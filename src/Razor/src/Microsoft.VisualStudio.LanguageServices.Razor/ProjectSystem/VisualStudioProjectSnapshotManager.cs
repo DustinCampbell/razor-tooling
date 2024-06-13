@@ -13,6 +13,9 @@ namespace Microsoft.VisualStudio.Razor.ProjectSystem;
 internal sealed class VisualStudioProjectSnapshotManager(
     IProjectEngineFactoryProvider projectEngineFactoryProvider,
     ILoggerFactory loggerFactory)
-    : ProjectSnapshotManager(projectEngineFactoryProvider, loggerFactory)
+    : ProjectSnapshotManager(
+        projectEngineFactoryProvider,
+        loggerFactory,
+        initializer: static updater => updater.SetSolutionState(SolutionState.Closed))
 {
 }

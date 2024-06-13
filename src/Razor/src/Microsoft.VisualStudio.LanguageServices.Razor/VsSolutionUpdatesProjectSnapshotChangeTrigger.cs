@@ -107,10 +107,10 @@ internal class VsSolutionUpdatesProjectSnapshotChangeTrigger : IRazorStartupServ
 
     private void ProjectManager_Changed(object sender, ProjectChangeEventArgs args)
     {
-        if (args.SolutionIsClosing)
+        if (args.SolutionState is SolutionState.Closing or SolutionState.Closed)
         {
             // If the solution is closing, cancel all existing updates.
-            _workspaceStateGenerator.CancelUpdates();
+            _workspaceStateGenerator.CancelAllUpdates();
         }
     }
 
@@ -133,7 +133,7 @@ internal class VsSolutionUpdatesProjectSnapshotChangeTrigger : IRazorStartupServ
                 {
                     // Trigger a tag helper update by forcing the project manager to see the workspace Project
                     // from the current solution.
-                    _workspaceStateGenerator.EnqueueUpdate(workspaceProject, projectSnapshot);
+                    _workspaceStateGenerator.EnqueueUpdate(workspaceProject, projectSnapshot, default);
                 }
             }
         }

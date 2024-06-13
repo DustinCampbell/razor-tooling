@@ -1,6 +1,7 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
+using System.Collections.Immutable;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Xunit;
@@ -13,6 +14,8 @@ internal partial class TestProjectSnapshotManager
     {
         public readonly struct Inspector(ProjectChangeEventArgs notification)
         {
+            private static readonly ImmutableArray<SolutionState> s_closeStates = [SolutionState.Closing, SolutionState.Closed];
+
             private void CommonAssertions(ProjectChangeKind kind, ProjectKey? projectKey = null, bool? solutionIsClosing = null)
             {
                 Assert.Equal(kind, notification.Kind);
@@ -24,7 +27,14 @@ internal partial class TestProjectSnapshotManager
 
                 if (solutionIsClosing is bool b)
                 {
-                    Assert.Equal(b, notification.SolutionIsClosing);
+                    if (b)
+                    {
+                        Assert.Contains(notification.SolutionState, s_closeStates);
+                    }
+                    else
+                    {
+                        Assert.DoesNotContain(notification.SolutionState, s_closeStates);
+                    }
                 }
             }
 

@@ -319,7 +319,7 @@ internal class RazorDynamicFileInfoProvider : IRazorDynamicFileInfoProviderInter
 
     private void ProjectManager_Changed(object? sender, ProjectChangeEventArgs args)
     {
-        if (args.SolutionIsClosing)
+        if (args.SolutionState is SolutionState.Closing or SolutionState.Closed)
         {
             if (_entries.Count > 0)
             {

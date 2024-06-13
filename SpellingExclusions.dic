@@ -4,6 +4,7 @@ csproj
 deserializer
 hresult
 microsoft
+roslyn
 vsls
 Blazor
 Metacode

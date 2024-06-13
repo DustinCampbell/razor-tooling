@@ -184,7 +184,7 @@ public class VsSolutionUpdatesProjectSnapshotChangeTriggerTest : VisualStudioTes
 
         await projectManager.UpdateAsync(updater =>
         {
-            updater.SolutionClosed();
+            updater.SetSolutionState(SolutionState.Closing);
             updater.ProjectRemoved(s_someProject.Key);
         });
 

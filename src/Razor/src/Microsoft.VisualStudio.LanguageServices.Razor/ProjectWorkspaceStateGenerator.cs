@@ -53,7 +53,7 @@ internal sealed partial class ProjectWorkspaceStateGenerator(
         // before we cancel the updates.
         _disposed = true;
 
-        CancelUpdates();
+        CancelAllUpdates();
 
         // Release before dispose to ensure we don't throw exceptions from the background thread trying to release
         // while we're disposing. Multiple releases are fine, and if we release and it lets something passed the lock
@@ -65,7 +65,7 @@ internal sealed partial class ProjectWorkspaceStateGenerator(
         _blockBackgroundWorkStart?.Set();
     }
 
-    public void EnqueueUpdate(Project? workspaceProject, IProjectSnapshot projectSnapshot)
+    public void EnqueueUpdate(Project workspaceProject, IProjectSnapshot projectSnapshot, ProjectUpdateReason reason)
     {
         if (_disposed)
         {
@@ -76,15 +76,7 @@ internal sealed partial class ProjectWorkspaceStateGenerator(
         {
             var projectKey = projectSnapshot.Key;
 
-            if (_updates.TryGetValue(projectKey, out var updateItem))
-            {
-                if (updateItem.IsRunning)
-                {
-                    _logger.LogTrace($"Cancelling previously enqueued update for '{projectKey}'.");
-                }
-
-                updateItem.CancelWorkAndCleanUp();
-            }
+            CancelUpdate_NoLock(projectKey);
 
             _logger.LogTrace($"Enqueuing update for '{projectKey}'");
 
@@ -93,7 +85,33 @@ internal sealed partial class ProjectWorkspaceStateGenerator(
         }
     }
 
-    public void CancelUpdates()
+    public void EnqueueRemove(ProjectKey key, ProjectUpdateReason reason)
+    {
+        if (_disposed)
+        {
+            return;
+        }
+
+        lock (_updates)
+        {
+            CancelUpdate_NoLock(key);
+        }
+    }
+
+    private void CancelUpdate_NoLock(ProjectKey key)
+    {
+        if (_updates.TryGetValue(key, out var updateItem))
+        {
+            if (updateItem.IsRunning)
+            {
+                _logger.LogTrace($"Cancelling previously enqueued update for '{key}'.");
+            }
+
+            updateItem.CancelWorkAndCleanUp();
+        }
+    }
+
+    public void CancelAllUpdates()
     {
         lock (_updates)
         {

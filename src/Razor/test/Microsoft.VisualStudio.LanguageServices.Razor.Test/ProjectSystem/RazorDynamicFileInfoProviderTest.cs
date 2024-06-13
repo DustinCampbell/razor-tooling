@@ -167,7 +167,7 @@ public class RazorDynamicFileInfoProviderTest(ITestOutputHelper testOutput) : Vi
 
         await _projectManager.UpdateAsync(updater =>
         {
-            updater.SolutionClosed();
+            updater.SetSolutionState(SolutionState.Closing);
             updater.DocumentClosed(_project.Key, _document1.FilePath, new EmptyTextLoader(string.Empty));
         });
 

@@ -51,9 +51,9 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
     private readonly HashSet<string> _openDocumentSet = new(FilePathComparer.Instance);
 
     /// <summary>
-    /// Determines whether or not the solution is closing.
+    /// Returns the current solution state.
     /// </summary>
-    private bool _isSolutionClosing;
+    private SolutionState _solutionState;
 
     #endregion
 
@@ -89,13 +89,13 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
         _readerWriterLock.Dispose();
     }
 
-    public bool IsSolutionClosing
+    public SolutionState SolutionState
     {
         get
         {
             using (_readerWriterLock.DisposableRead())
             {
-                return _isSolutionClosing;
+                return _solutionState;
             }
         }
     }
@@ -189,9 +189,10 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
             document.FilePath,
             new AddDocumentAction(document, textLoader),
             out var oldSnapshot,
-            out var newSnapshot))
+            out var newSnapshot,
+            out var solutionState))
         {
-            NotifyListeners(oldSnapshot, newSnapshot, document.FilePath, ProjectChangeKind.DocumentAdded);
+            NotifyListeners(ProjectChangeKind.DocumentAdded, oldSnapshot, newSnapshot, document.FilePath, solutionState);
         }
     }
 
@@ -207,9 +208,10 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
             document.FilePath,
             new RemoveDocumentAction(document),
             out var oldSnapshot,
-            out var newSnapshot))
+            out var newSnapshot,
+            out var solutionState))
         {
-            NotifyListeners(oldSnapshot, newSnapshot, document.FilePath, ProjectChangeKind.DocumentRemoved);
+            NotifyListeners(ProjectChangeKind.DocumentRemoved, oldSnapshot, newSnapshot, document.FilePath, solutionState);
         }
     }
 
@@ -225,9 +227,10 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
             documentFilePath,
             new OpenDocumentAction(sourceText),
             out var oldSnapshot,
-            out var newSnapshot))
+            out var newSnapshot,
+            out var solutionState))
         {
-            NotifyListeners(oldSnapshot, newSnapshot, documentFilePath, ProjectChangeKind.DocumentChanged);
+            NotifyListeners(ProjectChangeKind.DocumentChanged, oldSnapshot, newSnapshot, documentFilePath, solutionState);
         }
     }
 
@@ -243,9 +246,10 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
             documentFilePath,
             new CloseDocumentAction(textLoader),
             out var oldSnapshot,
-            out var newSnapshot))
+            out var newSnapshot,
+            out var solutionState))
         {
-            NotifyListeners(oldSnapshot, newSnapshot, documentFilePath, ProjectChangeKind.DocumentChanged);
+            NotifyListeners(ProjectChangeKind.DocumentChanged, oldSnapshot, newSnapshot, documentFilePath, solutionState);
         }
     }
 
@@ -261,9 +265,10 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
             documentFilePath,
             new DocumentTextChangedAction(sourceText),
             out var oldSnapshot,
-            out var newSnapshot))
+            out var newSnapshot,
+            out var solutionState))
         {
-            NotifyListeners(oldSnapshot, newSnapshot, documentFilePath, ProjectChangeKind.DocumentChanged);
+            NotifyListeners(ProjectChangeKind.DocumentChanged, oldSnapshot, newSnapshot, documentFilePath, solutionState);
         }
     }
 
@@ -279,9 +284,10 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
             documentFilePath,
             new DocumentTextLoaderChangedAction(textLoader),
             out var oldSnapshot,
-            out var newSnapshot))
+            out var newSnapshot,
+            out var solutionState))
         {
-            NotifyListeners(oldSnapshot, newSnapshot, documentFilePath, ProjectChangeKind.DocumentChanged);
+            NotifyListeners(ProjectChangeKind.DocumentChanged, oldSnapshot, newSnapshot, documentFilePath, solutionState);
         }
     }
 
@@ -297,9 +303,10 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
             documentFilePath: null,
             new ProjectAddedAction(hostProject),
             out _,
-            out var newSnapshot))
+            out var newSnapshot,
+            out var solutionState))
         {
-            NotifyListeners(older: null, newSnapshot, documentFilePath: null, ProjectChangeKind.ProjectAdded);
+            NotifyListeners(ProjectChangeKind.ProjectAdded, older: null, newer: newSnapshot, documentFilePath: null, solutionState: solutionState);
         }
     }
 
@@ -315,9 +322,10 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
             documentFilePath: null,
             new HostProjectUpdatedAction(hostProject),
             out var oldSnapshot,
-            out var newSnapshot))
+            out var newSnapshot,
+            out var solutionState))
         {
-            NotifyListeners(oldSnapshot, newSnapshot, documentFilePath: null, ProjectChangeKind.ProjectChanged);
+            NotifyListeners(ProjectChangeKind.ProjectChanged, oldSnapshot, newSnapshot, documentFilePath: null, solutionState: solutionState);
         }
     }
 
@@ -333,9 +341,10 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
             documentFilePath: null,
             new ProjectWorkspaceStateChangedAction(projectWorkspaceState),
             out var oldSnapshot,
-            out var newSnapshot))
+            out var newSnapshot,
+            out var solutionState))
         {
-            NotifyListeners(oldSnapshot, newSnapshot, documentFilePath: null, ProjectChangeKind.ProjectChanged);
+            NotifyListeners(ProjectChangeKind.ProjectChanged, oldSnapshot, newSnapshot, documentFilePath: null, solutionState: solutionState);
         }
     }
 
@@ -351,13 +360,14 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
             documentFilePath: null,
             new ProjectRemovedAction(projectKey),
             out var oldSnapshot,
-            out var newSnapshot))
+            out var newSnapshot,
+            out var solutionState))
         {
-            NotifyListeners(oldSnapshot, newSnapshot, documentFilePath: null, ProjectChangeKind.ProjectRemoved);
+            NotifyListeners(ProjectChangeKind.ProjectRemoved, oldSnapshot, newSnapshot, documentFilePath: null, solutionState: solutionState);
         }
     }
 
-    private void SolutionOpened()
+    private void SetSolutionState(SolutionState newState)
     {
         if (_initialized)
         {
@@ -366,31 +376,18 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
         using (_readerWriterLock.DisposableWrite())
         {
-            _isSolutionClosing = false;
+            _solutionState = newState;
         }
     }
 
-    private void SolutionClosed()
-    {
-        if (_initialized)
-        {
-            _dispatcher.AssertRunningOnDispatcher();
-        }
-
-        using (_readerWriterLock.DisposableWrite())
-        {
-            _isSolutionClosing = true;
-        }
-    }
-
-    private void NotifyListeners(IProjectSnapshot? older, IProjectSnapshot? newer, string? documentFilePath, ProjectChangeKind kind)
+    private void NotifyListeners(ProjectChangeKind kind, IProjectSnapshot? older, IProjectSnapshot? newer, string? documentFilePath, SolutionState solutionState)
     {
         if (!_initialized)
         {
             return;
         }
 
-        _notificationQueue.Enqueue(new ProjectChangeEventArgs(older, newer, documentFilePath, kind, IsSolutionClosing));
+        _notificationQueue.Enqueue(new ProjectChangeEventArgs(kind, older, newer, documentFilePath, solutionState));
 
         if (_notificationQueue.Count == 1)
         {
@@ -422,9 +419,12 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
         string? documentFilePath,
         IUpdateProjectAction action,
         [NotNullWhen(true)] out IProjectSnapshot? oldSnapshot,
-        [NotNullWhen(true)] out IProjectSnapshot? newSnapshot)
+        [NotNullWhen(true)] out IProjectSnapshot? newSnapshot,
+        out SolutionState solutionState)
     {
         using var upgradeableLock = _readerWriterLock.DisposableUpgradeableRead();
+
+        solutionState = _solutionState;
 
         if (action is ProjectAddedAction(var hostProject))
         {
@@ -454,7 +454,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
         if (_projectMap.TryGetValue(projectKey, out var entry))
         {
             // if the solution is closing we don't need to bother computing new state
-            if (_isSolutionClosing)
+            if (_solutionState == SolutionState.Closing)
             {
                 oldSnapshot = newSnapshot = entry.GetSnapshot();
                 return true;

@@ -146,7 +146,7 @@ public class WorkspaceProjectStateChangeDetectorTest : VisualStudioWorkspaceTest
         // Act
         await projectManager.UpdateAsync(updater =>
         {
-            updater.SolutionClosed();
+            updater.SetSolutionState(SolutionState.Closing);
 
             // Trigger a project removed event while solution is closing to clear state.
             updater.ProjectRemoved(_hostProjectOne.Key);
@@ -752,5 +752,5 @@ public class WorkspaceProjectStateChangeDetectorTest : VisualStudioWorkspaceTest
     }
 
     private WorkspaceProjectStateChangeDetector CreateDetector(IProjectWorkspaceStateGenerator generator, IProjectSnapshotManager projectManager)
-        => new(generator, projectManager, TestLanguageServerFeatureOptions.Instance, WorkspaceProvider, TimeSpan.FromMilliseconds(10));
+        => new(generator, projectManager, TestLanguageServerFeatureOptions.Instance, WorkspaceProvider, LoggerFactory, TimeSpan.FromMilliseconds(10));
 }

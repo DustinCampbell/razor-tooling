@@ -2,18 +2,29 @@
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
 using System;
+using System.IO;
+using Microsoft.AspNetCore.Razor;
+using Microsoft.AspNetCore.Razor.PooledObjects;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
 internal class ProjectChangeEventArgs : EventArgs
 {
-    public ProjectChangeEventArgs(IProjectSnapshot older, IProjectSnapshot newer, ProjectChangeKind kind)
-        : this(older, newer, null, kind, false)
-    {
-    }
+    public ProjectChangeKind Kind { get; }
+    public IProjectSnapshot? Older { get; }
+    public IProjectSnapshot? Newer { get; }
+    public ProjectKey ProjectKey { get; }
+    public string ProjectFilePath { get; }
+    public string? DocumentFilePath { get; }
+    public SolutionState SolutionState { get; }
 
-    public ProjectChangeEventArgs(IProjectSnapshot? older, IProjectSnapshot? newer, string? documentFilePath, ProjectChangeKind kind, bool solutionIsClosing)
+    public ProjectChangeEventArgs(
+        ProjectChangeKind kind,
+        IProjectSnapshot? older,
+        IProjectSnapshot? newer,
+        string? documentFilePath,
+        SolutionState solutionState)
     {
         if (older is null && newer is null)
         {
@@ -24,25 +35,38 @@ internal class ProjectChangeEventArgs : EventArgs
         Newer = newer;
         DocumentFilePath = documentFilePath;
         Kind = kind;
-        SolutionIsClosing = solutionIsClosing;
+        SolutionState = solutionState;
         ProjectFilePath = (older ?? newer)!.FilePath;
         ProjectKey = (older ?? newer)!.Key;
     }
 
-    public IProjectSnapshot? Older { get; }
+    public override string ToString()
+    {
+        using var _ = StringBuilderPool.GetPooledObject(out var builder);
 
-    public IProjectSnapshot? Newer { get; }
+        builder.Append('{');
+        builder.Append(Kind.ToString());
 
-    public ProjectKey ProjectKey { get; }
+        if (Kind == ProjectChangeKind.ProjectAdded)
+        {
+            builder.Append(", ");
+            builder.Append(Newer.AssumeNotNull().DisplayName);
+        }
 
-    public string ProjectFilePath { get; }
+        if (Kind == ProjectChangeKind.DocumentAdded)
+        {
+            builder.Append(", ");
+            builder.Append(Path.GetFileName(DocumentFilePath));
+            builder.Append(", ");
+            builder.Append(Newer.AssumeNotNull().DisplayName);
+        }
 
-    public string? DocumentFilePath { get; }
+        builder.Append(", ");
+        builder.Append("SolutionState = ");
+        builder.Append(SolutionState.ToString());
 
-    public ProjectChangeKind Kind { get; }
+        builder.Append('}');
 
-    public bool SolutionIsClosing { get; }
-
-    public static ProjectChangeEventArgs CreateTestInstance(IProjectSnapshot older, IProjectSnapshot newer, string documentFilePath, ProjectChangeKind kind, bool solutionIsClosing = false) =>
-        new(older, newer, documentFilePath, kind, solutionIsClosing);
+        return builder.ToString();
+    }
 }

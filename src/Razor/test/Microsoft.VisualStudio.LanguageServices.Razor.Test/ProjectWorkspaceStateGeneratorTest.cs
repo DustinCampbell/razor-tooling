@@ -62,7 +62,7 @@ public class ProjectWorkspaceStateGeneratorTest : VisualStudioWorkspaceTestBase
         // Act
         generator.Dispose();
 
-        generator.EnqueueUpdate(_workspaceProject, _projectSnapshot);
+        generator.EnqueueUpdate(_workspaceProject, _projectSnapshot, default);
 
         // Assert
         Assert.Empty(generatorAccessor.GetUpdates());
@@ -79,7 +79,7 @@ public class ProjectWorkspaceStateGeneratorTest : VisualStudioWorkspaceTestBase
         generatorAccessor.BlockBackgroundWorkStart = new ManualResetEventSlim(initialState: false);
 
         // Act
-        generator.EnqueueUpdate(_workspaceProject, _projectSnapshot);
+        generator.EnqueueUpdate(_workspaceProject, _projectSnapshot, default);
 
         // Assert
         var update = Assert.Single(generatorAccessor.GetUpdates());
@@ -96,12 +96,12 @@ public class ProjectWorkspaceStateGeneratorTest : VisualStudioWorkspaceTestBase
         var generatorAccessor = generator.GetTestAccessor();
         generatorAccessor.BlockBackgroundWorkStart = new ManualResetEventSlim(initialState: false);
 
-        generator.EnqueueUpdate(_workspaceProject, _projectSnapshot);
+        generator.EnqueueUpdate(_workspaceProject, _projectSnapshot, default);
 
         var initialUpdate = Assert.Single(generatorAccessor.GetUpdates());
 
         // Act
-        generator.EnqueueUpdate(_workspaceProject, _projectSnapshot);
+        generator.EnqueueUpdate(_workspaceProject, _projectSnapshot, default);
 
         // Assert
         Assert.True(initialUpdate.IsCancellationRequested);
@@ -124,7 +124,7 @@ public class ProjectWorkspaceStateGeneratorTest : VisualStudioWorkspaceTestBase
         });
 
         // Act
-        generator.EnqueueUpdate(workspaceProject: null, _projectSnapshot);
+        generator.EnqueueRemove(_projectSnapshot.Key, default);
 
         // Jump off the UI thread so the background work can complete.
         await Task.Run(() => generatorAccessor.NotifyBackgroundWorkCompleted.Wait(TimeSpan.FromSeconds(3)));
@@ -151,7 +151,7 @@ public class ProjectWorkspaceStateGeneratorTest : VisualStudioWorkspaceTestBase
         });
 
         // Act
-        generator.EnqueueUpdate(_workspaceProject, _projectSnapshot);
+        generator.EnqueueUpdate(_workspaceProject, _projectSnapshot, default);
 
         // Jump off the UI thread so the background work can complete.
         await Task.Run(() => generatorAccessor.NotifyBackgroundWorkCompleted.Wait(TimeSpan.FromSeconds(3)));

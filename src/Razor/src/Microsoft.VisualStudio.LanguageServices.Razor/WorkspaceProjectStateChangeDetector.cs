@@ -10,9 +10,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language.Components;
+using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Razor;
+using Microsoft.CodeAnalysis.Razor.Logging;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.Utilities;
 using Microsoft.CodeAnalysis.Razor.Workspaces;
@@ -22,15 +24,20 @@ namespace Microsoft.VisualStudio.Razor;
 [Export(typeof(IRazorStartupService))]
 internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupService, IDisposable
 {
+    private abstract record Work(ProjectKey Key, ProjectUpdateReason Reason);
+    private sealed record Update(Project RoslynProject, IProjectSnapshot RazorProject, ProjectUpdateReason Reason) : Work(RazorProject.Key, Reason);
+    private sealed record Remove(ProjectKey Key, ProjectUpdateReason Reason) : Work(Key, Reason);
+
     private static readonly TimeSpan s_delay = TimeSpan.FromSeconds(1);
 
     private readonly IProjectWorkspaceStateGenerator _generator;
     private readonly IProjectSnapshotManager _projectManager;
     private readonly LanguageServerFeatureOptions _options;
     private readonly CodeAnalysis.Workspace _workspace;
+    private readonly ILogger _logger;
 
     private readonly CancellationTokenSource _disposeTokenSource;
-    private readonly AsyncBatchingWorkQueue<(Project?, IProjectSnapshot)> _workQueue;
+    private readonly AsyncBatchingWorkQueue<Work> _workQueue;
 
     private WorkspaceChangedListener? _workspaceChangedListener;
 
@@ -39,8 +46,9 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
         IProjectWorkspaceStateGenerator generator,
         IProjectSnapshotManager projectManager,
         LanguageServerFeatureOptions options,
-        IWorkspaceProvider workspaceProvider)
-        : this(generator, projectManager, options, workspaceProvider, s_delay)
+        IWorkspaceProvider workspaceProvider,
+        ILoggerFactory loggerFactory)
+        : this(generator, projectManager, options, workspaceProvider, loggerFactory, s_delay)
     {
     }
 
@@ -49,6 +57,7 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
         IProjectSnapshotManager projectManager,
         LanguageServerFeatureOptions options,
         IWorkspaceProvider workspaceProvider,
+        ILoggerFactory loggerFactory,
         TimeSpan delay)
     {
         _generator = generator;
@@ -56,10 +65,12 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
         _options = options;
 
         _disposeTokenSource = new();
-        _workQueue = new AsyncBatchingWorkQueue<(Project?, IProjectSnapshot)>(
+        _workQueue = new AsyncBatchingWorkQueue<Work>(
             delay,
             ProcessBatchAsync,
             _disposeTokenSource.Token);
+
+        _logger = loggerFactory.GetOrCreateLogger<WorkspaceProjectStateChangeDetector>();
 
         _projectManager.Changed += ProjectManager_Changed;
 
@@ -85,16 +96,29 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
         _disposeTokenSource.Dispose();
     }
 
-    private ValueTask ProcessBatchAsync(ImmutableArray<(Project? Project, IProjectSnapshot ProjectSnapshot)> items, CancellationToken token)
+    private ValueTask ProcessBatchAsync(ImmutableArray<Work> items, CancellationToken token)
     {
-        foreach (var (project, projectSnapshot) in items.GetMostRecentUniqueItems(Comparer.Instance))
+        foreach (var work in items.GetMostRecentUniqueItems(Comparer.Instance))
         {
             if (token.IsCancellationRequested)
             {
                 return default;
             }
 
-            _generator.EnqueueUpdate(project, projectSnapshot);
+            switch (work)
+            {
+                case Update(var roslynProject, var razorProject, var reason):
+                    _generator.EnqueueUpdate(roslynProject, razorProject, reason);
+                    break;
+
+                case Remove(var key, var reason):
+                    _generator.EnqueueRemove(key, reason);
+                    break;
+
+                default:
+                    Assumed.Unreachable();
+                    break;
+            }
         }
 
         return default;
@@ -102,6 +126,8 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
 
     private void Workspace_WorkspaceChanged(object? sender, WorkspaceChangeEventArgs e)
     {
+        _logger.LogTrace($"Workspace_WorkspaceChanged: {e.Kind}");
+
         switch (e.Kind)
         {
             case WorkspaceChangeKind.ProjectAdded:
@@ -124,9 +150,10 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
 
                     var project = oldSolution.GetRequiredProject(projectId);
 
-                    if (TryGetProjectSnapshot(project, out var projectSnapshot))
+                    if (TryGetRazorProject(project, out var projectSnapshot))
                     {
-                        EnqueueUpdateOnProjectAndDependencies(projectId, project: null, oldSolution, projectSnapshot);
+                        EnqueueRemove(projectSnapshot.Key, default);
+                        EnqueueUpdateOnProjectDependencies(projectId, oldSolution);
                     }
                 }
 
@@ -245,9 +272,9 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
 
                     foreach (var project in oldSolution.Projects)
                     {
-                        if (TryGetProjectSnapshot(project, out var projectSnapshot))
+                        if (TryGetRazorProject(project, out var razorProject))
                         {
-                            EnqueueUpdate(project: null, projectSnapshot);
+                            EnqueueRemove(razorProject.Key, default);
                         }
                     }
 
@@ -326,17 +353,19 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
     {
         foreach (var project in solution.Projects)
         {
-            if (TryGetProjectSnapshot(project, out var projectSnapshot))
+            if (TryGetRazorProject(project, out var projectSnapshot))
             {
-                EnqueueUpdate(project, projectSnapshot);
+                EnqueueUpdate(project, projectSnapshot, default);
             }
         }
     }
 
     private void ProjectManager_Changed(object? sender, ProjectChangeEventArgs e)
     {
+        _logger.LogTrace($"{e}");
+
         // Don't do any work if the solution is closing. Any work in the queue will be cancelled on disposal
-        if (e.SolutionIsClosing)
+        if (e.SolutionState is SolutionState.Closing or SolutionState.Closed)
         {
             _workQueue.CancelExistingWork();
             return;
@@ -349,13 +378,12 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
             case ProjectChangeKind.DocumentAdded:
                 var currentSolution = _workspace.CurrentSolution;
                 var associatedWorkspaceProject = currentSolution.Projects
-                    .FirstOrDefault(project => e.ProjectKey == project.ToProjectKey());
+                    .FirstOrDefault(project => e.ProjectKey.Matches(project));
 
                 if (associatedWorkspaceProject is not null)
                 {
                     var projectSnapshot = e.Newer.AssumeNotNull();
                     EnqueueUpdateOnProjectAndDependencies(
-                        associatedWorkspaceProject.Id,
                         associatedWorkspaceProject,
                         associatedWorkspaceProject.Solution,
                         projectSnapshot);
@@ -364,6 +392,8 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
                 break;
 
             case ProjectChangeKind.ProjectRemoved:
+                _logger.LogTrace($"ProjectManager_Changed: {e.Kind}");
+
                 // No-op. We don't need to recompute tag helpers if the project is being removed
                 break;
         }
@@ -371,42 +401,55 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
 
     private void EnqueueUpdateOnProjectAndDependencies(Project project, Solution solution)
     {
-        if (TryGetProjectSnapshot(project, out var projectSnapshot))
+        if (TryGetRazorProject(project, out var projectSnapshot))
         {
-            EnqueueUpdateOnProjectAndDependencies(project.Id, project, solution, projectSnapshot);
+            EnqueueUpdateOnProjectAndDependencies(project, solution, projectSnapshot);
         }
     }
 
-    private void EnqueueUpdateOnProjectAndDependencies(ProjectId projectId, Project? project, Solution solution, IProjectSnapshot projectSnapshot)
+    private void EnqueueUpdateOnProjectAndDependencies(Project project, Solution solution, IProjectSnapshot projectSnapshot)
     {
-        EnqueueUpdate(project, projectSnapshot);
+        EnqueueUpdate(project, projectSnapshot, default);
+        EnqueueUpdateOnProjectDependencies(project.Id, solution);
+    }
 
+    private void EnqueueUpdateOnProjectDependencies(ProjectId projectId, Solution solution)
+    {
         var dependencyGraph = solution.GetProjectDependencyGraph();
         var dependentProjectIds = dependencyGraph.GetProjectsThatTransitivelyDependOnThisProject(projectId);
 
         foreach (var dependentProjectId in dependentProjectIds)
         {
             if (solution.GetProject(dependentProjectId) is { } dependentProject &&
-                TryGetProjectSnapshot(dependentProject, out var dependentProjectSnapshot))
+                TryGetRazorProject(dependentProject, out var dependentProjectSnapshot))
             {
-                EnqueueUpdate(dependentProject, dependentProjectSnapshot);
+                EnqueueUpdate(dependentProject, dependentProjectSnapshot, default);
             }
         }
     }
 
-    private void EnqueueUpdate(Project? project, IProjectSnapshot projectSnapshot)
+    private void EnqueueRemove(ProjectKey key, ProjectUpdateReason reason)
     {
-        _workQueue.AddWork((project, projectSnapshot));
+        _workQueue.AddWork(new Remove(key, reason));
     }
 
-    private bool TryGetProjectSnapshot(Project? project, [NotNullWhen(true)] out IProjectSnapshot? projectSnapshot)
+    private void EnqueueUpdate(Project roslynProject, IProjectSnapshot razorProject, ProjectUpdateReason reason)
     {
-        if (project?.CompilationOutputInfo.AssemblyPath is null)
+        _workQueue.AddWork(new Update(roslynProject, razorProject, reason));
+    }
+
+    /// <summary>
+    /// Given a Roslyn <see cref="Project"/>, attempts to find a matching Razor <see cref="IProjectSnapshot"/>.
+    /// </summary>
+    private bool TryGetRazorProject(Project project, [NotNullWhen(true)] out IProjectSnapshot? projectSnapshot)
+    {
+        if (project.CompilationOutputInfo.AssemblyPath is null)
         {
             projectSnapshot = null;
             return false;
         }
 
+        // NOTE: This will result in a new string allocation every time it's called.
         var projectKey = project.ToProjectKey();
 
         return _projectManager.TryGetLoadedProject(projectKey, out projectSnapshot);

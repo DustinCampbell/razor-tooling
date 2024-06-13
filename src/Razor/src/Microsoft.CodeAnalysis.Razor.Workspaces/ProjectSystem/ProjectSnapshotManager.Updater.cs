@@ -56,10 +56,7 @@ internal partial class ProjectSnapshotManager
         public void ProjectWorkspaceStateChanged(ProjectKey projectKey, ProjectWorkspaceState projectWorkspaceState)
             => instance.ProjectWorkspaceStateChanged(projectKey, projectWorkspaceState);
 
-        public void SolutionOpened()
-            => instance.SolutionOpened();
-
-        public void SolutionClosed()
-            => instance.SolutionClosed();
+        public void SetSolutionState(SolutionState newSolutionState)
+            => instance.SetSolutionState(newSolutionState);
     }
 }

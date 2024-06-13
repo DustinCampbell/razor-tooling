@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Razor.PooledObjects;
+using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
@@ -14,13 +15,18 @@ internal class TestProjectWorkspaceStateGenerator : IProjectWorkspaceStateGenera
 
     public IReadOnlyList<TestUpdate> Updates => _updates;
 
-    public void EnqueueUpdate(Project? workspaceProject, IProjectSnapshot projectSnapshot)
+    public void EnqueueUpdate(Project workspaceProject, IProjectSnapshot projectSnapshot, ProjectUpdateReason reason)
     {
         var update = new TestUpdate(workspaceProject, projectSnapshot);
         _updates.Add(update);
     }
 
-    public void CancelUpdates()
+    public void EnqueueRemove(ProjectKey key, ProjectUpdateReason reason)
+    {
+
+    }
+
+    public void CancelAllUpdates()
     {
         foreach (var update in _updates)
         {

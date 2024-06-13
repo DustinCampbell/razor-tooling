@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Razor.Test.Common;
 using Microsoft.AspNetCore.Razor.Test.Common.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Test.Common.VisualStudio;
 using Microsoft.AspNetCore.Razor.Test.Common.Workspaces;
+using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.VisualStudio.ProjectSystem.Properties;
 using Xunit;
 using Xunit.Abstractions;
@@ -858,13 +859,13 @@ public class DefaultWindowsRazorProjectHostTest : VisualStudioWorkspaceTestBase
         // Act - 1
         await _projectManager.UpdateAsync(updater =>
         {
-            updater.SolutionClosed();
+            updater.SetSolutionState(SolutionState.Closing);
         });
 
         await Task.Run(async () => await host.OnProjectChangedAsync(string.Empty, services.CreateUpdate(changes)));
 
         // Assert - 1
-        Assert.False(_projectManager.IsSolutionClosing);
+        Assert.NotEqual(SolutionState.Closing, _projectManager.SolutionState);
     }
 
     [UIFact]

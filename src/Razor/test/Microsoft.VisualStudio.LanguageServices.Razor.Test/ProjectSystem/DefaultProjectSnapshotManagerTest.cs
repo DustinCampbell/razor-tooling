@@ -852,7 +852,7 @@ public class DefaultProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         // Act
         await _projectManager.UpdateAsync(updater =>
         {
-            updater.SolutionClosed();
+            updater.SetSolutionState(SolutionState.Closing);
             updater.DocumentAdded(s_hostProject.Key, s_documents[0], textLoader.Object);
         });
 
