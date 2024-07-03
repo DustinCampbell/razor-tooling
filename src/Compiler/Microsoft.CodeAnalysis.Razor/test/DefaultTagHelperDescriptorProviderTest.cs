@@ -1,12 +1,8 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using System.Threading;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.CodeAnalysis.CSharp;
 using Xunit;
@@ -86,7 +82,8 @@ namespace TestAssembly
         var compilation = TestCompilation.Create(_assembly, CSharpSyntaxTree.ParseText(csharp));
         var descriptorProvider = new DefaultTagHelperDescriptorProvider();
 
-        var targetSymbol = (IAssemblySymbol)compilation.GetAssemblyOrModuleSymbol(compilation.References.First(r => r.Display.Contains("Microsoft.CodeAnalysis.Razor.Test.dll")));
+        var targetSymbol = (IAssemblySymbol?)compilation.GetAssemblyOrModuleSymbol(
+            compilation.References.First(r => r.Display is string display && display.Contains("Microsoft.CodeAnalysis.Razor.Test.dll")));
         var context = TagHelperDescriptorProviderContext.Create(compilation, targetSymbol);
 
         // Act
