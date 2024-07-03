@@ -9,15 +9,22 @@ namespace Microsoft.AspNetCore.Razor.Language;
 public sealed class TagHelperDescriptorProviderContext
 {
     public Compilation Compilation { get; }
+    public ISymbol? TargetSymbol { get; }
     public bool ExcludeHidden { get; }
     public bool IncludeDocumentation { get; }
 
     public ItemCollection Items { get; }
     public ICollection<TagHelperDescriptor> Results { get; }
 
-    private TagHelperDescriptorProviderContext(Compilation compilation, ICollection<TagHelperDescriptor> results, bool excludeHidden, bool includeDocumentation)
+    private TagHelperDescriptorProviderContext(
+        Compilation compilation,
+        ISymbol? targetSymbol,
+        ICollection<TagHelperDescriptor> results,
+        bool excludeHidden,
+        bool includeDocumentation)
     {
         Compilation = compilation;
+        TargetSymbol = targetSymbol;
         Results = results;
         ExcludeHidden = excludeHidden;
         IncludeDocumentation = includeDocumentation;
@@ -25,15 +32,24 @@ public sealed class TagHelperDescriptorProviderContext
         Items = [];
     }
 
-    public static TagHelperDescriptorProviderContext Create(Compilation compilation, bool excludeHidden = false, bool includeDocumentation = false)
+    public static TagHelperDescriptorProviderContext Create(
+        Compilation compilation,
+        ISymbol? targetSymbol = null,
+        bool excludeHidden = false,
+        bool includeDocumentation = false)
     {
-        return Create(compilation, new List<TagHelperDescriptor>(), excludeHidden, includeDocumentation);
+        return Create(compilation, targetSymbol, new List<TagHelperDescriptor>(), excludeHidden, includeDocumentation);
     }
 
-    public static TagHelperDescriptorProviderContext Create(Compilation compilation, ICollection<TagHelperDescriptor> results, bool excludeHidden = false, bool includeDocumentation = false)
+    public static TagHelperDescriptorProviderContext Create(
+        Compilation compilation,
+        ISymbol? targetSymbol,
+        ICollection<TagHelperDescriptor> results,
+        bool excludeHidden = false,
+        bool includeDocumentation = false)
     {
         ArgHelper.ThrowIfNull(results);
 
-        return new(compilation, results, excludeHidden, includeDocumentation);
+        return new(compilation, targetSymbol, results, excludeHidden, includeDocumentation);
     }
 }

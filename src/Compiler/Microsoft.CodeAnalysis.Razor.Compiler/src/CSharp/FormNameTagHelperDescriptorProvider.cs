@@ -36,7 +36,7 @@ internal sealed class FormNameTagHelperDescriptorProvider : ITagHelperDescriptor
             return;
         }
 
-        var targetSymbol = context.Items.GetTargetSymbol();
+        var targetSymbol = context.TargetSymbol;
         if (targetSymbol is not null && !SymbolEqualityComparer.Default.Equals(targetSymbol, renderTreeBuilder.ContainingAssembly))
         {
             return;

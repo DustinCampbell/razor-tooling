@@ -1644,8 +1644,9 @@ namespace Test
 
         Assert.Empty(compilation.GetDiagnostics());
 
-        var context = TagHelperDescriptorProviderContext.Create(compilation);
-        context.Items.SetTargetSymbol((IAssemblySymbol)compilation.GetAssemblyOrModuleSymbol(compilation.References.First(r => r.Display.Contains("Microsoft.CodeAnalysis.Razor.Test.dll"))));
+        var targetSymbol = (IAssemblySymbol)compilation.GetAssemblyOrModuleSymbol(compilation.References.First(r => r.Display.Contains("Microsoft.CodeAnalysis.Razor.Test.dll")));
+
+        var context = TagHelperDescriptorProviderContext.Create(compilation, targetSymbol);
         var provider = new ComponentTagHelperDescriptorProvider();
 
         // Act
