@@ -1,10 +1,8 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
-using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Components;
 using Microsoft.AspNetCore.Razor.PooledObjects;
@@ -16,14 +14,11 @@ internal class EventHandlerTagHelperDescriptorProvider : ITagHelperDescriptorPro
 {
     public int Order { get; set; }
 
-    public RazorEngine Engine { get; set; }
+    public RazorEngine? Engine { get; set; }
 
     public void Execute(TagHelperDescriptorProviderContext context)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgHelper.ThrowIfNull(context);
 
         var compilation = context.Compilation;
 
@@ -39,7 +34,7 @@ internal class EventHandlerTagHelperDescriptorProvider : ITagHelperDescriptorPro
         collector.Collect(context);
     }
 
-    private class Collector(Compilation compilation, ISymbol targetSymbol, INamedTypeSymbol eventHandlerAttribute)
+    private class Collector(Compilation compilation, ISymbol? targetSymbol, INamedTypeSymbol eventHandlerAttribute)
         : TagHelperCollector<Collector>(compilation, targetSymbol)
     {
         private readonly INamedTypeSymbol _eventHandlerAttribute = eventHandlerAttribute;
@@ -67,8 +62,8 @@ internal class EventHandlerTagHelperDescriptorProvider : ITagHelperDescriptorPro
                         var enableStopPropagation = false;
                         if (attribute.ConstructorArguments.Length == 4)
                         {
-                            enablePreventDefault = (bool)attribute.ConstructorArguments[2].Value;
-                            enableStopPropagation = (bool)attribute.ConstructorArguments[3].Value;
+                            enablePreventDefault = (bool)attribute.ConstructorArguments[2].Value.AssumeNotNull();
+                            enableStopPropagation = (bool)attribute.ConstructorArguments[3].Value.AssumeNotNull();
                         }
 
                         var (typeName, namespaceName) = displayNames.GetNames();
@@ -78,8 +73,8 @@ internal class EventHandlerTagHelperDescriptorProvider : ITagHelperDescriptorPro
                             typeName,
                             namespaceName,
                             type.Name,
-                            (string)constructorArguments[0].Value,
-                            (INamedTypeSymbol)constructorArguments[1].Value,
+                            (string)constructorArguments[0].Value.AssumeNotNull(),
+                            (INamedTypeSymbol)constructorArguments[1].Value.AssumeNotNull(),
                             enablePreventDefault,
                             enableStopPropagation));
                     }
