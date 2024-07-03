@@ -1,8 +1,6 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Razor.Language;
@@ -103,9 +101,9 @@ namespace Test
 
         Assert.Collection(
             attribute.Metadata.OrderBy(kvp => kvp.Key),
-            kvp => Assert.Equal(kvp, new KeyValuePair<string, string>(ComponentMetadata.Common.DirectiveAttribute, bool.TrueString)),
-            kvp => Assert.Equal(kvp, new KeyValuePair<string, string>("Common.PropertyName", "onclick")),
-            kvp => Assert.Equal(kvp, new KeyValuePair<string, string>(ComponentMetadata.Component.WeaklyTypedKey, bool.TrueString)));
+            kvp => Assert.Equal(kvp, new KeyValuePair<string, string?>(ComponentMetadata.Common.DirectiveAttribute, bool.TrueString)),
+            kvp => Assert.Equal(kvp, new KeyValuePair<string, string?>("Common.PropertyName", "onclick")),
+            kvp => Assert.Equal(kvp, new KeyValuePair<string, string?>(ComponentMetadata.Component.WeaklyTypedKey, bool.TrueString)));
 
         Assert.Equal(
             "Sets the '@onclick' attribute to the provided string or delegate value. " +
