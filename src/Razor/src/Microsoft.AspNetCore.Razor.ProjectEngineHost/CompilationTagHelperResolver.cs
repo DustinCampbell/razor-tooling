@@ -1,8 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
-using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
@@ -24,20 +22,13 @@ internal class CompilationTagHelperResolver(ITelemetryReporter? telemetryReporte
         RazorProjectEngine projectEngine,
         CancellationToken cancellationToken)
     {
-        if (workspaceProject is null)
-        {
-            throw new ArgumentNullException(nameof(workspaceProject));
-        }
+        ArgHelper.ThrowIfNull(workspaceProject);
+        ArgHelper.ThrowIfNull(projectEngine);
 
-        if (projectEngine is null)
-        {
-            throw new ArgumentNullException(nameof(projectEngine));
-        }
-
-        var providers = projectEngine.Engine.Features.OfType<ITagHelperDescriptorProvider>().OrderBy(f => f.Order).ToArray();
+        ImmutableArray<ITagHelperDescriptorProvider> providers = [.. projectEngine.Engine.Features.OfType<ITagHelperDescriptorProvider>().OrderBy(f => f.Order)];
         if (providers.Length == 0)
         {
-            return ImmutableArray<TagHelperDescriptor>.Empty;
+            return [];
         }
 
         var compilation = await workspaceProject.GetCompilationAsync(cancellationToken).ConfigureAwait(false);
@@ -51,9 +42,9 @@ internal class CompilationTagHelperResolver(ITelemetryReporter? telemetryReporte
 
         ExecuteProviders(providers, context, _telemetryReporter);
 
-        return results.ToImmutableArray();
+        return [.. results];
 
-        static void ExecuteProviders(ITagHelperDescriptorProvider[] providers, TagHelperDescriptorProviderContext context, ITelemetryReporter? telemetryReporter)
+        static void ExecuteProviders(ImmutableArray<ITagHelperDescriptorProvider> providers, TagHelperDescriptorProviderContext context, ITelemetryReporter? telemetryReporter)
         {
             using var _ = StopwatchPool.GetPooledObject(out var watch);
 
@@ -62,6 +53,7 @@ internal class CompilationTagHelperResolver(ITelemetryReporter? telemetryReporte
             for (var i = 0; i < providers.Length; i++)
             {
                 var provider = providers[i];
+
                 watch.Restart();
                 provider.Execute(context);
                 watch.Stop();
