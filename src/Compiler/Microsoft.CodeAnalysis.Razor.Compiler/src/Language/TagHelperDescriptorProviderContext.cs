@@ -7,27 +7,30 @@ namespace Microsoft.AspNetCore.Razor.Language;
 
 public sealed class TagHelperDescriptorProviderContext
 {
-    public bool ExcludeHidden { get; set; }
-    public bool IncludeDocumentation { get; set; }
+    public bool ExcludeHidden { get; }
+    public bool IncludeDocumentation { get; }
 
     public ItemCollection Items { get; }
     public ICollection<TagHelperDescriptor> Results { get; }
 
-    private TagHelperDescriptorProviderContext(ICollection<TagHelperDescriptor> results)
+    private TagHelperDescriptorProviderContext(ICollection<TagHelperDescriptor> results, bool excludeHidden, bool includeDocumentation)
     {
-        Items = [];
         Results = results;
+        ExcludeHidden = excludeHidden;
+        IncludeDocumentation = includeDocumentation;
+
+        Items = [];
     }
 
-    public static TagHelperDescriptorProviderContext Create()
+    public static TagHelperDescriptorProviderContext Create(bool excludeHidden = false, bool includeDocumentation = false)
     {
-        return new(new List<TagHelperDescriptor>());
+        return Create(new List<TagHelperDescriptor>(), excludeHidden, includeDocumentation);
     }
 
-    public static TagHelperDescriptorProviderContext Create(ICollection<TagHelperDescriptor> results)
+    public static TagHelperDescriptorProviderContext Create(ICollection<TagHelperDescriptor> results, bool excludeHidden = false, bool includeDocumentation = false)
     {
         ArgHelper.ThrowIfNull(results);
 
-        return new(results);
+        return new(results, excludeHidden, includeDocumentation);
     }
 }
