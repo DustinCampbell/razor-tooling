@@ -1,8 +1,6 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
 using System.Linq;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.TagHelpers;
@@ -20,8 +18,9 @@ public class CompilationTagHelperFeatureTest
         // Arrange
         var references = new[]
         {
-                MetadataReference.CreateFromFile(typeof(string).Assembly.Location),
-            };
+            MetadataReference.CreateFromFile(typeof(string).Assembly.Location),
+        };
+
         var compilation = CSharpCompilation.Create("Test", references: references);
 
         // Act
@@ -37,8 +36,9 @@ public class CompilationTagHelperFeatureTest
         // Arrange
         var references = new[]
         {
-                MetadataReference.CreateFromFile(typeof(ITagHelper).Assembly.Location),
-            };
+            MetadataReference.CreateFromFile(typeof(ITagHelper).Assembly.Location),
+        };
+
         var compilation = CSharpCompilation.Create("Test", references: references);
 
         // Act
@@ -54,9 +54,10 @@ public class CompilationTagHelperFeatureTest
         // Arrange
         var references = new[]
         {
-                MetadataReference.CreateFromFile(typeof(string).Assembly.Location),
-                MetadataReference.CreateFromFile(typeof(ITagHelper).Assembly.Location),
-            };
+            MetadataReference.CreateFromFile(typeof(string).Assembly.Location),
+            MetadataReference.CreateFromFile(typeof(ITagHelper).Assembly.Location),
+        };
+
         var compilation = CSharpCompilation.Create("Test", references: references);
 
         // Act
@@ -70,7 +71,7 @@ public class CompilationTagHelperFeatureTest
     public void GetDescriptors_DoesNotExecuteProviderIfCompilationIsInvalid()
     {
         // Arrange
-        Compilation compilation = null;
+        Compilation? compilation = null;
         var provider = new Mock<ITagHelperDescriptorProvider>();
         provider
             .Setup(c => c.Execute(It.IsAny<TagHelperDescriptorProviderContext>()))
@@ -99,7 +100,7 @@ public class CompilationTagHelperFeatureTest
     public void GetDescriptors_ExecutesProviderIfCompilationIsValid()
     {
         // Arrange
-        Compilation compilation = null;
+        Compilation? compilation = null;
         var provider = new Mock<ITagHelperDescriptorProvider>();
         provider
             .Setup(c => c.Execute(It.IsAny<TagHelperDescriptorProviderContext>()))
@@ -107,9 +108,9 @@ public class CompilationTagHelperFeatureTest
 
         var references = new[]
         {
-                MetadataReference.CreateFromFile(typeof(string).Assembly.Location),
-                MetadataReference.CreateFromFile(typeof(ITagHelper).Assembly.Location),
-            };
+            MetadataReference.CreateFromFile(typeof(string).Assembly.Location),
+            MetadataReference.CreateFromFile(typeof(ITagHelper).Assembly.Location),
+        };
 
         var engine = RazorProjectEngine.Create(
             configure =>
