@@ -67,14 +67,14 @@ public class CompilationTagHelperFeatureTest
     }
 
     [Fact]
-    public void GetDescriptors_DoesNotSetCompilation_IfCompilationIsInvalid()
+    public void GetDescriptors_DoesNotExecuteProviderIfCompilationIsInvalid()
     {
         // Arrange
         Compilation compilation = null;
         var provider = new Mock<ITagHelperDescriptorProvider>();
-        provider.Setup(c => c.Execute(It.IsAny<TagHelperDescriptorProviderContext>()))
-            .Callback<TagHelperDescriptorProviderContext>(c => compilation = c.GetCompilation())
-            .Verifiable();
+        provider
+            .Setup(c => c.Execute(It.IsAny<TagHelperDescriptorProviderContext>()))
+            .Callback<TagHelperDescriptorProviderContext>(c => compilation = c.Compilation);
 
         var engine = RazorProjectEngine.Create(
             configure =>
@@ -91,19 +91,19 @@ public class CompilationTagHelperFeatureTest
 
         // Assert
         Assert.Empty(result);
-        provider.Verify();
+        provider.Verify(c => c.Execute(It.IsAny<TagHelperDescriptorProviderContext>()), Times.Never);
         Assert.Null(compilation);
     }
 
     [Fact]
-    public void GetDescriptors_SetsCompilation_IfCompilationIsValid()
+    public void GetDescriptors_ExecutesProviderIfCompilationIsValid()
     {
         // Arrange
         Compilation compilation = null;
         var provider = new Mock<ITagHelperDescriptorProvider>();
-        provider.Setup(c => c.Execute(It.IsAny<TagHelperDescriptorProviderContext>()))
-            .Callback<TagHelperDescriptorProviderContext>(c => compilation = c.GetCompilation())
-            .Verifiable();
+        provider
+            .Setup(c => c.Execute(It.IsAny<TagHelperDescriptorProviderContext>()))
+            .Callback<TagHelperDescriptorProviderContext>(c => compilation = c.Compilation);
 
         var references = new[]
         {
@@ -126,7 +126,7 @@ public class CompilationTagHelperFeatureTest
 
         // Assert
         Assert.Empty(result);
-        provider.Verify();
+        provider.Verify(c => c.Execute(It.IsAny<TagHelperDescriptorProviderContext>()), Times.Once);
         Assert.NotNull(compilation);
     }
 }

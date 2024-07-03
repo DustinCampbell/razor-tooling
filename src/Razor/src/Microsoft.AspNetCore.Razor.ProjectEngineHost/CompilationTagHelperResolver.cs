@@ -40,14 +40,14 @@ internal class CompilationTagHelperResolver(ITelemetryReporter? telemetryReporte
             return ImmutableArray<TagHelperDescriptor>.Empty;
         }
 
-        using var _ = HashSetPool<TagHelperDescriptor>.GetPooledObject(out var results);
-        var context = TagHelperDescriptorProviderContext.Create(results, excludeHidden: true, includeDocumentation: true);
-
         var compilation = await workspaceProject.GetCompilationAsync(cancellationToken).ConfigureAwait(false);
-        if (CompilationTagHelperFeature.IsValidCompilation(compilation))
+        if (!CompilationTagHelperFeature.IsValidCompilation(compilation))
         {
-            context.SetCompilation(compilation);
+            return [];
         }
+
+        using var _ = HashSetPool<TagHelperDescriptor>.GetPooledObject(out var results);
+        var context = TagHelperDescriptorProviderContext.Create(compilation, results, excludeHidden: true, includeDocumentation: true);
 
         ExecuteProviders(providers, context, _telemetryReporter);
 

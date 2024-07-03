@@ -2,19 +2,22 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
+using Microsoft.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
 public sealed class TagHelperDescriptorProviderContext
 {
+    public Compilation Compilation { get; }
     public bool ExcludeHidden { get; }
     public bool IncludeDocumentation { get; }
 
     public ItemCollection Items { get; }
     public ICollection<TagHelperDescriptor> Results { get; }
 
-    private TagHelperDescriptorProviderContext(ICollection<TagHelperDescriptor> results, bool excludeHidden, bool includeDocumentation)
+    private TagHelperDescriptorProviderContext(Compilation compilation, ICollection<TagHelperDescriptor> results, bool excludeHidden, bool includeDocumentation)
     {
+        Compilation = compilation;
         Results = results;
         ExcludeHidden = excludeHidden;
         IncludeDocumentation = includeDocumentation;
@@ -22,15 +25,15 @@ public sealed class TagHelperDescriptorProviderContext
         Items = [];
     }
 
-    public static TagHelperDescriptorProviderContext Create(bool excludeHidden = false, bool includeDocumentation = false)
+    public static TagHelperDescriptorProviderContext Create(Compilation compilation, bool excludeHidden = false, bool includeDocumentation = false)
     {
-        return Create(new List<TagHelperDescriptor>(), excludeHidden, includeDocumentation);
+        return Create(compilation, new List<TagHelperDescriptor>(), excludeHidden, includeDocumentation);
     }
 
-    public static TagHelperDescriptorProviderContext Create(ICollection<TagHelperDescriptor> results, bool excludeHidden = false, bool includeDocumentation = false)
+    public static TagHelperDescriptorProviderContext Create(Compilation compilation, ICollection<TagHelperDescriptor> results, bool excludeHidden = false, bool includeDocumentation = false)
     {
         ArgHelper.ThrowIfNull(results);
 
-        return new(results, excludeHidden, includeDocumentation);
+        return new(compilation, results, excludeHidden, includeDocumentation);
     }
 }

@@ -34,13 +34,7 @@ internal partial class ComponentTagHelperDescriptorProvider : RazorEngineFeature
             throw new ArgumentNullException(nameof(context));
         }
 
-        var compilation = context.GetCompilation();
-        if (compilation == null)
-        {
-            // No compilation, nothing to do.
-            return;
-        }
-
+        var compilation = context.Compilation;
         var targetSymbol = context.Items.GetTargetSymbol();
 
         var collector = new Collector(compilation, targetSymbol);
