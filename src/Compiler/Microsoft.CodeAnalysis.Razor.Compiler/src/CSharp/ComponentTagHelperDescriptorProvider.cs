@@ -1,13 +1,12 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Components;
 using Microsoft.AspNetCore.Razor.Language.Extensions;
@@ -29,10 +28,7 @@ internal partial class ComponentTagHelperDescriptorProvider : RazorEngineFeature
 
     public void Execute(TagHelperDescriptorProviderContext context)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgHelper.ThrowIfNull(context);
 
         var compilation = context.Compilation;
         var targetSymbol = context.TargetSymbol;
@@ -41,7 +37,7 @@ internal partial class ComponentTagHelperDescriptorProvider : RazorEngineFeature
         collector.Collect(context);
     }
 
-    private sealed class Collector(Compilation compilation, ISymbol targetSymbol)
+    private sealed class Collector(Compilation compilation, ISymbol? targetSymbol)
         : TagHelperCollector<Collector>(compilation, targetSymbol)
     {
         protected override void Collect(ISymbol symbol, ICollection<TagHelperDescriptor> results)
@@ -137,7 +133,8 @@ internal partial class ComponentTagHelperDescriptorProvider : RazorEngineFeature
 
                 foreach (var attribute in type.GetAttributes())
                 {
-                    if (attribute.AttributeClass.HasFullName(ComponentsApi.CascadingTypeParameterAttribute.MetadataName) &&
+                    if (attribute.AttributeClass is { } attributeClass &&
+                        attributeClass.HasFullName(ComponentsApi.CascadingTypeParameterAttribute.MetadataName) &&
                         attribute.ConstructorArguments.FirstOrDefault() is { Value: string value })
                     {
                         cascadeGenericTypeAttributes.Add(value);
@@ -198,7 +195,8 @@ internal partial class ComponentTagHelperDescriptorProvider : RazorEngineFeature
                 pb.Name = property.Name;
                 pb.TypeName = property.Type.ToDisplayString(SymbolExtensions.FullNameTypeDisplayFormat);
                 pb.IsEditorRequired = property.GetAttributes().Any(
-                    static a => a.AttributeClass.HasFullName("Microsoft.AspNetCore.Components.EditorRequiredAttribute"));
+                    static a => a.AttributeClass is { } attributeClass &&
+                                attributeClass.HasFullName("Microsoft.AspNetCore.Components.EditorRequiredAttribute"));
 
                 metadata.Add(PropertyName(property.Name));
                 metadata.Add(GloballyQualifiedTypeName(property.Type.ToDisplayString(GloballyQualifiedFullNameTypeDisplayFormat)));
@@ -229,7 +227,8 @@ internal partial class ComponentTagHelperDescriptorProvider : RazorEngineFeature
                     metadata.Add(MakeTrue(ComponentMetadata.Component.GenericTypedKey));
                 }
 
-                if (property.SetMethod.IsInitOnly)
+                if (property.SetMethod is { } setMethod &&
+                    setMethod.IsInitOnly)
                 {
                     metadata.Add(MakeTrue(ComponentMetadata.Component.InitOnlyProperty));
                 }
@@ -256,7 +255,7 @@ internal partial class ComponentTagHelperDescriptorProvider : RazorEngineFeature
                 // [Parameter] public List<string> MyProperty { get; set; }
                 //
                 // We need to inspect the type arguments to tell the difference between a property that
-                // uses the containing class' type parameter(s) and a vanilla usage of generic types like
+                // uses the containing class's type parameter(s) and a vanilla usage of generic types like
                 // List<> and Dictionary<,>
                 //
                 // Since we need to handle cases like RenderFragment<List<T>>, this check must be recursive.
@@ -292,7 +291,7 @@ internal partial class ComponentTagHelperDescriptorProvider : RazorEngineFeature
         private static string IsAwaitable(IPropertySymbol prop)
         {
             var methodSymbol = ((INamedTypeSymbol)prop.Type).DelegateInvokeMethod;
-            if (methodSymbol.ReturnsVoid)
+            if (methodSymbol is null || methodSymbol.ReturnsVoid)
             {
                 return bool.FalseString;
             }
@@ -398,7 +397,7 @@ internal partial class ComponentTagHelperDescriptorProvider : RazorEngineFeature
                 pb.Name = typeParameter.Name;
                 pb.TypeName = typeof(Type).FullName;
 
-                using var _ = ListPool<KeyValuePair<string, string>>.GetPooledObject(out var metadataPairs);
+                using var _ = ListPool<KeyValuePair<string, string?>>.GetPooledObject(out var metadataPairs);
                 metadataPairs.Add(PropertyName(typeParameter.Name));
                 metadataPairs.Add(MakeTrue(ComponentMetadata.Component.TypeParameterKey));
                 metadataPairs.Add(new(ComponentMetadata.Component.TypeParameterIsCascadingKey, cascade.ToString()));
@@ -456,7 +455,7 @@ internal partial class ComponentTagHelperDescriptorProvider : RazorEngineFeature
                         builder.Name));
             });
 
-            static bool TryGetWhereClauseText(ITypeParameterSymbol typeParameter, PooledList<string> constraints, [NotNullWhen(true)] out string constraintsText)
+            static bool TryGetWhereClauseText(ITypeParameterSymbol typeParameter, PooledList<string> constraints, [NotNullWhen(true)] out string? constraintsText)
             {
                 if (constraints.Count == 0)
                 {
@@ -545,7 +544,7 @@ internal partial class ComponentTagHelperDescriptorProvider : RazorEngineFeature
             return descriptor;
         }
 
-        private static void CreateContextParameter(TagHelperDescriptorBuilder builder, string childContentName)
+        private static void CreateContextParameter(TagHelperDescriptorBuilder builder, string? childContentName)
         {
             builder.BindAttribute(b =>
             {
@@ -577,9 +576,10 @@ internal partial class ComponentTagHelperDescriptorProvider : RazorEngineFeature
             using var names = new PooledHashSet<string>(StringHashSetPool.Ordinal);
             using var results = new PooledArrayBuilder<(IPropertySymbol, PropertyKind)>();
 
+            var currentType = type;
             do
             {
-                if (type.HasFullName(ComponentsApi.ComponentBase.MetadataName))
+                if (currentType.HasFullName(ComponentsApi.ComponentBase.MetadataName))
                 {
                     // The ComponentBase base class doesn't have any [Parameter].
                     // Bail out now to avoid walking through its many members, plus the members
@@ -587,7 +587,7 @@ internal partial class ComponentTagHelperDescriptorProvider : RazorEngineFeature
                     break;
                 }
 
-                foreach (var member in type.GetMembers())
+                foreach (var member in currentType.GetMembers())
                 {
                     if (member is not IPropertySymbol property)
                     {
@@ -630,7 +630,8 @@ internal partial class ComponentTagHelperDescriptorProvider : RazorEngineFeature
                         kind = PropertyKind.Ignored;
                     }
 
-                    if (!property.GetAttributes().Any(static a => a.AttributeClass.HasFullName(ComponentsApi.ParameterAttribute.MetadataName)))
+                    if (!property.GetAttributes().Any(static a => a.AttributeClass is { } attributeClass &&
+                                                                  attributeClass.HasFullName(ComponentsApi.ParameterAttribute.MetadataName)))
                     {
                         if (property.IsOverride)
                         {
@@ -659,9 +660,9 @@ internal partial class ComponentTagHelperDescriptorProvider : RazorEngineFeature
                     results.Add((property, kind));
                 }
 
-                type = type.BaseType;
+                currentType = currentType.BaseType;
             }
-            while (type != null);
+            while (currentType != null);
 
             return results.DrainToImmutable();
 
