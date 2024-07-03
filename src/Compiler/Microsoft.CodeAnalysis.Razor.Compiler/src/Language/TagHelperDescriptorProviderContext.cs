@@ -13,7 +13,6 @@ public sealed class TagHelperDescriptorProviderContext
     public bool ExcludeHidden { get; }
     public bool IncludeDocumentation { get; }
 
-    public ItemCollection Items { get; }
     public ICollection<TagHelperDescriptor> Results { get; }
 
     private TagHelperDescriptorProviderContext(
@@ -28,8 +27,6 @@ public sealed class TagHelperDescriptorProviderContext
         Results = results;
         ExcludeHidden = excludeHidden;
         IncludeDocumentation = includeDocumentation;
-
-        Items = [];
     }
 
     public static TagHelperDescriptorProviderContext Create(
