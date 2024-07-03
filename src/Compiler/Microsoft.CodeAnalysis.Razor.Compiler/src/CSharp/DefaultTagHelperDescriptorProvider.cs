@@ -1,10 +1,8 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
-using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.PooledObjects;
 
@@ -16,10 +14,7 @@ public sealed class DefaultTagHelperDescriptorProvider : RazorEngineFeatureBase,
 
     public void Execute(TagHelperDescriptorProviderContext context)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgHelper.ThrowIfNull(context);
 
         var compilation = context.Compilation;
 
@@ -37,7 +32,7 @@ public sealed class DefaultTagHelperDescriptorProvider : RazorEngineFeatureBase,
     }
 
     private class Collector(
-        Compilation compilation, ISymbol targetSymbol, DefaultTagHelperDescriptorFactory factory, INamedTypeSymbol tagHelperTypeSymbol)
+        Compilation compilation, ISymbol? targetSymbol, DefaultTagHelperDescriptorFactory factory, INamedTypeSymbol tagHelperTypeSymbol)
         : TagHelperCollector<Collector>(compilation, targetSymbol)
     {
         private readonly DefaultTagHelperDescriptorFactory _factory = factory;
