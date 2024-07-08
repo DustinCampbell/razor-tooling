@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Components;
 using Microsoft.AspNetCore.Razor.PooledObjects;
@@ -23,10 +24,7 @@ internal class BindTagHelperDescriptorProvider : ITagHelperDescriptorProvider
 
     public void Execute(TagHelperDescriptorProviderContext context)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgHelper.ThrowIfNull(context);
 
         // This provider returns tag helper information for 'bind' which doesn't necessarily
         // map to any real component. Bind behaviors more like a macro, which can map a single LValue to
@@ -232,7 +230,7 @@ internal class BindTagHelperDescriptorProvider : ITagHelperDescriptorProvider
         Compilation compilation, INamedTypeSymbol bindElementAttribute, INamedTypeSymbol bindInputElementAttribute)
         : TagHelperCollector<Collector>(compilation, targetSymbol: null)
     {
-        protected override void Collect(ISymbol symbol, ICollection<TagHelperDescriptor> results)
+        protected override void Collect(ISymbol symbol, TagHelperDescriptorCollection.IBuilder results)
         {
             using var _ = ListPool<INamedTypeSymbol>.GetPooledObject(out var types);
             var visitor = new BindElementDataVisitor(types);

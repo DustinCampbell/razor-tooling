@@ -2,7 +2,6 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Microsoft.AspNetCore.Razor.Language;
@@ -117,23 +116,23 @@ namespace Microsoft.NET.Sdk.Razor.SourceGenerators
                 .SuppressIfNeeded(isGeneratorSuppressed)
                 .Select(static (pair, _) =>
                 {
-
                     var ((compilation, razorSourceGeneratorOptions), isGeneratorSuppressed) = pair;
-                    var results = new List<TagHelperDescriptor>();
-
+                    
                     if (isGeneratorSuppressed)
                     {
-                        return results;
+                        return TagHelperDescriptorCollection.Empty;
                     }
+
+                    using var builder = TagHelperDescriptorCollection.GetBuilder();
 
                     RazorSourceGeneratorEventSource.Log.DiscoverTagHelpersFromCompilationStart();
                     var tagHelperFeature = GetStaticTagHelperFeature(compilation);
 
-                    tagHelperFeature.CollectDescriptors(compilation.Assembly, results);
+                    tagHelperFeature.CollectDescriptors(compilation.Assembly, builder);
 
                     RazorSourceGeneratorEventSource.Log.DiscoverTagHelpersFromCompilationStop();
 
-                    return results;
+                    return builder.ToCollection();
                 })
                 .WithLambdaComparer(static (a, b) => a!.SequenceEqual(b!));
 
@@ -159,12 +158,11 @@ namespace Microsoft.NET.Sdk.Razor.SourceGenerators
                 })
                 .Select(static (pair, _) =>
                 {
-
                     var ((compilation, razorSourceGeneratorOptions), hasRazorFiles) = pair;
                     if (!hasRazorFiles)
                     {
                         // If there's no razor code in this app, don't do anything.
-                        return null;
+                        return TagHelperDescriptorCollection.Empty;
                     }
 
                     RazorSourceGeneratorEventSource.Log.DiscoverTagHelpersFromReferencesStart();
@@ -172,7 +170,7 @@ namespace Microsoft.NET.Sdk.Razor.SourceGenerators
 
                     // Typically a project with Razor files will have many tag helpers in references.
                     // So, we start with a larger capacity to avoid extra array copies.
-                    var results = new List<TagHelperDescriptor>(capacity: 128);
+                    var results = TagHelperDescriptorCollection.GetBuilder(capacity: 128);
 
                     foreach (var reference in compilation.References)
                     {
@@ -184,14 +182,14 @@ namespace Microsoft.NET.Sdk.Razor.SourceGenerators
 
                     RazorSourceGeneratorEventSource.Log.DiscoverTagHelpersFromReferencesStop();
 
-                    return results;
+                    return results.ToCollection();
                 });
 
             var allTagHelpers = tagHelpersFromCompilation
                 .Combine(tagHelpersFromReferences)
                 .Select(static (pair, _) =>
                 {
-                    return AllTagHelpers.Create(tagHelpersFromCompilation: pair.Left, tagHelpersFromReferences: pair.Right);
+                    return TagHelperDescriptorCollection.Merge(pair.Left, pair.Right);
                 });
 
             var withOptions = sourceItems

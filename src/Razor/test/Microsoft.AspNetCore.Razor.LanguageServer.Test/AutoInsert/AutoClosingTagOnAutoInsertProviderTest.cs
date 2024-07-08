@@ -1,11 +1,9 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
-using System;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.LanguageServer.Hosting;
 using Microsoft.AspNetCore.Razor.Test.Common;
-using Moq;
 using Xunit;
 using Xunit.Abstractions;
 using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
@@ -116,7 +114,7 @@ expected: @"
 <test />
 ",
 fileKind: FileKinds.Legacy,
-tagHelpers: new[] { WithoutEndTagTagHelper, CatchAllTagHelper });
+tagHelpers: [WithoutEndTagTagHelper, CatchAllTagHelper]);
 
     }
 
@@ -136,7 +134,7 @@ expected: @"
 <test><test></test></test>
 ",
 fileKind: FileKinds.Legacy,
-tagHelpers: new[] { NormalOrSelfClosingTagHelper });
+tagHelpers: [NormalOrSelfClosingTagHelper]);
     }
 
     [Fact]
@@ -155,7 +153,7 @@ expected: @"
 <input /><input></input></input>
 ",
 fileKind: FileKinds.Legacy,
-tagHelpers: new[] { UnspecifiedInputTagHelper });
+tagHelpers: [UnspecifiedInputTagHelper]);
     }
 
     [Fact]
@@ -221,7 +219,7 @@ expected: @"
 <Input>$0</Input>
 ",
 fileKind: FileKinds.Legacy,
-tagHelpers: new[] { UnspecifiedInputMirroringTagHelper });
+tagHelpers: [UnspecifiedInputMirroringTagHelper]);
     }
 
     [Fact]
@@ -232,7 +230,7 @@ tagHelpers: new[] { UnspecifiedInputMirroringTagHelper });
 input: "<Input>$$",
 expected: "<Input />",
 fileKind: FileKinds.Legacy,
-tagHelpers: Array.Empty<TagHelperDescriptor>());
+tagHelpers: []);
     }
 
     [Fact]
@@ -250,7 +248,7 @@ expected: @"
 <input>$0</input>
 ",
 fileKind: FileKinds.Legacy,
-tagHelpers: new[] { NormalOrSelfclosingInputTagHelper });
+tagHelpers: [NormalOrSelfclosingInputTagHelper]);
     }
 
     [Fact]
@@ -268,7 +266,7 @@ expected: @"
 <input />
 ",
 fileKind: FileKinds.Legacy,
-tagHelpers: new[] { UnspecifiedInputTagHelper });
+tagHelpers: [UnspecifiedInputTagHelper]);
     }
 
     [Fact]
@@ -286,7 +284,7 @@ expected: @"
 <test>$0</test>
 ",
 fileKind: FileKinds.Legacy,
-tagHelpers: new[] { UnspecifiedTagHelper });
+tagHelpers: [UnspecifiedTagHelper]);
     }
 
     [Fact]
@@ -304,7 +302,7 @@ expected: @"
 <test>$0</test>
 ",
 fileKind: FileKinds.Legacy,
-tagHelpers: new[] { NormalOrSelfClosingTagHelper });
+tagHelpers: [NormalOrSelfClosingTagHelper]);
     }
 
     [Fact]
@@ -329,7 +327,7 @@ expected: @"
 }
 ",
 fileKind: FileKinds.Legacy,
-tagHelpers: new[] { NormalOrSelfClosingTagHelper });
+tagHelpers: [NormalOrSelfClosingTagHelper]);
     }
 
     [Fact]
@@ -354,7 +352,7 @@ expected: @"
 }
 ",
 fileKind: FileKinds.Legacy,
-tagHelpers: new[] { NormalOrSelfClosingTagHelper });
+tagHelpers: [NormalOrSelfClosingTagHelper]);
     }
 
     [Fact]
@@ -379,7 +377,7 @@ expected: @"
 }
 ",
 fileKind: FileKinds.Legacy,
-tagHelpers: new[] { NormalOrSelfClosingTagHelper });
+tagHelpers: [NormalOrSelfClosingTagHelper]);
     }
 
     [Fact]
@@ -404,7 +402,7 @@ expected: @"
 }
 ",
 fileKind: FileKinds.Legacy,
-tagHelpers: new[] { NormalOrSelfClosingTagHelper });
+tagHelpers: [NormalOrSelfClosingTagHelper]);
     }
 
     [Fact]
@@ -429,7 +427,7 @@ expected: @"
 }
 ",
 fileKind: FileKinds.Legacy,
-tagHelpers: new[] { NormalOrSelfClosingTagHelper });
+tagHelpers: [NormalOrSelfClosingTagHelper]);
     }
 
     [Fact]
@@ -454,7 +452,7 @@ expected: @"
 }
 ",
 fileKind: FileKinds.Legacy,
-tagHelpers: new[] { NormalOrSelfClosingTagHelper });
+tagHelpers: [NormalOrSelfClosingTagHelper]);
     }
 
     [Fact]
@@ -479,7 +477,7 @@ expected: @"
 }
 ",
 fileKind: FileKinds.Legacy,
-tagHelpers: new[] { NormalOrSelfClosingTagHelper });
+tagHelpers: [NormalOrSelfClosingTagHelper]);
     }
 
     [Fact]
@@ -504,7 +502,7 @@ expected: @"
 }
 ",
 fileKind: FileKinds.Legacy,
-tagHelpers: new[] { NormalOrSelfClosingTagHelper });
+tagHelpers: [NormalOrSelfClosingTagHelper]);
     }
 
     [Fact]
@@ -529,7 +527,7 @@ expected: @"
 }
 ",
 fileKind: FileKinds.Legacy,
-tagHelpers: new[] { NormalOrSelfClosingTagHelper });
+tagHelpers: [NormalOrSelfClosingTagHelper]);
     }
 
     [Fact]
@@ -554,7 +552,7 @@ expected: @"
 }
 ",
 fileKind: FileKinds.Legacy,
-tagHelpers: new[] { NormalOrSelfClosingTagHelper, UnspecifiedInputTagHelper });
+tagHelpers: [NormalOrSelfClosingTagHelper, UnspecifiedInputTagHelper]);
     }
 
     [Fact]
@@ -579,7 +577,7 @@ expected: @"
 }
 ",
 fileKind: FileKinds.Legacy,
-tagHelpers: new[] { NormalOrSelfClosingTagHelper, UnspecifiedInputTagHelper });
+tagHelpers: [NormalOrSelfClosingTagHelper, UnspecifiedInputTagHelper]);
     }
 
     [Fact]
@@ -604,7 +602,7 @@ expected: @"
 }
 ",
 fileKind: FileKinds.Legacy,
-tagHelpers: new[] { NormalOrSelfClosingTagHelper, NormalOrSelfclosingInputTagHelper });
+tagHelpers: [NormalOrSelfClosingTagHelper, NormalOrSelfclosingInputTagHelper]);
     }
 
     [Fact]
@@ -626,7 +624,7 @@ expected: @"
 }
 ",
 fileKind: FileKinds.Legacy,
-tagHelpers: new[] { NormalOrSelfClosingTagHelper });
+tagHelpers: [NormalOrSelfClosingTagHelper]);
     }
 
     [Fact]
@@ -644,7 +642,7 @@ expected: @"
 <test />
 ",
 fileKind: FileKinds.Legacy,
-tagHelpers: new[] { WithoutEndTagTagHelper });
+tagHelpers: [WithoutEndTagTagHelper]);
     }
 
     [Fact]
@@ -669,7 +667,7 @@ expected: @"
 }
 ",
 fileKind: FileKinds.Legacy,
-tagHelpers: new[] { WithoutEndTagTagHelper });
+tagHelpers: [WithoutEndTagTagHelper]);
     }
 
     [Fact]
@@ -687,7 +685,7 @@ expected: @"
 <test />
 ",
 fileKind: FileKinds.Legacy,
-tagHelpers: new[] { WithoutEndTagTagHelper });
+tagHelpers: [WithoutEndTagTagHelper]);
     }
 
     [Fact]
@@ -705,7 +703,7 @@ expected: @"
 <test />
 ",
 fileKind: FileKinds.Legacy,
-tagHelpers: new[] { WithoutEndTagTagHelper });
+tagHelpers: [WithoutEndTagTagHelper]);
     }
 
     [Fact]
@@ -727,7 +725,7 @@ expected: @"
 }
 ",
 fileKind: FileKinds.Legacy,
-tagHelpers: new[] { WithoutEndTagTagHelper });
+tagHelpers: [WithoutEndTagTagHelper]);
     }
 
     [Fact]
@@ -745,7 +743,7 @@ expected: @"
 <test>$0</test>
 ",
 fileKind: FileKinds.Legacy,
-tagHelpers: new[] { UnspecifiedTagHelper, NormalOrSelfClosingTagHelper, WithoutEndTagTagHelper });
+tagHelpers: [UnspecifiedTagHelper, NormalOrSelfClosingTagHelper, WithoutEndTagTagHelper]);
     }
 
     [Fact]
@@ -763,7 +761,7 @@ expected: @"
 <!test>$0</!test>
 ",
 fileKind: FileKinds.Legacy,
-tagHelpers: new[] { NormalOrSelfClosingTagHelper });
+tagHelpers: [NormalOrSelfClosingTagHelper]);
     }
 
     [Fact]

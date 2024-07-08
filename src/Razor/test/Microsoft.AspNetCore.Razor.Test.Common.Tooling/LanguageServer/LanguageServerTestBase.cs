@@ -63,16 +63,16 @@ public abstract class LanguageServerTestBase : ToolingTestBase
         ILspServices? lspServices = null)
         => new(documentContext, lspServices ?? StrictMock.Of<ILspServices>(), "lsp/method", uri: null);
 
-    protected static RazorCodeDocument CreateCodeDocument(string text, ImmutableArray<TagHelperDescriptor> tagHelpers = default, string? filePath = null, string? rootNamespace = null)
+    protected static RazorCodeDocument CreateCodeDocument(string text, TagHelperDescriptorCollection? tagHelpers = null, string? filePath = null, string? rootNamespace = null)
     {
         filePath ??= "test.cshtml";
 
         var fileKind = FileKinds.GetFileKindFromFilePath(filePath);
-        tagHelpers = tagHelpers.NullToEmpty();
+        tagHelpers ??= [];
 
         if (fileKind == FileKinds.Component)
         {
-            tagHelpers = tagHelpers.AddRange(RazorTestResources.BlazorServerAppTagHelpers);
+            tagHelpers = TagHelperDescriptorCollection.Merge(tagHelpers, [.. RazorTestResources.BlazorServerAppTagHelpers]);
         }
 
         var sourceDocument = TestRazorSourceDocument.Create(text, filePath: filePath, relativePath: filePath);

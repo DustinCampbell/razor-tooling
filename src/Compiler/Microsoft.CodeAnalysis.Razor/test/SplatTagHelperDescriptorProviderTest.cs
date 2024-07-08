@@ -14,7 +14,7 @@ public class SplatTagHelperDescriptorProviderTest : TagHelperDescriptorProviderT
     public void Execute_CreatesDescriptor()
     {
         // Arrange
-        var context = TagHelperDescriptorProviderContext.Create(BaseCompilation);
+        using var context = TagHelperDescriptorProviderContext.Create(BaseCompilation);
 
         var provider = new SplatTagHelperDescriptorProvider();
 
@@ -22,7 +22,8 @@ public class SplatTagHelperDescriptorProviderTest : TagHelperDescriptorProviderT
         provider.Execute(context);
 
         // Assert
-        var matches = context.Results.Where(result => result.IsSplatTagHelper());
+        var results = context.Results.ToCollection();
+        var matches = results.Where(result => result.IsSplatTagHelper());
         var item = Assert.Single(matches);
 
         Assert.Empty(item.AllowedChildTags);

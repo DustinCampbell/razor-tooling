@@ -14,7 +14,7 @@ public class RefTagHelperDescriptorProviderTest : TagHelperDescriptorProviderTes
     public void Execute_CreatesDescriptor()
     {
         // Arrange
-        var context = TagHelperDescriptorProviderContext.Create(BaseCompilation);
+        using var context = TagHelperDescriptorProviderContext.Create(BaseCompilation);
 
         var provider = new RefTagHelperDescriptorProvider();
 
@@ -22,7 +22,8 @@ public class RefTagHelperDescriptorProviderTest : TagHelperDescriptorProviderTes
         provider.Execute(context);
 
         // Assert
-        var matches = context.Results.Where(result => result.IsRefTagHelper());
+        var results = context.Results.ToCollection();
+        var matches = results.Where(result => result.IsRefTagHelper());
         var item = Assert.Single(matches);
 
         Assert.Empty(item.AllowedChildTags);

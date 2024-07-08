@@ -17,9 +17,9 @@ public abstract partial class TagHelperCollector<T>
         // The cache needs to be large enough to handle all combinations of options.
         private const int CacheSize = (IncludeDocumentation | ExcludeHidden) + 1;
 
-        private readonly TagHelperDescriptor[]?[] _tagHelpers = new TagHelperDescriptor[CacheSize][];
+        private readonly TagHelperDescriptorCollection?[] _tagHelpers = new TagHelperDescriptorCollection?[CacheSize];
 
-        public bool TryGet(bool includeDocumentation, bool excludeHidden, [NotNullWhen(true)] out TagHelperDescriptor[]? tagHelpers)
+        public bool TryGet(bool includeDocumentation, bool excludeHidden, [NotNullWhen(true)] out TagHelperDescriptorCollection? tagHelpers)
         {
             var index = CalculateIndex(includeDocumentation, excludeHidden);
 
@@ -27,7 +27,7 @@ public abstract partial class TagHelperCollector<T>
             return tagHelpers is not null;
         }
 
-        public TagHelperDescriptor[] Add(TagHelperDescriptor[] tagHelpers, bool includeDocumentation, bool excludeHidden)
+        public TagHelperDescriptorCollection Add(TagHelperDescriptorCollection tagHelpers, bool includeDocumentation, bool excludeHidden)
         {
             var index = CalculateIndex(includeDocumentation, excludeHidden);
 

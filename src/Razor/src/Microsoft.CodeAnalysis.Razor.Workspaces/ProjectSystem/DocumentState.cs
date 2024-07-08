@@ -468,11 +468,11 @@ internal class DocumentState
             }
 
             var tagHelpers = await project.GetTagHelpersAsync(CancellationToken.None).ConfigureAwait(false);
-            var codeDocument = await GenerateCodeDocumentAsync(tagHelpers, project.GetProjectEngine(), document, imports).ConfigureAwait(false);
+            var codeDocument = await GenerateCodeDocumentAsync([.. tagHelpers], project.GetProjectEngine(), document, imports).ConfigureAwait(false);
             return (codeDocument, inputVersion);
         }
 
-        internal static async Task<RazorCodeDocument> GenerateCodeDocumentAsync(ImmutableArray<TagHelperDescriptor> tagHelpers, RazorProjectEngine projectEngine, IDocumentSnapshot document, ImmutableArray<ImportItem> imports)
+        internal static async Task<RazorCodeDocument> GenerateCodeDocumentAsync(TagHelperDescriptorCollection tagHelpers, RazorProjectEngine projectEngine, IDocumentSnapshot document, ImmutableArray<ImportItem> imports)
         {
             // OK we have to generate the code.
             using var importSources = new PooledArrayBuilder<RazorSourceDocument>(imports.Length);

@@ -15,7 +15,7 @@ public sealed class CompilationTagHelperFeature : RazorEngineFeatureBase, ITagHe
     private ITagHelperDescriptorProvider[]? _providers;
     private IMetadataReferenceFeature? _referenceFeature;
 
-    public IReadOnlyList<TagHelperDescriptor> GetDescriptors()
+    public TagHelperDescriptorCollection GetDescriptors()
     {
         var providers = _providers.AssumeNotNull();
         var referenceFeature = _referenceFeature.AssumeNotNull();
@@ -26,15 +26,14 @@ public sealed class CompilationTagHelperFeature : RazorEngineFeatureBase, ITagHe
             return [];
         }
 
-        var results = new List<TagHelperDescriptor>();
-        var context = TagHelperDescriptorProviderContext.Create(compilation, targetSymbol: null, results);
+        using var context = TagHelperDescriptorProviderContext.Create(compilation, targetSymbol: null);
 
         for (var i = 0; i < providers.Length; i++)
         {
             providers[i].Execute(context);
         }
 
-        return results;
+        return context.Results.ToCollection();
     }
 
     protected override void OnInitialized()

@@ -40,7 +40,7 @@ internal partial class ComponentTagHelperDescriptorProvider : RazorEngineFeature
     private sealed class Collector(Compilation compilation, ISymbol? targetSymbol)
         : TagHelperCollector<Collector>(compilation, targetSymbol)
     {
-        protected override void Collect(ISymbol symbol, ICollection<TagHelperDescriptor> results)
+        protected override void Collect(ISymbol symbol, TagHelperDescriptorCollection.IBuilder results)
         {
             using var _ = ListPool<INamedTypeSymbol>.GetPooledObject(out var types);
             var visitor = new ComponentTypeVisitor(types);

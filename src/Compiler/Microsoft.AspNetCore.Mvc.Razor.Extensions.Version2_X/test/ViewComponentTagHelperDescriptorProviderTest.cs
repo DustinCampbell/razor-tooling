@@ -28,7 +28,7 @@ public class ViewComponentTagHelperDescriptorProviderTest
 
         var compilation = MvcShim.BaseCompilation.AddSyntaxTrees(CSharpSyntaxTree.ParseText(code));
 
-        var context = TagHelperDescriptorProviderContext.Create(compilation);
+        using var context = TagHelperDescriptorProviderContext.Create(compilation);
 
         var provider = new ViewComponentTagHelperDescriptorProvider()
         {
@@ -66,6 +66,6 @@ public class ViewComponentTagHelperDescriptorProviderTest
         provider.Execute(context);
 
         // Assert
-        Assert.Single(context.Results, d => d.Equals(expectedDescriptor));
+        Assert.Single(context.Results.ToCollection(), d => d.Equals(expectedDescriptor));
     }
 }

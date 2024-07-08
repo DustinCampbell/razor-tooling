@@ -143,10 +143,10 @@ public class Foo { }
         return context;
     }
 
-    private static (RazorCodeDocument, IDocumentSnapshot) CreateCodeDocumentAndSnapshot(SourceText text, string path, ImmutableArray<TagHelperDescriptor> tagHelpers = default, string? fileKind = default)
+    private static (RazorCodeDocument, IDocumentSnapshot) CreateCodeDocumentAndSnapshot(SourceText text, string path, TagHelperDescriptorCollection? tagHelpers = null, string? fileKind = default)
     {
         fileKind ??= FileKinds.Component;
-        tagHelpers = tagHelpers.NullToEmpty();
+        tagHelpers ??= [];
         var sourceDocument = RazorSourceDocument.Create(text, RazorSourceDocumentProperties.Create(path, path));
         var projectEngine = RazorProjectEngine.Create(builder => builder.SetRootNamespace("Test"));
         var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, fileKind, importSources: default, tagHelpers);
@@ -160,7 +160,7 @@ public class Foo { }
             .Returns(path);
         documentSnapshot
             .Setup(d => d.Project.GetTagHelpersAsync(It.IsAny<CancellationToken>()))
-            .Returns(new ValueTask<ImmutableArray<TagHelperDescriptor>>(tagHelpers));
+            .Returns(new ValueTask<ImmutableArray<TagHelperDescriptor>>([.. tagHelpers]));
         documentSnapshot
             .Setup(d => d.FileKind)
             .Returns(fileKind);

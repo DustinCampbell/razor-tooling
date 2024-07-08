@@ -39,7 +39,7 @@ internal class EventHandlerTagHelperDescriptorProvider : ITagHelperDescriptorPro
     {
         private readonly INamedTypeSymbol _eventHandlerAttribute = eventHandlerAttribute;
 
-        protected override void Collect(ISymbol symbol, ICollection<TagHelperDescriptor> results)
+        protected override void Collect(ISymbol symbol, TagHelperDescriptorCollection.IBuilder results)
         {
             using var _ = ListPool<INamedTypeSymbol>.GetPooledObject(out var types);
             var visitor = new EventHandlerDataVisitor(types);

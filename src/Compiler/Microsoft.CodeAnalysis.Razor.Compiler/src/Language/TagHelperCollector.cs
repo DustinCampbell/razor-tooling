@@ -2,10 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using Microsoft.AspNetCore.Razor.PooledObjects;
 using Microsoft.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Razor.Language;
@@ -36,7 +34,7 @@ public abstract partial class TagHelperCollector<T>
                    a => a.Name.StartsWith("Microsoft.AspNetCore.", StringComparison.Ordinal));
     }
 
-    protected abstract void Collect(ISymbol symbol, ICollection<TagHelperDescriptor> results);
+    protected abstract void Collect(ISymbol symbol, TagHelperDescriptorCollection.IBuilder results);
 
     public void Collect(TagHelperDescriptorProviderContext context)
     {
@@ -69,10 +67,10 @@ public abstract partial class TagHelperCollector<T>
 
                     if (!cache.TryGet(includeDocumentation, excludeHidden, out var tagHelpers))
                     {
-                        using var _ = ListPool<TagHelperDescriptor>.GetPooledObject(out var referenceTagHelpers);
+                        using var referenceTagHelpers = TagHelperDescriptorCollection.GetBuilder();
                         Collect(assembly.GlobalNamespace, referenceTagHelpers);
 
-                        tagHelpers = cache.Add(referenceTagHelpers.ToArrayOrEmpty(), includeDocumentation, excludeHidden);
+                        tagHelpers = cache.Add(referenceTagHelpers.ToCollection(), includeDocumentation, excludeHidden);
                     }
 
                     foreach (var tagHelper in tagHelpers)

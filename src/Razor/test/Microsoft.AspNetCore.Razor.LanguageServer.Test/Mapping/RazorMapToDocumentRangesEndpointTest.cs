@@ -254,7 +254,7 @@ public class RazorMapToDocumentRangesEndpointTest : LanguageServerTestBase
 
     private static RazorCodeDocument CreateCodeDocumentWithCSharpProjection(string razorSource, string projectedCSharpSource, IEnumerable<SourceMapping> sourceMappings)
     {
-        var codeDocument = CreateCodeDocument(razorSource, ImmutableArray<TagHelperDescriptor>.Empty);
+        var codeDocument = CreateCodeDocument(razorSource, []);
         var csharpDocument = RazorCSharpDocument.Create(
             codeDocument,
             projectedCSharpSource,

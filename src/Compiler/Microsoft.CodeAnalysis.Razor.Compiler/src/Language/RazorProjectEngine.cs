@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
 using System.Threading.Tasks;
@@ -54,7 +53,7 @@ public class RazorProjectEngine
         RazorSourceDocument source,
         string fileKind,
         ImmutableArray<RazorSourceDocument> importSources,
-        IReadOnlyList<TagHelperDescriptor> tagHelpers)
+        TagHelperDescriptorCollection tagHelpers)
     {
         if (source == null)
         {
@@ -86,7 +85,7 @@ public class RazorProjectEngine
         RazorSourceDocument source,
         string fileKind,
         ImmutableArray<RazorSourceDocument> importSources,
-        IReadOnlyList<TagHelperDescriptor> tagHelpers)
+        TagHelperDescriptorCollection tagHelpers)
     {
         if (source == null)
         {
@@ -120,7 +119,7 @@ public class RazorProjectEngine
         RazorSourceDocument source,
         string? fileKind,
         ImmutableArray<RazorSourceDocument> importSources,
-        IReadOnlyList<TagHelperDescriptor>? tagHelpers)
+        TagHelperDescriptorCollection? tagHelpers)
     {
         if (source == null)
         {
@@ -174,7 +173,7 @@ public class RazorProjectEngine
         RazorSourceDocument sourceDocument,
         string? fileKind = null,
         ImmutableArray<RazorSourceDocument> importSourceDocuments = default,
-        IReadOnlyList<TagHelperDescriptor>? tagHelpers = null,
+        TagHelperDescriptorCollection? tagHelpers = null,
         Action<RazorParserOptionsBuilder>? configureParser = null,
         Action<RazorCodeGenerationOptionsBuilder>? configureCodeGeneration = null,
         string? cssScope = null)
@@ -189,6 +188,7 @@ public class RazorProjectEngine
             ConfigureParserOptions(builder);
             configureParser?.Invoke(builder);
         });
+
         var codeGenerationOptions = GetRequiredFeature<IRazorCodeGenerationOptionsFactoryProjectFeature>().Create(fileKind, builder =>
         {
             ConfigureCodeGenerationOptions(builder);
@@ -251,7 +251,7 @@ public class RazorProjectEngine
         RazorSourceDocument sourceDocument,
         string? fileKind,
         ImmutableArray<RazorSourceDocument> importSourceDocuments,
-        IReadOnlyList<TagHelperDescriptor>? tagHelpers,
+        TagHelperDescriptorCollection? tagHelpers,
         Action<RazorParserOptionsBuilder>? configureParser,
         Action<RazorCodeGenerationOptionsBuilder>? configureCodeGeneration)
     {

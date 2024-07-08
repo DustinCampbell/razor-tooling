@@ -29,7 +29,7 @@ public abstract class RazorOnAutoInsertProviderTestBase : LanguageServerTestBase
 
     internal abstract IOnAutoInsertProvider CreateProvider();
 
-    protected void RunAutoInsertTest(string input, string expected, int tabSize = 4, bool insertSpaces = true, string fileKind = default, IReadOnlyList<TagHelperDescriptor> tagHelpers = default)
+    protected void RunAutoInsertTest(string input, string expected, int tabSize = 4, bool insertSpaces = true, string fileKind = null, TagHelperDescriptorCollection tagHelpers = null)
     {
         // Arrange
         TestFileMarkupParser.GetPosition(input, out input, out var location);
@@ -68,10 +68,10 @@ public abstract class RazorOnAutoInsertProviderTestBase : LanguageServerTestBase
         return source.WithChanges(change);
     }
 
-    private static RazorCodeDocument CreateCodeDocument(SourceText text, string path, IReadOnlyList<TagHelperDescriptor> tagHelpers = null, string fileKind = default)
+    private static RazorCodeDocument CreateCodeDocument(SourceText text, string path, TagHelperDescriptorCollection tagHelpers = null, string fileKind = default)
     {
         fileKind ??= FileKinds.Component;
-        tagHelpers ??= Array.Empty<TagHelperDescriptor>();
+        tagHelpers ??= [];
         var sourceDocument = RazorSourceDocument.Create(text, RazorSourceDocumentProperties.Create(path, path));
         var projectEngine = RazorProjectEngine.Create(builder => { });
         var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, fileKind, importSources: default, tagHelpers);

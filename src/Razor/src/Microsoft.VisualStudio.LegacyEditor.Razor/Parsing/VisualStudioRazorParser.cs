@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
@@ -588,18 +589,13 @@ internal class VisualStudioRazorParser : IVisualStudioRazorParser, IDisposable
         }
     }
 
-    private class VisualStudioTagHelperFeature : ITagHelperFeature
+    private class VisualStudioTagHelperFeature(ImmutableArray<TagHelperDescriptor> tagHelpers) : ITagHelperFeature
     {
-        private readonly IReadOnlyList<TagHelperDescriptor>? _tagHelpers;
-
-        public VisualStudioTagHelperFeature(IReadOnlyList<TagHelperDescriptor>? tagHelpers)
-        {
-            _tagHelpers = tagHelpers;
-        }
+        private readonly TagHelperDescriptorCollection _tagHelpers = [.. tagHelpers];
 
         public RazorEngine? Engine { get; set; }
 
-        public IReadOnlyList<TagHelperDescriptor>? GetDescriptors()
+        public TagHelperDescriptorCollection GetDescriptors()
         {
             return _tagHelpers;
         }

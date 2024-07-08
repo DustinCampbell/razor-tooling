@@ -3,7 +3,6 @@
 
 #nullable disable
 
-using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.PooledObjects;
@@ -1763,7 +1762,7 @@ public class HtmlFormattingTest(ITestOutputHelper testOutput) : FormattingTestBa
                     """,
             tagHelpers: CreateTagHelpers());
 
-        ImmutableArray<TagHelperDescriptor> CreateTagHelpers()
+        TagHelperDescriptorCollection CreateTagHelpers()
         {
             var select = """
                     @typeparam TValue
@@ -1799,7 +1798,7 @@ public class HtmlFormattingTest(ITestOutputHelper testOutput) : FormattingTestBa
             tagHelpers.AddRange(selectComponent.CodeDocument.GetTagHelperContext().TagHelpers);
             tagHelpers.AddRange(selectItemComponent.CodeDocument.GetTagHelperContext().TagHelpers);
 
-            return tagHelpers.ToImmutable();
+            return [.. tagHelpers];
         }
     }
 
@@ -2075,7 +2074,7 @@ public class HtmlFormattingTest(ITestOutputHelper testOutput) : FormattingTestBa
                     """);
     }
 
-    private ImmutableArray<TagHelperDescriptor> GetComponents()
+    private TagHelperDescriptorCollection GetComponents()
     {
         AdditionalSyntaxTrees.Add(Parse("""
                 using Microsoft.AspNetCore.Components;
@@ -2115,6 +2114,6 @@ public class HtmlFormattingTest(ITestOutputHelper testOutput) : FormattingTestBa
 
         var generated = CompileToCSharp("Test.razor", string.Empty, throwOnFailure: false, fileKind: FileKinds.Component);
 
-        return generated.CodeDocument.GetTagHelperContext().TagHelpers.ToImmutableArray();
+        return [.. generated.CodeDocument.GetTagHelperContext().TagHelpers];
     }
 }

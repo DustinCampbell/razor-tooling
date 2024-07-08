@@ -125,7 +125,7 @@ internal sealed class DefaultRazorTagHelperContextDiscoveryPhase : RazorEnginePh
         private List<TagHelperDescriptor> _tagHelpers;
         private string _tagHelperPrefix;
 
-        public TagHelperDirectiveVisitor(IReadOnlyList<TagHelperDescriptor> tagHelpers, HashSet<TagHelperDescriptor> matches)
+        public TagHelperDirectiveVisitor(TagHelperDescriptorCollection tagHelpers, HashSet<TagHelperDescriptor> matches)
             : base(matches)
         {
             // We don't want to consider components in a view document.
@@ -251,7 +251,7 @@ internal sealed class DefaultRazorTagHelperContextDiscoveryPhase : RazorEnginePh
         private readonly string _filePath;
         private RazorSourceDocument _source;
 
-        public ComponentDirectiveVisitor(string filePath, IReadOnlyList<TagHelperDescriptor> tagHelpers, string currentNamespace, HashSet<TagHelperDescriptor> matches)
+        public ComponentDirectiveVisitor(string filePath, TagHelperDescriptorCollection tagHelpers, string currentNamespace, HashSet<TagHelperDescriptor> matches)
             : base(matches)
         {
             _filePath = filePath;

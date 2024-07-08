@@ -1,7 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.AspNetCore.Razor.Language;
@@ -14,14 +13,14 @@ namespace Microsoft.NET.Sdk.Razor.SourceGenerators
     {
         private ImmutableArray<ITagHelperDescriptorProvider> _providers;
 
-        public void CollectDescriptors(ISymbol? targetSymbol, List<TagHelperDescriptor> results)
+        public void CollectDescriptors(ISymbol? targetSymbol, TagHelperDescriptorCollection.IBuilder builder)
         {
             if (_providers.IsDefault)
             {
                 return;
             }
 
-            var context = TagHelperDescriptorProviderContext.Create(compilation, targetSymbol, results);
+            using var context = TagHelperDescriptorProviderContext.Create(compilation, targetSymbol, builder);
 
             foreach (var provider in _providers)
             {
@@ -29,12 +28,12 @@ namespace Microsoft.NET.Sdk.Razor.SourceGenerators
             }
         }
 
-        IReadOnlyList<TagHelperDescriptor> ITagHelperFeature.GetDescriptors()
+        TagHelperDescriptorCollection ITagHelperFeature.GetDescriptors()
         {
-            var results = new List<TagHelperDescriptor>();
+            using var results = TagHelperDescriptorCollection.GetBuilder();
             CollectDescriptors(targetSymbol: null, results);
 
-            return results;
+            return results.ToCollection();
         }
 
         protected override void OnInitialized()

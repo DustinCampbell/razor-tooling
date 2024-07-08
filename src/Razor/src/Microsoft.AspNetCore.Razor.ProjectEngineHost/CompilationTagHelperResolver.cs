@@ -37,12 +37,11 @@ internal class CompilationTagHelperResolver(ITelemetryReporter? telemetryReporte
             return [];
         }
 
-        using var _ = HashSetPool<TagHelperDescriptor>.GetPooledObject(out var results);
-        var context = TagHelperDescriptorProviderContext.Create(compilation, targetSymbol: null, results, excludeHidden: true, includeDocumentation: true);
+        using var context = TagHelperDescriptorProviderContext.Create(compilation, targetSymbol: null, excludeHidden: true, includeDocumentation: true);
 
         ExecuteProviders(providers, context, _telemetryReporter);
 
-        return [.. results];
+        return [.. context.Results.ToCollection()];
 
         static void ExecuteProviders(ImmutableArray<ITagHelperDescriptorProvider> providers, TagHelperDescriptorProviderContext context, ITelemetryReporter? telemetryReporter)
         {

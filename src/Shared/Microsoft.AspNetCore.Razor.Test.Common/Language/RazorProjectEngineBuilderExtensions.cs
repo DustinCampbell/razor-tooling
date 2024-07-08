@@ -22,11 +22,11 @@ public static class RazorProjectEngineBuilderExtensions
         var feature = (TestTagHelperFeature)builder.Features.OfType<ITagHelperFeature>().FirstOrDefault();
         if (feature == null)
         {
-            feature = new TestTagHelperFeature();
+            feature = new TestTagHelperFeature(tagHelpers);
             builder.Features.Add(feature);
         }
 
-        feature.TagHelpers.AddRange(tagHelpers);
+        feature.AddTagHelpers(tagHelpers);
         return builder;
     }
 

@@ -59,7 +59,7 @@ internal class RemoteDocumentSnapshot(TextDocument textDocument, RemoteProjectSn
         var projectEngine = _projectSnapshot.GetProjectEngine_CohostOnly();
         var tagHelpers = await _projectSnapshot.GetTagHelpersAsync(CancellationToken.None).ConfigureAwait(false);
         var imports = await DocumentState.ComputedStateTracker.GetImportsAsync(this, projectEngine).ConfigureAwait(false);
-        _codeDocument = await DocumentState.ComputedStateTracker.GenerateCodeDocumentAsync(tagHelpers, projectEngine, this, imports).ConfigureAwait(false);
+        _codeDocument = await DocumentState.ComputedStateTracker.GenerateCodeDocumentAsync([.. tagHelpers], projectEngine, this, imports).ConfigureAwait(false);
 
         return _codeDocument;
     }

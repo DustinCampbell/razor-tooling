@@ -14,7 +14,7 @@ public class KeyTagHelperDescriptorProviderTest : TagHelperDescriptorProviderTes
     public void Execute_CreatesDescriptor()
     {
         // Arrange
-        var context = TagHelperDescriptorProviderContext.Create(BaseCompilation);
+        using var context = TagHelperDescriptorProviderContext.Create(BaseCompilation);
 
         var provider = new KeyTagHelperDescriptorProvider();
 
@@ -22,7 +22,8 @@ public class KeyTagHelperDescriptorProviderTest : TagHelperDescriptorProviderTes
         provider.Execute(context);
 
         // Assert
-        var matches = context.Results.Where(result => result.IsKeyTagHelper());
+        var results = context.Results.ToCollection();
+        var matches = results.Where(result => result.IsKeyTagHelper());
         var item = Assert.Single(matches);
 
         Assert.Empty(item.AllowedChildTags);

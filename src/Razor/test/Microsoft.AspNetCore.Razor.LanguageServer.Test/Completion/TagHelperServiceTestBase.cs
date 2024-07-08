@@ -2,11 +2,9 @@
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Immutable;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Components;
 using Microsoft.AspNetCore.Razor.Test.Common.LanguageServer;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Razor.Completion;
 using Xunit.Abstractions;
 using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
@@ -18,7 +16,7 @@ public abstract class TagHelperServiceTestBase : LanguageServerTestBase
     protected const string CSHtmlFile = "test.cshtml";
     protected const string RazorFile = "test.razor";
 
-    protected ImmutableArray<TagHelperDescriptor> DefaultTagHelpers { get; }
+    protected TagHelperDescriptorCollection DefaultTagHelpers { get; }
     private protected ITagHelperCompletionService RazorTagHelperCompletionService { get; }
 
     public TagHelperServiceTestBase(ITestOutputHelper testOutput)
@@ -234,7 +232,7 @@ public abstract class TagHelperServiceTestBase : LanguageServerTestBase
             attribute.TypeName = typeof(bool).FullName;
         });
 
-        DefaultTagHelpers = ImmutableArray.Create(
+        DefaultTagHelpers = [
             builder1.Build(),
             builder1WithRequiredParent.Build(),
             builder2.Build(),
@@ -243,12 +241,12 @@ public abstract class TagHelperServiceTestBase : LanguageServerTestBase
             directiveAttribute1.Build(),
             directiveAttribute2.Build(),
             directiveAttribute3.Build(),
-            htmlTagMutator.Build());
+            htmlTagMutator.Build()];
 
         RazorTagHelperCompletionService = new LspTagHelperCompletionService();
     }
 
-    internal static RazorCodeDocument CreateCodeDocument(string text, bool isRazorFile, ImmutableArray<TagHelperDescriptor> tagHelpers)
+    internal static RazorCodeDocument CreateCodeDocument(string text, bool isRazorFile, TagHelperDescriptorCollection tagHelpers)
     {
         return CreateCodeDocument(text, isRazorFile ? RazorFile : CSHtmlFile, tagHelpers);
     }
@@ -258,9 +256,9 @@ public abstract class TagHelperServiceTestBase : LanguageServerTestBase
         return CreateCodeDocument(text, isRazorFile ? RazorFile : CSHtmlFile, tagHelpers);
     }
 
-    internal static RazorCodeDocument CreateCodeDocument(string text, string filePath, ImmutableArray<TagHelperDescriptor> tagHelpers)
+    internal static RazorCodeDocument CreateCodeDocument(string text, string filePath, TagHelperDescriptorCollection tagHelpers)
     {
-        tagHelpers = tagHelpers.NullToEmpty();
+        tagHelpers ??= [];
 
         var sourceDocument = TestRazorSourceDocument.Create(text, filePath: filePath, relativePath: filePath);
         var projectEngine = RazorProjectEngine.Create(builder => { });
@@ -274,6 +272,6 @@ public abstract class TagHelperServiceTestBase : LanguageServerTestBase
     {
         tagHelpers ??= Array.Empty<TagHelperDescriptor>();
 
-        return CreateCodeDocument(text, filePath, tagHelpers.ToImmutableArray());
+        return CreateCodeDocument(text, filePath, TagHelperDescriptorCollection.Create(tagHelpers));
     }
 }

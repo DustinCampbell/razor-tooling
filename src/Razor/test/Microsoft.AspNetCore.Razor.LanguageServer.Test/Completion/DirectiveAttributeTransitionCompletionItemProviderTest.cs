@@ -3,7 +3,6 @@
 
 #nullable disable
 
-using System;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Test.Common;
 using Microsoft.CodeAnalysis.Razor.Completion;
@@ -312,7 +311,7 @@ public class DirectiveAttributeTransitionCompletionItemProviderTest : ToolingTes
         fileKind ??= FileKinds.Component;
         var sourceDocument = TestRazorSourceDocument.Create(text);
         var projectEngine = RazorProjectEngine.Create(builder => { });
-        var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, fileKind, importSources: default, Array.Empty<TagHelperDescriptor>());
+        var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, fileKind, importSources: default, []);
         var syntaxTree = codeDocument.GetSyntaxTree();
 
         return syntaxTree;

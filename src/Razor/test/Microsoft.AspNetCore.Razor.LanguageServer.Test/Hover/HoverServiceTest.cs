@@ -996,7 +996,7 @@ public class HoverServiceTest(ITestOutputHelper testOutput) : TagHelperServiceTe
                 """;
         var path = "C:/text.razor";
         var codeDocument = CreateCodeDocument(txt, path, DefaultTagHelpers);
-        var projectWorkspaceState = ProjectWorkspaceState.Create(DefaultTagHelpers);
+        var projectWorkspaceState = ProjectWorkspaceState.Create([.. DefaultTagHelpers]);
         var projectSnapshot = TestProjectSnapshot.Create("C:/project.csproj", projectWorkspaceState);
         var sourceText = SourceText.From(txt);
 

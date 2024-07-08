@@ -43,17 +43,6 @@ public partial class TagHelperDescriptorBuilder
         _metadata.Clear();
     }
 
-    private sealed class Policy : PooledBuilderPolicy<TagHelperDescriptorBuilder>
-    {
-        public static readonly Policy Instance = new();
-
-        private Policy()
-        {
-        }
-
-        public override TagHelperDescriptorBuilder Create() => new();
-    }
-
     /// <summary>
     ///  Retrieves a pooled <see cref="TagHelperDescriptorBuilder"/> instance.
     /// </summary>

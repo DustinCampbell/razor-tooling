@@ -5,4 +5,14 @@ namespace Microsoft.AspNetCore.Razor.Language;
 
 public partial class TagHelperDescriptorBuilder
 {
+    private sealed class Policy : PooledBuilderPolicy<TagHelperDescriptorBuilder>
+    {
+        public static readonly Policy Instance = new();
+
+        private Policy()
+        {
+        }
+
+        public override TagHelperDescriptorBuilder Create() => new();
+    }
 }

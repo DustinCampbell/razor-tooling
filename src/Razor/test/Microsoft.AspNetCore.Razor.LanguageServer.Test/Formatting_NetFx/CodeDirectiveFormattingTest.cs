@@ -1,7 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
-using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Test.Common;
@@ -2064,7 +2063,7 @@ public class CodeDirectiveFormattingTest(ITestOutputHelper testOutput) : Formatt
                     """);
     }
 
-    private ImmutableArray<TagHelperDescriptor> GetComponentWithCascadingTypeParameter()
+    private TagHelperDescriptorCollection GetComponentWithCascadingTypeParameter()
     {
         var input = """
                 @using System.Collections.Generic
@@ -2083,10 +2082,10 @@ public class CodeDirectiveFormattingTest(ITestOutputHelper testOutput) : Formatt
 
         var generated = CompileToCSharp("TestGeneric.razor", input, throwOnFailure: true, fileKind: FileKinds.Component);
 
-        return generated.CodeDocument.GetTagHelperContext().TagHelpers.ToImmutableArray();
+        return [.. generated.CodeDocument.GetTagHelperContext().TagHelpers];
     }
 
-    private ImmutableArray<TagHelperDescriptor> GetComponentWithTwoCascadingTypeParameter()
+    private TagHelperDescriptorCollection GetComponentWithTwoCascadingTypeParameter()
     {
         var input = """
                 @using System.Collections.Generic
@@ -2108,6 +2107,6 @@ public class CodeDirectiveFormattingTest(ITestOutputHelper testOutput) : Formatt
 
         var generated = CompileToCSharp("TestGenericTwo.razor", input, throwOnFailure: true, fileKind: FileKinds.Component);
 
-        return generated.CodeDocument.GetTagHelperContext().TagHelpers.ToImmutableArray();
+        return [.. generated.CodeDocument.GetTagHelperContext().TagHelpers];
     }
 }

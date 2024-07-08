@@ -21,16 +21,17 @@ public class DefaultTagHelperDescriptorProviderTest
         var compilation = TestCompilation.Create(_assembly);
         var descriptorProvider = new DefaultTagHelperDescriptorProvider();
 
-        var context = TagHelperDescriptorProviderContext.Create(compilation, excludeHidden: true);
+        using var context = TagHelperDescriptorProviderContext.Create(compilation, excludeHidden: true);
 
         // Act
         descriptorProvider.Execute(context);
 
         // Assert
         Assert.NotNull(compilation.GetTypeByMetadataName(editorBrowsableTypeName));
-        var nullDescriptors = context.Results.Where(descriptor => descriptor == null);
+        var results = context.Results.ToCollection();
+        var nullDescriptors = results.Where(descriptor => descriptor == null);
         Assert.Empty(nullDescriptors);
-        var editorBrowsableDescriptor = context.Results.Where(descriptor => descriptor.GetTypeName() == editorBrowsableTypeName);
+        var editorBrowsableDescriptor = results.Where(descriptor => descriptor.GetTypeName() == editorBrowsableTypeName);
         Assert.Empty(editorBrowsableDescriptor);
     }
 
@@ -52,16 +53,17 @@ namespace TestAssembly
         var compilation = TestCompilation.Create(_assembly, CSharpSyntaxTree.ParseText(csharp));
         var descriptorProvider = new DefaultTagHelperDescriptorProvider();
 
-        var context = TagHelperDescriptorProviderContext.Create(compilation);
+        using var context = TagHelperDescriptorProviderContext.Create(compilation);
 
         // Act
         descriptorProvider.Execute(context);
 
         // Assert
         Assert.NotNull(compilation.GetTypeByMetadataName(testTagHelper));
-        Assert.NotEmpty(context.Results);
-        Assert.NotEmpty(context.Results.Where(f => f.GetTypeName() == testTagHelper));
-        Assert.NotEmpty(context.Results.Where(f => f.GetTypeName() == enumTagHelper));
+        var results = context.Results.ToCollection();
+        Assert.NotEmpty(results);
+        Assert.NotEmpty(results.Where(f => f.GetTypeName() == testTagHelper));
+        Assert.NotEmpty(results.Where(f => f.GetTypeName() == enumTagHelper));
     }
 
     [Fact]
@@ -84,15 +86,16 @@ namespace TestAssembly
 
         var targetSymbol = (IAssemblySymbol?)compilation.GetAssemblyOrModuleSymbol(
             compilation.References.First(r => r.Display is string display && display.Contains("Microsoft.CodeAnalysis.Razor.Test.dll")));
-        var context = TagHelperDescriptorProviderContext.Create(compilation, targetSymbol);
+        using var context = TagHelperDescriptorProviderContext.Create(compilation, targetSymbol);
 
         // Act
         descriptorProvider.Execute(context);
 
         // Assert
         Assert.NotNull(compilation.GetTypeByMetadataName(testTagHelper));
-        Assert.NotEmpty(context.Results);
-        Assert.Empty(context.Results.Where(f => f.GetTypeName() == testTagHelper));
-        Assert.NotEmpty(context.Results.Where(f => f.GetTypeName() == enumTagHelper));
+        var results = context.Results.ToCollection();
+        Assert.NotEmpty(results);
+        Assert.Empty(results.Where(f => f.GetTypeName() == testTagHelper));
+        Assert.NotEmpty(results.Where(f => f.GetTypeName() == enumTagHelper));
     }
 }

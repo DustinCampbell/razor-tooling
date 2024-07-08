@@ -32,7 +32,7 @@ public abstract class TagHelperDescriptorProviderTestBase
     protected static TagHelperDescriptor[] ExcludeBuiltInComponents(TagHelperDescriptorProviderContext context)
     {
         var results =
-         context.Results
+         context.Results.ToCollection()
             .Where(c => c.AssemblyName != "Microsoft.AspNetCore.Razor.Test.ComponentShim")
             .Where(c => !c.DisplayName.StartsWith("Microsoft.AspNetCore.Components.Web", StringComparison.Ordinal))
             .Where(c => c.GetTypeName() != "Microsoft.AspNetCore.Components.Bind")

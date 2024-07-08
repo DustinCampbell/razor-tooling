@@ -392,7 +392,7 @@ public class RazorDocumentMappingServiceTest : ToolingTestBase
             codeDoc.GetCSharpDocument(),
             projectedRange,
             MappingBehavior.Inferred,
-            out var originalRange);
+            out _);
 
         // Assert
         Assert.False(result);
@@ -757,7 +757,7 @@ public class RazorDocumentMappingServiceTest : ToolingTestBase
             @addTagHelper *, TestAssembly
             <test>@Name</test>
             """;
-        var (classifiedSpans, tagHelperSpans) = GetClassifiedSpans(text, new[] { descriptor.Build() });
+        var (classifiedSpans, tagHelperSpans) = GetClassifiedSpans(text, [descriptor.Build()]);
 
         // Act
         var languageKind = RazorDocumentMappingService.GetLanguageKindCore(classifiedSpans, tagHelperSpans, 32 + Environment.NewLine.Length, text.Length, rightAssociative: false);
@@ -777,7 +777,7 @@ public class RazorDocumentMappingServiceTest : ToolingTestBase
             @addTagHelper *, TestAssembly
             <test></test>@DateTime.Now
             """;
-        var (classifiedSpans, tagHelperSpans) = GetClassifiedSpans(text, new[] { descriptor.Build() });
+        var (classifiedSpans, tagHelperSpans) = GetClassifiedSpans(text, [descriptor.Build()]);
 
         // Act
         var languageKind = RazorDocumentMappingService.GetLanguageKindCore(classifiedSpans, tagHelperSpans, 42 + Environment.NewLine.Length, text.Length, rightAssociative: false);
@@ -803,7 +803,7 @@ public class RazorDocumentMappingServiceTest : ToolingTestBase
             @addTagHelper *, TestAssembly
             <test asp-int='123'></test>
             """;
-        var (classifiedSpans, tagHelperSpans) = GetClassifiedSpans(text, new[] { descriptor.Build() });
+        var (classifiedSpans, tagHelperSpans) = GetClassifiedSpans(text, [descriptor.Build()]);
 
         // Act
         var languageKind = RazorDocumentMappingService.GetLanguageKindCore(classifiedSpans, tagHelperSpans, 46 + Environment.NewLine.Length, text.Length, rightAssociative: false);
@@ -1044,12 +1044,12 @@ public class RazorDocumentMappingServiceTest : ToolingTestBase
         descriptor.TagMatchingRule(rule => rule.TagName = "test");
         descriptor.SetMetadata(TypeName("TestTagHelper"));
         var text = """
-                       @addTagHelper *, TestAssembly
-                       @if {
-                         <test>@Name</test>
-                       }
-                       """;
-        var (classifiedSpans, tagHelperSpans) = GetClassifiedSpans(text, new[] { descriptor.Build() });
+            @addTagHelper *, TestAssembly
+            @if {
+              <test>@Name</test>
+            }
+            """;
+        var (classifiedSpans, tagHelperSpans) = GetClassifiedSpans(text, [descriptor.Build()]);
 
         // Act\
         var languageKind = RazorDocumentMappingService.GetLanguageKindCore(classifiedSpans, tagHelperSpans, 40, text.Length, rightAssociative: true);
@@ -1058,7 +1058,7 @@ public class RazorDocumentMappingServiceTest : ToolingTestBase
         Assert.Equal(RazorLanguageKind.Html, languageKind);
     }
 
-    private static (ImmutableArray<ClassifiedSpanInternal> classifiedSpans, ImmutableArray<TagHelperSpanInternal> tagHelperSpans) GetClassifiedSpans(string text, IReadOnlyList<TagHelperDescriptor>? tagHelpers = null)
+    private static (ImmutableArray<ClassifiedSpanInternal> classifiedSpans, ImmutableArray<TagHelperSpanInternal> tagHelperSpans) GetClassifiedSpans(string text, TagHelperDescriptorCollection? tagHelpers = null)
     {
         var codeDocument = CreateCodeDocument(text, tagHelpers);
         var syntaxTree = codeDocument.GetSyntaxTree();
@@ -1067,9 +1067,9 @@ public class RazorDocumentMappingServiceTest : ToolingTestBase
         return (classifiedSpans, tagHelperSpans);
     }
 
-    private static RazorCodeDocument CreateCodeDocument(string text, IReadOnlyList<TagHelperDescriptor>? tagHelpers = null)
+    private static RazorCodeDocument CreateCodeDocument(string text, TagHelperDescriptorCollection? tagHelpers = null)
     {
-        tagHelpers ??= Array.Empty<TagHelperDescriptor>();
+        tagHelpers ??= [];
         var sourceDocument = TestRazorSourceDocument.Create(text);
         var projectEngine = RazorProjectEngine.Create(builder => { });
         var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, "mvc", importSources: default, tagHelpers);
@@ -1078,7 +1078,7 @@ public class RazorDocumentMappingServiceTest : ToolingTestBase
 
     private static RazorCodeDocument CreateCodeDocumentWithCSharpProjection(string razorSource, string projectedCSharpSource, IEnumerable<SourceMapping> sourceMappings)
     {
-        var codeDocument = CreateCodeDocument(razorSource, Array.Empty<TagHelperDescriptor>());
+        var codeDocument = CreateCodeDocument(razorSource, []);
         var csharpDocument = RazorCSharpDocument.Create(
             codeDocument,
             projectedCSharpSource,

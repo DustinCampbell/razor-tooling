@@ -44,14 +44,14 @@ public class FormattingTestBase : RazorToolingIntegrationTestBase
         int tabSize = 4,
         bool insertSpaces = true,
         string? fileKind = null,
-        ImmutableArray<TagHelperDescriptor> tagHelpers = default,
+        TagHelperDescriptorCollection? tagHelpers = null,
         bool allowDiagnostics = false,
         RazorLSPOptions? razorLSPOptions = null,
         bool inGlobalNamespace = false)
     {
         // Arrange
         fileKind ??= FileKinds.Component;
-        tagHelpers = tagHelpers.NullToEmpty();
+        tagHelpers ??= [];
 
         TestFileMarkupParser.GetSpans(input, out input, out ImmutableArray<TextSpan> spans);
 
@@ -217,14 +217,14 @@ public class FormattingTestBase : RazorToolingIntegrationTestBase
         return source.WithChanges(changes);
     }
 
-    private static (RazorCodeDocument, IDocumentSnapshot) CreateCodeDocumentAndSnapshot(SourceText text, string path, ImmutableArray<TagHelperDescriptor> tagHelpers = default, string? fileKind = default, bool allowDiagnostics = false, bool inGlobalNamespace = false)
+    private static (RazorCodeDocument, IDocumentSnapshot) CreateCodeDocumentAndSnapshot(SourceText text, string path, TagHelperDescriptorCollection? tagHelpers = null, string? fileKind = default, bool allowDiagnostics = false, bool inGlobalNamespace = false)
     {
         fileKind ??= FileKinds.Component;
-        tagHelpers = tagHelpers.NullToEmpty();
+        tagHelpers ??= [];
 
         if (fileKind == FileKinds.Component)
         {
-            tagHelpers = tagHelpers.AddRange(RazorTestResources.BlazorServerAppTagHelpers);
+            tagHelpers = TagHelperDescriptorCollection.Merge(tagHelpers, [.. RazorTestResources.BlazorServerAppTagHelpers]);
         }
 
         var sourceDocument = RazorSourceDocument.Create(text, RazorSourceDocumentProperties.Create(
@@ -261,7 +261,7 @@ public class FormattingTestBase : RazorToolingIntegrationTestBase
             builder.Features.Add(new DefaultTypeNameFeature());
             RazorExtensions.Register(builder);
         });
-        var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, fileKind, ImmutableArray.Create(importsDocument), tagHelpers);
+        var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, fileKind, [importsDocument], tagHelpers);
 
         if (!allowDiagnostics)
         {
@@ -275,7 +275,7 @@ public class FormattingTestBase : RazorToolingIntegrationTestBase
         return (codeDocument, documentSnapshot);
     }
 
-    internal static IDocumentSnapshot CreateDocumentSnapshot(string path, ImmutableArray<TagHelperDescriptor> tagHelpers, string? fileKind, ImmutableArray<RazorSourceDocument> importsDocuments, ImmutableArray<IDocumentSnapshot> imports, RazorProjectEngine projectEngine, RazorCodeDocument codeDocument, bool inGlobalNamespace = false)
+    internal static IDocumentSnapshot CreateDocumentSnapshot(string path, TagHelperDescriptorCollection tagHelpers, string? fileKind, ImmutableArray<RazorSourceDocument> importsDocuments, ImmutableArray<IDocumentSnapshot> imports, RazorProjectEngine projectEngine, RazorCodeDocument codeDocument, bool inGlobalNamespace = false)
     {
         var documentSnapshot = new Mock<IDocumentSnapshot>(MockBehavior.Strict);
         documentSnapshot
@@ -292,7 +292,7 @@ public class FormattingTestBase : RazorToolingIntegrationTestBase
             .Returns(path);
         documentSnapshot
             .Setup(d => d.Project.GetTagHelpersAsync(It.IsAny<CancellationToken>()))
-            .Returns(new ValueTask<ImmutableArray<TagHelperDescriptor>>(tagHelpers));
+            .Returns(new ValueTask<ImmutableArray<TagHelperDescriptor>>([.. tagHelpers]));
         documentSnapshot
             .Setup(d => d.FileKind)
             .Returns(fileKind);

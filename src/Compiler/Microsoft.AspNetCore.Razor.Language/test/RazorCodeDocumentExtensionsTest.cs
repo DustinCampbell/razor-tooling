@@ -66,7 +66,7 @@ public class RazorCodeDocumentExtensionsTest
         // Arrange
         var codeDocument = TestRazorCodeDocument.CreateEmpty();
 
-        var expected = new[] { TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly").Build() };
+        var expected = TagHelperDescriptorCollection.Create([TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly").Build()]);
         codeDocument.SetTagHelpers(expected);
 
         // Act

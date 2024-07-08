@@ -64,24 +64,22 @@ public class RazorTagHelperParsingBenchmark
         ComponentDirectiveVisitor.Visit(SyntaxTree);
     }
 
-    private static IReadOnlyList<TagHelperDescriptor> ReadTagHelpers(string filePath)
+    private static TagHelperDescriptorCollection ReadTagHelpers(string filePath)
     {
         var serializer = new JsonSerializer();
         serializer.Converters.Add(new RazorDiagnosticJsonConverter());
         serializer.Converters.Add(new TagHelperDescriptorJsonConverter());
 
-        using (var reader = new JsonTextReader(File.OpenText(filePath)))
-        {
-            return serializer.Deserialize<IReadOnlyList<TagHelperDescriptor>>(reader);
-        }
+        using var reader = new JsonTextReader(File.OpenText(filePath));
+
+        var tagHelpers = serializer.Deserialize<TagHelperDescriptor[]>(reader);
+        return TagHelperDescriptorCollection.Create(tagHelpers);
     }
 
-    private sealed class StaticTagHelperFeature : RazorEngineFeatureBase, ITagHelperFeature
+    private sealed class StaticTagHelperFeature(TagHelperDescriptorCollection descriptors) : RazorEngineFeatureBase, ITagHelperFeature
     {
-        public StaticTagHelperFeature(IReadOnlyList<TagHelperDescriptor> descriptors) => Descriptors = descriptors;
+        public TagHelperDescriptorCollection Descriptors { get; } = descriptors;
 
-        public IReadOnlyList<TagHelperDescriptor> Descriptors { get; }
-
-        public IReadOnlyList<TagHelperDescriptor> GetDescriptors() => Descriptors;
+        public TagHelperDescriptorCollection GetDescriptors() => Descriptors;
     }
 }
