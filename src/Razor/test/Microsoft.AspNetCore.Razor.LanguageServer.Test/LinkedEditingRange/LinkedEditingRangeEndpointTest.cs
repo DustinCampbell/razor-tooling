@@ -11,6 +11,7 @@ using Microsoft.CodeAnalysis.Razor.LinkedEditingRange;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
 using Xunit;
 using Xunit.Abstractions;
+using Range = Microsoft.VisualStudio.LanguageServer.Protocol.Range;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.LinkedEditingRange;
 

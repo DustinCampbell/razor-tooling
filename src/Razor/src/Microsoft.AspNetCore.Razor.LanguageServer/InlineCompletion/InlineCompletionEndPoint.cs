@@ -20,6 +20,7 @@ using Microsoft.CodeAnalysis.Razor.Protocol.Completion;
 using Microsoft.CodeAnalysis.Razor.Workspaces;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
+using Range = Microsoft.VisualStudio.LanguageServer.Protocol.Range;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.InlineCompletion;
 

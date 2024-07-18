@@ -28,6 +28,7 @@ using Microsoft.VisualStudio.Threading;
 using Moq;
 using Xunit;
 using Xunit.Abstractions;
+using Range = Microsoft.VisualStudio.LanguageServer.Protocol.Range;
 
 namespace Microsoft.VisualStudio.Razor.LanguageClient.Endpoints;
 

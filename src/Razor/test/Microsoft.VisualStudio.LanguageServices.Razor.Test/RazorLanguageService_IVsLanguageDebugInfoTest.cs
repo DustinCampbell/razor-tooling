@@ -17,6 +17,7 @@ using Moq;
 using Xunit;
 using Xunit.Abstractions;
 using Position = Microsoft.VisualStudio.LanguageServer.Protocol.Position;
+using Range = Microsoft.VisualStudio.LanguageServer.Protocol.Range;
 
 namespace Microsoft.VisualStudio.Razor;
 

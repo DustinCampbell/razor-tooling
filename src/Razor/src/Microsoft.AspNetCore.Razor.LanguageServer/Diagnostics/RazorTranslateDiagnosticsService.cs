@@ -21,6 +21,7 @@ using Microsoft.VisualStudio.LanguageServer.Protocol;
 using Diagnostic = Microsoft.VisualStudio.LanguageServer.Protocol.Diagnostic;
 using DiagnosticSeverity = Microsoft.VisualStudio.LanguageServer.Protocol.DiagnosticSeverity;
 using Position = Microsoft.VisualStudio.LanguageServer.Protocol.Position;
+using Range = Microsoft.VisualStudio.LanguageServer.Protocol.Range;
 using RazorDiagnosticFactory = Microsoft.AspNetCore.Razor.Language.RazorDiagnosticFactory;
 using SourceText = Microsoft.CodeAnalysis.Text.SourceText;
 using SyntaxNode = Microsoft.AspNetCore.Razor.Language.Syntax.SyntaxNode;

@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Razor.Test.Common.LanguageServer;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.LanguageServer.ContainedLanguage;
 using Microsoft.VisualStudio.Text;
+using Range = Microsoft.VisualStudio.LanguageServer.Protocol.Range;
 
 namespace Microsoft.VisualStudio.Razor.LanguageClient;
 

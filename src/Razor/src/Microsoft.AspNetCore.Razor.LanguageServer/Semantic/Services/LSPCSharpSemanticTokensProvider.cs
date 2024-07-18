@@ -14,6 +14,7 @@ using Microsoft.CodeAnalysis.Razor.SemanticTokens;
 using Microsoft.CodeAnalysis.Razor.Workspaces;
 using Microsoft.CodeAnalysis.Razor.Workspaces.Protocol.SemanticTokens;
 using Microsoft.CodeAnalysis.Text;
+using Range = Microsoft.VisualStudio.LanguageServer.Protocol.Range;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.Semantic;
 

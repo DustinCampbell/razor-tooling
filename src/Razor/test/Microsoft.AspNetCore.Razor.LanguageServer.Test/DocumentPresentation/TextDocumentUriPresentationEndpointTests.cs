@@ -19,6 +19,7 @@ using Moq;
 using Xunit;
 using Xunit.Abstractions;
 using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
+using Range = Microsoft.VisualStudio.LanguageServer.Protocol.Range;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.DocumentPresentation;
 

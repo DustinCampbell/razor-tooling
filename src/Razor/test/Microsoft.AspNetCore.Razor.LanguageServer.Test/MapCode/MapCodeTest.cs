@@ -20,6 +20,7 @@ using Roslyn.Test.Utilities;
 using Xunit;
 using Xunit.Abstractions;
 using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
+using Range = Microsoft.VisualStudio.LanguageServer.Protocol.Range;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.Test.MapCode;
 

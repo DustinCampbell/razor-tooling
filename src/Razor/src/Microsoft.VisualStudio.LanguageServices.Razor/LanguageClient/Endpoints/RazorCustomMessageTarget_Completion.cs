@@ -15,6 +15,7 @@ using Microsoft.VisualStudio.LanguageServer.Protocol;
 using Microsoft.VisualStudio.Razor.LanguageClient.Extensions;
 using Microsoft.VisualStudio.Razor.Snippets;
 using StreamJsonRpc;
+using Range = Microsoft.VisualStudio.LanguageServer.Protocol.Range;
 
 namespace Microsoft.VisualStudio.Razor.LanguageClient.Endpoints;
 

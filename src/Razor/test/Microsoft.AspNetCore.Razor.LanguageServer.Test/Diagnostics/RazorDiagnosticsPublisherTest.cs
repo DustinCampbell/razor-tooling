@@ -25,6 +25,7 @@ using Xunit;
 using Xunit.Abstractions;
 using Diagnostic = Microsoft.VisualStudio.LanguageServer.Protocol.Diagnostic;
 using DiagnosticSeverity = Microsoft.VisualStudio.LanguageServer.Protocol.DiagnosticSeverity;
+using Range = Microsoft.VisualStudio.LanguageServer.Protocol.Range;
 using RazorDiagnosticFactory = Microsoft.AspNetCore.Razor.Language.RazorDiagnosticFactory;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.Diagnostics;

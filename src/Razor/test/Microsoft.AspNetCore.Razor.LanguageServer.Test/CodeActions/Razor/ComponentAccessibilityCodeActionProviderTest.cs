@@ -18,6 +18,7 @@ using Moq;
 using Xunit;
 using Xunit.Abstractions;
 using LanguageServerSR = Microsoft.AspNetCore.Razor.LanguageServer.Resources.SR;
+using Range = Microsoft.VisualStudio.LanguageServer.Protocol.Range;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.CodeActions;
 
