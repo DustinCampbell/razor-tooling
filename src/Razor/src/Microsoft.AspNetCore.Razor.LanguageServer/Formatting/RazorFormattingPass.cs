@@ -10,11 +10,10 @@ using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Components;
 using Microsoft.AspNetCore.Razor.Language.Extensions;
 using Microsoft.AspNetCore.Razor.Language.Syntax;
-using Microsoft.AspNetCore.Razor.LanguageServer.Hosting;
 using Microsoft.CodeAnalysis.Razor.DocumentMapping;
-using Microsoft.CodeAnalysis.Razor.Logging;
 using Microsoft.CodeAnalysis.Razor.Workspaces;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
+using static Microsoft.CodeAnalysis.Razor.VsLspFactory;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.Formatting;
 
@@ -122,7 +121,7 @@ internal sealed class RazorFormattingPass(
                 var start = brace.GetRange(source).Start;
                 var edit = new TextEdit
                 {
-                    Range = new Range { Start = start, End = start },
+                    Range = start.ToCollapsedRange(),
                     NewText = " "
                 };
                 edits.Add(edit);
@@ -289,7 +288,7 @@ internal sealed class RazorFormattingPass(
                 var start = brace.GetRange(source).Start;
                 var edit = new TextEdit
                 {
-                    Range = new Range { Start = start, End = start },
+                    Range = start.ToCollapsedRange(),
                     NewText = forceNewLine
                         ? context.NewLineString + FormattingUtilities.GetIndentationString(directive.GetLinePositionSpan(source).Start.Character, context.Options.InsertSpaces, context.Options.TabSize)
                         : " "
@@ -404,7 +403,7 @@ internal sealed class RazorFormattingPass(
             var edit = new TextEdit
             {
                 NewText = newText,
-                Range = new Range { Start = openBraceRange.End, End = openBraceRange.End },
+                Range = openBraceRange.End.ToCollapsedRange(),
             };
             edits.Add(edit);
             didFormat = true;
@@ -423,7 +422,7 @@ internal sealed class RazorFormattingPass(
                 var edit = new TextEdit
                 {
                     NewText = context.NewLineString + FormattingUtilities.GetIndentationString(directiveNode.GetRange(source).Start.Character, context.Options.InsertSpaces, context.Options.TabSize),
-                    Range = new Range { Start = codeRange.End, End = closeBraceRange.Start },
+                    Range = CreateRange(codeRange.End, closeBraceRange.Start),
                 };
                 edits.Add(edit);
                 didFormat = true;
@@ -434,7 +433,7 @@ internal sealed class RazorFormattingPass(
                 var edit = new TextEdit
                 {
                     NewText = context.NewLineString,
-                    Range = new Range { Start = codeRange.End, End = codeRange.End },
+                    Range = codeRange.End.ToCollapsedRange(),
                 };
                 edits.Add(edit);
                 didFormat = true;

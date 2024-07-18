@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Razor.Workspaces;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
-using Range = Microsoft.VisualStudio.LanguageServer.Protocol.Range;
+using static Microsoft.CodeAnalysis.Razor.VsLspFactory;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.CodeActions.Razor;
 
@@ -61,8 +61,8 @@ internal static class CodeBlockService
                 codeBlockStartText = $"{Environment.NewLine}{codeBlockStartText}";
             }
 
-            var eofPosition = new Position(lastCharacterLocation.LineNumber, insertCharacterIndex);
-            var eofRange = new Range { Start = eofPosition, End = eofPosition };
+            var eofPosition = CreatePosition(lastCharacterLocation.LineNumber, insertCharacterIndex);
+            var eofRange = eofPosition.ToCollapsedRange();
             var start = new TextEdit()
             {
                 NewText = codeBlockStartText,
@@ -108,11 +108,11 @@ internal static class CodeBlockService
         var insertCharacter = openBraceLocation.LineIndex == closeBraceLocation.LineIndex
             ? closeBraceLocation.CharacterIndex
             : 0;
-        var insertPosition = new Position(insertLineLocation.LineIndex, insertCharacter);
+        var insertPosition = CreatePosition(insertLineLocation.LineIndex, insertCharacter);
 
         var edit = new TextEdit()
         {
-            Range = new Range { Start = insertPosition, End = insertPosition },
+            Range = insertPosition.ToCollapsedRange(),
             NewText = formattedGeneratedMethod
         };
 

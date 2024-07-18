@@ -18,6 +18,7 @@ using Microsoft.CodeAnalysis.Razor.Protocol;
 using Microsoft.CodeAnalysis.Razor.Workspaces;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
+using static Microsoft.CodeAnalysis.Razor.VsLspFactory;
 using Range = Microsoft.VisualStudio.LanguageServer.Protocol.Range;
 
 namespace Microsoft.CodeAnalysis.Razor.DocumentMapping;
@@ -66,7 +67,7 @@ internal abstract class AbstractRazorDocumentMappingService(
                 hostDocumentEdits.Add(new TextEdit()
                 {
                     NewText = newText,
-                    Range = new Range { Start = hostDocumentStart!, End = hostDocumentEnd! },
+                    Range = CreateRange(hostDocumentStart!, hostDocumentEnd!),
                 });
                 continue;
             }
@@ -93,14 +94,14 @@ internal abstract class AbstractRazorDocumentMappingService(
                 // gave us, and see if we can map that.
                 // The +1 here skips the newline character that is found, but also protects from Substring throwing
                 // if there are no newlines (which should be impossible anyway)
-                var lastNewLine = edit.NewText.LastIndexOfAny(new char[] { '\n', '\r' }) + 1;
+                var lastNewLine = edit.NewText.LastIndexOfAny(['\n', '\r']) + 1;
 
                 // Strictly speaking we could be dropping more lines than we need to, because our mapping point could be anywhere within the edit
                 // but we know that the C# formatter will only be returning blank lines up until the first bit of content that needs to be indented
                 // so we can ignore all but the last line. This assert ensures that is true, just in case something changes in Roslyn
                 Debug.Assert(lastNewLine == 0 || edit.NewText[..(lastNewLine - 1)].All(c => c == '\r' || c == '\n'), "We are throwing away part of an edit that has more than just empty lines!");
 
-                var proposedRange = new Range { Start = new Position(range.End.Line, 0), End = new Position(range.End.Line, range.End.Character) };
+                var proposedRange = CreateRange(range.End.Line, 0, range.End.Line, range.End.Character);
                 startSync = proposedRange.Start.TryGetAbsoluteIndex(generatedDocumentSourceText, _logger, out startIndex);
                 endSync = proposedRange.End.TryGetAbsoluteIndex(generatedDocumentSourceText, _logger, out endIndex);
                 if (startSync is false || endSync is false)
@@ -116,7 +117,7 @@ internal abstract class AbstractRazorDocumentMappingService(
                     hostDocumentEdits.Add(new TextEdit()
                     {
                         NewText = edit.NewText[lastNewLine..],
-                        Range = new Range { Start = hostDocumentStart!, End = hostDocumentEnd! },
+                        Range = CreateRange(hostDocumentStart!, hostDocumentEnd!),
                     });
                     continue;
                 }
@@ -173,7 +174,7 @@ internal abstract class AbstractRazorDocumentMappingService(
                         hostDocumentEdits.Add(new TextEdit()
                         {
                             NewText = " " + edit.NewText,
-                            Range = new Range { Start = hostDocumentIndex, End = hostDocumentIndex }
+                            Range = hostDocumentIndex.ToCollapsedRange()
                         });
                     }
                     else
@@ -183,7 +184,7 @@ internal abstract class AbstractRazorDocumentMappingService(
                         hostDocumentEdits.Add(new TextEdit()
                         {
                             NewText = Environment.NewLine + new string(' ', range.Start.Character) + edit.NewText,
-                            Range = new Range { Start = hostDocumentIndex, End = hostDocumentIndex }
+                            Range = hostDocumentIndex.ToCollapsedRange()
                         });
                     }
 

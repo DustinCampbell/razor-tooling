@@ -9,21 +9,13 @@ namespace Microsoft.CodeAnalysis.Razor.Workspaces;
 
 internal static class SourceSpanExtensions
 {
-    public static Range ToRange(this SourceSpan sourceSpan, SourceText sourceText)
+    public static Range ToRange(this SourceSpan sourceSpan, SourceText text)
+        => text.GetRange(sourceSpan);
+
+    public static LinePositionSpan ToLinePositionSpan(this SourceSpan sourceSpan, SourceText text)
     {
-        sourceText.GetLinesAndOffsets(sourceSpan, out var startLine, out var startChar, out var endLine, out var endChar);
+        var (start, end) = text.GetLinesAndOffsets(sourceSpan);
 
-        return new Range
-        {
-            Start = new Position(startLine, startChar),
-            End = new Position(endLine, endChar),
-        };
-    }
-
-    public static LinePositionSpan ToLinePositionSpan(this SourceSpan sourceSpan, SourceText sourceText)
-    {
-        sourceText.GetLinesAndOffsets(sourceSpan, out var startLine, out var startChar, out var endLine, out var endChar);
-
-        return new LinePositionSpan(new(startLine, startChar), new(endLine, endChar));
+        return new LinePositionSpan(new(start.lineNumber, start.offset), new(end.lineNumber, end.offset));
     }
 }

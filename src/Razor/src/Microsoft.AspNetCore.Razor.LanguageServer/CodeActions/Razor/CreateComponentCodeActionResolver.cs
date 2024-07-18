@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using System.Text.Json;
 using System.Threading;
@@ -16,7 +15,7 @@ using Microsoft.AspNetCore.Razor.PooledObjects;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.Workspaces;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
-using Range = Microsoft.VisualStudio.LanguageServer.Protocol.Range;
+using static Microsoft.CodeAnalysis.Razor.VsLspFactory;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.CodeActions;
 
@@ -93,7 +92,7 @@ internal sealed class CreateComponentCodeActionResolver(IDocumentContextFactory 
                     new TextEdit()
                     {
                         NewText = namespaceDirective.GetContent(),
-                        Range = new Range{ Start = new Position(0, 0), End = new Position(0, 0) },
+                        Range = EmptyRange(),
                     }
                 ]
             });

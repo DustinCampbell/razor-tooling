@@ -8,12 +8,12 @@ using System.Linq;
 using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.CodeAnalysis.Text;
-using Microsoft.VisualStudio.LanguageServer.Protocol;
+using static Microsoft.CodeAnalysis.Razor.VsLspFactory;
+using Range = Microsoft.VisualStudio.LanguageServer.Protocol.Range;
 
 namespace Microsoft.CodeAnalysis.Razor.Workspaces;
 
 using Microsoft.AspNetCore.Razor.Language.Syntax;
-using Range = VisualStudio.LanguageServer.Protocol.Range;
 
 internal static class RazorSyntaxNodeExtensions
 {
@@ -95,16 +95,13 @@ internal static class RazorSyntaxNodeExtensions
 
     public static bool ContainsOnlyWhitespace(this SyntaxNode node, bool includingNewLines = true)
     {
-        if (node is null)
-        {
-            throw new ArgumentNullException(nameof(node));
-        }
+        ArgHelper.ThrowIfNull(node);
 
         var tokens = node.GetTokens();
 
-        for (var i = 0; i < tokens.Count; i++)
+        foreach (var token in tokens)
         {
-            var tokenKind = tokens[i].Kind;
+            var tokenKind = token.Kind;
             if (tokenKind != SyntaxKind.Whitespace && (tokenKind != SyntaxKind.NewLine || !includingNewLines))
             {
                 return false;
@@ -115,28 +112,21 @@ internal static class RazorSyntaxNodeExtensions
         return true;
     }
 
-    public static LinePositionSpan GetLinePositionSpan(this SyntaxNode node, RazorSourceDocument source)
+    public static LinePositionSpan GetLinePositionSpan(this SyntaxNode node, RazorSourceDocument sourceDocument)
     {
-        if (node is null)
-        {
-            throw new ArgumentNullException(nameof(node));
-        }
-
-        if (source is null)
-        {
-            throw new ArgumentNullException(nameof(source));
-        }
+        ArgHelper.ThrowIfNull(node);
+        ArgHelper.ThrowIfNull(sourceDocument);
 
         var start = node.Position;
         var end = node.EndPosition;
-        var sourceText = source.Text;
+        var sourceText = sourceDocument.Text;
 
         Debug.Assert(start <= sourceText.Length && end <= sourceText.Length, "Node position exceeds source length.");
 
         if (start == sourceText.Length && node.FullWidth == 0)
         {
             // Marker symbol at the end of the document.
-            var location = node.GetSourceLocation(source);
+            var location = node.GetSourceLocation(sourceDocument);
             var position = GetLinePosition(location);
             return new LinePositionSpan(position, position);
         }
@@ -152,39 +142,19 @@ internal static class RazorSyntaxNodeExtensions
         }
     }
 
-    public static Range GetRange(this SyntaxNode node, RazorSourceDocument source)
+    public static Range GetRange(this SyntaxNode node, RazorSourceDocument sourceDocument)
     {
-        if (node is null)
-        {
-            throw new ArgumentNullException(nameof(node));
-        }
+        ArgHelper.ThrowIfNull(node);
+        ArgHelper.ThrowIfNull(sourceDocument);
 
-        if (source is null)
-        {
-            throw new ArgumentNullException(nameof(source));
-        }
-
-        var lineSpan = node.GetLinePositionSpan(source);
-        var range = new Range
-        {
-            Start = new Position(lineSpan.Start.Line, lineSpan.Start.Character),
-            End = new Position(lineSpan.End.Line, lineSpan.End.Character)
-        };
-
-        return range;
+        var lineSpan = node.GetLinePositionSpan(sourceDocument);
+        return lineSpan.ToRange();
     }
 
-    public static Range? GetRangeWithoutWhitespace(this SyntaxNode node, RazorSourceDocument source)
+    public static Range? GetRangeWithoutWhitespace(this SyntaxNode node, RazorSourceDocument sourceDocument)
     {
-        if (node is null)
-        {
-            throw new ArgumentNullException(nameof(node));
-        }
-
-        if (source is null)
-        {
-            throw new ArgumentNullException(nameof(source));
-        }
+        ArgHelper.ThrowIfNull(node);
+        ArgHelper.ThrowIfNull(sourceDocument);
 
         var tokens = node.GetTokens();
 
@@ -215,32 +185,19 @@ internal static class RazorSyntaxNodeExtensions
             return null;
         }
 
-        var startPositionSpan = GetLinePositionSpan(firstToken, source, node.SpanStart);
-        var endPositionSpan = GetLinePositionSpan(lastToken, source, node.SpanStart);
+        var startPositionSpan = GetLinePositionSpan(firstToken, sourceDocument, node.SpanStart);
+        var endPositionSpan = GetLinePositionSpan(lastToken, sourceDocument, node.SpanStart);
 
-        var range = new Range
-        {
-            Start = new Position(startPositionSpan.Start.Line, startPositionSpan.Start.Character),
-            End = new Position(endPositionSpan.End.Line, endPositionSpan.End.Character)
-        };
-
-        return range;
+        return CreateRange(startPositionSpan.Start.ToPosition(), endPositionSpan.End.ToPosition());
 
         // This is needed because SyntaxToken positions taken from GetTokens
         // are relative to their parent node and not to the document.
-        static LinePositionSpan GetLinePositionSpan(SyntaxNode? node, RazorSourceDocument source, int parentStart)
+        static LinePositionSpan GetLinePositionSpan(SyntaxNode? node, RazorSourceDocument sourceDocument, int parentStart)
         {
-            if (node is null)
-            {
-                throw new ArgumentNullException(nameof(node));
-            }
+            ArgHelper.ThrowIfNull(node);
+            ArgHelper.ThrowIfNull(sourceDocument);
 
-            if (source is null)
-            {
-                throw new ArgumentNullException(nameof(source));
-            }
-
-            var sourceText = source.Text;
+            var sourceText = sourceDocument.Text;
 
             var start = node.Position + parentStart;
             var end = node.EndPosition + parentStart;
@@ -248,7 +205,7 @@ internal static class RazorSyntaxNodeExtensions
             if (start == sourceText.Length && node.FullWidth == 0)
             {
                 // Marker symbol at the end of the document.
-                var location = node.GetSourceLocation(source);
+                var location = node.GetSourceLocation(sourceDocument);
                 var position = GetLinePosition(location);
                 return new LinePositionSpan(position, position);
             }

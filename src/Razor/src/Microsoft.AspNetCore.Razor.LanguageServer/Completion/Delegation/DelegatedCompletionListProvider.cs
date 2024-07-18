@@ -13,8 +13,8 @@ using Microsoft.AspNetCore.Razor.LanguageServer.Hosting;
 using Microsoft.CodeAnalysis.Razor.DocumentMapping;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.Protocol;
+using Microsoft.CodeAnalysis.Razor.Workspaces;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
-using Range = Microsoft.VisualStudio.LanguageServer.Protocol.Range;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.Completion.Delegation;
 
@@ -217,19 +217,13 @@ internal class DelegatedCompletionListProvider
         // completion items for moments when a user has typed a '.' that's typically interpreted as Html.
         var addProvisionalDot = new TextEdit()
         {
-            Range = new Range()
-            {
-                Start = previousPosition,
-                End = previousPosition,
-            },
+            Range = previousPosition.ToCollapsedRange(),
             NewText = ".",
         };
 
         var provisionalPositionInfo = new DocumentPositionInfo(
             RazorLanguageKind.CSharp,
-            new Position(
-                previousPosition.Line,
-                previousPosition.Character + 1),
+            previousPosition.WithCharacter(static ch => ch + 1),
             previousCharacterPositionInfo.HostDocumentIndex + 1);
 
         return new ProvisionalCompletionInfo(addProvisionalDot, provisionalPositionInfo);

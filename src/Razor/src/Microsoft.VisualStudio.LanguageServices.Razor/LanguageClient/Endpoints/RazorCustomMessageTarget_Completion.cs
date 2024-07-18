@@ -15,7 +15,6 @@ using Microsoft.VisualStudio.LanguageServer.Protocol;
 using Microsoft.VisualStudio.Razor.LanguageClient.Extensions;
 using Microsoft.VisualStudio.Razor.Snippets;
 using StreamJsonRpc;
-using Range = Microsoft.VisualStudio.LanguageServer.Protocol.Range;
 
 namespace Microsoft.VisualStudio.Razor.LanguageClient.Endpoints;
 
@@ -188,13 +187,8 @@ internal partial class RazorCustomMessageTarget
             // Insertion
             revertedProvisionalTextEdit = new TextEdit()
             {
-                Range = new Range()
-                {
-                    Start = provisionalTextEdit.Range.Start,
-
-                    // We're making an assumption that provisional text edits do not span more than 1 line.
-                    End = new Position(provisionalTextEdit.Range.End.Line, provisionalTextEdit.Range.End.Character + provisionalTextEdit.NewText.Length),
-                },
+                // We're making an assumption that provisional text edits do not span more than 1 line.
+                Range = provisionalTextEdit.Range.WithEnd(end => end.WithCharacter(ch => ch + provisionalTextEdit.NewText.Length)),
                 NewText = string.Empty
             };
         }

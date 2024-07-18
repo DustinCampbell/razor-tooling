@@ -82,11 +82,7 @@ public class RazorSemanticTokensRangeEndpointBenchmark : RazorLanguageServerBenc
         SemanticTokensRangeEndpoint = new SemanticTokensRangeEndpoint(RazorSemanticTokenService, razorSemanticTokensLegendService, razorOptionsMonitor, telemetryReporter: null);
 
         var text = await DocumentContext.GetSourceTextAsync(CancellationToken.None).ConfigureAwait(false);
-        Range = new Range
-        {
-            Start = new Position { Line = 0, Character = 0 },
-            End = new Position { Line = text.Lines.Count - 1, Character = text.Lines.Last().Span.Length - 1 }
-        };
+        Range = text.GetRange();
 
         var documentVersion = 1;
         VersionCache.TrackDocumentVersion(DocumentSnapshot, documentVersion);

@@ -1,20 +1,16 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
-using System;
+using Microsoft.AspNetCore.Razor;
 using Microsoft.CodeAnalysis.Text;
-using Microsoft.VisualStudio.LanguageServer.Protocol;
+using static Microsoft.CodeAnalysis.Razor.VsLspFactory;
 using Range = Microsoft.VisualStudio.LanguageServer.Protocol.Range;
 
 namespace Microsoft.CodeAnalysis.Razor.Workspaces;
 
 internal static class RangeExtensions
 {
-    public static readonly Range UndefinedRange = new()
-    {
-        Start = new Position(-1, -1),
-        End = new Position(-1, -1)
-    };
+    public static readonly Range UndefinedRange = CreateRange(-1, -1, -1, -1);
 
     public static bool IntersectsOrTouches(this Range range, Range other)
     {
@@ -39,30 +35,16 @@ internal static class RangeExtensions
 
     public static bool OverlapsWith(this Range range, Range other)
     {
-        if (range is null)
-        {
-            throw new ArgumentNullException(nameof(range));
-        }
-
-        if (other is null)
-        {
-            throw new ArgumentNullException(nameof(other));
-        }
+        ArgHelper.ThrowIfNull(range);
+        ArgHelper.ThrowIfNull(other);
 
         return range.ToLinePositionSpan().OverlapsWith(other.ToLinePositionSpan());
     }
 
     public static bool LineOverlapsWith(this Range range, Range other)
     {
-        if (range is null)
-        {
-            throw new ArgumentNullException(nameof(range));
-        }
-
-        if (other is null)
-        {
-            throw new ArgumentNullException(nameof(other));
-        }
+        ArgHelper.ThrowIfNull(range);
+        ArgHelper.ThrowIfNull(other);
 
         var overlapStart = range.Start.Line;
         if (range.Start.Line.CompareTo(other.Start.Line) < 0)
@@ -81,25 +63,15 @@ internal static class RangeExtensions
 
     public static bool Contains(this Range range, Range other)
     {
-        if (range is null)
-        {
-            throw new ArgumentNullException(nameof(range));
-        }
-
-        if (other is null)
-        {
-            throw new ArgumentNullException(nameof(other));
-        }
+        ArgHelper.ThrowIfNull(range);
+        ArgHelper.ThrowIfNull(other);
 
         return range.Start.CompareTo(other.Start) <= 0 && range.End.CompareTo(other.End) >= 0;
     }
 
     public static bool SpansMultipleLines(this Range range)
     {
-        if (range is null)
-        {
-            throw new ArgumentNullException(nameof(range));
-        }
+        ArgHelper.ThrowIfNull(range);
 
         return range.Start.Line != range.End.Line;
     }
@@ -108,14 +80,11 @@ internal static class RangeExtensions
         => sourceText.GetTextSpan(range.Start.Line, range.Start.Character, range.End.Line, range.End.Character);
 
     public static LinePositionSpan ToLinePositionSpan(this Range range)
-        => new LinePositionSpan(range.Start.ToLinePosition(), range.End.ToLinePosition());
+        => new(range.Start.ToLinePosition(), range.End.ToLinePosition());
 
     public static bool IsUndefined(this Range range)
     {
-        if (range is null)
-        {
-            throw new ArgumentNullException(nameof(range));
-        }
+        ArgHelper.ThrowIfNull(range);
 
         return range == UndefinedRange;
     }
@@ -137,34 +106,20 @@ internal static class RangeExtensions
         return $"({range.Start.Line}, {range.Start.Character})-({range.End.Line}, {range.End.Character})";
     }
 
-    public static TextSpan AsTextSpan(this Range range, SourceText sourceText)
+    public static TextSpan AsTextSpan(this Range range, SourceText text)
     {
-        if (range is null)
-        {
-            throw new ArgumentNullException(nameof(range));
-        }
+        ArgHelper.ThrowIfNull(range);
+        ArgHelper.ThrowIfNull(text);
 
-        if (sourceText is null)
-        {
-            throw new ArgumentNullException(nameof(sourceText));
-        }
-
-        var start = sourceText.Lines[range.Start.Line].Start + range.Start.Character;
-        var end = sourceText.Lines[range.End.Line].Start + range.End.Character;
+        var start = text.Lines[range.Start.Line].Start + range.Start.Character;
+        var end = text.Lines[range.End.Line].Start + range.End.Character;
         return new TextSpan(start, end - start);
     }
 
     public static Range? Overlap(this Range range, Range other)
     {
-        if (range is null)
-        {
-            throw new ArgumentNullException(nameof(range));
-        }
-
-        if (other is null)
-        {
-            throw new ArgumentNullException(nameof(other));
-        }
+        ArgHelper.ThrowIfNull(range);
+        ArgHelper.ThrowIfNull(other);
 
         var overlapStart = range.Start;
         if (range.Start.CompareTo(other.Start) < 0)
@@ -181,11 +136,7 @@ internal static class RangeExtensions
         // Empty ranges do not overlap with any range.
         if (overlapStart.CompareTo(overlapEnd) < 0)
         {
-            return new Range()
-            {
-                Start = overlapStart,
-                End = overlapEnd,
-            };
+            return CreateRange(overlapStart, overlapEnd);
         }
 
         return null;

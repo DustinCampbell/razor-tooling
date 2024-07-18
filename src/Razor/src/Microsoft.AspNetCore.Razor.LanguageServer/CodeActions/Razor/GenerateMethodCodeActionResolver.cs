@@ -20,9 +20,9 @@ using Microsoft.CodeAnalysis.Razor;
 using Microsoft.CodeAnalysis.Razor.DocumentMapping;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.Protocol;
+using Microsoft.CodeAnalysis.Razor.Workspaces;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
 using CSharpSyntaxFactory = Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
-using Range = Microsoft.VisualStudio.LanguageServer.Protocol.Range;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.CodeActions.Razor;
 
@@ -113,10 +113,10 @@ internal sealed class GenerateMethodCodeActionResolver(
             classLocationLineSpan.StartLinePosition.Character,
             content);
 
-        var insertPosition = new Position(classLocationLineSpan.EndLinePosition.Line, 0);
+        var insertPosition = classLocationLineSpan.EndLinePosition.GetStartPosition();
         var edit = new TextEdit()
         {
-            Range = new Range { Start = insertPosition, End = insertPosition },
+            Range = insertPosition.ToCollapsedRange(),
             NewText = $"{formattedMethod}{Environment.NewLine}"
         };
 
@@ -164,11 +164,11 @@ internal sealed class GenerateMethodCodeActionResolver(
             // just get the simplified text that comes back from Roslyn.
 
             var classLocationLineSpan = @class.GetLocation().GetLineSpan();
-            var insertPosition = new Position(classLocationLineSpan.EndLinePosition.Line, 0);
+            var insertPosition = classLocationLineSpan.EndLinePosition.GetStartPosition();
             var tempTextEdit = new TextEdit()
             {
                 NewText = editToSendToRoslyn.NewText,
-                Range = new Range() { Start = insertPosition, End = insertPosition }
+                Range = insertPosition.ToCollapsedRange()
             };
 
             var delegatedParams = new DelegatedSimplifyMethodParams(documentContext.Identifier, RequiresVirtualDocument: true, tempTextEdit);

@@ -1,14 +1,13 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
-using System;
-using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.Protocol;
 using Microsoft.CodeAnalysis.Razor.Workspaces;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
+using static Microsoft.CodeAnalysis.Razor.VsLspFactory;
 using Range = Microsoft.VisualStudio.LanguageServer.Protocol.Range;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.Completion.Delegation;
@@ -31,8 +30,7 @@ internal class TextEditResponseRewriter : DelegatedCompletionResponseRewriter
 
         var sourceText = await hostDocumentContext.GetSourceTextAsync(cancellationToken).ConfigureAwait(false);
 
-        sourceText.GetLineAndOffset(hostDocumentIndex, out var lineNumber, out var characterOffset);
-        var hostDocumentPosition = new Position(lineNumber, characterOffset);
+        var hostDocumentPosition = sourceText.GetPosition(hostDocumentIndex);
         completionList = TranslateTextEdits(hostDocumentPosition, delegatedParameters.ProjectedPosition, completionList);
 
         if (completionList.ItemDefaults?.EditRange is { } editRange)
@@ -90,28 +88,14 @@ internal class TextEditResponseRewriter : DelegatedCompletionResponseRewriter
 
     private static Range TranslateRange(Position hostDocumentPosition, Position projectedPosition, Range textEditRange)
     {
-        var offset = projectedPosition.Character - hostDocumentPosition.Character;
-
-        var editStartPosition = textEditRange.Start;
-        var translatedStartPosition = TranslatePosition(offset, hostDocumentPosition, editStartPosition);
-        var editEndPosition = textEditRange.End;
-        var translatedEndPosition = TranslatePosition(offset, hostDocumentPosition, editEndPosition);
-        var translatedRange = new Range()
-        {
-            Start = translatedStartPosition,
-            End = translatedEndPosition,
-        };
-
-        return translatedRange;
-    }
-
-    private static Position TranslatePosition(int offset, Position hostDocumentPosition, Position editPosition)
-    {
-        var translatedCharacter = editPosition.Character - offset;
-
         // Note: If this completion handler ever expands to deal with multi-line TextEdits, this logic will likely need to change since
         // it assumes we're only dealing with single-line TextEdits.
-        var translatedPosition = new Position(hostDocumentPosition.Line, translatedCharacter);
-        return translatedPosition;
+
+        var line = hostDocumentPosition.Line;
+        var offset = projectedPosition.Character - hostDocumentPosition.Character;
+
+        return CreateRange(
+            start: CreatePosition(line, textEditRange.Start.Character - offset),
+            end: CreatePosition(line, textEditRange.End.Character - offset));
     }
 }

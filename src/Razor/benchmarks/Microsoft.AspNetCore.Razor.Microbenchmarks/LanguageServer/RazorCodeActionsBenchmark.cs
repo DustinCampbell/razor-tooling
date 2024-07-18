@@ -79,9 +79,9 @@ public class RazorCodeActionsBenchmark : RazorLanguageServerBenchmarkBase
         DocumentSnapshot = await GetDocumentSnapshotAsync(projectFilePath, _filePath, targetPath);
         DocumentText = await DocumentSnapshot.GetTextAsync();
 
-        RazorCodeActionRange = ToRange(razorCodeActionIndex);
-        CSharpCodeActionRange = ToRange(csharpCodeActionIndex);
-        HtmlCodeActionRange = ToRange(htmlCodeActionIndex);
+        RazorCodeActionRange = DocumentText.GetCollapsedRange(razorCodeActionIndex);
+        CSharpCodeActionRange = DocumentText.GetCollapsedRange(csharpCodeActionIndex);
+        HtmlCodeActionRange = DocumentText.GetCollapsedRange(htmlCodeActionIndex);
 
         var documentContext = new VersionedDocumentContext(DocumentUri, DocumentSnapshot, projectContext: null, 1);
 
@@ -90,16 +90,6 @@ public class RazorCodeActionsBenchmark : RazorLanguageServerBenchmarkBase
         codeDocument.SetCodeGenerationOptions(RazorCodeGenerationOptions.Create(c => c.RootNamespace = "Root.Namespace"));
 
         RazorRequestContext = new RazorRequestContext(documentContext, RazorLanguageServerHost.GetRequiredService<ILspServices>(), "lsp/method", uri: null);
-
-        Range ToRange(int index)
-        {
-            DocumentText.GetLineAndOffset(index, out var line, out var offset);
-            return new Range
-            {
-                Start = new Position(line, offset),
-                End = new Position(line, offset)
-            };
-        }
     }
 
     private string GetFileContents(FileTypes fileType)

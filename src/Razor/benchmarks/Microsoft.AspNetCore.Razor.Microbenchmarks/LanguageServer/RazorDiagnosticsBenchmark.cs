@@ -22,6 +22,7 @@ using Microsoft.CodeAnalysis.Razor.Workspaces;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
 using Moq;
+using static Microsoft.CodeAnalysis.Razor.VsLspFactory;
 using Range = Microsoft.VisualStudio.LanguageServer.Protocol.Range;
 
 namespace Microsoft.AspNetCore.Razor.Microbenchmarks.LanguageServer;
@@ -207,8 +208,8 @@ public class RazorDiagnosticsBenchmark : RazorLanguageServerBenchmarkBase
         }
     }
 
-    private Range InRange { get; set; } = new Range { Start = new Position(85, 8), End = new Position(85, 16) };
-    private Range OutRange { get; set; } = new Range { Start = new Position(6, 8), End = new Position(6, 16) };
+    private Range InRange { get; set; } = CreateRange(start: (85, 8), end: (85, 16));
+    private Range OutRange { get; set; } = CreateRange(start: (6, 8), end: (6, 16));
 
     private Diagnostic[] GetDiagnostics(int N) => Enumerable.Range(1, N).Select(_ => new Diagnostic()
     {

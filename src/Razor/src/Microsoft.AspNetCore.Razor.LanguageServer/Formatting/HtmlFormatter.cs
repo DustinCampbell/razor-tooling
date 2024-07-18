@@ -66,13 +66,12 @@ internal class HtmlFormatter
     {
         if (!_documentVersionCache.TryGetDocumentVersion(context.OriginalSnapshot, out var documentVersion))
         {
-            return Array.Empty<TextEdit>();
+            return [];
         }
 
-        context.SourceText.GetLineAndOffset(context.HostDocumentIndex, out var line, out var col);
         var @params = new RazorDocumentOnTypeFormattingParams()
         {
-            Position = new Position(line, col),
+            Position = context.SourceText.GetPosition(context.HostDocumentIndex),
             Character = context.TriggerCharacter.ToString(),
             TextDocument = new TextDocumentIdentifier { Uri = context.Uri },
             Options = context.Options,
@@ -84,7 +83,7 @@ internal class HtmlFormatter
             @params,
             cancellationToken).ConfigureAwait(false);
 
-        return result?.Edits ?? Array.Empty<TextEdit>();
+        return result?.Edits ?? [];
     }
 
     /// <summary>

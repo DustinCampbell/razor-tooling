@@ -3,17 +3,14 @@
 
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
+using static Microsoft.CodeAnalysis.Razor.VsLspFactory;
 
 namespace Microsoft.CodeAnalysis.Razor.Workspaces;
 
 internal static class LinePositionSpanExtensions
 {
     public static Range ToRange(this LinePositionSpan linePositionSpan)
-        => new()
-        {
-            Start = linePositionSpan.Start.ToPosition(),
-            End = linePositionSpan.End.ToPosition()
-        };
+        => CreateRange(linePositionSpan.Start.ToPosition(), linePositionSpan.End.ToPosition());
 
     public static TextSpan ToTextSpan(this LinePositionSpan linePositionSpan, SourceText sourceText)
         => sourceText.GetTextSpan(linePositionSpan.Start.Line, linePositionSpan.Start.Character, linePositionSpan.End.Line, linePositionSpan.End.Character);

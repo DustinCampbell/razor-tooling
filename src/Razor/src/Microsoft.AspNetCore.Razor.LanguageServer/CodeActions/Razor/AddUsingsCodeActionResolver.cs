@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
 using System.Text.Json;
@@ -20,7 +19,7 @@ using Microsoft.AspNetCore.Razor.PooledObjects;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.Workspaces;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
-using Range = Microsoft.VisualStudio.LanguageServer.Protocol.Range;
+using static Microsoft.CodeAnalysis.Razor.VsLspFactory;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.CodeActions;
 
@@ -125,8 +124,8 @@ internal sealed class AddUsingsCodeActionResolver(IDocumentContextFactory docume
             if (string.CompareOrdinal(newUsingNamespace, usingDirectiveNamespace) < 0)
             {
                 var usingDirectiveLineIndex = codeDocument.Source.Text.Lines.GetLinePosition(usingDirective.Node.Span.Start).Line;
-                var head = new Position(usingDirectiveLineIndex, 0);
-                var edit = new TextEdit() { Range = new Range { Start = head, End = head }, NewText = newText };
+                var head = CreatePosition(usingDirectiveLineIndex, 0);
+                var edit = new TextEdit() { Range = head.ToCollapsedRange(), NewText = newText };
                 edits.Add(edit);
                 break;
             }
@@ -137,8 +136,8 @@ internal sealed class AddUsingsCodeActionResolver(IDocumentContextFactory docume
         {
             var endIndex = existingUsingDirectives[^1].Node.Span.End;
             var lineIndex = GetLineIndexOrEnd(codeDocument, endIndex - 1) + 1;
-            var head = new Position(lineIndex, 0);
-            var edit = new TextEdit() { Range = new Range { Start = head, End = head }, NewText = newText };
+            var head = CreatePosition(lineIndex, 0);
+            var edit = new TextEdit() { Range = head.ToCollapsedRange(), NewText = newText };
             edits.Add(edit);
         }
 
@@ -154,7 +153,7 @@ internal sealed class AddUsingsCodeActionResolver(IDocumentContextFactory docume
         OptionalVersionedTextDocumentIdentifier codeDocumentIdentifier,
         string newUsingNamespace)
     {
-        var head = new Position(0, 0);
+        var head = EmptyPosition();
 
         // If we don't have usings, insert after the last namespace or page directive, which ever comes later
         var syntaxTreeRoot = codeDocument.GetSyntaxTree().Root;
@@ -165,11 +164,11 @@ internal sealed class AddUsingsCodeActionResolver(IDocumentContextFactory docume
         if (lastNamespaceOrPageDirective != null)
         {
             var lineIndex = GetLineIndexOrEnd(codeDocument, lastNamespaceOrPageDirective.Span.End - 1) + 1;
-            head = new Position(lineIndex, 0);
+            head = CreatePosition(lineIndex, 0);
         }
 
         // Insert all usings at the given point
-        var range = new Range { Start = head, End = head };
+        var range = head.ToCollapsedRange();
         return new TextDocumentEdit
         {
             TextDocument = codeDocumentIdentifier,

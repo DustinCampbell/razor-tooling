@@ -119,7 +119,7 @@ internal sealed partial class HoverService(
             owner = owner.Parent;
         }
 
-        var position = new Position(location.LineIndex, location.CharacterIndex);
+        var position = location.ToPosition();
         var tagHelperDocumentContext = codeDocument.GetTagHelperContext();
 
         // We want to find the parent tag, but looking up ancestors in the tree can find other things,

@@ -78,16 +78,10 @@ public class RazorCompletionBenchmark : RazorLanguageServerBenchmarkBase
         DocumentSnapshot = await GetDocumentSnapshotAsync(projectFilePath, _filePath, targetPath);
         DocumentText = await DocumentSnapshot.GetTextAsync();
 
-        RazorPosition = ToPosition(razorCodeActionIndex);
+        RazorPosition = DocumentText.GetPosition(razorCodeActionIndex);
 
         var documentContext = new VersionedDocumentContext(DocumentUri, DocumentSnapshot, projectContext: null, 1);
         RazorRequestContext = new RazorRequestContext(documentContext, RazorLanguageServerHost.GetRequiredService<ILspServices>(), "lsp/method", uri: null);
-
-        Position ToPosition(int index)
-        {
-            DocumentText.GetLineAndOffset(index, out var line, out var offset);
-            return new Position(line, offset);
-        }
     }
 
     private static string GetFileContents()

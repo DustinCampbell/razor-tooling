@@ -8,9 +8,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Utilities;
 using Microsoft.VisualStudio.LanguageServer.ContainedLanguage;
-using Microsoft.VisualStudio.LanguageServer.Protocol;
 using Microsoft.VisualStudio.Razor.Debugging;
 using Microsoft.VisualStudio.Text;
+using static Microsoft.CodeAnalysis.Razor.VsLspFactory;
 using Range = Microsoft.VisualStudio.LanguageServer.Protocol.Range;
 
 namespace Microsoft.VisualStudio.Razor.LanguageClient.Debugging;
@@ -96,7 +96,7 @@ internal class DefaultRazorBreakpointResolver : RazorBreakpointResolver
             return cachedRange;
         }
 
-        var lspPosition = new Position(lineIndex, characterIndex);
+        var lspPosition = CreatePosition(lineIndex, characterIndex);
         var hostDocumentRange = await _breakpointSpanProvider.GetBreakpointSpanAsync(documentSnapshot, lspPosition, cancellationToken).ConfigureAwait(false);
         if (hostDocumentRange is null)
         {

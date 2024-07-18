@@ -2,18 +2,14 @@
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
-using Microsoft.AspNetCore.Razor.Language.Syntax;
 using Microsoft.AspNetCore.Razor.LanguageServer.EndpointContracts;
 using Microsoft.CodeAnalysis.Razor.LinkedEditingRange;
 using Microsoft.CodeAnalysis.Razor.Logging;
-using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.Workspaces;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
-using Range = Microsoft.VisualStudio.LanguageServer.Protocol.Range;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.LinkedEditingRange;
 
@@ -65,11 +61,9 @@ internal class LinkedEditingRangeEndpoint : IRazorRequestHandler<LinkedEditingRa
 
         if (LinkedEditingRangeHelper.GetLinkedSpans(request.Position.ToLinePosition(), codeDocument, _logger) is { } linkedSpans && linkedSpans.Length == 2)
         {
-            var ranges = new Range[2] { linkedSpans[0].ToRange(), linkedSpans[1].ToRange() };
-
             return new LinkedEditingRanges
             {
-                Ranges = ranges,
+                Ranges = [linkedSpans[0].ToRange(), linkedSpans[1].ToRange()],
                 WordPattern = LinkedEditingRangeHelper.WordPattern
             };
         }

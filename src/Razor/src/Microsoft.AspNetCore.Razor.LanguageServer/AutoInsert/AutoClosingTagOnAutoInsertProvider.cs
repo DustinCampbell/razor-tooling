@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Razor.LanguageServer.Formatting;
 using Microsoft.CodeAnalysis.Razor.Logging;
 using Microsoft.CodeAnalysis.Razor.Workspaces;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
-using Range = Microsoft.VisualStudio.LanguageServer.Protocol.Range;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.AutoInsert;
 
@@ -89,7 +88,7 @@ internal sealed class AutoClosingTagOnAutoInsertProvider : IOnAutoInsertProvider
             edit = new TextEdit()
             {
                 NewText = $"$0</{tagName}>",
-                Range = new Range { Start = position, End = position },
+                Range = position.ToCollapsedRange(),
             };
 
             return true;
@@ -101,15 +100,11 @@ internal sealed class AutoClosingTagOnAutoInsertProvider : IOnAutoInsertProvider
 
         // Need to replace the `>` with ' />$0' or '/>$0' depending on if there's prefixed whitespace.
         var insertionText = char.IsWhiteSpace(context.SourceText[afterCloseAngleIndex - 2]) ? "/" : " /";
-        var insertionPosition = new Position(position.Line, position.Character - 1);
+        var insertionPosition = position.WithCharacter(static ch => ch - 1);
         edit = new TextEdit()
         {
             NewText = insertionText,
-            Range = new Range
-            {
-                Start = insertionPosition,
-                End = insertionPosition
-            }
+            Range = insertionPosition.ToCollapsedRange()
         };
 
         return true;

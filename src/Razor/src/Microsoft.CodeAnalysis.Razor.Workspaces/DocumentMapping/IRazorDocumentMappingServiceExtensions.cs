@@ -34,11 +34,10 @@ internal static class IRazorDocumentMappingServiceExtensions
     public static DocumentPositionInfo GetPositionInfo(
         this IRazorDocumentMappingService service,
         RazorCodeDocument codeDocument,
-        SourceText sourceText,
+        SourceText text,
         int hostDocumentIndex)
     {
-        sourceText.GetLineAndOffset(hostDocumentIndex, out var line, out var character);
-        var position = new Position(line, character);
+        var position = text.GetPosition(hostDocumentIndex);
 
         var languageKind = service.GetLanguageKind(codeDocument, hostDocumentIndex, rightAssociative: false);
         if (languageKind is not RazorLanguageKind.Razor)

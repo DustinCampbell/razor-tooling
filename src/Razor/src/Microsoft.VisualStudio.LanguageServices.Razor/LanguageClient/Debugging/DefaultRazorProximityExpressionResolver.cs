@@ -9,9 +9,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Utilities;
 using Microsoft.VisualStudio.LanguageServer.ContainedLanguage;
-using Microsoft.VisualStudio.LanguageServer.Protocol;
 using Microsoft.VisualStudio.Razor.Debugging;
 using Microsoft.VisualStudio.Text;
+using static Microsoft.CodeAnalysis.Razor.VsLspFactory;
 
 namespace Microsoft.VisualStudio.Razor.LanguageClient.Debugging;
 
@@ -95,7 +95,7 @@ internal class DefaultRazorProximityExpressionResolver : RazorProximityExpressio
             return cachedExpressions;
         }
 
-        var position = new Position(lineIndex, characterIndex);
+        var position = CreatePosition(lineIndex, characterIndex);
         var proximityExpressions = await _proximityExpressionsProvider.GetProximityExpressionsAsync(documentSnapshot, position, cancellationToken).ConfigureAwait(false);
 
         // Cache range so if we're asked again for this document/line/character we don't have to go async.

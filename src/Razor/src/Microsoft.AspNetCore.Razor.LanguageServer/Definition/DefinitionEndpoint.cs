@@ -18,6 +18,7 @@ using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.Protocol;
 using Microsoft.CodeAnalysis.Razor.Workspaces;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
+using static Microsoft.CodeAnalysis.Razor.VsLspFactory;
 using DefinitionResult = Microsoft.VisualStudio.LanguageServer.Protocol.SumType<
     Microsoft.VisualStudio.LanguageServer.Protocol.VSInternalLocation,
     Microsoft.VisualStudio.LanguageServer.Protocol.VSInternalLocation[],
@@ -264,7 +265,7 @@ internal sealed class DefinitionEndpoint(
         // If we were trying to navigate to a property, and we couldn't find it, we can at least take
         // them to the file for the component. If the property was defined in a partial class they can
         // at least then press F7 to go there.
-        return new Range { Start = new Position(0, 0), End = new Position(0, 0) };
+        return EmptyRange();
     }
 
     internal static async Task<Range?> TryGetPropertyRangeAsync(RazorCodeDocument codeDocument, string propertyName, IRazorDocumentMappingService documentMappingService, ILogger logger, CancellationToken cancellationToken)

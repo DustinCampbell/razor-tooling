@@ -18,9 +18,9 @@ using Microsoft.CodeAnalysis.Razor.Protocol;
 using Microsoft.CodeAnalysis.Razor.Workspaces;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
+using static Microsoft.CodeAnalysis.Razor.VsLspFactory;
 using Diagnostic = Microsoft.VisualStudio.LanguageServer.Protocol.Diagnostic;
 using DiagnosticSeverity = Microsoft.VisualStudio.LanguageServer.Protocol.DiagnosticSeverity;
-using Position = Microsoft.VisualStudio.LanguageServer.Protocol.Position;
 using Range = Microsoft.VisualStudio.LanguageServer.Protocol.Range;
 using RazorDiagnosticFactory = Microsoft.AspNetCore.Razor.Language.RazorDiagnosticFactory;
 using SourceText = Microsoft.CodeAnalysis.Text.SourceText;
@@ -534,7 +534,7 @@ internal class RazorTranslateDiagnosticsService(IRazorDocumentMappingService doc
                 // Look for the first non-whitespace character so we're not squiggling random whitespace at the start of the diagnostic
                 var firstNonWhitespaceCharacterOffset = sourceText.GetFirstNonWhitespaceOffset(startLine.Span, out _);
                 var diagnosticStartCharacter = firstNonWhitespaceCharacterOffset ?? 0;
-                var startLinePosition = new Position(startLineIndex, diagnosticStartCharacter);
+                var startLinePosition = CreatePosition(startLineIndex, diagnosticStartCharacter);
 
                 var endLineIndex = diagnosticRange.End.Line;
                 if (endLineIndex >= sourceText.Lines.Count)
@@ -550,13 +550,9 @@ internal class RazorTranslateDiagnosticsService(IRazorDocumentMappingService doc
                 var lastNonWhitespaceCharacterOffset = sourceText.GetLastNonWhitespaceOffset(endLine.Span, out _);
                 var diagnosticEndCharacter = lastNonWhitespaceCharacterOffset ?? 0;
                 var diagnosticEndWhitespaceOffset = diagnosticEndCharacter + 1;
-                var endLinePosition = new Position(endLineIndex, diagnosticEndWhitespaceOffset);
+                var endLinePosition = CreatePosition(endLineIndex, diagnosticEndWhitespaceOffset);
 
-                remappedRange = new Range
-                {
-                    Start = startLinePosition,
-                    End = endLinePosition
-                };
+                remappedRange = CreateRange(startLinePosition, endLinePosition);
                 return true;
         }
     }

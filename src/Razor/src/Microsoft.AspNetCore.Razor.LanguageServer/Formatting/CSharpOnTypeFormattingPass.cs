@@ -21,6 +21,7 @@ using Microsoft.CodeAnalysis.Razor.Protocol;
 using Microsoft.CodeAnalysis.Razor.Workspaces;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
+using static Microsoft.CodeAnalysis.Razor.VsLspFactory;
 using Range = Microsoft.VisualStudio.LanguageServer.Protocol.Range;
 using SyntaxNode = Microsoft.AspNetCore.Razor.Language.Syntax.SyntaxNode;
 
@@ -180,13 +181,13 @@ internal sealed class CSharpOnTypeFormattingPass(
             start = firstPosition;
         }
 
-        var end = new Position(rangeAfterFormatting.End.Line + lineDelta, 0);
+        var end = CreatePosition(rangeAfterFormatting.End.Line + lineDelta, 0);
         if (lastPosition is not null && lastPosition.CompareTo(start) < 0)
         {
             end = lastPosition;
         }
 
-        var rangeToAdjust = new Range { Start = start, End = end };
+        var rangeToAdjust = CreateRange(start, end);
 
         Debug.Assert(rangeToAdjust.End.IsValid(cleanedText), "Invalid range. This is unexpected.");
 
