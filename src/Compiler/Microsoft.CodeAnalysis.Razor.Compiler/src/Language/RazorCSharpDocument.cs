@@ -25,14 +25,6 @@ public abstract class RazorCSharpDocument : IRazorGeneratedDocument
 
     internal virtual IReadOnlyList<LinePragma> LinePragmas { get; }
 
-    [Obsolete("For backwards compatibility only. Use the overload that takes a RazorCodeDocument")]
-    public static RazorCSharpDocument Create(string generatedCode, RazorCodeGenerationOptions options, IEnumerable<RazorDiagnostic> diagnostics)
-        => Create(codeDocument: null, generatedCode, options, diagnostics);
-
-    [Obsolete("For backwards compatibility only. Use the overload that takes a RazorCodeDocument")]
-    public static RazorCSharpDocument Create(string generatedCode, RazorCodeGenerationOptions options, IEnumerable<RazorDiagnostic> diagnostics, ImmutableArray<SourceMapping> sourceMappings, IEnumerable<LinePragma> linePragmas)
-        => Create(codeDocument: null, generatedCode, options, diagnostics, sourceMappings, linePragmas);
-
     public static RazorCSharpDocument Create(RazorCodeDocument codeDocument, string generatedCode, RazorCodeGenerationOptions options, IEnumerable<RazorDiagnostic> diagnostics)
     {
         if (generatedCode == null)
