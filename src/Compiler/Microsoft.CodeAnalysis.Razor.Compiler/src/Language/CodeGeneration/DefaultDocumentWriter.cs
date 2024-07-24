@@ -4,6 +4,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
@@ -23,15 +24,8 @@ internal class DefaultDocumentWriter : DocumentWriter
 
     public override RazorCSharpDocument WriteDocument(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
     {
-        if (codeDocument == null)
-        {
-            throw new ArgumentNullException(nameof(codeDocument));
-        }
-
-        if (documentNode == null)
-        {
-            throw new ArgumentNullException(nameof(documentNode));
-        }
+        ArgHelper.ThrowIfNull(codeDocument);
+        ArgHelper.ThrowIfNull(documentNode);
 
         using var context = new DefaultCodeRenderingContext(
             _codeTarget.CreateNodeWriter(),
@@ -45,13 +39,13 @@ internal class DefaultDocumentWriter : DocumentWriter
         var cSharp = context.CodeWriter.GenerateCode();
 
         var allOrderedDiagnostics = context.Diagnostics.OrderBy(diagnostic => diagnostic.Span.AbsoluteIndex);
-        return new DefaultRazorCSharpDocument(
+        return new RazorCSharpDocument(
             codeDocument,
             cSharp,
             _options,
-            allOrderedDiagnostics.ToArray(),
+            allOrderedDiagnostics.ToImmutableArray(),
             context.SourceMappings.DrainToImmutable(),
-            context.LinePragmas.ToArray());
+            context.LinePragmas.ToImmutableArray());
     }
 
     private class Visitor : IntermediateNodeVisitor

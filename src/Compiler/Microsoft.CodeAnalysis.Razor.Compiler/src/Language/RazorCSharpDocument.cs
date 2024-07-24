@@ -1,49 +1,44 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-public abstract class RazorCSharpDocument : IRazorGeneratedDocument
+public sealed class RazorCSharpDocument : IRazorGeneratedDocument
 {
-    public abstract string GeneratedCode { get; }
+    public RazorCodeDocument CodeDocument { get; }
+    public string GeneratedCode { get; }
+    public RazorCodeGenerationOptions Options { get; }
+    public ImmutableArray<RazorDiagnostic> Diagnostics { get; }
+    public ImmutableArray<SourceMapping> SourceMappings { get; }
+    public ImmutableArray<LinePragma> LinePragmas { get; }
 
-    public abstract ImmutableArray<SourceMapping> SourceMappings { get; }
+    public RazorCSharpDocument(
+        RazorCodeDocument codeDocument,
+        string generatedCode,
+        RazorCodeGenerationOptions options,
+        ImmutableArray<RazorDiagnostic> diagnostics,
+        ImmutableArray<SourceMapping> sourceMappings,
+        ImmutableArray<LinePragma> linePragmas)
+    {
+        ArgHelper.ThrowIfNull(codeDocument);
+        ArgHelper.ThrowIfNull(generatedCode);
+        ArgHelper.ThrowIfNull(options);
 
-    public abstract IReadOnlyList<RazorDiagnostic> Diagnostics { get; }
+        CodeDocument = codeDocument;
+        GeneratedCode = generatedCode;
+        Options = options;
 
-    public abstract RazorCodeGenerationOptions Options { get; }
-
-    public abstract RazorCodeDocument CodeDocument { get; }
-
-    internal virtual IReadOnlyList<LinePragma> LinePragmas { get; }
+        Diagnostics = diagnostics.NullToEmpty();
+        SourceMappings = sourceMappings.NullToEmpty();
+        LinePragmas = linePragmas.NullToEmpty();
+    }
 
     public static RazorCSharpDocument Create(RazorCodeDocument codeDocument, string generatedCode, RazorCodeGenerationOptions options, IEnumerable<RazorDiagnostic> diagnostics)
-    {
-        if (generatedCode == null)
-        {
-            throw new ArgumentNullException(nameof(generatedCode));
-        }
-
-        if (options == null)
-        {
-            throw new ArgumentNullException(nameof(options));
-        }
-
-        if (diagnostics == null)
-        {
-            throw new ArgumentNullException(nameof(diagnostics));
-        }
-
-        return new DefaultRazorCSharpDocument(codeDocument, generatedCode, options, diagnostics.ToArray(), sourceMappings: ImmutableArray<SourceMapping>.Empty, linePragmas: null);
-    }
+        => new(codeDocument, generatedCode, options, diagnostics.ToImmutableArray(), sourceMappings: [], linePragmas: []);
 
     public static RazorCSharpDocument Create(
         RazorCodeDocument codeDocument,
@@ -52,22 +47,5 @@ public abstract class RazorCSharpDocument : IRazorGeneratedDocument
         IEnumerable<RazorDiagnostic> diagnostics,
         ImmutableArray<SourceMapping> sourceMappings,
         IEnumerable<LinePragma> linePragmas)
-    {
-        if (generatedCode == null)
-        {
-            throw new ArgumentNullException(nameof(generatedCode));
-        }
-
-        if (options == null)
-        {
-            throw new ArgumentNullException(nameof(options));
-        }
-
-        if (diagnostics == null)
-        {
-            throw new ArgumentNullException(nameof(diagnostics));
-        }
-
-        return new DefaultRazorCSharpDocument(codeDocument, generatedCode, options, diagnostics.ToArray(), sourceMappings, linePragmas.ToArray());
-    }
+        => new(codeDocument, generatedCode, options, diagnostics.ToImmutableArray(), sourceMappings, linePragmas.ToImmutableArray());
 }

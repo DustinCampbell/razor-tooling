@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Microsoft.AspNetCore.Razor.Language;
-using Microsoft.AspNetCore.Razor.Language.Extensions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
@@ -313,7 +312,7 @@ namespace Microsoft.NET.Sdk.Razor.SourceGenerators
                 })
                 .WithLambdaComparer(static (a, b) =>
                 {
-                    if (a.csharpDocument.Diagnostics.Count > 0 || b.csharpDocument.Diagnostics.Count > 0)
+                    if (a.csharpDocument.Diagnostics.Length > 0 || b.csharpDocument.Diagnostics.Length > 0)
                     {
                         // if there are any diagnostics, treat the documents as unequal and force RegisterSourceOutput to be called uncached.
                         return false;
@@ -339,7 +338,7 @@ namespace Microsoft.NET.Sdk.Razor.SourceGenerators
                     var hintName = GetIdentifierFromPath(filePath) + ".g.cs";
 
                     RazorSourceGeneratorEventSource.Log.AddSyntaxTrees(hintName);
-                    for (var i = 0; i < csharpDocument.Diagnostics.Count; i++)
+                    for (var i = 0; i < csharpDocument.Diagnostics.Length; i++)
                     {
                         var razorDiagnostic = csharpDocument.Diagnostics[i];
                         var csharpDiagnostic = razorDiagnostic.AsDiagnostic();
