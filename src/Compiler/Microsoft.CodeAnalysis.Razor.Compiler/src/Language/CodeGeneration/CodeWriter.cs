@@ -6,8 +6,10 @@ using System.Buffers;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Razor.PooledObjects;
+using Microsoft.CodeAnalysis.Text;
 using static System.StringExtensions;
 
 namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration;
@@ -307,6 +309,84 @@ public sealed partial class CodeWriter : IDisposable
 
     public CodeWriter WriteLine([InterpolatedStringHandlerArgument("")] ref WriteInterpolatedStringHandler handler)
         => WriteLine();
+
+    public SourceText GenerateText()
+    {
+        var reader = new CodeReader(this);
+        return SourceText.From(reader, Length);
+    }
+
+    private sealed class CodeReader : TextReader
+    {
+        private readonly CodeWriter _writer;
+        private LinkedListNode<ReadOnlyMemory<char>[]>? _currentNode;
+        private ReadOnlyMemory<char>[] _currentPage;
+        private ReadOnlyMemory<char> _currentBlock;
+        private int _blockIndex;
+        private int _charIndex;
+
+        public CodeReader(CodeWriter writer)
+        {
+            _writer = writer;
+            _currentNode = _writer._pages.First;
+            _currentPage = _currentNode?.Value ?? [];
+            _currentBlock = _currentPage.FirstOrDefault();
+            _blockIndex = 0;
+            _charIndex = 0;
+        }
+
+        public override int Read()
+        {
+            while (_charIndex == _currentBlock.Length)
+            {
+                if (!TryLoadNextBlock())
+                {
+                    return -1;
+                }
+            }
+
+            var result = _currentBlock.Span[_charIndex];
+            _charIndex++;
+            return result;
+        }
+
+        private bool TryLoadNextBlock()
+        {
+            _blockIndex++;
+
+            if (_blockIndex < _currentPage.Length)
+            {
+                _currentBlock = _currentPage[_blockIndex];
+                _charIndex = 0;
+                return true;
+            }
+
+            // We've reached the end the current page.
+            return TryLoadNextPage();
+        }
+
+        private bool TryLoadNextPage()
+        {
+            if (_currentNode is null)
+            {
+                return false;
+            }
+
+            _currentNode = _currentNode.Next;
+
+            if (_currentNode is null)
+            {
+                return false;
+            }
+
+            _currentPage = _currentNode.Value;
+            _currentBlock = _currentPage.FirstOrDefault();
+            _blockIndex = 0;
+            _charIndex = 0;
+
+            return true;
+        }
+    }
 
     public string GenerateCode()
     {

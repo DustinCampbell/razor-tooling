@@ -36,12 +36,12 @@ internal class DefaultDocumentWriter : DocumentWriter
 
         context.Visitor.VisitDocument(documentNode);
 
-        var cSharp = context.CodeWriter.GenerateCode();
+        var generatedText = context.CodeWriter.GenerateText();
 
         var allOrderedDiagnostics = context.Diagnostics.OrderBy(diagnostic => diagnostic.Span.AbsoluteIndex);
         return new RazorCSharpDocument(
             codeDocument,
-            cSharp,
+            generatedText,
             _options,
             allOrderedDiagnostics.ToImmutableArray(),
             context.SourceMappings.DrainToImmutable(),
