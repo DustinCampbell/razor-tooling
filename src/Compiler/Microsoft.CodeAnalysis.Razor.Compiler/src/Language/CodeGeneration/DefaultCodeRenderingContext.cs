@@ -19,6 +19,7 @@ internal class DefaultCodeRenderingContext : CodeRenderingContext
     private readonly List<ScopeInternal> _scopes;
 
     private readonly PooledObject<ImmutableArray<SourceMapping>.Builder> _sourceMappingsBuilder;
+    private readonly PooledObject<ImmutableArray<LinePragma>.Builder> _linePragmasBuilder;
 
     public DefaultCodeRenderingContext(
         IntermediateNodeWriter nodeWriter,
@@ -54,7 +55,7 @@ internal class DefaultCodeRenderingContext : CodeRenderingContext
         Diagnostics = new RazorDiagnosticCollection();
         Items = new ItemCollection();
         _sourceMappingsBuilder = ArrayBuilderPool<SourceMapping>.GetPooledObject();
-        LinePragmas = new List<LinePragma>();
+        _linePragmasBuilder = ArrayBuilderPool<LinePragma>.GetPooledObject();
 
         var diagnostics = _documentNode.GetAllDiagnostics();
         for (var i = 0; i < diagnostics.Count; i++)
@@ -90,7 +91,7 @@ internal class DefaultCodeRenderingContext : CodeRenderingContext
 
     public ImmutableArray<SourceMapping>.Builder SourceMappings => _sourceMappingsBuilder.Object;
 
-    internal List<LinePragma> LinePragmas { get; }
+    internal ImmutableArray<LinePragma>.Builder LinePragmas => _linePragmasBuilder.Object;
 
     public override IntermediateNodeWriter NodeWriter => Current.Writer;
 

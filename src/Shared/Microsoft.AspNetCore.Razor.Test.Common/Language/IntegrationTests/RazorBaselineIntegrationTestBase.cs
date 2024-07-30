@@ -4,6 +4,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -200,7 +201,7 @@ public abstract class RazorBaselineIntegrationTestBase : RazorIntegrationTestBas
             }
 
             // check that the pragmas in the main document have matching span maps and are enhanced
-            var pragmasInDocument = linePragmas.Where(p => p.FilePath == codeDocument.Source.FilePath).ToArray();
+            var pragmasInDocument = linePragmas.WhereAsArray(p => p.FilePath == codeDocument.Source.FilePath);
 
             foreach(var pragma in pragmasInDocument)
             {

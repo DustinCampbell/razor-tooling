@@ -15,7 +15,7 @@ public sealed class RazorCSharpDocument : IRazorGeneratedDocument
     public ImmutableArray<RazorDiagnostic> Diagnostics { get; }
     public RazorCodeGenerationOptions Options { get; }
 
-    internal IReadOnlyList<LinePragma> LinePragmas { get; }
+    internal ImmutableArray<LinePragma> LinePragmas { get; }
 
     public RazorCSharpDocument(
         RazorCodeDocument codeDocument,
