@@ -169,21 +169,6 @@ public class RazorCodeDocumentExtensionsTest
     }
 
     [Fact]
-    public void GetParserOptions_ReturnsSuccessfully()
-    {
-        // Arrange
-        var codeDocument = TestRazorCodeDocument.CreateEmpty();
-
-        var expected = RazorParserOptions.Default;
-
-        // Act
-        var actual = codeDocument.ParserOptions;
-
-        // Assert
-        Assert.Same(expected, actual);
-    }
-
-    [Fact]
     public void GetCodeGenerationOptions_ReturnsSuccessfully()
     {
         // Arrange

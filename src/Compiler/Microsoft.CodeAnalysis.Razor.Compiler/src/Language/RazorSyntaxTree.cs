@@ -58,7 +58,7 @@ public abstract class RazorSyntaxTree
             throw new ArgumentNullException(nameof(source));
         }
 
-        var parser = new RazorParser(options ?? RazorParserOptions.CreateDefault());
+        var parser = new RazorParser(options ?? RazorParserOptions.Default);
         return parser.Parse(source);
     }
 

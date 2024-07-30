@@ -10,18 +10,13 @@ namespace Microsoft.AspNetCore.Razor.Language;
 
 public sealed class RazorParserOptions
 {
-    public static RazorParserOptions Default { get; } = CreateDefault();
-
-    public static RazorParserOptions CreateDefault()
-    {
-        return new RazorParserOptions(
-            Array.Empty<DirectiveDescriptor>(),
-            designTime: false,
-            parseLeadingDirectives: false,
-            version: RazorLanguageVersion.Latest,
-            fileKind: FileKinds.Legacy,
-            enableSpanEditHandlers: false);
-    }
+    public static RazorParserOptions Default { get; } = new(
+        directives: [],
+        designTime: false,
+        parseLeadingDirectives: false,
+        version: RazorLanguageVersion.Latest,
+        fileKind: FileKinds.Legacy,
+        enableSpanEditHandlers: false);
 
     public static RazorParserOptions Create(Action<RazorParserOptionsBuilder> configure)
     {
