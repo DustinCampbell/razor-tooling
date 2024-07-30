@@ -1,28 +1,21 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
-using System;
-
 namespace Microsoft.AspNetCore.Razor.Language;
 
-internal sealed class RazorParserFeatureFlags(
-    bool allowMinimizedBooleanTagHelperAttributes,
-    bool allowHtmlCommentsInTagHelpers,
-    bool allowComponentFileKind,
-    bool allowRazorInAllCodeBlocks,
-    bool allowUsingVariableDeclarations,
-    bool allowConditionalDataDashAttributesInComponents,
-    bool allowCSharpInMarkupAttributeArea,
-    bool allowNullableForgivenessOperator)
+internal readonly record struct RazorParserFeatureFlags(
+    bool AllowMinimizedBooleanTagHelperAttributes,
+    bool AllowHtmlCommentsInTagHelpers,
+    bool AllowComponentFileKind,
+    bool AllowRazorInAllCodeBlocks,
+    bool AllowUsingVariableDeclarations,
+    bool AllowConditionalDataDashAttributes,
+    bool AllowCSharpInMarkupAttributeArea,
+    bool AllowNullableForgivenessOperator)
 {
     public static RazorParserFeatureFlags Create(RazorLanguageVersion version, string fileKind)
     {
-        if (fileKind == null)
-        {
-            throw new ArgumentNullException(nameof(fileKind));
-        }
+        ArgHelper.ThrowIfNull(fileKind);
 
         var allowMinimizedBooleanTagHelperAttributes = false;
         var allowHtmlCommentsInTagHelpers = false;
@@ -70,20 +63,4 @@ internal sealed class RazorParserFeatureFlags(
             allowCSharpInMarkupAttributeArea,
             allowNullableForgivenessOperator);
     }
-
-    public bool AllowMinimizedBooleanTagHelperAttributes { get; } = allowMinimizedBooleanTagHelperAttributes;
-
-    public bool AllowHtmlCommentsInTagHelpers { get; } = allowHtmlCommentsInTagHelpers;
-
-    public bool AllowComponentFileKind { get; } = allowComponentFileKind;
-
-    public bool AllowRazorInAllCodeBlocks { get; } = allowRazorInAllCodeBlocks;
-
-    public bool AllowUsingVariableDeclarations { get; } = allowUsingVariableDeclarations;
-
-    public bool AllowConditionalDataDashAttributes { get; } = allowConditionalDataDashAttributesInComponents;
-
-    public bool AllowCSharpInMarkupAttributeArea { get; } = allowCSharpInMarkupAttributeArea;
-
-    public bool AllowNullableForgivenessOperator { get; } = allowNullableForgivenessOperator;
 }
