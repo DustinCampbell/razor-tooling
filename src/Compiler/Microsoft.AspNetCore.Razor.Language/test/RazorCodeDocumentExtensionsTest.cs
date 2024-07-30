@@ -174,29 +174,13 @@ public class RazorCodeDocumentExtensionsTest
         // Arrange
         var codeDocument = TestRazorCodeDocument.CreateEmpty();
 
-        var expected = RazorParserOptions.CreateDefault();
-        codeDocument.Items[typeof(RazorParserOptions)] = expected;
+        var expected = RazorParserOptions.Default;
 
         // Act
-        var actual = codeDocument.GetParserOptions();
+        var actual = codeDocument.ParserOptions;
 
         // Assert
         Assert.Same(expected, actual);
-    }
-
-    [Fact]
-    public void SetParserOptions_SetsSuccessfully()
-    {
-        // Arrange
-        var codeDocument = TestRazorCodeDocument.CreateEmpty();
-
-        var expected = RazorParserOptions.CreateDefault();
-
-        // Act
-        codeDocument.SetParserOptions(expected);
-
-        // Assert
-        Assert.Same(expected, codeDocument.Items[typeof(RazorParserOptions)]);
     }
 
     [Fact]

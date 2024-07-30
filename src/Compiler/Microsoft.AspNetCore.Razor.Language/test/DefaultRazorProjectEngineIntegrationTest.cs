@@ -24,7 +24,7 @@ public class DefaultRazorProjectEngineIntegrationTest
         var codeDocument = projectEngine.Process(projectItem);
 
         // Assert
-        var parserOptions = codeDocument.GetParserOptions();
+        var parserOptions = codeDocument.ParserOptions;
         Assert.False(parserOptions.DesignTime);
 
         var codeGenerationOptions = codeDocument.GetCodeGenerationOptions();
@@ -45,7 +45,7 @@ public class DefaultRazorProjectEngineIntegrationTest
         var codeDocument = projectEngine.ProcessDesignTime(projectItem);
 
         // Assert
-        var parserOptions = codeDocument.GetParserOptions();
+        var parserOptions = codeDocument.ParserOptions;
         Assert.True(parserOptions.DesignTime);
 
         var codeGenerationOptions = codeDocument.GetCodeGenerationOptions();

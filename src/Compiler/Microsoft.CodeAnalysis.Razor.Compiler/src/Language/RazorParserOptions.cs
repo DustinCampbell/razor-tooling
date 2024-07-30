@@ -10,6 +10,8 @@ namespace Microsoft.AspNetCore.Razor.Language;
 
 public sealed class RazorParserOptions
 {
+    public static RazorParserOptions Default { get; } = CreateDefault();
+
     public static RazorParserOptions CreateDefault()
     {
         return new RazorParserOptions(

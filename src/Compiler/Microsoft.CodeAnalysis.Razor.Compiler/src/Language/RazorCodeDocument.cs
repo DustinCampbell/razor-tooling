@@ -9,6 +9,7 @@ public sealed class RazorCodeDocument
 {
     public RazorSourceDocument Source { get; }
     public ImmutableArray<RazorSourceDocument> Imports { get; }
+    public RazorParserOptions? ParserOptions { get; }
     public ItemCollection Items { get; }
 
     public RazorCodeDocument(RazorSourceDocument source)
@@ -31,13 +32,9 @@ public sealed class RazorCodeDocument
 
         Source = source;
         Imports = imports.NullToEmpty();
+        ParserOptions = parserOptions;
 
         Items = [];
-
-        if (parserOptions is not null)
-        {
-            this.SetParserOptions(parserOptions);
-        }
 
         if (codeGenerationOptions is not null)
         {
