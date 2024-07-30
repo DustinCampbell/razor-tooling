@@ -61,8 +61,8 @@ public class CodeGenerationIntegrationTest : IntegrationTestBase
         AssertDocumentNodeMatchesBaseline(compiled.CodeDocument.GetDocumentIntermediateNode());
         AssertCSharpDocumentMatchesBaseline(compiled.CodeDocument.GetCSharpDocument());
 
-        var diagnotics = compiled.CodeDocument.GetCSharpDocument().Diagnostics;
-        Assert.Equal("RZ1014", Assert.Single(diagnotics).Id);
+        var diagnostics = compiled.CodeDocument.GetCSharpDocument().Diagnostics;
+        Assert.Equal("RZ1014", Assert.Single(diagnostics).Id);
     }
 
     [Fact]
@@ -164,8 +164,8 @@ public class MyModel
         AssertDocumentNodeMatchesBaseline(compiled.CodeDocument.GetDocumentIntermediateNode());
         AssertCSharpDocumentMatchesBaseline(compiled.CodeDocument.GetCSharpDocument());
 
-        var diagnotics = compiled.CodeDocument.GetCSharpDocument().Diagnostics;
-        Assert.Equal("RZ1016", Assert.Single(diagnotics).Id);
+        var diagnostics = compiled.CodeDocument.GetCSharpDocument().Diagnostics;
+        Assert.Equal("RZ1016", Assert.Single(diagnostics).Id);
     }
 
     [Fact]
@@ -472,8 +472,8 @@ public class AllTagHelper : {{typeof(TagHelper).FullName}}
         AssertDocumentNodeMatchesBaseline(compiled.CodeDocument.GetDocumentIntermediateNode());
         AssertCSharpDocumentMatchesBaseline(compiled.CodeDocument.GetCSharpDocument());
 
-        var diagnotics = compiled.CodeDocument.GetCSharpDocument().Diagnostics;
-        Assert.Equal("RZ3906", Assert.Single(diagnotics).Id);
+        var diagnostics = compiled.CodeDocument.GetCSharpDocument().Diagnostics;
+        Assert.Equal("RZ3906", Assert.Single(diagnostics).Id);
     }
     #endregion
 
@@ -511,8 +511,8 @@ public class AllTagHelper : {{typeof(TagHelper).FullName}}
         AssertCSharpDocumentMatchesBaseline(compiled.CodeDocument.GetCSharpDocument());
         AssertSourceMappingsMatchBaseline(compiled.CodeDocument);
 
-        var diagnotics = compiled.CodeDocument.GetCSharpDocument().Diagnostics;
-        Assert.Equal("RZ1014", Assert.Single(diagnotics).Id);
+        var diagnostics = compiled.CodeDocument.GetCSharpDocument().Diagnostics;
+        Assert.Equal("RZ1014", Assert.Single(diagnostics).Id);
     }
 
     [Fact]
@@ -619,8 +619,8 @@ public class MyModel
         AssertCSharpDocumentMatchesBaseline(compiled.CodeDocument.GetCSharpDocument());
         AssertSourceMappingsMatchBaseline(compiled.CodeDocument);
 
-        var diagnotics = compiled.CodeDocument.GetCSharpDocument().Diagnostics;
-        Assert.Equal("RZ1016", Assert.Single(diagnotics).Id);
+        var diagnostics = compiled.CodeDocument.GetCSharpDocument().Diagnostics;
+        Assert.Equal("RZ1016", Assert.Single(diagnostics).Id);
     }
 
     [Fact]
@@ -797,8 +797,8 @@ public class ThisShouldBeGenerated
         AssertCSharpDocumentMatchesBaseline(compiled.CodeDocument.GetCSharpDocument());
         AssertSourceMappingsMatchBaseline(compiled.CodeDocument);
 
-        var diagnotics = compiled.CodeDocument.GetCSharpDocument().Diagnostics;
-        Assert.Equal("RZ2001", Assert.Single(diagnotics).Id);
+        var diagnostics = compiled.CodeDocument.GetCSharpDocument().Diagnostics;
+        Assert.Equal("RZ2001", Assert.Single(diagnostics).Id);
     }
 
     [Fact]
@@ -959,8 +959,8 @@ public class AllTagHelper : {{typeof(TagHelper).FullName}}
         AssertCSharpDocumentMatchesBaseline(compiled.CodeDocument.GetCSharpDocument());
         AssertSourceMappingsMatchBaseline(compiled.CodeDocument);
 
-        var diagnotics = compiled.CodeDocument.GetCSharpDocument().Diagnostics;
-        Assert.Equal("RZ3906", Assert.Single(diagnotics).Id);
+        var diagnostics = compiled.CodeDocument.GetCSharpDocument().Diagnostics;
+        Assert.Equal("RZ3906", Assert.Single(diagnostics).Id);
     }
 
     #endregion

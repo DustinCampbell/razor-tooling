@@ -65,8 +65,8 @@ public class CodeGenerationIntegrationTest : IntegrationTestBase
         AssertCSharpDocumentMatchesBaseline(compiled.CodeDocument.GetCSharpDocument());
         AssertLinePragmas(compiled.CodeDocument, designTime: false);
 
-        var diagnotics = compiled.CodeDocument.GetCSharpDocument().Diagnostics;
-        Assert.Equal("RZ1014", Assert.Single(diagnotics).Id);
+        var diagnostics = compiled.CodeDocument.GetCSharpDocument().Diagnostics;
+        Assert.Equal("RZ1014", Assert.Single(diagnostics).Id);
     }
 
     [Fact]
@@ -201,8 +201,8 @@ public class CodeGenerationIntegrationTest : IntegrationTestBase
         AssertCSharpDocumentMatchesBaseline(compiled.CodeDocument.GetCSharpDocument());
         AssertLinePragmas(compiled.CodeDocument, designTime: false);
 
-        var diagnotics = compiled.CodeDocument.GetCSharpDocument().Diagnostics;
-        Assert.Equal("RZ1016", Assert.Single(diagnotics).Id);
+        var diagnostics = compiled.CodeDocument.GetCSharpDocument().Diagnostics;
+        Assert.Equal("RZ1016", Assert.Single(diagnostics).Id);
     }
 
     [Fact]
@@ -591,8 +591,8 @@ public class CodeGenerationIntegrationTest : IntegrationTestBase
         AssertCSharpDocumentMatchesBaseline(compiled.CodeDocument.GetCSharpDocument());
         AssertLinePragmas(compiled.CodeDocument, designTime: false);
 
-        var diagnotics = compiled.CodeDocument.GetCSharpDocument().Diagnostics;
-        Assert.Equal("RZ3906", Assert.Single(diagnotics).Id);
+        var diagnostics = compiled.CodeDocument.GetCSharpDocument().Diagnostics;
+        Assert.Equal("RZ3906", Assert.Single(diagnostics).Id);
     }
 
     [Fact]
@@ -920,8 +920,8 @@ public class CodeGenerationIntegrationTest : IntegrationTestBase
         AssertLinePragmas(compiled.CodeDocument, designTime: true);
         AssertSourceMappingsMatchBaseline(compiled.CodeDocument);
 
-        var diagnotics = compiled.CodeDocument.GetCSharpDocument().Diagnostics;
-        Assert.Equal("RZ1014", Assert.Single(diagnotics).Id);
+        var diagnostics = compiled.CodeDocument.GetCSharpDocument().Diagnostics;
+        Assert.Equal("RZ1014", Assert.Single(diagnostics).Id);
     }
 
     [Fact]
@@ -1067,8 +1067,8 @@ public class CodeGenerationIntegrationTest : IntegrationTestBase
         AssertLinePragmas(compiled.CodeDocument, designTime: true);
         AssertSourceMappingsMatchBaseline(compiled.CodeDocument);
 
-        var diagnotics = compiled.CodeDocument.GetCSharpDocument().Diagnostics;
-        Assert.Equal("RZ1016", Assert.Single(diagnotics).Id);
+        var diagnostics = compiled.CodeDocument.GetCSharpDocument().Diagnostics;
+        Assert.Equal("RZ1016", Assert.Single(diagnostics).Id);
     }
 
     [Fact]
@@ -1286,8 +1286,8 @@ public class CodeGenerationIntegrationTest : IntegrationTestBase
         AssertLinePragmas(compiled.CodeDocument, designTime: true);
         AssertSourceMappingsMatchBaseline(compiled.CodeDocument);
 
-        var diagnotics = compiled.CodeDocument.GetCSharpDocument().Diagnostics;
-        Assert.Equal("RZ2001", Assert.Single(diagnotics).Id);
+        var diagnostics = compiled.CodeDocument.GetCSharpDocument().Diagnostics;
+        Assert.Equal("RZ2001", Assert.Single(diagnostics).Id);
     }
 
     [Fact]
@@ -1464,8 +1464,8 @@ public class CodeGenerationIntegrationTest : IntegrationTestBase
         AssertLinePragmas(compiled.CodeDocument, designTime: true);
         AssertSourceMappingsMatchBaseline(compiled.CodeDocument);
 
-        var diagnotics = compiled.CodeDocument.GetCSharpDocument().Diagnostics;
-        Assert.Equal("RZ3906", Assert.Single(diagnotics).Id);
+        var diagnostics = compiled.CodeDocument.GetCSharpDocument().Diagnostics;
+        Assert.Equal("RZ3906", Assert.Single(diagnostics).Id);
     }
 
     #endregion
