@@ -71,7 +71,7 @@ public class RazorProjectEngineBuilderExtensionsTest
     {
         // Arrange
         var builder = new RazorProjectEngineBuilder(RazorConfiguration.Default, Mock.Of<RazorProjectFileSystem>());
-        var expectedDirective = Mock.Of<DirectiveDescriptor>();
+        var expectedDirective = DirectiveDescriptor.CreateSingleLineDirective("test");
 
         // Act
         builder.AddDirective(expectedDirective);
@@ -90,15 +90,15 @@ public class RazorProjectEngineBuilderExtensionsTest
         var builder = new RazorProjectEngineBuilder(RazorConfiguration.Default, Mock.Of<RazorProjectFileSystem>());
         var directiveFeature = new DefaultRazorDirectiveFeature();
         builder.Features.Add(directiveFeature);
-        var expecteDirective = Mock.Of<DirectiveDescriptor>();
+        var expectedDirective = DirectiveDescriptor.CreateSingleLineDirective("test");
 
         // Act
-        builder.AddDirective(expecteDirective);
+        builder.AddDirective(expectedDirective);
 
         // Assert
         var feature = Assert.Single(builder.Features);
         Assert.Same(directiveFeature, feature);
         var directive = Assert.Single(directiveFeature.Directives);
-        Assert.Same(expecteDirective, directive);
+        Assert.Same(expectedDirective, directive);
     }
 }

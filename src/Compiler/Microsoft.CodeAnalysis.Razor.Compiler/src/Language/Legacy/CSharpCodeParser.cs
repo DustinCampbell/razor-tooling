@@ -1458,7 +1458,7 @@ internal class CSharpCodeParser : TokenizerBackedParser<CSharpTokenizer>
                 // identifier for the constraint an emit a diagnostic in case they are not the same.
                 string? lastSeenMemberIdentifier = null;
 
-                for (var i = 0; i < descriptor.Tokens.Count; i++)
+                foreach (var token in descriptor.Tokens)
                 {
                     if (!At(SyntaxKind.Whitespace) &&
                         !At(SyntaxKind.NewLine) &&
@@ -1474,8 +1474,6 @@ internal class CSharpCodeParser : TokenizerBackedParser<CSharpTokenizer>
                         return;
                     }
 
-                    var tokenDescriptor = descriptor.Tokens[i];
-
                     if (At(SyntaxKind.Whitespace))
                     {
                         AcceptWhile(IsSpacingTokenIncludingComments);
@@ -1483,13 +1481,13 @@ internal class CSharpCodeParser : TokenizerBackedParser<CSharpTokenizer>
                         chunkGenerator = SpanChunkGenerator.Null;
                         SetAcceptedCharacters(AcceptedCharactersInternal.Whitespace);
 
-                        if (tokenDescriptor.Kind == DirectiveTokenKind.Member ||
-                            tokenDescriptor.Kind == DirectiveTokenKind.Namespace ||
-                            tokenDescriptor.Kind == DirectiveTokenKind.Type ||
-                            tokenDescriptor.Kind == DirectiveTokenKind.Attribute ||
-                            tokenDescriptor.Kind == DirectiveTokenKind.GenericTypeConstraint ||
-                            tokenDescriptor.Kind == DirectiveTokenKind.Boolean ||
-                            tokenDescriptor.Kind == DirectiveTokenKind.IdentifierOrExpression)
+                        if (token.Kind == DirectiveTokenKind.Member ||
+                            token.Kind == DirectiveTokenKind.Namespace ||
+                            token.Kind == DirectiveTokenKind.Type ||
+                            token.Kind == DirectiveTokenKind.Attribute ||
+                            token.Kind == DirectiveTokenKind.GenericTypeConstraint ||
+                            token.Kind == DirectiveTokenKind.Boolean ||
+                            token.Kind == DirectiveTokenKind.IdentifierOrExpression)
                         {
                             directiveBuilder.Add(OutputTokensAsStatementLiteral());
 
@@ -1498,7 +1496,7 @@ internal class CSharpCodeParser : TokenizerBackedParser<CSharpTokenizer>
                                 // Add a marker token to provide CSharp intellisense when we start typing the directive token.
                                 // We want CSharp intellisense only if there is whitespace after the directive keyword.
                                 AcceptMarkerTokenIfNecessary();
-                                chunkGenerator = new DirectiveTokenChunkGenerator(tokenDescriptor);
+                                chunkGenerator = new DirectiveTokenChunkGenerator(token);
                                 SetAcceptedCharacters(AcceptedCharactersInternal.NonWhitespace);
                                 if (editHandlerBuilder != null)
                                 {
@@ -1513,7 +1511,7 @@ internal class CSharpCodeParser : TokenizerBackedParser<CSharpTokenizer>
                         }
                     }
 
-                    if (tokenDescriptor.Optional && (EndOfFile || At(SyntaxKind.NewLine)))
+                    if (token.Optional && (EndOfFile || At(SyntaxKind.NewLine)))
                     {
                         break;
                     }
@@ -1523,12 +1521,12 @@ internal class CSharpCodeParser : TokenizerBackedParser<CSharpTokenizer>
                             RazorDiagnosticFactory.CreateParsing_UnexpectedEOFAfterDirective(
                                 new SourceSpan(CurrentStart, contentLength: 1),
                                 descriptor.Directive,
-                                tokenDescriptor.Kind.ToString().ToLowerInvariant()));
+                                token.Kind.ToString().ToLowerInvariant()));
                         builder.Add(BuildDirective(SyntaxKind.Identifier));
                         return;
                     }
 
-                    switch (tokenDescriptor.Kind)
+                    switch (token.Kind)
                     {
                         case DirectiveTokenKind.Type:
                             if (!TryParseNamespaceOrTypeName(directiveBuilder))
@@ -1622,7 +1620,7 @@ internal class CSharpCodeParser : TokenizerBackedParser<CSharpTokenizer>
                             if (At(SyntaxKind.Keyword) &&
                                 string.Equals(CurrentToken.Content, CSharpSyntaxFacts.GetText(CSharpSyntaxKind.WhereKeyword), StringComparison.Ordinal))
                             {
-                                // Consume the 'where' keyword plus any aditional whitespace
+                                // Consume the 'where' keyword plus any additional whitespace
                                 AcceptAndMoveNext();
                                 AcceptWhile(SyntaxKind.Whitespace);
                                 // Check that the type name matches the type name before the where clause.
@@ -1695,7 +1693,7 @@ internal class CSharpCodeParser : TokenizerBackedParser<CSharpTokenizer>
                             break;
                     }
 
-                    chunkGenerator = new DirectiveTokenChunkGenerator(tokenDescriptor);
+                    chunkGenerator = new DirectiveTokenChunkGenerator(token);
                     SetAcceptedCharacters(AcceptedCharactersInternal.NonWhitespace);
                     if (editHandlerBuilder != null)
                     {
