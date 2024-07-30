@@ -209,7 +209,7 @@ public class ViewComponentTagHelperPassTest
     private static RazorCodeDocument CreateDocument(string content)
     {
         var source = RazorSourceDocument.Create(content, "test.cshtml");
-        return RazorCodeDocument.Create(source);
+        return new RazorCodeDocument(source);
     }
 
     private static RazorEngine CreateEngine(params TagHelperDescriptor[] tagHelpers)

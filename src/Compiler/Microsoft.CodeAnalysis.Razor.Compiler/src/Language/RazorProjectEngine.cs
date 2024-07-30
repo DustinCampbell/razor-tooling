@@ -191,7 +191,7 @@ public class RazorProjectEngine
             configureCodeGeneration?.Invoke(builder);
         });
 
-        var codeDocument = RazorCodeDocument.Create(sourceDocument, importSourceDocuments, parserOptions, codeGenerationOptions);
+        var codeDocument = new RazorCodeDocument(sourceDocument, importSourceDocuments, parserOptions, codeGenerationOptions);
         codeDocument.SetTagHelpers(tagHelpers);
 
         if (fileKind != null)
@@ -267,7 +267,7 @@ public class RazorProjectEngine
             configureCodeGeneration?.Invoke(builder);
         });
 
-        var codeDocument = RazorCodeDocument.Create(sourceDocument, importSourceDocuments, parserOptions, codeGenerationOptions);
+        var codeDocument = new RazorCodeDocument(sourceDocument, importSourceDocuments, parserOptions, codeGenerationOptions);
         codeDocument.SetTagHelpers(tagHelpers);
 
         if (fileKind != null)

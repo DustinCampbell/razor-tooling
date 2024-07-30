@@ -204,7 +204,7 @@ public class RazorDirectiveCompletionSourceTest(ITestOutputHelper testOutput) : 
     private static IVisualStudioRazorParser CreateParser(string text, params DirectiveDescriptor[] directives)
     {
         var syntaxTree = CreateSyntaxTree(text, directives);
-        var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create(text, RazorSourceDocumentProperties.Default));
+        var codeDocument = new RazorCodeDocument(RazorSourceDocument.Create(text, RazorSourceDocumentProperties.Default));
         codeDocument.SetSyntaxTree(syntaxTree);
         codeDocument.SetTagHelperContext(TagHelperDocumentContext.Create(prefix: null, tagHelpers: []));
         var parserMock = new StrictMock<IVisualStudioRazorParser>();

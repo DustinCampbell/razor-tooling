@@ -50,7 +50,7 @@ public class DefaultDocumentWriterTest
 
         var document = new DocumentIntermediateNode();
 
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
         var options = RazorCodeGenerationOptions.CreateDefault();
 
         var target = CodeTarget.CreateDefault(codeDocument, options);
@@ -81,7 +81,7 @@ public class DefaultDocumentWriterTest
 
         var document = new DocumentIntermediateNode();
 
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
         var options = RazorCodeGenerationOptions.CreateDefault();
 
         var target = CodeTarget.CreateDefault(codeDocument, options);

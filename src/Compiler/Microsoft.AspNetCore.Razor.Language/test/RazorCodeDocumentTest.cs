@@ -15,7 +15,7 @@ public class RazorCodeDocumentTest
         var source = TestRazorSourceDocument.Create();
 
         // Act
-        var code = RazorCodeDocument.Create(source);
+        var code = new RazorCodeDocument(source);
 
         // Assert
         Assert.Same(source, code.Source);
@@ -32,7 +32,7 @@ public class RazorCodeDocumentTest
             TestRazorSourceDocument.Create());
 
         // Act
-        var code = RazorCodeDocument.Create(source, imports);
+        var code = new RazorCodeDocument(source, imports);
 
         // Assert
         Assert.Same(source, code.Source);
@@ -48,7 +48,7 @@ public class RazorCodeDocumentTest
         var source = TestRazorSourceDocument.Create();
 
         // Act
-        var code = RazorCodeDocument.Create(source, imports: default);
+        var code = new RazorCodeDocument(source, imports: default);
 
         // Assert
         Assert.Same(source, code.Source);

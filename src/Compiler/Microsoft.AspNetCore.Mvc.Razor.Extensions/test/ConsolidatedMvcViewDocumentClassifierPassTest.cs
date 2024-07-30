@@ -18,7 +18,7 @@ public class ConsolidatedMvcViewDocumentClassifierPassTest : RazorProjectEngineT
     public void ConsolidatedMvcViewDocumentClassifierPass_SetsDifferentNamespace()
     {
         // Arrange
-        var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("some-content", "Test.cshtml"));
+        var codeDocument = new RazorCodeDocument(RazorSourceDocument.Create("some-content", "Test.cshtml"));
 
         var projectEngine = CreateProjectEngine();
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
@@ -41,7 +41,7 @@ public class ConsolidatedMvcViewDocumentClassifierPassTest : RazorProjectEngineT
     {
         // Arrange
         var properties = RazorSourceDocumentProperties.Create(filePath: "ignored", relativePath: "Test.cshtml");
-        var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("some-content", properties));
+        var codeDocument = new RazorCodeDocument(RazorSourceDocument.Create("some-content", properties));
 
         var projectEngine = CreateProjectEngine();
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
@@ -66,7 +66,7 @@ public class ConsolidatedMvcViewDocumentClassifierPassTest : RazorProjectEngineT
     {
         // Arrange
         var properties = RazorSourceDocumentProperties.Create(filePath: null, relativePath: null);
-        var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("some-content", properties));
+        var codeDocument = new RazorCodeDocument(RazorSourceDocument.Create("some-content", properties));
 
         var projectEngine = CreateProjectEngine();
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
@@ -93,7 +93,7 @@ public class ConsolidatedMvcViewDocumentClassifierPassTest : RazorProjectEngineT
     {
         // Arrange
         var properties = RazorSourceDocumentProperties.Create(filePath: "ignored", relativePath: relativePath);
-        var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("some-content", properties));
+        var codeDocument = new RazorCodeDocument(RazorSourceDocument.Create("some-content", properties));
 
         var projectEngine = CreateProjectEngine();
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
@@ -116,7 +116,7 @@ public class ConsolidatedMvcViewDocumentClassifierPassTest : RazorProjectEngineT
     public void ConsolidatedMvcViewDocumentClassifierPass_SetsUpExecuteAsyncMethod()
     {
         // Arrange
-        var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("some-content", "Test.cshtml"));
+        var codeDocument = new RazorCodeDocument(RazorSourceDocument.Create("some-content", "Test.cshtml"));
 
         var projectEngine = CreateProjectEngine();
         var irDocument = CreateIRDocument(projectEngine, codeDocument);

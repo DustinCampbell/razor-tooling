@@ -23,7 +23,7 @@ public static class TestCodeRenderingContext
             source = TestRazorSourceDocument.Create();
         }
 
-        var codeDocument = RazorCodeDocument.Create(source);
+        var codeDocument = new RazorCodeDocument(source);
         if (newLineString != null)
         {
             codeDocument.Items[CodeRenderingContext.NewLineString] = newLineString;
@@ -59,7 +59,7 @@ public static class TestCodeRenderingContext
             source = TestRazorSourceDocument.Create();
         }
 
-        var codeDocument = RazorCodeDocument.Create(source);
+        var codeDocument = new RazorCodeDocument(source);
         if (newLineString != null)
         {
             codeDocument.Items[CodeRenderingContext.NewLineString] = newLineString;

@@ -44,7 +44,7 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
         @"
 @addTagHelper """;
         var sourceDocument = TestRazorSourceDocument.Create(content, filePath: null);
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
         var originalTree = RazorSyntaxTree.Parse(sourceDocument);
         codeDocument.SetSyntaxTree(originalTree);
 
@@ -83,7 +83,7 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
         @"
 @removeTagHelper """;
         var sourceDocument = TestRazorSourceDocument.Create(content, filePath: null);
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
         var originalTree = RazorSyntaxTree.Parse(sourceDocument);
         codeDocument.SetSyntaxTree(originalTree);
 
@@ -122,7 +122,7 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
         @"
 @tagHelperPrefix """;
         var sourceDocument = TestRazorSourceDocument.Create(content, filePath: null);
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
         var originalTree = RazorSyntaxTree.Parse(sourceDocument);
         codeDocument.SetSyntaxTree(originalTree);
 
@@ -165,7 +165,7 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
         };
 
         var sourceDocument = CreateTestSourceDocument();
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
         var originalTree = RazorSyntaxTree.Parse(sourceDocument);
         codeDocument.SetSyntaxTree(originalTree);
 
@@ -209,7 +209,7 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
         };
 
         var sourceDocument = CreateTestSourceDocument();
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
         var originalTree = RazorSyntaxTree.Parse(sourceDocument);
         codeDocument.SetSyntaxTree(originalTree);
         codeDocument.SetTagHelpers(tagHelpers);
@@ -254,7 +254,7 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
         };
 
         var sourceDocument = CreateTestSourceDocument();
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
         var originalTree = RazorSyntaxTree.Parse(sourceDocument);
         codeDocument.SetSyntaxTree(originalTree);
         codeDocument.SetTagHelpers(tagHelpers: null);
@@ -295,7 +295,7 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
         };
 
         var sourceDocument = CreateTestSourceDocument();
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
         var originalTree = RazorSyntaxTree.Parse(sourceDocument);
         codeDocument.SetSyntaxTree(originalTree);
         codeDocument.SetTagHelpers(tagHelpers: []);
@@ -351,7 +351,7 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
 </form>";
 
         var sourceDocument = TestRazorSourceDocument.Create(content);
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
         var originalTree = RazorSyntaxTree.Parse(sourceDocument);
         codeDocument.SetSyntaxTree(originalTree);
 
@@ -410,7 +410,7 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
 </form>";
 
         var sourceDocument = TestRazorSourceDocument.Create(content);
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
         var originalTree = RazorSyntaxTree.Parse(sourceDocument);
         codeDocument.SetSyntaxTree(originalTree);
 
@@ -452,7 +452,7 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
         };
 
         var sourceDocument = CreateTestSourceDocument();
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
         var originalTree = RazorSyntaxTree.Parse(sourceDocument);
         codeDocument.SetSyntaxTree(originalTree);
 
@@ -489,7 +489,7 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
             Engine = projectEngine.Engine,
         };
         var sourceDocument = CreateTestSourceDocument();
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
         var originalTree = RazorSyntaxTree.Parse(sourceDocument);
         codeDocument.SetSyntaxTree(originalTree);
 
@@ -518,7 +518,7 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
 
         // No taghelper directives here so nothing is resolved.
         var sourceDocument = TestRazorSourceDocument.Create("Hello, world");
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
         var originalTree = RazorSyntaxTree.Parse(sourceDocument);
         codeDocument.SetSyntaxTree(originalTree);
 
@@ -547,7 +547,7 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
 
         // No taghelper directives here so nothing is resolved.
         var sourceDocument = TestRazorSourceDocument.Create("Hello, world");
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
         var originalTree = RazorSyntaxTree.Parse(sourceDocument);
         codeDocument.SetSyntaxTree(originalTree);
 
@@ -594,7 +594,7 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
 <form>
     <input value='Hello' type='text' />";
         var sourceDocument = TestRazorSourceDocument.Create(content, filePath: null);
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
 
         var originalTree = RazorSyntaxTree.Parse(sourceDocument);
 

@@ -24,7 +24,7 @@ public class InheritsDirectivePassTest : RazorProjectEngineTestBase
         };
 
         var sourceDocument = TestRazorSourceDocument.Create("@inherits Hello<World[]>");
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
 
         var irDocument = new DocumentIntermediateNode();
         irDocument.Children.Add(new DirectiveIntermediateNode() { Directive = FunctionsDirective.Directive, });
@@ -50,7 +50,7 @@ public class InheritsDirectivePassTest : RazorProjectEngineTestBase
 
         var content = "@inherits Hello<World[]>";
         var sourceDocument = TestRazorSourceDocument.Create(content);
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
 
         var irDocument = Lower(codeDocument, engine);
 

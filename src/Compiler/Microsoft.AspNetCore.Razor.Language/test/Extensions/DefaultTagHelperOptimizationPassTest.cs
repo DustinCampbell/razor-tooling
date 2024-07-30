@@ -84,7 +84,7 @@ public class DefaultTagHelperOptimizationPassTest
     private RazorCodeDocument CreateDocument(string content)
     {
         var source = RazorSourceDocument.Create(content, "test.cshtml");
-        return RazorCodeDocument.Create(source);
+        return new RazorCodeDocument(source);
     }
 
     private RazorEngine CreateEngine(params TagHelperDescriptor[] tagHelpers)

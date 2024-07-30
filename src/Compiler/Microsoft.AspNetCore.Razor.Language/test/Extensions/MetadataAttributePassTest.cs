@@ -24,7 +24,7 @@ public class MetadataAttributePassTest
         };
 
         var sourceDocument = TestRazorSourceDocument.Create();
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
 
         var irDocument = new DocumentIntermediateNode();
 
@@ -46,7 +46,7 @@ public class MetadataAttributePassTest
         };
 
         var sourceDocument = TestRazorSourceDocument.Create();
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
 
         var irDocument = new DocumentIntermediateNode()
         {
@@ -74,7 +74,7 @@ public class MetadataAttributePassTest
         };
 
         var sourceDocument = TestRazorSourceDocument.Create();
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
 
         var irDocument = new DocumentIntermediateNode()
         {
@@ -103,7 +103,7 @@ public class MetadataAttributePassTest
         };
 
         var sourceDocument = TestRazorSourceDocument.Create();
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
 
         var irDocument = new DocumentIntermediateNode()
         {
@@ -160,7 +160,7 @@ public class MetadataAttributePassTest
         };
 
         var sourceDocument = TestRazorSourceDocument.Create();
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
 
         var irDocument = new DocumentIntermediateNode()
         {
@@ -204,7 +204,7 @@ public class MetadataAttributePassTest
         };
 
         var sourceDocument = TestRazorSourceDocument.Create();
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
 
         var irDocument = new DocumentIntermediateNode();
         var builder = IntermediateNodeBuilder.Create(irDocument);
@@ -245,7 +245,7 @@ public class MetadataAttributePassTest
         };
 
         var sourceDocument = TestRazorSourceDocument.Create("", RazorSourceDocumentProperties.Default);
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
 
         var irDocument = new DocumentIntermediateNode()
         {
@@ -290,7 +290,7 @@ public class MetadataAttributePassTest
         };
 
         var sourceDocument = TestRazorSourceDocument.Create("", RazorSourceDocumentProperties.Create(null, "Foo\\Bar.cshtml"));
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
 
         var irDocument = new DocumentIntermediateNode()
         {
@@ -346,7 +346,7 @@ public class MetadataAttributePassTest
 
         var sourceDocument = TestRazorSourceDocument.Create("", RazorSourceDocumentProperties.Create(null, "Foo\\Bar.cshtml"));
         var import = TestRazorSourceDocument.Create("@using System", RazorSourceDocumentProperties.Create(null, "Foo\\Import.cshtml"));
-        var codeDocument = RazorCodeDocument.Create(sourceDocument, ImmutableArray.Create(import));
+        var codeDocument = new RazorCodeDocument(sourceDocument, ImmutableArray.Create(import));
 
         var irDocument = new DocumentIntermediateNode()
         {
@@ -406,7 +406,7 @@ public class MetadataAttributePassTest
 
         var sourceDocument = TestRazorSourceDocument.Create("", RazorSourceDocumentProperties.Create(null, "Foo\\Bar.cshtml"));
         var import = TestRazorSourceDocument.Create("@using System", RazorSourceDocumentProperties.Create(null, "Foo\\Import.cshtml"));
-        var codeDocument = RazorCodeDocument.Create(sourceDocument, ImmutableArray.Create(import));
+        var codeDocument = new RazorCodeDocument(sourceDocument, ImmutableArray.Create(import));
 
         var irDocument = new DocumentIntermediateNode()
         {

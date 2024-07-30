@@ -209,7 +209,7 @@ public abstract class ParserTestBase : IParserTest
 
         var diagnostics = context.ErrorSink.Errors;
 
-        var codeDocument = RazorCodeDocument.Create(source);
+        var codeDocument = new RazorCodeDocument(source);
 
         var syntaxTree = RazorSyntaxTree.Create(root, source, diagnostics, options);
         codeDocument.SetSyntaxTree(syntaxTree);

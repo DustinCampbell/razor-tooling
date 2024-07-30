@@ -134,7 +134,7 @@ public class NamespaceDirectiveTest
 
         document.DocumentKind = RazorPageDocumentClassifierPass.RazorPageDocumentKind;
 
-        var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("ignored", "/Account/Manage/AddUser.cshtml"));
+        var codeDocument = new RazorCodeDocument(RazorSourceDocument.Create("ignored", "/Account/Manage/AddUser.cshtml"));
 
         var pass = new NamespaceDirective.Pass();
         pass.Engine = new RazorEngine(ImmutableArray<IRazorEngineFeature>.Empty, ImmutableArray<IRazorEnginePhase>.Empty);
@@ -181,7 +181,7 @@ public class NamespaceDirectiveTest
 
         document.DocumentKind = RazorPageDocumentClassifierPass.RazorPageDocumentKind;
 
-        var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("ignored", "/Account/Manage/AddUser.cshtml"));
+        var codeDocument = new RazorCodeDocument(RazorSourceDocument.Create("ignored", "/Account/Manage/AddUser.cshtml"));
 
         var pass = new NamespaceDirective.Pass();
         pass.Engine = new RazorEngine(ImmutableArray<IRazorEngineFeature>.Empty, ImmutableArray<IRazorEnginePhase>.Empty);
@@ -219,7 +219,7 @@ public class NamespaceDirectiveTest
 
         document.DocumentKind = RazorPageDocumentClassifierPass.RazorPageDocumentKind;
 
-        var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("ignored", "/Account/Manage-Info/Add+User.cshtml"));
+        var codeDocument = new RazorCodeDocument(RazorSourceDocument.Create("ignored", "/Account/Manage-Info/Add+User.cshtml"));
 
         var pass = new NamespaceDirective.Pass();
         pass.Engine = new RazorEngine(ImmutableArray<IRazorEngineFeature>.Empty, ImmutableArray<IRazorEnginePhase>.Empty);
@@ -266,7 +266,7 @@ public class NamespaceDirectiveTest
 
         document.DocumentKind = MvcViewDocumentClassifierPass.MvcViewDocumentKind;
 
-        var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("ignored", "/Account/Manage/AddUser.cshtml"));
+        var codeDocument = new RazorCodeDocument(RazorSourceDocument.Create("ignored", "/Account/Manage/AddUser.cshtml"));
 
         var pass = new NamespaceDirective.Pass();
         pass.Engine = new RazorEngine(ImmutableArray<IRazorEngineFeature>.Empty, ImmutableArray<IRazorEnginePhase>.Empty);
@@ -304,7 +304,7 @@ public class NamespaceDirectiveTest
 
         document.DocumentKind = RazorPageDocumentClassifierPass.RazorPageDocumentKind;
 
-        var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("ignored", "/Account/Manage/AddUser.cshtml"));
+        var codeDocument = new RazorCodeDocument(RazorSourceDocument.Create("ignored", "/Account/Manage/AddUser.cshtml"));
 
         var pass = new NamespaceDirective.Pass();
         pass.Engine = new RazorEngine(ImmutableArray<IRazorEngineFeature>.Empty, ImmutableArray<IRazorEnginePhase>.Empty);
@@ -340,7 +340,7 @@ public class NamespaceDirectiveTest
 
         document.DocumentKind = null;
 
-        var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("ignored", "/Account/Manage/AddUser.cshtml"));
+        var codeDocument = new RazorCodeDocument(RazorSourceDocument.Create("ignored", "/Account/Manage/AddUser.cshtml"));
 
         var pass = new NamespaceDirective.Pass();
         pass.Engine = new RazorEngine(ImmutableArray<IRazorEngineFeature>.Empty, ImmutableArray<IRazorEnginePhase>.Empty);

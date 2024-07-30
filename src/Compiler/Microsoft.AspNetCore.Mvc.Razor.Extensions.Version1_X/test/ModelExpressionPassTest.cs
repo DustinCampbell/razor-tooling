@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
-using Microsoft.AspNetCore.Razor.Language.Legacy;
 using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X;
@@ -148,7 +147,7 @@ public class ModelExpressionPassTest
     private RazorCodeDocument CreateDocument(string content)
     {
         var source = RazorSourceDocument.Create(content, "test.cshtml");
-        return RazorCodeDocument.Create(source);
+        return new RazorCodeDocument(source);
     }
 
     private RazorEngine CreateEngine(params TagHelperDescriptor[] tagHelpers)

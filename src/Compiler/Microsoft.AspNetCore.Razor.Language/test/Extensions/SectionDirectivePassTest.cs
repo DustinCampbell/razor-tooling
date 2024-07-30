@@ -22,7 +22,7 @@ public class SectionDirectivePassTest
         };
 
         var sourceDocument = TestRazorSourceDocument.Create("@section Header { <p>Hello World</p> }");
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
 
         var irDocument = new DocumentIntermediateNode();
         irDocument.Children.Add(new DirectiveIntermediateNode() { Directive = SectionDirective.Directive, });
@@ -48,7 +48,7 @@ public class SectionDirectivePassTest
 
         var content = "@section Header { <p>Hello World</p> }";
         var sourceDocument = TestRazorSourceDocument.Create(content);
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
 
         var irDocument = Lower(codeDocument, projectEngine);
 

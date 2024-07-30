@@ -20,7 +20,7 @@ public class CreateNewOnMetadataUpdateAttributePassTest : RazorProjectEngineTest
     {
         // Arrange
         var properties = RazorSourceDocumentProperties.Create(filePath: "ignored", relativePath: "Test.cshtml");
-        var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("Hello world", properties));
+        var codeDocument = new RazorCodeDocument(RazorSourceDocument.Create("Hello world", properties));
 
         var engine = CreateProjectEngine(b =>
         {
@@ -59,7 +59,7 @@ public class CreateNewOnMetadataUpdateAttributePassTest : RazorProjectEngineTest
     {
         // Arrange
         var properties = RazorSourceDocumentProperties.Create(filePath: "ignored", relativePath: "Test.razor");
-        var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("Hello world", properties));
+        var codeDocument = new RazorCodeDocument(RazorSourceDocument.Create("Hello world", properties));
         codeDocument.SetFileKind(FileKinds.Component);
 
         var engine = CreateProjectEngine(b =>

@@ -18,7 +18,7 @@ public class PageDirectiveTest
         // Arrange
         var content = "@page \"some-route-template\" Invalid";
         var sourceDocument = RazorSourceDocument.Create(content, "file");
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
         var engine = CreateEngine();
         var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -38,7 +38,7 @@ public class PageDirectiveTest
         var content = "Hello world";
         var sourceDocument = RazorSourceDocument.Create(content, "file");
         var importDocument = RazorSourceDocument.Create("@page", "imports.cshtml");
-        var codeDocument = RazorCodeDocument.Create(sourceDocument, ImmutableArray.Create(importDocument));
+        var codeDocument = new RazorCodeDocument(sourceDocument, ImmutableArray.Create(importDocument));
         var engine = CreateEngine();
         var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -56,7 +56,7 @@ public class PageDirectiveTest
         // Arrange
         var content = "Hello world";
         var sourceDocument = RazorSourceDocument.Create(content, "file");
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
         var engine = CreateEngine();
         var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -74,7 +74,7 @@ public class PageDirectiveTest
         // Arrange
         var content = "Hello @page";
         var sourceDocument = RazorSourceDocument.Create(content, "file");
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
         var engine = CreateEngine();
         var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -93,7 +93,7 @@ public class PageDirectiveTest
         // Arrange
         var content = "@page";
         var sourceDocument = RazorSourceDocument.Create(content, "file");
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
         var engine = CreateEngine();
         var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -111,7 +111,7 @@ public class PageDirectiveTest
         // Arrange
         var content = "@page \"some-route-template\"";
         var sourceDocument = RazorSourceDocument.Create(content, "file");
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
         var engine = CreateEngine();
         var irDocument = CreateIRDocument(engine, codeDocument);
 

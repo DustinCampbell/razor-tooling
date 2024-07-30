@@ -10,17 +10,17 @@ public static class TestRazorCodeDocument
     public static RazorCodeDocument CreateEmpty()
     {
         var source = TestRazorSourceDocument.Create(content: string.Empty);
-        return RazorCodeDocument.Create(source, imports: default);
+        return new RazorCodeDocument(source, imports: default);
     }
 
     public static RazorCodeDocument Create(string content, bool normalizeNewLines = false)
     {
         var source = TestRazorSourceDocument.Create(content, normalizeNewLines: normalizeNewLines);
-        return RazorCodeDocument.Create(source, imports: default);
+        return new RazorCodeDocument(source, imports: default);
     }
 
     public static RazorCodeDocument Create(RazorSourceDocument source, ImmutableArray<RazorSourceDocument> imports)
     {
-        return RazorCodeDocument.Create(source, imports);
+        return new RazorCodeDocument(source, imports);
     }
 }

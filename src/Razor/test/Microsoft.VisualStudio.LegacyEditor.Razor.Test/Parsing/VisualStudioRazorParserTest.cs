@@ -243,7 +243,7 @@ public class VisualStudioRazorParserTest : VisualStudioTestBase
     public void CodeDocumentRequest_Complete_CanBeCalledMultipleTimes()
     {
         // Arrange
-        var codeDocument = RazorCodeDocument.Create(TestRazorSourceDocument.Create());
+        var codeDocument = new RazorCodeDocument(TestRazorSourceDocument.Create());
         var request = new VisualStudioRazorParser.CodeDocumentRequest(StringTextSnapshot.Empty, DisposalToken);
 
         // Act & Assert
@@ -256,7 +256,7 @@ public class VisualStudioRazorParserTest : VisualStudioTestBase
     public async Task CodeDocumentRequest_Complete_FinishesTask()
     {
         // Arrange
-        var codeDocument = RazorCodeDocument.Create(TestRazorSourceDocument.Create());
+        var codeDocument = new RazorCodeDocument(TestRazorSourceDocument.Create());
         var request = new VisualStudioRazorParser.CodeDocumentRequest(StringTextSnapshot.Empty, DisposalToken);
 
         // Act
@@ -311,7 +311,7 @@ public class VisualStudioRazorParserTest : VisualStudioTestBase
     public void CodeDocumentRequest_CompleteToCancelNoops()
     {
         // Arrange
-        var codeDocument = RazorCodeDocument.Create(TestRazorSourceDocument.Create());
+        var codeDocument = new RazorCodeDocument(TestRazorSourceDocument.Create());
         var request = new VisualStudioRazorParser.CodeDocumentRequest(StringTextSnapshot.Empty, DisposalToken);
 
         // Act - 1
@@ -331,7 +331,7 @@ public class VisualStudioRazorParserTest : VisualStudioTestBase
     public void CodeDocumentRequest_CancelToCompleteNoops()
     {
         // Arrange
-        var codeDocument = RazorCodeDocument.Create(TestRazorSourceDocument.Create());
+        var codeDocument = new RazorCodeDocument(TestRazorSourceDocument.Create());
         var request = new VisualStudioRazorParser.CodeDocumentRequest(StringTextSnapshot.Empty, DisposalToken);
 
         // Act - 1

@@ -25,7 +25,7 @@ public class FunctionsDirectivePassTest : RazorProjectEngineTestBase
         };
 
         var sourceDocument = TestRazorSourceDocument.Create("@functions { var value = true; }");
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
 
         var irDocument = new DocumentIntermediateNode();
         irDocument.Children.Add(new DirectiveIntermediateNode() { Directive = FunctionsDirective.Directive, });
@@ -50,7 +50,7 @@ public class FunctionsDirectivePassTest : RazorProjectEngineTestBase
         };
 
         var sourceDocument = TestRazorSourceDocument.Create("@functions { var value = true; }");
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
 
         var irDocument = Lower(codeDocument, projectEngine);
 
@@ -88,7 +88,7 @@ public class FunctionsDirectivePassTest : RazorProjectEngineTestBase
         };
 
         var sourceDocument = TestRazorSourceDocument.Create("@code { var value = true; }");
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
         codeDocument.SetFileKind(FileKinds.Component);
 
         var irDocument = Lower(codeDocument, projectEngine);
@@ -130,7 +130,7 @@ public class FunctionsDirectivePassTest : RazorProjectEngineTestBase
 @functions { var value1 = true; }
 @code { var value2 = true; }
 @functions { var value3 = true; }");
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
         codeDocument.SetFileKind(FileKinds.Component);
 
         var irDocument = Lower(codeDocument, projectEngine);

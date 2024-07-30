@@ -198,7 +198,7 @@ public class AssemblyAttributeInjectionPassTest : RazorProjectEngineTestBase
         };
 
         var source = TestRazorSourceDocument.Create("test", RazorSourceDocumentProperties.Create(filePath: null, relativePath: "/Views/Index.cshtml"));
-        var document = RazorCodeDocument.Create(source);
+        var document = new RazorCodeDocument(source);
 
         // Act
         pass.Execute(document, irDocument);
@@ -245,7 +245,7 @@ public class AssemblyAttributeInjectionPassTest : RazorProjectEngineTestBase
         };
 
         var source = TestRazorSourceDocument.Create("test", RazorSourceDocumentProperties.Create(filePath: null, relativePath: "/Views/Index.cshtml"));
-        var document = RazorCodeDocument.Create(source);
+        var document = new RazorCodeDocument(source);
 
         // Act
         pass.Execute(document, irDocument);
@@ -298,7 +298,7 @@ public class AssemblyAttributeInjectionPassTest : RazorProjectEngineTestBase
         };
 
         var source = TestRazorSourceDocument.Create("test", RazorSourceDocumentProperties.Create(filePath: null, relativePath: "\\test\\\"Index.cshtml"));
-        var document = RazorCodeDocument.Create(source);
+        var document = new RazorCodeDocument(source);
 
         // Act
         pass.Execute(document, irDocument);
@@ -357,7 +357,7 @@ public class AssemblyAttributeInjectionPassTest : RazorProjectEngineTestBase
         };
 
         var source = TestRazorSourceDocument.Create("test", RazorSourceDocumentProperties.Create(filePath: null, relativePath: "/Views/Index.cshtml"));
-        var document = RazorCodeDocument.Create(source);
+        var document = new RazorCodeDocument(source);
 
         // Act
         pass.Execute(document, irDocument);
@@ -412,7 +412,7 @@ public class AssemblyAttributeInjectionPassTest : RazorProjectEngineTestBase
         };
 
         var source = TestRazorSourceDocument.Create("test", RazorSourceDocumentProperties.Create(filePath: null, relativePath: "test\\\"Index.cshtml"));
-        var document = RazorCodeDocument.Create(source);
+        var document = new RazorCodeDocument(source);
 
         // Act
         pass.Execute(document, irDocument);

@@ -3,9 +3,7 @@
 
 #nullable disable
 
-using System;
 using System.Linq;
-using Microsoft.AspNetCore.Razor.Language.Legacy;
 using Microsoft.AspNetCore.Razor.Language.Syntax;
 using Xunit;
 
@@ -24,7 +22,7 @@ public class HtmlNodeOptimizationPassTest
         var sourceDocument = TestRazorSourceDocument.Create(content);
         var originalTree = RazorSyntaxTree.Parse(sourceDocument);
         var pass = new HtmlNodeOptimizationPass();
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
 
         // Act
         var outputTree = pass.Execute(codeDocument, originalTree);

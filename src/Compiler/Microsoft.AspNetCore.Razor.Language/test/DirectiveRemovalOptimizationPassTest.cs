@@ -19,7 +19,7 @@ public class DirectiveRemovalOptimizationPassTest
         // Arrange
         var content = "@custom \"Hello\"";
         var sourceDocument = TestRazorSourceDocument.Create(content);
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
         var defaultEngine = RazorProjectEngine.Create(b =>
         {
             b.AddDirective(DirectiveDescriptor.CreateDirective("custom", DirectiveKind.SingleLine, d => d.AddStringToken()));
@@ -53,7 +53,7 @@ public class DirectiveRemovalOptimizationPassTest
             @custom "World"
             """;
         var sourceDocument = TestRazorSourceDocument.Create(content);
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
         var defaultEngine = RazorProjectEngine.Create(b =>
         {
             b.AddDirective(DirectiveDescriptor.CreateDirective("custom", DirectiveKind.SingleLine, d => d.AddStringToken()));
@@ -85,7 +85,7 @@ public class DirectiveRemovalOptimizationPassTest
         var content = "@custom \"Hello\"";
         var expectedDiagnostic = RazorDiagnostic.Create(new RazorDiagnosticDescriptor("RZ9999", "Some diagnostic message.", RazorDiagnosticSeverity.Error));
         var sourceDocument = TestRazorSourceDocument.Create(content);
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
         var defaultEngine = RazorProjectEngine.Create(b =>
         {
             b.AddDirective(DirectiveDescriptor.CreateDirective("custom", DirectiveKind.SingleLine, d => d.AddStringToken()));

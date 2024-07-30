@@ -41,7 +41,7 @@ internal static class TestDocumentContext
     {
         var properties = RazorSourceDocumentProperties.Create(filePath, filePath);
         var sourceDocument = RazorSourceDocument.Create(content: string.Empty, properties);
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
         return From(filePath, codeDocument);
     }
 
@@ -49,7 +49,7 @@ internal static class TestDocumentContext
     {
         var properties = RazorSourceDocumentProperties.Create(filePath, filePath);
         var sourceDocument = RazorSourceDocument.Create(content: string.Empty, properties);
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = new RazorCodeDocument(sourceDocument);
         return From(filePath, codeDocument, hostDocumentVersion);
     }
 }

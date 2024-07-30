@@ -219,7 +219,7 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
     private RazorCodeDocument CreateDocument(string content)
     {
         var source = RazorSourceDocument.Create(content, "test.cshtml");
-        return RazorCodeDocument.Create(source);
+        return new RazorCodeDocument(source);
     }
 
     private ClassDeclarationIntermediateNode FindClassNode(IntermediateNode node)
