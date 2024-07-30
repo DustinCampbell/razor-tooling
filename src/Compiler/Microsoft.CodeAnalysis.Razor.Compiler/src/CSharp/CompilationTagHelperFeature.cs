@@ -4,6 +4,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.CodeAnalysis.CSharp;
@@ -19,12 +20,13 @@ public sealed class CompilationTagHelperFeature : RazorEngineFeatureBase, ITagHe
     {
         var results = new List<TagHelperDescriptor>();
 
-        var context = TagHelperDescriptorProviderContext.Create(results);
         var compilation = CSharpCompilation.Create("__TagHelpers", references: _referenceFeature.References);
-        if (IsValidCompilation(compilation))
+        if (!IsValidCompilation(compilation))
         {
-            context.SetCompilation(compilation);
+            return [];
         }
+
+        var context = TagHelperDescriptorProviderContext.Create(compilation, results);
 
         for (var i = 0; i < _providers.Length; i++)
         {
@@ -40,7 +42,7 @@ public sealed class CompilationTagHelperFeature : RazorEngineFeatureBase, ITagHe
         _providers = Engine.Features.OfType<ITagHelperDescriptorProvider>().OrderBy(f => f.Order).ToArray();
     }
 
-    internal static bool IsValidCompilation(Compilation compilation)
+    internal static bool IsValidCompilation([NotNullWhen(true)] Compilation compilation)
     {
         var @string = compilation.GetSpecialType(SpecialType.System_String);
 

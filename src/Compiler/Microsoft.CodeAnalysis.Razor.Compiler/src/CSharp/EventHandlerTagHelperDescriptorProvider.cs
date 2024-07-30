@@ -3,8 +3,8 @@
 
 #nullable disable
 
-using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Components;
 using Microsoft.AspNetCore.Razor.PooledObjects;
@@ -20,16 +20,9 @@ internal class EventHandlerTagHelperDescriptorProvider : ITagHelperDescriptorPro
 
     public void Execute(TagHelperDescriptorProviderContext context)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgHelper.ThrowIfNull(context);
 
-        var compilation = context.GetCompilation();
-        if (compilation == null)
-        {
-            return;
-        }
+        var compilation = context.Compilation;
 
         if (compilation.GetTypeByMetadataName(ComponentsApi.EventHandlerAttribute.FullTypeName) is not INamedTypeSymbol eventHandlerAttribute)
         {

@@ -3,12 +3,11 @@
 
 #nullable disable
 
-using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.PooledObjects;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Razor;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X;
 
@@ -18,17 +17,9 @@ public sealed class ViewComponentTagHelperDescriptorProvider : RazorEngineFeatur
 
     public void Execute(TagHelperDescriptorProviderContext context)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgHelper.ThrowIfNull(context);
 
-        var compilation = context.GetCompilation();
-        if (compilation == null)
-        {
-            // No compilation, nothing to do.
-            return;
-        }
+        var compilation = context.Compilation;
 
         var vcAttribute = compilation.GetTypeByMetadataName(ViewComponentTypes.ViewComponentAttribute);
         var nonVCAttribute = compilation.GetTypeByMetadataName(ViewComponentTypes.NonViewComponentAttribute);

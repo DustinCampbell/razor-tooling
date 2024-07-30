@@ -4,6 +4,7 @@
 #nullable enable
 
 using System;
+using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Components;
 using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
@@ -21,16 +22,9 @@ internal sealed class RenderModeTagHelperDescriptorProvider : ITagHelperDescript
 
     public void Execute(TagHelperDescriptorProviderContext context)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgHelper.ThrowIfNull(context);
 
-        var compilation = context.GetCompilation();
-        if (compilation == null)
-        {
-            return;
-        }
+        var compilation = context.Compilation;
 
         var iComponentRenderMode = compilation.GetTypeByMetadataName(ComponentsApi.IComponentRenderMode.FullTypeName);
         if (iComponentRenderMode == null)

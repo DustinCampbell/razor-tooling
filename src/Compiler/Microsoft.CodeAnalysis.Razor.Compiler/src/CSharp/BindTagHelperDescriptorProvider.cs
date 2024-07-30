@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Components;
 using Microsoft.AspNetCore.Razor.PooledObjects;
@@ -23,10 +24,7 @@ internal class BindTagHelperDescriptorProvider : ITagHelperDescriptorProvider
 
     public void Execute(TagHelperDescriptorProviderContext context)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgHelper.ThrowIfNull(context);
 
         // This provider returns tag helper information for 'bind' which doesn't necessarily
         // map to any real component. Bind behaviors more like a macro, which can map a single LValue to
@@ -91,11 +89,7 @@ internal class BindTagHelperDescriptorProvider : ITagHelperDescriptorProvider
         // we have. Case #4 is data-driven based on component definitions.
         //
         // We provide a good set of attributes that map to the HTML dom. This set is user extensible.
-        var compilation = context.GetCompilation();
-        if (compilation == null)
-        {
-            return;
-        }
+        var compilation = context.Compilation;
 
         var bindMethods = compilation.GetTypeByMetadataName(ComponentsApi.BindConverter.FullTypeName);
         if (bindMethods == null)

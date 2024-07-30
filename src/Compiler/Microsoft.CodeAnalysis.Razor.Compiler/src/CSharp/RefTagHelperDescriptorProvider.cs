@@ -3,7 +3,7 @@
 
 #nullable disable
 
-using System;
+using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Components;
 using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
@@ -21,16 +21,9 @@ internal class RefTagHelperDescriptorProvider : ITagHelperDescriptorProvider
 
     public void Execute(TagHelperDescriptorProviderContext context)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgHelper.ThrowIfNull(context);
 
-        var compilation = context.GetCompilation();
-        if (compilation == null)
-        {
-            return;
-        }
+        var compilation = context.Compilation;
 
         var elementReference = compilation.GetTypeByMetadataName(ComponentsApi.ElementReference.FullTypeName);
         if (elementReference == null)

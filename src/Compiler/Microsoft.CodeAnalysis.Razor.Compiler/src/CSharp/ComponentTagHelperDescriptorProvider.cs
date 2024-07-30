@@ -8,9 +8,9 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Components;
-using Microsoft.AspNetCore.Razor.Language.Extensions;
 using Microsoft.AspNetCore.Razor.PooledObjects;
 using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
@@ -29,18 +29,9 @@ internal partial class ComponentTagHelperDescriptorProvider : RazorEngineFeature
 
     public void Execute(TagHelperDescriptorProviderContext context)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgHelper.ThrowIfNull(context);
 
-        var compilation = context.GetCompilation();
-        if (compilation == null)
-        {
-            // No compilation, nothing to do.
-            return;
-        }
-
+        var compilation = context.Compilation;
         var targetSymbol = context.Items.GetTargetSymbol();
 
         var collector = new Collector(compilation, targetSymbol);

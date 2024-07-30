@@ -1,7 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -24,32 +23,25 @@ internal class CompilationTagHelperResolver(ITelemetryReporter? telemetryReporte
         RazorProjectEngine projectEngine,
         CancellationToken cancellationToken)
     {
-        if (workspaceProject is null)
-        {
-            throw new ArgumentNullException(nameof(workspaceProject));
-        }
-
-        if (projectEngine is null)
-        {
-            throw new ArgumentNullException(nameof(projectEngine));
-        }
+        ArgHelper.ThrowIfNull(workspaceProject);
+        ArgHelper.ThrowIfNull(projectEngine);
 
         var providers = projectEngine.Engine.Features.OfType<ITagHelperDescriptorProvider>().OrderBy(f => f.Order).ToArray();
         if (providers.Length == 0)
         {
-            return ImmutableArray<TagHelperDescriptor>.Empty;
+            return [];
+        }
+
+        var compilation = await workspaceProject.GetCompilationAsync(cancellationToken).ConfigureAwait(false);
+        if (!CompilationTagHelperFeature.IsValidCompilation(compilation))
+        {
+            return [];
         }
 
         using var _ = HashSetPool<TagHelperDescriptor>.GetPooledObject(out var results);
-        var context = TagHelperDescriptorProviderContext.Create(results);
+        var context = TagHelperDescriptorProviderContext.Create(compilation, results);
         context.ExcludeHidden = true;
         context.IncludeDocumentation = true;
-
-        var compilation = await workspaceProject.GetCompilationAsync(cancellationToken).ConfigureAwait(false);
-        if (CompilationTagHelperFeature.IsValidCompilation(compilation))
-        {
-            context.SetCompilation(compilation);
-        }
 
         ExecuteProviders(providers, context, _telemetryReporter);
 

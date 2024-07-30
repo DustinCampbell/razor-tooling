@@ -3,6 +3,7 @@
 
 using System;
 using System.Linq;
+using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Components;
 using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
@@ -20,16 +21,9 @@ internal sealed class FormNameTagHelperDescriptorProvider : ITagHelperDescriptor
 
     public void Execute(TagHelperDescriptorProviderContext context)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgHelper.ThrowIfNull(context);
 
-        var compilation = context.GetCompilation();
-        if (compilation == null)
-        {
-            return;
-        }
+        var compilation = context.Compilation;
 
         var renderTreeBuilders = compilation.GetTypesByMetadataName(ComponentsApi.RenderTreeBuilder.FullTypeName)
             .Where(static t => t.DeclaredAccessibility == Accessibility.Public &&
