@@ -3,10 +3,12 @@
 
 using System;
 using System.Collections.Immutable;
+using System.Linq;
+using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-public sealed class RazorParserOptions
+public sealed record class RazorParserOptions
 {
     public static RazorParserOptions Default { get; } = new(
         directives: [],
@@ -16,9 +18,8 @@ public sealed class RazorParserOptions
         fileKind: FileKinds.Legacy,
         enableSpanEditHandlers: false);
 
-    public bool DesignTime { get; }
-
     public ImmutableArray<DirectiveDescriptor> Directives { get; }
+    public bool DesignTime { get; }
 
     /// <summary>
     /// Gets a value which indicates whether the parser will parse only the leading directives. If <c>true</c>
@@ -34,9 +35,9 @@ public sealed class RazorParserOptions
 
     internal string FileKind { get; }
 
-    internal RazorParserFeatureFlags FeatureFlags { get; /* Testing Only */ init; }
-
     internal bool EnableSpanEditHandlers { get; }
+
+    internal RazorParserFeatureFlags FeatureFlags { get; /* Testing Only */ init; }
 
     internal RazorParserOptions(
         ImmutableArray<DirectiveDescriptor> directives,
@@ -53,6 +54,29 @@ public sealed class RazorParserOptions
         FeatureFlags = RazorParserFeatureFlags.Create(Version, fileKind);
         FileKind = fileKind;
         EnableSpanEditHandlers = enableSpanEditHandlers;
+    }
+
+    public bool Equals(RazorParserOptions? other)
+        => other is not null &&
+           DesignTime == other.DesignTime &&
+           ParseLeadingDirectives == other.ParseLeadingDirectives &&
+           EnableSpanEditHandlers == other.EnableSpanEditHandlers &&
+           StringComparer.OrdinalIgnoreCase.Equals(FileKind, other.FileKind) &&
+           Version == other.Version &&
+           Directives.SequenceEqual(other.Directives);
+
+    public override int GetHashCode()
+    {
+        var hash = HashCodeCombiner.Start();
+
+        hash.Add(DesignTime);
+        hash.Add(ParseLeadingDirectives);
+        hash.Add(EnableSpanEditHandlers);
+        hash.Add(FileKind, StringComparer.OrdinalIgnoreCase);
+        hash.Add(Version);
+        hash.Add(Directives);
+
+        return hash.CombinedHash;
     }
 
     public static RazorParserOptions Create(Action<RazorParserOptionsBuilder> configure)
