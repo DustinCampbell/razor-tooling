@@ -1,8 +1,6 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
 using System;
 using System.Collections.Generic;
 
@@ -17,60 +15,6 @@ public sealed class RazorParserOptions
         version: RazorLanguageVersion.Latest,
         fileKind: FileKinds.Legacy,
         enableSpanEditHandlers: false);
-
-    public static RazorParserOptions Create(Action<RazorParserOptionsBuilder> configure)
-    {
-        return Create(configure, fileKind: FileKinds.Legacy);
-    }
-
-    public static RazorParserOptions Create(Action<RazorParserOptionsBuilder> configure, string fileKind)
-    {
-        if (configure == null)
-        {
-            throw new ArgumentNullException(nameof(configure));
-        }
-
-        var builder = new RazorParserOptionsBuilder(designTime: false, version: RazorLanguageVersion.Latest, fileKind ?? FileKinds.Legacy);
-        configure(builder);
-        var options = builder.Build();
-
-        return options;
-    }
-
-    public static RazorParserOptions CreateDesignTime(Action<RazorParserOptionsBuilder> configure)
-    {
-        return CreateDesignTime(configure, fileKind: null);
-    }
-
-    public static RazorParserOptions CreateDesignTime(Action<RazorParserOptionsBuilder> configure, string fileKind)
-    {
-        if (configure == null)
-        {
-            throw new ArgumentNullException(nameof(configure));
-        }
-
-        var builder = new RazorParserOptionsBuilder(designTime: true, version: RazorLanguageVersion.Latest, fileKind ?? FileKinds.Legacy);
-        configure(builder);
-        var options = builder.Build();
-
-        return options;
-    }
-
-    internal RazorParserOptions(DirectiveDescriptor[] directives, bool designTime, bool parseLeadingDirectives, RazorLanguageVersion version, string fileKind, bool enableSpanEditHandlers)
-    {
-        if (directives == null)
-        {
-            throw new ArgumentNullException(nameof(directives));
-        }
-
-        Directives = directives;
-        DesignTime = designTime;
-        ParseLeadingDirectives = parseLeadingDirectives;
-        Version = version;
-        FeatureFlags = RazorParserFeatureFlags.Create(Version, fileKind);
-        FileKind = fileKind;
-        EnableSpanEditHandlers = enableSpanEditHandlers;
-    }
 
     public bool DesignTime { get; }
 
@@ -93,4 +37,55 @@ public sealed class RazorParserOptions
     internal RazorParserFeatureFlags FeatureFlags { get; /* Testing Only */ init; }
 
     internal bool EnableSpanEditHandlers { get; }
+
+    internal RazorParserOptions(
+        DirectiveDescriptor[] directives,
+        bool designTime,
+        bool parseLeadingDirectives,
+        RazorLanguageVersion version,
+        string fileKind,
+        bool enableSpanEditHandlers)
+    {
+        ArgHelper.ThrowIfNull(directives);
+
+        Directives = directives;
+        DesignTime = designTime;
+        ParseLeadingDirectives = parseLeadingDirectives;
+        Version = version;
+        FeatureFlags = RazorParserFeatureFlags.Create(Version, fileKind);
+        FileKind = fileKind;
+        EnableSpanEditHandlers = enableSpanEditHandlers;
+    }
+
+    public static RazorParserOptions Create(Action<RazorParserOptionsBuilder> configure)
+    {
+        return Create(configure, fileKind: FileKinds.Legacy);
+    }
+
+    public static RazorParserOptions Create(Action<RazorParserOptionsBuilder> configure, string? fileKind)
+    {
+        ArgHelper.ThrowIfNull(configure);
+
+        var builder = new RazorParserOptionsBuilder(designTime: false, version: RazorLanguageVersion.Latest, fileKind ?? FileKinds.Legacy);
+        configure(builder);
+        var options = builder.Build();
+
+        return options;
+    }
+
+    public static RazorParserOptions CreateDesignTime(Action<RazorParserOptionsBuilder> configure)
+    {
+        return CreateDesignTime(configure, fileKind: null);
+    }
+
+    public static RazorParserOptions CreateDesignTime(Action<RazorParserOptionsBuilder> configure, string? fileKind)
+    {
+        ArgHelper.ThrowIfNull(configure);
+
+        var builder = new RazorParserOptionsBuilder(designTime: true, version: RazorLanguageVersion.Latest, fileKind ?? FileKinds.Legacy);
+        configure(builder);
+        var options = builder.Build();
+
+        return options;
+    }
 }
