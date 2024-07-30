@@ -15,22 +15,25 @@ public sealed class TagHelperDescriptorProviderContext
 
     public ICollection<TagHelperDescriptor> Results { get; }
 
-    private TagHelperDescriptorProviderContext(Compilation compilation, ISymbol? targetSymbol, ICollection<TagHelperDescriptor> results)
+    public TagHelperDescriptorProviderContext(Compilation compilation)
+        : this(compilation, targetSymbol: null, results: null)
+    {
+    }
+
+    public TagHelperDescriptorProviderContext(Compilation compilation, ISymbol targetSymbol)
+        : this(compilation, targetSymbol, results: null)
+    {
+    }
+
+    public TagHelperDescriptorProviderContext(Compilation compilation, ICollection<TagHelperDescriptor> results)
+        : this(compilation, targetSymbol: null, results)
+    {
+    }
+
+    public TagHelperDescriptorProviderContext(Compilation compilation, ISymbol? targetSymbol, ICollection<TagHelperDescriptor>? results)
     {
         Compilation = compilation;
         TargetSymbol = targetSymbol;
-        Results = results;
-    }
-
-    public static TagHelperDescriptorProviderContext Create(Compilation compilation, ISymbol? targetSymbol = null)
-    {
-        return new(compilation, targetSymbol, new List<TagHelperDescriptor>());
-    }
-
-    public static TagHelperDescriptorProviderContext Create(Compilation compilation, ISymbol? targetSymbol, ICollection<TagHelperDescriptor> results)
-    {
-        ArgHelper.ThrowIfNull(results);
-
-        return new(compilation, targetSymbol, results);
+        Results = results ?? new List<TagHelperDescriptor>();
     }
 }
