@@ -1,7 +1,6 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
@@ -21,9 +20,9 @@ public sealed class RazorCSharpDocument : IRazorGeneratedDocument
         RazorCodeDocument codeDocument,
         string generatedCode,
         RazorCodeGenerationOptions options,
-        ImmutableArray<RazorDiagnostic> diagnostics,
-        ImmutableArray<SourceMapping> sourceMappings,
-        ImmutableArray<LinePragma> linePragmas)
+        ImmutableArray<RazorDiagnostic> diagnostics = default,
+        ImmutableArray<SourceMapping> sourceMappings = default,
+        ImmutableArray<LinePragma> linePragmas = default)
     {
         ArgHelper.ThrowIfNull(codeDocument);
         ArgHelper.ThrowIfNull(generatedCode);
@@ -36,36 +35,5 @@ public sealed class RazorCSharpDocument : IRazorGeneratedDocument
         Diagnostics = diagnostics.NullToEmpty();
         SourceMappings = sourceMappings.NullToEmpty();
         LinePragmas = linePragmas.NullToEmpty();
-    }
-
-    public static RazorCSharpDocument Create(
-        RazorCodeDocument codeDocument,
-        string generatedCode,
-        RazorCodeGenerationOptions options,
-        IEnumerable<RazorDiagnostic> diagnostics)
-    {
-        ArgHelper.ThrowIfNull(codeDocument);
-        ArgHelper.ThrowIfNull(generatedCode);
-        ArgHelper.ThrowIfNull(options);
-        ArgHelper.ThrowIfNull(diagnostics);
-
-        return new RazorCSharpDocument(codeDocument, generatedCode, options, diagnostics.ToImmutableArray(), sourceMappings: [], linePragmas: default);
-    }
-
-    public static RazorCSharpDocument Create(
-        RazorCodeDocument codeDocument,
-        string generatedCode,
-        RazorCodeGenerationOptions options,
-        IEnumerable<RazorDiagnostic> diagnostics,
-        ImmutableArray<SourceMapping> sourceMappings,
-        IEnumerable<LinePragma> linePragmas)
-    {
-        ArgHelper.ThrowIfNull(codeDocument);
-        ArgHelper.ThrowIfNull(generatedCode);
-        ArgHelper.ThrowIfNull(options);
-        ArgHelper.ThrowIfNull(diagnostics);
-        ArgHelper.ThrowIfNull(linePragmas);
-
-        return new RazorCSharpDocument(codeDocument, generatedCode, options, diagnostics.ToImmutableArray(), sourceMappings, linePragmas.ToImmutableArray());
     }
 }

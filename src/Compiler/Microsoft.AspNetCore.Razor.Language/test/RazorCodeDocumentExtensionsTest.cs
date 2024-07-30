@@ -1,7 +1,6 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
 using System.Collections.Immutable;
 using System.IO;
 using Microsoft.AspNetCore.Razor.Language.Extensions;
@@ -113,7 +112,7 @@ public class RazorCodeDocumentExtensionsTest
         // Arrange
         var codeDocument = TestRazorCodeDocument.CreateEmpty();
 
-        var expected = RazorCSharpDocument.Create(codeDocument, "", RazorCodeGenerationOptions.CreateDefault(), Array.Empty<RazorDiagnostic>());
+        var expected = new RazorCSharpDocument(codeDocument, "", RazorCodeGenerationOptions.CreateDefault(), diagnostics: []);
         codeDocument.Items[typeof(RazorCSharpDocument)] = expected;
 
         // Act
@@ -129,7 +128,7 @@ public class RazorCodeDocumentExtensionsTest
         // Arrange
         var codeDocument = TestRazorCodeDocument.CreateEmpty();
 
-        var expected = RazorCSharpDocument.Create(codeDocument, "", RazorCodeGenerationOptions.CreateDefault(), Array.Empty<RazorDiagnostic>());
+        var expected = new RazorCSharpDocument(codeDocument, "", RazorCodeGenerationOptions.CreateDefault(), diagnostics: []);
 
         // Act
         codeDocument.SetCSharpDocument(expected);

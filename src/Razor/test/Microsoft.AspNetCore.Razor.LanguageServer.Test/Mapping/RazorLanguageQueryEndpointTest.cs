@@ -4,10 +4,8 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
-using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 using Microsoft.AspNetCore.Razor.Test.Common.LanguageServer;
 using Microsoft.CodeAnalysis.Razor.DocumentMapping;
 using Microsoft.CodeAnalysis.Razor.Protocol;
@@ -148,13 +146,13 @@ public class RazorLanguageQueryEndpointTest : LanguageServerTestBase
     private static RazorCodeDocument CreateCodeDocumentWithCSharpProjection(string razorSource, string projectedCSharpSource, IEnumerable<SourceMapping> sourceMappings)
     {
         var codeDocument = CreateCodeDocument(razorSource, ImmutableArray<TagHelperDescriptor>.Empty);
-        var csharpDocument = RazorCSharpDocument.Create(
+        var csharpDocument = new RazorCSharpDocument(
             codeDocument,
             projectedCSharpSource,
             RazorCodeGenerationOptions.CreateDefault(),
-            Enumerable.Empty<RazorDiagnostic>(),
+            diagnostics: [],
             sourceMappings.ToImmutableArray(),
-            Enumerable.Empty<LinePragma>());
+            linePragmas: []);
         codeDocument.SetCSharpDocument(csharpDocument);
         return codeDocument;
     }
