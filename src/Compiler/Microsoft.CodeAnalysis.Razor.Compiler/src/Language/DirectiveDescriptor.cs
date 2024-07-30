@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Immutable;
+using Microsoft.AspNetCore.Razor.PooledObjects;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
@@ -74,7 +75,7 @@ public sealed class DirectiveDescriptor
     {
         ArgHelper.ThrowIfNull(directive);
 
-        var builder = new Builder(directive, kind);
+        using var builder = new Builder(directive, kind);
         configure?.Invoke(builder);
         return builder.Build();
     }
@@ -118,7 +119,7 @@ public sealed class DirectiveDescriptor
         return CreateDirective(directive, DirectiveKind.CodeBlock, configure);
     }
 
-    private sealed class Builder(string name, DirectiveKind kind) : IDirectiveDescriptorBuilder
+    private sealed class Builder(string name, DirectiveKind kind) : IDirectiveDescriptorBuilder, IDisposable
     {
         public string Name { get; } = name;
         public DirectiveKind Kind { get; } = kind;
@@ -127,7 +128,12 @@ public sealed class DirectiveDescriptor
         public string? DisplayName { get; set; }
         public DirectiveUsage Usage { get; set; }
 
-        public ImmutableArray<DirectiveTokenDescriptor>.Builder Tokens { get; } = ImmutableArray.CreateBuilder<DirectiveTokenDescriptor>();
+        public ImmutableArray<DirectiveTokenDescriptor>.Builder Tokens { get; } = ArrayBuilderPool<DirectiveTokenDescriptor>.Default.Get();
+
+        public void Dispose()
+        {
+            ArrayBuilderPool<DirectiveTokenDescriptor>.Default.Return(Tokens);
+        }
 
         public DirectiveDescriptor Build()
         {
