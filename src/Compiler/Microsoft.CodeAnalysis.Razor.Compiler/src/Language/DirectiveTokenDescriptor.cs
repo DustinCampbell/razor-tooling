@@ -1,51 +1,29 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
 namespace Microsoft.AspNetCore.Razor.Language;
 
-public abstract class DirectiveTokenDescriptor
+public sealed record class DirectiveTokenDescriptor
 {
-    public abstract DirectiveTokenKind Kind { get; }
+    public DirectiveTokenKind Kind { get; }
+    public bool Optional { get; }
+    public string? Name { get; }
+    public string? Description { get; }
 
-    public abstract bool Optional { get; }
-
-    public virtual string Name { get; }
-
-    public virtual string Description { get; }
-
-    public static DirectiveTokenDescriptor CreateToken(DirectiveTokenKind kind)
+    private DirectiveTokenDescriptor(DirectiveTokenKind kind, bool optional, string? name, string? description)
     {
-        return CreateToken(kind, optional: false);
+        Kind = kind;
+        Optional = optional;
+        Name = name;
+        Description = description;
     }
 
-    public static DirectiveTokenDescriptor CreateToken(DirectiveTokenKind kind, bool optional)
-    {
-        return CreateToken(kind, optional, name: null, description: null);
-    }
+    public static DirectiveTokenDescriptor Create(DirectiveTokenKind kind)
+        => new(kind, optional: false, name: null, description: null);
 
-    public static DirectiveTokenDescriptor CreateToken(DirectiveTokenKind kind, bool optional, string name, string description)
-    {
-        return new DefaultDirectiveTokenDescriptor(kind, optional, name, description);
-    }
+    public static DirectiveTokenDescriptor Create(DirectiveTokenKind kind, bool optional)
+        => new(kind, optional, name: null, description: null);
 
-    private class DefaultDirectiveTokenDescriptor : DirectiveTokenDescriptor
-    {
-        public DefaultDirectiveTokenDescriptor(DirectiveTokenKind kind, bool optional, string name, string description)
-        {
-            Kind = kind;
-            Optional = optional;
-            Name = name;
-            Description = description;
-        }
-
-        public override DirectiveTokenKind Kind { get; }
-
-        public override bool Optional { get; }
-
-        public override string Name { get; }
-
-        public override string Description { get; }
-    }
+    public static DirectiveTokenDescriptor Create(DirectiveTokenKind kind, bool optional, string name, string description)
+        => new(kind, optional, name, description);
 }
