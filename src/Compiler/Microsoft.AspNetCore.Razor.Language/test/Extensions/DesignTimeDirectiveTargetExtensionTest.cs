@@ -11,6 +11,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 
 public class DesignTimeDirectiveTargetExtensionTest
 {
+    private static DirectiveTokenDescriptor CreateToken(DirectiveTokenKind kind)
+        => new(kind, Optional: false, Name: null, Description: null);
+
     [Fact]
     public void WriteDesignTimeDirective_NoChildren_WritesEmptyMethod_WithPragma()
     {
@@ -47,7 +50,7 @@ private void __RazorDirectiveTokenHelpers__() {
         {
             Source = new SourceSpan("test.cshtml", 0, 0, 0, 5),
             Content = "System.String",
-            DirectiveToken = DirectiveTokenDescriptor.Create(DirectiveTokenKind.Type),
+            DirectiveToken = CreateToken(DirectiveTokenKind.Type),
         };
         node.Children.Add(token);
 
@@ -88,7 +91,7 @@ System.String __typeHelper = default!;
         {
             Source = new SourceSpan("test.cshtml", 0, 0, 0, 5),
             Content = "System.Collections.Generic",
-            DirectiveToken = DirectiveTokenDescriptor.Create(DirectiveTokenKind.Namespace),
+            DirectiveToken = CreateToken(DirectiveTokenKind.Namespace),
         };
         node.Children.Add(token);
 
@@ -129,7 +132,7 @@ global::System.Object __typeHelper = nameof(System.Collections.Generic);
         {
             Source = new SourceSpan("test.cshtml", 0, 0, 0, 5),
             Content = "Foo",
-            DirectiveToken = DirectiveTokenDescriptor.Create(DirectiveTokenKind.Member),
+            DirectiveToken = CreateToken(DirectiveTokenKind.Member),
         };
         node.Children.Add(token);
 
@@ -170,13 +173,13 @@ global::System.Object Foo = null!;
         {
             Source = new SourceSpan("test.cshtml", 0, 0, 0, 5),
             Content = "Value",
-            DirectiveToken = DirectiveTokenDescriptor.Create(DirectiveTokenKind.String),
+            DirectiveToken = CreateToken(DirectiveTokenKind.String),
         };
         var tokenWithQuotedContent = new DirectiveTokenIntermediateNode()
         {
             Source = new SourceSpan("test.cshtml", 0, 0, 0, 5),
             Content = "\"Value\"",
-            DirectiveToken = DirectiveTokenDescriptor.Create(DirectiveTokenKind.String),
+            DirectiveToken = CreateToken(DirectiveTokenKind.String),
         };
         node.Children.Add(token);
         node.Children.Add(tokenWithQuotedContent);
@@ -228,7 +231,7 @@ global::System.Object __typeHelper = ""Value"";
         {
             Source = new SourceSpan("test.cshtml", 0, 0, 0, 5),
             Content = "true",
-            DirectiveToken = DirectiveTokenDescriptor.Create(DirectiveTokenKind.Boolean),
+            DirectiveToken = CreateToken(DirectiveTokenKind.Boolean),
         };
         node.Children.Add(token);
 
@@ -268,7 +271,7 @@ global::System.Boolean __typeHelper = true;
         var token = new DirectiveTokenIntermediateNode()
         {
             Content = "Value",
-            DirectiveToken = DirectiveTokenDescriptor.Create(DirectiveTokenKind.String),
+            DirectiveToken = CreateToken(DirectiveTokenKind.String),
         };
         node.Children.Add(token);
 
