@@ -3,8 +3,6 @@
 
 #nullable disable
 
-using System;
-using System.Linq;
 using Roslyn.Test.Utilities;
 using Xunit;
 
@@ -273,7 +271,7 @@ public class HtmlAttributeTest() : ParserTestBase(layer: TestProject.Layer.Compi
     [Fact]
     public void ConditionalAttributesAreEnabledForDataAttributesWithExperimentalFlag()
     {
-        ParseDocumentTest(RazorLanguageVersion.Experimental, "@{<span data-foo='@foo'></span>}", directives: null, designTime: false);
+        ParseDocumentTest(RazorLanguageVersion.Experimental, "@{<span data-foo='@foo'></span>}", directives: [], designTime: false);
     }
 
     [Fact]

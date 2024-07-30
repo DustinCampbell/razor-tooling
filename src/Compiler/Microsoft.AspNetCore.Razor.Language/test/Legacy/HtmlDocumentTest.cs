@@ -3,7 +3,6 @@
 
 #nullable disable
 
-using System;
 using Microsoft.AspNetCore.Razor.Language.Extensions;
 using Xunit;
 
@@ -57,7 +56,7 @@ public class HtmlDocumentTest() : ParserTestBase(layer: TestProject.Layer.Compil
                 <html></html>
             }
             """,
-            new[] { SectionDirective.Directive, });
+            [SectionDirective.Directive]);
     }
 
     [Fact]
@@ -199,7 +198,7 @@ public class HtmlDocumentTest() : ParserTestBase(layer: TestProject.Layer.Compil
     {
         ParseDocumentTest(
             @"@section Foo { <script>foo<bar baz='@boz'></script> }",
-            new[] { SectionDirective.Directive, });
+            [SectionDirective.Directive]);
     }
 
     [Fact]

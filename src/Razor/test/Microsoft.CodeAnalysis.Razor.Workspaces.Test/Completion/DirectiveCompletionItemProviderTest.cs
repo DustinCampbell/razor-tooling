@@ -454,7 +454,7 @@ public class DirectiveCompletionItemProviderTest : ToolingTestBase
 
         if (isSnippet)
         {
-            var (insertText, displayText) = DirectiveCompletionItemProvider.s_singleLineDirectiveSnippets[directive.Directive];
+            var (insertText, displayText) = DirectiveCompletionItemProvider.SingleLineDirectiveSnippets[directive.Directive];
 
             Assert.StartsWith(directive.Directive, item.InsertText);
             Assert.Equal(item.InsertText, insertText);

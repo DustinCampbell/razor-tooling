@@ -31,7 +31,7 @@ public class CSharpFunctionsTest() : ParserTestBase(layer: TestProject.Layer.Com
         if (message != null) @@SomeGitHubUserName <strong>@message</strong>
     }
 }
-", new[] { FunctionsDirective.Directive, }, designTime: false);
+", [FunctionsDirective.Directive], designTime: false);
     }
 
     [Fact]
@@ -46,7 +46,7 @@ public class CSharpFunctionsTest() : ParserTestBase(layer: TestProject.Layer.Com
         if (message.Length > 0) return ""Anouncement: "" + message;
     }
 }
-", new[] { FunctionsDirective.Directive, }, designTime: false);
+", [FunctionsDirective.Directive], designTime: false);
     }
 
     [Fact]
@@ -61,7 +61,7 @@ public class CSharpFunctionsTest() : ParserTestBase(layer: TestProject.Layer.Com
         <h3>@message</h3>
     }
 }
-", new[] { FunctionsDirective.Directive, }, designTime: false);
+", [FunctionsDirective.Directive], designTime: false);
     }
 
     [Fact]
@@ -76,7 +76,7 @@ public class CSharpFunctionsTest() : ParserTestBase(layer: TestProject.Layer.Com
         <h3>@message</h3>
     }
 }
-", new[] { FunctionsDirective.Directive, }, designTime: false);
+", [FunctionsDirective.Directive], designTime: false);
     }
 
     // This will parse correctly in Razor, but will generate invalid C#.
@@ -89,7 +89,7 @@ public class CSharpFunctionsTest() : ParserTestBase(layer: TestProject.Layer.Com
 @functions {
     void Announcment(string message) => <h3>@message</h3>
 }
-", new[] { FunctionsDirective.Directive, }, designTime: false);
+", [FunctionsDirective.Directive], designTime: false);
     }
 
     [Fact]
@@ -101,7 +101,7 @@ public class CSharpFunctionsTest() : ParserTestBase(layer: TestProject.Layer.Com
 @functions {
     void Announcment(string message) => ""<h3>@message</h3>"";
 }
-", new[] { FunctionsDirective.Directive, }, designTime: false);
+", [FunctionsDirective.Directive], designTime: false);
     }
 
     [Fact]
@@ -113,7 +113,7 @@ public class CSharpFunctionsTest() : ParserTestBase(layer: TestProject.Layer.Com
 @functions {
     void Announcment(string message) => @""<h3>@message</h3>"";
 }
-", new[] { FunctionsDirective.Directive, }, designTime: false);
+", [FunctionsDirective.Directive], designTime: false);
     }
 
     [Fact]
@@ -133,7 +133,7 @@ public class CSharpFunctionsTest() : ParserTestBase(layer: TestProject.Layer.Com
         </div>
     }
 }
-", new[] { FunctionsDirective.Directive, }, designTime: false);
+", [FunctionsDirective.Directive], designTime: false);
     }
 
     [Fact]
@@ -153,7 +153,7 @@ public class CSharpFunctionsTest() : ParserTestBase(layer: TestProject.Layer.Com
         </div>
     }
 }
-", new[] { FunctionsDirective.Directive, }, designTime: false);
+", [FunctionsDirective.Directive], designTime: false);
     }
 
     [Fact]
@@ -171,6 +171,6 @@ public class CSharpFunctionsTest() : ParserTestBase(layer: TestProject.Layer.Com
         }
     }
 }
-", new[] { FunctionsDirective.Directive, }, designTime: false);
+", [FunctionsDirective.Directive], designTime: false);
     }
 }

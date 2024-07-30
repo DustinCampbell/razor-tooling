@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.AspNetCore.Razor.Language.Legacy;
 using Xunit;
@@ -218,10 +219,11 @@ public class CSharpCodeParserTest
         var context = new ParserContext(source, options);
 
         // Act & Assert (Does not throw)
-        var directiveDescriptors = new[] {
+        ImmutableArray<DirectiveDescriptor> directives = [
             DirectiveDescriptor.CreateDirective("test", DirectiveKind.SingleLine),
-            DirectiveDescriptor.CreateDirective("test", DirectiveKind.SingleLine),
-        };
-        _ = new CSharpCodeParser(directiveDescriptors, context);
+            DirectiveDescriptor.CreateDirective("test", DirectiveKind.SingleLine)
+        ];
+
+        _ = new CSharpCodeParser(directives, context);
     }
 }

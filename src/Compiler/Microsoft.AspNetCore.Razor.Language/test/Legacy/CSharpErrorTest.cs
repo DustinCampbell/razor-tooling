@@ -3,7 +3,6 @@
 
 #nullable disable
 
-using System;
 using Microsoft.AspNetCore.Razor.Language.Extensions;
 using Xunit;
 
@@ -183,7 +182,7 @@ public class CSharpErrorTest() : ParserTestBase(layer: TestProject.Layer.Compile
     {
         ParseDocumentTest(
             "@functions { var foo = bar; if(foo != null) { bar(); } ",
-            new[] { FunctionsDirective.Directive });
+            [FunctionsDirective.Directive]);
     }
 
     [Fact]

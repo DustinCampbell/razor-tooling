@@ -2,8 +2,7 @@
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using Microsoft.AspNetCore.Razor.PooledObjects;
 using Microsoft.CodeAnalysis.Razor.Completion;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
 using Xunit;
@@ -12,27 +11,25 @@ namespace Microsoft.AspNetCore.Razor.LanguageServer.Completion;
 
 internal static class DirectiveVerifier
 {
-    private static readonly Action<CompletionItem>[] s_defaultDirectiveCollectionVerifiers;
-
-    public static Action<CompletionItem>[] DefaultDirectiveCollectionVerifiers => s_defaultDirectiveCollectionVerifiers;
+    public static readonly Action<CompletionItem>[] DefaultDirectiveCollectionVerifiers;
 
     static DirectiveVerifier()
     {
-        var defaultDirectiveVerifierList = new List<Action<CompletionItem>>(DirectiveCompletionItemProvider.MvcDefaultDirectives.Count() * 2);
+        using var builder = new PooledArrayBuilder<Action<CompletionItem>>(capacity: DirectiveCompletionItemProvider.MvcDefaultDirectives.Length * 2);
 
         foreach (var directive in DirectiveCompletionItemProvider.MvcDefaultDirectives)
         {
-            defaultDirectiveVerifierList.Add(item => Assert.Equal(directive.Directive, item.InsertText));
-            defaultDirectiveVerifierList.Add(item => AssertDirectiveSnippet(item, directive.Directive));
+            builder.Add(item => Assert.Equal(directive.Directive, item.InsertText));
+            builder.Add(item => AssertDirectiveSnippet(item, directive.Directive));
         }
 
-        s_defaultDirectiveCollectionVerifiers = defaultDirectiveVerifierList.ToArray();
+        DefaultDirectiveCollectionVerifiers = builder.ToArray();
     }
 
     private static void AssertDirectiveSnippet(CompletionItem completionItem, string directive)
     {
         Assert.StartsWith(directive, completionItem.InsertText);
-        Assert.Equal(DirectiveCompletionItemProvider.s_singleLineDirectiveSnippets[directive].InsertText, completionItem.InsertText);
+        Assert.Equal(DirectiveCompletionItemProvider.SingleLineDirectiveSnippets[directive].InsertText, completionItem.InsertText);
         Assert.Equal(CompletionItemKind.Snippet, completionItem.Kind);
     }
 }

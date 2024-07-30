@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Collections.Generic;
+using System.Collections.Immutable;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
@@ -18,7 +18,7 @@ public sealed class RazorParserOptions
 
     public bool DesignTime { get; }
 
-    public IReadOnlyCollection<DirectiveDescriptor> Directives { get; }
+    public ImmutableArray<DirectiveDescriptor> Directives { get; }
 
     /// <summary>
     /// Gets a value which indicates whether the parser will parse only the leading directives. If <c>true</c>
@@ -30,7 +30,7 @@ public sealed class RazorParserOptions
     /// </remarks>
     public bool ParseLeadingDirectives { get; }
 
-    public RazorLanguageVersion Version { get; } = RazorLanguageVersion.Latest;
+    public RazorLanguageVersion Version { get; }
 
     internal string FileKind { get; }
 
@@ -39,16 +39,14 @@ public sealed class RazorParserOptions
     internal bool EnableSpanEditHandlers { get; }
 
     internal RazorParserOptions(
-        DirectiveDescriptor[] directives,
+        ImmutableArray<DirectiveDescriptor> directives,
         bool designTime,
         bool parseLeadingDirectives,
         RazorLanguageVersion version,
         string fileKind,
         bool enableSpanEditHandlers)
     {
-        ArgHelper.ThrowIfNull(directives);
-
-        Directives = directives;
+        Directives = directives.NullToEmpty();
         DesignTime = designTime;
         ParseLeadingDirectives = parseLeadingDirectives;
         Version = version;
@@ -58,9 +56,7 @@ public sealed class RazorParserOptions
     }
 
     public static RazorParserOptions Create(Action<RazorParserOptionsBuilder> configure)
-    {
-        return Create(configure, fileKind: FileKinds.Legacy);
-    }
+        => Create(configure, fileKind: FileKinds.Legacy);
 
     public static RazorParserOptions Create(Action<RazorParserOptionsBuilder> configure, string? fileKind)
     {
@@ -74,9 +70,7 @@ public sealed class RazorParserOptions
     }
 
     public static RazorParserOptions CreateDesignTime(Action<RazorParserOptionsBuilder> configure)
-    {
-        return CreateDesignTime(configure, fileKind: null);
-    }
+        => CreateDesignTime(configure, fileKind: null);
 
     public static RazorParserOptions CreateDesignTime(Action<RazorParserOptionsBuilder> configure, string? fileKind)
     {

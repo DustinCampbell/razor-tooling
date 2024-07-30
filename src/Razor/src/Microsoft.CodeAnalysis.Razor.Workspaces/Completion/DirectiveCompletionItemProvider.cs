@@ -18,27 +18,26 @@ internal class DirectiveCompletionItemProvider : IRazorCompletionItemProvider
     internal static readonly ImmutableArray<RazorCommitCharacter> SingleLineDirectiveCommitCharacters = RazorCommitCharacter.CreateArray([" "]);
     internal static readonly ImmutableArray<RazorCommitCharacter> BlockDirectiveCommitCharacters = RazorCommitCharacter.CreateArray([" ", "{"]);
 
-    private static readonly IEnumerable<DirectiveDescriptor> s_mvcDefaultDirectives = new[]
-    {
+    private static readonly ImmutableArray<DirectiveDescriptor> s_mvcDefaultDirectives =
+    [
         CSharpCodeParser.AddTagHelperDirectiveDescriptor,
         CSharpCodeParser.RemoveTagHelperDirectiveDescriptor,
         CSharpCodeParser.TagHelperPrefixDirectiveDescriptor,
         CSharpCodeParser.UsingDirectiveDescriptor
-    };
+    ];
 
-    private static readonly IEnumerable<DirectiveDescriptor> s_componentDefaultDirectives = new[]
-    {
+    private static readonly ImmutableArray<DirectiveDescriptor> s_componentDefaultDirectives = 
+    [
         CSharpCodeParser.UsingDirectiveDescriptor
-    };
-
+    ];
 
     // Test accessor
-    internal static IEnumerable<DirectiveDescriptor> MvcDefaultDirectives => s_mvcDefaultDirectives;
-    internal static IEnumerable<DirectiveDescriptor> ComponentDefaultDirectives => s_componentDefaultDirectives;
+    internal static ImmutableArray<DirectiveDescriptor> MvcDefaultDirectives => s_mvcDefaultDirectives;
+    internal static ImmutableArray<DirectiveDescriptor> ComponentDefaultDirectives => s_componentDefaultDirectives;
 
     // internal for testing
     // Do not forget to update both insert and display text !important
-    internal static readonly FrozenDictionary<string, (string InsertText, string DisplayText)> s_singleLineDirectiveSnippets = new Dictionary<string, (string InsertText, string DisplayText)>(StringComparer.Ordinal)
+    internal static readonly FrozenDictionary<string, (string InsertText, string DisplayText)> SingleLineDirectiveSnippets = new Dictionary<string, (string InsertText, string DisplayText)>(StringComparer.Ordinal)
     {
         ["addTagHelper"] = ("addTagHelper ${1:*}, ${2:Microsoft.AspNetCore.Mvc.TagHelpers}", "addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers"),
         ["attribute"] = ("attribute [${1:Authorize}]$0", "attribute [Authorize]"),
@@ -140,8 +139,11 @@ internal class DirectiveCompletionItemProvider : IRazorCompletionItemProvider
     // Internal for testing
     internal static ImmutableArray<RazorCompletionItem> GetDirectiveCompletionItems(RazorSyntaxTree syntaxTree)
     {
-        var defaultDirectives = FileKinds.IsComponent(syntaxTree.Options.FileKind) ? s_componentDefaultDirectives : s_mvcDefaultDirectives;
-        var directives = syntaxTree.Options.Directives.Concat(defaultDirectives);
+        var defaultDirectives = FileKinds.IsComponent(syntaxTree.Options.FileKind)
+            ? s_componentDefaultDirectives
+            : s_mvcDefaultDirectives;
+
+        var directives = syntaxTree.Options.Directives.AddRange(defaultDirectives);
 
         using var completionItems = new PooledArrayBuilder<RazorCompletionItem>();
 
@@ -164,7 +166,7 @@ internal class DirectiveCompletionItemProvider : IRazorCompletionItemProvider
             completionItem.SetDirectiveCompletionDescription(completionDescription);
             completionItems.Add(completionItem);
 
-            if (s_singleLineDirectiveSnippets.TryGetValue(directive.Directive, out var snippetTexts))
+            if (SingleLineDirectiveSnippets.TryGetValue(directive.Directive, out var snippetTexts))
             {
                 var snippetCompletionItem = new RazorCompletionItem(
                     $"{completionDisplayText} {SR.Directive} ...",

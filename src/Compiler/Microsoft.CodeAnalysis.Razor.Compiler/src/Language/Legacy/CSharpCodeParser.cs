@@ -84,22 +84,16 @@ internal class CSharpCodeParser : TokenizerBackedParser<CSharpTokenizer>
     private readonly ImmutableDictionary<string, Action<SyntaxListBuilder<RazorSyntaxNode>, CSharpTransitionSyntax>> _directiveParserMap;
 
     public CSharpCodeParser(ParserContext context)
-        : this(directives: Enumerable.Empty<DirectiveDescriptor>(), context: context)
+        : this(directives: [], context: context)
     {
     }
 
-    public CSharpCodeParser(IEnumerable<DirectiveDescriptor> directives, ParserContext context)
+    public CSharpCodeParser(ImmutableArray<DirectiveDescriptor> directives, ParserContext context)
         : base(context.ParseLeadingDirectives ? FirstDirectiveCSharpLanguageCharacteristics.Instance : CSharpLanguageCharacteristics.Instance, context)
     {
-        if (directives == null)
-        {
-            throw new ArgumentNullException(nameof(directives));
-        }
+        ArgHelper.ThrowIfNull(context);
 
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        directives = directives.NullToEmpty();
 
         var keywordsBuilder = ImmutableHashSet<string>.Empty.ToBuilder();
         var keywordParserMapBuilder = ImmutableDictionary<CSharpSyntaxKind, Action<SyntaxListBuilder<RazorSyntaxNode>, CSharpTransitionSyntax?>>.Empty.ToBuilder();
@@ -145,12 +139,12 @@ internal class CSharpCodeParser : TokenizerBackedParser<CSharpTokenizer>
             keywordParserMapBuilder.Add(CSharpSyntaxKind.AwaitKeyword, ParseAwaitExpression);
         }
 
-        void SetupDirectiveParsers(IEnumerable<DirectiveDescriptor> directiveDescriptors)
+        void SetupDirectiveParsers(ImmutableArray<DirectiveDescriptor> directives)
         {
-            foreach (var directiveDescriptor in directiveDescriptors)
+            foreach (var directive in directives)
             {
-                currentKeywordsBuilder.Add(directiveDescriptor.Directive);
-                MapDirectives((builder, transition) => ParseExtensibleDirective(builder, transition, directiveDescriptor), directiveParserMapBuilder, keywordsBuilder, context, directiveDescriptor.Directive);
+                currentKeywordsBuilder.Add(directive.Directive);
+                MapDirectives((builder, transition) => ParseExtensibleDirective(builder, transition, directive), directiveParserMapBuilder, keywordsBuilder, context, directive.Directive);
             }
 
             MapDirectives(ParseTagHelperPrefixDirective, directiveParserMapBuilder, keywordsBuilder, context, SyntaxConstants.CSharp.TagHelperPrefixKeyword);
