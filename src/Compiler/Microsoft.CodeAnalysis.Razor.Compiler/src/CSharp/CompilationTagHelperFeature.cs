@@ -26,7 +26,7 @@ public sealed class CompilationTagHelperFeature : RazorEngineFeatureBase, ITagHe
             return [];
         }
 
-        var context = TagHelperDescriptorProviderContext.Create(compilation, results);
+        var context = TagHelperDescriptorProviderContext.Create(compilation, targetSymbol: null, results);
 
         for (var i = 0; i < _providers.Length; i++)
         {

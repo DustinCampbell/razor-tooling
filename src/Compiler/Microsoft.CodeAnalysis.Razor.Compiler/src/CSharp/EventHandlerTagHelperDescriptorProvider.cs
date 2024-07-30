@@ -30,9 +30,7 @@ internal class EventHandlerTagHelperDescriptorProvider : ITagHelperDescriptorPro
             return;
         }
 
-        var targetSymbol = context.Items.GetTargetSymbol();
-
-        var collector = new Collector(compilation, targetSymbol, eventHandlerAttribute);
+        var collector = new Collector(compilation, context.TargetSymbol, eventHandlerAttribute);
         collector.Collect(context);
     }
 

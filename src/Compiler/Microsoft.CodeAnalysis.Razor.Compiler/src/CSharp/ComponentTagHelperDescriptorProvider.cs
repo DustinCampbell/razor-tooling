@@ -31,10 +31,7 @@ internal partial class ComponentTagHelperDescriptorProvider : RazorEngineFeature
     {
         ArgHelper.ThrowIfNull(context);
 
-        var compilation = context.Compilation;
-        var targetSymbol = context.Items.GetTargetSymbol();
-
-        var collector = new Collector(compilation, targetSymbol);
+        var collector = new Collector(context.Compilation, context.TargetSymbol);
         collector.Collect(context);
     }
 

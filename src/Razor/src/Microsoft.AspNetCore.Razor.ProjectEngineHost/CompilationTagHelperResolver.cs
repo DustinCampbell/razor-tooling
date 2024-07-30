@@ -39,7 +39,7 @@ internal class CompilationTagHelperResolver(ITelemetryReporter? telemetryReporte
         }
 
         using var _ = HashSetPool<TagHelperDescriptor>.GetPooledObject(out var results);
-        var context = TagHelperDescriptorProviderContext.Create(compilation, results);
+        var context = TagHelperDescriptorProviderContext.Create(compilation, targetSymbol: null, results);
         context.ExcludeHidden = true;
         context.IncludeDocumentation = true;
 
