@@ -208,26 +208,6 @@ public static class RazorCodeDocumentExtensions
         document.Items[typeof(RazorCSharpDocument)] = csharp;
     }
 
-    public static RazorCodeGenerationOptions GetCodeGenerationOptions(this RazorCodeDocument document)
-    {
-        if (document == null)
-        {
-            throw new ArgumentNullException(nameof(document));
-        }
-
-        return (RazorCodeGenerationOptions)document.Items[typeof(RazorCodeGenerationOptions)];
-    }
-
-    public static void SetCodeGenerationOptions(this RazorCodeDocument document, RazorCodeGenerationOptions codeGenerationOptions)
-    {
-        if (document == null)
-        {
-            throw new ArgumentNullException(nameof(document));
-        }
-
-        document.Items[typeof(RazorCodeGenerationOptions)] = codeGenerationOptions;
-    }
-
     public static string GetFileKind(this RazorCodeDocument document)
     {
         if (document == null)
@@ -385,7 +365,7 @@ public static class RazorCodeDocumentExtensions
             }
             else if (fallbackToRootNamespace)
             {
-                var options = document.GetCodeGenerationOptions() ?? document.GetDocumentIntermediateNode()?.Options;
+                var options = document.CodeGenerationOptions ?? document.GetDocumentIntermediateNode()?.Options;
                 baseNamespace = options?.RootNamespace;
                 appendSuffix = true;
 

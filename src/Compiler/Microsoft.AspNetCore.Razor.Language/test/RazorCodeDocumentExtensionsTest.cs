@@ -169,37 +169,6 @@ public class RazorCodeDocumentExtensionsTest
     }
 
     [Fact]
-    public void GetCodeGenerationOptions_ReturnsSuccessfully()
-    {
-        // Arrange
-        var codeDocument = TestRazorCodeDocument.CreateEmpty();
-
-        var expected = RazorCodeGenerationOptions.CreateDefault();
-        codeDocument.Items[typeof(RazorCodeGenerationOptions)] = expected;
-
-        // Act
-        var actual = codeDocument.GetCodeGenerationOptions();
-
-        // Assert
-        Assert.Same(expected, actual);
-    }
-
-    [Fact]
-    public void SetCodeGenerationOptions_SetsSuccessfully()
-    {
-        // Arrange
-        var codeDocument = TestRazorCodeDocument.CreateEmpty();
-
-        var expected = RazorCodeGenerationOptions.CreateDefault();
-
-        // Act
-        codeDocument.SetCodeGenerationOptions(expected);
-
-        // Assert
-        Assert.Same(expected, codeDocument.Items[typeof(RazorCodeGenerationOptions)]);
-    }
-
-    [Fact]
     public void TryComputeNamespace_RootNamespaceNotSet_ReturnsNull()
     {
         // Arrange
@@ -260,11 +229,11 @@ public class RazorCodeDocumentExtensionsTest
     {
         // Arrange
         var sourceDocument = TestRazorSourceDocument.Create(filePath: "C:\\Hello\\Components\\Test.cshtml", relativePath: "\\Components\\Test.cshtml");
-        var codeDocument = TestRazorCodeDocument.Create(sourceDocument, default);
-        codeDocument.SetCodeGenerationOptions(RazorCodeGenerationOptions.Create(c =>
-        {
-            c.RootNamespace = "Hello";
-        }));
+        var codeDocument = new RazorCodeDocument(sourceDocument, imports: default, parserOptions: null,
+            codeGenerationOptions: RazorCodeGenerationOptions.Create(c =>
+            {
+                c.RootNamespace = "Hello";
+            }));
 
         // Act
         codeDocument.TryComputeNamespace(fallbackToRootNamespace: true, out var @namespace);
@@ -322,11 +291,12 @@ public class RazorCodeDocumentExtensionsTest
     {
         // Arrange
         var sourceDocument = TestRazorSourceDocument.Create(filePath: "C:\\Hello\\Components\\Test.cshtml", relativePath: "\\Components\\Test.cshtml");
-        var codeDocument = TestRazorCodeDocument.Create(sourceDocument, default);
-        codeDocument.SetCodeGenerationOptions(RazorCodeGenerationOptions.Create(c =>
-        {
-            c.RootNamespace = "World";
-        }));
+        var codeDocument = new RazorCodeDocument(sourceDocument, imports: default, parserOptions: null,
+            codeGenerationOptions: RazorCodeGenerationOptions.Create(c =>
+            {
+                c.RootNamespace = "World";
+            }));
+
         var documentNode = new DocumentIntermediateNode()
         {
             Options = RazorCodeGenerationOptions.Create(c =>
@@ -334,6 +304,7 @@ public class RazorCodeDocumentExtensionsTest
                 c.RootNamespace = "Hello";
             })
         };
+
         codeDocument.SetDocumentIntermediateNode(documentNode);
 
         // Act

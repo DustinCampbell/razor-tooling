@@ -25,9 +25,11 @@ public class DefaultRazorProjectEngineIntegrationTest
 
         // Assert
         var parserOptions = codeDocument.ParserOptions;
+        Assert.NotNull(parserOptions);
         Assert.False(parserOptions.DesignTime);
 
-        var codeGenerationOptions = codeDocument.GetCodeGenerationOptions();
+        var codeGenerationOptions = codeDocument.CodeGenerationOptions;
+        Assert.NotNull(codeGenerationOptions);
         Assert.False(codeGenerationOptions.DesignTime);
         Assert.False(codeGenerationOptions.SuppressChecksum);
         Assert.False(codeGenerationOptions.SuppressMetadataAttributes);
@@ -46,9 +48,11 @@ public class DefaultRazorProjectEngineIntegrationTest
 
         // Assert
         var parserOptions = codeDocument.ParserOptions;
+        Assert.NotNull(parserOptions);
         Assert.True(parserOptions.DesignTime);
 
-        var codeGenerationOptions = codeDocument.GetCodeGenerationOptions();
+        var codeGenerationOptions = codeDocument.CodeGenerationOptions;
+        Assert.NotNull(codeGenerationOptions);
         Assert.True(codeGenerationOptions.DesignTime);
         Assert.True(codeGenerationOptions.SuppressChecksum);
         Assert.True(codeGenerationOptions.SuppressMetadataAttributes);

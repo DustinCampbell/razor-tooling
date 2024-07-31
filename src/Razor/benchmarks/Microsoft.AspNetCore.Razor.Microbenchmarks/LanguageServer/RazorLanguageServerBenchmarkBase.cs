@@ -1,15 +1,15 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
-#nullable disable
-
 using System;
+using System.Collections.Immutable;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.LanguageServer;
 using Microsoft.AspNetCore.Razor.LanguageServer.Hosting;
+using Microsoft.AspNetCore.Razor.ProjectEngineHost;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Telemetry;
 using Microsoft.CodeAnalysis;
@@ -39,6 +39,7 @@ public class RazorLanguageServerBenchmarkBase : ProjectSnapshotManagerBenchmarkB
             {
                 collection.AddSingleton<IOnInitialized, NoopClientNotifierService>();
                 collection.AddSingleton<IClientConnection, NoopClientNotifierService>();
+                collection.AddSingleton<IRazorProjectInfoDriver, NoopRazorProjectInfoDriver>();
                 Builder(collection);
             },
             featureOptions: BuildFeatureOptions());
@@ -48,7 +49,7 @@ public class RazorLanguageServerBenchmarkBase : ProjectSnapshotManagerBenchmarkB
     {
     }
 
-    private protected virtual LanguageServerFeatureOptions BuildFeatureOptions()
+    private protected virtual LanguageServerFeatureOptions? BuildFeatureOptions()
     {
         return null;
     }
@@ -57,16 +58,25 @@ public class RazorLanguageServerBenchmarkBase : ProjectSnapshotManagerBenchmarkB
 
     private protected ILogger Logger { get; }
 
-    internal async Task<IDocumentSnapshot> GetDocumentSnapshotAsync(string projectFilePath, string filePath, string targetPath)
+    internal static async Task<IDocumentSnapshot> GetDocumentSnapshotAsync(string projectFilePath, string filePath, string targetPath, string? rootNamespace = null)
     {
-        var intermediateOutputPath = Path.Combine(Path.GetDirectoryName(projectFilePath), "obj");
-        var hostProject = new HostProject(projectFilePath, intermediateOutputPath, RazorConfiguration.Default, rootNamespace: null);
+        var intermediateOutputPath = Path.Combine(Path.GetDirectoryName(projectFilePath).AssumeNotNull(), "obj");
+        var hostProject = new HostProject(
+            projectFilePath,
+            intermediateOutputPath,
+            RazorConfiguration.Default,
+            rootNamespace);
+
         using var fileStream = new FileStream(filePath, FileMode.Open);
         var text = SourceText.From(fileStream);
         var textLoader = TextLoader.From(TextAndVersion.Create(text, VersionStamp.Create()));
         var hostDocument = new HostDocument(filePath, targetPath, FileKinds.Component);
 
-        var projectManager = CreateProjectSnapshotManager();
+        var projectEngineFactoryProvider = rootNamespace is not null
+            ? new ProjectEngineFactoryProvider(rootNamespace)
+            : null;
+
+        using var projectManager = CreateProjectSnapshotManager(projectEngineFactoryProvider);
 
         await projectManager.UpdateAsync(
             updater =>
@@ -81,7 +91,25 @@ public class RazorLanguageServerBenchmarkBase : ProjectSnapshotManagerBenchmarkB
 
         var projectSnapshot = projectManager.GetLoadedProject(hostProject.Key);
 
-        return projectSnapshot.GetDocument(filePath);
+        return projectSnapshot.GetDocument(filePath).AssumeNotNull();
+    }
+
+    private sealed class ProjectEngineFactoryProvider(string rootNamespace) : IProjectEngineFactoryProvider
+    {
+        public IProjectEngineFactory GetFactory(RazorConfiguration configuration)
+            => new Factory(rootNamespace);
+
+        private sealed class Factory(string rootNamespace) : IProjectEngineFactory
+        {
+            public string ConfigurationName => "FactoryWithRootNamespace";
+
+            public RazorProjectEngine Create(RazorConfiguration configuration, RazorProjectFileSystem fileSystem, Action<RazorProjectEngineBuilder>? configure)
+                => RazorProjectEngine.Create(builder =>
+                {
+                    configure?.Invoke(builder);
+                    builder.SetRootNamespace(rootNamespace);
+                });
+        }
     }
 
     private class NoopClientNotifierService : IClientConnection, IOnInitialized
@@ -105,5 +133,18 @@ public class RazorLanguageServerBenchmarkBase : ProjectSnapshotManagerBenchmarkB
         {
             throw new NotImplementedException();
         }
+    }
+
+    private sealed class NoopRazorProjectInfoDriver : IRazorProjectInfoDriver
+    {
+        public void AddListener(IRazorProjectInfoListener listener)
+        {
+        }
+
+        public ImmutableArray<RazorProjectInfo> GetLatestProjectInfo()
+            => [];
+
+        public Task WaitForInitializationAsync()
+            => Task.CompletedTask;
     }
 }

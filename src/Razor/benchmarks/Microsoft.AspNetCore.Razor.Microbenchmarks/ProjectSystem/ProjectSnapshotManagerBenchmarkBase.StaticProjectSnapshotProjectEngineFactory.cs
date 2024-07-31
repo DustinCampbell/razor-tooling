@@ -10,7 +10,7 @@ namespace Microsoft.AspNetCore.Razor.Microbenchmarks;
 
 public abstract partial class ProjectSnapshotManagerBenchmarkBase
 {
-    private class StaticProjectEngineFactoryProvider : IProjectEngineFactoryProvider
+    private sealed class StaticProjectEngineFactoryProvider : IProjectEngineFactoryProvider
     {
         public static readonly StaticProjectEngineFactoryProvider Instance = new();
 

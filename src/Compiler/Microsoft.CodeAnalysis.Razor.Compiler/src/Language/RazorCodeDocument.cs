@@ -10,6 +10,7 @@ public sealed class RazorCodeDocument
     public RazorSourceDocument Source { get; }
     public ImmutableArray<RazorSourceDocument> Imports { get; }
     public RazorParserOptions? ParserOptions { get; }
+    public RazorCodeGenerationOptions? CodeGenerationOptions { get; }
     public ItemCollection Items { get; }
 
     public RazorCodeDocument(RazorSourceDocument source)
@@ -33,12 +34,8 @@ public sealed class RazorCodeDocument
         Source = source;
         Imports = imports.NullToEmpty();
         ParserOptions = parserOptions;
+        CodeGenerationOptions = codeGenerationOptions;
 
         Items = [];
-
-        if (codeGenerationOptions is not null)
-        {
-            this.SetCodeGenerationOptions(codeGenerationOptions);
-        }
     }
 }

@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Components;
 using Microsoft.AspNetCore.Razor.Language.Extensions;
 using Microsoft.AspNetCore.Razor.LanguageServer.CodeActions.Models;
+using Microsoft.AspNetCore.Razor.Test.Common;
 using Microsoft.AspNetCore.Razor.Test.Common.LanguageServer;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.Protocol.CodeActions;
@@ -380,29 +381,35 @@ public class ExtractToCodeBehindCodeActionProviderTest(ITestOutputHelper testOut
     private static RazorCodeActionContext CreateRazorCodeActionContext(VSCodeActionParams request, SourceLocation location, string filePath, string text, string? relativePath, bool supportsFileCreation = true)
     {
         var sourceDocument = RazorSourceDocument.Create(text, RazorSourceDocumentProperties.Create(filePath, relativePath));
-        var options = RazorParserOptions.Create(o =>
-        {
-            o.Directives.Add(ComponentCodeDirective.Descriptor);
-            o.Directives.Add(FunctionsDirective.Descriptor);
-        });
-        var syntaxTree = RazorSyntaxTree.Parse(sourceDocument, options);
 
-        var codeDocument = TestRazorCodeDocument.Create(sourceDocument, imports: default);
-        codeDocument.SetFileKind(FileKinds.Component);
-        codeDocument.SetCodeGenerationOptions(RazorCodeGenerationOptions.Create(o =>
+        var parserOptions = RazorParserOptions.Create(builder =>
         {
-            o.RootNamespace = "ExtractToCodeBehindTest";
-        }));
+            builder.Directives.Add(ComponentCodeDirective.Descriptor);
+            builder.Directives.Add(FunctionsDirective.Descriptor);
+        });
+
+        var codeGenerationOptions = RazorCodeGenerationOptions.Create(builder =>
+        {
+            builder.RootNamespace = "ExtractToCodeBehindTest";
+        });
+
+        var syntaxTree = RazorSyntaxTree.Parse(sourceDocument, parserOptions);
+
+        var codeDocument = new RazorCodeDocument(sourceDocument, imports: default, parserOptions, codeGenerationOptions);
+
+        codeDocument.SetFileKind(FileKinds.Component);
         codeDocument.SetSyntaxTree(syntaxTree);
 
-        var documentSnapshot = Mock.Of<IDocumentSnapshot>(document =>
-            document.GetGeneratedOutputAsync() == Task.FromResult(codeDocument) &&
-            document.GetTextAsync() == Task.FromResult(codeDocument.Source.Text), MockBehavior.Strict);
+        var documentSnapshotMock = new StrictMock<IDocumentSnapshot>();
+        documentSnapshotMock
+            .Setup(x => x.GetGeneratedOutputAsync())
+            .ReturnsAsync(codeDocument);
+        documentSnapshotMock
+            .Setup(x => x.GetTextAsync())
+            .ReturnsAsync(codeDocument.Source.Text);
 
         var sourceText = SourceText.From(text);
 
-        var context = new RazorCodeActionContext(request, documentSnapshot, codeDocument, location, sourceText, supportsFileCreation, SupportsCodeActionResolve: true);
-
-        return context;
+        return new RazorCodeActionContext(request, documentSnapshotMock.Object, codeDocument, location, sourceText, supportsFileCreation, SupportsCodeActionResolve: true);
     }
 }

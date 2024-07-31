@@ -25,8 +25,7 @@ internal sealed class EliminateMethodBodyPass : IntermediateNodePassBase, IRazor
             throw new ArgumentNullException(nameof(documentNode));
         }
 
-        var codeGenerationOptions = codeDocument.GetCodeGenerationOptions();
-        if (codeGenerationOptions == null || !codeGenerationOptions.SuppressPrimaryMethodBody)
+        if (codeDocument.CodeGenerationOptions is null or { SuppressPrimaryMethodBody: false })
         {
             return;
         }
