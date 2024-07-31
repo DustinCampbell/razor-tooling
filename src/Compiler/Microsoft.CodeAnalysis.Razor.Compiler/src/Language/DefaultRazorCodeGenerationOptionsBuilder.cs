@@ -49,7 +49,7 @@ internal class DefaultRazorCodeGenerationOptionsBuilder : RazorCodeGenerationOpt
 
     public override RazorCodeGenerationOptions Build()
     {
-        return new DefaultRazorCodeGenerationOptions(
+        return new RazorCodeGenerationOptions(
             IndentWithTabs,
             IndentSize,
             DesignTime,
