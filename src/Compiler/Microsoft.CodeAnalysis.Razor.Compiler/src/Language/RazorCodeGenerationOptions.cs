@@ -144,7 +144,7 @@ public sealed class RazorCodeGenerationOptions(
     {
         ArgHelper.ThrowIfNull(configure);
 
-        var builder = new DefaultRazorCodeGenerationOptionsBuilder(designTime: false);
+        var builder = new RazorCodeGenerationOptionsBuilder(designTime: false);
         configure(builder);
 
         return builder.Build();
@@ -154,7 +154,7 @@ public sealed class RazorCodeGenerationOptions(
     {
         ArgHelper.ThrowIfNull(configure);
 
-        var builder = new DefaultRazorCodeGenerationOptionsBuilder(designTime: true)
+        var builder = new RazorCodeGenerationOptionsBuilder(designTime: true)
         {
             SuppressMetadataAttributes = true,
         };
