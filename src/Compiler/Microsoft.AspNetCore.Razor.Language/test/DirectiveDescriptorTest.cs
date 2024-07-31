@@ -14,7 +14,7 @@ public class DirectiveDescriptorTest
     public void CreateDirective_CreatesDirective_WithProvidedKind()
     {
         // Arrange & Act
-        var directive = DirectiveDescriptor.CreateDirective("test", DirectiveKind.SingleLine);
+        var directive = DirectiveDescriptor.Create("test", DirectiveKind.SingleLine);
 
         // Assert
         Assert.Equal("test", directive.Name);
@@ -29,7 +29,7 @@ public class DirectiveDescriptorTest
         Action<IDirectiveDescriptorBuilder> configure = b => { called = true; };
 
         // Act
-        var directive = DirectiveDescriptor.CreateDirective("test", DirectiveKind.SingleLine, configure);
+        var directive = DirectiveDescriptor.Create("test", DirectiveKind.SingleLine, configure);
 
         // Assert
         Assert.Equal("test", directive.Name);
@@ -41,7 +41,7 @@ public class DirectiveDescriptorTest
     public void CreateSingleLineDirective_CreatesSingleLineDirective()
     {
         // Arrange & Act
-        var directive = DirectiveDescriptor.CreateSingleLineDirective("test");
+        var directive = DirectiveDescriptor.CreateSingleLine("test");
 
         // Assert
         Assert.Equal("test", directive.Name);
@@ -56,7 +56,7 @@ public class DirectiveDescriptorTest
         Action<IDirectiveDescriptorBuilder> configure = b => { called = true; };
 
         // Act
-        var directive = DirectiveDescriptor.CreateSingleLineDirective("test", configure);
+        var directive = DirectiveDescriptor.CreateSingleLine("test", configure);
 
         // Assert
         Assert.Equal("test", directive.Name);
@@ -68,7 +68,7 @@ public class DirectiveDescriptorTest
     public void CreateRazorBlockDirective_CreatesRazorBlockDirective()
     {
         // Arrange & Act
-        var directive = DirectiveDescriptor.CreateRazorBlockDirective("test");
+        var directive = DirectiveDescriptor.CreateRazorBlock("test");
 
         // Assert
         Assert.Equal("test", directive.Name);
@@ -83,7 +83,7 @@ public class DirectiveDescriptorTest
         Action<IDirectiveDescriptorBuilder> configure = b => { called = true; };
 
         // Act
-        var directive = DirectiveDescriptor.CreateRazorBlockDirective("test", configure);
+        var directive = DirectiveDescriptor.CreateRazorBlock("test", configure);
 
         // Assert
         Assert.Equal("test", directive.Name);
@@ -95,7 +95,7 @@ public class DirectiveDescriptorTest
     public void CreateCodeBlockDirective_CreatesCodeBlockDirective()
     {
         // Arrange & Act
-        var directive = DirectiveDescriptor.CreateCodeBlockDirective("test");
+        var directive = DirectiveDescriptor.CreateCodeBlock("test");
 
         // Assert
         Assert.Equal("test", directive.Name);
@@ -110,7 +110,7 @@ public class DirectiveDescriptorTest
         Action<IDirectiveDescriptorBuilder> configure = b => { called = true; };
 
         // Act
-        var directive = DirectiveDescriptor.CreateCodeBlockDirective("test", configure);
+        var directive = DirectiveDescriptor.CreateCodeBlock("test", configure);
 
         // Assert
         Assert.Equal("test", directive.Name);
@@ -122,7 +122,7 @@ public class DirectiveDescriptorTest
     public void Build_ValidatesDirectiveKeyword_EmptyIsInvalid()
     {
         // Arrange & Act
-        var ex = Assert.Throws<InvalidOperationException>(() => DirectiveDescriptor.CreateSingleLineDirective(""));
+        var ex = Assert.Throws<InvalidOperationException>(() => DirectiveDescriptor.CreateSingleLine(""));
 
         // Assert
         Assert.Equal("Invalid directive keyword ''. Directives must have a non-empty keyword that consists only of letters.", ex.Message);
@@ -132,7 +132,7 @@ public class DirectiveDescriptorTest
     public void Build_ValidatesDirectiveKeyword_InvalidCharacter()
     {
         // Arrange & Act
-        var ex = Assert.Throws<InvalidOperationException>(() => DirectiveDescriptor.CreateSingleLineDirective("test_directive"));
+        var ex = Assert.Throws<InvalidOperationException>(() => DirectiveDescriptor.CreateSingleLine("test_directive"));
 
         // Assert
         Assert.Equal("Invalid directive keyword 'test_directive'. Directives must have a non-empty keyword that consists only of letters.", ex.Message);
@@ -143,7 +143,7 @@ public class DirectiveDescriptorTest
     {
         // Arrange & Act
         var ex = Assert.Throws<InvalidOperationException>(
-            () => DirectiveDescriptor.CreateSingleLineDirective("test", b => { b.AddOptionalMemberToken(); b.AddMemberToken(); }));
+            () => DirectiveDescriptor.CreateSingleLine("test", b => { b.AddOptionalMemberToken(); b.AddMemberToken(); }));
 
         // Assert
         Assert.Equal("A non-optional directive token cannot follow an optional directive token.", ex.Message);

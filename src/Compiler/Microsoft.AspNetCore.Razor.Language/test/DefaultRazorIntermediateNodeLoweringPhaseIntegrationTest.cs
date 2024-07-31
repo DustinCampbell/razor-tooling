@@ -410,7 +410,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
         // Act
         var documentNode = Lower(codeDocument, b =>
         {
-            b.AddDirective(DirectiveDescriptor.CreateDirective(
+            b.AddDirective(DirectiveDescriptor.Create(
                 "test",
                 DirectiveKind.SingleLine,
                 builder =>
@@ -440,7 +440,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
         // Act
         var documentNode = Lower(codeDocument, b =>
         {
-            b.AddDirective(DirectiveDescriptor.CreateDirective("block", DirectiveKind.RazorBlock, d => d.AddMemberToken()));
+            b.AddDirective(DirectiveDescriptor.Create("block", DirectiveKind.RazorBlock, d => d.AddMemberToken()));
         });
 
         // Assert

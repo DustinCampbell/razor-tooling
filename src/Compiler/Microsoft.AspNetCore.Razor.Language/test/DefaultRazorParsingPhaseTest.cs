@@ -87,7 +87,7 @@ public class DefaultRazorParsingPhaseTest
 
         public void Configure(RazorParserOptionsBuilder options)
         {
-            options.Directives.Add(DirectiveDescriptor.CreateDirective("test", DirectiveKind.SingleLine));
+            options.Directives.Add(DirectiveDescriptor.Create("test", DirectiveKind.SingleLine));
         }
     }
 }

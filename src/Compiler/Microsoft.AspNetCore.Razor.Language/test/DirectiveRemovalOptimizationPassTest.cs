@@ -22,7 +22,7 @@ public class DirectiveRemovalOptimizationPassTest
         var codeDocument = new RazorCodeDocument(sourceDocument);
         var defaultEngine = RazorProjectEngine.Create(b =>
         {
-            b.AddDirective(DirectiveDescriptor.CreateDirective("custom", DirectiveKind.SingleLine, d => d.AddStringToken()));
+            b.AddDirective(DirectiveDescriptor.Create("custom", DirectiveKind.SingleLine, d => d.AddStringToken()));
         }).Engine;
         var documentNode = Lower(codeDocument, defaultEngine);
         var pass = new DirectiveRemovalOptimizationPass()
@@ -56,7 +56,7 @@ public class DirectiveRemovalOptimizationPassTest
         var codeDocument = new RazorCodeDocument(sourceDocument);
         var defaultEngine = RazorProjectEngine.Create(b =>
         {
-            b.AddDirective(DirectiveDescriptor.CreateDirective("custom", DirectiveKind.SingleLine, d => d.AddStringToken()));
+            b.AddDirective(DirectiveDescriptor.Create("custom", DirectiveKind.SingleLine, d => d.AddStringToken()));
         }).Engine;
         var documentNode = Lower(codeDocument, defaultEngine);
         var pass = new DirectiveRemovalOptimizationPass()
@@ -88,7 +88,7 @@ public class DirectiveRemovalOptimizationPassTest
         var codeDocument = new RazorCodeDocument(sourceDocument);
         var defaultEngine = RazorProjectEngine.Create(b =>
         {
-            b.AddDirective(DirectiveDescriptor.CreateDirective("custom", DirectiveKind.SingleLine, d => d.AddStringToken()));
+            b.AddDirective(DirectiveDescriptor.Create("custom", DirectiveKind.SingleLine, d => d.AddStringToken()));
         }).Engine;
         var documentNode = Lower(codeDocument, defaultEngine);
 

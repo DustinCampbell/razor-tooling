@@ -25,7 +25,7 @@ public class SectionDirectivePassTest
         var codeDocument = new RazorCodeDocument(sourceDocument);
 
         var irDocument = new DocumentIntermediateNode();
-        irDocument.Children.Add(new DirectiveIntermediateNode() { Directive = SectionDirective.Directive, });
+        irDocument.Children.Add(new DirectiveIntermediateNode() { Directive = SectionDirective.Descriptor, });
 
         // Act
         pass.Execute(codeDocument, irDocument);

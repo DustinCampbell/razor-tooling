@@ -15,7 +15,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void DirectiveDescriptor_FileScopedMultipleOccurring_CanHaveDuplicates()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.SingleLine,
             builder =>
@@ -35,7 +35,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void DirectiveDescriptor_FileScopedSinglyOccurring_ErrorsIfDuplicate()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.SingleLine,
             builder =>
@@ -55,7 +55,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void DirectiveDescriptor_FileScoped_CanBeBeneathOtherDirectives()
     {
         // Arrange
-        var customDescriptor = DirectiveDescriptor.CreateDirective(
+        var customDescriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.SingleLine,
             builder =>
@@ -63,7 +63,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
                 builder.Usage = DirectiveUsage.FileScopedSinglyOccurring;
                 builder.AddTypeToken();
             });
-        var somethingDescriptor = DirectiveDescriptor.CreateDirective(
+        var somethingDescriptor = DirectiveDescriptor.Create(
             "something",
             DirectiveKind.SingleLine,
             builder =>
@@ -83,7 +83,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void DirectiveDescriptor_FileScoped_CanBeBeneathOtherWhiteSpaceCommentsAndDirectives()
     {
         // Arrange
-        var customDescriptor = DirectiveDescriptor.CreateDirective(
+        var customDescriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.SingleLine,
             builder =>
@@ -91,7 +91,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
                 builder.Usage = DirectiveUsage.FileScopedSinglyOccurring;
                 builder.AddTypeToken();
             });
-        var somethingDescriptor = DirectiveDescriptor.CreateDirective(
+        var somethingDescriptor = DirectiveDescriptor.Create(
             "something",
             DirectiveKind.SingleLine,
             builder =>
@@ -115,7 +115,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void DirectiveDescriptor_TokensMustBeSeparatedBySpace()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.SingleLine,
             b => b.AddStringToken().AddStringToken());
@@ -130,7 +130,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void DirectiveDescriptor_CanHandleEOFIncompleteNamespaceTokens()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.SingleLine,
             b => b.AddNamespaceToken());
@@ -145,7 +145,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void DirectiveDescriptor_CanHandleEOFInvalidNamespaceTokens()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.SingleLine,
             b => b.AddNamespaceToken());
@@ -159,7 +159,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void DirectiveDescriptor_CanHandleIncompleteNamespaceTokens()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.SingleLine,
             b => b.AddNamespaceToken());
@@ -176,7 +176,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void DirectiveDescriptor_CanHandleInvalidNamespaceTokens()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.SingleLine,
             b => b.AddNamespaceToken());
@@ -193,7 +193,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void ExtensibleDirectiveDoesNotErrorIfNotAtStartOfLineBecauseOfWhitespace()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.SingleLine,
             b => b.AddTypeToken());
@@ -230,7 +230,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void ExtensibleDirectiveErrorsIfNotAtStartOfLine()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.SingleLine,
             b => b.AddTypeToken());
@@ -248,7 +248,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void DirectiveDescriptor_UnderstandsTypeTokens()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.SingleLine,
             b => b.AddTypeToken());
@@ -263,7 +263,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void DirectiveDescriptor_UnderstandsMemberTokens()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.SingleLine,
             b => b.AddMemberToken());
@@ -278,7 +278,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void Parser_ParsesNamespaceDirectiveToken_WithSingleSegment()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.SingleLine,
             b => b.AddNamespaceToken());
@@ -293,7 +293,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void Parser_ParsesNamespaceDirectiveToken_WithMultipleSegments()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.SingleLine,
             b => b.AddNamespaceToken());
@@ -308,7 +308,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void DirectiveDescriptor_UnderstandsStringTokens()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.SingleLine,
             b => b.AddStringToken());
@@ -323,7 +323,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void DirectiveDescriptor_StringToken_ParserErrorForUnquotedValue()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.SingleLine,
             b => b.AddStringToken());
@@ -338,7 +338,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void DirectiveDescriptor_StringToken_ParserErrorForNonStringValue()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.SingleLine,
             b => b.AddStringToken());
@@ -353,7 +353,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void DirectiveDescriptor_StringToken_ParserErrorForSingleQuotedValue()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.SingleLine,
             b => b.AddStringToken());
@@ -368,7 +368,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void DirectiveDescriptor_StringToken_ParserErrorForPartialQuotedValue()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.SingleLine,
             b => b.AddStringToken());
@@ -383,7 +383,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void DirectiveDescriptor_UnderstandsMultipleTokens()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.SingleLine,
             b => b.AddTypeToken().AddMemberToken().AddStringToken());
@@ -398,7 +398,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void DirectiveDescriptor_UnderstandsRazorBlocks()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.RazorBlock,
             b => b.AddStringToken());
@@ -413,7 +413,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void DirectiveDescriptor_UnderstandsCodeBlocks()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.CodeBlock,
             b => b.AddStringToken());
@@ -428,7 +428,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void DirectiveDescriptor_AllowsWhiteSpaceAroundTokens()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.SingleLine,
             b => b.AddTypeToken().AddMemberToken());
@@ -443,7 +443,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void DirectiveDescriptor_ErrorsForInvalidMemberTokens()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.SingleLine,
             b => b.AddMemberToken());
@@ -458,7 +458,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void DirectiveDescriptor_NoErrorsSemicolonAfterDirective()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.SingleLine,
             b => b.AddStringToken());
@@ -485,7 +485,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
 
         var directiveName = "custom";
         var source = $"@{directiveName}";
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             directiveName,
             DirectiveKind.SingleLine,
             b =>
@@ -523,7 +523,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
 
         var directiveName = "custom";
         var source = $"@{directiveName}";
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             directiveName,
             DirectiveKind.SingleLine,
             b =>
@@ -549,7 +549,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void DirectiveDescriptor_AllowsTupleTypes_IgnoresTrailingWhitespace()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.SingleLine,
             b => b.AddTypeToken());
@@ -564,7 +564,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void DirectiveDescriptor_ErrorsExtraContentAfterDirective()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.SingleLine,
             b => b.AddStringToken());
@@ -579,7 +579,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void DirectiveDescriptor_ErrorsWhenExtraContentBeforeBlockStart()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.CodeBlock,
             b => b.AddStringToken());
@@ -594,7 +594,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void DirectiveDescriptor_ErrorsWhenEOFBeforeDirectiveBlockStart()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.CodeBlock,
             b => b.AddStringToken());
@@ -609,7 +609,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void DirectiveDescriptor_ErrorsWhenMissingEndBrace()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.CodeBlock,
             b => b.AddStringToken());
@@ -758,7 +758,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     {
         ParseDocumentTest(
             "@inherits string[[]][]",
-            [InheritsDirective.Directive]);
+            [InheritsDirective.Descriptor]);
     }
 
     [Fact]
@@ -766,7 +766,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     {
         ParseDocumentTest(
             "@inherits System.Web.Mvc.WebViewPage<IEnumerable<MvcApplication2.Models.RegisterModel>>",
-            [InheritsDirective.Directive]);
+            [InheritsDirective.Descriptor]);
     }
 
     [Fact]
@@ -774,7 +774,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     {
         ParseDocumentTest(
             "@inherits string",
-            [InheritsDirective.Directive]);
+            [InheritsDirective.Descriptor]);
     }
 
     [Fact]
@@ -782,7 +782,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     {
         ParseDocumentTest(
             "@functions { foo(); bar(); }",
-            [FunctionsDirective.Directive]);
+            [FunctionsDirective.Descriptor]);
     }
 
     [Fact]
@@ -790,7 +790,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     {
         ParseDocumentTest(
             "@functions { }",
-            [FunctionsDirective.Directive]);
+            [FunctionsDirective.Descriptor]);
     }
 
     [Fact]
@@ -798,7 +798,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     {
         ParseDocumentTest(
             "@section Header { <p>F{o}o</p> }",
-            [SectionDirective.Directive]);
+            [SectionDirective.Descriptor]);
     }
 
     [Fact]
@@ -812,7 +812,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     // something
 }
 """,
-            [ComponentConstrainedTypeParamDirective.Directive]);
+            [ComponentConstrainedTypeParamDirective.Descriptor]);
     }
 
     [Fact]
@@ -826,14 +826,14 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     // something
 }
 """,
-            [ComponentConstrainedTypeParamDirective.Directive]);
+            [ComponentConstrainedTypeParamDirective.Descriptor]);
     }
 
     [Fact]
     public void OptionalDirectiveTokens_AreSkipped()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.SingleLine,
             b => b.AddOptionalStringToken());
@@ -848,7 +848,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void OptionalDirectiveTokens_WithSimpleTokens_AreParsed()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.SingleLine,
             b => b.AddOptionalStringToken());
@@ -863,7 +863,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void OptionalDirectiveTokens_WithBraces_AreParsed()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.SingleLine,
             b => b.AddOptionalStringToken());
@@ -878,7 +878,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void OptionalDirectiveTokens_WithMultipleOptionalTokens_AreParsed()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.SingleLine,
             b => b.AddOptionalStringToken().AddOptionalTypeToken());
@@ -893,7 +893,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void OptionalMemberTokens_WithMissingMember_IsParsed()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "TestDirective",
             DirectiveKind.SingleLine,
             b => b.AddOptionalMemberToken().AddOptionalStringToken());
@@ -908,7 +908,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void OptionalMemberTokens_WithMemberSpecified_IsParsed()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "TestDirective",
             DirectiveKind.SingleLine,
             b => b.AddOptionalMemberToken().AddOptionalStringToken());
@@ -923,7 +923,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void Directives_CanUseReservedWord_Class()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "class",
             DirectiveKind.SingleLine);
 
@@ -937,7 +937,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void Directives_CanUseReservedWord_Namespace()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "namespace",
             DirectiveKind.SingleLine);
 
@@ -957,7 +957,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void DirectiveDescriptor_UnderstandsGenericConstraintsToken()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.SingleLine,
             b =>
@@ -977,7 +977,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void DirectiveDescriptor_GenericConstraintTokenWorksWhenAtEndOfFile()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.SingleLine,
             b =>
@@ -996,7 +996,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void DirectiveDescriptor_GenericConstraintTokenProducesErrorWhenFirstTokenIsNotWhereKeyword()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.SingleLine,
             b =>
@@ -1015,7 +1015,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void DirectiveDescriptor_GenericConstraintErrorsWhenConstraintIdentifierIsDifferent()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.SingleLine,
             b =>
@@ -1034,7 +1034,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void DirectiveDescriptor_UnderstandsAttributeTokens()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.SingleLine,
             b => b.AddAttributeToken());
@@ -1051,7 +1051,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void DirectiveDescriptor_AttributeToken_BalancesBrackets()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.SingleLine,
             b => b.AddAttributeToken());
@@ -1067,7 +1067,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void DirectiveDescriptor_MultilineAttributeToken_BalancesBrackets()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.SingleLine,
             b => b.AddAttributeToken());
@@ -1088,7 +1088,7 @@ public class RazorDirectivesTest() : ParserTestBase(layer: TestProject.Layer.Com
     public void DirectiveDescriptor_AttributeToken_ErrorsIfDoesNotStartWithOpenBracket()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
+        var descriptor = DirectiveDescriptor.Create(
             "custom",
             DirectiveKind.SingleLine,
             b => b.AddAttributeToken());

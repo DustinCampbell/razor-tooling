@@ -374,8 +374,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                         {
                             directiveNode = new MalformedDirectiveIntermediateNode()
                             {
-                                DirectiveName = CSharpCodeParser.AddTagHelperDirectiveDescriptor.Name,
-                                Directive = CSharpCodeParser.AddTagHelperDirectiveDescriptor,
+                                DirectiveName = CSharpCodeParser.AddTagHelperDescriptor.Name,
+                                Directive = CSharpCodeParser.AddTagHelperDescriptor,
                                 Source = BuildSourceSpanFromNode(node),
                             };
                         }
@@ -383,8 +383,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                         {
                             directiveNode = new DirectiveIntermediateNode()
                             {
-                                DirectiveName = CSharpCodeParser.AddTagHelperDirectiveDescriptor.Name,
-                                Directive = CSharpCodeParser.AddTagHelperDirectiveDescriptor,
+                                DirectiveName = CSharpCodeParser.AddTagHelperDescriptor.Name,
+                                Directive = CSharpCodeParser.AddTagHelperDescriptor,
                                 Source = BuildSourceSpanFromNode(node),
                             };
                         }
@@ -399,7 +399,7 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                         _builder.Add(new DirectiveTokenIntermediateNode()
                         {
                             Content = addTagHelperChunkGenerator.LookupText,
-                            DirectiveToken = CSharpCodeParser.AddTagHelperDirectiveDescriptor.Tokens[0],
+                            DirectiveToken = CSharpCodeParser.AddTagHelperDescriptor.Tokens[0],
                             Source = BuildSourceSpanFromNode(node),
                         });
 
@@ -413,8 +413,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                         {
                             directiveNode = new MalformedDirectiveIntermediateNode()
                             {
-                                DirectiveName = CSharpCodeParser.RemoveTagHelperDirectiveDescriptor.Name,
-                                Directive = CSharpCodeParser.RemoveTagHelperDirectiveDescriptor,
+                                DirectiveName = CSharpCodeParser.RemoveTagHelperDescriptor.Name,
+                                Directive = CSharpCodeParser.RemoveTagHelperDescriptor,
                                 Source = BuildSourceSpanFromNode(node),
                             };
                         }
@@ -422,8 +422,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                         {
                             directiveNode = new DirectiveIntermediateNode()
                             {
-                                DirectiveName = CSharpCodeParser.RemoveTagHelperDirectiveDescriptor.Name,
-                                Directive = CSharpCodeParser.RemoveTagHelperDirectiveDescriptor,
+                                DirectiveName = CSharpCodeParser.RemoveTagHelperDescriptor.Name,
+                                Directive = CSharpCodeParser.RemoveTagHelperDescriptor,
                                 Source = BuildSourceSpanFromNode(node),
                             };
                         }
@@ -438,7 +438,7 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                         _builder.Add(new DirectiveTokenIntermediateNode()
                         {
                             Content = removeTagHelperChunkGenerator.LookupText,
-                            DirectiveToken = CSharpCodeParser.RemoveTagHelperDirectiveDescriptor.Tokens[0],
+                            DirectiveToken = CSharpCodeParser.RemoveTagHelperDescriptor.Tokens[0],
                             Source = BuildSourceSpanFromNode(node),
                         });
 
@@ -452,8 +452,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                         {
                             directiveNode = new MalformedDirectiveIntermediateNode()
                             {
-                                DirectiveName = CSharpCodeParser.TagHelperPrefixDirectiveDescriptor.Name,
-                                Directive = CSharpCodeParser.TagHelperPrefixDirectiveDescriptor,
+                                DirectiveName = CSharpCodeParser.TagHelperPrefixDescriptor.Name,
+                                Directive = CSharpCodeParser.TagHelperPrefixDescriptor,
                                 Source = BuildSourceSpanFromNode(node),
                             };
                         }
@@ -461,8 +461,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                         {
                             directiveNode = new DirectiveIntermediateNode()
                             {
-                                DirectiveName = CSharpCodeParser.TagHelperPrefixDirectiveDescriptor.Name,
-                                Directive = CSharpCodeParser.TagHelperPrefixDirectiveDescriptor,
+                                DirectiveName = CSharpCodeParser.TagHelperPrefixDescriptor.Name,
+                                Directive = CSharpCodeParser.TagHelperPrefixDescriptor,
                                 Source = BuildSourceSpanFromNode(node),
                             };
                         }
@@ -477,7 +477,7 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                         _builder.Add(new DirectiveTokenIntermediateNode()
                         {
                             Content = tagHelperPrefixChunkGenerator.Prefix,
-                            DirectiveToken = CSharpCodeParser.TagHelperPrefixDirectiveDescriptor.Tokens[0],
+                            DirectiveToken = CSharpCodeParser.TagHelperPrefixDescriptor.Tokens[0],
                             Source = BuildSourceSpanFromNode(node),
                         });
 

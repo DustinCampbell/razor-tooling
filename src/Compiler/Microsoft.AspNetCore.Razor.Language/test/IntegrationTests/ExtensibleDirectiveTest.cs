@@ -23,7 +23,7 @@ public class ExtensibleDirectiveTest : IntegrationTestBase
         {
             builder.ConfigureDocumentClassifier(GetTestFileName(nameof(NamespaceToken)));
 
-            builder.AddDirective(DirectiveDescriptor.CreateDirective("custom", DirectiveKind.SingleLine, b => b.AddNamespaceToken()));
+            builder.AddDirective(DirectiveDescriptor.Create("custom", DirectiveKind.SingleLine, b => b.AddNamespaceToken()));
         });
 
         var projectItem = CreateProjectItemFromFile();

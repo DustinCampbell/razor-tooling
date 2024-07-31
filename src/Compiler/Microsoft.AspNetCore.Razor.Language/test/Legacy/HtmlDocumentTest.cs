@@ -56,7 +56,7 @@ public class HtmlDocumentTest() : ParserTestBase(layer: TestProject.Layer.Compil
                 <html></html>
             }
             """,
-            [SectionDirective.Directive]);
+            [SectionDirective.Descriptor]);
     }
 
     [Fact]
@@ -198,7 +198,7 @@ public class HtmlDocumentTest() : ParserTestBase(layer: TestProject.Layer.Compil
     {
         ParseDocumentTest(
             @"@section Foo { <script>foo<bar baz='@boz'></script> }",
-            [SectionDirective.Directive]);
+            [SectionDirective.Descriptor]);
     }
 
     [Fact]

@@ -20,15 +20,15 @@ internal class DirectiveCompletionItemProvider : IRazorCompletionItemProvider
 
     private static readonly ImmutableArray<DirectiveDescriptor> s_mvcDefaultDirectives =
     [
-        CSharpCodeParser.AddTagHelperDirectiveDescriptor,
-        CSharpCodeParser.RemoveTagHelperDirectiveDescriptor,
-        CSharpCodeParser.TagHelperPrefixDirectiveDescriptor,
-        CSharpCodeParser.UsingDirectiveDescriptor
+        CSharpCodeParser.AddTagHelperDescriptor,
+        CSharpCodeParser.RemoveTagHelperDescriptor,
+        CSharpCodeParser.TagHelperPrefixDescriptor,
+        CSharpCodeParser.UsingDescriptor
     ];
 
     private static readonly ImmutableArray<DirectiveDescriptor> s_componentDefaultDirectives = 
     [
-        CSharpCodeParser.UsingDirectiveDescriptor
+        CSharpCodeParser.UsingDescriptor
     ];
 
     // Test accessor

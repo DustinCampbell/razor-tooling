@@ -28,7 +28,7 @@ internal class ComponentPageDirectivePass : IntermediateNodePassBase, IRazorDire
             return;
         }
 
-        var directives = documentNode.FindDirectiveReferences(ComponentPageDirective.Directive);
+        var directives = documentNode.FindDirectiveReferences(ComponentPageDirective.Descriptor);
         if (directives.Count == 0)
         {
             return;

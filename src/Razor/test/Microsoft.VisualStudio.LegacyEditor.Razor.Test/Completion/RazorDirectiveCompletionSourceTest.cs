@@ -28,10 +28,10 @@ public class RazorDirectiveCompletionSourceTest(ITestOutputHelper testOutput) : 
 {
     private static readonly ImmutableArray<DirectiveDescriptor> s_defaultDirectives = ImmutableArray.Create(
     [
-        CSharpCodeParser.AddTagHelperDirectiveDescriptor,
-        CSharpCodeParser.RemoveTagHelperDirectiveDescriptor,
-        CSharpCodeParser.TagHelperPrefixDirectiveDescriptor,
-        CSharpCodeParser.UsingDirectiveDescriptor
+        CSharpCodeParser.AddTagHelperDescriptor,
+        CSharpCodeParser.RemoveTagHelperDescriptor,
+        CSharpCodeParser.TagHelperPrefixDescriptor,
+        CSharpCodeParser.UsingDescriptor
     ]);
 
     private readonly IRazorCompletionFactsService _completionFactsService = new LegacyRazorCompletionFactsService();
@@ -96,7 +96,7 @@ public class RazorDirectiveCompletionSourceTest(ITestOutputHelper testOutput) : 
     public async Task GetCompletionContextAsync_ProvidesCompletionsWhenAtCompletionPoint(string text)
     {
         // Arrange
-        var parser = CreateParser(text, SectionDirective.Directive);
+        var parser = CreateParser(text, SectionDirective.Descriptor);
         var completionSource = new RazorDirectiveCompletionSource(parser, _completionFactsService);
         var documentSnapshot = new StringTextSnapshot(text);
         var textBuffer = new TestTextBuffer(documentSnapshot, VsMocks.ContentTypes.LegacyRazorCore);
@@ -115,7 +115,7 @@ public class RazorDirectiveCompletionSourceTest(ITestOutputHelper testOutput) : 
         // Assert
         Assert.Collection(
             completionContext.ItemList,
-            item => AssertRazorCompletionItem(SectionDirective.Directive, item, completionSource),
+            item => AssertRazorCompletionItem(SectionDirective.Descriptor, item, completionSource),
             item => AssertRazorCompletionItem(s_defaultDirectives[0], item, completionSource, isSnippet: false),
             item => AssertRazorCompletionItem(s_defaultDirectives[0], item, completionSource, isSnippet: true),
             item => AssertRazorCompletionItem(s_defaultDirectives[1], item, completionSource, isSnippet: false),

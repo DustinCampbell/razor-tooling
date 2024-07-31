@@ -22,7 +22,7 @@ public class NamespaceDirectiveTest
         var imports = "c:\\foo\\baz\\bleh.cshtml";
         var node = new DirectiveIntermediateNode()
         {
-            Directive = NamespaceDirective.Directive,
+            Directive = NamespaceDirective.Descriptor,
             Source = new SourceSpan(imports, 0, 0, 0, 0),
         };
 
@@ -41,7 +41,7 @@ public class NamespaceDirectiveTest
         var imports = "c:\\foo\\baz\\bleh.cshtml";
         var node = new DirectiveIntermediateNode()
         {
-            Directive = NamespaceDirective.Directive,
+            Directive = NamespaceDirective.Descriptor,
             Source = new SourceSpan(imports, 0, 0, 0, 0),
         };
         node.Children.Add(new DirectiveTokenIntermediateNode() { Content = string.Empty });
@@ -68,7 +68,7 @@ public class NamespaceDirectiveTest
         // Arrange
         var node = new DirectiveIntermediateNode()
         {
-            Directive = NamespaceDirective.Directive,
+            Directive = NamespaceDirective.Descriptor,
             Source = new SourceSpan(imports, 0, 0, 0, 0),
         };
 
@@ -97,7 +97,7 @@ public class NamespaceDirectiveTest
         // Arrange
         var node = new DirectiveIntermediateNode()
         {
-            Directive = NamespaceDirective.Directive,
+            Directive = NamespaceDirective.Descriptor,
             Source = new SourceSpan(imports, 0, 0, 0, 0),
         };
 
@@ -120,7 +120,7 @@ public class NamespaceDirectiveTest
 
         builder.Push(new DirectiveIntermediateNode()
         {
-            Directive = NamespaceDirective.Directive,
+            Directive = NamespaceDirective.Descriptor,
             Source = new SourceSpan("/Account/_ViewImports.cshtml", 0, 0, 0, 0),
         });
         builder.Add(new DirectiveTokenIntermediateNode() { Content = "WebApplication.Account" });
@@ -158,7 +158,7 @@ public class NamespaceDirectiveTest
         // This will be ignored.
         builder.Push(new DirectiveIntermediateNode()
         {
-            Directive = NamespaceDirective.Directive,
+            Directive = NamespaceDirective.Descriptor,
             Source = new SourceSpan("/Account/_ViewImports.cshtml", 0, 0, 0, 0),
         });
         builder.Add(new DirectiveTokenIntermediateNode() { Content = "ignored" });
@@ -167,7 +167,7 @@ public class NamespaceDirectiveTest
         // This will be used.
         builder.Push(new DirectiveIntermediateNode()
         {
-            Directive = NamespaceDirective.Directive,
+            Directive = NamespaceDirective.Descriptor,
             Source = new SourceSpan("/Account/Manage/AddUser.cshtml", 0, 0, 0, 0),
         });
         builder.Add(new DirectiveTokenIntermediateNode() { Content = "WebApplication.Account.Manage" });
@@ -205,7 +205,7 @@ public class NamespaceDirectiveTest
 
         builder.Push(new DirectiveIntermediateNode()
         {
-            Directive = NamespaceDirective.Directive,
+            Directive = NamespaceDirective.Descriptor,
             Source = new SourceSpan("/Account/_ViewImports.cshtml", 0, 0, 0, 0),
         });
         builder.Add(new DirectiveTokenIntermediateNode() { Content = "WebApplication.Account" });
@@ -243,7 +243,7 @@ public class NamespaceDirectiveTest
         // This will be ignored.
         builder.Push(new DirectiveIntermediateNode()
         {
-            Directive = NamespaceDirective.Directive,
+            Directive = NamespaceDirective.Descriptor,
             Source = new SourceSpan("/Account/_ViewImports.cshtml", 0, 0, 0, 0),
         });
         builder.Add(new DirectiveTokenIntermediateNode() { Content = "ignored" });
@@ -252,7 +252,7 @@ public class NamespaceDirectiveTest
         // This will be used.
         builder.Push(new DirectiveIntermediateNode()
         {
-            Directive = NamespaceDirective.Directive,
+            Directive = NamespaceDirective.Descriptor,
             Source = new SourceSpan("/Account/Manage/AddUser.cshtml", 0, 0, 0, 0),
         });
         builder.Add(new DirectiveTokenIntermediateNode() { Content = "WebApplication.Account.Manage" });
@@ -290,7 +290,7 @@ public class NamespaceDirectiveTest
 
         builder.Push(new DirectiveIntermediateNode()
         {
-            Directive = NamespaceDirective.Directive,
+            Directive = NamespaceDirective.Descriptor,
             Source = new SourceSpan(null, 0, 0, 0, 0),
         });
         builder.Add(new DirectiveTokenIntermediateNode() { Content = "WebApplication.Account" });
@@ -326,7 +326,7 @@ public class NamespaceDirectiveTest
 
         builder.Push(new DirectiveIntermediateNode()
         {
-            Directive = NamespaceDirective.Directive,
+            Directive = NamespaceDirective.Descriptor,
             Source = new SourceSpan(null, 0, 0, 0, 0),
         });
         builder.Add(new DirectiveTokenIntermediateNode() { Content = "WebApplication.Account" });

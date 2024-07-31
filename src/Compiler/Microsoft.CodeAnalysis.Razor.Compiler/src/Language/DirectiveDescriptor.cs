@@ -71,7 +71,7 @@ public sealed class DirectiveDescriptor
     /// <param name="kind">The directive kind.</param>
     /// <param name="configure">A configuration delegate for the directive.</param>
     /// <returns>A <see cref="DirectiveDescriptor"/> for the created directive.</returns>
-    public static DirectiveDescriptor CreateDirective(string name, DirectiveKind kind, Action<IDirectiveDescriptorBuilder>? configure = null)
+    public static DirectiveDescriptor Create(string name, DirectiveKind kind, Action<IDirectiveDescriptorBuilder>? configure = null)
     {
         ArgHelper.ThrowIfNull(name);
 
@@ -86,11 +86,11 @@ public sealed class DirectiveDescriptor
     /// <param name="name">The directive keyword.</param>
     /// <param name="configure">A configuration delegate for the directive.</param>
     /// <returns>A <see cref="DirectiveDescriptor"/> for the created directive.</returns>
-    public static DirectiveDescriptor CreateSingleLineDirective(string name, Action<IDirectiveDescriptorBuilder>? configure = null)
+    public static DirectiveDescriptor CreateSingleLine(string name, Action<IDirectiveDescriptorBuilder>? configure = null)
     {
         ArgHelper.ThrowIfNull(name);
 
-        return CreateDirective(name, DirectiveKind.SingleLine, configure);
+        return Create(name, DirectiveKind.SingleLine, configure);
     }
 
     /// <summary>
@@ -99,11 +99,11 @@ public sealed class DirectiveDescriptor
     /// <param name="name">The directive keyword.</param>
     /// <param name="configure">A configuration delegate for the directive.</param>
     /// <returns>A <see cref="DirectiveDescriptor"/> for the created directive.</returns>
-    public static DirectiveDescriptor CreateRazorBlockDirective(string name, Action<IDirectiveDescriptorBuilder>? configure = null)
+    public static DirectiveDescriptor CreateRazorBlock(string name, Action<IDirectiveDescriptorBuilder>? configure = null)
     {
         ArgHelper.ThrowIfNull(name);
 
-        return CreateDirective(name, DirectiveKind.RazorBlock, configure);
+        return Create(name, DirectiveKind.RazorBlock, configure);
     }
 
     /// <summary>
@@ -112,11 +112,11 @@ public sealed class DirectiveDescriptor
     /// <param name="name">The directive keyword.</param>
     /// <param name="configure">A configuration delegate for the directive.</param>
     /// <returns>A <see cref="DirectiveDescriptor"/> for the created directive.</returns>
-    public static DirectiveDescriptor CreateCodeBlockDirective(string name, Action<IDirectiveDescriptorBuilder>? configure = null)
+    public static DirectiveDescriptor CreateCodeBlock(string name, Action<IDirectiveDescriptorBuilder>? configure = null)
     {
         ArgHelper.ThrowIfNull(name);
 
-        return CreateDirective(name, DirectiveKind.CodeBlock, configure);
+        return Create(name, DirectiveKind.CodeBlock, configure);
     }
 
     private sealed class Builder(string name, DirectiveKind kind) : IDirectiveDescriptorBuilder, IDisposable

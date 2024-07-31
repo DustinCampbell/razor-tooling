@@ -1,10 +1,6 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
-using System;
-
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
 // Much of the following is equivalent to Microsoft.AspNetCore.Mvc.Razor.Extensions's InjectDirective,
@@ -13,9 +9,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components;
 
 internal static class ComponentInjectDirective
 {
-    public static readonly DirectiveDescriptor Directive = DirectiveDescriptor.CreateDirective(
+    public static readonly DirectiveDescriptor Descriptor = DirectiveDescriptor.CreateSingleLine(
         "inject",
-        DirectiveKind.SingleLine,
         builder =>
         {
             builder.AddTypeToken("TypeName", "The type of the service to inject.");
@@ -26,12 +21,9 @@ internal static class ComponentInjectDirective
 
     public static void Register(RazorProjectEngineBuilder builder)
     {
-        if (builder == null)
-        {
-            throw new ArgumentNullException(nameof(builder));
-        }
+        ArgHelper.ThrowIfNull(builder);
 
-        builder.AddDirective(Directive, FileKinds.Component, FileKinds.ComponentImport);
+        builder.AddDirective(Descriptor, FileKinds.Component, FileKinds.ComponentImport);
         builder.Features.Add(new ComponentInjectDirectivePass());
     }
 }

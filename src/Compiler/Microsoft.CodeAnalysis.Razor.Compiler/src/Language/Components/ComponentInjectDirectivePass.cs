@@ -52,7 +52,7 @@ internal class ComponentInjectDirectivePass : IntermediateNodePassBase, IRazorDi
 
         public override void VisitDirective(DirectiveIntermediateNode node)
         {
-            if (node.Directive == ComponentInjectDirective.Directive)
+            if (node.Directive == ComponentInjectDirective.Descriptor)
             {
                 Directives.Add(node);
             }

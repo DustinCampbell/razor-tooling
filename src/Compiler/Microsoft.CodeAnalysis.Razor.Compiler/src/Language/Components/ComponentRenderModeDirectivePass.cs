@@ -21,7 +21,7 @@ internal sealed class ComponentRenderModeDirectivePass : IntermediateNodePassBas
             return;
         }
 
-        var directives = documentNode.FindDirectiveReferences(ComponentRenderModeDirective.Directive);
+        var directives = documentNode.FindDirectiveReferences(ComponentRenderModeDirective.Descriptor);
         if (directives.Count == 0)
         {
             return;

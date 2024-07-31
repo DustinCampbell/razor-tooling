@@ -252,7 +252,7 @@ public class BraceSmartIndenterTest(ITestOutputHelper testOutput) : BraceSmartIn
         // Arrange
         var parseOptions = RazorParserOptions.Create(options =>
         {
-            options.Directives.Add(FunctionsDirective.Directive);
+            options.Directives.Add(FunctionsDirective.Descriptor);
             options.EnableSpanEditHandlers = true;
         });
         var syntaxTree = RazorSyntaxTree.Parse(TestRazorSourceDocument.Create("@functions {}"), parseOptions);
@@ -564,8 +564,8 @@ public class BraceSmartIndenterTest(ITestOutputHelper testOutput) : BraceSmartIn
             TestRazorSourceDocument.Create(content),
             RazorParserOptions.Create(options =>
             {
-                options.Directives.Add(FunctionsDirective.Directive);
-                options.Directives.Add(SectionDirective.Directive);
+                options.Directives.Add(FunctionsDirective.Descriptor);
+                options.Directives.Add(SectionDirective.Descriptor);
                 options.EnableSpanEditHandlers = true;
             }));
 

@@ -25,35 +25,31 @@ internal class CSharpCodeParser : TokenizerBackedParser<CSharpTokenizer>
     private static readonly Func<SyntaxToken, bool> IsValidStatementSpacingToken =
         IsSpacingTokenIncludingNewLinesAndComments;
 
-    internal static readonly DirectiveDescriptor AddTagHelperDirectiveDescriptor = DirectiveDescriptor.CreateDirective(
+    internal static readonly DirectiveDescriptor AddTagHelperDescriptor = DirectiveDescriptor.CreateSingleLine(
         SyntaxConstants.CSharp.AddTagHelperKeyword,
-        DirectiveKind.SingleLine,
         builder =>
         {
             builder.AddStringToken(Resources.AddTagHelperDirective_StringToken_Name, Resources.AddTagHelperDirective_StringToken_Description);
             builder.Description = Resources.AddTagHelperDirective_Description;
         });
 
-    internal static readonly DirectiveDescriptor UsingDirectiveDescriptor = DirectiveDescriptor.CreateDirective(
+    internal static readonly DirectiveDescriptor UsingDescriptor = DirectiveDescriptor.CreateSingleLine(
         SyntaxConstants.CSharp.UsingKeyword,
-        DirectiveKind.SingleLine,
         builder =>
         {
             builder.Description = Resources.UsingDirective_Description;
         });
 
-    internal static readonly DirectiveDescriptor RemoveTagHelperDirectiveDescriptor = DirectiveDescriptor.CreateDirective(
+    internal static readonly DirectiveDescriptor RemoveTagHelperDescriptor = DirectiveDescriptor.CreateSingleLine(
         SyntaxConstants.CSharp.RemoveTagHelperKeyword,
-        DirectiveKind.SingleLine,
         builder =>
         {
             builder.AddStringToken(Resources.RemoveTagHelperDirective_StringToken_Name, Resources.RemoveTagHelperDirective_StringToken_Description);
             builder.Description = Resources.RemoveTagHelperDirective_Description;
         });
 
-    internal static readonly DirectiveDescriptor TagHelperPrefixDirectiveDescriptor = DirectiveDescriptor.CreateDirective(
+    internal static readonly DirectiveDescriptor TagHelperPrefixDescriptor = DirectiveDescriptor.CreateSingleLine(
         SyntaxConstants.CSharp.TagHelperPrefixKeyword,
-        DirectiveKind.SingleLine,
         builder =>
         {
             builder.AddStringToken(Resources.TagHelperPrefixDirective_PrefixToken_Name, Resources.TagHelperPrefixDirective_PrefixToken_Description);

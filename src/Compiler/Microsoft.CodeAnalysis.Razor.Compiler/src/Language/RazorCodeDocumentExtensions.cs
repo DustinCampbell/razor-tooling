@@ -543,7 +543,7 @@ public static class RazorCodeDocumentExtensions
 
         public override void VisitRazorDirective(RazorDirectiveSyntax node)
         {
-            if (node != null && node.DirectiveDescriptor == NamespaceDirective.Directive)
+            if (node != null && node.DirectiveDescriptor == NamespaceDirective.Descriptor)
             {
                 if (node.Body?.ChildNodes() is [_, CSharpCodeBlockSyntax { Children: [ _, CSharpSyntaxNode @namespace, ..] }])
                 {

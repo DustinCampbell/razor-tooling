@@ -16,7 +16,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
     public void Execute_AutomaticallyImportsSingleLineSinglyOccurringDirective()
     {
         // Arrange
-        var directive = DirectiveDescriptor.CreateSingleLineDirective(
+        var directive = DirectiveDescriptor.CreateSingleLine(
             "custom",
             builder =>
             {
@@ -51,7 +51,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
     public void Execute_AutomaticallyOverridesImportedSingleLineSinglyOccurringDirective_MainDocument()
     {
         // Arrange
-        var directive = DirectiveDescriptor.CreateSingleLineDirective(
+        var directive = DirectiveDescriptor.CreateSingleLine(
             "custom",
             builder =>
             {
@@ -86,7 +86,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
     public void Execute_AutomaticallyOverridesImportedSingleLineSinglyOccurringDirective_MultipleImports()
     {
         // Arrange
-        var directive = DirectiveDescriptor.CreateSingleLineDirective(
+        var directive = DirectiveDescriptor.CreateSingleLine(
             "custom",
             builder =>
             {
@@ -122,8 +122,8 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
     public void Execute_DoesNotImportNonFileScopedSinglyOccurringDirectives_Block()
     {
         // Arrange
-        var codeBlockDirective = DirectiveDescriptor.CreateCodeBlockDirective("code", b => b.AddStringToken());
-        var razorBlockDirective = DirectiveDescriptor.CreateRazorBlockDirective("razor", b => b.AddStringToken());
+        var codeBlockDirective = DirectiveDescriptor.CreateCodeBlock("code", b => b.AddStringToken());
+        var razorBlockDirective = DirectiveDescriptor.CreateRazorBlock("razor", b => b.AddStringToken());
         var phase = new DefaultRazorIntermediateNodeLoweringPhase();
         var engine = RazorProjectEngine.CreateEmpty(b =>
         {
@@ -158,7 +158,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
     public void Execute_ErrorsForCodeBlockFileScopedSinglyOccurringDirectives()
     {
         // Arrange
-        var directive = DirectiveDescriptor.CreateCodeBlockDirective("custom", b => b.Usage = DirectiveUsage.FileScopedSinglyOccurring);
+        var directive = DirectiveDescriptor.CreateCodeBlock("custom", b => b.Usage = DirectiveUsage.FileScopedSinglyOccurring);
         var phase = new DefaultRazorIntermediateNodeLoweringPhase();
         var engine = RazorProjectEngine.CreateEmpty(b =>
         {
@@ -188,7 +188,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
     public void Execute_ErrorsForRazorBlockFileScopedSinglyOccurringDirectives()
     {
         // Arrange
-        var directive = DirectiveDescriptor.CreateRazorBlockDirective("custom", b => b.Usage = DirectiveUsage.FileScopedSinglyOccurring);
+        var directive = DirectiveDescriptor.CreateRazorBlock("custom", b => b.Usage = DirectiveUsage.FileScopedSinglyOccurring);
         var phase = new DefaultRazorIntermediateNodeLoweringPhase();
         var engine = RazorProjectEngine.CreateEmpty(b =>
         {

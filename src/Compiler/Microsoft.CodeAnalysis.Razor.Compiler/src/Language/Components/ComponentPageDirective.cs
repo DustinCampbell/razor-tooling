@@ -1,18 +1,12 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
-using System;
-using Microsoft.AspNetCore.Razor.Language.Intermediate;
-
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
-internal class ComponentPageDirective
+internal static class ComponentPageDirective
 {
-    public static readonly DirectiveDescriptor Directive = DirectiveDescriptor.CreateDirective(
+    public static readonly DirectiveDescriptor Descriptor = DirectiveDescriptor.CreateSingleLine(
         "page",
-        DirectiveKind.SingleLine,
         builder =>
         {
             builder.AddStringToken(ComponentResources.PageDirective_RouteToken_Name, ComponentResources.PageDirective_RouteToken_Description);
@@ -20,18 +14,11 @@ internal class ComponentPageDirective
             builder.Description = ComponentResources.PageDirective_Description;
         });
 
-    public string RouteTemplate { get; }
-
-    public IntermediateNode DirectiveNode { get; }
-
     public static RazorProjectEngineBuilder Register(RazorProjectEngineBuilder builder)
     {
-        if (builder == null)
-        {
-            throw new ArgumentNullException(nameof(builder));
-        }
+        ArgHelper.ThrowIfNull(builder);
 
-        builder.AddDirective(Directive, FileKinds.Component, FileKinds.ComponentImport);
+        builder.AddDirective(Descriptor, FileKinds.Component, FileKinds.ComponentImport);
         builder.Features.Add(new ComponentPageDirectivePass());
         return builder;
     }

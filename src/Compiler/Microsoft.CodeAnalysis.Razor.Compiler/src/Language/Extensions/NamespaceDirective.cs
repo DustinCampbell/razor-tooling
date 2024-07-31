@@ -1,17 +1,12 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
-using System;
-
 namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 
 public static class NamespaceDirective
 {
-    public static readonly DirectiveDescriptor Directive = DirectiveDescriptor.CreateDirective(
+    public static readonly DirectiveDescriptor Descriptor = DirectiveDescriptor.CreateSingleLine(
         "namespace",
-        DirectiveKind.SingleLine,
         builder =>
         {
             builder.AddNamespaceToken(
@@ -23,12 +18,9 @@ public static class NamespaceDirective
 
     public static RazorProjectEngineBuilder Register(RazorProjectEngineBuilder builder)
     {
-        if (builder == null)
-        {
-            throw new ArgumentNullException(nameof(builder));
-        }
+        ArgHelper.ThrowIfNull(builder);
 
-        builder.AddDirective(Directive, FileKinds.Legacy, FileKinds.Component, FileKinds.ComponentImport);
+        builder.AddDirective(Descriptor, FileKinds.Legacy, FileKinds.Component, FileKinds.ComponentImport);
         return builder;
     }
 }

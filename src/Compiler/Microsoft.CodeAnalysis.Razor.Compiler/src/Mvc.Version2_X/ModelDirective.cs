@@ -1,11 +1,10 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
@@ -13,9 +12,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X;
 
 public static class ModelDirective
 {
-    public static readonly DirectiveDescriptor Directive = DirectiveDescriptor.CreateDirective(
+    public static readonly DirectiveDescriptor Descriptor = DirectiveDescriptor.CreateSingleLine(
         "model",
-        DirectiveKind.SingleLine,
         builder =>
         {
             builder.AddTypeToken(Resources.ModelDirective_TypeToken_Name, Resources.ModelDirective_TypeToken_Description);
@@ -25,12 +23,9 @@ public static class ModelDirective
 
     public static RazorProjectEngineBuilder Register(RazorProjectEngineBuilder builder)
     {
-        if (builder == null)
-        {
-            throw new ArgumentNullException(nameof(builder));
-        }
+        ArgHelper.ThrowIfNull(builder);
 
-        builder.AddDirective(Directive);
+        builder.AddDirective(Descriptor);
         builder.Features.Add(new Pass());
         return builder;
     }
@@ -63,7 +58,7 @@ public static class ModelDirective
 
         if (document.DocumentKind == RazorPageDocumentClassifierPass.RazorPageDocumentKind)
         {
-            return visitor.Class.ClassName;
+            return visitor.Class!.ClassName;
         }
         else
         {
@@ -95,41 +90,35 @@ public static class ModelDirective
             }
 
             var baseType = visitor.Class?.BaseType?.Replace("<TModel>", "<" + modelType + ">");
-            visitor.Class.BaseType = baseType;
+            visitor.Class!.BaseType = baseType;
         }
     }
 
     private class Visitor : IntermediateNodeWalker
     {
-        public NamespaceDeclarationIntermediateNode Namespace { get; private set; }
+        public NamespaceDeclarationIntermediateNode? Namespace { get; private set; }
 
-        public ClassDeclarationIntermediateNode Class { get; private set; }
+        public ClassDeclarationIntermediateNode? Class { get; private set; }
 
         public IList<DirectiveIntermediateNode> ModelDirectives { get; } = new List<DirectiveIntermediateNode>();
 
         public override void VisitNamespaceDeclaration(NamespaceDeclarationIntermediateNode node)
         {
-            if (Namespace == null)
-            {
-                Namespace = node;
-            }
+            Namespace ??= node;
 
             base.VisitNamespaceDeclaration(node);
         }
 
         public override void VisitClassDeclaration(ClassDeclarationIntermediateNode node)
         {
-            if (Class == null)
-            {
-                Class = node;
-            }
+            Class ??= node;
 
             base.VisitClassDeclaration(node);
         }
 
         public override void VisitDirective(DirectiveIntermediateNode node)
         {
-            if (node.Directive == Directive)
+            if (node.Directive == Descriptor)
             {
                 ModelDirectives.Add(node);
             }

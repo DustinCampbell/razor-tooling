@@ -328,7 +328,7 @@ public class AssemblyAttributeInjectionPassTest : RazorProjectEngineTestBase
         var builder = IntermediateNodeBuilder.Create(irDocument);
         var pageDirective = new DirectiveIntermediateNode
         {
-            Directive = PageDirective.Directive,
+            Directive = PageDirective.Descriptor,
         };
         builder.Add(pageDirective);
 

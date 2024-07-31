@@ -377,7 +377,7 @@ public class RazorCodeDocumentExtensionsTest
         codeDocument.SetFileKind(FileKinds.Component);
         codeDocument.SetSyntaxTree(RazorSyntaxTree.Parse(sourceDocument, RazorParserOptions.Create(options =>
         {
-            options.Directives.Add(NamespaceDirective.Directive);
+            options.Directives.Add(NamespaceDirective.Descriptor);
         })));
 
         var documentNode = new DocumentIntermediateNode()
@@ -407,7 +407,7 @@ public class RazorCodeDocumentExtensionsTest
         codeDocument.SetFileKind(FileKinds.Component);
         codeDocument.SetSyntaxTree(RazorSyntaxTree.Parse(sourceDocument, RazorParserOptions.Create(options =>
         {
-            options.Directives.Add(NamespaceDirective.Directive);
+            options.Directives.Add(NamespaceDirective.Descriptor);
         })));
 
         var importSourceDocument = TestRazorSourceDocument.Create(
@@ -418,7 +418,7 @@ public class RazorCodeDocumentExtensionsTest
         {
             RazorSyntaxTree.Parse(importSourceDocument, RazorParserOptions.Create(options =>
             {
-                options.Directives.Add(NamespaceDirective.Directive);
+                options.Directives.Add(NamespaceDirective.Descriptor);
             }))
         }.ToImmutableArray());
 
@@ -449,7 +449,7 @@ public class RazorCodeDocumentExtensionsTest
         codeDocument.SetFileKind(FileKinds.Component);
         codeDocument.SetSyntaxTree(RazorSyntaxTree.Parse(sourceDocument, RazorParserOptions.Create(options =>
         {
-            options.Directives.Add(NamespaceDirective.Directive);
+            options.Directives.Add(NamespaceDirective.Descriptor);
         })));
 
         var importSourceDocument = TestRazorSourceDocument.Create(
@@ -460,7 +460,7 @@ public class RazorCodeDocumentExtensionsTest
         {
             RazorSyntaxTree.Parse(importSourceDocument, RazorParserOptions.Create(options =>
             {
-                options.Directives.Add(NamespaceDirective.Directive);
+                options.Directives.Add(NamespaceDirective.Descriptor);
             }))
         }.ToImmutableArray());
 
@@ -492,7 +492,7 @@ public class RazorCodeDocumentExtensionsTest
         codeDocument.SetFileKind(FileKinds.Component);
         codeDocument.SetSyntaxTree(RazorSyntaxTree.Parse(sourceDocument, RazorParserOptions.Create(options =>
         {
-            options.Directives.Add(NamespaceDirective.Directive);
+            options.Directives.Add(NamespaceDirective.Descriptor);
         })));
 
         var importSourceDocument = TestRazorSourceDocument.Create(
@@ -503,7 +503,7 @@ public class RazorCodeDocumentExtensionsTest
         {
             RazorSyntaxTree.Parse(importSourceDocument, RazorParserOptions.Create(options =>
             {
-                options.Directives.Add(NamespaceDirective.Directive);
+                options.Directives.Add(NamespaceDirective.Descriptor);
             }))
         }.ToImmutableArray());
 
@@ -543,7 +543,7 @@ public class RazorCodeDocumentExtensionsTest
         var codeDocument = TestRazorCodeDocument.Create(sourceDocument, default);
         codeDocument.SetSyntaxTree(RazorSyntaxTree.Parse(sourceDocument, RazorParserOptions.Create(options =>
         {
-            options.Directives.Add(NamespaceDirective.Directive);
+            options.Directives.Add(NamespaceDirective.Descriptor);
         })));
 
         var importRelativePath = "_ViewImports.cshtml";
@@ -555,7 +555,7 @@ public class RazorCodeDocumentExtensionsTest
         {
             RazorSyntaxTree.Parse(importSourceDocument, RazorParserOptions.Create(options =>
             {
-                options.Directives.Add(NamespaceDirective.Directive);
+                options.Directives.Add(NamespaceDirective.Descriptor);
             }))
         }.ToImmutableArray());
 
@@ -576,7 +576,7 @@ public class RazorCodeDocumentExtensionsTest
         var codeDocument = TestRazorCodeDocument.Create(sourceDocument, default);
         codeDocument.SetSyntaxTree(RazorSyntaxTree.Parse(sourceDocument, RazorParserOptions.Create(options =>
         {
-            options.Directives.Add(NamespaceDirective.Directive);
+            options.Directives.Add(NamespaceDirective.Descriptor);
         })));
 
         var importSourceDocument = TestRazorSourceDocument.Create(
@@ -587,7 +587,7 @@ public class RazorCodeDocumentExtensionsTest
         {
             RazorSyntaxTree.Parse(importSourceDocument, RazorParserOptions.Create(options =>
             {
-                options.Directives.Add(NamespaceDirective.Directive);
+                options.Directives.Add(NamespaceDirective.Descriptor);
             }))
         }.ToImmutableArray());
 

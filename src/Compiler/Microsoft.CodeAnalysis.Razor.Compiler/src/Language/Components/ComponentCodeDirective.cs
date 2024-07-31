@@ -1,17 +1,12 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
-using System;
-
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
 public static class ComponentCodeDirective
 {
-    public static readonly DirectiveDescriptor Directive = DirectiveDescriptor.CreateDirective(
+    public static readonly DirectiveDescriptor Descriptor = DirectiveDescriptor.CreateCodeBlock(
         "code",
-        DirectiveKind.CodeBlock,
         builder =>
         {
             builder.Description = Resources.FunctionsDirective_Description;
@@ -19,11 +14,8 @@ public static class ComponentCodeDirective
 
     public static void Register(RazorProjectEngineBuilder builder)
     {
-        if (builder == null)
-        {
-            throw new ArgumentNullException(nameof(builder));
-        }
+        ArgHelper.ThrowIfNull(builder);
 
-        builder.AddDirective(Directive, FileKinds.Component);
+        builder.AddDirective(Descriptor, FileKinds.Component);
     }
 }

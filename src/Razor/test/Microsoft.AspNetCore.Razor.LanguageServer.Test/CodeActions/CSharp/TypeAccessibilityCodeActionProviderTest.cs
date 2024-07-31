@@ -453,7 +453,7 @@ public class TypeAccessibilityCodeActionProviderTest(ITestOutputHelper testOutpu
         var projectEngine = RazorProjectEngine.Create(builder =>
         {
             builder.AddTagHelpers(tagHelpers);
-            builder.AddDirective(InjectDirective.Directive);
+            builder.AddDirective(InjectDirective.Descriptor);
         });
         var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, FileKinds.Component, importSources: default, tagHelpers);
 

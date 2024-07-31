@@ -1,22 +1,21 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X;
 
-public class PageDirective
+public sealed class PageDirective
 {
-    public static readonly DirectiveDescriptor Directive = DirectiveDescriptor.CreateDirective(
+    public static readonly DirectiveDescriptor Descriptor = DirectiveDescriptor.CreateSingleLine(
         "page",
-        DirectiveKind.SingleLine,
         builder =>
         {
             builder.AddOptionalStringToken(Resources.PageDirective_RouteToken_Name, Resources.PageDirective_RouteToken_Description);
@@ -24,31 +23,28 @@ public class PageDirective
             builder.Description = Resources.PageDirective_Description;
         });
 
-    private PageDirective(string routeTemplate, IntermediateNode directiveNode, SourceSpan? source)
+    private PageDirective(string? routeTemplate, IntermediateNode? directiveNode, SourceSpan? source)
     {
         RouteTemplate = routeTemplate;
         DirectiveNode = directiveNode;
         Source = source;
     }
 
-    public string RouteTemplate { get; }
+    public string? RouteTemplate { get; }
 
-    public IntermediateNode DirectiveNode { get; }
+    public IntermediateNode? DirectiveNode { get; }
 
     public SourceSpan? Source { get; }
 
     public static RazorProjectEngineBuilder Register(RazorProjectEngineBuilder builder)
     {
-        if (builder == null)
-        {
-            throw new ArgumentNullException(nameof(builder));
-        }
+        ArgHelper.ThrowIfNull(builder);
 
-        builder.AddDirective(Directive);
+        builder.AddDirective(Descriptor);
         return builder;
     }
 
-    public static bool TryGetPageDirective(DocumentIntermediateNode documentNode, out PageDirective pageDirective)
+    public static bool TryGetPageDirective(DocumentIntermediateNode documentNode, [NotNullWhen(true)] out PageDirective? pageDirective)
     {
         var visitor = new Visitor();
         for (var i = 0; i < documentNode.Children.Count; i++)
@@ -63,7 +59,7 @@ public class PageDirective
         }
 
         var tokens = visitor.DirectiveTokens.ToList();
-        string routeTemplate = null;
+        string? routeTemplate = null;
         SourceSpan? sourceSpan = null;
         if (tokens.Count > 0)
         {
@@ -88,13 +84,13 @@ public class PageDirective
 
     private class Visitor : IntermediateNodeWalker
     {
-        public IntermediateNode DirectiveNode { get; private set; }
+        public IntermediateNode? DirectiveNode { get; private set; }
 
-        public IEnumerable<DirectiveTokenIntermediateNode> DirectiveTokens { get; private set; }
+        public IEnumerable<DirectiveTokenIntermediateNode>? DirectiveTokens { get; private set; }
 
         public override void VisitDirective(DirectiveIntermediateNode node)
         {
-            if (node.Directive == Directive)
+            if (node.Directive == Descriptor)
             {
                 DirectiveNode = node;
                 DirectiveTokens = node.Tokens;
@@ -103,7 +99,7 @@ public class PageDirective
 
         public override void VisitMalformedDirective(MalformedDirectiveIntermediateNode node)
         {
-            if (DirectiveTokens == null && node.Directive == Directive)
+            if (DirectiveTokens == null && node.Directive == Descriptor)
             {
                 DirectiveNode = node;
                 DirectiveTokens = node.Tokens;

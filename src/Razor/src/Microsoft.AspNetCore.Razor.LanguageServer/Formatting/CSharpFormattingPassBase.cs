@@ -141,7 +141,7 @@ internal abstract class CSharpFormattingPassBase : FormattingPassBase
             // For @section blocks we have special handling to add a fake source mapping/significant location at the end of the
             // section, to return the indentation back to before the start of the section block.
             if (scopeOwner?.Parent?.Parent?.Parent is RazorDirectiveSyntax containingDirective &&
-                containingDirective.DirectiveDescriptor.Name == SectionDirective.Directive.Name &&
+                containingDirective.DirectiveDescriptor.Name == SectionDirective.Descriptor.Name &&
                 !sourceMappingIndentations.ContainsKey(containingDirective.EndPosition - 1))
             {
                 // We want the indentation for the end point to be whatever the indentation was before the start point. For
@@ -479,7 +479,7 @@ internal abstract class CSharpFormattingPassBase : FormattingPassBase
                 n => n is RazorDirectiveSyntax directive &&
                     directive.DirectiveDescriptor != null &&
                     directive.DirectiveDescriptor.Kind == DirectiveKind.SingleLine &&
-                    directive.DirectiveDescriptor.Name.Equals(AttributeDirective.Directive.Name, StringComparison.Ordinal));
+                    directive.DirectiveDescriptor.Name.Equals(AttributeDirective.Descriptor.Name, StringComparison.Ordinal));
         }
 
         bool IsTypeParamDirective()
@@ -492,7 +492,7 @@ internal abstract class CSharpFormattingPassBase : FormattingPassBase
                 n => n is RazorDirectiveSyntax directive &&
                     directive.DirectiveDescriptor != null &&
                     directive.DirectiveDescriptor.Kind == DirectiveKind.SingleLine &&
-                    directive.DirectiveDescriptor.Name.Equals(ComponentTypeParamDirective.Directive.Name, StringComparison.Ordinal));
+                    directive.DirectiveDescriptor.Name.Equals(ComponentTypeParamDirective.Descriptor.Name, StringComparison.Ordinal));
         }
 
         bool IsInSingleLineDirective()
@@ -558,7 +558,7 @@ internal abstract class CSharpFormattingPassBase : FormattingPassBase
                 owner == codeBlock.Children[3] &&
                 // CSharpCodeBlock -> RazorDirectiveBody -> RazorDirective
                 codeBlock.Parent?.Parent is RazorDirectiveSyntax directive2 &&
-                directive2.DirectiveDescriptor.Name == SectionDirective.Directive.Name)
+                directive2.DirectiveDescriptor.Name == SectionDirective.Descriptor.Name)
             {
                 return true;
             }
@@ -569,7 +569,7 @@ internal abstract class CSharpFormattingPassBase : FormattingPassBase
                 owner == block.Children[^1] &&
                 // MarkupBlock -> CSharpCodeBlock -> RazorDirectiveBody -> RazorDirective
                 block.Parent?.Parent?.Parent is RazorDirectiveSyntax directive &&
-                directive.DirectiveDescriptor.Name == SectionDirective.Directive.Name)
+                directive.DirectiveDescriptor.Name == SectionDirective.Descriptor.Name)
             {
                 return true;
             }

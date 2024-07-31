@@ -1,11 +1,10 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
 using System;
 using System.Linq;
 using System.Text;
+using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
@@ -15,9 +14,8 @@ public static class NamespaceDirective
 {
     private static readonly char[] Separators = ['\\', '/'];
 
-    public static readonly DirectiveDescriptor Directive = DirectiveDescriptor.CreateDirective(
+    public static readonly DirectiveDescriptor Descriptor = DirectiveDescriptor.CreateSingleLine(
         "namespace",
-        DirectiveKind.SingleLine,
         builder =>
         {
             builder.AddNamespaceToken(
@@ -29,12 +27,9 @@ public static class NamespaceDirective
 
     public static void Register(RazorProjectEngineBuilder builder)
     {
-        if (builder == null)
-        {
-            throw new ArgumentNullException(nameof(builder));
-        }
+        ArgHelper.ThrowIfNull(builder);
 
-        builder.AddDirective(Directive);
+        builder.AddDirective(Descriptor);
         builder.Features.Add(new Pass());
     }
 
@@ -78,18 +73,18 @@ public static class NamespaceDirective
     //
     // In the event that these two source either don't have FileNames set or don't follow a coherent hierarchy,
     // we will just use the namespace verbatim.
-    internal static string GetNamespace(string source, DirectiveIntermediateNode directive)
+    internal static string GetNamespace(string? source, DirectiveIntermediateNode directive)
     {
         var directiveSource = NormalizeDirectory(directive.Source?.FilePath);
 
         var baseNamespace = directive.Tokens.FirstOrDefault()?.Content;
-        if (string.IsNullOrEmpty(baseNamespace))
+        if (baseNamespace.IsNullOrEmpty())
         {
             // The namespace directive was incomplete.
             return string.Empty;
         }
 
-        if (string.IsNullOrEmpty(source) || directiveSource == null)
+        if (source.IsNullOrEmpty() || directiveSource == null)
         {
             // No sources, can't compute a suffix.
             return baseNamespace;
@@ -131,9 +126,9 @@ public static class NamespaceDirective
     // We also don't normalize the separators here. We expect that all documents are using a consistent style of path.
     //
     // If we can't normalize the path, we just return null so it will be ignored.
-    private static string NormalizeDirectory(string path)
+    private static string? NormalizeDirectory(string? path)
     {
-        if (string.IsNullOrEmpty(path))
+        if (path.IsNullOrEmpty())
         {
             return null;
         }
@@ -150,36 +145,30 @@ public static class NamespaceDirective
 
     private class Visitor : IntermediateNodeWalker
     {
-        public ClassDeclarationIntermediateNode FirstClass { get; private set; }
+        public ClassDeclarationIntermediateNode? FirstClass { get; private set; }
 
-        public NamespaceDeclarationIntermediateNode FirstNamespace { get; private set; }
+        public NamespaceDeclarationIntermediateNode? FirstNamespace { get; private set; }
 
         // We want the last one, so get them all and then .
-        public DirectiveIntermediateNode LastNamespaceDirective { get; private set; }
+        public DirectiveIntermediateNode? LastNamespaceDirective { get; private set; }
 
         public override void VisitNamespaceDeclaration(NamespaceDeclarationIntermediateNode node)
         {
-            if (FirstNamespace == null)
-            {
-                FirstNamespace = node;
-            }
+            FirstNamespace ??= node;
 
             base.VisitNamespaceDeclaration(node);
         }
 
         public override void VisitClassDeclaration(ClassDeclarationIntermediateNode node)
         {
-            if (FirstClass == null)
-            {
-                FirstClass = node;
-            }
+            FirstClass ??= node;
 
             base.VisitClassDeclaration(node);
         }
 
         public override void VisitDirective(DirectiveIntermediateNode node)
         {
-            if (node.Directive == Directive)
+            if (node.Directive == Descriptor)
             {
                 LastNamespaceDirective = node;
             }

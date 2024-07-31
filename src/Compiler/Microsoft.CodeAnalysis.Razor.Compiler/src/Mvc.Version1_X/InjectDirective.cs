@@ -1,11 +1,10 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
@@ -13,9 +12,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X;
 
 public static class InjectDirective
 {
-    public static readonly DirectiveDescriptor Directive = DirectiveDescriptor.CreateDirective(
+    public static readonly DirectiveDescriptor Descriptor = DirectiveDescriptor.CreateSingleLine(
         "inject",
-        DirectiveKind.SingleLine,
         builder =>
         {
             builder
@@ -28,12 +26,9 @@ public static class InjectDirective
 
     public static RazorProjectEngineBuilder Register(RazorProjectEngineBuilder builder)
     {
-        if (builder == null)
-        {
-            throw new ArgumentNullException(nameof(builder));
-        }
+        ArgHelper.ThrowIfNull(builder);
 
-        builder.AddDirective(Directive);
+        builder.AddDirective(Descriptor);
         builder.Features.Add(new Pass());
         builder.AddTargetExtension(new InjectTargetExtension());
         return builder;
@@ -89,30 +84,27 @@ public static class InjectDirective
                     MemberSource = memberSpan
                 };
 
-                visitor.Class.Children.Add(injectNode);
+                visitor.Class!.Children.Add(injectNode);
             }
         }
     }
 
     private class Visitor : IntermediateNodeWalker
     {
-        public ClassDeclarationIntermediateNode Class { get; private set; }
+        public ClassDeclarationIntermediateNode? Class { get; private set; }
 
         public IList<DirectiveIntermediateNode> Directives { get; } = new List<DirectiveIntermediateNode>();
 
         public override void VisitClassDeclaration(ClassDeclarationIntermediateNode node)
         {
-            if (Class == null)
-            {
-                Class = node;
-            }
+            Class ??= node;
 
             base.VisitClassDeclaration(node);
         }
 
         public override void VisitDirective(DirectiveIntermediateNode node)
         {
-            if (node.Directive == Directive)
+            if (node.Directive == Descriptor)
             {
                 Directives.Add(node);
             }

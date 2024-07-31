@@ -177,8 +177,8 @@ public class InjectDirectiveTest : RazorProjectEngineTestBase
     protected override void ConfigureProjectEngine(RazorProjectEngineBuilder builder)
     {
         // Notice we're not registering the InjectDirective.Pass here so we can run it on demand.
-        builder.AddDirective(InjectDirective.Directive);
-        builder.AddDirective(ModelDirective.Directive);
+        builder.AddDirective(InjectDirective.Descriptor);
+        builder.AddDirective(ModelDirective.Descriptor);
     }
 
     private DocumentIntermediateNode CreateIRDocument(RazorEngine engine, RazorCodeDocument codeDocument)

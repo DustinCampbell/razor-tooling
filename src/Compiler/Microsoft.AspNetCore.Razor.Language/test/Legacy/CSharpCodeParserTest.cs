@@ -220,8 +220,8 @@ public class CSharpCodeParserTest
 
         // Act & Assert (Does not throw)
         ImmutableArray<DirectiveDescriptor> directives = [
-            DirectiveDescriptor.CreateDirective("test", DirectiveKind.SingleLine),
-            DirectiveDescriptor.CreateDirective("test", DirectiveKind.SingleLine)
+            DirectiveDescriptor.Create("test", DirectiveKind.SingleLine),
+            DirectiveDescriptor.Create("test", DirectiveKind.SingleLine)
         ];
 
         _ = new CSharpCodeParser(directives, context);

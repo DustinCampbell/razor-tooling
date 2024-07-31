@@ -20,7 +20,7 @@ internal class ComponentLayoutDirectivePass : IntermediateNodePassBase, IRazorDi
             return;
         }
 
-        var directives = documentNode.FindDirectiveReferences(ComponentLayoutDirective.Directive);
+        var directives = documentNode.FindDirectiveReferences(ComponentLayoutDirective.Descriptor);
         if (directives.Count == 0)
         {
             return;

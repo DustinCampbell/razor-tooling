@@ -21,11 +21,11 @@ public sealed class FunctionsDirectivePass : IntermediateNodePassBase, IRazorDir
         }
 
         var directiveNodes = new List<IntermediateNodeReference>();
-        directiveNodes.AddRange(documentNode.FindDirectiveReferences(FunctionsDirective.Directive));
+        directiveNodes.AddRange(documentNode.FindDirectiveReferences(FunctionsDirective.Descriptor));
 
         if (FileKinds.IsComponent(codeDocument.GetFileKind()))
         {
-            directiveNodes.AddRange(documentNode.FindDirectiveReferences(ComponentCodeDirective.Directive));
+            directiveNodes.AddRange(documentNode.FindDirectiveReferences(ComponentCodeDirective.Descriptor));
         }
 
         // Now we have all the directive nodes, we want to add them to the end of the class node in document order.

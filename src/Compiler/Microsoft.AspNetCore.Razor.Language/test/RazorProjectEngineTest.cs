@@ -100,11 +100,11 @@ public class RazorProjectEngineTest
         Assert.NotNull(feature);
         Assert.Collection(
             feature.Directives,
-            directive => Assert.Same(FunctionsDirective.Directive, directive),
-            directive => Assert.Same(ImplementsDirective.Directive, directive),
-            directive => Assert.Same(InheritsDirective.Directive, directive),
-            directive => Assert.Same(NamespaceDirective.Directive, directive),
-            directive => Assert.Same(AttributeDirective.Directive, directive));
+            directive => Assert.Same(FunctionsDirective.Descriptor, directive),
+            directive => Assert.Same(ImplementsDirective.Descriptor, directive),
+            directive => Assert.Same(InheritsDirective.Descriptor, directive),
+            directive => Assert.Same(NamespaceDirective.Descriptor, directive),
+            directive => Assert.Same(AttributeDirective.Descriptor, directive));
     }
 
     private static void AssertDefaultTargetExtensions(RazorProjectEngine engine)

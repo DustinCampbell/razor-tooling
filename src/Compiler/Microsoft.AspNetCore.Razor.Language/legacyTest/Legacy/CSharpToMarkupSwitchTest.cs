@@ -253,7 +253,7 @@ public class CSharpToMarkupSwitchTest() : ParserTestBase(layer: TestProject.Laye
             @code {
             }
 
-            """, [ComponentCodeDirective.Directive]);
+            """, [ComponentCodeDirective.Descriptor]);
     }
 
     [Fact, WorkItem("https://github.com/dotnet/razor/issues/10358")]
@@ -263,7 +263,7 @@ public class CSharpToMarkupSwitchTest() : ParserTestBase(layer: TestProject.Laye
             @code{
             }                    
 
-            """, [ComponentCodeDirective.Directive]);
+            """, [ComponentCodeDirective.Descriptor]);
     }
 
     [Fact, WorkItem("https://github.com/dotnet/razor/issues/10358")]
@@ -273,7 +273,7 @@ public class CSharpToMarkupSwitchTest() : ParserTestBase(layer: TestProject.Laye
             @code{
             }                    @* comment *@
 
-            """, [ComponentCodeDirective.Directive]);
+            """, [ComponentCodeDirective.Descriptor]);
     }
 
     [Fact, WorkItem("https://github.com/dotnet/razor/issues/10358")]
@@ -284,7 +284,7 @@ public class CSharpToMarkupSwitchTest() : ParserTestBase(layer: TestProject.Laye
             }
             @* comment *@
 
-            """, [ComponentCodeDirective.Directive]);
+            """, [ComponentCodeDirective.Descriptor]);
     }
 
     [Fact, WorkItem("https://github.com/dotnet/razor/issues/10358")]
@@ -297,7 +297,7 @@ public class CSharpToMarkupSwitchTest() : ParserTestBase(layer: TestProject.Laye
             @code {
             }
 
-            """, [ComponentCodeDirective.Directive]);
+            """, [ComponentCodeDirective.Descriptor]);
     }
 
     [Fact, WorkItem("https://github.com/dotnet/razor/issues/10358")]
@@ -309,7 +309,7 @@ public class CSharpToMarkupSwitchTest() : ParserTestBase(layer: TestProject.Laye
 
             <div></div>
 
-            """, [ComponentCodeDirective.Directive]);
+            """, [ComponentCodeDirective.Descriptor]);
     }
 
     [Fact, WorkItem("https://github.com/dotnet/razor/issues/10358")]
@@ -321,7 +321,7 @@ public class CSharpToMarkupSwitchTest() : ParserTestBase(layer: TestProject.Laye
             }
             <div></div>
 
-            """, [ComponentCodeDirective.Directive]);
+            """, [ComponentCodeDirective.Descriptor]);
     }
 
     [Fact, WorkItem("https://github.com/dotnet/razor/issues/10358")]
@@ -332,7 +332,7 @@ public class CSharpToMarkupSwitchTest() : ParserTestBase(layer: TestProject.Laye
                
             }      <div></div>
 
-            """, [ComponentCodeDirective.Directive]);
+            """, [ComponentCodeDirective.Descriptor]);
     }
 
     [Fact, WorkItem("https://github.com/dotnet/razor/issues/10358")]
@@ -343,7 +343,7 @@ public class CSharpToMarkupSwitchTest() : ParserTestBase(layer: TestProject.Laye
                
             }<div></div>
 
-            """, [ComponentCodeDirective.Directive]);
+            """, [ComponentCodeDirective.Descriptor]);
     }
 
     [Fact, WorkItem("https://github.com/dotnet/razor/issues/10358")]
@@ -354,7 +354,7 @@ public class CSharpToMarkupSwitchTest() : ParserTestBase(layer: TestProject.Laye
             }
 
             """,
-            directives: [ComponentCodeDirective.Directive]);
+            directives: [ComponentCodeDirective.Descriptor]);
 
         var codeBlock = tree1.Root.ChildNodes()[0].ChildNodes()[1];
         Assert.Equal("CSharpCodeBlockSyntax<CSharpCodeBlock> at 0::11", codeBlock.ToString());

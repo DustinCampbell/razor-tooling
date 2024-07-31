@@ -14,14 +14,14 @@ public class CSharpAutoCompleteTest() : ParserTestBase(layer: TestProject.Layer.
     public void FunctionsDirectiveAutoCompleteAtEOF()
     {
         // Arrange, Act & Assert
-        ParseDocumentTest("@functions{", [FunctionsDirective.Directive]);
+        ParseDocumentTest("@functions{", [FunctionsDirective.Descriptor]);
     }
 
     [Fact]
     public void SectionDirectiveAutoCompleteAtEOF()
     {
         // Arrange, Act & Assert
-        ParseDocumentTest("@section Header {", [SectionDirective.Directive]);
+        ParseDocumentTest("@section Header {", [SectionDirective.Descriptor]);
     }
 
     [Fact]
@@ -37,7 +37,7 @@ public class CSharpAutoCompleteTest() : ParserTestBase(layer: TestProject.Layer.
         ParseDocumentTest("""
             @functions{
             foo
-            """, [FunctionsDirective.Directive]);
+            """, [FunctionsDirective.Descriptor]);
     }
 
     [Fact]
@@ -47,7 +47,7 @@ public class CSharpAutoCompleteTest() : ParserTestBase(layer: TestProject.Layer.
         ParseDocumentTest("""
             @section Header {
             <p>Foo</p>
-            """, [SectionDirective.Directive]);
+            """, [SectionDirective.Descriptor]);
     }
 
     [Fact]

@@ -28,7 +28,7 @@ public static class RazorExtensions
         builder.Features.Add(new DefaultTagHelperDescriptorProvider());
 
         // Register section directive with the 1.x compatible target extension.
-        builder.AddDirective(SectionDirective.Directive);
+        builder.AddDirective(SectionDirective.Descriptor);
         builder.Features.Add(new SectionDirectivePass());
         builder.AddTargetExtension(new LegacySectionTargetExtension());
 

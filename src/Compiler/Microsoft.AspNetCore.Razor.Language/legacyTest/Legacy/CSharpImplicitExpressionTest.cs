@@ -231,7 +231,7 @@ public class CSharpImplicitExpressionTest() : ParserTestBase(layer: TestProject.
     public void ParsesNullForgivenessOperatorImplicitExpression_DirectiveCodeBlock()
     {
         // Act & Assert
-        ParseDocumentTest("@functions { public void Foo() { @Model!.Name![0]!?.Bar } }", [FunctionsDirective.Directive]);
+        ParseDocumentTest("@functions { public void Foo() { @Model!.Name![0]!?.Bar } }", [FunctionsDirective.Descriptor]);
     }
 
     [Fact]

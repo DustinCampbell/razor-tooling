@@ -117,7 +117,7 @@ public class HtmlToCodeSwitchTest() : ParserTestBase(layer: TestProject.Layer.Co
                 </ul>
             }}
             """,
-            [SectionDirective.Directive]);
+            [SectionDirective.Descriptor]);
     }
 
     [Fact]
@@ -163,7 +163,7 @@ public class HtmlToCodeSwitchTest() : ParserTestBase(layer: TestProject.Layer.Co
     {
         ParseDocumentTest(
             "@section Foo { <foo>@@bar</foo> }",
-            [SectionDirective.Directive]);
+            [SectionDirective.Descriptor]);
     }
 
     [Fact]
@@ -171,6 +171,6 @@ public class HtmlToCodeSwitchTest() : ParserTestBase(layer: TestProject.Layer.Co
     {
         ParseDocumentTest(
             "@section Foo { <foo>@@@@@bar</foo> }",
-            [SectionDirective.Directive]);
+            [SectionDirective.Descriptor]);
     }
 }

@@ -43,7 +43,7 @@ public class BasicIntegrationTest() : IntegrationTestBase(layer: TestProject.Lay
         // Arrange
         var projectEngine = CreateProjectEngine(b =>
         {
-            b.AddDirective(DirectiveDescriptor.CreateDirective("test", DirectiveKind.SingleLine));
+            b.AddDirective(DirectiveDescriptor.Create("test", DirectiveKind.SingleLine));
         });
 
         var projectItem = CreateProjectItemFromFile();

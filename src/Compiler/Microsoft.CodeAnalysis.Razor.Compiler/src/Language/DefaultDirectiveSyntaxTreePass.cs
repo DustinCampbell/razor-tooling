@@ -63,7 +63,7 @@ internal class DefaultDirectiveSyntaxTreePass : RazorEngineFeatureBase, IRazorSy
 
         public override SyntaxNode VisitRazorDirective(RazorDirectiveSyntax node)
         {
-            if (node.DirectiveDescriptor?.Name != SectionDirective.Directive.Name)
+            if (node.DirectiveDescriptor?.Name != SectionDirective.Descriptor.Name)
             {
                 // We only want to track the nesting of section directives.
                 return base.VisitRazorDirective(node);
@@ -75,7 +75,7 @@ internal class DefaultDirectiveSyntaxTreePass : RazorEngineFeatureBase, IRazorSy
             if (_nestedLevel > 1)
             {
                 var directiveStart = node.Transition.GetSourceLocation(_syntaxTree.Source);
-                var errorLength = /* @ */ 1 + SectionDirective.Directive.Name.Length;
+                var errorLength = /* @ */ 1 + SectionDirective.Descriptor.Name.Length;
                 var error = RazorDiagnosticFactory.CreateParsing_SectionsCannotBeNested(new SourceSpan(directiveStart, errorLength));
                 result = result.AppendDiagnostic(error);
             }

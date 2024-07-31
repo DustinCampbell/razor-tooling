@@ -114,7 +114,7 @@ public class MarkupTransitionCompletionItemProviderTest(ITestOutputHelper testOu
     public void GetCompletionItems_ReturnsMarkupTransitionCompletionItemInFunctionDirective()
     {
         // Arrange
-        var syntaxTree = CreateSyntaxTree("@functions {public string GetHello(){< return \"pi\";}}", FunctionsDirective.Directive);
+        var syntaxTree = CreateSyntaxTree("@functions {public string GetHello(){< return \"pi\";}}", FunctionsDirective.Descriptor);
         var absoluteIndex = 38;
         var razorCompletionContext = CreateRazorCompletionContext(absoluteIndex, syntaxTree);
 
@@ -219,7 +219,7 @@ public class MarkupTransitionCompletionItemProviderTest(ITestOutputHelper testOu
     }
 
     private bool _collapseNavMenu => true;
-}", FunctionsDirective.Directive);
+}", FunctionsDirective.Descriptor);
         var absoluteIndex = 59 + (Environment.NewLine.Length * 3);
         var razorCompletionContext = CreateRazorCompletionContext(absoluteIndex, syntaxTree);
 

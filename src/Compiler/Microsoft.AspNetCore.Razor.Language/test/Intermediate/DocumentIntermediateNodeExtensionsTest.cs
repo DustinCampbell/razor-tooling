@@ -67,8 +67,8 @@ public class DocumentIntermediateNodeExtensionsTest
     public void FindDirectiveReferences_FindsMatchingDirectives()
     {
         // Arrange
-        var directive = DirectiveDescriptor.CreateSingleLineDirective("test");
-        var directive2 = DirectiveDescriptor.CreateSingleLineDirective("test");
+        var directive = DirectiveDescriptor.CreateSingleLine("test");
+        var directive2 = DirectiveDescriptor.CreateSingleLine("test");
 
         var document = new DocumentIntermediateNode();
         var @namespace = new NamespaceDeclarationIntermediateNode();

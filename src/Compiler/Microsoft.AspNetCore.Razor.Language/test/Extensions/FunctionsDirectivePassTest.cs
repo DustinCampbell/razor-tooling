@@ -28,7 +28,7 @@ public class FunctionsDirectivePassTest : RazorProjectEngineTestBase
         var codeDocument = new RazorCodeDocument(sourceDocument);
 
         var irDocument = new DocumentIntermediateNode();
-        irDocument.Children.Add(new DirectiveIntermediateNode() { Directive = FunctionsDirective.Directive, });
+        irDocument.Children.Add(new DirectiveIntermediateNode() { Directive = FunctionsDirective.Descriptor, });
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -81,7 +81,7 @@ public class FunctionsDirectivePassTest : RazorProjectEngineTestBase
     public void Execute_ComponentCodeDirective_AddsStatementsToClassLevel()
     {
         // Arrange
-        var projectEngine = CreateProjectEngine(b => b.AddDirective(ComponentCodeDirective.Directive));
+        var projectEngine = CreateProjectEngine(b => b.AddDirective(ComponentCodeDirective.Descriptor));
         var pass = new FunctionsDirectivePass()
         {
             Engine = projectEngine.Engine,
@@ -120,7 +120,7 @@ public class FunctionsDirectivePassTest : RazorProjectEngineTestBase
     public void Execute_FunctionsAndComponentCodeDirective_AddsStatementsToClassLevel()
     {
         // Arrange
-        var projectEngine = CreateProjectEngine(b => b.AddDirective(ComponentCodeDirective.Directive));
+        var projectEngine = CreateProjectEngine(b => b.AddDirective(ComponentCodeDirective.Descriptor));
         var pass = new FunctionsDirectivePass()
         {
             Engine = projectEngine.Engine,

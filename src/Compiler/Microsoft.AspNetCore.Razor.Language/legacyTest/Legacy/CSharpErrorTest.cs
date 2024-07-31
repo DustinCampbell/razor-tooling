@@ -182,7 +182,7 @@ public class CSharpErrorTest() : ParserTestBase(layer: TestProject.Layer.Compile
     {
         ParseDocumentTest(
             "@functions { var foo = bar; if(foo != null) { bar(); } ",
-            [FunctionsDirective.Directive]);
+            [FunctionsDirective.Descriptor]);
     }
 
     [Fact]

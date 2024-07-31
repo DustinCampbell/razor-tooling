@@ -66,7 +66,7 @@ public class DirectiveCompletionItemProviderTest : ToolingTestBase
     public void GetDirectiveCompletionItems_ReturnsCustomDirectivesAsCompletionItems()
     {
         // Arrange
-        var customDirective = DirectiveDescriptor.CreateSingleLineDirective("custom", builder => builder.Description = "My Custom Directive.");
+        var customDirective = DirectiveDescriptor.CreateSingleLine("custom", builder => builder.Description = "My Custom Directive.");
         var syntaxTree = CreateSyntaxTree("@addTag", customDirective);
 
         // Act
@@ -87,7 +87,7 @@ public class DirectiveCompletionItemProviderTest : ToolingTestBase
     public void GetDirectiveCompletionItems_UsesDisplayNamesWhenNotNull()
     {
         // Arrange
-        var customDirective = DirectiveDescriptor.CreateSingleLineDirective("custom", builder =>
+        var customDirective = DirectiveDescriptor.CreateSingleLine("custom", builder =>
         {
             builder.DisplayName = "different";
             builder.Description = "My Custom Directive.";
@@ -112,7 +112,7 @@ public class DirectiveCompletionItemProviderTest : ToolingTestBase
     public void GetDirectiveCompletionItems_CodeBlockCommitCharacters()
     {
         // Arrange
-        var customDirective = DirectiveDescriptor.CreateCodeBlockDirective("custom", builder =>
+        var customDirective = DirectiveDescriptor.CreateCodeBlock("custom", builder =>
         {
             builder.DisplayName = "code";
             builder.Description = "My Custom Code Block Directive.";
@@ -136,7 +136,7 @@ public class DirectiveCompletionItemProviderTest : ToolingTestBase
     public void GetDirectiveCompletionItems_RazorBlockCommitCharacters()
     {
         // Arrange
-        var customDirective = DirectiveDescriptor.CreateRazorBlockDirective("custom", builder =>
+        var customDirective = DirectiveDescriptor.CreateRazorBlock("custom", builder =>
         {
             builder.DisplayName = "section";
             builder.Description = "My Custom Razor Block Directive.";
@@ -171,7 +171,7 @@ public class DirectiveCompletionItemProviderTest : ToolingTestBase
     {
         // Arrange
         var usingDirective = DirectiveCompletionItemProvider.ComponentDefaultDirectives.First();
-        var customDirective = DirectiveDescriptor.CreateRazorBlockDirective(knownDirective, builder =>
+        var customDirective = DirectiveDescriptor.CreateRazorBlock(knownDirective, builder =>
         {
             builder.DisplayName = knownDirective;
             builder.Description = string.Empty; // Doesn't matter for this test. Just need to provide something to avoid ArgumentNullException
@@ -195,7 +195,7 @@ public class DirectiveCompletionItemProviderTest : ToolingTestBase
     public void GetDirectiveCompletionItems_ReturnsKnownDirectivesAsSnippets_SingleLine_Legacy()
     {
         // Arrange
-        var customDirective = DirectiveDescriptor.CreateRazorBlockDirective("model", builder =>
+        var customDirective = DirectiveDescriptor.CreateRazorBlock("model", builder =>
         {
             builder.DisplayName = "model"; // Currently "model" is the only cshtml-only single-line directive. "add(remove)TagHelper" and "tagHelperPrefix" are there by default
             builder.Description = string.Empty; // Doesn't matter for this test. Just need to provide something to avoid ArgumentNullException
@@ -321,7 +321,7 @@ public class DirectiveCompletionItemProviderTest : ToolingTestBase
     public void ShouldProvideCompletions_ReturnsFalseWhenInsideDirective()
     {
         // Arrange
-        var syntaxTree = CreateSyntaxTree("@functions { @  }", FunctionsDirective.Directive);
+        var syntaxTree = CreateSyntaxTree("@functions { @  }", FunctionsDirective.Descriptor);
         var context = CreateRazorCompletionContext(absoluteIndex: 14, syntaxTree);
 
         // Act

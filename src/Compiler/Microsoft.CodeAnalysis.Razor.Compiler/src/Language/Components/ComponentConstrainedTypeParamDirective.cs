@@ -1,17 +1,12 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
-using System;
-
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
 internal static class ComponentConstrainedTypeParamDirective
 {
-    public static DirectiveDescriptor Directive = DirectiveDescriptor.CreateDirective(
+    public static readonly DirectiveDescriptor Descriptor = DirectiveDescriptor.CreateSingleLine(
         "typeparam",
-        DirectiveKind.SingleLine,
         builder =>
         {
             builder.AddMemberToken(ComponentResources.TypeParamDirective_Token_Name, ComponentResources.TypeParamDirective_Token_Description);
@@ -22,12 +17,9 @@ internal static class ComponentConstrainedTypeParamDirective
 
     public static RazorProjectEngineBuilder Register(RazorProjectEngineBuilder builder)
     {
-        if (builder == null)
-        {
-            throw new ArgumentNullException(nameof(builder));
-        }
+        ArgHelper.ThrowIfNull(builder);
 
-        builder.AddDirective(Directive, FileKinds.Component, FileKinds.ComponentImport);
+        builder.AddDirective(Descriptor, FileKinds.Component, FileKinds.ComponentImport);
         return builder;
     }
 }

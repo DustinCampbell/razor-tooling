@@ -219,7 +219,7 @@ public class RazorIndentationFactsTest(ITestOutputHelper testOutput) : ToolingTe
     public void GetDesiredIndentation_ReturnsNull_IfOwningSpanIsNone()
     {
         // Arrange
-        var customDirective = DirectiveDescriptor.CreateSingleLineDirective("custom");
+        var customDirective = DirectiveDescriptor.CreateSingleLine("custom");
         var source = new StringTextSnapshot($@"
 @custom
 ");
@@ -266,7 +266,7 @@ public class RazorIndentationFactsTest(ITestOutputHelper testOutput) : ToolingTe
     public void GetDesiredIndentation_ReturnsCorrectIndentation_ForMarkupWithinDirectiveBlock()
     {
         // Arrange
-        var customDirective = DirectiveDescriptor.CreateRazorBlockDirective("custom");
+        var customDirective = DirectiveDescriptor.CreateRazorBlock("custom");
         var source = new StringTextSnapshot("""
             @custom
             {
@@ -318,7 +318,7 @@ public class RazorIndentationFactsTest(ITestOutputHelper testOutput) : ToolingTe
     public void GetDesiredIndentation_ReturnsCorrectIndentation_ForMarkupWithinCodeBlockInADirectiveBlock()
     {
         // Arrange
-        var customDirective = DirectiveDescriptor.CreateRazorBlockDirective("custom");
+        var customDirective = DirectiveDescriptor.CreateRazorBlock("custom");
         var source = new StringTextSnapshot("""
             @custom
             {

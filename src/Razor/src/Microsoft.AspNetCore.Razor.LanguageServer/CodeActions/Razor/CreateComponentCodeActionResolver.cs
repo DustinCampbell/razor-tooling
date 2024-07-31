@@ -77,7 +77,7 @@ internal sealed class CreateComponentCodeActionResolver(IDocumentContextFactory 
         var namespaceDirective = syntaxTree.Root.DescendantNodes()
             .Where(n => n.Kind == SyntaxKind.RazorDirective)
             .Cast<RazorDirectiveSyntax>()
-            .FirstOrDefault(static n => n.DirectiveDescriptor == NamespaceDirective.Directive);
+            .FirstOrDefault(static n => n.DirectiveDescriptor == NamespaceDirective.Descriptor);
 
         if (namespaceDirective != null)
         {

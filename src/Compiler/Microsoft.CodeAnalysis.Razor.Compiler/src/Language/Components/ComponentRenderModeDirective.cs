@@ -1,16 +1,12 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
-#nullable enable
-
-using System;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
-internal sealed class ComponentRenderModeDirective
+internal static class ComponentRenderModeDirective
 {
-    public static readonly DirectiveDescriptor Directive = DirectiveDescriptor.CreateDirective(
+    public static readonly DirectiveDescriptor Descriptor = DirectiveDescriptor.CreateSingleLine(
        "rendermode",
-       DirectiveKind.SingleLine,
        builder =>
        {
            builder.AddIdentifierOrExpression(ComponentResources.RenderModeDirective_Token_Name, ComponentResources.RenderModeDirective_Token_Description);
@@ -20,12 +16,9 @@ internal sealed class ComponentRenderModeDirective
 
     public static void Register(RazorProjectEngineBuilder builder)
     {
-        if (builder == null)
-        {
-            throw new ArgumentNullException(nameof(builder));
-        }
+        ArgHelper.ThrowIfNull(builder);
 
-        builder.AddDirective(Directive, FileKinds.Component);
+        builder.AddDirective(Descriptor, FileKinds.Component);
         builder.Features.Add(new ComponentRenderModeDirectivePass());
     }
 }

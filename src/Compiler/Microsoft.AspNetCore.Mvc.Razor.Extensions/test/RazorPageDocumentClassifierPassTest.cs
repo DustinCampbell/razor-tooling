@@ -44,7 +44,7 @@ public class RazorPageDocumentClassifierPassTest : RazorProjectEngineTestBase
         pass.Execute(codeDocument, irDocument);
 
         // Assert
-        var pageDirectives = irDocument.FindDirectiveReferences(PageDirective.Directive);
+        var pageDirectives = irDocument.FindDirectiveReferences(PageDirective.Descriptor);
         var directive = Assert.Single(pageDirectives);
         var diagnostic = Assert.Single(directive.Node.Diagnostics);
         Assert.Equal(expectedDiagnostic, diagnostic);
@@ -85,7 +85,7 @@ public class RazorPageDocumentClassifierPassTest : RazorProjectEngineTestBase
         visitor.Visit(irDocument);
 
         // Assert
-        var pageDirectives = irDocument.FindDirectiveReferences(PageDirective.Directive);
+        var pageDirectives = irDocument.FindDirectiveReferences(PageDirective.Descriptor);
         var directive = Assert.Single(pageDirectives);
         var diagnostic = Assert.Single(directive.Node.Diagnostics);
         Assert.Equal(expectedDiagnostic, diagnostic);
@@ -115,7 +115,7 @@ public class RazorPageDocumentClassifierPassTest : RazorProjectEngineTestBase
         visitor.Visit(irDocument);
 
         // Assert
-        var pageDirectives = irDocument.FindDirectiveReferences(PageDirective.Directive);
+        var pageDirectives = irDocument.FindDirectiveReferences(PageDirective.Descriptor);
         var directive = Assert.Single(pageDirectives);
         Assert.Empty(directive.Node.Diagnostics);
     }

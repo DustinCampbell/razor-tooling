@@ -382,8 +382,8 @@ public class ExtractToCodeBehindCodeActionProviderTest(ITestOutputHelper testOut
         var sourceDocument = RazorSourceDocument.Create(text, RazorSourceDocumentProperties.Create(filePath, relativePath));
         var options = RazorParserOptions.Create(o =>
         {
-            o.Directives.Add(ComponentCodeDirective.Directive);
-            o.Directives.Add(FunctionsDirective.Directive);
+            o.Directives.Add(ComponentCodeDirective.Descriptor);
+            o.Directives.Add(FunctionsDirective.Descriptor);
         });
         var syntaxTree = RazorSyntaxTree.Parse(sourceDocument, options);
 

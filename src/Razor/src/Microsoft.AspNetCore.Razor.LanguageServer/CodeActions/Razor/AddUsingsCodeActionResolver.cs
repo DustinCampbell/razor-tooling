@@ -206,9 +206,9 @@ internal sealed class AddUsingsCodeActionResolver(IDocumentContextFactory docume
     {
         if (node is RazorDirectiveSyntax directiveNode)
         {
-            return directiveNode.DirectiveDescriptor == ComponentPageDirective.Directive ||
-                directiveNode.DirectiveDescriptor == NamespaceDirective.Directive ||
-                directiveNode.DirectiveDescriptor == PageDirective.Directive;
+            return directiveNode.DirectiveDescriptor == ComponentPageDirective.Descriptor ||
+                directiveNode.DirectiveDescriptor == NamespaceDirective.Descriptor ||
+                directiveNode.DirectiveDescriptor == PageDirective.Descriptor;
         }
 
         return false;

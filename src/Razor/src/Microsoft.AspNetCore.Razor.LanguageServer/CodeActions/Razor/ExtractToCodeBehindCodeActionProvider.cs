@@ -65,8 +65,8 @@ internal sealed class ExtractToCodeBehindCodeActionProvider(ILoggerFactory logge
         }
 
         // Make sure we've found a @code or @functions
-        if (directiveNode.DirectiveDescriptor != ComponentCodeDirective.Directive &&
-            directiveNode.DirectiveDescriptor != FunctionsDirective.Directive)
+        if (directiveNode.DirectiveDescriptor != ComponentCodeDirective.Descriptor &&
+            directiveNode.DirectiveDescriptor != FunctionsDirective.Descriptor)
         {
             return SpecializedTasks.EmptyImmutableArray<RazorVSInternalCodeAction>();
         }

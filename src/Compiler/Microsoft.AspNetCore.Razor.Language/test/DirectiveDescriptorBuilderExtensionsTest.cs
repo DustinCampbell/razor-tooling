@@ -13,7 +13,7 @@ public class DirectiveDescriptorBuilderExtensionsTest
     public void AddMemberToken_AddsToken()
     {
         // Arrange & Act
-        var descriptor = DirectiveDescriptor.CreateDirective("custom", DirectiveKind.SingleLine, b => b.AddMemberToken());
+        var descriptor = DirectiveDescriptor.Create("custom", DirectiveKind.SingleLine, b => b.AddMemberToken());
 
         // Assert
         var token = Assert.Single(descriptor.Tokens);
@@ -27,7 +27,7 @@ public class DirectiveDescriptorBuilderExtensionsTest
     public void AddNamespaceToken_AddsToken()
     {
         // Arrange & Act
-        var descriptor = DirectiveDescriptor.CreateDirective("custom", DirectiveKind.SingleLine, b => b.AddNamespaceToken("Name", "Description"));
+        var descriptor = DirectiveDescriptor.Create("custom", DirectiveKind.SingleLine, b => b.AddNamespaceToken("Name", "Description"));
 
         // Assert
         var token = Assert.Single(descriptor.Tokens);
@@ -41,7 +41,7 @@ public class DirectiveDescriptorBuilderExtensionsTest
     public void AddStringToken_AddsToken()
     {
         // Arrange & Act
-        var descriptor = DirectiveDescriptor.CreateDirective("custom", DirectiveKind.SingleLine, b => b.AddStringToken());
+        var descriptor = DirectiveDescriptor.Create("custom", DirectiveKind.SingleLine, b => b.AddStringToken());
 
         // Assert
         var token = Assert.Single(descriptor.Tokens);
@@ -55,7 +55,7 @@ public class DirectiveDescriptorBuilderExtensionsTest
     public void AddTypeToken_AddsToken()
     {
         // Arrange & Act
-        var descriptor = DirectiveDescriptor.CreateDirective("custom", DirectiveKind.SingleLine, b => b.AddTypeToken("Name", "Description"));
+        var descriptor = DirectiveDescriptor.Create("custom", DirectiveKind.SingleLine, b => b.AddTypeToken("Name", "Description"));
 
         // Assert
         var token = Assert.Single(descriptor.Tokens);
@@ -69,7 +69,7 @@ public class DirectiveDescriptorBuilderExtensionsTest
     public void AddOptionalTypeToken_AddsToken()
     {
         // Arrange & Act
-        var descriptor = DirectiveDescriptor.CreateDirective("custom", DirectiveKind.SingleLine, b => b.AddOptionalTypeToken());
+        var descriptor = DirectiveDescriptor.Create("custom", DirectiveKind.SingleLine, b => b.AddOptionalTypeToken());
 
         // Assert
         var token = Assert.Single(descriptor.Tokens);
@@ -83,7 +83,7 @@ public class DirectiveDescriptorBuilderExtensionsTest
     public void AddOptionalMemberToken_AddsToken()
     {
         // Arrange & Act
-        var descriptor = DirectiveDescriptor.CreateDirective("custom", DirectiveKind.SingleLine, b => b.AddOptionalMemberToken("Name", "Description"));
+        var descriptor = DirectiveDescriptor.Create("custom", DirectiveKind.SingleLine, b => b.AddOptionalMemberToken("Name", "Description"));
 
         // Assert
         var token = Assert.Single(descriptor.Tokens);
@@ -97,7 +97,7 @@ public class DirectiveDescriptorBuilderExtensionsTest
     public void AddOptionalNamespaceToken_AddsToken()
     {
         // Arrange & Act
-        var descriptor = DirectiveDescriptor.CreateDirective("custom", DirectiveKind.SingleLine, b => b.AddOptionalNamespaceToken());
+        var descriptor = DirectiveDescriptor.Create("custom", DirectiveKind.SingleLine, b => b.AddOptionalNamespaceToken());
 
         // Assert
         var token = Assert.Single(descriptor.Tokens);
@@ -111,7 +111,7 @@ public class DirectiveDescriptorBuilderExtensionsTest
     public void AddOptionalStringToken_AddsToken()
     {
         // Arrange & Act
-        var descriptor = DirectiveDescriptor.CreateDirective("custom", DirectiveKind.SingleLine, b => b.AddOptionalStringToken("Name", "Description"));
+        var descriptor = DirectiveDescriptor.Create("custom", DirectiveKind.SingleLine, b => b.AddOptionalStringToken("Name", "Description"));
 
         // Assert
         var token = Assert.Single(descriptor.Tokens);
@@ -125,7 +125,7 @@ public class DirectiveDescriptorBuilderExtensionsTest
     public void AddAttributeToken_AddsToken()
     {
         // Arrange & Act
-        var descriptor = DirectiveDescriptor.CreateDirective("custom", DirectiveKind.SingleLine, b => b.AddAttributeToken("Name", "Description"));
+        var descriptor = DirectiveDescriptor.Create("custom", DirectiveKind.SingleLine, b => b.AddAttributeToken("Name", "Description"));
 
         // Assert
         var token = Assert.Single(descriptor.Tokens);
@@ -139,7 +139,7 @@ public class DirectiveDescriptorBuilderExtensionsTest
     public void AddOptionalAttributeToken_AddsToken()
     {
         // Arrange & Act
-        var descriptor = DirectiveDescriptor.CreateDirective("custom", DirectiveKind.SingleLine, b => b.AddOptionalAttributeToken());
+        var descriptor = DirectiveDescriptor.Create("custom", DirectiveKind.SingleLine, b => b.AddOptionalAttributeToken());
 
         // Assert
         var token = Assert.Single(descriptor.Tokens);
@@ -153,7 +153,7 @@ public class DirectiveDescriptorBuilderExtensionsTest
     public void AddOptionalGenericTypeConstraintToken_AddsToken()
     {
         // Arrange & Act
-        var descriptor = DirectiveDescriptor.CreateDirective("custom", DirectiveKind.SingleLine, b => b.AddOptionalGenericTypeConstraintToken("Name", "Description"));
+        var descriptor = DirectiveDescriptor.Create("custom", DirectiveKind.SingleLine, b => b.AddOptionalGenericTypeConstraintToken("Name", "Description"));
 
         // Assert
         var token = Assert.Single(descriptor.Tokens);
