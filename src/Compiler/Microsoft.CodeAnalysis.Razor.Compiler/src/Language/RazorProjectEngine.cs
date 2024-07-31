@@ -18,7 +18,7 @@ public class RazorProjectEngine
     public RazorProjectFileSystem FileSystem { get; }
     public RazorEngine Engine { get; }
     public ImmutableArray<IRazorEngineFeature> EngineFeatures => Engine.Features;
-    public ImmutableArray<IRazorEnginePhase> Phases => Engine.Phases;
+    public ImmutableArray<IRazorEnginePhase> Phases { get; }
     public ImmutableArray<IRazorProjectEngineFeature> ProjectFeatures { get; }
 
     internal RazorProjectEngine(
@@ -26,7 +26,7 @@ public class RazorProjectEngine
         RazorEngine engine,
         RazorProjectFileSystem fileSystem,
         ImmutableArray<IRazorProjectEngineFeature> projectFeatures,
-        bool initializeProjectFeatures)
+        ImmutableArray<IRazorEnginePhase> phases)
     {
         ArgHelper.ThrowIfNull(configuration);
         ArgHelper.ThrowIfNull(engine);
@@ -36,14 +36,28 @@ public class RazorProjectEngine
         Engine = engine;
         FileSystem = fileSystem;
         ProjectFeatures = projectFeatures;
+        Phases = phases;
 
-        if (initializeProjectFeatures)
+        foreach (var phase in phases)
         {
-            foreach (var projectFeature in projectFeatures)
-            {
-                projectFeature.Initialize(this);
-            }
+            phase.Initialize(this);
         }
+
+        foreach (var projectFeature in projectFeatures)
+        {
+            projectFeature.Initialize(this);
+        }
+    }
+
+    private protected RazorProjectEngine(RazorProjectEngine otherProjectEngine)
+    {
+        ArgHelper.ThrowIfNull(otherProjectEngine);
+
+        Configuration = otherProjectEngine.Configuration;
+        Engine = otherProjectEngine.Engine;
+        FileSystem = otherProjectEngine.FileSystem;
+        ProjectFeatures = otherProjectEngine.ProjectFeatures;
+        Phases = otherProjectEngine.Phases;
     }
 
     public RazorCodeDocument Process(RazorProjectItem projectItem)
@@ -54,7 +68,7 @@ public class RazorProjectEngine
         }
 
         var codeDocument = CreateCodeDocumentCore(projectItem);
-        ProcessCore(codeDocument);
+        RunPhasesOn(codeDocument);
         return codeDocument;
     }
 
@@ -70,7 +84,7 @@ public class RazorProjectEngine
         }
 
         var codeDocument = CreateCodeDocumentCore(source, fileKind, importSources, tagHelpers, configureParser: null, configureCodeGeneration: null);
-        ProcessCore(codeDocument);
+        RunPhasesOn(codeDocument);
         return codeDocument;
     }
 
@@ -86,7 +100,7 @@ public class RazorProjectEngine
             builder.SuppressPrimaryMethodBody = true;
         });
 
-        ProcessCore(codeDocument);
+        RunPhasesOn(codeDocument);
         return codeDocument;
     }
 
@@ -106,7 +120,7 @@ public class RazorProjectEngine
             builder.SuppressPrimaryMethodBody = true;
         });
 
-        ProcessCore(codeDocument);
+        RunPhasesOn(codeDocument);
         return codeDocument;
     }
 
@@ -118,7 +132,7 @@ public class RazorProjectEngine
         }
 
         var codeDocument = CreateCodeDocumentDesignTimeCore(projectItem);
-        ProcessCore(codeDocument);
+        RunPhasesOn(codeDocument);
         return codeDocument;
     }
 
@@ -134,7 +148,7 @@ public class RazorProjectEngine
         }
 
         var codeDocument = CreateCodeDocumentDesignTimeCore(source, fileKind, importSources, tagHelpers, configureParser: null, configureCodeGeneration: null);
-        ProcessCore(codeDocument);
+        RunPhasesOn(codeDocument);
         return codeDocument;
     }
 
@@ -286,14 +300,14 @@ public class RazorProjectEngine
         return codeDocument;
     }
 
-    private void ProcessCore(RazorCodeDocument codeDocument)
+    public void RunPhasesOn(RazorCodeDocument codeDocument)
     {
-        if (codeDocument == null)
-        {
-            throw new ArgumentNullException(nameof(codeDocument));
-        }
+        ArgHelper.ThrowIfNull(codeDocument);
 
-        Engine.Process(codeDocument);
+        foreach (var phase in Phases)
+        {
+            phase.Execute(codeDocument);
+        }
     }
 
     private TFeature GetRequiredFeature<TFeature>()

@@ -22,10 +22,8 @@ public class MvcViewDocumentClassifierPassTest : RazorProjectEngineTestBase
 
         var projectEngine = CreateProjectEngine();
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
-        var pass = new MvcViewDocumentClassifierPass
-        {
-            Engine = projectEngine.Engine
-        };
+        var pass = new MvcViewDocumentClassifierPass();
+        pass.Initialize(projectEngine);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -43,10 +41,8 @@ public class MvcViewDocumentClassifierPassTest : RazorProjectEngineTestBase
         var projectEngine = CreateProjectEngine();
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
         irDocument.DocumentKind = "some-value";
-        var pass = new MvcViewDocumentClassifierPass
-        {
-            Engine = projectEngine.Engine
-        };
+        var pass = new MvcViewDocumentClassifierPass();
+        pass.Initialize(projectEngine);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -63,10 +59,8 @@ public class MvcViewDocumentClassifierPassTest : RazorProjectEngineTestBase
 
         var projectEngine = CreateProjectEngine();
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
-        var pass = new MvcViewDocumentClassifierPass
-        {
-            Engine = projectEngine.Engine
-        };
+        var pass = new MvcViewDocumentClassifierPass();
+        pass.Initialize(projectEngine);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -86,10 +80,8 @@ public class MvcViewDocumentClassifierPassTest : RazorProjectEngineTestBase
 
         var projectEngine = CreateProjectEngine();
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
-        var pass = new MvcViewDocumentClassifierPass
-        {
-            Engine = projectEngine.Engine
-        };
+        var pass = new MvcViewDocumentClassifierPass();
+        pass.Initialize(projectEngine);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -111,10 +103,8 @@ public class MvcViewDocumentClassifierPassTest : RazorProjectEngineTestBase
 
         var projectEngine = CreateProjectEngine();
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
-        var pass = new MvcViewDocumentClassifierPass
-        {
-            Engine = projectEngine.Engine
-        };
+        var pass = new MvcViewDocumentClassifierPass();
+        pass.Initialize(projectEngine);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -138,10 +128,8 @@ public class MvcViewDocumentClassifierPassTest : RazorProjectEngineTestBase
 
         var projectEngine = CreateProjectEngine();
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
-        var pass = new MvcViewDocumentClassifierPass
-        {
-            Engine = projectEngine.Engine
-        };
+        var pass = new MvcViewDocumentClassifierPass();
+        pass.Initialize(projectEngine);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -161,10 +149,8 @@ public class MvcViewDocumentClassifierPassTest : RazorProjectEngineTestBase
 
         var projectEngine = CreateProjectEngine();
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
-        var pass = new MvcViewDocumentClassifierPass
-        {
-            Engine = projectEngine.Engine
-        };
+        var pass = new MvcViewDocumentClassifierPass();
+        pass.Initialize(projectEngine);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -184,10 +170,8 @@ public class MvcViewDocumentClassifierPassTest : RazorProjectEngineTestBase
 
         var projectEngine = CreateProjectEngine();
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
-        var pass = new MvcViewDocumentClassifierPass
-        {
-            Engine = projectEngine.Engine
-        };
+        var pass = new MvcViewDocumentClassifierPass();
+        pass.Initialize(projectEngine);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -206,10 +190,8 @@ public class MvcViewDocumentClassifierPassTest : RazorProjectEngineTestBase
 
         var projectEngine = CreateProjectEngine();
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
-        var pass = new MvcViewDocumentClassifierPass
-        {
-            Engine = projectEngine.Engine
-        };
+        var pass = new MvcViewDocumentClassifierPass();
+        pass.Initialize(projectEngine);
 
         // Act
         pass.Execute(codeDocument, irDocument);

@@ -1,17 +1,14 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
-using System;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-public abstract class IntermediateNodePassBase : RazorEngineFeatureBase
+public abstract class IntermediateNodePassBase : RazorProjectEngineFeatureBase
 {
     /// <summary>
-    /// The default implementation of the <see cref="IRazorEngineFeature"/>s that run in a
+    /// The default implementation of the <see cref="IRazorProjectEngineFeature"/>s that run in a
     /// <see cref="IRazorEnginePhase"/> will use this value for its Order property.
     /// </summary>
     /// <remarks>
@@ -24,19 +21,12 @@ public abstract class IntermediateNodePassBase : RazorEngineFeatureBase
 
     public void Execute(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
     {
-        if (codeDocument == null)
-        {
-            throw new ArgumentNullException(nameof(codeDocument));
-        }
+        ArgHelper.ThrowIfNull(codeDocument);
+        ArgHelper.ThrowIfNull(documentNode);
 
-        if (documentNode == null)
+        if (ProjectEngine == null)
         {
-            throw new ArgumentNullException(nameof(documentNode));
-        }
-
-        if (Engine == null)
-        {
-            throw new InvalidOperationException(Resources.FormatPhaseMustBeInitialized(nameof(Engine)));
+            ThrowHelper.ThrowInvalidOperationException(Resources.FormatPhaseMustBeInitialized(nameof(ProjectEngine)));
         }
 
         ExecuteCore(codeDocument, documentNode);

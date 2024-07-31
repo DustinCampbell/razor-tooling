@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Razor.Language.Legacy;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
-internal class ComponentMarkupEncodingPass : ComponentIntermediateNodePassBase, IRazorOptimizationPass
+internal sealed class ComponentMarkupEncodingPass : ComponentIntermediateNodePassBase, IRazorOptimizationPass
 {
     private readonly RazorLanguageVersion _version;
 

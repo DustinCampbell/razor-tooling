@@ -23,19 +23,16 @@ public class ComponentDuplicateAttributeDiagnosticPassTest
             RazorProjectFileSystem.Create(Environment.CurrentDirectory),
             b =>
             {
-                    // Don't run the markup mutating passes.
-                    b.Features.Remove(b.Features.OfType<ComponentMarkupDiagnosticPass>().Single());
+                // Don't run the markup mutating passes.
+                b.Features.Remove(b.Features.OfType<ComponentMarkupDiagnosticPass>().Single());
                 b.Features.Remove(b.Features.OfType<ComponentMarkupBlockPass>().Single());
                 b.Features.Remove(b.Features.OfType<ComponentMarkupEncodingPass>().Single());
             });
-        Engine = ProjectEngine.Engine;
 
-        Pass.Engine = Engine;
+        Pass.Initialize(ProjectEngine);
     }
 
     private RazorProjectEngine ProjectEngine { get; }
-
-    private RazorEngine Engine { get; }
 
     private ComponentMarkupDiagnosticPass Pass { get; }
 
@@ -167,7 +164,7 @@ public class ComponentDuplicateAttributeDiagnosticPassTest
 
     private DocumentIntermediateNode Lower(RazorCodeDocument codeDocument)
     {
-        foreach (var phase in Engine.Phases)
+        foreach (var phase in ProjectEngine.Phases)
         {
             if (phase is IRazorCSharpLoweringPhase)
             {
@@ -178,7 +175,7 @@ public class ComponentDuplicateAttributeDiagnosticPassTest
         }
 
         var document = codeDocument.GetDocumentIntermediateNode();
-        Engine.Features.OfType<ComponentDocumentClassifierPass>().Single().Execute(codeDocument, document);
+        ProjectEngine.ProjectFeatures.OfType<ComponentDocumentClassifierPass>().Single().Execute(codeDocument, document);
         return document;
     }
 

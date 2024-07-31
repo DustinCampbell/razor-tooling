@@ -13,7 +13,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Components;
 //
 // This is where a lot of the complexity in the Razor/TagHelpers model creeps in and we
 // might be able to avoid it if these features aren't needed.
-internal class ComponentComplexAttributeContentPass : ComponentIntermediateNodePassBase, IRazorOptimizationPass
+internal sealed class ComponentComplexAttributeContentPass : ComponentIntermediateNodePassBase, IRazorOptimizationPass
 {
     // Run before other Component passes
     public override int Order => -1000;

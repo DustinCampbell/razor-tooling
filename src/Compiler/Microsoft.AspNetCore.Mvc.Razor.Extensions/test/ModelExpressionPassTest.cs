@@ -34,10 +34,8 @@ public class ModelExpressionPassTest
             };
 
         var engine = CreateEngine(tagHelpers);
-        var pass = new ModelExpressionPass()
-        {
-            Engine = engine,
-        };
+        var pass = new ModelExpressionPass();
+        pass.Initialize(engine);
 
         var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -75,10 +73,8 @@ public class ModelExpressionPassTest
             };
 
         var engine = CreateEngine(tagHelpers);
-        var pass = new ModelExpressionPass()
-        {
-            Engine = engine,
-        };
+        var pass = new ModelExpressionPass();
+        pass.Initialize(engine);
 
         var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -120,10 +116,8 @@ public class ModelExpressionPassTest
             };
 
         var engine = CreateEngine(tagHelpers);
-        var pass = new ModelExpressionPass()
-        {
-            Engine = engine,
-        };
+        var pass = new ModelExpressionPass();
+        pass.Initialize(engine);
 
         var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -149,15 +143,13 @@ public class ModelExpressionPassTest
         return RazorCodeDocument.Create(source);
     }
 
-    private RazorEngine CreateEngine(params TagHelperDescriptor[] tagHelpers)
-    {
-        return RazorProjectEngine.Create(b =>
+    private static RazorProjectEngine CreateEngine(params TagHelperDescriptor[] tagHelpers)
+        => RazorProjectEngine.Create(b =>
         {
             b.Features.Add(new TestTagHelperFeature(tagHelpers));
-        }).Engine;
-    }
+        });
 
-    private DocumentIntermediateNode CreateIRDocument(RazorEngine engine, RazorCodeDocument codeDocument)
+    private static DocumentIntermediateNode CreateIRDocument(RazorProjectEngine engine, RazorCodeDocument codeDocument)
     {
         foreach (var phase in engine.Phases)
         {
@@ -175,14 +167,14 @@ public class ModelExpressionPassTest
         return irNode;
     }
 
-    private TagHelperIntermediateNode FindTagHelperNode(IntermediateNode node)
+    private static TagHelperIntermediateNode FindTagHelperNode(IntermediateNode node)
     {
         var visitor = new TagHelperNodeVisitor();
         visitor.Visit(node);
         return visitor.Node;
     }
 
-    private string GetCSharpContent(IntermediateNode node)
+    private static string GetCSharpContent(IntermediateNode node)
     {
         var builder = new StringBuilder();
         for (var i = 0; i < node.Children.Count; i++)

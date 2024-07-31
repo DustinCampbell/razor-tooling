@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 
-internal class DefaultTagHelperOptimizationPass : IntermediateNodePassBase, IRazorOptimizationPass
+internal sealed class DefaultTagHelperOptimizationPass : IntermediateNodePassBase, IRazorOptimizationPass
 {
     // Run later than default order for user code so other passes have a chance to modify the
     // tag helper nodes.

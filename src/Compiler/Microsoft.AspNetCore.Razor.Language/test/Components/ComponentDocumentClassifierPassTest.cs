@@ -21,10 +21,8 @@ public class ComponentDocumentClassifierPassTest : RazorProjectEngineTestBase
 
         var projectEngine = CreateProjectEngine();
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
-        var pass = new ComponentDocumentClassifierPass(Version)
-        {
-            Engine = projectEngine.Engine
-        };
+        var pass = new ComponentDocumentClassifierPass(Version);
+        pass.Initialize(projectEngine);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -47,10 +45,8 @@ public class ComponentDocumentClassifierPassTest : RazorProjectEngineTestBase
         });
 
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
-        var pass = new ComponentDocumentClassifierPass(Version)
-        {
-            Engine = projectEngine.Engine
-        };
+        var pass = new ComponentDocumentClassifierPass(Version);
+        pass.Initialize(projectEngine);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -75,10 +71,8 @@ public class ComponentDocumentClassifierPassTest : RazorProjectEngineTestBase
         });
 
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
-        var pass = new ComponentDocumentClassifierPass(Version)
-        {
-            Engine = projectEngine.Engine
-        };
+        var pass = new ComponentDocumentClassifierPass(Version);
+        pass.Initialize(projectEngine);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -106,10 +100,8 @@ public class ComponentDocumentClassifierPassTest : RazorProjectEngineTestBase
         });
 
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
-        var pass = new ComponentDocumentClassifierPass(Version)
-        {
-            Engine = projectEngine.Engine
-        };
+        var pass = new ComponentDocumentClassifierPass(Version);
+        pass.Initialize(projectEngine);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -135,10 +127,8 @@ public class ComponentDocumentClassifierPassTest : RazorProjectEngineTestBase
         });
 
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
-        var pass = new ComponentDocumentClassifierPass(Version)
-        {
-            Engine = projectEngine.Engine
-        };
+        var pass = new ComponentDocumentClassifierPass(Version);
+        pass.Initialize(projectEngine);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -159,10 +149,8 @@ public class ComponentDocumentClassifierPassTest : RazorProjectEngineTestBase
 
         var projectEngine = CreateProjectEngine();
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
-        var pass = new ComponentDocumentClassifierPass(Version)
-        {
-            Engine = projectEngine.Engine
-        };
+        var pass = new ComponentDocumentClassifierPass(Version);
+        pass.Initialize(projectEngine);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -175,7 +163,7 @@ public class ComponentDocumentClassifierPassTest : RazorProjectEngineTestBase
         Assert.Equal(new[] { "protected", "override" }, visitor.Method.Modifiers);
     }
 
-    private DocumentIntermediateNode CreateIRDocument(RazorProjectEngine projectEngine, RazorCodeDocument codeDocument)
+    private static DocumentIntermediateNode CreateIRDocument(RazorProjectEngine projectEngine, RazorCodeDocument codeDocument)
     {
         foreach (var phase in projectEngine.Phases)
         {

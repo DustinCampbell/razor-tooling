@@ -25,7 +25,7 @@ internal class DefaultDocumentClassifierPass : DocumentClassifierPassBase
         ClassDeclarationIntermediateNode @class,
         MethodDeclarationIntermediateNode method)
     {
-        if (Engine.TryGetFeature(out DefaultDocumentClassifierPassFeature configuration))
+        if (ProjectEngine.Engine.TryGetFeature(out DefaultDocumentClassifierPassFeature configuration))
         {
             for (var i = 0; i < configuration.ConfigureClass.Count; i++)
             {

@@ -30,10 +30,8 @@ public class InstrumentationPassTest
         });
         builder.Pop();
 
-        var pass = new InstrumentationPass()
-        {
-            Engine = RazorProjectEngine.CreateEmpty().Engine,
-        };
+        var pass = new InstrumentationPass();
+        pass.Initialize(RazorProjectEngine.CreateEmpty());
 
         // Act
         pass.Execute(TestRazorCodeDocument.CreateEmpty(), document);
@@ -67,10 +65,8 @@ public class InstrumentationPassTest
         });
         builder.Pop();
 
-        var pass = new InstrumentationPass()
-        {
-            Engine = RazorProjectEngine.CreateEmpty().Engine,
-        };
+        var pass = new InstrumentationPass();
+        pass.Initialize(RazorProjectEngine.CreateEmpty());
 
         // Act
         pass.Execute(TestRazorCodeDocument.CreateEmpty(), document);
@@ -101,10 +97,8 @@ public class InstrumentationPassTest
         });
         builder.Pop();
 
-        var pass = new InstrumentationPass()
-        {
-            Engine = RazorProjectEngine.CreateEmpty().Engine,
-        };
+        var pass = new InstrumentationPass();
+        pass.Initialize(RazorProjectEngine.CreateEmpty());
 
         // Act
         pass.Execute(TestRazorCodeDocument.CreateEmpty(), document);
@@ -135,10 +129,8 @@ public class InstrumentationPassTest
             Kind = TokenKind.CSharp,
         });
 
-        var pass = new InstrumentationPass()
-        {
-            Engine = RazorProjectEngine.CreateEmpty().Engine,
-        };
+        var pass = new InstrumentationPass();
+        pass.Initialize(RazorProjectEngine.CreateEmpty());
 
         // Act
         pass.Execute(TestRazorCodeDocument.CreateEmpty(), document);
@@ -168,10 +160,8 @@ public class InstrumentationPassTest
             Kind = TokenKind.CSharp,
         });
 
-        var pass = new InstrumentationPass()
-        {
-            Engine = RazorProjectEngine.CreateEmpty().Engine,
-        };
+        var pass = new InstrumentationPass();
+        pass.Initialize(RazorProjectEngine.CreateEmpty());
 
         // Act
         pass.Execute(TestRazorCodeDocument.CreateEmpty(), document);
@@ -207,10 +197,8 @@ public class InstrumentationPassTest
             Kind = TokenKind.CSharp,
         });
 
-        var pass = new InstrumentationPass()
-        {
-            Engine = RazorProjectEngine.CreateEmpty().Engine,
-        };
+        var pass = new InstrumentationPass();
+        pass.Initialize(RazorProjectEngine.CreateEmpty());
 
         // Act
         pass.Execute(TestRazorCodeDocument.CreateEmpty(), document);
@@ -258,10 +246,8 @@ public class InstrumentationPassTest
             Kind = TokenKind.CSharp,
         });
 
-        var pass = new InstrumentationPass()
-        {
-            Engine = RazorProjectEngine.CreateEmpty().Engine,
-        };
+        var pass = new InstrumentationPass();
+        pass.Initialize(RazorProjectEngine.CreateEmpty());
 
         // Act
         pass.Execute(TestRazorCodeDocument.CreateEmpty(), document);
@@ -299,10 +285,8 @@ public class InstrumentationPassTest
             Source = CreateSource(3),
         });
 
-        var pass = new InstrumentationPass()
-        {
-            Engine = RazorProjectEngine.CreateEmpty().Engine,
-        };
+        var pass = new InstrumentationPass();
+        pass.Initialize(RazorProjectEngine.CreateEmpty());
 
         // Act
         pass.Execute(TestRazorCodeDocument.CreateEmpty(), document);
@@ -327,10 +311,8 @@ public class InstrumentationPassTest
         var builder = IntermediateNodeBuilder.Create(document);
         builder.Push(new TagHelperIntermediateNode());
 
-        var pass = new InstrumentationPass()
-        {
-            Engine = RazorProjectEngine.CreateEmpty().Engine,
-        };
+        var pass = new InstrumentationPass();
+        pass.Initialize(RazorProjectEngine.CreateEmpty());
 
         // Act
         pass.Execute(TestRazorCodeDocument.CreateEmpty(), document);

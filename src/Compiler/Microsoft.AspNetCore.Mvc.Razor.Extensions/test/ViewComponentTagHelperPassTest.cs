@@ -34,10 +34,8 @@ public class ViewComponentTagHelperPassTest
             };
 
         var projectEngine = CreateProjectEngine(tagHelpers);
-        var pass = new ViewComponentTagHelperPass()
-        {
-            Engine = projectEngine.Engine,
-        };
+        var pass = new ViewComponentTagHelperPass();
+        pass.Initialize(projectEngine);
 
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
 
@@ -76,10 +74,8 @@ public class ViewComponentTagHelperPassTest
         };
 
         var projectEngine = CreateProjectEngine(tagHelpers);
-        var pass = new ViewComponentTagHelperPass()
-        {
-            Engine = projectEngine.Engine,
-        };
+        var pass = new ViewComponentTagHelperPass();
+        pass.Initialize(projectEngine);
 
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
 
@@ -124,10 +120,8 @@ public class ViewComponentTagHelperPassTest
         };
 
         var projectEngine = CreateProjectEngine(tagHelpers);
-        var pass = new ViewComponentTagHelperPass()
-        {
-            Engine = projectEngine.Engine,
-        };
+        var pass = new ViewComponentTagHelperPass();
+        pass.Initialize(projectEngine);
 
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
 
@@ -178,10 +172,8 @@ public class ViewComponentTagHelperPassTest
         };
 
         var projectEngine = CreateProjectEngine(tagHelpers);
-        var pass = new ViewComponentTagHelperPass()
-        {
-            Engine = projectEngine.Engine,
-        };
+        var pass = new ViewComponentTagHelperPass();
+        pass.Initialize(projectEngine);
 
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
 
@@ -206,23 +198,20 @@ public class ViewComponentTagHelperPassTest
         Assert.IsType<ViewComponentTagHelperIntermediateNode>(@class.Children.Last());
     }
 
-    private RazorCodeDocument CreateDocument(string content)
+    private static RazorCodeDocument CreateDocument(string content)
     {
         var source = RazorSourceDocument.Create(content, "test.cshtml");
         return RazorCodeDocument.Create(source);
     }
 
-    private RazorProjectEngine CreateProjectEngine(params TagHelperDescriptor[] tagHelpers)
-    {
-        return RazorProjectEngine.Create(b =>
+    private static RazorProjectEngine CreateProjectEngine(params TagHelperDescriptor[] tagHelpers)
+        => RazorProjectEngine.Create(b =>
         {
             b.Features.Add(new MvcViewDocumentClassifierPass());
-
             b.Features.Add(new TestTagHelperFeature(tagHelpers));
         });
-    }
 
-    private DocumentIntermediateNode CreateIRDocument(RazorProjectEngine projectEngine, RazorCodeDocument codeDocument)
+    private static DocumentIntermediateNode CreateIRDocument(RazorProjectEngine projectEngine, RazorCodeDocument codeDocument)
     {
         foreach (var phase in projectEngine.Phases)
         {
@@ -237,20 +226,20 @@ public class ViewComponentTagHelperPassTest
         // We also expect the default tag helper pass to run first.
         var documentNode = codeDocument.GetDocumentIntermediateNode();
 
-        var defaultTagHelperPass = projectEngine.EngineFeatures.OfType<DefaultTagHelperOptimizationPass>().Single();
+        var defaultTagHelperPass = projectEngine.ProjectFeatures.OfType<DefaultTagHelperOptimizationPass>().Single();
         defaultTagHelperPass.Execute(codeDocument, documentNode);
 
         return codeDocument.GetDocumentIntermediateNode();
     }
 
-    private ClassDeclarationIntermediateNode FindClassNode(IntermediateNode node)
+    private static ClassDeclarationIntermediateNode FindClassNode(IntermediateNode node)
     {
         var visitor = new ClassDeclarationNodeVisitor();
         visitor.Visit(node);
         return visitor.Node;
     }
 
-    private TagHelperIntermediateNode FindTagHelperNode(IntermediateNode node)
+    private static TagHelperIntermediateNode FindTagHelperNode(IntermediateNode node)
     {
         var visitor = new TagHelperNodeVisitor();
         visitor.Visit(node);

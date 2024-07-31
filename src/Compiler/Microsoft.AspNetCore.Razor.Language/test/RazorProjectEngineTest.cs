@@ -47,9 +47,9 @@ public class RazorProjectEngineTest
 
     private static void AssertDefaultFeatures(RazorProjectEngine engine)
     {
-        var features = engine.EngineFeatures.OrderBy(f => f.GetType().Name).ToArray();
+        var projectFeatures = engine.ProjectFeatures.OrderBy(f => f.GetType().Name).ToArray();
         Assert.Collection(
-            features,
+            projectFeatures,
             feature => Assert.IsType<AttributeDirectivePass>(feature),
             feature => Assert.IsType<ComponentBindLoweringPass>(feature),
             feature => Assert.IsType<ComponentChildContentDiagnosticPass>(feature),
@@ -59,6 +59,7 @@ public class RazorProjectEngineTest
             feature => Assert.IsType<ComponentEventHandlerLoweringPass>(feature),
             feature => Assert.IsType<ComponentFormNameLoweringPass>(feature),
             feature => Assert.IsType<ComponentGenericTypePass>(feature),
+            feature => Assert.IsType<ComponentImportProjectFeature>(feature),
             feature => Assert.IsType<ComponentInjectDirectivePass>(feature),
             feature => Assert.IsType<ComponentKeyLoweringPass>(feature),
             feature => Assert.IsType<ComponentLayoutDirectivePass>(feature),
@@ -73,25 +74,32 @@ public class RazorProjectEngineTest
             feature => Assert.IsType<ComponentSplatLoweringPass>(feature),
             feature => Assert.IsType<ComponentTemplateDiagnosticPass>(feature),
             feature => Assert.IsType<ComponentWhitespacePass>(feature),
-            feature => Assert.IsType<DefaultDirectiveSyntaxTreePass>(feature),
             feature => Assert.IsType<DefaultDocumentClassifierPass>(feature),
+            feature => Assert.IsType<DefaultImportProjectFeature>(feature),
+            feature => Assert.IsType<DefaultRazorCodeGenerationOptionsFactoryProjectFeature>(feature),
+            feature => Assert.IsType<DefaultRazorParserOptionsFactoryProjectFeature>(feature),
+            feature => Assert.IsType<DefaultTagHelperOptimizationPass>(feature),
+            feature => Assert.IsType<DesignTimeDirectivePass>(feature),
+            feature => Assert.IsType<DirectiveRemovalOptimizationPass>(feature),
+            feature => Assert.IsType<EliminateMethodBodyPass>(feature),
+            feature => Assert.IsType<FunctionsDirectivePass>(feature),
+            feature => Assert.IsType<ImplementsDirectivePass>(feature),
+            feature => Assert.IsType<InheritsDirectivePass>(feature),
+            feature => Assert.IsType<MetadataAttributePass>(feature),
+            feature => Assert.IsType<PreallocatedTagHelperAttributeOptimizationPass>(feature),
+            feature => Assert.IsType<ViewCssScopePass>(feature));
+
+        var features = engine.EngineFeatures.OrderBy(f => f.GetType().Name).ToArray();
+        Assert.Collection(
+            features,
+            feature => Assert.IsType<DefaultDirectiveSyntaxTreePass>(feature),
             feature => Assert.IsType<DefaultDocumentClassifierPassFeature>(feature),
             feature => Assert.IsType<DefaultMetadataIdentifierFeature>(feature),
             feature => Assert.IsType<DefaultRazorCodeGenerationOptionsFeature>(feature),
             feature => Assert.IsType<DefaultRazorDirectiveFeature>(feature),
             feature => Assert.IsType<DefaultRazorParserOptionsFeature>(feature),
             feature => Assert.IsType<DefaultRazorTargetExtensionFeature>(feature),
-            feature => Assert.IsType<DefaultTagHelperOptimizationPass>(feature),
-            feature => Assert.IsType<DesignTimeDirectivePass>(feature),
-            feature => Assert.IsType<DirectiveRemovalOptimizationPass>(feature),
-            feature => Assert.IsType<EliminateMethodBodyPass>(feature),
-            feature => Assert.IsType<FunctionsDirectivePass>(feature),
-            feature => Assert.IsType<HtmlNodeOptimizationPass>(feature),
-            feature => Assert.IsType<ImplementsDirectivePass>(feature),
-            feature => Assert.IsType<InheritsDirectivePass>(feature),
-            feature => Assert.IsType<MetadataAttributePass>(feature),
-            feature => Assert.IsType<PreallocatedTagHelperAttributeOptimizationPass>(feature),
-            feature => Assert.IsType<ViewCssScopePass>(feature));
+            feature => Assert.IsType<HtmlNodeOptimizationPass>(feature));
     }
 
     private static void AssertDefaultDirectives(RazorProjectEngine engine)

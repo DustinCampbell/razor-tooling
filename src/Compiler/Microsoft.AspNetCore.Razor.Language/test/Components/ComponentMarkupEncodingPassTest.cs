@@ -26,14 +26,11 @@ public class ComponentMarkupEncodingPassTest
                     b.Features.Remove(b.Features.OfType<ComponentMarkupEncodingPass>().Single());
                 }
             });
-        Engine = ProjectEngine.Engine;
 
-        Pass.Engine = Engine;
+        Pass.Initialize(ProjectEngine);
     }
 
     private RazorProjectEngine ProjectEngine { get; }
-
-    private RazorEngine Engine { get; }
 
     private ComponentMarkupEncodingPass Pass { get; }
 
@@ -172,7 +169,7 @@ The time is ");
         Assert.False(node.IsEncoded());
     }
 
-    private string NormalizeContent(string content)
+    private static string NormalizeContent(string content)
     {
         // Normalize newlines since we are testing lengths of things.
         content = content.Replace("\r", "");
@@ -193,7 +190,7 @@ The time is ");
 
     private DocumentIntermediateNode Lower(RazorCodeDocument codeDocument)
     {
-        foreach (var phase in Engine.Phases)
+        foreach (var phase in ProjectEngine.Phases)
         {
             if (phase is IRazorCSharpLoweringPhase)
             {
@@ -204,7 +201,7 @@ The time is ");
         }
 
         var document = codeDocument.GetDocumentIntermediateNode();
-        Engine.Features.OfType<ComponentDocumentClassifierPass>().Single().Execute(codeDocument, document);
+        ProjectEngine.ProjectFeatures.OfType<ComponentDocumentClassifierPass>().Single().Execute(codeDocument, document);
         return document;
     }
 

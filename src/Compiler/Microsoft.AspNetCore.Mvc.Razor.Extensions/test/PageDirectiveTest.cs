@@ -123,15 +123,13 @@ public class PageDirectiveTest
         Assert.Equal("some-route-template", pageDirective.RouteTemplate);
     }
 
-    private RazorEngine CreateEngine()
-    {
-        return RazorProjectEngine.Create(b =>
+    private static RazorProjectEngine CreateEngine()
+        => RazorProjectEngine.Create(b =>
         {
             PageDirective.Register(b);
-        }).Engine;
-    }
+        });
 
-    private DocumentIntermediateNode CreateIRDocument(RazorEngine engine, RazorCodeDocument codeDocument)
+    private static DocumentIntermediateNode CreateIRDocument(RazorProjectEngine engine, RazorCodeDocument codeDocument)
     {
         foreach (var phase in engine.Phases)
         {

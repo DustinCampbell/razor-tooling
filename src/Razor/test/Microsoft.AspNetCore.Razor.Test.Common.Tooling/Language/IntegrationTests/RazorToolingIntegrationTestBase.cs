@@ -430,7 +430,7 @@ public class RazorToolingIntegrationTestBase : ToolingTestBase
         }
     }
 
-    private class ForceLineEndingPhase : RazorEnginePhaseBase
+    private sealed class ForceLineEndingPhase : RazorEnginePhaseBase
     {
         public ForceLineEndingPhase(string lineEnding)
         {

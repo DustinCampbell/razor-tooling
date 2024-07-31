@@ -35,10 +35,8 @@ public class RazorPageDocumentClassifierPassTest : RazorProjectEngineTestBase
         var codeDocument = RazorCodeDocument.Create(sourceDocument, ImmutableArray.Create(importDocument));
         var engine = CreateRuntimeEngine();
         var irDocument = CreateIRDocument(engine, codeDocument);
-        var pass = new RazorPageDocumentClassifierPass
-        {
-            Engine = engine
-        };
+        var pass = new RazorPageDocumentClassifierPass();
+        pass.Initialize(engine);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -74,10 +72,8 @@ public class RazorPageDocumentClassifierPassTest : RazorProjectEngineTestBase
 
         var engine = CreateRuntimeEngine();
         var irDocument = CreateIRDocument(engine, codeDocument);
-        var pass = new RazorPageDocumentClassifierPass
-        {
-            Engine = engine
-        };
+        var pass = new RazorPageDocumentClassifierPass();
+        pass.Initialize(engine);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -104,10 +100,8 @@ public class RazorPageDocumentClassifierPassTest : RazorProjectEngineTestBase
 
         var engine = CreateRuntimeEngine();
         var irDocument = CreateIRDocument(engine, codeDocument);
-        var pass = new RazorPageDocumentClassifierPass
-        {
-            Engine = engine
-        };
+        var pass = new RazorPageDocumentClassifierPass();
+        pass.Initialize(engine);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -128,10 +122,8 @@ public class RazorPageDocumentClassifierPassTest : RazorProjectEngineTestBase
 
         var engine = CreateRuntimeEngine();
         var irDocument = CreateIRDocument(engine, codeDocument);
-        var pass = new RazorPageDocumentClassifierPass
-        {
-            Engine = engine
-        };
+        var pass = new RazorPageDocumentClassifierPass();
+        pass.Initialize(engine);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -149,10 +141,8 @@ public class RazorPageDocumentClassifierPassTest : RazorProjectEngineTestBase
         var engine = CreateRuntimeEngine();
         var irDocument = CreateIRDocument(engine, codeDocument);
         irDocument.DocumentKind = "some-value";
-        var pass = new RazorPageDocumentClassifierPass
-        {
-            Engine = engine
-        };
+        var pass = new RazorPageDocumentClassifierPass();
+        pass.Initialize(engine);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -170,10 +160,8 @@ public class RazorPageDocumentClassifierPassTest : RazorProjectEngineTestBase
         var engine = CreateRuntimeEngine();
         var irDocument = CreateIRDocument(engine, codeDocument);
         irDocument.DocumentKind = "some-value";
-        var pass = new RazorPageDocumentClassifierPass
-        {
-            Engine = engine
-        };
+        var pass = new RazorPageDocumentClassifierPass();
+        pass.Initialize(engine);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -190,10 +178,8 @@ public class RazorPageDocumentClassifierPassTest : RazorProjectEngineTestBase
 
         var engine = CreateRuntimeEngine();
         var irDocument = CreateIRDocument(engine, codeDocument);
-        var pass = new RazorPageDocumentClassifierPass
-        {
-            Engine = engine
-        };
+        var pass = new RazorPageDocumentClassifierPass();
+        pass.Initialize(engine);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -213,10 +199,8 @@ public class RazorPageDocumentClassifierPassTest : RazorProjectEngineTestBase
 
         var engine = CreateRuntimeEngine();
         var irDocument = CreateIRDocument(engine, codeDocument);
-        var pass = new RazorPageDocumentClassifierPass
-        {
-            Engine = engine
-        };
+        var pass = new RazorPageDocumentClassifierPass();
+        pass.Initialize(engine);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -238,10 +222,8 @@ public class RazorPageDocumentClassifierPassTest : RazorProjectEngineTestBase
 
         var engine = CreateRuntimeEngine();
         var irDocument = CreateIRDocument(engine, codeDocument);
-        var pass = new RazorPageDocumentClassifierPass
-        {
-            Engine = engine
-        };
+        var pass = new RazorPageDocumentClassifierPass();
+        pass.Initialize(engine);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -265,10 +247,8 @@ public class RazorPageDocumentClassifierPassTest : RazorProjectEngineTestBase
 
         var engine = CreateRuntimeEngine();
         var irDocument = CreateIRDocument(engine, codeDocument);
-        var pass = new RazorPageDocumentClassifierPass
-        {
-            Engine = engine
-        };
+        var pass = new RazorPageDocumentClassifierPass();
+        pass.Initialize(engine);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -288,10 +268,8 @@ public class RazorPageDocumentClassifierPassTest : RazorProjectEngineTestBase
 
         var engine = CreateRuntimeEngine();
         var irDocument = CreateIRDocument(engine, codeDocument);
-        var pass = new RazorPageDocumentClassifierPass
-        {
-            Engine = engine
-        };
+        var pass = new RazorPageDocumentClassifierPass();
+        pass.Initialize(engine);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -311,10 +289,8 @@ public class RazorPageDocumentClassifierPassTest : RazorProjectEngineTestBase
 
         var engine = CreateRuntimeEngine();
         var irDocument = CreateIRDocument(engine, codeDocument);
-        var pass = new RazorPageDocumentClassifierPass
-        {
-            Engine = engine
-        };
+        var pass = new RazorPageDocumentClassifierPass();
+        pass.Initialize(engine);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -333,10 +309,8 @@ public class RazorPageDocumentClassifierPassTest : RazorProjectEngineTestBase
 
         var engine = CreateRuntimeEngine();
         var irDocument = CreateIRDocument(engine, codeDocument);
-        var pass = new RazorPageDocumentClassifierPass
-        {
-            Engine = engine
-        };
+        var pass = new RazorPageDocumentClassifierPass();
+        pass.Initialize(engine);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -358,10 +332,8 @@ public class RazorPageDocumentClassifierPassTest : RazorProjectEngineTestBase
 
         var engine = CreateRuntimeEngine();
         var irDocument = CreateIRDocument(engine, codeDocument);
-        var pass = new RazorPageDocumentClassifierPass
-        {
-            Engine = engine
-        };
+        var pass = new RazorPageDocumentClassifierPass();
+        pass.Initialize(engine);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -374,15 +346,13 @@ public class RazorPageDocumentClassifierPassTest : RazorProjectEngineTestBase
         Assert.Equal("some-route", attributeNode.Value);
     }
 
-    private RazorEngine CreateRuntimeEngine()
-    {
-        return CreateProjectEngine(b =>
+    private RazorProjectEngine CreateRuntimeEngine()
+        => CreateProjectEngine(b =>
         {
             PageDirective.Register(b);
-        }).Engine;
-    }
+        });
 
-    private static DocumentIntermediateNode CreateIRDocument(RazorEngine engine, RazorCodeDocument codeDocument)
+    private static DocumentIntermediateNode CreateIRDocument(RazorProjectEngine engine, RazorCodeDocument codeDocument)
     {
         foreach (var phase in engine.Phases)
         {

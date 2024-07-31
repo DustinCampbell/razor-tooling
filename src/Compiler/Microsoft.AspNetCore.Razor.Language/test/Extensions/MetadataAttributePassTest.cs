@@ -18,10 +18,8 @@ public class MetadataAttributePassTest
     {
         // Arrange
         var engine = CreateEngine();
-        var pass = new MetadataAttributePass()
-        {
-            Engine = engine,
-        };
+        var pass = new MetadataAttributePass();
+        pass.Initialize(engine);
 
         var sourceDocument = TestRazorSourceDocument.Create();
         var codeDocument = RazorCodeDocument.Create(sourceDocument);
@@ -40,10 +38,8 @@ public class MetadataAttributePassTest
     {
         // Arrange
         var engine = CreateEngine();
-        var pass = new MetadataAttributePass()
-        {
-            Engine = engine,
-        };
+        var pass = new MetadataAttributePass();
+        pass.Initialize(engine);
 
         var sourceDocument = TestRazorSourceDocument.Create();
         var codeDocument = RazorCodeDocument.Create(sourceDocument);
@@ -68,10 +64,8 @@ public class MetadataAttributePassTest
     {
         // Arrange
         var engine = CreateEngine();
-        var pass = new MetadataAttributePass()
-        {
-            Engine = engine,
-        };
+        var pass = new MetadataAttributePass();
+        pass.Initialize(engine);
 
         var sourceDocument = TestRazorSourceDocument.Create();
         var codeDocument = RazorCodeDocument.Create(sourceDocument);
@@ -97,10 +91,8 @@ public class MetadataAttributePassTest
     {
         // Arrange
         var engine = CreateEngine();
-        var pass = new MetadataAttributePass()
-        {
-            Engine = engine,
-        };
+        var pass = new MetadataAttributePass();
+        pass.Initialize(engine);
 
         var sourceDocument = TestRazorSourceDocument.Create();
         var codeDocument = RazorCodeDocument.Create(sourceDocument);
@@ -114,17 +106,17 @@ public class MetadataAttributePassTest
         var @namespace = new NamespaceDeclarationIntermediateNode
         {
             Annotations =
-                {
-                    [CommonAnnotations.PrimaryNamespace] = CommonAnnotations.PrimaryNamespace,
-                },
+            {
+                [CommonAnnotations.PrimaryNamespace] = CommonAnnotations.PrimaryNamespace,
+            },
         };
         builder.Push(@namespace);
         var @class = new ClassDeclarationIntermediateNode
         {
             Annotations =
-                {
-                    [CommonAnnotations.PrimaryClass] = CommonAnnotations.PrimaryClass,
-                },
+            {
+                [CommonAnnotations.PrimaryClass] = CommonAnnotations.PrimaryClass,
+            },
             ClassName = "Test",
         };
         builder.Add(@class);
@@ -154,10 +146,8 @@ public class MetadataAttributePassTest
     {
         // Arrange
         var engine = CreateEngine();
-        var pass = new MetadataAttributePass()
-        {
-            Engine = engine,
-        };
+        var pass = new MetadataAttributePass();
+        pass.Initialize(engine);
 
         var sourceDocument = TestRazorSourceDocument.Create();
         var codeDocument = RazorCodeDocument.Create(sourceDocument);
@@ -171,18 +161,18 @@ public class MetadataAttributePassTest
         var @namespace = new NamespaceDeclarationIntermediateNode
         {
             Annotations =
-                {
-                    [CommonAnnotations.PrimaryNamespace] = CommonAnnotations.PrimaryNamespace,
-                },
+            {
+                [CommonAnnotations.PrimaryNamespace] = CommonAnnotations.PrimaryNamespace,
+            },
             Content = "Some.Namespace"
         };
         builder.Push(@namespace);
         var @class = new ClassDeclarationIntermediateNode
         {
             Annotations =
-                {
-                    [CommonAnnotations.PrimaryClass] = CommonAnnotations.PrimaryClass,
-                },
+            {
+                [CommonAnnotations.PrimaryClass] = CommonAnnotations.PrimaryClass,
+            },
         };
         builder.Add(@class);
 
@@ -198,10 +188,8 @@ public class MetadataAttributePassTest
     {
         // Arrange
         var engine = CreateEngine();
-        var pass = new MetadataAttributePass()
-        {
-            Engine = engine,
-        };
+        var pass = new MetadataAttributePass();
+        pass.Initialize(engine);
 
         var sourceDocument = TestRazorSourceDocument.Create();
         var codeDocument = RazorCodeDocument.Create(sourceDocument);
@@ -211,18 +199,18 @@ public class MetadataAttributePassTest
         var @namespace = new NamespaceDeclarationIntermediateNode
         {
             Annotations =
-                {
-                    [CommonAnnotations.PrimaryNamespace] = CommonAnnotations.PrimaryNamespace,
-                },
+            {
+                [CommonAnnotations.PrimaryNamespace] = CommonAnnotations.PrimaryNamespace,
+            },
             Content = "Some.Namespace"
         };
         builder.Push(@namespace);
         var @class = new ClassDeclarationIntermediateNode
         {
             Annotations =
-                {
-                    [CommonAnnotations.PrimaryClass] = CommonAnnotations.PrimaryClass,
-                },
+            {
+                [CommonAnnotations.PrimaryClass] = CommonAnnotations.PrimaryClass,
+            },
             ClassName = "Test",
         };
         builder.Add(@class);
@@ -239,10 +227,8 @@ public class MetadataAttributePassTest
     {
         // Arrange
         var engine = CreateEngine();
-        var pass = new MetadataAttributePass()
-        {
-            Engine = engine,
-        };
+        var pass = new MetadataAttributePass();
+        pass.Initialize(engine);
 
         var sourceDocument = TestRazorSourceDocument.Create("", RazorSourceDocumentProperties.Default);
         var codeDocument = RazorCodeDocument.Create(sourceDocument);
@@ -256,18 +242,18 @@ public class MetadataAttributePassTest
         var @namespace = new NamespaceDeclarationIntermediateNode
         {
             Annotations =
-                {
-                    [CommonAnnotations.PrimaryNamespace] = CommonAnnotations.PrimaryNamespace,
-                },
+            {
+                [CommonAnnotations.PrimaryNamespace] = CommonAnnotations.PrimaryNamespace,
+            },
             Content = "Some.Namespace"
         };
         builder.Push(@namespace);
         var @class = new ClassDeclarationIntermediateNode
         {
             Annotations =
-                {
-                    [CommonAnnotations.PrimaryClass] = CommonAnnotations.PrimaryClass,
-                },
+            {
+                [CommonAnnotations.PrimaryClass] = CommonAnnotations.PrimaryClass,
+            },
             ClassName = "Test",
         };
         builder.Add(@class);
@@ -284,10 +270,8 @@ public class MetadataAttributePassTest
     {
         // Arrange
         var engine = CreateEngine();
-        var pass = new MetadataAttributePass()
-        {
-            Engine = engine,
-        };
+        var pass = new MetadataAttributePass();
+        pass.Initialize(engine);
 
         var sourceDocument = TestRazorSourceDocument.Create("", RazorSourceDocumentProperties.Create(null, "Foo\\Bar.cshtml"));
         var codeDocument = RazorCodeDocument.Create(sourceDocument);
@@ -301,18 +285,18 @@ public class MetadataAttributePassTest
         var @namespace = new NamespaceDeclarationIntermediateNode
         {
             Annotations =
-                {
-                    [CommonAnnotations.PrimaryNamespace] = CommonAnnotations.PrimaryNamespace,
-                },
+            {
+                [CommonAnnotations.PrimaryNamespace] = CommonAnnotations.PrimaryNamespace,
+            },
             Content = "Some.Namespace"
         };
         builder.Push(@namespace);
         var @class = new ClassDeclarationIntermediateNode
         {
             Annotations =
-                {
-                    [CommonAnnotations.PrimaryClass] = CommonAnnotations.PrimaryClass,
-                },
+            {
+                [CommonAnnotations.PrimaryClass] = CommonAnnotations.PrimaryClass,
+            },
             ClassName = "Test",
         };
         builder.Add(@class);
@@ -339,10 +323,8 @@ public class MetadataAttributePassTest
     {
         // Arrange
         var engine = CreateEngine();
-        var pass = new MetadataAttributePass()
-        {
-            Engine = engine,
-        };
+        var pass = new MetadataAttributePass();
+        pass.Initialize(engine);
 
         var sourceDocument = TestRazorSourceDocument.Create("", RazorSourceDocumentProperties.Create(null, "Foo\\Bar.cshtml"));
         var import = TestRazorSourceDocument.Create("@using System", RazorSourceDocumentProperties.Create(null, "Foo\\Import.cshtml"));
@@ -399,10 +381,8 @@ public class MetadataAttributePassTest
     {
         // Arrange
         var engine = CreateEngine();
-        var pass = new MetadataAttributePass()
-        {
-            Engine = engine,
-        };
+        var pass = new MetadataAttributePass();
+        pass.Initialize(engine);
 
         var sourceDocument = TestRazorSourceDocument.Create("", RazorSourceDocumentProperties.Create(null, "Foo\\Bar.cshtml"));
         var import = TestRazorSourceDocument.Create("@using System", RazorSourceDocumentProperties.Create(null, "Foo\\Import.cshtml"));
@@ -448,11 +428,9 @@ public class MetadataAttributePassTest
         Assert.IsType<ClassDeclarationIntermediateNode>(child);
     }
 
-    private static RazorEngine CreateEngine()
-    {
-        return RazorProjectEngine.Create(b =>
+    private static RazorProjectEngine CreateEngine()
+        => RazorProjectEngine.Create(b =>
         {
             b.Features.Add(new DefaultMetadataIdentifierFeature());
-        }).Engine;
-    }
+        });
 }

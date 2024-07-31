@@ -71,7 +71,7 @@ public static class ModelDirective
         }
     }
 
-    internal class Pass : IntermediateNodePassBase, IRazorDirectiveClassifierPass
+    internal sealed class Pass : IntermediateNodePassBase, IRazorDirectiveClassifierPass
     {
         // Runs after the @inherits directive
         public override int Order => 5;

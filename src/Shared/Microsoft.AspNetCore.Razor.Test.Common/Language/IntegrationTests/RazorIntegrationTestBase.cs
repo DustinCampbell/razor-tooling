@@ -489,14 +489,9 @@ public class RazorIntegrationTestBase
         }
     }
 
-    private class ForceLineEndingPhase : RazorEnginePhaseBase
+    private sealed class ForceLineEndingPhase(string lineEnding) : RazorEnginePhaseBase
     {
-        public ForceLineEndingPhase(string lineEnding)
-        {
-            LineEnding = lineEnding;
-        }
-
-        public string LineEnding { get; }
+        public string LineEnding { get; } = lineEnding;
 
         protected override void ExecuteCore(RazorCodeDocument codeDocument)
         {

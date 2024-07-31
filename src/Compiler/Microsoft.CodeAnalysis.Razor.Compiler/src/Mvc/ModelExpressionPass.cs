@@ -5,13 +5,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions;
 
-public class ModelExpressionPass : IntermediateNodePassBase, IRazorOptimizationPass
+public sealed class ModelExpressionPass : IntermediateNodePassBase, IRazorOptimizationPass
 {
     private const string ModelExpressionTypeName = "Microsoft.AspNetCore.Mvc.ViewFeatures.ModelExpression";
 

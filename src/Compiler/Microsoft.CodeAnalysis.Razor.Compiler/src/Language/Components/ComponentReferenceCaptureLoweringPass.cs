@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
-internal class ComponentReferenceCaptureLoweringPass : ComponentIntermediateNodePassBase, IRazorOptimizationPass
+internal sealed class ComponentReferenceCaptureLoweringPass : ComponentIntermediateNodePassBase, IRazorOptimizationPass
 {
     // Run after component lowering pass
     public override int Order => 50;

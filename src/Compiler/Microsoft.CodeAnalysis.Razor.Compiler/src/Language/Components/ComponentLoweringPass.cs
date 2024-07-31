@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
-internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazorOptimizationPass
+internal sealed class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazorOptimizationPass
 {
     // This pass runs earlier than our other passes that 'lower' specific kinds of attributes.
     public override int Order => 0;

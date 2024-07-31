@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 
-internal class AttributeDirectivePass : IntermediateNodePassBase, IRazorDirectiveClassifierPass
+internal sealed class AttributeDirectivePass : IntermediateNodePassBase, IRazorDirectiveClassifierPass
 {
     protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
     {

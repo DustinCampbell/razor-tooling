@@ -19,10 +19,8 @@ public class FunctionsDirectivePassTest : RazorProjectEngineTestBase
     {
         // Arrange
         var projectEngine = CreateProjectEngine();
-        var pass = new FunctionsDirectivePass()
-        {
-            Engine = projectEngine.Engine,
-        };
+        var pass = new FunctionsDirectivePass();
+        pass.Initialize(projectEngine);
 
         var sourceDocument = TestRazorSourceDocument.Create("@functions { var value = true; }");
         var codeDocument = RazorCodeDocument.Create(sourceDocument);
@@ -44,10 +42,8 @@ public class FunctionsDirectivePassTest : RazorProjectEngineTestBase
     {
         // Arrange
         var projectEngine = CreateProjectEngine();
-        var pass = new FunctionsDirectivePass()
-        {
-            Engine = projectEngine.Engine,
-        };
+        var pass = new FunctionsDirectivePass();
+        pass.Initialize(projectEngine);
 
         var sourceDocument = TestRazorSourceDocument.Create("@functions { var value = true; }");
         var codeDocument = RazorCodeDocument.Create(sourceDocument);
@@ -82,10 +78,8 @@ public class FunctionsDirectivePassTest : RazorProjectEngineTestBase
     {
         // Arrange
         var projectEngine = CreateProjectEngine(b => b.AddDirective(ComponentCodeDirective.Directive));
-        var pass = new FunctionsDirectivePass()
-        {
-            Engine = projectEngine.Engine,
-        };
+        var pass = new FunctionsDirectivePass();
+        pass.Initialize(projectEngine);
 
         var sourceDocument = TestRazorSourceDocument.Create("@code { var value = true; }");
         var codeDocument = RazorCodeDocument.Create(sourceDocument);
@@ -121,10 +115,8 @@ public class FunctionsDirectivePassTest : RazorProjectEngineTestBase
     {
         // Arrange
         var projectEngine = CreateProjectEngine(b => b.AddDirective(ComponentCodeDirective.Directive));
-        var pass = new FunctionsDirectivePass()
-        {
-            Engine = projectEngine.Engine,
-        };
+        var pass = new FunctionsDirectivePass();
+        pass.Initialize(projectEngine);
 
         var sourceDocument = TestRazorSourceDocument.Create(@"
 @functions { var value1 = true; }

@@ -3,13 +3,12 @@
 
 #nullable disable
 
-using System;
 using System.Linq;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
-internal class ComponentLayoutDirectivePass : IntermediateNodePassBase, IRazorDirectiveClassifierPass
+internal sealed class ComponentLayoutDirectivePass : IntermediateNodePassBase, IRazorDirectiveClassifierPass
 {
     protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
     {

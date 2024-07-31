@@ -39,7 +39,7 @@ public static class InjectDirective
         return builder;
     }
 
-    internal class Pass : IntermediateNodePassBase, IRazorDirectiveClassifierPass
+    internal sealed class Pass : IntermediateNodePassBase, IRazorDirectiveClassifierPass
     {
         // Runs after the @model and @namespace directives
         public override int Order => 10;

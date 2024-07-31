@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 
-internal class DesignTimeDirectivePass : IntermediateNodePassBase, IRazorDirectiveClassifierPass
+internal sealed class DesignTimeDirectivePass : IntermediateNodePassBase, IRazorDirectiveClassifierPass
 {
     internal const string DesignTimeVariable = "__o";
 

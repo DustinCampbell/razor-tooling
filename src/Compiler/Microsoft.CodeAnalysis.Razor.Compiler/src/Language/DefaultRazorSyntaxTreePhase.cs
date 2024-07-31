@@ -1,19 +1,18 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
+using System.Collections.Immutable;
 using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-internal class DefaultRazorSyntaxTreePhase : RazorEnginePhaseBase, IRazorSyntaxTreePhase
+internal sealed class DefaultRazorSyntaxTreePhase : RazorEnginePhaseBase, IRazorSyntaxTreePhase
 {
-    public IRazorSyntaxTreePass[] Passes { get; private set; }
+    public ImmutableArray<IRazorSyntaxTreePass> Passes { get; private set; }
 
     protected override void OnInitialized()
     {
-        Passes = Engine.Features.OfType<IRazorSyntaxTreePass>().OrderBy(p => p.Order).ToArray();
+        Passes = ProjectEngine.Engine.Features.OfType<IRazorSyntaxTreePass>().OrderBy(p => p.Order).ToImmutableArray();
     }
 
     protected override void ExecuteCore(RazorCodeDocument codeDocument)

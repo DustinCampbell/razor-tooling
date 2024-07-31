@@ -26,14 +26,11 @@ public class ComponentWhitespacePassTest
                     b.Features.Remove(b.Features.OfType<ComponentWhitespacePass>().Single());
                 }
             });
-        Engine = ProjectEngine.Engine;
 
-        Pass.Engine = Engine;
+        Pass.Initialize(ProjectEngine);
     }
 
     private RazorProjectEngine ProjectEngine { get; }
-
-    private RazorEngine Engine { get; }
 
     private ComponentWhitespacePass Pass { get; }
 
@@ -157,7 +154,7 @@ public class ComponentWhitespacePassTest
 
     private DocumentIntermediateNode Lower(RazorCodeDocument codeDocument)
     {
-        foreach (var phase in Engine.Phases)
+        foreach (var phase in ProjectEngine.Phases)
         {
             if (phase is IRazorCSharpLoweringPhase)
             {

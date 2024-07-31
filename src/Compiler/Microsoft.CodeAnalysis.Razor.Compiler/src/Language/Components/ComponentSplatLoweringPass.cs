@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
-internal class ComponentSplatLoweringPass : ComponentIntermediateNodePassBase, IRazorOptimizationPass
+internal sealed class ComponentSplatLoweringPass : ComponentIntermediateNodePassBase, IRazorOptimizationPass
 {
     // Run after component lowering pass
     public override int Order => 50;

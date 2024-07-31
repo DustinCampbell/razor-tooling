@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
-internal class ComponentTemplateDiagnosticPass : ComponentIntermediateNodePassBase, IRazorOptimizationPass
+internal sealed class ComponentTemplateDiagnosticPass : ComponentIntermediateNodePassBase, IRazorOptimizationPass
 {
     // Runs after components/eventhandlers/ref/bind. We need to check for templates in all of those
     // places.

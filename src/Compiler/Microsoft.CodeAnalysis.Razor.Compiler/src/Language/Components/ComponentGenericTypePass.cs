@@ -14,7 +14,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Components;
 // 1. Adds diagnostics for missing generic type arguments
 // 2. Rewrites the type name of the component to substitute generic type arguments
 // 3. Rewrites the type names of parameters/child content to substitute generic type arguments
-internal class ComponentGenericTypePass : ComponentIntermediateNodePassBase, IRazorOptimizationPass
+internal sealed class ComponentGenericTypePass : ComponentIntermediateNodePassBase, IRazorOptimizationPass
 {
     private TypeNameFeature? _typeNameFeature;
 

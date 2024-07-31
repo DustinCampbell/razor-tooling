@@ -22,10 +22,8 @@ public class ConsolidatedMvcViewDocumentClassifierPassTest : RazorProjectEngineT
 
         var projectEngine = CreateProjectEngine();
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
-        var pass = new MvcViewDocumentClassifierPass(useConsolidatedMvcViews: true)
-        {
-            Engine = projectEngine.Engine
-        };
+        var pass = new MvcViewDocumentClassifierPass(useConsolidatedMvcViews: true);
+        pass.Initialize(projectEngine);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -45,10 +43,8 @@ public class ConsolidatedMvcViewDocumentClassifierPassTest : RazorProjectEngineT
 
         var projectEngine = CreateProjectEngine();
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
-        var pass = new MvcViewDocumentClassifierPass(useConsolidatedMvcViews: true)
-        {
-            Engine = projectEngine.Engine
-        };
+        var pass = new MvcViewDocumentClassifierPass(useConsolidatedMvcViews: true);
+        pass.Initialize(projectEngine);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -70,10 +66,8 @@ public class ConsolidatedMvcViewDocumentClassifierPassTest : RazorProjectEngineT
 
         var projectEngine = CreateProjectEngine();
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
-        var pass = new MvcViewDocumentClassifierPass(useConsolidatedMvcViews: true)
-        {
-            Engine = projectEngine.Engine
-        };
+        var pass = new MvcViewDocumentClassifierPass(useConsolidatedMvcViews: true);
+        pass.Initialize(projectEngine);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -97,10 +91,8 @@ public class ConsolidatedMvcViewDocumentClassifierPassTest : RazorProjectEngineT
 
         var projectEngine = CreateProjectEngine();
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
-        var pass = new MvcViewDocumentClassifierPass(useConsolidatedMvcViews: true)
-        {
-            Engine = projectEngine.Engine
-        };
+        var pass = new MvcViewDocumentClassifierPass(useConsolidatedMvcViews: true);
+        pass.Initialize(projectEngine);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -120,10 +112,8 @@ public class ConsolidatedMvcViewDocumentClassifierPassTest : RazorProjectEngineT
 
         var projectEngine = CreateProjectEngine();
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
-        var pass = new MvcViewDocumentClassifierPass(useConsolidatedMvcViews: true)
-        {
-            Engine = projectEngine.Engine
-        };
+        var pass = new MvcViewDocumentClassifierPass(useConsolidatedMvcViews: true);
+        pass.Initialize(projectEngine);
 
         // Act
         pass.Execute(codeDocument, irDocument);

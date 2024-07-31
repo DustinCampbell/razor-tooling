@@ -1,6 +1,8 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System;
+
 namespace Microsoft.AspNetCore.Razor.Language;
 
 public abstract class RazorProjectEngineFeatureBase : IRazorProjectEngineFeature
@@ -25,5 +27,25 @@ public abstract class RazorProjectEngineFeatureBase : IRazorProjectEngineFeature
 
     protected virtual void OnInitialized()
     {
+    }
+
+    protected TFeature GetRequiredFeature<TFeature>()
+        where TFeature : class, IRazorEngineFeature
+    {
+        if (ProjectEngine == null)
+        {
+            return ThrowHelper.ThrowInvalidOperationException<TFeature>(Resources.FormatFeatureMustBeInitialized(nameof(ProjectEngine)));
+        }
+
+        if (ProjectEngine.Engine.TryGetFeature(out TFeature? feature))
+        {
+            return feature;
+        }
+
+        throw new InvalidOperationException(
+            Resources.FormatFeatureDependencyMissing(
+                GetType().Name,
+                typeof(TFeature).Name,
+                typeof(RazorEngine).Name));
     }
 }

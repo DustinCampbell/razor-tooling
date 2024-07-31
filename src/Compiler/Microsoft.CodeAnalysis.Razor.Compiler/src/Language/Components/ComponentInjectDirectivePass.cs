@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
-internal class ComponentInjectDirectivePass : IntermediateNodePassBase, IRazorDirectiveClassifierPass
+internal sealed class ComponentInjectDirectivePass : IntermediateNodePassBase, IRazorDirectiveClassifierPass
 {
     protected override void ExecuteCore(
         RazorCodeDocument codeDocument,

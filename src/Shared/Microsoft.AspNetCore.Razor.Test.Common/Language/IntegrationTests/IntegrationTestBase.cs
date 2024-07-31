@@ -782,14 +782,9 @@ public abstract class IntegrationTestBase
         return Regex.Replace(content, "(?<!\r)\n", lineEnding, RegexOptions.None, TimeSpan.FromSeconds(10));
     }
 
-    private class ConfigureCodeRenderingPhase : RazorEnginePhaseBase
+    private sealed class ConfigureCodeRenderingPhase(string lineEnding) : RazorEnginePhaseBase
     {
-        public ConfigureCodeRenderingPhase(string lineEnding)
-        {
-            LineEnding = lineEnding;
-        }
-
-        public string LineEnding { get; }
+        public string LineEnding { get; } = lineEnding;
 
         protected override void ExecuteCore(RazorCodeDocument codeDocument)
         {

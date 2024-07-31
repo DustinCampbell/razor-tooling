@@ -62,10 +62,8 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
 ");
 
         var engine = CreateRuntimeEngine();
-        var pass = new ModelDirective.Pass()
-        {
-            Engine = engine,
-        };
+        var pass = new ModelDirective.Pass();
+        pass.Initialize(engine);
 
         var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -89,10 +87,8 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
 ");
 
         var engine = CreateRuntimeEngine();
-        var pass = new ModelDirective.Pass()
-        {
-            Engine = engine,
-        };
+        var pass = new ModelDirective.Pass();
+        pass.Initialize(engine);
 
         var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -115,10 +111,8 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
 ");
 
         var engine = CreateRuntimeEngine();
-        var pass = new ModelDirective.Pass()
-        {
-            Engine = engine,
-        };
+        var pass = new ModelDirective.Pass();
+        pass.Initialize(engine);
 
         var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -140,10 +134,8 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
 ");
 
         var engine = CreateRuntimeEngine();
-        var pass = new ModelDirective.Pass()
-        {
-            Engine = engine,
-        };
+        var pass = new ModelDirective.Pass();
+        pass.Initialize(engine);
 
         var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -165,10 +157,8 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
 ");
 
         var engine = CreateDesignTimeEngine();
-        var pass = new ModelDirective.Pass()
-        {
-            Engine = engine,
-        };
+        var pass = new ModelDirective.Pass();
+        pass.Initialize(engine);
 
         var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -195,10 +185,8 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
 ");
 
         var engine = CreateDesignTimeEngine();
-        var pass = new ModelDirective.Pass()
-        {
-            Engine = engine,
-        };
+        var pass = new ModelDirective.Pass();
+        pass.Initialize(engine);
 
         var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -215,50 +203,48 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
         Assert.Equal($"TModel = global::System.Object", usingNode.Content);
     }
 
-    private RazorCodeDocument CreateDocument(string content)
+    private static RazorCodeDocument CreateDocument(string content)
     {
         var source = RazorSourceDocument.Create(content, "test.cshtml");
         return RazorCodeDocument.Create(source);
     }
 
-    private ClassDeclarationIntermediateNode FindClassNode(IntermediateNode node)
+    private static ClassDeclarationIntermediateNode FindClassNode(IntermediateNode node)
     {
         var visitor = new ClassNodeVisitor();
         visitor.Visit(node);
         return visitor.Node;
     }
 
-    private NamespaceDeclarationIntermediateNode FindNamespaceNode(IntermediateNode node)
+    private static NamespaceDeclarationIntermediateNode FindNamespaceNode(IntermediateNode node)
     {
         var visitor = new NamespaceNodeVisitor();
         visitor.Visit(node);
         return visitor.Node;
     }
 
-    private RazorEngine CreateRuntimeEngine()
+    private RazorProjectEngine CreateRuntimeEngine()
     {
         return CreateEngineCore(designTime: false);
     }
 
-    private RazorEngine CreateDesignTimeEngine()
+    private RazorProjectEngine CreateDesignTimeEngine()
     {
         return CreateEngineCore(designTime: true);
     }
 
-    private RazorEngine CreateEngineCore(bool designTime = false)
-    {
-        return CreateProjectEngine(b =>
+    private RazorProjectEngine CreateEngineCore(bool designTime = false)
+        => CreateProjectEngine(b =>
         {
-                // Notice we're not registering the ModelDirective.Pass here so we can run it on demand.
-                b.AddDirective(ModelDirective.Directive);
+            // Notice we're not registering the ModelDirective.Pass here so we can run it on demand.
+            b.AddDirective(ModelDirective.Directive);
 
             b.Features.Add(new RazorPageDocumentClassifierPass());
             b.Features.Add(new MvcViewDocumentClassifierPass());
             b.Features.Add(new DesignTimeOptionsFeature(designTime));
-        }).Engine;
-    }
+        });
 
-    private DocumentIntermediateNode CreateIRDocument(RazorEngine engine, RazorCodeDocument codeDocument)
+    private static DocumentIntermediateNode CreateIRDocument(RazorProjectEngine engine, RazorCodeDocument codeDocument)
     {
         foreach (var phase in engine.Phases)
         {
@@ -271,10 +257,9 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
         }
 
         // InheritsDirectivePass needs to run before ModelDirective.
-        var pass = new InheritsDirectivePass()
-        {
-            Engine = engine
-        };
+        var pass = new InheritsDirectivePass();
+        pass.Initialize(engine);
+
         pass.Execute(codeDocument, codeDocument.GetDocumentIntermediateNode());
 
         return codeDocument.GetDocumentIntermediateNode();

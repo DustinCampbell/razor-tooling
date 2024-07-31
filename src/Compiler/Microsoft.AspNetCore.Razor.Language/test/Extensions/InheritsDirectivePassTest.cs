@@ -17,11 +17,9 @@ public class InheritsDirectivePassTest : RazorProjectEngineTestBase
     public void Execute_SkipsDocumentWithNoClassNode()
     {
         // Arrange
-        var engine = CreateEngine();
-        var pass = new InheritsDirectivePass()
-        {
-            Engine = engine,
-        };
+        var engine = CreateProjectEngine();
+        var pass = new InheritsDirectivePass();
+        pass.Initialize(engine);
 
         var sourceDocument = TestRazorSourceDocument.Create("@inherits Hello<World[]>");
         var codeDocument = RazorCodeDocument.Create(sourceDocument);
@@ -42,11 +40,9 @@ public class InheritsDirectivePassTest : RazorProjectEngineTestBase
     public void Execute_Inherits_SetsClassDeclarationBaseType()
     {
         // Arrange
-        var engine = CreateEngine();
-        var pass = new InheritsDirectivePass()
-        {
-            Engine = engine,
-        };
+        var engine = CreateProjectEngine();
+        var pass = new InheritsDirectivePass();
+        pass.Initialize(engine);
 
         var content = "@inherits Hello<World[]>";
         var sourceDocument = TestRazorSourceDocument.Create(content);
@@ -71,7 +67,7 @@ public class InheritsDirectivePassTest : RazorProjectEngineTestBase
         Assert.Equal("Hello<World[]>", @class.BaseType);
     }
 
-    private static DocumentIntermediateNode Lower(RazorCodeDocument codeDocument, RazorEngine engine)
+    private static DocumentIntermediateNode Lower(RazorCodeDocument codeDocument, RazorProjectEngine engine)
     {
         foreach (var phase in engine.Phases)
         {

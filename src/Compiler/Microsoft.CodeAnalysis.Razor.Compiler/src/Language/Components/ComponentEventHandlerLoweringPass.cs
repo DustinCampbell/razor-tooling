@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Razor.PooledObjects;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
-internal class ComponentEventHandlerLoweringPass : ComponentIntermediateNodePassBase, IRazorOptimizationPass
+internal sealed class ComponentEventHandlerLoweringPass : ComponentIntermediateNodePassBase, IRazorOptimizationPass
 {
     public override int Order => 50;
 

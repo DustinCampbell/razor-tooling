@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X;
 
-public class InstrumentationPass : IntermediateNodePassBase, IRazorOptimizationPass
+public sealed class InstrumentationPass : IntermediateNodePassBase, IRazorOptimizationPass
 {
     public override int Order => DefaultFeatureOrder;
 

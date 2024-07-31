@@ -28,10 +28,9 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
             builder.AddTagHelpers([]);
         });
 
-        var phase = new DefaultRazorTagHelperContextDiscoveryPhase()
-        {
-            Engine = projectEngine.Engine,
-        };
+        var phase = new DefaultRazorTagHelperContextDiscoveryPhase();
+        phase.Initialize(projectEngine);
+
         var expectedDiagnostics = new[]
         {
             RazorDiagnosticFactory.CreateParsing_UnterminatedStringLiteral(
@@ -67,10 +66,9 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
             builder.AddTagHelpers([]);
         });
 
-        var phase = new DefaultRazorTagHelperContextDiscoveryPhase()
-        {
-            Engine = projectEngine.Engine,
-        };
+        var phase = new DefaultRazorTagHelperContextDiscoveryPhase();
+        phase.Initialize(projectEngine);
+
         var expectedDiagnostics = new[]
         {
             RazorDiagnosticFactory.CreateParsing_UnterminatedStringLiteral(
@@ -106,10 +104,9 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
             builder.AddTagHelpers([]);
         });
 
-        var phase = new DefaultRazorTagHelperContextDiscoveryPhase()
-        {
-            Engine = projectEngine.Engine,
-        };
+        var phase = new DefaultRazorTagHelperContextDiscoveryPhase();
+        phase.Initialize(projectEngine);
+
         var expectedDiagnostics = new[]
         {
                 RazorDiagnosticFactory.CreateParsing_UnterminatedStringLiteral(
@@ -155,14 +152,11 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
             ]);
         });
 
-        var discoveryPhase = new DefaultRazorTagHelperContextDiscoveryPhase()
-        {
-            Engine = projectEngine.Engine,
-        };
-        var rewritePhase = new DefaultRazorTagHelperRewritePhase()
-        {
-            Engine = projectEngine.Engine
-        };
+        var discoveryPhase = new DefaultRazorTagHelperContextDiscoveryPhase();
+        discoveryPhase.Initialize(projectEngine);
+
+        var rewritePhase = new DefaultRazorTagHelperRewritePhase();
+        rewritePhase.Initialize(projectEngine);
 
         var sourceDocument = CreateTestSourceDocument();
         var codeDocument = RazorCodeDocument.Create(sourceDocument);
@@ -199,14 +193,11 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
                 assemblyName: "TestAssembly"),
         };
 
-        var discoveryPhase = new DefaultRazorTagHelperContextDiscoveryPhase()
-        {
-            Engine = projectEngine.Engine,
-        };
-        var rewritePhase = new DefaultRazorTagHelperRewritePhase()
-        {
-            Engine = projectEngine.Engine
-        };
+        var discoveryPhase = new DefaultRazorTagHelperContextDiscoveryPhase();
+        discoveryPhase.Initialize(projectEngine);
+
+        var rewritePhase = new DefaultRazorTagHelperRewritePhase();
+        rewritePhase.Initialize(projectEngine);
 
         var sourceDocument = CreateTestSourceDocument();
         var codeDocument = RazorCodeDocument.Create(sourceDocument);
@@ -244,14 +235,11 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
         };
         var projectEngine = RazorProjectEngine.Create(builder => builder.AddTagHelpers(tagHelpers));
 
-        var discoveryPhase = new DefaultRazorTagHelperContextDiscoveryPhase()
-        {
-            Engine = projectEngine.Engine,
-        };
-        var rewritePhase = new DefaultRazorTagHelperRewritePhase()
-        {
-            Engine = projectEngine.Engine
-        };
+        var discoveryPhase = new DefaultRazorTagHelperContextDiscoveryPhase();
+        discoveryPhase.Initialize(projectEngine);
+
+        var rewritePhase = new DefaultRazorTagHelperRewritePhase();
+        rewritePhase.Initialize(projectEngine);
 
         var sourceDocument = CreateTestSourceDocument();
         var codeDocument = RazorCodeDocument.Create(sourceDocument);
@@ -287,12 +275,11 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
                 typeName: "TestInputTagHelper",
                 assemblyName: "TestAssembly"),
         };
+
         var projectEngine = RazorProjectEngine.Create(builder => builder.AddTagHelpers(tagHelpers));
 
-        var phase = new DefaultRazorTagHelperContextDiscoveryPhase()
-        {
-            Engine = projectEngine.Engine,
-        };
+        var phase = new DefaultRazorTagHelperContextDiscoveryPhase();
+        phase.Initialize(projectEngine);
 
         var sourceDocument = CreateTestSourceDocument();
         var codeDocument = RazorCodeDocument.Create(sourceDocument);
@@ -336,14 +323,11 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
             builder.AddTagHelpers([descriptor]);
         });
 
-        var discoveryPhase = new DefaultRazorTagHelperContextDiscoveryPhase()
-        {
-            Engine = projectEngine.Engine,
-        };
-        var rewritePhase = new DefaultRazorTagHelperRewritePhase()
-        {
-            Engine = projectEngine.Engine
-        };
+        var discoveryPhase = new DefaultRazorTagHelperContextDiscoveryPhase();
+        discoveryPhase.Initialize(projectEngine);
+
+        var rewritePhase = new DefaultRazorTagHelperRewritePhase();
+        rewritePhase.Initialize(projectEngine);
 
         var content = @"
 @addTagHelper *, TestAssembly
@@ -395,14 +379,11 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
             builder.AddTagHelpers([descriptor]);
         });
 
-        var discoveryPhase = new DefaultRazorTagHelperContextDiscoveryPhase()
-        {
-            Engine = projectEngine.Engine,
-        };
-        var rewritePhase = new DefaultRazorTagHelperRewritePhase()
-        {
-            Engine = projectEngine.Engine
-        };
+        var discoveryPhase = new DefaultRazorTagHelperContextDiscoveryPhase();
+        discoveryPhase.Initialize(projectEngine);
+
+        var rewritePhase = new DefaultRazorTagHelperRewritePhase();
+        rewritePhase.Initialize(projectEngine);
 
         var content = @"
 @addTagHelper ""*, TestAssembly""
@@ -442,14 +423,11 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
         };
         var projectEngine = RazorProjectEngine.Create(builder => builder.AddTagHelpers(featureTagHelpers));
 
-        var discoveryPhase = new DefaultRazorTagHelperContextDiscoveryPhase()
-        {
-            Engine = projectEngine.Engine,
-        };
-        var rewritePhase = new DefaultRazorTagHelperRewritePhase()
-        {
-            Engine = projectEngine.Engine
-        };
+        var discoveryPhase = new DefaultRazorTagHelperContextDiscoveryPhase();
+        discoveryPhase.Initialize(projectEngine);
+
+        var rewritePhase = new DefaultRazorTagHelperRewritePhase();
+        rewritePhase.Initialize(projectEngine);
 
         var sourceDocument = CreateTestSourceDocument();
         var codeDocument = RazorCodeDocument.Create(sourceDocument);
@@ -484,10 +462,10 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
     {
         // Arrange
         var projectEngine = CreateProjectEngine();
-        var phase = new DefaultRazorTagHelperContextDiscoveryPhase()
-        {
-            Engine = projectEngine.Engine,
-        };
+
+        var phase = new DefaultRazorTagHelperContextDiscoveryPhase();
+        phase.Initialize(projectEngine);
+
         var sourceDocument = CreateTestSourceDocument();
         var codeDocument = RazorCodeDocument.Create(sourceDocument);
         var originalTree = RazorSyntaxTree.Parse(sourceDocument);
@@ -511,10 +489,8 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
             builder.Features.Add(new TestTagHelperFeature());
         });
 
-        var phase = new DefaultRazorTagHelperContextDiscoveryPhase()
-        {
-            Engine = projectEngine.Engine,
-        };
+        var phase = new DefaultRazorTagHelperContextDiscoveryPhase();
+        phase.Initialize(projectEngine);
 
         // No taghelper directives here so nothing is resolved.
         var sourceDocument = TestRazorSourceDocument.Create("Hello, world");
@@ -540,10 +516,8 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
             builder.Features.Add(new TestTagHelperFeature());
         });
 
-        var phase = new DefaultRazorTagHelperContextDiscoveryPhase()
-        {
-            Engine = projectEngine.Engine,
-        };
+        var phase = new DefaultRazorTagHelperContextDiscoveryPhase();
+        phase.Initialize(projectEngine);
 
         // No taghelper directives here so nothing is resolved.
         var sourceDocument = TestRazorSourceDocument.Create("Hello, world");
@@ -579,14 +553,11 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
             ]);
         });
 
-        var discoveryPhase = new DefaultRazorTagHelperContextDiscoveryPhase()
-        {
-            Engine = projectEngine.Engine,
-        };
-        var rewritePhase = new DefaultRazorTagHelperRewritePhase()
-        {
-            Engine = projectEngine.Engine
-        };
+        var discoveryPhase = new DefaultRazorTagHelperContextDiscoveryPhase();
+        discoveryPhase.Initialize(projectEngine);
+
+        var rewritePhase = new DefaultRazorTagHelperRewritePhase();
+        rewritePhase.Initialize(projectEngine);
 
         var content =
         @"

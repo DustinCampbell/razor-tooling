@@ -70,20 +70,28 @@ public class DefaultRazorDocumentClassifierPhaseTest
         codeDocument.SetDocumentIntermediateNode(originalNode);
 
         var firstPass = new Mock<IRazorDocumentClassifierPass>(MockBehavior.Strict);
+        RazorProjectEngine firstPassEngine = null;
+        firstPass
+            .Setup(x => x.Initialize(It.IsAny<RazorProjectEngine>()))
+            .Callback((RazorProjectEngine engine) => firstPassEngine = engine);
         firstPass.SetupGet(m => m.Order).Returns(0);
-        firstPass.SetupProperty(m => m.Engine);
+        firstPass.SetupGet(m => m.ProjectEngine).Returns(firstPassEngine);
         firstPass.Setup(m => m.Execute(codeDocument, originalNode)).Callback(() =>
         {
             originalNode.Children.Add(firstPassNode);
         });
 
         var secondPass = new Mock<IRazorDocumentClassifierPass>(MockBehavior.Strict);
+        RazorProjectEngine secondPassEngine = null;
+        secondPass
+            .Setup(x => x.Initialize(It.IsAny<RazorProjectEngine>()))
+            .Callback((RazorProjectEngine engine) => secondPassEngine = engine);
         secondPass.SetupGet(m => m.Order).Returns(1);
-        secondPass.SetupProperty(m => m.Engine);
+        secondPass.SetupGet(m => m.ProjectEngine).Returns(() => secondPassEngine);
         secondPass.Setup(m => m.Execute(codeDocument, originalNode)).Callback(() =>
         {
-                // Works only when the first pass has run before this.
-                originalNode.Children[0].Children.Add(secondPassNode);
+            // Works only when the first pass has run before this.
+            originalNode.Children[0].Children.Add(secondPassNode);
         });
 
         var phase = new DefaultRazorDocumentClassifierPhase();

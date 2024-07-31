@@ -1,56 +1,60 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
 public abstract class RazorEnginePhaseBase : IRazorEnginePhase
 {
-    private RazorEngine _engine;
+    private RazorProjectEngine? _projectEngine;
 
-    public RazorEngine Engine
+    public RazorProjectEngine ProjectEngine => _projectEngine.AssumeNotNull();
+
+    public void Initialize(RazorProjectEngine projectEngine)
     {
-        get { return _engine; }
-        set
-        {
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+        ArgHelper.ThrowIfNull(projectEngine);
 
-            _engine = value;
-            OnInitialized();
+        if (_projectEngine is not null)
+        {
+            ThrowHelper.ThrowInvalidOperationException($"{nameof(IRazorProjectEngineFeature)} is already initialized.");
         }
+
+        _projectEngine = projectEngine;
+
+        OnInitialized();
+    }
+
+    protected virtual void OnInitialized()
+    {
     }
 
     public void Execute(RazorCodeDocument codeDocument)
     {
-        if (codeDocument == null)
-        {
-            throw new ArgumentNullException(nameof(codeDocument));
-        }
+        ArgHelper.ThrowIfNull(codeDocument);
 
-        if (Engine == null)
+        if (ProjectEngine == null)
         {
-            throw new InvalidOperationException(Resources.FormatPhaseMustBeInitialized(nameof(Engine)));
+            ThrowHelper.ThrowInvalidOperationException(Resources.FormatPhaseMustBeInitialized(nameof(ProjectEngine)));
         }
 
         ExecuteCore(codeDocument);
     }
 
+    protected abstract void ExecuteCore(RazorCodeDocument codeDocument);
+
     protected T GetRequiredFeature<T>()
+        where T : class
     {
-        if (Engine == null)
+        if (ProjectEngine == null)
         {
-            throw new InvalidOperationException(Resources.FormatFeatureMustBeInitialized(nameof(Engine)));
+            throw new InvalidOperationException(Resources.FormatFeatureMustBeInitialized(nameof(ProjectEngine)));
         }
 
-        var feature = Engine.Features.OfType<T>().FirstOrDefault();
-        ThrowForMissingFeatureDependency<T>(feature);
+        var feature = ProjectEngine.Engine.Features.OfType<T>().FirstOrDefault();
+        ThrowForMissingFeatureDependency(feature);
 
         return feature;
     }
@@ -67,7 +71,8 @@ public abstract class RazorEnginePhaseBase : IRazorEnginePhase
         }
     }
 
-    protected void ThrowForMissingFeatureDependency<TEngineDependency>(TEngineDependency value)
+    protected void ThrowForMissingFeatureDependency<TEngineDependency>([NotNull] TEngineDependency? value)
+        where TEngineDependency : class
     {
         if (value == null)
         {
@@ -78,10 +83,4 @@ public abstract class RazorEnginePhaseBase : IRazorEnginePhase
                     typeof(RazorEngine).Name));
         }
     }
-
-    protected virtual void OnInitialized()
-    {
-    }
-
-    protected abstract void ExecuteCore(RazorCodeDocument codeDocument);
 }

@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X;
 
-public class AssemblyAttributeInjectionPass : IntermediateNodePassBase, IRazorOptimizationPass
+public sealed class AssemblyAttributeInjectionPass : IntermediateNodePassBase, IRazorOptimizationPass
 {
     private const string RazorViewAttribute = "global::Microsoft.AspNetCore.Mvc.Razor.Compilation.RazorViewAttribute";
     private const string RazorPageAttribute = "global::Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.RazorPageAttribute";

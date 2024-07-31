@@ -15,8 +15,6 @@ public abstract class RazorProjectEngineTestBase
     {
     }
 
-    protected RazorEngine CreateEngine() => CreateProjectEngine().Engine;
-
     protected RazorProjectEngine CreateProjectEngine()
     {
         var configuration = new RazorConfiguration(Version, "test", Extensions: []);

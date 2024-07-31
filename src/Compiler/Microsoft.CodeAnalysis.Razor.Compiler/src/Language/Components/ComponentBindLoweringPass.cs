@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Razor.PooledObjects;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
-internal class ComponentBindLoweringPass : ComponentIntermediateNodePassBase, IRazorOptimizationPass
+internal sealed class ComponentBindLoweringPass : ComponentIntermediateNodePassBase, IRazorOptimizationPass
 {
     private readonly bool _bindGetSetSupported;
 

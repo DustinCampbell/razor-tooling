@@ -33,10 +33,8 @@ public class DefaultTagHelperOptimizationPassTest
         };
 
         var engine = CreateEngine(tagHelpers);
-        var pass = new DefaultTagHelperOptimizationPass()
-        {
-            Engine = engine
-        };
+        var pass = new DefaultTagHelperOptimizationPass();
+        pass.Initialize(engine);
 
         var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -81,21 +79,19 @@ public class DefaultTagHelperOptimizationPassTest
         Assert.IsType<DefaultTagHelperExecuteIntermediateNode>(tagHelper.Children[4]);
     }
 
-    private RazorCodeDocument CreateDocument(string content)
+    private static RazorCodeDocument CreateDocument(string content)
     {
         var source = RazorSourceDocument.Create(content, "test.cshtml");
         return RazorCodeDocument.Create(source);
     }
 
-    private RazorEngine CreateEngine(params TagHelperDescriptor[] tagHelpers)
-    {
-        return RazorProjectEngine.Create(b =>
+    private static RazorProjectEngine CreateEngine(params TagHelperDescriptor[] tagHelpers)
+        => RazorProjectEngine.Create(b =>
         {
             b.Features.Add(new TestTagHelperFeature(tagHelpers));
-        }).Engine;
-    }
+        });
 
-    private DocumentIntermediateNode CreateIRDocument(RazorEngine engine, RazorCodeDocument codeDocument)
+    private static DocumentIntermediateNode CreateIRDocument(RazorProjectEngine engine, RazorCodeDocument codeDocument)
     {
         foreach (var phase in engine.Phases)
         {
@@ -110,7 +106,7 @@ public class DefaultTagHelperOptimizationPassTest
         return codeDocument.GetDocumentIntermediateNode();
     }
 
-    private TagHelperIntermediateNode FindTagHelperNode(IntermediateNode node)
+    private static TagHelperIntermediateNode FindTagHelperNode(IntermediateNode node)
     {
         var visitor = new TagHelperNodeVisitor();
         visitor.Visit(node);

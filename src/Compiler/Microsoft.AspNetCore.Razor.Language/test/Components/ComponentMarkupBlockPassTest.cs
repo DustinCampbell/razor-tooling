@@ -27,14 +27,11 @@ public class ComponentMarkupBlockPassTest
                     b.Features.Remove(b.Features.OfType<ComponentMarkupBlockPass>().Single());
                 }
             });
-        Engine = ProjectEngine.Engine;
 
-        Pass.Engine = Engine;
+        Pass.Initialize(ProjectEngine);
     }
 
     private RazorProjectEngine ProjectEngine { get; }
-
-    private RazorEngine Engine { get; }
 
     private ComponentMarkupBlockPass Pass { get; }
 
@@ -431,7 +428,7 @@ public class ComponentMarkupBlockPassTest
         Assert.Equal(expected, block.Content, ignoreLineEndingDifferences: true);
     }
 
-    private string NormalizeContent(string content)
+    private static string NormalizeContent(string content)
     {
         // Test inputs frequently have leading space for readability.
         content = content.TrimStart();
@@ -455,7 +452,7 @@ public class ComponentMarkupBlockPassTest
 
     private DocumentIntermediateNode Lower(RazorCodeDocument codeDocument)
     {
-        foreach (var phase in Engine.Phases)
+        foreach (var phase in ProjectEngine.Phases)
         {
             if (phase is IRazorCSharpLoweringPhase)
             {
@@ -466,8 +463,8 @@ public class ComponentMarkupBlockPassTest
         }
 
         var document = codeDocument.GetDocumentIntermediateNode();
-        Engine.Features.OfType<ComponentDocumentClassifierPass>().Single().Execute(codeDocument, document);
-        Engine.Features.OfType<ComponentMarkupDiagnosticPass>().Single().Execute(codeDocument, document);
+        ProjectEngine.ProjectFeatures.OfType<ComponentDocumentClassifierPass>().Single().Execute(codeDocument, document);
+        ProjectEngine.ProjectFeatures.OfType<ComponentMarkupDiagnosticPass>().Single().Execute(codeDocument, document);
         return document;
     }
 

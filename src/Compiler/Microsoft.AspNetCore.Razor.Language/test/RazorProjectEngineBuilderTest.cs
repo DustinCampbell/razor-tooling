@@ -45,7 +45,7 @@ public class RazorProjectEngineBuilderTest
         var projectEngine = builder.Build();
 
         // Assert
-        Assert.Collection(projectEngine.Engine.Phases,
+        Assert.Collection(projectEngine.Phases,
             phase => Assert.Same(phases[0], phase),
             phase => Assert.Same(phases[1], phase));
     }

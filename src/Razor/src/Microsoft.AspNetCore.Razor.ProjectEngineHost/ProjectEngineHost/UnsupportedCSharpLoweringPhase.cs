@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Razor.Language;
 
 namespace Microsoft.AspNetCore.Razor.ProjectEngineHost;
 
-internal class UnsupportedCSharpLoweringPhase : RazorEnginePhaseBase, IRazorCSharpLoweringPhase
+internal sealed class UnsupportedCSharpLoweringPhase : RazorEnginePhaseBase, IRazorCSharpLoweringPhase
 {
     internal const string UnsupportedDisclaimer = "// Razor CSharp output is not supported for this project's version of Razor.";
 

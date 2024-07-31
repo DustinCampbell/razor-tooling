@@ -12,13 +12,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 
 // Optimization pass is the best choice for this class. It's not an optimization, but it also doesn't add semantically
 // meaningful information.
-internal class MetadataAttributePass : IntermediateNodePassBase, IRazorOptimizationPass
+internal sealed class MetadataAttributePass : IntermediateNodePassBase, IRazorOptimizationPass
 {
     private IMetadataIdentifierFeature _identifierFeature;
 
     protected override void OnInitialized()
     {
-        Engine.TryGetFeature(out _identifierFeature);
+        ProjectEngine.Engine.TryGetFeature(out _identifierFeature);
         Debug.Assert(_identifierFeature is not null);
     }
 

@@ -25,13 +25,13 @@ public class CreateNewOnMetadataUpdateAttributePassTest : RazorProjectEngineTest
         var engine = CreateProjectEngine(b =>
         {
             PageDirective.Register(b);
-        }).Engine; ;
+        });
         var irDocument = CreateIRDocument(engine, codeDocument);
-        var pass = new CreateNewOnMetadataUpdateAttributePass
-        {
-            Engine = engine
-        };
-        var documentClassifier = new MvcViewDocumentClassifierPass { Engine = engine };
+        var pass = new CreateNewOnMetadataUpdateAttributePass();
+        pass.Initialize(engine);
+
+        var documentClassifier = new MvcViewDocumentClassifierPass();
+        documentClassifier.Initialize(engine);
 
         // Act
         documentClassifier.Execute(codeDocument, irDocument);
@@ -65,13 +65,13 @@ public class CreateNewOnMetadataUpdateAttributePassTest : RazorProjectEngineTest
         var engine = CreateProjectEngine(b =>
         {
             PageDirective.Register(b);
-        }).Engine;
+        });
         var irDocument = CreateIRDocument(engine, codeDocument);
-        var pass = new CreateNewOnMetadataUpdateAttributePass
-        {
-            Engine = engine
-        };
-        var documentClassifier = new DefaultDocumentClassifierPass { Engine = engine };
+        var pass = new CreateNewOnMetadataUpdateAttributePass();
+        pass.Initialize(engine);
+
+        var documentClassifier = new DefaultDocumentClassifierPass();
+        documentClassifier.Initialize(engine);
 
         // Act
         documentClassifier.Execute(codeDocument, irDocument);
@@ -83,7 +83,7 @@ public class CreateNewOnMetadataUpdateAttributePassTest : RazorProjectEngineTest
         Assert.Empty(visitor.ExtensionNodes);
     }
 
-    private static DocumentIntermediateNode CreateIRDocument(RazorEngine engine, RazorCodeDocument codeDocument)
+    private static DocumentIntermediateNode CreateIRDocument(RazorProjectEngine engine, RazorCodeDocument codeDocument)
     {
         foreach (var phase in engine.Phases)
         {

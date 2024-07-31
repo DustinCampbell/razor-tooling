@@ -23,7 +23,7 @@ internal sealed partial class DefaultRazorTagHelperContextDiscoveryPhase : Razor
         var tagHelpers = codeDocument.GetTagHelpers();
         if (tagHelpers == null)
         {
-            if (!Engine.TryGetFeature(out ITagHelperFeature? tagHelperFeature))
+            if (!ProjectEngine.Engine.TryGetFeature(out ITagHelperFeature? tagHelperFeature))
             {
                 // No feature, nothing to do.
                 return;

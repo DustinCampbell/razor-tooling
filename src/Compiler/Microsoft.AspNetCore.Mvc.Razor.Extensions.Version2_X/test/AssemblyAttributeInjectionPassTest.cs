@@ -22,10 +22,8 @@ public class AssemblyAttributeInjectionPassTest : RazorProjectEngineTestBase
             Options = RazorCodeGenerationOptions.CreateDefault(),
         };
 
-        var pass = new AssemblyAttributeInjectionPass
-        {
-            Engine = CreateProjectEngine().Engine,
-        };
+        var pass = new AssemblyAttributeInjectionPass();
+        pass.Initialize(CreateProjectEngine());
 
         // Act
         pass.Execute(TestRazorCodeDocument.CreateEmpty(), irDocument);
@@ -47,10 +45,8 @@ public class AssemblyAttributeInjectionPassTest : RazorProjectEngineTestBase
         @namespace.Annotations[CommonAnnotations.PrimaryNamespace] = CommonAnnotations.PrimaryNamespace;
         builder.Push(@namespace);
 
-        var pass = new AssemblyAttributeInjectionPass
-        {
-            Engine = CreateProjectEngine().Engine,
-        };
+        var pass = new AssemblyAttributeInjectionPass();
+        pass.Initialize(CreateProjectEngine());
 
         // Act
         pass.Execute(TestRazorCodeDocument.CreateEmpty(), irDocument);
@@ -73,10 +69,8 @@ public class AssemblyAttributeInjectionPassTest : RazorProjectEngineTestBase
         var @namespace = new NamespaceDeclarationIntermediateNode() { Content = "SomeNamespace" };
         builder.Push(@namespace);
 
-        var pass = new AssemblyAttributeInjectionPass
-        {
-            Engine = CreateProjectEngine().Engine,
-        };
+        var pass = new AssemblyAttributeInjectionPass();
+        pass.Initialize(CreateProjectEngine());
 
         // Act
         pass.Execute(TestRazorCodeDocument.CreateEmpty(), irDocument);
@@ -114,10 +108,8 @@ public class AssemblyAttributeInjectionPassTest : RazorProjectEngineTestBase
         };
         builder.Add(@class);
 
-        var pass = new AssemblyAttributeInjectionPass
-        {
-            Engine = CreateProjectEngine().Engine,
-        };
+        var pass = new AssemblyAttributeInjectionPass();
+        pass.Initialize(CreateProjectEngine());
 
         // Act
         pass.Execute(TestRazorCodeDocument.CreateEmpty(), irDocument);
@@ -149,10 +141,8 @@ public class AssemblyAttributeInjectionPassTest : RazorProjectEngineTestBase
         };
         builder.Add(@class);
 
-        var pass = new AssemblyAttributeInjectionPass
-        {
-            Engine = CreateProjectEngine().Engine,
-        };
+        var pass = new AssemblyAttributeInjectionPass();
+        pass.Initialize(CreateProjectEngine());
 
         // Act
         pass.Execute(TestRazorCodeDocument.CreateEmpty(), irDocument);
@@ -192,10 +182,8 @@ public class AssemblyAttributeInjectionPassTest : RazorProjectEngineTestBase
         };
         builder.Add(@class);
 
-        var pass = new AssemblyAttributeInjectionPass
-        {
-            Engine = CreateProjectEngine().Engine,
-        };
+        var pass = new AssemblyAttributeInjectionPass();
+        pass.Initialize(CreateProjectEngine());
 
         var source = TestRazorSourceDocument.Create("test", RazorSourceDocumentProperties.Create(filePath: null, relativePath: "/Views/Index.cshtml"));
         var document = RazorCodeDocument.Create(source);
@@ -239,10 +227,8 @@ public class AssemblyAttributeInjectionPassTest : RazorProjectEngineTestBase
         };
         builder.Add(@class);
 
-        var pass = new AssemblyAttributeInjectionPass
-        {
-            Engine = CreateProjectEngine().Engine,
-        };
+        var pass = new AssemblyAttributeInjectionPass();
+        pass.Initialize(CreateProjectEngine());
 
         var source = TestRazorSourceDocument.Create("test", RazorSourceDocumentProperties.Create(filePath: null, relativePath: "/Views/Index.cshtml"));
         var document = RazorCodeDocument.Create(source);
@@ -292,10 +278,8 @@ public class AssemblyAttributeInjectionPassTest : RazorProjectEngineTestBase
         };
         builder.Add(@class);
 
-        var pass = new AssemblyAttributeInjectionPass
-        {
-            Engine = CreateProjectEngine().Engine,
-        };
+        var pass = new AssemblyAttributeInjectionPass();
+        pass.Initialize(CreateProjectEngine());
 
         var source = TestRazorSourceDocument.Create("test", RazorSourceDocumentProperties.Create(filePath: null, relativePath: "\\test\\\"Index.cshtml"));
         var document = RazorCodeDocument.Create(source);
@@ -351,10 +335,8 @@ public class AssemblyAttributeInjectionPassTest : RazorProjectEngineTestBase
         };
         builder.Add(@class);
 
-        var pass = new AssemblyAttributeInjectionPass
-        {
-            Engine = CreateProjectEngine().Engine,
-        };
+        var pass = new AssemblyAttributeInjectionPass();
+        pass.Initialize(CreateProjectEngine());
 
         var source = TestRazorSourceDocument.Create("test", RazorSourceDocumentProperties.Create(filePath: null, relativePath: "/Views/Index.cshtml"));
         var document = RazorCodeDocument.Create(source);
@@ -406,10 +388,8 @@ public class AssemblyAttributeInjectionPassTest : RazorProjectEngineTestBase
 
         builder.Add(@class);
 
-        var pass = new AssemblyAttributeInjectionPass
-        {
-            Engine = CreateProjectEngine().Engine,
-        };
+        var pass = new AssemblyAttributeInjectionPass();
+        pass.Initialize(CreateProjectEngine());
 
         var source = TestRazorSourceDocument.Create("test", RazorSourceDocumentProperties.Create(filePath: null, relativePath: "test\\\"Index.cshtml"));
         var document = RazorCodeDocument.Create(source);

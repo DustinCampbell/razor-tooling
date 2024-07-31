@@ -16,10 +16,8 @@ public class SectionDirectivePassTest
     {
         // Arrange
         var projectEngine = CreateProjectEngine();
-        var pass = new SectionDirectivePass()
-        {
-            Engine = projectEngine.Engine,
-        };
+        var pass = new SectionDirectivePass();
+        pass.Initialize(projectEngine);
 
         var sourceDocument = TestRazorSourceDocument.Create("@section Header { <p>Hello World</p> }");
         var codeDocument = RazorCodeDocument.Create(sourceDocument);
@@ -41,10 +39,8 @@ public class SectionDirectivePassTest
     {
         // Arrange
         var projectEngine = CreateProjectEngine();
-        var pass = new SectionDirectivePass()
-        {
-            Engine = projectEngine.Engine,
-        };
+        var pass = new SectionDirectivePass();
+        pass.Initialize(projectEngine);
 
         var content = "@section Header { <p>Hello World</p> }";
         var sourceDocument = TestRazorSourceDocument.Create(content);

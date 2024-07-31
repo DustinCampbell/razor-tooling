@@ -39,7 +39,7 @@ public static class NamespaceDirective
     }
 
     // internal for testing
-    internal class Pass : IntermediateNodePassBase, IRazorDirectiveClassifierPass
+    internal sealed class Pass : IntermediateNodePassBase, IRazorDirectiveClassifierPass
     {
         protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
         {

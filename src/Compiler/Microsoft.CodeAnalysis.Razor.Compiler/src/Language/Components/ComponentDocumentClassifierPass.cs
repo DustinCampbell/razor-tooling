@@ -11,16 +11,11 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
-internal class ComponentDocumentClassifierPass : DocumentClassifierPassBase
+internal sealed class ComponentDocumentClassifierPass(RazorLanguageVersion version) : DocumentClassifierPassBase
 {
-    private readonly RazorLanguageVersion _version;
-
-    public ComponentDocumentClassifierPass(RazorLanguageVersion version)
-    {
-        _version = version;
-    }
-
     public const string ComponentDocumentKind = "component.1.0";
+
+    private readonly RazorLanguageVersion _version = version;
 
     /// <summary>
     /// The fallback value of the root namespace. Only used if the fallback root namespace

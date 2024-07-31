@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-internal class DirectiveRemovalOptimizationPass : IntermediateNodePassBase, IRazorOptimizationPass
+internal sealed class DirectiveRemovalOptimizationPass : IntermediateNodePassBase, IRazorOptimizationPass
 {
     public override int Order => DefaultFeatureOrder + 50;
 

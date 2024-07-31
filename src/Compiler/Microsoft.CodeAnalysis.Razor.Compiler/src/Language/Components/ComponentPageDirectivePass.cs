@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
-internal class ComponentPageDirectivePass : IntermediateNodePassBase, IRazorDirectiveClassifierPass
+internal sealed class ComponentPageDirectivePass : IntermediateNodePassBase, IRazorDirectiveClassifierPass
 {
     protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
     {

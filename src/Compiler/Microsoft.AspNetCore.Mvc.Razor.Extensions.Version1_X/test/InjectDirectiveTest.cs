@@ -3,7 +3,6 @@
 
 #nullable disable
 
-using System.Text;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 using Xunit;
@@ -21,10 +20,8 @@ public class InjectDirectiveTest
 ");
 
         var engine = CreateEngine();
-        var pass = new InjectDirective.Pass()
-        {
-            Engine = engine,
-        };
+        var pass = new InjectDirective.Pass();
+        pass.Initialize(engine);
 
         var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -51,10 +48,8 @@ public class InjectDirectiveTest
 ");
 
         var engine = CreateEngine();
-        var pass = new InjectDirective.Pass()
-        {
-            Engine = engine,
-        };
+        var pass = new InjectDirective.Pass();
+        pass.Initialize(engine);
 
         var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -80,10 +75,8 @@ public class InjectDirectiveTest
 ");
 
         var engine = CreateEngine();
-        var pass = new InjectDirective.Pass()
-        {
-            Engine = engine,
-        };
+        var pass = new InjectDirective.Pass();
+        pass.Initialize(engine);
 
         var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -110,10 +103,8 @@ public class InjectDirectiveTest
 ");
 
         var engine = CreateEngine();
-        var pass = new InjectDirective.Pass()
-        {
-            Engine = engine,
-        };
+        var pass = new InjectDirective.Pass();
+        pass.Initialize(engine);
 
         var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -140,10 +131,8 @@ public class InjectDirectiveTest
 ");
 
         var engine = CreateEngine();
-        var pass = new InjectDirective.Pass()
-        {
-            Engine = engine,
-        };
+        var pass = new InjectDirective.Pass();
+        pass.Initialize(engine);
 
         var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -160,20 +149,20 @@ public class InjectDirectiveTest
         Assert.Equal("PropertyName", node.MemberName);
     }
 
-    private RazorCodeDocument CreateDocument(string content)
+    private static RazorCodeDocument CreateDocument(string content)
     {
         var source = RazorSourceDocument.Create(content, "test.cshtml");
         return RazorCodeDocument.Create(source);
     }
 
-    private ClassDeclarationIntermediateNode FindClassNode(IntermediateNode node)
+    private static ClassDeclarationIntermediateNode FindClassNode(IntermediateNode node)
     {
         var visitor = new ClassNodeVisitor();
         visitor.Visit(node);
         return visitor.Node;
     }
 
-    private RazorEngine CreateEngine()
+    private static RazorProjectEngine CreateEngine()
     {
         var configuration = new RazorConfiguration(RazorLanguageVersion.Version_1_1, "test", Extensions: []);
         return RazorProjectEngine.Create(configuration, RazorProjectFileSystem.Empty, b =>
@@ -181,10 +170,10 @@ public class InjectDirectiveTest
             // Notice we're not registering the InjectDirective.Pass here so we can run it on demand.
             b.AddDirective(InjectDirective.Directive);
             b.AddDirective(ModelDirective.Directive);
-        }).Engine;
+        });
     }
 
-    private DocumentIntermediateNode CreateIRDocument(RazorEngine engine, RazorCodeDocument codeDocument)
+    private static DocumentIntermediateNode CreateIRDocument(RazorProjectEngine engine, RazorCodeDocument codeDocument)
     {
         foreach (var phase in engine.Phases)
         {

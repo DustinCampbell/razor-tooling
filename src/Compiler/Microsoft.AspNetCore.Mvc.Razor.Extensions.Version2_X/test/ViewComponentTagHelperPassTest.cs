@@ -34,10 +34,8 @@ public class ViewComponentTagHelperPassTest
         };
 
         var projectEngine = CreateProjectEngine(tagHelpers);
-        var pass = new ViewComponentTagHelperPass()
-        {
-            Engine = projectEngine.Engine,
-        };
+        var pass = new ViewComponentTagHelperPass();
+        pass.Initialize(projectEngine);
 
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
 
@@ -76,10 +74,8 @@ public class ViewComponentTagHelperPassTest
         };
 
         var projectEngine = CreateProjectEngine(tagHelpers);
-        var pass = new ViewComponentTagHelperPass()
-        {
-            Engine = projectEngine.Engine,
-        };
+        var pass = new ViewComponentTagHelperPass();
+        pass.Initialize(projectEngine);
 
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
 
@@ -124,10 +120,8 @@ public class ViewComponentTagHelperPassTest
         };
 
         var projectEngine = CreateProjectEngine(tagHelpers);
-        var pass = new ViewComponentTagHelperPass()
-        {
-            Engine = projectEngine.Engine,
-        };
+        var pass = new ViewComponentTagHelperPass();
+        pass.Initialize(projectEngine);
 
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
 
@@ -178,10 +172,8 @@ public class ViewComponentTagHelperPassTest
         };
 
         var projectEngine = CreateProjectEngine(tagHelpers);
-        var pass = new ViewComponentTagHelperPass()
-        {
-            Engine = projectEngine.Engine,
-        };
+        var pass = new ViewComponentTagHelperPass();
+        pass.Initialize(projectEngine);
 
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
 
@@ -217,7 +209,6 @@ public class ViewComponentTagHelperPassTest
         return RazorProjectEngine.Create(b =>
         {
             b.Features.Add(new MvcViewDocumentClassifierPass());
-
             b.Features.Add(new TestTagHelperFeature(tagHelpers));
         });
     }
@@ -237,7 +228,7 @@ public class ViewComponentTagHelperPassTest
         // We also expect the default tag helper pass to run first.
         var documentNode = codeDocument.GetDocumentIntermediateNode();
 
-        var defaultTagHelperPass = projectEngine.EngineFeatures.OfType<DefaultTagHelperOptimizationPass>().Single();
+        var defaultTagHelperPass = projectEngine.ProjectFeatures.OfType<DefaultTagHelperOptimizationPass>().Single();
         defaultTagHelperPass.Execute(codeDocument, documentNode);
 
         return codeDocument.GetDocumentIntermediateNode();

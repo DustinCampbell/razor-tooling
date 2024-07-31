@@ -10,10 +10,10 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions;
 
-public class ViewComponentTagHelperPass : IntermediateNodePassBase, IRazorOptimizationPass
+public sealed class ViewComponentTagHelperPass : IntermediateNodePassBase, IRazorOptimizationPass
 {
     // Run after the default taghelper pass
-    public override int Order => IntermediateNodePassBase.DefaultFeatureOrder + 2000;
+    public override int Order => DefaultFeatureOrder + 2000;
 
     protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
     {

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Razor.PooledObjects;
 namespace Microsoft.AspNetCore.Razor.Language;
 
 #pragma warning disable CS0618 // Type or member is obsolete
-internal class DefaultRazorParsingPhase : RazorEnginePhaseBase, IRazorParsingPhase
+internal sealed class DefaultRazorParsingPhase : RazorEnginePhaseBase, IRazorParsingPhase
 {
     private IRazorParserOptionsFeature? _optionsFeature;
 

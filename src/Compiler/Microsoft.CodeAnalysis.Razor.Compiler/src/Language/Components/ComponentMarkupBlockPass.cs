@@ -16,7 +16,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Components;
 //
 // Does not preserve insignificant details of the HTML, like tag closing style
 // or quote style.
-internal class ComponentMarkupBlockPass : ComponentIntermediateNodePassBase, IRazorOptimizationPass
+internal sealed class ComponentMarkupBlockPass : ComponentIntermediateNodePassBase, IRazorOptimizationPass
 {
     private readonly RazorLanguageVersion _version;
 

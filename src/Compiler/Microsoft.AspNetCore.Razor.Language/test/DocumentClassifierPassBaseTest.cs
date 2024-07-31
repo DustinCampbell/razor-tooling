@@ -17,7 +17,7 @@ public class DocumentClassifierPassBaseTest : RazorProjectEngineTestBase
 {
     protected override RazorLanguageVersion Version => RazorLanguageVersion.Latest;
 
-    public RazorEngine Engine => CreateProjectEngine().Engine;
+    public RazorProjectEngine Engine => CreateProjectEngine();
 
     [Fact]
     public void Execute_HasDocumentKind_IgnoresDocument()
@@ -30,7 +30,7 @@ public class DocumentClassifierPassBaseTest : RazorProjectEngineTestBase
         };
 
         var pass = new TestDocumentClassifierPass();
-        pass.Engine = Engine;
+        pass.Initialize(Engine);
 
         // Act
         pass.Execute(TestRazorCodeDocument.CreateEmpty(), documentNode);
@@ -51,9 +51,10 @@ public class DocumentClassifierPassBaseTest : RazorProjectEngineTestBase
 
         var pass = new TestDocumentClassifierPass()
         {
-            Engine = Engine,
             ShouldMatch = false,
         };
+
+        pass.Initialize(Engine);
 
         // Act
         pass.Execute(TestRazorCodeDocument.CreateEmpty(), documentNode);
@@ -74,18 +75,20 @@ public class DocumentClassifierPassBaseTest : RazorProjectEngineTestBase
 
         var expected = new ICodeTargetExtension[]
         {
-                new MyExtension1(),
-                new MyExtension2(),
+            new MyExtension1(),
+            new MyExtension2(),
         };
 
-        var pass = new TestDocumentClassifierPass();
-        pass.Engine = RazorProjectEngine.CreateEmpty(b =>
+        var engine = RazorProjectEngine.CreateEmpty(b =>
         {
             for (var i = 0; i < expected.Length; i++)
             {
                 b.AddTargetExtension(expected[i]);
             }
-        }).Engine;
+        });
+
+        var pass = new TestDocumentClassifierPass();
+        pass.Initialize(engine);
 
         ICodeTargetExtension[] extensions = null;
 
@@ -108,7 +111,7 @@ public class DocumentClassifierPassBaseTest : RazorProjectEngineTestBase
         };
 
         var pass = new TestDocumentClassifierPass();
-        pass.Engine = Engine;
+        pass.Initialize(Engine);
 
         // Act
         pass.Execute(TestRazorCodeDocument.CreateEmpty(), documentNode);
@@ -136,7 +139,7 @@ public class DocumentClassifierPassBaseTest : RazorProjectEngineTestBase
         builder.Add(new UsingDirectiveIntermediateNode());
 
         var pass = new TestDocumentClassifierPass();
-        pass.Engine = Engine;
+        pass.Initialize(Engine);
 
         // Act
         pass.Execute(TestRazorCodeDocument.CreateEmpty(), documentNode);
@@ -163,7 +166,7 @@ public class DocumentClassifierPassBaseTest : RazorProjectEngineTestBase
         builder.Add(new CSharpCodeIntermediateNode());
 
         var pass = new TestDocumentClassifierPass();
-        pass.Engine = Engine;
+        pass.Initialize(Engine);
 
         // Act
         pass.Execute(TestRazorCodeDocument.CreateEmpty(), documentNode);
@@ -193,11 +196,12 @@ public class DocumentClassifierPassBaseTest : RazorProjectEngineTestBase
 
         var pass = new TestDocumentClassifierPass()
         {
-            Engine = Engine,
             Namespace = "TestNamespace",
             Class = "TestClass",
             Method = "TestMethod",
         };
+
+        pass.Initialize(Engine);
 
         // Act
         pass.Execute(TestRazorCodeDocument.CreateEmpty(), documentNode);
@@ -228,11 +232,12 @@ public class DocumentClassifierPassBaseTest : RazorProjectEngineTestBase
 
         var pass = new TestDocumentClassifierPass()
         {
-            Engine = Engine,
             Namespace = "TestNamespace",
             Class = "TestClass",
             Method = "TestMethod",
         };
+
+        pass.Initialize(Engine);
 
         // Act
         pass.Execute(TestRazorCodeDocument.CreateEmpty(), documentNode);

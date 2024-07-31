@@ -3,7 +3,6 @@
 
 #nullable disable
 
-using System;
 using System.Linq;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 using Xunit;
@@ -23,12 +22,10 @@ public class DirectiveRemovalOptimizationPassTest
         var defaultEngine = RazorProjectEngine.Create(b =>
         {
             b.AddDirective(DirectiveDescriptor.CreateDirective("custom", DirectiveKind.SingleLine, d => d.AddStringToken()));
-        }).Engine;
+        });
         var documentNode = Lower(codeDocument, defaultEngine);
-        var pass = new DirectiveRemovalOptimizationPass()
-        {
-            Engine = defaultEngine,
-        };
+        var pass = new DirectiveRemovalOptimizationPass();
+        pass.Initialize(defaultEngine);
 
         // Act
         pass.Execute(codeDocument, documentNode);
@@ -57,12 +54,10 @@ public class DirectiveRemovalOptimizationPassTest
         var defaultEngine = RazorProjectEngine.Create(b =>
         {
             b.AddDirective(DirectiveDescriptor.CreateDirective("custom", DirectiveKind.SingleLine, d => d.AddStringToken()));
-        }).Engine;
+        });
         var documentNode = Lower(codeDocument, defaultEngine);
-        var pass = new DirectiveRemovalOptimizationPass()
-        {
-            Engine = defaultEngine,
-        };
+        var pass = new DirectiveRemovalOptimizationPass();
+        pass.Initialize(defaultEngine);
 
         // Act
         pass.Execute(codeDocument, documentNode);
@@ -89,17 +84,15 @@ public class DirectiveRemovalOptimizationPassTest
         var defaultEngine = RazorProjectEngine.Create(b =>
         {
             b.AddDirective(DirectiveDescriptor.CreateDirective("custom", DirectiveKind.SingleLine, d => d.AddStringToken()));
-        }).Engine;
+        });
         var documentNode = Lower(codeDocument, defaultEngine);
 
         // Add the diagnostic to the directive node.
         var directiveNode = documentNode.FindDescendantNodes<DirectiveIntermediateNode>().Single();
         directiveNode.Diagnostics.Add(expectedDiagnostic);
 
-        var pass = new DirectiveRemovalOptimizationPass()
-        {
-            Engine = defaultEngine,
-        };
+        var pass = new DirectiveRemovalOptimizationPass();
+        pass.Initialize(defaultEngine);
 
         // Act
         pass.Execute(codeDocument, documentNode);
@@ -118,7 +111,7 @@ public class DirectiveRemovalOptimizationPassTest
         Assert.Empty(method.Children);
     }
 
-    private static DocumentIntermediateNode Lower(RazorCodeDocument codeDocument, RazorEngine engine)
+    private static DocumentIntermediateNode Lower(RazorCodeDocument codeDocument, RazorProjectEngine engine)
     {
         foreach (var phase in engine.Phases)
         {
