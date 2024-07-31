@@ -1080,7 +1080,7 @@ public class RazorDocumentMappingServiceTest : ToolingTestBase
         var csharpDocument = new RazorCSharpDocument(
             codeDocument,
             projectedCSharpSource,
-            RazorCodeGenerationOptions.CreateDefault(),
+            RazorCodeGenerationOptions.            Default,
             diagnostics: [],
             sourceMappings.ToImmutableArray(),
             linePragmas: []);

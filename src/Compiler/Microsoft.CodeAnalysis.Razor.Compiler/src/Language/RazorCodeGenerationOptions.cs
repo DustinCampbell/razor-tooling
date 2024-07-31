@@ -21,6 +21,38 @@ public sealed class RazorCodeGenerationOptions(
     bool suppressAddComponentParameter,
     bool remapLinePragmaPathsOnWindows)
 {
+    public static RazorCodeGenerationOptions Default { get; } = new(
+        indentWithTabs: false,
+        indentSize: 4,
+        designTime: false,
+        suppressChecksum: false,
+        rootNamespace: null,
+        suppressMetadataAttributes: false,
+        suppressPrimaryMethodBody: false,
+        suppressNullabilityEnforcement: false,
+        omitMinimizedComponentAttributeValues: false,
+        supportLocalizedComponentNames: false,
+        useEnhancedLinePragma: true,
+        suppressUniqueIds: null,
+        suppressAddComponentParameter: false,
+        remapLinePragmaPathsOnWindows: false);
+
+    public static RazorCodeGenerationOptions DesignTimeDefault { get; } = new(
+        indentWithTabs: false,
+        indentSize: 4,
+        designTime: true,
+        rootNamespace: null,
+        suppressChecksum: false,
+        suppressMetadataAttributes: true,
+        suppressPrimaryMethodBody: false,
+        suppressNullabilityEnforcement: false,
+        omitMinimizedComponentAttributeValues: false,
+        supportLocalizedComponentNames: false,
+        useEnhancedLinePragma: true,
+        suppressUniqueIds: null,
+        suppressAddComponentParameter: false,
+        remapLinePragmaPathsOnWindows: true);
+
     public bool DesignTime { get; } = designTime;
     public bool IndentWithTabs { get; } = indentWithTabs;
     public int IndentSize { get; } = indentSize;
@@ -107,44 +139,6 @@ public sealed class RazorCodeGenerationOptions(
     /// </para>
     /// </summary>
     internal bool SuppressMetadataSourceChecksumAttributes { get; init; }
-
-    public static RazorCodeGenerationOptions CreateDefault()
-    {
-        return new RazorCodeGenerationOptions(
-            indentWithTabs: false,
-            indentSize: 4,
-            designTime: false,
-            suppressChecksum: false,
-            rootNamespace: null,
-            suppressMetadataAttributes: false,
-            suppressPrimaryMethodBody: false,
-            suppressNullabilityEnforcement: false,
-            omitMinimizedComponentAttributeValues: false,
-            supportLocalizedComponentNames: false,
-            useEnhancedLinePragma: true,
-            suppressUniqueIds: null,
-            suppressAddComponentParameter: false,
-            remapLinePragmaPathsOnWindows: false);
-    }
-
-    public static RazorCodeGenerationOptions CreateDesignTimeDefault()
-    {
-        return new RazorCodeGenerationOptions(
-            indentWithTabs: false,
-            indentSize: 4,
-            designTime: true,
-            rootNamespace: null,
-            suppressChecksum: false,
-            suppressMetadataAttributes: true,
-            suppressPrimaryMethodBody: false,
-            suppressNullabilityEnforcement: false,
-            omitMinimizedComponentAttributeValues: false,
-            supportLocalizedComponentNames: false,
-            useEnhancedLinePragma: true,
-            suppressUniqueIds: null,
-            suppressAddComponentParameter: false,
-            remapLinePragmaPathsOnWindows: true);
-    }
 
     public static RazorCodeGenerationOptions Create(Action<RazorCodeGenerationOptionsBuilder> configure)
     {
