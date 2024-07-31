@@ -231,7 +231,7 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                         {
                             // A block directive cannot be imported.
                             document.Diagnostics.Add(
-                                RazorDiagnosticFactory.CreateDirective_BlockDirectiveCannotBeImported(descriptor.Directive));
+                                RazorDiagnosticFactory.CreateDirective_BlockDirectiveCannotBeImported(descriptor.Name));
                         }
 
                         break;
@@ -316,7 +316,7 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                 {
                     directiveNode = new MalformedDirectiveIntermediateNode()
                     {
-                        DirectiveName = descriptor.Directive,
+                        DirectiveName = descriptor.Name,
                         Directive = descriptor,
                         Source = BuildSourceSpanFromNode(node),
                     };
@@ -325,7 +325,7 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                 {
                     directiveNode = new DirectiveIntermediateNode()
                     {
-                        DirectiveName = descriptor.Directive,
+                        DirectiveName = descriptor.Name,
                         Directive = descriptor,
                         Source = BuildSourceSpanFromNode(node),
                     };
@@ -374,7 +374,7 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                         {
                             directiveNode = new MalformedDirectiveIntermediateNode()
                             {
-                                DirectiveName = CSharpCodeParser.AddTagHelperDirectiveDescriptor.Directive,
+                                DirectiveName = CSharpCodeParser.AddTagHelperDirectiveDescriptor.Name,
                                 Directive = CSharpCodeParser.AddTagHelperDirectiveDescriptor,
                                 Source = BuildSourceSpanFromNode(node),
                             };
@@ -383,7 +383,7 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                         {
                             directiveNode = new DirectiveIntermediateNode()
                             {
-                                DirectiveName = CSharpCodeParser.AddTagHelperDirectiveDescriptor.Directive,
+                                DirectiveName = CSharpCodeParser.AddTagHelperDirectiveDescriptor.Name,
                                 Directive = CSharpCodeParser.AddTagHelperDirectiveDescriptor,
                                 Source = BuildSourceSpanFromNode(node),
                             };
@@ -413,7 +413,7 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                         {
                             directiveNode = new MalformedDirectiveIntermediateNode()
                             {
-                                DirectiveName = CSharpCodeParser.RemoveTagHelperDirectiveDescriptor.Directive,
+                                DirectiveName = CSharpCodeParser.RemoveTagHelperDirectiveDescriptor.Name,
                                 Directive = CSharpCodeParser.RemoveTagHelperDirectiveDescriptor,
                                 Source = BuildSourceSpanFromNode(node),
                             };
@@ -422,7 +422,7 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                         {
                             directiveNode = new DirectiveIntermediateNode()
                             {
-                                DirectiveName = CSharpCodeParser.RemoveTagHelperDirectiveDescriptor.Directive,
+                                DirectiveName = CSharpCodeParser.RemoveTagHelperDirectiveDescriptor.Name,
                                 Directive = CSharpCodeParser.RemoveTagHelperDirectiveDescriptor,
                                 Source = BuildSourceSpanFromNode(node),
                             };
@@ -452,7 +452,7 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                         {
                             directiveNode = new MalformedDirectiveIntermediateNode()
                             {
-                                DirectiveName = CSharpCodeParser.TagHelperPrefixDirectiveDescriptor.Directive,
+                                DirectiveName = CSharpCodeParser.TagHelperPrefixDirectiveDescriptor.Name,
                                 Directive = CSharpCodeParser.TagHelperPrefixDirectiveDescriptor,
                                 Source = BuildSourceSpanFromNode(node),
                             };
@@ -461,7 +461,7 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                         {
                             directiveNode = new DirectiveIntermediateNode()
                             {
-                                DirectiveName = CSharpCodeParser.TagHelperPrefixDirectiveDescriptor.Directive,
+                                DirectiveName = CSharpCodeParser.TagHelperPrefixDirectiveDescriptor.Name,
                                 Directive = CSharpCodeParser.TagHelperPrefixDirectiveDescriptor,
                                 Source = BuildSourceSpanFromNode(node),
                             };

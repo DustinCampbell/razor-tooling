@@ -19,8 +19,8 @@ internal static class DirectiveVerifier
 
         foreach (var directive in DirectiveCompletionItemProvider.MvcDefaultDirectives)
         {
-            builder.Add(item => Assert.Equal(directive.Directive, item.InsertText));
-            builder.Add(item => AssertDirectiveSnippet(item, directive.Directive));
+            builder.Add(item => Assert.Equal(directive.Name, item.InsertText));
+            builder.Add(item => AssertDirectiveSnippet(item, directive.Name));
         }
 
         DefaultDirectiveCollectionVerifiers = builder.ToArray();

@@ -13,6 +13,16 @@ namespace Microsoft.AspNetCore.Razor.Language;
 public sealed class DirectiveDescriptor
 {
     /// <summary>
+    /// Gets the directive keyword without the leading <c>@</c> token.
+    /// </summary>
+    public string Name { get; }
+
+    /// <summary>
+    /// Gets the kind of the directive. The kind determines whether or not a directive has an associated block.
+    /// </summary>
+    public DirectiveKind Kind { get; }
+
+    /// <summary>
     /// Gets the description of the directive.
     /// </summary>
     /// <remarks>
@@ -21,22 +31,12 @@ public sealed class DirectiveDescriptor
     public string Description { get; }
 
     /// <summary>
-    /// Gets the directive keyword without the leading <c>@</c> token.
-    /// </summary>
-    public string Directive { get; }
-
-    /// <summary>
     /// Gets the display name of the directive.
     /// </summary>
     /// <remarks>
     /// The display name is used for information purposes, and has no effect on parsing.
     /// </remarks>
     public string DisplayName { get; }
-
-    /// <summary>
-    /// Gets the kind of the directive. The kind determines whether or not a directive has an associated block.
-    /// </summary>
-    public DirectiveKind Kind { get; }
 
     /// <summary>
     /// Gets the way a directive can be used. The usage determines how many, and where directives can exist per document.
@@ -56,7 +56,7 @@ public sealed class DirectiveDescriptor
         string displayName,
         string description)
     {
-        Directive = directive;
+        Name = directive;
         Kind = kind;
         Usage = usage;
         Tokens = tokens;
@@ -67,15 +67,15 @@ public sealed class DirectiveDescriptor
     /// <summary>
     /// Creates a new <see cref="DirectiveDescriptor"/>.
     /// </summary>
-    /// <param name="directive">The directive keyword.</param>
+    /// <param name="name">The directive keyword.</param>
     /// <param name="kind">The directive kind.</param>
     /// <param name="configure">A configuration delegate for the directive.</param>
     /// <returns>A <see cref="DirectiveDescriptor"/> for the created directive.</returns>
-    public static DirectiveDescriptor CreateDirective(string directive, DirectiveKind kind, Action<IDirectiveDescriptorBuilder>? configure = null)
+    public static DirectiveDescriptor CreateDirective(string name, DirectiveKind kind, Action<IDirectiveDescriptorBuilder>? configure = null)
     {
-        ArgHelper.ThrowIfNull(directive);
+        ArgHelper.ThrowIfNull(name);
 
-        using var builder = new Builder(directive, kind);
+        using var builder = new Builder(name, kind);
         configure?.Invoke(builder);
         return builder.Build();
     }
@@ -83,40 +83,40 @@ public sealed class DirectiveDescriptor
     /// <summary>
     /// Creates a new <see cref="DirectiveDescriptor"/> with <see cref="Kind"/> set to <see cref="DirectiveKind.SingleLine"/>
     /// </summary>
-    /// <param name="directive">The directive keyword.</param>
+    /// <param name="name">The directive keyword.</param>
     /// <param name="configure">A configuration delegate for the directive.</param>
     /// <returns>A <see cref="DirectiveDescriptor"/> for the created directive.</returns>
-    public static DirectiveDescriptor CreateSingleLineDirective(string directive, Action<IDirectiveDescriptorBuilder>? configure = null)
+    public static DirectiveDescriptor CreateSingleLineDirective(string name, Action<IDirectiveDescriptorBuilder>? configure = null)
     {
-        ArgHelper.ThrowIfNull(directive);
+        ArgHelper.ThrowIfNull(name);
 
-        return CreateDirective(directive, DirectiveKind.SingleLine, configure);
+        return CreateDirective(name, DirectiveKind.SingleLine, configure);
     }
 
     /// <summary>
     /// Creates a new <see cref="DirectiveDescriptor"/> with <see cref="Kind"/> set to <see cref="DirectiveKind.RazorBlock"/>
     /// </summary>
-    /// <param name="directive">The directive keyword.</param>
+    /// <param name="name">The directive keyword.</param>
     /// <param name="configure">A configuration delegate for the directive.</param>
     /// <returns>A <see cref="DirectiveDescriptor"/> for the created directive.</returns>
-    public static DirectiveDescriptor CreateRazorBlockDirective(string directive, Action<IDirectiveDescriptorBuilder>? configure = null)
+    public static DirectiveDescriptor CreateRazorBlockDirective(string name, Action<IDirectiveDescriptorBuilder>? configure = null)
     {
-        ArgHelper.ThrowIfNull(directive);
+        ArgHelper.ThrowIfNull(name);
 
-        return CreateDirective(directive, DirectiveKind.RazorBlock, configure);
+        return CreateDirective(name, DirectiveKind.RazorBlock, configure);
     }
 
     /// <summary>
     /// Creates a new <see cref="DirectiveDescriptor"/> with <see cref="Kind"/> set to <see cref="DirectiveKind.CodeBlock"/>
     /// </summary>
-    /// <param name="directive">The directive keyword.</param>
+    /// <param name="name">The directive keyword.</param>
     /// <param name="configure">A configuration delegate for the directive.</param>
     /// <returns>A <see cref="DirectiveDescriptor"/> for the created directive.</returns>
-    public static DirectiveDescriptor CreateCodeBlockDirective(string directive, Action<IDirectiveDescriptorBuilder>? configure = null)
+    public static DirectiveDescriptor CreateCodeBlockDirective(string name, Action<IDirectiveDescriptorBuilder>? configure = null)
     {
-        ArgHelper.ThrowIfNull(directive);
+        ArgHelper.ThrowIfNull(name);
 
-        return CreateDirective(directive, DirectiveKind.CodeBlock, configure);
+        return CreateDirective(name, DirectiveKind.CodeBlock, configure);
     }
 
     private sealed class Builder(string name, DirectiveKind kind) : IDirectiveDescriptorBuilder, IDisposable

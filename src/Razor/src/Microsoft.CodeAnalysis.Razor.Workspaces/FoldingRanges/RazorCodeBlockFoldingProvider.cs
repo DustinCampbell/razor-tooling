@@ -11,7 +11,7 @@ internal class RazorCodeBlockFoldingProvider : AbstractSyntaxNodeFoldingProvider
 {
     protected override string GetCollapsedText(RazorDirectiveSyntax node)
     {
-        return "@" + node.DirectiveDescriptor.Directive;
+        return "@" + node.DirectiveDescriptor.Name;
     }
 
     protected override ImmutableArray<RazorDirectiveSyntax> GetFoldableNodes(RazorSyntaxTree syntaxTree)

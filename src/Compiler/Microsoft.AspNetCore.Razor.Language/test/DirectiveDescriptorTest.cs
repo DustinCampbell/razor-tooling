@@ -17,7 +17,7 @@ public class DirectiveDescriptorTest
         var directive = DirectiveDescriptor.CreateDirective("test", DirectiveKind.SingleLine);
 
         // Assert
-        Assert.Equal("test", directive.Directive);
+        Assert.Equal("test", directive.Name);
         Assert.Equal(DirectiveKind.SingleLine, directive.Kind);
     }
 
@@ -32,7 +32,7 @@ public class DirectiveDescriptorTest
         var directive = DirectiveDescriptor.CreateDirective("test", DirectiveKind.SingleLine, configure);
 
         // Assert
-        Assert.Equal("test", directive.Directive);
+        Assert.Equal("test", directive.Name);
         Assert.Equal(DirectiveKind.SingleLine, directive.Kind);
         Assert.True(called);
     }
@@ -44,7 +44,7 @@ public class DirectiveDescriptorTest
         var directive = DirectiveDescriptor.CreateSingleLineDirective("test");
 
         // Assert
-        Assert.Equal("test", directive.Directive);
+        Assert.Equal("test", directive.Name);
         Assert.Equal(DirectiveKind.SingleLine, directive.Kind);
     }
 
@@ -59,7 +59,7 @@ public class DirectiveDescriptorTest
         var directive = DirectiveDescriptor.CreateSingleLineDirective("test", configure);
 
         // Assert
-        Assert.Equal("test", directive.Directive);
+        Assert.Equal("test", directive.Name);
         Assert.Equal(DirectiveKind.SingleLine, directive.Kind);
         Assert.True(called);
     }
@@ -71,7 +71,7 @@ public class DirectiveDescriptorTest
         var directive = DirectiveDescriptor.CreateRazorBlockDirective("test");
 
         // Assert
-        Assert.Equal("test", directive.Directive);
+        Assert.Equal("test", directive.Name);
         Assert.Equal(DirectiveKind.RazorBlock, directive.Kind);
     }
 
@@ -86,7 +86,7 @@ public class DirectiveDescriptorTest
         var directive = DirectiveDescriptor.CreateRazorBlockDirective("test", configure);
 
         // Assert
-        Assert.Equal("test", directive.Directive);
+        Assert.Equal("test", directive.Name);
         Assert.Equal(DirectiveKind.RazorBlock, directive.Kind);
         Assert.True(called);
     }
@@ -98,7 +98,7 @@ public class DirectiveDescriptorTest
         var directive = DirectiveDescriptor.CreateCodeBlockDirective("test");
 
         // Assert
-        Assert.Equal("test", directive.Directive);
+        Assert.Equal("test", directive.Name);
         Assert.Equal(DirectiveKind.CodeBlock, directive.Kind);
     }
 
@@ -113,7 +113,7 @@ public class DirectiveDescriptorTest
         var directive = DirectiveDescriptor.CreateCodeBlockDirective("test", configure);
 
         // Assert
-        Assert.Equal("test", directive.Directive);
+        Assert.Equal("test", directive.Name);
         Assert.Equal(DirectiveKind.CodeBlock, directive.Kind);
         Assert.True(called);
     }

@@ -149,12 +149,12 @@ internal class DirectiveCompletionItemProvider : IRazorCompletionItemProvider
 
         foreach (var directive in directives)
         {
-            var completionDisplayText = directive.DisplayName ?? directive.Directive;
+            var completionDisplayText = directive.DisplayName ?? directive.Name;
             var commitCharacters = GetDirectiveCommitCharacters(directive.Kind);
 
             var completionItem = new RazorCompletionItem(
                 completionDisplayText,
-                directive.Directive,
+                directive.Name,
                 RazorCompletionItemKind.Directive,
                 // Make sort text one less than display text so if there are any delegated completion items
                 // with the same display text in the combined completion list, they will be sorted below
@@ -166,7 +166,7 @@ internal class DirectiveCompletionItemProvider : IRazorCompletionItemProvider
             completionItem.SetDirectiveCompletionDescription(completionDescription);
             completionItems.Add(completionItem);
 
-            if (SingleLineDirectiveSnippets.TryGetValue(directive.Directive, out var snippetTexts))
+            if (SingleLineDirectiveSnippets.TryGetValue(directive.Name, out var snippetTexts))
             {
                 var snippetCompletionItem = new RazorCompletionItem(
                     $"{completionDisplayText} {SR.Directive} ...",

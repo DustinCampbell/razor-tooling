@@ -26,7 +26,7 @@ internal class DirectiveDescriptorComparer : IEqualityComparer<DirectiveDescript
         }
 
         return descriptorX != null &&
-            string.Equals(descriptorX.Directive, descriptorY.Directive, StringComparison.Ordinal) &&
+            string.Equals(descriptorX.Name, descriptorY.Name, StringComparison.Ordinal) &&
             descriptorX.Kind == descriptorY.Kind &&
             Enumerable.SequenceEqual(
                 descriptorX.Tokens,
@@ -42,7 +42,7 @@ internal class DirectiveDescriptorComparer : IEqualityComparer<DirectiveDescript
         }
 
         var hash = HashCodeCombiner.Start();
-        hash.Add(descriptor.Directive, StringComparer.Ordinal);
+        hash.Add(descriptor.Name, StringComparer.Ordinal);
         hash.Add(descriptor.Kind);
 
         return hash.CombinedHash;

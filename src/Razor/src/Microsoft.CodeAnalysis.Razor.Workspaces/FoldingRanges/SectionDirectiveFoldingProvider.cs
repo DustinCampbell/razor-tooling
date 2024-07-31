@@ -11,7 +11,7 @@ internal class SectionDirectiveFoldingProvider : AbstractSyntaxNodeFoldingProvid
 {
     protected override string GetCollapsedText(RazorDirectiveSyntax node)
     {
-        return $"@{node.DirectiveDescriptor.Directive}{GetSectionName(node)}";
+        return $"@{node.DirectiveDescriptor.Name}{GetSectionName(node)}";
 
         static string GetSectionName(RazorDirectiveSyntax node)
         {

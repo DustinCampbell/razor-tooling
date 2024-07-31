@@ -48,7 +48,7 @@ public class DefaultRazorParsingPhaseTest
         // Assert
         var syntaxTree = codeDocument.GetSyntaxTree();
         var directive = Assert.Single(syntaxTree.Options.Directives);
-        Assert.Equal("test", directive.Directive);
+        Assert.Equal("test", directive.Name);
     }
 
     [Fact]
@@ -77,8 +77,8 @@ public class DefaultRazorParsingPhaseTest
         Assert.False(importSyntaxTrees.IsDefault);
         Assert.Collection(
             importSyntaxTrees,
-            t => { Assert.Same(t.Source, imports[0]); Assert.Equal("test", Assert.Single(t.Options.Directives).Directive); },
-            t => { Assert.Same(t.Source, imports[1]); Assert.Equal("test", Assert.Single(t.Options.Directives).Directive); });
+            t => { Assert.Same(t.Source, imports[0]); Assert.Equal("test", Assert.Single(t.Options.Directives).Name); },
+            t => { Assert.Same(t.Source, imports[1]); Assert.Equal("test", Assert.Single(t.Options.Directives).Name); });
     }
 
     private class MyParserOptionsFeature : RazorEngineFeatureBase, IConfigureRazorParserOptionsFeature

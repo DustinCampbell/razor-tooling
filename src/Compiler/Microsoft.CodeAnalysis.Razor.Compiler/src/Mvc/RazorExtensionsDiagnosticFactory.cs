@@ -84,7 +84,7 @@ internal class RazorExtensionsDiagnosticFactory
     {
         var fileName = Path.GetFileName(source.FilePath);
 
-        return RazorDiagnostic.Create(PageDirective_CannotBeImported, source, PageDirective.Directive.Directive, fileName);
+        return RazorDiagnostic.Create(PageDirective_CannotBeImported, source, PageDirective.Directive.Name, fileName);
     }
 
     internal static readonly RazorDiagnosticDescriptor PageDirective_MustExistAtTheTopOfFile =
@@ -93,5 +93,5 @@ internal class RazorExtensionsDiagnosticFactory
             RazorDiagnosticSeverity.Error);
 
     public static RazorDiagnostic CreatePageDirective_MustExistAtTheTopOfFile(SourceSpan source)
-        => RazorDiagnostic.Create(PageDirective_MustExistAtTheTopOfFile, source, PageDirective.Directive.Directive);
+        => RazorDiagnostic.Create(PageDirective_MustExistAtTheTopOfFile, source, PageDirective.Directive.Name);
 }

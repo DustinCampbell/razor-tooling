@@ -165,18 +165,18 @@ public class RazorDirectiveCompletionSourceTest(ITestOutputHelper testOutput) : 
 
         if (isSnippet)
         {
-            Assert.StartsWith(directive.Directive, item.InsertText);
-            Assert.Equal(item.InsertText, DirectiveCompletionItemProvider.SingleLineDirectiveSnippets[directive.Directive].InsertText);
+            Assert.StartsWith(directive.Name, item.InsertText);
+            Assert.Equal(item.InsertText, DirectiveCompletionItemProvider.SingleLineDirectiveSnippets[directive.Name].InsertText);
         }
         else
         {
-            Assert.Equal(item.InsertText, directive.Directive);
+            Assert.Equal(item.InsertText, directive.Name);
         }
 
         Assert.Same(item.Source, source);
         Assert.True(item.Properties.TryGetProperty<DirectiveCompletionDescription>(RazorDirectiveCompletionSource.DescriptionKey, out var actualDescription));
 
-        var description = isSnippet ? "@" + DirectiveCompletionItemProvider.SingleLineDirectiveSnippets[directive.Directive].DisplayText
+        var description = isSnippet ? "@" + DirectiveCompletionItemProvider.SingleLineDirectiveSnippets[directive.Name].DisplayText
                          + Environment.NewLine
                          + WorkspacesSR.DirectiveSnippetDescription
                          : directive.Description;
@@ -187,7 +187,7 @@ public class RazorDirectiveCompletionSourceTest(ITestOutputHelper testOutput) : 
 
     private static void AssertRazorCompletionItem(DirectiveDescriptor directive, CompletionItem item, IAsyncCompletionSource source, bool isSnippet = false)
     {
-        var expectedDisplayText = isSnippet ? directive.Directive + " directive ..." : directive.Directive;
+        var expectedDisplayText = isSnippet ? directive.Name + " directive ..." : directive.Name;
         AssertRazorCompletionItem(expectedDisplayText, directive, item, source, isSnippet: isSnippet);
     }
 

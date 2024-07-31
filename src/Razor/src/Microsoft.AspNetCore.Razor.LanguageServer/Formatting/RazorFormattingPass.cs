@@ -102,7 +102,7 @@ internal sealed class RazorFormattingPass(
         // }
         if (node is CSharpCodeBlockSyntax directiveCode &&
             directiveCode.Children is [RazorDirectiveSyntax directive] &&
-            directive.DirectiveDescriptor?.Directive == SectionDirective.Directive.Directive &&
+            directive.DirectiveDescriptor?.Name == SectionDirective.Directive.Name &&
             directive.Body is RazorDirectiveBodySyntax { CSharpCode: { } code })
         {
             var children = code.Children;
@@ -515,7 +515,7 @@ internal sealed class RazorFormattingPass(
     private static bool IsCodeOrFunctionsBlock(RazorSyntaxNode keyword)
     {
         var keywordContent = keyword.GetContent();
-        return keywordContent == FunctionsDirective.Directive.Directive ||
-            keywordContent == ComponentCodeDirective.Directive.Directive;
+        return keywordContent == FunctionsDirective.Directive.Name ||
+            keywordContent == ComponentCodeDirective.Directive.Name;
     }
 }

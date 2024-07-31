@@ -200,7 +200,7 @@ internal class SyntaxSerializer
             }
 
             var builder = new StringBuilder("Directive:{");
-            builder.Append(node.DirectiveDescriptor.Directive);
+            builder.Append(node.DirectiveDescriptor.Name);
             builder.Append(';');
             builder.Append(node.DirectiveDescriptor.Kind);
             builder.Append(';');

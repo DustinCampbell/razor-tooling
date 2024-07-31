@@ -481,7 +481,7 @@ public abstract class IntegrationTestBase
             }
 
             // See https://github.com/dotnet/razor/issues/10062
-            if (expectedSpan.Contains("<TModel>") || span.FirstAncestorOrSelf<RazorDirectiveSyntax>()?.DirectiveDescriptor?.Directive == "model")
+            if (expectedSpan.Contains("<TModel>") || span.FirstAncestorOrSelf<RazorDirectiveSyntax>()?.DirectiveDescriptor?.Name == "model")
             {
                 // Inject directives in MVC replace the TModel with a user defined model type, so we aren't able to find
                 // the matching text in the generated document

@@ -118,7 +118,7 @@ internal class SyntaxNodeWriter(TextWriter writer, bool validateSpanEditHandlers
         }
         using var _ = StringBuilderPool.GetPooledObject(out var builder);
         builder.Append("Directive:{");
-        builder.Append(node.DirectiveDescriptor.Directive);
+        builder.Append(node.DirectiveDescriptor.Name);
         builder.Append(';');
         builder.Append(node.DirectiveDescriptor.Kind);
         builder.Append(';');

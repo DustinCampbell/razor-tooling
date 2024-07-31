@@ -12,7 +12,7 @@ namespace Microsoft.AspNetCore.Razor.Language;
 internal static class RazorSyntaxTreeExtensions
 {
     public static ImmutableArray<RazorDirectiveSyntax> GetSectionDirectives(this RazorSyntaxTree syntaxTree)
-        => GetDirectives(syntaxTree, static d => d.DirectiveDescriptor?.Directive == SectionDirective.Directive.Directive);
+        => GetDirectives(syntaxTree, static d => d.DirectiveDescriptor?.Name == SectionDirective.Directive.Name);
 
     public static ImmutableArray<RazorDirectiveSyntax> GetCodeBlockDirectives(this RazorSyntaxTree syntaxTree)
         => GetDirectives(syntaxTree, static d => d.DirectiveDescriptor?.Kind == DirectiveKind.CodeBlock);
