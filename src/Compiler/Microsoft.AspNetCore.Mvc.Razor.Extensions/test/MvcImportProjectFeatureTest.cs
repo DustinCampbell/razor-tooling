@@ -1,8 +1,6 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Razor.Language;
 using Xunit;
@@ -31,17 +29,14 @@ public class MvcImportProjectFeatureTest
         // Arrange
         var imports = new List<RazorProjectItem>();
         var projectItem = new TestRazorProjectItem("/Contact/Index.cshtml");
-        var testFileSystem = new TestRazorProjectFileSystem(new[]
-        {
+        var testFileSystem = new TestRazorProjectFileSystem([
             new TestRazorProjectItem("/Index.cshtml"),
             new TestRazorProjectItem("/_ViewImports.cshtml"),
             new TestRazorProjectItem("/Contact/_ViewImports.cshtml"),
-            projectItem,
-        });
-        var mvcImportFeature = new MvcImportProjectFeature()
-        {
-            ProjectEngine = RazorProjectEngine.Create(RazorConfiguration.Default, testFileSystem)
-        };
+            projectItem]);
+
+        var mvcImportFeature = new MvcImportProjectFeature();
+        mvcImportFeature.Initialize(RazorProjectEngine.Create(RazorConfiguration.Default, testFileSystem));
 
         // Act
         mvcImportFeature.AddHierarchicalImports(projectItem, imports);
@@ -58,11 +53,10 @@ public class MvcImportProjectFeatureTest
         // Arrange
         var imports = new List<RazorProjectItem>();
         var projectItem = new TestRazorProjectItem("/Pages/Contact/Index.cshtml");
-        var testFileSystem = new TestRazorProjectFileSystem(new[] { projectItem });
-        var mvcImportFeature = new MvcImportProjectFeature()
-        {
-            ProjectEngine = RazorProjectEngine.Create(RazorConfiguration.Default, testFileSystem)
-        };
+        var testFileSystem = new TestRazorProjectFileSystem([projectItem]);
+
+        var mvcImportFeature = new MvcImportProjectFeature();
+        mvcImportFeature.Initialize(RazorProjectEngine.Create(RazorConfiguration.Default, testFileSystem));
 
         // Act
         mvcImportFeature.AddHierarchicalImports(projectItem, imports);

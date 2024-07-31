@@ -65,7 +65,7 @@ internal class VisualStudioRazorParser : IVisualStudioRazorParser, IDisposable
         _logger = loggerFactory.GetOrCreateLogger<VisualStudioRazorParser>();
         _completionBroker = completionBroker;
         _documentTracker = documentTracker;
-        _codeDocumentRequests = new List<CodeDocumentRequest>();
+        _codeDocumentRequests = [];
 
         _documentTracker.ContextChanged += DocumentTracker_ContextChanged;
 
@@ -91,10 +91,7 @@ internal class VisualStudioRazorParser : IVisualStudioRazorParser, IDisposable
 
     public Task<RazorCodeDocument?> GetLatestCodeDocumentAsync(ITextSnapshot atOrNewerSnapshot, CancellationToken cancellationToken = default)
     {
-        if (atOrNewerSnapshot is null)
-        {
-            throw new ArgumentNullException(nameof(atOrNewerSnapshot));
-        }
+        ArgHelper.ThrowIfNull(atOrNewerSnapshot);
 
         lock (_updateStateLock)
         {
@@ -570,40 +567,28 @@ internal class VisualStudioRazorParser : IVisualStudioRazorParser, IDisposable
         }
     }
 
-    private class VisualStudioParserOptionsFeature : RazorEngineFeatureBase, IConfigureRazorCodeGenerationOptionsFeature
+    private sealed class VisualStudioParserOptionsFeature(ClientSpaceSettings settings) : RazorEngineFeatureBase, IConfigureRazorCodeGenerationOptionsFeature
     {
-        private readonly ClientSpaceSettings _settings;
-
-        public VisualStudioParserOptionsFeature(ClientSpaceSettings settings)
-        {
-            _settings = settings;
-        }
+        private readonly ClientSpaceSettings _settings = settings;
 
         public int Order { get; set; }
 
-        public void Configure(RazorCodeGenerationOptionsBuilder options)
+        public void Configure(RazorCodeGenerationOptionsBuilder builder)
         {
-            options.IndentSize = _settings.IndentSize;
-            options.IndentWithTabs = _settings.IndentWithTabs;
-            options.RemapLinePragmaPathsOnWindows = true;
+            builder.IndentSize = _settings.IndentSize;
+            builder.IndentWithTabs = _settings.IndentWithTabs;
+            builder.RemapLinePragmaPathsOnWindows = true;
         }
     }
 
-    private class VisualStudioTagHelperFeature : ITagHelperFeature
+    private sealed class VisualStudioTagHelperFeature(IReadOnlyList<TagHelperDescriptor>? tagHelpers) : ITagHelperFeature
     {
-        private readonly IReadOnlyList<TagHelperDescriptor>? _tagHelpers;
-
-        public VisualStudioTagHelperFeature(IReadOnlyList<TagHelperDescriptor>? tagHelpers)
-        {
-            _tagHelpers = tagHelpers;
-        }
+        private readonly IReadOnlyList<TagHelperDescriptor>? _tagHelpers = tagHelpers;
 
         public RazorEngine? Engine { get; set; }
 
         public IReadOnlyList<TagHelperDescriptor>? GetDescriptors()
-        {
-            return _tagHelpers;
-        }
+            => _tagHelpers;
     }
 
     // Internal for testing

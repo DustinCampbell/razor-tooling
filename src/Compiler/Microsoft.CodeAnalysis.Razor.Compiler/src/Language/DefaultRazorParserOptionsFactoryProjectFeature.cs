@@ -1,33 +1,31 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
 using System;
-using System.Linq;
+using System.Collections.Immutable;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-internal class DefaultRazorParserOptionsFactoryProjectFeature : RazorProjectEngineFeatureBase, IRazorParserOptionsFactoryProjectFeature
+internal sealed class DefaultRazorParserOptionsFactoryProjectFeature : RazorProjectEngineFeatureBase, IRazorParserOptionsFactoryProjectFeature
 {
-    private IConfigureRazorParserOptionsFeature[] _configureOptions;
+    private ImmutableArray<IConfigureRazorParserOptionsFeature> _configureOptions;
 
     protected override void OnInitialized()
     {
-        _configureOptions = ProjectEngine.EngineFeatures.OfType<IConfigureRazorParserOptionsFeature>().ToArray();
+        _configureOptions = ProjectEngine.EngineFeatures.OfType<IConfigureRazorParserOptionsFeature>().ToImmutableArray();
     }
 
     public RazorParserOptions Create(string fileKind, Action<RazorParserOptionsBuilder> configure)
     {
         var builder = new RazorParserOptionsBuilder(ProjectEngine.Configuration, fileKind);
+
         configure?.Invoke(builder);
 
-        for (var i = 0; i < _configureOptions.Length; i++)
+        foreach (var option in _configureOptions)
         {
-            _configureOptions[i].Configure(builder);
+            option.Configure(builder);
         }
 
-        var options = builder.Build();
-        return options;
+        return builder.Build();
     }
 }

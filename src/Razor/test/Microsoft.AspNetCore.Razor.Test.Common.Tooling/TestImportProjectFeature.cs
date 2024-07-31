@@ -8,14 +8,11 @@ using Microsoft.AspNetCore.Razor.Language;
 
 namespace Microsoft.AspNetCore.Razor.Test.Common;
 
-public class TestImportProjectFeature : RazorProjectEngineFeatureBase, IImportProjectFeature
+public sealed class TestImportProjectFeature : RazorProjectEngineFeatureBase, IImportProjectFeature
 {
     public IReadOnlyList<RazorProjectItem> GetImports(RazorProjectItem projectItem)
     {
-        if (projectItem is null)
-        {
-            throw new ArgumentNullException(nameof(projectItem));
-        }
+        ArgHelper.ThrowIfNull(projectItem);
 
         var imports = new List<RazorProjectItem>();
         AddHierarchicalImports(projectItem, imports);

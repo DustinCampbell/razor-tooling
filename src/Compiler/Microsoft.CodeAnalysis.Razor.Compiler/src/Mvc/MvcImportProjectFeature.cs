@@ -1,32 +1,28 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions;
 
-internal class MvcImportProjectFeature : RazorProjectEngineFeatureBase, IImportProjectFeature
+internal sealed class MvcImportProjectFeature : RazorProjectEngineFeatureBase, IImportProjectFeature
 {
     private const string ImportsFileName = "_ViewImports.cshtml";
 
     public IReadOnlyList<RazorProjectItem> GetImports(RazorProjectItem projectItem)
     {
-        if (projectItem == null)
-        {
-            throw new ArgumentNullException(nameof(projectItem));
-        }
+        ArgHelper.ThrowIfNull(projectItem);
 
         // Don't add MVC imports for a component
         if (FileKinds.IsComponent(projectItem.FileKind))
         {
-            return Array.Empty<RazorProjectItem>();
+            return [];
         }
 
         var imports = new List<RazorProjectItem>();
@@ -52,7 +48,7 @@ internal class MvcImportProjectFeature : RazorProjectEngineFeatureBase, IImportP
         imports.AddRange(importProjectItems);
     }
 
-    private class DefaultDirectivesProjectItem : RazorProjectItem
+    private sealed class DefaultDirectivesProjectItem : RazorProjectItem
     {
         private readonly byte[] _defaultImportBytes;
 
@@ -83,11 +79,11 @@ internal class MvcImportProjectFeature : RazorProjectEngineFeatureBase, IImportP
             contentBytes.CopyTo(_defaultImportBytes, preamble.Length);
         }
 
-        public override string BasePath => null;
+        public override string BasePath => null!;
 
-        public override string FilePath => null;
+        public override string FilePath => null!;
 
-        public override string PhysicalPath => null;
+        public override string PhysicalPath => null!;
 
         public override bool Exists => true;
 

@@ -1,8 +1,6 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,7 +9,7 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
-internal class ComponentImportProjectFeature : IImportProjectFeature
+internal sealed class ComponentImportProjectFeature : RazorProjectEngineFeatureBase, IImportProjectFeature
 {
     // Using explicit newlines here to avoid fooling our baseline tests
     private const string DefaultUsingImportContent =
@@ -22,25 +20,20 @@ internal class ComponentImportProjectFeature : IImportProjectFeature
         "@using global::System.Threading.Tasks\r\n" +
         "@using global::" + ComponentsApi.RenderFragment.Namespace + "\r\n"; // Microsoft.AspNetCore.Components
 
-    public RazorProjectEngine ProjectEngine { get; set; }
-
     public IReadOnlyList<RazorProjectItem> GetImports(RazorProjectItem projectItem)
     {
-        if (projectItem == null)
-        {
-            throw new ArgumentNullException(nameof(projectItem));
-        }
+        ArgHelper.ThrowIfNull(projectItem);
 
         // Don't add Component imports for a non-component.
         if (!FileKinds.IsComponent(projectItem.FileKind))
         {
-            return Array.Empty<RazorProjectItem>();
+            return [];
         }
 
         var imports = new List<RazorProjectItem>()
-            {
-                 new VirtualProjectItem(DefaultUsingImportContent),
-            };
+        {
+            new VirtualProjectItem(DefaultUsingImportContent),
+        };
 
         // We add hierarchical imports second so any default directive imports can be overridden.
         imports.AddRange(GetHierarchicalImports(ProjectEngine.FileSystem, projectItem));
@@ -69,11 +62,11 @@ internal class ComponentImportProjectFeature : IImportProjectFeature
             contentBytes.CopyTo(_bytes, preamble.Length);
         }
 
-        public override string BasePath => null;
+        public override string BasePath => null!;
 
-        public override string FilePath => null;
+        public override string FilePath => null!;
 
-        public override string PhysicalPath => null;
+        public override string PhysicalPath => null!;
 
         public override bool Exists => true;
 

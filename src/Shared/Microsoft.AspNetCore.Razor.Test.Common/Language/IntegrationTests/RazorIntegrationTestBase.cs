@@ -506,20 +506,8 @@ public class RazorIntegrationTestBase
         }
     }
 
-    private class TestImportProjectFeature : IImportProjectFeature
+    private sealed class TestImportProjectFeature(List<RazorProjectItem> imports) : RazorProjectEngineFeatureBase, IImportProjectFeature
     {
-        private readonly List<RazorProjectItem> _imports;
-
-        public TestImportProjectFeature(List<RazorProjectItem> imports)
-        {
-            _imports = imports;
-        }
-
-        public RazorProjectEngine ProjectEngine { get; set; }
-
-        public IReadOnlyList<RazorProjectItem> GetImports(RazorProjectItem projectItem)
-        {
-            return _imports;
-        }
+        public IReadOnlyList<RazorProjectItem> GetImports(RazorProjectItem projectItem) => imports;
     }
 }

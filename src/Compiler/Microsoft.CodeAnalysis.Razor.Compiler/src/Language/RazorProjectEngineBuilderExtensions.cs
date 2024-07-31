@@ -1,8 +1,6 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -53,7 +51,6 @@ public static class RazorProjectEngineBuilderExtensions
         }
     }
 
-
     /// <summary>
     /// Registers a class configuration delegate that gets invoked during code generation.
     /// </summary>
@@ -65,15 +62,8 @@ public static class RazorProjectEngineBuilderExtensions
         this RazorProjectEngineBuilder builder,
         Action<RazorCodeDocument, ClassDeclarationIntermediateNode> configureClass)
     {
-        if (builder == null)
-        {
-            throw new ArgumentNullException(nameof(builder));
-        }
-
-        if (configureClass == null)
-        {
-            throw new ArgumentNullException(nameof(configureClass));
-        }
+        ArgHelper.ThrowIfNull(builder);
+        ArgHelper.ThrowIfNull(configureClass);
 
         var configurationFeature = GetDefaultDocumentClassifierPassFeature(builder);
         configurationFeature.ConfigureClass.Add(configureClass);
@@ -88,10 +78,7 @@ public static class RazorProjectEngineBuilderExtensions
     /// <returns>The <see cref="RazorProjectEngineBuilder"/>.</returns>
     public static RazorProjectEngineBuilder SetBaseType(this RazorProjectEngineBuilder builder, string baseType)
     {
-        if (builder == null)
-        {
-            throw new ArgumentNullException(nameof(builder));
-        }
+        ArgHelper.ThrowIfNull(builder);
 
         var configurationFeature = GetDefaultDocumentClassifierPassFeature(builder);
         configurationFeature.ConfigureClass.Add((document, @class) => @class.BaseType = baseType);
@@ -106,10 +93,7 @@ public static class RazorProjectEngineBuilderExtensions
     /// <returns>The <see cref="RazorProjectEngineBuilder"/>.</returns>
     public static RazorProjectEngineBuilder SetNamespace(this RazorProjectEngineBuilder builder, string namespaceName)
     {
-        if (builder == null)
-        {
-            throw new ArgumentNullException(nameof(builder));
-        }
+        ArgHelper.ThrowIfNull(builder);
 
         var configurationFeature = GetDefaultDocumentClassifierPassFeature(builder);
         configurationFeature.ConfigureNamespace.Add((document, @namespace) => @namespace.Content = namespaceName);
@@ -122,12 +106,9 @@ public static class RazorProjectEngineBuilderExtensions
     /// <param name="builder">The <see cref="RazorProjectEngineBuilder"/>.</param>
     /// <param name="rootNamespace">The root namespace.</param>
     /// <returns>The <see cref="RazorProjectEngineBuilder"/>.</returns>
-    public static RazorProjectEngineBuilder SetRootNamespace(this RazorProjectEngineBuilder builder, string rootNamespace)
+    public static RazorProjectEngineBuilder SetRootNamespace(this RazorProjectEngineBuilder builder, string? rootNamespace)
     {
-        if (builder == null)
-        {
-            throw new ArgumentNullException(nameof(builder));
-        }
+        ArgHelper.ThrowIfNull(builder);
 
         builder.Features.Add(new ConfigureRootNamespaceFeature(rootNamespace));
         return builder;
@@ -140,10 +121,7 @@ public static class RazorProjectEngineBuilderExtensions
     /// <returns>The <see cref="RazorProjectEngineBuilder"/>.</returns>
     public static RazorProjectEngineBuilder SetSupportLocalizedComponentNames(this RazorProjectEngineBuilder builder)
     {
-        if (builder == null)
-        {
-            throw new ArgumentNullException(nameof(builder));
-        }
+        ArgHelper.ThrowIfNull(builder);
 
         builder.Features.Add(new SetSupportLocalizedComponentNamesFeature());
         return builder;
@@ -151,15 +129,8 @@ public static class RazorProjectEngineBuilderExtensions
 
     public static void SetImportFeature(this RazorProjectEngineBuilder builder, IImportProjectFeature feature)
     {
-        if (builder == null)
-        {
-            throw new ArgumentNullException(nameof(builder));
-        }
-
-        if (feature == null)
-        {
-            throw new ArgumentNullException(nameof(builder));
-        }
+        ArgHelper.ThrowIfNull(builder);
+        ArgHelper.ThrowIfNull(feature);
 
         // Remove any existing import features in favor of the new one we're given.
         var existingFeatures = builder.Features.OfType<IImportProjectFeature>().ToArray();
@@ -179,15 +150,8 @@ public static class RazorProjectEngineBuilderExtensions
     /// <returns>The <see cref="RazorProjectEngineBuilder"/>.</returns>
     public static RazorProjectEngineBuilder AddTargetExtension(this RazorProjectEngineBuilder builder, ICodeTargetExtension extension)
     {
-        if (builder == null)
-        {
-            throw new ArgumentNullException(nameof(builder));
-        }
-
-        if (extension == null)
-        {
-            throw new ArgumentNullException(nameof(extension));
-        }
+        ArgHelper.ThrowIfNull(builder);
+        ArgHelper.ThrowIfNull(extension);
 
         var targetExtensionFeature = GetTargetExtensionFeature(builder);
         targetExtensionFeature.TargetExtensions.Add(extension);
@@ -203,15 +167,8 @@ public static class RazorProjectEngineBuilderExtensions
     /// <returns>The <see cref="RazorProjectEngineBuilder"/>.</returns>
     public static RazorProjectEngineBuilder AddDirective(this RazorProjectEngineBuilder builder, DirectiveDescriptor directive)
     {
-        if (builder == null)
-        {
-            throw new ArgumentNullException(nameof(builder));
-        }
-
-        if (directive == null)
-        {
-            throw new ArgumentNullException(nameof(directive));
-        }
+        ArgHelper.ThrowIfNull(builder);
+        ArgHelper.ThrowIfNull(directive);
 
         var directiveFeature = GetDirectiveFeature(builder);
         directiveFeature.Directives.Add(directive);
@@ -228,20 +185,9 @@ public static class RazorProjectEngineBuilderExtensions
     /// <returns>The <see cref="RazorProjectEngineBuilder"/>.</returns>
     public static RazorProjectEngineBuilder AddDirective(this RazorProjectEngineBuilder builder, DirectiveDescriptor directive, params string[] fileKinds)
     {
-        if (builder == null)
-        {
-            throw new ArgumentNullException(nameof(builder));
-        }
-
-        if (directive == null)
-        {
-            throw new ArgumentNullException(nameof(directive));
-        }
-
-        if (fileKinds == null)
-        {
-            throw new ArgumentNullException(nameof(fileKinds));
-        }
+        ArgHelper.ThrowIfNull(builder);
+        ArgHelper.ThrowIfNull(directive);
+        ArgHelper.ThrowIfNull(fileKinds);
 
         var directiveFeature = GetDirectiveFeature(builder);
 
@@ -249,7 +195,7 @@ public static class RazorProjectEngineBuilderExtensions
         {
             if (!directiveFeature.DirectivesByFileKind.TryGetValue(fileKind, out var directives))
             {
-                directives = new List<DirectiveDescriptor>();
+                directives = [];
                 directiveFeature.DirectivesByFileKind.Add(fileKind, directives);
             }
 
@@ -268,10 +214,7 @@ public static class RazorProjectEngineBuilderExtensions
     /// <returns>The <see cref="RazorProjectEngineBuilder"/>.</returns>
     public static RazorProjectEngineBuilder AddDefaultImports(this RazorProjectEngineBuilder builder, params string[] imports)
     {
-        if (builder == null)
-        {
-            throw new ArgumentNullException(nameof(builder));
-        }
+        ArgHelper.ThrowIfNull(builder);
 
         builder.Features.Add(new AdditionalImportsProjectFeature(imports));
 
@@ -314,21 +257,16 @@ public static class RazorProjectEngineBuilderExtensions
         return configurationFeature;
     }
 
-    private class AdditionalImportsProjectFeature : RazorProjectEngineFeatureBase, IImportProjectFeature
+    private sealed class AdditionalImportsProjectFeature(params string[] imports) : RazorProjectEngineFeatureBase, IImportProjectFeature
     {
-        private readonly IReadOnlyList<RazorProjectItem> _imports;
-
-        public AdditionalImportsProjectFeature(params string[] imports)
-        {
-            _imports = imports.Select(import => new InMemoryProjectItem(import)).ToArray();
-        }
+        private readonly IReadOnlyList<RazorProjectItem> _imports = imports.Select(import => new InMemoryProjectItem(import)).ToArray();
 
         public IReadOnlyList<RazorProjectItem> GetImports(RazorProjectItem projectItem)
         {
             return _imports;
         }
 
-        private class InMemoryProjectItem : RazorProjectItem
+        private sealed class InMemoryProjectItem : RazorProjectItem
         {
             private readonly byte[] _importBytes;
 
@@ -347,11 +285,11 @@ public static class RazorProjectEngineBuilderExtensions
                 contentBytes.CopyTo(_importBytes, preamble.Length);
             }
 
-            public override string BasePath => null;
+            public override string BasePath => null!;
 
-            public override string FilePath => null;
+            public override string FilePath => null!;
 
-            public override string PhysicalPath => null;
+            public override string PhysicalPath => null!;
 
             public override bool Exists => true;
 
@@ -359,42 +297,31 @@ public static class RazorProjectEngineBuilderExtensions
         }
     }
 
-    private class SetSupportLocalizedComponentNamesFeature : RazorEngineFeatureBase, IConfigureRazorCodeGenerationOptionsFeature
+    private sealed class SetSupportLocalizedComponentNamesFeature : RazorEngineFeatureBase, IConfigureRazorCodeGenerationOptionsFeature
     {
         public int Order { get; set; }
 
-        public void Configure(RazorCodeGenerationOptionsBuilder options)
+        public void Configure(RazorCodeGenerationOptionsBuilder builder)
         {
-            if (options == null)
-            {
-                throw new ArgumentNullException(nameof(options));
-            }
+            ArgHelper.ThrowIfNull(builder);
 
-            options.SupportLocalizedComponentNames = true;
+            builder.SupportLocalizedComponentNames = true;
         }
     }
 
-    private class ConfigureRootNamespaceFeature : IConfigureRazorCodeGenerationOptionsFeature
+    private sealed class ConfigureRootNamespaceFeature(string? rootNamespace) : IConfigureRazorCodeGenerationOptionsFeature
     {
-        private readonly string _rootNamespace;
-
-        public ConfigureRootNamespaceFeature(string rootNamespace)
-        {
-            _rootNamespace = rootNamespace;
-        }
+        private readonly string? _rootNamespace = rootNamespace;
 
         public int Order { get; set; }
 
-        public RazorEngine Engine { get; set; }
+        public RazorEngine? Engine { get; set; }
 
-        public void Configure(RazorCodeGenerationOptionsBuilder options)
+        public void Configure(RazorCodeGenerationOptionsBuilder builder)
         {
-            if (options == null)
-            {
-                throw new ArgumentNullException(nameof(options));
-            }
+            ArgHelper.ThrowIfNull(builder);
 
-            options.RootNamespace = _rootNamespace;
+            builder.RootNamespace = _rootNamespace;
         }
     }
 }

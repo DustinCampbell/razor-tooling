@@ -799,30 +799,22 @@ public abstract class IntegrationTestBase
     }
 
     // 'Default' imports won't have normalized line-endings, which is unfriendly for testing.
-    private class NormalizedDefaultImportFeature : RazorProjectEngineFeatureBase, IImportProjectFeature
+    private sealed class NormalizedDefaultImportFeature(IImportProjectFeature inner, string lineEnding) : RazorProjectEngineFeatureBase, IImportProjectFeature
     {
-        private readonly IImportProjectFeature _inner;
-        private readonly string _lineEnding;
-
-        public NormalizedDefaultImportFeature(IImportProjectFeature inner, string lineEnding)
-        {
-            _inner = inner;
-            _lineEnding = lineEnding;
-        }
+        private readonly IImportProjectFeature _inner = inner;
+        private readonly string _lineEnding = lineEnding;
 
         protected override void OnInitialized()
         {
-            if (_inner != null)
-            {
-                _inner.ProjectEngine = ProjectEngine;
-            }
+            // Note: The _inner IImportProjectFeature will not have been initialized yet.
+            _inner?.Initialize(ProjectEngine);
         }
 
         public IReadOnlyList<RazorProjectItem> GetImports(RazorProjectItem projectItem)
         {
             if (_inner == null)
             {
-                return Array.Empty<RazorProjectItem>();
+                return [];
             }
 
             var normalizedImports = new List<RazorProjectItem>();

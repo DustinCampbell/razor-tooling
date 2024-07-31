@@ -25,16 +25,24 @@ public class RazorProjectEngine
         RazorConfiguration configuration,
         RazorEngine engine,
         RazorProjectFileSystem fileSystem,
-        ImmutableArray<IRazorProjectEngineFeature> projectFeatures)
+        ImmutableArray<IRazorProjectEngineFeature> projectFeatures,
+        bool initializeProjectFeatures)
     {
-        Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
-        Engine = engine ?? throw new ArgumentNullException(nameof(engine));
-        FileSystem = fileSystem ?? throw new ArgumentNullException(nameof(fileSystem));
+        ArgHelper.ThrowIfNull(configuration);
+        ArgHelper.ThrowIfNull(engine);
+        ArgHelper.ThrowIfNull(fileSystem);
+
+        Configuration = configuration;
+        Engine = engine;
+        FileSystem = fileSystem;
         ProjectFeatures = projectFeatures;
 
-        foreach (var projectFeature in projectFeatures)
+        if (initializeProjectFeatures)
         {
-            projectFeature.ProjectEngine = this;
+            foreach (var projectFeature in projectFeatures)
+            {
+                projectFeature.Initialize(this);
+            }
         }
     }
 

@@ -1,8 +1,6 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
 using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language;
@@ -16,13 +14,13 @@ public class RazorProjectEngineFeatureBaseTest
         var testFeature = new TestFeature();
 
         // Act
-        testFeature.ProjectEngine = RazorProjectEngine.CreateEmpty();
+        testFeature.Initialize(RazorProjectEngine.CreateEmpty());
 
         // Assert
         Assert.Equal(1, testFeature.InitializationCount);
     }
 
-    private class TestFeature : RazorProjectEngineFeatureBase
+    private sealed class TestFeature : RazorProjectEngineFeatureBase
     {
         public int InitializationCount { get; private set; }
 
