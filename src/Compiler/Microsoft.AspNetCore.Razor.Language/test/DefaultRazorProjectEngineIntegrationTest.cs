@@ -165,7 +165,7 @@ public class DefaultRazorProjectEngineIntegrationTest
         var projectEngine = RazorProjectEngine.Create(RazorConfiguration.Default, TestRazorProjectFileSystem.Empty);
 
         // Act
-        var codeDocument = projectEngine.Process(RazorSourceDocument.ReadFrom(projectItem), "test", importSources: default, tagHelpers: null);
+        var codeDocument = projectEngine.Process(RazorSourceDocument.ReadFrom(projectItem), "test", importSourceDocuments: default, tagHelpers: null);
 
         // Assert
         var actual = codeDocument.GetFileKind();
@@ -181,7 +181,7 @@ public class DefaultRazorProjectEngineIntegrationTest
         var projectEngine = RazorProjectEngine.Create(RazorConfiguration.Default, TestRazorProjectFileSystem.Empty);
 
         // Act
-        var codeDocument = projectEngine.Process(RazorSourceDocument.ReadFrom(projectItem), "test", importSources: default, tagHelpers: null);
+        var codeDocument = projectEngine.Process(RazorSourceDocument.ReadFrom(projectItem), "test", importSourceDocuments: default, tagHelpers: null);
 
         // Assert
         var tagHelpers = codeDocument.GetTagHelpers();
@@ -245,7 +245,7 @@ public class DefaultRazorProjectEngineIntegrationTest
         var projectEngine = RazorProjectEngine.Create(RazorConfiguration.Default, TestRazorProjectFileSystem.Empty);
 
         // Act
-        var codeDocument = projectEngine.Process(RazorSourceDocument.ReadFrom(projectItem), "test", importSources: default, tagHelpers: null);
+        var codeDocument = projectEngine.Process(RazorSourceDocument.ReadFrom(projectItem), "test", importSourceDocuments: default, tagHelpers: null);
 
         // Assert
         Assert.Empty(codeDocument.Imports);
@@ -348,7 +348,7 @@ public class DefaultRazorProjectEngineIntegrationTest
         var projectEngine = RazorProjectEngine.Create(RazorConfiguration.Default, TestRazorProjectFileSystem.Empty);
 
         // Act
-        var codeDocument = projectEngine.ProcessDesignTime(RazorSourceDocument.ReadFrom(projectItem), "test", importSources: default, tagHelpers: null);
+        var codeDocument = projectEngine.ProcessDesignTime(RazorSourceDocument.ReadFrom(projectItem), "test", importSourceDocuments: default, tagHelpers: null);
 
         // Assert
         Assert.Empty(codeDocument.Imports);

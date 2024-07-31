@@ -1,8 +1,6 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable enable
-
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -36,6 +34,7 @@ internal sealed class SourceGeneratorProjectEngine : RazorProjectEngine
                 break;
             }
         }
+
         Debug.Assert(_discoveryPhaseIndex >= 0);
         Debug.Assert(_rewritePhaseIndex >= 0);
         Debug.Assert(_discoveryPhaseIndex < _rewritePhaseIndex);
@@ -44,9 +43,8 @@ internal sealed class SourceGeneratorProjectEngine : RazorProjectEngine
     public SourceGeneratorRazorCodeDocument ProcessInitialParse(RazorProjectItem projectItem, bool designTime)
     {
         var codeDocument = designTime 
-                            ? CreateCodeDocumentDesignTimeCore(projectItem)
-                            : CreateCodeDocumentCore(projectItem);
-
+            ? CreateCodeDocumentDesignTimeCore(projectItem)
+            : CreateCodeDocumentCore(projectItem);
 
         ProcessPartial(codeDocument, 0, _discoveryPhaseIndex);
 

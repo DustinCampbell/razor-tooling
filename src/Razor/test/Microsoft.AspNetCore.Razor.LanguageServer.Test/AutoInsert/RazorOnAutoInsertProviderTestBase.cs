@@ -73,7 +73,7 @@ public abstract class RazorOnAutoInsertProviderTestBase : LanguageServerTestBase
         tagHelpers ??= Array.Empty<TagHelperDescriptor>();
         var sourceDocument = RazorSourceDocument.Create(text, RazorSourceDocumentProperties.Create(path, path));
         var projectEngine = RazorProjectEngine.Create(builder => { });
-        var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, fileKind, importSources: default, tagHelpers);
+        var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, fileKind, importSourceDocuments: default, tagHelpers);
         return codeDocument;
     }
 }

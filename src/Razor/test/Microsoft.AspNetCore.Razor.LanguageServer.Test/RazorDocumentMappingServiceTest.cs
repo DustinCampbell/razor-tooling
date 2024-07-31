@@ -1070,7 +1070,7 @@ public class RazorDocumentMappingServiceTest : ToolingTestBase
         tagHelpers ??= Array.Empty<TagHelperDescriptor>();
         var sourceDocument = TestRazorSourceDocument.Create(text);
         var projectEngine = RazorProjectEngine.Create(builder => { });
-        var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, "mvc", importSources: default, tagHelpers);
+        var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, "mvc", importSourceDocuments: default, tagHelpers);
         return codeDocument;
     }
 

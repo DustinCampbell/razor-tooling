@@ -244,7 +244,7 @@ public class TagHelperFactsServiceTest(ITestOutputHelper testOutput) : TagHelper
         tagHelpers = tagHelpers.NullToEmpty();
         var sourceDocument = TestRazorSourceDocument.Create(text);
         var projectEngine = RazorProjectEngine.Create(builder => { });
-        var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, FileKinds.Component, importSources: default, tagHelpers);
+        var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, FileKinds.Component, importSourceDocuments: default, tagHelpers);
         return codeDocument;
     }
 }
