@@ -1,38 +1,32 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
-using System.Linq;
+using System.Collections.Immutable;
 
 namespace Microsoft.AspNetCore.Razor.Language;
+
 #pragma warning disable CS0618 // Type or member is obsolete
-internal class DefaultRazorCodeGenerationOptionsFeature : RazorEngineFeatureBase, IRazorCodeGenerationOptionsFeature
+internal class DefaultRazorCodeGenerationOptionsFeature(bool designTime) : RazorEngineFeatureBase, IRazorCodeGenerationOptionsFeature
 #pragma warning restore CS0618 // Type or member is obsolete
 {
-    private readonly bool _designTime;
-    private IConfigureRazorCodeGenerationOptionsFeature[] _configureOptions;
-
-    public DefaultRazorCodeGenerationOptionsFeature(bool designTime)
-    {
-        _designTime = designTime;
-    }
+    private readonly bool _designTime = designTime;
+    private ImmutableArray<IConfigureRazorCodeGenerationOptionsFeature> _configureOptions;
 
     protected override void OnInitialized()
     {
-        _configureOptions = Engine.Features.OfType<IConfigureRazorCodeGenerationOptionsFeature>().ToArray();
+        _configureOptions = Engine.Features.OfType<IConfigureRazorCodeGenerationOptionsFeature>().ToImmutableArray();
     }
 
     public RazorCodeGenerationOptions GetOptions()
-    {
-        return _designTime ? RazorCodeGenerationOptions.CreateDesignTime(ConfigureOptions) : RazorCodeGenerationOptions.Create(ConfigureOptions);
-    }
+        => _designTime
+            ? RazorCodeGenerationOptions.CreateDesignTime(ConfigureOptions)
+            : RazorCodeGenerationOptions.Create(ConfigureOptions);
 
     private void ConfigureOptions(RazorCodeGenerationOptionsBuilder builder)
     {
-        for (var i = 0; i < _configureOptions.Length; i++)
+        foreach (var option in _configureOptions)
         {
-            _configureOptions[i].Configure(builder);
+            option.Configure(builder);
         }
     }
 }
