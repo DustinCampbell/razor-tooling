@@ -79,8 +79,6 @@ public class RazorProjectEngineTest
             feature => Assert.IsType<DefaultDocumentClassifierPassFeature>(feature),
             feature => Assert.IsType<DefaultImportProjectFeature>(feature),
             feature => Assert.IsType<DefaultMetadataIdentifierFeature>(feature),
-            feature => Assert.IsType<DefaultRazorCodeGenerationOptionsFactoryProjectFeature>(feature),
-            feature => Assert.IsType<DefaultRazorCodeGenerationOptionsFeature>(feature),
             feature => Assert.IsType<DefaultRazorDirectiveFeature>(feature),
             feature => Assert.IsType<DefaultRazorTargetExtensionFeature>(feature),
             feature => Assert.IsType<DefaultTagHelperOptimizationPass>(feature),
@@ -93,6 +91,7 @@ public class RazorProjectEngineTest
             feature => Assert.IsType<InheritsDirectivePass>(feature),
             feature => Assert.IsType<MetadataAttributePass>(feature),
             feature => Assert.IsType<PreallocatedTagHelperAttributeOptimizationPass>(feature),
+            feature => Assert.IsType<RazorCodeGenerationOptionsFactory>(feature),
             feature => Assert.IsType<RazorParserOptionsFactory>(feature),
             feature => Assert.IsType<ViewCssScopePass>(feature));
     }

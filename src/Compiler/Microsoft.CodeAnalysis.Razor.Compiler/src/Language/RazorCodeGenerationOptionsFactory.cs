@@ -6,7 +6,7 @@ using System.Collections.Immutable;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-internal sealed class DefaultRazorCodeGenerationOptionsFactoryProjectFeature : RazorEngineFeatureBase, IRazorCodeGenerationOptionsFactoryProjectFeature
+internal sealed class RazorCodeGenerationOptionsFactory : RazorEngineFeatureBase, IRazorCodeGenerationOptionsFactory
 {
     private ImmutableArray<IConfigureRazorCodeGenerationOptionsFeature> _configureOptions;
 
@@ -15,7 +15,7 @@ internal sealed class DefaultRazorCodeGenerationOptionsFactoryProjectFeature : R
         _configureOptions = ProjectEngine.Features.OfType<IConfigureRazorCodeGenerationOptionsFeature>().ToImmutableArray();
     }
 
-    public RazorCodeGenerationOptions Create(string fileKind, Action<RazorCodeGenerationOptionsBuilder> configure)
+    public RazorCodeGenerationOptions Create(string? fileKind = null, Action<RazorCodeGenerationOptionsBuilder>? configure = null)
     {
         var builder = new DefaultRazorCodeGenerationOptionsBuilder(ProjectEngine.Configuration, fileKind);
 

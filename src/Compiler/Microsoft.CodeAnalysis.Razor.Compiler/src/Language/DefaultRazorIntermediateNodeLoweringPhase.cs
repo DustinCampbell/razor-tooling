@@ -18,14 +18,13 @@ using Microsoft.AspNetCore.Razor.PooledObjects;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-#pragma warning disable CS0618 // Type or member is obsolete
 internal sealed class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase, IRazorIntermediateNodeLoweringPhase
 {
-    private IRazorCodeGenerationOptionsFeature _optionsFeature;
+    private IRazorCodeGenerationOptionsFactory _optionsFeature;
 
     protected override void OnInitialized()
     {
-        _optionsFeature = GetRequiredFeature<IRazorCodeGenerationOptionsFeature>();
+        _optionsFeature = GetRequiredFeature<IRazorCodeGenerationOptionsFactory>();
     }
 
     protected override void ExecuteCore(RazorCodeDocument codeDocument)
@@ -39,7 +38,7 @@ internal sealed class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePha
         var document = new DocumentIntermediateNode();
         var builder = IntermediateNodeBuilder.Create(document);
 
-        document.Options = codeDocument.GetCodeGenerationOptions() ?? _optionsFeature.GetOptions();
+        document.Options = codeDocument.GetCodeGenerationOptions() ?? _optionsFeature.Create();
 
         // The import documents should be inserted logically before the main document.
         var imports = codeDocument.GetImportSyntaxTrees();

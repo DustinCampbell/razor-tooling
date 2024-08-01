@@ -202,7 +202,7 @@ public class RazorProjectEngine
             ConfigureParserOptions(builder);
             configureParser?.Invoke(builder);
         });
-        var codeGenerationOptions = GetRequiredFeature<IRazorCodeGenerationOptionsFactoryProjectFeature>().Create(fileKind, builder =>
+        var codeGenerationOptions = GetRequiredFeature<IRazorCodeGenerationOptionsFactory>().Create(fileKind, builder =>
         {
             ConfigureCodeGenerationOptions(builder);
             configureCodeGeneration?.Invoke(builder);
@@ -278,7 +278,7 @@ public class RazorProjectEngine
             ConfigureDesignTimeParserOptions(builder);
             configureParser?.Invoke(builder);
         });
-        var codeGenerationOptions = GetRequiredFeature<IRazorCodeGenerationOptionsFactoryProjectFeature>().Create(fileKind, builder =>
+        var codeGenerationOptions = GetRequiredFeature<IRazorCodeGenerationOptionsFactory>().Create(fileKind, builder =>
         {
             ConfigureDesignTimeCodeGenerationOptions(builder);
             configureCodeGeneration?.Invoke(builder);
@@ -423,12 +423,7 @@ public class RazorProjectEngine
 
         // Options features
         features.Add(new RazorParserOptionsFactory());
-        features.Add(new DefaultRazorCodeGenerationOptionsFactoryProjectFeature());
-
-        // Legacy options features
-        //
-        // These features are obsolete as of 2.1. Our code will resolve this but not invoke them.
-        features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
+        features.Add(new RazorCodeGenerationOptionsFactory());
 
         // Syntax Tree passes
         features.Add(new DefaultDirectiveSyntaxTreePass());

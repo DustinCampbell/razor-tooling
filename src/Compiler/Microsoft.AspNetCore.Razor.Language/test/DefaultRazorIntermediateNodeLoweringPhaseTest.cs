@@ -27,7 +27,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
         var engine = RazorProjectEngine.CreateEmpty(b =>
         {
             b.Phases.Add(phase);
-            b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
+            b.Features.Add(new RazorCodeGenerationOptionsFactory());
             b.AddDirective(directive);
         });
         var options = RazorParserOptions.Create(builder => builder.Directives.Add(directive));
@@ -62,7 +62,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
         var engine = RazorProjectEngine.CreateEmpty(b =>
         {
             b.Phases.Add(phase);
-            b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
+            b.Features.Add(new RazorCodeGenerationOptionsFactory());
             b.AddDirective(directive);
         });
         var options = RazorParserOptions.Create(builder => builder.Directives.Add(directive));
@@ -97,7 +97,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
         var engine = RazorProjectEngine.CreateEmpty(b =>
         {
             b.Phases.Add(phase);
-            b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
+            b.Features.Add(new RazorCodeGenerationOptionsFactory());
             b.AddDirective(directive);
         });
         var options = RazorParserOptions.Create(builder => builder.Directives.Add(directive));
@@ -128,7 +128,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
         var engine = RazorProjectEngine.CreateEmpty(b =>
         {
             b.Phases.Add(phase);
-            b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
+            b.Features.Add(new RazorCodeGenerationOptionsFactory());
             b.AddDirective(codeBlockDirective);
             b.AddDirective(razorBlockDirective);
         });
@@ -163,7 +163,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
         var engine = RazorProjectEngine.CreateEmpty(b =>
         {
             b.Phases.Add(phase);
-            b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
+            b.Features.Add(new RazorCodeGenerationOptionsFactory());
             b.AddDirective(directive);
         });
         var options = RazorParserOptions.Create(builder => builder.Directives.Add(directive));
@@ -193,7 +193,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
         var engine = RazorProjectEngine.CreateEmpty(b =>
         {
             b.Phases.Add(phase);
-            b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
+            b.Features.Add(new RazorCodeGenerationOptionsFactory());
             b.AddDirective(directive);
         });
         var options = RazorParserOptions.Create(builder => builder.Directives.Add(directive));
@@ -223,7 +223,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
         var engine = RazorProjectEngine.CreateEmpty(b =>
         {
             b.Phases.Add(phase);
-            b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
+            b.Features.Add(new RazorCodeGenerationOptionsFactory());
         });
 
         var codeDocument = TestRazorCodeDocument.CreateEmpty();
@@ -245,7 +245,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
         var engine = RazorProjectEngine.CreateEmpty(b =>
         {
             b.Phases.Add(phase);
-            b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
+            b.Features.Add(new RazorCodeGenerationOptionsFactory());
         });
         var codeDocument = TestRazorCodeDocument.Create("<p class=@(");
         codeDocument.SetSyntaxTree(RazorSyntaxTree.Parse(codeDocument.Source));
@@ -268,7 +268,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
         var engine = RazorProjectEngine.CreateEmpty(b =>
         {
             b.Phases.Add(phase);
-            b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
+            b.Features.Add(new RazorCodeGenerationOptionsFactory());
         });
 
         var codeDocument = TestRazorCodeDocument.CreateEmpty();
