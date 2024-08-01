@@ -5,19 +5,18 @@ using Microsoft.AspNetCore.Razor.PooledObjects;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-#pragma warning disable CS0618 // Type or member is obsolete
 internal sealed class DefaultRazorParsingPhase : RazorEnginePhaseBase, IRazorParsingPhase
 {
-    private IRazorParserOptionsFeature? _optionsFeature;
+    private IRazorParserOptionsFactory? _optionsFactory;
 
     protected override void OnInitialized()
     {
-        _optionsFeature = GetRequiredFeature<IRazorParserOptionsFeature>();
+        _optionsFactory = GetRequiredFeature<IRazorParserOptionsFactory>();
     }
 
     protected override void ExecuteCore(RazorCodeDocument codeDocument)
     {
-        var options = codeDocument.GetParserOptions() ?? _optionsFeature.AssumeNotNull().GetOptions();
+        var options = codeDocument.GetParserOptions() ?? _optionsFactory.AssumeNotNull().Create();
         var syntaxTree = RazorSyntaxTree.Parse(codeDocument.Source, options);
         codeDocument.SetSyntaxTree(syntaxTree);
 

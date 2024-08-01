@@ -82,8 +82,6 @@ public class RazorProjectEngineTest
             feature => Assert.IsType<DefaultRazorCodeGenerationOptionsFactoryProjectFeature>(feature),
             feature => Assert.IsType<DefaultRazorCodeGenerationOptionsFeature>(feature),
             feature => Assert.IsType<DefaultRazorDirectiveFeature>(feature),
-            feature => Assert.IsType<DefaultRazorParserOptionsFactoryProjectFeature>(feature),
-            feature => Assert.IsType<DefaultRazorParserOptionsFeature>(feature),
             feature => Assert.IsType<DefaultRazorTargetExtensionFeature>(feature),
             feature => Assert.IsType<DefaultTagHelperOptimizationPass>(feature),
             feature => Assert.IsType<DesignTimeDirectivePass>(feature),
@@ -95,6 +93,7 @@ public class RazorProjectEngineTest
             feature => Assert.IsType<InheritsDirectivePass>(feature),
             feature => Assert.IsType<MetadataAttributePass>(feature),
             feature => Assert.IsType<PreallocatedTagHelperAttributeOptimizationPass>(feature),
+            feature => Assert.IsType<RazorParserOptionsFactory>(feature),
             feature => Assert.IsType<ViewCssScopePass>(feature));
     }
 

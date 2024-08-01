@@ -197,7 +197,7 @@ public class RazorProjectEngine
             throw new ArgumentNullException(nameof(sourceDocument));
         }
 
-        var parserOptions = GetRequiredFeature<IRazorParserOptionsFactoryProjectFeature>().Create(fileKind, builder =>
+        var parserOptions = GetRequiredFeature<IRazorParserOptionsFactory>().Create(fileKind, builder =>
         {
             ConfigureParserOptions(builder);
             configureParser?.Invoke(builder);
@@ -273,7 +273,7 @@ public class RazorProjectEngine
             throw new ArgumentNullException(nameof(sourceDocument));
         }
 
-        var parserOptions = GetRequiredFeature<IRazorParserOptionsFactoryProjectFeature>().Create(fileKind, builder =>
+        var parserOptions = GetRequiredFeature<IRazorParserOptionsFactory>().Create(fileKind, builder =>
         {
             ConfigureDesignTimeParserOptions(builder);
             configureParser?.Invoke(builder);
@@ -422,13 +422,12 @@ public class RazorProjectEngine
         features.Add(new DefaultMetadataIdentifierFeature());
 
         // Options features
-        features.Add(new DefaultRazorParserOptionsFactoryProjectFeature());
+        features.Add(new RazorParserOptionsFactory());
         features.Add(new DefaultRazorCodeGenerationOptionsFactoryProjectFeature());
 
         // Legacy options features
         //
         // These features are obsolete as of 2.1. Our code will resolve this but not invoke them.
-        features.Add(new DefaultRazorParserOptionsFeature(designTime: false, version: RazorLanguageVersion.Version_2_0, fileKind: null));
         features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
 
         // Syntax Tree passes

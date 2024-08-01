@@ -6,7 +6,7 @@ using System.Collections.Immutable;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-internal sealed class DefaultRazorParserOptionsFactoryProjectFeature : RazorEngineFeatureBase, IRazorParserOptionsFactoryProjectFeature
+internal sealed class RazorParserOptionsFactory : RazorEngineFeatureBase, IRazorParserOptionsFactory
 {
     private ImmutableArray<IConfigureRazorParserOptionsFeature> _configureOptions;
 
@@ -15,7 +15,7 @@ internal sealed class DefaultRazorParserOptionsFactoryProjectFeature : RazorEngi
         _configureOptions = ProjectEngine.Features.OfType<IConfigureRazorParserOptionsFeature>().ToImmutableArray();
     }
 
-    public RazorParserOptions Create(string fileKind, Action<RazorParserOptionsBuilder> configure)
+    public RazorParserOptions Create(string? fileKind = null, Action<RazorParserOptionsBuilder>? configure = null)
     {
         var builder = new RazorParserOptionsBuilder(ProjectEngine.Configuration, fileKind);
 
