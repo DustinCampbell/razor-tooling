@@ -4,6 +4,7 @@
 #nullable disable
 
 using System;
+using Microsoft.AspNetCore.Razor.Test.Common;
 using Moq;
 using Xunit;
 
@@ -67,23 +68,21 @@ public class DefaultRazorSyntaxTreePhaseTest
         var secondPassSyntaxTree = RazorSyntaxTree.Parse(codeDocument.Source);
         codeDocument.SetSyntaxTree(originalSyntaxTree);
 
-        var firstPass = new Mock<IRazorSyntaxTreePass>(MockBehavior.Strict);
-        RazorProjectEngine firstPassEngine = null;
+        var firstPass = CompilerMocks.CreateEngineFeatureMock<IRazorSyntaxTreePass>();
         firstPass
-            .Setup(x => x.Initialize(It.IsAny<RazorProjectEngine>()))
-            .Callback((RazorProjectEngine engine) => firstPassEngine = engine);
-        firstPass.SetupGet(m => m.Order).Returns(0);
-        firstPass.SetupGet(m => m.Engine).Returns(firstPassEngine);
-        firstPass.Setup(m => m.Execute(codeDocument, originalSyntaxTree)).Returns(firstPassSyntaxTree);
+            .SetupGet(m => m.Order)
+            .Returns(0);
+        firstPass
+            .Setup(m => m.Execute(codeDocument, originalSyntaxTree))
+            .Returns(firstPassSyntaxTree);
 
-        var secondPass = new Mock<IRazorSyntaxTreePass>(MockBehavior.Strict);
-        RazorProjectEngine secondPassEngine = null;
+        var secondPass = CompilerMocks.CreateEngineFeatureMock<IRazorSyntaxTreePass>();
         secondPass
-            .Setup(x => x.Initialize(It.IsAny<RazorProjectEngine>()))
-            .Callback((RazorProjectEngine engine) => secondPassEngine = engine);
-        secondPass.SetupGet(m => m.Order).Returns(1);
-        firstPass.SetupGet(m => m.Engine).Returns(secondPassEngine);
-        secondPass.Setup(m => m.Execute(codeDocument, firstPassSyntaxTree)).Returns(secondPassSyntaxTree);
+            .SetupGet(m => m.Order)
+            .Returns(1);
+        secondPass
+            .Setup(m => m.Execute(codeDocument, firstPassSyntaxTree))
+            .Returns(secondPassSyntaxTree);
 
         var phase = new DefaultRazorSyntaxTreePhase();
 

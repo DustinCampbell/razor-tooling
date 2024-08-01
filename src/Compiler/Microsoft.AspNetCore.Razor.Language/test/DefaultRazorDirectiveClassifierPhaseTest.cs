@@ -5,6 +5,7 @@
 
 using System;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
+using Microsoft.AspNetCore.Razor.Test.Common;
 using Moq;
 using Xunit;
 
@@ -69,30 +70,28 @@ public class DefaultRazorDirectiveClassifierPhaseTest
         var secondPassNode = new DocumentIntermediateNode();
         codeDocument.SetDocumentIntermediateNode(originalNode);
 
-        var firstPass = new Mock<IRazorDirectiveClassifierPass>(MockBehavior.Strict);
-        RazorProjectEngine firstPassEngine = null;
+        var firstPass = CompilerMocks.CreateEngineFeatureMock<IRazorDirectiveClassifierPass>();
         firstPass
-            .Setup(x => x.Initialize(It.IsAny<RazorProjectEngine>()))
-            .Callback((RazorProjectEngine engine) => firstPassEngine = engine);
-        firstPass.SetupGet(m => m.Order).Returns(0);
-        firstPass.SetupGet(m => m.Engine).Returns(() => firstPassEngine);
-        firstPass.Setup(m => m.Execute(codeDocument, originalNode)).Callback(() =>
-        {
-            originalNode.Children.Add(firstPassNode);
-        });
+            .SetupGet(m => m.Order)
+            .Returns(0);
+        firstPass
+            .Setup(m => m.Execute(codeDocument, originalNode))
+            .Callback(() =>
+            {
+                originalNode.Children.Add(firstPassNode);
+            });
 
-        var secondPass = new Mock<IRazorDirectiveClassifierPass>(MockBehavior.Strict);
-        RazorProjectEngine secondPassEngine = null;
+        var secondPass = CompilerMocks.CreateEngineFeatureMock<IRazorDirectiveClassifierPass>();
         secondPass
-            .Setup(x => x.Initialize(It.IsAny<RazorProjectEngine>()))
-            .Callback((RazorProjectEngine engine) => secondPassEngine = engine);
-        secondPass.SetupGet(m => m.Order).Returns(1);
-        secondPass.SetupGet(m => m.Engine).Returns(() => secondPassEngine);
-        secondPass.Setup(m => m.Execute(codeDocument, originalNode)).Callback(() =>
-        {
-            // Works only when the first pass has run before this.
-            originalNode.Children[0].Children.Add(secondPassNode);
-        });
+            .SetupGet(m => m.Order)
+            .Returns(1);
+        secondPass
+            .Setup(m => m.Execute(codeDocument, originalNode))
+            .Callback(() =>
+            {
+                // Works only when the first pass has run before this.
+                originalNode.Children[0].Children.Add(secondPassNode);
+            });
 
         var phase = new DefaultRazorDirectiveClassifierPhase();
 

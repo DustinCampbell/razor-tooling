@@ -5,6 +5,7 @@
 
 using System;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
+using Microsoft.AspNetCore.Razor.Test.Common;
 using Moq;
 using Xunit;
 
@@ -18,8 +19,8 @@ public class DefaultRazorDocumentClassifierPhaseTest
         // Arrange & Act
         var phase = new DefaultRazorDocumentClassifierPhase();
 
-        var first = Mock.Of<IRazorDocumentClassifierPass>(p => p.Order == 15);
-        var second = Mock.Of<IRazorDocumentClassifierPass>(p => p.Order == 17);
+        var first = Mock.Of<IRazorDocumentClassifierPass>(x => x.Order == 15);
+        var second = Mock.Of<IRazorDocumentClassifierPass>(x => x.Order == 17);
 
         var engine = RazorProjectEngine.CreateEmpty(b =>
         {
@@ -69,30 +70,28 @@ public class DefaultRazorDocumentClassifierPhaseTest
         var secondPassNode = new DocumentIntermediateNode();
         codeDocument.SetDocumentIntermediateNode(originalNode);
 
-        var firstPass = new Mock<IRazorDocumentClassifierPass>(MockBehavior.Strict);
-        RazorProjectEngine firstPassEngine = null;
+        var firstPass = CompilerMocks.CreateEngineFeatureMock<IRazorDocumentClassifierPass>();
         firstPass
-            .Setup(x => x.Initialize(It.IsAny<RazorProjectEngine>()))
-            .Callback((RazorProjectEngine engine) => firstPassEngine = engine);
-        firstPass.SetupGet(m => m.Order).Returns(0);
-        firstPass.SetupGet(m => m.Engine).Returns(firstPassEngine);
-        firstPass.Setup(m => m.Execute(codeDocument, originalNode)).Callback(() =>
-        {
-            originalNode.Children.Add(firstPassNode);
-        });
+            .SetupGet(m => m.Order)
+            .Returns(0);
+        firstPass
+            .Setup(m => m.Execute(codeDocument, originalNode))
+            .Callback(() =>
+            {
+                originalNode.Children.Add(firstPassNode);
+            });
 
-        var secondPass = new Mock<IRazorDocumentClassifierPass>(MockBehavior.Strict);
-        RazorProjectEngine secondPassEngine = null;
+        var secondPass = CompilerMocks.CreateEngineFeatureMock<IRazorDocumentClassifierPass>();
         secondPass
-            .Setup(x => x.Initialize(It.IsAny<RazorProjectEngine>()))
-            .Callback((RazorProjectEngine engine) => secondPassEngine = engine);
-        secondPass.SetupGet(m => m.Order).Returns(1);
-        secondPass.SetupGet(m => m.Engine).Returns(() => secondPassEngine);
-        secondPass.Setup(m => m.Execute(codeDocument, originalNode)).Callback(() =>
-        {
-            // Works only when the first pass has run before this.
-            originalNode.Children[0].Children.Add(secondPassNode);
-        });
+            .SetupGet(m => m.Order)
+            .Returns(1);
+        secondPass
+            .Setup(m => m.Execute(codeDocument, originalNode))
+            .Callback(() =>
+            {
+                // Works only when the first pass has run before this.
+                originalNode.Children[0].Children.Add(secondPassNode);
+            });
 
         var phase = new DefaultRazorDocumentClassifierPhase();
 

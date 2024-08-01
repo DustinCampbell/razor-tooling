@@ -5,6 +5,7 @@
 
 using System;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
+using Microsoft.AspNetCore.Razor.Test.Common;
 using Moq;
 using Xunit;
 
@@ -68,30 +69,28 @@ public class DefaultRazorOptimizationPhaseTest
         var secondPassNode = new DocumentIntermediateNode();
         codeDocument.SetDocumentIntermediateNode(originalNode);
 
-        var firstPass = new Mock<IRazorOptimizationPass>(MockBehavior.Strict);
-        RazorProjectEngine firstPassEngine = null;
+        var firstPass = CompilerMocks.CreateEngineFeatureMock<IRazorOptimizationPass>();
         firstPass
-            .Setup(x => x.Initialize(It.IsAny<RazorProjectEngine>()))
-            .Callback((RazorProjectEngine engine) => firstPassEngine = engine);
-        firstPass.SetupGet(m => m.Order).Returns(0);
-        firstPass.SetupGet(m => m.Engine).Returns(firstPassEngine);
-        firstPass.Setup(m => m.Execute(codeDocument, originalNode)).Callback(() =>
-        {
-            originalNode.Children.Add(firstPassNode);
-        });
+            .SetupGet(x => x.Order)
+            .Returns(0);
+        firstPass
+            .Setup(x => x.Execute(codeDocument, originalNode))
+            .Callback(() =>
+            {
+                originalNode.Children.Add(firstPassNode);
+            });
 
-        var secondPass = new Mock<IRazorOptimizationPass>(MockBehavior.Strict);
-        RazorProjectEngine secondPassEngine = null;
+        var secondPass = CompilerMocks.CreateEngineFeatureMock<IRazorOptimizationPass>();
         secondPass
-            .Setup(x => x.Initialize(It.IsAny<RazorProjectEngine>()))
-            .Callback((RazorProjectEngine engine) => secondPassEngine = engine);
-        secondPass.SetupGet(m => m.Order).Returns(1);
-        secondPass.SetupGet(m => m.Engine).Returns(() => secondPassEngine);
-        secondPass.Setup(m => m.Execute(codeDocument, originalNode)).Callback(() =>
-        {
-            // Works only when the first pass has run before this.
-            originalNode.Children[0].Children.Add(secondPassNode);
-        });
+            .SetupGet(x => x.Order)
+            .Returns(1);
+        secondPass
+            .Setup(x => x.Execute(codeDocument, originalNode))
+            .Callback(() =>
+            {
+                // Works only when the first pass has run before this.
+                originalNode.Children[0].Children.Add(secondPassNode);
+            });
 
         var phase = new DefaultRazorOptimizationPhase();
 
