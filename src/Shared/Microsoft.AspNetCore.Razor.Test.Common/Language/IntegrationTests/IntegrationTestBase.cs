@@ -802,7 +802,7 @@ public abstract class IntegrationTestBase
         protected override void OnInitialized()
         {
             // Note: The _inner IImportProjectFeature will not have been initialized yet.
-            _inner?.Initialize(ProjectEngine);
+            _inner?.Initialize(Engine);
         }
 
         public IReadOnlyList<RazorProjectItem> GetImports(RazorProjectItem projectItem)

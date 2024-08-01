@@ -12,7 +12,7 @@ internal sealed class DefaultRazorOptimizationPhase : RazorEnginePhaseBase, IRaz
 
     protected override void OnInitialized()
     {
-        Passes = [.. ProjectEngine.Features.OfType<IRazorOptimizationPass>().OrderBy(p => p.Order)];
+        Passes = [.. Engine.Features.OfType<IRazorOptimizationPass>().OrderBy(p => p.Order)];
     }
 
     protected override void ExecuteCore(RazorCodeDocument codeDocument)

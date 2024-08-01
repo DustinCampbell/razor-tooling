@@ -75,7 +75,7 @@ public class DefaultRazorDocumentClassifierPhaseTest
             .Setup(x => x.Initialize(It.IsAny<RazorProjectEngine>()))
             .Callback((RazorProjectEngine engine) => firstPassEngine = engine);
         firstPass.SetupGet(m => m.Order).Returns(0);
-        firstPass.SetupGet(m => m.ProjectEngine).Returns(firstPassEngine);
+        firstPass.SetupGet(m => m.Engine).Returns(firstPassEngine);
         firstPass.Setup(m => m.Execute(codeDocument, originalNode)).Callback(() =>
         {
             originalNode.Children.Add(firstPassNode);
@@ -87,7 +87,7 @@ public class DefaultRazorDocumentClassifierPhaseTest
             .Setup(x => x.Initialize(It.IsAny<RazorProjectEngine>()))
             .Callback((RazorProjectEngine engine) => secondPassEngine = engine);
         secondPass.SetupGet(m => m.Order).Returns(1);
-        secondPass.SetupGet(m => m.ProjectEngine).Returns(() => secondPassEngine);
+        secondPass.SetupGet(m => m.Engine).Returns(() => secondPassEngine);
         secondPass.Setup(m => m.Execute(codeDocument, originalNode)).Callback(() =>
         {
             // Works only when the first pass has run before this.

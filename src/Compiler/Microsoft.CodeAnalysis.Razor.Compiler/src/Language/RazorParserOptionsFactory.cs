@@ -12,12 +12,12 @@ internal sealed class RazorParserOptionsFactory : RazorEngineFeatureBase, IRazor
 
     protected override void OnInitialized()
     {
-        _configureOptions = ProjectEngine.Features.OfType<IConfigureRazorParserOptionsFeature>().ToImmutableArray();
+        _configureOptions = Engine.Features.OfType<IConfigureRazorParserOptionsFeature>().ToImmutableArray();
     }
 
     public RazorParserOptions Create(string? fileKind = null, Action<RazorParserOptionsBuilder>? configure = null)
     {
-        var builder = new RazorParserOptionsBuilder(ProjectEngine.Configuration, fileKind);
+        var builder = new RazorParserOptionsBuilder(Engine.Configuration, fileKind);
 
         configure?.Invoke(builder);
 

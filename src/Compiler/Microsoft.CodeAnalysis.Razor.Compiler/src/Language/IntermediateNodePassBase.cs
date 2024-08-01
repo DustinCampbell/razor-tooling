@@ -24,9 +24,9 @@ public abstract class IntermediateNodePassBase : RazorEngineFeatureBase
         ArgHelper.ThrowIfNull(codeDocument);
         ArgHelper.ThrowIfNull(documentNode);
 
-        if (ProjectEngine == null)
+        if (Engine == null)
         {
-            ThrowHelper.ThrowInvalidOperationException(Resources.FormatPhaseMustBeInitialized(nameof(ProjectEngine)));
+            ThrowHelper.ThrowInvalidOperationException(Resources.FormatPhaseMustBeInitialized(nameof(Engine)));
         }
 
         ExecuteCore(codeDocument, documentNode);

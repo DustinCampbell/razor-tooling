@@ -12,7 +12,7 @@ internal class DefaultRazorDirectiveClassifierPhase : RazorEnginePhaseBase, IRaz
 
     protected override void OnInitialized()
     {
-        Passes = [.. ProjectEngine.Features.OfType<IRazorDirectiveClassifierPass>().OrderBy(p => p.Order)];
+        Passes = [.. Engine.Features.OfType<IRazorDirectiveClassifierPass>().OrderBy(p => p.Order)];
     }
 
     protected override void ExecuteCore(RazorCodeDocument codeDocument)

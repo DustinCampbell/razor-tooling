@@ -9,7 +9,7 @@ public abstract class RazorEngineFeatureBase : IRazorEngineFeature
 {
     private RazorProjectEngine? _projectEngine;
 
-    public RazorProjectEngine ProjectEngine => _projectEngine.AssumeNotNull();
+    public RazorProjectEngine Engine => _projectEngine.AssumeNotNull();
 
     public void Initialize(RazorProjectEngine projectEngine)
     {
@@ -32,12 +32,12 @@ public abstract class RazorEngineFeatureBase : IRazorEngineFeature
     protected TFeature GetRequiredFeature<TFeature>()
         where TFeature : class, IRazorEngineFeature
     {
-        if (ProjectEngine == null)
+        if (Engine == null)
         {
-            throw new InvalidOperationException(Resources.FormatFeatureMustBeInitialized(nameof(ProjectEngine)));
+            throw new InvalidOperationException(Resources.FormatFeatureMustBeInitialized(nameof(Engine)));
         }
 
-        if (ProjectEngine.TryGetFeature(out TFeature? feature))
+        if (Engine.TryGetFeature(out TFeature? feature))
         {
             return feature;
         }

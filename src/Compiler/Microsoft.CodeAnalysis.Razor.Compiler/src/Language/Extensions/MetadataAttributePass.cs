@@ -18,7 +18,7 @@ internal sealed class MetadataAttributePass : IntermediateNodePassBase, IRazorOp
 
     protected override void OnInitialized()
     {
-        ProjectEngine.TryGetFeature(out _identifierFeature);
+        Engine.TryGetFeature(out _identifierFeature);
         Debug.Assert(_identifierFeature is not null);
     }
 

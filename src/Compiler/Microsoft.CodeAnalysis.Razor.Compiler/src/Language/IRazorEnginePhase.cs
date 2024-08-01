@@ -5,7 +5,7 @@ namespace Microsoft.AspNetCore.Razor.Language;
 
 public interface IRazorEnginePhase
 {
-    RazorProjectEngine ProjectEngine { get; }
+    RazorProjectEngine Engine { get; }
 
     void Initialize(RazorProjectEngine projectEngine);
     void Execute(RazorCodeDocument codeDocument);

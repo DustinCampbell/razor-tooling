@@ -36,8 +36,8 @@ public sealed class CompilationTagHelperFeature : RazorEngineFeatureBase, ITagHe
 
     protected override void OnInitialized()
     {
-        _referenceFeature = ProjectEngine.Features.OfType<IMetadataReferenceFeature>().FirstOrDefault();
-        _providers = ProjectEngine.Features.OfType<ITagHelperDescriptorProvider>().OrderBy(f => f.Order).ToArray();
+        _referenceFeature = Engine.Features.OfType<IMetadataReferenceFeature>().FirstOrDefault();
+        _providers = Engine.Features.OfType<ITagHelperDescriptorProvider>().OrderBy(f => f.Order).ToArray();
     }
 
     internal static bool IsValidCompilation(Compilation compilation)

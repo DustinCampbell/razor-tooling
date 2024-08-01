@@ -36,7 +36,7 @@ internal sealed class ComponentImportProjectFeature : RazorEngineFeatureBase, II
         };
 
         // We add hierarchical imports second so any default directive imports can be overridden.
-        imports.AddRange(GetHierarchicalImports(ProjectEngine.FileSystem, projectItem));
+        imports.AddRange(GetHierarchicalImports(Engine.FileSystem, projectItem));
 
         return imports;
     }

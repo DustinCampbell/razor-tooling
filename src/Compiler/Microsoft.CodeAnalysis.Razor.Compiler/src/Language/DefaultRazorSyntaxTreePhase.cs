@@ -12,7 +12,7 @@ internal sealed class DefaultRazorSyntaxTreePhase : RazorEnginePhaseBase, IRazor
 
     protected override void OnInitialized()
     {
-        Passes = ProjectEngine.Features.OfType<IRazorSyntaxTreePass>().OrderBy(p => p.Order).ToImmutableArray();
+        Passes = Engine.Features.OfType<IRazorSyntaxTreePass>().OrderBy(p => p.Order).ToImmutableArray();
     }
 
     protected override void ExecuteCore(RazorCodeDocument codeDocument)

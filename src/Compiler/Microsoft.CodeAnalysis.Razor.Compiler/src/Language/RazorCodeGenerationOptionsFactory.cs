@@ -12,12 +12,12 @@ internal sealed class RazorCodeGenerationOptionsFactory : RazorEngineFeatureBase
 
     protected override void OnInitialized()
     {
-        _configureOptions = ProjectEngine.Features.OfType<IConfigureRazorCodeGenerationOptionsFeature>().ToImmutableArray();
+        _configureOptions = Engine.Features.OfType<IConfigureRazorCodeGenerationOptionsFeature>().ToImmutableArray();
     }
 
     public RazorCodeGenerationOptions Create(string? fileKind = null, Action<RazorCodeGenerationOptionsBuilder>? configure = null)
     {
-        var builder = new DefaultRazorCodeGenerationOptionsBuilder(ProjectEngine.Configuration, fileKind);
+        var builder = new DefaultRazorCodeGenerationOptionsBuilder(Engine.Configuration, fileKind);
 
         configure?.Invoke(builder);
 

@@ -11,7 +11,7 @@ public abstract class RazorEnginePhaseBase : IRazorEnginePhase
 {
     private RazorProjectEngine? _projectEngine;
 
-    public RazorProjectEngine ProjectEngine => _projectEngine.AssumeNotNull();
+    public RazorProjectEngine Engine => _projectEngine.AssumeNotNull();
 
     public void Initialize(RazorProjectEngine projectEngine)
     {
@@ -35,9 +35,9 @@ public abstract class RazorEnginePhaseBase : IRazorEnginePhase
     {
         ArgHelper.ThrowIfNull(codeDocument);
 
-        if (ProjectEngine == null)
+        if (Engine == null)
         {
-            ThrowHelper.ThrowInvalidOperationException(Resources.FormatPhaseMustBeInitialized(nameof(ProjectEngine)));
+            ThrowHelper.ThrowInvalidOperationException(Resources.FormatPhaseMustBeInitialized(nameof(Engine)));
         }
 
         ExecuteCore(codeDocument);
@@ -48,12 +48,12 @@ public abstract class RazorEnginePhaseBase : IRazorEnginePhase
     protected T GetRequiredFeature<T>()
         where T : class
     {
-        if (ProjectEngine == null)
+        if (Engine == null)
         {
-            throw new InvalidOperationException(Resources.FormatFeatureMustBeInitialized(nameof(ProjectEngine)));
+            throw new InvalidOperationException(Resources.FormatFeatureMustBeInitialized(nameof(Engine)));
         }
 
-        var feature = ProjectEngine.Features.OfType<T>().FirstOrDefault();
+        var feature = Engine.Features.OfType<T>().FirstOrDefault();
         ThrowForMissingFeatureDependency(feature);
 
         return feature;

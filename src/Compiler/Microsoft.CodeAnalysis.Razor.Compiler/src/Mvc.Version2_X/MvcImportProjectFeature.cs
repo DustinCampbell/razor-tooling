@@ -44,7 +44,7 @@ internal sealed class MvcImportProjectFeature : RazorEngineFeatureBase, IImportP
     internal void AddHierarchicalImports(RazorProjectItem projectItem, List<RazorProjectItem> imports)
     {
         // We want items in descending order. FindHierarchicalItems returns items in ascending order.
-        var importProjectItems = ProjectEngine.FileSystem.FindHierarchicalItems(projectItem.FilePath, ImportsFileName).Reverse();
+        var importProjectItems = Engine.FileSystem.FindHierarchicalItems(projectItem.FilePath, ImportsFileName).Reverse();
         imports.AddRange(importProjectItems);
     }
 

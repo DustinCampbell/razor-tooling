@@ -5,7 +5,7 @@ namespace Microsoft.AspNetCore.Razor.Language;
 
 public interface IRazorEngineFeature
 {
-    RazorProjectEngine ProjectEngine { get; }
+    RazorProjectEngine Engine { get; }
 
     void Initialize(RazorProjectEngine projectEngine);
 }
