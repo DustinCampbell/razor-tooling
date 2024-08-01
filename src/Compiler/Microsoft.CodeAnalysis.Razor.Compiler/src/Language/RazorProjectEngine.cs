@@ -8,7 +8,6 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Runtime.InteropServices;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language.Components;
 using Microsoft.AspNetCore.Razor.Language.Extensions;
 using Microsoft.AspNetCore.Razor.PooledObjects;
@@ -409,28 +408,7 @@ public class RazorProjectEngine
         targetExtensionFeature.TargetExtensions.Add(new DesignTimeDirectiveTargetExtension());
 
         // Default configuration
-        var configurationFeature = new DefaultDocumentClassifierPassFeature();
-        features.Add(configurationFeature);
-        configurationFeature.ConfigureClass.Add((document, @class) =>
-        {
-            @class.ClassName = "Template";
-            @class.Modifiers.Add("public");
-        });
-
-        configurationFeature.ConfigureNamespace.Add((document, @namespace) =>
-        {
-            @namespace.Content = "Razor";
-        });
-
-        configurationFeature.ConfigureMethod.Add((document, method) =>
-        {
-            method.MethodName = "ExecuteAsync";
-            method.ReturnType = $"global::{typeof(Task).FullName}";
-
-            method.Modifiers.Add("public");
-            method.Modifiers.Add("async");
-            method.Modifiers.Add("override");
-        });
+        features.Add(DefaultDocumentClassifierPassFeature.CreateDefault());
     }
 
     private static void AddComponentFeatures(RazorProjectEngineBuilder builder, RazorLanguageVersion razorLanguageVersion)

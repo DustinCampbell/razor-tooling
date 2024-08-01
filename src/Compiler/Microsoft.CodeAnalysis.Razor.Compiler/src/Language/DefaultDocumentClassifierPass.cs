@@ -26,21 +26,18 @@ internal class DefaultDocumentClassifierPass : DocumentClassifierPassBase
     {
         if (Engine.TryGetFeature(out DefaultDocumentClassifierPassFeature configuration))
         {
-            for (var i = 0; i < configuration.ConfigureClass.Count; i++)
+            foreach (var configureClass in configuration.ConfigureClass)
             {
-                var configureClass = configuration.ConfigureClass[i];
                 configureClass(codeDocument, @class);
             }
 
-            for (var i = 0; i < configuration.ConfigureNamespace.Count; i++)
+            foreach (var configureNamespace in configuration.ConfigureNamespace)
             {
-                var configureNamespace = configuration.ConfigureNamespace[i];
                 configureNamespace(codeDocument, @namespace);
             }
 
-            for (var i = 0; i < configuration.ConfigureMethod.Count; i++)
+            foreach (var configureMethod in configuration.ConfigureMethod)
             {
-                var configureMethod = configuration.ConfigureMethod[i];
                 configureMethod(codeDocument, @method);
             }
         }

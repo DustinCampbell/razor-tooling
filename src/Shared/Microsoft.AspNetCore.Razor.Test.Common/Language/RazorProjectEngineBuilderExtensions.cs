@@ -32,37 +32,49 @@ public static class RazorProjectEngineBuilderExtensions
 
     public static RazorProjectEngineBuilder ConfigureDocumentClassifier(this RazorProjectEngineBuilder builder, string testFileName)
     {
-        var feature = builder.Features.OfType<DefaultDocumentClassifierPassFeature>().FirstOrDefault();
-        if (feature == null)
+        var features = builder.Features;
+        var featureIndex = -1;
+
+        for (var i = 0; i < features.Count; i++)
         {
-            feature = new DefaultDocumentClassifierPassFeature();
-            builder.Features.Add(feature);
+            if (features[i] is DefaultDocumentClassifierPassFeature)
+            {
+                featureIndex = i;
+                break;
+            }
         }
 
-        feature.ConfigureNamespace.Clear();
-        feature.ConfigureClass.Clear();
-        feature.ConfigureMethod.Clear();
-
-        feature.ConfigureNamespace.Add((RazorCodeDocument codeDocument, NamespaceDeclarationIntermediateNode node) =>
-        {
-            node.Content = "Microsoft.AspNetCore.Razor.Language.IntegrationTests.TestFiles";
-        });
-
-        feature.ConfigureClass.Add((RazorCodeDocument codeDocument, ClassDeclarationIntermediateNode node) =>
+        var configureClass = (RazorCodeDocument codeDocument, ClassDeclarationIntermediateNode node) =>
         {
             node.ClassName = testFileName.Replace('/', '_');
             node.Modifiers.Clear();
             node.Modifiers.Add("public");
-        });
+        };
 
-        feature.ConfigureMethod.Add((RazorCodeDocument codeDocument, MethodDeclarationIntermediateNode node) =>
+        var configureNamespace = (RazorCodeDocument codeDocument, NamespaceDeclarationIntermediateNode node) =>
+        {
+            node.Content = "Microsoft.AspNetCore.Razor.Language.IntegrationTests.TestFiles";
+        };
+
+        var configureMethod = (RazorCodeDocument codeDocument, MethodDeclarationIntermediateNode node) =>
         {
             node.Modifiers.Clear();
             node.Modifiers.Add("public");
             node.Modifiers.Add("async");
             node.MethodName = "ExecuteAsync";
             node.ReturnType = typeof(Task).FullName;
-        });
+        };
+
+        var feature = new DefaultDocumentClassifierPassFeature([configureClass], [configureNamespace], [configureMethod]);
+
+        if (featureIndex >= 0)
+        {
+            builder.Features[featureIndex] = feature;
+        }
+        else
+        {
+            builder.Features.Add(feature);
+        }
 
         return builder;
     }
