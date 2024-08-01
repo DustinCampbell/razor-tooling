@@ -10,14 +10,12 @@ using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
-internal class SplatTagHelperDescriptorProvider : ITagHelperDescriptorProvider
+internal class SplatTagHelperDescriptorProvider : RazorEngineFeatureBase, ITagHelperDescriptorProvider
 {
     private static TagHelperDescriptor s_splatTagHelper;
 
     // Order doesn't matter
     public int Order { get; set; }
-
-    public RazorEngine Engine { get; set; }
 
     public void Execute(TagHelperDescriptorProviderContext context)
     {

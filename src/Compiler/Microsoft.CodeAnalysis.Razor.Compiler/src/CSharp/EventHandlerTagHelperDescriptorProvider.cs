@@ -12,11 +12,9 @@ using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
-internal class EventHandlerTagHelperDescriptorProvider : ITagHelperDescriptorProvider
+internal class EventHandlerTagHelperDescriptorProvider : RazorEngineFeatureBase, ITagHelperDescriptorProvider
 {
     public int Order { get; set; }
-
-    public RazorEngine Engine { get; set; }
 
     public void Execute(TagHelperDescriptorProviderContext context)
     {

@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language.Components;
@@ -16,27 +17,30 @@ public class RazorProjectEngine
 {
     public RazorConfiguration Configuration { get; }
     public RazorProjectFileSystem FileSystem { get; }
-    public RazorEngine Engine { get; }
-    public ImmutableArray<IRazorEngineFeature> EngineFeatures => Engine.Features;
+    public ImmutableArray<IRazorEngineFeature> Features { get; }
     public ImmutableArray<IRazorEnginePhase> Phases { get; }
     public ImmutableArray<IRazorProjectEngineFeature> ProjectFeatures { get; }
 
     internal RazorProjectEngine(
         RazorConfiguration configuration,
-        RazorEngine engine,
         RazorProjectFileSystem fileSystem,
         ImmutableArray<IRazorProjectEngineFeature> projectFeatures,
+        ImmutableArray<IRazorEngineFeature> features,
         ImmutableArray<IRazorEnginePhase> phases)
     {
         ArgHelper.ThrowIfNull(configuration);
-        ArgHelper.ThrowIfNull(engine);
         ArgHelper.ThrowIfNull(fileSystem);
 
         Configuration = configuration;
-        Engine = engine;
         FileSystem = fileSystem;
         ProjectFeatures = projectFeatures;
+        Features = features;
         Phases = phases;
+
+        foreach (var feature in features)
+        {
+            feature.Initialize(this);
+        }
 
         foreach (var phase in phases)
         {
@@ -54,9 +58,9 @@ public class RazorProjectEngine
         ArgHelper.ThrowIfNull(otherProjectEngine);
 
         Configuration = otherProjectEngine.Configuration;
-        Engine = otherProjectEngine.Engine;
         FileSystem = otherProjectEngine.FileSystem;
         ProjectFeatures = otherProjectEngine.ProjectFeatures;
+        Features = otherProjectEngine.Features;
         Phases = otherProjectEngine.Phases;
     }
 
@@ -308,6 +312,22 @@ public class RazorProjectEngine
         {
             phase.Execute(codeDocument);
         }
+    }
+
+    internal bool TryGetFeature<TFeature>([NotNullWhen(true)] out TFeature? feature)
+        where TFeature : class, IRazorEngineFeature
+    {
+        foreach (var item in Features)
+        {
+            if (item is TFeature result)
+            {
+                feature = result;
+                return true;
+            }
+        }
+
+        feature = null;
+        return false;
     }
 
     private TFeature GetRequiredFeature<TFeature>()

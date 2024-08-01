@@ -46,10 +46,7 @@ namespace Microsoft.NET.Sdk.Razor.SourceGenerators
 
         protected override void OnInitialized()
         {
-            _providers = Engine.Features
-                .OfType<ITagHelperDescriptorProvider>()
-                .OrderBy(f => f.Order)
-                .ToImmutableArray();
+            _providers = [.. ProjectEngine.Features.OfType<ITagHelperDescriptorProvider>().OrderBy(f => f.Order)];
         }
     }
 }

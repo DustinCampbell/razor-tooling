@@ -468,10 +468,8 @@ public class ComponentMarkupBlockPassTest
         return document;
     }
 
-    private class StaticTagHelperFeature : ITagHelperFeature
+    private class StaticTagHelperFeature : RazorEngineFeatureBase, ITagHelperFeature
     {
-        public RazorEngine Engine { get; set; }
-
         public List<TagHelperDescriptor> TagHelpers { get; set; }
 
         public IReadOnlyList<TagHelperDescriptor> GetDescriptors()

@@ -12,7 +12,7 @@ internal sealed class DefaultRazorCodeGenerationOptionsFactoryProjectFeature : R
 
     protected override void OnInitialized()
     {
-        _configureOptions = ProjectEngine.EngineFeatures.OfType<IConfigureRazorCodeGenerationOptionsFeature>().ToImmutableArray();
+        _configureOptions = ProjectEngine.Features.OfType<IConfigureRazorCodeGenerationOptionsFeature>().ToImmutableArray();
     }
 
     public RazorCodeGenerationOptions Create(string fileKind, Action<RazorCodeGenerationOptionsBuilder> configure)

@@ -22,8 +22,6 @@ public abstract class RazorToolingProjectEngineTestBase : ToolingTestBase
     {
     }
 
-    protected RazorEngine CreateEngine() => CreateProjectEngine().Engine;
-
     protected RazorProjectEngine CreateProjectEngine()
     {
         var configuration = new RazorConfiguration(Version, "test", Extensions: []);

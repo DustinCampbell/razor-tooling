@@ -221,7 +221,6 @@ internal class VisualStudioRazorParser : IVisualStudioRazorParser, IDisposable
 
         _projectEngine = _projectEngineFactoryProvider.Create(projectSnapshot, ConfigureProjectEngine).AssumeNotNull();
 
-        Debug.Assert(_projectEngine.Engine is not null);
         Debug.Assert(_projectEngine.FileSystem is not null);
 
         // We might not have a document snapshot in the case of an ephemeral project.
@@ -581,11 +580,9 @@ internal class VisualStudioRazorParser : IVisualStudioRazorParser, IDisposable
         }
     }
 
-    private sealed class VisualStudioTagHelperFeature(IReadOnlyList<TagHelperDescriptor>? tagHelpers) : ITagHelperFeature
+    private sealed class VisualStudioTagHelperFeature(IReadOnlyList<TagHelperDescriptor>? tagHelpers) : RazorEngineFeatureBase, ITagHelperFeature
     {
         private readonly IReadOnlyList<TagHelperDescriptor>? _tagHelpers = tagHelpers;
-
-        public RazorEngine? Engine { get; set; }
 
         public IReadOnlyList<TagHelperDescriptor>? GetDescriptors()
             => _tagHelpers;

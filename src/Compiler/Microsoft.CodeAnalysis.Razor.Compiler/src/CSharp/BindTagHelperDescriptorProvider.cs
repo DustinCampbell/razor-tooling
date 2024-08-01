@@ -12,14 +12,12 @@ using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
-internal class BindTagHelperDescriptorProvider : ITagHelperDescriptorProvider
+internal class BindTagHelperDescriptorProvider : RazorEngineFeatureBase, ITagHelperDescriptorProvider
 {
     private static TagHelperDescriptor? s_fallbackBindTagHelper;
 
     // Run after the component tag helper provider, because we need to see the results.
     public int Order { get; set; } = 1000;
-
-    public RazorEngine? Engine { get; set; }
 
     public void Execute(TagHelperDescriptorProviderContext context)
     {

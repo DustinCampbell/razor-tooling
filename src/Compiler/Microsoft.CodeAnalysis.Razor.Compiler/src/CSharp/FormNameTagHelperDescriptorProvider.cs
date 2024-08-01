@@ -9,14 +9,12 @@ using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
-internal sealed class FormNameTagHelperDescriptorProvider : ITagHelperDescriptorProvider
+internal sealed class FormNameTagHelperDescriptorProvider : RazorEngineFeatureBase, ITagHelperDescriptorProvider
 {
     private static readonly Lazy<TagHelperDescriptor> s_formNameTagHelper = new(CreateFormNameTagHelper);
 
     // Run after the component tag helper provider
     public int Order { get; set; } = 1000;
-
-    public RazorEngine? Engine { get; set; }
 
     public void Execute(TagHelperDescriptorProviderContext context)
     {

@@ -3,7 +3,6 @@
 
 #nullable disable
 
-using System.Linq;
 using Moq;
 using Xunit;
 
@@ -26,7 +25,7 @@ public class RazorProjectEngineBuilderTest
         var projectEngine = builder.Build();
 
         // Assert
-        Assert.Collection(projectEngine.Engine.Features,
+        Assert.Collection(projectEngine.Features,
             feature => Assert.Same(features[0], feature),
             feature => Assert.Same(features[1], feature));
     }

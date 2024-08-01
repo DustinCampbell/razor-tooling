@@ -19,7 +19,7 @@ public abstract class DocumentClassifierPassBase : IntermediateNodePassBase, IRa
 
     protected override void OnInitialized()
     {
-        TargetExtensions = ProjectEngine.Engine.TryGetFeature(out IRazorTargetExtensionFeature feature)
+        TargetExtensions = ProjectEngine.TryGetFeature(out IRazorTargetExtensionFeature feature)
             ? feature.TargetExtensions.ToArray()
             : Array.Empty<ICodeTargetExtension>();
     }

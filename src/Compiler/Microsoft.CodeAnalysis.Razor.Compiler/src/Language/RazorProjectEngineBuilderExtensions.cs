@@ -309,13 +309,11 @@ public static class RazorProjectEngineBuilderExtensions
         }
     }
 
-    private sealed class ConfigureRootNamespaceFeature(string? rootNamespace) : IConfigureRazorCodeGenerationOptionsFeature
+    private sealed class ConfigureRootNamespaceFeature(string? rootNamespace) : RazorEngineFeatureBase, IConfigureRazorCodeGenerationOptionsFeature
     {
         private readonly string? _rootNamespace = rootNamespace;
 
         public int Order { get; set; }
-
-        public RazorEngine? Engine { get; set; }
 
         public void Configure(RazorCodeGenerationOptionsBuilder builder)
         {

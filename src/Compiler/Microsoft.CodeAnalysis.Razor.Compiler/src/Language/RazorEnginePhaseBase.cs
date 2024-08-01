@@ -53,7 +53,7 @@ public abstract class RazorEnginePhaseBase : IRazorEnginePhase
             throw new InvalidOperationException(Resources.FormatFeatureMustBeInitialized(nameof(ProjectEngine)));
         }
 
-        var feature = ProjectEngine.Engine.Features.OfType<T>().FirstOrDefault();
+        var feature = ProjectEngine.Features.OfType<T>().FirstOrDefault();
         ThrowForMissingFeatureDependency(feature);
 
         return feature;
@@ -80,7 +80,7 @@ public abstract class RazorEnginePhaseBase : IRazorEnginePhase
                 Resources.FormatPhaseDependencyMissing(
                     GetType().Name,
                     typeof(TEngineDependency).Name,
-                    typeof(RazorEngine).Name));
+                    typeof(RazorProjectEngine).Name));
         }
     }
 }

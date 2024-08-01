@@ -37,7 +37,7 @@ public abstract class RazorProjectEngineFeatureBase : IRazorProjectEngineFeature
             return ThrowHelper.ThrowInvalidOperationException<TFeature>(Resources.FormatFeatureMustBeInitialized(nameof(ProjectEngine)));
         }
 
-        if (ProjectEngine.Engine.TryGetFeature(out TFeature? feature))
+        if (ProjectEngine.TryGetFeature(out TFeature? feature))
         {
             return feature;
         }
@@ -46,6 +46,6 @@ public abstract class RazorProjectEngineFeatureBase : IRazorProjectEngineFeature
             Resources.FormatFeatureDependencyMissing(
                 GetType().Name,
                 typeof(TFeature).Name,
-                typeof(RazorEngine).Name));
+                typeof(RazorProjectEngine).Name));
     }
 }

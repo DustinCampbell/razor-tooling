@@ -31,10 +31,8 @@ public class ViewComponentTagHelperDescriptorProviderTest
         var context = TagHelperDescriptorProviderContext.Create();
         context.SetCompilation(compilation);
 
-        var provider = new ViewComponentTagHelperDescriptorProvider()
-        {
-            Engine = RazorProjectEngine.CreateEmpty().Engine,
-        };
+        var provider = new ViewComponentTagHelperDescriptorProvider();
+        provider.Initialize(RazorProjectEngine.CreateEmpty());
 
         var expectedDescriptor = TagHelperDescriptorBuilder.Create(
             ViewComponentTagHelperConventions.Kind,

@@ -418,11 +418,9 @@ public class RazorToolingIntegrationTestBase : ToolingTestBase
         }
     }
 
-    private class SuppressChecksum : IConfigureRazorCodeGenerationOptionsFeature
+    private class SuppressChecksum : RazorEngineFeatureBase, IConfigureRazorCodeGenerationOptionsFeature
     {
         public int Order => 0;
-
-        public RazorEngine Engine { get; set; }
 
         public void Configure(RazorCodeGenerationOptionsBuilder options)
         {

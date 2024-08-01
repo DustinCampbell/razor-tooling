@@ -3,7 +3,6 @@
 
 #nullable disable
 
-using System.Linq;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language;
@@ -25,7 +24,7 @@ internal class DefaultDocumentClassifierPass : DocumentClassifierPassBase
         ClassDeclarationIntermediateNode @class,
         MethodDeclarationIntermediateNode method)
     {
-        if (ProjectEngine.Engine.TryGetFeature(out DefaultDocumentClassifierPassFeature configuration))
+        if (ProjectEngine.TryGetFeature(out DefaultDocumentClassifierPassFeature configuration))
         {
             for (var i = 0; i < configuration.ConfigureClass.Count; i++)
             {

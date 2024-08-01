@@ -24,7 +24,7 @@ internal class DefaultRazorParserOptionsFeature : RazorEngineFeatureBase, IRazor
 
     protected override void OnInitialized()
     {
-        _configureOptions = Engine.Features.OfType<IConfigureRazorParserOptionsFeature>().ToArray();
+        _configureOptions = ProjectEngine.Features.OfType<IConfigureRazorParserOptionsFeature>().ToArray();
     }
 
     public RazorParserOptions GetOptions()

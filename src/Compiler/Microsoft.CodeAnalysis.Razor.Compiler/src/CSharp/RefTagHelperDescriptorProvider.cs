@@ -10,14 +10,12 @@ using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
-internal class RefTagHelperDescriptorProvider : ITagHelperDescriptorProvider
+internal class RefTagHelperDescriptorProvider : RazorEngineFeatureBase, ITagHelperDescriptorProvider
 {
     private static TagHelperDescriptor s_refTagHelper;
 
     // Run after the component tag helper provider, because later we may want component-type-specific variants of this
     public int Order { get; set; } = 1000;
-
-    public RazorEngine Engine { get; set; }
 
     public void Execute(TagHelperDescriptorProviderContext context)
     {

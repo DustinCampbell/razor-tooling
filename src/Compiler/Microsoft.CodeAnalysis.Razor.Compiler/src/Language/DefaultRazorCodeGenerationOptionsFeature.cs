@@ -20,7 +20,7 @@ internal class DefaultRazorCodeGenerationOptionsFeature : RazorEngineFeatureBase
 
     protected override void OnInitialized()
     {
-        _configureOptions = Engine.Features.OfType<IConfigureRazorCodeGenerationOptionsFeature>().ToArray();
+        _configureOptions = ProjectEngine.Features.OfType<IConfigureRazorCodeGenerationOptionsFeature>().ToArray();
     }
 
     public RazorCodeGenerationOptions GetOptions()

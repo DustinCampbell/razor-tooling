@@ -1,40 +1,43 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
 using System;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
 public abstract class RazorEngineFeatureBase : IRazorEngineFeature
 {
-    private RazorEngine _engine;
+    private RazorProjectEngine? _projectEngine;
 
-    public RazorEngine Engine
+    public RazorProjectEngine ProjectEngine => _projectEngine.AssumeNotNull();
+
+    public void Initialize(RazorProjectEngine projectEngine)
     {
-        get { return _engine; }
-        set
-        {
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+        ArgHelper.ThrowIfNull(projectEngine);
 
-            _engine = value;
-            OnInitialized();
+        if (_projectEngine is not null)
+        {
+            ThrowHelper.ThrowInvalidOperationException($"{nameof(IRazorProjectEngineFeature)} is already initialized.");
         }
+
+        _projectEngine = projectEngine;
+
+        OnInitialized();
+    }
+
+    protected virtual void OnInitialized()
+    {
     }
 
     protected TFeature GetRequiredFeature<TFeature>()
         where TFeature : class, IRazorEngineFeature
     {
-        if (Engine == null)
+        if (ProjectEngine == null)
         {
-            throw new InvalidOperationException(Resources.FormatFeatureMustBeInitialized(nameof(Engine)));
+            throw new InvalidOperationException(Resources.FormatFeatureMustBeInitialized(nameof(ProjectEngine)));
         }
 
-        if (Engine.TryGetFeature(out TFeature feature))
+        if (ProjectEngine.TryGetFeature(out TFeature? feature))
         {
             return feature;
         }
@@ -43,7 +46,7 @@ public abstract class RazorEngineFeatureBase : IRazorEngineFeature
             Resources.FormatFeatureDependencyMissing(
                 GetType().Name,
                 typeof(TFeature).Name,
-                typeof(RazorEngine).Name));
+                typeof(RazorProjectEngine).Name));
     }
 
     protected void ThrowForMissingDocumentDependency<TDocumentDependency>(TDocumentDependency value)
@@ -56,9 +59,5 @@ public abstract class RazorEngineFeatureBase : IRazorEngineFeature
                     typeof(TDocumentDependency).Name,
                     typeof(RazorCodeDocument).Name));
         }
-    }
-
-    protected virtual void OnInitialized()
-    {
     }
 }

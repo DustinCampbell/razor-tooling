@@ -68,13 +68,21 @@ public class DefaultRazorSyntaxTreePhaseTest
         codeDocument.SetSyntaxTree(originalSyntaxTree);
 
         var firstPass = new Mock<IRazorSyntaxTreePass>(MockBehavior.Strict);
+        RazorProjectEngine firstPassEngine = null;
+        firstPass
+            .Setup(x => x.Initialize(It.IsAny<RazorProjectEngine>()))
+            .Callback((RazorProjectEngine engine) => firstPassEngine = engine);
         firstPass.SetupGet(m => m.Order).Returns(0);
-        firstPass.SetupProperty(m => m.Engine);
+        firstPass.SetupGet(m => m.ProjectEngine).Returns(firstPassEngine);
         firstPass.Setup(m => m.Execute(codeDocument, originalSyntaxTree)).Returns(firstPassSyntaxTree);
 
         var secondPass = new Mock<IRazorSyntaxTreePass>(MockBehavior.Strict);
+        RazorProjectEngine secondPassEngine = null;
+        secondPass
+            .Setup(x => x.Initialize(It.IsAny<RazorProjectEngine>()))
+            .Callback((RazorProjectEngine engine) => secondPassEngine = engine);
         secondPass.SetupGet(m => m.Order).Returns(1);
-        secondPass.SetupProperty(m => m.Engine);
+        firstPass.SetupGet(m => m.ProjectEngine).Returns(secondPassEngine);
         secondPass.Setup(m => m.Execute(codeDocument, firstPassSyntaxTree)).Returns(secondPassSyntaxTree);
 
         var phase = new DefaultRazorSyntaxTreePhase();

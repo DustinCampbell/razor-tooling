@@ -18,10 +18,8 @@ public class DefaultMetadataIdentifierFeatureTest : RazorProjectEngineTestBase
         var sourceDocument = RazorSourceDocument.Create("content", RazorSourceDocumentProperties.Create("Test.cshtml", null));
         var codeDocument = RazorCodeDocument.Create(sourceDocument);
 
-        var feature = new DefaultMetadataIdentifierFeature()
-        {
-            Engine = CreateProjectEngine().Engine,
-        };
+        var feature = new DefaultMetadataIdentifierFeature();
+        feature.Initialize(CreateProjectEngine());
 
         // Act
         var result = feature.GetIdentifier(codeDocument, sourceDocument);
@@ -37,10 +35,8 @@ public class DefaultMetadataIdentifierFeatureTest : RazorProjectEngineTestBase
         var sourceDocument = RazorSourceDocument.Create("content", RazorSourceDocumentProperties.Create("Test.cshtml", string.Empty));
         var codeDocument = RazorCodeDocument.Create(sourceDocument);
 
-        var feature = new DefaultMetadataIdentifierFeature()
-        {
-            Engine = CreateProjectEngine().Engine,
-        };
+        var feature = new DefaultMetadataIdentifierFeature();
+        feature.Initialize(CreateProjectEngine());
 
         // Act
         var result = feature.GetIdentifier(codeDocument, sourceDocument);
@@ -61,10 +57,8 @@ public class DefaultMetadataIdentifierFeatureTest : RazorProjectEngineTestBase
         var sourceDocument = RazorSourceDocument.Create("content", RazorSourceDocumentProperties.Create("Test.cshtml", relativePath));
         var codeDocument = RazorCodeDocument.Create(sourceDocument);
 
-        var feature = new DefaultMetadataIdentifierFeature()
-        {
-            Engine = CreateProjectEngine().Engine,
-        };
+        var feature = new DefaultMetadataIdentifierFeature();
+        feature.Initialize(CreateProjectEngine());
 
         // Act
         var result = feature.GetIdentifier(codeDocument, sourceDocument);

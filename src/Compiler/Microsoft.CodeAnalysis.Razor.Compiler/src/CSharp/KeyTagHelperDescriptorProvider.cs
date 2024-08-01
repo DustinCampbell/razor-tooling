@@ -10,14 +10,12 @@ using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
-internal class KeyTagHelperDescriptorProvider : ITagHelperDescriptorProvider
+internal class KeyTagHelperDescriptorProvider : RazorEngineFeatureBase, ITagHelperDescriptorProvider
 {
     private static TagHelperDescriptor s_keyTagHelper;
 
     // Run after the component tag helper provider
     public int Order { get; set; } = 1000;
-
-    public RazorEngine Engine { get; set; }
 
     public void Execute(TagHelperDescriptorProviderContext context)
     {

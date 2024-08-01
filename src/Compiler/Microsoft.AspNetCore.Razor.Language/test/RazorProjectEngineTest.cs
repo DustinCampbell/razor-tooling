@@ -89,7 +89,7 @@ public class RazorProjectEngineTest
             feature => Assert.IsType<PreallocatedTagHelperAttributeOptimizationPass>(feature),
             feature => Assert.IsType<ViewCssScopePass>(feature));
 
-        var features = engine.EngineFeatures.OrderBy(f => f.GetType().Name).ToArray();
+        var features = engine.Features.OrderBy(f => f.GetType().Name).ToArray();
         Assert.Collection(
             features,
             feature => Assert.IsType<DefaultDirectiveSyntaxTreePass>(feature),
@@ -104,7 +104,7 @@ public class RazorProjectEngineTest
 
     private static void AssertDefaultDirectives(RazorProjectEngine engine)
     {
-        var feature = engine.EngineFeatures.OfType<IRazorDirectiveFeature>().FirstOrDefault();
+        var feature = engine.Features.OfType<IRazorDirectiveFeature>().FirstOrDefault();
         Assert.NotNull(feature);
         Assert.Collection(
             feature.Directives,
@@ -117,7 +117,7 @@ public class RazorProjectEngineTest
 
     private static void AssertDefaultTargetExtensions(RazorProjectEngine engine)
     {
-        var feature = engine.EngineFeatures.OfType<IRazorTargetExtensionFeature>().FirstOrDefault();
+        var feature = engine.Features.OfType<IRazorTargetExtensionFeature>().FirstOrDefault();
         Assert.NotNull(feature);
 
         var extensions = feature.TargetExtensions.OrderBy(f => f.GetType().Name).ToArray();

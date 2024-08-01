@@ -34,7 +34,7 @@ internal class CompilationTagHelperResolver(ITelemetryReporter? telemetryReporte
             throw new ArgumentNullException(nameof(projectEngine));
         }
 
-        var providers = projectEngine.Engine.Features.OfType<ITagHelperDescriptorProvider>().OrderBy(f => f.Order).ToArray();
+        var providers = projectEngine.Features.OfType<ITagHelperDescriptorProvider>().OrderBy(f => f.Order).ToArray();
         if (providers.Length == 0)
         {
             return ImmutableArray<TagHelperDescriptor>.Empty;
