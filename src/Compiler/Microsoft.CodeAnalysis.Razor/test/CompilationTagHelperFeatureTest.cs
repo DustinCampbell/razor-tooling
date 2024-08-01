@@ -84,7 +84,7 @@ public class CompilationTagHelperFeatureTest
                 configure.Features.Add(new CompilationTagHelperFeature());
             });
 
-        var feature = engine.Features.OfType<CompilationTagHelperFeature>().First();
+        var feature = engine.GetFeatures<CompilationTagHelperFeature>().First();
 
         // Act
         var result = feature.GetDescriptors();
@@ -119,7 +119,7 @@ public class CompilationTagHelperFeatureTest
                 configure.Features.Add(new CompilationTagHelperFeature());
             });
 
-        var feature = engine.Features.OfType<CompilationTagHelperFeature>().First();
+        var feature = engine.GetFeatures<CompilationTagHelperFeature>().First();
 
         // Act
         var result = feature.GetDescriptors();

@@ -413,7 +413,7 @@ public class CodeGenerationIntegrationTest : IntegrationTestBase
 
     private static ImmutableArray<RazorSourceDocument> GetImports(RazorProjectEngine projectEngine, RazorProjectItem projectItem)
     {
-        var importFeatures = projectEngine.Features.OfType<IImportProjectFeature>();
+        var importFeatures = projectEngine.GetFeatures<IImportProjectFeature>();
         var importItems = importFeatures.SelectMany(f => f.GetImports(projectItem));
         var importSourceDocuments = importItems
             .Where(i => i.Exists)

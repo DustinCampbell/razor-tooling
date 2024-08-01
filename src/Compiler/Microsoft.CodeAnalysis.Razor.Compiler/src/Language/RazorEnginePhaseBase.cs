@@ -19,7 +19,7 @@ public abstract class RazorEnginePhaseBase : IRazorEnginePhase
 
         if (_projectEngine is not null)
         {
-            ThrowHelper.ThrowInvalidOperationException($"{nameof(IRazorEngineFeature)} is already initialized.");
+            ThrowHelper.ThrowInvalidOperationException($"'{GetType().FullName}' is already initialized.");
         }
 
         _projectEngine = projectEngine;
@@ -46,14 +46,14 @@ public abstract class RazorEnginePhaseBase : IRazorEnginePhase
     protected abstract void ExecuteCore(RazorCodeDocument codeDocument);
 
     protected T GetRequiredFeature<T>()
-        where T : class
+        where T : class, IRazorEngineFeature
     {
         if (Engine == null)
         {
             throw new InvalidOperationException(Resources.FormatFeatureMustBeInitialized(nameof(Engine)));
         }
 
-        var feature = Engine.Features.OfType<T>().FirstOrDefault();
+        var feature = Engine.GetFeatures<T>().FirstOrDefault();
         ThrowForMissingFeatureDependency(feature);
 
         return feature;

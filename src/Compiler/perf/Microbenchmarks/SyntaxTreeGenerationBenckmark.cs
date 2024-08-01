@@ -25,16 +25,16 @@ public class SyntaxTreeGenerationBenchmark
         var root = current;
         var fileSystem = RazorProjectFileSystem.Create(root.FullName);
 
-        ProjectEngine = RazorProjectEngine.Create(RazorConfiguration.Default, fileSystem, b => RazorExtensions.Register(b)); ;
+        Engine = RazorProjectEngine.Create(RazorConfiguration.Default, fileSystem, b => RazorExtensions.Register(b)); ;
 
         var projectItem = fileSystem.GetItem(Path.Combine(root.FullName, "MSN.cshtml"), FileKinds.Legacy);
         MSN = RazorSourceDocument.ReadFrom(projectItem);
 
-        var directiveFeature = ProjectEngine.Features.OfType<IRazorDirectiveFeature>().FirstOrDefault();
+        var directiveFeature = Engine.GetFeatures<IRazorDirectiveFeature>().FirstOrDefault();
         Directives = directiveFeature?.Directives.ToArray() ?? Array.Empty<DirectiveDescriptor>();
     }
 
-    public RazorProjectEngine ProjectEngine { get; }
+    public RazorProjectEngine Engine { get; }
 
     public RazorSourceDocument MSN { get; }
 

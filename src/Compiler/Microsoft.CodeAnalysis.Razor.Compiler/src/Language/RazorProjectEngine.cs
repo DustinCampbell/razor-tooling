@@ -4,8 +4,10 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language.Components;
 using Microsoft.AspNetCore.Razor.Language.Extensions;
@@ -19,6 +21,8 @@ public class RazorProjectEngine
     public RazorProjectFileSystem FileSystem { get; }
     public ImmutableArray<IRazorEngineFeature> Features { get; }
     public ImmutableArray<IRazorEnginePhase> Phases { get; }
+
+    private readonly Dictionary<Type, object[]> _featureMap = [];
 
     internal RazorProjectEngine(
         RazorConfiguration configuration,
@@ -130,12 +134,9 @@ public class RazorProjectEngine
 
         using var importItems = new PooledArrayBuilder<RazorProjectItem>();
 
-        foreach (var feature in Features)
+        foreach (var importProjectFeature in GetFeatures<IImportProjectFeature>())
         {
-            if (feature is IImportProjectFeature importProjectFeature)
-            {
-                importItems.AddRange(importProjectFeature.GetImports(projectItem));
-            }
+            importItems.AddRange(importProjectFeature.GetImports(projectItem));
         }
 
         var importSourceDocuments = GetImportSourceDocuments(importItems.DrainToImmutable());
@@ -197,12 +198,9 @@ public class RazorProjectEngine
 
         using var importItems = new PooledArrayBuilder<RazorProjectItem>();
 
-        foreach (var feature in Features)
+        foreach (var importProjectFeature in GetFeatures<IImportProjectFeature>())
         {
-            if (feature is IImportProjectFeature importProjectFeature)
-            {
-                importItems.AddRange(importProjectFeature.GetImports(projectItem));
-            }
+            importItems.AddRange(importProjectFeature.GetImports(projectItem));
         }
 
         var importSourceDocuments = GetImportSourceDocuments(importItems.DrainToImmutable(), suppressExceptions: true);
@@ -259,37 +257,54 @@ public class RazorProjectEngine
         }
     }
 
+    public ImmutableArray<T> GetFeatures<T>()
+        where T : class, IRazorEngineFeature
+    {
+        lock (_featureMap)
+        {
+            if (_featureMap.TryGetValue(typeof(T), out var features))
+            {
+                return ImmutableCollectionsMarshal.AsImmutableArray((T[])features);
+            }
+
+            var result = GetFeaturesCore(Features);
+            Debug.Assert(!result.IsDefault);
+
+            _featureMap.Add(typeof(T), ImmutableCollectionsMarshal.AsArray(result)!);
+
+            return result;
+        }
+
+        static ImmutableArray<T> GetFeaturesCore(ImmutableArray<IRazorEngineFeature> features)
+        {
+            using var builder = new PooledArrayBuilder<T>();
+
+            foreach (var feature in features)
+            {
+                if (feature is T foundFeature)
+                {
+                    builder.Add(foundFeature);
+                }
+            }
+
+            return builder.DrainToImmutable();
+        }
+    }
+
     internal bool TryGetFeature<TFeature>([NotNullWhen(true)] out TFeature? feature)
         where TFeature : class, IRazorEngineFeature
     {
-        foreach (var item in Features)
-        {
-            if (item is TFeature result)
-            {
-                feature = result;
-                return true;
-            }
-        }
+        feature = GetFeatures<TFeature>().FirstOrDefault();
 
-        feature = null;
-        return false;
+        return feature is not null;
     }
 
     private TFeature GetRequiredFeature<TFeature>()
-        where TFeature : IRazorEngineFeature
+        where TFeature : class, IRazorEngineFeature
     {
-        foreach (var feature in Features)
-        {
-            if (feature is TFeature result)
-            {
-                return result;
-            }
-        }
-
-        throw new InvalidOperationException(
-            Resources.FormatRazorProjectEngineMissingFeatureDependency(
-                typeof(RazorProjectEngine).FullName,
-                typeof(TFeature).FullName));
+        return GetFeatures<TFeature>().FirstOrDefault()
+            ?? ThrowHelper.ThrowInvalidOperationException<TFeature>(
+                Resources.FormatRazorProjectEngineMissingFeatureDependency(typeof(RazorProjectEngine).FullName, typeof(TFeature).FullName));
     }
 
     internal static RazorProjectEngine CreateEmpty(Action<RazorProjectEngineBuilder>? configure = null)

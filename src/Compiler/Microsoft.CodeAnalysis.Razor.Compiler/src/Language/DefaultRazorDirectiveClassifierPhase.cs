@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Immutable;
-using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
@@ -12,7 +11,7 @@ internal class DefaultRazorDirectiveClassifierPhase : RazorEnginePhaseBase, IRaz
 
     protected override void OnInitialized()
     {
-        Passes = [.. Engine.Features.OfType<IRazorDirectiveClassifierPass>().OrderBy(p => p.Order)];
+        Passes = Engine.GetFeatures<IRazorDirectiveClassifierPass>().OrderByAsArray(static p => p.Order);
     }
 
     protected override void ExecuteCore(RazorCodeDocument codeDocument)

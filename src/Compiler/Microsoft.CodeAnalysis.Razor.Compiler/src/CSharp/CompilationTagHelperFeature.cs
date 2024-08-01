@@ -4,6 +4,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.CodeAnalysis.CSharp;
@@ -12,7 +13,7 @@ namespace Microsoft.CodeAnalysis.Razor;
 
 public sealed class CompilationTagHelperFeature : RazorEngineFeatureBase, ITagHelperFeature
 {
-    private ITagHelperDescriptorProvider[] _providers;
+    private ImmutableArray<ITagHelperDescriptorProvider> _providers;
     private IMetadataReferenceFeature _referenceFeature;
 
     public IReadOnlyList<TagHelperDescriptor> GetDescriptors()
@@ -26,9 +27,9 @@ public sealed class CompilationTagHelperFeature : RazorEngineFeatureBase, ITagHe
             context.SetCompilation(compilation);
         }
 
-        for (var i = 0; i < _providers.Length; i++)
+        foreach (var provider in _providers)
         {
-            _providers[i].Execute(context);
+            provider.Execute(context);
         }
 
         return results;
@@ -36,8 +37,8 @@ public sealed class CompilationTagHelperFeature : RazorEngineFeatureBase, ITagHe
 
     protected override void OnInitialized()
     {
-        _referenceFeature = Engine.Features.OfType<IMetadataReferenceFeature>().FirstOrDefault();
-        _providers = Engine.Features.OfType<ITagHelperDescriptorProvider>().OrderBy(f => f.Order).ToArray();
+        _referenceFeature = Engine.GetFeatures<IMetadataReferenceFeature>().FirstOrDefault();
+        _providers = Engine.GetFeatures<ITagHelperDescriptorProvider>().OrderByAsArray(static p => p.Order);
     }
 
     internal static bool IsValidCompilation(Compilation compilation)

@@ -12,7 +12,7 @@ internal sealed class RazorCodeGenerationOptionsFactory : RazorEngineFeatureBase
 
     protected override void OnInitialized()
     {
-        _configureOptions = Engine.Features.OfType<IConfigureRazorCodeGenerationOptionsFeature>().ToImmutableArray();
+        _configureOptions = Engine.GetFeatures<IConfigureRazorCodeGenerationOptionsFeature>();
     }
 
     public RazorCodeGenerationOptions Create(string? fileKind = null, Action<RazorCodeGenerationOptionsBuilder>? configure = null)

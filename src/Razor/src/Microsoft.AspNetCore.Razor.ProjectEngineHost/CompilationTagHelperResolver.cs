@@ -2,9 +2,7 @@
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
@@ -34,7 +32,7 @@ internal class CompilationTagHelperResolver(ITelemetryReporter? telemetryReporte
             throw new ArgumentNullException(nameof(projectEngine));
         }
 
-        var providers = projectEngine.Features.OfType<ITagHelperDescriptorProvider>().OrderBy(f => f.Order).ToArray();
+        var providers = projectEngine.GetFeatures<ITagHelperDescriptorProvider>().OrderByAsArray(static f => f.Order);
         if (providers.Length == 0)
         {
             return ImmutableArray<TagHelperDescriptor>.Empty;
@@ -55,7 +53,7 @@ internal class CompilationTagHelperResolver(ITelemetryReporter? telemetryReporte
 
         return results.ToImmutableArray();
 
-        static void ExecuteProviders(ITagHelperDescriptorProvider[] providers, TagHelperDescriptorProviderContext context, ITelemetryReporter? telemetryReporter)
+        static void ExecuteProviders(ImmutableArray<ITagHelperDescriptorProvider> providers, TagHelperDescriptorProviderContext context, ITelemetryReporter? telemetryReporter)
         {
             using var _ = StopwatchPool.GetPooledObject(out var watch);
 
