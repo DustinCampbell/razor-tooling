@@ -9,7 +9,7 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
-internal sealed class ComponentImportProjectFeature : RazorProjectEngineFeatureBase, IImportProjectFeature
+internal sealed class ComponentImportProjectFeature : RazorEngineFeatureBase, IImportProjectFeature
 {
     // Using explicit newlines here to avoid fooling our baseline tests
     private const string DefaultUsingImportContent =

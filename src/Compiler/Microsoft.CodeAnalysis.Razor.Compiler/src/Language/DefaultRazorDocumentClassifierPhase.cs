@@ -12,7 +12,7 @@ internal sealed class DefaultRazorDocumentClassifierPhase : RazorEnginePhaseBase
 
     protected override void OnInitialized()
     {
-        Passes = [.. ProjectEngine.ProjectFeatures.OfType<IRazorDocumentClassifierPass>().OrderBy(p => p.Order)];
+        Passes = [.. ProjectEngine.Features.OfType<IRazorDocumentClassifierPass>().OrderBy(p => p.Order)];
     }
 
     protected override void ExecuteCore(RazorCodeDocument codeDocument)

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-internal sealed class DefaultImportProjectFeature : RazorProjectEngineFeatureBase, IImportProjectFeature
+internal sealed class DefaultImportProjectFeature : RazorEngineFeatureBase, IImportProjectFeature
 {
     public IReadOnlyList<RazorProjectItem> GetImports(RazorProjectItem projectItem) => [];
 }

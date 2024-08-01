@@ -255,7 +255,7 @@ public class DocumentClassifierPassBaseTest : RazorProjectEngineTestBase
 
     private class TestDocumentClassifierPass : DocumentClassifierPassBase
     {
-        public override int Order => IntermediateNodePassBase.DefaultFeatureOrder;
+        public override int Order => DefaultFeatureOrder;
 
         public bool ShouldMatch { get; set; } = true;
 

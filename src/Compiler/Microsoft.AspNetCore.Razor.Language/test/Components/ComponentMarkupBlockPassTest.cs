@@ -463,8 +463,8 @@ public class ComponentMarkupBlockPassTest
         }
 
         var document = codeDocument.GetDocumentIntermediateNode();
-        ProjectEngine.ProjectFeatures.OfType<ComponentDocumentClassifierPass>().Single().Execute(codeDocument, document);
-        ProjectEngine.ProjectFeatures.OfType<ComponentMarkupDiagnosticPass>().Single().Execute(codeDocument, document);
+        ProjectEngine.Features.OfType<ComponentDocumentClassifierPass>().Single().Execute(codeDocument, document);
+        ProjectEngine.Features.OfType<ComponentMarkupDiagnosticPass>().Single().Execute(codeDocument, document);
         return document;
     }
 

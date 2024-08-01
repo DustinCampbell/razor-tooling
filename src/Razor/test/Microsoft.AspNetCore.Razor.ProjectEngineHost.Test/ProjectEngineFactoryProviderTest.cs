@@ -81,8 +81,8 @@ public class ProjectEngineFactoryProviderTest : ToolingTestBase
         // Assert
         Assert.Single(engine.Features.OfType<MyCoolNewFeature>());
         Assert.Single(engine.Features.OfType<MvcLatest.ViewComponentTagHelperDescriptorProvider>());
-        Assert.Single(engine.ProjectFeatures.OfType<MvcLatest.MvcViewDocumentClassifierPass>());
-        Assert.Single(engine.ProjectFeatures.OfType<MvcLatest.ViewComponentTagHelperPass>());
+        Assert.Single(engine.Features.OfType<MvcLatest.MvcViewDocumentClassifierPass>());
+        Assert.Single(engine.Features.OfType<MvcLatest.ViewComponentTagHelperPass>());
     }
 
     [Fact]
@@ -102,8 +102,8 @@ public class ProjectEngineFactoryProviderTest : ToolingTestBase
         Assert.Empty(engine.Features.OfType<MvcLatest.MvcViewDocumentClassifierPass>());
 
         Assert.Single(engine.Features.OfType<Mvc2_X.ViewComponentTagHelperDescriptorProvider>());
-        Assert.Single(engine.ProjectFeatures.OfType<Mvc2_X.MvcViewDocumentClassifierPass>());
-        Assert.Single(engine.ProjectFeatures.OfType<Mvc2_X.ViewComponentTagHelperPass>());
+        Assert.Single(engine.Features.OfType<Mvc2_X.MvcViewDocumentClassifierPass>());
+        Assert.Single(engine.Features.OfType<Mvc2_X.ViewComponentTagHelperPass>());
     }
 
     [Fact]
@@ -121,8 +121,8 @@ public class ProjectEngineFactoryProviderTest : ToolingTestBase
         // Assert
         Assert.Single(engine.Features.OfType<MyCoolNewFeature>());
         Assert.Single(engine.Features.OfType<Mvc2_X.ViewComponentTagHelperDescriptorProvider>());
-        Assert.Single(engine.ProjectFeatures.OfType<Mvc2_X.MvcViewDocumentClassifierPass>());
-        Assert.Single(engine.ProjectFeatures.OfType<Mvc2_X.ViewComponentTagHelperPass>());
+        Assert.Single(engine.Features.OfType<Mvc2_X.MvcViewDocumentClassifierPass>());
+        Assert.Single(engine.Features.OfType<Mvc2_X.ViewComponentTagHelperPass>());
     }
 
     [Fact]
@@ -140,8 +140,8 @@ public class ProjectEngineFactoryProviderTest : ToolingTestBase
         // Assert
         Assert.Single(engine.Features.OfType<MyCoolNewFeature>());
         Assert.Single(engine.Features.OfType<Mvc1_X.ViewComponentTagHelperDescriptorProvider>());
-        Assert.Single(engine.ProjectFeatures.OfType<Mvc1_X.MvcViewDocumentClassifierPass>());
-        Assert.Single(engine.ProjectFeatures.OfType<Mvc1_X.ViewComponentTagHelperPass>());
+        Assert.Single(engine.Features.OfType<Mvc1_X.MvcViewDocumentClassifierPass>());
+        Assert.Single(engine.Features.OfType<Mvc1_X.ViewComponentTagHelperPass>());
     }
 
     [Fact]
@@ -158,18 +158,18 @@ public class ProjectEngineFactoryProviderTest : ToolingTestBase
 
         // Assert
         Assert.Single(engine.Features.OfType<MyCoolNewFeature>());
-        Assert.Single(engine.ProjectFeatures.OfType<Mvc1_X.MvcViewDocumentClassifierPass>());
+        Assert.Single(engine.Features.OfType<Mvc1_X.MvcViewDocumentClassifierPass>());
 
         Assert.Empty(engine.Features.OfType<MvcLatest.ViewComponentTagHelperDescriptorProvider>());
-        Assert.Empty(engine.ProjectFeatures.OfType<MvcLatest.MvcViewDocumentClassifierPass>());
-        Assert.Empty(engine.ProjectFeatures.OfType<MvcLatest.ViewComponentTagHelperPass>());
+        Assert.Empty(engine.Features.OfType<MvcLatest.MvcViewDocumentClassifierPass>());
+        Assert.Empty(engine.Features.OfType<MvcLatest.ViewComponentTagHelperPass>());
 
         Assert.Empty(engine.Features.OfType<Mvc2_X.ViewComponentTagHelperDescriptorProvider>());
-        Assert.Empty(engine.ProjectFeatures.OfType<Mvc2_X.MvcViewDocumentClassifierPass>());
-        Assert.Empty(engine.ProjectFeatures.OfType<Mvc2_X.ViewComponentTagHelperPass>());
+        Assert.Empty(engine.Features.OfType<Mvc2_X.MvcViewDocumentClassifierPass>());
+        Assert.Empty(engine.Features.OfType<Mvc2_X.ViewComponentTagHelperPass>());
 
         Assert.Empty(engine.Features.OfType<Mvc1_X.ViewComponentTagHelperDescriptorProvider>());
-        Assert.Empty(engine.ProjectFeatures.OfType<Mvc1_X.ViewComponentTagHelperPass>());
+        Assert.Empty(engine.Features.OfType<Mvc1_X.ViewComponentTagHelperPass>());
     }
 
     [Fact]

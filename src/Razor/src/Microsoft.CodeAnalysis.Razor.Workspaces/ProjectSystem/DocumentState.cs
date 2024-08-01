@@ -228,7 +228,7 @@ internal partial class DocumentState
 
         using var _1 = ListPool<RazorProjectItem>.GetPooledObject(out var importItems);
 
-        foreach (var feature in projectEngine.ProjectFeatures.OfType<IImportProjectFeature>())
+        foreach (var feature in projectEngine.Features.OfType<IImportProjectFeature>())
         {
             if (feature.GetImports(projectItem) is { } featureImports)
             {

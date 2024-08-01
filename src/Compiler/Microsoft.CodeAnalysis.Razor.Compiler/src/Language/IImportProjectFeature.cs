@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-public interface IImportProjectFeature : IRazorProjectEngineFeature
+public interface IImportProjectFeature : IRazorEngineFeature
 {
     IReadOnlyList<RazorProjectItem> GetImports(RazorProjectItem projectItem);
 }

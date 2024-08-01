@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Razor.Language;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions;
 
-internal sealed class MvcImportProjectFeature : RazorProjectEngineFeatureBase, IImportProjectFeature
+internal sealed class MvcImportProjectFeature : RazorEngineFeatureBase, IImportProjectFeature
 {
     private const string ImportsFileName = "_ViewImports.cshtml";
 

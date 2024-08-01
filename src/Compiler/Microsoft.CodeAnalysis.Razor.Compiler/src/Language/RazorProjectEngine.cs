@@ -19,12 +19,10 @@ public class RazorProjectEngine
     public RazorProjectFileSystem FileSystem { get; }
     public ImmutableArray<IRazorEngineFeature> Features { get; }
     public ImmutableArray<IRazorEnginePhase> Phases { get; }
-    public ImmutableArray<IRazorProjectEngineFeature> ProjectFeatures { get; }
 
     internal RazorProjectEngine(
         RazorConfiguration configuration,
         RazorProjectFileSystem fileSystem,
-        ImmutableArray<IRazorProjectEngineFeature> projectFeatures,
         ImmutableArray<IRazorEngineFeature> features,
         ImmutableArray<IRazorEnginePhase> phases)
     {
@@ -33,7 +31,6 @@ public class RazorProjectEngine
 
         Configuration = configuration;
         FileSystem = fileSystem;
-        ProjectFeatures = projectFeatures;
         Features = features;
         Phases = phases;
 
@@ -46,11 +43,6 @@ public class RazorProjectEngine
         {
             phase.Initialize(this);
         }
-
-        foreach (var projectFeature in projectFeatures)
-        {
-            projectFeature.Initialize(this);
-        }
     }
 
     private protected RazorProjectEngine(RazorProjectEngine otherProjectEngine)
@@ -59,7 +51,6 @@ public class RazorProjectEngine
 
         Configuration = otherProjectEngine.Configuration;
         FileSystem = otherProjectEngine.FileSystem;
-        ProjectFeatures = otherProjectEngine.ProjectFeatures;
         Features = otherProjectEngine.Features;
         Phases = otherProjectEngine.Phases;
     }
@@ -180,7 +171,7 @@ public class RazorProjectEngine
 
         using var importItems = new PooledArrayBuilder<RazorProjectItem>();
 
-        foreach (var feature in ProjectFeatures)
+        foreach (var feature in Features)
         {
             if (feature is IImportProjectFeature importProjectFeature)
             {
@@ -257,7 +248,7 @@ public class RazorProjectEngine
 
         using var importItems = new PooledArrayBuilder<RazorProjectItem>();
 
-        foreach (var feature in ProjectFeatures)
+        foreach (var feature in Features)
         {
             if (feature is IImportProjectFeature importProjectFeature)
             {
@@ -331,11 +322,11 @@ public class RazorProjectEngine
     }
 
     private TFeature GetRequiredFeature<TFeature>()
-        where TFeature : IRazorProjectEngineFeature
+        where TFeature : IRazorEngineFeature
     {
-        foreach (var projectFeature in ProjectFeatures)
+        foreach (var feature in Features)
         {
-            if (projectFeature is TFeature result)
+            if (feature is TFeature result)
             {
                 return result;
             }
@@ -422,7 +413,7 @@ public class RazorProjectEngine
         phases.Add(new DefaultRazorCSharpLoweringPhase());
     }
 
-    private static void AddDefaultFeatures(ImmutableArray<IRazorFeature>.Builder features)
+    private static void AddDefaultFeatures(ImmutableArray<IRazorEngineFeature>.Builder features)
     {
         features.Add(new DefaultImportProjectFeature());
 

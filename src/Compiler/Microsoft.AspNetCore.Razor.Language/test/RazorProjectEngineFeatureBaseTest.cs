@@ -20,7 +20,7 @@ public class RazorProjectEngineFeatureBaseTest
         Assert.Equal(1, testFeature.InitializationCount);
     }
 
-    private sealed class TestFeature : RazorProjectEngineFeatureBase
+    private sealed class TestFeature : RazorEngineFeatureBase
     {
         public int InitializationCount { get; private set; }
 

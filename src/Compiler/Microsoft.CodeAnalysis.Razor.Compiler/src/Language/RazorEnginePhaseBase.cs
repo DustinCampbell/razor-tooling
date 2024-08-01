@@ -19,7 +19,7 @@ public abstract class RazorEnginePhaseBase : IRazorEnginePhase
 
         if (_projectEngine is not null)
         {
-            ThrowHelper.ThrowInvalidOperationException($"{nameof(IRazorProjectEngineFeature)} is already initialized.");
+            ThrowHelper.ThrowInvalidOperationException($"{nameof(IRazorEngineFeature)} is already initialized.");
         }
 
         _projectEngine = projectEngine;

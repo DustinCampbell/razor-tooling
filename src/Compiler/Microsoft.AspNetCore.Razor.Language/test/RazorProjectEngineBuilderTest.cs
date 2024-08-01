@@ -17,7 +17,6 @@ public class RazorProjectEngineBuilderTest
         var builder = new RazorProjectEngineBuilder(RazorConfiguration.Default, Mock.Of<RazorProjectFileSystem>());
         builder.Features.Add(Mock.Of<IRazorEngineFeature>());
         builder.Features.Add(Mock.Of<IRazorEngineFeature>());
-        builder.Features.Add(Mock.Of<IRazorProjectEngineFeature>());
 
         var features = builder.Features.ToArray();
 

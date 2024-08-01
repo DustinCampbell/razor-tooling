@@ -257,7 +257,7 @@ public static class RazorProjectEngineBuilderExtensions
         return configurationFeature;
     }
 
-    private sealed class AdditionalImportsProjectFeature(params string[] imports) : RazorProjectEngineFeatureBase, IImportProjectFeature
+    private sealed class AdditionalImportsProjectFeature(params string[] imports) : RazorEngineFeatureBase, IImportProjectFeature
     {
         private readonly IReadOnlyList<RazorProjectItem> _imports = imports.Select(import => new InMemoryProjectItem(import)).ToArray();
 

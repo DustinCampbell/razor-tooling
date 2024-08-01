@@ -6,7 +6,7 @@ using System.Collections.Immutable;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-internal sealed class DefaultRazorCodeGenerationOptionsFactoryProjectFeature : RazorProjectEngineFeatureBase, IRazorCodeGenerationOptionsFactoryProjectFeature
+internal sealed class DefaultRazorCodeGenerationOptionsFactoryProjectFeature : RazorEngineFeatureBase, IRazorCodeGenerationOptionsFactoryProjectFeature
 {
     private ImmutableArray<IConfigureRazorCodeGenerationOptionsFeature> _configureOptions;
 

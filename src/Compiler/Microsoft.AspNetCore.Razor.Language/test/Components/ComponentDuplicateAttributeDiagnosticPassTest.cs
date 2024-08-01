@@ -175,7 +175,7 @@ public class ComponentDuplicateAttributeDiagnosticPassTest
         }
 
         var document = codeDocument.GetDocumentIntermediateNode();
-        ProjectEngine.ProjectFeatures.OfType<ComponentDocumentClassifierPass>().Single().Execute(codeDocument, document);
+        ProjectEngine.Features.OfType<ComponentDocumentClassifierPass>().Single().Execute(codeDocument, document);
         return document;
     }
 

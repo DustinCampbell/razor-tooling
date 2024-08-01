@@ -7,7 +7,7 @@ using System;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-internal interface IRazorCodeGenerationOptionsFactoryProjectFeature : IRazorProjectEngineFeature
+internal interface IRazorCodeGenerationOptionsFactoryProjectFeature : IRazorEngineFeature
 {
     RazorCodeGenerationOptions Create(string fileKind, Action<RazorCodeGenerationOptionsBuilder> configure);
 }

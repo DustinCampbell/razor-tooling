@@ -5,10 +5,10 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-public abstract class IntermediateNodePassBase : RazorProjectEngineFeatureBase
+public abstract class IntermediateNodePassBase : RazorEngineFeatureBase
 {
     /// <summary>
-    /// The default implementation of the <see cref="IRazorProjectEngineFeature"/>s that run in a
+    /// The default implementation of the <see cref="RazorEngineFeatureBase"/>s that run in a
     /// <see cref="IRazorEnginePhase"/> will use this value for its Order property.
     /// </summary>
     /// <remarks>
