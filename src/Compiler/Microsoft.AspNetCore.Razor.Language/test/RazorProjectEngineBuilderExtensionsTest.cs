@@ -39,29 +39,11 @@ public class RazorProjectEngineBuilderExtensionsTest
 
         // Act
         builder.AddTargetExtension(expectedExtension);
+        var engine = builder.Build();
 
         // Assert
-        var feature = Assert.Single(builder.Features);
+        var feature = Assert.Single(engine.Features);
         var codeTargetExtensionFeature = Assert.IsAssignableFrom<IRazorTargetExtensionFeature>(feature);
-        var extensions = Assert.Single(codeTargetExtensionFeature.TargetExtensions);
-        Assert.Same(expectedExtension, extensions);
-    }
-
-    [Fact]
-    public void AddTargetExtension_UsesExistingFeatureIfExistsAndAddsTo()
-    {
-        // Arrange
-        var builder = new RazorProjectEngineBuilder(RazorConfiguration.Default, Mock.Of<RazorProjectFileSystem>());
-        var codeTargetExtensionFeature = new DefaultRazorTargetExtensionFeature();
-        builder.Features.Add(codeTargetExtensionFeature);
-        var expectedExtension = Mock.Of<ICodeTargetExtension>();
-
-        // Act
-        builder.AddTargetExtension(expectedExtension);
-
-        // Assert
-        var feature = Assert.Single(builder.Features);
-        Assert.Same(codeTargetExtensionFeature, feature);
         var extensions = Assert.Single(codeTargetExtensionFeature.TargetExtensions);
         Assert.Same(expectedExtension, extensions);
     }

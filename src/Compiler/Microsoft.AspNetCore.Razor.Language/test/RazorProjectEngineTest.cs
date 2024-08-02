@@ -111,8 +111,7 @@ public class RazorProjectEngineTest
 
     private static void AssertDefaultTargetExtensions(RazorProjectEngine engine)
     {
-        var feature = engine.GetFeatures<IRazorTargetExtensionFeature>().FirstOrDefault();
-        Assert.NotNull(feature);
+        var feature = Assert.Single(engine.GetFeatures<IRazorTargetExtensionFeature>());
 
         var extensions = feature.TargetExtensions.OrderBy(f => f.GetType().Name).ToArray();
         Assert.Collection(

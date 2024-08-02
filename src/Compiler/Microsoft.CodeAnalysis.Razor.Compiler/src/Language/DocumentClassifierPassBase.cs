@@ -5,7 +5,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Collections.Immutable;
 using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
@@ -15,13 +15,13 @@ public abstract class DocumentClassifierPassBase : IntermediateNodePassBase, IRa
 {
     protected abstract string DocumentKind { get; }
 
-    protected IReadOnlyList<ICodeTargetExtension> TargetExtensions { get; private set; }
+    protected ImmutableArray<ICodeTargetExtension> TargetExtensions { get; private set; }
 
     protected override void OnInitialized()
     {
         TargetExtensions = Engine.TryGetFeature(out IRazorTargetExtensionFeature feature)
-            ? feature.TargetExtensions.ToArray()
-            : Array.Empty<ICodeTargetExtension>();
+            ? feature.TargetExtensions
+            : [];
     }
 
     protected sealed override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
@@ -92,9 +92,9 @@ public abstract class DocumentClassifierPassBase : IntermediateNodePassBase, IRa
     {
         return CodeTarget.CreateDefault(codeDocument, options, (builder) =>
         {
-            for (var i = 0; i < TargetExtensions.Count; i++)
+            foreach (var targetExtension in TargetExtensions)
             {
-                builder.TargetExtensions.Add(TargetExtensions[i]);
+                builder.TargetExtensions.Add(targetExtension);
             }
 
             ConfigureTarget(builder);

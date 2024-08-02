@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 using RazorExtensionsV1_X = Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X.RazorExtensions;
 using RazorExtensionsV2_X = Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X.RazorExtensions;
 using RazorExtensionsV3 = Microsoft.AspNetCore.Mvc.Razor.Extensions.RazorExtensions;
@@ -93,23 +92,6 @@ public static class RazorProjectEngineBuilderExtensions
     }
 
     /// <summary>
-    /// Adds the specified <see cref="ICodeTargetExtension"/>.
-    /// </summary>
-    /// <param name="builder">The <see cref="RazorProjectEngineBuilder"/>.</param>
-    /// <param name="extension">The <see cref="ICodeTargetExtension"/> to add.</param>
-    /// <returns>The <see cref="RazorProjectEngineBuilder"/>.</returns>
-    public static RazorProjectEngineBuilder AddTargetExtension(this RazorProjectEngineBuilder builder, ICodeTargetExtension extension)
-    {
-        ArgHelper.ThrowIfNull(builder);
-        ArgHelper.ThrowIfNull(extension);
-
-        var targetExtensionFeature = GetTargetExtensionFeature(builder);
-        targetExtensionFeature.TargetExtensions.Add(extension);
-
-        return builder;
-    }
-
-    /// <summary>
     /// Adds the specified <see cref="DirectiveDescriptor"/>.
     /// </summary>
     /// <param name="builder">The <see cref="RazorProjectEngineBuilder"/>.</param>
@@ -181,18 +163,6 @@ public static class RazorProjectEngineBuilderExtensions
         }
 
         return directiveFeature;
-    }
-
-    private static IRazorTargetExtensionFeature GetTargetExtensionFeature(RazorProjectEngineBuilder builder)
-    {
-        var targetExtensionFeature = builder.Features.OfType<IRazorTargetExtensionFeature>().FirstOrDefault();
-        if (targetExtensionFeature == null)
-        {
-            targetExtensionFeature = new DefaultRazorTargetExtensionFeature();
-            builder.Features.Add(targetExtensionFeature);
-        }
-
-        return targetExtensionFeature;
     }
 
     private sealed class AdditionalImportsProjectFeature(params string[] imports) : RazorEngineFeatureBase, IImportProjectFeature

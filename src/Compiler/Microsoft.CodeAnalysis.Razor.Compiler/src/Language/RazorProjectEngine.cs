@@ -337,8 +337,8 @@ public class RazorProjectEngine
         //
         // This allows extensions to rely on default features, and customizations to override choices made by
         // extensions.
-        AddDefaultPhases(builder.Phases);
-        AddDefaultFeatures(builder.Features);
+        AddDefaultPhases(builder);
+        AddDefaultFeatures(builder);
 
         if (configuration.LanguageVersion >= RazorLanguageVersion.Version_5_0)
         {
@@ -361,8 +361,10 @@ public class RazorProjectEngine
         return builder.Build();
     }
 
-    private static void AddDefaultPhases(ImmutableArray<IRazorEnginePhase>.Builder phases)
+    private static void AddDefaultPhases(RazorProjectEngineBuilder builder)
     {
+        var phases = builder.Phases;
+
         phases.Add(new DefaultRazorParsingPhase());
         phases.Add(new DefaultRazorSyntaxTreePhase());
         phases.Add(new DefaultRazorTagHelperContextDiscoveryPhase());
@@ -374,8 +376,10 @@ public class RazorProjectEngine
         phases.Add(new DefaultRazorCSharpLoweringPhase());
     }
 
-    private static void AddDefaultFeatures(ImmutableArray<IRazorEngineFeature>.Builder features)
+    private static void AddDefaultFeatures(RazorProjectEngineBuilder builder)
     {
+        var features = builder.Features;
+
         features.Add(new DefaultImportProjectFeature());
 
         // General extensibility
@@ -400,12 +404,10 @@ public class RazorProjectEngine
         features.Add(new EliminateMethodBodyPass());
 
         // Default Code Target Extensions
-        var targetExtensionFeature = new DefaultRazorTargetExtensionFeature();
-        features.Add(targetExtensionFeature);
-        targetExtensionFeature.TargetExtensions.Add(new MetadataAttributeTargetExtension());
-        targetExtensionFeature.TargetExtensions.Add(new DefaultTagHelperTargetExtension());
-        targetExtensionFeature.TargetExtensions.Add(new PreallocatedAttributeTargetExtension());
-        targetExtensionFeature.TargetExtensions.Add(new DesignTimeDirectiveTargetExtension());
+        builder.AddTargetExtension(new MetadataAttributeTargetExtension());
+        builder.AddTargetExtension(new DefaultTagHelperTargetExtension());
+        builder.AddTargetExtension(new PreallocatedAttributeTargetExtension());
+        builder.AddTargetExtension(new DesignTimeDirectiveTargetExtension());
 
         // Default configuration
         features.Add(DefaultDocumentClassifierPassFeature.CreateDefault());
