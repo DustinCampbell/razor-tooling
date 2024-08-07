@@ -56,6 +56,97 @@ internal static class TestMocks
         return mock.Object;
     }
 
+    public static IDocumentSnapshot CreateDocumentSnapshot(Action<IDocumentSnapshotBuilder> configure)
+    {
+        var builder = new DocumentSnapshotBuilder();
+        configure.Invoke(builder);
+        builder.CompleteMock();
+
+        return builder.Mock.Object;
+    }
+
+    public interface IDocumentSnapshotBuilder : IMockBuilder<IDocumentSnapshot>
+    {
+        void SetFileKind(string? fileKind);
+        void SetFilePath(string? filePath);
+        void SetGeneratedOutput(RazorCodeDocument codeDocument);
+        void SetProject(IProjectSnapshot project);
+        void SetProject(Action<IProjectSnapshotBuilder> configure);
+        void SetTargetPath(string? targetPath);
+        void SetText(SourceText text);
+        void SetVersion(VersionStamp version);
+    }
+
+    private sealed class DocumentSnapshotBuilder : MockBuilder<IDocumentSnapshot>, IDocumentSnapshotBuilder
+    {
+        public DocumentSnapshotBuilder()
+        {
+            // By default, TryGetText(...) and TryGetTextVersion(...) return false.
+            SourceText? text = null;
+            Mock.Setup(x => x.TryGetText(out text))
+                .Returns(false);
+
+            var version = VersionStamp.Default;
+            Mock.Setup(x => x.TryGetTextVersion(out version))
+                .Returns(false);
+        }
+
+        public void SetFileKind(string? fileKind)
+        {
+            Mock.SetupGet(x => x.FileKind)
+                .Returns(fileKind);
+        }
+
+        public void SetFilePath(string? filePath)
+        {
+            Mock.SetupGet(x => x.FilePath)
+                .Returns(filePath);
+        }
+
+        public void SetGeneratedOutput(RazorCodeDocument codeDocument)
+        {
+            Mock.Setup(x => x.GetGeneratedOutputAsync())
+                .ReturnsAsync(codeDocument);
+            Mock.Setup(x => x.TryGetGeneratedOutput(out codeDocument!))
+                .Returns(true);
+
+            SetText(codeDocument.Source.Text);
+        }
+
+        public void SetProject(IProjectSnapshot project)
+        {
+            Mock.SetupGet(x => x.Project)
+                .Returns(project);
+        }
+
+        public void SetProject(Action<IProjectSnapshotBuilder> configure)
+        {
+            SetProject(CreateProjectSnapshot(configure));
+        }
+
+        public void SetTargetPath(string? targetPath)
+        {
+            Mock.SetupGet(x => x.TargetPath)
+                .Returns(targetPath);
+        }
+
+        public void SetText(SourceText text)
+        {
+            Mock.Setup(x => x.GetTextAsync())
+                .ReturnsAsync(text);
+            Mock.Setup(x => x.TryGetText(out text!))
+                .Returns(true);
+        }
+
+        public void SetVersion(VersionStamp version)
+        {
+            Mock.Setup(x => x.GetTextVersionAsync())
+                .ReturnsAsync(version);
+            Mock.Setup(x => x.TryGetTextVersion(out version))
+                .Returns(true);
+        }
+    }
+
     public static IProjectSnapshot CreateProjectSnapshot(Action<IProjectSnapshotBuilder> configure)
     {
         var builder = new ProjectSnapshotBuilder();

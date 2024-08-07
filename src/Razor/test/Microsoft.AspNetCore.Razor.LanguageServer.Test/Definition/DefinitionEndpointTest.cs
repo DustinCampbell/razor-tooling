@@ -11,9 +11,7 @@ using Microsoft.AspNetCore.Razor.Test.Common;
 using Microsoft.AspNetCore.Razor.Test.Common.LanguageServer;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Testing;
-using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
-using Moq;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -361,7 +359,7 @@ public class DefinitionEndpointTest(ITestOutputHelper testOutput) : TagHelperSer
     {
         TestFileMarkupParser.GetPosition(content, out content, out var position);
 
-        SetupDocument(out _, out var documentSnapshot, content, isRazorFile);
+        var documentSnapshot = CreateDocumentSnapshot(content, isRazorFile);
         var documentContext = CreateDocumentContext(new Uri(@"C:\file.razor"), documentSnapshot);
 
         var (descriptor, attributeDescriptor) = await DefinitionEndpoint.GetOriginTagHelperBindingAsync(
@@ -392,7 +390,7 @@ public class DefinitionEndpointTest(ITestOutputHelper testOutput) : TagHelperSer
     {
         TestFileMarkupParser.GetSpan(content, out content, out var selection);
 
-        SetupDocument(out var codeDocument, out _, content);
+        var codeDocument = CreateCodeDocument(content, isRazorFile: true, DefaultTagHelpers);
         var expectedRange = codeDocument.Source.Text.GetRange(selection);
 
         var mappingService = new LspDocumentMappingService(FilePathService, new TestDocumentContextFactory(), LoggerFactory);
@@ -402,17 +400,15 @@ public class DefinitionEndpointTest(ITestOutputHelper testOutput) : TagHelperSer
         Assert.Equal(expectedRange, range);
     }
 
-    private void SetupDocument(out RazorCodeDocument codeDocument, out IDocumentSnapshot documentSnapshot, string content, bool isRazorFile = true)
+    private IDocumentSnapshot CreateDocumentSnapshot(string content, bool isRazorFile)
     {
-        var sourceText = SourceText.From(content);
-        codeDocument = CreateCodeDocument(content, isRazorFile, DefaultTagHelpers);
-        var outDoc = codeDocument;
-        documentSnapshot = Mock.Of<IDocumentSnapshot>(
-            d => d.GetTextAsync() == Task.FromResult(sourceText),
-            MockBehavior.Strict);
-        Mock.Get(documentSnapshot)
-            .Setup(s => s.GetGeneratedOutputAsync())
-            .ReturnsAsync(outDoc);
+        var codeDocument = CreateCodeDocument(content, isRazorFile, DefaultTagHelpers);
+
+        return TestMocks.CreateDocumentSnapshot(b =>
+        {
+            b.SetGeneratedOutput(codeDocument);
+        });
     }
+
     #endregion
 }

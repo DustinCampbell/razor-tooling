@@ -11,10 +11,8 @@ using Microsoft.AspNetCore.Razor.LanguageServer.CodeActions.Models;
 using Microsoft.AspNetCore.Razor.Test.Common;
 using Microsoft.AspNetCore.Razor.Test.Common.LanguageServer;
 using Microsoft.CodeAnalysis.Razor.DocumentMapping;
-using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.Protocol.CodeActions;
 using Microsoft.CodeAnalysis.Testing;
-using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
 using Moq;
 using Xunit;
@@ -153,20 +151,16 @@ public class DefaultHtmlCodeActionProviderTest(ITestOutputHelper testOutput) : L
         var projectEngine = RazorProjectEngine.Create(builder => builder.AddTagHelpers(tagHelpers));
         var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, FileKinds.Component, importSources: default, tagHelpers);
 
-        var projectSnapshot = TestMocks.CreateProjectSnapshot(b =>
+        var documentSnapshot = TestMocks.CreateDocumentSnapshot(b =>
         {
-            b.SetTagHelpers(tagHelpers);
+            b.SetGeneratedOutput(codeDocument);
+            b.SetProject(b =>
+            {
+                b.SetTagHelpers(tagHelpers);
+            });
         });
 
-        var documentSnapshot = Mock.Of<IDocumentSnapshot>(document =>
-            document.GetGeneratedOutputAsync() == Task.FromResult(codeDocument) &&
-            document.GetTextAsync() == Task.FromResult(codeDocument.Source.Text) &&
-            document.Project == projectSnapshot, MockBehavior.Strict);
-
-        var sourceText = SourceText.From(text);
-
-        var context = new RazorCodeActionContext(request, documentSnapshot, codeDocument, location, sourceText, supportsFileCreation, supportsCodeActionResolve);
-
-        return context;
+        return new RazorCodeActionContext(
+            request, documentSnapshot, codeDocument, location, sourceDocument.Text, supportsFileCreation, supportsCodeActionResolve);
     }
 }

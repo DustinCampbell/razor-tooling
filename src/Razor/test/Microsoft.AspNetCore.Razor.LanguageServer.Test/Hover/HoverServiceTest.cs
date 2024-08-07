@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Razor.LanguageServer.Hosting;
 using Microsoft.AspNetCore.Razor.LanguageServer.Hover;
 using Microsoft.AspNetCore.Razor.LanguageServer.Tooltip;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
+using Microsoft.AspNetCore.Razor.Test.Common;
 using Microsoft.AspNetCore.Razor.Test.Common.LanguageServer;
 using Microsoft.AspNetCore.Razor.Test.Common.Mef;
 using Microsoft.AspNetCore.Razor.Test.Common.ProjectSystem;
@@ -908,30 +909,28 @@ public class HoverServiceTest(ITestOutputHelper testOutput) : TagHelperServiceTe
 
     private VersionedDocumentContext CreateDefaultDocumentContext()
     {
-        var txt = """
-                @addTagHelper *, TestAssembly
-                <any @test="Increment" />
-                @code{
-                    public void Increment(){
-                    }
+        var text = """
+            @addTagHelper *, TestAssembly
+            <any @test="Increment" />
+            @code{
+                public void Increment(){
                 }
-                """;
+            }
+            """;
         var path = "C:/text.razor";
-        var codeDocument = CreateCodeDocument(txt, path, DefaultTagHelpers);
+        var codeDocument = CreateCodeDocument(text, path, DefaultTagHelpers);
         var projectWorkspaceState = ProjectWorkspaceState.Create(DefaultTagHelpers);
         var projectSnapshot = TestProjectSnapshot.Create("C:/project.csproj", projectWorkspaceState);
-        var sourceText = SourceText.From(txt);
 
-        var snapshot = Mock.Of<IDocumentSnapshot>(d =>
-            d.GetGeneratedOutputAsync() == Task.FromResult(codeDocument) &&
-            d.FilePath == path &&
-            d.FileKind == FileKinds.Component &&
-            d.GetTextAsync() == Task.FromResult(sourceText) &&
-            d.Project == projectSnapshot, MockBehavior.Strict);
+        var documentSnapshot = TestMocks.CreateDocumentSnapshot(b =>
+        {
+            b.SetFileKind(FileKinds.Component);
+            b.SetFilePath(path);
+            b.SetGeneratedOutput(codeDocument);
+            b.SetProject(projectSnapshot);
+        });
 
-        var documentContext = new VersionedDocumentContext(new Uri(path), snapshot, projectContext: null, 1337);
-
-        return documentContext;
+        return new VersionedDocumentContext(new Uri(path), documentSnapshot, projectContext: null, 1337);
     }
 
     private HoverEndpoint CreateEndpoint(

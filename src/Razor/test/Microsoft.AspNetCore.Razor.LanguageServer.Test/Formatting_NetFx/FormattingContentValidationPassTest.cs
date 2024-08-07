@@ -12,7 +12,6 @@ using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.Protocol;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
-using Moq;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -143,25 +142,17 @@ public class Foo { }
         var projectEngine = RazorProjectEngine.Create(builder => builder.SetRootNamespace("Test"));
         var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, fileKind, importSources: default, tagHelpers);
 
-        var projectSnapshot = TestMocks.CreateProjectSnapshot(b =>
+        var documentSnapshot = TestMocks.CreateDocumentSnapshot(b =>
         {
-            b.SetTagHelpers(tagHelpers);
+            b.SetFileKind(fileKind);
+            b.SetGeneratedOutput(codeDocument);
+            b.SetProject(b =>
+            {
+                b.SetTagHelpers(tagHelpers);
+            });
+            b.SetTargetPath(path);
+
         });
-
-        var documentSnapshot = new Mock<IDocumentSnapshot>(MockBehavior.Strict);
-        documentSnapshot
-            .Setup(d => d.GetGeneratedOutputAsync())
-            .ReturnsAsync(codeDocument);
-        documentSnapshot
-            .Setup(d => d.TargetPath)
-            .Returns(path);
-        documentSnapshot
-            .SetupGet(d => d.Project)
-            .Returns(projectSnapshot);
-        documentSnapshot
-            .Setup(d => d.FileKind)
-            .Returns(fileKind);
-
-        return (codeDocument, documentSnapshot.Object);
+        return (codeDocument, documentSnapshot);
     }
 }

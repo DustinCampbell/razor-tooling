@@ -8,13 +8,12 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.LanguageServer.Formatting;
 using Microsoft.AspNetCore.Razor.LanguageServer.Test;
+using Microsoft.AspNetCore.Razor.Test.Common;
 using Microsoft.AspNetCore.Razor.Test.Common.LanguageServer;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
-using Microsoft.CodeAnalysis.Razor.Workspaces;
 using Microsoft.CodeAnalysis.Testing;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
-using Moq;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -47,7 +46,7 @@ public abstract class RazorOnAutoInsertProviderTestBase : LanguageServerTestBase
         };
 
         var provider = CreateProvider();
-        using var context = FormattingContext.Create(uri, Mock.Of<IDocumentSnapshot>(MockBehavior.Strict), codeDocument, options, TestAdhocWorkspaceFactory.Instance);
+        using var context = FormattingContext.Create(uri, StrictMock.Of<IDocumentSnapshot>(), codeDocument, options, TestAdhocWorkspaceFactory.Instance);
 
         // Act
         if (!provider.TryResolveInsertion(position, context, out var edit, out _))

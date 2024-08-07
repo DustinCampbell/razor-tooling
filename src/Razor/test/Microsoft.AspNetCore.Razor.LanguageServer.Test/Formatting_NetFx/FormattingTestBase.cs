@@ -230,36 +230,31 @@ public class FormattingTestBase : RazorToolingIntegrationTestBase
             relativePath: inGlobalNamespace ? Path.GetFileName(path) : path));
 
         const string DefaultImports = """
-                @using BlazorApp1
-                @using BlazorApp1.Pages
-                @using BlazorApp1.Shared
-                @using Microsoft.AspNetCore.Components
-                @using Microsoft.AspNetCore.Components.Authorization
-                @using Microsoft.AspNetCore.Components.Routing
-                @using Microsoft.AspNetCore.Components.Web
-                """;
+            @using BlazorApp1
+            @using BlazorApp1.Pages
+            @using BlazorApp1.Shared
+            @using Microsoft.AspNetCore.Components
+            @using Microsoft.AspNetCore.Components.Authorization
+            @using Microsoft.AspNetCore.Components.Routing
+            @using Microsoft.AspNetCore.Components.Web
+            """;
 
         var importsPath = new Uri("file:///path/to/_Imports.razor").AbsolutePath;
         var importsSourceText = SourceText.From(DefaultImports);
         var importsDocument = RazorSourceDocument.Create(importsSourceText, RazorSourceDocumentProperties.Create(importsPath, importsPath));
-        var importsSnapshot = new Mock<IDocumentSnapshot>(MockBehavior.Strict);
-        importsSnapshot
-            .Setup(d => d.GetTextAsync())
-            .ReturnsAsync(importsSourceText);
-        importsSnapshot
-            .Setup(d => d.FilePath)
-            .Returns(importsPath);
-        importsSnapshot
-            .Setup(d => d.TargetPath)
-            .Returns(importsPath);
+        var importsSnapshot = TestMocks.CreateDocumentSnapshot(b =>
+        {
+            b.SetFilePath(importsPath);
+            b.SetTargetPath(importsPath);
+            b.SetText(importsSourceText);
+        });
 
         var projectFileSystem = new TestRazorProjectFileSystem([
             new TestRazorProjectItem(path, fileKind: fileKind),
-            new TestRazorProjectItem(importsPath, fileKind: FileKinds.ComponentImport),
-            ]);
+            new TestRazorProjectItem(importsPath, fileKind: FileKinds.ComponentImport)]);
 
         var projectEngine = RazorProjectEngine.Create(
-            new RazorConfiguration(RazorLanguageVersion.Latest, "TestConfiguration", ImmutableArray<RazorExtension>.Empty, new LanguageServerFlags(forceRuntimeCodeGeneration)),
+            new RazorConfiguration(RazorLanguageVersion.Latest, "TestConfiguration", Extensions: [], new LanguageServerFlags(forceRuntimeCodeGeneration)),
             projectFileSystem,
             builder =>
             {
@@ -268,60 +263,46 @@ public class FormattingTestBase : RazorToolingIntegrationTestBase
                 RazorExtensions.Register(builder);
             });
 
-        var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, fileKind, ImmutableArray.Create(importsDocument), tagHelpers);
+        var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, fileKind, [importsDocument], tagHelpers);
 
         if (!allowDiagnostics)
         {
             Assert.False(codeDocument.GetCSharpDocument().Diagnostics.Any(), "Error creating document:" + Environment.NewLine + string.Join(Environment.NewLine, codeDocument.GetCSharpDocument().Diagnostics));
         }
 
-        var imports = ImmutableArray.Create(importsSnapshot.Object);
+        var imports = ImmutableArray.Create(importsSnapshot);
         var importsDocuments = ImmutableArray.Create(importsDocument);
-        var documentSnapshot = CreateDocumentSnapshot(path, tagHelpers, fileKind, importsDocuments, imports, projectEngine, codeDocument, inGlobalNamespace: inGlobalNamespace);
+        var documentSnapshot = CreateDocumentSnapshot(path, tagHelpers, fileKind, importsDocuments, imports, projectEngine, codeDocument, inGlobalNamespace);
 
         return (codeDocument, documentSnapshot);
     }
 
     internal static IDocumentSnapshot CreateDocumentSnapshot(string path, ImmutableArray<TagHelperDescriptor> tagHelpers, string? fileKind, ImmutableArray<RazorSourceDocument> importsDocuments, ImmutableArray<IDocumentSnapshot> imports, RazorProjectEngine projectEngine, RazorCodeDocument codeDocument, bool inGlobalNamespace = false)
     {
-        var projectSnapshot = TestMocks.CreateProjectSnapshot(b =>
+        return TestMocks.CreateDocumentSnapshot(b =>
         {
-            b.SetConfiguration(projectEngine.Configuration);
-            b.SetKey(TestProjectKey.Create("/obj"));
-            b.SetProjectEngine(projectEngine);
-            b.SetTagHelpers(tagHelpers);
-        });
-
-        var documentSnapshot = new Mock<IDocumentSnapshot>(MockBehavior.Strict);
-        documentSnapshot
-            .Setup(d => d.GetGeneratedOutputAsync())
-            .ReturnsAsync(codeDocument);
-        documentSnapshot
-            .Setup(d => d.FilePath)
-            .Returns(path);
-        documentSnapshot
-            .SetupGet(d => d.Project)
-            .Returns(projectSnapshot);
-        documentSnapshot
-            .Setup(d => d.TargetPath)
-            .Returns(path);
-        documentSnapshot
-            .Setup(d => d.GetTextAsync())
-            .ReturnsAsync(codeDocument.Source.Text);
-        documentSnapshot
-            .Setup(d => d.FileKind)
-            .Returns(fileKind);
-        documentSnapshot
-            .Setup(d => d.WithText(It.IsAny<SourceText>()))
-            .Returns<SourceText>(text =>
+            b.SetFileKind(fileKind);
+            b.SetFilePath(path);
+            b.SetGeneratedOutput(codeDocument);
+            b.SetProject(b =>
             {
-                var sourceDocument = RazorSourceDocument.Create(text, RazorSourceDocumentProperties.Create(
-                    filePath: path,
-                    relativePath: inGlobalNamespace ? Path.GetFileName(path) : path));
-                var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, fileKind, importsDocuments, tagHelpers);
-                return CreateDocumentSnapshot(path, tagHelpers, fileKind, importsDocuments, imports, projectEngine, codeDocument, inGlobalNamespace: inGlobalNamespace);
+                b.SetConfiguration(projectEngine.Configuration);
+                b.SetKey(TestProjectKey.Create("/obj"));
+                b.SetProjectEngine(projectEngine);
+                b.SetTagHelpers(tagHelpers);
             });
+            b.SetTargetPath(path);
 
-        return documentSnapshot.Object;
+            b.Mock
+                .Setup(x => x.WithText(It.IsAny<SourceText>()))
+                .Returns((SourceText text) =>
+                {
+                    var sourceDocument = RazorSourceDocument.Create(text,
+                        RazorSourceDocumentProperties.Create(filePath: path, relativePath: inGlobalNamespace ? Path.GetFileName(path) : path));
+                    var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, fileKind, importsDocuments, tagHelpers);
+
+                    return CreateDocumentSnapshot(path, tagHelpers, fileKind, importsDocuments, imports, projectEngine, codeDocument, inGlobalNamespace);
+                });
+        });
     }
 }
