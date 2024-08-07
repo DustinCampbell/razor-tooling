@@ -27,7 +27,7 @@ public class DocumentStateTest : ToolingTestBase
     public async Task DocumentState_CreatedNew_HasEmptyText()
     {
         // Arrange & Act
-        var state = DocumentState.Create(_hostDocument, RazorTextLoader.Empty);
+        var state = DocumentState.Create(_hostDocument);
 
         // Assert
         var text = await state.GetTextAsync();
@@ -38,7 +38,7 @@ public class DocumentStateTest : ToolingTestBase
     public async Task DocumentState_WithText_CreatesNewState()
     {
         // Arrange
-        var original = DocumentState.Create(_hostDocument, RazorTextLoader.Empty);
+        var original = DocumentState.Create(_hostDocument);
 
         // Act
         var state = original.WithText(_text, VersionStamp.Create());
@@ -52,7 +52,7 @@ public class DocumentStateTest : ToolingTestBase
     public async Task DocumentState_WithTextLoader_CreatesNewState()
     {
         // Arrange
-        var original = DocumentState.Create(_hostDocument, RazorTextLoader.Empty);
+        var original = DocumentState.Create(_hostDocument);
 
         // Act
         var state = original.WithTextLoader(_textLoader);
@@ -66,7 +66,8 @@ public class DocumentStateTest : ToolingTestBase
     public void DocumentState_WithConfigurationChange_CachesSnapshotText()
     {
         // Arrange
-        var original = DocumentState.Create(_hostDocument, RazorTextLoader.Empty)
+        var original = DocumentState
+            .Create(_hostDocument)
             .WithText(_text, VersionStamp.Create());
 
         // Act
@@ -81,7 +82,8 @@ public class DocumentStateTest : ToolingTestBase
     public async Task DocumentState_WithConfigurationChange_CachesLoadedText()
     {
         // Arrange
-        var original = DocumentState.Create(_hostDocument, RazorTextLoader.Empty)
+        var original = DocumentState
+            .Create(_hostDocument)
             .WithTextLoader(_textLoader);
 
         await original.GetTextAsync();
@@ -98,7 +100,8 @@ public class DocumentStateTest : ToolingTestBase
     public void DocumentState_WithImportsChange_CachesSnapshotText()
     {
         // Arrange
-        var original = DocumentState.Create(_hostDocument, RazorTextLoader.Empty)
+        var original = DocumentState
+            .Create(_hostDocument)
             .WithText(_text, VersionStamp.Create());
 
         // Act
@@ -113,7 +116,8 @@ public class DocumentStateTest : ToolingTestBase
     public async Task DocumentState_WithImportsChange_CachesLoadedText()
     {
         // Arrange
-        var original = DocumentState.Create(_hostDocument, RazorTextLoader.Empty)
+        var original = DocumentState
+            .Create(_hostDocument)
             .WithTextLoader(_textLoader);
 
         await original.GetTextAsync();
@@ -130,7 +134,8 @@ public class DocumentStateTest : ToolingTestBase
     public void DocumentState_WithProjectWorkspaceStateChange_CachesSnapshotText()
     {
         // Arrange
-        var original = DocumentState.Create(_hostDocument, RazorTextLoader.Empty)
+        var original = DocumentState
+            .Create(_hostDocument)
             .WithText(_text, VersionStamp.Create());
 
         // Act
@@ -145,7 +150,8 @@ public class DocumentStateTest : ToolingTestBase
     public async Task DocumentState_WithProjectWorkspaceStateChange_CachesLoadedText()
     {
         // Arrange
-        var original = DocumentState.Create(_hostDocument, RazorTextLoader.Empty)
+        var original = DocumentState
+            .Create(_hostDocument)
             .WithTextLoader(_textLoader);
 
         await original.GetTextAsync();

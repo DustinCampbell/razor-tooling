@@ -1,7 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
-using System;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
@@ -9,13 +8,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.PooledObjects;
+using Microsoft.AspNetCore.Razor.Threading;
 using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
 internal partial class DocumentState
 {
-    private readonly object _lock;
+    private readonly object _lock = new();
 
     private ComputedStateTracker? _computedState;
 
@@ -24,30 +24,16 @@ internal partial class DocumentState
     private SourceText? _sourceText;
     private VersionStamp? _version;
 
-    public static DocumentState Create(
-        HostDocument hostDocument,
-        RazorTextLoader? loader)
-    {
-        if (hostDocument is null)
-        {
-            throw new ArgumentNullException(nameof(hostDocument));
-        }
-
-        return new DocumentState(hostDocument, null, null, loader);
-    }
+    public static DocumentState Create(HostDocument hostDocument, RazorTextLoader? loader = null)
+        => new(hostDocument, text: null, version: null, loader);
 
     // Internal for testing
-    internal DocumentState(
-        HostDocument hostDocument,
-        SourceText? text,
-        VersionStamp? version,
-        RazorTextLoader? loader)
+    internal DocumentState(HostDocument hostDocument, SourceText? text, VersionStamp? version, RazorTextLoader? loader)
     {
         HostDocument = hostDocument;
         _sourceText = text;
         _version = version;
         _loader = loader ?? RazorTextLoader.Empty;
-        _lock = new object();
     }
 
     public HostDocument HostDocument { get; }
@@ -115,9 +101,7 @@ internal partial class DocumentState
 
         if (_loaderTask is { } loaderTask && loaderTask.IsCompleted)
         {
-#pragma warning disable VSTHRD002 // Avoid problematic synchronous waits
-            result = loaderTask.Result.Text;
-#pragma warning restore VSTHRD002 // Avoid problematic synchronous waits
+            result = loaderTask.VerifyCompleted().Text;
             return true;
         }
 
@@ -135,9 +119,7 @@ internal partial class DocumentState
 
         if (_loaderTask is { } loaderTask && loaderTask.IsCompleted)
         {
-#pragma warning disable VSTHRD002 // Avoid problematic synchronous waits
-            result = loaderTask.Result.Version;
-#pragma warning restore VSTHRD002 // Avoid problematic synchronous waits
+            result = loaderTask.VerifyCompleted().Version;
             return true;
         }
 
@@ -194,38 +176,37 @@ internal partial class DocumentState
 
     public virtual DocumentState WithText(SourceText sourceText, VersionStamp version)
     {
-        if (sourceText is null)
-        {
-            throw new ArgumentNullException(nameof(sourceText));
-        }
-
         // Do not cache the computed state
 
-        return new DocumentState(HostDocument, sourceText, version, null);
+        return new DocumentState(HostDocument, sourceText, version, loader: null);
     }
 
     public virtual DocumentState WithTextLoader(RazorTextLoader loader)
     {
-        if (loader is null)
-        {
-            throw new ArgumentNullException(nameof(loader));
-        }
-
         // Do not cache the computed state
 
-        return new DocumentState(HostDocument, null, null, loader);
+        return new DocumentState(HostDocument, text: null, version: null, loader);
     }
 
     // Internal, because we are temporarily sharing code with CohostDocumentSnapshot
-    internal static ImmutableArray<IDocumentSnapshot> GetImportsCore(IProjectSnapshot project, RazorProjectEngine projectEngine, string filePath, string fileKind)
+    internal static ImmutableArray<IDocumentSnapshot> GetImportsCore(
+        IProjectSnapshot project,
+        RazorProjectEngine projectEngine,
+        string filePath,
+        string fileKind)
     {
         var projectItem = projectEngine.FileSystem.GetItem(filePath, fileKind);
 
-        using var _1 = ListPool<RazorProjectItem>.GetPooledObject(out var importItems);
+        using var importItems = new PooledArrayBuilder<RazorProjectItem>();
 
-        foreach (var feature in projectEngine.ProjectFeatures.OfType<IImportProjectFeature>())
+        foreach (var projectFeature in projectEngine.ProjectFeatures)
         {
-            if (feature.GetImports(projectItem) is { } featureImports)
+            if (projectFeature is not IImportProjectFeature importFeature)
+            {
+                continue;
+            }
+
+            if (importFeature.GetImports(projectItem) is { } featureImports)
             {
                 importItems.AddRange(featureImports);
             }
@@ -233,64 +214,74 @@ internal partial class DocumentState
 
         if (importItems.Count == 0)
         {
-            return ImmutableArray<IDocumentSnapshot>.Empty;
+            return [];
         }
 
-        using var _2 = ArrayBuilderPool<IDocumentSnapshot>.GetPooledObject(out var imports);
+        using var imports = new PooledArrayBuilder<IDocumentSnapshot>(importItems.Count);
 
-        foreach (var item in importItems)
+        foreach (var importItem in importItems)
         {
-            if (item is NotFoundProjectItem)
+            if (importItem is NotFoundProjectItem)
             {
                 continue;
             }
 
-            if (item.PhysicalPath is null)
+            if (importItem.PhysicalPath is null)
             {
                 // This is a default import.
-                var defaultImport = new ImportDocumentSnapshot(project, item);
-                imports.Add(defaultImport);
+                imports.Add(new ImportDocumentSnapshot(project, importItem));
             }
-            else if (project.GetDocument(item.PhysicalPath) is { } import)
+            else if (project.TryGetDocument(importItem.PhysicalPath, out var importDocument))
             {
-                imports.Add(import);
+                imports.Add(importDocument);
             }
         }
 
-        return imports.ToImmutable();
+        return imports.DrainToImmutable();
     }
 
-    internal static async Task<RazorCodeDocument> GenerateCodeDocumentAsync(IDocumentSnapshot document, RazorProjectEngine projectEngine, ImmutableArray<ImportItem> imports, ImmutableArray<TagHelperDescriptor> tagHelpers, bool forceRuntimeCodeGeneration)
+    internal static async Task<RazorCodeDocument> GenerateCodeDocumentAsync(
+        IDocumentSnapshot document,
+        RazorProjectEngine projectEngine,
+        ImmutableArray<ImportItem> imports,
+        ImmutableArray<TagHelperDescriptor> tagHelpers,
+        bool forceRuntimeCodeGeneration)
     {
         // OK we have to generate the code.
         using var importSources = new PooledArrayBuilder<RazorSourceDocument>(imports.Length);
+
         foreach (var item in imports)
         {
-            var importProjectItem = item.FilePath is null ? null : projectEngine.FileSystem.GetItem(item.FilePath, item.FileKind);
-            var sourceDocument = await GetRazorSourceDocumentAsync(item.Document, importProjectItem).ConfigureAwait(false);
-            importSources.Add(sourceDocument);
+            var importProjectItem = GetProjectItem(item.FilePath, item.FileKind, projectEngine.FileSystem);
+            var importSourceDocument = await GetRazorSourceDocumentAsync(item.Document, importProjectItem).ConfigureAwait(false);
+            importSources.Add(importSourceDocument);
         }
 
-        var projectItem = document.FilePath is null ? null : projectEngine.FileSystem.GetItem(document.FilePath, document.FileKind);
-        var documentSource = await GetRazorSourceDocumentAsync(document, projectItem).ConfigureAwait(false);
+        var projectItem = GetProjectItem(document.FilePath, document.FileKind, projectEngine.FileSystem);
+        var sourceDocument = await GetRazorSourceDocumentAsync(document, projectItem).ConfigureAwait(false);
 
-        if (forceRuntimeCodeGeneration)
+        return forceRuntimeCodeGeneration
+            ? projectEngine.Process(sourceDocument, document.FileKind, importSources.DrainToImmutable(), tagHelpers)
+            : projectEngine.ProcessDesignTime(sourceDocument, document.FileKind, importSources.DrainToImmutable(), tagHelpers);
+
+        static RazorProjectItem? GetProjectItem(string? filePath, string? fileKind, RazorProjectFileSystem fileSystem)
         {
-            return projectEngine.Process(documentSource, fileKind: document.FileKind, importSources.DrainToImmutable(), tagHelpers);
+            return filePath is not null
+                ? fileSystem.GetItem(filePath, fileKind)
+                : null;
         }
-
-        return projectEngine.ProcessDesignTime(documentSource, fileKind: document.FileKind, importSources.DrainToImmutable(), tagHelpers);
     }
 
     internal static async Task<ImmutableArray<ImportItem>> GetImportsAsync(IDocumentSnapshot document, RazorProjectEngine projectEngine)
     {
-        var imports = GetImportsCore(document.Project, projectEngine, document.FilePath.AssumeNotNull(), document.FileKind.AssumeNotNull());
-        using var result = new PooledArrayBuilder<ImportItem>(imports.Length);
+        var importSnapshots = GetImportsCore(document.Project, projectEngine, document.FilePath.AssumeNotNull(), document.FileKind.AssumeNotNull());
 
-        foreach (var snapshot in imports)
+        using var result = new PooledArrayBuilder<ImportItem>(importSnapshots.Length);
+
+        foreach (var snapshot in importSnapshots)
         {
-            var versionStamp = await snapshot.GetTextVersionAsync().ConfigureAwait(false);
-            result.Add(new ImportItem(snapshot.FilePath, versionStamp, snapshot));
+            var version = await snapshot.GetTextVersionAsync().ConfigureAwait(false);
+            result.Add(new ImportItem(snapshot.FilePath, version, snapshot));
         }
 
         return result.DrainToImmutable();
@@ -299,6 +290,8 @@ internal partial class DocumentState
     private static async Task<RazorSourceDocument> GetRazorSourceDocumentAsync(IDocumentSnapshot document, RazorProjectItem? projectItem)
     {
         var sourceText = await document.GetTextAsync().ConfigureAwait(false);
-        return RazorSourceDocument.Create(sourceText, RazorSourceDocumentProperties.Create(document.FilePath, projectItem?.RelativePhysicalPath));
+        return RazorSourceDocument.Create(
+            sourceText,
+            RazorSourceDocumentProperties.Create(document.FilePath, projectItem?.RelativePhysicalPath));
     }
 }
