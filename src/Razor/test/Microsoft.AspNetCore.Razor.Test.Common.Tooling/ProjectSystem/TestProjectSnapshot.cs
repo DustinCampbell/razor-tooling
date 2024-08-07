@@ -3,13 +3,11 @@
 
 using System;
 using System.IO;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.ProjectEngineHost;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
-using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.AspNetCore.Razor.Test.Common.ProjectSystem;
 
@@ -35,7 +33,7 @@ internal class TestProjectSnapshot : ProjectSnapshot
         foreach (var documentFilePath in documentFilePaths)
         {
             var hostDocument = new HostDocument(documentFilePath, documentFilePath);
-            state = state.WithAddedHostDocument(hostDocument, () => Task.FromResult(TextAndVersion.Create(SourceText.From(string.Empty), VersionStamp.Default)));
+            state = state.WithAddedHostDocument(hostDocument, RazorTextLoader.Empty);
         }
 
         var testProject = new TestProjectSnapshot(state);

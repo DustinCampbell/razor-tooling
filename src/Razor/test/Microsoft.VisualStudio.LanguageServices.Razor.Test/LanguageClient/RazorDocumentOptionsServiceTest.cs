@@ -13,7 +13,6 @@ using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.Options;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.Settings;
-using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.Razor.Settings;
 using Xunit;
 using Xunit.Abstractions;
@@ -31,7 +30,7 @@ public class RazorDocumentOptionsServiceTest(ITestOutputHelper testOutput) : Wor
         clientSettingsManager.Update(clientSpaceSettings);
         var optionsService = new RazorDocumentOptionsService(clientSettingsManager);
 
-        var document = InitializeDocument(SourceText.From("text"));
+        var document = InitializeDocument("text");
 
         var useTabsOptionKey = GetUseTabsOptionKey(document);
         var tabSizeOptionKey = GetTabSizeOptionKey(document);
@@ -58,7 +57,7 @@ public class RazorDocumentOptionsServiceTest(ITestOutputHelper testOutput) : Wor
         clientSettingsManager.Update(spaceSettings);
         var optionsService = new RazorDocumentOptionsService(clientSettingsManager);
 
-        var document = InitializeDocument(SourceText.From("text"));
+        var document = InitializeDocument("text");
 
         var useTabsOptionKey = GetUseTabsOptionKey(document);
         var tabSizeOptionKey = GetTabSizeOptionKey(document);
@@ -87,7 +86,7 @@ public class RazorDocumentOptionsServiceTest(ITestOutputHelper testOutput) : Wor
 
     // Adapted from DocumentExcerptServiceTestBase's InitializeDocument.
     // Adds the text to a ProjectSnapshot, generates code, and updates the workspace.
-    private Document InitializeDocument(SourceText sourceText)
+    private Document InitializeDocument(string text)
     {
         var baseDirectory = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "c:\\users\\example\\src" : "/home/example";
         var hostProject = new HostProject(
@@ -97,7 +96,7 @@ public class RazorDocumentOptionsServiceTest(ITestOutputHelper testOutput) : Wor
 
         var project = new ProjectSnapshot(
             ProjectState.Create(ProjectEngineFactoryProvider, hostProject, ProjectWorkspaceState.Default)
-            .WithAddedHostDocument(hostDocument, () => Task.FromResult(TextAndVersion.Create(sourceText, VersionStamp.Create()))));
+            .WithAddedHostDocument(hostDocument, RazorTextLoader.Create(text, VersionStamp.Create())));
 
         var documentSnapshot = project.GetDocument(hostDocument.FilePath);
 

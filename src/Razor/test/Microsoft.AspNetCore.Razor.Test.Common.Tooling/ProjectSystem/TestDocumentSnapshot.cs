@@ -39,9 +39,9 @@ internal class TestDocumentSnapshot : DocumentSnapshot
         var sourceText = SourceText.From(text);
         var documentState = new DocumentState(
             hostDocument,
-            SourceText.From(text),
+            sourceText,
             version,
-            () => Task.FromResult(TextAndVersion.Create(sourceText, version)));
+            RazorTextLoader.Create(sourceText, version));
         var testDocument = new TestDocumentSnapshot(projectSnapshot, documentState);
 
         return testDocument;
@@ -62,9 +62,9 @@ internal class TestDocumentSnapshot : DocumentSnapshot
         var sourceText = SourceText.From(text);
         var documentState = new DocumentState(
             hostDocument,
-            SourceText.From(text),
+            sourceText,
             version,
-            () => Task.FromResult(TextAndVersion.Create(sourceText, version.Value)));
+            RazorTextLoader.Create(sourceText, version.Value));
         var testDocument = new TestDocumentSnapshot(projectSnapshot, documentState);
 
         return testDocument;

@@ -511,7 +511,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
         switch (action)
         {
             case AddDocumentAction(var newDocument, var textLoader):
-                return new Entry(originalEntry.State.WithAddedHostDocument(newDocument, CreateTextAndVersionFunc(textLoader)));
+                return new Entry(originalEntry.State.WithAddedHostDocument(newDocument, RazorTextLoader.Create(textLoader)));
 
             case RemoveDocumentAction(var originalDocument):
                 return new Entry(originalEntry.State.WithRemovedHostDocument(originalDocument));
@@ -521,7 +521,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
                     documentState.AssumeNotNull();
                     var state = originalEntry.State.WithChangedHostDocument(
                         documentState.HostDocument,
-                        () => textLoader.LoadTextAndVersionAsync(s_loadTextOptions, cancellationToken: default));
+                        RazorTextLoader.Create(textLoader));
                     return new Entry(state);
                 }
 
@@ -538,14 +538,16 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
                     }
                     else
                     {
-                        var newState = originalEntry.State.WithChangedHostDocument(documentState.HostDocument, async () =>
-                        {
-                            olderText = await documentState.GetTextAsync().ConfigureAwait(false);
-                            olderVersion = await documentState.GetTextVersionAsync().ConfigureAwait(false);
+                        var newState = originalEntry.State.WithChangedHostDocument(
+                            documentState.HostDocument,
+                            RazorTextLoader.Create(async cancellationToken =>
+                            {
+                                olderText = await documentState.GetTextAsync().ConfigureAwait(false);
+                                olderVersion = await documentState.GetTextVersionAsync().ConfigureAwait(false);
 
-                            var version = sourceText.ContentEquals(olderText) ? olderVersion : olderVersion.GetNewerVersion();
-                            return TextAndVersion.Create(sourceText, version, documentState.HostDocument.FilePath);
-                        });
+                                var version = sourceText.ContentEquals(olderText) ? olderVersion : olderVersion.GetNewerVersion();
+                                return TextAndVersion.Create(sourceText, version, documentState.HostDocument.FilePath);
+                            }));
 
                         return new Entry(newState);
                     }
@@ -555,7 +557,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
                 {
                     var newState = originalEntry.State.WithChangedHostDocument(
                         documentState.AssumeNotNull().HostDocument,
-                        CreateTextAndVersionFunc(textLoader));
+                        RazorTextLoader.Create(textLoader));
 
                     return new Entry(newState);
                 }
@@ -574,14 +576,16 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
                     }
                     else
                     {
-                        var state = originalEntry.State.WithChangedHostDocument(documentState.HostDocument, async () =>
-                        {
-                            olderText = await documentState.GetTextAsync().ConfigureAwait(false);
-                            olderVersion = await documentState.GetTextVersionAsync().ConfigureAwait(false);
+                        var state = originalEntry.State.WithChangedHostDocument(
+                            documentState.HostDocument,
+                            RazorTextLoader.Create(async cancellationToken =>
+                            {
+                                olderText = await documentState.GetTextAsync().ConfigureAwait(false);
+                                olderVersion = await documentState.GetTextVersionAsync().ConfigureAwait(false);
 
-                            var version = sourceText.ContentEquals(olderText) ? olderVersion : olderVersion.GetNewerVersion();
-                            return TextAndVersion.Create(sourceText, version, documentState.HostDocument.FilePath);
-                        });
+                                var version = sourceText.ContentEquals(olderText) ? olderVersion : olderVersion.GetNewerVersion();
+                                return TextAndVersion.Create(sourceText, version, documentState.HostDocument.FilePath);
+                            }));
 
                         return new Entry(state);
                     }
@@ -595,13 +599,6 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
             default:
                 throw new InvalidOperationException($"Unexpected action type {action.GetType()}");
-        }
-
-        static Func<Task<TextAndVersion>> CreateTextAndVersionFunc(TextLoader textLoader)
-        {
-            return textLoader is null
-                ? DocumentState.EmptyLoader
-                : (() => textLoader.LoadTextAndVersionAsync(s_loadTextOptions, CancellationToken.None));
         }
     }
 

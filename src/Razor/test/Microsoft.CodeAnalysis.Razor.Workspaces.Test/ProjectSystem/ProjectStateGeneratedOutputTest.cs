@@ -8,33 +8,30 @@ using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Test.Common;
 using Microsoft.AspNetCore.Razor.Test.Common.Workspaces;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.Text;
 using Xunit;
 using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
-public class ProjectStateGeneratedOutputTest : WorkspaceTestBase
+public class ProjectStateGeneratedOutputTest(ITestOutputHelper testOutput) : WorkspaceTestBase(testOutput)
 {
-    private readonly HostDocument _hostDocument;
-    private readonly HostProject _hostProject;
-    private readonly HostProject _hostProjectWithConfigurationChange;
-    private readonly ImmutableArray<TagHelperDescriptor> _someTagHelpers;
-    private readonly SourceText _text;
+    private readonly HostDocument _hostDocument = TestProjectData.SomeProjectFile1;
 
-    public ProjectStateGeneratedOutputTest(ITestOutputHelper testOutput)
-        : base(testOutput)
-    {
-        _hostProject = new HostProject(TestProjectData.SomeProject.FilePath, TestProjectData.SomeProject.IntermediateOutputPath, FallbackRazorConfiguration.MVC_2_0, TestProjectData.SomeProject.RootNamespace);
-        _hostProjectWithConfigurationChange = new HostProject(TestProjectData.SomeProject.FilePath, TestProjectData.SomeProject.IntermediateOutputPath, FallbackRazorConfiguration.MVC_1_0, TestProjectData.SomeProject.RootNamespace);
+    private readonly HostProject _hostProject = new(
+            TestProjectData.SomeProject.FilePath,
+            TestProjectData.SomeProject.IntermediateOutputPath,
+            FallbackRazorConfiguration.MVC_2_0,
+            TestProjectData.SomeProject.RootNamespace);
 
-        _someTagHelpers = ImmutableArray.Create(
-            TagHelperDescriptorBuilder.Create("Test1", "TestAssembly").Build());
+    private readonly HostProject _hostProjectWithConfigurationChange = new(
+            TestProjectData.SomeProject.FilePath,
+            TestProjectData.SomeProject.IntermediateOutputPath,
+            FallbackRazorConfiguration.MVC_1_0,
+            TestProjectData.SomeProject.RootNamespace);
 
-        _hostDocument = TestProjectData.SomeProjectFile1;
-
-        _text = SourceText.From("Hello, world!");
-    }
+    private readonly ImmutableArray<TagHelperDescriptor> _someTagHelpers = [
+        TagHelperDescriptorBuilder.Create("Test1", "TestAssembly").Build()
+    ];
 
     protected override void ConfigureProjectEngine(RazorProjectEngineBuilder builder)
     {
@@ -45,14 +42,14 @@ public class ProjectStateGeneratedOutputTest : WorkspaceTestBase
     public async Task HostDocumentAdded_CachesOutput()
     {
         // Arrange
-        var original =
-            ProjectState.Create(ProjectEngineFactoryProvider, _hostProject, ProjectWorkspaceState.Default)
-            .WithAddedHostDocument(_hostDocument, DocumentState.EmptyLoader);
+        var original = ProjectState
+            .Create(ProjectEngineFactoryProvider, _hostProject, ProjectWorkspaceState.Default)
+            .WithAddedHostDocument(_hostDocument, RazorTextLoader.Empty);
 
         var (originalOutput, originalInputVersion) = await GetOutputAsync(original, _hostDocument);
 
         // Act
-        var state = original.WithAddedHostDocument(TestProjectData.AnotherProjectFile1, DocumentState.EmptyLoader);
+        var state = original.WithAddedHostDocument(TestProjectData.AnotherProjectFile1, RazorTextLoader.Empty);
 
         // Assert
         var (actualOutput, actualInputVersion) = await GetOutputAsync(state, _hostDocument);
@@ -64,14 +61,14 @@ public class ProjectStateGeneratedOutputTest : WorkspaceTestBase
     public async Task HostDocumentAdded_Import_DoesNotCacheOutput()
     {
         // Arrange
-        var original =
-            ProjectState.Create(ProjectEngineFactoryProvider, _hostProject, ProjectWorkspaceState.Default)
-            .WithAddedHostDocument(_hostDocument, DocumentState.EmptyLoader);
+        var original = ProjectState
+            .Create(ProjectEngineFactoryProvider, _hostProject, ProjectWorkspaceState.Default)
+            .WithAddedHostDocument(_hostDocument, RazorTextLoader.Empty);
 
         var (originalOutput, originalInputVersion) = await GetOutputAsync(original, _hostDocument);
 
         // Act
-        var state = original.WithAddedHostDocument(TestProjectData.SomeProjectImportFile, DocumentState.EmptyLoader);
+        var state = original.WithAddedHostDocument(TestProjectData.SomeProjectImportFile, RazorTextLoader.Empty);
 
         // Assert
         var (actualOutput, actualInputVersion) = await GetOutputAsync(state, _hostDocument);
@@ -84,16 +81,16 @@ public class ProjectStateGeneratedOutputTest : WorkspaceTestBase
     public async Task HostDocumentChanged_DoesNotCacheOutput()
     {
         // Arrange
-        var original =
-            ProjectState.Create(ProjectEngineFactoryProvider, _hostProject, ProjectWorkspaceState.Default)
-            .WithAddedHostDocument(_hostDocument, DocumentState.EmptyLoader)
-            .WithAddedHostDocument(TestProjectData.SomeProjectImportFile, DocumentState.EmptyLoader);
+        var original = ProjectState
+            .Create(ProjectEngineFactoryProvider, _hostProject, ProjectWorkspaceState.Default)
+            .WithAddedHostDocument(_hostDocument, RazorTextLoader.Empty)
+            .WithAddedHostDocument(TestProjectData.SomeProjectImportFile, RazorTextLoader.Empty);
 
         var (originalOutput, originalInputVersion) = await GetOutputAsync(original, _hostDocument);
 
         // Act
         var version = VersionStamp.Create();
-        var state = original.WithChangedHostDocument(_hostDocument, () => Task.FromResult(TextAndVersion.Create(SourceText.From("@using System"), version)));
+        var state = original.WithChangedHostDocument(_hostDocument, RazorTextLoader.Create("@using System", version));
 
         // Assert
         var (actualOutput, actualInputVersion) = await GetOutputAsync(state, _hostDocument);
@@ -106,16 +103,16 @@ public class ProjectStateGeneratedOutputTest : WorkspaceTestBase
     public async Task HostDocumentChanged_Import_DoesNotCacheOutput()
     {
         // Arrange
-        var original =
-            ProjectState.Create(ProjectEngineFactoryProvider, _hostProject, ProjectWorkspaceState.Default)
-            .WithAddedHostDocument(_hostDocument, DocumentState.EmptyLoader)
-            .WithAddedHostDocument(TestProjectData.SomeProjectImportFile, DocumentState.EmptyLoader);
+        var original = ProjectState
+            .Create(ProjectEngineFactoryProvider, _hostProject, ProjectWorkspaceState.Default)
+            .WithAddedHostDocument(_hostDocument, RazorTextLoader.Empty)
+            .WithAddedHostDocument(TestProjectData.SomeProjectImportFile, RazorTextLoader.Empty);
 
         var (originalOutput, originalInputVersion) = await GetOutputAsync(original, _hostDocument);
 
         // Act
         var version = VersionStamp.Create();
-        var state = original.WithChangedHostDocument(TestProjectData.SomeProjectImportFile, () => Task.FromResult(TextAndVersion.Create(SourceText.From("@using System"), version)));
+        var state = original.WithChangedHostDocument(TestProjectData.SomeProjectImportFile, RazorTextLoader.Create("@using System", version));
 
         // Assert
         var (actualOutput, actualInputVersion) = await GetOutputAsync(state, _hostDocument);
@@ -128,10 +125,10 @@ public class ProjectStateGeneratedOutputTest : WorkspaceTestBase
     public async Task HostDocumentRemoved_Import_DoesNotCacheOutput()
     {
         // Arrange
-        var original =
-            ProjectState.Create(ProjectEngineFactoryProvider, _hostProject, ProjectWorkspaceState.Default)
-            .WithAddedHostDocument(_hostDocument, DocumentState.EmptyLoader)
-            .WithAddedHostDocument(TestProjectData.SomeProjectImportFile, DocumentState.EmptyLoader);
+        var original = ProjectState
+            .Create(ProjectEngineFactoryProvider, _hostProject, ProjectWorkspaceState.Default)
+            .WithAddedHostDocument(_hostDocument, RazorTextLoader.Empty)
+            .WithAddedHostDocument(TestProjectData.SomeProjectImportFile, RazorTextLoader.Empty);
 
         var (originalOutput, originalInputVersion) = await GetOutputAsync(original, _hostDocument);
 
@@ -149,9 +146,9 @@ public class ProjectStateGeneratedOutputTest : WorkspaceTestBase
     public async Task ProjectWorkspaceStateChange_CachesOutput_EvenWhenNewerProjectWorkspaceState()
     {
         // Arrange
-        var original =
-            ProjectState.Create(ProjectEngineFactoryProvider, _hostProject, ProjectWorkspaceState.Default)
-            .WithAddedHostDocument(_hostDocument, DocumentState.EmptyLoader);
+        var original = ProjectState
+            .Create(ProjectEngineFactoryProvider, _hostProject, ProjectWorkspaceState.Default)
+            .WithAddedHostDocument(_hostDocument, RazorTextLoader.Empty);
 
         var (originalOutput, originalInputVersion) = await GetOutputAsync(original, _hostDocument);
         var changed = ProjectWorkspaceState.Default;
@@ -170,9 +167,9 @@ public class ProjectStateGeneratedOutputTest : WorkspaceTestBase
     public async Task ProjectWorkspaceStateChange_WithTagHelperChange_DoesNotCacheOutput()
     {
         // Arrange
-        var original =
-            ProjectState.Create(ProjectEngineFactoryProvider, _hostProject, ProjectWorkspaceState.Default)
-            .WithAddedHostDocument(_hostDocument, DocumentState.EmptyLoader);
+        var original = ProjectState
+            .Create(ProjectEngineFactoryProvider, _hostProject, ProjectWorkspaceState.Default)
+            .WithAddedHostDocument(_hostDocument, RazorTextLoader.Empty);
 
         var (originalOutput, originalInputVersion) = await GetOutputAsync(original, _hostDocument);
         var changed = ProjectWorkspaceState.Create(_someTagHelpers);
@@ -194,9 +191,9 @@ public class ProjectStateGeneratedOutputTest : WorkspaceTestBase
         var csharp8ValidConfiguration = new RazorConfiguration(RazorLanguageVersion.Version_3_0, _hostProject.Configuration.ConfigurationName, _hostProject.Configuration.Extensions);
         var hostProject = new HostProject(TestProjectData.SomeProject.FilePath, TestProjectData.SomeProject.IntermediateOutputPath, csharp8ValidConfiguration, TestProjectData.SomeProject.RootNamespace);
         var originalWorkspaceState = ProjectWorkspaceState.Create(_someTagHelpers, LanguageVersion.CSharp7);
-        var original =
-            ProjectState.Create(ProjectEngineFactoryProvider, hostProject, originalWorkspaceState)
-            .WithAddedHostDocument(_hostDocument, () => Task.FromResult(TextAndVersion.Create(SourceText.From("@DateTime.Now"), VersionStamp.Default)));
+        var original = ProjectState
+            .Create(ProjectEngineFactoryProvider, hostProject, originalWorkspaceState)
+            .WithAddedHostDocument(_hostDocument, RazorTextLoader.Create("@DateTime.Now", VersionStamp.Default));
         var changedWorkspaceState = ProjectWorkspaceState.Create(_someTagHelpers, LanguageVersion.CSharp8);
 
         var (originalOutput, originalInputVersion) = await GetOutputAsync(original, _hostDocument);
@@ -215,9 +212,9 @@ public class ProjectStateGeneratedOutputTest : WorkspaceTestBase
     public async Task ConfigurationChange_DoesNotCacheOutput()
     {
         // Arrange
-        var original =
-            ProjectState.Create(ProjectEngineFactoryProvider, _hostProject, ProjectWorkspaceState.Default)
-            .WithAddedHostDocument(_hostDocument, DocumentState.EmptyLoader);
+        var original = ProjectState
+            .Create(ProjectEngineFactoryProvider, _hostProject, ProjectWorkspaceState.Default)
+            .WithAddedHostDocument(_hostDocument, RazorTextLoader.Empty);
 
         var (originalOutput, originalInputVersion) = await GetOutputAsync(original, _hostDocument);
 
@@ -239,7 +236,6 @@ public class ProjectStateGeneratedOutputTest : WorkspaceTestBase
 
     private static Task<(RazorCodeDocument, VersionStamp)> GetOutputAsync(ProjectState project, DocumentState document)
     {
-
         var projectSnapshot = new ProjectSnapshot(project);
         var documentSnapshot = new DocumentSnapshot(projectSnapshot, document);
         return document.GetGeneratedOutputAndVersionAsync(projectSnapshot, documentSnapshot);

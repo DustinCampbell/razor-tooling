@@ -23,11 +23,6 @@ public abstract class DocumentExcerptServiceTestBase(ITestOutputHelper testOutpu
 
     public static (SourceText sourceText, TextSpan span) CreateText(string text)
     {
-        if (text is null)
-        {
-            throw new ArgumentNullException(nameof(text));
-        }
-
         // Since we're using positions, normalize to Windows style
 #pragma warning disable CA1307 // Specify StringComparison
         text = text.Replace("\r", "").Replace("\n", "\r\n");
@@ -42,7 +37,7 @@ public abstract class DocumentExcerptServiceTestBase(ITestOutputHelper testOutpu
     {
         var project = new ProjectSnapshot(
             ProjectState.Create(ProjectEngineFactoryProvider, _hostProject, ProjectWorkspaceState.Default)
-            .WithAddedHostDocument(_hostDocument, () => Task.FromResult(TextAndVersion.Create(sourceText, VersionStamp.Create()))));
+            .WithAddedHostDocument(_hostDocument, RazorTextLoader.Create(sourceText, VersionStamp.Create())));
 
         var primary = project.GetDocument(_hostDocument.FilePath).AssumeNotNull();
 

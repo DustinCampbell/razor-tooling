@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Test.Common;
 using Microsoft.AspNetCore.Razor.Test.Common.Workspaces;
-using Microsoft.CodeAnalysis.Text;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -15,7 +14,6 @@ namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
 public class DefaultDocumentSnapshotTest : WorkspaceTestBase
 {
-    private readonly SourceText _sourceText;
     private readonly VersionStamp _version;
     private readonly HostDocument _componentHostDocument;
     private readonly HostDocument _componentCshtmlHostDocument;
@@ -29,7 +27,6 @@ public class DefaultDocumentSnapshotTest : WorkspaceTestBase
     public DefaultDocumentSnapshotTest(ITestOutputHelper testOutput)
         : base(testOutput)
     {
-        _sourceText = SourceText.From("<p>Hello World</p>");
         _version = VersionStamp.Create();
 
         // Create a new HostDocument to avoid mutating the code container
@@ -41,18 +38,18 @@ public class DefaultDocumentSnapshotTest : WorkspaceTestBase
         var projectState = ProjectState.Create(ProjectEngineFactoryProvider, TestProjectData.SomeProject, ProjectWorkspaceState.Default);
         var project = new ProjectSnapshot(projectState);
 
-        var textAndVersion = TextAndVersion.Create(_sourceText, _version);
+        var textLoader = RazorTextLoader.Create("<p>Hello World</p>", _version);
 
-        var documentState = DocumentState.Create(_legacyHostDocument, () => Task.FromResult(textAndVersion));
+        var documentState = DocumentState.Create(_legacyHostDocument, textLoader);
         _legacyDocument = new DocumentSnapshot(project, documentState);
 
-        documentState = DocumentState.Create(_componentHostDocument, () => Task.FromResult(textAndVersion));
+        documentState = DocumentState.Create(_componentHostDocument, textLoader);
         _componentDocument = new DocumentSnapshot(project, documentState);
 
-        documentState = DocumentState.Create(_componentCshtmlHostDocument, () => Task.FromResult(textAndVersion));
+        documentState = DocumentState.Create(_componentCshtmlHostDocument, textLoader);
         _componentCshtmlDocument = new DocumentSnapshot(project, documentState);
 
-        documentState = DocumentState.Create(_nestedComponentHostDocument, () => Task.FromResult(textAndVersion));
+        documentState = DocumentState.Create(_nestedComponentHostDocument, textLoader);
         _nestedComponentDocument = new DocumentSnapshot(project, documentState);
     }
 

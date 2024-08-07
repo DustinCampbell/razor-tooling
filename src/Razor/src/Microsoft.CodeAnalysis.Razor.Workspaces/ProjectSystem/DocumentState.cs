@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
@@ -14,24 +15,18 @@ namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
 internal partial class DocumentState
 {
-    private static readonly TextAndVersion s_emptyText = TextAndVersion.Create(
-        SourceText.From(string.Empty),
-        VersionStamp.Default);
-
-    public static readonly Func<Task<TextAndVersion>> EmptyLoader = () => Task.FromResult(s_emptyText);
-
     private readonly object _lock;
 
     private ComputedStateTracker? _computedState;
 
-    private readonly Func<Task<TextAndVersion>> _loader;
+    private readonly RazorTextLoader _loader;
     private Task<TextAndVersion>? _loaderTask;
     private SourceText? _sourceText;
     private VersionStamp? _version;
 
     public static DocumentState Create(
         HostDocument hostDocument,
-        Func<Task<TextAndVersion>>? loader)
+        RazorTextLoader? loader)
     {
         if (hostDocument is null)
         {
@@ -46,12 +41,12 @@ internal partial class DocumentState
         HostDocument hostDocument,
         SourceText? text,
         VersionStamp? version,
-        Func<Task<TextAndVersion>>? loader)
+        RazorTextLoader? loader)
     {
         HostDocument = hostDocument;
         _sourceText = text;
         _version = version;
-        _loader = loader ?? EmptyLoader;
+        _loader = loader ?? RazorTextLoader.Empty;
         _lock = new object();
     }
 
@@ -89,7 +84,7 @@ internal partial class DocumentState
 
         lock (_lock)
         {
-            _loaderTask = _loader();
+            _loaderTask = _loader.LoadTextAndVersionAsync(CancellationToken.None);
         }
 
         return (await _loaderTask.ConfigureAwait(false)).Text;
@@ -104,7 +99,7 @@ internal partial class DocumentState
 
         lock (_lock)
         {
-            _loaderTask = _loader();
+            _loaderTask = _loader.LoadTextAndVersionAsync(CancellationToken.None);
         }
 
         return (await _loaderTask.ConfigureAwait(false)).Version;
@@ -209,7 +204,7 @@ internal partial class DocumentState
         return new DocumentState(HostDocument, sourceText, version, null);
     }
 
-    public virtual DocumentState WithTextLoader(Func<Task<TextAndVersion>> loader)
+    public virtual DocumentState WithTextLoader(RazorTextLoader loader)
     {
         if (loader is null)
         {
