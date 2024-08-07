@@ -15,12 +15,12 @@ namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
 internal partial class DocumentState
 {
-    private readonly object _lock = new();
+    private readonly object _gate = new();
 
     private ComputedStateTracker? _computedState;
 
     private readonly RazorTextLoader _loader;
-    private Task<TextAndVersion>? _loaderTask;
+    private Task<(SourceText text, VersionStamp version)>? _loadTask;
     private SourceText? _sourceText;
     private VersionStamp? _version;
 
@@ -46,7 +46,7 @@ internal partial class DocumentState
         {
             if (_computedState is null)
             {
-                lock (_lock)
+                lock (_gate)
                 {
                     _computedState ??= new ComputedStateTracker(this);
                 }
@@ -61,6 +61,59 @@ internal partial class DocumentState
         return ComputedState.GetGeneratedOutputAndVersionAsync(project, document);
     }
 
+    private Task<(SourceText text, VersionStamp stamp)> LoadTextAndVersionAsync(CancellationToken cancellationToken)
+    {
+        lock (_gate)
+        {
+            return _loadTask ??= LoadTextAndVersionCoreAsync(cancellationToken);
+        }
+
+        async Task<(SourceText text, VersionStamp version)> LoadTextAndVersionCoreAsync(CancellationToken cancellationToken)
+        {
+            var textAndVersion = await _loader.LoadTextAndVersionAsync(cancellationToken).ConfigureAwait(false);
+
+            lock (_gate)
+            {
+                if (_sourceText is null)
+                {
+                    _sourceText = textAndVersion.Text;
+                    _version = textAndVersion.Version;
+                }
+            }
+
+            // Return the cached field values to ensure that we always return the same SourceText.
+            // In race scenarios, when more than one SourceText instance is produced, we want to
+            // return whichever SourceText is cached.
+            return (_sourceText, _version.GetValueOrDefault());
+        }
+    }
+
+    public ValueTask<SourceText> GetTextAsync(CancellationToken cancellationToken)
+    {
+        return _sourceText is SourceText sourceText
+            ? new(sourceText)
+            : GetTextCoreAsync(cancellationToken);
+
+        async ValueTask<SourceText> GetTextCoreAsync(CancellationToken cancellationToken)
+        {
+            var (text, _ ) = await LoadTextAndVersionAsync(cancellationToken).ConfigureAwait(false);
+            return text;
+        }
+    }
+
+    public ValueTask<VersionStamp> GetTextVersionAsync(CancellationToken cancellationToken)
+    {
+        return _version is VersionStamp version
+            ? new(version)
+            : GetTextVersionCoreAsync(cancellationToken);
+
+        async ValueTask<VersionStamp> GetTextVersionCoreAsync(CancellationToken cancellationToken)
+        {
+            var (_, version) = await LoadTextAndVersionAsync(cancellationToken).ConfigureAwait(false);
+            return version;
+        }
+    }
+
     public async Task<SourceText> GetTextAsync()
     {
         if (TryGetText(out var text))
@@ -68,12 +121,8 @@ internal partial class DocumentState
             return text;
         }
 
-        lock (_lock)
-        {
-            _loaderTask = _loader.LoadTextAndVersionAsync(CancellationToken.None);
-        }
-
-        return (await _loaderTask.ConfigureAwait(false)).Text;
+        (text, _) = await LoadTextAndVersionAsync(CancellationToken.None).ConfigureAwait(false);
+        return text;
     }
 
     public async Task<VersionStamp> GetTextVersionAsync()
@@ -83,12 +132,8 @@ internal partial class DocumentState
             return version;
         }
 
-        lock (_lock)
-        {
-            _loaderTask = _loader.LoadTextAndVersionAsync(CancellationToken.None);
-        }
-
-        return (await _loaderTask.ConfigureAwait(false)).Version;
+        (_, version) = await LoadTextAndVersionAsync(CancellationToken.None).ConfigureAwait(false);
+        return version;
     }
 
     public bool TryGetText([NotNullWhen(true)] out SourceText? result)
@@ -99,9 +144,9 @@ internal partial class DocumentState
             return true;
         }
 
-        if (_loaderTask is { } loaderTask && loaderTask.IsCompleted)
+        if (_loadTask is { } loadTask && loadTask.IsCompleted)
         {
-            result = loaderTask.VerifyCompleted().Text;
+            result = loadTask.VerifyCompleted().text;
             return true;
         }
 
@@ -117,9 +162,9 @@ internal partial class DocumentState
             return true;
         }
 
-        if (_loaderTask is { } loaderTask && loaderTask.IsCompleted)
+        if (_loadTask is { } loadTask && loadTask.IsCompleted)
         {
-            result = loaderTask.VerifyCompleted().Version;
+            result = loadTask.VerifyCompleted().version;
             return true;
         }
 
@@ -134,7 +179,7 @@ internal partial class DocumentState
             // The source could not have possibly changed.
             _sourceText = _sourceText,
             _version = _version,
-            _loaderTask = _loaderTask
+            _loadTask = _loadTask
         };
 
         // Do not cache computed state
@@ -149,7 +194,7 @@ internal partial class DocumentState
             // The source could not have possibly changed.
             _sourceText = _sourceText,
             _version = _version,
-            _loaderTask = _loaderTask
+            _loadTask = _loadTask
         };
 
         // Optimistically cache the computed state
@@ -165,7 +210,7 @@ internal partial class DocumentState
             // The source could not have possibly changed.
             _sourceText = _sourceText,
             _version = _version,
-            _loaderTask = _loaderTask
+            _loadTask = _loadTask
         };
 
         // Optimistically cache the computed state

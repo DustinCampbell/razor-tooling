@@ -70,9 +70,9 @@ internal class DocumentContext(Uri uri, IDocumentSnapshot snapshot, VSProjectCon
 
             cancellationToken.ThrowIfCancellationRequested();
 
-            // Interlock to ensure that we only ever return one instance of RazorCodeDocument.
-            // In race scenarios, when more than one RazorCodeDocument is produced, we want to
-            // return whichever RazorCodeDocument is cached.
+            // Interlock to ensure that we only ever return one instance of SourceText.
+            // In race scenarios, when more than one SourceText is produced, we want to
+            // return whichever SourceText is cached.
             return InterlockedOperations.Initialize(ref _sourceText, sourceText);
         }
     }

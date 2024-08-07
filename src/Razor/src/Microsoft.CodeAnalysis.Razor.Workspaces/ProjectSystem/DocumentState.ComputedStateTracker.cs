@@ -25,7 +25,7 @@ internal partial class DocumentState
 
         public ComputedStateTracker(DocumentState state, ComputedStateTracker? older = null)
         {
-            _lock = state._lock;
+            _lock = state._gate;
             _older = older;
         }
 
