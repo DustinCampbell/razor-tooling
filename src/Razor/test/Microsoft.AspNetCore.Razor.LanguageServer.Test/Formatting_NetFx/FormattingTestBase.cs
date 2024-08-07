@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Razor.Extensions;
 using Microsoft.AspNetCore.Razor.Language;
@@ -285,6 +284,14 @@ public class FormattingTestBase : RazorToolingIntegrationTestBase
 
     internal static IDocumentSnapshot CreateDocumentSnapshot(string path, ImmutableArray<TagHelperDescriptor> tagHelpers, string? fileKind, ImmutableArray<RazorSourceDocument> importsDocuments, ImmutableArray<IDocumentSnapshot> imports, RazorProjectEngine projectEngine, RazorCodeDocument codeDocument, bool inGlobalNamespace = false)
     {
+        var projectSnapshot = TestMocks.CreateProjectSnapshot(b =>
+        {
+            b.SetConfiguration(projectEngine.Configuration);
+            b.SetKey(TestProjectKey.Create("/obj"));
+            b.SetProjectEngine(projectEngine);
+            b.SetTagHelpers(tagHelpers);
+        });
+
         var documentSnapshot = new Mock<IDocumentSnapshot>(MockBehavior.Strict);
         documentSnapshot
             .Setup(d => d.GetGeneratedOutputAsync())
@@ -293,23 +300,14 @@ public class FormattingTestBase : RazorToolingIntegrationTestBase
             .Setup(d => d.FilePath)
             .Returns(path);
         documentSnapshot
-            .Setup(d => d.Project.Key)
-            .Returns(TestProjectKey.Create("/obj"));
+            .SetupGet(d => d.Project)
+            .Returns(projectSnapshot);
         documentSnapshot
             .Setup(d => d.TargetPath)
             .Returns(path);
         documentSnapshot
-            .Setup(d => d.Project.Configuration)
-            .Returns(projectEngine.Configuration);
-        documentSnapshot
             .Setup(d => d.GetTextAsync())
             .ReturnsAsync(codeDocument.Source.Text);
-        documentSnapshot
-            .Setup(d => d.Project.GetTagHelpersAsync(It.IsAny<CancellationToken>()))
-            .Returns(new ValueTask<ImmutableArray<TagHelperDescriptor>>(tagHelpers));
-        documentSnapshot
-            .Setup(d => d.Project.GetProjectEngine())
-            .Returns(projectEngine);
         documentSnapshot
             .Setup(d => d.FileKind)
             .Returns(fileKind);
@@ -323,6 +321,7 @@ public class FormattingTestBase : RazorToolingIntegrationTestBase
                 var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, fileKind, importsDocuments, tagHelpers);
                 return CreateDocumentSnapshot(path, tagHelpers, fileKind, importsDocuments, imports, projectEngine, codeDocument, inGlobalNamespace: inGlobalNamespace);
             });
+
         return documentSnapshot.Object;
     }
 }

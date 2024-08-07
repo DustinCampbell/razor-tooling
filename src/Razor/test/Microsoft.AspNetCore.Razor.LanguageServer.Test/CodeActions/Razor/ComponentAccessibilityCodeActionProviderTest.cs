@@ -3,10 +3,10 @@
 
 using System;
 using System.Collections.Immutable;
-using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Components;
+using Microsoft.AspNetCore.Razor.Test.Common;
 using Microsoft.AspNetCore.Razor.Test.Common.LanguageServer;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.Protocol.CodeActions;
@@ -463,10 +463,15 @@ public class ComponentAccessibilityCodeActionProviderTest(ITestOutputHelper test
         var cSharpDocumentWithDiagnostic = RazorCSharpDocument.Create(codeDocument, cSharpDocument.GeneratedCode, cSharpDocument.Options, new[] { diagnostic });
         codeDocument.SetCSharpDocument(cSharpDocumentWithDiagnostic);
 
+        var projectSnapshot = TestMocks.CreateProjectSnapshot(b =>
+        {
+            b.SetTagHelpers(tagHelpers);
+        });
+
         var documentSnapshot = Mock.Of<IDocumentSnapshot>(document =>
             document.GetGeneratedOutputAsync() == Task.FromResult(codeDocument) &&
             document.GetTextAsync() == Task.FromResult(codeDocument.Source.Text) &&
-            document.Project.GetTagHelpersAsync(It.IsAny<CancellationToken>()) == new ValueTask<ImmutableArray<TagHelperDescriptor>>(tagHelpers), MockBehavior.Strict);
+            document.Project == projectSnapshot, MockBehavior.Strict);
 
         var sourceText = SourceText.From(text);
 

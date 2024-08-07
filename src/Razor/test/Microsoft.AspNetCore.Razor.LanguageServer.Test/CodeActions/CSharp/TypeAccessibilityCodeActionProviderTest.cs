@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Immutable;
 using System.Text.Json;
-using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Razor.Extensions;
 using Microsoft.AspNetCore.Razor.Language;
@@ -463,10 +462,15 @@ public class TypeAccessibilityCodeActionProviderTest(ITestOutputHelper testOutpu
         var cSharpDocumentWithDiagnostic = RazorCSharpDocument.Create(codeDocument, cSharpDocument.GeneratedCode, cSharpDocument.Options, [diagnostic]);
         codeDocument.SetCSharpDocument(cSharpDocumentWithDiagnostic);
 
+        var projectSnapshot = TestMocks.CreateProjectSnapshot(b =>
+        {
+            b.SetTagHelpers(tagHelpers);
+        });
+
         var documentSnapshot = Mock.Of<IDocumentSnapshot>(document =>
             document.GetGeneratedOutputAsync() == Task.FromResult(codeDocument) &&
             document.GetTextAsync() == Task.FromResult(codeDocument.Source.Text) &&
-            document.Project.GetTagHelpersAsync(It.IsAny<CancellationToken>()) == new ValueTask<ImmutableArray<TagHelperDescriptor>>(tagHelpers), MockBehavior.Strict);
+            document.Project == projectSnapshot, MockBehavior.Strict);
 
         var sourceText = SourceText.From(text);
 

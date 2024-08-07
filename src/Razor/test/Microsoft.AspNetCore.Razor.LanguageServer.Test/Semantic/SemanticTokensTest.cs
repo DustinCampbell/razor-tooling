@@ -927,15 +927,15 @@ public partial class SemanticTokensTest(ITestOutputHelper testOutput) : TagHelpe
     {
         var document = CreateCodeDocument(documentText, isRazorFile, tagHelpers);
 
-        var projectSnapshot = new StrictMock<IProjectSnapshot>();
-        projectSnapshot
-            .SetupGet(p => p.Version)
-            .Returns(VersionStamp.Default);
+        var projectSnapshot = TestMocks.CreateProjectSnapshot(b =>
+        {
+            b.SetVersion(VersionStamp.Default);
+        });
 
         var documentSnapshotMock = new StrictMock<IDocumentSnapshot>();
         documentSnapshotMock
             .SetupGet(x => x.Project)
-            .Returns(projectSnapshot.Object);
+            .Returns(projectSnapshot);
         documentSnapshotMock
             .Setup(x => x.GetGeneratedOutputAsync())
             .ReturnsAsync(document);

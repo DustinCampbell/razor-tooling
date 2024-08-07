@@ -42,9 +42,7 @@ public class ImportDocumentManagerTest : VisualStudioTestBase
         var tracker = StrictMock.Of<IVisualStudioDocumentTracker>(t =>
             t.FilePath == Path.Combine(_directoryPath, "Views", "Home", "file.cshtml") &&
             t.ProjectPath == _projectPath &&
-            t.ProjectSnapshot == StrictMock.Of<IProjectSnapshot>(p =>
-                p.GetProjectEngine() == _projectEngine &&
-                p.GetDocument(It.IsAny<string>()) == null));
+            t.ProjectSnapshot == CreateProjectSnapshot());
 
         var fileChangeTrackerFactoryMock = new StrictMock<IFileChangeTrackerFactory>();
         var fileChangeTracker1Mock = new StrictMock<IFileChangeTracker>();
@@ -89,16 +87,12 @@ public class ImportDocumentManagerTest : VisualStudioTestBase
         var tracker = StrictMock.Of<IVisualStudioDocumentTracker>(t =>
             t.FilePath == Path.Combine(_directoryPath, "file.cshtml") &&
             t.ProjectPath == _projectPath &&
-            t.ProjectSnapshot == StrictMock.Of<IProjectSnapshot>(p =>
-                p.GetProjectEngine() == _projectEngine &&
-                p.GetDocument(It.IsAny<string>()) == null));
+            t.ProjectSnapshot == CreateProjectSnapshot());
 
         var anotherTracker = StrictMock.Of<IVisualStudioDocumentTracker>(t =>
             t.FilePath == Path.Combine(_directoryPath, "anotherFile.cshtml") &&
             t.ProjectPath == _projectPath &&
-            t.ProjectSnapshot == StrictMock.Of<IProjectSnapshot>(p =>
-                p.GetProjectEngine() == _projectEngine &&
-                p.GetDocument(It.IsAny<string>()) == null));
+            t.ProjectSnapshot == CreateProjectSnapshot());
 
         var callCount = 0;
         var fileChangeTrackerFactoryMock = new StrictMock<IFileChangeTrackerFactory>();
@@ -127,9 +121,7 @@ public class ImportDocumentManagerTest : VisualStudioTestBase
         var tracker = StrictMock.Of<IVisualStudioDocumentTracker>(t =>
             t.FilePath == Path.Combine(_directoryPath, "file.cshtml") &&
             t.ProjectPath == _projectPath &&
-            t.ProjectSnapshot == StrictMock.Of<IProjectSnapshot>(p =>
-                p.GetProjectEngine() == _projectEngine &&
-                p.GetDocument(It.IsAny<string>()) == null));
+            t.ProjectSnapshot == CreateProjectSnapshot());
 
         var fileChangeTrackerFactoryMock = new StrictMock<IFileChangeTrackerFactory>();
         var fileChangeTrackerMock = new StrictMock<IFileChangeTracker>();
@@ -161,16 +153,12 @@ public class ImportDocumentManagerTest : VisualStudioTestBase
         var tracker = StrictMock.Of<IVisualStudioDocumentTracker>(t =>
             t.FilePath == Path.Combine(_directoryPath, "file.cshtml") &&
             t.ProjectPath == _projectPath &&
-            t.ProjectSnapshot == StrictMock.Of<IProjectSnapshot>(p =>
-                p.GetProjectEngine() == _projectEngine &&
-                p.GetDocument(It.IsAny<string>()) == null));
+            t.ProjectSnapshot == CreateProjectSnapshot());
 
         var anotherTracker = StrictMock.Of<IVisualStudioDocumentTracker>(t =>
             t.FilePath == Path.Combine(_directoryPath, "anotherFile.cshtml") &&
             t.ProjectPath == _projectPath &&
-            t.ProjectSnapshot == StrictMock.Of<IProjectSnapshot>(p =>
-                p.GetProjectEngine() == _projectEngine &&
-                p.GetDocument(It.IsAny<string>()) == null));
+            t.ProjectSnapshot == CreateProjectSnapshot());
 
         var fileChangeTrackerFactoryMock = new StrictMock<IFileChangeTrackerFactory>();
         var fileChangeTrackerMock = new StrictMock<IFileChangeTracker>();
@@ -192,4 +180,13 @@ public class ImportDocumentManagerTest : VisualStudioTestBase
         manager.OnUnsubscribed(tracker);
         manager.OnUnsubscribed(tracker);
     }
+
+    private IProjectSnapshot CreateProjectSnapshot()
+        => TestMocks.CreateProjectSnapshot(b =>
+        {
+            b.SetProjectEngine(_projectEngine);
+            b.Mock
+                .Setup(x => x.GetDocument(It.IsAny<string>()))
+                .Returns<IDocumentSnapshot?>(null);
+        });
 }

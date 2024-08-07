@@ -153,10 +153,15 @@ public class DefaultHtmlCodeActionProviderTest(ITestOutputHelper testOutput) : L
         var projectEngine = RazorProjectEngine.Create(builder => builder.AddTagHelpers(tagHelpers));
         var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, FileKinds.Component, importSources: default, tagHelpers);
 
+        var projectSnapshot = TestMocks.CreateProjectSnapshot(b =>
+        {
+            b.SetTagHelpers(tagHelpers);
+        });
+
         var documentSnapshot = Mock.Of<IDocumentSnapshot>(document =>
             document.GetGeneratedOutputAsync() == Task.FromResult(codeDocument) &&
             document.GetTextAsync() == Task.FromResult(codeDocument.Source.Text) &&
-            document.Project.GetTagHelpersAsync(It.IsAny<CancellationToken>()) == new ValueTask<ImmutableArray<TagHelperDescriptor>>(tagHelpers), MockBehavior.Strict);
+            document.Project == projectSnapshot, MockBehavior.Strict);
 
         var sourceText = SourceText.From(text);
 

@@ -3,10 +3,10 @@
 
 using System;
 using System.Collections.Immutable;
-using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.LanguageServer.Test;
+using Microsoft.AspNetCore.Razor.Test.Common;
 using Microsoft.AspNetCore.Razor.Test.Common.LanguageServer;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.Protocol;
@@ -143,6 +143,11 @@ public class Foo { }
         var projectEngine = RazorProjectEngine.Create(builder => builder.SetRootNamespace("Test"));
         var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, fileKind, importSources: default, tagHelpers);
 
+        var projectSnapshot = TestMocks.CreateProjectSnapshot(b =>
+        {
+            b.SetTagHelpers(tagHelpers);
+        });
+
         var documentSnapshot = new Mock<IDocumentSnapshot>(MockBehavior.Strict);
         documentSnapshot
             .Setup(d => d.GetGeneratedOutputAsync())
@@ -151,8 +156,8 @@ public class Foo { }
             .Setup(d => d.TargetPath)
             .Returns(path);
         documentSnapshot
-            .Setup(d => d.Project.GetTagHelpersAsync(It.IsAny<CancellationToken>()))
-            .Returns(new ValueTask<ImmutableArray<TagHelperDescriptor>>(tagHelpers));
+            .SetupGet(d => d.Project)
+            .Returns(projectSnapshot);
         documentSnapshot
             .Setup(d => d.FileKind)
             .Returns(fileKind);
