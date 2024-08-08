@@ -1,15 +1,15 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
-using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
-internal class DocumentSnapshot : IDocumentSnapshot
+internal class DocumentSnapshot(ProjectSnapshot project, DocumentState state) : IDocumentSnapshot
 {
     public string FileKind => State.HostDocument.FileKind;
     public string FilePath => State.HostDocument.FilePath;
@@ -17,13 +17,19 @@ internal class DocumentSnapshot : IDocumentSnapshot
     public IProjectSnapshot Project => ProjectInternal;
     public bool SupportsOutput => true;
 
-    public ProjectSnapshot ProjectInternal { get; }
-    public DocumentState State { get; }
+    public ProjectSnapshot ProjectInternal { get; } = project;
+    public DocumentState State { get; } = state;
 
-    public DocumentSnapshot(ProjectSnapshot project, DocumentState state)
+    public ValueTask<SourceText> GetTextAsync(CancellationToken cancellationToken)
+        => State.GetTextAsync(cancellationToken);
+
+    public ValueTask<VersionStamp> GetTextVersionAsync(CancellationToken cancellationToken)
+        => State.GetTextVersionAsync(cancellationToken);
+
+    public async ValueTask<RazorCodeDocument> GetGeneratedOutputAsync(CancellationToken cancellationToken)
     {
-        ProjectInternal = project ?? throw new ArgumentNullException(nameof(project));
-        State = state ?? throw new ArgumentNullException(nameof(state));
+        var (output, _) = await State.GetGeneratedOutputAndVersionAsync(ProjectInternal, this).ConfigureAwait(false);
+        return output;
     }
 
     public Task<SourceText> GetTextAsync()

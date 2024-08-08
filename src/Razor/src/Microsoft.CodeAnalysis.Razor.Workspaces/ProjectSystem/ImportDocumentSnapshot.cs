@@ -4,13 +4,15 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
-internal class ImportDocumentSnapshot : IDocumentSnapshot
+internal class ImportDocumentSnapshot(IProjectSnapshot project, RazorProjectItem item) : IDocumentSnapshot
 {
     // The default import file does not have a kind or paths.
     public string? FileKind => null;
@@ -20,17 +22,36 @@ internal class ImportDocumentSnapshot : IDocumentSnapshot
     public bool SupportsOutput => false;
     public IProjectSnapshot Project => _project;
 
-    private readonly IProjectSnapshot _project;
-    private readonly RazorProjectItem _importItem;
+    private readonly IProjectSnapshot _project = project;
+    private readonly RazorProjectItem _importItem = item;
     private SourceText? _sourceText;
-    private readonly VersionStamp _version;
 
-    public ImportDocumentSnapshot(IProjectSnapshot project, RazorProjectItem item)
+    public ValueTask<SourceText> GetTextAsync(CancellationToken cancellationToken)
     {
-        _project = project;
-        _importItem = item;
-        _version = VersionStamp.Default;
+        return _sourceText is SourceText sourceText
+            ? new(sourceText)
+            : new(GetTextCore(cancellationToken));
+
+        SourceText GetTextCore(CancellationToken cancellationToken)
+        {
+            using var stream = _importItem.Read();
+            cancellationToken.ThrowIfCancellationRequested();
+
+            var sourceText = SourceText.From(stream);
+            cancellationToken.ThrowIfCancellationRequested();
+
+            // Interlock to ensure that we only ever return one instance of SourceText.
+            // In race scenarios, when more than one SourceText is produced, we want to
+            // return whichever SourceText is cached.
+            return InterlockedOperations.Initialize(ref _sourceText, sourceText);
+        }
     }
+
+    public ValueTask<VersionStamp> GetTextVersionAsync(CancellationToken cancellationToken)
+        => new(VersionStamp.Default);
+
+    public ValueTask<RazorCodeDocument> GetGeneratedOutputAsync(CancellationToken cancellationToken)
+        => throw new NotSupportedException();
 
     public Task<RazorCodeDocument> GetGeneratedOutputAsync()
         => throw new NotSupportedException();
@@ -48,9 +69,7 @@ internal class ImportDocumentSnapshot : IDocumentSnapshot
     }
 
     public Task<VersionStamp> GetTextVersionAsync()
-    {
-        return Task.FromResult(_version);
-    }
+        => Task.FromResult(VersionStamp.Default);
 
     public bool TryGetText([NotNullWhen(true)] out SourceText? result)
     {
@@ -66,7 +85,7 @@ internal class ImportDocumentSnapshot : IDocumentSnapshot
 
     public bool TryGetTextVersion(out VersionStamp result)
     {
-        result = _version;
+        result = VersionStamp.Default;
         return true;
     }
 

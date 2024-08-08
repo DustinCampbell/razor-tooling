@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
 using System.Diagnostics.CodeAnalysis;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.CodeAnalysis.Text;
@@ -15,6 +16,10 @@ internal interface IDocumentSnapshot
     string? TargetPath { get; }
     IProjectSnapshot Project { get; }
     bool SupportsOutput { get; }
+
+    ValueTask<SourceText> GetTextAsync(CancellationToken cancellationToken);
+    ValueTask<VersionStamp> GetTextVersionAsync(CancellationToken cancellationToken);
+    ValueTask<RazorCodeDocument> GetGeneratedOutputAsync(CancellationToken cancellationToken);
 
     Task<SourceText> GetTextAsync();
     Task<VersionStamp> GetTextVersionAsync();
