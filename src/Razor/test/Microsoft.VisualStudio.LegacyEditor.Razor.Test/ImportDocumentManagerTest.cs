@@ -187,6 +187,6 @@ public class ImportDocumentManagerTest : VisualStudioTestBase
             b.SetProjectEngine(_projectEngine);
             b.Mock
                 .Setup(x => x.GetDocument(It.IsAny<string>()))
-                .Returns<IDocumentSnapshot?>(null);
+                .ReturnsNull();
         });
 }

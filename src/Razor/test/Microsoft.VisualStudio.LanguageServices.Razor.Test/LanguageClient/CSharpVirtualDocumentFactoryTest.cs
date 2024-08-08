@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Razor.Test.Common.VisualStudio;
 using Microsoft.AspNetCore.Razor.Test.Common.Workspaces;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.Workspaces;
-using Microsoft.VisualStudio.Editor.Razor;
 using Microsoft.VisualStudio.LanguageServer.ContainedLanguage;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Utilities;
@@ -56,7 +55,7 @@ public class CSharpVirtualDocumentFactoryTest : VisualStudioTestBase
         var textDocumentFactoryServiceMock = new StrictMock<ITextDocumentFactoryService>();
         textDocumentFactoryServiceMock
             .Setup(x => x.CreateTextDocument(It.IsAny<ITextBuffer>(), It.IsAny<string>()))
-            .Returns((ITextDocument)null!);
+            .Returns(StrictMock.Of<ITextDocument>);
 
         _textDocumentFactoryService = textDocumentFactoryServiceMock.Object;
 

@@ -25,14 +25,14 @@ public class RazorFileChangeDetectorTest(ITestOutputHelper testOutput) : Languag
         var listenerMock1 = new StrictMock<IRazorFileChangeListener>();
         listenerMock1
             .Setup(l => l.RazorFileChangedAsync(It.IsAny<string>(), It.IsAny<RazorFileChangeKind>(), It.IsAny<CancellationToken>()))
-            .Returns(Task.CompletedTask)
+            .ReturnsAsync()
             .Callback((string filePath, RazorFileChangeKind kind, CancellationToken _) => args1.Add((filePath, kind)));
 
         var args2 = new List<(string FilePath, RazorFileChangeKind Kind)>();
         var listenerMock2 = new StrictMock<IRazorFileChangeListener>();
         listenerMock2
             .Setup(l => l.RazorFileChangedAsync(It.IsAny<string>(), It.IsAny<RazorFileChangeKind>(), It.IsAny<CancellationToken>()))
-            .Returns(Task.CompletedTask)
+            .ReturnsAsync()
             .Callback((string filePath, RazorFileChangeKind kind, CancellationToken _) => args2.Add((filePath, kind)));
 
         ImmutableArray<string> existingRazorFiles = ["c:/path/to/index.razor", "c:/other/path/_Host.cshtml"];
@@ -76,7 +76,7 @@ public class RazorFileChangeDetectorTest(ITestOutputHelper testOutput) : Languag
         var listenerMock = new StrictMock<IRazorFileChangeListener>();
         listenerMock
             .Setup(l => l.RazorFileChangedAsync(It.IsAny<string>(), It.IsAny<RazorFileChangeKind>(), It.IsAny<CancellationToken>()))
-            .Returns(Task.CompletedTask)
+            .ReturnsAsync()
             .Callback((string filePath, RazorFileChangeKind kind, CancellationToken _) => actual.Add((filePath, kind)));
 
         using var detector = new TestRazorFileChangeDetector([listenerMock.Object], TimeSpan.FromMilliseconds(1));

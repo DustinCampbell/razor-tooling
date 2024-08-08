@@ -29,7 +29,7 @@ public class RazorLanguageService_IVsLanguageDebugInfoTest(ITestOutputHelper tes
     {
         // Arrange
         var editorAdaptersFactoryService = new Mock<IVsEditorAdaptersFactoryService>(MockBehavior.Strict);
-        editorAdaptersFactoryService.Setup(s => s.GetDataBuffer(It.IsAny<IVsTextBuffer>())).Returns(value: null);
+        editorAdaptersFactoryService.Setup(s => s.GetDataBuffer(It.IsAny<IVsTextBuffer>())).ReturnsNull();
         var languageService = CreateLanguageServiceWith(editorAdaptersFactory: editorAdaptersFactoryService.Object);
 
         // Act

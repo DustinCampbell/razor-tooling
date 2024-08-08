@@ -25,7 +25,7 @@ public class DocumentDidCloseEndpointTest(ITestOutputHelper testOutput) : Langua
         var projectService = new StrictMock<IRazorProjectService>();
         projectService
             .Setup(service => service.CloseDocumentAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
-            .Returns(Task.CompletedTask)
+            .ReturnsAsync()
             .Callback((string path, CancellationToken cancellationToken) => Assert.Equal(documentPath, path));
         var endpoint = new DocumentDidCloseEndpoint(projectService.Object);
         var request = new DidCloseTextDocumentParams()

@@ -41,7 +41,7 @@ public class RazorFileChangeDetectorManagerTest(ITestOutputHelper testOutput) : 
         var detectorMock1 = new StrictMock<IFileChangeDetector>();
         detectorMock1
             .Setup(detector => detector.StartAsync(expectedWorkspaceDirectory, It.IsAny<CancellationToken>()))
-            .Returns(Task.CompletedTask)
+            .ReturnsAsync()
             .Verifiable();
 
         detectorMock1.Setup(x => x.Stop());
@@ -49,7 +49,7 @@ public class RazorFileChangeDetectorManagerTest(ITestOutputHelper testOutput) : 
         var detectorMock2 = new StrictMock<IFileChangeDetector>();
         detectorMock2
             .Setup(detector => detector.StartAsync(expectedWorkspaceDirectory, It.IsAny<CancellationToken>()))
-            .Returns(Task.CompletedTask)
+            .ReturnsAsync()
             .Verifiable();
 
         detectorMock2.Setup(x => x.Stop());

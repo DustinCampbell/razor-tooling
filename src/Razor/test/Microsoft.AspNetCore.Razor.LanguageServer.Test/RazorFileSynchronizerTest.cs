@@ -23,7 +23,7 @@ public class RazorFileSynchronizerTest(ITestOutputHelper testOutput) : LanguageS
         var projectService = new StrictMock<IRazorProjectService>();
         projectService
             .Setup(service => service.AddDocumentToMiscProjectAsync(filePath, It.IsAny<CancellationToken>()))
-            .Returns(Task.CompletedTask)
+            .ReturnsAsync()
             .Verifiable();
         var synchronizer = new RazorFileSynchronizer(projectService.Object);
 
@@ -42,7 +42,7 @@ public class RazorFileSynchronizerTest(ITestOutputHelper testOutput) : LanguageS
         var projectService = new StrictMock<IRazorProjectService>();
         projectService
             .Setup(service => service.AddDocumentToMiscProjectAsync(filePath, It.IsAny<CancellationToken>()))
-            .Returns(Task.CompletedTask)
+            .ReturnsAsync()
             .Verifiable();
         var synchronizer = new RazorFileSynchronizer(projectService.Object);
 
@@ -61,7 +61,7 @@ public class RazorFileSynchronizerTest(ITestOutputHelper testOutput) : LanguageS
         var projectService = new StrictMock<IRazorProjectService>();
         projectService
             .Setup(service => service.RemoveDocumentAsync(filePath, It.IsAny<CancellationToken>()))
-            .Returns(Task.CompletedTask)
+            .ReturnsAsync()
             .Verifiable();
         var synchronizer = new RazorFileSynchronizer(projectService.Object);
 
@@ -80,7 +80,7 @@ public class RazorFileSynchronizerTest(ITestOutputHelper testOutput) : LanguageS
         var projectService = new StrictMock<IRazorProjectService>();
         projectService
             .Setup(service => service.RemoveDocumentAsync(filePath, It.IsAny<CancellationToken>()))
-            .Returns(Task.CompletedTask)
+            .ReturnsAsync()
             .Verifiable();
         var synchronizer = new RazorFileSynchronizer(projectService.Object);
 

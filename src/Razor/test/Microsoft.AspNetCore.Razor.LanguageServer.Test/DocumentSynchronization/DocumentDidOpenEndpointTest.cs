@@ -26,7 +26,7 @@ public class DocumentDidOpenEndpointTest(ITestOutputHelper testOutput) : Languag
         var projectService = new StrictMock<IRazorProjectService>();
         projectService
             .Setup(service => service.OpenDocumentAsync(It.IsAny<string>(), It.IsAny<SourceText>(), It.IsAny<int>(), It.IsAny<CancellationToken>()))
-            .Returns(Task.CompletedTask)
+            .ReturnsAsync()
             .Callback((string path, SourceText text, int version, CancellationToken cancellationToken) =>
             {
                 Assert.Equal("hello", text.ToString());

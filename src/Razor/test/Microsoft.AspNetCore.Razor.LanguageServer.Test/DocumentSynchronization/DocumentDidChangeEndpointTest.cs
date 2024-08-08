@@ -99,7 +99,7 @@ public class DocumentDidChangeEndpointTest(ITestOutputHelper testOutput) : Langu
         var projectService = new StrictMock<IRazorProjectService>();
         projectService
             .Setup(service => service.UpdateDocumentAsync(It.IsAny<string>(), It.IsAny<SourceText>(), It.IsAny<int>(), It.IsAny<CancellationToken>()))
-            .Returns(Task.CompletedTask)
+            .ReturnsAsync()
             .Callback((string path, SourceText text, int version, CancellationToken cancellationToken) =>
             {
                 Assert.Equal("<p></p>", text.ToString());

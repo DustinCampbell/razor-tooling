@@ -232,12 +232,10 @@ public class TextDocumentUriPresentationEndpointTests(ITestOutputHelper testOutp
         var documentContextFactory = CreateDocumentContextFactory(uri, codeDocument);
         var documentContext = CreateDocumentContext(uri, codeDocument);
 
-        var response = (WorkspaceEdit?)null;
-
         var clientConnection = new Mock<IClientConnection>(MockBehavior.Strict);
         clientConnection
             .Setup(l => l.SendRequestAsync<IRazorPresentationParams, WorkspaceEdit?>(CustomMessageNames.RazorUriPresentationEndpoint, It.IsAny<IRazorPresentationParams>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(response);
+            .ReturnsNullAsync();
 
         var endpoint = new TextDocumentUriPresentationEndpoint(
             documentMappingService,
@@ -276,12 +274,10 @@ public class TextDocumentUriPresentationEndpointTests(ITestOutputHelper testOutp
         var documentContextFactory = CreateDocumentContextFactory(uri, codeDocument);
         var documentContext = CreateDocumentContext(uri, codeDocument);
 
-        var response = (WorkspaceEdit?)null;
-
         var clientConnection = new Mock<IClientConnection>(MockBehavior.Strict);
         clientConnection
             .Setup(l => l.SendRequestAsync<IRazorPresentationParams, WorkspaceEdit?>(CustomMessageNames.RazorUriPresentationEndpoint, It.IsAny<IRazorPresentationParams>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(response);
+            .ReturnsNullAsync();
 
         var endpoint = new TextDocumentUriPresentationEndpoint(
             documentMappingService,
@@ -326,12 +322,10 @@ public class TextDocumentUriPresentationEndpointTests(ITestOutputHelper testOutp
         var documentContextFactory = CreateDocumentContextFactory(uri, codeDocument);
         var documentContext = CreateDocumentContext(uri, codeDocument);
 
-        var response = (WorkspaceEdit?)null;
-
         var clientConnection = new Mock<IClientConnection>(MockBehavior.Strict);
         clientConnection
             .Setup(l => l.SendRequestAsync<IRazorPresentationParams, WorkspaceEdit?>(CustomMessageNames.RazorUriPresentationEndpoint, It.IsAny<IRazorPresentationParams>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(response);
+            .ReturnsNullAsync();
 
         var endpoint = new TextDocumentUriPresentationEndpoint(
             documentMappingService,
@@ -432,12 +426,10 @@ public class TextDocumentUriPresentationEndpointTests(ITestOutputHelper testOutp
 
         var documentContextFactory = CreateDocumentContextFactory(uri, codeDocument);
 
-        var response = (WorkspaceEdit?)null;
-
         var clientConnection = new Mock<IClientConnection>(MockBehavior.Strict);
         clientConnection
             .Setup(l => l.SendRequestAsync<IRazorPresentationParams, WorkspaceEdit?>(CustomMessageNames.RazorUriPresentationEndpoint, It.IsAny<IRazorPresentationParams>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(response);
+            .ReturnsNullAsync();
 
         var endpoint = new TextDocumentUriPresentationEndpoint(
             documentMappingService,
@@ -475,12 +467,10 @@ public class TextDocumentUriPresentationEndpointTests(ITestOutputHelper testOutp
 
         var documentContextFactory = CreateDocumentContextFactory(uri, codeDocument);
 
-        var response = (WorkspaceEdit?)null;
-
         var clientConnection = new Mock<IClientConnection>(MockBehavior.Strict);
         clientConnection
             .Setup(l => l.SendRequestAsync<IRazorPresentationParams, WorkspaceEdit?>(CustomMessageNames.RazorUriPresentationEndpoint, It.IsAny<IRazorPresentationParams>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(response);
+            .ReturnsNullAsync();
 
         var endpoint = new TextDocumentUriPresentationEndpoint(
             documentMappingService,
@@ -519,12 +509,10 @@ public class TextDocumentUriPresentationEndpointTests(ITestOutputHelper testOutp
 
         var documentContextFactory = CreateDocumentContextFactory(uri, codeDocument);
 
-        var response = new WorkspaceEdit();
-
         var clientConnection = new Mock<IClientConnection>(MockBehavior.Strict);
         clientConnection
             .Setup(l => l.SendRequestAsync<IRazorPresentationParams, WorkspaceEdit?>(CustomMessageNames.RazorUriPresentationEndpoint, It.IsAny<IRazorPresentationParams>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(response);
+            .ReturnsNullAsync();
 
         var endpoint = new TextDocumentUriPresentationEndpoint(
             documentMappingService,
@@ -562,12 +550,10 @@ public class TextDocumentUriPresentationEndpointTests(ITestOutputHelper testOutp
 
         var documentContextFactory = CreateDocumentContextFactory(uri, codeDocument);
 
-        var response = (WorkspaceEdit?)null;
-
         var clientConnection = new Mock<IClientConnection>(MockBehavior.Strict);
         clientConnection
             .Setup(l => l.SendRequestAsync<IRazorPresentationParams, WorkspaceEdit?>(CustomMessageNames.RazorUriPresentationEndpoint, It.IsAny<IRazorPresentationParams>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(response);
+            .ReturnsNullAsync();
 
         var endpoint = new TextDocumentUriPresentationEndpoint(
             documentMappingService,

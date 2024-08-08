@@ -275,7 +275,7 @@ internal static class TestMocks
                     .Returns([]);
 
                 Mock.Setup(x => x.GetDocument(It.IsAny<string>()))
-                    .Returns<IDocumentSnapshot?>(null);
+                    .ReturnsNull();
 
                 IDocumentSnapshot? outDocument = null;
                 Mock.Setup(x => x.TryGetDocument(It.IsAny<string>(), out outDocument))

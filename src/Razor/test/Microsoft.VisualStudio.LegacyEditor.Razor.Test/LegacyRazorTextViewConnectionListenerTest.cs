@@ -1,7 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Test.Common;
 using Microsoft.AspNetCore.Razor.Test.Common.VisualStudio;
 using Microsoft.VisualStudio.Razor;
@@ -30,7 +29,7 @@ public class LegacyRazorTextViewConnectionListenerTest(ITestOutputHelper testOut
         var documentManagerMock = new StrictMock<IRazorDocumentManager>();
         documentManagerMock
             .Setup(d => d.OnTextViewOpenedAsync(textView, buffers))
-            .Returns(Task.CompletedTask)
+            .ReturnsAsync()
             .Verifiable();
 
         var listener = new LegacyTextViewConnectionListener(serviceProvider, documentManagerMock.Object, JoinableTaskFactory.Context);
@@ -58,7 +57,7 @@ public class LegacyRazorTextViewConnectionListenerTest(ITestOutputHelper testOut
         var documentManagerMock = new StrictMock<IRazorDocumentManager>();
         documentManagerMock
             .Setup(d => d.OnTextViewClosedAsync(textView, buffers))
-            .Returns(Task.CompletedTask)
+            .ReturnsAsync()
             .Verifiable();
 
         var listener = new LegacyTextViewConnectionListener(serviceProvider, documentManagerMock.Object, JoinableTaskFactory.Context);
