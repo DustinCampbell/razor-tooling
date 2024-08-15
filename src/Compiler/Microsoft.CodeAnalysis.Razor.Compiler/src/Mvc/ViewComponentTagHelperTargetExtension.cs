@@ -147,8 +147,8 @@ internal class ViewComponentTagHelperTargetExtension : IViewComponentTagHelperTa
                 TagHelperProcessMethodName,
                 new Dictionary<string, string>()
                 {
-                        { TagHelperContextTypeName, TagHelperContextVariableName },
-                        { TagHelperOutputTypeName, TagHelperOutputVariableName }
+                    { TagHelperContextTypeName, TagHelperContextVariableName },
+                    { TagHelperOutputTypeName, TagHelperOutputVariableName }
                 }))
         {
             writer.WriteInstanceMethodInvocation(
@@ -200,8 +200,7 @@ internal class ViewComponentTagHelperTargetExtension : IViewComponentTagHelperTa
     private string[] GetMethodParameters(TagHelperDescriptor tagHelper)
     {
         var viewComponentName = tagHelper.GetViewComponentName();
-        var methodParameters = new[] { $"\"{viewComponentName}\"", $"{TagHelperProcessInvokeAsyncArgsMethodName}({TagHelperContextVariableName})" };
-        return methodParameters;
+        return [$"\"{viewComponentName}\"", $"{TagHelperProcessInvokeAsyncArgsMethodName}({TagHelperContextVariableName})"];
     }
 
     private void WriteTargetElementString(CodeWriter writer, TagHelperDescriptor tagHelper)

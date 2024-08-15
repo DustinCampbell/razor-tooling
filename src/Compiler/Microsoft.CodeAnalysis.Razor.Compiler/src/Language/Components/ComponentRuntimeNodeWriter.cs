@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 using Microsoft.AspNetCore.Razor.Language.Extensions;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 using Microsoft.AspNetCore.Razor.PooledObjects;
+using static Microsoft.AspNetCore.Razor.Language.CodeGeneration.CodeWriterExtensions;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
@@ -87,15 +88,13 @@ internal class ComponentRuntimeNodeWriter : ComponentNodeWriter
             throw new ArgumentNullException(nameof(node));
         }
 
-        var sourceSequenceAsString = _sourceSequence.ToString(CultureInfo.InvariantCulture);
-        var methodInvocation = _scopeStack.BuilderVarName + '.' + ComponentsApi.RenderTreeBuilder.AddContent + '(' + sourceSequenceAsString;
-        _sourceSequence++;
-
         // Since we're not in the middle of writing an element, this must evaluate as some
         // text to display
         context.CodeWriter
-            .Write(methodInvocation)
+            .Write($"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.AddContent}({_sourceSequence}")
             .WriteParameterSeparator();
+
+        _sourceSequence++;
 
         for (var i = 0; i < node.Children.Count; i++)
         {
@@ -109,6 +108,7 @@ internal class ComponentRuntimeNodeWriter : ComponentNodeWriter
                 context.RenderNode(node.Children[i]);
             }
         }
+
         context.CodeWriter.WriteEndMethodInvocation();
     }
 
@@ -453,7 +453,7 @@ internal class ComponentRuntimeNodeWriter : ComponentNodeWriter
             // into two parts. First we call an inference method that captures all the parameters in local variables,
             // then we use those to call the real type inference method that emits the component. The reason for this
             // is so the captured variables can be used by descendants without re-evaluating the expressions.
-            CodeWriterExtensions.CSharpCodeWritingScope? typeInferenceCaptureScope = null;
+            CSharpCodeWritingScope typeInferenceCaptureScope = default;
             if (node.Component.SuppliesCascadingGenericParameters())
             {
                 typeInferenceCaptureScope = context.CodeWriter.BuildScope();
@@ -516,7 +516,7 @@ internal class ComponentRuntimeNodeWriter : ComponentNodeWriter
             context.CodeWriter.Write(");");
             context.CodeWriter.WriteLine();
 
-            if (typeInferenceCaptureScope.HasValue)
+            if (!typeInferenceCaptureScope.IsDefault)
             {
                 foreach (var localToClear in parameters.Select(p => p.Source).OfType<TypeInferenceCapturedVariable>())
                 {
@@ -525,7 +525,8 @@ internal class ComponentRuntimeNodeWriter : ComponentNodeWriter
                     context.CodeWriter.Write(localToClear.VariableName);
                     context.CodeWriter.WriteLine(" = default;");
                 }
-                typeInferenceCaptureScope.Value.Dispose();
+
+                typeInferenceCaptureScope.Dispose();
             }
         }
     }

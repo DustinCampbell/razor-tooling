@@ -473,6 +473,9 @@ internal abstract class ComponentNodeWriter : IntermediateNodeWriter, ITemplateT
     }
 
     protected static void WriteAddComponentRenderMode(CodeRenderingContext context, string builderName, string variableName)
+        => WriteAddComponentRenderMode(context, [builderName], variableName);
+
+    protected static void WriteAddComponentRenderMode(CodeRenderingContext context, ReadOnlySpan<string> builderName, string variableName)
     {
         context.CodeWriter.Write(builderName);
         context.CodeWriter.Write(".");

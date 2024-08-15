@@ -14,6 +14,8 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 using CSharpSyntaxFacts = Microsoft.CodeAnalysis.CSharp.SyntaxFacts;
 using CSharpSyntaxKind = Microsoft.CodeAnalysis.CSharp.SyntaxKind;
 
+using static Microsoft.AspNetCore.Razor.Language.CodeGeneration.CodeWriterExtensions;
+
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
 // Based on the DesignTimeNodeWriter from Razor repo.
@@ -194,7 +196,8 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
             }
         }
 
-        IDisposable linePragmaScope = null;
+        LinePragmaHelper linePragmaScope = default;
+
         if (node.Source != null)
         {
             if (!isWhitespaceStatement)
@@ -224,7 +227,7 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
             }
         }
 
-        if (linePragmaScope != null)
+        if (!linePragmaScope.IsDefault)
         {
             linePragmaScope.Dispose();
         }
@@ -374,7 +377,7 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
         }
 
         // We might need a scope for inferring types,
-        CodeWriterExtensions.CSharpCodeWritingScope? typeInferenceCaptureScope = null;
+        CSharpCodeWritingScope typeInferenceCaptureScope = default;
         string typeInferenceLocalName = null;
 
         var suppressTypeInference = ShouldSuppressTypeInferenceCall(node);
@@ -483,6 +486,7 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
 
                     UseCapturedCascadingGenericParameterVariable(node, parameter, variableName);
                 }
+
                 context.CodeWriter.WriteLine(");");
             }
 
@@ -560,7 +564,7 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
             }
         }
 
-        typeInferenceCaptureScope?.Dispose();
+        typeInferenceCaptureScope.Dispose();
 
         // We want to generate something that references the Component type to avoid
         // the "usings directive is unnecessary" message.
@@ -1232,7 +1236,7 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
                 new IntermediateToken
                 {
                     Kind = TokenKind.CSharp,
-                    Content = $"{DesignTimeVariable} = (global::{ComponentsApi.IComponentRenderMode.FullTypeName})(" 
+                    Content = $"{DesignTimeVariable} = (global::{ComponentsApi.IComponentRenderMode.FullTypeName})("
                 },
                 new CSharpCodeIntermediateNode
                 {

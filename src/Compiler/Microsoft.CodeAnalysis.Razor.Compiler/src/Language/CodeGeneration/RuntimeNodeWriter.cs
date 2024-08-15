@@ -299,7 +299,8 @@ public class RuntimeNodeWriter : IntermediateNodeWriter
             WriteLiteral(textToRender);
 
             charactersConsumed += textToRender.Length;
-        } while (charactersConsumed < literal.Length);
+        }
+        while (charactersConsumed < literal.Length);
 
         void WriteLiteral(string content)
         {

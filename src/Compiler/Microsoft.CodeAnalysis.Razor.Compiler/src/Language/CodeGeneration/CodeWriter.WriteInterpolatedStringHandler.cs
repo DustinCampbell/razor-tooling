@@ -21,18 +21,24 @@ public sealed partial class CodeWriter
         }
 
         public void AppendLiteral(string value)
-            => _writer.Write(value);
+            => _writer.WriteCore(value.AsMemory());
 
         public void AppendFormatted(ReadOnlyMemory<char> value)
-            => _writer.Write(value);
+            => _writer.WriteCore(value);
 
         public void AppendFormatted(string? value)
         {
             if (value is not null)
             {
-                _writer.Write(value);
+                _writer.WriteCore(value.AsMemory());
             }
         }
+
+        public void AppendFormatted(ReadOnlySpan<string> values)
+            => _writer.Write(values);
+
+        public void AppendFormatted(ReadOnlySpan<ReadOnlyMemory<char>> values)
+            => _writer.Write(values);
 
         public void AppendFormatted<T>(T value)
         {
@@ -44,15 +50,15 @@ public sealed partial class CodeWriter
             switch (value)
             {
                 case ReadOnlyMemory<char> memory:
-                    _writer.Write(memory);
+                    _writer.WriteCore(memory);
                     break;
 
                 case string s:
-                    _writer.Write(s);
+                    _writer.WriteCore(s.AsMemory());
                     break;
 
                 default:
-                    _writer.Write(value.ToString() ?? string.Empty);
+                    _writer.WriteCore(value.ToString().AsMemoryOrDefault());
                     break;
             }
         }

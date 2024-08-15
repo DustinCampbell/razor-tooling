@@ -219,9 +219,6 @@ public sealed partial class CodeWriter : IDisposable
         return WriteCore(value.AsMemory());
     }
 
-    public CodeWriter Write(ReadOnlyMemory<char> value)
-        => WriteCore(value);
-
     public CodeWriter Write(string value, int startIndex, int count)
     {
         ArgHelper.ThrowIfNull(value);
@@ -230,6 +227,29 @@ public sealed partial class CodeWriter : IDisposable
         ArgHelper.ThrowIfGreaterThan(startIndex, value.Length - count);
 
         return WriteCore(value.AsMemory(startIndex, count));
+    }
+
+    public CodeWriter Write(ReadOnlySpan<string> values)
+    {
+        foreach (var value in values)
+        {
+            WriteCore(value.AsMemory());
+        }
+
+        return this;
+    }
+
+    public CodeWriter Write(ReadOnlyMemory<char> value)
+        => WriteCore(value);
+
+    public CodeWriter Write(ReadOnlySpan<ReadOnlyMemory<char>> values)
+    {
+        foreach (var value in values)
+        {
+            WriteCore(value);
+        }
+
+        return this;
     }
 
     public CodeWriter Write([InterpolatedStringHandlerArgument("")] ref WriteInterpolatedStringHandler handler)

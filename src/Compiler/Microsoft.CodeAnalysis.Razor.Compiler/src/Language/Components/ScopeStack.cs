@@ -16,12 +16,14 @@ namespace Microsoft.AspNetCore.Razor.Language.Components;
 /// </summary>
 internal class ScopeStack
 {
+    private static readonly string[] s_builderParameter = [ComponentsApi.RenderTreeBuilder.BuilderParameter];
+
     private readonly Stack<ScopeEntry> _stack = new Stack<ScopeEntry>();
 
-    public string BuilderVarName =>
+    public ReadOnlySpan<string> BuilderVarName =>
         Current.BuilderVarNumber == 1
-            ? ComponentsApi.RenderTreeBuilder.BuilderParameter
-            : $"{ComponentsApi.RenderTreeBuilder.BuilderParameter}{Current.BuilderVarNumber}";
+            ? s_builderParameter
+            : new[] { ComponentsApi.RenderTreeBuilder.BuilderParameter, Current.BuilderVarNumber.ToString() };
 
     public string RenderModeVarName =>
        Current.BuilderVarNumber == 1 && Current.RenderModeCount == 0
@@ -54,6 +56,7 @@ internal class ScopeStack
         {
             context.CodeWriter.Write($"({parameterName}) => ");
         }
+
         OpenScope(context);
     }
 

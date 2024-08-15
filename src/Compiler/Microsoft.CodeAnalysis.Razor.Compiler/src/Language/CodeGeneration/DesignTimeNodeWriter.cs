@@ -6,6 +6,7 @@
 using System;
 using Microsoft.AspNetCore.Razor.Language.Extensions;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
+using static Microsoft.AspNetCore.Razor.Language.CodeGeneration.CodeWriterExtensions;
 
 namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
@@ -13,22 +14,24 @@ public class DesignTimeNodeWriter : IntermediateNodeWriter
 {
     public override void WriteUsingDirective(CodeRenderingContext context, UsingDirectiveIntermediateNode node)
     {
+        var codeWriter = context.CodeWriter;
+
         if (node.Source is { FilePath: not null } sourceSpan)
         {
-            using (context.CodeWriter.BuildLinePragma(sourceSpan, context, suppressLineDefaultAndHidden: !node.AppendLineDefaultAndHidden))
+            using (codeWriter.BuildLinePragma(sourceSpan, context, suppressLineDefaultAndHidden: !node.AppendLineDefaultAndHidden))
             {
                 context.AddSourceMappingFor(node);
-                context.CodeWriter.WriteUsing(node.Content);
+                codeWriter.WriteUsing(node.Content);
             }
         }
         else
         {
-            context.CodeWriter.WriteUsing(node.Content);
+            codeWriter.WriteUsing(node.Content);
 
             if (node.AppendLineDefaultAndHidden)
             {
-                context.CodeWriter.WriteLine("#line default");
-                context.CodeWriter.WriteLine("#line hidden");
+                codeWriter.WriteLine("#line default");
+                codeWriter.WriteLine("#line hidden");
             }
         }
     }
@@ -96,7 +99,8 @@ public class DesignTimeNodeWriter : IntermediateNodeWriter
 
     public override void WriteCSharpCode(CodeRenderingContext context, CSharpCodeIntermediateNode node)
     {
-        IDisposable linePragmaScope = null;
+        LinePragmaHelper linePragmaScope = default;
+
         if (node.Source != null)
         {
             linePragmaScope = context.CodeWriter.BuildLinePragma(node.Source.Value, context);
@@ -118,7 +122,7 @@ public class DesignTimeNodeWriter : IntermediateNodeWriter
             }
         }
 
-        if (linePragmaScope != null)
+        if (!linePragmaScope.IsDefault)
         {
             linePragmaScope.Dispose();
         }
@@ -211,7 +215,8 @@ public class DesignTimeNodeWriter : IntermediateNodeWriter
         {
             if (node.Children[i] is IntermediateToken token && token.IsCSharp)
             {
-                IDisposable linePragmaScope = null;
+                LinePragmaHelper linePragmaScope = default;
+
                 var isWhitespaceStatement = string.IsNullOrWhiteSpace(token.Content);
 
                 if (token.Source != null)
@@ -232,7 +237,7 @@ public class DesignTimeNodeWriter : IntermediateNodeWriter
                 context.AddSourceMappingFor(token);
                 context.CodeWriter.Write(token.Content);
 
-                if (linePragmaScope != null)
+                if (!linePragmaScope.IsDefault)
                 {
                     linePragmaScope.Dispose();
                 }
