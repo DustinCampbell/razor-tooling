@@ -17,4 +17,5 @@ internal abstract class MockBuilder<T> : IMockBuilder<T>
 internal interface IMockBuilder<T>
     where T : class
 {
+    StrictMock<T> Mock { get; }
 }

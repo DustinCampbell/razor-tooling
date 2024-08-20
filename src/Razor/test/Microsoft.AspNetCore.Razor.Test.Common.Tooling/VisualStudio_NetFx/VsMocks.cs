@@ -80,7 +80,7 @@ internal static class VsMocks
         return builder.Mock.Object;
     }
 
-    public interface IServiceProviderBuilder
+    public interface IServiceProviderBuilder : IMockBuilder<IServiceProvider>
     {
         void AddService<T>(T? serviceInstance)
             where T : class;
@@ -96,10 +96,8 @@ internal static class VsMocks
         void AddComponentModel(Action<IComponentModelBuilder>? configure = null);
     }
 
-    private class ServiceProviderBuilder : IServiceProviderBuilder
+    private class ServiceProviderBuilder : MockBuilder<IServiceProvider>, IServiceProviderBuilder
     {
-        public StrictMock<IServiceProvider> Mock { get; } = new();
-
         public void AddService<T>(T? serviceInstance)
             where T : class
         {
@@ -149,7 +147,7 @@ internal static class VsMocks
         return builder.Mock.Object;
     }
 
-    public interface IAsyncServiceProviderBuilder
+    public interface IAsyncServiceProviderBuilder : IMockBuilder<IAsyncServiceProvider>
     {
         void AddService<TService, TInterface>(TInterface service)
             where TInterface : class;
@@ -157,17 +155,13 @@ internal static class VsMocks
             where TInterface : class;
     }
 
-    private class AsyncServiceProviderBuilder : IAsyncServiceProviderBuilder
+    private sealed class AsyncServiceProviderBuilder : MockBuilder<IAsyncServiceProvider>, IAsyncServiceProviderBuilder
     {
-        private readonly StrictMock<IAsyncServiceProvider> _mock1;
         private readonly Mock<IAsyncServiceProvider2> _mock2;
         private readonly Mock<IAsyncServiceProvider3> _mock3;
 
-        public StrictMock<IAsyncServiceProvider> Mock => _mock1;
-
         public AsyncServiceProviderBuilder()
         {
-            _mock1 = new();
             _mock2 = Mock.As<IAsyncServiceProvider2>();
             _mock3 = Mock.As<IAsyncServiceProvider3>();
         }
@@ -175,8 +169,9 @@ internal static class VsMocks
         public void AddService<TService, TInterface>(TInterface service)
             where TInterface : class
         {
-            _mock1.Setup(x => x.GetServiceAsync(typeof(TService)))
-                  .ReturnsAsync(service);
+            Mock.Setup(x => x.GetServiceAsync(typeof(TService)))
+                .ReturnsAsync(service);
+
             _mock2.Setup(x => x.GetServiceAsync(typeof(TService), /*swallowException*/ false))
                   .ReturnsAsync(service);
             _mock3.Setup(x => x.GetServiceAsync<TService, TInterface>(/*throwOnFailure*/ true, It.IsAny<CancellationToken>()))
@@ -186,8 +181,9 @@ internal static class VsMocks
         public void AddService<TService, TInterface>(Func<TInterface> getServiceCallback)
             where TInterface : class
         {
-            _mock1.Setup(x => x.GetServiceAsync(typeof(TService)))
-                  .ReturnsAsync(() => getServiceCallback());
+            Mock.Setup(x => x.GetServiceAsync(typeof(TService)))
+                .ReturnsAsync(() => getServiceCallback());
+
             _mock2.Setup(x => x.GetServiceAsync(typeof(TService), /*swallowException*/ false))
                   .ReturnsAsync(() => getServiceCallback());
             _mock3.Setup(x => x.GetServiceAsync<TService, TInterface>(/*throwOnFailure*/ true, It.IsAny<CancellationToken>()))
@@ -202,7 +198,7 @@ internal static class VsMocks
         return builder.Mock.Object;
     }
 
-    public interface IComponentModelBuilder
+    public interface IComponentModelBuilder : IMockBuilder<IComponentModel>
     {
         void AddExport<T>(T instance)
             where T : class;
@@ -210,9 +206,15 @@ internal static class VsMocks
             where T : class;
     }
 
-    private class ComponentModelBuilder : IComponentModelBuilder
+    private sealed class ComponentModelBuilder : MockBuilder<IComponentModel>, IComponentModelBuilder
     {
-        private readonly Dictionary<string, Func<object>> _contractNameToExportMap = new();
+        private readonly Dictionary<string, Func<object>> _contractNameToExportMap = [];
+
+        public ComponentModelBuilder()
+        {
+            Mock.SetupGet(x => x.DefaultExportProvider)
+                .Returns(new SimpleExportProvider(_contractNameToExportMap));
+        }
 
         public void AddExport<T>(T instance)
             where T : class
@@ -224,19 +226,6 @@ internal static class VsMocks
             where T : class
         {
             _contractNameToExportMap.Add(typeof(T).FullName, () => getInstanceCallback());
-        }
-
-        public StrictMock<IComponentModel> Mock
-        {
-            get
-            {
-                var mock = new StrictMock<IComponentModel>();
-
-                mock.SetupGet(x => x.DefaultExportProvider)
-                    .Returns(new SimpleExportProvider(_contractNameToExportMap));
-
-                return mock;
-            }
         }
 
         private class SimpleExportProvider(Dictionary<string, Func<object>> contractNameToExportMap) : ExportProvider
