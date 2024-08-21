@@ -4,19 +4,16 @@
 using System;
 using System.Collections.Immutable;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.LanguageServer.CodeActions.Models;
 using Microsoft.AspNetCore.Razor.LanguageServer.Hosting;
+using Microsoft.AspNetCore.Razor.Test.Common;
 using Microsoft.AspNetCore.Razor.Test.Common.LanguageServer;
 using Microsoft.AspNetCore.Razor.Test.Common.Workspaces;
-using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.Protocol.CodeActions;
 using Microsoft.CodeAnalysis.Testing;
-using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
-using Moq;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -326,20 +323,23 @@ $$Path;
         var projectEngine = RazorProjectEngine.Create(builder => builder.AddTagHelpers(tagHelpers));
         var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, FileKinds.Component, importSources: default, tagHelpers);
 
-        var cSharpDocument = codeDocument.GetCSharpDocument();
+        var csharpDocument = codeDocument.GetCSharpDocument();
         var diagnosticDescriptor = new RazorDiagnosticDescriptor("RZ10012", "diagnostic", RazorDiagnosticSeverity.Error);
         var diagnostic = RazorDiagnostic.Create(diagnosticDescriptor, componentSourceSpan);
-        var cSharpDocumentWithDiagnostic = RazorCSharpDocument.Create(codeDocument, cSharpDocument.GeneratedCode, cSharpDocument.Options, new[] { diagnostic });
-        codeDocument.SetCSharpDocument(cSharpDocumentWithDiagnostic);
+        var csharpDocumentWithDiagnostic = RazorCSharpDocument.Create(codeDocument, csharpDocument.GeneratedCode, csharpDocument.Options, [diagnostic]);
+        codeDocument.SetCSharpDocument(csharpDocumentWithDiagnostic);
 
-        var documentSnapshot = Mock.Of<IDocumentSnapshot>(document =>
-            document.GetGeneratedOutputAsync() == Task.FromResult(codeDocument) &&
-            document.GetTextAsync() == Task.FromResult(codeDocument.Source.Text) &&
-            document.Project.GetTagHelpersAsync(It.IsAny<CancellationToken>()) == new ValueTask<ImmutableArray<TagHelperDescriptor>>(tagHelpers), MockBehavior.Strict);
+        var documentSnapshot = TestMocks.CreateDocumentSnapshot(b =>
+        {
+            b.SetupProject(b =>
+            {
+                b.SetupTagHelpers(tagHelpers);
+            });
 
-        var sourceText = SourceText.From(text);
+            b.SetupGeneratedOutput(codeDocument);
+        });
 
-        var context = new RazorCodeActionContext(request, documentSnapshot, codeDocument, location, sourceText, supportsFileCreation, supportsCodeActionResolve);
+        var context = new RazorCodeActionContext(request, documentSnapshot, codeDocument, location, sourceDocument.Text, supportsFileCreation, supportsCodeActionResolve);
 
         return context;
     }

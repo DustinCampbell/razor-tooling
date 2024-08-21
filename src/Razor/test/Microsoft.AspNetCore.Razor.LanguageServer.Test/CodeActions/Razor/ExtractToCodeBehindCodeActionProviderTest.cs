@@ -10,13 +10,12 @@ using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Components;
 using Microsoft.AspNetCore.Razor.Language.Extensions;
 using Microsoft.AspNetCore.Razor.LanguageServer.CodeActions.Models;
+using Microsoft.AspNetCore.Razor.Test.Common;
 using Microsoft.AspNetCore.Razor.Test.Common.LanguageServer;
-using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.Protocol.CodeActions;
 using Microsoft.CodeAnalysis.Testing;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
-using Moq;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -380,29 +379,28 @@ public class ExtractToCodeBehindCodeActionProviderTest(ITestOutputHelper testOut
     private static RazorCodeActionContext CreateRazorCodeActionContext(VSCodeActionParams request, SourceLocation location, string filePath, string text, string? relativePath, bool supportsFileCreation = true)
     {
         var sourceDocument = RazorSourceDocument.Create(text, RazorSourceDocumentProperties.Create(filePath, relativePath));
-        var options = RazorParserOptions.Create(o =>
+        var options = RazorParserOptions.Create(b =>
         {
-            o.Directives.Add(ComponentCodeDirective.Directive);
-            o.Directives.Add(FunctionsDirective.Directive);
+            b.Directives.Add(ComponentCodeDirective.Directive);
+            b.Directives.Add(FunctionsDirective.Directive);
         });
+
         var syntaxTree = RazorSyntaxTree.Parse(sourceDocument, options);
 
         var codeDocument = TestRazorCodeDocument.Create(sourceDocument, imports: default);
         codeDocument.SetFileKind(FileKinds.Component);
-        codeDocument.SetCodeGenerationOptions(RazorCodeGenerationOptions.Create(o =>
+        codeDocument.SetCodeGenerationOptions(RazorCodeGenerationOptions.Create(b =>
         {
-            o.RootNamespace = "ExtractToCodeBehindTest";
+            b.RootNamespace = "ExtractToCodeBehindTest";
         }));
+
         codeDocument.SetSyntaxTree(syntaxTree);
 
-        var documentSnapshot = Mock.Of<IDocumentSnapshot>(document =>
-            document.GetGeneratedOutputAsync() == Task.FromResult(codeDocument) &&
-            document.GetTextAsync() == Task.FromResult(codeDocument.Source.Text), MockBehavior.Strict);
+        var documentSnapshot = TestMocks.CreateDocumentSnapshot(b =>
+        {
+            b.SetupGeneratedOutput(codeDocument);
+        });
 
-        var sourceText = SourceText.From(text);
-
-        var context = new RazorCodeActionContext(request, documentSnapshot, codeDocument, location, sourceText, supportsFileCreation, SupportsCodeActionResolve: true);
-
-        return context;
+        return new RazorCodeActionContext(request, documentSnapshot, codeDocument, location, sourceDocument.Text, supportsFileCreation, SupportsCodeActionResolve: true);
     }
 }

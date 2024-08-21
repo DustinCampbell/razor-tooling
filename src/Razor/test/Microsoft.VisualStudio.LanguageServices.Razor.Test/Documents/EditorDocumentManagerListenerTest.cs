@@ -174,10 +174,11 @@ public class EditorDocumentManagerListenerTest(ITestOutputHelper testOutput) : V
         var called = false;
         listenerAccessor.OnOpened += delegate { called = true; };
 
-        var projectFilePath = "/Path/to/project.csproj";
-        var project = StrictMock.Of<IProjectSnapshot>(p =>
-            p.Key == TestProjectKey.Create("/Path/to/obj") &&
-            p.FilePath == projectFilePath);
+        var project = TestMocks.CreateProjectSnapshot(b =>
+        {
+            b.SetupKey(TestProjectKey.Create("/Path/to/obj"));
+            b.SetupFilePath("/Path/to/project.csproj");
+        });
 
         // Act
         await projectManager.UpdateAsync(updater =>

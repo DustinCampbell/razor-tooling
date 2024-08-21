@@ -925,27 +925,21 @@ public partial class SemanticTokensTest(ITestOutputHelper testOutput) : TagHelpe
         ImmutableArray<TagHelperDescriptor> tagHelpers,
         int version)
     {
-        var document = CreateCodeDocument(documentText, isRazorFile, tagHelpers);
+        var codeDocument = CreateCodeDocument(documentText, isRazorFile, tagHelpers);
 
-        var projectSnapshot = new StrictMock<IProjectSnapshot>();
-        projectSnapshot
-            .SetupGet(p => p.Version)
-            .Returns(VersionStamp.Default);
+        var documentSnapshot = TestMocks.CreateDocumentSnapshot(b =>
+        {
+            b.SetupProject(b =>
+            {
+                b.SetupVersion();
+            });
 
-        var documentSnapshotMock = new StrictMock<IDocumentSnapshot>();
-        documentSnapshotMock
-            .SetupGet(x => x.Project)
-            .Returns(projectSnapshot.Object);
-        documentSnapshotMock
-            .Setup(x => x.GetGeneratedOutputAsync())
-            .ReturnsAsync(document);
-        documentSnapshotMock
-            .Setup(x => x.GetTextAsync())
-            .ReturnsAsync(document.Source.Text);
+            b.SetupGeneratedOutput(codeDocument);
+        });
 
         return new VersionedDocumentContext(
             uri: new Uri($@"c:\${GetFileName(isRazorFile)}"),
-            snapshot: documentSnapshotMock.Object,
+            snapshot: documentSnapshot,
             projectContext: null,
             version);
     }

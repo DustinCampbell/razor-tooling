@@ -40,19 +40,27 @@ public class ImportDocumentManagerIntegrationTest : VisualStudioTestBase
         // Arrange
         var testImportsPath = Path.Combine(_directoryPath, "_ViewImports.cshtml");
 
+        var projectSnapshot = TestMocks.CreateProjectSnapshot(b =>
+        {
+            b.SetupProjectEngine(_projectEngine);
+            b.Mock.Setup(x => x.GetDocument(It.IsAny<string>())).ReturnsNull();
+        });
+
+        var anotherProjectSnapshot = TestMocks.CreateProjectSnapshot(b =>
+        {
+            b.SetupProjectEngine(_projectEngine);
+            b.Mock.Setup(x => x.GetDocument(It.IsAny<string>())).ReturnsNull();
+        });
+
         var tracker = StrictMock.Of<IVisualStudioDocumentTracker>(t =>
             t.FilePath == Path.Combine(_directoryPath, "Views", "Home", "_ViewImports.cshtml") &&
             t.ProjectPath == _projectPath &&
-            t.ProjectSnapshot == StrictMock.Of<IProjectSnapshot>(p =>
-                p.GetProjectEngine() == _projectEngine &&
-                p.GetDocument(It.IsAny<string>()) == null));
+            t.ProjectSnapshot == projectSnapshot);
 
         var anotherTracker = StrictMock.Of<IVisualStudioDocumentTracker>(t =>
             t.FilePath == Path.Combine(_directoryPath, "anotherFile.cshtml") &&
             t.ProjectPath == _projectPath &&
-            t.ProjectSnapshot == StrictMock.Of<IProjectSnapshot>(p =>
-                p.GetProjectEngine() == _projectEngine &&
-                p.GetDocument(It.IsAny<string>()) == null));
+            t.ProjectSnapshot == anotherProjectSnapshot);
 
         var fileChangeTrackerFactoryMock = new StrictMock<IFileChangeTrackerFactory>();
         var fileChangeTracker1Mock = new StrictMock<IFileChangeTracker>();

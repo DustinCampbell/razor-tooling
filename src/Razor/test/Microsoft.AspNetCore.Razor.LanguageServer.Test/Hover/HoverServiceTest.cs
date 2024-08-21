@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Razor.LanguageServer.Hosting;
 using Microsoft.AspNetCore.Razor.LanguageServer.Hover;
 using Microsoft.AspNetCore.Razor.LanguageServer.Tooltip;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
+using Microsoft.AspNetCore.Razor.Test.Common;
 using Microsoft.AspNetCore.Razor.Test.Common.LanguageServer;
 using Microsoft.AspNetCore.Razor.Test.Common.Mef;
 using Microsoft.AspNetCore.Razor.Test.Common.ProjectSystem;
@@ -920,18 +921,16 @@ public class HoverServiceTest(ITestOutputHelper testOutput) : TagHelperServiceTe
         var codeDocument = CreateCodeDocument(txt, path, DefaultTagHelpers);
         var projectWorkspaceState = ProjectWorkspaceState.Create(DefaultTagHelpers);
         var projectSnapshot = TestProjectSnapshot.Create("C:/project.csproj", projectWorkspaceState);
-        var sourceText = SourceText.From(txt);
 
-        var snapshot = Mock.Of<IDocumentSnapshot>(d =>
-            d.GetGeneratedOutputAsync() == Task.FromResult(codeDocument) &&
-            d.FilePath == path &&
-            d.FileKind == FileKinds.Component &&
-            d.GetTextAsync() == Task.FromResult(sourceText) &&
-            d.Project == projectSnapshot, MockBehavior.Strict);
+        var snapshot = TestMocks.CreateDocumentSnapshot(b =>
+        {
+            b.SetupFileKind(FileKinds.Component);
+            b.SetupFilePath(path);
+            b.SetupProject(projectSnapshot);
+            b.SetupGeneratedOutput(codeDocument);
+        });
 
-        var documentContext = new VersionedDocumentContext(new Uri(path), snapshot, projectContext: null, 1337);
-
-        return documentContext;
+        return new VersionedDocumentContext(new Uri(path), snapshot, projectContext: null, 1337);
     }
 
     private HoverEndpoint CreateEndpoint(
@@ -973,21 +972,14 @@ public class HoverServiceTest(ITestOutputHelper testOutput) : TagHelperServiceTe
         return new HoverService(lspTagHelperTooltipFactory, vsLspTagHelperTooltipFactory, mappingService, clientCapabilitiesService);
     }
 
-    private class HoverLanguageServer : IClientConnection
+    private sealed class HoverLanguageServer(
+        CSharpTestLspServer csharpServer,
+        Uri csharpDocumentUri,
+        CancellationToken cancellationToken) : IClientConnection
     {
-        private readonly CSharpTestLspServer _csharpServer;
-        private readonly Uri _csharpDocumentUri;
-        private readonly CancellationToken _cancellationToken;
-
-        public HoverLanguageServer(
-            CSharpTestLspServer csharpServer,
-            Uri csharpDocumentUri,
-            CancellationToken cancellationToken)
-        {
-            _csharpServer = csharpServer;
-            _csharpDocumentUri = csharpDocumentUri;
-            _cancellationToken = cancellationToken;
-        }
+        private readonly CSharpTestLspServer _csharpServer = csharpServer;
+        private readonly Uri _csharpDocumentUri = csharpDocumentUri;
+        private readonly CancellationToken _cancellationToken = cancellationToken;
 
         public Task SendNotificationAsync<TParams>(string method, TParams @params, CancellationToken cancellationToken)
         {
@@ -1013,7 +1005,7 @@ public class HoverServiceTest(ITestOutputHelper testOutput) : TagHelperServiceTe
                 Position = hoverParams.ProjectedPosition
             };
 
-            var result = await _csharpServer.ExecuteRequestAsync<VisualStudio.LanguageServer.Protocol.TextDocumentPositionParams, TResponse>(
+            var result = await _csharpServer.ExecuteRequestAsync<TextDocumentPositionParams, TResponse>(
                 Methods.TextDocumentHoverName, hoverRequest, _cancellationToken);
 
             return result;

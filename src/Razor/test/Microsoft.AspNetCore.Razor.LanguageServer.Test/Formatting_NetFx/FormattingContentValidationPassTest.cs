@@ -3,17 +3,16 @@
 
 using System;
 using System.Collections.Immutable;
-using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.LanguageServer.Test;
+using Microsoft.AspNetCore.Razor.Test.Common;
 using Microsoft.AspNetCore.Razor.Test.Common.LanguageServer;
 using Microsoft.CodeAnalysis.Razor.Formatting;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.Protocol;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
-using Moq;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -140,24 +139,22 @@ public class Foo { }
     {
         fileKind ??= FileKinds.Component;
         tagHelpers = tagHelpers.NullToEmpty();
-        var sourceDocument = RazorSourceDocument.Create(text, RazorSourceDocumentProperties.Create(path, path));
+        var sourceDocument = RazorSourceDocument.Create(text, RazorSourceDocumentProperties.Create(filePath: path, relativePath: path));
         var projectEngine = RazorProjectEngine.Create(builder => builder.SetRootNamespace("Test"));
         var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, fileKind, importSources: default, tagHelpers);
 
-        var documentSnapshot = new Mock<IDocumentSnapshot>(MockBehavior.Strict);
-        documentSnapshot
-            .Setup(d => d.GetGeneratedOutputAsync())
-            .ReturnsAsync(codeDocument);
-        documentSnapshot
-            .Setup(d => d.TargetPath)
-            .Returns(path);
-        documentSnapshot
-            .Setup(d => d.Project.GetTagHelpersAsync(It.IsAny<CancellationToken>()))
-            .Returns(new ValueTask<ImmutableArray<TagHelperDescriptor>>(tagHelpers));
-        documentSnapshot
-            .Setup(d => d.FileKind)
-            .Returns(fileKind);
+        var documentSnapshot = TestMocks.CreateDocumentSnapshot(b =>
+        {
+            b.SetupProject(b =>
+            {
+                b.SetupTagHelpers(tagHelpers);
+            });
 
-        return (codeDocument, documentSnapshot.Object);
+            b.SetupFileKind(fileKind);
+            b.SetupTargetPath(path);
+            b.SetupGeneratedOutput(codeDocument);
+        });
+
+        return (codeDocument, documentSnapshot);
     }
 }

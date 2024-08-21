@@ -133,7 +133,8 @@ public class Foo { }
         return context;
     }
 
-    private static (RazorCodeDocument, IDocumentSnapshot) CreateCodeDocumentAndSnapshot(SourceText text, string path, ImmutableArray<TagHelperDescriptor> tagHelpers = default, string? fileKind = default)
+    private static (RazorCodeDocument, IDocumentSnapshot) CreateCodeDocumentAndSnapshot(
+        SourceText text, string path, ImmutableArray<TagHelperDescriptor> tagHelpers = default, string? fileKind = default)
     {
         fileKind ??= FileKinds.Component;
         tagHelpers = tagHelpers.NullToEmpty();
@@ -141,7 +142,7 @@ public class Foo { }
         var projectEngine = RazorProjectEngine.Create(builder => builder.SetRootNamespace("Test"));
         var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, fileKind, importSources: default, tagHelpers);
 
-        var documentSnapshot = FormattingTestBase.CreateDocumentSnapshot(path, tagHelpers, fileKind, [], [], projectEngine, codeDocument);
+        var documentSnapshot = FormattingTestBase.CreateDocumentSnapshot(path, tagHelpers, fileKind, importSources: [], projectEngine, codeDocument);
 
         return (codeDocument, documentSnapshot);
     }

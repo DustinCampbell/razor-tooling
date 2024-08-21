@@ -7,25 +7,20 @@ using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.LanguageServer.Test;
+using Microsoft.AspNetCore.Razor.Test.Common;
 using Microsoft.AspNetCore.Razor.Test.Common.LanguageServer;
 using Microsoft.CodeAnalysis.Razor.Formatting;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Testing;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
-using Moq;
 using Xunit;
 using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.AutoInsert;
 
-public abstract class RazorOnAutoInsertProviderTestBase : LanguageServerTestBase
+public abstract class RazorOnAutoInsertProviderTestBase(ITestOutputHelper testOutput) : LanguageServerTestBase(testOutput)
 {
-    protected RazorOnAutoInsertProviderTestBase(ITestOutputHelper testOutput)
-        : base(testOutput)
-    {
-    }
-
     internal abstract IOnAutoInsertProvider CreateProvider();
 
     protected void RunAutoInsertTest(string input, string expected, int tabSize = 4, bool insertSpaces = true, string fileKind = default, IReadOnlyList<TagHelperDescriptor> tagHelpers = default)
@@ -46,7 +41,7 @@ public abstract class RazorOnAutoInsertProviderTestBase : LanguageServerTestBase
         };
 
         var provider = CreateProvider();
-        using var context = FormattingContext.Create(uri, Mock.Of<IDocumentSnapshot>(MockBehavior.Strict), codeDocument, options, TestAdhocWorkspaceFactory.Instance);
+        using var context = FormattingContext.Create(uri, StrictMock.Of<IDocumentSnapshot>(), codeDocument, options, TestAdhocWorkspaceFactory.Instance);
 
         // Act
         if (!provider.TryResolveInsertion(position, context, out var edit, out _))
