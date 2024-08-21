@@ -17,7 +17,6 @@ internal class DocumentSnapshot : IDocumentSnapshot
     public string FilePath => State.HostDocument.FilePath;
     public string TargetPath => State.HostDocument.TargetPath;
     public IProjectSnapshot Project => ProjectInternal;
-    public bool SupportsOutput => true;
 
     public ProjectSnapshot ProjectInternal { get; }
     public DocumentState State { get; }

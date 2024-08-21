@@ -34,8 +34,6 @@ internal class RemoteDocumentSnapshot(TextDocument textDocument, RemoteProjectSn
 
     public IProjectSnapshot Project => _projectSnapshot;
 
-    public bool SupportsOutput => true;
-
     public Task<SourceText> GetTextAsync() => _textDocument.GetTextAsync();
 
     public Task<VersionStamp> GetTextVersionAsync() => _textDocument.GetTextVersionAsync();

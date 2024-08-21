@@ -26,8 +26,6 @@ internal sealed class ImportDocumentSnapshot(IProjectSnapshot project, RazorProj
     public string? FilePath => null;
     public string? TargetPath => null;
 
-    public bool SupportsOutput => false;
-
     public Task<SourceText> GetTextAsync()
     {
         return _text is SourceText text
