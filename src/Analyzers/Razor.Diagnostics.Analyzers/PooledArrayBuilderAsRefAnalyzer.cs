@@ -11,7 +11,7 @@ using static Razor.Diagnostics.Analyzers.Resources;
 namespace Razor.Diagnostics.Analyzers;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public class PooledArrayBuilderAsRefAnalyzer : DiagnosticAnalyzer
+public sealed class PooledArrayBuilderAsRefAnalyzer : DiagnosticAnalyzer
 {
     internal static readonly DiagnosticDescriptor Rule = new(
         DiagnosticIds.PooledArrayBuilderAsRef,
@@ -22,7 +22,7 @@ public class PooledArrayBuilderAsRefAnalyzer : DiagnosticAnalyzer
         isEnabledByDefault: true,
         description: CreateLocalizableResourceString(nameof(PooledArrayBuilderAsRefDescription)));
 
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = [Rule];
 
     public override void Initialize(AnalysisContext context)
     {

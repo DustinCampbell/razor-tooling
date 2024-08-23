@@ -3,10 +3,9 @@
 
 using System.Threading.Tasks;
 using Xunit;
+using VerifyCS = Razor.Diagnostics.Analyzers.Test.CSharpAnalyzerVerifier<Razor.Diagnostics.Analyzers.PooledArrayBuilderAsRefAnalyzer>;
 
 namespace Razor.Diagnostics.Analyzers.Test;
-
-using VerifyCS = CSharpAnalyzerVerifier<PooledArrayBuilderAsRefAnalyzer>;
 
 public class PooledArrayBuilderAsRefAnalyzerTests
 {
@@ -26,7 +25,7 @@ public class PooledArrayBuilderAsRefAnalyzerTests
         """;
 
     [Fact]
-    public async Task TestUsingVariable_CSharpAsync()
+    public Task TestUsingVariable_CSharpAsync()
     {
         var code = $$"""
             using Microsoft.AspNetCore.Razor.PooledObjects;
@@ -46,14 +45,11 @@ public class PooledArrayBuilderAsRefAnalyzerTests
             {{PooledArrayBuilderSource}}
             """;
 
-        await new VerifyCS.Test
-        {
-            TestCode = code,
-        }.RunAsync();
+        return new VerifyCS.Test(code).RunAsync();
     }
 
     [Fact]
-    public async Task TestUsingDeclarationVariable_CSharpAsync()
+    public Task TestUsingDeclarationVariable_CSharpAsync()
     {
         var code = $$"""
             using Microsoft.AspNetCore.Razor.PooledObjects;
@@ -71,14 +67,11 @@ public class PooledArrayBuilderAsRefAnalyzerTests
             {{PooledArrayBuilderSource}}
             """;
 
-        await new VerifyCS.Test
-        {
-            TestCode = code,
-        }.RunAsync();
+        return new VerifyCS.Test(code).RunAsync();
     }
 
     [Fact]
-    public async Task TestNonUsingVariable_CSharpAsync()
+    public Task TestNonUsingVariable_CSharpAsync()
     {
         var code = $$"""
             using Microsoft.AspNetCore.Razor.PooledObjects;
@@ -96,9 +89,6 @@ public class PooledArrayBuilderAsRefAnalyzerTests
             {{PooledArrayBuilderSource}}
             """;
 
-        await new VerifyCS.Test
-        {
-            TestCode = code,
-        }.RunAsync();
+        return new VerifyCS.Test(code).RunAsync();
     }
 }
