@@ -129,4 +129,16 @@
     <value>Instance of PooledArrayBuilder&lt;T&gt;.AsRef() must be a 'using' variable</value>
     <comment>The title of the diagnostic.</comment>
   </data>
+  <data name="ReadOnlyListForEachDescription" xml:space="preserve">
+    <value>Do not foreach an IReadOnlyList&lt;T&gt; directly.</value>
+    <comment>An optional longer localizable description of the diagnostic.</comment>
+  </data>
+  <data name="ReadOnlyListForEachMessage" xml:space="preserve">
+    <value>Do not foreach an IReadOnlyList&lt;T&gt; directly</value>
+    <comment>The format-able message the diagnostic displays.</comment>
+  </data>
+  <data name="ReadOnlyListForEachTitle" xml:space="preserve">
+    <value>Do not foreach an IReadOnlyList&lt;T&gt; directly</value>
+    <comment>The title of the diagnostic.</comment>
+  </data>
 </root>

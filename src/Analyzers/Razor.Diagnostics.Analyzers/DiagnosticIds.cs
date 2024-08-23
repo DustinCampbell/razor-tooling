@@ -6,4 +6,5 @@ namespace Razor.Diagnostics.Analyzers;
 internal static class DiagnosticIds
 {
     public const string PooledArrayBuilderAsRef = "RZD001";
+    public const string ReadOnlyListForEach = "RZD002";
 }

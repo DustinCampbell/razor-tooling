@@ -5,5 +5,6 @@ namespace Razor.Diagnostics.Analyzers;
 
 internal static class WellKnownTypeNames
 {
+    public const string ReadOnlyListOfT = "System.Collections.Generic.IReadOnlyList`1";
     public const string PooledArrayBuilderExtensions = "Microsoft.AspNetCore.Razor.PooledObjects.PooledArrayBuilderExtensions";
 }

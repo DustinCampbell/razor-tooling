@@ -17,6 +17,21 @@
         <target state="translated">PooledArrayBuilder&lt;T&gt; 인스턴스입니다. AsRef()는 반드시 'using' 변수여야 합니다.</target>
         <note>The title of the diagnostic.</note>
       </trans-unit>
+      <trans-unit id="ReadOnlyListForEachDescription">
+        <source>Do not foreach an IReadOnlyList&lt;T&gt; directly.</source>
+        <target state="new">Do not foreach an IReadOnlyList&lt;T&gt; directly.</target>
+        <note>An optional longer localizable description of the diagnostic.</note>
+      </trans-unit>
+      <trans-unit id="ReadOnlyListForEachMessage">
+        <source>Do not foreach an IReadOnlyList&lt;T&gt; directly</source>
+        <target state="new">Do not foreach an IReadOnlyList&lt;T&gt; directly</target>
+        <note>The format-able message the diagnostic displays.</note>
+      </trans-unit>
+      <trans-unit id="ReadOnlyListForEachTitle">
+        <source>Do not foreach an IReadOnlyList&lt;T&gt; directly</source>
+        <target state="new">Do not foreach an IReadOnlyList&lt;T&gt; directly</target>
+        <note>The title of the diagnostic.</note>
+      </trans-unit>
     </body>
   </file>
 </xliff>
