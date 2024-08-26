@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
 using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
@@ -355,9 +356,9 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
         context.CodeWriter.WriteParameterSeparator();
 
         var tokens = GetCSharpTokens(expression);
-        for (var i = 0; i < tokens.Count; i++)
+        foreach (var token in tokens)
         {
-            context.CodeWriter.Write(tokens[i].Content);
+            context.CodeWriter.Write(token.Content);
         }
     }
 
@@ -806,9 +807,9 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
                 }
                 context.CodeWriter.WriteLine();
 
-                for (var i = 0; i < tokens.Count; i++)
+                foreach (var token in tokens)
                 {
-                    WriteCSharpToken(context, tokens[i]);
+                    WriteCSharpToken(context, token);
                 }
 
                 if (canTypeCheck)
@@ -862,9 +863,9 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
 
                 context.CodeWriter.WriteLine();
 
-                for (var i = 0; i < tokens.Count; i++)
+                foreach (var token in tokens)
                 {
-                    WriteCSharpToken(context, tokens[i]);
+                    WriteCSharpToken(context, token);
                 }
 
                 context.CodeWriter.Write(")");
@@ -896,9 +897,9 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
                     context.CodeWriter.Write("(");
                 }
 
-                for (var i = 0; i < tokens.Count; i++)
+                foreach (var token in tokens)
                 {
-                    WriteCSharpToken(context, tokens[i]);
+                    WriteCSharpToken(context, token);
                 }
 
                 if (canTypeCheck && NeedsTypeCheck(node))
@@ -938,10 +939,10 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
         }
     }
 
-    private IReadOnlyList<IntermediateToken> GetCSharpTokens(IntermediateNode node)
+    private static ImmutableArray<IntermediateToken> GetCSharpTokens(IntermediateNode node)
     {
         // We generally expect all children to be CSharp, this is here just in case.
-        return node.FindDescendantNodes<IntermediateToken>().Where(t => t.IsCSharp).ToArray();
+        return node.FindDescendantNodes<IntermediateToken>().WhereAsArray(static t => t.IsCSharp);
     }
 
     public override void WriteComponentChildContent(CodeRenderingContext context, ComponentChildContentIntermediateNode node)
@@ -1010,19 +1011,18 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
         context.CodeWriter.Write(" = ");
         context.CodeWriter.Write("typeof(");
 
-        var tokens = GetCSharpTokens(node);
-        for (var i = 0; i < tokens.Count; i++)
+        foreach (var token in GetCSharpTokens(node))
         {
-            WriteCSharpToken(context, tokens[i]);
+            WriteCSharpToken(context, token);
         }
 
         context.CodeWriter.Write(");");
         context.CodeWriter.WriteLine();
 
-        IReadOnlyList<IntermediateToken> GetCSharpTokens(ComponentTypeArgumentIntermediateNode arg)
+        static ImmutableArray<IntermediateToken> GetCSharpTokens(ComponentTypeArgumentIntermediateNode arg)
         {
             // We generally expect all children to be CSharp, this is here just in case.
-            return arg.FindDescendantNodes<IntermediateToken>().Where(t => t.IsCSharp).ToArray();
+            return arg.FindDescendantNodes<IntermediateToken>().WhereAsArray(static t => t.IsCSharp);
         }
     }
 
@@ -1119,9 +1119,9 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
             context.CodeWriter.Write("(");
         }
 
-        for (var i = 0; i < tokens.Count; i++)
+        foreach (var token in tokens)
         {
-            WriteCSharpToken(context, tokens[i]);
+            WriteCSharpToken(context, token);
         }
 
         if (canTypeCheck)

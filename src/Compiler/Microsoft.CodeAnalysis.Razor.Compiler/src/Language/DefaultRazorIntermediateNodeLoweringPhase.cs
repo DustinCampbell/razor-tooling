@@ -199,7 +199,7 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
     {
         var directives = document.FindDescendantReferences<DirectiveIntermediateNode>();
         using var _ = HashSetPool<DirectiveDescriptor>.GetPooledObject(out var seenDirectives);
-        for (var i = directives.Count - 1; i >= 0; i--)
+        for (var i = directives.Length - 1; i >= 0; i--)
         {
             var reference = directives[i];
             var directive = (DirectiveIntermediateNode)reference.Node;

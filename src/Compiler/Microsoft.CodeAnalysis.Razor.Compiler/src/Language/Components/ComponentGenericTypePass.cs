@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -28,12 +29,7 @@ internal class ComponentGenericTypePass : ComponentIntermediateNodePassBase, IRa
         {
             // Doing lazy initialization here to avoid making things really complicated when we don't
             // need to exercise this code in tests.
-            if (_typeNameFeature == null)
-            {
-                _typeNameFeature = GetRequiredFeature<TypeNameFeature>();
-            }
-
-            return _typeNameFeature;
+            return _typeNameFeature ??= GetRequiredFeature<TypeNameFeature>();
         }
     }
 
@@ -143,7 +139,7 @@ internal class ComponentGenericTypePass : ComponentIntermediateNodePassBase, IRa
                 if (attribute != null && TryFindGenericTypeNames(attribute.BoundAttribute, attribute.GloballyQualifiedTypeName, out var typeParameters))
                 {
                     // Keep only type parameters defined by this component.
-                    typeParameters = typeParameters.Where(bindings.ContainsKey).ToArray();
+                    typeParameters = typeParameters.WhereAsArray(bindings.ContainsKey);
 
                     var attributeValueIsLambda = _pass.TypeNameFeature.IsLambda(GetContent(attribute));
                     var provideCascadingGenericTypes = new CascadingGenericTypeParameter
@@ -161,9 +157,9 @@ internal class ComponentGenericTypePass : ComponentIntermediateNodePassBase, IRa
                             // There might be multiple sources for each generic type, so pick the one that has the
                             // fewest other generic types on it. For example if we could infer from either List<T>
                             // or Dictionary<T, U>, we prefer List<T>.
-                            node.ProvidesCascadingGenericTypes ??= new();
+                            node.ProvidesCascadingGenericTypes ??= [];
                             if (!node.ProvidesCascadingGenericTypes.TryGetValue(typeName, out var existingValue)
-                                || existingValue.GenericTypeNames.Count > typeParameters.Count)
+                                || existingValue.GenericTypeNames.Count > typeParameters.Length)
                             {
                                 node.ProvidesCascadingGenericTypes[typeName] = provideCascadingGenericTypes;
                             }
@@ -271,18 +267,18 @@ internal class ComponentGenericTypePass : ComponentIntermediateNodePassBase, IRa
             CreateTypeInferenceMethod(documentNode, node, receivesCascadingGenericTypes);
         }
 
-        private bool TryFindGenericTypeNames(BoundAttributeDescriptor? boundAttribute, string? globallyQualifiedTypeName, [NotNullWhen(true)] out IReadOnlyList<string>? typeParameters)
+        private bool TryFindGenericTypeNames(BoundAttributeDescriptor? boundAttribute, string? globallyQualifiedTypeName, [NotNullWhen(true)] out ImmutableArray<string> typeParameters)
         {
             if (boundAttribute == null)
             {
                 // Will be null for attributes set on the component that don't match a declared component parameter
-                typeParameters = null;
+                typeParameters = default;
                 return false;
             }
 
             if (!boundAttribute.IsGenericTypedProperty())
             {
-                typeParameters = null;
+                typeParameters = default;
                 return false;
             }
 
@@ -291,22 +287,23 @@ internal class ComponentGenericTypePass : ComponentIntermediateNodePassBase, IRa
             // 1. name is a simple identifier like TItem
             // 2. name contains type parameters like Dictionary<string, TItem>
             typeParameters = _pass.TypeNameFeature.ParseTypeParameters(globallyQualifiedTypeName ?? boundAttribute.TypeName);
-            if (typeParameters.Count == 0)
+
+            if (typeParameters.Length == 0)
             {
-                typeParameters = new[] { boundAttribute.TypeName };
+                typeParameters = [boundAttribute.TypeName];
             }
 
             return true;
         }
 
-        private string GetContent(ComponentTypeArgumentIntermediateNode node)
+        private static string GetContent(ComponentTypeArgumentIntermediateNode node)
         {
-            return string.Join(string.Empty, node.FindDescendantNodes<IntermediateToken>().Where(t => t.IsCSharp).Select(t => t.Content));
+            return string.Join(string.Empty, node.FindDescendantNodes<IntermediateToken>().WhereAsArray(static t => t.IsCSharp).SelectAsArray(static t => t.Content));
         }
 
-        private string GetContent(ComponentAttributeIntermediateNode node)
+        private static string GetContent(ComponentAttributeIntermediateNode node)
         {
-            return string.Join(string.Empty, node.FindDescendantNodes<IntermediateToken>().Where(t => t.IsCSharp).Select(t => t.Content));
+            return string.Join(string.Empty, node.FindDescendantNodes<IntermediateToken>().WhereAsArray(static t => t.IsCSharp).SelectAsArray(static t => t.Content));
         }
 
         private static bool ValidateTypeArguments(ComponentIntermediateNode node, Dictionary<string, Binding> bindings)
@@ -369,12 +366,11 @@ internal class ComponentGenericTypePass : ComponentIntermediateNodePassBase, IRa
                     {
                         attribute.Annotations.Add(ComponentMetadata.Component.ExplicitTypeNameKey, true);
                     }
-                    else if(attribute.BoundAttribute?.IsEventCallbackProperty() ?? false)
+                    else if (attribute.BoundAttribute?.IsEventCallbackProperty() ?? false)
                     {
-                        var typeParameters = typeNameFeature.ParseTypeParameters(attribute.TypeName);
-                        for (int i = 0; i < typeParameters.Count; i++)
+                        var typeParameters = typeNameFeature.ParseTypeParameters(attribute.TypeName.AssumeNotNull());
+                        foreach (var parameter in typeParameters)
                         {
-                            var parameter = typeParameters[i];
                             if (bindings!.ContainsKey(parameter))
                             {
                                 attribute.Annotations.Add(ComponentMetadata.Component.OpenGenericKey, true);

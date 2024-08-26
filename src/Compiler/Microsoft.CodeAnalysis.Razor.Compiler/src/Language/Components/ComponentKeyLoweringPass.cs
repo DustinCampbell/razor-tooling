@@ -28,9 +28,8 @@ internal class ComponentKeyLoweringPass : ComponentIntermediateNodePassBase, IRa
         }
 
         var references = documentNode.FindDescendantReferences<TagHelperDirectiveAttributeIntermediateNode>();
-        for (var i = 0; i < references.Count; i++)
+        foreach (var reference in references)
         {
-            var reference = references[i];
             var node = (TagHelperDirectiveAttributeIntermediateNode)reference.Node;
 
             if (node.TagHelper.IsKeyTagHelper())

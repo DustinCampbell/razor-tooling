@@ -67,7 +67,7 @@ public abstract class LSPDocument : IDisposable
     [SuppressMessage("Usage", "CA1816:Dispose methods should call SuppressFinalize", Justification = "https://github.com/dotnet/roslyn-analyzers/issues/4801")]
     public virtual void Dispose()
     {
-        foreach (var virtualDocument in VirtualDocuments)
+        foreach (var virtualDocument in VirtualDocuments.AsEnumerable())
         {
             virtualDocument.Dispose();
         }

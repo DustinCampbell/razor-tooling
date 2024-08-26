@@ -4,6 +4,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.AspNetCore.Razor.Language.Extensions;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
@@ -36,16 +37,16 @@ internal class ComponentEventHandlerLoweringPass : ComponentIntermediateNodePass
         var references = documentNode.FindDescendantReferences<TagHelperDirectiveAttributeIntermediateNode>();
         using var _ = ReferenceEqualityHashSetPool<IntermediateNode>.GetPooledObject(out var parents);
 
-        for (var i = 0; i < references.Count; i++)
+        foreach (var reference in references)
         {
-            parents.Add(references[i].Parent);
+            parents.Add(reference.Parent);
         }
 
         // We need to do something similar for directive attribute parameters like @onclick:preventDefault.
         var parameterReferences = documentNode.FindDescendantReferences<TagHelperDirectiveAttributeParameterIntermediateNode>();
-        for (var i = 0; i < parameterReferences.Count; i++)
+        foreach (var parameterReference in parameterReferences)
         {
-            parents.Add(parameterReferences[i].Parent);
+            parents.Add(parameterReference.Parent);
         }
 
         foreach (var parent in parents)
@@ -53,9 +54,8 @@ internal class ComponentEventHandlerLoweringPass : ComponentIntermediateNodePass
             ProcessDuplicates(parent);
         }
 
-        for (var i = 0; i < references.Count; i++)
+        foreach (var reference in references)
         {
-            var reference = references[i];
             var node = (TagHelperDirectiveAttributeIntermediateNode)reference.Node;
 
             if (!reference.Parent.Children.Contains(node))
@@ -70,9 +70,8 @@ internal class ComponentEventHandlerLoweringPass : ComponentIntermediateNodePass
             }
         }
 
-        for (var i = 0; i < parameterReferences.Count; i++)
+        foreach (var reference in parameterReferences)
         {
-            var reference = parameterReferences[i];
             var node = (TagHelperDirectiveAttributeParameterIntermediateNode)reference.Node;
 
             if (!reference.Parent.Children.Contains(node))
@@ -159,7 +158,7 @@ internal class ComponentEventHandlerLoweringPass : ComponentIntermediateNodePass
     private static IntermediateNode RewriteUsage(IntermediateNode parent, TagHelperDirectiveAttributeIntermediateNode node)
     {
         var original = GetAttributeContent(node);
-        if (original.Count == 0)
+        if (original.Length == 0)
         {
             // This can happen in error cases, the parser will already have flagged this
             // as an error, so ignore it.
@@ -175,7 +174,7 @@ internal class ComponentEventHandlerLoweringPass : ComponentIntermediateNodePass
         var eventArgsType = node.TagHelper.GetEventArgsType();
 
         using var _ = ListPool<IntermediateToken>.GetPooledObject(out var tokens);
-        tokens.SetCapacityIfLarger(original.Count + 2);
+        tokens.SetCapacityIfLarger(original.Length + 2);
 
         tokens.Add(
             new IntermediateToken()
@@ -184,9 +183,9 @@ internal class ComponentEventHandlerLoweringPass : ComponentIntermediateNodePass
                 Kind = TokenKind.CSharp
             });
 
-        for (var i = 0; i < original.Count; i++)
+        foreach (var token in original)
         {
-            tokens.Add(original[i]);
+            tokens.Add(token);
         }
 
         tokens.Add(
@@ -252,15 +251,15 @@ internal class ComponentEventHandlerLoweringPass : ComponentIntermediateNodePass
         }
     }
 
-    private static IReadOnlyList<IntermediateToken> GetAttributeContent(IntermediateNode node)
+    private static ImmutableArray<IntermediateToken> GetAttributeContent(IntermediateNode node)
     {
         var nodes = node.FindDescendantNodes<TemplateIntermediateNode>();
-        var template = nodes.Count > 0 ? nodes[0] : default;
+        var template = nodes.FirstOrDefault();
         if (template != null)
         {
             // See comments in TemplateDiagnosticPass
             node.Diagnostics.Add(ComponentDiagnosticFactory.Create_TemplateInvalidLocation(template.Source));
-            return new[] { new IntermediateToken() { Kind = TokenKind.CSharp, Content = string.Empty, }, };
+            return [new IntermediateToken() { Kind = TokenKind.CSharp, Content = string.Empty, }];
         }
 
         if (node.Children.Count == 1 && node.Children[0] is HtmlContentIntermediateNode htmlContentNode)
@@ -270,7 +269,7 @@ internal class ComponentEventHandlerLoweringPass : ComponentIntermediateNodePass
             var tokens = htmlContentNode.FindDescendantNodes<IntermediateToken>();
 
             var content = "\"" + string.Join(string.Empty, tokens.Select(t => t.Content.Replace("\"", "\\\""))) + "\"";
-            return new[] { new IntermediateToken() { Content = content, Kind = TokenKind.CSharp, } };
+            return [new IntermediateToken() { Content = content, Kind = TokenKind.CSharp }];
         }
         else
         {

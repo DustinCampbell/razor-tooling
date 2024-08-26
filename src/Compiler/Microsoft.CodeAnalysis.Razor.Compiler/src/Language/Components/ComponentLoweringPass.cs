@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
@@ -34,9 +35,8 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
         // APIs.
         var usings = documentNode.FindDescendantNodes<UsingDirectiveIntermediateNode>();
         var references = documentNode.FindDescendantReferences<TagHelperIntermediateNode>();
-        for (var i = 0; i < references.Count; i++)
+        foreach (var reference in references)
         {
-            var reference = references[i];
             var node = (TagHelperIntermediateNode)reference.Node;
             if (node.TagHelpers.Any(t => t.IsChildContentTagHelper))
             {
@@ -85,7 +85,7 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
         // tag helpers.
         // We look based on the set of usings if there is only a single component for that can be applied to that tag or if we detect more than one
         // we add a diagnostic and return null
-        static TagHelperDescriptor GetTagHelperOrAddDiagnostic(TagHelperIntermediateNode node, IReadOnlyList<UsingDirectiveIntermediateNode> usings)
+        static TagHelperDescriptor GetTagHelperOrAddDiagnostic(TagHelperIntermediateNode node, ImmutableArray<UsingDirectiveIntermediateNode> usings)
         {
             TagHelperDescriptor candidate = null;
             List<TagHelperDescriptor> matched = null;
@@ -97,9 +97,9 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
                     continue;
                 }
 
-                for (var j = 0; j < usings.Count; j++)
+                foreach (var @using in usings)
                 {
-                    var usingNamespace = usings[j].Content;
+                    var usingNamespace = @using.Content;
                     if (string.Equals(tagHelper.GetTypeNamespace(), usingNamespace, StringComparison.Ordinal))
                     {
                         if (candidate == null)

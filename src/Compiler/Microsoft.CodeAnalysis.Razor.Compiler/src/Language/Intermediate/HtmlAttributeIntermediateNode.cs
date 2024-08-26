@@ -4,6 +4,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
@@ -37,7 +38,7 @@ public sealed class HtmlAttributeIntermediateNode : IntermediateNode
         formatter.WriteContent(AttributeName);
 
         formatter.WriteProperty(nameof(AttributeName), AttributeName);
-        formatter.WriteProperty(nameof(AttributeNameExpression), string.Join(string.Empty, AttributeNameExpression?.FindDescendantNodes<IntermediateToken>().Select(n => n.Content) ?? Array.Empty<string>()));
+        formatter.WriteProperty(nameof(AttributeNameExpression), string.Join(string.Empty, AttributeNameExpression?.FindDescendantNodes<IntermediateToken>().SelectAsArray(static n => n.Content) ?? []));
         formatter.WriteProperty(nameof(Prefix), Prefix);
         formatter.WriteProperty(nameof(Suffix), Suffix);
         formatter.WriteProperty(nameof(EventUpdatesAttributeName), EventUpdatesAttributeName);

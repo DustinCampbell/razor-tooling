@@ -4,7 +4,7 @@
 #nullable disable
 
 using System.Collections.Generic;
-using System.Linq;
+using System.Collections.Immutable;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Extensions;
@@ -31,8 +31,7 @@ internal class DefaultTagHelperOptimizationPass : IntermediateNodePassBase, IRaz
         // This phase lowers the conceptual nodes to default runtime nodes we only care about those.
         var tagHelperNodes = documentNode
             .FindDescendantNodes<TagHelperIntermediateNode>()
-            .Where(IsTagHelperRuntimeNode)
-            .ToArray();
+            .WhereAsArray(IsTagHelperRuntimeNode);
 
         if (tagHelperNodes.Length == 0)
         {

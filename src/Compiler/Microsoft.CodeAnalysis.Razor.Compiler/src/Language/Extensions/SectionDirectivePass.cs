@@ -31,7 +31,7 @@ public sealed class SectionDirectivePass : IntermediateNodePassBase, IRazorDirec
             var i = 0;
             for (; i < directive.Node.Children.Count; i++)
             {
-                if (!(directive.Node.Children[i] is DirectiveTokenIntermediateNode))
+                if (directive.Node.Children[i] is not DirectiveTokenIntermediateNode)
                 {
                     break;
                 }

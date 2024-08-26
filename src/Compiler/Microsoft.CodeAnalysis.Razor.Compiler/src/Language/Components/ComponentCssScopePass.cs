@@ -28,9 +28,9 @@ internal class ComponentCssScopePass : ComponentIntermediateNodePassBase, IRazor
         }
 
         var nodes = documentNode.FindDescendantNodes<MarkupElementIntermediateNode>();
-        for (var i = 0; i < nodes.Count; i++)
+        foreach (var node in nodes)
         {
-            ProcessElement(nodes[i], cssScope);
+            ProcessElement(node, cssScope);
         }
     }
 

@@ -54,6 +54,23 @@ internal static partial class ImmutableArrayExtensions
         }
     }
 
+    public static ImmutableArray<TResult> SelectManyAsArray<T, TResult>(this ImmutableArray<T> source, Func<T, ImmutableArray<TResult>> selector)
+    {
+        if (source.Length == 0)
+        {
+            return [];
+        }
+
+        using var builder = new PooledArrayBuilder<TResult>(capacity: source.Length);
+
+        foreach (var item in source)
+        {
+            builder.AddRange(selector(item));
+        }
+
+        return builder.DrainToImmutable();
+    }
+
     public static ImmutableArray<TResult> SelectManyAsArray<TSource, TResult>(this IReadOnlyCollection<TSource>? source, Func<TSource, ImmutableArray<TResult>> selector)
     {
         if (source is null || source.Count == 0)
@@ -77,7 +94,7 @@ internal static partial class ImmutableArrayExtensions
             return [];
         }
 
-        using var builder = new PooledArrayBuilder<T>();
+        using var builder = new PooledArrayBuilder<T>(capacity: source.Length);
 
         foreach (var item in source)
         {

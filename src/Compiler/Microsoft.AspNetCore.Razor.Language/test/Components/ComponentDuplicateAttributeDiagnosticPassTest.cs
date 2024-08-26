@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 using Xunit;
@@ -85,7 +86,7 @@ public class ComponentDuplicateAttributeDiagnosticPassTest
         var diagnostic = Assert.Single(documentNode.GetAllDiagnostics());
         Assert.Equal(ComponentDiagnosticFactory.DuplicateMarkupAttribute.Id, diagnostic.Id);
 
-        var node = documentNode.FindDescendantNodes<HtmlAttributeIntermediateNode>().Where(n => n.HasDiagnostics).Single();
+        var node = documentNode.FindDescendantNodes<HtmlAttributeIntermediateNode>().Single(static n => n.HasDiagnostics);
         Assert.Equal("a", node.AttributeName);
         Assert.Equal(node.Source, diagnostic.Span);
     }
@@ -113,7 +114,7 @@ public class ComponentDuplicateAttributeDiagnosticPassTest
         var diagnostic = Assert.Single(documentNode.GetAllDiagnostics());
         Assert.Equal(ComponentDiagnosticFactory.DuplicateMarkupAttribute.Id, diagnostic.Id);
 
-        var node = documentNode.FindDescendantNodes<HtmlAttributeIntermediateNode>().Where(n => n.HasDiagnostics).Single();
+        var node = documentNode.FindDescendantNodes<HtmlAttributeIntermediateNode>().Single(static n => n.HasDiagnostics);
         Assert.Equal("attr", node.AttributeName);
         Assert.Equal(node.Source, diagnostic.Span);
     }
@@ -139,7 +140,7 @@ public class ComponentDuplicateAttributeDiagnosticPassTest
 
         // Assert
         var diagnostics = documentNode.GetAllDiagnostics();
-        var nodes = documentNode.FindDescendantNodes<HtmlAttributeIntermediateNode>().Where(n => n.HasDiagnostics).ToArray();
+        var nodes = documentNode.FindDescendantNodes<HtmlAttributeIntermediateNode>().WhereAsArray(static n => n.HasDiagnostics);
 
         Assert.Equal(2, diagnostics.Length);
         Assert.Equal(2, nodes.Length);

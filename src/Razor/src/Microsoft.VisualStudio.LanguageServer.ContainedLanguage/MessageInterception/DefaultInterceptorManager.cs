@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Threading;
@@ -15,8 +16,8 @@ namespace Microsoft.VisualStudio.LanguageServer.ContainedLanguage.MessageInterce
 internal sealed class DefaultInterceptorManager : InterceptorManager
 {
     [Obsolete]
-    private readonly IReadOnlyList<Lazy<MessageInterceptor, IInterceptMethodMetadata>> _lazyInterceptors;
-    private readonly IReadOnlyList<Lazy<GenericMessageInterceptor, IInterceptMethodMetadata>> _lazyGenericInterceptors;
+    private readonly ImmutableArray<Lazy<MessageInterceptor, IInterceptMethodMetadata>> _lazyInterceptors;
+    private readonly ImmutableArray<Lazy<GenericMessageInterceptor, IInterceptMethodMetadata>> _lazyGenericInterceptors;
 
     [ImportingConstructor]
     public DefaultInterceptorManager(
@@ -27,11 +28,11 @@ internal sealed class DefaultInterceptorManager : InterceptorManager
     {
         _ = lazyInterceptors ?? throw new ArgumentNullException(nameof(lazyInterceptors));
 #pragma warning disable CS0612 // Type or member is obsolete
-        _lazyInterceptors = lazyInterceptors.ToList().AsReadOnly();
+        _lazyInterceptors = lazyInterceptors.ToImmutableArray();
 #pragma warning restore CS0612 // Type or member is obsolete
 
         _ = lazyGenericInterceptors ?? throw new ArgumentNullException(nameof(lazyGenericInterceptors));
-        _lazyGenericInterceptors = lazyGenericInterceptors.ToList().AsReadOnly();
+        _lazyGenericInterceptors = lazyGenericInterceptors.ToImmutableArray();
     }
 
     public override bool HasInterceptor(string methodName, string contentType)
@@ -88,7 +89,7 @@ internal sealed class DefaultInterceptorManager : InterceptorManager
             throw new ArgumentException("Cannot be empty", nameof(contentType));
         }
 
-        for (var i = 0; i < _lazyGenericInterceptors.Count; i++)
+        for (var i = 0; i < _lazyGenericInterceptors.Length; i++)
         {
             var interceptor = _lazyGenericInterceptors[i];
             if (CanInterceptMessage(methodName, contentType, interceptor.Metadata))
@@ -130,7 +131,7 @@ internal sealed class DefaultInterceptorManager : InterceptorManager
             throw new ArgumentException("Cannot be empty", nameof(contentType));
         }
 
-        for (var i = 0; i < _lazyInterceptors.Count; i++)
+        for (var i = 0; i < _lazyInterceptors.Length; i++)
         {
             var interceptor = _lazyInterceptors[i];
             if (CanInterceptMessage(methodName, contentType, interceptor.Metadata))

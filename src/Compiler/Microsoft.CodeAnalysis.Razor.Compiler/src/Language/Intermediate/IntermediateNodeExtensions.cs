@@ -3,7 +3,7 @@
 
 #nullable disable
 
-using System.Collections.Generic;
+using System;
 using System.Collections.Immutable;
 using Microsoft.AspNetCore.Razor.Language.Components;
 using Microsoft.AspNetCore.Razor.PooledObjects;
@@ -54,24 +54,30 @@ public static class IntermediateNodeExtensions
         }
     }
 
-    public static IReadOnlyList<TNode> FindDescendantNodes<TNode>(this IntermediateNode node)
+    public static ImmutableArray<TNode> FindDescendantNodes<TNode>(this IntermediateNode node)
         where TNode : IntermediateNode
     {
-        var visitor = new Visitor<TNode>();
+        using var visitor = new Visitor<TNode>();
         visitor.Visit(node);
 
         if (visitor.Results.Count > 0 && visitor.Results[0] == node)
         {
             // Don't put the node itself in the results
-            visitor.Results.Remove((TNode)node);
+            visitor.Results.RemoveAt(0);
         }
 
-        return visitor.Results;
+        return visitor.Results.DrainToImmutable();
     }
 
-    private class Visitor<TNode> : IntermediateNodeWalker where TNode : IntermediateNode
+    private sealed class Visitor<TNode> : IntermediateNodeWalker, IDisposable
+        where TNode : IntermediateNode
     {
-        public List<TNode> Results { get; } = new List<TNode>();
+        public PooledArrayBuilder<TNode> Results = [];
+
+        public void Dispose()
+        {
+            Results.Dispose();
+        }
 
         public override void VisitDefault(IntermediateNode node)
         {

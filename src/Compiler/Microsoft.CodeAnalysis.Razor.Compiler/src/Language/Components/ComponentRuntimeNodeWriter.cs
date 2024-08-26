@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
@@ -641,7 +642,7 @@ internal class ComponentRuntimeNodeWriter : ComponentNodeWriter
         else if (node.Children.Count == 1 && node.Children[0] is HtmlContentIntermediateNode htmlNode)
         {
             // This is how string attributes are lowered by default, a single HTML node with a single HTML token.
-            var content = string.Join(string.Empty, GetHtmlTokens(htmlNode).Select(t => t.Content));
+            var content = string.Join(string.Empty, GetHtmlTokens(htmlNode).SelectAsArray(static t => t.Content));
             context.CodeWriter.WriteStringLiteral(content);
         }
         else
@@ -659,9 +660,9 @@ internal class ComponentRuntimeNodeWriter : ComponentNodeWriter
                     context.CodeWriter.Write("(");
                 }
 
-                for (var i = 0; i < tokens.Count; i++)
+                foreach (var token in tokens)
                 {
-                    WriteCSharpToken(context, tokens[i]);
+                    WriteCSharpToken(context, token);
                 }
 
                 if (canTypeCheck)
@@ -708,9 +709,9 @@ internal class ComponentRuntimeNodeWriter : ComponentNodeWriter
                 context.CodeWriter.Write("this");
                 context.CodeWriter.Write(", ");
 
-                for (var i = 0; i < tokens.Count; i++)
+                foreach (var token in tokens)
                 {
-                    WriteCSharpToken(context, tokens[i]);
+                    WriteCSharpToken(context, token);
                 }
 
                 context.CodeWriter.Write(")");
@@ -739,9 +740,9 @@ internal class ComponentRuntimeNodeWriter : ComponentNodeWriter
                     context.CodeWriter.Write("(");
                 }
 
-                for (var i = 0; i < tokens.Count; i++)
+                foreach (var token in tokens)
                 {
-                    WriteCSharpToken(context, tokens[i]);
+                    WriteCSharpToken(context, token);
                 }
 
                 if (canTypeCheck && NeedsTypeCheck(node))
@@ -775,10 +776,10 @@ internal class ComponentRuntimeNodeWriter : ComponentNodeWriter
             }
         }
 
-        IReadOnlyList<IntermediateToken> GetHtmlTokens(HtmlContentIntermediateNode html)
+        ImmutableArray<IntermediateToken> GetHtmlTokens(HtmlContentIntermediateNode html)
         {
             // We generally expect all children to be HTML, this is here just in case.
-            return html.FindDescendantNodes<IntermediateToken>().Where(t => t.IsHtml).ToArray();
+            return html.FindDescendantNodes<IntermediateToken>().WhereAsArray(static t => t.IsHtml);
         }
 
         static bool NeedsTypeCheck(ComponentAttributeIntermediateNode n)
@@ -787,10 +788,10 @@ internal class ComponentRuntimeNodeWriter : ComponentNodeWriter
         }
     }
 
-    private IReadOnlyList<IntermediateToken> GetCSharpTokens(IntermediateNode node)
+    private static ImmutableArray<IntermediateToken> GetCSharpTokens(IntermediateNode node)
     {
         // We generally expect all children to be CSharp, this is here just in case.
-        return node.FindDescendantNodes<IntermediateToken>().Where(t => t.IsCSharp).ToArray();
+        return node.FindDescendantNodes<IntermediateToken>().WhereAsArray(static t => t.IsCSharp);
     }
 
     public override void WriteComponentChildContent(CodeRenderingContext context, ComponentChildContentIntermediateNode node)
@@ -929,9 +930,9 @@ internal class ComponentRuntimeNodeWriter : ComponentNodeWriter
             context.CodeWriter.Write("(");
         }
 
-        for (var i = 0; i < tokens.Count; i++)
+        foreach (var token in tokens)
         {
-            WriteCSharpToken(context, tokens[i]);
+            WriteCSharpToken(context, token);
         }
 
         if (canTypeCheck)
@@ -1080,10 +1081,9 @@ internal class ComponentRuntimeNodeWriter : ComponentNodeWriter
         context.CodeWriter.Write((_sourceSequence++).ToString(CultureInfo.InvariantCulture));
         context.CodeWriter.WriteParameterSeparator();
 
-        var tokens = GetCSharpTokens(nameExpression);
-        for (var i = 0; i < tokens.Count; i++)
+        foreach (var token in GetCSharpTokens(nameExpression))
         {
-            WriteCSharpToken(context, tokens[i]);
+            WriteCSharpToken(context, token);
         }
     }
 
@@ -1179,7 +1179,7 @@ internal class ComponentRuntimeNodeWriter : ComponentNodeWriter
         }
         else if (hasCSharp)
         {
-            foreach (var token in tokens)
+            foreach (var token in tokens.AsEnumerable())
             {
                 WriteCSharpToken(context, token);
             }

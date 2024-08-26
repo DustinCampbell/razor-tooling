@@ -1,13 +1,11 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
+using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
+using Microsoft.AspNetCore.Razor.PooledObjects;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
@@ -15,81 +13,91 @@ namespace Microsoft.CodeAnalysis.Razor;
 
 internal class DefaultTypeNameFeature : TypeNameFeature
 {
-    public override IReadOnlyList<string> ParseTypeParameters(string typeName)
+    public override ImmutableArray<string> ParseTypeParameters(string typeName)
     {
-        if (typeName == null)
+        ArgHelper.ThrowIfNull(typeName);
+
+        var typeSyntax = SyntaxFactory.ParseTypeName(typeName);
+
+        if (typeSyntax is IdentifierNameSyntax identifier)
         {
-            throw new ArgumentNullException(nameof(typeName));
+            return [];
         }
 
-        var parsed = SyntaxFactory.ParseTypeName(typeName);
-
-        if (parsed is IdentifierNameSyntax identifier)
+        if (TryParseCore(typeSyntax, out var result))
         {
-            return Array.Empty<string>();
+            return result;
         }
 
-        if (TryParseCore(parsed) is { IsDefault: false } list)
+        if (typeSyntax is not GenericNameSyntax genericName)
         {
-            return list;
+            return [];
         }
 
-        return parsed.DescendantNodesAndSelf()
-            .OfType<TypeArgumentListSyntax>()
-            .SelectMany(arg => arg.Arguments)
-            .SelectMany(t => ParseCore(t)).ToArray();
+        using var builder = new PooledArrayBuilder<string>();
 
-        static ImmutableArray<string> TryParseCore(TypeSyntax parsed)
+        foreach (var typeArgument in genericName.TypeArgumentList.Arguments)
         {
-            if (parsed is ArrayTypeSyntax array)
+            builder.AddRange(ParseCore(typeArgument));
+        }
+
+        return builder.DrainToImmutable();
+
+        static bool TryParseCore(TypeSyntax typeName, out ImmutableArray<string> typeParameters)
+        {
+            if (typeName is ArrayTypeSyntax arrayType)
             {
-                return ParseCore(array.ElementType);
+                typeParameters = ParseCore(arrayType.ElementType);
+                return true;
             }
 
-            if (parsed is TupleTypeSyntax tuple)
+            if (typeName is TupleTypeSyntax tupleType)
             {
-                return tuple.Elements.SelectManyAsArray(a => ParseCore(a.Type));
+                using var builder = new PooledArrayBuilder<string>();
+
+                foreach (var element in tupleType.Elements)
+                {
+                    builder.AddRange(ParseCore(element.Type));
+                }
+
+                typeParameters = builder.ToImmutable();
+                return true;
             }
 
-            return default;
+            typeParameters = default;
+            return false;
         }
 
-        static ImmutableArray<string> ParseCore(TypeSyntax parsed)
+        static ImmutableArray<string> ParseCore(TypeSyntax typeName)
         {
             // Recursively drill into arrays `T[]` and tuples `(T, T)`.
-            if (TryParseCore(parsed) is { IsDefault: false } list)
+            if (TryParseCore(typeName, out var result))
             {
-                return list;
+                return result;
             }
 
             // When we encounter an identifier, we assume it's a type parameter.
-            if (parsed is IdentifierNameSyntax identifier)
+            if (typeName is IdentifierNameSyntax identifierName)
             {
-                return ImmutableArray.Create(identifier.Identifier.Text);
+                return [identifierName.Identifier.Text];
             }
 
             // Generic names like `C<T>` are ignored here because we will visit their type argument list
             // via the `.DescendantNodesAndSelf().OfType<TypeArgumentListSyntax>()` call above.
-            return ImmutableArray<string>.Empty;
+            return [];
         }
     }
 
-    public override TypeNameRewriter CreateGenericTypeRewriter(Dictionary<string, string> bindings)
+    public override TypeNameRewriter CreateGenericTypeRewriter(Dictionary<string, string?> bindings)
     {
-        if (bindings == null)
-        {
-            throw new ArgumentNullException(nameof(bindings));
-        }
+        ArgHelper.ThrowIfNull(bindings);
 
         return new GenericTypeNameRewriter(bindings);
     }
 
     public override TypeNameRewriter CreateGlobalQualifiedTypeNameRewriter(ICollection<string> ignore)
     {
-        if (ignore == null)
-        {
-            throw new ArgumentNullException(nameof(ignore));
-        }
+        ArgHelper.ThrowIfNull(ignore);
 
         return new GlobalQualifiedTypeNameRewriter(ignore);
     }

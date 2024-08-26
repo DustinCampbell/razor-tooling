@@ -1,24 +1,18 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
-internal class GenericTypeNameRewriter : TypeNameRewriter
+internal class GenericTypeNameRewriter(Dictionary<string, string?> bindings) : TypeNameRewriter
 {
-    private readonly Dictionary<string, string> _bindings;
-
-    public GenericTypeNameRewriter(Dictionary<string, string> bindings)
-    {
-        _bindings = bindings;
-    }
+    private readonly Dictionary<string, string?> _bindings = bindings;
 
     public override string Rewrite(string typeName)
     {
@@ -27,20 +21,17 @@ internal class GenericTypeNameRewriter : TypeNameRewriter
         return rewritten.ToFullString();
     }
 
-    private class Visitor : CSharpSyntaxRewriter
+    private class Visitor(Dictionary<string, string?> bindings) : CSharpSyntaxRewriter
     {
-        private readonly Dictionary<string, string> _bindings;
+        private readonly Dictionary<string, string?> _bindings = bindings;
 
-        public Visitor(Dictionary<string, string> bindings)
-        {
-            _bindings = bindings;
-        }
-
-        public override SyntaxNode Visit(SyntaxNode node)
+        [return: NotNullIfNotNull(nameof(node))]
+        public override SyntaxNode? Visit(SyntaxNode? node)
         {
             // We can handle a single IdentifierNameSyntax at the top level (like 'TItem)
             // OR a GenericNameSyntax recursively (like `List<T>`)
-            if (node is IdentifierNameSyntax identifier && !(identifier.Parent is QualifiedNameSyntax))
+            if (node is IdentifierNameSyntax identifier &&
+                identifier.Parent is not QualifiedNameSyntax)
             {
                 if (_bindings.TryGetValue(identifier.Identifier.Text, out var binding))
                 {
@@ -48,7 +39,7 @@ internal class GenericTypeNameRewriter : TypeNameRewriter
                     // compared to leaving the type parameter in place.
                     //
                     // We add our own diagnostics for missing/invalid type parameters anyway.
-                    var replacement = binding == null ? typeof(object).FullName : binding;
+                    var replacement = binding ?? typeof(object).FullName.AssumeNotNull();
                     return identifier.Update(SyntaxFactory.Identifier(replacement).WithTriviaFrom(identifier.Identifier));
                 }
             }

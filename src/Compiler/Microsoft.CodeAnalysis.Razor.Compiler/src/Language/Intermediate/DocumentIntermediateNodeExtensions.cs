@@ -5,6 +5,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
+using Microsoft.AspNetCore.Razor.PooledObjects;
 
 namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
@@ -40,34 +42,25 @@ public static class DocumentIntermediateNodeExtensions
         return FindWithAnnotation<NamespaceDeclarationIntermediateNode>(node, CommonAnnotations.PrimaryNamespace);
     }
 
-    public static IReadOnlyList<IntermediateNodeReference> FindDirectiveReferences(this DocumentIntermediateNode node, DirectiveDescriptor directive)
+    public static ImmutableArray<IntermediateNodeReference> FindDirectiveReferences(this DocumentIntermediateNode node, DirectiveDescriptor directive)
     {
-        if (node == null)
-        {
-            throw new ArgumentNullException(nameof(node));
-        }
+        ArgHelper.ThrowIfNull(node);
+        ArgHelper.ThrowIfNull(directive);
 
-        if (directive == null)
-        {
-            throw new ArgumentNullException(nameof(directive));
-        }
-
-        var visitor = new DirectiveVisitor(directive);
+        using var visitor = new DirectiveVisitor(directive);
         visitor.Visit(node);
-        return visitor.Directives;
+        return visitor.Directives.DrainToImmutable();
     }
 
-    public static IReadOnlyList<IntermediateNodeReference> FindDescendantReferences<TNode>(this DocumentIntermediateNode document)
+    public static ImmutableArray<IntermediateNodeReference> FindDescendantReferences<TNode>(this DocumentIntermediateNode document)
         where TNode : IntermediateNode
     {
-        if (document == null)
-        {
-            throw new ArgumentNullException(nameof(document));
-        }
+        ArgHelper.ThrowIfNull(document);
 
-        var visitor = new ReferenceVisitor<TNode>();
+        using var visitor = new ReferenceVisitor<TNode>();
         visitor.Visit(document);
-        return visitor.References;
+
+        return visitor.References.DrainToImmutable();
     }
 
     private static T FindWithAnnotation<T>(IntermediateNode node, object annotation) where T : IntermediateNode
@@ -89,16 +82,16 @@ public static class DocumentIntermediateNodeExtensions
         return null;
     }
 
-    private class DirectiveVisitor : IntermediateNodeWalker
+    private sealed class DirectiveVisitor(DirectiveDescriptor directive) : IntermediateNodeWalker, IDisposable
     {
-        private readonly DirectiveDescriptor _directive;
+        private readonly DirectiveDescriptor _directive = directive;
 
-        public DirectiveVisitor(DirectiveDescriptor directive)
+        public PooledArrayBuilder<IntermediateNodeReference> Directives = [];
+
+        public void Dispose()
         {
-            _directive = directive;
+            Directives.Dispose();
         }
-
-        public List<IntermediateNodeReference> Directives = new List<IntermediateNodeReference>();
 
         public override void VisitDirective(DirectiveIntermediateNode node)
         {
@@ -111,10 +104,15 @@ public static class DocumentIntermediateNodeExtensions
         }
     }
 
-    private class ReferenceVisitor<TNode> : IntermediateNodeWalker
+    private sealed class ReferenceVisitor<TNode> : IntermediateNodeWalker, IDisposable
         where TNode : IntermediateNode
     {
-        public List<IntermediateNodeReference> References = new List<IntermediateNodeReference>();
+        public PooledArrayBuilder<IntermediateNodeReference> References = [];
+
+        public void Dispose()
+        {
+            References.Dispose();
+        }
 
         public override void VisitDefault(IntermediateNode node)
         {
