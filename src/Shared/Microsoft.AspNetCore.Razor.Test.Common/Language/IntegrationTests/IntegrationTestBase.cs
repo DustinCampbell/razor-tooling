@@ -314,7 +314,7 @@ public abstract class IntegrationTestBase
                 });
             }
 
-            b.Features.Add(new DefaultTypeNameFeature());
+            b.Features.Add(new TypeNameFeature());
             b.SetCSharpLanguageVersion(CSharpParseOptions.LanguageVersion);
 
             // Decorate each import feature so we can normalize line endings.

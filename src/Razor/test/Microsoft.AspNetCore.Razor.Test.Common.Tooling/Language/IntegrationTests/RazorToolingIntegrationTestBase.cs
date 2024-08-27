@@ -119,7 +119,7 @@ public class RazorToolingIntegrationTestBase : ToolingTestBase
                 b.Features.Add(new SetNewLineOptionFeature(LineEnding));
             }
 
-            b.Features.Add(new DefaultTypeNameFeature());
+            b.Features.Add(new TypeNameFeature());
 
             b.Features.Add(new CompilationTagHelperFeature());
             b.Features.Add(new DefaultMetadataReferenceFeature()

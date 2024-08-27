@@ -3,19 +3,102 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Razor;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
 // Razor.Language doesn't reference Microsoft.CodeAnalysis.CSharp so we
 // need some indirection.
-internal abstract class TypeNameFeature : RazorEngineFeatureBase
+internal sealed class TypeNameFeature : RazorEngineFeatureBase
 {
-    public abstract IReadOnlyList<string> ParseTypeParameters(string typeName);
+    public IReadOnlyList<string> ParseTypeParameters(string typeName)
+    {
+        if (typeName == null)
+        {
+            throw new ArgumentNullException(nameof(typeName));
+        }
 
-    public abstract TypeNameRewriter CreateGenericTypeRewriter(Dictionary<string, string> bindings);
+        var parsed = SyntaxFactory.ParseTypeName(typeName);
 
-    public abstract TypeNameRewriter CreateGlobalQualifiedTypeNameRewriter(ICollection<string> ignore);
+        if (parsed is IdentifierNameSyntax identifier)
+        {
+            return Array.Empty<string>();
+        }
 
-    public abstract bool IsLambda(string expression);
+        if (TryParseCore(parsed) is { IsDefault: false } list)
+        {
+            return list;
+        }
+
+        return parsed.DescendantNodesAndSelf()
+            .OfType<TypeArgumentListSyntax>()
+            .SelectMany(arg => arg.Arguments)
+            .SelectMany(t => ParseCore(t)).ToArray();
+
+        static ImmutableArray<string> TryParseCore(TypeSyntax parsed)
+        {
+            if (parsed is ArrayTypeSyntax array)
+            {
+                return ParseCore(array.ElementType);
+            }
+
+            if (parsed is TupleTypeSyntax tuple)
+            {
+                return tuple.Elements.SelectManyAsArray(a => ParseCore(a.Type));
+            }
+
+            return default;
+        }
+
+        static ImmutableArray<string> ParseCore(TypeSyntax parsed)
+        {
+            // Recursively drill into arrays `T[]` and tuples `(T, T)`.
+            if (TryParseCore(parsed) is { IsDefault: false } list)
+            {
+                return list;
+            }
+
+            // When we encounter an identifier, we assume it's a type parameter.
+            if (parsed is IdentifierNameSyntax identifier)
+            {
+                return ImmutableArray.Create(identifier.Identifier.Text);
+            }
+
+            // Generic names like `C<T>` are ignored here because we will visit their type argument list
+            // via the `.DescendantNodesAndSelf().OfType<TypeArgumentListSyntax>()` call above.
+            return ImmutableArray<string>.Empty;
+        }
+    }
+
+    public TypeNameRewriter CreateGenericTypeRewriter(Dictionary<string, string> bindings)
+    {
+        if (bindings == null)
+        {
+            throw new ArgumentNullException(nameof(bindings));
+        }
+
+        return new GenericTypeNameRewriter(bindings);
+    }
+
+    public TypeNameRewriter CreateGlobalQualifiedTypeNameRewriter(ICollection<string> ignore)
+    {
+        if (ignore == null)
+        {
+            throw new ArgumentNullException(nameof(ignore));
+        }
+
+        return new GlobalQualifiedTypeNameRewriter(ignore);
+    }
+
+    public bool IsLambda(string expression)
+    {
+        var parsed = SyntaxFactory.ParseExpression(expression);
+        return parsed is LambdaExpressionSyntax;
+    }
 }

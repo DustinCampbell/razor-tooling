@@ -48,7 +48,7 @@ namespace Microsoft.NET.Sdk.Razor.SourceGenerators
 
             var discoveryProjectEngine = RazorProjectEngine.Create(razorSourceGeneratorOptions.Configuration, fileSystem, b =>
             {
-                b.Features.Add(new DefaultTypeNameFeature());
+                b.Features.Add(new TypeNameFeature());
                 b.Features.Add(new ConfigureRazorCodeGenerationOptions(options =>
                 {
                     options.SuppressPrimaryMethodBody = true;
@@ -99,7 +99,7 @@ namespace Microsoft.NET.Sdk.Razor.SourceGenerators
 
             var projectEngine = RazorProjectEngine.Create(razorSourceGeneratorOptions.Configuration, fileSystem, b =>
             {
-                b.Features.Add(new DefaultTypeNameFeature());
+                b.Features.Add(new TypeNameFeature());
                 b.SetRootNamespace(razorSourceGeneratorOptions.RootNamespace);
 
                 b.Features.Add(new ConfigureRazorCodeGenerationOptions(options =>
