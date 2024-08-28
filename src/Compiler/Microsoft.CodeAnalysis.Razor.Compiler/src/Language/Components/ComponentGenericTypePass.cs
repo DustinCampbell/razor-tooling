@@ -332,7 +332,11 @@ internal class ComponentGenericTypePass : ComponentIntermediateNodePassBase, IRa
             return true;
         }
 
-        private void RewriteTypeNames(TypeNameRewriter rewriter, ComponentIntermediateNode node, bool? hasTypeArgumentSpecified = null, IDictionary<string, Binding>? bindings = null)
+        private void RewriteTypeNames(
+            TypeNameRewriter rewriter,
+            ComponentIntermediateNode node,
+            bool? hasTypeArgumentSpecified = null,
+            IDictionary<string, Binding>? bindings = null)
         {
             var typeNameFeature = _pass.TypeNameFeature;
 
@@ -369,12 +373,11 @@ internal class ComponentGenericTypePass : ComponentIntermediateNodePassBase, IRa
                     {
                         attribute.Annotations.Add(ComponentMetadata.Component.ExplicitTypeNameKey, true);
                     }
-                    else if(attribute.BoundAttribute?.IsEventCallbackProperty() ?? false)
+                    else if (attribute.BoundAttribute?.IsEventCallbackProperty() ?? false)
                     {
-                        var typeParameters = typeNameFeature.ParseTypeParameters(attribute.TypeName);
-                        for (int i = 0; i < typeParameters.Count; i++)
+                        var typeParameters = typeNameFeature.ParseTypeParameters(attribute.TypeName.AssumeNotNull());
+                        foreach (var parameter in typeParameters)
                         {
-                            var parameter = typeParameters[i];
                             if (bindings!.ContainsKey(parameter))
                             {
                                 attribute.Annotations.Add(ComponentMetadata.Component.OpenGenericKey, true);
