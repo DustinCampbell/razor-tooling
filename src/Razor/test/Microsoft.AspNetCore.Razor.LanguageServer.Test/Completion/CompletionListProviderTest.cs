@@ -4,6 +4,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading;
@@ -78,13 +79,13 @@ public class CompletionListProviderTest : LanguageServerTestBase
         private readonly VSInternalCompletionList _completionList;
 
         public TestDelegatedCompletionListProvider(VSInternalCompletionList completionList, IEnumerable<string> triggerCharacters)
-            : base(Array.Empty<DelegatedCompletionResponseRewriter>(), null, null, null)
+            : base(responseRewriters: [], documentMappingService: null, clientConnection: null, completionListCache: null)
         {
             _completionList = completionList;
-            TriggerCharacters = triggerCharacters.ToImmutableHashSet();
+            TriggerCharacters = triggerCharacters.ToFrozenSet();
         }
 
-        public override ImmutableHashSet<string> TriggerCharacters { get; }
+        public override FrozenSet<string> TriggerCharacters { get; }
 
         public override Task<VSInternalCompletionList> GetCompletionListAsync(
             int absoluteIndex,
@@ -109,10 +110,10 @@ public class CompletionListProviderTest : LanguageServerTestBase
             : base(completionFactsService: null, completionListCache: null, loggerFactory)
         {
             _completionList = completionList;
-            TriggerCharacters = triggerCharacters.ToImmutableHashSet();
+            TriggerCharacters = triggerCharacters.ToFrozenSet();
         }
 
-        public override ImmutableHashSet<string> TriggerCharacters { get; }
+        public override FrozenSet<string> TriggerCharacters { get; }
 
         public override Task<VSInternalCompletionList> GetCompletionListAsync(
             int absoluteIndex,

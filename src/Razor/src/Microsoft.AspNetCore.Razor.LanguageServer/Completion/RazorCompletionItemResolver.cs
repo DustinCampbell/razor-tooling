@@ -13,18 +13,12 @@ using Microsoft.VisualStudio.Text.Adornments;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.Completion;
 
-internal class RazorCompletionItemResolver : CompletionItemResolver
+internal class RazorCompletionItemResolver(
+    LSPTagHelperTooltipFactory lspTagHelperTooltipFactory,
+    VSLSPTagHelperTooltipFactory vsLspTagHelperTooltipFactory) : CompletionItemResolver
 {
-    private readonly LSPTagHelperTooltipFactory _lspTagHelperTooltipFactory;
-    private readonly VSLSPTagHelperTooltipFactory _vsLspTagHelperTooltipFactory;
-
-    public RazorCompletionItemResolver(
-        LSPTagHelperTooltipFactory lspTagHelperTooltipFactory,
-        VSLSPTagHelperTooltipFactory vsLspTagHelperTooltipFactory)
-    {
-        _lspTagHelperTooltipFactory = lspTagHelperTooltipFactory;
-        _vsLspTagHelperTooltipFactory = vsLspTagHelperTooltipFactory;
-    }
+    private readonly LSPTagHelperTooltipFactory _lspTagHelperTooltipFactory = lspTagHelperTooltipFactory;
+    private readonly VSLSPTagHelperTooltipFactory _vsLspTagHelperTooltipFactory = vsLspTagHelperTooltipFactory;
 
     public override async Task<VSInternalCompletionItem?> ResolveAsync(
         VSInternalCompletionItem completionItem,
@@ -62,6 +56,7 @@ internal class RazorCompletionItemResolver : CompletionItemResolver
             // do what previous version of the code did and return true.
             return true;
         });
+
         if (associatedRazorCompletion is null)
         {
             return null;
@@ -87,6 +82,7 @@ internal class RazorCompletionItemResolver : CompletionItemResolver
 
                     break;
                 }
+
             case RazorCompletionItemKind.MarkupTransition:
                 {
                     var descriptionInfo = associatedRazorCompletion.GetMarkupTransitionCompletionDescription();
@@ -97,6 +93,7 @@ internal class RazorCompletionItemResolver : CompletionItemResolver
 
                     break;
                 }
+
             case RazorCompletionItemKind.DirectiveAttribute:
             case RazorCompletionItemKind.DirectiveAttributeParameter:
             case RazorCompletionItemKind.TagHelperAttribute:
@@ -118,6 +115,7 @@ internal class RazorCompletionItemResolver : CompletionItemResolver
 
                     break;
                 }
+
             case RazorCompletionItemKind.TagHelperElement:
                 {
                     var descriptionInfo = associatedRazorCompletion.GetTagHelperElementDescriptionInfo();

@@ -2,9 +2,10 @@
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
@@ -18,35 +19,28 @@ using Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.Completion.Delegation;
 
-internal class DelegatedCompletionListProvider
+internal class DelegatedCompletionListProvider(
+    IEnumerable<DelegatedCompletionResponseRewriter> responseRewriters,
+    IDocumentMappingService documentMappingService,
+    IClientConnection clientConnection,
+    CompletionListCache completionListCache)
 {
-    private static readonly ImmutableHashSet<string> s_razorTriggerCharacters = new[] { "@" }.ToImmutableHashSet();
-    private static readonly ImmutableHashSet<string> s_csharpTriggerCharacters = new[] { " ", "(", "=", "#", ".", "<", "[", "{", "\"", "/", ":", "~" }.ToImmutableHashSet();
-    private static readonly ImmutableHashSet<string> s_htmlTriggerCharacters = new[] { ":", "@", "#", ".", "!", "*", ",", "(", "[", "-", "<", "&", "\\", "/", "'", "\"", "=", ":", " ", "`" }.ToImmutableHashSet();
-    private static readonly ImmutableHashSet<string> s_allTriggerCharacters =
-        s_csharpTriggerCharacters
-            .Union(s_htmlTriggerCharacters)
-            .Union(s_razorTriggerCharacters);
+    private static readonly FrozenSet<string> s_razorTriggerCharacters = FrozenSet.ToFrozenSet(["@"]);
+    private static readonly FrozenSet<string> s_csharpTriggerCharacters = FrozenSet.ToFrozenSet([" ", "(", "=", "#", ".", "<", "[", "{", "\"", "/", ":", "~"]);
+    private static readonly FrozenSet<string> s_htmlTriggerCharacters = FrozenSet.ToFrozenSet([":", "@", "#", ".", "!", "*", ",", "(", "[", "-", "<", "&", "\\", "/", "'", "\"", "=", ":", " ", "`"]);
+    private static readonly FrozenSet<string> s_allTriggerCharacters = FrozenSet.ToFrozenSet([
+        .. s_csharpTriggerCharacters.Items,
+        .. s_htmlTriggerCharacters.Items,
+        .. s_razorTriggerCharacters.Items
+    ]);
 
-    private readonly ImmutableArray<DelegatedCompletionResponseRewriter> _responseRewriters;
-    private readonly IDocumentMappingService _documentMappingService;
-    private readonly IClientConnection _clientConnection;
-    private readonly CompletionListCache _completionListCache;
-
-    public DelegatedCompletionListProvider(
-        IEnumerable<DelegatedCompletionResponseRewriter> responseRewriters,
-        IDocumentMappingService documentMappingService,
-        IClientConnection clientConnection,
-        CompletionListCache completionListCache)
-    {
-        _responseRewriters = responseRewriters.OrderBy(rewriter => rewriter.Order).ToImmutableArray();
-        _documentMappingService = documentMappingService;
-        _clientConnection = clientConnection;
-        _completionListCache = completionListCache;
-    }
+    private readonly ImmutableArray<DelegatedCompletionResponseRewriter> _responseRewriters = responseRewriters.OrderByAsArray(static rewriter => rewriter.Order);
+    private readonly IDocumentMappingService _documentMappingService = documentMappingService;
+    private readonly IClientConnection _clientConnection = clientConnection;
+    private readonly CompletionListCache _completionListCache = completionListCache;
 
     // virtual for tests
-    public virtual ImmutableHashSet<string> TriggerCharacters => s_allTriggerCharacters;
+    public virtual FrozenSet<string> TriggerCharacters => s_allTriggerCharacters;
 
     // virtual for tests
     public virtual async Task<VSInternalCompletionList?> GetCompletionListAsync(
@@ -57,7 +51,9 @@ internal class DelegatedCompletionListProvider
         Guid correlationId,
         CancellationToken cancellationToken)
     {
-        var positionInfo = await _documentMappingService.GetPositionInfoAsync(documentContext, absoluteIndex, cancellationToken).ConfigureAwait(false);
+        var codeDocument = await documentContext.GetCodeDocumentAsync(cancellationToken).ConfigureAwait(false);
+
+        var positionInfo = _documentMappingService.GetPositionInfo(codeDocument, absoluteIndex);
 
         if (positionInfo.LanguageKind == RazorLanguageKind.Razor)
         {
@@ -65,9 +61,8 @@ internal class DelegatedCompletionListProvider
             return null;
         }
 
-        var provisionalCompletion = await TryGetProvisionalCompletionInfoAsync(documentContext, completionContext, positionInfo, cancellationToken).ConfigureAwait(false);
         TextEdit? provisionalTextEdit = null;
-        if (provisionalCompletion is not null)
+        if (TryGetProvisionalCompletionInfo(codeDocument, completionContext, positionInfo, out var provisionalCompletion))
         {
             provisionalTextEdit = provisionalCompletion.ProvisionalTextEdit;
             positionInfo = provisionalCompletion.ProvisionalPositionInfo;
@@ -75,7 +70,7 @@ internal class DelegatedCompletionListProvider
 
         completionContext = RewriteContext(completionContext, positionInfo.LanguageKind);
 
-        var shouldIncludeSnippets = await ShouldIncludeSnippetsAsync(documentContext, absoluteIndex, cancellationToken).ConfigureAwait(false);
+        var shouldIncludeSnippets = ShouldIncludeSnippets(codeDocument, absoluteIndex);
 
         var delegatedParams = new DelegatedCompletionParams(
             documentContext.GetTextDocumentIdentifierAndVersion(),
@@ -120,9 +115,8 @@ internal class DelegatedCompletionListProvider
         return rewrittenResponse;
     }
 
-    private async Task<bool> ShouldIncludeSnippetsAsync(DocumentContext documentContext, int absoluteIndex, CancellationToken cancellationToken)
+    private static bool ShouldIncludeSnippets(RazorCodeDocument codeDocument, int absoluteIndex)
     {
-        var codeDocument = await documentContext.GetCodeDocumentAsync(cancellationToken).ConfigureAwait(false);
         var tree = codeDocument.GetSyntaxTree();
 
         var token = tree.Root.FindToken(absoluteIndex, includeWhitespace: false);
@@ -182,33 +176,34 @@ internal class DelegatedCompletionListProvider
         return rewrittenContext;
     }
 
-    private async Task<ProvisionalCompletionInfo?> TryGetProvisionalCompletionInfoAsync(
-        DocumentContext documentContext,
+    private bool TryGetProvisionalCompletionInfo(
+        RazorCodeDocument codeDocument,
         VSInternalCompletionContext completionContext,
         DocumentPositionInfo positionInfo,
-        CancellationToken cancellationToken)
+        [NotNullWhen(true)] out ProvisionalCompletionInfo? provisionalCompletionInfo)
     {
         if (positionInfo.LanguageKind != RazorLanguageKind.Html ||
             completionContext.TriggerKind != CompletionTriggerKind.TriggerCharacter ||
             completionContext.TriggerCharacter != ".")
         {
             // Invalid provisional completion context
-            return null;
+            provisionalCompletionInfo = null;
+            return false;
         }
 
         if (positionInfo.Position.Character == 0)
         {
             // We're at the start of line. Can't have provisional completions here.
-            return null;
+            provisionalCompletionInfo = null;
+            return false;
         }
 
-        var previousCharacterPositionInfo = await _documentMappingService
-            .GetPositionInfoAsync(documentContext, positionInfo.HostDocumentIndex - 1, cancellationToken)
-            .ConfigureAwait(false);
+        var previousCharacterPositionInfo = _documentMappingService.GetPositionInfo(codeDocument, positionInfo.HostDocumentIndex - 1);
 
         if (previousCharacterPositionInfo.LanguageKind != RazorLanguageKind.CSharp)
         {
-            return null;
+            provisionalCompletionInfo = null;
+            return false;
         }
 
         var previousPosition = previousCharacterPositionInfo.Position;
@@ -224,7 +219,8 @@ internal class DelegatedCompletionListProvider
                 previousPosition.Character + 1),
             previousCharacterPositionInfo.HostDocumentIndex + 1);
 
-        return new ProvisionalCompletionInfo(addProvisionalDot, provisionalPositionInfo);
+        provisionalCompletionInfo = new ProvisionalCompletionInfo(addProvisionalDot, provisionalPositionInfo);
+        return true;
     }
 
     private record class ProvisionalCompletionInfo(TextEdit ProvisionalTextEdit, DocumentPositionInfo ProvisionalPositionInfo);

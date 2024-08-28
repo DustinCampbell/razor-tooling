@@ -4,6 +4,7 @@
 using System;
 using System.Buffers;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,16 +14,10 @@ using Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.Completion;
 
-internal class AggregateCompletionItemResolver
+internal class AggregateCompletionItemResolver(IEnumerable<CompletionItemResolver> completionItemResolvers, ILoggerFactory loggerFactory)
 {
-    private readonly IReadOnlyList<CompletionItemResolver> _completionItemResolvers;
-    private readonly ILogger _logger;
-
-    public AggregateCompletionItemResolver(IEnumerable<CompletionItemResolver> completionItemResolvers, ILoggerFactory loggerFactory)
-    {
-        _completionItemResolvers = completionItemResolvers.ToArray();
-        _logger = loggerFactory.GetOrCreateLogger<AggregateCompletionItemResolver>();
-    }
+    private readonly ImmutableArray<CompletionItemResolver> _completionItemResolvers = completionItemResolvers.ToImmutableArray();
+    private readonly ILogger _logger = loggerFactory.GetOrCreateLogger<AggregateCompletionItemResolver>();
 
     public async Task<VSInternalCompletionItem?> ResolveAsync(
         VSInternalCompletionItem item,
@@ -31,7 +26,7 @@ internal class AggregateCompletionItemResolver
         VSInternalClientCapabilities? clientCapabilities,
         CancellationToken cancellationToken)
     {
-        using var completionItemResolverTasks = new PooledArrayBuilder<Task<VSInternalCompletionItem?>>(_completionItemResolvers.Count);
+        using var completionItemResolverTasks = new PooledArrayBuilder<Task<VSInternalCompletionItem?>>(_completionItemResolvers.Length);
 
         foreach (var completionItemResolver in _completionItemResolvers)
         {

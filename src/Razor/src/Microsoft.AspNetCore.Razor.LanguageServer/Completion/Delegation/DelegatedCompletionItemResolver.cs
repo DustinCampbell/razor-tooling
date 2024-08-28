@@ -15,21 +15,14 @@ using Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.Completion.Delegation;
 
-internal class DelegatedCompletionItemResolver : CompletionItemResolver
+internal class DelegatedCompletionItemResolver(
+    IDocumentContextFactory documentContextFactory,
+    IRazorFormattingService formattingService,
+    IClientConnection clientConnection) : CompletionItemResolver
 {
-    private readonly IDocumentContextFactory _documentContextFactory;
-    private readonly IRazorFormattingService _formattingService;
-    private readonly IClientConnection _clientConnection;
-
-    public DelegatedCompletionItemResolver(
-        IDocumentContextFactory documentContextFactory,
-        IRazorFormattingService formattingService,
-        IClientConnection clientConnection)
-    {
-        _documentContextFactory = documentContextFactory;
-        _formattingService = formattingService;
-        _clientConnection = clientConnection;
-    }
+    private readonly IDocumentContextFactory _documentContextFactory = documentContextFactory;
+    private readonly IRazorFormattingService _formattingService = formattingService;
+    private readonly IClientConnection _clientConnection = clientConnection;
 
     public override async Task<VSInternalCompletionItem?> ResolveAsync(
         VSInternalCompletionItem item,
@@ -125,7 +118,7 @@ internal class DelegatedCompletionItemResolver : CompletionItemResolver
                 var formattedTextEdit = await _formattingService.FormatSnippetAsync(
                     documentContext,
                     RazorLanguageKind.CSharp,
-                    new[] { textEdit },
+                    [textEdit],
                     formattingOptions,
                     cancellationToken).ConfigureAwait(false);
 

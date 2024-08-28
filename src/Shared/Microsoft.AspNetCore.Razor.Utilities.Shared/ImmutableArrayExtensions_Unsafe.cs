@@ -26,6 +26,19 @@ internal static partial class ImmutableArrayExtensions
     public readonly ref struct UnsafeOperations<T>(ImmutableArray<T> array)
     {
         /// <summary>
+        ///  Gets the internal array of this <see cref="ImmutableArray{T}"/>.
+        /// </summary>
+        /// <returns></returns>
+        public T[]? AsArray()
+            => ImmutableCollectionsMarshal.AsArray(array);
+
+        /// <summary>
+        ///  Gets the internal array of this <see cref="ImmutableArray{T}"/> as a <see cref="Span{T}"/>.
+        /// </summary>
+        public Span<T> AsSpan()
+            => AsArray().AsSpan();
+
+        /// <summary>
         ///  Sorts the elements of this <see cref="ImmutableArray{T}"/> in ascending order.
         /// </summary>
         public void Order()

@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Razor.PooledObjects;
 using Microsoft.CodeAnalysis.Razor.Completion;
@@ -15,15 +16,30 @@ internal static class VSInternalCompletionItemExtensions
 {
     private const string ResultIdKey = "_resultId";
 
-    private static readonly Dictionary<RazorCommitCharacter, VSInternalCommitCharacter> s_commitCharacterCache = [];
+    private static readonly Dictionary<RazorCommitCharacter, VSInternalCommitCharacter> s_vsInternalCommitCharacterCache = [];
+
+    /// <summary>
+    ///  Retrieves a cached <see cref="VSInternalCommitCharacter"/> for the given <see cref="RazorCommitCharacter"/>
+    ///  or creates a new one and adds it to the cache.
+    /// </summary>
+    private static VSInternalCommitCharacter GetOrCreateVsInternalCommitCharacter(RazorCommitCharacter commitCharacter)
+    {
+        lock (s_vsInternalCommitCharacterCache)
+        {
+            var result = s_vsInternalCommitCharacterCache.GetOrAdd(
+                commitCharacter,
+                static ch => new() { Character = ch.Character, Insert = ch.Insert });
+
+            Debug.Assert(
+                commitCharacter.Character == result.Character && commitCharacter.Insert == result.Insert,
+                "Cached VSInternalCommitCharacter has been modified from the original!");
+
+            return result;
+        }
+    }
 
     public static bool TryGetCompletionListResultIds(this VSInternalCompletionItem completion, out ImmutableArray<int> resultIds)
     {
-        if (completion is null)
-        {
-            throw new ArgumentNullException(nameof(completion));
-        }
-
         if (!CompletionListMerger.TrySplit(completion.Data, out var splitData))
         {
             resultIds = default;
@@ -43,7 +59,7 @@ internal static class VSInternalCompletionItemExtensions
 
         if (ids.Count > 0)
         {
-            resultIds = ids.ToImmutable();
+            resultIds = ids.DrainToImmutable();
             return true;
         }
 
@@ -51,48 +67,42 @@ internal static class VSInternalCompletionItemExtensions
         return false;
     }
 
-    public static void UseCommitCharactersFrom(
+    /// <summary>
+    ///  Sets the correct "commit characters" property on the given LSP completion item.
+    /// </summary>
+    /// <param name="completionItem">The LSP completion item to update.</param>
+    /// <param name="razorCompletionItem">The Razor completion item whose commit characters will be used.</param>
+    /// <param name="clientCapabilities">The available client capabilities.</param>
+    /// <remarks>
+    ///  If <see cref="VSInternalClientCapabilities.SupportsVisualStudioExtensions"/> is <see langword="true"/>,
+    ///  the <see cref="VSInternalCompletionItem.VsCommitCharacters"/> property will be set; if <see langword="false"/>,
+    ///  <see cref="CompletionItem.CommitCharacters"/> will be set.
+    /// </remarks>
+    public static void SetupCommitCharacters(
         this VSInternalCompletionItem completionItem,
         RazorCompletionItem razorCompletionItem,
         VSInternalClientCapabilities clientCapabilities)
     {
-        var razorCommitCharacters = razorCompletionItem.CommitCharacters;
-        if (razorCommitCharacters.IsEmpty)
+        var commitCharacters = razorCompletionItem.CommitCharacters;
+        if (commitCharacters.IsEmpty)
         {
             return;
         }
 
-        var supportsVSExtensions = clientCapabilities?.SupportsVisualStudioExtensions ?? false;
+        // In the calculations below, SelectAsArray returns a new ImmutableArray<T>, so we can safely use its internal array.
+
+        var supportsVSExtensions = clientCapabilities.SupportsVisualStudioExtensions;
         if (supportsVSExtensions)
         {
-            using var builder = new PooledArrayBuilder<VSInternalCommitCharacter>(capacity: razorCommitCharacters.Length);
-
-            lock (s_commitCharacterCache)
-            {
-                foreach (var c in razorCommitCharacters)
-                {
-                    if (!s_commitCharacterCache.TryGetValue(c, out var commitCharacter))
-                    {
-                        commitCharacter = new() { Character = c.Character, Insert = c.Insert };
-                        s_commitCharacterCache.Add(c, commitCharacter);
-                    }
-
-                    builder.Add(commitCharacter);
-                }
-            }
-
-            completionItem.VsCommitCharacters = builder.ToArray();
+            completionItem.VsCommitCharacters = commitCharacters
+                .SelectAsArray(GetOrCreateVsInternalCommitCharacter)
+                .Unsafe().AsArray();
         }
         else
         {
-            using var builder = new PooledArrayBuilder<string>(capacity: razorCommitCharacters.Length);
-
-            foreach (var c in razorCommitCharacters)
-            {
-                builder.Add(c.Character);
-            }
-
-            completionItem.CommitCharacters = builder.ToArray();
+            completionItem.CommitCharacters = commitCharacters
+                .SelectAsArray(static ch => ch.Character)
+                .Unsafe().AsArray();
         }
     }
 }

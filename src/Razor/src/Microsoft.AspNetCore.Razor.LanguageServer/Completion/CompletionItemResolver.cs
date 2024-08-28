@@ -11,7 +11,7 @@ internal abstract class CompletionItemResolver
 {
     public abstract Task<VSInternalCompletionItem?> ResolveAsync(
         VSInternalCompletionItem item,
-        VSInternalCompletionList containingCompletionlist,
+        VSInternalCompletionList containingCompletionList,
         object? originalRequestContext,
         VSInternalClientCapabilities? clientCapabilities,
         CancellationToken cancellationToken);

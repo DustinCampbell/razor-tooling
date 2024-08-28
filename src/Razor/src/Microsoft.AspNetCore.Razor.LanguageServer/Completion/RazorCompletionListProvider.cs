@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
@@ -23,6 +24,8 @@ internal class RazorCompletionListProvider(
     CompletionListCache completionListCache,
     ILoggerFactory loggerFactory)
 {
+    private static readonly FrozenSet<string> s_triggerCharacters = FrozenSet.ToFrozenSet(["@", "<", ":", " "]);
+
     private readonly IRazorCompletionFactsService _completionFactsService = completionFactsService;
     private readonly CompletionListCache _completionListCache = completionListCache;
     private readonly ILogger _logger = loggerFactory.GetOrCreateLogger<RazorCompletionListProvider>();
@@ -33,7 +36,7 @@ internal class RazorCompletionListProvider(
     };
 
     // virtual for tests
-    public virtual ImmutableHashSet<string> TriggerCharacters => new[] { "@", "<", ":", " " }.ToImmutableHashSet();
+    public virtual FrozenSet<string> TriggerCharacters => s_triggerCharacters;
 
     // virtual for tests
     public virtual async Task<VSInternalCompletionList?> GetCompletionListAsync(
@@ -126,8 +129,8 @@ internal class RazorCompletionListProvider(
         }
 
         var tagHelperCompletionItemKind = CompletionItemKind.TypeParameter;
-        var supportedItemKinds = clientCapabilities.TextDocument?.Completion?.CompletionItemKind?.ValueSet ?? Array.Empty<CompletionItemKind>();
-        if (supportedItemKinds?.Contains(CompletionItemKind.TagHelper) == true)
+        var supportedItemKinds = clientCapabilities.TextDocument?.Completion?.CompletionItemKind?.ValueSet ?? [];
+        if (supportedItemKinds.Contains(CompletionItemKind.TagHelper))
         {
             tagHelperCompletionItemKind = CompletionItemKind.TagHelper;
         }
@@ -148,7 +151,7 @@ internal class RazorCompletionListProvider(
                         Kind = razorCompletionItem.IsSnippet ? CompletionItemKind.Snippet : CompletionItemKind.Keyword,
                     };
 
-                    directiveCompletionItem.UseCommitCharactersFrom(razorCompletionItem, clientCapabilities);
+                    directiveCompletionItem.SetupCommitCharacters(razorCompletionItem, clientCapabilities);
 
                     if (razorCompletionItem == DirectiveAttributeTransitionCompletionItemProvider.TransitionCompletionItem)
                     {
@@ -159,6 +162,7 @@ internal class RazorCompletionListProvider(
                     completionItem = directiveCompletionItem;
                     return true;
                 }
+
             case RazorCompletionItemKind.DirectiveAttribute:
                 {
                     var directiveAttributeCompletionItem = new VSInternalCompletionItem()
@@ -171,11 +175,12 @@ internal class RazorCompletionListProvider(
                         Kind = tagHelperCompletionItemKind,
                     };
 
-                    directiveAttributeCompletionItem.UseCommitCharactersFrom(razorCompletionItem, clientCapabilities);
+                    directiveAttributeCompletionItem.SetupCommitCharacters(razorCompletionItem, clientCapabilities);
 
                     completionItem = directiveAttributeCompletionItem;
                     return true;
                 }
+
             case RazorCompletionItemKind.DirectiveAttributeParameter:
                 {
                     var parameterCompletionItem = new VSInternalCompletionItem()
@@ -188,11 +193,12 @@ internal class RazorCompletionListProvider(
                         Kind = tagHelperCompletionItemKind,
                     };
 
-                    parameterCompletionItem.UseCommitCharactersFrom(razorCompletionItem, clientCapabilities);
+                    parameterCompletionItem.SetupCommitCharacters(razorCompletionItem, clientCapabilities);
 
                     completionItem = parameterCompletionItem;
                     return true;
                 }
+
             case RazorCompletionItemKind.MarkupTransition:
                 {
                     var markupTransitionCompletionItem = new VSInternalCompletionItem()
@@ -205,11 +211,12 @@ internal class RazorCompletionListProvider(
                         Kind = tagHelperCompletionItemKind,
                     };
 
-                    markupTransitionCompletionItem.UseCommitCharactersFrom(razorCompletionItem, clientCapabilities);
+                    markupTransitionCompletionItem.SetupCommitCharacters(razorCompletionItem, clientCapabilities);
 
                     completionItem = markupTransitionCompletionItem;
                     return true;
                 }
+
             case RazorCompletionItemKind.TagHelperElement:
                 {
                     var tagHelperElementCompletionItem = new VSInternalCompletionItem()
@@ -222,11 +229,12 @@ internal class RazorCompletionListProvider(
                         Kind = tagHelperCompletionItemKind,
                     };
 
-                    tagHelperElementCompletionItem.UseCommitCharactersFrom(razorCompletionItem, clientCapabilities);
+                    tagHelperElementCompletionItem.SetupCommitCharacters(razorCompletionItem, clientCapabilities);
 
                     completionItem = tagHelperElementCompletionItem;
                     return true;
                 }
+
             case RazorCompletionItemKind.TagHelperAttribute:
                 {
                     var tagHelperAttributeCompletionItem = new VSInternalCompletionItem()
@@ -239,7 +247,7 @@ internal class RazorCompletionListProvider(
                         Kind = tagHelperCompletionItemKind,
                     };
 
-                    tagHelperAttributeCompletionItem.UseCommitCharactersFrom(razorCompletionItem, clientCapabilities);
+                    tagHelperAttributeCompletionItem.SetupCommitCharacters(razorCompletionItem, clientCapabilities);
 
                     completionItem = tagHelperAttributeCompletionItem;
                     return true;

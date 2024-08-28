@@ -4,13 +4,8 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Text.Json;
-using System.Text.Json.Nodes;
-using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Razor.PooledObjects;
-using Microsoft.CodeAnalysis.Razor.Protocol;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
 using Newtonsoft.Json.Linq;
 
@@ -18,9 +13,15 @@ namespace Microsoft.AspNetCore.Razor.LanguageServer.Completion;
 
 internal static class CompletionListMerger
 {
-    private static readonly string Data1Key = nameof(MergedCompletionListData.Data1);
-    private static readonly string Data2Key = nameof(MergedCompletionListData.Data2);
-    private static readonly object EmptyData = new object();
+    private readonly record struct PropertyNames(string Name, string LowerInvariantName);
+
+    private record class MergedCompletionListData(object Data1, object Data2)
+    {
+        public static readonly PropertyNames Data1Property = new (nameof(Data1), nameof(Data1).ToLowerInvariant());
+        public static readonly PropertyNames Data2Property = new(nameof(Data2), nameof(Data2).ToLowerInvariant());
+    }
+
+    private static readonly object s_emptyData = new();
 
     public static VSInternalCompletionList? Merge(VSInternalCompletionList? razorCompletionList, VSInternalCompletionList? delegatedCompletionList)
     {
@@ -38,7 +39,7 @@ internal static class CompletionListMerger
         EnsureMergeableData(razorCompletionList, delegatedCompletionList);
 
         var mergedIsIncomplete = razorCompletionList.IsIncomplete || delegatedCompletionList.IsIncomplete;
-        var mergedItems = razorCompletionList.Items.Concat(delegatedCompletionList.Items).ToArray();
+        CompletionItem[] mergedItems = [.. razorCompletionList.Items, .. delegatedCompletionList.Items];
         var mergedData = MergeData(razorCompletionList.Data, delegatedCompletionList.Data);
         var mergedCommitCharacters = razorCompletionList.CommitCharacters ?? delegatedCompletionList.CommitCharacters;
         var mergedSuggestionMode = razorCompletionList.SuggestionMode || delegatedCompletionList.SuggestionMode;
@@ -126,8 +127,8 @@ internal static class CompletionListMerger
             return;
         }
 
-        if (jsonElement.TryGetProperty(Data1Key, out _) || jsonElement.TryGetProperty(Data1Key.ToLowerInvariant(), out _) &&
-            jsonElement.TryGetProperty(Data2Key, out _) || jsonElement.TryGetProperty(Data2Key.ToLowerInvariant(), out _))
+        if (ContainsProperty(jsonElement, MergedCompletionListData.Data1Property) &&
+            ContainsProperty(jsonElement, MergedCompletionListData.Data2Property))
         {
             // Merged data
             var mergedCompletionListData = jsonElement.Deserialize<MergedCompletionListData>();
@@ -154,8 +155,8 @@ internal static class CompletionListMerger
             return;
         }
 
-        if ((jObject.ContainsKey(Data1Key) || jObject.ContainsKey(Data1Key.ToLowerInvariant())) &&
-            (jObject.ContainsKey(Data2Key) || jObject.ContainsKey(Data2Key.ToLowerInvariant())))
+        if (ContainsProperty(jObject, MergedCompletionListData.Data1Property) &&
+            ContainsProperty(jObject, MergedCompletionListData.Data2Property))
         {
             // Merged data
             var mergedCompletionListData = jObject.ToObject<MergedCompletionListData>();
@@ -176,92 +177,81 @@ internal static class CompletionListMerger
         }
     }
 
+    private static bool ContainsProperty(JsonElement jsonElement, PropertyNames property)
+        => jsonElement.TryGetProperty(property.Name, out _) || jsonElement.TryGetProperty(property.LowerInvariantName, out _);
+
+    private static bool ContainsProperty(JObject jObject, PropertyNames property)
+        => jObject.ContainsKey(property.Name) || jObject.ContainsKey(property.LowerInvariantName);
+
     private static void EnsureMergeableData(VSInternalCompletionList completionListA, VSInternalCompletionList completionListB)
     {
-        if (completionListA.Data != completionListB.Data &&
-            completionListA.Data is null || completionListB.Data is null)
+        if ((completionListA.Data == completionListB.Data || completionListA.Data is not null) && completionListB.Data is not null)
         {
-            // One of the completion lists have data while the other does not, we need to ensure that any non-data centric items don't get incorrect data associated
+            return;
+        }
 
-            // The candidate completion list will be one where we populate empty data for any `null` specifying data given we'll be merging
-            // two completion lists together we don't want incorrect data to be inherited down
-            var candidateCompletionList = completionListA.Data is null ? completionListA : completionListB;
-            for (var i = 0; i < candidateCompletionList.Items.Length; i++)
-            {
-                var item = candidateCompletionList.Items[i];
-                if (item.Data is null)
-                {
-                    item.Data = EmptyData;
-                }
-            }
+        // One of the completion lists have data while the other does not, we need to ensure that any non-data centric items don't get incorrect data associated
+
+        // The candidate completion list will be one where we populate empty data for any null specifying data given we'll be merging
+        // two completion lists together we don't want incorrect data to be inherited down
+        var candidateCompletionList = completionListA.Data is null ? completionListA : completionListB;
+
+        foreach (var item in candidateCompletionList.Items)
+        {
+            item.Data ??= s_emptyData;
         }
     }
 
     private static void EnsureMergeableCommitCharacters(VSInternalCompletionList completionListA, VSInternalCompletionList completionListB)
     {
-        var aInheritsCommitCharacters = completionListA.CommitCharacters is not null || completionListA.ItemDefaults?.CommitCharacters is not null;
-        var bInheritsCommitCharacters = completionListB.CommitCharacters is not null || completionListB.ItemDefaults?.CommitCharacters is not null;
-        if (aInheritsCommitCharacters && bInheritsCommitCharacters)
+        if (!InheritsCommitCharacters(completionListA) || !InheritsCommitCharacters(completionListB))
         {
-            // Need to merge commit characters because both are trying to inherit
+            return;
+        }
 
-            var inheritableCommitCharacterCompletionsA = GetCompletionsThatDoNotSpecifyCommitCharacters(completionListA);
-            var inheritableCommitCharacterCompletionsB = GetCompletionsThatDoNotSpecifyCommitCharacters(completionListB);
-            IReadOnlyList<VSInternalCompletionItem>? completionItemsToStopInheriting;
-            VSInternalCompletionList? completionListToStopInheriting;
+        // Need to merge commit characters because both are trying to inherit
 
-            // Decide which completion list has more items that benefit from "inheriting" commit characters.
-            if (inheritableCommitCharacterCompletionsA.Length >= inheritableCommitCharacterCompletionsB.Length)
-            {
-                completionListToStopInheriting = completionListB;
-                completionItemsToStopInheriting = inheritableCommitCharacterCompletionsB;
-            }
-            else
-            {
-                completionListToStopInheriting = completionListA;
-                completionItemsToStopInheriting = inheritableCommitCharacterCompletionsA;
-            }
+        using var pooledListA = ListPool<VSInternalCompletionItem>.GetPooledObject(out var inheritableCompletionsA);
+        using var pooledListB = ListPool<VSInternalCompletionItem>.GetPooledObject(out var inheritableCompletionsB);
 
-            for (var i = 0; i < completionItemsToStopInheriting.Count; i++)
+        CollectCompletionsWithoutCommitCharacters(completionListA, inheritableCompletionsA);
+        CollectCompletionsWithoutCommitCharacters(completionListB, inheritableCompletionsB);
+
+        // Decide which completion list has more items that benefit from "inheriting" commit characters.
+        var (completionListToStopInheriting, completionItemsToStopInheriting) = inheritableCompletionsA.Count >= inheritableCompletionsB.Count
+            ? (completionListB, inheritableCompletionsB)
+            : (completionListA, inheritableCompletionsA);
+
+        var commitCharacters = completionListToStopInheriting.CommitCharacters is not null
+            ? completionListToStopInheriting.CommitCharacters
+            : completionListToStopInheriting.ItemDefaults?.CommitCharacters;
+
+        for (var i = 0; i < completionItemsToStopInheriting.Count; i++)
+        {
+            completionItemsToStopInheriting[i].VsCommitCharacters = commitCharacters;
+        }
+
+        completionListToStopInheriting.CommitCharacters = null;
+
+        if (completionListToStopInheriting.ItemDefaults is { } itemDefaults)
+        {
+            itemDefaults.CommitCharacters = null;
+        }
+
+        static bool InheritsCommitCharacters(VSInternalCompletionList completionList)
+        {
+            return completionList is { CommitCharacters: not null } or { ItemDefaults.CommitCharacters: not null };
+        }
+
+        static void CollectCompletionsWithoutCommitCharacters(VSInternalCompletionList completionList, List<VSInternalCompletionItem> collector)
+        {
+            foreach (var item in completionList.Items)
             {
-                if (completionListToStopInheriting.CommitCharacters is not null)
+                if (item is VSInternalCompletionItem { CommitCharacters: null, VsCommitCharacters: null } vsItem)
                 {
-                    completionItemsToStopInheriting[i].VsCommitCharacters = completionListToStopInheriting.CommitCharacters;
+                    collector.Add(vsItem);
                 }
-                else if (completionListToStopInheriting.ItemDefaults?.CommitCharacters is not null)
-                {
-                    completionItemsToStopInheriting[i].VsCommitCharacters = completionListToStopInheriting.ItemDefaults?.CommitCharacters;
-                }
-            }
-
-            completionListToStopInheriting.CommitCharacters = null;
-
-            if (completionListToStopInheriting.ItemDefaults is not null)
-            {
-                completionListToStopInheriting.ItemDefaults.CommitCharacters = null;
             }
         }
     }
-
-    private static ImmutableArray<VSInternalCompletionItem> GetCompletionsThatDoNotSpecifyCommitCharacters(VSInternalCompletionList completionList)
-    {
-        using var inheritableCompletions = new PooledArrayBuilder<VSInternalCompletionItem>();
-        for (var i = 0; i < completionList.Items.Length; i++)
-        {
-            var completionItem = completionList.Items[i] as VSInternalCompletionItem;
-            if (completionItem is null ||
-                completionItem.CommitCharacters is not null ||
-                completionItem.VsCommitCharacters is not null)
-            {
-                // Completion item wasn't the right type or already specifies commit characters
-                continue;
-            }
-
-            inheritableCompletions.Add(completionItem);
-        }
-
-        return inheritableCompletions.ToImmutable();
-    }
-
-    private record MergedCompletionListData(object Data1, object Data2);
 }

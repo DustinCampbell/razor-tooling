@@ -35,7 +35,7 @@ internal class RazorCompletionEndpoint(
         serverCapabilities.CompletionProvider = new CompletionOptions()
         {
             ResolveProvider = true,
-            TriggerCharacters = _completionListProvider.AggregateTriggerCharacters.ToArray(),
+            TriggerCharacters = _completionListProvider.AllTriggerCharacters,
         };
     }
 
