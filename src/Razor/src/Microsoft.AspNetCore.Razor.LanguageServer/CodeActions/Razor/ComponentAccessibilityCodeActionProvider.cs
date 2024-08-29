@@ -205,7 +205,7 @@ internal sealed class ComponentAccessibilityCodeActionProvider : IRazorCodeActio
             parentTagName = parentTagHelperElement.StartTag?.Name.Content ?? parentTagHelperElement.EndTag?.Name.Content;
         }
 
-        var attributes = TagHelperFacts.StringifyAttributes(startTag.Attributes);
+        var attributes = startTag.Attributes.ToAttributePairs();
 
         // Find all matching tag helpers
         using var _ = DictionaryPool<string, TagHelperPair>.GetPooledObject(out var matching);

@@ -7,7 +7,6 @@ using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.CodeAnalysis.Razor.Completion;
-using Microsoft.VisualStudio.Editor.Razor;
 
 namespace Microsoft.VisualStudio.LegacyEditor.Razor.Completion;
 
@@ -32,22 +31,13 @@ internal sealed class LegacyElementCompletionContext : ElementCompletionContext
     public override bool InitializeWithExistingCompletions => true;
 
     public override bool TryGetTagHelperBinding([NotNullWhen(true)] out TagHelperBinding? binding)
-    {
-        binding = TagHelperFacts.GetTagHelperBinding(
-            DocumentContext,
-            ContainingTagName,
-            Attributes,
-            ContainingParentTagName,
-            ContainingParentIsTagHelper);
-
-        return binding is not null;
-    }
+        => DocumentContext.TryGetTagHelperBinding(ContainingTagName, Attributes, ContainingParentTagName, ContainingParentIsTagHelper, out binding);
 
     public override ImmutableArray<TagHelperDescriptor> GetTagHelpersGivenTag(string prefixedName)
-        => TagHelperFacts.GetTagHelpersGivenTag(DocumentContext, prefixedName, ContainingTagName);
+        => DocumentContext.GetTagHelpersGivenTag(prefixedName, ContainingTagName);
 
     public override ImmutableArray<TagHelperDescriptor> GetTagHelpersGivenParent()
-        => TagHelperFacts.GetTagHelpersGivenParent(DocumentContext, ContainingTagName);
+        => DocumentContext.GetTagHelpersGivenParent(ContainingTagName);
 
     public override bool SatisfiesParentTag(TagMatchingRuleDescriptor rule)
         => TagHelperMatchingConventions.SatisfiesParentTag(rule, ContainingTagName.AsSpanOrDefault());

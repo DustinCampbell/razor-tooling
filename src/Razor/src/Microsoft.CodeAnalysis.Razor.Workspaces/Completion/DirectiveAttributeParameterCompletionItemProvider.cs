@@ -8,7 +8,6 @@ using System.Linq;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.PooledObjects;
 using Microsoft.CodeAnalysis.Razor.Tooltip;
-using Microsoft.VisualStudio.Editor.Razor;
 
 namespace Microsoft.CodeAnalysis.Razor.Completion;
 
@@ -67,7 +66,7 @@ internal class DirectiveAttributeParameterCompletionItemProvider : DirectiveAttr
         ImmutableArray<string> attributes,
         TagHelperDocumentContext tagHelperDocumentContext)
     {
-        var descriptorsForTag = TagHelperFacts.GetTagHelpersGivenTag(tagHelperDocumentContext, containingTagName, parentTag: null);
+        var descriptorsForTag = tagHelperDocumentContext.GetTagHelpersGivenTag(containingTagName, parentTag: null);
         if (descriptorsForTag.Length == 0)
         {
             // If the current tag has no possible descriptors then we can't have any additional attributes.

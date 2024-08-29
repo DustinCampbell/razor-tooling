@@ -1,14 +1,11 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
-#nullable disable
-
-using System;
 using System.Collections.Immutable;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Syntax;
 using Microsoft.AspNetCore.Razor.LanguageServer.Completion;
-using Microsoft.VisualStudio.Editor.Razor;
+using Microsoft.AspNetCore.Razor.Test.Common;
 using Xunit;
 using Xunit.Abstractions;
 using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
@@ -18,93 +15,84 @@ namespace Microsoft.AspNetCore.Razor.LanguageServer.Test;
 public class TagHelperFactsServiceTest(ITestOutputHelper testOutput) : TagHelperServiceTestBase(testOutput)
 {
     [Fact]
-    public void StringifyAttributes_DirectiveAttribute()
+    public void ToAttributePairs_DirectiveAttribute()
     {
-        // Arrange
-        var codeDocument = CreateComponentDocument($"<TestElement @test='abc' />", DefaultTagHelpers);
-        var syntaxTree = codeDocument.GetSyntaxTree();
-        var startTag = (MarkupTagHelperStartTagSyntax)syntaxTree.Root.FindInnermostNode(3);
+        var startTag = GetStartTag<MarkupTagHelperStartTagSyntax>($"<Te$$stElement @test='abc' />");
 
-        // Act
-        var attributes = TagHelperFacts.StringifyAttributes(startTag.Attributes);
+        var attributePairs = startTag.Attributes.ToAttributePairs();
 
-        // Assert
-        Assert.Collection(
-            attributes,
-            attribute =>
-            {
-                Assert.Equal("@test", attribute.Key);
-                Assert.Equal("abc", attribute.Value);
-            });
+        var attribute = Assert.Single(attributePairs);
+        Assert.Equal("@test", attribute.Key);
+        Assert.Equal("abc", attribute.Value);
     }
 
     [Fact]
-    public void StringifyAttributes_DirectiveAttributeWithParameter()
+    public void ToAttributePairs_DirectiveAttributeWithParameter()
     {
-        // Arrange
-        var codeDocument = CreateComponentDocument($"<TestElement @test:something='abc' />", DefaultTagHelpers);
-        var syntaxTree = codeDocument.GetSyntaxTree();
-        var startTag = (MarkupTagHelperStartTagSyntax)syntaxTree.Root.FindInnermostNode(3);
+        var startTag = GetStartTag<MarkupTagHelperStartTagSyntax>($"<Te$$stElement @test:something='abc' />");
 
-        // Act
-        var attributes = TagHelperFacts.StringifyAttributes(startTag.Attributes);
+        var attributePairs = startTag.Attributes.ToAttributePairs();
 
-        // Assert
-        Assert.Collection(
-            attributes,
-            attribute =>
-            {
-                Assert.Equal("@test:something", attribute.Key);
-                Assert.Equal("abc", attribute.Value);
-            });
+        var attribute = Assert.Single(attributePairs);
+        Assert.Equal("@test:something", attribute.Key);
+        Assert.Equal("abc", attribute.Value);
     }
 
     [Fact]
-    public void StringifyAttributes_MinimizedDirectiveAttribute()
+    public void ToAttributePairs_MinimizedDirectiveAttribute()
     {
-        // Arrange
-        var codeDocument = CreateComponentDocument($"<TestElement @minimized />", DefaultTagHelpers);
-        var syntaxTree = codeDocument.GetSyntaxTree();
-        var startTag = (MarkupTagHelperStartTagSyntax)syntaxTree.Root.FindInnermostNode(3);
+        var startTag = GetStartTag<MarkupTagHelperStartTagSyntax>($"<Te$$stElement @minimized />");
 
-        // Act
-        var attributes = TagHelperFacts.StringifyAttributes(startTag.Attributes);
+        var attributePairs = startTag.Attributes.ToAttributePairs();
 
-        // Assert
-        Assert.Collection(
-            attributes,
-            attribute =>
-            {
-                Assert.Equal("@minimized", attribute.Key);
-                Assert.Equal(string.Empty, attribute.Value);
-            });
+        var attribute = Assert.Single(attributePairs);
+        Assert.Equal("@minimized", attribute.Key);
+        Assert.Equal(string.Empty, attribute.Value);
     }
 
     [Fact]
-    public void StringifyAttributes_MinimizedDirectiveAttributeWithParameter()
+    public void ToAttributePairs_MinimizedDirectiveAttributeWithParameter()
     {
-        // Arrange
-        var codeDocument = CreateComponentDocument($"<TestElement @minimized:something />", DefaultTagHelpers);
-        var syntaxTree = codeDocument.GetSyntaxTree();
-        var startTag = (MarkupTagHelperStartTagSyntax)syntaxTree.Root.FindInnermostNode(3);
+        var startTag = GetStartTag<MarkupTagHelperStartTagSyntax>($"<Te$$stElement @minimized:something />");
 
-        // Act
-        var attributes = TagHelperFacts.StringifyAttributes(startTag.Attributes);
+        var attributePairs = startTag.Attributes.ToAttributePairs();
 
-        // Assert
-        Assert.Collection(
-            attributes,
-            attribute =>
-            {
-                Assert.Equal("@minimized:something", attribute.Key);
-                Assert.Equal(string.Empty, attribute.Value);
-            });
+        var attribute = Assert.Single(attributePairs);
+        Assert.Equal("@minimized:something", attribute.Key);
+        Assert.Equal(string.Empty, attribute.Value);
     }
 
     [Fact]
-    public void StringifyAttributes_TagHelperAttribute()
+    public void ToAttributePairs_TagHelperAttribute()
     {
-        // Arrange
+        var tagHelper = TagHelperDescriptorBuilder.Create("WithBoundAttribute", "TestAssembly");
+        tagHelper.TagMatchingRule(rule => rule.TagName = "test");
+        tagHelper.BindAttribute(attribute =>
+        {
+            attribute.Name = "bound";
+            attribute.SetMetadata(PropertyName("Bound"));
+            attribute.TypeName = typeof(bool).FullName;
+        });
+
+        tagHelper.SetMetadata(TypeName("WithBoundAttribute"));
+
+        var startTag = GetStartTag<MarkupTagHelperStartTagSyntax>("""
+            @addTagHelper *, TestAssembly
+            <t$$est bound='true' />
+            """,
+            isRazorFile: false,
+            tagHelper.Build());
+
+        var attributePairs = startTag.Attributes.ToAttributePairs();
+
+        var attribute = Assert.Single(attributePairs);
+        Assert.Equal("bound", attribute.Key);
+        Assert.Equal("true", attribute.Value);
+    }
+
+    [Fact]
+    public void ToAttributePairs_MinimizedTagHelperAttribute()
+    {
         var tagHelper = TagHelperDescriptorBuilder.Create("WithBoundAttribute", "TestAssembly");
         tagHelper.TagMatchingRule(rule => rule.TagName = "test");
         tagHelper.BindAttribute(attribute =>
@@ -114,137 +102,84 @@ public class TagHelperFactsServiceTest(ITestOutputHelper testOutput) : TagHelper
             attribute.TypeName = typeof(bool).FullName;
         });
         tagHelper.SetMetadata(TypeName("WithBoundAttribute"));
-        var codeDocument = CreateCodeDocument("""
+
+        var startTag = GetStartTag<MarkupTagHelperStartTagSyntax>("""
             @addTagHelper *, TestAssembly
-            <test bound='true' />
-            """, isRazorFile: false, tagHelper.Build());
-        var syntaxTree = codeDocument.GetSyntaxTree();
-        var startTag = (MarkupTagHelperStartTagSyntax)syntaxTree.Root.FindInnermostNode(30 + Environment.NewLine.Length);
+            <t$$est bound />
+            """,
+            isRazorFile: false,
+            tagHelper.Build());
 
-        // Act
-        var attributes = TagHelperFacts.StringifyAttributes(startTag.Attributes);
+        var attributePairs = startTag.Attributes.ToAttributePairs();
 
-        // Assert
-        Assert.Collection(
-            attributes,
-            attribute =>
-            {
-                Assert.Equal("bound", attribute.Key);
-                Assert.Equal("true", attribute.Value);
-            });
+        var attribute = Assert.Single(attributePairs);
+        Assert.Equal("bound", attribute.Key);
+        Assert.Equal(string.Empty, attribute.Value);
     }
 
     [Fact]
-    public void StringifyAttributes_MinimizedTagHelperAttribute()
+    public void ToAttributePairs_UnboundAttribute()
     {
-        // Arrange
-        var tagHelper = TagHelperDescriptorBuilder.Create("WithBoundAttribute", "TestAssembly");
-        tagHelper.TagMatchingRule(rule => rule.TagName = "test");
-        tagHelper.BindAttribute(attribute =>
-        {
-            attribute.Name = "bound";
-            attribute.SetMetadata(PropertyName("Bound"));
-            attribute.TypeName = typeof(bool).FullName;
-        });
-        tagHelper.SetMetadata(TypeName("WithBoundAttribute"));
-        var codeDocument = CreateCodeDocument("""
+        var startTag = GetStartTag<MarkupStartTagSyntax>("""
             @addTagHelper *, TestAssembly
-            <test bound />
-            """, isRazorFile: false, tagHelper.Build());
-        var syntaxTree = codeDocument.GetSyntaxTree();
-        var startTag = (MarkupTagHelperStartTagSyntax)syntaxTree.Root.FindInnermostNode(30 + Environment.NewLine.Length);
+            <i$$nput unbound='hello world' />
+            """,
+            isRazorFile: false);
 
-        // Act
-        var attributes = TagHelperFacts.StringifyAttributes(startTag.Attributes);
+        var attributePairs = startTag.Attributes.ToAttributePairs();
 
-        // Assert
-        Assert.Collection(
-            attributes,
-            attribute =>
-            {
-                Assert.Equal("bound", attribute.Key);
-                Assert.Equal(string.Empty, attribute.Value);
-            });
+        var attribute = Assert.Single(attributePairs);
+        Assert.Equal("unbound", attribute.Key);
+        Assert.Equal("hello world", attribute.Value);
     }
 
     [Fact]
-    public void StringifyAttributes_UnboundAttribute()
+    public void ToAttributePairs_UnboundMinimizedAttribute()
     {
-        // Arrange
-        var codeDocument = CreateCodeDocument("""
+        var startTag = GetStartTag<MarkupStartTagSyntax>("""
             @addTagHelper *, TestAssembly
-            <input unbound='hello world' />
-            """, isRazorFile: false, DefaultTagHelpers);
-        var syntaxTree = codeDocument.GetSyntaxTree();
-        var startTag = (MarkupStartTagSyntax)syntaxTree.Root.FindInnermostNode(30 + Environment.NewLine.Length);
+            <i$$nput unbound />
+            """,
+            isRazorFile: false);
 
-        // Act
-        var attributes = TagHelperFacts.StringifyAttributes(startTag.Attributes);
+        var attributePairs = startTag.Attributes.ToAttributePairs();
 
-        // Assert
-        Assert.Collection(
-            attributes,
-            attribute =>
-            {
-                Assert.Equal("unbound", attribute.Key);
-                Assert.Equal("hello world", attribute.Value);
-            });
+        var attribute = Assert.Single(attributePairs);
+        Assert.Equal("unbound", attribute.Key);
+        Assert.Equal(string.Empty, attribute.Value);
     }
 
     [Fact]
-    public void StringifyAttributes_UnboundMinimizedAttribute()
+    public void ToAttributePairs_IgnoresMiscContent()
     {
-        // Arrange
-        var codeDocument = CreateCodeDocument("""
+        var startTag = GetStartTag<MarkupStartTagSyntax>("""
             @addTagHelper *, TestAssembly
-            <input unbound />
-            """, isRazorFile: false, DefaultTagHelpers);
-        var syntaxTree = codeDocument.GetSyntaxTree();
-        var startTag = (MarkupStartTagSyntax)syntaxTree.Root.FindInnermostNode(30 + Environment.NewLine.Length);
+            <i$$nput unbound @DateTime.Now />
+            """,
+            isRazorFile: false);
 
-        // Act
-        var attributes = TagHelperFacts.StringifyAttributes(startTag.Attributes);
+        var attributePairs = startTag.Attributes.ToAttributePairs();
 
-        // Assert
-        Assert.Collection(
-            attributes,
-            attribute =>
-            {
-                Assert.Equal("unbound", attribute.Key);
-                Assert.Equal(string.Empty, attribute.Value);
-            });
+        var attribute = Assert.Single(attributePairs);
+        Assert.Equal("unbound", attribute.Key);
+        Assert.Equal(string.Empty, attribute.Value);
     }
 
-    [Fact]
-    public void StringifyAttributes_IgnoresMiscContent()
+    private static TNode GetStartTag<TNode>(TestCode testCode, bool isRazorFile = true, params ImmutableArray<TagHelperDescriptor> tagHelpers)
+        where TNode : class, IStartTagSyntaxNode
     {
-        // Arrange
-        var codeDocument = CreateCodeDocument("""
-            @addTagHelper *, TestAssembly
-            <input unbound @DateTime.Now />
-            """, isRazorFile: false, DefaultTagHelpers);
+        var codeDocument = CreateCodeDocument(testCode.Text, isRazorFile, tagHelpers);
         var syntaxTree = codeDocument.GetSyntaxTree();
-        var startTag = (MarkupStartTagSyntax)syntaxTree.Root.FindInnermostNode(30 + Environment.NewLine.Length);
 
-        // Act
-        var attributes = TagHelperFacts.StringifyAttributes(startTag.Attributes);
+        var node = syntaxTree.Root.FindInnermostNode(testCode.Position) as TNode;
+        Assert.NotNull(node);
 
-        // Assert
-        Assert.Collection(
-            attributes,
-            attribute =>
-            {
-                Assert.Equal("unbound", attribute.Key);
-                Assert.Equal(string.Empty, attribute.Value);
-            });
+        return node;
     }
 
-    private static RazorCodeDocument CreateComponentDocument(string text, ImmutableArray<TagHelperDescriptor> tagHelpers)
+    private TNode GetStartTag<TNode>(TestCode testCode, bool isRazorFile = true)
+        where TNode : class, IStartTagSyntaxNode
     {
-        tagHelpers = tagHelpers.NullToEmpty();
-        var sourceDocument = TestRazorSourceDocument.Create(text);
-        var projectEngine = RazorProjectEngine.Create(builder => { });
-        var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, FileKinds.Component, importSources: default, tagHelpers);
-        return codeDocument;
+        return GetStartTag<TNode>(testCode, isRazorFile, DefaultTagHelpers);
     }
 }

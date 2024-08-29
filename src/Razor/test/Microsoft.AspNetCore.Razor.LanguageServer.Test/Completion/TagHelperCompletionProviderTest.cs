@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Razor.Language.Syntax;
 using Microsoft.AspNetCore.Razor.Test.Common;
 using Microsoft.CodeAnalysis.Razor.Completion;
 using Microsoft.CodeAnalysis.Testing;
-using Microsoft.VisualStudio.Editor.Razor;
 using Xunit;
 using Xunit.Abstractions;
 using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
@@ -37,7 +36,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
         var element = context.Owner.FirstAncestorOrSelf<MarkupElementSyntax>();
 
         // Act
-        var (ancestorName, ancestorIsTagHelper) = TagHelperFacts.GetNearestAncestorTagInfo(element.Ancestors());
+        var (ancestorName, ancestorIsTagHelper) = element.GetNearestAncestorTagInfo();
 
         // Assert
         Assert.Equal("p", ancestorName);
@@ -58,7 +57,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
         var element = context.Owner.FirstAncestorOrSelf<MarkupTagHelperElementSyntax>();
 
         // Act
-        var (ancestorName, ancestorIsTagHelper) = TagHelperFacts.GetNearestAncestorTagInfo(element.Ancestors());
+        var (ancestorName, ancestorIsTagHelper) = element.GetNearestAncestorTagInfo();
 
         // Assert
         Assert.Equal("test1", ancestorName);

@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
 using System.Collections.Immutable;
-using Microsoft.VisualStudio.Editor.Razor;
+using Microsoft.AspNetCore.Razor.Language;
 
 namespace Microsoft.AspNetCore.Razor.ExternalAccess.LegacyEditor;
 
@@ -10,8 +10,7 @@ internal static partial class RazorWrapperFactory
 {
     /// <summary>
     ///  This isn't exactly a "wrapper", since it doesn't wrap an existing object. Instead, it provides
-    ///  an implementation of <see cref="IRazorTagHelperFactsService"/> that delegates to the static
-    ///  <see cref="TagHelperFacts"/> class.
+    ///  an implementation of <see cref="IRazorTagHelperFactsService"/> that delegates to various extension methods.
     /// </summary>
     private sealed class TagHelperFactsServiceWrapper : IRazorTagHelperFactsService
     {
@@ -26,7 +25,7 @@ internal static partial class RazorWrapperFactory
             string attributeName,
             IRazorTagHelperBinding binding)
         {
-            var result = TagHelperFacts.GetBoundTagHelperAttributes(Unwrap(documentContext), attributeName, Unwrap(binding));
+            var result = Unwrap(binding).GetBoundTagHelperAttributes(attributeName);
 
             return WrapAll(result, Wrap);
         }
@@ -37,17 +36,13 @@ internal static partial class RazorWrapperFactory
             IEnumerable<KeyValuePair<string, string>> attributes,
             string? parentTag,
             bool parentIsTagHelper)
-        {
-            var binding = TagHelperFacts.GetTagHelperBinding(Unwrap(documentContext), tagName, attributes.ToImmutableArray(), parentTag, parentIsTagHelper);
-
-            return binding is not null
+            => Unwrap(documentContext).TryGetTagHelperBinding(tagName, attributes.ToImmutableArray(), parentTag, parentIsTagHelper, out var binding)
                 ? WrapTagHelperBinding(binding)
                 : null;
-        }
 
         public ImmutableArray<IRazorTagHelperDescriptor> GetTagHelpersGivenTag(IRazorTagHelperDocumentContext documentContext, string tagName, string? parentTag)
         {
-            var result = TagHelperFacts.GetTagHelpersGivenTag(Unwrap(documentContext), tagName, parentTag);
+            var result = Unwrap(documentContext).GetTagHelpersGivenTag(tagName, parentTag);
 
             return WrapAll(result, Wrap);
         }

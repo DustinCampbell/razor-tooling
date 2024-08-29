@@ -1,6 +1,8 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -307,5 +309,38 @@ internal static class RazorSyntaxNodeExtensions
         {
             return node is CSharpCodeBlockSyntax;
         }
+    }
+
+    public static (string? tagName, bool isTagHelper) GetNearestAncestorTagInfo(this SyntaxNode node)
+        => GetNearestAncestorTagInfo(node.Ancestors());
+
+    public static (string? tagName, bool isTagHelper) GetNearestAncestorTagInfo(
+        this SyntaxNode node,
+        Func<SyntaxNode, bool> shouldInclude)
+        => GetNearestAncestorTagInfo(node.Ancestors().Where(shouldInclude));
+
+    private static (string? tagName, bool isTagHelper) GetNearestAncestorTagInfo(IEnumerable<SyntaxNode> ancestors)
+    {
+        foreach (var ancestor in ancestors)
+        {
+            switch (ancestor)
+            {
+                case MarkupElementSyntax element:
+                    {
+                        // It's possible for start tag to be null in malformed cases.
+                        var name = element.StartTag?.Name?.Content ?? string.Empty;
+                        return (name, isTagHelper: false);
+                    }
+
+                case MarkupTagHelperElementSyntax tagHelperElement:
+                    {
+                        // It's possible for start tag to be null in malformed cases.
+                        var name = tagHelperElement.StartTag?.Name?.Content ?? string.Empty;
+                        return (name, isTagHelper: true);
+                    }
+            }
+        }
+
+        return (tagName: null, isTagHelper: false);
     }
 }

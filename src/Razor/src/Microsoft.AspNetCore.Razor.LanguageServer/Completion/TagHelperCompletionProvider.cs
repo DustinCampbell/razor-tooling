@@ -66,10 +66,10 @@ internal class TagHelperCompletionProvider : IRazorCompletionItemProvider
             containingTagNameToken.Span.IntersectsWith(context.AbsoluteIndex))
         {
             // Trying to complete the element type
-            var stringifiedAttributes = TagHelperFacts.StringifyAttributes(attributes);
+            var attributePairs = attributes.ToAttributePairs();
             var containingElement = owner.Parent;
-            var elementCompletions = GetElementCompletions(containingElement, containingTagNameToken.Content, stringifiedAttributes, context);
-            return elementCompletions;
+
+            return GetElementCompletions(containingElement, containingTagNameToken.Content, attributePairs, context);
         }
 
         if (HtmlFacts.TryGetAttributeInfo(
@@ -102,9 +102,9 @@ internal class TagHelperCompletionProvider : IRazorCompletionItemProvider
                 return ImmutableArray<RazorCompletionItem>.Empty;
             }
 
-            var stringifiedAttributes = TagHelperFacts.StringifyAttributes(attributes);
+            var attributePairs = attributes.ToAttributePairs();
 
-            return GetAttributeCompletions(owner, containingTagNameToken.Content, selectedAttributeName, stringifiedAttributes, context.TagHelperDocumentContext, context.Options);
+            return GetAttributeCompletions(owner, containingTagNameToken.Content, selectedAttributeName, attributePairs, context.TagHelperDocumentContext, context.Options);
 
             static bool InOrAtEndOfAttribute(SyntaxNode attributeSyntax, int absoluteIndex)
             {
@@ -131,11 +131,10 @@ internal class TagHelperCompletionProvider : IRazorCompletionItemProvider
         TagHelperDocumentContext tagHelperDocumentContext,
         RazorCompletionOptions options)
     {
-        var ancestors = containingAttribute.Parent.Ancestors();
         var nonDirectiveAttributeTagHelpers = tagHelperDocumentContext.TagHelpers.WhereAsArray(
             static tagHelper => !tagHelper.BoundAttributes.Any(static attribute => attribute.IsDirectiveAttribute));
         var filteredContext = TagHelperDocumentContext.Create(tagHelperDocumentContext.Prefix, nonDirectiveAttributeTagHelpers);
-        var (ancestorTagName, ancestorIsTagHelper) = TagHelperFacts.GetNearestAncestorTagInfo(ancestors);
+        var (ancestorTagName, ancestorIsTagHelper) = containingAttribute.Parent.GetNearestAncestorTagInfo();
         var attributeCompletionContext = new AttributeCompletionContext(
             filteredContext,
             existingCompletions: [],
@@ -230,8 +229,7 @@ internal class TagHelperCompletionProvider : IRazorCompletionItemProvider
         ImmutableArray<KeyValuePair<string, string>> attributes,
         RazorCompletionContext context)
     {
-        var ancestors = containingElement.Ancestors();
-        var (ancestorTagName, ancestorIsTagHelper) = TagHelperFacts.GetNearestAncestorTagInfo(ancestors);
+        var (ancestorTagName, ancestorIsTagHelper) = containingElement.GetNearestAncestorTagInfo();
         var elementCompletionContext = new ElementCompletionContext(
             context.TagHelperDocumentContext,
             context.ExistingCompletions,

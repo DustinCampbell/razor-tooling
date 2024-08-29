@@ -9,7 +9,6 @@ using System.Linq;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.PooledObjects;
 using Microsoft.CodeAnalysis.Razor.Workspaces;
-using Microsoft.VisualStudio.Editor.Razor;
 
 namespace Microsoft.CodeAnalysis.Razor.Completion;
 
@@ -40,7 +39,7 @@ internal abstract class AbstractTagHelperCompletionService : ITagHelperCompletio
             StringComparer.OrdinalIgnoreCase);
 
         var documentContext = completionContext.DocumentContext;
-        var descriptorsForTag = TagHelperFacts.GetTagHelpersGivenTag(documentContext, completionContext.CurrentTagName, completionContext.CurrentParentTagName);
+        var descriptorsForTag = documentContext.GetTagHelpersGivenTag(completionContext.CurrentTagName, completionContext.CurrentParentTagName);
         if (descriptorsForTag.Length == 0)
         {
             // If the current tag has no possible descriptors then we can't have any additional attributes.
@@ -50,18 +49,16 @@ internal abstract class AbstractTagHelperCompletionService : ITagHelperCompletio
         var prefix = documentContext.Prefix ?? string.Empty;
         Debug.Assert(completionContext.CurrentTagName.StartsWith(prefix, StringComparison.OrdinalIgnoreCase));
 
-        var applicableTagHelperBinding = TagHelperFacts.GetTagHelperBinding(
-            documentContext,
+        using var _ = HashSetPool<TagHelperDescriptor>.GetPooledObject(out var applicableDescriptors);
+
+        if (documentContext.TryGetTagHelperBinding(
             completionContext.CurrentTagName,
             completionContext.Attributes,
             completionContext.CurrentParentTagName,
-            completionContext.CurrentParentIsTagHelper);
-
-        using var _ = HashSetPool<TagHelperDescriptor>.GetPooledObject(out var applicableDescriptors);
-
-        if (applicableTagHelperBinding is { Descriptors: var descriptors })
+            completionContext.CurrentParentIsTagHelper,
+            out var applicableTagHelperBinding))
         {
-            applicableDescriptors.UnionWith(descriptors);
+            applicableDescriptors.AddRange(applicableTagHelperBinding.Descriptors);
         }
 
         var unprefixedTagName = completionContext.CurrentTagName[prefix.Length..];

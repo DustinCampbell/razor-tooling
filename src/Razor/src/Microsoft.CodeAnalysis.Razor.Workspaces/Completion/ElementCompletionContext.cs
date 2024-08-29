@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Razor.Language;
-using Microsoft.VisualStudio.Editor.Razor;
 
 namespace Microsoft.CodeAnalysis.Razor.Completion;
 
@@ -50,22 +49,13 @@ internal class ElementCompletionContext
     public virtual bool InitializeWithExistingCompletions => false;
 
     public virtual bool TryGetTagHelperBinding([NotNullWhen(true)] out TagHelperBinding? binding)
-    {
-        binding = TagHelperFacts.GetTagHelperBinding(
-            DocumentContext,
-            ContainingParentTagName,
-            Attributes,
-            parentTag: null,
-            parentIsTagHelper: false);
-
-        return binding is not null;
-    }
+        => DocumentContext.TryGetTagHelperBinding(ContainingParentTagName, Attributes, parentTagName: null, parentIsTagHelper: false, out binding);
 
     public virtual ImmutableArray<TagHelperDescriptor> GetTagHelpersGivenTag(string prefixedName)
-        => TagHelperFacts.GetTagHelpersGivenTag(DocumentContext, prefixedName, ContainingParentTagName);
+        => DocumentContext.GetTagHelpersGivenTag(prefixedName, ContainingParentTagName);
 
     public virtual ImmutableArray<TagHelperDescriptor> GetTagHelpersGivenParent()
-        => TagHelperFacts.GetTagHelpersGivenParent(DocumentContext, ContainingParentTagName);
+        => DocumentContext.GetTagHelpersGivenParent(ContainingParentTagName);
 
     public virtual bool SatisfiesParentTag(TagMatchingRuleDescriptor rule)
         => TagHelperMatchingConventions.SatisfiesParentTag(rule, ContainingParentTagName.AsSpanOrDefault());

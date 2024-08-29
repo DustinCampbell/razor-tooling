@@ -119,7 +119,7 @@ internal sealed partial class HoverService(
             owner = owner.Parent;
         }
 
-        var tagHelperDocumentContext = codeDocument.GetTagHelperContext();
+        var tagHelperContext = codeDocument.GetTagHelperContext();
 
         // We want to find the parent tag, but looking up ancestors in the tree can find other things,
         // for example when hovering over a start tag, the first ancestor is actually the element it
@@ -139,22 +139,17 @@ internal sealed partial class HoverService(
             }
 
             // Hovering over HTML tag name
-            var ancestors = owner.Ancestors().Where(n => n.SpanStart != ownerStart);
-            var (parentTag, parentIsTagHelper) = TagHelperFacts.GetNearestAncestorTagInfo(ancestors);
-            var stringifiedAttributes = TagHelperFacts.StringifyAttributes(attributes);
-            var binding = TagHelperFacts.GetTagHelperBinding(
-                tagHelperDocumentContext,
-                containingTagNameToken.Content,
-                stringifiedAttributes,
-                parentTag: parentTag,
-                parentIsTagHelper: parentIsTagHelper);
+            var tagName = containingTagNameToken.Content;
+            var (parentTagName, parentIsTagHelper) = owner.GetNearestAncestorTagInfo(n => n.SpanStart != ownerStart);
+            var attributePairs = attributes.ToAttributePairs();
 
-            if (binding is null)
+            if (!tagHelperContext.TryGetTagHelperBinding(tagName, attributePairs, parentTagName, parentIsTagHelper, out var binding))
             {
                 // No matching tagHelpers, it's just HTML
                 return null;
             }
-            else if (binding.IsAttributeMatch)
+
+            if (binding.IsAttributeMatch)
             {
                 // Hovered over a HTML tag name but the binding matches an attribute
                 return null;
@@ -165,8 +160,7 @@ internal sealed partial class HoverService(
 
                 var range = containingTagNameToken.GetRange(codeDocument.Source);
 
-                var result = await ElementInfoToHoverAsync(documentFilePath, binding.Descriptors, range, clientCapabilities, cancellationToken).ConfigureAwait(false);
-                return result;
+                return await ElementInfoToHoverAsync(documentFilePath, binding.Descriptors, range, clientCapabilities, cancellationToken).ConfigureAwait(false);
             }
         }
 
@@ -176,75 +170,62 @@ internal sealed partial class HoverService(
             // When finding parents for attributes, we make sure to find the parent of the containing tag, otherwise these methods
             // would return the parent of the attribute, which is not helpful, as its just going to be the containing element
             var containingTag = containingTagNameToken.Parent;
-            var ancestors = containingTag.Ancestors().Where<SyntaxNode>(n => n.SpanStart != containingTag.SpanStart);
-            var (parentTag, parentIsTagHelper) = TagHelperFacts.GetNearestAncestorTagInfo(ancestors);
 
             // Hovering over HTML attribute name
-            var stringifiedAttributes = TagHelperFacts.StringifyAttributes(attributes);
+            var tagName = containingTagNameToken.Content;
+            var (parentTagName, parentIsTagHelper) = containingTag.GetNearestAncestorTagInfo(n => n.SpanStart != containingTag.SpanStart);
+            var attributePairs = attributes.ToAttributePairs();
 
-            var binding = TagHelperFacts.GetTagHelperBinding(
-                tagHelperDocumentContext,
-                containingTagNameToken.Content,
-                stringifiedAttributes,
-                parentTag: parentTag,
-                parentIsTagHelper: parentIsTagHelper);
-
-            if (binding is null)
+            if (!tagHelperContext.TryGetTagHelperBinding(tagName, attributePairs, parentTagName, parentIsTagHelper, out var binding))
             {
                 // No matching TagHelpers, it's just HTML
                 return null;
             }
-            else
+
+            Debug.Assert(binding.Descriptors.Any());
+
+            var tagHelperAttributes = binding.GetBoundTagHelperAttributes(selectedAttributeName.AssumeNotNull());
+
+            // Grab the first attribute that we find that intersects with this location. That way if there are multiple attributes side-by-side aka hovering over:
+            //      <input checked| minimized />
+            // Then we take the left most attribute (attributes are returned in source order).
+            var attribute = attributes.First(a => a.Span.IntersectsWith(location.AbsoluteIndex));
+            if (attribute is MarkupTagHelperAttributeSyntax thAttributeSyntax)
             {
-                Debug.Assert(binding.Descriptors.Any());
-                var tagHelperAttributes = TagHelperFacts.GetBoundTagHelperAttributes(
-                    tagHelperDocumentContext,
-                    selectedAttributeName.AssumeNotNull(),
-                    binding);
-
-                // Grab the first attribute that we find that intersects with this location. That way if there are multiple attributes side-by-side aka hovering over:
-                //      <input checked| minimized />
-                // Then we take the left most attribute (attributes are returned in source order).
-                var attribute = attributes.First(a => a.Span.IntersectsWith(location.AbsoluteIndex));
-                if (attribute is MarkupTagHelperAttributeSyntax thAttributeSyntax)
-                {
-                    attribute = thAttributeSyntax.Name;
-                }
-                else if (attribute is MarkupMinimizedTagHelperAttributeSyntax thMinimizedAttribute)
-                {
-                    attribute = thMinimizedAttribute.Name;
-                }
-                else if (attribute is MarkupTagHelperDirectiveAttributeSyntax directiveAttribute)
-                {
-                    attribute = directiveAttribute.Name;
-                }
-                else if (attribute is MarkupMinimizedTagHelperDirectiveAttributeSyntax miniDirectiveAttribute)
-                {
-                    attribute = miniDirectiveAttribute;
-                }
-
-                var attributeName = attribute.GetContent();
-                var range = attribute.GetRange(codeDocument.Source);
-
-                // Include the @ in the range
-                switch (attribute.Parent.Kind)
-                {
-                    case SyntaxKind.MarkupTagHelperDirectiveAttribute:
-                        var directiveAttribute = (MarkupTagHelperDirectiveAttributeSyntax)attribute.Parent;
-                        range.Start.Character -= directiveAttribute.Transition.FullWidth;
-                        attributeName = "@" + attributeName;
-                        break;
-                    case SyntaxKind.MarkupMinimizedTagHelperDirectiveAttribute:
-                        var minimizedAttribute = (MarkupMinimizedTagHelperDirectiveAttributeSyntax)containingTag;
-                        range.Start.Character -= minimizedAttribute.Transition.FullWidth;
-                        attributeName = "@" + attributeName;
-                        break;
-                }
-
-                var attributeHoverModel = AttributeInfoToHover(tagHelperAttributes, range, attributeName, clientCapabilities);
-
-                return attributeHoverModel;
+                attribute = thAttributeSyntax.Name;
             }
+            else if (attribute is MarkupMinimizedTagHelperAttributeSyntax thMinimizedAttribute)
+            {
+                attribute = thMinimizedAttribute.Name;
+            }
+            else if (attribute is MarkupTagHelperDirectiveAttributeSyntax directiveAttribute)
+            {
+                attribute = directiveAttribute.Name;
+            }
+            else if (attribute is MarkupMinimizedTagHelperDirectiveAttributeSyntax miniDirectiveAttribute)
+            {
+                attribute = miniDirectiveAttribute;
+            }
+
+            var attributeName = attribute.GetContent();
+            var range = attribute.GetRange(codeDocument.Source);
+
+            // Include the @ in the range
+            switch (attribute.Parent.Kind)
+            {
+                case SyntaxKind.MarkupTagHelperDirectiveAttribute:
+                    var directiveAttribute = (MarkupTagHelperDirectiveAttributeSyntax)attribute.Parent;
+                    range.Start.Character -= directiveAttribute.Transition.FullWidth;
+                    attributeName = "@" + attributeName;
+                    break;
+                case SyntaxKind.MarkupMinimizedTagHelperDirectiveAttribute:
+                    var minimizedAttribute = (MarkupMinimizedTagHelperDirectiveAttributeSyntax)containingTag;
+                    range.Start.Character -= minimizedAttribute.Transition.FullWidth;
+                    attributeName = "@" + attributeName;
+                    break;
+            }
+
+            return AttributeInfoToHover(tagHelperAttributes, range, attributeName, clientCapabilities);
         }
 
         return null;

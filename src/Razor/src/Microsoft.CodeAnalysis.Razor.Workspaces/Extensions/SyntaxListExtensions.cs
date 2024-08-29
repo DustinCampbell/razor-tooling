@@ -1,8 +1,11 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
+using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Microsoft.AspNetCore.Razor.PooledObjects;
 using Microsoft.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
@@ -99,5 +102,63 @@ internal static class SyntaxListExtensions
         }
 
         return brace != null;
+    }
+
+    public static ImmutableArray<KeyValuePair<string, string>> ToAttributePairs(this SyntaxList<RazorSyntaxNode> attributeList)
+    {
+        using var result = new PooledArrayBuilder<KeyValuePair<string, string>>();
+
+        foreach (var attribute in attributeList)
+        {
+            switch (attribute)
+            {
+                case MarkupTagHelperAttributeSyntax tagHelperAttribute:
+                    {
+                        var name = tagHelperAttribute.Name.GetContent();
+                        var value = tagHelperAttribute.Value?.GetContent() ?? string.Empty;
+                        result.Add(new KeyValuePair<string, string>(name, value));
+                        break;
+                    }
+
+                case MarkupMinimizedTagHelperAttributeSyntax minimizedTagHelperAttribute:
+                    {
+                        var name = minimizedTagHelperAttribute.Name.GetContent();
+                        result.Add(new KeyValuePair<string, string>(name, string.Empty));
+                        break;
+                    }
+
+                case MarkupAttributeBlockSyntax markupAttribute:
+                    {
+                        var name = markupAttribute.Name.GetContent();
+                        var value = markupAttribute.Value?.GetContent() ?? string.Empty;
+                        result.Add(new KeyValuePair<string, string>(name, value));
+                        break;
+                    }
+
+                case MarkupMinimizedAttributeBlockSyntax minimizedMarkupAttribute:
+                    {
+                        var name = minimizedMarkupAttribute.Name.GetContent();
+                        result.Add(new KeyValuePair<string, string>(name, string.Empty));
+                        break;
+                    }
+
+                case MarkupTagHelperDirectiveAttributeSyntax directiveAttribute:
+                    {
+                        var name = directiveAttribute.FullName;
+                        var value = directiveAttribute.Value?.GetContent() ?? string.Empty;
+                        result.Add(new KeyValuePair<string, string>(name, value));
+                        break;
+                    }
+
+                case MarkupMinimizedTagHelperDirectiveAttributeSyntax minimizedDirectiveAttribute:
+                    {
+                        var name = minimizedDirectiveAttribute.FullName;
+                        result.Add(new KeyValuePair<string, string>(name, string.Empty));
+                        break;
+                    }
+            }
+        }
+
+        return result.DrainToImmutable();
     }
 }
