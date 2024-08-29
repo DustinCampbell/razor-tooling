@@ -142,8 +142,7 @@ internal class TagHelperCompletionProvider : IRazorCompletionItemProvider
             selectedAttributeName,
             attributes,
             ancestorTagName,
-            ancestorIsTagHelper,
-            HtmlFacts.IsHtmlTagName);
+            ancestorIsTagHelper);
 
         using var completionItems = new PooledArrayBuilder<RazorCompletionItem>();
         var completionResult = _tagHelperCompletionService.GetAttributeCompletions(attributeCompletionContext);

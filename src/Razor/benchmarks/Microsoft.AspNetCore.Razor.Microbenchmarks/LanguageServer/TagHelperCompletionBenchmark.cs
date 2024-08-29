@@ -37,8 +37,7 @@ public class TagHelperCompletionBenchmark
             currentAttributeName: null,
             attributes: [],
             currentParentTagName: "PageTitle",
-            currentParentIsTagHelper: true,
-            inHTMLSchema: HtmlFacts.IsHtmlTagName);
+            currentParentIsTagHelper: true);
 
         return tagHelperCompletionService.GetAttributeCompletions(context);
     }

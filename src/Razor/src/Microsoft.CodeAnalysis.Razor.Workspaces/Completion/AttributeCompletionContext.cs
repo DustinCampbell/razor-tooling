@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.AspNetCore.Razor.Language;
+using Microsoft.CodeAnalysis.Razor.Workspaces;
 
 namespace Microsoft.CodeAnalysis.Razor.Completion;
 
@@ -27,7 +28,7 @@ internal sealed class AttributeCompletionContext
         ImmutableArray<KeyValuePair<string, string>> attributes,
         string? currentParentTagName,
         bool currentParentIsTagHelper,
-        Func<string, bool> inHTMLSchema)
+        Func<string, bool>? inHTMLSchema = null)
     {
         DocumentContext = documentContext;
         ExistingCompletions = existingCompletions;
@@ -36,6 +37,6 @@ internal sealed class AttributeCompletionContext
         Attributes = attributes.NullToEmpty();
         CurrentParentTagName = currentParentTagName;
         CurrentParentIsTagHelper = currentParentIsTagHelper;
-        InHTMLSchema = inHTMLSchema;
+        InHTMLSchema = inHTMLSchema ?? HtmlFacts.IsHtmlTagName;
     }
 }
