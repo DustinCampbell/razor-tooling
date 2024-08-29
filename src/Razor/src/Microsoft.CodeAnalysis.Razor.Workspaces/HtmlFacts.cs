@@ -6,8 +6,11 @@ using System.Collections.Frozen;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Razor.Language.Syntax;
 using Microsoft.CodeAnalysis.Text;
+using RazorSyntaxNode = Microsoft.AspNetCore.Razor.Language.Syntax.SyntaxNode;
+using RazorSyntaxNodeList = Microsoft.AspNetCore.Razor.Language.Syntax.SyntaxList<Microsoft.AspNetCore.Razor.Language.Syntax.RazorSyntaxNode>;
+using RazorSyntaxToken = Microsoft.AspNetCore.Razor.Language.Syntax.SyntaxToken;
 
-namespace Microsoft.VisualStudio.Editor.Razor;
+namespace Microsoft.CodeAnalysis.Razor.Workspaces;
 
 internal static class HtmlFacts
 {
@@ -142,10 +145,10 @@ internal static class HtmlFacts
         => s_htmlSchemaTagNames.Contains(name);
 
     public static bool TryGetElementInfo(
-        SyntaxNode element,
-        [NotNullWhen(true)] out SyntaxToken? containingTagNameToken,
-        out SyntaxList<RazorSyntaxNode> attributeNodes,
-        [NotNullWhen(true)] out SyntaxToken? closingForwardSlashOrCloseAngleToken)
+        RazorSyntaxNode element,
+        [NotNullWhen(true)] out RazorSyntaxToken? containingTagNameToken,
+        out RazorSyntaxNodeList attributeNodes,
+        [NotNullWhen(true)] out RazorSyntaxToken? closingForwardSlashOrCloseAngleToken)
     {
         switch (element)
         {
@@ -156,7 +159,7 @@ internal static class HtmlFacts
                 return true;
             case MarkupEndTagSyntax { Parent: MarkupElementSyntax parent } endTag:
                 containingTagNameToken = endTag.Name;
-                attributeNodes = parent.StartTag?.Attributes ?? new SyntaxList<RazorSyntaxNode>();
+                attributeNodes = parent.StartTag?.Attributes ?? new RazorSyntaxNodeList();
                 closingForwardSlashOrCloseAngleToken = endTag.ForwardSlash ?? endTag.CloseAngle;
                 return true;
             case MarkupTagHelperStartTagSyntax startTagHelper:
@@ -166,7 +169,7 @@ internal static class HtmlFacts
                 return true;
             case MarkupTagHelperEndTagSyntax { Parent: MarkupTagHelperElementSyntax parent } endTagHelper:
                 containingTagNameToken = endTagHelper.Name;
-                attributeNodes = parent.StartTag?.Attributes ?? new SyntaxList<RazorSyntaxNode>();
+                attributeNodes = parent.StartTag?.Attributes ?? new RazorSyntaxNodeList();
                 closingForwardSlashOrCloseAngleToken = endTagHelper.ForwardSlash ?? endTagHelper.CloseAngle;
                 return true;
             default:
@@ -178,12 +181,12 @@ internal static class HtmlFacts
     }
 
     public static bool TryGetAttributeInfo(
-        SyntaxNode attribute,
-        [NotNullWhen(true)] out SyntaxToken? containingTagNameToken,
+        RazorSyntaxNode attribute,
+        [NotNullWhen(true)] out RazorSyntaxToken? containingTagNameToken,
         out TextSpan? prefixLocation,
         out string? selectedAttributeName,
         out TextSpan? selectedAttributeNameLocation,
-        out SyntaxList<RazorSyntaxNode> attributeNodes)
+        out RazorSyntaxNodeList attributeNodes)
     {
         if (!TryGetElementInfo(attribute.Parent, out containingTagNameToken, out attributeNodes, closingForwardSlashOrCloseAngleToken: out _))
         {

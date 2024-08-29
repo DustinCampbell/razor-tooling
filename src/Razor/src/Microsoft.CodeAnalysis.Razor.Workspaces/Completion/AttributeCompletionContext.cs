@@ -29,13 +29,13 @@ internal sealed class AttributeCompletionContext
         bool currentParentIsTagHelper,
         Func<string, bool> inHTMLSchema)
     {
-        DocumentContext = documentContext ?? throw new ArgumentNullException(nameof(documentContext));
-        ExistingCompletions = existingCompletions ?? throw new ArgumentNullException(nameof(existingCompletions));
-        CurrentTagName = currentTagName ?? throw new ArgumentNullException(nameof(currentTagName));
+        DocumentContext = documentContext;
+        ExistingCompletions = existingCompletions;
+        CurrentTagName = currentTagName;
         CurrentAttributeName = currentAttributeName;
-        Attributes = attributes.IsDefault ? throw new ArgumentNullException(nameof(attributes)) : attributes;
+        Attributes = attributes.NullToEmpty();
         CurrentParentTagName = currentParentTagName;
         CurrentParentIsTagHelper = currentParentIsTagHelper;
-        InHTMLSchema = inHTMLSchema ?? throw new ArgumentNullException(nameof(inHTMLSchema));
+        InHTMLSchema = inHTMLSchema;
     }
 }
