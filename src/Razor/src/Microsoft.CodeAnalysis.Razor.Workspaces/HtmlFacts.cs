@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
+using System.Collections.Frozen;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Razor.Language.Syntax;
 using Microsoft.CodeAnalysis.Text;
@@ -11,8 +11,8 @@ namespace Microsoft.VisualStudio.Editor.Razor;
 
 internal static class HtmlFacts
 {
-    private static readonly HashSet<string> s_htmlSchemaTagNames = new(StringComparer.OrdinalIgnoreCase)
-    {
+    private static readonly FrozenSet<string> s_htmlSchemaTagNames = FrozenSet.ToFrozenSet(
+    [
         "DOCTYPE",
         "a",
         "abbr",
@@ -136,7 +136,7 @@ internal static class HtmlFacts
         "var",
         "video",
         "wbr",
-    };
+    ], StringComparer.OrdinalIgnoreCase);
 
     public static bool IsHtmlTagName(string name)
         => s_htmlSchemaTagNames.Contains(name);
