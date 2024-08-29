@@ -9,12 +9,16 @@ using System.Linq;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.PooledObjects;
 using Microsoft.CodeAnalysis.Razor.Workspaces;
+using Microsoft.Extensions.ObjectPool;
 
 namespace Microsoft.CodeAnalysis.Razor.Completion;
 
 internal class TagHelperCompletionService : ITagHelperCompletionService
 {
     private static readonly HashSet<TagHelperDescriptor> s_emptyHashSet = new();
+
+    private static readonly ObjectPool<HashSet<TagHelperDescriptor>> s_shortNameSetPool
+        = HashSetPool<TagHelperDescriptor>.Create(ShortNameToFullyQualifiedComparer.Instance);
 
     // This API attempts to understand a users context as they're typing in a Razor file to provide TagHelper based attribute IntelliSense.
     //
@@ -149,11 +153,6 @@ internal class TagHelperCompletionService : ITagHelperCompletionService
 
     public ElementCompletionResult GetElementCompletions(ElementCompletionContext completionContext)
     {
-        if (completionContext is null)
-        {
-            throw new ArgumentNullException(nameof(completionContext));
-        }
-
         var elementCompletions = new Dictionary<string, HashSet<TagHelperDescriptor>>(StringComparer.Ordinal);
 
         AddAllowedChildrenCompletions(completionContext, elementCompletions);
@@ -161,8 +160,7 @@ internal class TagHelperCompletionService : ITagHelperCompletionService
         if (elementCompletions.Count > 0)
         {
             // If the containing element is already a TagHelper and only allows certain children.
-            var emptyResult = ElementCompletionResult.Create(elementCompletions);
-            return emptyResult;
+            return ElementCompletionResult.Create(elementCompletions);
         }
 
         if (completionContext.InitializeWithExistingCompletions)
@@ -173,17 +171,23 @@ internal class TagHelperCompletionService : ITagHelperCompletionService
             }
         }
 
-        var catchAllDescriptors = new HashSet<TagHelperDescriptor>();
+        // Acquire a pooled HashSet to collect catch-all tag helpers, i.e. those that match any tag name.
+        using var pooledSet = HashSetPool<TagHelperDescriptor>.GetPooledObject();
+        var catchAllTagHelpers = pooledSet.Object;
+
         var prefix = completionContext.DocumentContext.Prefix ?? string.Empty;
-        var possibleChildDescriptors = completionContext.GetTagHelpersGivenParent();
-        possibleChildDescriptors = FilterFullyQualifiedCompletions(possibleChildDescriptors);
-        foreach (var possibleDescriptor in possibleChildDescriptors)
+        var tagHelpers = completionContext.GetTagHelpersGivenParent();
+
+        using var deduplicatedTagHelpers = new PooledArrayBuilder<TagHelperDescriptor>(tagHelpers.Length);
+        DeduplicateTagHelpers(tagHelpers, ref deduplicatedTagHelpers.AsRef());
+
+        foreach (var tagHelper in deduplicatedTagHelpers)
         {
             var addRuleCompletions = false;
             var checkAttributeRules = completionContext.ShouldCheckAttributeRules;
-            var outputHint = possibleDescriptor.TagOutputHint;
+            var outputHint = tagHelper.TagOutputHint;
 
-            foreach (var rule in possibleDescriptor.TagMatchingRules)
+            foreach (var rule in tagHelper.TagMatchingRules)
             {
                 if (!completionContext.SatisfiesParentTag(rule))
                 {
@@ -192,7 +196,7 @@ internal class TagHelperCompletionService : ITagHelperCompletionService
 
                 if (rule.TagName == TagHelperMatchingConventions.ElementCatchAllName)
                 {
-                    catchAllDescriptors.Add(possibleDescriptor);
+                    catchAllTagHelpers.Add(tagHelper);
                 }
                 else if (elementCompletions.ContainsKey(rule.TagName))
                 {
@@ -212,7 +216,7 @@ internal class TagHelperCompletionService : ITagHelperCompletionService
                     // We'd expect to only get "my-table" as a completion because the "body" tag doesn't allow "tr" tags.
                     addRuleCompletions = completionContext.ExistingCompletions.Contains(outputHint);
                 }
-                else if (!completionContext.InHTMLSchema(rule.TagName) || rule.TagName.Any(c => char.IsUpper(c)))
+                else if (!completionContext.InHTMLSchema(rule.TagName) || rule.TagName.Any(char.IsUpper))
                 {
                     // If there is an unknown HTML schema tag that doesn't exist in the current completion we should add it. This happens for
                     // TagHelpers that target non-schema oriented tags.
@@ -229,26 +233,26 @@ internal class TagHelperCompletionService : ITagHelperCompletionService
                     }
                 }
 
-                // If we think this completion should be added based on tag name, thats great, but lets also make sure the attributes are correct
+                // If we think this completion should be added based on tag name, that's great, but lets also make sure the attributes are correct
                 if (addRuleCompletions && (!checkAttributeRules || TagHelperMatchingConventions.SatisfiesAttributes(rule, completionContext.Attributes)))
                 {
-                    UpdateCompletions(prefix + rule.TagName, possibleDescriptor, elementCompletions);
+                    UpdateCompletions(prefix + rule.TagName, tagHelper, elementCompletions);
                 }
             }
         }
 
         // We needed to track all catch-alls and update their completions after all other completions have been completed.
         // This way, any TagHelper added completions will also have catch-alls listed under their entries.
-        foreach (var catchAllDescriptor in catchAllDescriptors)
+        foreach (var tagHelper in catchAllTagHelpers)
         {
-            foreach (var (completionTagName, tagHelperDescriptors) in elementCompletions)
+            foreach (var (elementTagName, elementTagHelpers) in elementCompletions)
             {
-                if (tagHelperDescriptors.Count > 0 ||
-                    (!string.IsNullOrEmpty(prefix) && completionTagName.StartsWith(prefix, StringComparison.OrdinalIgnoreCase)))
+                if (elementTagHelpers.Count > 0 ||
+                    (!string.IsNullOrEmpty(prefix) && elementTagName.StartsWith(prefix, StringComparison.OrdinalIgnoreCase)))
                 {
                     // The current completion either has other TagHelper's associated with it or is prefixed with a non-empty
                     // TagHelper prefix.
-                    UpdateCompletions(completionTagName, catchAllDescriptor, elementCompletions, tagHelperDescriptors);
+                    UpdateCompletions(elementTagName, tagHelper, elementCompletions, elementTagHelpers);
                 }
             }
         }
@@ -306,61 +310,52 @@ internal class TagHelperCompletionService : ITagHelperCompletionService
 
                 if (descriptors.Length == 0)
                 {
-                    if (!elementCompletions.ContainsKey(prefixedName))
-                    {
-                        elementCompletions[prefixedName] = s_emptyHashSet;
-                    }
-
+                    elementCompletions.TryAdd(prefixedName, s_emptyHashSet);
                     continue;
                 }
 
-                if (!elementCompletions.TryGetValue(prefixedName, out var existingRuleDescriptors))
-                {
-                    existingRuleDescriptors = new HashSet<TagHelperDescriptor>();
-                    elementCompletions[prefixedName] = existingRuleDescriptors;
-                }
-
-                existingRuleDescriptors.AddRange(descriptors);
+                var existingDescriptors = elementCompletions.GetOrCreate(prefixedName);
+                existingDescriptors.AddRange(descriptors);
             }
         }
     }
 
-    private static ImmutableArray<TagHelperDescriptor> FilterFullyQualifiedCompletions(ImmutableArray<TagHelperDescriptor> possibleChildDescriptors)
+    /// <summary>
+    ///  Deduplicate the specified set of tag helpers to those that share the same short-name.
+    /// </summary>
+    private static void DeduplicateTagHelpers(ImmutableArray<TagHelperDescriptor> tagHelpers, ref PooledArrayBuilder<TagHelperDescriptor> collector)
     {
-        // Iterate once through the list to tease apart fully qualified and short name TagHelpers
-        using var fullyQualifiedTagHelpers = new PooledArrayBuilder<TagHelperDescriptor>();
-        var shortNameTagHelpers = new HashSet<TagHelperDescriptor>(ShortNameToFullyQualifiedComparer.Instance);
+        // Acquire a pooled HashSet to keep track of short-named tag helpers and de-dupe them.
+        using var pooledSet = s_shortNameSetPool.GetPooledObject();
+        var shortNameTagHelperSet = pooledSet.Object;
 
-        foreach (var descriptor in possibleChildDescriptors)
+        using var fullyQualifiedTagHelpers = new PooledArrayBuilder<TagHelperDescriptor>(tagHelpers.Length);
+
+        // Iterate through the tag helpers to determine which ones are short-named vs. fully-qualified.
+        foreach (var tagHelper in tagHelpers)
         {
-            if (descriptor.IsComponentFullyQualifiedNameMatch)
+            if (tagHelper.IsComponentFullyQualifiedNameMatch)
             {
-                fullyQualifiedTagHelpers.Add(descriptor);
+                // This is a fully-qualified tag helper, so we need to remember it for later.
+                fullyQualifiedTagHelpers.Add(tagHelper);
             }
-            else
+            else if (shortNameTagHelperSet.Add(tagHelper))
             {
-                shortNameTagHelpers.Add(descriptor);
+                // We haven't seen this short-named tag helper yet, so go ahead and collect it.
+                collector.Add(tagHelper);
             }
         }
 
-        // Re-combine the short named & fully qualified TagHelpers but filter out any fully qualified TagHelpers that have a short
-        // named representation already.
-        using var filteredList = new PooledArrayBuilder<TagHelperDescriptor>(capacity: shortNameTagHelpers.Count);
-        filteredList.AddRange(shortNameTagHelpers);
+        // Now, iterate through the fully-qualified tag helpers again and collect any that we didn't already
+        // see in a short-named form.
 
-        foreach (var fullyQualifiedTagHelper in fullyQualifiedTagHelpers)
+        foreach (var tagHelper in fullyQualifiedTagHelpers)
         {
-            if (!shortNameTagHelpers.Contains(fullyQualifiedTagHelper))
+            if (!shortNameTagHelperSet.Contains(tagHelper))
             {
-                // Unimported completion item that isn't represented in a short named form.
-                filteredList.Add(fullyQualifiedTagHelper);
-            }
-            else
-            {
-                // There's already a shortname variant of this item, don't include it.
+                // Collect this fully-qualified tag helper that we have seen a version of yet.
+                collector.Add(tagHelper);
             }
         }
-
-        return filteredList.DrainToImmutable();
     }
 }

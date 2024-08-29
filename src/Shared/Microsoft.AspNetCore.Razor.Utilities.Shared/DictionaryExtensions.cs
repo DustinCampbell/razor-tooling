@@ -76,4 +76,34 @@ internal static class DictionaryExtensions
             return value;
         }
     }
+
+    public static TValue GetOrCreate<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TKey key)
+        where TKey : notnull
+        where TValue : new()
+    {
+        if (!dictionary.TryGetValue(key, out var value))
+        {
+            value = new();
+            dictionary.Add(key, value);
+        }
+
+        return value;
+    }
+
+    public static bool TryAdd<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TKey key, TValue value)
+        where TKey : notnull
+    {
+#if NET
+        return dictionary.TryAdd(key, value);
+#else
+        if (dictionary.ContainsKey(key))
+        {
+            return false;
+        }
+
+        dictionary.Add(key, value);
+
+        return true;
+#endif
+    }
 }
