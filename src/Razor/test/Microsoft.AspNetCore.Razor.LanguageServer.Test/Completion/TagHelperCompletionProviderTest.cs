@@ -20,57 +20,16 @@ namespace Microsoft.AspNetCore.Razor.LanguageServer.Completion;
 
 public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : TagHelperServiceTestBase(testOutput)
 {
-    private readonly ITagHelperCompletionService _razorTagHelperCompletionService = new LspTagHelperCompletionService();
+    private readonly ITagHelperCompletionService _tagHelperCompletionService = new TagHelperCompletionService();
 
     private TagHelperCompletionProvider CreateTagHelperCompletionProvider()
-        => new(_razorTagHelperCompletionService, TestRazorLSPOptionsMonitor.Create());
-
-    [Fact]
-    public void GetNearestAncestorTagInfo_MarkupElement()
-    {
-        // Arrange
-        var context = CreateRazorCompletionContext(
-            """
-                @addTagHelper *, TestAssembly
-                <p><$$strong></strong></p>
-                """,
-            isRazorFile: false);
-        var element = context.Owner.FirstAncestorOrSelf<MarkupElementSyntax>();
-
-        // Act
-        var (ancestorName, ancestorIsTagHelper) = element.GetNearestAncestorTagInfo();
-
-        // Assert
-        Assert.Equal("p", ancestorName);
-        Assert.False(ancestorIsTagHelper);
-    }
-
-    [Fact]
-    public void GetNearestAncestorTagInfo_TagHelperElement()
-    {
-        // Arrange
-        var context = CreateRazorCompletionContext(
-            """
-                @addTagHelper *, TestAssembly
-                <test1><$$test2></test2></test1>
-                """,
-            isRazorFile: false,
-            tagHelpers: DefaultTagHelpers);
-        var element = context.Owner.FirstAncestorOrSelf<MarkupTagHelperElementSyntax>();
-
-        // Act
-        var (ancestorName, ancestorIsTagHelper) = element.GetNearestAncestorTagInfo();
-
-        // Assert
-        Assert.Equal("test1", ancestorName);
-        Assert.True(ancestorIsTagHelper);
-    }
+        => new(_tagHelperCompletionService, TestRazorLSPOptionsMonitor.Create());
 
     [Fact]
     public void GetCompletionAt_AtEmptyTagName_ReturnsCompletions()
     {
         // Arrange
-        var service = new TagHelperCompletionProvider(_razorTagHelperCompletionService, TestRazorLSPOptionsMonitor.Create());
+        var service = new TagHelperCompletionProvider(_tagHelperCompletionService, TestRazorLSPOptionsMonitor.Create());
         var context = CreateRazorCompletionContext(
             """
                 @addTagHelper *, TestAssembly
@@ -93,7 +52,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
     public void GetCompletionAt_InEmptyDocument_ReturnsEmptyCompletionArray()
     {
         // Arrange
-        var service = new TagHelperCompletionProvider(_razorTagHelperCompletionService, TestRazorLSPOptionsMonitor.Create());
+        var service = new TagHelperCompletionProvider(_tagHelperCompletionService, TestRazorLSPOptionsMonitor.Create());
         var context = CreateRazorCompletionContext(
             "$$",
             isRazorFile: true,
@@ -110,7 +69,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
     public void GetCompletionAt_OutsideOfTagName_DoesNotReturnCompletions()
     {
         // Arrange
-        var service = new TagHelperCompletionProvider(_razorTagHelperCompletionService, TestRazorLSPOptionsMonitor.Create());
+        var service = new TagHelperCompletionProvider(_tagHelperCompletionService, TestRazorLSPOptionsMonitor.Create());
         var context = CreateRazorCompletionContext(
             """
                 @addTagHelper *, TestAssembly
@@ -130,7 +89,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
     public void GetCompletionAt_OutsideOfTagName_InsideCSharp_DoesNotReturnCompletions()
     {
         // Arrange
-        var service = new TagHelperCompletionProvider(_razorTagHelperCompletionService, TestRazorLSPOptionsMonitor.Create());
+        var service = new TagHelperCompletionProvider(_tagHelperCompletionService, TestRazorLSPOptionsMonitor.Create());
         var context = CreateRazorCompletionContext(
             """
                 @addTagHelper *, TestAssembly
@@ -154,7 +113,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
     public void GetCompletionAt_SelfClosingTag_NotAtEndOfName_DoesNotReturnCompletions()
     {
         // Arrange
-        var service = new TagHelperCompletionProvider(_razorTagHelperCompletionService, TestRazorLSPOptionsMonitor.Create());
+        var service = new TagHelperCompletionProvider(_tagHelperCompletionService, TestRazorLSPOptionsMonitor.Create());
         var context = CreateRazorCompletionContext(
             """
                 @addTagHelper *, TestAssembly
@@ -174,7 +133,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
     public void GetCompletionAt_SelfClosingTag_ReturnsCompletions()
     {
         // Arrange
-        var service = new TagHelperCompletionProvider(_razorTagHelperCompletionService, TestRazorLSPOptionsMonitor.Create());
+        var service = new TagHelperCompletionProvider(_tagHelperCompletionService, TestRazorLSPOptionsMonitor.Create());
         var context = CreateRazorCompletionContext(
             """
                 @addTagHelper *, TestAssembly
@@ -194,7 +153,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
     public void GetCompletionAt_SelfClosingTag_InsideCSharp_ReturnsCompletions()
     {
         // Arrange
-        var service = new TagHelperCompletionProvider(_razorTagHelperCompletionService, TestRazorLSPOptionsMonitor.Create());
+        var service = new TagHelperCompletionProvider(_tagHelperCompletionService, TestRazorLSPOptionsMonitor.Create());
         var context = CreateRazorCompletionContext(
             """
                 @addTagHelper *, TestAssembly
@@ -218,7 +177,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
     public void GetCompletionAt_MalformedElement()
     {
         // Arrange
-        var service = new TagHelperCompletionProvider(_razorTagHelperCompletionService, TestRazorLSPOptionsMonitor.Create());
+        var service = new TagHelperCompletionProvider(_tagHelperCompletionService, TestRazorLSPOptionsMonitor.Create());
         var context = CreateRazorCompletionContext(
             """
                 @addTagHelper *, TestAssembly
@@ -239,7 +198,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
     public void GetCompletionAt_AtHtmlElementNameEdge_ReturnsCompletions()
     {
         // Arrange
-        var service = new TagHelperCompletionProvider(_razorTagHelperCompletionService, TestRazorLSPOptionsMonitor.Create());
+        var service = new TagHelperCompletionProvider(_tagHelperCompletionService, TestRazorLSPOptionsMonitor.Create());
         var context = CreateRazorCompletionContext(
             """
                 @addTagHelper *, TestAssembly
@@ -261,7 +220,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
     public void GetCompletionAt_AtTagHelperElementNameEdge_ReturnsCompletions()
     {
         // Arrange
-        var service = new TagHelperCompletionProvider(_razorTagHelperCompletionService, TestRazorLSPOptionsMonitor.Create());
+        var service = new TagHelperCompletionProvider(_tagHelperCompletionService, TestRazorLSPOptionsMonitor.Create());
         var context = CreateRazorCompletionContext(
             """
                 @addTagHelper *, TestAssembly
@@ -318,7 +277,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
     public void GetCompletionAt_AtAttributeEdge_BothAttribute_ReturnsCompletions(string documentText)
     {
         // Arrange
-        var service = new TagHelperCompletionProvider(_razorTagHelperCompletionService, TestRazorLSPOptionsMonitor.Create());
+        var service = new TagHelperCompletionProvider(_tagHelperCompletionService, TestRazorLSPOptionsMonitor.Create());
         var context = CreateRazorCompletionContext(
             documentText,
             isRazorFile: false,
@@ -445,7 +404,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
         // Arrange
         var options = TestRazorLSPOptionsMonitor.Create();
         await options.UpdateAsync(options.CurrentValue with { CommitElementsWithSpace = false }, CancellationToken.None);
-        var service = new TagHelperCompletionProvider(_razorTagHelperCompletionService, options);
+        var service = new TagHelperCompletionProvider(_tagHelperCompletionService, options);
 
         var context = CreateRazorCompletionContext(
             """

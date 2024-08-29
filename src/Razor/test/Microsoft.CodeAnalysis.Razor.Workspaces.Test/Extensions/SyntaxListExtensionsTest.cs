@@ -2,17 +2,14 @@
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
 using System.Collections.Immutable;
-using Microsoft.AspNetCore.Razor.Language;
-using Microsoft.AspNetCore.Razor.Language.Syntax;
-using Microsoft.AspNetCore.Razor.LanguageServer.Completion;
 using Microsoft.AspNetCore.Razor.Test.Common;
 using Xunit;
 using Xunit.Abstractions;
 using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
-namespace Microsoft.AspNetCore.Razor.LanguageServer.Test;
+namespace Microsoft.AspNetCore.Razor.Language.Syntax.Test;
 
-public class TagHelperFactsServiceTest(ITestOutputHelper testOutput) : TagHelperServiceTestBase(testOutput)
+public class SyntaxListExtensionsTest(ITestOutputHelper testOutput) : ToolingTestBase(testOutput)
 {
     [Fact]
     public void ToAttributePairs_DirectiveAttribute()
@@ -168,7 +165,7 @@ public class TagHelperFactsServiceTest(ITestOutputHelper testOutput) : TagHelper
     private static TNode GetStartTag<TNode>(TestCode testCode, bool isRazorFile = true, params ImmutableArray<TagHelperDescriptor> tagHelpers)
         where TNode : class, IStartTagSyntaxNode
     {
-        var codeDocument = CreateCodeDocument(testCode.Text, isRazorFile, tagHelpers);
+        var codeDocument = TestRazorCodeDocumentFactory.Create(testCode.Text, isRazorFile, tagHelpers);
         var syntaxTree = codeDocument.GetSyntaxTree();
 
         var node = syntaxTree.Root.FindInnermostNode(testCode.Position) as TNode;
@@ -180,6 +177,6 @@ public class TagHelperFactsServiceTest(ITestOutputHelper testOutput) : TagHelper
     private static TNode GetStartTag<TNode>(TestCode testCode, bool isRazorFile = true)
         where TNode : class, IStartTagSyntaxNode
     {
-        return GetStartTag<TNode>(testCode, isRazorFile, DefaultTagHelpers);
+        return GetStartTag<TNode>(testCode, isRazorFile, TestTagHelperData.DefaultTagHelpers);
     }
 }

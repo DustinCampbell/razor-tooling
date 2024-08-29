@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis.Razor.Workspaces;
 
 namespace Microsoft.CodeAnalysis.Razor.Completion;
 
-internal abstract class AbstractTagHelperCompletionService : ITagHelperCompletionService
+internal class TagHelperCompletionService : ITagHelperCompletionService
 {
     private static readonly HashSet<TagHelperDescriptor> s_emptyHashSet = new();
 

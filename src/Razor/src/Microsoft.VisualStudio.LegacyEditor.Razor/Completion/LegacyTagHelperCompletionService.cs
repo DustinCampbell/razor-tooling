@@ -7,6 +7,6 @@ using Microsoft.CodeAnalysis.Razor.Completion;
 namespace Microsoft.VisualStudio.LegacyEditor.Razor.Completion;
 
 [Export(typeof(ITagHelperCompletionService))]
-internal sealed class LegacyTagHelperCompletionService : AbstractTagHelperCompletionService
+internal sealed class LegacyTagHelperCompletionService : TagHelperCompletionService
 {
 }

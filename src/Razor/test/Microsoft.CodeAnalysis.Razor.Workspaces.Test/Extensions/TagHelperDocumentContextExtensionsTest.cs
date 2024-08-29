@@ -10,9 +10,9 @@ using Xunit;
 using Xunit.Abstractions;
 using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
-namespace Microsoft.VisualStudio.Editor.Razor;
+namespace Microsoft.CodeAnalysis.Razor.Workspaces.Test.Extensions;
 
-public class TagHelperFactsTest(ITestOutputHelper testOutput) : ToolingTestBase(testOutput)
+public class TagHelperDocumentContextExtensionsTest(ITestOutputHelper testOutput) : ToolingTestBase(testOutput)
 {
     [Fact]
     public void TryGetTagHelperBinding_DoesNotAllowOptOutCharacterPrefix()
@@ -71,73 +71,6 @@ public class TagHelperFactsTest(ITestOutputHelper testOutput) : ToolingTestBase(
         Assert.Equal(documentDescriptors[0], descriptor);
         var boundRule = Assert.Single(binding.Mappings[descriptor]);
         Assert.Equal(documentDescriptors[0].TagMatchingRules.First(), boundRule);
-    }
-
-    [Fact]
-    public void GetBoundTagHelperAttributes_MatchesPrefixedAttributeName()
-    {
-        ImmutableArray<TagHelperDescriptor> documentDescriptors =
-        [
-            TagHelperDescriptorBuilder.Create("TestType", "TestAssembly")
-                .TagMatchingRuleDescriptor(rule => rule.RequireTagName("a"))
-                .BoundAttributeDescriptor(attribute =>
-                    attribute
-                        .Name("asp-for")
-                        .TypeName(typeof(string).FullName)
-                        .Metadata(PropertyName("AspFor")))
-                .BoundAttributeDescriptor(attribute =>
-                    attribute
-                        .Name("asp-route")
-                        .TypeName(typeof(IDictionary<string, string>).Namespace + "IDictionary<string, string>")
-                        .Metadata(PropertyName("AspRoute"))
-                        .AsDictionaryAttribute("asp-route-", typeof(string).FullName))
-                .Build()
-        ];
-
-        var expectedAttributeDescriptors = new[]
-        {
-            documentDescriptors[0].BoundAttributes.Last()
-        };
-
-        var documentContext = TagHelperDocumentContext.Create(string.Empty, documentDescriptors);
-        Assert.True(documentContext.TryGetTagHelperBinding(tagName: "a", attributes: [], parentTagName: null, parentIsTagHelper: false, out var binding));
-
-        var tagHelperAttributes = binding.GetBoundTagHelperAttributes("asp-route-something");
-
-        Assert.Equal(expectedAttributeDescriptors, tagHelperAttributes);
-    }
-
-    [Fact]
-    public void GetBoundTagHelperAttributes_MatchesAttributeName()
-    {
-        ImmutableArray<TagHelperDescriptor> documentDescriptors =
-        [
-            TagHelperDescriptorBuilder.Create("TestType", "TestAssembly")
-                .TagMatchingRuleDescriptor(rule => rule.RequireTagName("input"))
-                .BoundAttributeDescriptor(attribute =>
-                    attribute
-                        .Name("asp-for")
-                        .TypeName(typeof(string).FullName)
-                        .Metadata(PropertyName("AspFor")))
-                .BoundAttributeDescriptor(attribute =>
-                    attribute
-                        .Name("asp-extra")
-                        .TypeName(typeof(string).FullName)
-                        .Metadata(PropertyName("AspExtra")))
-                .Build()
-        ];
-
-        var expectedAttributeDescriptors = new[]
-        {
-            documentDescriptors[0].BoundAttributes.First()
-        };
-
-        var documentContext = TagHelperDocumentContext.Create(string.Empty, documentDescriptors);
-        Assert.True(documentContext.TryGetTagHelperBinding(tagName: "input", attributes: [], parentTagName: null, parentIsTagHelper: false, out var binding));
-
-        var tagHelperAttributes = binding.GetBoundTagHelperAttributes("asp-for");
-
-        Assert.Equal(expectedAttributeDescriptors, tagHelperAttributes);
     }
 
     [Fact]

@@ -16,7 +16,7 @@ using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.Completion;
 
-public class LanguageServerTagHelperCompletionServiceTest(ITestOutputHelper testOutput) : ToolingTestBase(testOutput)
+public class TagHelperCompletionServiceTest(ITestOutputHelper testOutput) : ToolingTestBase(testOutput)
 {
     [Fact]
     [WorkItem("https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1452432")]
@@ -1459,7 +1459,7 @@ public class LanguageServerTagHelperCompletionServiceTest(ITestOutputHelper test
         AssertCompletionsAreEquivalent(expectedCompletions, completions);
     }
 
-    private static LspTagHelperCompletionService CreateTagHelperCompletionFactsService() => new();
+    private static TagHelperCompletionService CreateTagHelperCompletionFactsService() => new();
 
     private static void AssertCompletionsAreEquivalent(ElementCompletionResult expected, ElementCompletionResult actual)
     {
