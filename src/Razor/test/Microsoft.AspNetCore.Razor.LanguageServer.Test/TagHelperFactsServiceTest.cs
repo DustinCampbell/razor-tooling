@@ -177,7 +177,7 @@ public class TagHelperFactsServiceTest(ITestOutputHelper testOutput) : TagHelper
         return node;
     }
 
-    private TNode GetStartTag<TNode>(TestCode testCode, bool isRazorFile = true)
+    private static TNode GetStartTag<TNode>(TestCode testCode, bool isRazorFile = true)
         where TNode : class, IStartTagSyntaxNode
     {
         return GetStartTag<TNode>(testCode, isRazorFile, DefaultTagHelpers);
