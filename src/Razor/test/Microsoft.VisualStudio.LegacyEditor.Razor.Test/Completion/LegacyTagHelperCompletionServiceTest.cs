@@ -1387,7 +1387,7 @@ public class LegacyTagHelperCompletionServiceTest(ITestOutputHelper testOutput) 
         string? tagHelperPrefix = "")
     {
         var documentContext = TagHelperDocumentContext.Create(tagHelperPrefix, descriptors);
-        var completionContext = new ElementCompletionContext(
+        var completionContext = new LegacyElementCompletionContext(
             documentContext,
             existingCompletions,
             containingTagName,

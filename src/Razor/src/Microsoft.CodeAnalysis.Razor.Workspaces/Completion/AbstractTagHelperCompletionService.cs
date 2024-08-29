@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.PooledObjects;
@@ -169,27 +168,27 @@ internal abstract class AbstractTagHelperCompletionService : ITagHelperCompletio
             return emptyResult;
         }
 
-        if (UseExistingCompletions)
+        if (completionContext.InitializeWithExistingCompletions)
         {
-            elementCompletions = completionContext.ExistingCompletions.ToDictionary(
-                completion => completion,
-                _ => new HashSet<TagHelperDescriptor>(),
-                StringComparer.Ordinal);
+            foreach (var completion in completionContext.ExistingCompletions)
+            {
+                elementCompletions.Add(completion, []);
+            }
         }
 
         var catchAllDescriptors = new HashSet<TagHelperDescriptor>();
         var prefix = completionContext.DocumentContext.Prefix ?? string.Empty;
-        var possibleChildDescriptors = GetTagHelpersGivenParent(completionContext);
+        var possibleChildDescriptors = completionContext.GetTagHelpersGivenParent();
         possibleChildDescriptors = FilterFullyQualifiedCompletions(possibleChildDescriptors);
         foreach (var possibleDescriptor in possibleChildDescriptors)
         {
             var addRuleCompletions = false;
-            var checkAttributeRules = CheckAttributeRules;
+            var checkAttributeRules = completionContext.ShouldCheckAttributeRules;
             var outputHint = possibleDescriptor.TagOutputHint;
 
             foreach (var rule in possibleDescriptor.TagMatchingRules)
             {
-                if (!SatisfiesParentTag(rule, completionContext))
+                if (!completionContext.SatisfiesParentTag(rule))
                 {
                     continue;
                 }
@@ -224,7 +223,7 @@ internal abstract class AbstractTagHelperCompletionService : ITagHelperCompletio
                     // We want completions to not dedupe by casing. E.g, we want to show both <div> and <DIV> completion items separately.
                     addRuleCompletions = true;
 
-                    if (CheckAttributeRules)
+                    if (completionContext.ShouldCheckAttributeRules)
                     {
                         // If the tag is not in the Html schema, then don't check attribute rules. Normally we want to check them so that
                         // users don't see html tag and tag helper completions for the same thing, where the tag helper doesn't apply. In
@@ -285,15 +284,7 @@ internal abstract class AbstractTagHelperCompletionService : ITagHelperCompletio
         }
     }
 
-    protected abstract bool UseExistingCompletions { get; }
-    protected abstract bool CheckAttributeRules { get; }
-
-    protected abstract bool TryGetTagHelperBinding(ElementCompletionContext context, [NotNullWhen(true)] out TagHelperBinding? binding);
-    protected abstract ImmutableArray<TagHelperDescriptor> GetTagHelpersGivenTag(ElementCompletionContext context, string prefixedName);
-    protected abstract ImmutableArray<TagHelperDescriptor> GetTagHelpersGivenParent(ElementCompletionContext context);
-    protected abstract bool SatisfiesParentTag(TagMatchingRuleDescriptor rule, ElementCompletionContext context);
-
-    protected void AddAllowedChildrenCompletions(ElementCompletionContext completionContext, Dictionary<string, HashSet<TagHelperDescriptor>> elementCompletions)
+    private static void AddAllowedChildrenCompletions(ElementCompletionContext completionContext, Dictionary<string, HashSet<TagHelperDescriptor>> elementCompletions)
     {
         if (completionContext.ContainingTagName is null)
         {
@@ -301,7 +292,7 @@ internal abstract class AbstractTagHelperCompletionService : ITagHelperCompletio
             return;
         }
 
-        if (!TryGetTagHelperBinding(completionContext, out var binding))
+        if (!completionContext.TryGetTagHelperBinding(out var binding))
         {
             // Containing tag is not a TagHelper; therefore, it allows any children.
             return;
@@ -314,7 +305,7 @@ internal abstract class AbstractTagHelperCompletionService : ITagHelperCompletio
             foreach (var childTag in descriptor.AllowedChildTags)
             {
                 var prefixedName = string.Concat(prefix, childTag.Name);
-                var descriptors = GetTagHelpersGivenTag(completionContext, prefixedName);
+                var descriptors = completionContext.GetTagHelpersGivenTag(prefixedName);
 
                 if (descriptors.Length == 0)
                 {
@@ -337,7 +328,7 @@ internal abstract class AbstractTagHelperCompletionService : ITagHelperCompletio
         }
     }
 
-    protected static ImmutableArray<TagHelperDescriptor> FilterFullyQualifiedCompletions(ImmutableArray<TagHelperDescriptor> possibleChildDescriptors)
+    private static ImmutableArray<TagHelperDescriptor> FilterFullyQualifiedCompletions(ImmutableArray<TagHelperDescriptor> possibleChildDescriptors)
     {
         // Iterate once through the list to tease apart fully qualified and short name TagHelpers
         using var fullyQualifiedTagHelpers = new PooledArrayBuilder<TagHelperDescriptor>();

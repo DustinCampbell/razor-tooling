@@ -24,11 +24,6 @@ internal static class TagHelperFacts
             throw new ArgumentNullException(nameof(documentContext));
         }
 
-        if (attributes.IsDefault)
-        {
-            throw new ArgumentNullException(nameof(attributes));
-        }
-
         if (tagName is null)
         {
             return null;
@@ -41,7 +36,7 @@ internal static class TagHelperFacts
 
         var binder = documentContext.GetBinder();
 
-        return binder.GetBinding(tagName, attributes, parentTag, parentIsTagHelper);
+        return binder.GetBinding(tagName, attributes.NullToEmpty(), parentTag, parentIsTagHelper);
     }
 
     public static ImmutableArray<BoundAttributeDescriptor> GetBoundTagHelperAttributes(
@@ -98,12 +93,12 @@ internal static class TagHelperFacts
             throw new ArgumentNullException(nameof(tagName));
         }
 
-        if (documentContext?.TagHelpers is not { Length: > 0 } tagHelpers)
+        if (documentContext.TagHelpers is not { Length: > 0 } tagHelpers)
         {
             return ImmutableArray<TagHelperDescriptor>.Empty;
         }
 
-        var prefix = documentContext?.Prefix ?? string.Empty;
+        var prefix = documentContext.Prefix ?? string.Empty;
         if (!tagName.StartsWith(prefix, StringComparison.OrdinalIgnoreCase))
         {
             // Can't possibly match TagHelpers, it doesn't start with the TagHelperPrefix.

@@ -4,6 +4,7 @@
 using System.Collections.Immutable;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.CodeAnalysis.Razor.Completion;
+using Microsoft.VisualStudio.LegacyEditor.Razor.Completion;
 
 namespace Microsoft.AspNetCore.Razor.ExternalAccess.LegacyEditor;
 
@@ -13,7 +14,7 @@ internal static partial class RazorWrapperFactory
     {
         public IRazorElementCompletionContext CreateContext(IRazorTagHelperDocumentContext tagHelperContext, IEnumerable<string>? existingCompletions, string? containingTagName, IEnumerable<KeyValuePair<string, string>> attributes, string? containingParentTagName, bool containingParentIsTagHelper, Func<string, bool> inHTMLSchema)
             => Wrap(
-                new ElementCompletionContext(
+                new LegacyElementCompletionContext(
                     Unwrap(tagHelperContext),
                     existingCompletions,
                     containingTagName,

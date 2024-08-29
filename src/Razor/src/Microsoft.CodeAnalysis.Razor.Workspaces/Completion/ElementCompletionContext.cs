@@ -4,11 +4,13 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Razor.Language;
+using Microsoft.VisualStudio.Editor.Razor;
 
 namespace Microsoft.CodeAnalysis.Razor.Completion;
 
-internal sealed class ElementCompletionContext
+internal class ElementCompletionContext
 {
     public TagHelperDocumentContext DocumentContext { get; }
     public IEnumerable<string> ExistingCompletions { get; }
@@ -35,4 +37,36 @@ internal sealed class ElementCompletionContext
         ContainingParentIsTagHelper = containingParentIsTagHelper;
         InHTMLSchema = inHTMLSchema ?? throw new ArgumentNullException(nameof(inHTMLSchema));
     }
+
+    // Note: The properties and methods below capture nuances between the Razor LSP editor's tag helper completion
+    // and the Razor legacy editor's tag helper completion. These are called by the TagHelperCompletionService to
+    // compute results for the appropriate editor.
+    //
+    // The defaults below represent the LSP editor's behavior.
+    // LegacyElementCompletionContext overrides these members to tweak tag helper completion for the legacy editor.
+
+    public virtual bool ShouldCheckAttributeRules => true;
+
+    public virtual bool InitializeWithExistingCompletions => false;
+
+    public virtual bool TryGetTagHelperBinding([NotNullWhen(true)] out TagHelperBinding? binding)
+    {
+        binding = TagHelperFacts.GetTagHelperBinding(
+            DocumentContext,
+            ContainingParentTagName,
+            Attributes,
+            parentTag: null,
+            parentIsTagHelper: false);
+
+        return binding is not null;
+    }
+
+    public virtual ImmutableArray<TagHelperDescriptor> GetTagHelpersGivenTag(string prefixedName)
+        => TagHelperFacts.GetTagHelpersGivenTag(DocumentContext, prefixedName, ContainingParentTagName);
+
+    public virtual ImmutableArray<TagHelperDescriptor> GetTagHelpersGivenParent()
+        => TagHelperFacts.GetTagHelpersGivenParent(DocumentContext, ContainingParentTagName);
+
+    public virtual bool SatisfiesParentTag(TagMatchingRuleDescriptor rule)
+        => TagHelperMatchingConventions.SatisfiesParentTag(rule, ContainingParentTagName.AsSpanOrDefault());
 }
