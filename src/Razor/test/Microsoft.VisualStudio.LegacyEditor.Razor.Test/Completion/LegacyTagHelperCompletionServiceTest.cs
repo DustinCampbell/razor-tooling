@@ -33,7 +33,7 @@ public class LegacyTagHelperCompletionServiceTest(ITestOutputHelper testOutput) 
                 .Build(),
         ];
 
-        var expectedCompletions = AttributeCompletionResult.Create(new()
+        var expectedCompletions = CreateContext(new()
         {
             ["asp-route-..."] = [documentDescriptors[0].BoundAttributes.Last()]
         });
@@ -69,7 +69,7 @@ public class LegacyTagHelperCompletionServiceTest(ITestOutputHelper testOutput) 
                 .Build(),
         ];
 
-        var expectedCompletions = AttributeCompletionResult.Create(new()
+        var expectedCompletions = CreateContext(new()
         {
             ["asp-all-route-data"] = [documentDescriptors[0].BoundAttributes.Last()],
             ["asp-route-..."] = [documentDescriptors[0].BoundAttributes.Last()]
@@ -114,7 +114,7 @@ public class LegacyTagHelperCompletionServiceTest(ITestOutputHelper testOutput) 
                 .Build(),
         ];
 
-        var expectedCompletions = AttributeCompletionResult.Create(new()
+        var expectedCompletions = CreateContext(new()
         {
             ["asp-all-route-data"] = [documentDescriptors[0].BoundAttributes.Last()],
             ["asp-route-..."] = [documentDescriptors[0].BoundAttributes.Last()]
@@ -158,7 +158,7 @@ public class LegacyTagHelperCompletionServiceTest(ITestOutputHelper testOutput) 
                 .Build(),
         ];
 
-        var expectedCompletions = AttributeCompletionResult.Create(new()
+        var expectedCompletions = CreateContext(new()
         {
             ["onclick"] = [],
             ["visible"] = [documentDescriptors[0].BoundAttributes.Last()]
@@ -205,7 +205,7 @@ public class LegacyTagHelperCompletionServiceTest(ITestOutputHelper testOutput) 
                 .Build(),
         ];
 
-        var expectedCompletions = AttributeCompletionResult.Create(new()
+        var expectedCompletions = CreateContext(new()
         {
             ["onclick"] = [],
             ["visible"] = [documentDescriptors[0].BoundAttributes.Last()]
@@ -254,7 +254,7 @@ public class LegacyTagHelperCompletionServiceTest(ITestOutputHelper testOutput) 
                 .Build(),
         ];
 
-        var expectedCompletions = AttributeCompletionResult.Create(new()
+        var expectedCompletions = CreateContext(new()
         {
             ["onclick"] = []
         });
@@ -296,7 +296,7 @@ public class LegacyTagHelperCompletionServiceTest(ITestOutputHelper testOutput) 
                 .Build(),
         ];
 
-        var expectedCompletions = AttributeCompletionResult.Create(new()
+        var expectedCompletions = CreateContext(new()
         {
             ["class"] = [],
             ["onclick"] = [],
@@ -347,7 +347,7 @@ public class LegacyTagHelperCompletionServiceTest(ITestOutputHelper testOutput) 
                 .Build(),
         ];
 
-        var expectedCompletions = AttributeCompletionResult.Create(new()
+        var expectedCompletions = CreateContext(new()
         {
             ["class"] = [.. documentDescriptors[1].BoundAttributes],
             ["onclick"] = [],
@@ -402,7 +402,7 @@ public class LegacyTagHelperCompletionServiceTest(ITestOutputHelper testOutput) 
                     .Metadata(PropertyName("Visible")))
                 .Build(),
         ];
-        var expectedCompletions = AttributeCompletionResult.Create(new()
+        var expectedCompletions = CreateContext(new()
         {
             ["onclick"] = [],
             ["class"] = [.. documentDescriptors[1].BoundAttributes],
@@ -440,7 +440,7 @@ public class LegacyTagHelperCompletionServiceTest(ITestOutputHelper testOutput) 
                 .Build(),
         ];
 
-        var expectedCompletions = AttributeCompletionResult.Create(new()
+        var expectedCompletions = CreateContext(new()
         {
             ["class"] = [],
             ["repeat"] = [.. documentDescriptors[0].BoundAttributes]
@@ -475,7 +475,7 @@ public class LegacyTagHelperCompletionServiceTest(ITestOutputHelper testOutput) 
                 .Build(),
         ];
 
-        var expectedCompletions = AttributeCompletionResult.Create(new()
+        var expectedCompletions = CreateContext(new()
         {
             ["repeat"] = [.. documentDescriptors[0].BoundAttributes]
         });
@@ -509,7 +509,7 @@ public class LegacyTagHelperCompletionServiceTest(ITestOutputHelper testOutput) 
                 .Build(),
         ];
 
-        var expectedCompletions = AttributeCompletionResult.Create(new()
+        var expectedCompletions = CreateContext(new()
         {
             ["class"] = [],
             ["repeat"] = [..documentDescriptors[0].BoundAttributes]
@@ -533,7 +533,7 @@ public class LegacyTagHelperCompletionServiceTest(ITestOutputHelper testOutput) 
     public void GetAttributeCompletions_NoDescriptorsReturnsExistingCompletions()
     {
         // Arrange
-        var expectedCompletions = AttributeCompletionResult.Create(new()
+        var expectedCompletions = CreateContext(new()
         {
             ["class"] = [],
         });
@@ -565,7 +565,7 @@ public class LegacyTagHelperCompletionServiceTest(ITestOutputHelper testOutput) 
                 .Build(),
         ];
 
-        var expectedCompletions = AttributeCompletionResult.Create(new()
+        var expectedCompletions = CreateContext(new()
         {
             ["class"] = [],
         });
@@ -598,7 +598,7 @@ public class LegacyTagHelperCompletionServiceTest(ITestOutputHelper testOutput) 
                 .Build(),
         ];
 
-        var expectedCompletions = AttributeCompletionResult.Create(new()
+        var expectedCompletions = CreateContext(new()
         {
             ["class"] = [],
         });
@@ -1352,6 +1352,14 @@ public class LegacyTagHelperCompletionServiceTest(ITestOutputHelper testOutput) 
         AssertCompletionsAreEquivalent(expectedCompletions, completions);
     }
 
+    private static AttributeCompletionResult CreateContext(Dictionary<string, ImmutableArray<BoundAttributeDescriptor>> completions)
+    {
+        return AttributeCompletionResult.Create(
+            completions.ToImmutableDictionary(
+                keySelector: x => x.Key,
+                elementSelector: x => x.Value.ToHashSet().ToImmutableArray()));
+    }
+
     private static LegacyTagHelperCompletionService CreateTagHelperCompletionFactsService() => new();
 
     private static void AssertCompletionsAreEquivalent(ElementCompletionResult expected, ElementCompletionResult actual)
@@ -1362,7 +1370,7 @@ public class LegacyTagHelperCompletionServiceTest(ITestOutputHelper testOutput) 
         {
             var actualValue = actual.Completions[expectedCompletion.Key];
             Assert.NotNull(actualValue);
-            Assert.Equal(expectedCompletion.Value, actualValue);
+            Assert.Equal<TagHelperDescriptor>(expectedCompletion.Value, actualValue);
         }
     }
 
@@ -1373,8 +1381,8 @@ public class LegacyTagHelperCompletionServiceTest(ITestOutputHelper testOutput) 
         foreach (var expectedCompletion in expected.Completions)
         {
             var actualValue = actual.Completions[expectedCompletion.Key];
-            Assert.NotNull(actualValue);
-            Assert.Equal(expectedCompletion.Value, actualValue);
+            Assert.NotEqual(default, actualValue);
+            Assert.Equal<BoundAttributeDescriptor>(expectedCompletion.Value, actualValue);
         }
     }
 

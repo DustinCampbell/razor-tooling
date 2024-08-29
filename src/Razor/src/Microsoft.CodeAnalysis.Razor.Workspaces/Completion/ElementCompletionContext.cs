@@ -10,8 +10,10 @@ namespace Microsoft.CodeAnalysis.Razor.Completion;
 
 internal sealed class ElementCompletionContext
 {
+    private readonly HashSet<string>? _existingCompletionSet;
+
     public TagHelperDocumentContext DocumentContext { get; }
-    public IEnumerable<string> ExistingCompletions { get; }
+    public IEnumerable<string> ExistingCompletions => _existingCompletionSet ?? [];
     public string? ContainingTagName { get; }
     public ImmutableArray<KeyValuePair<string, string>> Attributes { get; }
     public string? ContainingParentTagName { get; }
@@ -28,11 +30,26 @@ internal sealed class ElementCompletionContext
         Func<string, bool> inHTMLSchema)
     {
         DocumentContext = documentContext ?? throw new ArgumentNullException(nameof(documentContext));
-        ExistingCompletions = existingCompletions ?? Array.Empty<string>();
         ContainingTagName = containingTagName;
         Attributes = attributes;
         ContainingParentTagName = containingParentTagName;
         ContainingParentIsTagHelper = containingParentIsTagHelper;
         InHTMLSchema = inHTMLSchema ?? throw new ArgumentNullException(nameof(inHTMLSchema));
+
+        switch (existingCompletions)
+        {
+            case HashSet<string> set:
+                // We were handed a HashSet<string>, so we'll use it directly.
+                _existingCompletionSet = set;
+                break;
+
+            case IEnumerable<string> enumerable:
+                // We were handed an IEnumerable<string>, so we'll create a HashSet<T> from it.
+                _existingCompletionSet = new HashSet<string>(enumerable);
+                break;
+        }
     }
+
+    public bool ContainsExistingCompletion(string text)
+        => _existingCompletionSet?.Contains(text) ?? false;
 }

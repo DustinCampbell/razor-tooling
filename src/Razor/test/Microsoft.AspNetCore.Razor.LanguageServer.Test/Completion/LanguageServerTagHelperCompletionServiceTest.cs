@@ -35,7 +35,7 @@ public class LanguageServerTagHelperCompletionServiceTest(ITestOutputHelper test
                 .Build(),
         ];
 
-        var expectedCompletions = AttributeCompletionResult.Create(new()
+        var expectedCompletions = CreateContext(new()
         {
             ["asp-route-..."] = [documentDescriptors[0].BoundAttributes.Last()]
         });
@@ -71,7 +71,7 @@ public class LanguageServerTagHelperCompletionServiceTest(ITestOutputHelper test
                 .Build(),
         ];
 
-        var expectedCompletions = AttributeCompletionResult.Create(new()
+        var expectedCompletions = CreateContext(new()
         {
             ["asp-all-route-data"] = [documentDescriptors[0].BoundAttributes.Last()],
             ["asp-route-..."] = [documentDescriptors[0].BoundAttributes.Last()]
@@ -116,7 +116,7 @@ public class LanguageServerTagHelperCompletionServiceTest(ITestOutputHelper test
                 .Build(),
         ];
 
-        var expectedCompletions = AttributeCompletionResult.Create(new()
+        var expectedCompletions = CreateContext(new()
         {
             ["asp-all-route-data"] = [documentDescriptors[0].BoundAttributes.Last()],
             ["asp-route-..."] = [documentDescriptors[0].BoundAttributes.Last()]
@@ -160,7 +160,7 @@ public class LanguageServerTagHelperCompletionServiceTest(ITestOutputHelper test
                 .Build(),
         ];
 
-        var expectedCompletions = AttributeCompletionResult.Create(new()
+        var expectedCompletions = CreateContext(new()
         {
             ["onclick"] = [],
             ["visible"] = [documentDescriptors[0].BoundAttributes.Last()]
@@ -207,7 +207,7 @@ public class LanguageServerTagHelperCompletionServiceTest(ITestOutputHelper test
                 .Build(),
         ];
 
-        var expectedCompletions = AttributeCompletionResult.Create(new()
+        var expectedCompletions = CreateContext(new()
         {
             ["onclick"] = [],
             ["visible"] = [documentDescriptors[0].BoundAttributes.Last()]
@@ -256,7 +256,7 @@ public class LanguageServerTagHelperCompletionServiceTest(ITestOutputHelper test
                 .Build(),
         ];
 
-        var expectedCompletions = AttributeCompletionResult.Create(new()
+        var expectedCompletions = CreateContext(new()
         {
             ["onclick"] = []
         });
@@ -298,7 +298,7 @@ public class LanguageServerTagHelperCompletionServiceTest(ITestOutputHelper test
                 .Build(),
         ];
 
-        var expectedCompletions = AttributeCompletionResult.Create(new()
+        var expectedCompletions = CreateContext(new()
         {
             ["class"] = [],
             ["onclick"] = [],
@@ -349,7 +349,7 @@ public class LanguageServerTagHelperCompletionServiceTest(ITestOutputHelper test
                 .Build(),
         ];
 
-        var expectedCompletions = AttributeCompletionResult.Create(new()
+        var expectedCompletions = CreateContext(new()
         {
             ["class"] = [.. documentDescriptors[1].BoundAttributes],
             ["onclick"] = [],
@@ -405,7 +405,7 @@ public class LanguageServerTagHelperCompletionServiceTest(ITestOutputHelper test
                 .Build(),
         ];
 
-        var expectedCompletions = AttributeCompletionResult.Create(new()
+        var expectedCompletions = CreateContext(new()
         {
             ["onclick"] = [],
             ["class"] = [.. documentDescriptors[1].BoundAttributes],
@@ -443,7 +443,7 @@ public class LanguageServerTagHelperCompletionServiceTest(ITestOutputHelper test
                 .Build(),
         ];
 
-        var expectedCompletions = AttributeCompletionResult.Create(new()
+        var expectedCompletions = CreateContext(new()
         {
             ["class"] = [],
             ["repeat"] = [.. documentDescriptors[0].BoundAttributes]
@@ -478,7 +478,7 @@ public class LanguageServerTagHelperCompletionServiceTest(ITestOutputHelper test
                 .Build(),
         ];
 
-        var expectedCompletions = AttributeCompletionResult.Create(new()
+        var expectedCompletions = CreateContext(new()
         {
             ["repeat"] = [.. documentDescriptors[0].BoundAttributes]
         });
@@ -512,7 +512,7 @@ public class LanguageServerTagHelperCompletionServiceTest(ITestOutputHelper test
                 .Build(),
         ];
 
-        var expectedCompletions = AttributeCompletionResult.Create(new()
+        var expectedCompletions = CreateContext(new()
         {
             ["class"] = [],
             ["repeat"] = [..documentDescriptors[0].BoundAttributes]
@@ -536,7 +536,7 @@ public class LanguageServerTagHelperCompletionServiceTest(ITestOutputHelper test
     public void GetAttributeCompletions_NoDescriptorsReturnsExistingCompletions()
     {
         // Arrange
-        var expectedCompletions = AttributeCompletionResult.Create(new()
+        var expectedCompletions = CreateContext(new()
         {
             ["class"] = [],
         });
@@ -568,7 +568,7 @@ public class LanguageServerTagHelperCompletionServiceTest(ITestOutputHelper test
                 .Build(),
         ];
 
-        var expectedCompletions = AttributeCompletionResult.Create(new()
+        var expectedCompletions = CreateContext(new()
         {
             ["class"] = [],
         });
@@ -601,7 +601,7 @@ public class LanguageServerTagHelperCompletionServiceTest(ITestOutputHelper test
                 .Build(),
         ];
 
-        var expectedCompletions = AttributeCompletionResult.Create(new()
+        var expectedCompletions = CreateContext(new()
         {
             ["class"] = [],
         });
@@ -1459,6 +1459,14 @@ public class LanguageServerTagHelperCompletionServiceTest(ITestOutputHelper test
         AssertCompletionsAreEquivalent(expectedCompletions, completions);
     }
 
+    private static AttributeCompletionResult CreateContext(Dictionary<string, ImmutableArray<BoundAttributeDescriptor>> completions)
+    {
+        return AttributeCompletionResult.Create(
+            completions.ToImmutableDictionary(
+                keySelector: x => x.Key,
+                elementSelector: x => x.Value.ToHashSet().ToImmutableArray()));
+    }
+
     private static LspTagHelperCompletionService CreateTagHelperCompletionFactsService() => new();
 
     private static void AssertCompletionsAreEquivalent(ElementCompletionResult expected, ElementCompletionResult actual)
@@ -1469,7 +1477,7 @@ public class LanguageServerTagHelperCompletionServiceTest(ITestOutputHelper test
         {
             var actualValue = actual.Completions[expectedCompletion.Key];
             Assert.NotNull(actualValue);
-            Assert.Equal(expectedCompletion.Value, actualValue);
+            Assert.Equal<TagHelperDescriptor>(expectedCompletion.Value, actualValue);
         }
     }
 
@@ -1480,8 +1488,8 @@ public class LanguageServerTagHelperCompletionServiceTest(ITestOutputHelper test
         foreach (var expectedCompletion in expected.Completions)
         {
             var actualValue = actual.Completions[expectedCompletion.Key];
-            Assert.NotNull(actualValue);
-            Assert.Equal(expectedCompletion.Value, actualValue);
+            Assert.NotEqual(default, actualValue);
+            Assert.Equal<BoundAttributeDescriptor>(expectedCompletion.Value, actualValue);
         }
     }
 

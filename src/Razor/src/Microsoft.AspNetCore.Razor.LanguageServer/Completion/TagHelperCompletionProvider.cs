@@ -39,11 +39,6 @@ internal class TagHelperCompletionProvider : IRazorCompletionItemProvider
 
     public ImmutableArray<RazorCompletionItem> GetCompletionItems(RazorCompletionContext context)
     {
-        if (context is null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-
         var owner = context.Owner;
         if (owner is null)
         {
@@ -269,7 +264,7 @@ internal class TagHelperCompletionProvider : IRazorCompletionItemProvider
     private const string BooleanTypeString = "System.Boolean";
 
     private static AttributeContext ResolveAttributeContext(
-        IEnumerable<BoundAttributeDescriptor> boundAttributes,
+        ImmutableArray<BoundAttributeDescriptor> boundAttributes,
         bool indexerCompletion,
         bool snippetsSupported)
     {

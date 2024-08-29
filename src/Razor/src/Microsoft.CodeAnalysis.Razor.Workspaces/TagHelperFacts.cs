@@ -4,6 +4,8 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
+using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Syntax;
 using Microsoft.AspNetCore.Razor.PooledObjects;
@@ -19,15 +21,7 @@ internal static class TagHelperFacts
         string? parentTag,
         bool parentIsTagHelper)
     {
-        if (documentContext is null)
-        {
-            throw new ArgumentNullException(nameof(documentContext));
-        }
-
-        if (attributes.IsDefault)
-        {
-            throw new ArgumentNullException(nameof(attributes));
-        }
+        ArgHelper.ThrowIfNull(documentContext);
 
         if (tagName is null)
         {
@@ -41,7 +35,35 @@ internal static class TagHelperFacts
 
         var binder = documentContext.GetBinder();
 
-        return binder.GetBinding(tagName, attributes, parentTag, parentIsTagHelper);
+        return binder.GetBinding(tagName, attributes.NullToEmpty(), parentTag, parentIsTagHelper);
+    }
+
+    public static bool TryGetTagHelperBinding(
+        TagHelperDocumentContext documentContext,
+        string? tagName,
+        ImmutableArray<KeyValuePair<string, string>> attributes,
+        string? parentTag,
+        bool parentIsTagHelper,
+        [NotNullWhen(true)] out TagHelperBinding? binding)
+    {
+        ArgHelper.ThrowIfNull(documentContext);
+
+        if (tagName is null)
+        {
+            binding = null;
+            return false;
+        }
+
+        if (documentContext.TagHelpers.Length == 0)
+        {
+            binding = null;
+            return false;
+        }
+
+        var binder = documentContext.GetBinder();
+        binding = binder.GetBinding(tagName, attributes.NullToEmpty(), parentTag, parentIsTagHelper);
+
+        return binding is not null;
     }
 
     public static ImmutableArray<BoundAttributeDescriptor> GetBoundTagHelperAttributes(
@@ -132,17 +154,20 @@ internal static class TagHelperFacts
 
     public static ImmutableArray<TagHelperDescriptor> GetTagHelpersGivenParent(TagHelperDocumentContext documentContext, string? parentTag)
     {
-        if (documentContext is null)
-        {
-            throw new ArgumentNullException(nameof(documentContext));
-        }
-
-        if (documentContext?.TagHelpers is not { Length: > 0 } tagHelpers)
-        {
-            return ImmutableArray<TagHelperDescriptor>.Empty;
-        }
-
         using var matchingDescriptors = new PooledArrayBuilder<TagHelperDescriptor>();
+        CollectTagHelpersGivenParent(documentContext, parentTag, ref matchingDescriptors.AsRef());
+        return matchingDescriptors.DrainToImmutable();
+    }
+
+    public static void CollectTagHelpersGivenParent(
+        TagHelperDocumentContext documentContext,
+        string? parentTag,
+        ref PooledArrayBuilder<TagHelperDescriptor> collector)
+    {
+        if (documentContext.TagHelpers is not { Length: > 0 } tagHelpers)
+        {
+            return;
+        }
 
         foreach (var descriptor in tagHelpers)
         {
@@ -150,18 +175,16 @@ internal static class TagHelperFacts
             {
                 if (TagHelperMatchingConventions.SatisfiesParentTag(rule, parentTag.AsSpanOrDefault()))
                 {
-                    matchingDescriptors.Add(descriptor);
+                    collector.Add(descriptor);
                     break;
                 }
             }
         }
-
-        return matchingDescriptors.DrainToImmutable();
     }
 
     public static ImmutableArray<KeyValuePair<string, string>> StringifyAttributes(SyntaxList<RazorSyntaxNode> attributes)
     {
-        using var stringifiedAttributes = new PooledArrayBuilder<KeyValuePair<string, string>>();
+        using var stringifiedAttributes = new PooledArrayBuilder<KeyValuePair<string, string>>(capacity: attributes.Count);
 
         foreach (var attribute in attributes)
         {

@@ -1,8 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
-#nullable disable
-
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading;
@@ -11,7 +9,6 @@ using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Syntax;
 using Microsoft.AspNetCore.Razor.Test.Common;
 using Microsoft.CodeAnalysis.Razor.Completion;
-using Microsoft.CodeAnalysis.Testing;
 using Microsoft.VisualStudio.Editor.Razor;
 using Xunit;
 using Xunit.Abstractions;
@@ -34,7 +31,10 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
                 <p><$$strong></strong></p>
                 """,
             isRazorFile: false);
+
+        Assert.NotNull(context.Owner);
         var element = context.Owner.FirstAncestorOrSelf<MarkupElementSyntax>();
+        Assert.NotNull(element);
 
         // Act
         var (ancestorName, ancestorIsTagHelper) = TagHelperFacts.GetNearestAncestorTagInfo(element.Ancestors());
@@ -55,7 +55,10 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
                 """,
             isRazorFile: false,
             tagHelpers: DefaultTagHelpers);
+
+        Assert.NotNull(context.Owner);
         var element = context.Owner.FirstAncestorOrSelf<MarkupTagHelperElementSyntax>();
+        Assert.NotNull(element);
 
         // Act
         var (ancestorName, ancestorIsTagHelper) = TagHelperFacts.GetNearestAncestorTagInfo(element.Ancestors());
@@ -79,7 +82,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
             tagHelpers: DefaultTagHelpers);
 
         // Act
-        var completions = service.GetCompletionItems(context);
+        var completions = service.GetCompletionItems(context).OrderByAsArray(static c => c.DisplayText);
 
         // Assert
         Assert.Collection(
@@ -99,7 +102,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
             tagHelpers: DefaultTagHelpers);
 
         // Act
-        var completions = service.GetCompletionItems(context);
+        var completions = service.GetCompletionItems(context).OrderByAsArray(static c => c.DisplayText);
 
         // Assert
         Assert.Empty(completions);
@@ -119,7 +122,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
             tagHelpers: DefaultTagHelpers);
 
         // Act
-        var completions = service.GetCompletionItems(context);
+        var completions = service.GetCompletionItems(context).OrderByAsArray(static c => c.DisplayText);
 
         // Assert
         Assert.Empty(completions);
@@ -143,7 +146,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
             tagHelpers: DefaultTagHelpers);
 
         // Act
-        var completions = service.GetCompletionItems(context);
+        var completions = service.GetCompletionItems(context).OrderByAsArray(static c => c.DisplayText);
 
         // Assert
         Assert.Empty(completions);
@@ -163,7 +166,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
             tagHelpers: DefaultTagHelpers);
 
         // Act
-        var completions = service.GetCompletionItems(context);
+        var completions = service.GetCompletionItems(context).OrderByAsArray(static c => c.DisplayText);
 
         // Assert
         Assert.Empty(completions);
@@ -183,7 +186,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
             tagHelpers: DefaultTagHelpers);
 
         // Act
-        var completions = service.GetCompletionItems(context);
+        var completions = service.GetCompletionItems(context).OrderByAsArray(static c => c.DisplayText);
 
         // Assert
         AssertTest1Test2Completions(completions);
@@ -207,7 +210,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
             tagHelpers: DefaultTagHelpers);
 
         // Act
-        var completions = service.GetCompletionItems(context);
+        var completions = service.GetCompletionItems(context).OrderByAsArray(static c => c.DisplayText);
 
         // Assert
         AssertTest1Test2Completions(completions);
@@ -227,7 +230,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
             tagHelpers: DefaultTagHelpers);
 
         // Act
-        var completions = service.GetCompletionItems(context);
+        var completions = service.GetCompletionItems(context).OrderByAsArray(static c => c.DisplayText);
 
         // Assert
         AssertTest1Test2Completions(completions);
@@ -248,7 +251,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
             tagHelpers: DefaultTagHelpers);
 
         // Act
-        var completions = service.GetCompletionItems(context);
+        var completions = service.GetCompletionItems(context).OrderByAsArray(static c => c.DisplayText);
 
         // Assert
         // Both "test1" and "test2" technically should not be here, but in real-world scenarios they will be filtered by the IDE
@@ -270,7 +273,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
             tagHelpers: DefaultTagHelpers);
 
         // Act
-        var completions = service.GetCompletionItems(context);
+        var completions = service.GetCompletionItems(context).OrderByAsArray(static c => c.DisplayText);
 
         // Assert
         // "test2" technically should not be here, but in real-world scenarios it will be filtered by the IDE
@@ -324,7 +327,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
             tagHelpers: DefaultTagHelpers);
 
         // Act
-        var completions = service.GetCompletionItems(context);
+        var completions = service.GetCompletionItems(context).OrderByAsArray(static c => c.DisplayText);
 
         // Assert
         Assert.Collection(
@@ -359,7 +362,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
             tagHelpers: DefaultTagHelpers);
 
         // Act
-        var completions = service.GetCompletionItems(context);
+        var completions = service.GetCompletionItems(context).OrderByAsArray(static c => c.DisplayText);
 
         // Assert
         Assert.Collection(
@@ -394,17 +397,13 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
             tagHelpers: DefaultTagHelpers);
 
         // Act
-        var completions = service.GetCompletionItems(context);
+        var completions = service.GetCompletionItems(context).OrderByAsArray(static c => c.DisplayText);
 
         // Assert
-        Assert.Collection(
-            completions,
-            completion =>
-            {
-                Assert.Equal("Extra", completion.InsertText);
-                Assert.Equal(TagHelperCompletionProvider.MinimizedAttributeCommitCharacters, completion.CommitCharacters);
-                Assert.Equal("Extra", completion.SortText);
-            });
+        var completion = Assert.Single(completions);
+        Assert.Equal("Extra", completion.InsertText);
+        Assert.Equal(TagHelperCompletionProvider.MinimizedAttributeCommitCharacters, completion.CommitCharacters);
+        Assert.Equal("Extra", completion.SortText);
     }
 
     [Fact]
@@ -423,7 +422,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
             tagHelpers: DefaultTagHelpers);
 
         // Act
-        var completions = service.GetCompletionItems(context);
+        var completions = service.GetCompletionItems(context).OrderByAsArray(static c => c.DisplayText);
 
         // Assert
         Assert.Collection(
@@ -457,7 +456,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
             tagHelpers: DefaultTagHelpers);
 
         // Act
-        var completions = service.GetCompletionItems(context);
+        var completions = service.GetCompletionItems(context).OrderByAsArray(static c => c.DisplayText);
 
         // Assert
         Assert.Collection(
@@ -488,18 +487,18 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
             tagHelpers: DefaultTagHelpers);
 
         // Act
-        var completions = service.GetCompletionItems(context);
+        var completions = service.GetCompletionItems(context).OrderByAsArray(static c => c.DisplayText);
 
         // Assert
         Assert.Collection(
             completions,
             completion =>
             {
-                Assert.Equal("test1", completion.InsertText);
+                Assert.Equal("SomeChild", completion.InsertText);
             },
             completion =>
             {
-                Assert.Equal("SomeChild", completion.InsertText);
+                Assert.Equal("test1", completion.InsertText);
             },
             completion =>
             {
@@ -521,7 +520,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
             tagHelpers: DefaultTagHelpers);
 
         // Act
-        var completions = service.GetCompletionItems(context);
+        var completions = service.GetCompletionItems(context).OrderByAsArray(static c => c.DisplayText);
 
         // Assert
         Assert.Collection(
@@ -561,10 +560,10 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
                 <test $$/>
                 """,
             isRazorFile: false,
-            tagHelpers: ImmutableArray.Create(tagHelper.Build()));
+            tagHelpers: [tagHelper.Build()]);
 
         // Act
-        var completions = service.GetCompletionItems(context);
+        var completions = service.GetCompletionItems(context).OrderByAsArray(static c => c.DisplayText);
 
         // Assert
         Assert.Collection(
@@ -604,10 +603,10 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
                 <test $$/>
                 """,
             isRazorFile: false,
-            tagHelpers: ImmutableArray.Create(tagHelper.Build()));
+            tagHelpers: [tagHelper.Build()]);
 
         // Act
-        var completions = service.GetCompletionItems(context);
+        var completions = service.GetCompletionItems(context).OrderByAsArray(static c => c.DisplayText);
 
         // Assert
         Assert.Collection(
@@ -640,7 +639,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
             tagHelpers: DefaultTagHelpers);
 
         // Act
-        var completions = service.GetCompletionItems(context);
+        var completions = service.GetCompletionItems(context).OrderByAsArray(static c => c.DisplayText);
 
         // Assert
         AssertBoolIntCompletions(completions);
@@ -660,7 +659,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
             tagHelpers: DefaultTagHelpers);
 
         // Act
-        var completions = service.GetCompletionItems(context);
+        var completions = service.GetCompletionItems(context).OrderByAsArray(static c => c.DisplayText);
 
         // Assert
         AssertBoolIntCompletions(completions);
@@ -680,7 +679,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
             tagHelpers: DefaultTagHelpers);
 
         // Act
-        var completions = service.GetCompletionItems(context);
+        var completions = service.GetCompletionItems(context).OrderByAsArray(static c => c.DisplayText);
 
         // Assert
         AssertBoolIntCompletions(completions);
@@ -700,7 +699,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
             tagHelpers: DefaultTagHelpers);
 
         // Act
-        var completions = service.GetCompletionItems(context);
+        var completions = service.GetCompletionItems(context).OrderByAsArray(static c => c.DisplayText);
 
         // Assert
         AssertBoolIntCompletions(completions);
@@ -720,7 +719,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
             tagHelpers: DefaultTagHelpers);
 
         // Act
-        var completions = service.GetCompletionItems(context);
+        var completions = service.GetCompletionItems(context).OrderByAsArray(static c => c.DisplayText);
 
         // Assert
         AssertBoolIntCompletions(completions);
@@ -728,7 +727,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
 
     [Fact]
     [WorkItem("https://github.com/dotnet/razor-tooling/issues/6134")]
-    public void GetCompletionAt_InPossibePartiallyWrittenTagHelper_ReturnsCompletions()
+    public void GetCompletionAt_InPossiblePartiallyWrittenTagHelper_ReturnsCompletions()
     {
         // Arrange
         var service = CreateTagHelperCompletionProvider();
@@ -741,7 +740,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
             tagHelpers: DefaultTagHelpers);
 
         // Act
-        var completions = service.GetCompletionItems(context);
+        var completions = service.GetCompletionItems(context).OrderByAsArray(static c => c.DisplayText);
 
         // Assert
         // "bool-var" technically should not be here, but in real-world scenarios it will be filtered by the IDE
@@ -762,7 +761,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
             tagHelpers: DefaultTagHelpers);
 
         // Act
-        var completions = service.GetCompletionItems(context);
+        var completions = service.GetCompletionItems(context).OrderByAsArray(static c => c.DisplayText);
 
         // Assert
         AssertBoolIntCompletions(completions);
@@ -782,7 +781,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
             tagHelpers: DefaultTagHelpers);
 
         // Act
-        var completions = service.GetCompletionItems(context);
+        var completions = service.GetCompletionItems(context).OrderByAsArray(static c => c.DisplayText);
 
         // Assert
         AssertBoolIntCompletions(completions);
@@ -802,7 +801,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
             tagHelpers: DefaultTagHelpers);
 
         // Act
-        var completions = service.GetCompletionItems(context);
+        var completions = service.GetCompletionItems(context).OrderByAsArray(static c => c.DisplayText);
 
         // Assert
         Assert.Empty(completions);
@@ -822,7 +821,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
             tagHelpers: DefaultTagHelpers);
 
         // Act
-        var completions = service.GetCompletionItems(context);
+        var completions = service.GetCompletionItems(context).OrderByAsArray(static c => c.DisplayText);
 
         // Assert
         AssertBoolIntCompletions(completions);
@@ -830,7 +829,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
 
     [Fact]
     [WorkItem("https://github.com/dotnet/razor-tooling/issues/6724")]
-    public void GetCompletionsAt_MiddleOfFullAttribute_ReturnsCompletions_NoSnippetBehaviour()
+    public void GetCompletionsAt_MiddleOfFullAttribute_ReturnsCompletions_NoSnippetBehavior()
     {
         // Arrange
         var service = CreateTagHelperCompletionProvider();
@@ -844,7 +843,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
             tagHelpers: DefaultTagHelpers);
 
         // Act
-        var completions = service.GetCompletionItems(context);
+        var completions = service.GetCompletionItems(context).OrderByAsArray(static c => c.DisplayText);
 
         // Assert
         Assert.Collection(completions,
@@ -875,7 +874,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
             tagHelpers: DefaultTagHelpers);
 
         // Act
-        var completions = service.GetCompletionItems(context);
+        var completions = service.GetCompletionItems(context).OrderByAsArray(static c => c.DisplayText);
 
         // Assert
         AssertTest1Test2Completions(completions);
@@ -895,7 +894,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
             tagHelpers: DefaultTagHelpers);
 
         // Act
-        var completions = service.GetCompletionItems(context);
+        var completions = service.GetCompletionItems(context).OrderByAsArray(static c => c.DisplayText);
 
         // Assert
         AssertTest1Test2Completions(completions);
@@ -931,15 +930,15 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
         );
     }
 
-    private static RazorCompletionContext CreateRazorCompletionContext(string markup, bool isRazorFile, RazorCompletionOptions options = default, ImmutableArray<TagHelperDescriptor> tagHelpers = default)
+    private static RazorCompletionContext CreateRazorCompletionContext(TestCode testCode, bool isRazorFile, RazorCompletionOptions options = default, ImmutableArray<TagHelperDescriptor> tagHelpers = default)
     {
         tagHelpers = tagHelpers.NullToEmpty();
 
-        TestFileMarkupParser.GetPosition(markup, out var documentContent, out var position);
-        var codeDocument = CreateCodeDocument(documentContent, isRazorFile, tagHelpers);
+        var codeDocument = CreateCodeDocument(testCode.Text, isRazorFile, tagHelpers);
         var syntaxTree = codeDocument.GetSyntaxTree();
         var tagHelperDocumentContext = codeDocument.GetTagHelperContext();
 
+        var position = testCode.Position;
         var owner = syntaxTree.Root.FindInnermostNode(position, includeWhitespace: true, walkMarkersBack: true);
         owner = AbstractRazorCompletionFactsService.AdjustSyntaxNodeForWordBoundary(owner, position);
         return new RazorCompletionContext(position, owner, syntaxTree, tagHelperDocumentContext, Options: options);
