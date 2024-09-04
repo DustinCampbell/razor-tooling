@@ -53,19 +53,4 @@ internal static class RazorCompletionItemExtensions
         var attributeCompletionDescription = completionItem.Items[s_directiveCompletionDescriptionKey] as DirectiveCompletionDescription;
         return attributeCompletionDescription;
     }
-
-    public static IEnumerable<string> GetAttributeCompletionTypes(this RazorCompletionItem completionItem)
-    {
-        var attributeCompletionDescription = completionItem.GetAttributeCompletionDescription();
-
-        if (attributeCompletionDescription is null)
-        {
-            yield break;
-        }
-
-        foreach (var descriptionInfo in attributeCompletionDescription.DescriptionInfos)
-        {
-            yield return descriptionInfo.ReturnTypeName;
-        }
-    }
 }
