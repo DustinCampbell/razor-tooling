@@ -1,6 +1,7 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Razor.Language.Legacy;
@@ -9,7 +10,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
 internal static class SyntaxUtilities
 {
-    public static MarkupTextLiteralSyntax MergeTextLiterals(params MarkupTextLiteralSyntax[] literalSyntaxes)
+    public static MarkupTextLiteralSyntax MergeTextLiterals(params ReadOnlySpan<MarkupTextLiteralSyntax> literalSyntaxes)
     {
         SyntaxNode? parent = null;
         var position = 0;
@@ -22,7 +23,8 @@ internal static class SyntaxUtilities
             {
                 continue;
             }
-            else if (!seenFirstLiteral)
+
+            if (!seenFirstLiteral)
             {
                 // Set the parent and position of the merged literal to the value of the first non-null literal.
                 parent = syntax.Parent;
@@ -193,68 +195,83 @@ internal static class SyntaxUtilities
 
         SpanEditHandler? latestEditHandler = null;
 
-        var children = node.LegacyChildren;
-        using var _ = SyntaxListBuilderPool.GetPooledBuilder<RazorSyntaxNode>(out var newChildren);
-        var literals = new List<MarkupTextLiteralSyntax>();
-        foreach (var child in children)
+        var literals = new MemoryBuilder<MarkupTextLiteralSyntax>();
+        try
         {
-            if (child is MarkupTextLiteralSyntax literal)
-            {
-                literals.Add(literal);
+            var children = node.LegacyChildren;
+            using var _ = SyntaxListBuilderPool.GetPooledBuilder<RazorSyntaxNode>(out var newChildren);
 
-                if (includeEditHandler)
-                {
-                    latestEditHandler = literal.GetEditHandler() ?? latestEditHandler;
-                }
-            }
-            else if (child is MarkupMiscAttributeContentSyntax miscContent)
+            foreach (var child in children)
             {
-                foreach (var contentChild in miscContent.Children)
+                if (child is MarkupTextLiteralSyntax literal)
                 {
-                    if (contentChild is MarkupTextLiteralSyntax contentLiteral)
+                    literals.Append(literal);
+
+                    if (includeEditHandler)
                     {
-                        literals.Add(contentLiteral);
-
-                        if (includeEditHandler)
+                        latestEditHandler = literal.GetEditHandler() ?? latestEditHandler;
+                    }
+                }
+                else if (child is MarkupMiscAttributeContentSyntax miscContent)
+                {
+                    foreach (var contentChild in miscContent.Children)
+                    {
+                        if (contentChild is MarkupTextLiteralSyntax contentLiteral)
                         {
-                            latestEditHandler = contentLiteral.GetEditHandler() ?? latestEditHandler;
+                            literals.Append(contentLiteral);
+
+                            if (includeEditHandler)
+                            {
+                                latestEditHandler = contentLiteral.GetEditHandler() ?? latestEditHandler;
+                            }
+                        }
+                        else
+                        {
+                            literals.AddLiteralIfExists(newChildren, includeEditHandler, ref latestEditHandler);
+                            newChildren.Add(contentChild);
                         }
                     }
-                    else
-                    {
-                        // Pop stack
-                        AddLiteralIfExists();
-                        newChildren.Add(contentChild);
-                    }
                 }
-            }
-            else
-            {
-                AddLiteralIfExists();
-                newChildren.Add(child);
-            }
-        }
-
-        AddLiteralIfExists();
-
-        return newChildren.ToList(node);
-
-        void AddLiteralIfExists()
-        {
-            if (literals.Count > 0)
-            {
-                var mergedLiteral = MergeTextLiterals(literals.ToArray());
-
-                if (includeEditHandler)
+                else
                 {
-                    mergedLiteral = mergedLiteral.WithEditHandler(latestEditHandler);
+                    literals.AddLiteralIfExists(newChildren, includeEditHandler, ref latestEditHandler);
+                    newChildren.Add(child);
                 }
-
-                literals.Clear();
-                latestEditHandler = null;
-                newChildren.Add(mergedLiteral);
             }
+
+            literals.AddLiteralIfExists(newChildren, includeEditHandler, ref latestEditHandler);
+
+            return newChildren.ToList(node);
         }
+        finally
+        {
+            literals.Dispose();
+        }
+    }
+
+    private static void AddLiteralIfExists(
+        this ref MemoryBuilder<MarkupTextLiteralSyntax> literals,
+        SyntaxListBuilder<RazorSyntaxNode> builder,
+        bool includeEditHandler,
+        ref SpanEditHandler? latestEditHandler)
+    {
+        var literalsSpan = literals.AsSpan();
+
+        if (literalsSpan.IsEmpty)
+        {
+            return;
+        }
+
+        var mergedLiteral = MergeTextLiterals(literalsSpan);
+
+        if (includeEditHandler)
+        {
+            mergedLiteral = mergedLiteral.WithEditHandler(latestEditHandler);
+        }
+
+        literals.Length = 0;
+        latestEditHandler = null;
+        builder.Add(mergedLiteral);
     }
 
     internal static SyntaxList<RazorSyntaxNode> GetRewrittenMarkupEndTagChildren(MarkupEndTagSyntax node, bool includeEditHandler = false)
@@ -270,10 +287,18 @@ internal static class SyntaxUtilities
         ISpanChunkGenerator chunkGenerator,
         bool includeEditHandler = false)
     {
-        var tokens = node.DescendantNodes().OfType<SyntaxToken>().Where(t => !t.IsMissing).ToArray();
+        using var tokens = new MemoryBuilder<SyntaxToken>();
+
+        foreach (var child in node.DescendantNodes())
+        {
+            if (child is SyntaxToken { IsMissing: false } token)
+            {
+                tokens.Append(token);
+            }
+        }
 
         using var _ = SyntaxListBuilderPool.GetPooledBuilder<SyntaxToken>(out var builder);
-        builder.AddRange(tokens, 0, tokens.Length);
+        builder.AddRange(tokens.AsSpan());
         var transitionTokens = builder.ToList();
 
         var markupTransition = SyntaxFactory

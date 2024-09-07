@@ -1,6 +1,8 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System;
+
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
 internal readonly struct SyntaxListBuilder<TNode>
@@ -38,9 +40,9 @@ internal readonly struct SyntaxListBuilder<TNode>
         return this;
     }
 
-    public void AddRange(TNode[] items, int offset, int length)
+    public void AddRange(ReadOnlySpan<TNode> span)
     {
-        Builder.AddRange(items, offset, length);
+        Builder.AddRange(span);
     }
 
     public void AddRange(SyntaxList<TNode> nodes)

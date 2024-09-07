@@ -41,8 +41,33 @@ internal ref struct MemoryBuilder<T>
         }
     }
 
+    public bool IsEmpty => _length > 0;
+
+    public int Length
+    {
+        get => _length;
+        set
+        {
+            Debug.Assert(value >= 0);
+            Debug.Assert(value <= _memory.Length);
+            _length = value;
+        }
+    }
+
+    public readonly ref T this[int index]
+    {
+        get
+        {
+            Debug.Assert(index < _length);
+            return ref _memory.Span[index];
+        }
+    }
+
     public readonly ReadOnlyMemory<T> AsMemory()
         => _memory[.._length];
+
+    public readonly ReadOnlySpan<T> AsSpan()
+        => AsMemory().Span;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void Append(T item)
