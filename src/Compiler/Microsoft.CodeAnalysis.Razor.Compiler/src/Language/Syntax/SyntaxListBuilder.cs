@@ -60,25 +60,24 @@ internal class SyntaxListBuilder(int initialCapacity)
         _nodes[Count++].Value = item;
     }
 
-    public void AddRange(SyntaxNode[] items)
+    public void AddRange<TNode>(ReadOnlySpan<TNode> items)
+        where TNode : SyntaxNode
     {
-        AddRange(items, 0, items.Length);
-    }
+        var count = Count;
+        var newCount = count + items.Length;
 
-    public void AddRange(SyntaxNode[] items, int offset, int length)
-    {
-        if (Count + length > _nodes.Length)
+        if (newCount > _nodes.Length)
         {
-            Grow(Count + length);
+            Grow(newCount);
         }
 
-        for (int i = offset, j = Count; i < offset + length; ++i, ++j)
+        for (int i = 0, j = count; i < items.Length; ++i, ++j)
         {
             _nodes[j].Value = items[i].Green;
         }
 
-        var start = Count;
-        Count += length;
+        var start = count;
+        Count += items.Length;
         Validate(start, Count);
     }
 

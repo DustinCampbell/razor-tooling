@@ -44,6 +44,9 @@ internal ref struct MemoryBuilder<T>
     public readonly ReadOnlyMemory<T> AsMemory()
         => _memory[.._length];
 
+    public readonly ReadOnlySpan<T> AsSpan()
+        => _memory.Span[.._length];
+
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void Append(T item)
     {

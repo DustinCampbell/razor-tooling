@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.AspNetCore.Razor.Language.Legacy;
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
@@ -270,10 +269,18 @@ internal static class SyntaxUtilities
         ISpanChunkGenerator chunkGenerator,
         bool includeEditHandler = false)
     {
-        var tokens = node.DescendantNodes().OfType<SyntaxToken>().Where(t => !t.IsMissing).ToArray();
+        using var tokens = new MemoryBuilder<SyntaxToken>();
+
+        foreach (var descendantNode in node.DescendantNodes())
+        {
+            if (descendantNode is SyntaxToken { IsMissing: false } token)
+            {
+                tokens.Append(token);
+            }
+        }
 
         using var _ = SyntaxListBuilderPool.GetPooledBuilder<SyntaxToken>(out var builder);
-        builder.AddRange(tokens, 0, tokens.Length);
+        builder.AddRange(tokens.AsSpan());
         var transitionTokens = builder.ToList();
 
         var markupTransition = SyntaxFactory
