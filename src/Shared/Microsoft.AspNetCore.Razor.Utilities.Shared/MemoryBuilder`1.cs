@@ -41,6 +41,26 @@ internal ref struct MemoryBuilder<T>
         }
     }
 
+    public int Length
+    {
+        readonly get => _length;
+        set
+        {
+            Debug.Assert(value >= 0);
+            Debug.Assert(value <= _memory.Length);
+            _length = value;
+        }
+    }
+
+    public readonly ref T this[int index]
+    {
+        get
+        {
+            Debug.Assert(index < _length);
+            return ref _memory.Span[index];
+        }
+    }
+
     public readonly ReadOnlyMemory<T> AsMemory()
         => _memory[.._length];
 
@@ -141,5 +161,10 @@ internal ref struct MemoryBuilder<T>
         {
             ArrayPool<T>.Shared.Return(toReturn);
         }
+    }
+
+    public void Clear()
+    {
+        Length = 0;
     }
 }
