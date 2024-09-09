@@ -1,6 +1,7 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Razor.Language.Legacy;
 
@@ -8,7 +9,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
 internal static class SyntaxUtilities
 {
-    public static MarkupTextLiteralSyntax MergeTextLiterals(params MarkupTextLiteralSyntax[] literalSyntaxes)
+    public static MarkupTextLiteralSyntax MergeTextLiterals(params ReadOnlySpan<MarkupTextLiteralSyntax> literalSyntaxes)
     {
         SyntaxNode? parent = null;
         var position = 0;
@@ -21,7 +22,8 @@ internal static class SyntaxUtilities
             {
                 continue;
             }
-            else if (!seenFirstLiteral)
+
+            if (!seenFirstLiteral)
             {
                 // Set the parent and position of the merged literal to the value of the first non-null literal.
                 parent = syntax.Parent;
