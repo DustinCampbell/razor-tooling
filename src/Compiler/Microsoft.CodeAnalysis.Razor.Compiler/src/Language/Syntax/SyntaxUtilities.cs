@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Razor.Language.Legacy;
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
@@ -196,66 +195,80 @@ internal static class SyntaxUtilities
 
         var children = node.LegacyChildren;
         using var _ = SyntaxListBuilderPool.GetPooledBuilder<RazorSyntaxNode>(out var newChildren);
-        var literals = new List<MarkupTextLiteralSyntax>();
-        foreach (var child in children)
+
+        var literals = new MemoryBuilder<MarkupTextLiteralSyntax>();
+        try
         {
-            if (child is MarkupTextLiteralSyntax literal)
+            foreach (var child in children)
             {
-                literals.Add(literal);
+                if (child is MarkupTextLiteralSyntax literal)
+                {
+                    literals.Append(literal);
 
-                if (includeEditHandler)
-                {
-                    latestEditHandler = literal.GetEditHandler() ?? latestEditHandler;
-                }
-            }
-            else if (child is MarkupMiscAttributeContentSyntax miscContent)
-            {
-                foreach (var contentChild in miscContent.Children)
-                {
-                    if (contentChild is MarkupTextLiteralSyntax contentLiteral)
+                    if (includeEditHandler)
                     {
-                        literals.Add(contentLiteral);
-
-                        if (includeEditHandler)
+                        latestEditHandler = literal.GetEditHandler() ?? latestEditHandler;
+                    }
+                }
+                else if (child is MarkupMiscAttributeContentSyntax miscContent)
+                {
+                    foreach (var contentChild in miscContent.Children)
+                    {
+                        if (contentChild is MarkupTextLiteralSyntax contentLiteral)
                         {
-                            latestEditHandler = contentLiteral.GetEditHandler() ?? latestEditHandler;
+                            literals.Append(contentLiteral);
+
+                            if (includeEditHandler)
+                            {
+                                latestEditHandler = contentLiteral.GetEditHandler() ?? latestEditHandler;
+                            }
+                        }
+                        else
+                        {
+                            // Pop stack
+                            literals.AddLiteralIfExists(newChildren, includeEditHandler, ref latestEditHandler);
+                            newChildren.Add(contentChild);
                         }
                     }
-                    else
-                    {
-                        // Pop stack
-                        AddLiteralIfExists();
-                        newChildren.Add(contentChild);
-                    }
+                }
+                else
+                {
+                    literals.AddLiteralIfExists(newChildren, includeEditHandler, ref latestEditHandler);
+                    newChildren.Add(child);
                 }
             }
-            else
-            {
-                AddLiteralIfExists();
-                newChildren.Add(child);
-            }
-        }
 
-        AddLiteralIfExists();
+            literals.AddLiteralIfExists(newChildren, includeEditHandler, ref latestEditHandler);
+        }
+        finally
+        {
+            literals.Dispose();
+        }
 
         return newChildren.ToList(node);
+    }
 
-        void AddLiteralIfExists()
+    private static void AddLiteralIfExists(
+        this ref readonly MemoryBuilder<MarkupTextLiteralSyntax> literals,
+        SyntaxListBuilder<RazorSyntaxNode> newChildren,
+        bool includeEditHandler,
+        ref SpanEditHandler? latestEditHandler)
+    {
+        if (literals.Length == 0)
         {
-            if (literals.Count > 0)
-            {
-                var mergedLiteral = MergeTextLiterals(literals.ToArray());
-
-                if (includeEditHandler)
-                {
-                    mergedLiteral = mergedLiteral.WithEditHandler(latestEditHandler);
-                }
-
-                literals.Clear();
-                latestEditHandler = null;
-                newChildren.Add(mergedLiteral);
-            }
+            return;
         }
+
+        var mergedLiteral = MergeTextLiterals(literals.AsSpan());
+
+        if (includeEditHandler)
+        {
+            mergedLiteral = mergedLiteral.WithEditHandler(latestEditHandler);
+        }
+
+        literals.Clear();
+        latestEditHandler = null;
+        newChildren.Add(mergedLiteral);
     }
 
     internal static SyntaxList<RazorSyntaxNode> GetRewrittenMarkupEndTagChildren(MarkupEndTagSyntax node, bool includeEditHandler = false)
