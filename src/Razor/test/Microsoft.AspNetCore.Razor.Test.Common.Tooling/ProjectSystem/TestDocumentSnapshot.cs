@@ -13,7 +13,8 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.AspNetCore.Razor.Test.Common.ProjectSystem;
 
-internal class TestDocumentSnapshot : DocumentSnapshot
+internal class TestDocumentSnapshot(ProjectSnapshot projectSnapshot, DocumentState documentState)
+    : DocumentSnapshot(projectSnapshot, documentState)
 {
     private RazorCodeDocument? _codeDocument;
 
@@ -71,13 +72,6 @@ internal class TestDocumentSnapshot : DocumentSnapshot
 
         return testDocument;
     }
-
-    public TestDocumentSnapshot(ProjectSnapshot projectSnapshot, DocumentState documentState)
-        : base(projectSnapshot, documentState)
-    {
-    }
-
-    public HostDocument HostDocument => State.HostDocument;
 
     public override Task<RazorCodeDocument> GetGeneratedOutputAsync(bool _)
     {

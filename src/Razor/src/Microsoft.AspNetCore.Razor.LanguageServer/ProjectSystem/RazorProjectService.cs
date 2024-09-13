@@ -270,7 +270,7 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
                         {
                             _logger.LogInformation($"Removing document '{textDocumentPath}' from project '{projectSnapshot.Key}'.");
 
-                            updater.DocumentRemoved(projectSnapshot.Key, documentSnapshot.State.HostDocument);
+                            updater.DocumentRemoved(projectSnapshot.Key, documentSnapshot.HostDocument);
                         }
                     });
             },
@@ -511,7 +511,7 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
                 continue;
             }
 
-            var currentHostDocument = documentSnapshot.State.HostDocument;
+            var currentHostDocument = documentSnapshot.HostDocument;
             var newFilePath = EnsureFullPath(documentHandle.FilePath, projectDirectory);
             var newHostDocument = new HostDocument(newFilePath, documentHandle.TargetPath, documentHandle.FileKind);
 
@@ -578,7 +578,7 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
             return;
         }
 
-        var currentHostDocument = documentSnapshot.State.HostDocument;
+        var currentHostDocument = documentSnapshot.HostDocument;
 
         var textLoader = new DocumentSnapshotTextLoader(documentSnapshot);
 
@@ -630,7 +630,7 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
             }
 
             // Remove from miscellaneous project
-            updater.DocumentRemoved(miscellaneousProject.Key, documentSnapshot.State.HostDocument);
+            updater.DocumentRemoved(miscellaneousProject.Key, documentSnapshot.HostDocument);
 
             // Add to new project
 
