@@ -232,7 +232,7 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         var document = project.GetDocument(documentFilePath);
         Assert.NotNull(document);
 
-        var text = await document.GetTextAsync();
+        var text = await document.GetTextAsync(DisposalToken);
         Assert.Equal(0, text.Length);
     }
 
@@ -259,7 +259,7 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         var document = project.GetDocument(documentFilePath);
         Assert.NotNull(document);
 
-        var actual = await document.GetTextAsync();
+        var actual = await document.GetTextAsync(DisposalToken);
         Assert.Same(expected, actual);
     }
 
@@ -467,7 +467,7 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         var project = _projectManager.GetLoadedProject(s_hostProject.Key);
         var document = project.GetDocument(s_documents[0].FilePath);
         Assert.NotNull(document);
-        var text = await document.GetTextAsync();
+        var text = await document.GetTextAsync(DisposalToken);
         Assert.Same(_sourceText, text);
 
         Assert.True(_projectManager.IsDocumentOpen(s_documents[0].FilePath));
@@ -506,7 +506,7 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         var project = _projectManager.GetLoadedProject(s_hostProject.Key);
         var document = project.GetDocument(s_documents[0].FilePath);
         Assert.NotNull(document);
-        var text = await document.GetTextAsync();
+        var text = await document.GetTextAsync(DisposalToken);
         Assert.Same(expected, text);
         Assert.False(_projectManager.IsDocumentOpen(s_documents[0].FilePath));
         Assert.Equal(3, document.Version);
@@ -540,7 +540,7 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         var project = _projectManager.GetLoadedProject(s_hostProject.Key);
         var document = project.GetDocument(s_documents[0].FilePath);
         Assert.NotNull(document);
-        var text = await document.GetTextAsync();
+        var text = await document.GetTextAsync(DisposalToken);
         Assert.Same(expected, text);
     }
 
@@ -572,7 +572,7 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         var project = _projectManager.GetLoadedProject(s_hostProject.Key);
         var document = project.GetDocument(s_documents[0].FilePath);
         Assert.NotNull(document);
-        var text = await document.GetTextAsync();
+        var text = await document.GetTextAsync(DisposalToken);
         Assert.Same(expected, text);
         Assert.Equal(3, document.Version);
     }
@@ -606,7 +606,7 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         var project = _projectManager.GetLoadedProject(s_hostProject.Key);
         var document = project.GetDocument(s_documents[0].FilePath);
         Assert.NotNull(document);
-        var text = await document.GetTextAsync();
+        var text = await document.GetTextAsync(DisposalToken);
         Assert.Same(expected, text);
         Assert.Equal(3, document.Version);
     }

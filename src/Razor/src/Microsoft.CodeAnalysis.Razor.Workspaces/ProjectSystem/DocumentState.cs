@@ -3,9 +3,10 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
-using Microsoft.AspNetCore.Razor.Threading;
 using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
@@ -26,7 +27,6 @@ internal partial class DocumentState
     private ComputedStateTracker? _computedState;
 
     private readonly Func<Task<TextAndVersion>> _loader;
-    private Task<TextAndVersion>? _loaderTask;
     private TextAndVersion? _textAndVersion;
 
     public static DocumentState Create(HostDocument hostDocument, Func<Task<TextAndVersion>> loader)
@@ -91,47 +91,66 @@ internal partial class DocumentState
         return ComputedState.GetGeneratedOutputAndVersionAsync(project, document);
     }
 
-    public async Task<SourceText> GetTextAsync()
+    public ValueTask<TextAndVersion> GetTextAndVersionAsync(CancellationToken cancellationToken)
     {
-        if (TryGetText(out var text))
-        {
-            return text;
-        }
+        return _textAndVersion is TextAndVersion textAndVersion
+            ? new(textAndVersion)
+            : GetTextAndVersionCoreAsync(cancellationToken);
 
-        lock (_lock)
+        async ValueTask<TextAndVersion> GetTextAndVersionCoreAsync(CancellationToken cancellationToken)
         {
-            _loaderTask = _loader();
-        }
+            var textAndVersion = await _loader().ConfigureAwait(false);
+            cancellationToken.ThrowIfCancellationRequested();
 
-        return (await _loaderTask.ConfigureAwait(false)).Text;
+            var result = InterlockedOperations.Initialize(ref _textAndVersion, textAndVersion);
+
+            return result;
+        }
     }
 
-    public async Task<VersionStamp> GetTextVersionAsync()
+    public ValueTask<SourceText> GetTextAsync(CancellationToken cancellationToken)
     {
-        if (TryGetTextVersion(out var version))
+        return TryGetText(out var text)
+            ? new(text)
+            : GetTextCoreAsync(cancellationToken);
+
+        async ValueTask<SourceText> GetTextCoreAsync(CancellationToken cancellationToken)
         {
-            return version;
+            var textAndVersion = await GetTextAndVersionAsync(cancellationToken).ConfigureAwait(false);
+            return textAndVersion.Text;
+        }
+    }
+
+    public ValueTask<VersionStamp> GetTextVersionAsync(CancellationToken cancellationToken)
+    {
+        return TryGetTextVersion(out var version)
+            ? new(version)
+            : GetTextVersionCoreAsync(cancellationToken);
+
+        async ValueTask<VersionStamp> GetTextVersionCoreAsync(CancellationToken cancellationToken)
+        {
+            var textAndVersion = await GetTextAndVersionAsync(cancellationToken).ConfigureAwait(false);
+            return textAndVersion.Version;
+        }
+    }
+
+    public bool TryGetTextAndVersion([NotNullWhen(true)] out TextAndVersion? result)
+    {
+        if (_textAndVersion is TextAndVersion textAndVersion)
+        {
+            result = textAndVersion;
+            return true;
         }
 
-        lock (_lock)
-        {
-            _loaderTask = _loader();
-        }
-
-        return (await _loaderTask.ConfigureAwait(false)).Version;
+        result = null;
+        return false;
     }
 
     public bool TryGetText([NotNullWhen(true)] out SourceText? result)
     {
-        if (_textAndVersion is TextAndVersion textAndVersion)
+        if (TryGetTextAndVersion(out var textAndVersion))
         {
             result = textAndVersion.Text;
-            return true;
-        }
-
-        if (_loaderTask is { } loaderTask && loaderTask.IsCompleted)
-        {
-            result = loaderTask.VerifyCompleted().Text;
             return true;
         }
 
@@ -141,15 +160,9 @@ internal partial class DocumentState
 
     public bool TryGetTextVersion(out VersionStamp result)
     {
-        if (_textAndVersion is TextAndVersion textAndVersion)
+        if (TryGetTextAndVersion(out var textAndVersion))
         {
             result = textAndVersion.Version;
-            return true;
-        }
-
-        if (_loaderTask is { } loaderTask && loaderTask.IsCompleted)
-        {
-            result = loaderTask.VerifyCompleted().Version;
             return true;
         }
 
@@ -163,7 +176,6 @@ internal partial class DocumentState
         {
             // The source could not have possibly changed.
             _textAndVersion = _textAndVersion,
-            _loaderTask = _loaderTask,
         };
 
         // Do not cache computed state
@@ -177,7 +189,6 @@ internal partial class DocumentState
         {
             // The source could not have possibly changed.
             _textAndVersion = _textAndVersion,
-            _loaderTask = _loaderTask
         };
 
         // Optimistically cache the computed state
@@ -192,7 +203,6 @@ internal partial class DocumentState
         {
             // The source could not have possibly changed.
             _textAndVersion = _textAndVersion,
-            _loaderTask = _loaderTask
         };
 
         // Optimistically cache the computed state

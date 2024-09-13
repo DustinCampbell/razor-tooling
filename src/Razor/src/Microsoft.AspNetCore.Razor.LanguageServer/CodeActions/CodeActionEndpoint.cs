@@ -142,8 +142,6 @@ internal sealed class CodeActionEndpoint(
             return null;
         }
 
-        var sourceText = await documentSnapshot.GetTextAsync().ConfigureAwait(false);
-
         // VS Provides `CodeActionParams.Context.SelectionRange` in addition to
         // `CodeActionParams.Range`. The `SelectionRange` is relative to where the
         // code action was invoked (ex. line 14, char 3) whereas the `Range` is
@@ -158,21 +156,18 @@ internal sealed class CodeActionEndpoint(
             request.Range = vsCodeActionContext.SelectionRange;
         }
 
-        if (!sourceText.TryGetSourceLocation(request.Range.Start, out var location))
+        if (!codeDocument.Source.Text.TryGetSourceLocation(request.Range.Start, out var location))
         {
             return null;
         }
 
-        var context = new RazorCodeActionContext(
+        return new RazorCodeActionContext(
             request,
             documentSnapshot,
             codeDocument,
             location,
-            sourceText,
             _languageServerFeatureOptions.SupportsFileManipulation,
             _supportsCodeActionResolve);
-
-        return context;
     }
 
     private async Task<ImmutableArray<RazorVSInternalCodeAction>> GetDelegatedCodeActionsAsync(DocumentContext documentContext, RazorCodeActionContext context, Guid correlationId, CancellationToken cancellationToken)

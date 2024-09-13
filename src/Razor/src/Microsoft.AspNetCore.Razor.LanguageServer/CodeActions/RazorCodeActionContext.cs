@@ -14,6 +14,8 @@ internal sealed record class RazorCodeActionContext(
     IDocumentSnapshot DocumentSnapshot,
     RazorCodeDocument CodeDocument,
     SourceLocation Location,
-    SourceText SourceText,
     bool SupportsFileCreation,
-    bool SupportsCodeActionResolve);
+    bool SupportsCodeActionResolve)
+{
+    public SourceText SourceText => CodeDocument.Source.Text;
+}

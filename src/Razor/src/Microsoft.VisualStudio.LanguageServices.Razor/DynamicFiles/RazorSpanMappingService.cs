@@ -39,10 +39,10 @@ internal class RazorSpanMappingService(IDocumentSnapshot document) : IRazorSpanM
         // Called on an uninitialized document.
         if (_document is null)
         {
-            return ImmutableArray<RazorMappedSpanResult>.Empty;
+            return [];
         }
 
-        var source = await _document.GetTextAsync().ConfigureAwait(false);
+        var source = await _document.GetTextAsync(cancellationToken).ConfigureAwait(false);
         var output = await _document.GetGeneratedOutputAsync().ConfigureAwait(false);
 
         var csharpDocument = output.GetCSharpDocument();

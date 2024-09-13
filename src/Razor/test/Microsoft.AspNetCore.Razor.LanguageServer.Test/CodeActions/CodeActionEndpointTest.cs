@@ -564,7 +564,7 @@ public class CodeActionEndpointTest(ITestOutputHelper testOutput) : LanguageServ
         Assert.NotNull(context);
 
         // Act
-        var results = await codeActionEndpoint.GetCodeActionsFromLanguageServerAsync(RazorLanguageKind.CSharp, documentContext, context, Guid.Empty, cancellationToken: DisposalToken);
+        var results = await codeActionEndpoint.GetCodeActionsFromLanguageServerAsync(RazorLanguageKind.CSharp, documentContext, context, correlationId: Guid.Empty, DisposalToken);
 
         // Assert
         var result = Assert.Single(results);

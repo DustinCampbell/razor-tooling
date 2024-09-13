@@ -31,7 +31,7 @@ public class DocumentStateTest : ToolingTestBase
         var state = DocumentState.Create(_hostDocument);
 
         // Assert
-        var text = await state.GetTextAsync();
+        var text = await state.GetTextAsync(DisposalToken);
         Assert.Equal(0, text.Length);
     }
 
@@ -45,7 +45,7 @@ public class DocumentStateTest : ToolingTestBase
         var state = original.WithText(_text, VersionStamp.Create());
 
         // Assert
-        var text = await state.GetTextAsync();
+        var text = await state.GetTextAsync(DisposalToken);
         Assert.Same(_text, text);
     }
 
@@ -59,7 +59,7 @@ public class DocumentStateTest : ToolingTestBase
         var state = original.WithTextLoader(_textLoader);
 
         // Assert
-        var text = await state.GetTextAsync();
+        var text = await state.GetTextAsync(DisposalToken);
         Assert.Same(_text, text);
     }
 
@@ -85,7 +85,7 @@ public class DocumentStateTest : ToolingTestBase
         var original = DocumentState.Create(_hostDocument)
             .WithTextLoader(_textLoader);
 
-        await original.GetTextAsync();
+        await original.GetTextAsync(DisposalToken);
 
         // Act
         var state = original.WithConfigurationChange();
@@ -117,7 +117,7 @@ public class DocumentStateTest : ToolingTestBase
         var original = DocumentState.Create(_hostDocument)
             .WithTextLoader(_textLoader);
 
-        await original.GetTextAsync();
+        await original.GetTextAsync(DisposalToken);
 
         // Act
         var state = original.WithImportsChange();
@@ -149,7 +149,7 @@ public class DocumentStateTest : ToolingTestBase
         var original = DocumentState.Create(_hostDocument)
             .WithTextLoader(_textLoader);
 
-        await original.GetTextAsync();
+        await original.GetTextAsync(DisposalToken);
 
         // Act
         var state = original.WithProjectWorkspaceStateChange();

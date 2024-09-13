@@ -269,9 +269,9 @@ public class FormattingTestBase : RazorToolingIntegrationTestBase
         var importsPath = new Uri("file:///path/to/_Imports.razor").AbsolutePath;
         var importsSourceText = SourceText.From(DefaultImports);
         var importsDocument = RazorSourceDocument.Create(importsSourceText, RazorSourceDocumentProperties.Create(importsPath, importsPath));
-        var importsSnapshot = new Mock<IDocumentSnapshot>(MockBehavior.Strict);
+        var importsSnapshot = new StrictMock<IDocumentSnapshot>();
         importsSnapshot
-            .Setup(d => d.GetTextAsync())
+            .Setup(d => d.GetTextAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(importsSourceText);
         importsSnapshot
             .Setup(d => d.FilePath)
@@ -328,11 +328,11 @@ public class FormattingTestBase : RazorToolingIntegrationTestBase
             .Setup(d => d.Project.Configuration)
             .Returns(projectEngine.Configuration);
         documentSnapshot
-            .Setup(d => d.GetTextAsync())
+            .Setup(d => d.GetTextAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(codeDocument.Source.Text);
         documentSnapshot
             .Setup(d => d.Project.GetTagHelpersAsync(It.IsAny<CancellationToken>()))
-            .Returns(new ValueTask<ImmutableArray<TagHelperDescriptor>>(tagHelpers));
+            .ReturnsAsync(tagHelpers);
         documentSnapshot
             .Setup(d => d.Project.GetProjectEngine())
             .Returns(projectEngine);

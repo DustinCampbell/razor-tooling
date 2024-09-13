@@ -18,8 +18,8 @@ internal interface IDocumentSnapshot
 
     int Version { get; }
 
-    Task<SourceText> GetTextAsync();
-    Task<VersionStamp> GetTextVersionAsync();
+    ValueTask<SourceText> GetTextAsync(CancellationToken cancellationToken);
+    ValueTask<VersionStamp> GetTextVersionAsync(CancellationToken cancellationToken);
     Task<RazorCodeDocument> GetGeneratedOutputAsync(bool forceDesignTimeGeneratedOutput);
 
     /// <summary>

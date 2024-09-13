@@ -20,7 +20,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Razor.DocumentMapping;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.Protocol;
-using Microsoft.CodeAnalysis.Razor.Workspaces;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
 using Location = Microsoft.VisualStudio.LanguageServer.Protocol.Location;
@@ -228,7 +227,7 @@ internal sealed class MapCodeEndpoint(
                     razorNodesToMap.Add(nodeToMap);
                 }
 
-                var sourceText = await documentContext.Snapshot.GetTextAsync().ConfigureAwait(false);
+                var sourceText = await documentContext.Snapshot.GetTextAsync(cancellationToken).ConfigureAwait(false);
 
                 foreach (var nodeToMap in razorNodesToMap)
                 {

@@ -6,53 +6,50 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
-internal class ImportDocumentSnapshot : IDocumentSnapshot
+internal sealed class ImportDocumentSnapshot(IProjectSnapshot project, RazorProjectItem importItem) : IDocumentSnapshot
 {
+    public IProjectSnapshot Project { get; } = project;
+
+    private readonly RazorProjectItem _importItem = importItem;
+    private SourceText? _sourceText;
+
     // The default import file does not have a kind or paths.
     public string? FileKind => null;
     public string? FilePath => null;
     public string? TargetPath => null;
 
-    public IProjectSnapshot Project => _project;
-
-    private readonly IProjectSnapshot _project;
-    private readonly RazorProjectItem _importItem;
-    private SourceText? _sourceText;
-    private readonly VersionStamp _version;
-
-    public ImportDocumentSnapshot(IProjectSnapshot project, RazorProjectItem item)
-    {
-        _project = project;
-        _importItem = item;
-        _version = VersionStamp.Default;
-    }
-
     public int Version => 1;
 
-    public async Task<SourceText> GetTextAsync()
+    public ValueTask<SourceText> GetTextAsync(CancellationToken cancellationToken)
     {
-        using (var stream = _importItem.Read())
-        using (var reader = new StreamReader(stream))
-        {
-            var content = await reader.ReadToEndAsync().ConfigureAwait(false);
-            _sourceText = SourceText.From(content);
-        }
+        return TryGetText(out var text)
+            ? new(text)
+            : GetTextCoreAsync(cancellationToken);
 
-        return _sourceText;
+        ValueTask<SourceText> GetTextCoreAsync(CancellationToken cancellationToken)
+        {
+            using var stream = _importItem.Read();
+            using var reader = new StreamReader(stream);
+
+            var sourceText = SourceText.From(stream);
+            cancellationToken.ThrowIfCancellationRequested();
+
+            var result = InterlockedOperations.Initialize(ref _sourceText, sourceText);
+            return new(result);
+        }
     }
+
+    public ValueTask<VersionStamp> GetTextVersionAsync(CancellationToken cancellationToken)
+        => new(VersionStamp.Default);
 
     public Task<RazorCodeDocument> GetGeneratedOutputAsync(bool forceDesignTimeGeneratedOutput)
         => throw new NotSupportedException();
-
-    public Task<VersionStamp> GetTextVersionAsync()
-    {
-        return Task.FromResult(_version);
-    }
 
     public bool TryGetText([NotNullWhen(true)] out SourceText? result)
     {
@@ -68,7 +65,7 @@ internal class ImportDocumentSnapshot : IDocumentSnapshot
 
     public bool TryGetTextVersion(out VersionStamp result)
     {
-        result = _version;
+        result = VersionStamp.Default;
         return true;
     }
 

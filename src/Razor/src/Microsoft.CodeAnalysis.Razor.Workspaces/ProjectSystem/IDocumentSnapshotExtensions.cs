@@ -69,7 +69,7 @@ internal static class IDocumentSnapshotExtensions
 
         foreach (var snapshot in imports)
         {
-            var versionStamp = await snapshot.GetTextVersionAsync().ConfigureAwait(false);
+            var versionStamp = await snapshot.GetTextVersionAsync(CancellationToken.None).ConfigureAwait(false);
             result.Add(new ImportItem(snapshot.FilePath, versionStamp, snapshot));
         }
 
@@ -147,7 +147,7 @@ internal static class IDocumentSnapshotExtensions
 
     private static async Task<RazorSourceDocument> GetRazorSourceDocumentAsync(IDocumentSnapshot document, RazorProjectItem? projectItem)
     {
-        var sourceText = await document.GetTextAsync().ConfigureAwait(false);
+        var sourceText = await document.GetTextAsync(CancellationToken.None).ConfigureAwait(false);
         return RazorSourceDocument.Create(sourceText, RazorSourceDocumentProperties.Create(document.FilePath, projectItem?.RelativePhysicalPath));
     }
 }

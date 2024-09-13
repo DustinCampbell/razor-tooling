@@ -34,7 +34,7 @@ internal class RazorDocumentExcerptService(
             return null;
         }
 
-        var mappedSpans = await _mappingService.MapSpansAsync(document, new[] { span }, cancellationToken).ConfigureAwait(false);
+        var mappedSpans = await _mappingService.MapSpansAsync(document, [span], cancellationToken).ConfigureAwait(false);
         if (mappedSpans.Length == 0 || mappedSpans[0].Equals(default(RazorMappedSpanResult)))
         {
             return null;
@@ -47,7 +47,7 @@ internal class RazorDocumentExcerptService(
             return null;
         }
 
-        var razorDocumentText = await razorDocument.GetTextAsync().ConfigureAwait(false);
+        var razorDocumentText = await razorDocument.GetTextAsync(cancellationToken).ConfigureAwait(false);
         var razorDocumentSpan = razorDocumentText.Lines.GetTextSpan(mappedSpans[0].LinePositionSpan);
 
         var generatedDocument = document;

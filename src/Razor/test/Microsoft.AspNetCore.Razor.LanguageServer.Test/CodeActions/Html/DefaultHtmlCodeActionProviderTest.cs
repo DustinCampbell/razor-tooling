@@ -14,7 +14,6 @@ using Microsoft.CodeAnalysis.Razor.DocumentMapping;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.Protocol.CodeActions;
 using Microsoft.CodeAnalysis.Testing;
-using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
 using Moq;
 using Xunit;
@@ -151,15 +150,24 @@ public class DefaultHtmlCodeActionProviderTest(ITestOutputHelper testOutput) : L
         var projectEngine = RazorProjectEngine.Create(builder => builder.AddTagHelpers(tagHelpers));
         var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, FileKinds.Component, importSources: default, tagHelpers);
 
-        var documentSnapshot = Mock.Of<IDocumentSnapshot>(document =>
-            document.GetGeneratedOutputAsync(It.IsAny<bool>()) == Task.FromResult(codeDocument) &&
-            document.GetTextAsync() == Task.FromResult(codeDocument.Source.Text) &&
-            document.Project.GetTagHelpersAsync(It.IsAny<CancellationToken>()) == new ValueTask<ImmutableArray<TagHelperDescriptor>>(tagHelpers), MockBehavior.Strict);
+        var documentSnapshotMock = new StrictMock<IDocumentSnapshot>();
 
-        var sourceText = SourceText.From(text);
+        documentSnapshotMock
+            .Setup(x => x.GetGeneratedOutputAsync(It.IsAny<bool>()))
+            .ReturnsAsync(codeDocument);
+        documentSnapshotMock
+            .Setup(x => x.GetTextAsync(It.IsAny<CancellationToken>()))
+            .ReturnsAsync(codeDocument.Source.Text);
 
-        var context = new RazorCodeActionContext(request, documentSnapshot, codeDocument, location, sourceText, supportsFileCreation, supportsCodeActionResolve);
+        var projectSnapshotMock = new StrictMock<IProjectSnapshot>();
+        projectSnapshotMock
+            .Setup(x => x.GetTagHelpersAsync(It.IsAny<CancellationToken>()))
+            .ReturnsAsync(tagHelpers);
 
-        return context;
+        documentSnapshotMock
+            .SetupGet(x => x.Project)
+            .Returns(projectSnapshotMock.Object);
+
+        return new RazorCodeActionContext(request, documentSnapshotMock.Object, codeDocument, location, supportsFileCreation, supportsCodeActionResolve);
     }
 }

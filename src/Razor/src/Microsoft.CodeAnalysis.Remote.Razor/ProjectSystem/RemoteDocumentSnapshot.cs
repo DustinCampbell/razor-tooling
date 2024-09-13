@@ -36,13 +36,23 @@ internal class RemoteDocumentSnapshot(TextDocument textDocument, RemoteProjectSn
 
     public int Version => -999; // We don't expect to use this in cohosting, but plenty of existing code logs it's value
 
-    public Task<SourceText> GetTextAsync() => _textDocument.GetTextAsync();
+    public ValueTask<SourceText> GetTextAsync(CancellationToken cancellationToken)
+        => TryGetText(out var text)
+            ? new(text)
+            : new(_textDocument.GetTextAsync(cancellationToken));
 
-    public Task<VersionStamp> GetTextVersionAsync() => _textDocument.GetTextVersionAsync();
+    public ValueTask<VersionStamp> GetTextVersionAsync(CancellationToken cancellationToken)
+    {
+        return TryGetTextVersion(out var textVersion)
+            ? new(textVersion)
+            : new(_textDocument.GetTextVersionAsync(cancellationToken));
+    }
 
-    public bool TryGetText([NotNullWhen(true)] out SourceText? result) => _textDocument.TryGetText(out result);
+    public bool TryGetText([NotNullWhen(true)] out SourceText? result)
+        => _textDocument.TryGetText(out result);
 
-    public bool TryGetTextVersion(out VersionStamp result) => _textDocument.TryGetTextVersion(out result);
+    public bool TryGetTextVersion(out VersionStamp result)
+        => _textDocument.TryGetTextVersion(out result);
 
     public async Task<RazorCodeDocument> GetGeneratedOutputAsync(bool forceDesignTimeGeneratedOutput)
     {

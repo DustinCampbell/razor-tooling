@@ -529,21 +529,20 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
                 {
                     documentState.AssumeNotNull();
 
-                    if (documentState.TryGetText(out var olderText) &&
-                        documentState.TryGetTextVersion(out var olderVersion))
+                    if (documentState.TryGetTextAndVersion(out var oldTextAndVersion))
                     {
-                        var version = sourceText.ContentEquals(olderText) ? olderVersion : olderVersion.GetNewerVersion();
+                        var version = GetNewVersionIfDifferent(sourceText, oldTextAndVersion);
                         var newState = originalEntry.State.WithChangedHostDocument(documentState.HostDocument, sourceText, version);
+
                         return new Entry(newState);
                     }
                     else
                     {
                         var newState = originalEntry.State.WithChangedHostDocument(documentState.HostDocument, async () =>
                         {
-                            olderText = await documentState.GetTextAsync().ConfigureAwait(false);
-                            olderVersion = await documentState.GetTextVersionAsync().ConfigureAwait(false);
+                            var oldTextAndVersion = await documentState.GetTextAndVersionAsync(CancellationToken.None).ConfigureAwait(false);
+                            var version = GetNewVersionIfDifferent(sourceText, oldTextAndVersion);
 
-                            var version = sourceText.ContentEquals(olderText) ? olderVersion : olderVersion.GetNewerVersion();
                             return TextAndVersion.Create(sourceText, version, documentState.HostDocument.FilePath);
                         });
 
@@ -564,10 +563,9 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
                 {
                     documentState.AssumeNotNull();
 
-                    if (documentState.TryGetText(out var olderText) &&
-                        documentState.TryGetTextVersion(out var olderVersion))
+                    if (documentState.TryGetTextAndVersion(out var oldTextAndVersion))
                     {
-                        var version = sourceText.ContentEquals(olderText) ? olderVersion : olderVersion.GetNewerVersion();
+                        var version = GetNewVersionIfDifferent(sourceText, oldTextAndVersion);
                         var state = originalEntry.State.WithChangedHostDocument(documentState.HostDocument, sourceText, version);
 
                         return new Entry(state);
@@ -576,10 +574,9 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
                     {
                         var state = originalEntry.State.WithChangedHostDocument(documentState.HostDocument, async () =>
                         {
-                            olderText = await documentState.GetTextAsync().ConfigureAwait(false);
-                            olderVersion = await documentState.GetTextVersionAsync().ConfigureAwait(false);
+                            var oldTextAndVersion = await documentState.GetTextAndVersionAsync(CancellationToken.None).ConfigureAwait(false);
+                            var version = GetNewVersionIfDifferent(sourceText, oldTextAndVersion);
 
-                            var version = sourceText.ContentEquals(olderText) ? olderVersion : olderVersion.GetNewerVersion();
                             return TextAndVersion.Create(sourceText, version, documentState.HostDocument.FilePath);
                         });
 
@@ -595,6 +592,13 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
             default:
                 throw new InvalidOperationException($"Unexpected action type {action.GetType()}");
+        }
+
+        static VersionStamp GetNewVersionIfDifferent(SourceText sourceText, TextAndVersion oldTextAndVersion)
+        {
+            return sourceText.ContentEquals(oldTextAndVersion.Text)
+                ? oldTextAndVersion.Version
+                : oldTextAndVersion.Version.GetNewerVersion();
         }
 
         static Func<Task<TextAndVersion>> CreateTextAndVersionFunc(TextLoader textLoader)

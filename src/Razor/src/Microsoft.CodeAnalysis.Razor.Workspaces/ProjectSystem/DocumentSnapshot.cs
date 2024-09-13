@@ -26,11 +26,11 @@ internal class DocumentSnapshot(ProjectSnapshot project, DocumentState state) : 
 
     public HostDocument HostDocument => _state.HostDocument;
 
-    public Task<SourceText> GetTextAsync()
-        => _state.GetTextAsync();
+    public ValueTask<SourceText> GetTextAsync(CancellationToken cancellationToken)
+        => _state.GetTextAsync(cancellationToken);
 
-    public Task<VersionStamp> GetTextVersionAsync()
-        => _state.GetTextVersionAsync();
+    public ValueTask<VersionStamp> GetTextVersionAsync(CancellationToken cancellationToken)
+        => _state.GetTextVersionAsync(cancellationToken);
 
     public bool TryGetText([NotNullWhen(true)] out SourceText? result)
         => _state.TryGetText(out result);

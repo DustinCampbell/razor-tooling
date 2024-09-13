@@ -4,6 +4,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
@@ -66,7 +67,7 @@ public abstract class DocumentExcerptServiceTestBase(ITestOutputHelper testOutpu
 
     // Maps a span in the primary buffer to the secondary buffer. This is only valid for C# code
     // that appears in the primary buffer.
-    private static async Task<TextSpan> GetSecondarySpanAsync(IDocumentSnapshot primary, TextSpan primarySpan, Document secondary)
+    private async Task<TextSpan> GetSecondarySpanAsync(IDocumentSnapshot primary, TextSpan primarySpan, Document secondary)
     {
         var output = await primary.GetGeneratedOutputAsync();
 
@@ -78,8 +79,8 @@ public abstract class DocumentExcerptServiceTestBase(ITestOutputHelper testOutpu
                 var offset = mapping.GeneratedSpan.AbsoluteIndex - mapping.OriginalSpan.AbsoluteIndex;
                 var secondarySpan = new TextSpan(primarySpan.Start + offset, primarySpan.Length);
                 Assert.Equal(
-                    (await primary.GetTextAsync()).GetSubText(primarySpan).ToString(),
-                    (await secondary.GetTextAsync()).GetSubText(secondarySpan).ToString());
+                    (await primary.GetTextAsync(DisposalToken)).GetSubText(primarySpan).ToString(),
+                    (await secondary.GetTextAsync(DisposalToken)).GetSubText(secondarySpan).ToString());
                 return secondarySpan;
             }
         }

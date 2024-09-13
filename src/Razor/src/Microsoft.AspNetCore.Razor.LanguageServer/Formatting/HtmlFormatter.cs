@@ -16,8 +16,7 @@ using Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.Formatting;
 
-internal sealed class HtmlFormatter(
-    IClientConnection clientConnection) : IHtmlFormatter
+internal sealed class HtmlFormatter(IClientConnection clientConnection) : IHtmlFormatter
 {
     private readonly IClientConnection _clientConnection = clientConnection;
 
@@ -47,7 +46,7 @@ internal sealed class HtmlFormatter(
             return [];
         }
 
-        var sourceText = await documentSnapshot.GetTextAsync().ConfigureAwait(false);
+        var sourceText = await documentSnapshot.GetTextAsync(cancellationToken).ConfigureAwait(false);
         return result.Edits.SelectAsArray(sourceText.GetTextChange);
     }
 
@@ -78,7 +77,7 @@ internal sealed class HtmlFormatter(
             return [];
         }
 
-        var sourceText = await documentSnapshot.GetTextAsync().ConfigureAwait(false);
+        var sourceText = await documentSnapshot.GetTextAsync(cancellationToken).ConfigureAwait(false);
         return result.Edits.SelectAsArray(sourceText.GetTextChange);
     }
 

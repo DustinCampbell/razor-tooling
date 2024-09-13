@@ -1216,7 +1216,9 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
 
         // Assert
         var newProject = _projectManager.GetLoadedProject(projectKey);
-        var documentText = await newProject.GetDocument(DocumentFilePath1)!.GetTextAsync();
+        var document = newProject.GetDocument(DocumentFilePath1);
+        Assert.NotNull(document);
+        var documentText = await document.GetTextAsync(DisposalToken);
         Assert.Equal("Hello", documentText.ToString());
     }
 
