@@ -515,7 +515,7 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
             var newFilePath = EnsureFullPath(documentHandle.FilePath, projectDirectory);
             var newHostDocument = new HostDocument(newFilePath, documentHandle.TargetPath, documentHandle.FileKind);
 
-            if (HostDocumentComparer.Instance.Equals(currentHostDocument, newHostDocument))
+            if (currentHostDocument == newHostDocument)
             {
                 // Current and "new" host documents are equivalent
                 continue;
@@ -592,7 +592,7 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
             newTargetPath = newTargetPath[projectDirectory.Length..];
         }
 
-        var newHostDocument = new HostDocument(documentSnapshot.FilePath, newTargetPath, documentSnapshot.FileKind);
+        var newHostDocument = documentSnapshot.HostDocument with { TargetPath = newTargetPath };
 
         _logger.LogInformation($"Moving '{documentFilePath}' from the '{fromProject.Key}' project to '{toProject.Key}' project.");
 
@@ -647,7 +647,7 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
                 newTargetPath = newTargetPath[projectDirectory.Length..];
             }
 
-            var newHostDocument = new HostDocument(documentSnapshot.FilePath, newTargetPath, documentSnapshot.FileKind);
+            var newHostDocument = documentSnapshot.HostDocument with { TargetPath = newTargetPath };
             _logger.LogInformation($"Migrating '{documentFilePath}' from the '{miscellaneousProject.Key}' project to '{projectSnapshot.Key}' project.");
 
             updater.DocumentAdded(projectSnapshot.Key, newHostDocument, textLoader);

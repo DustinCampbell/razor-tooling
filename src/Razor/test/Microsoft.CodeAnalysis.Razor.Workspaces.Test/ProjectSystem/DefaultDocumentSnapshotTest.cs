@@ -32,11 +32,10 @@ public class DefaultDocumentSnapshotTest : WorkspaceTestBase
         _sourceText = SourceText.From("<p>Hello World</p>");
         _version = VersionStamp.Create();
 
-        // Create a new HostDocument to avoid mutating the code container
-        _componentCshtmlHostDocument = new HostDocument(TestProjectData.SomeProjectCshtmlComponentFile5);
-        _componentHostDocument = new HostDocument(TestProjectData.SomeProjectComponentFile1);
-        _legacyHostDocument = new HostDocument(TestProjectData.SomeProjectFile1);
-        _nestedComponentHostDocument = new HostDocument(TestProjectData.SomeProjectNestedComponentFile3);
+        _componentCshtmlHostDocument = TestProjectData.SomeProjectCshtmlComponentFile5;
+        _componentHostDocument = TestProjectData.SomeProjectComponentFile1;
+        _legacyHostDocument = TestProjectData.SomeProjectFile1;
+        _nestedComponentHostDocument = TestProjectData.SomeProjectNestedComponentFile3;
 
         var projectState = ProjectState.Create(ProjectEngineFactoryProvider, TestProjectData.SomeProject, ProjectWorkspaceState.Default);
         var project = new ProjectSnapshot(projectState);

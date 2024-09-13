@@ -3,36 +3,49 @@
 
 using System;
 using Microsoft.AspNetCore.Razor.Language;
+using Microsoft.Extensions.Internal;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
-internal class HostDocument
+internal sealed record HostDocument
 {
-    public string FileKind { get; }
-    public string FilePath { get; }
-    public string TargetPath { get; }
+    private static readonly StringComparer s_filePathComparer = FilePathComparer.Instance;
 
-    public HostDocument(HostDocument other)
+    public string FileKind { get; init; }
+    public string FilePath { get; init; }
+    public string TargetPath { get; init; }
+
+    /// <summary>
+    ///  Creates a new <see cref="HostDocument"/> instance.
+    /// </summary>
+    /// <param name="filePath">The file path of the document.</param>
+    /// <param name="targetPath">The target path of the document.</param>
+    /// <param name="fileKind">
+    ///  The file kind from <see cref="FileKinds"/>. If <see langword="null"/>, the kind
+    ///  will be computed by calling <see cref="FileKinds.GetFileKindFromFilePath(string)"/>.
+    /// </param>
+    public HostDocument(string filePath, string targetPath, string? fileKind = null)
     {
-        if (other is null)
-        {
-            throw new ArgumentNullException(nameof(other));
-        }
-
-        FileKind = other.FileKind;
-        FilePath = other.FilePath;
-        TargetPath = other.TargetPath;
-    }
-
-    public HostDocument(string filePath, string targetPath)
-        : this(filePath, targetPath, fileKind: null)
-    {
-    }
-
-    public HostDocument(string filePath, string targetPath, string? fileKind)
-    {
-        FilePath = filePath ?? throw new ArgumentNullException(nameof(filePath));
-        TargetPath = targetPath ?? throw new ArgumentNullException(nameof(targetPath));
         FileKind = fileKind ?? FileKinds.GetFileKindFromFilePath(filePath);
+        FilePath = filePath;
+        TargetPath = targetPath;
+    }
+
+    public bool Equals(HostDocument? other)
+    {
+        return other is not null &&
+               FileKind == other.FileKind &&
+               s_filePathComparer.Equals(FilePath, other.FilePath) &&
+               s_filePathComparer.Equals(TargetPath, other.TargetPath);
+    }
+
+    public override int GetHashCode()
+    {
+        var combiner = HashCodeCombiner.Start();
+        combiner.Add(FileKind);
+        combiner.Add(FilePath, s_filePathComparer);
+        combiner.Add(TargetPath, s_filePathComparer);
+
+        return combiner.CombinedHash;
     }
 }
