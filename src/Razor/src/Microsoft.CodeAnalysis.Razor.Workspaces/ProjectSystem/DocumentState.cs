@@ -8,19 +8,23 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.PooledObjects;
+using Microsoft.AspNetCore.Razor.Threading;
 using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
 internal partial class DocumentState
 {
-    private static readonly TextAndVersion s_emptyText = TextAndVersion.Create(
-        SourceText.From(string.Empty),
-        VersionStamp.Default);
+    private static readonly TextAndVersion s_emptyText = TextAndVersion.Create(SourceText.From(string.Empty), VersionStamp.Default);
 
     public static readonly Func<Task<TextAndVersion>> EmptyLoader = () => Task.FromResult(s_emptyText);
 
-    private readonly object _lock;
+    public HostDocument HostDocument { get; }
+
+    private readonly int _version;
+    public int Version => _version;
+
+    private readonly object _lock = new();
 
     private ComputedStateTracker? _computedState;
 
@@ -28,39 +32,40 @@ internal partial class DocumentState
     private Task<TextAndVersion>? _loaderTask;
     private SourceText? _sourceText;
     private VersionStamp? _textVersion;
-    private readonly int _version;
 
-    public static DocumentState Create(
+    public static DocumentState Create(HostDocument hostDocument, Func<Task<TextAndVersion>> loader)
+        => new(hostDocument, version: 1, loader);
+
+    public static DocumentState Create(HostDocument hostDocument)
+        => new(hostDocument, version: 1, EmptyLoader);
+
+    public static DocumentState Create(HostDocument hostDocument, int version, TextAndVersion textAndVersion)
+        => new(hostDocument, version, textAndVersion);
+
+    public static DocumentState Create(HostDocument hostDocument, TextAndVersion textAndVersion)
+        => new(hostDocument, version: 1, textAndVersion);
+
+    protected DocumentState(HostDocument hostDocument, int version, TextAndVersion textAndVersion)
+    {
+        HostDocument = hostDocument;
+        _version = version;
+        _sourceText = textAndVersion.Text;
+        _textVersion = textAndVersion.Version;
+        _loader = EmptyLoader;
+    }
+
+    protected DocumentState(HostDocument hostDocument, int version, Func<Task<TextAndVersion>> loader)
+    {
+        HostDocument = hostDocument;
+        _version = version;
+        _loader = loader;
+    }
+
+    private DocumentState(
         HostDocument hostDocument,
         int version,
-        Func<Task<TextAndVersion>>? loader)
-    {
-        if (hostDocument is null)
-        {
-            throw new ArgumentNullException(nameof(hostDocument));
-        }
-
-        return new DocumentState(hostDocument, null, null, version, loader);
-    }
-
-    public static DocumentState Create(
-      HostDocument hostDocument,
-      Func<Task<TextAndVersion>>? loader)
-    {
-        if (hostDocument is null)
-        {
-            throw new ArgumentNullException(nameof(hostDocument));
-        }
-
-        return new DocumentState(hostDocument, null, null, version: 1, loader);
-    }
-
-    // Internal for testing
-    internal DocumentState(
-        HostDocument hostDocument,
         SourceText? text,
         VersionStamp? textVersion,
-        int version,
         Func<Task<TextAndVersion>>? loader)
     {
         HostDocument = hostDocument;
@@ -68,11 +73,7 @@ internal partial class DocumentState
         _textVersion = textVersion;
         _version = version;
         _loader = loader ?? EmptyLoader;
-        _lock = new object();
     }
-
-    public HostDocument HostDocument { get; }
-    public int Version => _version;
 
     public bool IsGeneratedOutputResultAvailable => ComputedState.IsResultAvailable == true;
 
@@ -137,9 +138,7 @@ internal partial class DocumentState
 
         if (_loaderTask is { } loaderTask && loaderTask.IsCompleted)
         {
-#pragma warning disable VSTHRD002 // Avoid problematic synchronous waits
-            result = loaderTask.Result.Text;
-#pragma warning restore VSTHRD002 // Avoid problematic synchronous waits
+            result = loaderTask.VerifyCompleted().Text;
             return true;
         }
 
@@ -157,9 +156,7 @@ internal partial class DocumentState
 
         if (_loaderTask is { } loaderTask && loaderTask.IsCompleted)
         {
-#pragma warning disable VSTHRD002 // Avoid problematic synchronous waits
-            result = loaderTask.Result.Version;
-#pragma warning restore VSTHRD002 // Avoid problematic synchronous waits
+            result = loaderTask.VerifyCompleted().Version;
             return true;
         }
 
@@ -169,7 +166,7 @@ internal partial class DocumentState
 
     public virtual DocumentState WithConfigurationChange()
     {
-        var state = new DocumentState(HostDocument, _sourceText, _textVersion, _version + 1, _loader)
+        var state = new DocumentState(HostDocument, _version + 1, _sourceText, _textVersion, _loader)
         {
             // The source could not have possibly changed.
             _sourceText = _sourceText,
@@ -184,7 +181,7 @@ internal partial class DocumentState
 
     public virtual DocumentState WithImportsChange()
     {
-        var state = new DocumentState(HostDocument, _sourceText, _textVersion, _version + 1, _loader)
+        var state = new DocumentState(HostDocument, _version + 1, _sourceText, _textVersion, _loader)
         {
             // The source could not have possibly changed.
             _sourceText = _sourceText,
@@ -200,7 +197,7 @@ internal partial class DocumentState
 
     public virtual DocumentState WithProjectWorkspaceStateChange()
     {
-        var state = new DocumentState(HostDocument, _sourceText, _textVersion, _version + 1, _loader)
+        var state = new DocumentState(HostDocument, _version + 1, _sourceText, _textVersion, _loader)
         {
             // The source could not have possibly changed.
             _sourceText = _sourceText,
@@ -216,26 +213,16 @@ internal partial class DocumentState
 
     public virtual DocumentState WithText(SourceText sourceText, VersionStamp textVersion)
     {
-        if (sourceText is null)
-        {
-            throw new ArgumentNullException(nameof(sourceText));
-        }
-
         // Do not cache the computed state
 
-        return new DocumentState(HostDocument, sourceText, textVersion, _version + 1, null);
+        return new DocumentState(HostDocument, _version + 1, TextAndVersion.Create(sourceText, textVersion));
     }
 
     public virtual DocumentState WithTextLoader(Func<Task<TextAndVersion>> loader)
     {
-        if (loader is null)
-        {
-            throw new ArgumentNullException(nameof(loader));
-        }
-
         // Do not cache the computed state
 
-        return new DocumentState(HostDocument, null, null, _version + 1, loader);
+        return new DocumentState(HostDocument, _version + 1, loader);
     }
 
     // Internal, because we are temporarily sharing code with CohostDocumentSnapshot
@@ -255,7 +242,7 @@ internal partial class DocumentState
 
         if (importItems.Count == 0)
         {
-            return ImmutableArray<IDocumentSnapshot>.Empty;
+            return [];
         }
 
         using var _2 = ArrayBuilderPool<IDocumentSnapshot>.GetPooledObject(out var imports);

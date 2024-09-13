@@ -991,22 +991,19 @@ public class ProjectStateTest : WorkspaceTestBase
     {
         public static TestDocumentState Create(
             HostDocument hostDocument,
-            Func<Task<TextAndVersion>>? loader = null,
             Action? onTextChange = null,
             Action? onTextLoaderChange = null,
             Action? onConfigurationChange = null,
             Action? onImportsChange = null,
             Action? onProjectWorkspaceStateChange = null)
-        {
-            return new TestDocumentState(
+            => new(
                 hostDocument,
-                loader,
+                EmptyLoader,
                 onTextChange,
                 onTextLoaderChange,
                 onConfigurationChange,
                 onImportsChange,
                 onProjectWorkspaceStateChange);
-        }
 
         private readonly Action? _onTextChange;
         private readonly Action? _onTextLoaderChange;
@@ -1016,13 +1013,13 @@ public class ProjectStateTest : WorkspaceTestBase
 
         private TestDocumentState(
             HostDocument hostDocument,
-            Func<Task<TextAndVersion>>? loader,
+            Func<Task<TextAndVersion>> loader,
             Action? onTextChange,
             Action? onTextLoaderChange,
             Action? onConfigurationChange,
             Action? onImportsChange,
             Action? onProjectWorkspaceStateChange)
-            : base(hostDocument, text: null, textVersion: null, version: 1, loader)
+            : base(hostDocument, version: 1, loader)
         {
             _onTextChange = onTextChange;
             _onTextLoaderChange = onTextLoaderChange;

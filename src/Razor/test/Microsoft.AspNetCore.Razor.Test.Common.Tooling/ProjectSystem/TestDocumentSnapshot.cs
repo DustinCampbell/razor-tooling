@@ -21,38 +21,27 @@ internal class TestDocumentSnapshot(ProjectSnapshot projectSnapshot, DocumentSta
     public static TestDocumentSnapshot Create(string filePath)
         => Create(filePath, string.Empty);
 
-    public static TestDocumentSnapshot Create(string filePath, VersionStamp textVersion)
-        => Create(filePath, string.Empty, textVersion);
+    public static TestDocumentSnapshot Create(string filePath, string text, int documentVersion = 0)
+        => Create(filePath, text, VersionStamp.Default, documentVersion: documentVersion);
 
-    public static TestDocumentSnapshot Create(string filePath, string text, int version = 0)
-        => Create(filePath, text, VersionStamp.Default, version: version);
+    public static TestDocumentSnapshot Create(string filePath, string text, VersionStamp textVersion, ProjectWorkspaceState? projectWorkspaceState = null, int documentVersion = 0)
+        => Create(filePath, text, textVersion, TestProjectSnapshot.Create(filePath + ".csproj", projectWorkspaceState), documentVersion);
 
-    public static TestDocumentSnapshot Create(string filePath, string text, VersionStamp textVersion, ProjectWorkspaceState? projectWorkspaceState = null, int version = 0)
-        => Create(filePath, text, textVersion, TestProjectSnapshot.Create(filePath + ".csproj", projectWorkspaceState), version);
-
-    public static TestDocumentSnapshot Create(string filePath, string text, VersionStamp textVersion, TestProjectSnapshot projectSnapshot, int version)
+    public static TestDocumentSnapshot Create(string filePath, string text, VersionStamp textVersion, TestProjectSnapshot projectSnapshot, int documentVersion)
     {
         var targetPath = Path.GetDirectoryName(projectSnapshot.FilePath) is string projectDirectory && filePath.StartsWith(projectDirectory)
             ? filePath[projectDirectory.Length..]
             : filePath;
 
         var hostDocument = new HostDocument(filePath, targetPath);
-        var sourceText = SourceText.From(text);
-        var documentState = new DocumentState(
-            hostDocument,
-            SourceText.From(text),
-            textVersion,
-            version,
-            () => Task.FromResult(TextAndVersion.Create(sourceText, textVersion)));
-        var testDocument = new TestDocumentSnapshot(projectSnapshot, documentState);
+        var textAndVersion = TextAndVersion.Create(SourceText.From(text), textVersion);
+        var documentState = DocumentState.Create(hostDocument, documentVersion, textAndVersion);
 
-        return testDocument;
-    }
+        return new TestDocumentSnapshot(projectSnapshot, documentState);
+   }
 
-    internal static TestDocumentSnapshot Create(ProjectSnapshot projectSnapshot, string filePath, string text = "", VersionStamp? version = null)
+    internal static TestDocumentSnapshot Create(ProjectSnapshot projectSnapshot, string filePath, string text = "")
     {
-        version ??= VersionStamp.Default;
-
         var targetPath = FilePathNormalizer.Normalize(filePath);
         var projectDirectory = FilePathNormalizer.GetNormalizedDirectoryName(projectSnapshot.FilePath);
         if (targetPath.StartsWith(projectDirectory))
@@ -61,16 +50,10 @@ internal class TestDocumentSnapshot(ProjectSnapshot projectSnapshot, DocumentSta
         }
 
         var hostDocument = new HostDocument(filePath, targetPath);
-        var sourceText = SourceText.From(text);
-        var documentState = new DocumentState(
-            hostDocument,
-            SourceText.From(text),
-            version,
-            version: 1,
-            () => Task.FromResult(TextAndVersion.Create(sourceText, version.Value)));
-        var testDocument = new TestDocumentSnapshot(projectSnapshot, documentState);
+        var textAndVersion = TextAndVersion.Create(SourceText.From(text), VersionStamp.Default);
+        var documentState = DocumentState.Create(hostDocument, version: 1, textAndVersion);
 
-        return testDocument;
+        return new TestDocumentSnapshot(projectSnapshot, documentState);
     }
 
     public override Task<RazorCodeDocument> GetGeneratedOutputAsync(bool _)
