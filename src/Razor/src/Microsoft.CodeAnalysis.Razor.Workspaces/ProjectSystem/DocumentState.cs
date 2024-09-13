@@ -30,8 +30,7 @@ internal partial class DocumentState
 
     private readonly Func<Task<TextAndVersion>> _loader;
     private Task<TextAndVersion>? _loaderTask;
-    private SourceText? _sourceText;
-    private VersionStamp? _textVersion;
+    private TextAndVersion? _textAndVersion;
 
     public static DocumentState Create(HostDocument hostDocument, Func<Task<TextAndVersion>> loader)
         => new(hostDocument, version: 1, loader);
@@ -49,8 +48,7 @@ internal partial class DocumentState
     {
         HostDocument = hostDocument;
         _version = version;
-        _sourceText = textAndVersion.Text;
-        _textVersion = textAndVersion.Version;
+        _textAndVersion = textAndVersion;
         _loader = EmptyLoader;
     }
 
@@ -64,15 +62,13 @@ internal partial class DocumentState
     private DocumentState(
         HostDocument hostDocument,
         int version,
-        SourceText? text,
-        VersionStamp? textVersion,
-        Func<Task<TextAndVersion>>? loader)
+        TextAndVersion? textAndVersion,
+        Func<Task<TextAndVersion>> loader)
     {
         HostDocument = hostDocument;
-        _sourceText = text;
-        _textVersion = textVersion;
+        _textAndVersion = textAndVersion;
         _version = version;
-        _loader = loader ?? EmptyLoader;
+        _loader = loader;
     }
 
     public bool IsGeneratedOutputResultAvailable => ComputedState.IsResultAvailable == true;
@@ -130,9 +126,9 @@ internal partial class DocumentState
 
     public bool TryGetText([NotNullWhen(true)] out SourceText? result)
     {
-        if (_sourceText is { } sourceText)
+        if (_textAndVersion is TextAndVersion textAndVersion)
         {
-            result = sourceText;
+            result = textAndVersion.Text;
             return true;
         }
 
@@ -148,9 +144,9 @@ internal partial class DocumentState
 
     public bool TryGetTextVersion(out VersionStamp result)
     {
-        if (_textVersion is { } version)
+        if (_textAndVersion is TextAndVersion textAndVersion)
         {
-            result = version;
+            result = textAndVersion.Version;
             return true;
         }
 
@@ -166,11 +162,10 @@ internal partial class DocumentState
 
     public virtual DocumentState WithConfigurationChange()
     {
-        var state = new DocumentState(HostDocument, _version + 1, _sourceText, _textVersion, _loader)
+        var state = new DocumentState(HostDocument, _version + 1, _textAndVersion, _loader)
         {
             // The source could not have possibly changed.
-            _sourceText = _sourceText,
-            _textVersion = _textVersion,
+            _textAndVersion = _textAndVersion,
             _loaderTask = _loaderTask,
         };
 
@@ -181,11 +176,10 @@ internal partial class DocumentState
 
     public virtual DocumentState WithImportsChange()
     {
-        var state = new DocumentState(HostDocument, _version + 1, _sourceText, _textVersion, _loader)
+        var state = new DocumentState(HostDocument, _version + 1, _textAndVersion, _loader)
         {
             // The source could not have possibly changed.
-            _sourceText = _sourceText,
-            _textVersion = _textVersion,
+            _textAndVersion = _textAndVersion,
             _loaderTask = _loaderTask
         };
 
@@ -197,11 +191,10 @@ internal partial class DocumentState
 
     public virtual DocumentState WithProjectWorkspaceStateChange()
     {
-        var state = new DocumentState(HostDocument, _version + 1, _sourceText, _textVersion, _loader)
+        var state = new DocumentState(HostDocument, _version + 1, _textAndVersion, _loader)
         {
             // The source could not have possibly changed.
-            _sourceText = _sourceText,
-            _textVersion = _textVersion,
+            _textAndVersion = _textAndVersion,
             _loaderTask = _loaderTask
         };
 
