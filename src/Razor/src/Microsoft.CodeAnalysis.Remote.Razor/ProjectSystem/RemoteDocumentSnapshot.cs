@@ -34,8 +34,6 @@ internal class RemoteDocumentSnapshot(TextDocument textDocument, RemoteProjectSn
 
     public IProjectSnapshot Project => _projectSnapshot;
 
-    public bool SupportsOutput => true;
-
     public int Version => -999; // We don't expect to use this in cohosting, but plenty of existing code logs it's value
 
     public Task<SourceText> GetTextAsync() => _textDocument.GetTextAsync();
