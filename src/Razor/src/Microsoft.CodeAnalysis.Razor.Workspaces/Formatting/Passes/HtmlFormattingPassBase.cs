@@ -32,7 +32,7 @@ internal abstract class HtmlFormattingPassBase(ILogger logger) : IFormattingPass
         {
             changedText = originalText.WithChanges(changes);
             // Create a new formatting context for the changed razor document.
-            changedContext = await context.WithTextAsync(changedText).ConfigureAwait(false);
+            changedContext = await context.WithTextAsync(changedText, cancellationToken).ConfigureAwait(false);
 
             _logger.LogTestOnly($"After normalizedEdits:\r\n{changedText}");
         }

@@ -178,7 +178,7 @@ public class CodeDocumentReferenceHolderTest(ITestOutputHelper testOutput) : Lan
     [MethodImpl(MethodImplOptions.NoInlining)]
     private async Task<WeakReference<RazorCodeDocument>> ProcessDocumentAndRetrieveOutputAsync(IDocumentSnapshot documentSnapshot)
     {
-        var codeDocument = await documentSnapshot.GetGeneratedOutputAsync();
+        var codeDocument = await documentSnapshot.GetGeneratedOutputAsync(DisposalToken);
 
         _referenceHolder.DocumentProcessed(codeDocument, documentSnapshot);
 

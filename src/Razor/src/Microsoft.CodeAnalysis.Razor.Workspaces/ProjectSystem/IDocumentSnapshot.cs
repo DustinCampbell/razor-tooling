@@ -20,17 +20,17 @@ internal interface IDocumentSnapshot
 
     ValueTask<SourceText> GetTextAsync(CancellationToken cancellationToken);
     ValueTask<VersionStamp> GetTextVersionAsync(CancellationToken cancellationToken);
-    Task<RazorCodeDocument> GetGeneratedOutputAsync(bool forceDesignTimeGeneratedOutput);
+    ValueTask<RazorCodeDocument> GetGeneratedOutputAsync(bool forceDesignTimeGeneratedOutput, CancellationToken cancellationToken);
+
+    bool TryGetText([NotNullWhen(true)] out SourceText? result);
+    bool TryGetTextVersion(out VersionStamp result);
+    bool TryGetGeneratedOutput([NotNullWhen(true)] out RazorCodeDocument? result);
 
     /// <summary>
     /// Gets the Roslyn syntax tree for the generated C# for this Razor document
     /// </summary>
     /// <remarks>Using this from the LSP server side of things is not ideal. Use sparingly :)</remarks>
     Task<SyntaxTree> GetCSharpSyntaxTreeAsync(CancellationToken cancellationToken);
-
-    bool TryGetText([NotNullWhen(true)] out SourceText? result);
-    bool TryGetTextVersion(out VersionStamp result);
-    bool TryGetGeneratedOutput([NotNullWhen(true)] out RazorCodeDocument? result);
 
     IDocumentSnapshot WithText(SourceText text);
 }

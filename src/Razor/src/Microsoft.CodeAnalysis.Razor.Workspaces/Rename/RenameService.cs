@@ -55,7 +55,10 @@ internal class RenameService(
             return null;
         }
 
-        var originComponentDocumentSnapshot = await _componentSearchEngine.TryLocateComponentAsync(documentContext.Snapshot, originTagHelpers.First()).ConfigureAwait(false);
+        var originComponentDocumentSnapshot = await _componentSearchEngine
+            .TryLocateComponentAsync(documentContext.Snapshot, originTagHelpers.First(), cancellationToken)
+            .ConfigureAwait(false);
+
         if (originComponentDocumentSnapshot is null)
         {
             return null;
@@ -77,7 +80,7 @@ internal class RenameService(
 
         foreach (var documentSnapshot in documentSnapshots)
         {
-            await AddEditsForCodeDocumentAsync(documentChanges, originTagHelpers, newName, documentSnapshot).ConfigureAwait(false);
+            await AddEditsForCodeDocumentAsync(documentChanges, originTagHelpers, newName, documentSnapshot, cancellationToken).ConfigureAwait(false);
         }
 
         foreach (var documentChange in documentChanges)
@@ -162,14 +165,15 @@ internal class RenameService(
         List<SumType<TextDocumentEdit, CreateFile, RenameFile, DeleteFile>> documentChanges,
         ImmutableArray<TagHelperDescriptor> originTagHelpers,
         string newName,
-        IDocumentSnapshot documentSnapshot)
+        IDocumentSnapshot documentSnapshot,
+        CancellationToken cancellationToken)
     {
         if (!FileKinds.IsComponent(documentSnapshot.FileKind))
         {
             return;
         }
 
-        var codeDocument = await documentSnapshot.GetGeneratedOutputAsync().ConfigureAwait(false);
+        var codeDocument = await documentSnapshot.GetGeneratedOutputAsync(cancellationToken).ConfigureAwait(false);
         if (codeDocument.IsUnsupported())
         {
             return;

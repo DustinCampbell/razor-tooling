@@ -59,7 +59,7 @@ public class DefaultDocumentSnapshotTest : WorkspaceTestBase
     public async Task GCCollect_OutputIsNoLongerCached()
     {
         // Arrange
-        await Task.Run(async () => { await _legacyDocument.GetGeneratedOutputAsync(); });
+        await Task.Run(async () => { await _legacyDocument.GetGeneratedOutputAsync(DisposalToken); });
 
         // Act
 
@@ -74,7 +74,7 @@ public class DefaultDocumentSnapshotTest : WorkspaceTestBase
     public async Task RegeneratingWithReference_CachesOutput()
     {
         // Arrange
-        var output = await _legacyDocument.GetGeneratedOutputAsync();
+        var output = await _legacyDocument.GetGeneratedOutputAsync(DisposalToken);
 
         // Mostly doing this to ensure "var output" doesn't get optimized out
         Assert.NotNull(output);
@@ -90,7 +90,7 @@ public class DefaultDocumentSnapshotTest : WorkspaceTestBase
     public async Task GetGeneratedOutputAsync_CshtmlComponent_ContainsComponentImports()
     {
         // Act
-        var codeDocument = await _componentCshtmlDocument.GetGeneratedOutputAsync();
+        var codeDocument = await _componentCshtmlDocument.GetGeneratedOutputAsync(DisposalToken);
 
         // Assert
         Assert.Contains("using global::Microsoft.AspNetCore.Components", codeDocument.GetCSharpSourceText().ToString(), StringComparison.Ordinal);
@@ -100,7 +100,7 @@ public class DefaultDocumentSnapshotTest : WorkspaceTestBase
     public async Task GetGeneratedOutputAsync_Component()
     {
         // Act
-        var codeDocument = await _componentDocument.GetGeneratedOutputAsync();
+        var codeDocument = await _componentDocument.GetGeneratedOutputAsync(DisposalToken);
 
         // Assert
         Assert.Contains("ComponentBase", codeDocument.GetCSharpSourceText().ToString(), StringComparison.Ordinal);
@@ -110,7 +110,7 @@ public class DefaultDocumentSnapshotTest : WorkspaceTestBase
     public async Task GetGeneratedOutputAsync_NestedComponentDocument_SetsCorrectNamespaceAndClassName()
     {
         // Act
-        var codeDocument = await _nestedComponentDocument.GetGeneratedOutputAsync();
+        var codeDocument = await _nestedComponentDocument.GetGeneratedOutputAsync(DisposalToken);
 
         // Assert
         Assert.Contains("ComponentBase", codeDocument.GetCSharpSourceText().ToString(), StringComparison.Ordinal);
@@ -124,7 +124,7 @@ public class DefaultDocumentSnapshotTest : WorkspaceTestBase
     public async Task GetGeneratedOutputAsync_Legacy()
     {
         // Act
-        var codeDocument = await _legacyDocument.GetGeneratedOutputAsync();
+        var codeDocument = await _legacyDocument.GetGeneratedOutputAsync(DisposalToken);
 
         // Assert
         Assert.Contains("Template", codeDocument.GetCSharpSourceText().ToString(), StringComparison.Ordinal);

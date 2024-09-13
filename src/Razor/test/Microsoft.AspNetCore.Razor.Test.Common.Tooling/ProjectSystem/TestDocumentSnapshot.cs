@@ -3,6 +3,7 @@
 
 using System;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
@@ -56,14 +57,11 @@ internal class TestDocumentSnapshot(ProjectSnapshot projectSnapshot, DocumentSta
         return new TestDocumentSnapshot(projectSnapshot, documentState);
     }
 
-    public override Task<RazorCodeDocument> GetGeneratedOutputAsync(bool forceDesignTimeGeneratedOutput)
+    public override ValueTask<RazorCodeDocument> GetGeneratedOutputAsync(bool forceDesignTimeGeneratedOutput, CancellationToken cancellationToken)
     {
-        if (_codeDocument is null)
-        {
-            throw new ArgumentNullException(nameof(_codeDocument));
-        }
-
-        return Task.FromResult(_codeDocument);
+        return _codeDocument is RazorCodeDocument codeDocument
+            ? new(codeDocument)
+            : throw new InvalidOperationException($"You must call {nameof(With)} to set the code document for this document snapshot.");
     }
 
     public override bool TryGetGeneratedOutput(out RazorCodeDocument result)

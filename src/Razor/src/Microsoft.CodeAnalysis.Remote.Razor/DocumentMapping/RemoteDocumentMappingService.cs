@@ -54,7 +54,7 @@ internal sealed class RemoteDocumentMappingService(
 
         var razorDocumentSnapshot = _documentSnapshotFactory.GetOrCreate(razorDocument);
 
-        var razorCodeDocument = await razorDocumentSnapshot.GetGeneratedOutputAsync().ConfigureAwait(false);
+        var razorCodeDocument = await razorDocumentSnapshot.GetGeneratedOutputAsync(cancellationToken).ConfigureAwait(false);
         cancellationToken.ThrowIfCancellationRequested();
 
         if (razorCodeDocument is null)

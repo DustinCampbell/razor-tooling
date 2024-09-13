@@ -51,7 +51,7 @@ internal sealed partial class RemoteInlayHintService(in ServiceArgs args) : Razo
             return null;
         }
 
-        var generatedDocument = await context.Snapshot.GetGeneratedDocumentAsync().ConfigureAwait(false);
+        var generatedDocument = await context.Snapshot.GetGeneratedDocumentAsync(cancellationToken).ConfigureAwait(false);
 
         var textDocument = inlayHintParams.TextDocument.WithUri(generatedDocument.CreateUri());
         var range = projectedLinePositionSpan.ToRange();
@@ -105,7 +105,7 @@ internal sealed partial class RemoteInlayHintService(in ServiceArgs args) : Razo
 
     private async ValueTask<InlayHint> ResolveInlayHintAsync(RemoteDocumentContext context, InlayHint inlayHint, CancellationToken cancellationToken)
     {
-        var generatedDocument = await context.Snapshot.GetGeneratedDocumentAsync().ConfigureAwait(false);
+        var generatedDocument = await context.Snapshot.GetGeneratedDocumentAsync(cancellationToken).ConfigureAwait(false);
 
         return await InlayHints.ResolveInlayHintAsync(generatedDocument, inlayHint, cancellationToken).ConfigureAwait(false);
     }

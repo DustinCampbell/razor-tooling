@@ -69,7 +69,7 @@ public abstract class DocumentExcerptServiceTestBase(ITestOutputHelper testOutpu
     // that appears in the primary buffer.
     private async Task<TextSpan> GetSecondarySpanAsync(IDocumentSnapshot primary, TextSpan primarySpan, Document secondary)
     {
-        var output = await primary.GetGeneratedOutputAsync();
+        var output = await primary.GetGeneratedOutputAsync(DisposalToken);
 
         foreach (var mapping in output.GetCSharpDocument().SourceMappings)
         {

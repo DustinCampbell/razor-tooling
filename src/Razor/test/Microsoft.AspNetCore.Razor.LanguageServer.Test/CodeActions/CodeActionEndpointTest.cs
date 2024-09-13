@@ -471,7 +471,7 @@ public class CodeActionEndpointTest(ITestOutputHelper testOutput) : LanguageServ
         };
 
         // Act
-        var razorCodeActionContext = await codeActionEndpoint.GenerateRazorCodeActionContextAsync(request, documentContext.Snapshot);
+        var razorCodeActionContext = await codeActionEndpoint.GenerateRazorCodeActionContextAsync(request, documentContext.Snapshot, DisposalToken);
 
         // Assert
         Assert.NotNull(razorCodeActionContext);
@@ -499,7 +499,7 @@ public class CodeActionEndpointTest(ITestOutputHelper testOutput) : LanguageServ
         };
 
         // Act
-        var razorCodeActionContext = await codeActionEndpoint.GenerateRazorCodeActionContextAsync(request, documentContext.Snapshot);
+        var razorCodeActionContext = await codeActionEndpoint.GenerateRazorCodeActionContextAsync(request, documentContext.Snapshot, DisposalToken);
 
         // Assert
         Assert.NotNull(razorCodeActionContext);
@@ -524,11 +524,11 @@ public class CodeActionEndpointTest(ITestOutputHelper testOutput) : LanguageServ
             Context = new VSInternalCodeActionContext()
         };
 
-        var context = await codeActionEndpoint.GenerateRazorCodeActionContextAsync(request, documentContext.Snapshot);
+        var context = await codeActionEndpoint.GenerateRazorCodeActionContextAsync(request, documentContext.Snapshot, DisposalToken);
         Assert.NotNull(context);
 
         // Act
-        var results = await codeActionEndpoint.GetCodeActionsFromLanguageServerAsync(RazorLanguageKind.CSharp, documentContext, context, Guid.Empty, cancellationToken: default);
+        var results = await codeActionEndpoint.GetCodeActionsFromLanguageServerAsync(RazorLanguageKind.CSharp, documentContext, context, correlationId: Guid.Empty, DisposalToken);
 
         // Assert
         Assert.Empty(results);
@@ -560,7 +560,7 @@ public class CodeActionEndpointTest(ITestOutputHelper testOutput) : LanguageServ
             }
         };
 
-        var context = await codeActionEndpoint.GenerateRazorCodeActionContextAsync(request, documentContext.Snapshot);
+        var context = await codeActionEndpoint.GenerateRazorCodeActionContextAsync(request, documentContext.Snapshot, DisposalToken);
         Assert.NotNull(context);
 
         // Act

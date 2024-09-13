@@ -114,7 +114,7 @@ internal partial class RazorDiagnosticsPublisher : IDocumentProcessedListener, I
 
     private async Task PublishDiagnosticsAsync(IDocumentSnapshot document, CancellationToken token)
     {
-        var result = await document.GetGeneratedOutputAsync().ConfigureAwait(false);
+        var result = await document.GetGeneratedOutputAsync(token).ConfigureAwait(false);
         var csharpDiagnostics = await GetCSharpDiagnosticsAsync(document, token).ConfigureAwait(false);
         var razorDiagnostics = result.GetCSharpDocument().Diagnostics;
 

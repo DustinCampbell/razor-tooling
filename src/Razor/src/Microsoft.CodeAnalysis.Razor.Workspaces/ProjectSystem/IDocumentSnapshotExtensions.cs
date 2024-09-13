@@ -23,7 +23,7 @@ internal static class IDocumentSnapshotExtensions
             return null;
         }
 
-        var razorCodeDocument = await documentSnapshot.GetGeneratedOutputAsync().ConfigureAwait(false);
+        var razorCodeDocument = await documentSnapshot.GetGeneratedOutputAsync(cancellationToken).ConfigureAwait(false);
         if (razorCodeDocument is null)
         {
             return null;
@@ -57,9 +57,9 @@ internal static class IDocumentSnapshotExtensions
         return fileName.AsSpan().Equals(path.Span, FilePathComparison.Instance);
     }
 
-    public static Task<RazorCodeDocument> GetGeneratedOutputAsync(this IDocumentSnapshot documentSnapshot)
+    public static ValueTask<RazorCodeDocument> GetGeneratedOutputAsync(this IDocumentSnapshot documentSnapshot, CancellationToken cancellationToken)
     {
-        return documentSnapshot.GetGeneratedOutputAsync(forceDesignTimeGeneratedOutput: false);
+        return documentSnapshot.GetGeneratedOutputAsync(forceDesignTimeGeneratedOutput: false, cancellationToken);
     }
 
     public static async Task<ImmutableArray<ImportItem>> GetImportsAsync(this IDocumentSnapshot document, RazorProjectEngine projectEngine)

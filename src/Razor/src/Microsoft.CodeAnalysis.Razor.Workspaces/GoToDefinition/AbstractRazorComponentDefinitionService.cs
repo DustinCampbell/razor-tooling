@@ -39,7 +39,7 @@ internal abstract class AbstractRazorComponentDefinitionService(
             return null;
         }
 
-        var codeDocument = await documentSnapshot.GetGeneratedOutputAsync().ConfigureAwait(false);
+        var codeDocument = await documentSnapshot.GetGeneratedOutputAsync(cancellationToken).ConfigureAwait(false);
 
         if (!RazorComponentDefinitionHelpers.TryGetBoundTagHelpers(codeDocument, positionInfo.HostDocumentIndex, ignoreAttributes, _logger, out var boundTagHelper, out var boundAttribute))
         {
@@ -47,7 +47,7 @@ internal abstract class AbstractRazorComponentDefinitionService(
             return null;
         }
 
-        var componentDocument = await _componentSearchEngine.TryLocateComponentAsync(documentSnapshot, boundTagHelper).ConfigureAwait(false);
+        var componentDocument = await _componentSearchEngine.TryLocateComponentAsync(documentSnapshot, boundTagHelper, cancellationToken).ConfigureAwait(false);
         if (componentDocument is null)
         {
             _logger.LogInformation($"Could not locate component document.");

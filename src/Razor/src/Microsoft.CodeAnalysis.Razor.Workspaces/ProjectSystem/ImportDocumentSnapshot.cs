@@ -48,7 +48,7 @@ internal sealed class ImportDocumentSnapshot(IProjectSnapshot project, RazorProj
     public ValueTask<VersionStamp> GetTextVersionAsync(CancellationToken cancellationToken)
         => new(VersionStamp.Default);
 
-    public Task<RazorCodeDocument> GetGeneratedOutputAsync(bool forceDesignTimeGeneratedOutput)
+    public ValueTask<RazorCodeDocument> GetGeneratedOutputAsync(bool forceDesignTimeGeneratedOutput, CancellationToken cancellationToken)
         => throw new NotSupportedException();
 
     public bool TryGetText([NotNullWhen(true)] out SourceText? result)

@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.CodeAnalysis.Razor.Logging;
@@ -26,9 +27,10 @@ internal class RazorComponentSearchEngine(
     /// </remarks>
     /// <param name="contextSnapshot">A document snapshot that provides context to enumerate project snapshots</param>
     /// <param name="tagHelper">A TagHelperDescriptor to find the corresponding Razor component for.</param>
+    /// <param name="cancellationToken"></param>
     /// <returns>The corresponding DocumentSnapshot if found, null otherwise.</returns>
     /// <exception cref="ArgumentNullException">Thrown if <paramref name="tagHelper"/> is null.</exception>
-    public async Task<IDocumentSnapshot?> TryLocateComponentAsync(IDocumentSnapshot contextSnapshot, TagHelperDescriptor tagHelper)
+    public async Task<IDocumentSnapshot?> TryLocateComponentAsync(IDocumentSnapshot contextSnapshot, TagHelperDescriptor tagHelper, CancellationToken cancellationToken)
     {
         if (tagHelper is null)
         {
@@ -63,7 +65,7 @@ internal class RazorComponentSearchEngine(
                     continue;
                 }
 
-                var razorCodeDocument = await documentSnapshot.GetGeneratedOutputAsync().ConfigureAwait(false);
+                var razorCodeDocument = await documentSnapshot.GetGeneratedOutputAsync(cancellationToken).ConfigureAwait(false);
                 if (razorCodeDocument is null)
                 {
                     continue;

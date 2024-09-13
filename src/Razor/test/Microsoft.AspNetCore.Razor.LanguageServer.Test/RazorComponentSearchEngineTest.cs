@@ -102,8 +102,8 @@ public class RazorComponentSearchEngineTest(ITestOutputHelper testOutput) : Lang
         var snapshot = StrictMock.Of<IDocumentSnapshot>();
 
         // Act
-        var documentSnapshot1 = await searchEngine.TryLocateComponentAsync(snapshot, tagHelperDescriptor1);
-        var documentSnapshot2 = await searchEngine.TryLocateComponentAsync(snapshot, tagHelperDescriptor2);
+        var documentSnapshot1 = await searchEngine.TryLocateComponentAsync(snapshot, tagHelperDescriptor1, DisposalToken);
+        var documentSnapshot2 = await searchEngine.TryLocateComponentAsync(snapshot, tagHelperDescriptor2, DisposalToken);
 
         // Assert
         Assert.NotNull(documentSnapshot1);
@@ -122,8 +122,8 @@ public class RazorComponentSearchEngineTest(ITestOutputHelper testOutput) : Lang
         var snapshot = StrictMock.Of<IDocumentSnapshot>();
 
         // Act
-        var documentSnapshot1 = await searchEngine.TryLocateComponentAsync(snapshot, tagHelperDescriptor1);
-        var documentSnapshot2 = await searchEngine.TryLocateComponentAsync(snapshot, tagHelperDescriptor2);
+        var documentSnapshot1 = await searchEngine.TryLocateComponentAsync(snapshot, tagHelperDescriptor1, DisposalToken);
+        var documentSnapshot2 = await searchEngine.TryLocateComponentAsync(snapshot, tagHelperDescriptor2, DisposalToken);
 
         // Assert
         Assert.NotNull(documentSnapshot1);
@@ -141,7 +141,7 @@ public class RazorComponentSearchEngineTest(ITestOutputHelper testOutput) : Lang
         var snapshot = StrictMock.Of<IDocumentSnapshot>();
 
         // Act
-        var documentSnapshot = await searchEngine.TryLocateComponentAsync(snapshot, tagHelperDescriptor);
+        var documentSnapshot = await searchEngine.TryLocateComponentAsync(snapshot, tagHelperDescriptor, DisposalToken);
 
         // Assert
         Assert.NotNull(documentSnapshot);
@@ -157,7 +157,7 @@ public class RazorComponentSearchEngineTest(ITestOutputHelper testOutput) : Lang
         var snapshot = StrictMock.Of<IDocumentSnapshot>();
 
         // Act
-        var documentSnapshot = await searchEngine.TryLocateComponentAsync(snapshot, tagHelperDescriptor);
+        var documentSnapshot = await searchEngine.TryLocateComponentAsync(snapshot, tagHelperDescriptor, DisposalToken);
 
         // Assert
         Assert.Null(documentSnapshot);
@@ -172,7 +172,7 @@ public class RazorComponentSearchEngineTest(ITestOutputHelper testOutput) : Lang
         var snapshot = StrictMock.Of<IDocumentSnapshot>();
 
         // Act
-        var documentSnapshot = await searchEngine.TryLocateComponentAsync(snapshot, tagHelperDescriptor);
+        var documentSnapshot = await searchEngine.TryLocateComponentAsync(snapshot, tagHelperDescriptor, DisposalToken);
 
         // Assert
         Assert.Null(documentSnapshot);
@@ -187,7 +187,7 @@ public class RazorComponentSearchEngineTest(ITestOutputHelper testOutput) : Lang
         var snapshot = StrictMock.Of<IDocumentSnapshot>();
 
         // Act
-        var documentSnapshot = await searchEngine.TryLocateComponentAsync(snapshot, tagHelperDescriptor);
+        var documentSnapshot = await searchEngine.TryLocateComponentAsync(snapshot, tagHelperDescriptor, DisposalToken);
 
         // Assert
         Assert.Null(documentSnapshot);
@@ -202,7 +202,7 @@ public class RazorComponentSearchEngineTest(ITestOutputHelper testOutput) : Lang
         var snapshot = StrictMock.Of<IDocumentSnapshot>();
 
         // Act
-        var documentSnapshot = await searchEngine.TryLocateComponentAsync(snapshot, tagHelperDescriptor);
+        var documentSnapshot = await searchEngine.TryLocateComponentAsync(snapshot, tagHelperDescriptor, DisposalToken);
 
         // Assert
         Assert.NotNull(documentSnapshot);

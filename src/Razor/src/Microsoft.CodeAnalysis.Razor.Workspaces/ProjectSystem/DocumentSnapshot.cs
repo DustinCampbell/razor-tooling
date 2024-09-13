@@ -57,25 +57,25 @@ internal class DocumentSnapshot(ProjectSnapshot project, DocumentState state) : 
 
     public async Task<SyntaxTree> GetCSharpSyntaxTreeAsync(CancellationToken cancellationToken)
     {
-        var codeDocument = await GetGeneratedOutputAsync(forceDesignTimeGeneratedOutput: false).ConfigureAwait(false);
+        var codeDocument = await GetGeneratedOutputAsync(forceDesignTimeGeneratedOutput: false, cancellationToken).ConfigureAwait(false);
         var csharpText = codeDocument.GetCSharpSourceText();
         return CSharpSyntaxTree.ParseText(csharpText, cancellationToken: cancellationToken);
     }
 
-    public virtual async Task<RazorCodeDocument> GetGeneratedOutputAsync(bool forceDesignTimeGeneratedOutput)
+    public virtual async ValueTask<RazorCodeDocument> GetGeneratedOutputAsync(bool forceDesignTimeGeneratedOutput, CancellationToken cancellationToken)
     {
         if (forceDesignTimeGeneratedOutput)
         {
-            return await GetDesignTimeGeneratedOutputAsync().ConfigureAwait(false);
+            return await GetDesignTimeGeneratedOutputAsync(cancellationToken).ConfigureAwait(false);
         }
 
         var (output, _) = await _state.GetGeneratedOutputAndVersionAsync(_project, this).ConfigureAwait(false);
         return output;
     }
 
-    private async Task<RazorCodeDocument> GetDesignTimeGeneratedOutputAsync()
+    private async Task<RazorCodeDocument> GetDesignTimeGeneratedOutputAsync(CancellationToken cancellationToken)
     {
-        var tagHelpers = await _project.GetTagHelpersAsync(CancellationToken.None).ConfigureAwait(false);
+        var tagHelpers = await _project.GetTagHelpersAsync(cancellationToken).ConfigureAwait(false);
         var projectEngine = _project.GetProjectEngine();
         var imports = await this.GetImportsAsync(projectEngine).ConfigureAwait(false);
         return await this.GenerateCodeDocumentAsync(projectEngine, imports, tagHelpers, forceRuntimeCodeGeneration: false).ConfigureAwait(false);
