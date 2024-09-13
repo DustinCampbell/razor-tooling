@@ -170,7 +170,7 @@ internal partial class DocumentState
             var configurationVersion = project.State.ConfigurationVersion;
             var projectWorkspaceStateVersion = project.State.ProjectWorkspaceStateVersion;
             var documentCollectionVersion = project.State.DocumentCollectionVersion;
-            var imports = await GetImportsAsync(document, project.GetProjectEngine()).ConfigureAwait(false);
+            var imports = await document.GetImportsAsync(project.GetProjectEngine()).ConfigureAwait(false);
             var documentVersion = await document.GetTextVersionAsync().ConfigureAwait(false);
 
             // OK now that have the previous output and all of the versions, we can see if anything
@@ -218,7 +218,7 @@ internal partial class DocumentState
 
             var tagHelpers = await project.GetTagHelpersAsync(CancellationToken.None).ConfigureAwait(false);
             var forceRuntimeCodeGeneration = project.Configuration.LanguageServerFlags?.ForceRuntimeCodeGeneration ?? false;
-            var codeDocument = await GenerateCodeDocumentAsync(document, project.GetProjectEngine(), imports, tagHelpers, forceRuntimeCodeGeneration).ConfigureAwait(false);
+            var codeDocument = await document.GenerateCodeDocumentAsync(project.GetProjectEngine(), imports, tagHelpers, forceRuntimeCodeGeneration).ConfigureAwait(false);
             return (codeDocument, inputVersion);
         }
 

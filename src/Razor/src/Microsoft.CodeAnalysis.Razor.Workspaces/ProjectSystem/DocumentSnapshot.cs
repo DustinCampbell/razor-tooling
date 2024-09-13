@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
+using Microsoft.AspNetCore.Razor.Threading;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
 
@@ -41,9 +42,7 @@ internal class DocumentSnapshot(ProjectSnapshot project, DocumentState state) : 
     {
         if (_state.IsGeneratedOutputResultAvailable)
         {
-#pragma warning disable VSTHRD002 // Avoid problematic synchronous waits
-            result = _state.GetGeneratedOutputAndVersionAsync(_project, this).Result.output;
-#pragma warning restore VSTHRD002 // Avoid problematic synchronous waits
+            result = _state.GetGeneratedOutputAndVersionAsync(_project, this).VerifyCompleted().output;
             return true;
         }
 
@@ -78,7 +77,7 @@ internal class DocumentSnapshot(ProjectSnapshot project, DocumentState state) : 
     {
         var tagHelpers = await _project.GetTagHelpersAsync(CancellationToken.None).ConfigureAwait(false);
         var projectEngine = _project.GetProjectEngine();
-        var imports = await DocumentState.GetImportsAsync(this, projectEngine).ConfigureAwait(false);
-        return await DocumentState.GenerateCodeDocumentAsync(this, projectEngine, imports, tagHelpers, forceRuntimeCodeGeneration: false).ConfigureAwait(false);
+        var imports = await this.GetImportsAsync(projectEngine).ConfigureAwait(false);
+        return await this.GenerateCodeDocumentAsync(projectEngine, imports, tagHelpers, forceRuntimeCodeGeneration: false).ConfigureAwait(false);
     }
 }

@@ -46,7 +46,7 @@ internal class ImportDocumentSnapshot : IDocumentSnapshot
         return _sourceText;
     }
 
-    public Task<RazorCodeDocument> GetGeneratedOutputAsync(bool _)
+    public Task<RazorCodeDocument> GetGeneratedOutputAsync(bool forceDesignTimeGeneratedOutput)
         => throw new NotSupportedException();
 
     public Task<VersionStamp> GetTextVersionAsync()

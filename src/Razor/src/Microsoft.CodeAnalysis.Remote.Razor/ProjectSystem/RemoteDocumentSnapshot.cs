@@ -44,7 +44,7 @@ internal class RemoteDocumentSnapshot(TextDocument textDocument, RemoteProjectSn
 
     public bool TryGetTextVersion(out VersionStamp result) => _textDocument.TryGetTextVersion(out result);
 
-    public async Task<RazorCodeDocument> GetGeneratedOutputAsync(bool _)
+    public async Task<RazorCodeDocument> GetGeneratedOutputAsync(bool forceDesignTimeGeneratedOutput)
     {
         // TODO: We don't need to worry about locking if we get called from the didOpen/didChange LSP requests, as CLaSP
         //       takes care of that for us, and blocks requests until those are complete. If that doesn't end up happening,
@@ -64,13 +64,13 @@ internal class RemoteDocumentSnapshot(TextDocument textDocument, RemoteProjectSn
 
         var projectEngine = _projectSnapshot.GetProjectEngine_CohostOnly();
         var tagHelpers = await _projectSnapshot.GetTagHelpersAsync(CancellationToken.None).ConfigureAwait(false);
-        var imports = await DocumentState.GetImportsAsync(this, projectEngine).ConfigureAwait(false);
+        var imports = await this.GetImportsAsync(projectEngine).ConfigureAwait(false);
 
         // TODO: Get the configuration for forceRuntimeCodeGeneration
         // var forceRuntimeCodeGeneration = _projectSnapshot.Configuration.LanguageServerFlags?.ForceRuntimeCodeGeneration ?? false;
 
-        codeDocument = await DocumentState
-            .GenerateCodeDocumentAsync(this, projectEngine, imports, tagHelpers, forceRuntimeCodeGeneration: false)
+        codeDocument = await this
+            .GenerateCodeDocumentAsync(projectEngine, imports, tagHelpers, forceRuntimeCodeGeneration: false)
             .ConfigureAwait(false);
 
         return InterlockedOperations.Initialize(ref _codeDocument, codeDocument);

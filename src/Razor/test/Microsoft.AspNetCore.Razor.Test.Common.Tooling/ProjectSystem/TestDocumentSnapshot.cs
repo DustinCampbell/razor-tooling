@@ -56,7 +56,7 @@ internal class TestDocumentSnapshot(ProjectSnapshot projectSnapshot, DocumentSta
         return new TestDocumentSnapshot(projectSnapshot, documentState);
     }
 
-    public override Task<RazorCodeDocument> GetGeneratedOutputAsync(bool _)
+    public override Task<RazorCodeDocument> GetGeneratedOutputAsync(bool forceDesignTimeGeneratedOutput)
     {
         if (_codeDocument is null)
         {

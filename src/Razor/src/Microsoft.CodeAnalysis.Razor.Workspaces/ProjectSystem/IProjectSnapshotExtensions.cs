@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.PooledObjects;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Serialization;
+using Microsoft.AspNetCore.Razor.Threading;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
@@ -20,7 +21,7 @@ internal static class IProjectSnapshotExtensions
 
         foreach (var documentFilePath in project.DocumentFilePaths)
         {
-            if (project.GetDocument(documentFilePath) is { } document)
+            if (project.TryGetDocument(documentFilePath, out var document))
             {
                 var documentHandle = document.ToHandle();
 
@@ -44,12 +45,8 @@ internal static class IProjectSnapshotExtensions
             projectSnapshot.GetType().FullName == "Microsoft.VisualStudio.LegacyEditor.Razor.EphemeralProjectSnapshot";
 
         Debug.Assert(canResolveTagHelpersSynchronously, "The ProjectSnapshot in the VisualStudioDocumentTracker should not be a cohosted project.");
-        var tagHelperTask = projectSnapshot.GetTagHelpersAsync(CancellationToken.None);
-        Debug.Assert(tagHelperTask.IsCompleted, "GetTagHelpersAsync should be synchronous for non-cohosted projects.");
 
-#pragma warning disable VSTHRD002 // Avoid problematic synchronous waits
-        return tagHelperTask.Result;
-#pragma warning restore VSTHRD002 // Avoid problematic synchronous waits
+        return projectSnapshot.GetTagHelpersAsync(CancellationToken.None).VerifyCompleted();
     }
 
     public static ImmutableArray<IDocumentSnapshot> GetRelatedDocuments(this IProjectSnapshot projectSnapshot, IDocumentSnapshot document)
