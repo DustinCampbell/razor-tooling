@@ -167,38 +167,26 @@ internal partial class DocumentState
             // - This document
             //
             // All of these things are cached, so no work is wasted if we do need to generate the code.
-            var configurationVersion = project.State.ConfigurationVersion;
-            var projectWorkspaceStateVersion = project.State.ProjectWorkspaceStateVersion;
-            var documentCollectionVersion = project.State.DocumentCollectionVersion;
-            var projectEngine = project.GetProjectEngine();
-            var imports = await document.GetImportsAsync(projectEngine).ConfigureAwait(false);
+            var projectState = project.State;
+            var configurationVersion = projectState.ConfigurationVersion;
+            var projectWorkspaceStateVersion = projectState.ProjectWorkspaceStateVersion;
+            var documentCollectionVersion = projectState.DocumentCollectionVersion;
+
             var documentVersion = await document.GetTextVersionAsync(CancellationToken.None).ConfigureAwait(false);
 
             // OK now that have the previous output and all of the versions, we can see if anything
             // has changed that would require regenerating the code.
             var inputVersion = documentVersion;
-            if (inputVersion.GetNewerVersion(configurationVersion) == configurationVersion)
-            {
-                inputVersion = configurationVersion;
-            }
+            inputVersion = inputVersion.GetNewerVersion(configurationVersion);
+            inputVersion = inputVersion.GetNewerVersion(projectWorkspaceStateVersion);
+            inputVersion = inputVersion.GetNewerVersion(documentCollectionVersion);
 
-            if (inputVersion.GetNewerVersion(projectWorkspaceStateVersion) == projectWorkspaceStateVersion)
-            {
-                inputVersion = projectWorkspaceStateVersion;
-            }
-
-            if (inputVersion.GetNewerVersion(documentCollectionVersion) == documentCollectionVersion)
-            {
-                inputVersion = documentCollectionVersion;
-            }
+            var projectEngine = project.GetProjectEngine();
+            var imports = await document.GetImportsAsync(projectEngine).ConfigureAwait(false);
 
             foreach (var import in imports)
             {
-                var importVersion = import.Version;
-                if (inputVersion.GetNewerVersion(importVersion) == importVersion)
-                {
-                    inputVersion = importVersion;
-                }
+                inputVersion = inputVersion.GetNewerVersion(import.Version);
             }
 
             if (_older?._taskUnsafeReference != null &&

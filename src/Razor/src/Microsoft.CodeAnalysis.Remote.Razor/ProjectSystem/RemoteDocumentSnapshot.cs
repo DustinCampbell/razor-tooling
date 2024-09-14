@@ -26,7 +26,7 @@ internal class RemoteDocumentSnapshot(TextDocument textDocument, RemoteProjectSn
 
     public TextDocument TextDocument => _textDocument;
 
-    public string? FileKind => FileKinds.GetFileKindFromFilePath(FilePath);
+    public string FileKind => FileKinds.GetFileKindFromFilePath(FilePath);
 
     public string? FilePath => _textDocument.FilePath;
 

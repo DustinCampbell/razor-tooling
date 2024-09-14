@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.PooledObjects;
+using Microsoft.CodeAnalysis.Text;
 using static Microsoft.CodeAnalysis.Razor.ProjectSystem.DocumentState;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
@@ -70,7 +71,7 @@ internal static class IDocumentSnapshotExtensions
         foreach (var snapshot in imports)
         {
             var versionStamp = await snapshot.GetTextVersionAsync(CancellationToken.None).ConfigureAwait(false);
-            result.Add(new ImportItem(snapshot.FilePath, versionStamp, snapshot));
+            result.Add(new ImportItem(snapshot, versionStamp));
         }
 
         return result.DrainToImmutable();
@@ -119,7 +120,8 @@ internal static class IDocumentSnapshotExtensions
         return imports.ToImmutable();
     }
 
-    internal static async Task<RazorCodeDocument> GenerateCodeDocumentAsync(this IDocumentSnapshot document,
+    internal static async Task<RazorCodeDocument> GenerateCodeDocumentAsync(
+        this IDocumentSnapshot document,
         RazorProjectEngine projectEngine,
         ImmutableArray<ImportItem> imports,
         ImmutableArray<TagHelperDescriptor> tagHelpers,
@@ -150,4 +152,51 @@ internal static class IDocumentSnapshotExtensions
         var sourceText = await document.GetTextAsync(CancellationToken.None).ConfigureAwait(false);
         return RazorSourceDocument.Create(sourceText, RazorSourceDocumentProperties.Create(document.FilePath, projectItem?.RelativePhysicalPath));
     }
+
+    internal static async Task<RazorCodeDocument> GenerateCodeDocumentAsync(
+        this IDocumentSnapshot document,
+        RazorProjectEngine projectEngine,
+        ImmutableArray<RazorSourceDocument> importSources,
+        ImmutableArray<TagHelperDescriptor> tagHelpers,
+        bool forceRuntimeCodeGeneration,
+        CancellationToken cancellationToken)
+    {
+        // OK we have to generate the code.
+        var source = await document.ToRazorSourceDocumentAsync(projectEngine, cancellationToken).ConfigureAwait(false);
+
+        if (forceRuntimeCodeGeneration)
+        {
+            return projectEngine.Process(source, document.FileKind, importSources, tagHelpers);
+        }
+
+        return projectEngine.ProcessDesignTime(source, document.FileKind, importSources, tagHelpers);
+    }
+
+    public static ValueTask<RazorSourceDocument> ToRazorSourceDocumentAsync(
+        this IDocumentSnapshot document,
+        RazorProjectEngine projectEngine,
+        CancellationToken cancellationToken)
+    {
+        var projectItem = document.FilePath is string filePath
+            ? projectEngine.FileSystem.GetItem(filePath, document.FileKind)
+            : null;
+
+        return CreateRazorSourceDocumentAsync(document, projectItem, cancellationToken);
+    }
+
+    private static ValueTask<RazorSourceDocument> CreateRazorSourceDocumentAsync(IDocumentSnapshot document, RazorProjectItem? projectItem, CancellationToken cancellationToken)
+    {
+        return document.TryGetText(out var sourceText)
+            ? new(CreateRazorSourceDocument(sourceText, document.FilePath, projectItem))
+            : CreateRazorSourceDocumentCoreAsync(document, projectItem, cancellationToken);
+
+        static async ValueTask<RazorSourceDocument> CreateRazorSourceDocumentCoreAsync(IDocumentSnapshot document, RazorProjectItem? projectItem, CancellationToken cancellationToken)
+        {
+            var sourceText = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
+            return CreateRazorSourceDocument(sourceText, document.FilePath, projectItem);
+        }
+    }
+
+    private static RazorSourceDocument CreateRazorSourceDocument(SourceText sourceText, string? filePath, RazorProjectItem? projectItem)
+        => RazorSourceDocument.Create(sourceText, RazorSourceDocumentProperties.Create(filePath, projectItem?.RelativePhysicalPath));
 }
