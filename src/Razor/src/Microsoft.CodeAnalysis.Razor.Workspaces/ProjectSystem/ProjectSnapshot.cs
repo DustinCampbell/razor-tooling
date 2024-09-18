@@ -43,7 +43,7 @@ internal class ProjectSnapshot(ProjectState state) : IProjectSnapshot
 
     public HostProject HostProject => _state.HostProject;
 
-    public virtual VersionStamp Version => _state.Version;
+    public VersionStamp Version => _state.Version;
 
     public VersionStamp ConfigurationVersion => _state.ConfigurationVersion;
 
@@ -55,7 +55,7 @@ internal class ProjectSnapshot(ProjectState state) : IProjectSnapshot
 
     public ProjectWorkspaceState ProjectWorkspaceState => _state.ProjectWorkspaceState;
 
-    public virtual IDocumentSnapshot? GetDocument(string filePath)
+    public IDocumentSnapshot? GetDocument(string filePath)
     {
         lock (_lock)
         {
