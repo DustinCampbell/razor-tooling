@@ -2,18 +2,16 @@
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Utilities;
+using Microsoft.CodeAnalysis.Razor;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
+using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.ProjectSystem;
 
-internal sealed class MiscFilesHostProject : HostProject
+internal sealed record class MiscFilesHostProject : HostProject
 {
     public static MiscFilesHostProject Instance { get; } = Create();
 
@@ -26,14 +24,27 @@ internal sealed class MiscFilesHostProject : HostProject
 
     private MiscFilesHostProject(
         string directory,
-        string projectFilePath,
+        string filePath,
         string intermediateOutputPath,
-        RazorConfiguration razorConfiguration,
-        string? rootNamespace, string?
-        displayName = null)
-        : base(projectFilePath, intermediateOutputPath, razorConfiguration, rootNamespace, displayName)
+        RazorConfiguration configuration,
+        string? rootNamespace,
+        string displayName)
+        : base(filePath, intermediateOutputPath, configuration, rootNamespace, displayName)
     {
         DirectoryPath = directory;
+    }
+
+    public bool Equals(MiscFilesHostProject? other)
+        => base.Equals(other) &&
+           FilePathComparer.Instance.Equals(DirectoryPath, other.DirectoryPath);
+
+    public override int GetHashCode()
+    {
+        var hash = HashCodeCombiner.Start();
+        hash.Add(base.GetHashCode());
+        hash.Add(DirectoryPath, FilePathComparer.Instance);
+
+        return hash.CombinedHash;
     }
 
     private static MiscFilesHostProject Create()

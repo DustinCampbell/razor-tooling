@@ -6,10 +6,10 @@ using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
 namespace Microsoft.VisualStudio.Razor.ProjectSystem;
 
-internal class FallbackHostProject : HostProject
+internal sealed record FallbackHostProject : HostProject
 {
-    public FallbackHostProject(string projectFilePath, string intermediateOutputPath, RazorConfiguration razorConfiguration, string? rootNamespace, string displayName)
-        : base(projectFilePath, intermediateOutputPath, razorConfiguration, rootNamespace, displayName)
+    public FallbackHostProject(string filePath, string intermediateOutputPath, RazorConfiguration configuration, string? rootNamespace, string displayName)
+        : base(filePath, intermediateOutputPath, configuration, rootNamespace, displayName)
     {
     }
 }

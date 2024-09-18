@@ -19,9 +19,9 @@ namespace Microsoft.AspNetCore.Razor.LanguageServer;
 public class CodeDocumentReferenceHolderTest(ITestOutputHelper testOutput) : LanguageServerTestBase(testOutput)
 {
     private static readonly HostProject s_hostProject = new(
-        projectFilePath: "C:/path/to/project.csproj",
+        filePath: "C:/path/to/project.csproj",
         intermediateOutputPath: "C:/path/to/obj",
-        razorConfiguration: RazorConfiguration.Default,
+        configuration: RazorConfiguration.Default,
         rootNamespace: "TestNamespace");
 
     private static readonly HostDocument s_hostDocument = new("C:/path/to/file.razor", "file.razor");

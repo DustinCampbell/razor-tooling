@@ -40,9 +40,8 @@ public class IProjectSnapshotManagerExtensionsTest(ITestOutputHelper testOutput)
         await projectManager.UpdateAsync(updater =>
         {
             var miscProject = projectManager.GetMiscellaneousProject();
-            var hostProject = new HostProject(miscProject.FilePath, miscProject.IntermediateOutputPath, FallbackRazorConfiguration.Latest, miscProject.RootNamespace);
             updater.DocumentAdded(
-                hostProject.Key,
+                miscProject.Key,
                 new HostDocument(normalizedFilePath, "document.cshtml"),
                 new EmptyTextLoader(normalizedFilePath));
         });
