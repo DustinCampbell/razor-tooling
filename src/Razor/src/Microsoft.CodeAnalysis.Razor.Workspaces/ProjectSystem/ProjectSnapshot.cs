@@ -18,52 +18,58 @@ namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
 internal class ProjectSnapshot : IProjectSnapshot
 {
+    private readonly ProjectState _state;
+
     private readonly object _lock;
 
     private readonly Dictionary<string, DocumentSnapshot> _documents;
 
     public ProjectSnapshot(ProjectState state)
     {
-        State = state ?? throw new ArgumentNullException(nameof(state));
+        _state = state;
 
         _lock = new object();
         _documents = new Dictionary<string, DocumentSnapshot>(FilePathNormalizingComparer.Instance);
     }
 
-    public ProjectKey Key => State.HostProject.Key;
-
-    public ProjectState State { get; }
+    public ProjectKey Key => _state.HostProject.Key;
 
     public RazorConfiguration Configuration => HostProject.Configuration;
 
-    public IEnumerable<string> DocumentFilePaths => State.Documents.Keys;
+    public IEnumerable<string> DocumentFilePaths => _state.Documents.Keys;
 
-    public int DocumentCount => State.Documents.Count;
+    public int DocumentCount => _state.Documents.Count;
 
-    public string FilePath => State.HostProject.FilePath;
+    public string FilePath => _state.HostProject.FilePath;
 
-    public string IntermediateOutputPath => State.HostProject.IntermediateOutputPath;
+    public string IntermediateOutputPath => _state.HostProject.IntermediateOutputPath;
 
-    public string? RootNamespace => State.HostProject.RootNamespace;
+    public string? RootNamespace => _state.HostProject.RootNamespace;
 
-    public string DisplayName => State.HostProject.DisplayName;
+    public string DisplayName => _state.HostProject.DisplayName;
 
-    public LanguageVersion CSharpLanguageVersion => State.CSharpLanguageVersion;
+    public LanguageVersion CSharpLanguageVersion => _state.CSharpLanguageVersion;
 
-    public HostProject HostProject => State.HostProject;
+    public HostProject HostProject => _state.HostProject;
 
-    public virtual VersionStamp Version => State.Version;
+    public virtual VersionStamp Version => _state.Version;
 
-    public ValueTask<ImmutableArray<TagHelperDescriptor>> GetTagHelpersAsync(CancellationToken cancellationToken) => new(State.TagHelpers);
+    public VersionStamp ConfigurationVersion => _state.ConfigurationVersion;
 
-    public ProjectWorkspaceState ProjectWorkspaceState => State.ProjectWorkspaceState;
+    public VersionStamp DocumentCollectionVersion => _state.DocumentCollectionVersion;
+
+    public VersionStamp ProjectWorkspaceStateVersion => _state.ProjectWorkspaceStateVersion;
+
+    public ValueTask<ImmutableArray<TagHelperDescriptor>> GetTagHelpersAsync(CancellationToken cancellationToken) => new(_state.TagHelpers);
+
+    public ProjectWorkspaceState ProjectWorkspaceState => _state.ProjectWorkspaceState;
 
     public virtual IDocumentSnapshot? GetDocument(string filePath)
     {
         lock (_lock)
         {
             if (!_documents.TryGetValue(filePath, out var result) &&
-                State.Documents.TryGetValue(filePath, out var state))
+                _state.Documents.TryGetValue(filePath, out var state))
             {
                 result = new DocumentSnapshot(this, state);
                 _documents.Add(filePath, result);
@@ -93,7 +99,7 @@ internal class ProjectSnapshot : IProjectSnapshot
 
         var targetPath = document.TargetPath.AssumeNotNull();
 
-        if (!State.ImportsToRelatedDocuments.TryGetValue(targetPath, out var relatedDocuments))
+        if (!_state.ImportsToRelatedDocuments.TryGetValue(targetPath, out var relatedDocuments))
         {
             return ImmutableArray<IDocumentSnapshot>.Empty;
         }
@@ -116,6 +122,6 @@ internal class ProjectSnapshot : IProjectSnapshot
 
     public virtual RazorProjectEngine GetProjectEngine()
     {
-        return State.ProjectEngine;
+        return _state.ProjectEngine;
     }
 }
