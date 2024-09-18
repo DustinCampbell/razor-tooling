@@ -1,7 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
-using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,10 +10,10 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
-internal class DocumentSnapshot : IDocumentSnapshot
+internal class DocumentSnapshot(ProjectSnapshot project, DocumentState state) : IDocumentSnapshot
 {
-    private readonly ProjectSnapshot _project;
-    private readonly DocumentState _state;
+    private readonly ProjectSnapshot _project = project;
+    private readonly DocumentState _state = state;
 
     public HostDocument HostDocument => _state.HostDocument;
 
@@ -25,12 +24,6 @@ internal class DocumentSnapshot : IDocumentSnapshot
     public bool SupportsOutput => true;
 
     public int Version => _state.Version;
-
-    public DocumentSnapshot(ProjectSnapshot project, DocumentState state)
-    {
-        _project = project ?? throw new ArgumentNullException(nameof(project));
-        _state = state ?? throw new ArgumentNullException(nameof(state));
-    }
 
     public Task<SourceText> GetTextAsync()
         => _state.GetTextAsync();
