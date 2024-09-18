@@ -20,12 +20,25 @@ public class OpenDocumentGeneratorTest(ITestOutputHelper testOutput) : LanguageS
 {
     private readonly HostDocument[] _documents =
     [
-        new HostDocument("c:/Test1/Index.cshtml", "Index.cshtml"),
-        new HostDocument("c:/Test1/Components/Counter.cshtml", "Components/Counter.cshtml"),
+        new HostDocument(
+            filePath: "c:/Test1/Index.cshtml",
+            targetPath: "Index.cshtml"),
+        new HostDocument(
+            filePath: "c:/Test1/Components/Counter.cshtml",
+            targetPath: "Components/Counter.cshtml"),
     ];
 
-    private readonly HostProject _hostProject1 = new("c:/Test1/Test1.csproj", "c:/Test1/obj", RazorConfiguration.Default, "TestRootNamespace");
-    private readonly HostProject _hostProject2 = new("c:/Test2/Test2.csproj", "c:/Test2/obj", RazorConfiguration.Default, "TestRootNamespace");
+    private static readonly HostProject s_hostProject1 = new(
+        filePath: "c:/Test1/Test1.csproj",
+        intermediateOutputPath: "c:/Test1/obj",
+        RazorConfiguration.Default,
+        "TestRootNamespace");
+
+    private static readonly HostProject s_hostProject2 = new(
+        filePath: "c:/Test2/Test2.csproj",
+        intermediateOutputPath: "c:/Test2/obj",
+        RazorConfiguration.Default,
+        "TestRootNamespace");
 
     [Fact]
     public async Task DocumentAdded_ProcessesOpenDocument()
@@ -37,10 +50,10 @@ public class OpenDocumentGeneratorTest(ITestOutputHelper testOutput) : LanguageS
 
         await projectManager.UpdateAsync(updater =>
         {
-            updater.ProjectAdded(_hostProject1);
-            updater.ProjectAdded(_hostProject2);
-            updater.DocumentAdded(_hostProject1.Key, _documents[0], null!);
-            updater.DocumentOpened(_hostProject1.Key, _documents[0].FilePath, SourceText.From(string.Empty));
+            updater.ProjectAdded(s_hostProject1);
+            updater.ProjectAdded(s_hostProject2);
+            updater.DocumentAdded(s_hostProject1.Key, _documents[0], null!);
+            updater.DocumentOpened(s_hostProject1.Key, _documents[0].FilePath, SourceText.From(string.Empty));
         });
 
         await listener.GetProcessedDocumentAsync(cancelAfter: TimeSpan.FromSeconds(10));
@@ -48,13 +61,13 @@ public class OpenDocumentGeneratorTest(ITestOutputHelper testOutput) : LanguageS
 
         await projectManager.UpdateAsync(updater =>
         {
-            updater.DocumentRemoved(_hostProject1.Key, _documents[0]);
-            updater.DocumentAdded(_hostProject2.Key, _documents[0], null!);
+            updater.DocumentRemoved(s_hostProject1.Key, _documents[0]);
+            updater.DocumentAdded(s_hostProject2.Key, _documents[0], null!);
         });
 
         // Assert
         var document = await listener.GetProcessedDocumentAsync(cancelAfter: TimeSpan.FromSeconds(10));
-        Assert.Equal(_hostProject2.Key, document.Project.Key);
+        Assert.Equal(s_hostProject2.Key, document.Project.Key);
         Assert.Equal(_documents[0].FilePath, document.FilePath);
     }
 
@@ -68,11 +81,11 @@ public class OpenDocumentGeneratorTest(ITestOutputHelper testOutput) : LanguageS
 
         await projectManager.UpdateAsync(updater =>
         {
-            updater.ProjectAdded(_hostProject1);
-            updater.ProjectAdded(_hostProject2);
+            updater.ProjectAdded(s_hostProject1);
+            updater.ProjectAdded(s_hostProject2);
 
             // Act
-            updater.DocumentAdded(_hostProject1.Key, _documents[0], null!);
+            updater.DocumentAdded(s_hostProject1.Key, _documents[0], null!);
         });
 
         // Assert
@@ -89,12 +102,12 @@ public class OpenDocumentGeneratorTest(ITestOutputHelper testOutput) : LanguageS
 
         await projectManager.UpdateAsync(updater =>
         {
-            updater.ProjectAdded(_hostProject1);
-            updater.ProjectAdded(_hostProject2);
-            updater.DocumentAdded(_hostProject1.Key, _documents[0], null!);
+            updater.ProjectAdded(s_hostProject1);
+            updater.ProjectAdded(s_hostProject2);
+            updater.DocumentAdded(s_hostProject1.Key, _documents[0], null!);
 
             // Act
-            updater.DocumentChanged(_hostProject1.Key, _documents[0].FilePath, SourceText.From("new"));
+            updater.DocumentChanged(s_hostProject1.Key, _documents[0].FilePath, SourceText.From("new"));
         });
 
         // Assert
@@ -111,13 +124,13 @@ public class OpenDocumentGeneratorTest(ITestOutputHelper testOutput) : LanguageS
 
         await projectManager.UpdateAsync(updater =>
         {
-            updater.ProjectAdded(_hostProject1);
-            updater.ProjectAdded(_hostProject2);
-            updater.DocumentAdded(_hostProject1.Key, _documents[0], null!);
-            updater.DocumentOpened(_hostProject1.Key, _documents[0].FilePath, SourceText.From(string.Empty));
+            updater.ProjectAdded(s_hostProject1);
+            updater.ProjectAdded(s_hostProject2);
+            updater.DocumentAdded(s_hostProject1.Key, _documents[0], null!);
+            updater.DocumentOpened(s_hostProject1.Key, _documents[0].FilePath, SourceText.From(string.Empty));
 
             // Act
-            updater.DocumentChanged(_hostProject1.Key, _documents[0].FilePath, SourceText.From("new"));
+            updater.DocumentChanged(s_hostProject1.Key, _documents[0].FilePath, SourceText.From("new"));
         });
 
         // Assert
@@ -136,12 +149,12 @@ public class OpenDocumentGeneratorTest(ITestOutputHelper testOutput) : LanguageS
 
         await projectManager.UpdateAsync(updater =>
         {
-            updater.ProjectAdded(_hostProject1);
-            updater.ProjectAdded(_hostProject2);
-            updater.DocumentAdded(_hostProject1.Key, _documents[0], null!);
+            updater.ProjectAdded(s_hostProject1);
+            updater.ProjectAdded(s_hostProject2);
+            updater.DocumentAdded(s_hostProject1.Key, _documents[0], null!);
 
             // Act
-            updater.ProjectWorkspaceStateChanged(_hostProject1.Key,
+            updater.ProjectWorkspaceStateChanged(s_hostProject1.Key,
                 ProjectWorkspaceState.Create(LanguageVersion.CSharp8));
         });
 
@@ -159,13 +172,13 @@ public class OpenDocumentGeneratorTest(ITestOutputHelper testOutput) : LanguageS
 
         await projectManager.UpdateAsync(updater =>
         {
-            updater.ProjectAdded(_hostProject1);
-            updater.ProjectAdded(_hostProject2);
-            updater.DocumentAdded(_hostProject1.Key, _documents[0], null!);
-            updater.DocumentOpened(_hostProject1.Key, _documents[0].FilePath, SourceText.From(string.Empty));
+            updater.ProjectAdded(s_hostProject1);
+            updater.ProjectAdded(s_hostProject2);
+            updater.DocumentAdded(s_hostProject1.Key, _documents[0], null!);
+            updater.DocumentOpened(s_hostProject1.Key, _documents[0].FilePath, SourceText.From(string.Empty));
 
             // Act
-            updater.ProjectWorkspaceStateChanged(_hostProject1.Key,
+            updater.ProjectWorkspaceStateChanged(s_hostProject1.Key,
                 ProjectWorkspaceState.Create(LanguageVersion.CSharp8));
         });
 

@@ -1,8 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
-#nullable disable
-
 using System.Collections.Immutable;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,6 +20,25 @@ namespace Microsoft.AspNetCore.Razor.LanguageServer.Test.Completion;
 
 public class TagHelperTooltipFactoryBaseTest(ITestOutputHelper testOutput) : LanguageServerTestBase(testOutput)
 {
+    private static readonly HostProject s_hostProject1 = new(
+        filePath: "C:/path/to/project.csproj",
+        intermediateOutputPath: "C:/path/to/obj/1",
+        RazorConfiguration.Default,
+        rootNamespace: null,
+        displayName: "project1");
+
+    private static readonly HostProject s_hostProject2 = new(
+        filePath: "C:/path/to/project.csproj",
+        intermediateOutputPath: "C:/path/to/obj/2",
+        RazorConfiguration.Default,
+        rootNamespace: null,
+        displayName: "project2");
+
+    private static readonly HostDocument s_hostDocument = new(
+        filePath: "C:/path/to/file.razor",
+        targetPath: "file.razor",
+        FileKinds.Component);
+
     [Fact]
     public void ReduceTypeName_Plain()
     {
@@ -357,30 +374,18 @@ There is no xml, but I got you this < and the >.
         var tagHelpers = ImmutableArray.Create(builder.Build());
         var projectWorkspaceState = ProjectWorkspaceState.Create(tagHelpers);
 
-        var hostProject = new HostProject(
-            "C:/path/to/project.csproj",
-            "C:/path/to/obj/1",
-            RazorConfiguration.Default,
-            rootNamespace: null,
-            displayName: "project");
-
-        var hostDocument = new HostDocument(
-            "C:/path/to/file.razor",
-            "file.razor",
-            FileKinds.Component);
-
         var projectManager = CreateProjectSnapshotManager();
 
         await projectManager.UpdateAsync(updater =>
         {
-            updater.ProjectAdded(hostProject);
-            updater.ProjectWorkspaceStateChanged(hostProject.Key, projectWorkspaceState);
-            updater.DocumentAdded(hostProject.Key, hostDocument, TestMocks.CreateTextLoader(hostDocument.FilePath, text: ""));
+            updater.ProjectAdded(s_hostProject1);
+            updater.ProjectWorkspaceStateChanged(s_hostProject1.Key, projectWorkspaceState);
+            updater.DocumentAdded(s_hostProject1.Key, s_hostDocument, TestMocks.CreateTextLoader(s_hostDocument.FilePath, text: ""));
         });
 
         var service = new TestTagHelperToolTipFactory(projectManager);
 
-        var availability = await service.GetProjectAvailabilityAsync(hostDocument.FilePath, tagHelperTypeName, CancellationToken.None);
+        var availability = await service.GetProjectAvailabilityAsync(s_hostDocument.FilePath, tagHelperTypeName, CancellationToken.None);
 
         Assert.Null(availability);
     }
@@ -395,41 +400,22 @@ There is no xml, but I got you this < and the >.
         var tagHelpers = ImmutableArray.Create(builder.Build());
         var projectWorkspaceState = ProjectWorkspaceState.Create(tagHelpers);
 
-        var hostProject1 = new HostProject(
-            "C:/path/to/project.csproj",
-            "C:/path/to/obj/1",
-            RazorConfiguration.Default,
-            rootNamespace: null,
-            displayName: "project1");
-
-        var hostProject2 = new HostProject(
-            "C:/path/to/project.csproj",
-            "C:/path/to/obj/2",
-            RazorConfiguration.Default,
-            rootNamespace: null,
-            displayName: "project2");
-
-        var hostDocument = new HostDocument(
-            "C:/path/to/file.razor",
-            "file.razor",
-            FileKinds.Component);
-
         var projectManager = CreateProjectSnapshotManager();
 
         await projectManager.UpdateAsync(updater =>
         {
-            updater.ProjectAdded(hostProject1);
-            updater.ProjectWorkspaceStateChanged(hostProject1.Key, projectWorkspaceState);
-            updater.DocumentAdded(hostProject1.Key, hostDocument, TestMocks.CreateTextLoader(hostDocument.FilePath, text: ""));
+            updater.ProjectAdded(s_hostProject1);
+            updater.ProjectWorkspaceStateChanged(s_hostProject1.Key, projectWorkspaceState);
+            updater.DocumentAdded(s_hostProject1.Key, s_hostDocument, TestMocks.CreateTextLoader(s_hostDocument.FilePath, text: ""));
 
-            updater.ProjectAdded(hostProject2);
-            updater.ProjectWorkspaceStateChanged(hostProject2.Key, projectWorkspaceState);
-            updater.DocumentAdded(hostProject2.Key, hostDocument, TestMocks.CreateTextLoader(hostDocument.FilePath, text: ""));
+            updater.ProjectAdded(s_hostProject2);
+            updater.ProjectWorkspaceStateChanged(s_hostProject2.Key, projectWorkspaceState);
+            updater.DocumentAdded(s_hostProject2.Key, s_hostDocument, TestMocks.CreateTextLoader(s_hostDocument.FilePath, text: ""));
         });
 
         var service = new TestTagHelperToolTipFactory(projectManager);
 
-        var availability = await service.GetProjectAvailabilityAsync(hostDocument.FilePath, tagHelperTypeName, CancellationToken.None);
+        var availability = await service.GetProjectAvailabilityAsync(s_hostDocument.FilePath, tagHelperTypeName, CancellationToken.None);
 
         Assert.Null(availability);
     }
@@ -444,40 +430,21 @@ There is no xml, but I got you this < and the >.
         var tagHelpers = ImmutableArray.Create(builder.Build());
         var projectWorkspaceState = ProjectWorkspaceState.Create(tagHelpers);
 
-        var hostProject1 = new HostProject(
-            "C:/path/to/project.csproj",
-            "C:/path/to/obj/1",
-            RazorConfiguration.Default,
-            rootNamespace: null,
-            displayName: "project1");
-
-        var hostProject2 = new HostProject(
-            "C:/path/to/project.csproj",
-            "C:/path/to/obj/2",
-            RazorConfiguration.Default,
-            rootNamespace: null,
-            displayName: "project2");
-
-        var hostDocument = new HostDocument(
-            "C:/path/to/file.razor",
-            "file.razor",
-            FileKinds.Component);
-
         var projectManager = CreateProjectSnapshotManager();
 
         await projectManager.UpdateAsync(updater =>
         {
-            updater.ProjectAdded(hostProject1);
-            updater.ProjectWorkspaceStateChanged(hostProject1.Key, projectWorkspaceState);
-            updater.DocumentAdded(hostProject1.Key, hostDocument, TestMocks.CreateTextLoader(hostDocument.FilePath, text: ""));
+            updater.ProjectAdded(s_hostProject1);
+            updater.ProjectWorkspaceStateChanged(s_hostProject1.Key, projectWorkspaceState);
+            updater.DocumentAdded(s_hostProject1.Key, s_hostDocument, TestMocks.CreateTextLoader(s_hostDocument.FilePath, text: ""));
 
-            updater.ProjectAdded(hostProject2);
-            updater.DocumentAdded(hostProject2.Key, hostDocument, TestMocks.CreateTextLoader(hostDocument.FilePath, text: ""));
+            updater.ProjectAdded(s_hostProject2);
+            updater.DocumentAdded(s_hostProject2.Key, s_hostDocument, TestMocks.CreateTextLoader(s_hostDocument.FilePath, text: ""));
         });
 
         var service = new TestTagHelperToolTipFactory(projectManager);
 
-        var availability = await service.GetProjectAvailabilityAsync(hostDocument.FilePath, tagHelperTypeName, CancellationToken.None);
+        var availability = await service.GetProjectAvailabilityAsync(s_hostDocument.FilePath, tagHelperTypeName, CancellationToken.None);
 
         AssertEx.EqualOrDiff("""
 
@@ -489,39 +456,20 @@ There is no xml, but I got you this < and the >.
     [Fact]
     public async Task GetAvailableProjects_NotAvailableInAnyProject_ReturnsText()
     {
-        var hostProject1 = new HostProject(
-            "C:/path/to/project.csproj",
-            "C:/path/to/obj/1",
-            RazorConfiguration.Default,
-            rootNamespace: null,
-            displayName: "project1");
-
-        var hostProject2 = new HostProject(
-            "C:/path/to/project.csproj",
-            "C:/path/to/obj/2",
-            RazorConfiguration.Default,
-            rootNamespace: null,
-            displayName: "project2");
-
-        var hostDocument = new HostDocument(
-            "C:/path/to/file.razor",
-            "file.razor",
-            FileKinds.Component);
-
         var projectManager = CreateProjectSnapshotManager();
 
         await projectManager.UpdateAsync(updater =>
         {
-            updater.ProjectAdded(hostProject1);
-            updater.DocumentAdded(hostProject1.Key, hostDocument, TestMocks.CreateTextLoader(hostDocument.FilePath, text: ""));
+            updater.ProjectAdded(s_hostProject1);
+            updater.DocumentAdded(s_hostProject1.Key, s_hostDocument, TestMocks.CreateTextLoader(s_hostDocument.FilePath, text: ""));
 
-            updater.ProjectAdded(hostProject2);
-            updater.DocumentAdded(hostProject2.Key, hostDocument, TestMocks.CreateTextLoader(hostDocument.FilePath, text: ""));
+            updater.ProjectAdded(s_hostProject2);
+            updater.DocumentAdded(s_hostProject2.Key, s_hostDocument, TestMocks.CreateTextLoader(s_hostDocument.FilePath, text: ""));
         });
 
         var service = new TestTagHelperToolTipFactory(projectManager);
 
-        var availability = await service.GetProjectAvailabilityAsync(hostDocument.FilePath, "MyTagHelper", CancellationToken.None);
+        var availability = await service.GetProjectAvailabilityAsync(s_hostDocument.FilePath, "MyTagHelper", CancellationToken.None);
 
         AssertEx.EqualOrDiff("""
 
