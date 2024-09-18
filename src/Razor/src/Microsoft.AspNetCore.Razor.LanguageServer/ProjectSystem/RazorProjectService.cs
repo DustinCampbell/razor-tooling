@@ -515,7 +515,7 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
             var newFilePath = EnsureFullPath(documentHandle.FilePath, projectDirectory);
             var newHostDocument = new HostDocument(newFilePath, documentHandle.TargetPath, documentHandle.FileKind);
 
-            if (HostDocumentComparer.Instance.Equals(currentHostDocument, newHostDocument))
+            if (currentHostDocument == newHostDocument)
             {
                 // Current and "new" host documents are equivalent
                 continue;
