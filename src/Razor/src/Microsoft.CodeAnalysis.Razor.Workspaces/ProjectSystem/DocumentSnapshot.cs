@@ -21,7 +21,6 @@ internal class DocumentSnapshot(ProjectSnapshot project, DocumentState state) : 
     public string FilePath => _state.HostDocument.FilePath;
     public string TargetPath => _state.HostDocument.TargetPath;
     public IProjectSnapshot Project => _project;
-    public bool SupportsOutput => true;
 
     public int Version => _state.Version;
 
