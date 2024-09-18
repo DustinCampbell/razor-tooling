@@ -13,47 +13,20 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
-public class DefaultDocumentSnapshotTest : ToolingTestBase
+public class DocumentSnapshotTest(ITestOutputHelper testOutput) : ToolingTestBase(testOutput)
 {
-    private readonly SourceText _sourceText;
-    private readonly VersionStamp _version;
-    private readonly HostDocument _componentHostDocument;
-    private readonly HostDocument _componentCshtmlHostDocument;
-    private readonly HostDocument _legacyHostDocument;
-    private readonly DocumentSnapshot _componentDocument;
-    private readonly DocumentSnapshot _componentCshtmlDocument;
-    private readonly DocumentSnapshot _legacyDocument;
-    private readonly HostDocument _nestedComponentHostDocument;
-    private readonly DocumentSnapshot _nestedComponentDocument;
+    private readonly DocumentSnapshot _componentDocument = CreateDocumentSnapshot(TestProjectData.SomeProjectComponentFile1);
+    private readonly DocumentSnapshot _componentCshtmlDocument = CreateDocumentSnapshot(TestProjectData.SomeProjectCshtmlComponentFile5);
+    private readonly DocumentSnapshot _legacyDocument = CreateDocumentSnapshot(TestProjectData.SomeProjectFile1);
+    private readonly DocumentSnapshot _nestedComponentDocument = CreateDocumentSnapshot(TestProjectData.SomeProjectNestedComponentFile3);
 
-    public DefaultDocumentSnapshotTest(ITestOutputHelper testOutput)
-        : base(testOutput)
+    private static DocumentSnapshot CreateDocumentSnapshot(HostDocument hostDocument)
     {
-        _sourceText = SourceText.From("<p>Hello World</p>");
-        _version = VersionStamp.Create();
-
-        // Create a new HostDocument to avoid mutating the code container
-        _componentCshtmlHostDocument = TestProjectData.SomeProjectCshtmlComponentFile5;
-        _componentHostDocument = TestProjectData.SomeProjectComponentFile1;
-        _legacyHostDocument = TestProjectData.SomeProjectFile1;
-        _nestedComponentHostDocument = TestProjectData.SomeProjectNestedComponentFile3;
-
         var projectState = ProjectState.Create(ProjectEngineFactories.DefaultProvider, TestProjectData.SomeProject, ProjectWorkspaceState.Default);
         var project = new ProjectSnapshot(projectState);
 
-        var textAndVersion = TextAndVersion.Create(_sourceText, _version);
-
-        var documentState = DocumentState.Create(_legacyHostDocument, () => Task.FromResult(textAndVersion));
-        _legacyDocument = new DocumentSnapshot(project, documentState);
-
-        documentState = DocumentState.Create(_componentHostDocument, () => Task.FromResult(textAndVersion));
-        _componentDocument = new DocumentSnapshot(project, documentState);
-
-        documentState = DocumentState.Create(_componentCshtmlHostDocument, () => Task.FromResult(textAndVersion));
-        _componentCshtmlDocument = new DocumentSnapshot(project, documentState);
-
-        documentState = DocumentState.Create(_nestedComponentHostDocument, () => Task.FromResult(textAndVersion));
-        _nestedComponentDocument = new DocumentSnapshot(project, documentState);
+        return new DocumentSnapshot(project, DocumentState.Create(hostDocument,
+            () => Task.FromResult(TextAndVersion.Create(SourceText.From("<p>Hello World</p>"), VersionStamp.Create()))));
     }
 
     [Fact]
