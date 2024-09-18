@@ -13,6 +13,7 @@ namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
 internal class DocumentSnapshot : IDocumentSnapshot
 {
+    private readonly ProjectSnapshot _project;
     private readonly DocumentState _state;
 
     public HostDocument HostDocument => _state.HostDocument;
@@ -20,16 +21,14 @@ internal class DocumentSnapshot : IDocumentSnapshot
     public string FileKind => _state.HostDocument.FileKind;
     public string FilePath => _state.HostDocument.FilePath;
     public string TargetPath => _state.HostDocument.TargetPath;
-    public IProjectSnapshot Project => ProjectInternal;
+    public IProjectSnapshot Project => _project;
     public bool SupportsOutput => true;
 
     public int Version => _state.Version;
 
-    public ProjectSnapshot ProjectInternal { get; }
-
     public DocumentSnapshot(ProjectSnapshot project, DocumentState state)
     {
-        ProjectInternal = project ?? throw new ArgumentNullException(nameof(project));
+        _project = project ?? throw new ArgumentNullException(nameof(project));
         _state = state ?? throw new ArgumentNullException(nameof(state));
     }
 
@@ -50,7 +49,7 @@ internal class DocumentSnapshot : IDocumentSnapshot
         if (_state.IsGeneratedOutputResultAvailable)
         {
 #pragma warning disable VSTHRD002 // Avoid problematic synchronous waits
-            result = _state.GetGeneratedOutputAndVersionAsync(ProjectInternal, this).Result.output;
+            result = _state.GetGeneratedOutputAndVersionAsync(_project, this).Result.output;
 #pragma warning restore VSTHRD002 // Avoid problematic synchronous waits
             return true;
         }
@@ -61,7 +60,7 @@ internal class DocumentSnapshot : IDocumentSnapshot
 
     public IDocumentSnapshot WithText(SourceText text)
     {
-        return new DocumentSnapshot(ProjectInternal, _state.WithText(text, VersionStamp.Create()));
+        return new DocumentSnapshot(_project, _state.WithText(text, VersionStamp.Create()));
     }
 
     public async Task<SyntaxTree> GetCSharpSyntaxTreeAsync(CancellationToken cancellationToken)
@@ -78,7 +77,7 @@ internal class DocumentSnapshot : IDocumentSnapshot
             return await GetDesignTimeGeneratedOutputAsync().ConfigureAwait(false);
         }
 
-        var (output, _) = await _state.GetGeneratedOutputAndVersionAsync(ProjectInternal, this).ConfigureAwait(false);
+        var (output, _) = await _state.GetGeneratedOutputAndVersionAsync(_project, this).ConfigureAwait(false);
         return output;
     }
 
