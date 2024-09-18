@@ -77,8 +77,6 @@ internal class TestDocumentSnapshot : DocumentSnapshot
     {
     }
 
-    public HostDocument HostDocument => State.HostDocument;
-
     public override Task<RazorCodeDocument> GetGeneratedOutputAsync(bool _)
     {
         if (_codeDocument is null)

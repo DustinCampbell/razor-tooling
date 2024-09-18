@@ -13,6 +13,8 @@ namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
 internal class DocumentSnapshot : IDocumentSnapshot
 {
+    public HostDocument HostDocument => State.HostDocument;
+
     public string FileKind => State.HostDocument.FileKind;
     public string FilePath => State.HostDocument.FilePath;
     public string TargetPath => State.HostDocument.TargetPath;
