@@ -4,16 +4,16 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
+using Microsoft.AspNetCore.Razor.ProjectEngineHost;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Test.Common;
-using Microsoft.AspNetCore.Razor.Test.Common.Workspaces;
 using Microsoft.CodeAnalysis.Text;
 using Xunit;
 using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
-public class DefaultDocumentSnapshotTest : WorkspaceTestBase
+public class DefaultDocumentSnapshotTest : ToolingTestBase
 {
     private readonly SourceText _sourceText;
     private readonly VersionStamp _version;
@@ -38,7 +38,7 @@ public class DefaultDocumentSnapshotTest : WorkspaceTestBase
         _legacyHostDocument = TestProjectData.SomeProjectFile1;
         _nestedComponentHostDocument = TestProjectData.SomeProjectNestedComponentFile3;
 
-        var projectState = ProjectState.Create(ProjectEngineFactoryProvider, TestProjectData.SomeProject, ProjectWorkspaceState.Default);
+        var projectState = ProjectState.Create(ProjectEngineFactories.DefaultProvider, TestProjectData.SomeProject, ProjectWorkspaceState.Default);
         var project = new ProjectSnapshot(projectState);
 
         var textAndVersion = TextAndVersion.Create(_sourceText, _version);
