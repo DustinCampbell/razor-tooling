@@ -12,18 +12,6 @@ internal class HostDocument
     public string FilePath { get; }
     public string TargetPath { get; }
 
-    public HostDocument(HostDocument other)
-    {
-        if (other is null)
-        {
-            throw new ArgumentNullException(nameof(other));
-        }
-
-        FileKind = other.FileKind;
-        FilePath = other.FilePath;
-        TargetPath = other.TargetPath;
-    }
-
     public HostDocument(string filePath, string targetPath)
         : this(filePath, targetPath, fileKind: null)
     {
