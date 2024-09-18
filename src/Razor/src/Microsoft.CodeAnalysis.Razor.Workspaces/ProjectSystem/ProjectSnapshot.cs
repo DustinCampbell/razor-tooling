@@ -16,21 +16,12 @@ using Microsoft.CodeAnalysis.CSharp;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
-internal class ProjectSnapshot : IProjectSnapshot
+internal class ProjectSnapshot(ProjectState state) : IProjectSnapshot
 {
-    private readonly ProjectState _state;
+    private readonly ProjectState _state = state;
 
-    private readonly object _lock;
-
-    private readonly Dictionary<string, DocumentSnapshot> _documents;
-
-    public ProjectSnapshot(ProjectState state)
-    {
-        _state = state;
-
-        _lock = new object();
-        _documents = new Dictionary<string, DocumentSnapshot>(FilePathNormalizingComparer.Instance);
-    }
+    private readonly object _lock = new();
+    private readonly Dictionary<string, DocumentSnapshot> _documents = new(FilePathNormalizingComparer.Instance);
 
     public ProjectKey Key => _state.HostProject.Key;
 
