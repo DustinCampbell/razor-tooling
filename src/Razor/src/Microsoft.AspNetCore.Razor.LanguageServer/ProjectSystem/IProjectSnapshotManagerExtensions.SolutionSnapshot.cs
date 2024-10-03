@@ -10,7 +10,7 @@ namespace Microsoft.AspNetCore.Razor.LanguageServer.ProjectSystem;
 
 internal static partial class IProjectSnapshotManagerExtensions
 {
-    private sealed class SolutionQueryOperations(IProjectSnapshotManager projectManager) : ISolutionQueryOperations
+    private sealed class SolutionSnapshot(IProjectSnapshotManager projectManager) : ISolutionSnapshot
     {
         private readonly IProjectSnapshotManager _projectManager = projectManager;
 

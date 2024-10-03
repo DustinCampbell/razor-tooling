@@ -35,7 +35,7 @@ internal class RenameService(
         DocumentContext documentContext,
         DocumentPositionInfo positionInfo,
         string newName,
-        ISolutionQueryOperations solutionQueryOperations,
+        ISolutionSnapshot solutionSnapshot,
         CancellationToken cancellationToken)
     {
         // We only support renaming of .razor components, not .cshtml tag helpers
@@ -58,7 +58,7 @@ internal class RenameService(
             return null;
         }
 
-        var originComponentDocumentSnapshot = await _componentSearchEngine.TryLocateComponentAsync(originTagHelpers.First(), solutionQueryOperations).ConfigureAwait(false);
+        var originComponentDocumentSnapshot = await _componentSearchEngine.TryLocateComponentAsync(originTagHelpers.First(), solutionSnapshot).ConfigureAwait(false);
         if (originComponentDocumentSnapshot is null)
         {
             return null;
@@ -76,7 +76,7 @@ internal class RenameService(
         documentChanges.Add(fileRename);
         AddEditsForCodeDocument(documentChanges, originTagHelpers, newName, documentContext.Uri, codeDocument);
 
-        var documentSnapshots = GetAllDocumentSnapshots(documentContext.FilePath, solutionQueryOperations);
+        var documentSnapshots = GetAllDocumentSnapshots(documentContext.FilePath, solutionSnapshot);
 
         foreach (var documentSnapshot in documentSnapshots)
         {
@@ -98,12 +98,12 @@ internal class RenameService(
         };
     }
 
-    private static ImmutableArray<IDocumentSnapshot> GetAllDocumentSnapshots(string filePath, ISolutionQueryOperations solutionQueryOperations)
+    private static ImmutableArray<IDocumentSnapshot> GetAllDocumentSnapshots(string filePath, ISolutionSnapshot solutionSnapshot)
     {
         using var documentSnapshots = new PooledArrayBuilder<IDocumentSnapshot>();
         using var _ = StringHashSetPool.GetPooledObject(out var documentPaths);
 
-        foreach (var project in solutionQueryOperations.GetProjects())
+        foreach (var project in solutionSnapshot.GetProjects())
         {
             foreach (var documentPath in project.DocumentFilePaths)
             {

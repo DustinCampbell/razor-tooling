@@ -12,7 +12,7 @@ internal sealed class RemoteDocumentContext : DocumentContext
 
     public new RemoteDocumentSnapshot Snapshot => (RemoteDocumentSnapshot)base.Snapshot;
 
-    public ISolutionQueryOperations GetSolutionQueryOperations()
+    public ISolutionSnapshot GetSolutionSnapshot()
         => Snapshot.ProjectSnapshot.SolutionSnapshot;
 
     public RemoteDocumentContext(Uri uri, RemoteDocumentSnapshot snapshot)

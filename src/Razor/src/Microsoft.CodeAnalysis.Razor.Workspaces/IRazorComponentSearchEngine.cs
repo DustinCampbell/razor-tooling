@@ -9,5 +9,5 @@ namespace Microsoft.CodeAnalysis.Razor.Workspaces;
 
 internal interface IRazorComponentSearchEngine
 {
-    Task<IDocumentSnapshot?> TryLocateComponentAsync(TagHelperDescriptor tagHelper, ISolutionQueryOperations solutionQueryOperations);
+    Task<IDocumentSnapshot?> TryLocateComponentAsync(TagHelperDescriptor tagHelper, ISolutionSnapshot solutionSnapshot);
 }
