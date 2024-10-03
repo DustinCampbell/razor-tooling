@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Immutable;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
@@ -63,7 +64,7 @@ public class ProjectSnapshotManagerProxyTest(ITestOutputHelper testOutput) : Vis
         var project2TagHelpers = await projectManager.GetLoadedProject(_hostProject2.Key).GetTagHelpersAsync(DisposalToken);
 
         Assert.Collection(
-            state.ProjectHandles,
+            state.ProjectHandles.OrderBy(static x => x.FilePath.OriginalString),
             AssertProjectSnapshotHandle(LspProjectFilePath1, project1TagHelpers),
             AssertProjectSnapshotHandle(LspProjectFilePath2, project2TagHelpers));
     }
@@ -215,7 +216,7 @@ public class ProjectSnapshotManagerProxyTest(ITestOutputHelper testOutput) : Vis
         var project2TagHelpers = await projectManager.GetLoadedProject(_hostProject2.Key).GetTagHelpersAsync(DisposalToken);
 
         Assert.Collection(
-            state.ProjectHandles,
+            state.ProjectHandles.OrderBy(static x => x.FilePath.OriginalString),
             AssertProjectSnapshotHandle(LspProjectFilePath1, project1TagHelpers),
             AssertProjectSnapshotHandle(LspProjectFilePath2, project2TagHelpers));
     }
