@@ -64,7 +64,7 @@ public class ProjectSnapshotManagerProxyTest(ITestOutputHelper testOutput) : Vis
         var project2TagHelpers = await projectManager.GetLoadedProject(_hostProject2.Key).GetTagHelpersAsync(DisposalToken);
 
         Assert.Collection(
-            state.ProjectHandles.OrderBy(static x => x.FilePath.OriginalString),
+            state.ProjectHandles,
             AssertProjectSnapshotHandle(LspProjectFilePath1, project1TagHelpers),
             AssertProjectSnapshotHandle(LspProjectFilePath2, project2TagHelpers));
     }

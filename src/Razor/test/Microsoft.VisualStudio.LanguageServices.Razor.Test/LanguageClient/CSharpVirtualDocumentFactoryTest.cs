@@ -210,7 +210,7 @@ public class CSharpVirtualDocumentFactoryTest : VisualStudioTestBase
 
         // Assert
         Assert.Equal(2, virtualDocuments.Length);
-        Assert.Collection(virtualDocuments.OrderBy(static x => x.Uri.OriginalString),
+        Assert.Collection(virtualDocuments,
             item => Assert.Equal("C:/path/to/file.razor.jGYrFHvWEciJi85y.ide.g.cs", item.Uri.OriginalString),
             item => Assert.Equal("C:/path/to/file.razor.ooJmNcWMKXNlf5MK.ide.g.cs", item.Uri.OriginalString));
     }

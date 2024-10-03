@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor;
@@ -53,7 +54,7 @@ internal class ProjectSnapshotManagerProxy : IProjectSnapshotManagerProxy, IColl
         }
 
         var projects = await GetLatestProjectsAsync();
-        var state = await CalculateUpdatedStateAsync(projects);
+        var state = await CalculateUpdatedStateAsync(projects, cancellationToken);
 
         return state;
     }
@@ -66,25 +67,27 @@ internal class ProjectSnapshotManagerProxy : IProjectSnapshotManagerProxy, IColl
     }
 
     // Internal for testing
-    internal async Task<IReadOnlyList<IProjectSnapshot>> GetLatestProjectsAsync()
+    internal async Task<ImmutableArray<IProjectSnapshot>> GetLatestProjectsAsync(CancellationToken cancellationToken = default)
     {
         if (!_jtf.Context.IsOnMainThread)
         {
-            await _jtf.SwitchToMainThreadAsync(CancellationToken.None);
+            await _jtf.SwitchToMainThreadAsync(cancellationToken);
         }
 
         return _projectSnapshotManager.GetProjects();
     }
 
     // Internal for testing
-    internal async Task<ProjectSnapshotManagerProxyState> CalculateUpdatedStateAsync(IReadOnlyList<IProjectSnapshot> projects)
+    internal async Task<ProjectSnapshotManagerProxyState> CalculateUpdatedStateAsync(
+        ImmutableArray<IProjectSnapshot> projects,
+        CancellationToken cancellationToken = default)
     {
-        using (await _latestStateSemaphore.EnterAsync().ConfigureAwait(false))
+        using (await _latestStateSemaphore.EnterAsync(cancellationToken).ConfigureAwait(false))
         {
             var projectHandles = new List<ProjectSnapshotHandleProxy>();
             foreach (var project in projects)
             {
-                var projectHandleProxy = await ConvertToProxyAsync(project).ConfigureAwait(false);
+                var projectHandleProxy = await ConvertToProxyAsync(project, cancellationToken).ConfigureAwait(false);
                 projectHandles.Add(projectHandleProxy.AssumeNotNull());
             }
 
@@ -93,14 +96,14 @@ internal class ProjectSnapshotManagerProxy : IProjectSnapshotManagerProxy, IColl
         }
     }
 
-    private async Task<ProjectSnapshotHandleProxy?> ConvertToProxyAsync(IProjectSnapshot? project)
+    private async Task<ProjectSnapshotHandleProxy?> ConvertToProxyAsync(IProjectSnapshot? project, CancellationToken cancellationToken = default)
     {
         if (project is null)
         {
             return null;
         }
 
-        var tagHelpers = await project.GetTagHelpersAsync(CancellationToken.None).ConfigureAwait(false);
+        var tagHelpers = await project.GetTagHelpersAsync(cancellationToken).ConfigureAwait(false);
         var projectWorkspaceState = ProjectWorkspaceState.Create(tagHelpers, project.CSharpLanguageVersion);
         var projectFilePath = _session.ConvertLocalPathToSharedUri(project.FilePath);
         var intermediateOutputPath = _session.ConvertLocalPathToSharedUri(project.IntermediateOutputPath);

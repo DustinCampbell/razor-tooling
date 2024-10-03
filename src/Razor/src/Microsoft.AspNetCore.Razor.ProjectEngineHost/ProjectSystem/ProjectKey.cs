@@ -14,7 +14,7 @@ namespace Microsoft.AspNetCore.Razor.ProjectSystem;
 /// identifier for a project.
 /// </summary>
 [DebuggerDisplay("id: {Id}")]
-internal readonly record struct ProjectKey
+internal readonly record struct ProjectKey : IComparable<ProjectKey>
 {
     public static ProjectKey Unknown { get; } = default;
 
@@ -38,4 +38,22 @@ internal readonly record struct ProjectKey
 
     public override string ToString()
         => IsUnknown ? "<Unknown Project>" : Id;
+
+    public int CompareTo(ProjectKey other)
+    {
+        // Sort "Unknown" after known ProjectKeys.
+        if (IsUnknown)
+        {
+            if (other.IsUnknown)
+            {
+                return 0;
+            }
+            else
+            {
+                return int.MaxValue;
+            }
+        }
+
+        return FilePathComparer.Instance.Compare(Id, other.Id);
+    }
 }

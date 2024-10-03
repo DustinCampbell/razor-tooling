@@ -7,6 +7,7 @@ using System.Collections.Immutable;
 using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Microsoft.AspNetCore.Razor.PooledObjects;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Telemetry;
 using Microsoft.CodeAnalysis.Razor;
@@ -103,19 +104,26 @@ internal class CSharpVirtualDocumentFactory : VirtualDocumentFactoryBase
             return false;
         }
 
-        var newVirtualDocuments = new List<VirtualDocument>();
-
         var hostDocumentUri = _fileUriProvider.GetOrCreate(hostDocumentBuffer);
+        var projectKeys = GetProjectKeys(hostDocumentUri);
 
-        foreach (var projectKey in GetProjectKeys(hostDocumentUri))
+        if (projectKeys.Length == 0)
+        {
+            virtualDocuments = [];
+            return false;
+        }
+
+        using var newVirtualDocuments = new PooledArrayBuilder<VirtualDocument>();
+
+        foreach (var projectKey in projectKeys)
         {
             // We just call the base class here, it will call back into us to produce the virtual document uri
             _logger.LogDebug($"Creating C# virtual document for {projectKey} for {hostDocumentUri}");
             newVirtualDocuments.Add(CreateVirtualDocument(projectKey, hostDocumentUri));
         }
 
-        virtualDocuments = newVirtualDocuments.ToArray();
-        return virtualDocuments.Length > 0;
+        virtualDocuments = [.. newVirtualDocuments.ToImmutableOrderedBy(static x => x.Uri.OriginalString)];
+        return true;
     }
 
     internal override bool TryRefreshVirtualDocuments(LSPDocument document, [NotNullWhen(true)] out IReadOnlyList<VirtualDocument>? newVirtualDocuments)
@@ -184,36 +192,36 @@ internal class CSharpVirtualDocumentFactory : VirtualDocumentFactoryBase
         return didWork;
     }
 
-    private IEnumerable<ProjectKey> GetProjectKeys(Uri hostDocumentUri)
+    private ImmutableArray<ProjectKey> GetProjectKeys(Uri hostDocumentUri)
     {
         // If generated file paths are not unique, then we just act as though we're in one unknown project
         if (!_languageServerFeatureOptions.IncludeProjectKeyInGeneratedFilePath)
         {
-            yield return ProjectKey.Unknown;
-            yield break;
+            return [ProjectKey.Unknown];
         }
 
-        var projects = _projectManager.GetProjects();
+        using var result = new PooledArrayBuilder<ProjectKey>();
 
-        var inAny = false;
         var normalizedDocumentPath = RazorDynamicFileInfoProvider.GetProjectSystemFilePath(hostDocumentUri);
-        foreach (var projectSnapshot in projects)
+
+        foreach (var projectSnapshot in _projectManager.GetProjects())
         {
             if (projectSnapshot.GetDocument(normalizedDocumentPath) is not null)
             {
-                inAny = true;
-                yield return projectSnapshot.Key;
+                result.Add(projectSnapshot.Key);
             }
         }
 
-        if (!inAny)
+        if (result.Count == 0)
         {
             // We got called before we know about any projects. Probably just a .razor document being restored in VS from a previous session.
             // All we can do is return a default key and hope for the best.
             // TODO: Do we need to create some sort of Misc Files project on this (VS) side so the nav bar looks nicer?
             _logger.LogDebug($"Could not find any documents in projects for {hostDocumentUri}");
-            yield return ProjectKey.Unknown;
+            return [ProjectKey.Unknown];
         }
+
+        return result.DrainToImmutableOrdered();
     }
 
     private CSharpVirtualDocument CreateVirtualDocument(ProjectKey projectKey, Uri hostDocumentUri)

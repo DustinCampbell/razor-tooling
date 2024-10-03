@@ -43,7 +43,8 @@ internal static partial class IProjectSnapshotManagerExtensions
             }
         }
 
-        return projects.DrainToImmutable();
+        // We sort the result by ProjectKey for determinism.
+        return projects.DrainToImmutableOrderedBy(static x => x.Key);
     }
 
     public static bool TryResolveAllProjects(
