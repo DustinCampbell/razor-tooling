@@ -48,7 +48,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
     /// <summary>
     /// The set of open documents.
     /// </summary>
-    private readonly HashSet<string> _openDocumentSet = new(FilePathComparer.Instance);
+    private ImmutableHashSet<string> _openDocumentSet = ImmutableHashSet<string>.Empty.WithComparer(FilePathComparer.Instance);
 
     /// <summary>
     /// Determines whether or not the solution is closing.
@@ -488,10 +488,10 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
                 switch (action)
                 {
                     case OpenDocumentAction:
-                        _openDocumentSet.Add(documentFilePath.AssumeNotNull());
+                        _openDocumentSet = _openDocumentSet.Add(documentFilePath.AssumeNotNull());
                         break;
                     case CloseDocumentAction:
-                        _openDocumentSet.Remove(documentFilePath.AssumeNotNull());
+                        _openDocumentSet = _openDocumentSet.Remove(documentFilePath.AssumeNotNull());
                         break;
                 }
 
