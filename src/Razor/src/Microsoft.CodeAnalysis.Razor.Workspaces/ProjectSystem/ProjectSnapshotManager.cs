@@ -43,7 +43,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
     /// A map of <see cref="ProjectKey"/> to <see cref="Entry"/>, which wraps a <see cref="ProjectState"/>
     /// and lazily creates a <see cref="ProjectSnapshot"/>.
     /// </summary>
-    private readonly Dictionary<ProjectKey, Entry> _projectMap = [];
+    private ImmutableDictionary<ProjectKey, Entry> _projectMap = ImmutableDictionary<ProjectKey, Entry>.Empty;
 
     /// <summary>
     /// The set of open documents.
@@ -445,7 +445,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
             var newEntry = new Entry(state);
 
             upgradeableLock.EnterWrite();
-            _projectMap[hostProject.Key] = newEntry;
+            _projectMap = _projectMap.SetItem(hostProject.Key, newEntry);
 
             oldSnapshot = newSnapshot = newEntry.GetSnapshot();
             return true;
@@ -466,7 +466,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
             {
                 upgradeableLock.EnterWrite();
 
-                _projectMap.Remove(projectKey);
+                _projectMap = _projectMap.Remove(projectKey);
 
                 oldSnapshot = newSnapshot = entry.GetSnapshot();
                 return true;
@@ -483,7 +483,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
             {
                 upgradeableLock.EnterWrite();
 
-                _projectMap[projectKey] = newEntry;
+                _projectMap = _projectMap.SetItem(projectKey, newEntry);
 
                 switch (action)
                 {
