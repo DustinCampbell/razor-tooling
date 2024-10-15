@@ -6,7 +6,6 @@ using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.PooledObjects;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
@@ -102,9 +101,7 @@ internal sealed class ProjectSnapshot(ProjectState state) : IProjectSnapshot
     /// </summary>
     public ImmutableArray<IDocumentSnapshot> GetRelatedDocuments(IDocumentSnapshot document)
     {
-        var targetPath = document.TargetPath.AssumeNotNull();
-
-        if (!_state.ImportsToRelatedDocuments.TryGetValue(targetPath, out var relatedDocuments))
+        if (!_state.ImportsToRelatedDocuments.TryGetValue(document.TargetPath, out var relatedDocuments))
         {
             return [];
         }

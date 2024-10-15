@@ -13,7 +13,7 @@ internal interface IDocumentSnapshot
 {
     string FileKind { get; }
     string FilePath { get; }
-    string? TargetPath { get; }
+    string TargetPath { get; }
     IProjectSnapshot Project { get; }
 
     int Version { get; }

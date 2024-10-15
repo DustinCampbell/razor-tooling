@@ -63,7 +63,7 @@ internal sealed class TestDocumentSnapshot : IDocumentSnapshot
 
     public string FileKind => RealSnapshot.FileKind;
     public string FilePath => RealSnapshot.FilePath;
-    public string? TargetPath => RealSnapshot.TargetPath;
+    public string TargetPath => RealSnapshot.TargetPath;
     public IProjectSnapshot Project => RealSnapshot.Project;
     public int Version => RealSnapshot.Version;
 

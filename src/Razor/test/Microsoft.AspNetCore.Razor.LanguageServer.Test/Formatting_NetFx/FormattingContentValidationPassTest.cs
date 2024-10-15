@@ -104,7 +104,7 @@ public class FormattingContentValidationPassTest(ITestOutputHelper testOutput) :
             .Setup(d => d.GetGeneratedOutputAsync(It.IsAny<bool>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(codeDocument);
         documentSnapshot
-            .Setup(d => d.TargetPath)
+            .SetupGet(d => d.TargetPath)
             .Returns(path);
         documentSnapshot
             .Setup(d => d.Project.GetTagHelpersAsync(It.IsAny<CancellationToken>()))

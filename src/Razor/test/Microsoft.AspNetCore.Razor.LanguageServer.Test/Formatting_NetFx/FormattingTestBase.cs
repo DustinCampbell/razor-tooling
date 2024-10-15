@@ -281,7 +281,7 @@ public class FormattingTestBase : RazorToolingIntegrationTestBase
             .SetupGet(d => d.FilePath)
             .Returns(importsPath);
         importsSnapshot
-            .Setup(d => d.TargetPath)
+            .SetupGet(d => d.TargetPath)
             .Returns(importsPath);
 
         var projectFileSystem = new TestRazorProjectFileSystem([
@@ -325,7 +325,7 @@ public class FormattingTestBase : RazorToolingIntegrationTestBase
             .Setup(d => d.Project.Key)
             .Returns(TestProjectKey.Create("/obj"));
         documentSnapshot
-            .Setup(d => d.TargetPath)
+            .SetupGet(d => d.TargetPath)
             .Returns(path);
         documentSnapshot
             .Setup(d => d.Project.Configuration)

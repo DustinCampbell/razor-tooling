@@ -9,7 +9,6 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
-using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
@@ -233,7 +232,7 @@ internal abstract partial class WindowsRazorProjectHostBase : OnceInitializedOnc
                         // TODO: The creation of the HostProject here is silly
                         var hostDocument = new HostDocument(
                             documentSnapshot.FilePath,
-                            documentSnapshot.TargetPath.AssumeNotNull(),
+                            documentSnapshot.TargetPath,
                             documentSnapshot.FileKind);
                         updater.DocumentAdded(projectKey, hostDocument, new FileTextLoader(hostDocument.FilePath, null));
                     }
