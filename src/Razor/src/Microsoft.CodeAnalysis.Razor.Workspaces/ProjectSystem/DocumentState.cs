@@ -193,98 +193,78 @@ internal partial class DocumentState
         return new DocumentState(HostDocument, Version + 1, textAndVersion: null, textLoader);
     }
 
-    // Internal, because we are temporarily sharing code with CohostDocumentSnapshot
-    internal static ImmutableArray<IDocumentSnapshot> GetImportsCore(IProjectSnapshot project, RazorProjectEngine projectEngine, string filePath, string fileKind)
-    {
-        var projectItem = projectEngine.FileSystem.GetItem(filePath, fileKind);
-
-        using var importItems = new PooledArrayBuilder<RazorProjectItem>();
-
-        foreach (var feature in projectEngine.ProjectFeatures.OfType<IImportProjectFeature>())
-        {
-            if (feature.GetImports(projectItem) is { } featureImports)
-            {
-                importItems.AddRange(featureImports);
-            }
-        }
-
-        if (importItems.Count == 0)
-        {
-            return [];
-        }
-
-        using var imports = new PooledArrayBuilder<IDocumentSnapshot>(capacity: importItems.Count);
-
-        foreach (var item in importItems)
-        {
-            if (item is NotFoundProjectItem)
-            {
-                continue;
-            }
-
-            if (item.PhysicalPath is null)
-            {
-                // This is a default import.
-                var defaultImport = new ImportDocumentSnapshot(project, item);
-                imports.Add(defaultImport);
-            }
-            else if (project.TryGetDocument(item.PhysicalPath, out var import))
-            {
-                imports.Add(import);
-            }
-        }
-
-        return imports.DrainToImmutable();
-    }
-
     internal static async Task<RazorCodeDocument> GenerateCodeDocumentAsync(
         IDocumentSnapshot document,
         RazorProjectEngine projectEngine,
-        ImmutableArray<ImportItem> imports,
+        ImmutableArray<ImportItem> importItems,
         ImmutableArray<TagHelperDescriptor> tagHelpers,
         bool forceRuntimeCodeGeneration,
         CancellationToken cancellationToken)
     {
-        // OK we have to generate the code.
-        using var importSources = new PooledArrayBuilder<RazorSourceDocument>(imports.Length);
-        foreach (var item in imports)
+        using var importSources = new PooledArrayBuilder<RazorSourceDocument>(importItems.Length);
+        foreach (var importItem in importItems)
         {
-            var importProjectItem = item.FilePath is null ? null : projectEngine.FileSystem.GetItem(item.FilePath, item.FileKind);
-            var sourceDocument = await GetRazorSourceDocumentAsync(item.Document, importProjectItem, cancellationToken).ConfigureAwait(false);
+            var sourceDocument = await importItem.GetSourceDocumentAsync(cancellationToken).ConfigureAwait(false);
             importSources.Add(sourceDocument);
         }
 
-        var projectItem = document.FilePath is null ? null : projectEngine.FileSystem.GetItem(document.FilePath, document.FileKind);
-        var documentSource = await GetRazorSourceDocumentAsync(document, projectItem, cancellationToken).ConfigureAwait(false);
+        var filePath = document.FilePath.AssumeNotNull();
+        var fileKind = document.FileKind.AssumeNotNull();
+        var projectItem = projectEngine.FileSystem.GetItem(filePath, fileKind);
+        var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
+        var source = RazorSourceDocument.Create(text, RazorSourceDocumentProperties.Create(document.FilePath, projectItem?.RelativePhysicalPath));
 
         if (forceRuntimeCodeGeneration)
         {
-            return projectEngine.Process(documentSource, fileKind: document.FileKind, importSources.DrainToImmutable(), tagHelpers);
+            return projectEngine.Process(source, fileKind, importSources.DrainToImmutable(), tagHelpers);
         }
 
-        return projectEngine.ProcessDesignTime(documentSource, fileKind: document.FileKind, importSources.DrainToImmutable(), tagHelpers);
+        return projectEngine.ProcessDesignTime(source, fileKind, importSources.DrainToImmutable(), tagHelpers);
     }
 
-    internal static async Task<ImmutableArray<ImportItem>> GetImportsAsync(IDocumentSnapshot document, RazorProjectEngine projectEngine, CancellationToken cancellationToken)
+    internal static ImmutableArray<ImportItem> GetImports(IDocumentSnapshot document, RazorProjectEngine projectEngine)
     {
-        var imports = GetImportsCore(document.Project, projectEngine, document.FilePath.AssumeNotNull(), document.FileKind.AssumeNotNull());
-        using var result = new PooledArrayBuilder<ImportItem>(imports.Length);
+        var project = document.Project;
+        var filePath = document.FilePath.AssumeNotNull();
+        var fileKind = document.FileKind.AssumeNotNull();
 
-        foreach (var snapshot in imports)
+        var documentProjectItem = projectEngine.FileSystem.GetItem(filePath, fileKind);
+
+        using var importProjectItems = new PooledArrayBuilder<RazorProjectItem>();
+
+        foreach (var feature in projectEngine.ProjectFeatures.OfType<IImportProjectFeature>())
         {
-            var versionStamp = await snapshot.GetTextVersionAsync(cancellationToken).ConfigureAwait(false);
-            result.Add(new ImportItem(snapshot.FilePath, versionStamp, snapshot));
+            if (feature.GetImports(documentProjectItem) is { } featureImports)
+            {
+                importProjectItems.AddRange(featureImports);
+            }
         }
 
-        return result.DrainToImmutable();
-    }
+        if (importProjectItems.Count == 0)
+        {
+            return [];
+        }
 
-    private static async Task<RazorSourceDocument> GetRazorSourceDocumentAsync(
-        IDocumentSnapshot document,
-        RazorProjectItem? projectItem,
-        CancellationToken cancellationToken)
-    {
-        var sourceText = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
-        return RazorSourceDocument.Create(sourceText, RazorSourceDocumentProperties.Create(document.FilePath, projectItem?.RelativePhysicalPath));
+        using var imports = new PooledArrayBuilder<ImportItem>(capacity: importProjectItems.Count);
+
+        foreach (var importProjectItem in importProjectItems)
+        {
+            if (importProjectItem is NotFoundProjectItem)
+            {
+                continue;
+            }
+
+            if (importProjectItem.PhysicalPath is null)
+            {
+                // This is a default import.
+                imports.Add(ImportItem.CreateDefaultImport(importProjectItem));
+            }
+            else if (project.TryGetDocument(importProjectItem.PhysicalPath, out var importDocument))
+            {
+                imports.Add(ImportItem.CreateDocumentImport(importDocument, importProjectItem));
+            }
+        }
+
+        return imports.DrainToImmutable();
     }
 }

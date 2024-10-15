@@ -85,7 +85,7 @@ internal sealed class RemoteDocumentSnapshot : IDocumentSnapshot
 
             var projectEngine = await ProjectSnapshot.GetProjectEngine_CohostOnlyAsync(cancellationToken).ConfigureAwait(false);
             var tagHelpers = await ProjectSnapshot.GetTagHelpersAsync(cancellationToken).ConfigureAwait(false);
-            var imports = await DocumentState.GetImportsAsync(this, projectEngine, cancellationToken).ConfigureAwait(false);
+            var imports = DocumentState.GetImports(this, projectEngine);
 
             // TODO: Get the configuration for forceRuntimeCodeGeneration
             // var forceRuntimeCodeGeneration = _projectSnapshot.Configuration.LanguageServerFlags?.ForceRuntimeCodeGeneration ?? false;

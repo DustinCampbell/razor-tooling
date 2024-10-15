@@ -86,7 +86,7 @@ internal sealed class DocumentSnapshot(ProjectSnapshot project, DocumentState st
     {
         var tagHelpers = await Project.GetTagHelpersAsync(cancellationToken).ConfigureAwait(false);
         var projectEngine = Project.GetProjectEngine();
-        var imports = await DocumentState.GetImportsAsync(this, projectEngine, cancellationToken).ConfigureAwait(false);
+        var imports = DocumentState.GetImports(this, projectEngine);
         return await DocumentState
             .GenerateCodeDocumentAsync(this, projectEngine, imports, tagHelpers, forceRuntimeCodeGeneration: false, cancellationToken)
             .ConfigureAwait(false);
