@@ -104,7 +104,7 @@ internal static partial class ObjectReaders
         var tagHelpers = reader.ReadImmutableArrayOrEmpty(nameof(ProjectWorkspaceState.TagHelpers), static r => ReadTagHelper(r, useCache: true));
         var csharpLanguageVersion = (LanguageVersion)reader.ReadInt32OrZero(nameof(ProjectWorkspaceState.CSharpLanguageVersion));
 
-        return ProjectWorkspaceState.Create(tagHelpers, csharpLanguageVersion);
+        return new ProjectWorkspaceState(tagHelpers, csharpLanguageVersion);
     }
 
     public static TagHelperDescriptor ReadTagHelper(JsonDataReader reader, bool useCache)
@@ -347,7 +347,7 @@ internal static partial class ObjectReaders
         var projectKeyId = reader.ReadNonNullString(nameof(RazorProjectInfo.ProjectKey));
         var filePath = reader.ReadNonNullString(nameof(RazorProjectInfo.FilePath));
         var configuration = reader.ReadObject(nameof(RazorProjectInfo.Configuration), ReadConfigurationFromProperties) ?? RazorConfiguration.Default;
-        var projectWorkspaceState = reader.ReadObject(nameof(RazorProjectInfo.ProjectWorkspaceState), ReadProjectWorkspaceStateFromProperties) ?? ProjectWorkspaceState.Default;
+        var projectWorkspaceState = reader.ReadObject(nameof(RazorProjectInfo.ProjectWorkspaceState), ReadProjectWorkspaceStateFromProperties);
         var rootNamespace = reader.ReadString(nameof(RazorProjectInfo.RootNamespace));
         var documents = reader.ReadImmutableArray(nameof(RazorProjectInfo.Documents), static r => r.ReadNonNullObject(ReadDocumentSnapshotHandleFromProperties));
 

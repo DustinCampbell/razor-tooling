@@ -30,18 +30,16 @@ public class ProjectStateTest : WorkspaceTestBase
     {
         _hostProject = TestProjectData.SomeProject with { Configuration = FallbackRazorConfiguration.MVC_2_0 };
         _hostProjectWithConfigurationChange = TestProjectData.SomeProject with { Configuration = FallbackRazorConfiguration.MVC_1_0 };
-        _projectWorkspaceState = ProjectWorkspaceState.Create(
-            ImmutableArray.Create(
-                TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly").Build()));
+        _projectWorkspaceState = new ProjectWorkspaceState([TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly").Build()]);
 
-        _documents = new HostDocument[]
-        {
+        _documents =
+        [
             TestProjectData.SomeProjectFile1,
             TestProjectData.SomeProjectFile2,
 
             // linked file
             TestProjectData.AnotherProjectNestedFile3,
-        };
+        ];
 
         _text = SourceText.From("Hello, world!");
         _textLoader = TestMocks.CreateTextLoader(_text, VersionStamp.Create());
@@ -654,14 +652,14 @@ public class ProjectStateTest : WorkspaceTestBase
         var originalTagHelpers = original.TagHelpers;
         var originalProjectWorkspaceStateVersion = original.ProjectWorkspaceStateVersion;
 
-        var changed = ProjectWorkspaceState.Create(_projectWorkspaceState.TagHelpers, LanguageVersion.CSharp6);
+        var changed = new ProjectWorkspaceState(_projectWorkspaceState.TagHelpers, LanguageVersion.CSharp6);
 
         // Act
         var state = original.WithProjectWorkspaceState(changed);
 
         // Assert
         Assert.NotEqual(original.Version, state.Version);
-        Assert.Same(changed, state.ProjectWorkspaceState);
+        Assert.Equal(changed, state.ProjectWorkspaceState);
 
         var actualTagHelpers = state.TagHelpers;
         var actualProjectWorkspaceStateVersion = state.ProjectWorkspaceStateVersion;
@@ -700,7 +698,7 @@ public class ProjectStateTest : WorkspaceTestBase
 
         // Assert
         Assert.NotEqual(original.Version, state.Version);
-        Assert.Same(changed, state.ProjectWorkspaceState);
+        Assert.Equal(changed, state.ProjectWorkspaceState);
 
         var actualTagHelpers = state.TagHelpers;
         var actualProjectWorkspaceStateVersion = state.ProjectWorkspaceStateVersion;
@@ -727,7 +725,7 @@ public class ProjectStateTest : WorkspaceTestBase
         _ = original.TagHelpers;
         _ = original.ProjectWorkspaceStateVersion;
 
-        var changed = ProjectWorkspaceState.Create(original.TagHelpers, original.CSharpLanguageVersion);
+        var changed = new ProjectWorkspaceState(original.TagHelpers, original.CSharpLanguageVersion);
 
         // Act
         var state = original.WithProjectWorkspaceState(changed);

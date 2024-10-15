@@ -140,7 +140,7 @@ internal sealed partial class ProjectWorkspaceStateGenerator(
 
             var workspaceState = await GetProjectWorkspaceStateAsync(workspaceProject, projectSnapshot, cancellationToken);
 
-            if (workspaceState is null)
+            if (workspaceState is not { } projectWorkspaceStateValue)
             {
                 _logger.LogTrace($"Didn't receive {nameof(ProjectWorkspaceState)} for '{projectKey}'");
                 return;
@@ -151,7 +151,7 @@ internal sealed partial class ProjectWorkspaceStateGenerator(
                 return;
             }
 
-            _logger.LogTrace($"Received {nameof(ProjectWorkspaceState)} with {workspaceState.TagHelpers.Length} tag helper(s) for '{projectKey}'");
+            _logger.LogTrace($"Received {nameof(ProjectWorkspaceState)} with {projectWorkspaceStateValue.TagHelpers.Length} tag helper(s) for '{projectKey}'");
 
             await _projectManager
                 .UpdateAsync(
@@ -167,7 +167,7 @@ internal sealed partial class ProjectWorkspaceStateGenerator(
                         logger.LogTrace($"Updating project with {workspaceState.TagHelpers.Length} tag helper(s) for '{projectKey}'");
                         updater.ProjectWorkspaceStateChanged(projectKey, workspaceState);
                     },
-                    state: (projectKey, workspaceState, _logger, cancellationToken),
+                    state: (projectKey, projectWorkspaceStateValue, _logger, cancellationToken),
                     cancellationToken)
                 .ConfigureAwait(false);
         }
@@ -305,7 +305,7 @@ internal sealed partial class ProjectWorkspaceStateGenerator(
                 Project: {projectSnapshot.FilePath}
                 """);
 
-            return ProjectWorkspaceState.Create(tagHelpers, csharpLanguageVersion);
+            return new ProjectWorkspaceState(tagHelpers, csharpLanguageVersion);
         }
         catch (OperationCanceledException)
         {

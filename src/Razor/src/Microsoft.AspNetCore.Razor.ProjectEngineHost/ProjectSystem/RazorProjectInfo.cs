@@ -58,7 +58,7 @@ internal sealed record class RazorProjectInfo
            Configuration.Equals(other.Configuration) &&
            RootNamespace == other.RootNamespace &&
            DisplayName == other.DisplayName &&
-           ProjectWorkspaceState.Equals(other.ProjectWorkspaceState) &&
+           ProjectWorkspaceState == other.ProjectWorkspaceState &&
            Documents.SequenceEqual(other.Documents);
 
     public override int GetHashCode()

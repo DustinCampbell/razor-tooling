@@ -1,7 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
-using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Serialization.Json;
 
 namespace Microsoft.VisualStudio.Razor.LiveShare.Serialization;
@@ -16,7 +15,7 @@ internal class ProjectSnapshotHandleProxyJsonConverter : ObjectJsonConverter<Pro
         var intermediateOutputPath = reader.ReadNonNullUri(nameof(ProjectSnapshotHandleProxy.IntermediateOutputPath));
         var configuration = reader.ReadNonNullObject(nameof(ProjectSnapshotHandleProxy.Configuration), ObjectReaders.ReadConfigurationFromProperties);
         var rootNamespace = reader.ReadStringOrNull(nameof(ProjectSnapshotHandleProxy.RootNamespace));
-        var projectWorkspaceState = reader.ReadObjectOrNull(nameof(ProjectSnapshotHandleProxy.ProjectWorkspaceState), ObjectReaders.ReadProjectWorkspaceStateFromProperties) ?? ProjectWorkspaceState.Default;
+        var projectWorkspaceState = reader.ReadObject(nameof(ProjectSnapshotHandleProxy.ProjectWorkspaceState), ObjectReaders.ReadProjectWorkspaceStateFromProperties);
 
         return new(filePath, intermediateOutputPath, configuration, rootNamespace, projectWorkspaceState);
     }
@@ -27,6 +26,6 @@ internal class ProjectSnapshotHandleProxyJsonConverter : ObjectJsonConverter<Pro
         writer.Write(nameof(value.IntermediateOutputPath), value.IntermediateOutputPath);
         writer.WriteObject(nameof(value.Configuration), value.Configuration, ObjectWriters.WriteProperties);
         writer.WriteIfNotNull(nameof(value.RootNamespace), value.RootNamespace);
-        writer.WriteObjectIfNotNull(nameof(value.ProjectWorkspaceState), value.ProjectWorkspaceState, ObjectWriters.WriteProperties);
+        writer.WriteObject(nameof(value.ProjectWorkspaceState), value.ProjectWorkspaceState, ObjectWriters.WriteProperties);
     }
 }

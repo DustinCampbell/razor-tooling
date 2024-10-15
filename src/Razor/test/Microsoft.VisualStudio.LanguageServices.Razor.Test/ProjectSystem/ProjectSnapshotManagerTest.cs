@@ -58,7 +58,7 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
 
         _projectManager = CreateProjectSnapshotManager();
 
-        _projectWorkspaceStateWithTagHelpers = ProjectWorkspaceState.Create(someTagHelpers);
+        _projectWorkspaceStateWithTagHelpers = new ProjectWorkspaceState(someTagHelpers);
 
         _sourceText = SourceText.From("Hello world");
     }

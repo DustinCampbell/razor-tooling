@@ -78,7 +78,7 @@ internal static class ObjectWriters
         writer.Write(nameof(value.FileKind), value.FileKind);
     }
 
-    public static void Write(JsonDataWriter writer, ProjectWorkspaceState? value)
+    public static void Write(JsonDataWriter writer, ProjectWorkspaceState value)
         => writer.WriteObject(value, WriteProperties);
 
     public static void WriteProperties(JsonDataWriter writer, ProjectWorkspaceState value)

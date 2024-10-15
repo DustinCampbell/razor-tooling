@@ -143,7 +143,7 @@ public class OpenDocumentGeneratorTest(ITestOutputHelper testOutput) : LanguageS
 
             // Act
             updater.ProjectWorkspaceStateChanged(_hostProject1.Key,
-                ProjectWorkspaceState.Create(LanguageVersion.CSharp8));
+                ProjectWorkspaceState.Default with { CSharpLanguageVersion = LanguageVersion.CSharp8 });
         });
 
         // Assert
@@ -167,7 +167,7 @@ public class OpenDocumentGeneratorTest(ITestOutputHelper testOutput) : LanguageS
 
             // Act
             updater.ProjectWorkspaceStateChanged(_hostProject1.Key,
-                ProjectWorkspaceState.Create(LanguageVersion.CSharp8));
+                ProjectWorkspaceState.Default with { CSharpLanguageVersion = LanguageVersion.CSharp8 });
         });
 
         // Assert

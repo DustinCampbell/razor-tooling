@@ -49,7 +49,7 @@ internal sealed class ProjectWorkspaceStateFormatter : ValueFormatter<ProjectWor
         var tagHelpers = builder.DrainToImmutable();
         var csharpLanguageVersion = (LanguageVersion)reader.ReadInt32();
 
-        return ProjectWorkspaceState.Create(tagHelpers, csharpLanguageVersion);
+        return new ProjectWorkspaceState(tagHelpers, csharpLanguageVersion);
     }
 
     public override void Serialize(ref MessagePackWriter writer, ProjectWorkspaceState value, SerializerCachingOptions options)

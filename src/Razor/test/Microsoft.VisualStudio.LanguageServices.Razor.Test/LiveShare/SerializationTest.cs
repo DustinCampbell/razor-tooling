@@ -2,7 +2,6 @@
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Immutable;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Test.Common;
@@ -19,11 +18,12 @@ public class SerializationTest(ITestOutputHelper testOutput) : ToolingTestBase(t
     public void ProjectSnapshotHandleProxy_RoundTripsProperly()
     {
         // Arrange
-        var tagHelpers = ImmutableArray.Create(
+        var projectWorkspaceState = new ProjectWorkspaceState(
+        [
             TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly").Build(),
-            TagHelperDescriptorBuilder.Create("TestTagHelper2", "TestAssembly2").Build());
+            TagHelperDescriptorBuilder.Create("TestTagHelper2", "TestAssembly2").Build(),
+        ]);
 
-        var projectWorkspaceState = ProjectWorkspaceState.Create(tagHelpers);
         var expectedConfiguration = RazorConfiguration.Default;
         var expectedRootNamespace = "project";
         var handle = new ProjectSnapshotHandleProxy(new Uri("vsls://some/path/project.csproj"), new Uri("vsls://some/path/obj"), RazorConfiguration.Default, expectedRootNamespace, projectWorkspaceState);

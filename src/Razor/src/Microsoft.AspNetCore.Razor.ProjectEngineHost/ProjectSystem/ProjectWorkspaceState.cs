@@ -10,40 +10,30 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Razor.ProjectSystem;
 
-internal sealed class ProjectWorkspaceState : IEquatable<ProjectWorkspaceState>
+internal readonly record struct ProjectWorkspaceState(
+    ImmutableArray<TagHelperDescriptor> TagHelpers,
+    LanguageVersion CSharpLanguageVersion = default)
 {
-    public static readonly ProjectWorkspaceState Default = new(ImmutableArray<TagHelperDescriptor>.Empty, LanguageVersion.Default);
+    public static readonly ProjectWorkspaceState Default = new(TagHelpers: [], CSharpLanguageVersion: LanguageVersion.Default);
 
-    public ImmutableArray<TagHelperDescriptor> TagHelpers { get; }
-    public LanguageVersion CSharpLanguageVersion { get; }
+    private readonly ImmutableArray<TagHelperDescriptor> _tagHelpers = TagHelpers.NullToEmpty();
 
-    private ProjectWorkspaceState(
-        ImmutableArray<TagHelperDescriptor> tagHelpers,
-        LanguageVersion csharpLanguageVersion)
+    public ImmutableArray<TagHelperDescriptor> TagHelpers
     {
-        TagHelpers = tagHelpers;
-        CSharpLanguageVersion = csharpLanguageVersion;
+        // We call NullToEmpty() here to ensure that default(ProjectWorkspaceState).TagHelpers returns [].
+        get => _tagHelpers.NullToEmpty();
+        init => _tagHelpers = value;
     }
 
-    public static ProjectWorkspaceState Create(
-        ImmutableArray<TagHelperDescriptor> tagHelpers,
-        LanguageVersion csharpLanguageVersion = LanguageVersion.Default)
-        => tagHelpers.IsEmpty && csharpLanguageVersion == LanguageVersion.Default
-            ? Default
-            : new(tagHelpers, csharpLanguageVersion);
+    public LanguageVersion CSharpLanguageVersion { get; init; } = CSharpLanguageVersion;
 
-    public static ProjectWorkspaceState Create(LanguageVersion csharpLanguageVersion)
-        => csharpLanguageVersion == LanguageVersion.Default
-            ? Default
-            : new(ImmutableArray<TagHelperDescriptor>.Empty, csharpLanguageVersion);
+    public bool IsDefault
+        => CSharpLanguageVersion == LanguageVersion.Default &&
+           _tagHelpers.IsDefaultOrEmpty;
 
-    public override bool Equals(object? obj)
-        => obj is ProjectWorkspaceState other && Equals(other);
-
-    public bool Equals(ProjectWorkspaceState? other)
-        => other is not null &&
-           TagHelpers.SequenceEqual(other.TagHelpers) &&
-           CSharpLanguageVersion == other.CSharpLanguageVersion;
+    public bool Equals(ProjectWorkspaceState other)
+        => CSharpLanguageVersion == other.CSharpLanguageVersion &&
+           TagHelpers.SequenceEqual(other.TagHelpers);
 
     public override int GetHashCode()
     {

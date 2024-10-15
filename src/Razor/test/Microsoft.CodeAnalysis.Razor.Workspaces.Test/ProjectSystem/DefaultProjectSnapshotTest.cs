@@ -1,7 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
@@ -22,8 +21,7 @@ public class DefaultProjectSnapshotTest : WorkspaceTestBase
         : base(testOutput)
     {
         _hostProject = TestProjectData.SomeProject with { Configuration = FallbackRazorConfiguration.MVC_2_0 };
-        _projectWorkspaceState = ProjectWorkspaceState.Create(ImmutableArray.Create(
-            TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly").Build()));
+        _projectWorkspaceState = new ProjectWorkspaceState([TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly").Build()]);
 
         _documents =
         [

@@ -172,7 +172,7 @@ public class ProjectStateGeneratedOutputTest : WorkspaceTestBase
             .WithAddedHostDocument(_hostDocument, DocumentState.EmptyLoader);
 
         var (originalOutput, originalInputVersion) = await GetOutputAsync(original, _hostDocument, DisposalToken);
-        var changed = ProjectWorkspaceState.Create(_someTagHelpers);
+        var changed = new ProjectWorkspaceState(_someTagHelpers);
 
         // Act
         var state = original.WithProjectWorkspaceState(changed);
@@ -190,11 +190,11 @@ public class ProjectStateGeneratedOutputTest : WorkspaceTestBase
         // Arrange
         var csharp8ValidConfiguration = new RazorConfiguration(RazorLanguageVersion.Version_3_0, _hostProject.Configuration.ConfigurationName, _hostProject.Configuration.Extensions);
         var hostProject = TestProjectData.SomeProject with { Configuration = csharp8ValidConfiguration };
-        var originalWorkspaceState = ProjectWorkspaceState.Create(_someTagHelpers, LanguageVersion.CSharp7);
+        var originalWorkspaceState = new ProjectWorkspaceState(_someTagHelpers, LanguageVersion.CSharp7);
         var original =
             ProjectState.Create(ProjectEngineFactoryProvider, hostProject, originalWorkspaceState)
             .WithAddedHostDocument(_hostDocument, TestMocks.CreateTextLoader("@DateTime.Now", VersionStamp.Default));
-        var changedWorkspaceState = ProjectWorkspaceState.Create(_someTagHelpers, LanguageVersion.CSharp8);
+        var changedWorkspaceState = new ProjectWorkspaceState(_someTagHelpers, LanguageVersion.CSharp8);
 
         var (originalOutput, originalInputVersion) = await GetOutputAsync(original, _hostDocument, DisposalToken);
 

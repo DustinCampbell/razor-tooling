@@ -66,7 +66,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
             updater.ProjectAdded(hostProject);
         });
 
-        var projectWorkspaceState = ProjectWorkspaceState.Create(LanguageVersion.LatestMajor);
+        var projectWorkspaceState = ProjectWorkspaceState.Default with { CSharpLanguageVersion = LanguageVersion.LatestMajor };
 
         // Act
         await _projectInfoListener.UpdatedAsync(new RazorProjectInfo(
@@ -81,7 +81,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
 
         // Assert
         var project = _projectManager.GetLoadedProject(hostProject.Key);
-        Assert.Same(projectWorkspaceState, project.ProjectWorkspaceState);
+        Assert.Equal(projectWorkspaceState, project.ProjectWorkspaceState);
     }
 
     [Fact]

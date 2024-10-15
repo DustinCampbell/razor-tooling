@@ -364,7 +364,7 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
 
                 UpdateProjectDocuments(updater, documents, project.Key);
 
-                if (!projectWorkspaceState.Equals(ProjectWorkspaceState.Default))
+                if (!projectWorkspaceState.IsDefault)
                 {
                     _logger.LogInformation($"Updating project '{project.Key}' TagHelpers ({projectWorkspaceState.TagHelpers.Length}) and C# Language Version ({projectWorkspaceState.CSharpLanguageVersion}).");
                 }

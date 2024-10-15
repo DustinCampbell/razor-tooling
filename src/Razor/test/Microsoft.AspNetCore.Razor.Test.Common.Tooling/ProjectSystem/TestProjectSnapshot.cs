@@ -24,11 +24,9 @@ internal sealed class TestProjectSnapshot : IProjectSnapshot
         RealSnapshot = new ProjectSnapshot(state);
     }
 
-    public static TestProjectSnapshot Create(string filePath, ProjectWorkspaceState? projectWorkspaceState = null)
+    public static TestProjectSnapshot Create(string filePath, ProjectWorkspaceState projectWorkspaceState = default)
     {
         var hostProject = TestHostProject.Create(filePath);
-        projectWorkspaceState ??= ProjectWorkspaceState.Default;
-
         var state = ProjectState.Create(ProjectEngineFactories.DefaultProvider, hostProject, projectWorkspaceState);
 
         return new TestProjectSnapshot(state);

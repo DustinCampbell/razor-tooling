@@ -52,11 +52,6 @@ internal class ProjectState
             throw new ArgumentNullException(nameof(hostProject));
         }
 
-        if (projectWorkspaceState is null)
-        {
-            throw new ArgumentNullException(nameof(projectWorkspaceState));
-        }
-
         return new ProjectState(projectEngineFactoryProvider, hostProject, projectWorkspaceState);
     }
 
@@ -105,11 +100,6 @@ internal class ProjectState
             throw new ArgumentNullException(nameof(importsToRelatedDocuments));
         }
 
-        if (projectWorkspaceState is null)
-        {
-            throw new ArgumentNullException(nameof(projectWorkspaceState));
-        }
-
         _projectEngineFactoryProvider = older._projectEngineFactoryProvider;
         Version = older.Version.GetNewerVersion();
 
@@ -142,8 +132,7 @@ internal class ProjectState
         }
 
         if ((difference & ClearProjectWorkspaceStateVersionMask) == 0 ||
-            ProjectWorkspaceState == older.ProjectWorkspaceState ||
-            ProjectWorkspaceState.Equals(older.ProjectWorkspaceState))
+            ProjectWorkspaceState == older.ProjectWorkspaceState)
         {
             ProjectWorkspaceStateVersion = older.ProjectWorkspaceStateVersion;
         }
@@ -381,14 +370,8 @@ internal class ProjectState
             return this;
         }
 
-        if (ProjectWorkspaceState.Equals(projectWorkspaceState))
-        {
-            return this;
-        }
-
-        var difference = ProjectDifference.ProjectWorkspaceStateChanged;
         var documents = Documents.ToImmutableDictionary(kvp => kvp.Key, kvp => kvp.Value.WithProjectWorkspaceStateChange(), FilePathNormalizingComparer.Instance);
-        var state = new ProjectState(this, difference, HostProject, projectWorkspaceState, documents, ImportsToRelatedDocuments);
+        var state = new ProjectState(this, ProjectDifference.ProjectWorkspaceStateChanged, HostProject, projectWorkspaceState, documents, ImportsToRelatedDocuments);
         return state;
     }
 

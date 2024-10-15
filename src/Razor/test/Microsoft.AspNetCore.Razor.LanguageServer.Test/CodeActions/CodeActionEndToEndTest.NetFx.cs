@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
@@ -1262,7 +1261,7 @@ public class CodeActionEndToEndTest(ITestOutputHelper testOutput) : SingleServer
                 return false;
             }
 
-            var projectWorkspaceState = ProjectWorkspaceState.Create(_tagHelperDescriptors.ToImmutableArray());
+            var projectWorkspaceState = new ProjectWorkspaceState([.. _tagHelperDescriptors]);
             var testDocumentSnapshot = TestDocumentSnapshot.Create(FilePath, CodeDocument, projectWorkspaceState);
 
             context = CreateDocumentContext(new Uri(FilePath), testDocumentSnapshot);

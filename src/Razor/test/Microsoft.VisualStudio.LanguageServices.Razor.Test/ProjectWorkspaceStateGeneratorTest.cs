@@ -43,7 +43,7 @@ public class ProjectWorkspaceStateGeneratorTest : VisualStudioWorkspaceTestBase
         _workspaceProject = solution.GetProject(projectId).AssumeNotNull();
         _projectSnapshot = new ProjectSnapshot(
             ProjectState.Create(ProjectEngineFactoryProvider, TestProjectData.SomeProject, ProjectWorkspaceState.Default));
-        _projectWorkspaceStateWithTagHelpers = ProjectWorkspaceState.Create(
+        _projectWorkspaceStateWithTagHelpers = new ProjectWorkspaceState(
             [TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly").Build()]);
 
         _projectManager = CreateProjectSnapshotManager();

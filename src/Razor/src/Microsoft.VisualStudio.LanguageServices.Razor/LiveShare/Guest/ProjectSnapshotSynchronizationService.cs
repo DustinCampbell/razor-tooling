@@ -118,8 +118,7 @@ internal class ProjectSnapshotSynchronizationService(
                     state: hostProject,
                     CancellationToken.None);
             }
-            else if (args.Older.ProjectWorkspaceState != args.Newer.ProjectWorkspaceState ||
-                args.Older.ProjectWorkspaceState?.Equals(args.Newer.ProjectWorkspaceState) == false)
+            else if (args.Older.ProjectWorkspaceState != args.Newer.ProjectWorkspaceState)
             {
                 var guestPath = ResolveGuestPath(args.Newer.FilePath);
                 await _projectManager.UpdateAsync(
@@ -149,11 +148,7 @@ internal class ProjectSnapshotSynchronizationService(
                 static (updater, state) =>
                 {
                     updater.ProjectAdded(state.hostProject);
-
-                    if (state.projectWorkspaceState is not null)
-                    {
-                        updater.ProjectWorkspaceStateChanged(state.hostProject.Key, state.projectWorkspaceState);
-                    }
+                    updater.ProjectWorkspaceStateChanged(state.hostProject.Key, state.projectWorkspaceState);
                 },
                 state: (hostProject, projectWorkspaceState: projectHandle.ProjectWorkspaceState),
                 CancellationToken.None);
