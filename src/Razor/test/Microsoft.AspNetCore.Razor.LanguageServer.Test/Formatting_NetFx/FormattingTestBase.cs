@@ -246,7 +246,7 @@ public class FormattingTestBase : RazorToolingIntegrationTestBase
     protected static TextEdit Edit(int startLine, int startChar, int endLine, int endChar, string newText)
         => VsLspFactory.CreateTextEdit(startLine, startChar, endLine, endChar, newText);
 
-    private static (RazorCodeDocument, IDocumentSnapshot) CreateCodeDocumentAndSnapshot(SourceText text, string path, ImmutableArray<TagHelperDescriptor> tagHelpers = default, string? fileKind = default, bool allowDiagnostics = false, bool inGlobalNamespace = false, bool forceRuntimeCodeGeneration = false)
+    private static (RazorCodeDocument, IDocumentSnapshot) CreateCodeDocumentAndSnapshot(SourceText text, string path, ImmutableArray<TagHelperDescriptor> tagHelpers = default, string? fileKind = null, bool allowDiagnostics = false, bool inGlobalNamespace = false, bool forceRuntimeCodeGeneration = false)
     {
         fileKind ??= FileKinds.Component;
         tagHelpers = tagHelpers.NullToEmpty();
@@ -312,7 +312,7 @@ public class FormattingTestBase : RazorToolingIntegrationTestBase
         return (codeDocument, documentSnapshot);
     }
 
-    internal static IDocumentSnapshot CreateDocumentSnapshot(string path, ImmutableArray<TagHelperDescriptor> tagHelpers, string? fileKind, ImmutableArray<RazorSourceDocument> importsDocuments, ImmutableArray<IDocumentSnapshot> imports, RazorProjectEngine projectEngine, RazorCodeDocument codeDocument, bool inGlobalNamespace = false)
+    internal static IDocumentSnapshot CreateDocumentSnapshot(string path, ImmutableArray<TagHelperDescriptor> tagHelpers, string fileKind, ImmutableArray<RazorSourceDocument> importsDocuments, ImmutableArray<IDocumentSnapshot> imports, RazorProjectEngine projectEngine, RazorCodeDocument codeDocument, bool inGlobalNamespace = false)
     {
         var documentSnapshot = new StrictMock<IDocumentSnapshot>();
         documentSnapshot
@@ -340,7 +340,7 @@ public class FormattingTestBase : RazorToolingIntegrationTestBase
             .Setup(d => d.Project.GetProjectEngine())
             .Returns(projectEngine);
         documentSnapshot
-            .Setup(d => d.FileKind)
+            .SetupGet(d => d.FileKind)
             .Returns(fileKind);
         documentSnapshot
             .Setup(d => d.Version)

@@ -24,7 +24,7 @@ internal class DocumentContext(Uri uri, IDocumentSnapshot snapshot, VSProjectCon
     public Uri Uri { get; } = uri;
     public IDocumentSnapshot Snapshot { get; } = snapshot;
     public string FilePath => Snapshot.FilePath.AssumeNotNull();
-    public string FileKind => Snapshot.FileKind.AssumeNotNull();
+    public string FileKind => Snapshot.FileKind;
     public IProjectSnapshot Project => Snapshot.Project;
 
     public TextDocumentIdentifier GetTextDocumentIdentifier()

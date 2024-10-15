@@ -209,17 +209,16 @@ internal partial class DocumentState
         }
 
         var filePath = document.FilePath.AssumeNotNull();
-        var fileKind = document.FileKind.AssumeNotNull();
-        var projectItem = projectEngine.FileSystem.GetItem(filePath, fileKind);
+        var projectItem = projectEngine.FileSystem.GetItem(filePath, document.FileKind);
         var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
-        var source = RazorSourceDocument.Create(text, RazorSourceDocumentProperties.Create(document.FilePath, projectItem?.RelativePhysicalPath));
+        var source = RazorSourceDocument.Create(text, RazorSourceDocumentProperties.Create(filePath, projectItem?.RelativePhysicalPath));
 
         if (forceRuntimeCodeGeneration)
         {
-            return projectEngine.Process(source, fileKind, importSources.DrainToImmutable(), tagHelpers);
+            return projectEngine.Process(source, document.FileKind, importSources.DrainToImmutable(), tagHelpers);
         }
 
-        return projectEngine.ProcessDesignTime(source, fileKind, importSources.DrainToImmutable(), tagHelpers);
+        return projectEngine.ProcessDesignTime(source, document.FileKind, importSources.DrainToImmutable(), tagHelpers);
     }
 
     internal static ImmutableArray<ImportItem> GetImports(IDocumentSnapshot document, RazorProjectEngine projectEngine)
