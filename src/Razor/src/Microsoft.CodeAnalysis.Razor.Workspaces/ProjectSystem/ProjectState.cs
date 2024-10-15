@@ -1,7 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
@@ -17,7 +16,7 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
 // Internal tracker for DefaultProjectSnapshot
-internal class ProjectState
+internal sealed class ProjectState
 {
     private const ProjectDifference ClearConfigurationVersionMask = ProjectDifference.ConfigurationChanged;
 
@@ -30,9 +29,12 @@ internal class ProjectState
         ProjectDifference.DocumentAdded |
         ProjectDifference.DocumentRemoved;
 
-    private static readonly ImmutableDictionary<string, DocumentState> s_emptyDocuments = ImmutableDictionary.Create<string, DocumentState>(FilePathNormalizingComparer.Instance);
-    private static readonly ImmutableDictionary<string, ImmutableArray<string>> s_emptyImportsToRelatedDocuments = ImmutableDictionary.Create<string, ImmutableArray<string>>(FilePathNormalizingComparer.Instance);
-    private readonly object _lock;
+    private static readonly ImmutableDictionary<string, DocumentState> s_emptyDocuments
+        = ImmutableDictionary.Create<string, DocumentState>(FilePathNormalizingComparer.Instance);
+    private static readonly ImmutableDictionary<string, ImmutableArray<string>> s_emptyImportsToRelatedDocuments
+        = ImmutableDictionary.Create<string, ImmutableArray<string>>(FilePathNormalizingComparer.Instance);
+
+    private readonly object _lock = new();
 
     private readonly IProjectEngineFactoryProvider _projectEngineFactoryProvider;
     private RazorProjectEngine? _projectEngine;
@@ -42,16 +44,6 @@ internal class ProjectState
         HostProject hostProject,
         ProjectWorkspaceState projectWorkspaceState)
     {
-        if (projectEngineFactoryProvider is null)
-        {
-            throw new ArgumentNullException(nameof(projectEngineFactoryProvider));
-        }
-
-        if (hostProject is null)
-        {
-            throw new ArgumentNullException(nameof(hostProject));
-        }
-
         return new ProjectState(projectEngineFactoryProvider, hostProject, projectWorkspaceState);
     }
 
@@ -68,81 +60,52 @@ internal class ProjectState
         Version = VersionStamp.Create();
         ProjectWorkspaceStateVersion = Version;
         DocumentCollectionVersion = Version;
-
-        _lock = new object();
     }
 
     private ProjectState(
-        ProjectState older,
+        ProjectState oldState,
+        VersionStamp newVersion,
         ProjectDifference difference,
         HostProject hostProject,
         ProjectWorkspaceState projectWorkspaceState,
         ImmutableDictionary<string, DocumentState> documents,
         ImmutableDictionary<string, ImmutableArray<string>> importsToRelatedDocuments)
     {
-        if (older is null)
-        {
-            throw new ArgumentNullException(nameof(older));
-        }
-
-        if (hostProject is null)
-        {
-            throw new ArgumentNullException(nameof(hostProject));
-        }
-
-        if (documents is null)
-        {
-            throw new ArgumentNullException(nameof(documents));
-        }
-
-        if (importsToRelatedDocuments is null)
-        {
-            throw new ArgumentNullException(nameof(importsToRelatedDocuments));
-        }
-
-        _projectEngineFactoryProvider = older._projectEngineFactoryProvider;
-        Version = older.Version.GetNewerVersion();
+        _projectEngineFactoryProvider = oldState._projectEngineFactoryProvider;
+        Version = newVersion;
 
         HostProject = hostProject;
         ProjectWorkspaceState = projectWorkspaceState;
         Documents = documents;
         ImportsToRelatedDocuments = importsToRelatedDocuments;
 
-        _lock = new object();
+        DocumentCollectionVersion = difference.IsFlagClear(ClearDocumentCollectionVersionMask)
+            ? oldState.DocumentCollectionVersion
+            : Version;
 
-        if ((difference & ClearDocumentCollectionVersionMask) == 0)
-        {
-            // Document collection hasn't changed
-            DocumentCollectionVersion = older.DocumentCollectionVersion;
-        }
-        else
-        {
-            DocumentCollectionVersion = Version;
-        }
-
-        if ((difference & ClearConfigurationVersionMask) == 0 && older._projectEngine != null)
+        if (difference.IsFlagClear(ClearConfigurationVersionMask) && oldState._projectEngine != null)
         {
             // Optimistically cache the RazorProjectEngine.
-            _projectEngine = older.ProjectEngine;
-            ConfigurationVersion = older.ConfigurationVersion;
+            _projectEngine = oldState.ProjectEngine;
+            ConfigurationVersion = oldState.ConfigurationVersion;
         }
         else
         {
             ConfigurationVersion = Version;
         }
 
-        if ((difference & ClearProjectWorkspaceStateVersionMask) == 0 ||
-            ProjectWorkspaceState == older.ProjectWorkspaceState)
+        if (difference.IsFlagClear(ClearProjectWorkspaceStateVersionMask) ||
+            ProjectWorkspaceState == oldState.ProjectWorkspaceState)
         {
-            ProjectWorkspaceStateVersion = older.ProjectWorkspaceStateVersion;
+            ProjectWorkspaceStateVersion = oldState.ProjectWorkspaceStateVersion;
         }
         else
         {
             ProjectWorkspaceStateVersion = Version;
         }
 
-        if ((difference & ClearProjectWorkspaceStateVersionMask) != 0 &&
-            CSharpLanguageVersion != older.CSharpLanguageVersion)
+        if (!difference.IsFlagClear(ClearProjectWorkspaceStateVersionMask) &&
+            CSharpLanguageVersion != oldState.CSharpLanguageVersion)
         {
             // C# language version changed. This impacts the ProjectEngine, reset it.
             _projectEngine = null;
@@ -214,16 +177,6 @@ internal class ProjectState
 
     public ProjectState WithAddedHostDocument(HostDocument hostDocument, TextLoader loader)
     {
-        if (hostDocument is null)
-        {
-            throw new ArgumentNullException(nameof(hostDocument));
-        }
-
-        if (loader is null)
-        {
-            throw new ArgumentNullException(nameof(loader));
-        }
-
         // Ignore attempts to 'add' a document with different data, we only
         // care about one, so it might as well be the one we have.
         if (Documents.ContainsKey(hostDocument.FilePath))
@@ -239,25 +192,13 @@ internal class ProjectState
 
         // Now check if the updated document is an import - it's important this this happens after
         // updating the imports map.
-        if (importsToRelatedDocuments.TryGetValue(hostDocument.TargetPath, out var relatedDocuments))
-        {
-            foreach (var relatedDocument in relatedDocuments)
-            {
-                documents = documents.SetItem(relatedDocument, documents[relatedDocument].WithImportsChange());
-            }
-        }
+        documents = UpdateImportsIfNecessary(hostDocument, importsToRelatedDocuments, documents);
 
-        var state = new ProjectState(this, ProjectDifference.DocumentAdded, HostProject, ProjectWorkspaceState, documents, importsToRelatedDocuments);
-        return state;
+        return Update(ProjectDifference.DocumentAdded, HostProject, ProjectWorkspaceState, documents, importsToRelatedDocuments);
     }
 
     public ProjectState WithRemovedHostDocument(HostDocument hostDocument)
     {
-        if (hostDocument is null)
-        {
-            throw new ArgumentNullException(nameof(hostDocument));
-        }
-
         if (!Documents.ContainsKey(hostDocument.FilePath))
         {
             return this;
@@ -267,29 +208,17 @@ internal class ProjectState
 
         // First check if the updated document is an import - it's important that this happens
         // before updating the imports map.
-        if (ImportsToRelatedDocuments.TryGetValue(hostDocument.TargetPath, out var relatedDocuments))
-        {
-            foreach (var relatedDocument in relatedDocuments)
-            {
-                documents = documents.SetItem(relatedDocument, documents[relatedDocument].WithImportsChange());
-            }
-        }
+        documents = UpdateImportsIfNecessary(hostDocument, ImportsToRelatedDocuments, documents);
 
         // Compute the effect on the import map
         var importTargetPaths = GetImportDocumentTargetPaths(hostDocument);
         var importsToRelatedDocuments = RemoveFromImportsToRelatedDocuments(ImportsToRelatedDocuments, hostDocument, importTargetPaths);
 
-        var state = new ProjectState(this, ProjectDifference.DocumentRemoved, HostProject, ProjectWorkspaceState, documents, importsToRelatedDocuments);
-        return state;
+        return Update(ProjectDifference.DocumentRemoved, HostProject, ProjectWorkspaceState, documents, importsToRelatedDocuments);
     }
 
     public ProjectState WithChangedHostDocument(HostDocument hostDocument, SourceText sourceText, VersionStamp textVersion)
     {
-        if (hostDocument is null)
-        {
-            throw new ArgumentNullException(nameof(hostDocument));
-        }
-
         if (!Documents.TryGetValue(hostDocument.FilePath, out var document))
         {
             return this;
@@ -297,25 +226,13 @@ internal class ProjectState
 
         var documents = Documents.SetItem(hostDocument.FilePath, document.WithText(sourceText, textVersion));
 
-        if (ImportsToRelatedDocuments.TryGetValue(hostDocument.TargetPath, out var relatedDocuments))
-        {
-            foreach (var relatedDocument in relatedDocuments)
-            {
-                documents = documents.SetItem(relatedDocument, documents[relatedDocument].WithImportsChange());
-            }
-        }
+        documents = UpdateImportsIfNecessary(hostDocument, ImportsToRelatedDocuments, documents);
 
-        var state = new ProjectState(this, ProjectDifference.DocumentChanged, HostProject, ProjectWorkspaceState, documents, ImportsToRelatedDocuments);
-        return state;
+        return Update(ProjectDifference.DocumentChanged, HostProject, ProjectWorkspaceState, documents, ImportsToRelatedDocuments);
     }
 
     public ProjectState WithChangedHostDocument(HostDocument hostDocument, TextLoader loader)
     {
-        if (hostDocument is null)
-        {
-            throw new ArgumentNullException(nameof(hostDocument));
-        }
-
         if (!Documents.TryGetValue(hostDocument.FilePath, out var document))
         {
             return this;
@@ -323,32 +240,35 @@ internal class ProjectState
 
         var documents = Documents.SetItem(hostDocument.FilePath, document.WithTextLoader(loader));
 
-        if (ImportsToRelatedDocuments.TryGetValue(hostDocument.TargetPath, out var relatedDocuments))
-        {
-            foreach (var relatedDocument in relatedDocuments)
-            {
-                documents = documents.SetItem(relatedDocument, documents[relatedDocument].WithImportsChange());
-            }
-        }
+        documents = UpdateImportsIfNecessary(hostDocument, ImportsToRelatedDocuments, documents);
 
-        var state = new ProjectState(this, ProjectDifference.DocumentChanged, HostProject, ProjectWorkspaceState, documents, ImportsToRelatedDocuments);
-        return state;
+        return Update(ProjectDifference.DocumentChanged, HostProject, ProjectWorkspaceState, documents, ImportsToRelatedDocuments);
+    }
+
+    private static ImmutableDictionary<string, DocumentState> UpdateImportsIfNecessary(
+        HostDocument hostDocument,
+        ImmutableDictionary<string, ImmutableArray<string>> importsToRelatedDocumentsMap,
+        ImmutableDictionary<string, DocumentState> pathToDocumentMap)
+    {
+        if (!importsToRelatedDocumentsMap.TryGetValue(hostDocument.TargetPath, out var relatedDocuments))
+        {
+            return pathToDocumentMap;
+        }
+        
+        var updates = relatedDocuments.Select(relatedDocument => new KeyValuePair<string, DocumentState>(relatedDocument, pathToDocumentMap[relatedDocument].WithImportsChange()));
+        return pathToDocumentMap.SetItems(updates);
     }
 
     public ProjectState WithHostProject(HostProject hostProject)
     {
-        if (hostProject is null)
-        {
-            throw new ArgumentNullException(nameof(hostProject));
-        }
-
-        if (HostProject.Configuration.Equals(hostProject.Configuration) &&
+        if (HostProject.Configuration == hostProject.Configuration &&
             HostProject.RootNamespace == hostProject.RootNamespace)
         {
             return this;
         }
 
-        var documents = Documents.ToImmutableDictionary(kvp => kvp.Key, kvp => kvp.Value.WithConfigurationChange(), FilePathNormalizingComparer.Instance);
+        var updates = Documents.Select(WithConfigurationChange);
+        var documents = Documents.SetItems(updates);
 
         // If the host project has changed then we need to recompute the imports map
         var importsToRelatedDocuments = s_emptyImportsToRelatedDocuments;
@@ -359,8 +279,12 @@ internal class ProjectState
             importsToRelatedDocuments = AddToImportsToRelatedDocuments(importsToRelatedDocuments, document.Value.HostDocument.FilePath, importTargetPaths);
         }
 
-        var state = new ProjectState(this, ProjectDifference.ConfigurationChanged, hostProject, ProjectWorkspaceState, documents, importsToRelatedDocuments);
-        return state;
+        return Update(ProjectDifference.ConfigurationChanged, hostProject, ProjectWorkspaceState, documents, importsToRelatedDocuments);
+
+        static KeyValuePair<string, DocumentState> WithConfigurationChange(KeyValuePair<string, DocumentState> pair)
+        {
+            return new(pair.Key, pair.Value.WithConfigurationChange());
+        }
     }
 
     public ProjectState WithProjectWorkspaceState(ProjectWorkspaceState projectWorkspaceState)
@@ -370,12 +294,28 @@ internal class ProjectState
             return this;
         }
 
-        var documents = Documents.ToImmutableDictionary(kvp => kvp.Key, kvp => kvp.Value.WithProjectWorkspaceStateChange(), FilePathNormalizingComparer.Instance);
-        var state = new ProjectState(this, ProjectDifference.ProjectWorkspaceStateChanged, HostProject, projectWorkspaceState, documents, ImportsToRelatedDocuments);
-        return state;
+        var updates = Documents.Select(WithProjectWorkspaceStateChange);
+        var documents = Documents.SetItems(updates);
+
+        return Update(ProjectDifference.ProjectWorkspaceStateChanged, HostProject, projectWorkspaceState, documents, ImportsToRelatedDocuments);
+
+        static KeyValuePair<string, DocumentState> WithProjectWorkspaceStateChange(KeyValuePair<string, DocumentState> pair)
+        {
+            return new(pair.Key, pair.Value.WithProjectWorkspaceStateChange());
+        }
     }
 
-    internal static ImmutableDictionary<string, ImmutableArray<string>> AddToImportsToRelatedDocuments(
+    private ProjectState Update(
+        ProjectDifference difference,
+        HostProject hostProject,
+        ProjectWorkspaceState projectWorkspaceState,
+        ImmutableDictionary<string, DocumentState> documents,
+        ImmutableDictionary<string, ImmutableArray<string>> importsToRelatedDocuments)
+    {
+        return new(this, Version.GetNewerVersion(), difference, hostProject, projectWorkspaceState, documents, importsToRelatedDocuments);
+    }
+
+    private static ImmutableDictionary<string, ImmutableArray<string>> AddToImportsToRelatedDocuments(
         ImmutableDictionary<string, ImmutableArray<string>> importsToRelatedDocuments,
         string documentFilePath,
         List<string> importTargetPaths)
@@ -384,7 +324,7 @@ internal class ProjectState
         {
             if (!importsToRelatedDocuments.TryGetValue(importTargetPath, out var relatedDocuments))
             {
-                relatedDocuments = ImmutableArray.Create<string>();
+                relatedDocuments = [];
             }
 
             relatedDocuments = relatedDocuments.Add(documentFilePath);
@@ -418,7 +358,7 @@ internal class ProjectState
         return GetImportDocumentTargetPaths(hostDocument.TargetPath, hostDocument.FileKind, ProjectEngine);
     }
 
-    internal static List<string> GetImportDocumentTargetPaths(string targetPath, string fileKind, RazorProjectEngine projectEngine)
+    private static List<string> GetImportDocumentTargetPaths(string targetPath, string fileKind, RazorProjectEngine projectEngine)
     {
         var importFeatures = projectEngine.ProjectFeatures.OfType<IImportProjectFeature>();
         var projectItem = projectEngine.FileSystem.GetItem(targetPath, fileKind);
