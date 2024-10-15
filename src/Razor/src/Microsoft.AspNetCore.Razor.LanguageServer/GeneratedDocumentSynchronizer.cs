@@ -19,7 +19,6 @@ internal class GeneratedDocumentSynchronizer(
     public void DocumentProcessed(RazorCodeDocument codeDocument, IDocumentSnapshot document)
     {
         var hostDocumentVersion = document.Version;
-        var filePath = document.FilePath.AssumeNotNull();
 
         // If the document isn't open, and we're not updating buffers for closed documents, then we don't need to do anything.
         if (!_projectManager.IsDocumentOpen(document.FilePath) &&
@@ -40,11 +39,11 @@ internal class GeneratedDocumentSynchronizer(
         {
             var htmlText = codeDocument.GetHtmlSourceText();
 
-            _publisher.PublishHtml(document.Project.Key, filePath, htmlText, hostDocumentVersion);
+            _publisher.PublishHtml(document.Project.Key, document.FilePath, htmlText, hostDocumentVersion);
         }
 
         var csharpText = codeDocument.GetCSharpSourceText();
 
-        _publisher.PublishCSharp(document.Project.Key, filePath, csharpText, hostDocumentVersion);
+        _publisher.PublishCSharp(document.Project.Key, document.FilePath, csharpText, hostDocumentVersion);
     }
 }

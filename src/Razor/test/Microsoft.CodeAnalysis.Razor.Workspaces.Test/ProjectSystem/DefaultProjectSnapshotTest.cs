@@ -97,7 +97,7 @@ public class DefaultProjectSnapshotTest : WorkspaceTestBase
 
         // Assert
         Assert.Collection(
-            documents.OrderBy(d => d.FilePath),
+            documents.OrderBy(static d => d.FilePath),
             d => Assert.Equal(_documents[0].FilePath, d.FilePath),
             d => Assert.Equal(_documents[1].FilePath, d.FilePath));
     }

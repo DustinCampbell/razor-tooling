@@ -232,7 +232,7 @@ internal abstract partial class WindowsRazorProjectHostBase : OnceInitializedOnc
                         Assumes.NotNull(documentSnapshot);
                         // TODO: The creation of the HostProject here is silly
                         var hostDocument = new HostDocument(
-                            documentSnapshot.FilePath.AssumeNotNull(),
+                            documentSnapshot.FilePath,
                             documentSnapshot.TargetPath.AssumeNotNull(),
                             documentSnapshot.FileKind);
                         updater.DocumentAdded(projectKey, hostDocument, new FileTextLoader(hostDocument.FilePath, null));

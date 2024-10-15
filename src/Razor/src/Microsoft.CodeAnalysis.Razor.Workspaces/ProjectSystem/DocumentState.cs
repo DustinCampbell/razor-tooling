@@ -208,7 +208,7 @@ internal partial class DocumentState
             importSources.Add(sourceDocument);
         }
 
-        var filePath = document.FilePath.AssumeNotNull();
+        var filePath = document.FilePath;
         var projectItem = projectEngine.FileSystem.GetItem(filePath, document.FileKind);
         var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
         var source = RazorSourceDocument.Create(text, RazorSourceDocumentProperties.Create(filePath, projectItem?.RelativePhysicalPath));
@@ -223,11 +223,7 @@ internal partial class DocumentState
 
     internal static ImmutableArray<ImportItem> GetImports(IDocumentSnapshot document, RazorProjectEngine projectEngine)
     {
-        var project = document.Project;
-        var filePath = document.FilePath.AssumeNotNull();
-        var fileKind = document.FileKind.AssumeNotNull();
-
-        var documentProjectItem = projectEngine.FileSystem.GetItem(filePath, fileKind);
+        var documentProjectItem = projectEngine.FileSystem.GetItem(document.FilePath, document.FileKind);
 
         using var importProjectItems = new PooledArrayBuilder<RazorProjectItem>();
 
@@ -245,6 +241,7 @@ internal partial class DocumentState
         }
 
         using var imports = new PooledArrayBuilder<ImportItem>(capacity: importProjectItems.Count);
+        var project = document.Project;
 
         foreach (var importProjectItem in importProjectItems)
         {

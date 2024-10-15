@@ -27,7 +27,7 @@ internal partial class RazorDiagnosticsPublisher
 
         public int GetHashCode(IDocumentSnapshot obj)
         {
-            var filePath = obj.FilePath.AssumeNotNull();
+            var filePath = obj.FilePath;
             return FilePathComparer.Instance.GetHashCode(filePath);
         }
     }

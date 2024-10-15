@@ -278,7 +278,7 @@ public class FormattingTestBase : RazorToolingIntegrationTestBase
             .Setup(d => d.GetTextAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(importsSourceText);
         importsSnapshot
-            .Setup(d => d.FilePath)
+            .SetupGet(d => d.FilePath)
             .Returns(importsPath);
         importsSnapshot
             .Setup(d => d.TargetPath)
@@ -319,7 +319,7 @@ public class FormattingTestBase : RazorToolingIntegrationTestBase
             .Setup(d => d.GetGeneratedOutputAsync(It.IsAny<bool>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(codeDocument);
         documentSnapshot
-            .Setup(d => d.FilePath)
+            .SetupGet(d => d.FilePath)
             .Returns(path);
         documentSnapshot
             .Setup(d => d.Project.Key)
