@@ -17,20 +17,20 @@ internal static class FilePathNormalizer
 
     private static readonly bool s_caseSensitive = s_isLinux;
 
-    public static string NormalizeDirectory(string? directoryFilePath)
+    public static string NormalizeDirectory(string? directoryPath)
     {
-        if (directoryFilePath.IsNullOrEmpty() || directoryFilePath == "/")
+        if (directoryPath.IsNullOrEmpty() || directoryPath == "/")
         {
             return "/";
         }
 
-        var directoryFilePathSpan = directoryFilePath.AsSpan();
+        var directoryPathSpan = directoryPath.AsSpan();
 
         // Ensure that the array is at least 1 character larger, so that we can add
         // a trailing space after normalization if necessary.
-        var arrayLength = directoryFilePathSpan.Length + 1;
+        var arrayLength = directoryPathSpan.Length + 1;
         using var _ = ArrayPool<char>.Shared.GetPooledArraySpan(arrayLength, out var destination);
-        var (start, length) = NormalizeCore(directoryFilePathSpan, destination);
+        var (start, length) = NormalizeCore(directoryPathSpan, destination);
         ReadOnlySpan<char> normalizedSpan = destination.Slice(start, length);
 
         // Add a trailing slash if the normalized span doesn't end in one.
@@ -40,9 +40,9 @@ internal static class FilePathNormalizer
             normalizedSpan = destination.Slice(start, length + 1);
         }
 
-        if (directoryFilePathSpan.Equals(normalizedSpan, StringComparison.Ordinal))
+        if (directoryPathSpan.Equals(normalizedSpan, StringComparison.Ordinal))
         {
-            return directoryFilePath;
+            return directoryPath;
         }
 
         return CreateString(normalizedSpan);
