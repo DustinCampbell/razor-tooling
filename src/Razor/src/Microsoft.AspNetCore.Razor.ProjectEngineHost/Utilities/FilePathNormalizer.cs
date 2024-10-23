@@ -12,9 +12,10 @@ namespace Microsoft.AspNetCore.Razor.Utilities;
 
 internal static class FilePathNormalizer
 {
-    private static readonly Func<char, char> s_charConverter = RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
-        ? c => c
-        : char.ToLowerInvariant;
+    private static readonly bool s_isLinux = RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
+    private static readonly bool s_isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+
+    private static readonly bool s_caseSensitive = s_isLinux;
 
     public static string NormalizeDirectory(string? directoryFilePath)
     {
@@ -139,7 +140,7 @@ internal static class FilePathNormalizer
         return normalizedSpan1.Equals(normalizedSpan2, FilePathComparison.Instance);
     }
 
-    public static int GetHashCode(string filePath)
+    public static int ComputeHashCode(string filePath)
     {
         if (filePath.Length == 0)
         {
@@ -153,9 +154,19 @@ internal static class FilePathNormalizer
 
         var hashCombiner = HashCodeCombiner.Start();
 
-        foreach (var ch in normalizedSpan)
+        if (s_caseSensitive)
         {
-            hashCombiner.Add(s_charConverter(ch));
+            foreach (var ch in normalizedSpan)
+            {
+                hashCombiner.Add(ch);
+            }
+        }
+        else
+        {
+            foreach (var ch in normalizedSpan)
+            {
+                hashCombiner.Add(char.ToLowerInvariant(ch));
+            }
         }
 
         return hashCombiner.CombinedHash;
