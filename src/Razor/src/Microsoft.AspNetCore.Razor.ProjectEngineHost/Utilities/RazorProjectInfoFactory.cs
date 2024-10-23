@@ -131,7 +131,7 @@ internal static class RazorProjectInfoFactory
     {
         using var documents = new PooledArrayBuilder<HostDocument>();
 
-        var normalizedProjectPath = FilePathNormalizer.NormalizeDirectory(projectPath);
+        var normalizedProjectDirectoryPath = FilePathNormalizer.NormalizeDirectory(projectPath);
 
         // We go through additional documents, because that's where the razor files will be
         foreach (var document in project.AdditionalDocuments)
@@ -139,7 +139,7 @@ internal static class RazorProjectInfoFactory
             if (document.FilePath is { } filePath &&
                 TryGetFileKind(filePath, out var kind))
             {
-                documents.Add(new HostDocument(filePath, GetTargetPath(filePath, normalizedProjectPath), kind));
+                documents.Add(new HostDocument(filePath, GetTargetPath(filePath, normalizedProjectDirectoryPath), kind));
             }
         }
 
@@ -154,7 +154,7 @@ internal static class RazorProjectInfoFactory
                 if (TryGetRazorFileName(document.FilePath, out var razorFilePath) &&
                     TryGetFileKind(razorFilePath, out var kind))
                 {
-                    documents.Add(new HostDocument(razorFilePath, GetTargetPath(razorFilePath, normalizedProjectPath), kind));
+                    documents.Add(new HostDocument(razorFilePath, GetTargetPath(razorFilePath, normalizedProjectDirectoryPath), kind));
                 }
             }
         }
@@ -162,13 +162,13 @@ internal static class RazorProjectInfoFactory
         return documents.DrainToImmutable();
     }
 
-    private static string GetTargetPath(string documentFilePath, string normalizedProjectPath)
+    private static string GetTargetPath(string documentFilePath, string normalizedProjectDirectoryPath)
     {
         var targetFilePath = FilePathNormalizer.Normalize(documentFilePath);
-        if (targetFilePath.StartsWith(normalizedProjectPath, s_stringComparison))
+        if (targetFilePath.StartsWith(normalizedProjectDirectoryPath, s_stringComparison))
         {
             // Make relative
-            targetFilePath = documentFilePath[normalizedProjectPath.Length..];
+            targetFilePath = documentFilePath[normalizedProjectDirectoryPath.Length..];
         }
 
         // Representing all of our host documents with a re-normalized target path to workaround GetRelatedDocument limitations.
