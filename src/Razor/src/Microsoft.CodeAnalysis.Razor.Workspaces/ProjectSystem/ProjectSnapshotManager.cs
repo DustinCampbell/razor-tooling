@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Razor.PooledObjects;
 using Microsoft.AspNetCore.Razor.ProjectEngineHost;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Threading;
+using Microsoft.AspNetCore.Razor.Utilities;
 using Microsoft.CodeAnalysis.Razor.Logging;
 using Microsoft.CodeAnalysis.Text;
 
@@ -46,7 +47,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
     /// <summary>
     /// The set of open documents.
     /// </summary>
-    private readonly HashSet<string> _openDocumentSet = new(FilePathComparer.Instance);
+    private readonly HashSet<string> _openDocumentSet = new(FilePath.Comparer);
 
     /// <summary>
     /// Determines whether or not the solution is closing.
@@ -157,7 +158,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
             foreach (var (key, entry) in _projectMap)
             {
-                if (FilePathComparer.Instance.Equals(entry.State.HostProject.FilePath, projectFileName))
+                if (FilePath.Comparer.Equals(entry.State.HostProject.FilePath, projectFileName))
                 {
                     projects.Add(key);
                 }

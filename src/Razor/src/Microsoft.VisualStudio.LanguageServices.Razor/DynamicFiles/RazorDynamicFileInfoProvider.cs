@@ -186,7 +186,7 @@ internal class RazorDynamicFileInfoProvider : IRazorDynamicFileInfoProviderInter
     {
         foreach (var entry in _entries)
         {
-            if (FilePathComparer.Instance.Equals(filePath, entry.Key.FilePath))
+            if (FilePath.Comparer.Equals(filePath, entry.Key.FilePath))
             {
                 yield return entry;
             }
@@ -427,7 +427,7 @@ internal class RazorDynamicFileInfoProvider : IRazorDynamicFileInfoProviderInter
         {
             return
                 ProjectId.Equals(other.ProjectId) &&
-                FilePathComparer.Instance.Equals(FilePath, other.FilePath);
+                AspNetCore.Razor.Utilities.FilePath.Comparer.Equals(FilePath, other.FilePath);
         }
 
         public override bool Equals(object? obj)
@@ -439,7 +439,7 @@ internal class RazorDynamicFileInfoProvider : IRazorDynamicFileInfoProviderInter
         {
             var hash = HashCodeCombiner.Start();
             hash.Add(ProjectId);
-            hash.Add(FilePath, FilePathComparer.Instance);
+            hash.Add(FilePath, AspNetCore.Razor.Utilities.FilePath.Comparer);
             return hash;
         }
     }

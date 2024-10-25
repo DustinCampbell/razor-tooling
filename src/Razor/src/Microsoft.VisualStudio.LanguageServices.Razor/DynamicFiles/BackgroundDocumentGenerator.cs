@@ -9,7 +9,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Utilities;
-using Microsoft.CodeAnalysis.Razor;
 using Microsoft.CodeAnalysis.Razor.Logging;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.Workspaces;
@@ -53,7 +52,7 @@ internal partial class BackgroundDocumentGenerator : IRazorStartupService, IDisp
 
         _disposeTokenSource = new();
         _workQueue = new AsyncBatchingWorkQueue<(IProjectSnapshot, IDocumentSnapshot)>(delay, ProcessBatchAsync, _disposeTokenSource.Token);
-        _suppressedDocuments = ImmutableHashSet<string>.Empty.WithComparer(FilePathComparer.Instance);
+        _suppressedDocuments = ImmutableHashSet<string>.Empty.WithComparer(FilePath.Comparer);
         _projectManager.Changed += ProjectManager_Changed;
     }
 

@@ -4,13 +4,13 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using Microsoft.AspNetCore.Razor.LanguageServer.Hosting;
 using Microsoft.AspNetCore.Razor.PooledObjects;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.TextDifferencing;
+using Microsoft.AspNetCore.Razor.Utilities;
 using Microsoft.CodeAnalysis.Razor;
 using Microsoft.CodeAnalysis.Razor.Logging;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
@@ -47,7 +47,7 @@ internal sealed class GeneratedDocumentPublisher : IGeneratedDocumentPublisher, 
         // we don't use the project key for the key for this dictionary. This matches when we send edits to the client,
         // as they are only tracking a single Html file for each Razor file path, thus edits need to be correct or we'll
         // get out of sync.
-        _publishedHtmlData = new Dictionary<string, PublishData>(FilePathComparer.Instance);
+        _publishedHtmlData = new Dictionary<string, PublishData>(FilePath.Comparer);
 
         _projectManager.Changed += ProjectManager_Changed;
     }

@@ -5,7 +5,6 @@ using System;
 using System.IO;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Utilities;
-using Microsoft.CodeAnalysis.Razor;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.Extensions.Internal;
 
@@ -57,7 +56,7 @@ internal sealed record class MiscFilesHostProject : HostProject
         }
 
         return base.Equals(other) &&
-               FilePathComparer.Instance.Equals(DirectoryPath, other.DirectoryPath);
+               Utilities.FilePath.Comparer.Equals(DirectoryPath, other.DirectoryPath);
     }
 
     public override int GetHashCode()
@@ -65,7 +64,7 @@ internal sealed record class MiscFilesHostProject : HostProject
         var hash = HashCodeCombiner.Start();
 
         hash.Add(base.GetHashCode());
-        hash.Add(DirectoryPath, FilePathComparer.Instance);
+        hash.Add(DirectoryPath, Utilities.FilePath.Comparer);
 
         return hash.CombinedHash;
     }

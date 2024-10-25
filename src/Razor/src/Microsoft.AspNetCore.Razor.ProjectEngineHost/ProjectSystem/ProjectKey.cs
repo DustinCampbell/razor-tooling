@@ -5,7 +5,6 @@ using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Razor.Utilities;
-using Microsoft.CodeAnalysis.Razor;
 
 namespace Microsoft.AspNetCore.Razor.ProjectSystem;
 
@@ -31,10 +30,10 @@ internal readonly record struct ProjectKey
     }
 
     public bool Equals(ProjectKey other)
-        => FilePathComparer.Instance.Equals(Id, other.Id);
+        => FilePath.Comparer.Equals(Id, other.Id);
 
     public override int GetHashCode()
-        => IsUnknown ? 0 : FilePathComparer.Instance.GetHashCode(Id);
+        => IsUnknown ? 0 : FilePath.Comparer.GetHashCode(Id);
 
     public override string ToString()
         => IsUnknown ? "<Unknown Project>" : Id;

@@ -6,13 +6,11 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.LanguageServer.Common;
 using Microsoft.AspNetCore.Razor.PooledObjects;
 using Microsoft.AspNetCore.Razor.Utilities;
-using Microsoft.CodeAnalysis.Razor;
 using Microsoft.VisualStudio.Threading;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer;
@@ -42,7 +40,7 @@ internal partial class RazorFileChangeDetector : IFileChangeDetector, IDisposabl
 
         _disposeTokenSource = new();
         _workQueue = new AsyncBatchingWorkQueue<(string, RazorFileChangeKind)>(delay, ProcessBatchAsync, _disposeTokenSource.Token);
-        _filePathToChangeMap = new(FilePathComparer.Instance);
+        _filePathToChangeMap = new(FilePath.Comparer);
         _indicesToSkip = [];
         _watchers = new List<FileSystemWatcher>(s_razorFileExtensions.Length);
     }
@@ -177,13 +175,13 @@ internal partial class RazorFileChangeDetector : IFileChangeDetector, IDisposabl
             {
                 // Translate file renames into remove->add
 
-                if (args.OldFullPath.EndsWith(extension, FilePathComparison.Instance))
+                if (args.OldFullPath.EndsWith(extension, FilePath.Comparison))
                 {
                     // Renaming from Razor file to something else.
                     _workQueue.AddWork((args.OldFullPath, RazorFileChangeKind.Removed));
                 }
 
-                if (args.FullPath.EndsWith(extension, FilePathComparison.Instance))
+                if (args.FullPath.EndsWith(extension, FilePath.Comparison))
                 {
                     // Renaming to a Razor file.
                     _workQueue.AddWork((args.FullPath, RazorFileChangeKind.Added));

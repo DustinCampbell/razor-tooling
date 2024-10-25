@@ -14,13 +14,10 @@ using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Serialization;
 using Microsoft.AspNetCore.Razor.Utilities;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Razor;
 using Microsoft.CodeAnalysis.Razor.Logging;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.Workspaces;
 using Microsoft.CodeAnalysis.Text;
-using Microsoft.CommonLanguageServerProtocol.Framework;
-using Microsoft.VisualStudio.Threading;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.ProjectSystem;
 
@@ -242,7 +239,7 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
                     filePath,
                     (projectSnapshot, textDocumentPath) =>
                     {
-                        if (!projectSnapshot.DocumentFilePaths.Contains(textDocumentPath, FilePathComparer.Instance))
+                        if (!projectSnapshot.DocumentFilePaths.Contains(textDocumentPath, FilePath.Comparer))
                         {
                             _logger.LogInformation($"Containing project is not tracking document '{textDocumentPath}'");
                             return;
@@ -411,7 +408,7 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
         var project = _projectManager.GetLoadedProject(projectKey);
         var currentProjectKey = project.Key;
         var projectDirectory = FilePathNormalizer.GetNormalizedDirectoryName(project.FilePath);
-        var documentMap = documents.ToDictionary(document => EnsureFullPath(document.FilePath, projectDirectory), FilePathComparer.Instance);
+        var documentMap = documents.ToDictionary(document => EnsureFullPath(document.FilePath, projectDirectory), FilePath.Comparer);
         var miscellaneousProject = _projectManager.GetMiscellaneousProject();
 
         // "Remove" any unnecessary documents by putting them into the misc project
@@ -460,7 +457,7 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
             // If the physical file name hasn't changed, we use the current document snapshot as the source of truth for text, in case
             // it has received text change info from LSP. eg, if someone changes the TargetPath of the file while its open in the editor
             // with unsaved changes, we don't want to reload it from disk.
-            var textLoader = FilePathComparer.Instance.Equals(currentHostDocument.FilePath, newHostDocument.FilePath)
+            var textLoader = FilePath.Comparer.Equals(currentHostDocument.FilePath, newHostDocument.FilePath)
                 ? new DocumentSnapshotTextLoader(documentSnapshot)
                 : _remoteTextLoaderFactory.Create(newFilePath);
 
@@ -475,13 +472,13 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
         foreach (var documentKvp in documentMap)
         {
             var documentFilePath = documentKvp.Key;
-            if (project.DocumentFilePaths.Contains(documentFilePath, FilePathComparer.Instance))
+            if (project.DocumentFilePaths.Contains(documentFilePath, FilePath.Comparer))
             {
                 // Already know about this document
                 continue;
             }
 
-            if (miscellaneousProject.DocumentFilePaths.Contains(documentFilePath, FilePathComparer.Instance))
+            if (miscellaneousProject.DocumentFilePaths.Contains(documentFilePath, FilePath.Comparer))
             {
                 MoveDocument(updater, documentFilePath, fromProject: miscellaneousProject, toProject: project);
             }
@@ -504,8 +501,8 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
         IProjectSnapshot fromProject,
         IProjectSnapshot toProject)
     {
-        Debug.Assert(fromProject.DocumentFilePaths.Contains(documentFilePath, FilePathComparer.Instance));
-        Debug.Assert(!toProject.DocumentFilePaths.Contains(documentFilePath, FilePathComparer.Instance));
+        Debug.Assert(fromProject.DocumentFilePaths.Contains(documentFilePath, FilePath.Comparer));
+        Debug.Assert(!toProject.DocumentFilePaths.Contains(documentFilePath, FilePath.Comparer));
 
         if (fromProject.GetDocument(documentFilePath) is not DocumentSnapshot documentSnapshot)
         {
@@ -537,7 +534,7 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
     private static string EnsureFullPath(string filePath, string projectDirectory)
     {
         var normalizedFilePath = FilePathNormalizer.Normalize(filePath);
-        if (!normalizedFilePath.StartsWith(projectDirectory, FilePathComparison.Instance))
+        if (!normalizedFilePath.StartsWith(projectDirectory, FilePath.Comparison))
         {
             var absolutePath = Path.Combine(projectDirectory, normalizedFilePath);
             normalizedFilePath = FilePathNormalizer.Normalize(absolutePath);

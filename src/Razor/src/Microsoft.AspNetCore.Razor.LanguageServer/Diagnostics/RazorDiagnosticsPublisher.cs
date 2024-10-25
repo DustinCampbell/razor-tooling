@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.LanguageServer.Hosting;
 using Microsoft.AspNetCore.Razor.PooledObjects;
 using Microsoft.AspNetCore.Razor.Utilities;
-using Microsoft.CodeAnalysis.Razor;
 using Microsoft.CodeAnalysis.Razor.Diagnostics;
 using Microsoft.CodeAnalysis.Razor.Logging;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
@@ -78,7 +77,7 @@ internal partial class RazorDiagnosticsPublisher : IDocumentProcessedListener, I
         _disposeTokenSource = new();
         _workQueue = new AsyncBatchingWorkQueue<IDocumentSnapshot>(publishDelay, ProcessBatchAsync, _disposeTokenSource.Token);
 
-        _publishedDiagnostics = new Dictionary<string, PublishedDiagnostics>(FilePathComparer.Instance);
+        _publishedDiagnostics = new Dictionary<string, PublishedDiagnostics>(FilePath.Comparer);
         _logger = loggerFactory.GetOrCreateLogger<RazorDiagnosticsPublisher>();
     }
 

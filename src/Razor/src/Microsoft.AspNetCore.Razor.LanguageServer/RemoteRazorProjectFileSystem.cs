@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.IO;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Utilities;
-using Microsoft.CodeAnalysis.Razor;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer;
 
@@ -104,7 +103,7 @@ internal class RemoteRazorProjectFileSystem : RazorProjectFileSystem
         }
 
         var potentialRoot = path[..root.Length];
-        if (FilePathComparer.Instance.Equals(potentialRoot, root))
+        if (FilePath.Comparer.Equals(potentialRoot, root))
         {
             return true;
         }

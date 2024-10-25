@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
+using Microsoft.AspNetCore.Razor.Utilities;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Razor;
 using Microsoft.VisualStudio.Razor.Extensions;
@@ -34,7 +35,7 @@ internal abstract class EditorDocumentManager : IEditorDocumentManager
         _fileChangeTrackerFactory = fileChangeTrackerFactory;
 
         _documents = new Dictionary<DocumentKey, EditorDocument>();
-        _documentsByFilePath = new Dictionary<string, List<DocumentKey>>(FilePathComparer.Instance);
+        _documentsByFilePath = new Dictionary<string, List<DocumentKey>>(FilePath.Comparer);
 
         Lock = new object();
     }

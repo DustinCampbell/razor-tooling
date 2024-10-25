@@ -8,6 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.InteropServices;
 using Microsoft.AspNetCore.Razor;
+using Microsoft.AspNetCore.Razor.Utilities;
 using Microsoft.CodeAnalysis.Razor;
 using Microsoft.VisualStudio.Editor;
 using Microsoft.VisualStudio.Razor.Extensions;
@@ -201,7 +202,7 @@ internal sealed class VisualStudioEditorDocumentManager(
         EnsureDocumentTableAdvised();
 
         // Ignore changes is casing
-        if (FilePathComparer.Instance.Equals(fromFilePath, toFilePath))
+        if (FilePath.Comparer.Equals(fromFilePath, toFilePath))
         {
             return;
         }

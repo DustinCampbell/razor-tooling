@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Microsoft.CodeAnalysis.Razor;
+using Microsoft.AspNetCore.Razor.Utilities;
 using Microsoft.CodeAnalysis.Razor.Logging;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer;
@@ -115,7 +115,7 @@ internal static class DirectoryHelper
         foreach (var path in directories)
         {
             var directory = Path.GetFileName(path);
-            if (!ignoredDirectories.Contains(directory, FilePathComparer.Instance))
+            if (!ignoredDirectories.Contains(directory, FilePath.Comparer))
             {
                 foreach (var result in GetFilteredFiles(path, searchPattern, ignoredDirectories, fileSystem, logger))
                 {

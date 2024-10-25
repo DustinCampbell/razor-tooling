@@ -6,7 +6,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Microsoft.AspNetCore.Razor.PooledObjects;
 using Microsoft.AspNetCore.Razor.Utilities;
-using Microsoft.CodeAnalysis.Razor;
 using Microsoft.CodeAnalysis.Razor.Logging;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
@@ -37,7 +36,7 @@ internal static partial class IProjectSnapshotManagerExtensions
             }
 
             var projectDirectory = FilePathNormalizer.GetNormalizedDirectoryName(project.FilePath);
-            if (normalizedDocumentPath.StartsWith(projectDirectory, FilePathComparison.Instance))
+            if (normalizedDocumentPath.StartsWith(projectDirectory, FilePath.Comparison))
             {
                 projects.Add(project);
             }

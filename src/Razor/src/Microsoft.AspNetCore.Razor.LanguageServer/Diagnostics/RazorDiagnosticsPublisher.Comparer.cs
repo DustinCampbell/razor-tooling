@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
-using Microsoft.CodeAnalysis.Razor;
+using Microsoft.AspNetCore.Razor.Utilities;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.Diagnostics;
@@ -22,13 +22,13 @@ internal partial class RazorDiagnosticsPublisher
             var filePathX = x?.FilePath;
             var filePathY = y?.FilePath;
 
-            return FilePathComparer.Instance.Equals(filePathX, filePathY);
+            return FilePath.Comparer.Equals(filePathX, filePathY);
         }
 
         public int GetHashCode(IDocumentSnapshot obj)
         {
             var filePath = obj.FilePath.AssumeNotNull();
-            return FilePathComparer.Instance.GetHashCode(filePath);
+            return FilePath.Comparer.GetHashCode(filePath);
         }
     }
 }

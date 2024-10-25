@@ -9,7 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
-using Microsoft.CodeAnalysis.Razor;
+using Microsoft.AspNetCore.Razor.Utilities;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.Workspaces;
 
@@ -19,8 +19,8 @@ namespace Microsoft.VisualStudio.Razor.Documents;
 [Export(typeof(IRazorStartupService))]
 internal class RazorCodeDocumentProvidingSnapshotChangeTrigger : IRazorStartupService
 {
-    private readonly HashSet<string> _openDocuments = new(FilePathComparer.Instance);
-    private readonly Dictionary<string, ProjectKey> _documentProjectMap = new(FilePathComparer.Instance);
+    private readonly HashSet<string> _openDocuments = new(FilePath.Comparer);
+    private readonly Dictionary<string, ProjectKey> _documentProjectMap = new(FilePath.Comparer);
     private readonly IProjectSnapshotManager _projectManager;
 
     public event EventHandler<string>? DocumentReady;

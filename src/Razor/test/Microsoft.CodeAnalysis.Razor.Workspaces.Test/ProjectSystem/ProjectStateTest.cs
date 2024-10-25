@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Test.Common;
 using Microsoft.AspNetCore.Razor.Test.Common.Workspaces;
+using Microsoft.AspNetCore.Razor.Utilities;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
 using Xunit;
@@ -610,7 +611,7 @@ public class ProjectStateTest : WorkspaceTestBase
         // Arrange
         var callCount = 0;
 
-        var documents = ImmutableDictionary.CreateBuilder<string, DocumentState>(FilePathComparer.Instance);
+        var documents = ImmutableDictionary.CreateBuilder<string, DocumentState>(FilePath.Comparer);
         documents[_documents[1].FilePath] = TestDocumentState.Create(_documents[1], onConfigurationChange: () => callCount++);
         documents[_documents[2].FilePath] = TestDocumentState.Create(_documents[2], onConfigurationChange: () => callCount++);
 
@@ -742,7 +743,7 @@ public class ProjectStateTest : WorkspaceTestBase
         // Arrange
         var callCount = 0;
 
-        var documents = ImmutableDictionary.CreateBuilder<string, DocumentState>(FilePathComparer.Instance);
+        var documents = ImmutableDictionary.CreateBuilder<string, DocumentState>(FilePath.Comparer);
         documents[_documents[1].FilePath] = TestDocumentState.Create(_documents[1], onProjectWorkspaceStateChange: () => callCount++);
         documents[_documents[2].FilePath] = TestDocumentState.Create(_documents[2], onProjectWorkspaceStateChange: () => callCount++);
 
@@ -770,13 +771,13 @@ public class ProjectStateTest : WorkspaceTestBase
         var document3 = TestProjectData.SomeProjectNestedFile3;
         var document4 = TestProjectData.AnotherProjectNestedFile4;
 
-        var documents = ImmutableDictionary.CreateBuilder<string, DocumentState>(FilePathComparer.Instance);
+        var documents = ImmutableDictionary.CreateBuilder<string, DocumentState>(FilePath.Comparer);
         documents[document1.FilePath] = TestDocumentState.Create(document1, onImportsChange: () => callCount++);
         documents[document2.FilePath] = TestDocumentState.Create(document2, onImportsChange: () => callCount++);
         documents[document3.FilePath] = TestDocumentState.Create(document3, onImportsChange: () => callCount++);
         documents[document4.FilePath] = TestDocumentState.Create(document4, onImportsChange: () => callCount++);
 
-        var importsToRelatedDocuments = ImmutableDictionary.CreateBuilder<string, ImmutableArray<string>>(FilePathComparer.Instance);
+        var importsToRelatedDocuments = ImmutableDictionary.CreateBuilder<string, ImmutableArray<string>>(FilePath.Comparer);
         importsToRelatedDocuments.Add(
             TestProjectData.SomeProjectImportFile.TargetPath,
             ImmutableArray.Create(
@@ -813,13 +814,13 @@ public class ProjectStateTest : WorkspaceTestBase
         var document3 = TestProjectData.SomeProjectNestedFile3;
         var document4 = TestProjectData.AnotherProjectNestedFile4;
 
-        var documents = ImmutableDictionary.CreateBuilder<string, DocumentState>(FilePathComparer.Instance);
+        var documents = ImmutableDictionary.CreateBuilder<string, DocumentState>(FilePath.Comparer);
         documents[document1.FilePath] = TestDocumentState.Create(document1, onImportsChange: () => callCount++);
         documents[document2.FilePath] = TestDocumentState.Create(document2, onImportsChange: () => callCount++);
         documents[document3.FilePath] = TestDocumentState.Create(document3, onImportsChange: () => callCount++);
         documents[document4.FilePath] = TestDocumentState.Create(document4, onImportsChange: () => callCount++);
 
-        var importsToRelatedDocuments = ImmutableDictionary.CreateBuilder<string, ImmutableArray<string>>(FilePathComparer.Instance);
+        var importsToRelatedDocuments = ImmutableDictionary.CreateBuilder<string, ImmutableArray<string>>(FilePath.Comparer);
         importsToRelatedDocuments.Add(
             TestProjectData.SomeProjectImportFile.TargetPath,
             ImmutableArray.Create(
@@ -857,14 +858,14 @@ public class ProjectStateTest : WorkspaceTestBase
         var document4 = TestProjectData.AnotherProjectNestedFile4;
         var document5 = TestProjectData.AnotherProjectNestedImportFile;
 
-        var documents = ImmutableDictionary.CreateBuilder<string, DocumentState>(FilePathComparer.Instance);
+        var documents = ImmutableDictionary.CreateBuilder<string, DocumentState>(FilePath.Comparer);
         documents[document1.FilePath] = TestDocumentState.Create(document1, onImportsChange: () => callCount++);
         documents[document2.FilePath] = TestDocumentState.Create(document2, onImportsChange: () => callCount++);
         documents[document3.FilePath] = TestDocumentState.Create(document3, onImportsChange: () => callCount++);
         documents[document4.FilePath] = TestDocumentState.Create(document4, onImportsChange: () => callCount++);
         documents[document5.FilePath] = TestDocumentState.Create(document5, onImportsChange: () => callCount++);
 
-        var importsToRelatedDocuments = ImmutableDictionary.CreateBuilder<string, ImmutableArray<string>>(FilePathComparer.Instance);
+        var importsToRelatedDocuments = ImmutableDictionary.CreateBuilder<string, ImmutableArray<string>>(FilePath.Comparer);
         importsToRelatedDocuments.Add(
             TestProjectData.SomeProjectImportFile.TargetPath,
             ImmutableArray.Create(
@@ -903,14 +904,14 @@ public class ProjectStateTest : WorkspaceTestBase
         var document4 = TestProjectData.AnotherProjectNestedFile4;
         var document5 = TestProjectData.AnotherProjectNestedImportFile;
 
-        var documents = ImmutableDictionary.CreateBuilder<string, DocumentState>(FilePathComparer.Instance);
+        var documents = ImmutableDictionary.CreateBuilder<string, DocumentState>(FilePath.Comparer);
         documents[document1.FilePath] = TestDocumentState.Create(document1, onImportsChange: () => callCount++);
         documents[document2.FilePath] = TestDocumentState.Create(document2, onImportsChange: () => callCount++);
         documents[document3.FilePath] = TestDocumentState.Create(document3, onImportsChange: () => callCount++);
         documents[document4.FilePath] = TestDocumentState.Create(document4, onImportsChange: () => callCount++);
         documents[document5.FilePath] = TestDocumentState.Create(document5, onImportsChange: () => callCount++);
 
-        var importsToRelatedDocuments = ImmutableDictionary.CreateBuilder<string, ImmutableArray<string>>(FilePathComparer.Instance);
+        var importsToRelatedDocuments = ImmutableDictionary.CreateBuilder<string, ImmutableArray<string>>(FilePath.Comparer);
         importsToRelatedDocuments.Add(
             TestProjectData.SomeProjectImportFile.TargetPath,
             ImmutableArray.Create(
@@ -949,14 +950,14 @@ public class ProjectStateTest : WorkspaceTestBase
         var document4 = TestProjectData.AnotherProjectNestedFile4;
         var document5 = TestProjectData.AnotherProjectNestedImportFile;
 
-        var documents = ImmutableDictionary.CreateBuilder<string, DocumentState>(FilePathComparer.Instance);
+        var documents = ImmutableDictionary.CreateBuilder<string, DocumentState>(FilePath.Comparer);
         documents[document1.FilePath] = TestDocumentState.Create(document1, onImportsChange: () => callCount++);
         documents[document2.FilePath] = TestDocumentState.Create(document2, onImportsChange: () => callCount++);
         documents[document3.FilePath] = TestDocumentState.Create(document3, onImportsChange: () => callCount++);
         documents[document4.FilePath] = TestDocumentState.Create(document4, onImportsChange: () => callCount++);
         documents[document5.FilePath] = TestDocumentState.Create(document5, onImportsChange: () => callCount++);
 
-        var importsToRelatedDocuments = ImmutableDictionary.CreateBuilder<string, ImmutableArray<string>>(FilePathComparer.Instance);
+        var importsToRelatedDocuments = ImmutableDictionary.CreateBuilder<string, ImmutableArray<string>>(FilePath.Comparer);
         importsToRelatedDocuments.Add(
             TestProjectData.SomeProjectImportFile.TargetPath,
             ImmutableArray.Create(

@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Telemetry;
 using Microsoft.AspNetCore.Razor.Utilities;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Razor;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.Workspaces;
 using Microsoft.VisualStudio.Shell;
@@ -144,7 +143,7 @@ internal sealed class FallbackProjectManager(
         // that don't match
         var projectPath = FilePathNormalizer.GetNormalizedDirectoryName(projectFilePath);
         var normalizedFilePath = FilePathNormalizer.Normalize(filePath);
-        if (!normalizedFilePath.StartsWith(projectPath, FilePathComparison.Instance))
+        if (!normalizedFilePath.StartsWith(projectPath, FilePath.Comparison))
         {
             return null;
         }

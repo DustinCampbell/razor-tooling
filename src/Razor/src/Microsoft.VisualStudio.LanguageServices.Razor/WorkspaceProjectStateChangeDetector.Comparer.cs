@@ -2,8 +2,8 @@
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Razor.Utilities;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Razor;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
 namespace Microsoft.VisualStudio.Razor;
@@ -23,14 +23,14 @@ internal partial class WorkspaceProjectStateChangeDetector
             var (_, snapshotX) = x;
             var (_, snapshotY) = y;
 
-            return FilePathComparer.Instance.Equals(snapshotX.Key.Id, snapshotY.Key.Id);
+            return FilePath.Comparer.Equals(snapshotX.Key.Id, snapshotY.Key.Id);
         }
 
         public int GetHashCode((Project?, IProjectSnapshot) obj)
         {
             var (_, snapshot) = obj;
 
-            return FilePathComparer.Instance.GetHashCode(snapshot.Key.Id);
+            return FilePath.Comparer.GetHashCode(snapshot.Key.Id);
         }
     }
 }

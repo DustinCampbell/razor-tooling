@@ -56,8 +56,8 @@ internal record class HostProject
 
         return other is not null &&
                EqualityContract == other.EqualityContract &&
-               FilePathComparer.Instance.Equals(FilePath, other.FilePath) &&
-               FilePathComparer.Instance.Equals(IntermediateOutputPath, other.IntermediateOutputPath) &&
+               AspNetCore.Razor.Utilities.FilePath.Comparer.Equals(FilePath, other.FilePath) &&
+               AspNetCore.Razor.Utilities.FilePath.Comparer.Equals(IntermediateOutputPath, other.IntermediateOutputPath) &&
                Configuration == other.Configuration &&
                RootNamespace == other.RootNamespace &&
                DisplayName == other.DisplayName;
@@ -67,8 +67,8 @@ internal record class HostProject
     {
         var hash = HashCodeCombiner.Start();
 
-        hash.Add(FilePath, FilePathComparer.Instance);
-        hash.Add(IntermediateOutputPath, FilePathComparer.Instance);
+        hash.Add(FilePath, AspNetCore.Razor.Utilities.FilePath.Comparer);
+        hash.Add(IntermediateOutputPath, AspNetCore.Razor.Utilities.FilePath.Comparer);
         hash.Add(Configuration);
         hash.Add(RootNamespace);
         hash.Add(DisplayName);

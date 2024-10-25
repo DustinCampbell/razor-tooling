@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
-using Microsoft.CodeAnalysis.Razor;
+using Microsoft.AspNetCore.Razor.Utilities;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.Extensions.Internal;
 
@@ -30,14 +30,14 @@ internal partial class OpenDocumentGenerator
             }
 
             return x.Project.Key.Equals(y.Project.Key) &&
-                FilePathComparer.Instance.Equals(x.FilePath, y.FilePath);
+                FilePath.Comparer.Equals(x.FilePath, y.FilePath);
         }
 
         public int GetHashCode(IDocumentSnapshot obj)
         {
             var hash = HashCodeCombiner.Start();
-            hash.Add(obj.Project.Key.Id, FilePathComparer.Instance);
-            hash.Add(obj.FileKind.AssumeNotNull(), FilePathComparer.Instance);
+            hash.Add(obj.Project.Key.Id, FilePath.Comparer);
+            hash.Add(obj.FileKind.AssumeNotNull(), FilePath.Comparer);
             return hash.CombinedHash;
         }
     }

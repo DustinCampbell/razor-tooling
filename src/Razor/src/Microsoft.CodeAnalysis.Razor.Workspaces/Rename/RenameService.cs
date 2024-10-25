@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Syntax;
 using Microsoft.AspNetCore.Razor.PooledObjects;
+using Microsoft.AspNetCore.Razor.Utilities;
 using Microsoft.CodeAnalysis.Razor.DocumentMapping;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.Protocol;
@@ -110,7 +111,7 @@ internal class RenameService(
             foreach (var documentPath in project.DocumentFilePaths)
             {
                 // We've already added refactoring edits for our document snapshot
-                if (FilePathComparer.Instance.Equals(documentPath, filePath))
+                if (FilePath.Comparer.Equals(documentPath, filePath))
                 {
                     continue;
                 }
