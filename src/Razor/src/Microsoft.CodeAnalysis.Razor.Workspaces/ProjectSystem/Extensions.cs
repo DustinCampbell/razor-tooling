@@ -20,7 +20,7 @@ internal static class Extensions
 
     public static ProjectKey ToProjectKey(this Project project)
     {
-        var intermediateOutputPath = FilePathNormalizer.GetNormalizedDirectoryName(project.CompilationOutputInfo.AssemblyPath);
+        var intermediateOutputPath = PathNormalization.GetNormalizedDirectoryName(project.CompilationOutputInfo.AssemblyPath);
         return new(intermediateOutputPath);
     }
 
@@ -37,6 +37,6 @@ internal static class Extensions
 
         Debug.Assert(projectKey.Id.EndsWith('/'), $"This method can't be called if {nameof(projectKey.Id)} is not a normalized directory path.");
 
-        return FilePathNormalizer.AreDirectoryPathsEquivalent(projectKey.Id, project.CompilationOutputInfo.AssemblyPath);
+        return PathNormalization.AreDirectoryPathsEquivalent(projectKey.Id, project.CompilationOutputInfo.AssemblyPath);
     }
 }

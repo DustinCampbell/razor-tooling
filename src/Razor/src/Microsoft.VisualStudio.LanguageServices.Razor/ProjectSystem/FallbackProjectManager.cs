@@ -141,8 +141,8 @@ internal sealed class FallbackProjectManager(
     {
         // The compiler only supports paths that are relative to the project root, so filter our files
         // that don't match
-        var projectPath = FilePathNormalizer.GetNormalizedDirectoryName(projectFilePath);
-        var normalizedFilePath = FilePathNormalizer.Normalize(filePath);
+        var projectPath = PathNormalization.GetNormalizedDirectoryName(projectFilePath);
+        var normalizedFilePath = PathNormalization.Normalize(filePath);
         if (!normalizedFilePath.StartsWith(projectPath, FilePath.Comparison))
         {
             return null;

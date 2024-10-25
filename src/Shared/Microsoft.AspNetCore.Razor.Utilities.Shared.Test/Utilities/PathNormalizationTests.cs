@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Utilities.Shared.Test.Utilities;
 
-public class FilePathNormalizerTests
+public class PathNormalizationTests
 {
     [ConditionalFact(Is.Windows)]
     public void Normalize_Windows_StripsPrecedingSlash()
@@ -15,7 +15,7 @@ public class FilePathNormalizerTests
         var path = "/c:/path/to/something";
 
         // Act
-        path = FilePathNormalizer.Normalize(path);
+        path = PathNormalization.Normalize(path);
 
         // Assert
         Assert.Equal("c:/path/to/something", path);
@@ -28,7 +28,7 @@ public class FilePathNormalizerTests
         var path = "/c";
 
         // Act
-        path = FilePathNormalizer.Normalize(path);
+        path = PathNormalization.Normalize(path);
 
         // Assert
         Assert.Equal("c", path);
@@ -41,7 +41,7 @@ public class FilePathNormalizerTests
         var path = @"d\ComputerName\path\to\something";
 
         // Act
-        path = FilePathNormalizer.Normalize(path);
+        path = PathNormalization.Normalize(path);
 
         // Assert
         Assert.Equal("d/ComputerName/path/to/something", path);
@@ -54,7 +54,7 @@ public class FilePathNormalizerTests
         var path = "//ComputerName/path/to/something";
 
         // Act
-        path = FilePathNormalizer.Normalize(path);
+        path = PathNormalization.Normalize(path);
 
         // Assert
         Assert.Equal(@"\\ComputerName/path/to/something", path);
@@ -67,7 +67,7 @@ public class FilePathNormalizerTests
         var path = @"\\ComputerName\path\to\something";
 
         // Act
-        path = FilePathNormalizer.Normalize(path);
+        path = PathNormalization.Normalize(path);
 
         // Assert
         Assert.Equal(@"\\ComputerName/path/to/something", path);
@@ -80,7 +80,7 @@ public class FilePathNormalizerTests
         var directory = @"C:\path\to\\directory\";
 
         // Act
-        var normalized = FilePathNormalizer.NormalizeDirectory(directory);
+        var normalized = PathNormalization.NormalizeDirectory(directory);
 
         // Assert
         Assert.Equal("C:/path/to/directory/", normalized);
@@ -93,7 +93,7 @@ public class FilePathNormalizerTests
         var directory = "C:/path/to//directory/";
 
         // Act
-        var normalized = FilePathNormalizer.NormalizeDirectory(directory);
+        var normalized = PathNormalization.NormalizeDirectory(directory);
 
         // Assert
         Assert.Equal("C:/path/to/directory/", normalized);
@@ -106,7 +106,7 @@ public class FilePathNormalizerTests
         var directory = @"C:\path\to\/directory\";
 
         // Act
-        var normalized = FilePathNormalizer.NormalizeDirectory(directory);
+        var normalized = PathNormalization.NormalizeDirectory(directory);
 
         // Assert
         Assert.Equal("C:/path/to/directory/", normalized);
@@ -119,7 +119,7 @@ public class FilePathNormalizerTests
         var directory = @"C:\path\to\directory\";
 
         // Act
-        var normalized = FilePathNormalizer.NormalizeDirectory(directory);
+        var normalized = PathNormalization.NormalizeDirectory(directory);
 
         // Assert
         Assert.Equal("C:/path/to/directory/", normalized);
@@ -132,7 +132,7 @@ public class FilePathNormalizerTests
         var directory = @"C:\path\to\directory";
 
         // Act
-        var normalized = FilePathNormalizer.NormalizeDirectory(directory);
+        var normalized = PathNormalization.NormalizeDirectory(directory);
 
         // Assert
         Assert.Equal("C:/path/to/directory/", normalized);
@@ -145,7 +145,7 @@ public class FilePathNormalizerTests
         var directory = @"\";
 
         // Act
-        var normalized = FilePathNormalizer.NormalizeDirectory(directory);
+        var normalized = PathNormalization.NormalizeDirectory(directory);
 
         // Assert
         Assert.Equal("/", normalized);
@@ -158,7 +158,7 @@ public class FilePathNormalizerTests
         var directory = "/";
 
         // Act
-        var normalized = FilePathNormalizer.NormalizeDirectory(directory);
+        var normalized = PathNormalization.NormalizeDirectory(directory);
 
         // Assert
         Assert.Equal("/", normalized);
@@ -179,7 +179,7 @@ public class FilePathNormalizerTests
     [InlineData("path/to1/file.cs", @"path\to2\file.cs", false)]
     public void AreDirectoryPathsEquivalent(string path1, string path2, bool expected)
     {
-        var result = FilePathNormalizer.AreDirectoryPathsEquivalent(path1, path2);
+        var result = PathNormalization.AreDirectoryPathsEquivalent(path1, path2);
 
         Assert.Equal(expected, result);
     }
@@ -192,7 +192,7 @@ public class FilePathNormalizerTests
         var filePath2 = @"path\to\different\document.cshtml";
 
         // Act
-        var result = FilePathNormalizer.AreFilePathsEquivalent(filePath1, filePath2);
+        var result = PathNormalization.AreFilePathsEquivalent(filePath1, filePath2);
 
         // Assert
         Assert.False(result);
@@ -206,7 +206,7 @@ public class FilePathNormalizerTests
         var filePath2 = @"path\to\document.cshtml";
 
         // Act
-        var result = FilePathNormalizer.AreFilePathsEquivalent(filePath1, filePath2);
+        var result = PathNormalization.AreFilePathsEquivalent(filePath1, filePath2);
 
         // Assert
         Assert.True(result);
@@ -219,7 +219,7 @@ public class FilePathNormalizerTests
         var filePath = "C:/path/to/document.cshtml";
 
         // Act
-        var normalized = FilePathNormalizer.GetNormalizedDirectoryName(filePath);
+        var normalized = PathNormalization.GetNormalizedDirectoryName(filePath);
 
         // Assert
         Assert.Equal("C:/path/to/", normalized);
@@ -232,7 +232,7 @@ public class FilePathNormalizerTests
         var filePath = "C:/document.cshtml";
 
         // Act
-        var normalized = FilePathNormalizer.GetNormalizedDirectoryName(filePath);
+        var normalized = PathNormalization.GetNormalizedDirectoryName(filePath);
 
         // Assert
         Assert.Equal("C:/", normalized);
@@ -242,7 +242,7 @@ public class FilePathNormalizerTests
     public void Normalize_NullFilePath_ReturnsForwardSlash()
     {
         // Act
-        var normalized = FilePathNormalizer.Normalize(null);
+        var normalized = PathNormalization.Normalize(null);
 
         // Assert
         Assert.Equal("/", normalized);
@@ -252,7 +252,7 @@ public class FilePathNormalizerTests
     public void Normalize_EmptyFilePath_ReturnsEmptyString()
     {
         // Act
-        var normalized = FilePathNormalizer.Normalize(string.Empty);
+        var normalized = PathNormalization.Normalize(string.Empty);
 
         // Assert
         Assert.Equal("/", normalized);
@@ -265,7 +265,7 @@ public class FilePathNormalizerTests
         var filePath = "path/to/document.cshtml";
 
         // Act
-        var normalized = FilePathNormalizer.Normalize(filePath);
+        var normalized = PathNormalization.Normalize(filePath);
 
         // Assert
         Assert.Equal("/path/to/document.cshtml", normalized);
@@ -278,7 +278,7 @@ public class FilePathNormalizerTests
         var filePath = "C:/path%20to/document.cshtml";
 
         // Act
-        var normalized = FilePathNormalizer.Normalize(filePath);
+        var normalized = PathNormalization.Normalize(filePath);
 
         // Assert
         Assert.Equal("C:/path to/document.cshtml", normalized);
@@ -291,8 +291,8 @@ public class FilePathNormalizerTests
         var filePath = "C:/path%2Bto/document.cshtml";
 
         // Act
-        var normalized = FilePathNormalizer.Normalize(filePath);
-        normalized = FilePathNormalizer.Normalize(normalized);
+        var normalized = PathNormalization.Normalize(filePath);
+        normalized = PathNormalization.Normalize(normalized);
 
         // Assert
         Assert.Equal("C:/path+to/document.cshtml", normalized);
@@ -305,7 +305,7 @@ public class FilePathNormalizerTests
         var filePath = @"C:\path\to\document.cshtml";
 
         // Act
-        var normalized = FilePathNormalizer.Normalize(filePath);
+        var normalized = PathNormalization.Normalize(filePath);
 
         // Assert
         Assert.Equal("C:/path/to/document.cshtml", normalized);
@@ -318,7 +318,7 @@ public class FilePathNormalizerTests
     [InlineData("c:/path/to/document.cshtml")]
     public void Comparer_CaseInsensitiveDictionary(string fileName)
     {
-        var dictionary = new Dictionary<string, bool>(FilePathNormalizingComparer.Instance)
+        var dictionary = new Dictionary<string, bool>(PathNormalization.FilePathComparer)
         {
             { "C:/path/to/document.cshtml", true },
             { "C:/path/to/document1.cshtml", true },

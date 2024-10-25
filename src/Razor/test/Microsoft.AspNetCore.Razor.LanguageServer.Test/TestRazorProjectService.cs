@@ -46,7 +46,7 @@ internal class TestRazorProjectService(
     {
         foreach (var projectSnapshot in _projectManager.FindPotentialProjects(textDocumentPath))
         {
-            var normalizedProjectPath = FilePathNormalizer.NormalizeDirectory(projectSnapshot.FilePath);
+            var normalizedProjectPath = PathNormalization.NormalizeDirectory(projectSnapshot.FilePath);
             var documents = ImmutableArray
                 .CreateRange(projectSnapshot.DocumentFilePaths)
                 .Add(textDocumentPath)

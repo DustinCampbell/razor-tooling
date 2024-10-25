@@ -97,7 +97,7 @@ internal sealed class ComponentAccessibilityCodeActionProvider : IRazorCodeActio
         }
 
         var path = context.Request.TextDocument.Uri.GetAbsoluteOrUNCPath();
-        path = FilePathNormalizer.Normalize(path);
+        path = PathNormalization.Normalize(path);
 
         var directoryName = Path.GetDirectoryName(path);
         Assumes.NotNull(directoryName);

@@ -36,7 +36,7 @@ internal sealed record class MiscFilesHostProject : HostProject
     {
         var tempDirectory = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString("n"));
         var filePath = Path.Combine(tempDirectory, "__MISC_RAZOR_PROJECT__");
-        var normalizedPath = FilePathNormalizer.Normalize(filePath);
+        var normalizedPath = PathNormalization.Normalize(filePath);
 
         return new MiscFilesHostProject(
             tempDirectory,

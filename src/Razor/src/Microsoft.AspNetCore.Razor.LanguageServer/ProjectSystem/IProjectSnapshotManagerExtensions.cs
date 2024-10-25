@@ -23,7 +23,7 @@ internal static partial class IProjectSnapshotManagerExtensions
     /// </summary>
     public static ImmutableArray<IProjectSnapshot> FindPotentialProjects(this IProjectSnapshotManager projectManager, string documentFilePath)
     {
-        var normalizedDocumentPath = FilePathNormalizer.Normalize(documentFilePath);
+        var normalizedDocumentPath = PathNormalization.Normalize(documentFilePath);
 
         using var projects = new PooledArrayBuilder<IProjectSnapshot>();
 
@@ -35,7 +35,7 @@ internal static partial class IProjectSnapshotManagerExtensions
                 continue;
             }
 
-            var projectDirectory = FilePathNormalizer.GetNormalizedDirectoryName(project.FilePath);
+            var projectDirectory = PathNormalization.GetNormalizedDirectoryName(project.FilePath);
             if (normalizedDocumentPath.StartsWith(projectDirectory, FilePath.Comparison))
             {
                 projects.Add(project);
@@ -62,7 +62,7 @@ internal static partial class IProjectSnapshotManagerExtensions
             }
         }
 
-        var normalizedDocumentPath = FilePathNormalizer.Normalize(documentFilePath);
+        var normalizedDocumentPath = PathNormalization.Normalize(documentFilePath);
         var miscProject = projectManager.GetMiscellaneousProject();
         if (miscProject.ContainsDocument(normalizedDocumentPath))
         {
@@ -81,7 +81,7 @@ internal static partial class IProjectSnapshotManagerExtensions
     {
         logger.LogTrace($"Looking for {documentFilePath}.");
 
-        var normalizedDocumentPath = FilePathNormalizer.Normalize(documentFilePath);
+        var normalizedDocumentPath = PathNormalization.Normalize(documentFilePath);
         var potentialProjects = projectManager.FindPotentialProjects(documentFilePath);
 
         foreach (var project in potentialProjects)

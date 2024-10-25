@@ -54,7 +54,7 @@ internal sealed class GenerateMethodCodeActionResolver(
         }
 
         var code = await documentContext.GetCodeDocumentAsync(cancellationToken).ConfigureAwait(false);
-        var uriPath = FilePathNormalizer.Normalize(documentContext.Uri.GetAbsoluteOrUNCPath());
+        var uriPath = PathNormalization.Normalize(documentContext.Uri.GetAbsoluteOrUNCPath());
         var razorClassName = Path.GetFileNameWithoutExtension(uriPath);
         var codeBehindPath = $"{uriPath}.cs";
 

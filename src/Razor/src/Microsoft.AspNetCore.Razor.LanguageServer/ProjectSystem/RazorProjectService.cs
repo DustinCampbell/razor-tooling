@@ -152,7 +152,7 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
 
     private void AddDocumentToMiscProjectCore(ProjectSnapshotManager.Updater updater, string filePath)
     {
-        var textDocumentPath = FilePathNormalizer.Normalize(filePath);
+        var textDocumentPath = PathNormalization.Normalize(filePath);
         _logger.LogDebug($"Asked to add {textDocumentPath} to the miscellaneous files project, because we don't have project info (yet?)");
 
         if (_projectManager.TryResolveDocumentInAnyProject(textDocumentPath, _logger, out var document))
@@ -182,7 +182,7 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
         await _projectManager.UpdateAsync(
             updater =>
             {
-                var textDocumentPath = FilePathNormalizer.Normalize(filePath);
+                var textDocumentPath = PathNormalization.Normalize(filePath);
 
                 // We are okay to use the non-project-key overload of TryResolveDocument here because we really are just checking if the document
                 // has been added to _any_ project. AddDocument will take care of adding to all of the necessary ones, and then below we ensure
@@ -297,7 +297,7 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
 
     private void ActOnDocumentInMultipleProjects(string filePath, Action<IProjectSnapshot, string> action)
     {
-        var textDocumentPath = FilePathNormalizer.Normalize(filePath);
+        var textDocumentPath = PathNormalization.Normalize(filePath);
         if (!_projectManager.TryResolveAllProjects(textDocumentPath, out var projects))
         {
             var miscFilesProject = _projectManager.GetMiscellaneousProject();
@@ -312,7 +312,7 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
 
     private ProjectKey AddProjectCore(ProjectSnapshotManager.Updater updater, string filePath, string intermediateOutputPath, RazorConfiguration? configuration, string? rootNamespace, string? displayName)
     {
-        var normalizedPath = FilePathNormalizer.Normalize(filePath);
+        var normalizedPath = PathNormalization.Normalize(filePath);
         var hostProject = new HostProject(
             normalizedPath, intermediateOutputPath, configuration ?? FallbackRazorConfiguration.Latest, rootNamespace, displayName);
 
@@ -407,7 +407,7 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
 
         var project = _projectManager.GetLoadedProject(projectKey);
         var currentProjectKey = project.Key;
-        var projectDirectory = FilePathNormalizer.GetNormalizedDirectoryName(project.FilePath);
+        var projectDirectory = PathNormalization.GetNormalizedDirectoryName(project.FilePath);
         var documentMap = documents.ToDictionary(document => EnsureFullPath(document.FilePath, projectDirectory), FilePath.Comparer);
         var miscellaneousProject = _projectManager.GetMiscellaneousProject();
 
@@ -516,9 +516,9 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
         // If we're moving from the misc files project to a real project, then target path will be the full path to the file
         // and the next update to the project will update it to be a relative path. To save a bunch of busy work if that is
         // the only change necessary, we can proactively do that work here.
-        var projectDirectory = FilePathNormalizer.GetNormalizedDirectoryName(toProject.FilePath);
+        var projectDirectory = PathNormalization.GetNormalizedDirectoryName(toProject.FilePath);
         var newTargetPath = documentSnapshot.TargetPath;
-        if (FilePathNormalizer.Normalize(newTargetPath).StartsWith(projectDirectory))
+        if (PathNormalization.Normalize(newTargetPath).StartsWith(projectDirectory))
         {
             newTargetPath = newTargetPath[projectDirectory.Length..];
         }
@@ -533,11 +533,11 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
 
     private static string EnsureFullPath(string filePath, string projectDirectory)
     {
-        var normalizedFilePath = FilePathNormalizer.Normalize(filePath);
+        var normalizedFilePath = PathNormalization.Normalize(filePath);
         if (!normalizedFilePath.StartsWith(projectDirectory, FilePath.Comparison))
         {
             var absolutePath = Path.Combine(projectDirectory, normalizedFilePath);
-            normalizedFilePath = FilePathNormalizer.Normalize(absolutePath);
+            normalizedFilePath = PathNormalization.Normalize(absolutePath);
         }
 
         return normalizedFilePath;

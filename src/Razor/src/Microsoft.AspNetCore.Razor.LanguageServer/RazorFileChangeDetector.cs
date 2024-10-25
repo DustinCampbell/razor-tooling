@@ -136,7 +136,7 @@ internal partial class RazorFileChangeDetector : IFileChangeDetector, IDisposabl
     {
         // Dive through existing Razor files and fabricate "added" events so listeners can accurately listen to state changes for them.
 
-        workspaceDirectory = FilePathNormalizer.Normalize(workspaceDirectory);
+        workspaceDirectory = PathNormalization.Normalize(workspaceDirectory);
 
         var existingRazorFiles = GetExistingRazorFiles(workspaceDirectory);
 

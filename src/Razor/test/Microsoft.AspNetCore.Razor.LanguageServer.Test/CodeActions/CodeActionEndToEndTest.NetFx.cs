@@ -1007,8 +1007,8 @@ public class CodeActionEndToEndTest(ITestOutputHelper testOutput) : SingleServer
         string codeAction,
         int childActionIndex = 0)
     {
-        var razorFilePath = FilePathNormalizer.Normalize($"{Path.GetTempPath()}test.razor");
-        var codeBehindFilePath = FilePathNormalizer.Normalize($"{Path.GetTempPath()}test.razor.cs");
+        var razorFilePath = PathNormalization.Normalize($"{Path.GetTempPath()}test.razor");
+        var codeBehindFilePath = PathNormalization.Normalize($"{Path.GetTempPath()}test.razor.cs");
         var diagnostics = new[] { new Diagnostic() { Code = "CS0103", Message = "The name 'DoesNotExist' does not exist in the current context" } };
 
         TestFileMarkupParser.GetSpan(input, out input, out var textSpan);
@@ -1051,7 +1051,7 @@ public class CodeActionEndToEndTest(ITestOutputHelper testOutput) : SingleServer
             var codeBehindSourceText = SourceText.From(initialCodeBehindContent);
             foreach (var change in changes)
             {
-                if (FilePathNormalizer.Normalize(change.TextDocument.Uri.GetAbsoluteOrUNCPath()) == codeBehindFilePath)
+                if (PathNormalization.Normalize(change.TextDocument.Uri.GetAbsoluteOrUNCPath()) == codeBehindFilePath)
                 {
                     codeBehindEdits.AddRange(change.Edits.Select(codeBehindSourceText.GetTextChange));
                 }

@@ -26,7 +26,7 @@ internal readonly record struct ProjectKey
     {
         Debug.Assert(!id.EndsWith(".csproj", StringComparison.OrdinalIgnoreCase), "We expect the intermediate output path, not the project file");
 
-        Id = FilePathNormalizer.NormalizeDirectory(id);
+        Id = PathNormalization.NormalizeDirectory(id);
     }
 
     public bool Equals(ProjectKey other)

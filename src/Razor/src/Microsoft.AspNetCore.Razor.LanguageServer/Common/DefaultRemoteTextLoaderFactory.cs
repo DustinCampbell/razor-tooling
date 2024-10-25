@@ -20,7 +20,7 @@ internal class DefaultRemoteTextLoaderFactory() : RemoteTextLoaderFactory
             throw new ArgumentNullException(nameof(filePath));
         }
 
-        var normalizedPath = FilePathNormalizer.Normalize(filePath);
+        var normalizedPath = PathNormalization.Normalize(filePath);
         return new RemoteTextLoader(normalizedPath);
     }
 

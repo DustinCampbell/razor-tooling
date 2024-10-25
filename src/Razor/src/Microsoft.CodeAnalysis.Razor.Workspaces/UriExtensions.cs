@@ -44,7 +44,7 @@ internal static class UriExtensions
 
     private static string AddToFakeGitDirectoryAtRoot(string decodedAbsolutePath)
     {
-        var normalizedPath = FilePathNormalizer.Normalize(decodedAbsolutePath);
+        var normalizedPath = PathNormalization.Normalize(decodedAbsolutePath);
         var firstSeparatorIndex = normalizedPath.IndexOf('/');
         if (firstSeparatorIndex < 0)
         {

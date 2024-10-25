@@ -29,7 +29,7 @@ internal class FormattingLanguageServerClient(HtmlFormattingService htmlFormatti
 
     public void AddCodeDocument(RazorCodeDocument codeDocument)
     {
-        var path = FilePathNormalizer.Normalize(codeDocument.Source.FilePath);
+        var path = PathNormalization.Normalize(codeDocument.Source.FilePath);
         _documents.Add("/" + path, codeDocument);
     }
 

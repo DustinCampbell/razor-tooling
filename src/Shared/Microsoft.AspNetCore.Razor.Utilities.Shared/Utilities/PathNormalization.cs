@@ -3,13 +3,18 @@
 
 using System;
 using System.Buffers;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace Microsoft.AspNetCore.Razor.Utilities;
 
-internal static class FilePathNormalizer
+internal static partial class PathNormalization
 {
+    private static IEqualityComparer<string>? s_comparer;
+
+    public static IEqualityComparer<string> FilePathComparer = s_comparer ??= new Comparer();
+
     private static readonly Func<char, char> s_charConverter = PlatformInformation.IsLinux
         ? c => c
         : char.ToLowerInvariant;
@@ -137,7 +142,7 @@ internal static class FilePathNormalizer
         return normalizedSpan1.Equals(normalizedSpan2, FilePath.Comparison);
     }
 
-    public static int GetHashCode(string filePath)
+    private static int GetHashCode(string filePath)
     {
         if (filePath.Length == 0)
         {

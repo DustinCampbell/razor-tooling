@@ -20,7 +20,7 @@ internal sealed class ProjectSnapshot(ProjectState state) : IProjectSnapshot
     private readonly ProjectState _state = state;
 
     private readonly object _gate = new();
-    private readonly Dictionary<string, DocumentSnapshot> _filePathToDocumentMap = new(FilePathNormalizingComparer.Instance);
+    private readonly Dictionary<string, DocumentSnapshot> _filePathToDocumentMap = new(PathNormalization.FilePathComparer);
 
     public HostProject HostProject => _state.HostProject;
 

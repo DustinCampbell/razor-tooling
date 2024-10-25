@@ -11,8 +11,8 @@ internal static class TestHostDocument
 {
     public static HostDocument Create(HostProject hostProject, string documentFilePath)
     {
-        var targetPath = FilePathNormalizer.Normalize(documentFilePath);
-        var projectDirectory = FilePathNormalizer.GetNormalizedDirectoryName(hostProject.FilePath);
+        var targetPath = PathNormalization.Normalize(documentFilePath);
+        var projectDirectory = PathNormalization.GetNormalizedDirectoryName(hostProject.FilePath);
         if (targetPath.StartsWith(projectDirectory))
         {
             targetPath = targetPath[projectDirectory.Length..];

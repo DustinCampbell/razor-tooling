@@ -20,7 +20,7 @@ internal class RemoteRazorProjectFileSystem : RazorProjectFileSystem
             throw new ArgumentNullException(nameof(root));
         }
 
-        _root = FilePathNormalizer.NormalizeDirectory(root);
+        _root = PathNormalization.NormalizeDirectory(root);
     }
 
     public override IEnumerable<RazorProjectItem> EnumerateItems(string basePath)
@@ -75,7 +75,7 @@ internal class RemoteRazorProjectFileSystem : RazorProjectFileSystem
             absolutePath = _root + path;
         }
 
-        absolutePath = FilePathNormalizer.Normalize(absolutePath);
+        absolutePath = PathNormalization.Normalize(absolutePath);
         return absolutePath;
 
         static bool IsPathRootedForPlatform(string path)

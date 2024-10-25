@@ -47,7 +47,7 @@ internal sealed class ExtractToComponentCodeActionResolver(
         }
 
         var text = componentDocument.Source.Text;
-        var path = FilePathNormalizer.Normalize(documentContext.Uri.GetAbsoluteOrUNCPath());
+        var path = PathNormalization.Normalize(documentContext.Uri.GetAbsoluteOrUNCPath());
         var directoryName = Path.GetDirectoryName(path).AssumeNotNull();
         var templatePath = Path.Combine(directoryName, "Component.razor");
         var componentPath = FileUtilities.GenerateUniquePath(templatePath, ".razor");

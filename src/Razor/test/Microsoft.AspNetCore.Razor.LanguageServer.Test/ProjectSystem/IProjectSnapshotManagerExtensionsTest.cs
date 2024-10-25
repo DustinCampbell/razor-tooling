@@ -154,7 +154,7 @@ public class IProjectSnapshotManagerExtensionsTest(ITestOutputHelper testOutput)
         // Arrange
         var miscFilesHostProject = MiscFilesHostProject.Instance;
         var documentFilePath = Path.Combine(miscFilesHostProject.DirectoryPath, "file.cshtml");
-        documentFilePath = FilePathNormalizer.Normalize(documentFilePath);
+        documentFilePath = PathNormalization.Normalize(documentFilePath);
 
         var hostDocument = TestHostDocument.Create(miscFilesHostProject, documentFilePath);
         var hostProject = TestHostProject.Create("C:/path/to/project.csproj");
@@ -232,7 +232,7 @@ public class IProjectSnapshotManagerExtensionsTest(ITestOutputHelper testOutput)
 
     private async Task<TestProjectSnapshotManager> CreateProjectManagerAsync(string documentFilePath, bool addToMiscellaneous = false)
     {
-        documentFilePath = FilePathNormalizer.Normalize(documentFilePath);
+        documentFilePath = PathNormalization.Normalize(documentFilePath);
 
         var projectManager = CreateProjectSnapshotManager();
 
@@ -244,7 +244,7 @@ public class IProjectSnapshotManagerExtensionsTest(ITestOutputHelper testOutput)
         }
         else
         {
-            var projectDirectory = FilePathNormalizer.GetNormalizedDirectoryName(documentFilePath);
+            var projectDirectory = PathNormalization.GetNormalizedDirectoryName(documentFilePath);
             hostProject = TestHostProject.Create(Path.Combine(projectDirectory, "proj.csproj"));
 
             await projectManager.UpdateAsync(updater =>

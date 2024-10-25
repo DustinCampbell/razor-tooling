@@ -41,7 +41,7 @@ internal sealed class ExtractToCodeBehindCodeActionResolver(
             return null;
         }
 
-        var path = FilePathNormalizer.Normalize(documentContext.Uri.GetAbsoluteOrUNCPath());
+        var path = PathNormalization.Normalize(documentContext.Uri.GetAbsoluteOrUNCPath());
 
         var codeDocument = await documentContext.GetCodeDocumentAsync(cancellationToken).ConfigureAwait(false);
         if (codeDocument.IsUnsupported())

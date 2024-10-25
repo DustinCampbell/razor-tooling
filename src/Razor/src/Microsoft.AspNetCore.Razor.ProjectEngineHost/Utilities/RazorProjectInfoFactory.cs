@@ -135,7 +135,7 @@ internal static class RazorProjectInfoFactory
     {
         using var documents = new PooledArrayBuilder<DocumentSnapshotHandle>();
 
-        var normalizedProjectPath = FilePathNormalizer.NormalizeDirectory(projectPath);
+        var normalizedProjectPath = PathNormalization.NormalizeDirectory(projectPath);
 
         // We go through additional documents, because that's where the razor files will be
         foreach (var document in project.AdditionalDocuments)
@@ -168,7 +168,7 @@ internal static class RazorProjectInfoFactory
 
     private static string GetTargetPath(string documentFilePath, string normalizedProjectPath)
     {
-        var targetFilePath = FilePathNormalizer.Normalize(documentFilePath);
+        var targetFilePath = PathNormalization.Normalize(documentFilePath);
         if (targetFilePath.StartsWith(normalizedProjectPath, s_stringComparison))
         {
             // Make relative
@@ -222,7 +222,7 @@ internal static class RazorProjectInfoFactory
         {
             // Go through the file path normalizer because it also does Uri decoding, and we're converting from a Uri to a path
             // but "new Uri(filePath).LocalPath" seems wasteful
-            razorFilePath = FilePathNormalizer.Normalize(filePath[prefix.Length..^suffix.Length]);
+            razorFilePath = PathNormalization.Normalize(filePath[prefix.Length..^suffix.Length]);
             return true;
         }
 

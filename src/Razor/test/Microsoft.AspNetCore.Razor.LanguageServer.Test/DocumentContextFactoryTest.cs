@@ -32,7 +32,7 @@ public class DocumentContextFactoryTest : LanguageServerTestBase
     public void TryCreateAsync_CanNotResolveDocument_ReturnsNull()
     {
         // Arrange
-        var filePath = FilePathNormalizer.Normalize(Path.Combine(s_baseDirectory, "file.cshtml"));
+        var filePath = PathNormalization.Normalize(Path.Combine(s_baseDirectory, "file.cshtml"));
         var uri = new Uri(filePath);
 
         var factory = new DocumentContextFactory(_projectManager, LoggerFactory);
@@ -45,7 +45,7 @@ public class DocumentContextFactoryTest : LanguageServerTestBase
     public void TryCreateForOpenDocumentAsync_CanNotResolveDocument_ReturnsNull()
     {
         // Arrange
-        var filePath = FilePathNormalizer.Normalize(Path.Combine(s_baseDirectory, "file.cshtml"));
+        var filePath = PathNormalization.Normalize(Path.Combine(s_baseDirectory, "file.cshtml"));
         var uri = new Uri(filePath);
 
         var factory = new DocumentContextFactory(_projectManager, LoggerFactory);
@@ -58,7 +58,7 @@ public class DocumentContextFactoryTest : LanguageServerTestBase
     public async Task TryCreateAsync_ResolvesContent()
     {
         // Arrange
-        var filePath = FilePathNormalizer.Normalize(Path.Combine(s_baseDirectory, "file.cshtml"));
+        var filePath = PathNormalization.Normalize(Path.Combine(s_baseDirectory, "file.cshtml"));
         var uri = new Uri(filePath);
 
         var hostDocument = new HostDocument(filePath, "file.cshtml");
@@ -86,7 +86,7 @@ public class DocumentContextFactoryTest : LanguageServerTestBase
     public async Task TryCreateAsync_WithProjectContext_Resolves()
     {
         // Arrange
-        var filePath = FilePathNormalizer.Normalize(Path.Combine(s_baseDirectory, "file.cshtml"));
+        var filePath = PathNormalization.Normalize(Path.Combine(s_baseDirectory, "file.cshtml"));
         var intermediateOutputPath = Path.Combine(s_baseDirectory, "obj");
         var projectFilePath = Path.Combine(s_baseDirectory, "project.csproj");
         var uri = new Uri(filePath);
@@ -113,7 +113,7 @@ public class DocumentContextFactoryTest : LanguageServerTestBase
     public async Task TryCreateForOpenDocumentAsync_ResolvesContent()
     {
         // Arrange
-        var filePath = FilePathNormalizer.Normalize(Path.Combine(s_baseDirectory, "file.cshtml"));
+        var filePath = PathNormalization.Normalize(Path.Combine(s_baseDirectory, "file.cshtml"));
         var uri = new Uri(filePath);
 
         var hostDocument = new HostDocument(filePath, "file.cshtml");
