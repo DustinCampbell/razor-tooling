@@ -13,6 +13,6 @@ internal static partial class PathNormalization
             => AreFilePathsEquivalent(x, y);
 
         public int GetHashCode(string obj)
-            => PathNormalization.GetHashCode(obj);
+            => PathNormalization.ComputeHashCode(obj);
     }
 }

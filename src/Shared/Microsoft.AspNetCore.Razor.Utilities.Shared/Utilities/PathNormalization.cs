@@ -15,10 +15,6 @@ internal static partial class PathNormalization
 
     public static IEqualityComparer<string> FilePathComparer = s_comparer ??= new Comparer();
 
-    private static readonly Func<char, char> s_charConverter = PlatformInformation.IsLinux
-        ? c => c
-        : char.ToLowerInvariant;
-
     public static string NormalizeDirectory(string? directoryFilePath)
     {
         if (directoryFilePath.IsNullOrEmpty() || directoryFilePath == "/")
@@ -142,26 +138,38 @@ internal static partial class PathNormalization
         return normalizedSpan1.Equals(normalizedSpan2, FilePath.Comparison);
     }
 
-    private static int GetHashCode(string filePath)
+    private static int ComputeHashCode(string filePath)
     {
         if (filePath.Length == 0)
         {
             return filePath.GetHashCode();
         }
 
-        var filePathSpan = filePath.AsSpanOrDefault();
+        var filePathSpan = filePath.AsSpan();
 
         using var _ = ArrayPool<char>.Shared.GetPooledArraySpan(filePathSpan.Length, out var destination);
         var normalizedSpan = NormalizeCoreAndGetSpan(filePathSpan, destination);
 
-        var hashCombiner = HashCodeCombiner.Start();
+        var hash = HashCodeCombiner.Start();
 
-        foreach (var ch in normalizedSpan)
+        // PERF: We use two loops below to avoid checking IsLinux or calling into a delegate
+        // method for each character.
+        if (PlatformInformation.IsLinux)
         {
-            hashCombiner.Add(s_charConverter(ch));
+            foreach (var ch in normalizedSpan)
+            {
+                hash.Add(ch);
+            }
+        }
+        else
+        {
+            foreach (var ch in normalizedSpan)
+            {
+                hash.Add(char.ToLowerInvariant(ch));
+            }
         }
 
-        return hashCombiner.CombinedHash;
+        return hash.CombinedHash;
     }
 
     private static ReadOnlySpan<char> NormalizeCoreAndGetSpan(ReadOnlySpan<char> source, Span<char> destination)
