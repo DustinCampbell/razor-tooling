@@ -71,7 +71,7 @@ internal sealed class RemoteProjectSnapshot : IProjectSnapshot
             .Where(static d => d.IsRazorDocument())
             .Select(static d => d.FilePath.AssumeNotNull());
 
-    public string FilePath => _project.FilePath.AssumeNotNull();
+    public FilePath FilePath => _project.FilePath.AssumeNotNull();
 
     public string IntermediateOutputPath => PathNormalization.GetNormalizedDirectoryName(_project.CompilationOutputInfo.AssemblyPath);
 

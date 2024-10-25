@@ -19,7 +19,7 @@ internal class GeneratedDocumentSynchronizer(
     public void DocumentProcessed(RazorCodeDocument codeDocument, IDocumentSnapshot document)
     {
         var hostDocumentVersion = document.Version;
-        var filePath = document.FilePath.AssumeNotNull();
+        var filePath = document.FilePath;
 
         // If the document isn't open, and we're not updating buffers for closed documents, then we don't need to do anything.
         if (!_projectManager.IsDocumentOpen(document.FilePath) &&

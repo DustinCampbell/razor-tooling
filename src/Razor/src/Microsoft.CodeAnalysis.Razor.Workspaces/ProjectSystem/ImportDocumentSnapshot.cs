@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
+using Microsoft.AspNetCore.Razor.Utilities;
 using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
@@ -20,8 +21,8 @@ internal sealed class ImportDocumentSnapshot(IProjectSnapshot project, RazorProj
 
     // The default import file does not have a kind or paths.
     public string? FileKind => null;
-    public string? FilePath => null;
-    public string? TargetPath => null;
+    public FilePath FilePath => default;
+    public FilePath TargetPath => default;
 
     public int Version => 1;
 

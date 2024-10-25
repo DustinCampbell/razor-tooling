@@ -27,15 +27,15 @@ internal class HostDocumentComparer : IEqualityComparer<HostDocument>
         }
 
         return x.FileKind == y.FileKind &&
-               FilePath.Comparer.Equals(x.FilePath, y.FilePath) &&
-               FilePath.Comparer.Equals(x.TargetPath, y.TargetPath);
+               x.FilePath == y.FilePath &&
+               x.TargetPath == y.TargetPath;
     }
 
     public int GetHashCode(HostDocument hostDocument)
     {
         var combiner = HashCodeCombiner.Start();
-        combiner.Add(hostDocument.FilePath, FilePath.Comparer);
-        combiner.Add(hostDocument.TargetPath, FilePath.Comparer);
+        combiner.Add(hostDocument.FilePath);
+        combiner.Add(hostDocument.TargetPath);
         combiner.Add(hostDocument.FileKind);
 
         return combiner.CombinedHash;

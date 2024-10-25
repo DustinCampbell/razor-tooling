@@ -6,7 +6,6 @@ using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.PooledObjects;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
@@ -27,7 +26,7 @@ internal sealed class ProjectSnapshot(ProjectState state) : IProjectSnapshot
     public ProjectKey Key => _state.HostProject.Key;
     public RazorConfiguration Configuration => _state.HostProject.Configuration;
     public IEnumerable<string> DocumentFilePaths => _state.Documents.Keys;
-    public string FilePath => _state.HostProject.FilePath;
+    public FilePath FilePath => _state.HostProject.FilePath;
     public string IntermediateOutputPath => _state.HostProject.IntermediateOutputPath;
     public string? RootNamespace => _state.HostProject.RootNamespace;
     public string DisplayName => _state.HostProject.DisplayName;
@@ -102,7 +101,7 @@ internal sealed class ProjectSnapshot(ProjectState state) : IProjectSnapshot
     /// </summary>
     public ImmutableArray<IDocumentSnapshot> GetRelatedDocuments(IDocumentSnapshot document)
     {
-        var targetPath = document.TargetPath.AssumeNotNull();
+        var targetPath = document.TargetPath;
 
         if (!_state.ImportsToRelatedDocuments.TryGetValue(targetPath, out var relatedDocuments))
         {

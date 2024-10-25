@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
+using Microsoft.AspNetCore.Razor.Utilities;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Text;
 
@@ -35,8 +36,8 @@ internal sealed class RemoteDocumentSnapshot : IDocumentSnapshot
     }
 
     public string FileKind => FileKinds.GetFileKindFromFilePath(FilePath);
-    public string FilePath => TextDocument.FilePath.AssumeNotNull();
-    public string TargetPath => TextDocument.FilePath.AssumeNotNull();
+    public FilePath FilePath => TextDocument.FilePath.AssumeNotNull();
+    public FilePath TargetPath => TextDocument.FilePath.AssumeNotNull();
 
     public IProjectSnapshot Project => ProjectSnapshot;
 

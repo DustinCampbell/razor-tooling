@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
+using Microsoft.AspNetCore.Razor.Utilities;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
 
@@ -21,8 +22,8 @@ internal sealed class DocumentSnapshot(ProjectSnapshot project, DocumentState st
     public HostDocument HostDocument => _state.HostDocument;
 
     public string FileKind => _state.HostDocument.FileKind;
-    public string FilePath => _state.HostDocument.FilePath;
-    public string TargetPath => _state.HostDocument.TargetPath;
+    public FilePath FilePath => _state.HostDocument.FilePath;
+    public FilePath TargetPath => _state.HostDocument.TargetPath;
     public IProjectSnapshot Project => _project;
     public int Version => _state.Version;
 

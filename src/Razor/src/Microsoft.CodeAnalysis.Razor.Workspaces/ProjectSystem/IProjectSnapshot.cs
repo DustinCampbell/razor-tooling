@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
+using Microsoft.AspNetCore.Razor.Utilities;
 using Microsoft.CodeAnalysis.CSharp;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
@@ -20,9 +21,9 @@ internal interface IProjectSnapshot
     IEnumerable<string> DocumentFilePaths { get; }
 
     /// <summary>
-    /// Gets the full path to the .csproj file for this project
+    /// Gets the full path to the .csproj file for this project.
     /// </summary>
-    string FilePath { get; }
+    FilePath FilePath { get; }
 
     /// <summary>
     /// Gets the full path to the folder under 'obj' where the project.razor.bin file will live

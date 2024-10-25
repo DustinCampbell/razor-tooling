@@ -32,7 +32,7 @@ internal record class HostProject
     public string DisplayName { get; init; }
 
     public HostProject(
-        string filePath,
+        FilePath filePath,
         string intermediateOutputPath,
         RazorConfiguration configuration,
         string? rootNamespace,
@@ -56,7 +56,7 @@ internal record class HostProject
 
         return other is not null &&
                EqualityContract == other.EqualityContract &&
-               AspNetCore.Razor.Utilities.FilePath.Comparer.Equals(FilePath, other.FilePath) &&
+               FilePath == other.FilePath &&
                AspNetCore.Razor.Utilities.FilePath.Comparer.Equals(IntermediateOutputPath, other.IntermediateOutputPath) &&
                Configuration == other.Configuration &&
                RootNamespace == other.RootNamespace &&
@@ -67,7 +67,7 @@ internal record class HostProject
     {
         var hash = HashCodeCombiner.Start();
 
-        hash.Add(FilePath, AspNetCore.Razor.Utilities.FilePath.Comparer);
+        hash.Add(FilePath);
         hash.Add(IntermediateOutputPath, AspNetCore.Razor.Utilities.FilePath.Comparer);
         hash.Add(Configuration);
         hash.Add(RootNamespace);

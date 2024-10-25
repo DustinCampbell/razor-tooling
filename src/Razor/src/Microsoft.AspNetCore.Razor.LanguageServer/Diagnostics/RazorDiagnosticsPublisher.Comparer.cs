@@ -19,16 +19,20 @@ internal partial class RazorDiagnosticsPublisher
 
         public bool Equals(IDocumentSnapshot? x, IDocumentSnapshot? y)
         {
-            var filePathX = x?.FilePath;
-            var filePathY = y?.FilePath;
+            if (ReferenceEquals(x, y))
+            {
+                return true;
+            }
 
-            return FilePath.Comparer.Equals(filePathX, filePathY);
+            if (x is null || y is null)
+            {
+                return false;
+            }
+
+            return x.FilePath == y.FilePath;
         }
 
         public int GetHashCode(IDocumentSnapshot obj)
-        {
-            var filePath = obj.FilePath.AssumeNotNull();
-            return FilePath.Comparer.GetHashCode(filePath);
-        }
+            => obj.FilePath.GetHashCode();
     }
 }

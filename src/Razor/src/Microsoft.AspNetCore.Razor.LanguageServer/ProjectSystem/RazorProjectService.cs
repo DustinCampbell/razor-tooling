@@ -520,7 +520,7 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
         var newTargetPath = documentSnapshot.TargetPath;
         if (PathNormalization.Normalize(newTargetPath).StartsWith(projectDirectory))
         {
-            newTargetPath = newTargetPath[projectDirectory.Length..];
+            newTargetPath = newTargetPath.Value[projectDirectory.Length..];
         }
 
         var newHostDocument = new HostDocument(documentSnapshot.FilePath, newTargetPath, documentSnapshot.FileKind);

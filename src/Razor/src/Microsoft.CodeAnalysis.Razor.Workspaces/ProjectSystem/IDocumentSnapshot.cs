@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
+using Microsoft.AspNetCore.Razor.Utilities;
 using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
@@ -12,8 +13,8 @@ namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 internal interface IDocumentSnapshot
 {
     string? FileKind { get; }
-    string? FilePath { get; }
-    string? TargetPath { get; }
+    FilePath FilePath { get; }
+    FilePath TargetPath { get; }
     IProjectSnapshot Project { get; }
 
     int Version { get; }

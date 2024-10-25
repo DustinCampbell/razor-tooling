@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
+using Microsoft.AspNetCore.Razor.Utilities;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Text;
@@ -62,8 +63,8 @@ internal sealed class TestDocumentSnapshot : IDocumentSnapshot
     public HostDocument HostDocument => RealSnapshot.HostDocument;
 
     public string? FileKind => RealSnapshot.FileKind;
-    public string? FilePath => RealSnapshot.FilePath;
-    public string? TargetPath => RealSnapshot.TargetPath;
+    public FilePath FilePath => RealSnapshot.FilePath;
+    public FilePath TargetPath => RealSnapshot.TargetPath;
     public IProjectSnapshot Project => RealSnapshot.Project;
     public int Version => RealSnapshot.Version;
 

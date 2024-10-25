@@ -254,7 +254,7 @@ internal partial class DocumentState
             importSources.Add(sourceDocument);
         }
 
-        var projectItem = document.FilePath is null ? null : projectEngine.FileSystem.GetItem(document.FilePath, document.FileKind);
+        var projectItem = document.FilePath.Value is null ? null : projectEngine.FileSystem.GetItem(document.FilePath, document.FileKind);
         var documentSource = await GetRazorSourceDocumentAsync(document, projectItem, cancellationToken).ConfigureAwait(false);
 
         if (forceRuntimeCodeGeneration)
@@ -267,7 +267,7 @@ internal partial class DocumentState
 
     internal static async Task<ImmutableArray<ImportItem>> GetImportsAsync(IDocumentSnapshot document, RazorProjectEngine projectEngine, CancellationToken cancellationToken)
     {
-        var imports = GetImportsCore(document.Project, projectEngine, document.FilePath.AssumeNotNull(), document.FileKind.AssumeNotNull());
+        var imports = GetImportsCore(document.Project, projectEngine, document.FilePath, document.FileKind.AssumeNotNull());
         using var result = new PooledArrayBuilder<ImportItem>(imports.Length);
 
         foreach (var snapshot in imports)
