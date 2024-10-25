@@ -2,14 +2,11 @@
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Razor.Test.Common;
-using Microsoft.AspNetCore.Razor.Utilities;
 using Xunit;
-using Xunit.Abstractions;
 
-namespace Microsoft.AspNetCore.Razor.ProjectEngineHost.Test;
+namespace Microsoft.AspNetCore.Razor.Utilities.Shared.Test.Utilities;
 
-public class FilePathNormalizerTest(ITestOutputHelper testOutput) : ToolingTestBase(testOutput)
+public class FilePathNormalizerTests
 {
     [ConditionalFact(Is.Windows)]
     public void Normalize_Windows_StripsPrecedingSlash()
@@ -106,7 +103,7 @@ public class FilePathNormalizerTest(ITestOutputHelper testOutput) : ToolingTestB
     public void NormalizeDirectory_DedupesMismatchedSlashes()
     {
         // Arrange
-        var directory = "C:\\path\\to\\/directory\\";
+        var directory = @"C:\path\to\/directory\";
 
         // Act
         var normalized = FilePathNormalizer.NormalizeDirectory(directory);
@@ -119,7 +116,7 @@ public class FilePathNormalizerTest(ITestOutputHelper testOutput) : ToolingTestB
     public void NormalizeDirectory_EndsWithSlash()
     {
         // Arrange
-        var directory = "C:\\path\\to\\directory\\";
+        var directory = @"C:\path\to\directory\";
 
         // Act
         var normalized = FilePathNormalizer.NormalizeDirectory(directory);
@@ -132,7 +129,7 @@ public class FilePathNormalizerTest(ITestOutputHelper testOutput) : ToolingTestB
     public void NormalizeDirectory_EndsWithoutSlash()
     {
         // Arrange
-        var directory = "C:\\path\\to\\directory";
+        var directory = @"C:\path\to\directory";
 
         // Act
         var normalized = FilePathNormalizer.NormalizeDirectory(directory);
@@ -192,7 +189,7 @@ public class FilePathNormalizerTest(ITestOutputHelper testOutput) : ToolingTestB
     {
         // Arrange
         var filePath1 = "path/to/document.cshtml";
-        var filePath2 = "path\\to\\different\\document.cshtml";
+        var filePath2 = @"path\to\different\document.cshtml";
 
         // Act
         var result = FilePathNormalizer.AreFilePathsEquivalent(filePath1, filePath2);
@@ -206,7 +203,7 @@ public class FilePathNormalizerTest(ITestOutputHelper testOutput) : ToolingTestB
     {
         // Arrange
         var filePath1 = "path/to/document.cshtml";
-        var filePath2 = "path\\to\\document.cshtml";
+        var filePath2 = @"path\to\document.cshtml";
 
         // Act
         var result = FilePathNormalizer.AreFilePathsEquivalent(filePath1, filePath2);
@@ -305,7 +302,7 @@ public class FilePathNormalizerTest(ITestOutputHelper testOutput) : ToolingTestB
     public void Normalize_ReplacesBackSlashesWithForwardSlashes()
     {
         // Arrange
-        var filePath = "C:\\path\\to\\document.cshtml";
+        var filePath = @"C:\path\to\document.cshtml";
 
         // Act
         var normalized = FilePathNormalizer.Normalize(filePath);
