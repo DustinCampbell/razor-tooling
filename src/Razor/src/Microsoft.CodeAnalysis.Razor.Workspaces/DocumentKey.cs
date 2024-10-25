@@ -3,7 +3,6 @@
 
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Utilities;
-using Microsoft.Extensions.Internal;
 
 namespace Microsoft.CodeAnalysis.Razor;
 

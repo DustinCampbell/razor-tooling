@@ -19,7 +19,6 @@ using Microsoft.CodeAnalysis.Razor;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.Workspaces;
 using Microsoft.CodeAnalysis.Text;
-using Microsoft.Extensions.Internal;
 using Microsoft.VisualStudio.Razor.ProjectSystem;
 
 namespace Microsoft.VisualStudio.Razor.DynamicFiles;

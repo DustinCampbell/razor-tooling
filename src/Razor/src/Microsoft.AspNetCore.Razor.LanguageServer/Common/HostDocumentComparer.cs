@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Razor.Utilities;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
-using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.Common;
 

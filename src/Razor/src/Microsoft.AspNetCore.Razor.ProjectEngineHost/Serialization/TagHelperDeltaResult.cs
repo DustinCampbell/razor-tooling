@@ -5,7 +5,6 @@ using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.AspNetCore.Razor.PooledObjects;
 using Microsoft.AspNetCore.Razor.Utilities;
-using Microsoft.Extensions.Internal;
 
 #if DEBUG
 using System.Diagnostics;

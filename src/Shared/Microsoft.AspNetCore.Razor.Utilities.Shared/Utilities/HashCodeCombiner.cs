@@ -1,21 +1,15 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
+﻿// Copyright (c) .NET Foundation. All rights reserved.
+// Licensed under the MIT license. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Runtime.CompilerServices;
 
-namespace Microsoft.Extensions.Internal;
+namespace Microsoft.AspNetCore.Razor.Utilities;
 
 internal ref struct HashCodeCombiner
 {
     private long _combinedHash64;
-
-    public int CombinedHash
-    {
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        get { return _combinedHash64.GetHashCode(); }
-    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private HashCodeCombiner(long seed)
@@ -24,15 +18,23 @@ internal ref struct HashCodeCombiner
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static HashCodeCombiner Start()
+        => new(0x1505L);
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static implicit operator int(HashCodeCombiner self)
+        => self.CombinedHash;
+
+    public readonly int CombinedHash
     {
-        return self.CombinedHash;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        get => _combinedHash64.GetHashCode();
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void Add(int i)
     {
-        _combinedHash64 = ((_combinedHash64 << 5) + _combinedHash64) ^ i;
+        _combinedHash64 = (_combinedHash64 << 5) + _combinedHash64 ^ i;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -66,11 +68,5 @@ internal ref struct HashCodeCombiner
     public void Add<T>(ImmutableArray<T> array)
     {
         Add(array, EqualityComparer<T>.Default);
-    }
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static HashCodeCombiner Start()
-    {
-        return new HashCodeCombiner(0x1505L);
     }
 }

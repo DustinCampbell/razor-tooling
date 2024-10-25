@@ -5,8 +5,8 @@ using System;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.AspNetCore.Razor.Language;
+using Microsoft.AspNetCore.Razor.Utilities;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Razor.ProjectSystem;
 

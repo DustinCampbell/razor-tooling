@@ -5,8 +5,7 @@
 
 using System;
 using System.Globalization;
-using Microsoft.Extensions.Internal;
-
+using Microsoft.AspNetCore.Razor.Utilities;
 using CSharpLinePosition = Microsoft.CodeAnalysis.Text.LinePosition;
 
 namespace Microsoft.AspNetCore.Razor.Language;

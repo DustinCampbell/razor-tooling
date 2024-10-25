@@ -13,8 +13,8 @@ using MessagePack.Resolvers;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Serialization;
 using Microsoft.AspNetCore.Razor.Serialization.MessagePack.Resolvers;
+using Microsoft.AspNetCore.Razor.Utilities;
 using Microsoft.CodeAnalysis;
-using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Razor.ProjectSystem;
 

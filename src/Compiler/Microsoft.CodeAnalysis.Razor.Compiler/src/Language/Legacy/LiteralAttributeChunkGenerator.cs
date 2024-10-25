@@ -4,7 +4,7 @@
 #nullable disable
 
 using System.Globalization;
-using Microsoft.Extensions.Internal;
+using Microsoft.AspNetCore.Razor.Utilities;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
