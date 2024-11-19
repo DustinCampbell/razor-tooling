@@ -79,7 +79,7 @@ internal static partial class ObjectWriters
             {
                 writer.Write(nameof(value.Name), value.Name);
                 writer.WriteIfNotZero(nameof(value.NameComparison), (int)value.NameComparison);
-                writer.WriteIfNotTrue(nameof(value.CaseSensitive), value.CaseSensitive);
+                writer.WriteIfNotDefault(nameof(value.Flags), (int)value.Flags, defaultValue: (int)RequiredAttributeFlags.CaseSensitive);
                 writer.WriteIfNotNull(nameof(value.Value), value.Value);
                 writer.WriteIfNotZero(nameof(value.ValueComparison), (int)value.ValueComparison);
                 writer.WriteIfNotNull(nameof(value.DisplayName), value.DisplayName);

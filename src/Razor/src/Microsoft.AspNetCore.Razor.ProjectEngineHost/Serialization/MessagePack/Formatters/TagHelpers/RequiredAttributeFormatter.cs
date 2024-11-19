@@ -22,7 +22,7 @@ internal sealed class RequiredAttributeFormatter : ValueFormatter<RequiredAttrib
 
         var name = CachedStringFormatter.Instance.Deserialize(ref reader, options);
         var nameComparison = (NameComparisonMode)reader.ReadInt32();
-        var caseSensitive = reader.ReadBoolean();
+        var flags = (RequiredAttributeFlags)reader.ReadInt32();
         var value = CachedStringFormatter.Instance.Deserialize(ref reader, options);
         var valueComparison = (ValueComparisonMode)reader.ReadInt32();
         var displayName = CachedStringFormatter.Instance.Deserialize(ref reader, options).AssumeNotNull();
@@ -32,7 +32,7 @@ internal sealed class RequiredAttributeFormatter : ValueFormatter<RequiredAttrib
 
         return new RequiredAttributeDescriptor(
             name!, nameComparison,
-            caseSensitive,
+            flags,
             value, valueComparison,
             displayName, diagnostics, metadata);
     }
@@ -43,7 +43,7 @@ internal sealed class RequiredAttributeFormatter : ValueFormatter<RequiredAttrib
 
         CachedStringFormatter.Instance.Serialize(ref writer, value.Name, options);
         writer.Write((int)value.NameComparison);
-        writer.Write(value.CaseSensitive);
+        writer.Serialize((int)value.Flags, options);
         CachedStringFormatter.Instance.Serialize(ref writer, value.Value, options);
         writer.Write((int)value.ValueComparison);
         CachedStringFormatter.Instance.Serialize(ref writer, value.DisplayName, options);
@@ -58,7 +58,7 @@ internal sealed class RequiredAttributeFormatter : ValueFormatter<RequiredAttrib
 
         CachedStringFormatter.Instance.Skim(ref reader, options); // Name
         reader.Skip(); // NameComparison
-        reader.Skip(); // CaseSensitive
+        reader.Skip(); // Flags
         CachedStringFormatter.Instance.Skim(ref reader, options); // Value
         reader.Skip(); // ValueComparison
         CachedStringFormatter.Instance.Skim(ref reader, options); // DisplayName

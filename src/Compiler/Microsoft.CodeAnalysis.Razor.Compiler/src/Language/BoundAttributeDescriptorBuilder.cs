@@ -40,7 +40,6 @@ public sealed partial class BoundAttributeDescriptorBuilder : TagHelperObjectBui
     private DocumentationObject _documentationObject;
     private MetadataHolder _metadata;
     private bool? _caseSensitive;
-    private bool? _isDirectiveAttribute;
 
     private BoundAttributeDescriptorBuilder()
     {
@@ -60,6 +59,7 @@ public sealed partial class BoundAttributeDescriptorBuilder : TagHelperObjectBui
     public string? IndexerAttributeNamePrefix { get; set; }
     public string? IndexerValueTypeName { get; set; }
     internal bool IsEditorRequired { get; set; }
+    internal bool IsDirectiveAttribute { get; set; }
 
     public string? Documentation
     {
@@ -82,12 +82,6 @@ public sealed partial class BoundAttributeDescriptorBuilder : TagHelperObjectBui
     {
         get => _caseSensitive ?? _parent.CaseSensitive;
         set => _caseSensitive = value;
-    }
-
-    internal bool IsDirectiveAttribute
-    {
-        get => _isDirectiveAttribute ?? (TryGetMetadataValue(ComponentMetadata.Common.DirectiveAttribute, out var value) && value == bool.TrueString);
-        set => _isDirectiveAttribute = value;
     }
 
     private TagHelperObjectBuilderCollection<BoundAttributeParameterDescriptor, BoundAttributeParameterDescriptorBuilder> Parameters { get; }

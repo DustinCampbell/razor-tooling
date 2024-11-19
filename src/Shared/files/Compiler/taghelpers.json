@@ -4028,10 +4028,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 3369443405112860396,
-      "Data2": 3046097734821200829,
-      "Data3": -896897866579515934,
-      "Data4": 7373654384212824488
+      "Data1": -2186361747283159067,
+      "Data2": 8016802057568322762,
+      "Data3": 8369892498734509798,
+      "Data4": 9076135259520134317
     },
     "Kind": "Components.EventHandler",
     "Name": "onabort",
@@ -4045,10 +4045,8 @@
         "Attributes": [
           {
             "Name": "@onabort",
-            "DisplayName": "@onabort",
-            "Metadata": {
-              "Common.DirectiveAttribute": "True"
-            }
+            "Flags": 3,
+            "DisplayName": "@onabort"
           }
         ]
       },
@@ -4057,10 +4055,8 @@
         "Attributes": [
           {
             "Name": "@onabort:preventDefault",
-            "DisplayName": "@onabort:preventDefault",
-            "Metadata": {
-              "Common.DirectiveAttribute": "True"
-            }
+            "Flags": 3,
+            "DisplayName": "@onabort:preventDefault"
           }
         ]
       },
@@ -4069,10 +4065,8 @@
         "Attributes": [
           {
             "Name": "@onabort:stopPropagation",
-            "DisplayName": "@onabort:stopPropagation",
-            "Metadata": {
-              "Common.DirectiveAttribute": "True"
-            }
+            "Flags": 3,
+            "DisplayName": "@onabort:stopPropagation"
           }
         ]
       }

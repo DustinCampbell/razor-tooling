@@ -8,19 +8,24 @@ namespace Microsoft.AspNetCore.Razor.Language;
 
 public sealed class RequiredAttributeDescriptor : TagHelperObject<RequiredAttributeDescriptor>
 {
+    private readonly RequiredAttributeFlags _flags;
+
     public string Name { get; }
     public NameComparisonMode NameComparison { get; }
     public string? Value { get; }
     public ValueComparisonMode ValueComparison { get; }
     public string DisplayName { get; }
-    public bool CaseSensitive { get; }
 
     public MetadataCollection Metadata { get; }
+
+    internal RequiredAttributeFlags Flags => _flags;
+    public bool CaseSensitive => (_flags & RequiredAttributeFlags.CaseSensitive) != 0;
+    public bool IsDirectiveAttribute => (_flags & RequiredAttributeFlags.IsDirectiveAttribute) != 0;
 
     internal RequiredAttributeDescriptor(
         string name,
         NameComparisonMode nameComparison,
-        bool caseSensitive,
+        RequiredAttributeFlags flags,
         string? value,
         ValueComparisonMode valueComparison,
         string displayName,
@@ -30,7 +35,7 @@ public sealed class RequiredAttributeDescriptor : TagHelperObject<RequiredAttrib
     {
         Name = name;
         NameComparison = nameComparison;
-        CaseSensitive = caseSensitive;
+        _flags = flags;
         Value = value;
         ValueComparison = valueComparison;
         DisplayName = displayName;

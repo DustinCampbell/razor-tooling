@@ -26,12 +26,12 @@ public partial class BoundAttributeDescriptorBuilder
         _kind = null;
         _documentationObject = default;
         _caseSensitive = null;
-        _isDirectiveAttribute = null;
 
         Name = null;
         TypeName = null;
         IsEnum = false;
         IsDictionary = false;
+        IsDirectiveAttribute = false;
         IsEditorRequired = false;
         IndexerAttributeNamePrefix = null;
         IndexerValueTypeName = null;
