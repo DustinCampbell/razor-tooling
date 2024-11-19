@@ -10,7 +10,7 @@
     "Name": "BlazorApp1.Pages.Counter",
     "AssemblyName": "BlazorApp1",
     "DisplayName": "BlazorApp1.Pages.Counter",
-    "CaseSensitive": true,
+    "Flags": 3,
     "TagMatchingRules": [
       {
         "TagName": "Counter"
@@ -34,7 +34,7 @@
     "Name": "BlazorApp1.Pages.Counter",
     "AssemblyName": "BlazorApp1",
     "DisplayName": "BlazorApp1.Pages.Counter",
-    "CaseSensitive": true,
+    "Flags": 7,
     "TagMatchingRules": [
       {
         "TagName": "BlazorApp1.Pages.Counter"
@@ -59,7 +59,7 @@
     "Name": "BlazorApp1.Shared.MainLayout",
     "AssemblyName": "BlazorApp1",
     "DisplayName": "BlazorApp1.Shared.MainLayout",
-    "CaseSensitive": true,
+    "Flags": 3,
     "TagMatchingRules": [
       {
         "TagName": "MainLayout"
@@ -97,7 +97,7 @@
     "Name": "BlazorApp1.Shared.MainLayout",
     "AssemblyName": "BlazorApp1",
     "DisplayName": "BlazorApp1.Shared.MainLayout",
-    "CaseSensitive": true,
+    "Flags": 7,
     "TagMatchingRules": [
       {
         "TagName": "BlazorApp1.Shared.MainLayout"
@@ -136,8 +136,8 @@
     "Name": "BlazorApp1.Shared.MainLayout.Body",
     "AssemblyName": "BlazorApp1",
     "DisplayName": "BlazorApp1.Shared.MainLayout.Body",
+    "Flags": 9,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.LayoutComponentBase.Body\">\r\n            <summary>\r\n            Gets the content to be rendered inside the layout.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Body",
@@ -163,8 +163,8 @@
     "Name": "BlazorApp1.Shared.MainLayout.Body",
     "AssemblyName": "BlazorApp1",
     "DisplayName": "BlazorApp1.Shared.MainLayout.Body",
+    "Flags": 13,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.LayoutComponentBase.Body\">\r\n            <summary>\r\n            Gets the content to be rendered inside the layout.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Body",
@@ -191,7 +191,7 @@
     "Name": "BlazorApp1.Shared.NavMenu",
     "AssemblyName": "BlazorApp1",
     "DisplayName": "BlazorApp1.Shared.NavMenu",
-    "CaseSensitive": true,
+    "Flags": 3,
     "TagMatchingRules": [
       {
         "TagName": "NavMenu"
@@ -215,7 +215,7 @@
     "Name": "BlazorApp1.Shared.NavMenu",
     "AssemblyName": "BlazorApp1",
     "DisplayName": "BlazorApp1.Shared.NavMenu",
-    "CaseSensitive": true,
+    "Flags": 7,
     "TagMatchingRules": [
       {
         "TagName": "BlazorApp1.Shared.NavMenu"
@@ -240,7 +240,7 @@
     "Name": "BlazorApp1.Shared.SurveyPrompt",
     "AssemblyName": "BlazorApp1",
     "DisplayName": "BlazorApp1.Shared.SurveyPrompt",
-    "CaseSensitive": true,
+    "Flags": 3,
     "TagMatchingRules": [
       {
         "TagName": "SurveyPrompt"
@@ -277,7 +277,7 @@
     "Name": "BlazorApp1.Shared.SurveyPrompt",
     "AssemblyName": "BlazorApp1",
     "DisplayName": "BlazorApp1.Shared.SurveyPrompt",
-    "CaseSensitive": true,
+    "Flags": 7,
     "TagMatchingRules": [
       {
         "TagName": "BlazorApp1.Shared.SurveyPrompt"
@@ -315,7 +315,7 @@
     "Name": "BlazorApp1.Pages.Index",
     "AssemblyName": "BlazorApp1",
     "DisplayName": "BlazorApp1.Pages.Index",
-    "CaseSensitive": true,
+    "Flags": 3,
     "TagMatchingRules": [
       {
         "TagName": "Index"
@@ -339,7 +339,7 @@
     "Name": "BlazorApp1.Pages.Index",
     "AssemblyName": "BlazorApp1",
     "DisplayName": "BlazorApp1.Pages.Index",
-    "CaseSensitive": true,
+    "Flags": 7,
     "TagMatchingRules": [
       {
         "TagName": "BlazorApp1.Pages.Index"
@@ -364,7 +364,7 @@
     "Name": "BlazorApp1.Pages.FetchData",
     "AssemblyName": "BlazorApp1",
     "DisplayName": "BlazorApp1.Pages.FetchData",
-    "CaseSensitive": true,
+    "Flags": 3,
     "TagMatchingRules": [
       {
         "TagName": "FetchData"
@@ -388,7 +388,7 @@
     "Name": "BlazorApp1.Pages.FetchData",
     "AssemblyName": "BlazorApp1",
     "DisplayName": "BlazorApp1.Pages.FetchData",
-    "CaseSensitive": true,
+    "Flags": 7,
     "TagMatchingRules": [
       {
         "TagName": "BlazorApp1.Pages.FetchData"
@@ -413,7 +413,7 @@
     "Name": "BlazorApp1.App",
     "AssemblyName": "BlazorApp1",
     "DisplayName": "BlazorApp1.App",
-    "CaseSensitive": true,
+    "Flags": 3,
     "TagMatchingRules": [
       {
         "TagName": "App"
@@ -437,7 +437,7 @@
     "Name": "BlazorApp1.App",
     "AssemblyName": "BlazorApp1",
     "DisplayName": "BlazorApp1.App",
-    "CaseSensitive": true,
+    "Flags": 7,
     "TagMatchingRules": [
       {
         "TagName": "BlazorApp1.App"
@@ -462,8 +462,8 @@
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView",
+    "Flags": 3,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView\">\r\n             <summary>\r\n             Combines the behaviors of <see cref=\"T:Microsoft.AspNetCore.Components.Authorization.AuthorizeView\" /> and <see cref=\"T:Microsoft.AspNetCore.Components.RouteView\" />,\r\n             so that it displays the page matching the specified route but only if the user\r\n             is authorized to see it.\r\n            \r\n             Additionally, this component supplies a cascading parameter of type <see cref=\"T:System.Threading.Tasks.Task`1\" />,\r\n             which makes the user's current authentication state available to descendants.\r\n             </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "AuthorizeRouteView"
@@ -561,8 +561,8 @@
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView",
+    "Flags": 7,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView\">\r\n             <summary>\r\n             Combines the behaviors of <see cref=\"T:Microsoft.AspNetCore.Components.Authorization.AuthorizeView\" /> and <see cref=\"T:Microsoft.AspNetCore.Components.RouteView\" />,\r\n             so that it displays the page matching the specified route but only if the user\r\n             is authorized to see it.\r\n            \r\n             Additionally, this component supplies a cascading parameter of type <see cref=\"T:System.Threading.Tasks.Task`1\" />,\r\n             which makes the user's current authentication state available to descendants.\r\n             </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView"
@@ -661,8 +661,8 @@
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized",
+    "Flags": 9,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized\">\r\n            <summary>\r\n            The content that will be displayed if the user is not authorized.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "NotAuthorized",
@@ -707,8 +707,8 @@
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized",
+    "Flags": 13,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized\">\r\n            <summary>\r\n            The content that will be displayed if the user is not authorized.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "NotAuthorized",
@@ -754,8 +754,8 @@
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing",
+    "Flags": 9,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing\">\r\n            <summary>\r\n            The content that will be displayed while asynchronous authorization is in progress.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Authorizing",
@@ -781,8 +781,8 @@
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing",
+    "Flags": 13,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing\">\r\n            <summary>\r\n            The content that will be displayed while asynchronous authorization is in progress.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Authorizing",
@@ -809,8 +809,8 @@
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView",
+    "Flags": 3,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Authorization.AuthorizeView\">\r\n            <summary>\r\n            Displays differing content depending on the user's authorization status.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "AuthorizeView"
@@ -933,8 +933,8 @@
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView",
+    "Flags": 7,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Authorization.AuthorizeView\">\r\n            <summary>\r\n            Displays differing content depending on the user's authorization status.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView"
@@ -1058,8 +1058,8 @@
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.ChildContent",
+    "Flags": 9,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.ChildContent\">\r\n            <summary>\r\n            The content that will be displayed if the user is authorized.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "ChildContent",
@@ -1104,8 +1104,8 @@
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.ChildContent",
+    "Flags": 13,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.ChildContent\">\r\n            <summary>\r\n            The content that will be displayed if the user is authorized.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "ChildContent",
@@ -1151,8 +1151,8 @@
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.NotAuthorized",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.NotAuthorized",
+    "Flags": 9,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.NotAuthorized\">\r\n            <summary>\r\n            The content that will be displayed if the user is not authorized.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "NotAuthorized",
@@ -1197,8 +1197,8 @@
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.NotAuthorized",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.NotAuthorized",
+    "Flags": 13,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.NotAuthorized\">\r\n            <summary>\r\n            The content that will be displayed if the user is not authorized.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "NotAuthorized",
@@ -1244,8 +1244,8 @@
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorized",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorized",
+    "Flags": 9,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.Authorized\">\r\n            <summary>\r\n            The content that will be displayed if the user is authorized.\r\n            If you specify a value for this parameter, do not also specify a value for <see cref=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.ChildContent\" />.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Authorized",
@@ -1290,8 +1290,8 @@
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorized",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorized",
+    "Flags": 13,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.Authorized\">\r\n            <summary>\r\n            The content that will be displayed if the user is authorized.\r\n            If you specify a value for this parameter, do not also specify a value for <see cref=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.ChildContent\" />.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Authorized",
@@ -1337,8 +1337,8 @@
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorizing",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorizing",
+    "Flags": 9,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.Authorizing\">\r\n            <summary>\r\n            The content that will be displayed while asynchronous authorization is in progress.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Authorizing",
@@ -1364,8 +1364,8 @@
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorizing",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorizing",
+    "Flags": 13,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.Authorizing\">\r\n            <summary>\r\n            The content that will be displayed while asynchronous authorization is in progress.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Authorizing",
@@ -1392,7 +1392,7 @@
     "Name": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState",
-    "CaseSensitive": true,
+    "Flags": 3,
     "TagMatchingRules": [
       {
         "TagName": "CascadingAuthenticationState"
@@ -1430,7 +1430,7 @@
     "Name": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState",
-    "CaseSensitive": true,
+    "Flags": 7,
     "TagMatchingRules": [
       {
         "TagName": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState"
@@ -1469,8 +1469,8 @@
     "Name": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState.ChildContent",
+    "Flags": 9,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState.ChildContent\">\r\n            <summary>\r\n            The content to which the authentication state should be provided.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "ChildContent",
@@ -1496,8 +1496,8 @@
     "Name": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState.ChildContent",
+    "Flags": 13,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState.ChildContent\">\r\n            <summary>\r\n            The content to which the authentication state should be provided.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "ChildContent",
@@ -1524,8 +1524,8 @@
     "Name": "Microsoft.AspNetCore.Components.CascadingValue<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.CascadingValue<TValue>",
+    "Flags": 3,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.CascadingValue`1\">\r\n            <summary>\r\n            A component that provides a cascading value to all descendant components.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "CascadingValue"
@@ -1618,8 +1618,8 @@
     "Name": "Microsoft.AspNetCore.Components.CascadingValue<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.CascadingValue<TValue>",
+    "Flags": 7,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.CascadingValue`1\">\r\n            <summary>\r\n            A component that provides a cascading value to all descendant components.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Microsoft.AspNetCore.Components.CascadingValue"
@@ -1713,8 +1713,8 @@
     "Name": "Microsoft.AspNetCore.Components.CascadingValue<TValue>.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.CascadingValue<TValue>.ChildContent",
+    "Flags": 9,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.CascadingValue`1.ChildContent\">\r\n            <summary>\r\n            The content to which the value should be provided.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "ChildContent",
@@ -1740,8 +1740,8 @@
     "Name": "Microsoft.AspNetCore.Components.CascadingValue<TValue>.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.CascadingValue<TValue>.ChildContent",
+    "Flags": 13,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.CascadingValue`1.ChildContent\">\r\n            <summary>\r\n            The content to which the value should be provided.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "ChildContent",
@@ -1768,8 +1768,8 @@
     "Name": "Microsoft.AspNetCore.Components.DynamicComponent",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.DynamicComponent",
+    "Flags": 3,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.DynamicComponent\">\r\n            <summary>\r\n            A component that renders another component dynamically according to its\r\n            <see cref=\"P:Microsoft.AspNetCore.Components.DynamicComponent.Type\" /> parameter.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "DynamicComponent"
@@ -1818,8 +1818,8 @@
     "Name": "Microsoft.AspNetCore.Components.DynamicComponent",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.DynamicComponent",
+    "Flags": 7,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.DynamicComponent\">\r\n            <summary>\r\n            A component that renders another component dynamically according to its\r\n            <see cref=\"P:Microsoft.AspNetCore.Components.DynamicComponent.Type\" /> parameter.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Microsoft.AspNetCore.Components.DynamicComponent"
@@ -1869,8 +1869,8 @@
     "Name": "Microsoft.AspNetCore.Components.LayoutView",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.LayoutView",
+    "Flags": 3,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.LayoutView\">\r\n            <summary>\r\n            Displays the specified content inside the specified layout and any further\r\n            nested layouts.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "LayoutView"
@@ -1919,8 +1919,8 @@
     "Name": "Microsoft.AspNetCore.Components.LayoutView",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.LayoutView",
+    "Flags": 7,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.LayoutView\">\r\n            <summary>\r\n            Displays the specified content inside the specified layout and any further\r\n            nested layouts.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Microsoft.AspNetCore.Components.LayoutView"
@@ -1970,8 +1970,8 @@
     "Name": "Microsoft.AspNetCore.Components.LayoutView.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.LayoutView.ChildContent",
+    "Flags": 9,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.LayoutView.ChildContent\">\r\n            <summary>\r\n            Gets or sets the content to display.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "ChildContent",
@@ -1997,8 +1997,8 @@
     "Name": "Microsoft.AspNetCore.Components.LayoutView.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.LayoutView.ChildContent",
+    "Flags": 13,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.LayoutView.ChildContent\">\r\n            <summary>\r\n            Gets or sets the content to display.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "ChildContent",
@@ -2025,8 +2025,8 @@
     "Name": "Microsoft.AspNetCore.Components.RouteView",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.RouteView",
+    "Flags": 3,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.RouteView\">\r\n            <summary>\r\n            Displays the specified page component, rendering it inside its layout\r\n            and any further nested layouts.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "RouteView"
@@ -2075,8 +2075,8 @@
     "Name": "Microsoft.AspNetCore.Components.RouteView",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.RouteView",
+    "Flags": 7,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.RouteView\">\r\n            <summary>\r\n            Displays the specified page component, rendering it inside its layout\r\n            and any further nested layouts.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Microsoft.AspNetCore.Components.RouteView"
@@ -2126,8 +2126,8 @@
     "Name": "Microsoft.AspNetCore.Components.Routing.Router",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.Router",
+    "Flags": 3,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Routing.Router\">\r\n            <summary>\r\n            A component that supplies route data corresponding to the current navigation state.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Router"
@@ -2252,8 +2252,8 @@
     "Name": "Microsoft.AspNetCore.Components.Routing.Router",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.Router",
+    "Flags": 7,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Routing.Router\">\r\n            <summary>\r\n            A component that supplies route data corresponding to the current navigation state.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Microsoft.AspNetCore.Components.Routing.Router"
@@ -2379,8 +2379,8 @@
     "Name": "Microsoft.AspNetCore.Components.Routing.Router.NotFound",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.Router.NotFound",
+    "Flags": 9,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Routing.Router.NotFound\">\r\n            <summary>\r\n            Gets or sets the content to display when no match is found for the requested route.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "NotFound",
@@ -2406,8 +2406,8 @@
     "Name": "Microsoft.AspNetCore.Components.Routing.Router.NotFound",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.Router.NotFound",
+    "Flags": 13,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Routing.Router.NotFound\">\r\n            <summary>\r\n            Gets or sets the content to display when no match is found for the requested route.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "NotFound",
@@ -2434,8 +2434,8 @@
     "Name": "Microsoft.AspNetCore.Components.Routing.Router.Found",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.Router.Found",
+    "Flags": 9,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Routing.Router.Found\">\r\n            <summary>\r\n            Gets or sets the content to display when a match is found for the requested route.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Found",
@@ -2480,8 +2480,8 @@
     "Name": "Microsoft.AspNetCore.Components.Routing.Router.Found",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.Router.Found",
+    "Flags": 13,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Routing.Router.Found\">\r\n            <summary>\r\n            Gets or sets the content to display when a match is found for the requested route.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Found",
@@ -2527,8 +2527,8 @@
     "Name": "Microsoft.AspNetCore.Components.Routing.Router.Navigating",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.Router.Navigating",
+    "Flags": 9,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Routing.Router.Navigating\">\r\n            <summary>\r\n            Get or sets the content to display when asynchronous navigation is in progress.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Navigating",
@@ -2554,8 +2554,8 @@
     "Name": "Microsoft.AspNetCore.Components.Routing.Router.Navigating",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.Router.Navigating",
+    "Flags": 13,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Routing.Router.Navigating\">\r\n            <summary>\r\n            Get or sets the content to display when asynchronous navigation is in progress.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Navigating",
@@ -2582,8 +2582,8 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.EditForm",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.EditForm",
+    "Flags": 3,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.EditForm\">\r\n            <summary>\r\n            Renders a form element that cascades an <see cref=\"P:Microsoft.AspNetCore.Components.Forms.EditForm.EditContext\" /> to descendants.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "EditForm"
@@ -2704,8 +2704,8 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.EditForm",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.EditForm",
+    "Flags": 7,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.EditForm\">\r\n            <summary>\r\n            Renders a form element that cascades an <see cref=\"P:Microsoft.AspNetCore.Components.Forms.EditForm.EditContext\" /> to descendants.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Microsoft.AspNetCore.Components.Forms.EditForm"
@@ -2827,8 +2827,8 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent",
+    "Flags": 9,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent\">\r\n            <summary>\r\n            Specifies the content to be rendered inside this <see cref=\"T:Microsoft.AspNetCore.Components.Forms.EditForm\" />.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "ChildContent",
@@ -2873,8 +2873,8 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent",
+    "Flags": 13,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent\">\r\n            <summary>\r\n            Specifies the content to be rendered inside this <see cref=\"T:Microsoft.AspNetCore.Components.Forms.EditForm\" />.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "ChildContent",
@@ -2920,8 +2920,8 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.InputCheckbox",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputCheckbox",
+    "Flags": 3,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.InputCheckbox\">\r\n            <summary>\r\n            An input component for editing <see cref=\"T:System.Boolean\" /> values.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "InputCheckbox"
@@ -3005,8 +3005,8 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.InputCheckbox",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputCheckbox",
+    "Flags": 7,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.InputCheckbox\">\r\n            <summary>\r\n            An input component for editing <see cref=\"T:System.Boolean\" /> values.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Microsoft.AspNetCore.Components.Forms.InputCheckbox"
@@ -3091,8 +3091,8 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.InputDate<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputDate<TValue>",
+    "Flags": 3,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.InputDate`1\">\r\n            <summary>\r\n            An input component for editing date values.\r\n            Supported types are <see cref=\"T:System.DateTime\" /> and <see cref=\"T:System.DateTimeOffset\" />.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "InputDate"
@@ -3221,8 +3221,8 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.InputDate<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputDate<TValue>",
+    "Flags": 7,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.InputDate`1\">\r\n            <summary>\r\n            An input component for editing date values.\r\n            Supported types are <see cref=\"T:System.DateTime\" /> and <see cref=\"T:System.DateTimeOffset\" />.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Microsoft.AspNetCore.Components.Forms.InputDate"
@@ -3352,8 +3352,8 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.InputFile",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputFile",
+    "Flags": 3,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.InputFile\">\r\n            <summary>\r\n            A component that wraps the HTML file input element and supplies a <see cref=\"T:System.IO.Stream\" /> for each file's contents.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "InputFile"
@@ -3402,8 +3402,8 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.InputFile",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputFile",
+    "Flags": 7,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.InputFile\">\r\n            <summary>\r\n            A component that wraps the HTML file input element and supplies a <see cref=\"T:System.IO.Stream\" /> for each file's contents.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Microsoft.AspNetCore.Components.Forms.InputFile"
@@ -3453,8 +3453,8 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.InputNumber<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputNumber<TValue>",
+    "Flags": 3,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.InputNumber`1\">\r\n            <summary>\r\n            An input component for editing numeric values.\r\n            Supported numeric types are <see cref=\"T:System.Int32\" />, <see cref=\"T:System.Int64\" />, <see cref=\"T:System.Int16\" />, <see cref=\"T:System.Single\" />, <see cref=\"T:System.Double\" />, <see cref=\"T:System.Decimal\" />.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "InputNumber"
@@ -3571,8 +3571,8 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.InputNumber<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputNumber<TValue>",
+    "Flags": 7,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.InputNumber`1\">\r\n            <summary>\r\n            An input component for editing numeric values.\r\n            Supported numeric types are <see cref=\"T:System.Int32\" />, <see cref=\"T:System.Int64\" />, <see cref=\"T:System.Int16\" />, <see cref=\"T:System.Single\" />, <see cref=\"T:System.Double\" />, <see cref=\"T:System.Decimal\" />.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Microsoft.AspNetCore.Components.Forms.InputNumber"
@@ -3690,8 +3690,8 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.InputRadio<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputRadio<TValue>",
+    "Flags": 3,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.InputRadio`1\">\r\n            <summary>\r\n            An input component used for selecting a value from a group of choices.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "InputRadio"
@@ -3771,8 +3771,8 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.InputRadio<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputRadio<TValue>",
+    "Flags": 7,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.InputRadio`1\">\r\n            <summary>\r\n            An input component used for selecting a value from a group of choices.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Microsoft.AspNetCore.Components.Forms.InputRadio"
@@ -3853,8 +3853,8 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.InputRadioGroup<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputRadioGroup<TValue>",
+    "Flags": 3,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.InputRadioGroup`1\">\r\n            <summary>\r\n            Groups child <see cref=\"T:Microsoft.AspNetCore.Components.Forms.InputRadio`1\" /> components.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "InputRadioGroup"
@@ -3983,8 +3983,8 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.InputRadioGroup<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputRadioGroup<TValue>",
+    "Flags": 7,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.InputRadioGroup`1\">\r\n            <summary>\r\n            Groups child <see cref=\"T:Microsoft.AspNetCore.Components.Forms.InputRadio`1\" /> components.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Microsoft.AspNetCore.Components.Forms.InputRadioGroup"
@@ -4114,8 +4114,8 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.InputRadioGroup<TValue>.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputRadioGroup<TValue>.ChildContent",
+    "Flags": 9,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Forms.InputRadioGroup`1.ChildContent\">\r\n            <summary>\r\n            Gets or sets the child content to be rendering inside the <see cref=\"T:Microsoft.AspNetCore.Components.Forms.InputRadioGroup`1\" />.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "ChildContent",
@@ -4141,8 +4141,8 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.InputRadioGroup<TValue>.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputRadioGroup<TValue>.ChildContent",
+    "Flags": 13,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Forms.InputRadioGroup`1.ChildContent\">\r\n            <summary>\r\n            Gets or sets the child content to be rendering inside the <see cref=\"T:Microsoft.AspNetCore.Components.Forms.InputRadioGroup`1\" />.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "ChildContent",
@@ -4169,8 +4169,8 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>",
+    "Flags": 3,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.InputSelect`1\">\r\n            <summary>\r\n            A dropdown selection component.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "InputSelect"
@@ -4287,8 +4287,8 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>",
+    "Flags": 7,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.InputSelect`1\">\r\n            <summary>\r\n            A dropdown selection component.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Microsoft.AspNetCore.Components.Forms.InputSelect"
@@ -4406,8 +4406,8 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>.ChildContent",
+    "Flags": 9,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Forms.InputSelect`1.ChildContent\">\r\n            <summary>\r\n            Gets or sets the child content to be rendering inside the select element.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "ChildContent",
@@ -4433,8 +4433,8 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>.ChildContent",
+    "Flags": 13,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Forms.InputSelect`1.ChildContent\">\r\n            <summary>\r\n            Gets or sets the child content to be rendering inside the select element.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "ChildContent",
@@ -4461,8 +4461,8 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.InputText",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputText",
+    "Flags": 3,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.InputText\">\r\n            <summary>\r\n            An input component for editing <see cref=\"T:System.String\" /> values.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "InputText"
@@ -4546,8 +4546,8 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.InputText",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputText",
+    "Flags": 7,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.InputText\">\r\n            <summary>\r\n            An input component for editing <see cref=\"T:System.String\" /> values.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Microsoft.AspNetCore.Components.Forms.InputText"
@@ -4632,8 +4632,8 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.InputTextArea",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputTextArea",
+    "Flags": 3,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.InputTextArea\">\r\n            <summary>\r\n            A multiline input component for editing <see cref=\"T:System.String\" /> values.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "InputTextArea"
@@ -4717,8 +4717,8 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.InputTextArea",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputTextArea",
+    "Flags": 7,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.InputTextArea\">\r\n            <summary>\r\n            A multiline input component for editing <see cref=\"T:System.String\" /> values.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Microsoft.AspNetCore.Components.Forms.InputTextArea"
@@ -4803,8 +4803,8 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.ValidationMessage<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.ValidationMessage<TValue>",
+    "Flags": 3,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.ValidationMessage`1\">\r\n            <summary>\r\n            Displays a list of validation messages for a specified field within a cascaded <see cref=\"T:Microsoft.AspNetCore.Components.Forms.EditContext\" />.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "ValidationMessage"
@@ -4872,8 +4872,8 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.ValidationMessage<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.ValidationMessage<TValue>",
+    "Flags": 7,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.ValidationMessage`1\">\r\n            <summary>\r\n            Displays a list of validation messages for a specified field within a cascaded <see cref=\"T:Microsoft.AspNetCore.Components.Forms.EditContext\" />.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Microsoft.AspNetCore.Components.Forms.ValidationMessage"
@@ -4942,8 +4942,8 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.ValidationSummary",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.ValidationSummary",
+    "Flags": 3,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.ValidationSummary\">\r\n            <summary>\r\n            Displays a list of validation messages from a cascaded <see cref=\"T:Microsoft.AspNetCore.Components.Forms.EditContext\" />.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "ValidationSummary"
@@ -4991,8 +4991,8 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.ValidationSummary",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.ValidationSummary",
+    "Flags": 7,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.ValidationSummary\">\r\n            <summary>\r\n            Displays a list of validation messages from a cascaded <see cref=\"T:Microsoft.AspNetCore.Components.Forms.EditContext\" />.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Microsoft.AspNetCore.Components.Forms.ValidationSummary"
@@ -5041,8 +5041,8 @@
     "Name": "Microsoft.AspNetCore.Components.Routing.FocusOnNavigate",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.FocusOnNavigate",
+    "Flags": 3,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Routing.FocusOnNavigate\">\r\n            <summary>\r\n            After navigating from one page to another, sets focus to an element\r\n            matching a CSS selector. This can be used to build an accessible\r\n            navigation system compatible with screen readers.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "FocusOnNavigate"
@@ -5091,8 +5091,8 @@
     "Name": "Microsoft.AspNetCore.Components.Routing.FocusOnNavigate",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.FocusOnNavigate",
+    "Flags": 7,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Routing.FocusOnNavigate\">\r\n            <summary>\r\n            After navigating from one page to another, sets focus to an element\r\n            matching a CSS selector. This can be used to build an accessible\r\n            navigation system compatible with screen readers.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Microsoft.AspNetCore.Components.Routing.FocusOnNavigate"
@@ -5142,8 +5142,8 @@
     "Name": "Microsoft.AspNetCore.Components.Routing.NavLink",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.NavLink",
+    "Flags": 3,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Routing.NavLink\">\r\n            <summary>\r\n            A component that renders an anchor tag, automatically toggling its 'active'\r\n            class based on whether its 'href' matches the current URI.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "NavLink"
@@ -5216,8 +5216,8 @@
     "Name": "Microsoft.AspNetCore.Components.Routing.NavLink",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.NavLink",
+    "Flags": 7,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Routing.NavLink\">\r\n            <summary>\r\n            A component that renders an anchor tag, automatically toggling its 'active'\r\n            class based on whether its 'href' matches the current URI.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Microsoft.AspNetCore.Components.Routing.NavLink"
@@ -5291,8 +5291,8 @@
     "Name": "Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent",
+    "Flags": 9,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent\">\r\n            <summary>\r\n            Gets or sets the child content of the component.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "ChildContent",
@@ -5318,8 +5318,8 @@
     "Name": "Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent",
+    "Flags": 13,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent\">\r\n            <summary>\r\n            Gets or sets the child content of the component.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "ChildContent",
@@ -5346,8 +5346,8 @@
     "Name": "Microsoft.AspNetCore.Components.Web.HeadContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.HeadContent",
+    "Flags": 3,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Web.HeadContent\">\r\n            <summary>\r\n            Provides content to <see cref=\"T:Microsoft.AspNetCore.Components.Web.HeadOutlet\" /> components.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "HeadContent"
@@ -5385,8 +5385,8 @@
     "Name": "Microsoft.AspNetCore.Components.Web.HeadContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.HeadContent",
+    "Flags": 7,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Web.HeadContent\">\r\n            <summary>\r\n            Provides content to <see cref=\"T:Microsoft.AspNetCore.Components.Web.HeadOutlet\" /> components.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Microsoft.AspNetCore.Components.Web.HeadContent"
@@ -5425,8 +5425,8 @@
     "Name": "Microsoft.AspNetCore.Components.Web.HeadContent.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.HeadContent.ChildContent",
+    "Flags": 9,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Web.HeadContent.ChildContent\">\r\n            <summary>\r\n            Gets or sets the content to be rendered in <see cref=\"T:Microsoft.AspNetCore.Components.Web.HeadOutlet\" /> instances.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "ChildContent",
@@ -5452,8 +5452,8 @@
     "Name": "Microsoft.AspNetCore.Components.Web.HeadContent.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.HeadContent.ChildContent",
+    "Flags": 13,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Web.HeadContent.ChildContent\">\r\n            <summary>\r\n            Gets or sets the content to be rendered in <see cref=\"T:Microsoft.AspNetCore.Components.Web.HeadOutlet\" /> instances.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "ChildContent",
@@ -5480,8 +5480,8 @@
     "Name": "Microsoft.AspNetCore.Components.Web.HeadOutlet",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.HeadOutlet",
+    "Flags": 3,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Web.HeadOutlet\">\r\n            <summary>\r\n            Renders content provided by <see cref=\"T:Microsoft.AspNetCore.Components.Web.HeadContent\" /> components.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "HeadOutlet"
@@ -5505,8 +5505,8 @@
     "Name": "Microsoft.AspNetCore.Components.Web.HeadOutlet",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.HeadOutlet",
+    "Flags": 7,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Web.HeadOutlet\">\r\n            <summary>\r\n            Renders content provided by <see cref=\"T:Microsoft.AspNetCore.Components.Web.HeadContent\" /> components.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Microsoft.AspNetCore.Components.Web.HeadOutlet"
@@ -5531,8 +5531,8 @@
     "Name": "Microsoft.AspNetCore.Components.Web.PageTitle",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.PageTitle",
+    "Flags": 3,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Web.PageTitle\">\r\n            <summary>\r\n            Enables rendering an HTML <c>&lt;title&gt;</c> to a <see cref=\"T:Microsoft.AspNetCore.Components.Web.HeadOutlet\" /> component.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "PageTitle"
@@ -5570,8 +5570,8 @@
     "Name": "Microsoft.AspNetCore.Components.Web.PageTitle",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.PageTitle",
+    "Flags": 7,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Web.PageTitle\">\r\n            <summary>\r\n            Enables rendering an HTML <c>&lt;title&gt;</c> to a <see cref=\"T:Microsoft.AspNetCore.Components.Web.HeadOutlet\" /> component.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Microsoft.AspNetCore.Components.Web.PageTitle"
@@ -5610,8 +5610,8 @@
     "Name": "Microsoft.AspNetCore.Components.Web.PageTitle.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.PageTitle.ChildContent",
+    "Flags": 9,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Web.PageTitle.ChildContent\">\r\n            <summary>\r\n            Gets or sets the content to be rendered as the document title.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "ChildContent",
@@ -5637,8 +5637,8 @@
     "Name": "Microsoft.AspNetCore.Components.Web.PageTitle.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.PageTitle.ChildContent",
+    "Flags": 13,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Web.PageTitle.ChildContent\">\r\n            <summary>\r\n            Gets or sets the content to be rendered as the document title.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "ChildContent",
@@ -5665,8 +5665,8 @@
     "Name": "Microsoft.AspNetCore.Components.Web.ErrorBoundary",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.ErrorBoundary",
+    "Flags": 3,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Web.ErrorBoundary\">\r\n            <summary>\r\n            Captures errors thrown from its child content.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "ErrorBoundary"
@@ -5741,8 +5741,8 @@
     "Name": "Microsoft.AspNetCore.Components.Web.ErrorBoundary",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.ErrorBoundary",
+    "Flags": 7,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Web.ErrorBoundary\">\r\n            <summary>\r\n            Captures errors thrown from its child content.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Microsoft.AspNetCore.Components.Web.ErrorBoundary"
@@ -5818,8 +5818,8 @@
     "Name": "Microsoft.AspNetCore.Components.Web.ErrorBoundary.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.ErrorBoundary.ChildContent",
+    "Flags": 9,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.ErrorBoundaryBase.ChildContent\">\r\n            <summary>\r\n            The content to be displayed when there is no error.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "ChildContent",
@@ -5845,8 +5845,8 @@
     "Name": "Microsoft.AspNetCore.Components.Web.ErrorBoundary.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.ErrorBoundary.ChildContent",
+    "Flags": 13,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.ErrorBoundaryBase.ChildContent\">\r\n            <summary>\r\n            The content to be displayed when there is no error.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "ChildContent",
@@ -5873,8 +5873,8 @@
     "Name": "Microsoft.AspNetCore.Components.Web.ErrorBoundary.ErrorContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.ErrorBoundary.ErrorContent",
+    "Flags": 9,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.ErrorBoundaryBase.ErrorContent\">\r\n            <summary>\r\n            The content to be displayed when there is an error.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "ErrorContent",
@@ -5919,8 +5919,8 @@
     "Name": "Microsoft.AspNetCore.Components.Web.ErrorBoundary.ErrorContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.ErrorBoundary.ErrorContent",
+    "Flags": 13,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.ErrorBoundaryBase.ErrorContent\">\r\n            <summary>\r\n            The content to be displayed when there is an error.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "ErrorContent",
@@ -5966,8 +5966,8 @@
     "Name": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>",
+    "Flags": 3,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize`1\">\r\n            <summary>\r\n            Provides functionality for rendering a virtualized list of items.\r\n            </summary>\r\n            <typeparam name=\"TItem\">The <c>context</c> type for the items being rendered.</typeparam>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Virtualize"
@@ -6112,8 +6112,8 @@
     "Name": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>",
+    "Flags": 7,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize`1\">\r\n            <summary>\r\n            Provides functionality for rendering a virtualized list of items.\r\n            </summary>\r\n            <typeparam name=\"TItem\">The <c>context</c> type for the items being rendered.</typeparam>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize"
@@ -6259,8 +6259,8 @@
     "Name": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.ChildContent",
+    "Flags": 9,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize`1.ChildContent\">\r\n            <summary>\r\n            Gets or sets the item template for the list.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "ChildContent",
@@ -6305,8 +6305,8 @@
     "Name": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.ChildContent",
+    "Flags": 13,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize`1.ChildContent\">\r\n            <summary>\r\n            Gets or sets the item template for the list.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "ChildContent",
@@ -6352,8 +6352,8 @@
     "Name": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.ItemContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.ItemContent",
+    "Flags": 9,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize`1.ItemContent\">\r\n            <summary>\r\n            Gets or sets the item template for the list.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "ItemContent",
@@ -6398,8 +6398,8 @@
     "Name": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.ItemContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.ItemContent",
+    "Flags": 13,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize`1.ItemContent\">\r\n            <summary>\r\n            Gets or sets the item template for the list.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "ItemContent",
@@ -6445,8 +6445,8 @@
     "Name": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.Placeholder",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.Placeholder",
+    "Flags": 9,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize`1.Placeholder\">\r\n            <summary>\r\n            Gets or sets the template for items that have not yet been loaded in memory.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Placeholder",
@@ -6491,8 +6491,8 @@
     "Name": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.Placeholder",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.Placeholder",
+    "Flags": 13,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize`1.Placeholder\">\r\n            <summary>\r\n            Gets or sets the template for items that have not yet been loaded in memory.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Placeholder",
@@ -6538,8 +6538,8 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator",
     "AssemblyName": "Microsoft.AspNetCore.Components.Forms",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator",
+    "Flags": 3,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator\">\r\n            <summary>\r\n            Adds Data Annotations validation support to an <see cref=\"T:Microsoft.AspNetCore.Components.Forms.EditContext\" />.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "DataAnnotationsValidator"
@@ -6563,8 +6563,8 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator",
     "AssemblyName": "Microsoft.AspNetCore.Components.Forms",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator",
+    "Flags": 7,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator\">\r\n            <summary>\r\n            Adds Data Annotations validation support to an <see cref=\"T:Microsoft.AspNetCore.Components.Forms.EditContext\" />.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator"
@@ -6589,6 +6589,7 @@
     "Name": "onfocus",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -6596,7 +6597,6 @@
         "Microsoft.AspNetCore.Components.Web.FocusEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -6704,6 +6704,7 @@
     "Name": "onblur",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -6711,7 +6712,6 @@
         "Microsoft.AspNetCore.Components.Web.FocusEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -6819,6 +6819,7 @@
     "Name": "onfocusin",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -6826,7 +6827,6 @@
         "Microsoft.AspNetCore.Components.Web.FocusEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -6934,6 +6934,7 @@
     "Name": "onfocusout",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -6941,7 +6942,6 @@
         "Microsoft.AspNetCore.Components.Web.FocusEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -7049,6 +7049,7 @@
     "Name": "onmouseover",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -7056,7 +7057,6 @@
         "Microsoft.AspNetCore.Components.Web.MouseEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -7164,6 +7164,7 @@
     "Name": "onmouseout",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -7171,7 +7172,6 @@
         "Microsoft.AspNetCore.Components.Web.MouseEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -7279,6 +7279,7 @@
     "Name": "onmousemove",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -7286,7 +7287,6 @@
         "Microsoft.AspNetCore.Components.Web.MouseEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -7394,6 +7394,7 @@
     "Name": "onmousedown",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -7401,7 +7402,6 @@
         "Microsoft.AspNetCore.Components.Web.MouseEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -7509,6 +7509,7 @@
     "Name": "onmouseup",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -7516,7 +7517,6 @@
         "Microsoft.AspNetCore.Components.Web.MouseEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -7624,6 +7624,7 @@
     "Name": "onclick",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -7631,7 +7632,6 @@
         "Microsoft.AspNetCore.Components.Web.MouseEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -7739,6 +7739,7 @@
     "Name": "ondblclick",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -7746,7 +7747,6 @@
         "Microsoft.AspNetCore.Components.Web.MouseEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -7854,6 +7854,7 @@
     "Name": "onwheel",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -7861,7 +7862,6 @@
         "Microsoft.AspNetCore.Components.Web.WheelEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -7969,6 +7969,7 @@
     "Name": "onmousewheel",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -7976,7 +7977,6 @@
         "Microsoft.AspNetCore.Components.Web.WheelEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -8084,6 +8084,7 @@
     "Name": "oncontextmenu",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -8091,7 +8092,6 @@
         "Microsoft.AspNetCore.Components.Web.MouseEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -8199,6 +8199,7 @@
     "Name": "ondrag",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -8206,7 +8207,6 @@
         "Microsoft.AspNetCore.Components.Web.DragEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -8314,6 +8314,7 @@
     "Name": "ondragend",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -8321,7 +8322,6 @@
         "Microsoft.AspNetCore.Components.Web.DragEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -8429,6 +8429,7 @@
     "Name": "ondragenter",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -8436,7 +8437,6 @@
         "Microsoft.AspNetCore.Components.Web.DragEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -8544,6 +8544,7 @@
     "Name": "ondragleave",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -8551,7 +8552,6 @@
         "Microsoft.AspNetCore.Components.Web.DragEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -8659,6 +8659,7 @@
     "Name": "ondragover",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -8666,7 +8667,6 @@
         "Microsoft.AspNetCore.Components.Web.DragEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -8774,6 +8774,7 @@
     "Name": "ondragstart",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -8781,7 +8782,6 @@
         "Microsoft.AspNetCore.Components.Web.DragEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -8889,6 +8889,7 @@
     "Name": "ondrop",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -8896,7 +8897,6 @@
         "Microsoft.AspNetCore.Components.Web.DragEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -9004,6 +9004,7 @@
     "Name": "onkeydown",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -9011,7 +9012,6 @@
         "Microsoft.AspNetCore.Components.Web.KeyboardEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -9119,6 +9119,7 @@
     "Name": "onkeyup",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -9126,7 +9127,6 @@
         "Microsoft.AspNetCore.Components.Web.KeyboardEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -9234,6 +9234,7 @@
     "Name": "onkeypress",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -9241,7 +9242,6 @@
         "Microsoft.AspNetCore.Components.Web.KeyboardEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -9349,6 +9349,7 @@
     "Name": "onchange",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -9356,7 +9357,6 @@
         "Microsoft.AspNetCore.Components.ChangeEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -9464,6 +9464,7 @@
     "Name": "oninput",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -9471,7 +9472,6 @@
         "Microsoft.AspNetCore.Components.ChangeEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -9579,6 +9579,7 @@
     "Name": "oninvalid",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -9586,7 +9587,6 @@
         "System.EventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -9694,6 +9694,7 @@
     "Name": "onreset",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -9701,7 +9702,6 @@
         "System.EventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -9809,6 +9809,7 @@
     "Name": "onselect",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -9816,7 +9817,6 @@
         "System.EventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -9924,6 +9924,7 @@
     "Name": "onselectstart",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -9931,7 +9932,6 @@
         "System.EventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -10039,6 +10039,7 @@
     "Name": "onselectionchange",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -10046,7 +10047,6 @@
         "System.EventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -10154,6 +10154,7 @@
     "Name": "onsubmit",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -10161,7 +10162,6 @@
         "System.EventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -10269,6 +10269,7 @@
     "Name": "onbeforecopy",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -10276,7 +10277,6 @@
         "System.EventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -10384,6 +10384,7 @@
     "Name": "onbeforecut",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -10391,7 +10392,6 @@
         "System.EventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -10499,6 +10499,7 @@
     "Name": "onbeforepaste",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -10506,7 +10507,6 @@
         "System.EventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -10614,6 +10614,7 @@
     "Name": "oncopy",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -10621,7 +10622,6 @@
         "Microsoft.AspNetCore.Components.Web.ClipboardEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -10729,6 +10729,7 @@
     "Name": "oncut",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -10736,7 +10737,6 @@
         "Microsoft.AspNetCore.Components.Web.ClipboardEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -10844,6 +10844,7 @@
     "Name": "onpaste",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -10851,7 +10852,6 @@
         "Microsoft.AspNetCore.Components.Web.ClipboardEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -10959,6 +10959,7 @@
     "Name": "ontouchcancel",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -10966,7 +10967,6 @@
         "Microsoft.AspNetCore.Components.Web.TouchEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -11074,6 +11074,7 @@
     "Name": "ontouchend",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -11081,7 +11082,6 @@
         "Microsoft.AspNetCore.Components.Web.TouchEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -11189,6 +11189,7 @@
     "Name": "ontouchmove",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -11196,7 +11197,6 @@
         "Microsoft.AspNetCore.Components.Web.TouchEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -11304,6 +11304,7 @@
     "Name": "ontouchstart",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -11311,7 +11312,6 @@
         "Microsoft.AspNetCore.Components.Web.TouchEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -11419,6 +11419,7 @@
     "Name": "ontouchenter",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -11426,7 +11427,6 @@
         "Microsoft.AspNetCore.Components.Web.TouchEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -11534,6 +11534,7 @@
     "Name": "ontouchleave",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -11541,7 +11542,6 @@
         "Microsoft.AspNetCore.Components.Web.TouchEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -11649,6 +11649,7 @@
     "Name": "ongotpointercapture",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -11656,7 +11657,6 @@
         "Microsoft.AspNetCore.Components.Web.PointerEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -11764,6 +11764,7 @@
     "Name": "onlostpointercapture",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -11771,7 +11772,6 @@
         "Microsoft.AspNetCore.Components.Web.PointerEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -11879,6 +11879,7 @@
     "Name": "onpointercancel",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -11886,7 +11887,6 @@
         "Microsoft.AspNetCore.Components.Web.PointerEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -11994,6 +11994,7 @@
     "Name": "onpointerdown",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -12001,7 +12002,6 @@
         "Microsoft.AspNetCore.Components.Web.PointerEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -12109,6 +12109,7 @@
     "Name": "onpointerenter",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -12116,7 +12117,6 @@
         "Microsoft.AspNetCore.Components.Web.PointerEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -12224,6 +12224,7 @@
     "Name": "onpointerleave",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -12231,7 +12232,6 @@
         "Microsoft.AspNetCore.Components.Web.PointerEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -12339,6 +12339,7 @@
     "Name": "onpointermove",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -12346,7 +12347,6 @@
         "Microsoft.AspNetCore.Components.Web.PointerEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -12454,6 +12454,7 @@
     "Name": "onpointerout",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -12461,7 +12462,6 @@
         "Microsoft.AspNetCore.Components.Web.PointerEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -12569,6 +12569,7 @@
     "Name": "onpointerover",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -12576,7 +12577,6 @@
         "Microsoft.AspNetCore.Components.Web.PointerEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -12684,6 +12684,7 @@
     "Name": "onpointerup",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -12691,7 +12692,6 @@
         "Microsoft.AspNetCore.Components.Web.PointerEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -12799,6 +12799,7 @@
     "Name": "oncanplay",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -12806,7 +12807,6 @@
         "System.EventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -12914,6 +12914,7 @@
     "Name": "oncanplaythrough",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -12921,7 +12922,6 @@
         "System.EventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -13029,6 +13029,7 @@
     "Name": "oncuechange",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -13036,7 +13037,6 @@
         "System.EventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -13144,6 +13144,7 @@
     "Name": "ondurationchange",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -13151,7 +13152,6 @@
         "System.EventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -13259,6 +13259,7 @@
     "Name": "onemptied",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -13266,7 +13267,6 @@
         "System.EventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -13374,6 +13374,7 @@
     "Name": "onpause",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -13381,7 +13382,6 @@
         "System.EventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -13489,6 +13489,7 @@
     "Name": "onplay",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -13496,7 +13497,6 @@
         "System.EventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -13604,6 +13604,7 @@
     "Name": "onplaying",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -13611,7 +13612,6 @@
         "System.EventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -13719,6 +13719,7 @@
     "Name": "onratechange",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -13726,7 +13727,6 @@
         "System.EventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -13834,6 +13834,7 @@
     "Name": "onseeked",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -13841,7 +13842,6 @@
         "System.EventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -13949,6 +13949,7 @@
     "Name": "onseeking",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -13956,7 +13957,6 @@
         "System.EventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -14064,6 +14064,7 @@
     "Name": "onstalled",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -14071,7 +14072,6 @@
         "System.EventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -14179,6 +14179,7 @@
     "Name": "onstop",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -14186,7 +14187,6 @@
         "System.EventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -14294,6 +14294,7 @@
     "Name": "onsuspend",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -14301,7 +14302,6 @@
         "System.EventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -14409,6 +14409,7 @@
     "Name": "ontimeupdate",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -14416,7 +14417,6 @@
         "System.EventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -14524,6 +14524,7 @@
     "Name": "onvolumechange",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -14531,7 +14532,6 @@
         "System.EventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -14639,6 +14639,7 @@
     "Name": "onwaiting",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -14646,7 +14647,6 @@
         "System.EventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -14754,6 +14754,7 @@
     "Name": "onloadstart",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -14761,7 +14762,6 @@
         "Microsoft.AspNetCore.Components.Web.ProgressEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -14869,6 +14869,7 @@
     "Name": "ontimeout",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -14876,7 +14877,6 @@
         "Microsoft.AspNetCore.Components.Web.ProgressEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -14984,6 +14984,7 @@
     "Name": "onabort",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -14991,7 +14992,6 @@
         "Microsoft.AspNetCore.Components.Web.ProgressEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -15099,6 +15099,7 @@
     "Name": "onload",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -15106,7 +15107,6 @@
         "Microsoft.AspNetCore.Components.Web.ProgressEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -15214,6 +15214,7 @@
     "Name": "onloadend",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -15221,7 +15222,6 @@
         "Microsoft.AspNetCore.Components.Web.ProgressEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -15329,6 +15329,7 @@
     "Name": "onprogress",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -15336,7 +15337,6 @@
         "Microsoft.AspNetCore.Components.Web.ProgressEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -15444,6 +15444,7 @@
     "Name": "onerror",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -15451,7 +15452,6 @@
         "Microsoft.AspNetCore.Components.Web.ErrorEventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -15559,6 +15559,7 @@
     "Name": "onactivate",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -15566,7 +15567,6 @@
         "System.EventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -15674,6 +15674,7 @@
     "Name": "onbeforeactivate",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -15681,7 +15682,6 @@
         "System.EventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -15789,6 +15789,7 @@
     "Name": "onbeforedeactivate",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -15796,7 +15797,6 @@
         "System.EventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -15904,6 +15904,7 @@
     "Name": "ondeactivate",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -15911,7 +15912,6 @@
         "System.EventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -16019,6 +16019,7 @@
     "Name": "onended",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -16026,7 +16027,6 @@
         "System.EventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -16134,6 +16134,7 @@
     "Name": "onfullscreenchange",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -16141,7 +16142,6 @@
         "System.EventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -16249,6 +16249,7 @@
     "Name": "onfullscreenerror",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -16256,7 +16257,6 @@
         "System.EventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -16364,6 +16364,7 @@
     "Name": "onloadeddata",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -16371,7 +16372,6 @@
         "System.EventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -16479,6 +16479,7 @@
     "Name": "onloadedmetadata",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -16486,7 +16487,6 @@
         "System.EventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -16594,6 +16594,7 @@
     "Name": "onpointerlockchange",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -16601,7 +16602,6 @@
         "System.EventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -16709,6 +16709,7 @@
     "Name": "onpointerlockerror",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -16716,7 +16717,6 @@
         "System.EventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -16824,6 +16824,7 @@
     "Name": "onreadystatechange",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -16831,7 +16832,6 @@
         "System.EventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -16939,6 +16939,7 @@
     "Name": "onscroll",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -16946,7 +16947,6 @@
         "System.EventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -17054,6 +17054,7 @@
     "Name": "ontoggle",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
+    "Flags": 1,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -17061,7 +17062,6 @@
         "System.EventArgs"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -17169,10 +17169,10 @@
     "Name": "Attributes",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Attributes",
+    "Flags": 1,
     "Documentation": {
       "Id": 19
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -17219,7 +17219,6 @@
     "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
     "DisplayName": "Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper",
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper\">\r\n            <summary>\r\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting &lt;a&gt; elements.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": false,
     "TagMatchingRules": [
       {
         "TagName": "a",
@@ -17477,7 +17476,6 @@
     "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
     "DisplayName": "Microsoft.AspNetCore.Mvc.TagHelpers.CacheTagHelper",
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Mvc.TagHelpers.CacheTagHelper\">\r\n            <summary>\r\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.TagHelper\" /> implementation targeting &lt;cache&gt; elements.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": false,
     "TagMatchingRules": [
       {
         "TagName": "cache",
@@ -17637,7 +17635,6 @@
     "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
     "DisplayName": "Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper",
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper\">\r\n            <summary>\r\n            A <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.TagHelper\" /> that renders a Razor component.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": false,
     "TagMatchingRules": [
       {
         "TagName": "component",
@@ -17708,7 +17705,6 @@
     "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
     "DisplayName": "Microsoft.AspNetCore.Mvc.TagHelpers.DistributedCacheTagHelper",
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Mvc.TagHelpers.DistributedCacheTagHelper\">\r\n            <summary>\r\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.TagHelper\" /> implementation targeting &lt;distributed-cache&gt; elements.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": false,
     "TagMatchingRules": [
       {
         "TagName": "distributed-cache",
@@ -17875,7 +17871,6 @@
     "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
     "DisplayName": "Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper",
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper\">\r\n            <summary>\r\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting &lt;environment&gt; elements that conditionally renders\r\n            content based on the current value of <see cref=\"P:Microsoft.AspNetCore.Hosting.IHostingEnvironment.EnvironmentName\" />.\r\n            If the environment is not listed in the specified <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper.Names\" /> or <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper.Include\" />,\r\n            or if it is in <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper.Exclude\" />, the content will not be rendered.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": false,
     "TagMatchingRules": [
       {
         "TagName": "environment",
@@ -17936,7 +17931,6 @@
     "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
     "DisplayName": "Microsoft.AspNetCore.Mvc.TagHelpers.FormActionTagHelper",
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Mvc.TagHelpers.FormActionTagHelper\">\r\n            <summary>\r\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting &lt;button&gt; elements and &lt;input&gt; elements with\r\n            their <c>type</c> attribute set to <c>image</c> or <c>submit</c>.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": false,
     "TagMatchingRules": [
       {
         "TagName": "button",
@@ -18494,7 +18488,6 @@
     "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
     "DisplayName": "Microsoft.AspNetCore.Mvc.TagHelpers.FormTagHelper",
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Mvc.TagHelpers.FormTagHelper\">\r\n            <summary>\r\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting &lt;form&gt; elements.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": false,
     "TagMatchingRules": [
       {
         "TagName": "form",
@@ -18623,7 +18616,6 @@
     "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
     "DisplayName": "Microsoft.AspNetCore.Mvc.TagHelpers.ImageTagHelper",
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Mvc.TagHelpers.ImageTagHelper\">\r\n            <summary>\r\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting &lt;img&gt; elements that supports file versioning.\r\n            </summary>\r\n            <remarks>\r\n            The tag helper won't process for cases with just the 'src' attribute.\r\n            </remarks>\r\n        </member>",
-    "CaseSensitive": false,
     "TagMatchingRules": [
       {
         "TagName": "img",
@@ -18686,7 +18678,6 @@
     "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
     "DisplayName": "Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper",
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper\">\r\n            <summary>\r\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting &lt;input&gt; elements with an <c>asp-for</c> attribute.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": false,
     "TagMatchingRules": [
       {
         "TagName": "input",
@@ -18777,7 +18768,6 @@
     "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
     "DisplayName": "Microsoft.AspNetCore.Mvc.TagHelpers.LabelTagHelper",
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Mvc.TagHelpers.LabelTagHelper\">\r\n            <summary>\r\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting &lt;label&gt; elements with an <c>asp-for</c> attribute.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": false,
     "TagMatchingRules": [
       {
         "TagName": "label",
@@ -18823,7 +18813,6 @@
     "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
     "DisplayName": "Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper",
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper\">\r\n            <summary>\r\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting &lt;link&gt; elements that supports fallback href paths.\r\n            </summary>\r\n            <remarks>\r\n            The tag helper won't process for cases with just the 'href' attribute.\r\n            </remarks>\r\n        </member>",
-    "CaseSensitive": false,
     "TagMatchingRules": [
       {
         "TagName": "link",
@@ -19076,7 +19065,6 @@
     "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
     "DisplayName": "Microsoft.AspNetCore.Mvc.TagHelpers.OptionTagHelper",
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Mvc.TagHelpers.OptionTagHelper\">\r\n            <summary>\r\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting &lt;option&gt; elements.\r\n            </summary>\r\n            <remarks>\r\n            This <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> works in conjunction with <see cref=\"T:Microsoft.AspNetCore.Mvc.TagHelpers.SelectTagHelper\" />. It reads elements\r\n            content but does not modify that content. The only modification it makes is to add a <c>selected</c> attribute\r\n            in some cases.\r\n            </remarks>\r\n        </member>",
-    "CaseSensitive": false,
     "TagMatchingRules": [
       {
         "TagName": "option",
@@ -19115,7 +19103,6 @@
     "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
     "DisplayName": "Microsoft.AspNetCore.Mvc.TagHelpers.PartialTagHelper",
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Mvc.TagHelpers.PartialTagHelper\">\r\n            <summary>\r\n            Renders a partial view.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": false,
     "TagMatchingRules": [
       {
         "TagName": "partial",
@@ -19219,7 +19206,6 @@
     "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
     "DisplayName": "Microsoft.AspNetCore.Mvc.TagHelpers.PersistComponentStateTagHelper",
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Mvc.TagHelpers.PersistComponentStateTagHelper\">\r\n            <summary>\r\n            A <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.TagHelper\" /> that saves the state of Razor components rendered on the page up to that point.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": false,
     "TagMatchingRules": [
       {
         "TagName": "persist-component-state",
@@ -19259,7 +19245,6 @@
     "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
     "DisplayName": "Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper",
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper\">\r\n            <summary>\r\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting &lt;script&gt; elements that supports fallback src paths.\r\n            </summary>\r\n            <remarks>\r\n            The tag helper won't process for cases with just the 'src' attribute.\r\n            </remarks>\r\n        </member>",
-    "CaseSensitive": false,
     "TagMatchingRules": [
       {
         "TagName": "script",
@@ -19459,7 +19444,6 @@
     "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
     "DisplayName": "Microsoft.AspNetCore.Mvc.TagHelpers.SelectTagHelper",
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Mvc.TagHelpers.SelectTagHelper\">\r\n            <summary>\r\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting &lt;select&gt; elements with <c>asp-for</c> and/or\r\n            <c>asp-items</c> attribute(s).\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": false,
     "TagMatchingRules": [
       {
         "TagName": "select",
@@ -19538,7 +19522,6 @@
     "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
     "DisplayName": "Microsoft.AspNetCore.Mvc.TagHelpers.TextAreaTagHelper",
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Mvc.TagHelpers.TextAreaTagHelper\">\r\n            <summary>\r\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting &lt;textarea&gt; elements with an <c>asp-for</c> attribute.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": false,
     "TagMatchingRules": [
       {
         "TagName": "textarea",
@@ -19595,7 +19578,6 @@
     "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
     "DisplayName": "Microsoft.AspNetCore.Mvc.TagHelpers.ValidationMessageTagHelper",
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Mvc.TagHelpers.ValidationMessageTagHelper\">\r\n            <summary>\r\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting any HTML element with an <c>asp-validation-for</c>\r\n            attribute.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": false,
     "TagMatchingRules": [
       {
         "TagName": "span",
@@ -19641,7 +19623,6 @@
     "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
     "DisplayName": "Microsoft.AspNetCore.Mvc.TagHelpers.ValidationSummaryTagHelper",
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Mvc.TagHelpers.ValidationSummaryTagHelper\">\r\n            <summary>\r\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting any HTML element with an <c>asp-validation-summary</c>\r\n            attribute.\r\n            </summary>\r\n        </member>",
-    "CaseSensitive": false,
     "TagMatchingRules": [
       {
         "TagName": "div",
@@ -19687,7 +19668,6 @@
     "AssemblyName": "Microsoft.AspNetCore.Mvc.Razor",
     "DisplayName": "Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper",
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper\">\r\n            <summary>\r\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting elements containing attributes with URL expected values.\r\n            </summary>\r\n            <remarks>Resolves URLs starting with '~/' (relative to the application's 'webroot' setting) that are not\r\n            targeted by other <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" />s. Runs prior to other <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" />s to ensure\r\n            application-relative URLs are resolved.</remarks>\r\n        </member>",
-    "CaseSensitive": false,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -20096,10 +20076,10 @@
     "Name": "Bind",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Bind",
+    "Flags": 1,
     "Documentation": {
       "Id": 0
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -20231,6 +20211,7 @@
     "Name": "Bind",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
+    "Flags": 1,
     "Documentation": {
       "Id": 3,
       "Args": [
@@ -20238,7 +20219,6 @@
         "onchange"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "input",
@@ -20408,6 +20388,7 @@
     "Name": "Bind_value",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
+    "Flags": 1,
     "Documentation": {
       "Id": 3,
       "Args": [
@@ -20415,7 +20396,6 @@
         "onchange"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "input",
@@ -20585,6 +20565,7 @@
     "Name": "Bind",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
+    "Flags": 1,
     "Documentation": {
       "Id": 3,
       "Args": [
@@ -20592,7 +20573,6 @@
         "onchange"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "input",
@@ -20775,6 +20755,7 @@
     "Name": "Bind",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
+    "Flags": 1,
     "Documentation": {
       "Id": 3,
       "Args": [
@@ -20782,7 +20763,6 @@
         "onchange"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "input",
@@ -20965,6 +20945,7 @@
     "Name": "Bind",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
+    "Flags": 1,
     "Documentation": {
       "Id": 3,
       "Args": [
@@ -20972,7 +20953,6 @@
         "onchange"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "input",
@@ -21155,6 +21135,7 @@
     "Name": "Bind_value",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
+    "Flags": 1,
     "Documentation": {
       "Id": 3,
       "Args": [
@@ -21162,7 +21143,6 @@
         "onchange"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "input",
@@ -21345,6 +21325,7 @@
     "Name": "Bind",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
+    "Flags": 1,
     "Documentation": {
       "Id": 3,
       "Args": [
@@ -21352,7 +21333,6 @@
         "onchange"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "input",
@@ -21535,6 +21515,7 @@
     "Name": "Bind_value",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
+    "Flags": 1,
     "Documentation": {
       "Id": 3,
       "Args": [
@@ -21542,7 +21523,6 @@
         "onchange"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "input",
@@ -21725,6 +21705,7 @@
     "Name": "Bind",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
+    "Flags": 1,
     "Documentation": {
       "Id": 3,
       "Args": [
@@ -21732,7 +21713,6 @@
         "onchange"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "input",
@@ -21915,6 +21895,7 @@
     "Name": "Bind_value",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
+    "Flags": 1,
     "Documentation": {
       "Id": 3,
       "Args": [
@@ -21922,7 +21903,6 @@
         "onchange"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "input",
@@ -22105,6 +22085,7 @@
     "Name": "Bind",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
+    "Flags": 1,
     "Documentation": {
       "Id": 3,
       "Args": [
@@ -22112,7 +22093,6 @@
         "onchange"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "input",
@@ -22295,6 +22275,7 @@
     "Name": "Bind_value",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
+    "Flags": 1,
     "Documentation": {
       "Id": 3,
       "Args": [
@@ -22302,7 +22283,6 @@
         "onchange"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "input",
@@ -22485,6 +22465,7 @@
     "Name": "Bind",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
+    "Flags": 1,
     "Documentation": {
       "Id": 3,
       "Args": [
@@ -22492,7 +22473,6 @@
         "onchange"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "input",
@@ -22675,6 +22655,7 @@
     "Name": "Bind_value",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
+    "Flags": 1,
     "Documentation": {
       "Id": 3,
       "Args": [
@@ -22682,7 +22663,6 @@
         "onchange"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "input",
@@ -22865,6 +22845,7 @@
     "Name": "Bind",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
+    "Flags": 1,
     "Documentation": {
       "Id": 3,
       "Args": [
@@ -22872,7 +22853,6 @@
         "onchange"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "select",
@@ -23042,6 +23022,7 @@
     "Name": "Bind",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
+    "Flags": 1,
     "Documentation": {
       "Id": 3,
       "Args": [
@@ -23049,7 +23030,6 @@
         "onchange"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "textarea",
@@ -23219,6 +23199,7 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.InputCheckbox",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputCheckbox",
+    "Flags": 1,
     "Documentation": {
       "Id": 10,
       "Args": [
@@ -23226,7 +23207,6 @@
         "ValueChanged"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "InputCheckbox",
@@ -23334,6 +23314,7 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.InputCheckbox",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputCheckbox",
+    "Flags": 5,
     "Documentation": {
       "Id": 10,
       "Args": [
@@ -23341,7 +23322,6 @@
         "ValueChanged"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Microsoft.AspNetCore.Components.Forms.InputCheckbox",
@@ -23450,6 +23430,7 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.InputDate<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputDate<TValue>",
+    "Flags": 1,
     "Documentation": {
       "Id": 10,
       "Args": [
@@ -23457,7 +23438,6 @@
         "ValueChanged"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "InputDate",
@@ -23565,6 +23545,7 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.InputDate<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputDate<TValue>",
+    "Flags": 5,
     "Documentation": {
       "Id": 10,
       "Args": [
@@ -23572,7 +23553,6 @@
         "ValueChanged"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Microsoft.AspNetCore.Components.Forms.InputDate",
@@ -23681,6 +23661,7 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.InputNumber<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputNumber<TValue>",
+    "Flags": 1,
     "Documentation": {
       "Id": 10,
       "Args": [
@@ -23688,7 +23669,6 @@
         "ValueChanged"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "InputNumber",
@@ -23796,6 +23776,7 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.InputNumber<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputNumber<TValue>",
+    "Flags": 5,
     "Documentation": {
       "Id": 10,
       "Args": [
@@ -23803,7 +23784,6 @@
         "ValueChanged"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Microsoft.AspNetCore.Components.Forms.InputNumber",
@@ -23912,6 +23892,7 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.InputRadioGroup<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputRadioGroup<TValue>",
+    "Flags": 1,
     "Documentation": {
       "Id": 10,
       "Args": [
@@ -23919,7 +23900,6 @@
         "ValueChanged"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "InputRadioGroup",
@@ -24027,6 +24007,7 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.InputRadioGroup<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputRadioGroup<TValue>",
+    "Flags": 5,
     "Documentation": {
       "Id": 10,
       "Args": [
@@ -24034,7 +24015,6 @@
         "ValueChanged"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Microsoft.AspNetCore.Components.Forms.InputRadioGroup",
@@ -24143,6 +24123,7 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>",
+    "Flags": 1,
     "Documentation": {
       "Id": 10,
       "Args": [
@@ -24150,7 +24131,6 @@
         "ValueChanged"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "InputSelect",
@@ -24258,6 +24238,7 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>",
+    "Flags": 5,
     "Documentation": {
       "Id": 10,
       "Args": [
@@ -24265,7 +24246,6 @@
         "ValueChanged"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Microsoft.AspNetCore.Components.Forms.InputSelect",
@@ -24374,6 +24354,7 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.InputText",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputText",
+    "Flags": 1,
     "Documentation": {
       "Id": 10,
       "Args": [
@@ -24381,7 +24362,6 @@
         "ValueChanged"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "InputText",
@@ -24489,6 +24469,7 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.InputText",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputText",
+    "Flags": 5,
     "Documentation": {
       "Id": 10,
       "Args": [
@@ -24496,7 +24477,6 @@
         "ValueChanged"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Microsoft.AspNetCore.Components.Forms.InputText",
@@ -24605,6 +24585,7 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.InputTextArea",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputTextArea",
+    "Flags": 1,
     "Documentation": {
       "Id": 10,
       "Args": [
@@ -24612,7 +24593,6 @@
         "ValueChanged"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "InputTextArea",
@@ -24720,6 +24700,7 @@
     "Name": "Microsoft.AspNetCore.Components.Forms.InputTextArea",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputTextArea",
+    "Flags": 5,
     "Documentation": {
       "Id": 10,
       "Args": [
@@ -24727,7 +24708,6 @@
         "ValueChanged"
       ]
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "Microsoft.AspNetCore.Components.Forms.InputTextArea",
@@ -24836,10 +24816,10 @@
     "Name": "Ref",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Ref",
+    "Flags": 1,
     "Documentation": {
       "Id": 18
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",
@@ -24885,10 +24865,10 @@
     "Name": "Key",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Key",
+    "Flags": 1,
     "Documentation": {
       "Id": 17
     },
-    "CaseSensitive": true,
     "TagMatchingRules": [
       {
         "TagName": "*",

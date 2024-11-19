@@ -1,12 +1,10 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
-using Microsoft.AspNetCore.Razor.Language.Components;
 using Microsoft.AspNetCore.Razor.PooledObjects;
 using Microsoft.AspNetCore.Razor.Utilities;
 using Microsoft.CodeAnalysis;
@@ -16,15 +14,6 @@ namespace Microsoft.AspNetCore.Razor.Language;
 [DebuggerDisplay($"{{{nameof(GetDebuggerDisplay)}(),nq}}")]
 public sealed class TagHelperDescriptor : TagHelperObject<TagHelperDescriptor>
 {
-    [Flags]
-    private enum TagHelperFlags
-    {
-        CaseSensitive = 1 << 0,
-        IsComponent = 1 << 1,
-        IsComponentFullyQualifiedNameMatch = 1 << 2,
-        IsChildContent = 1 << 3
-    }
-
     private readonly TagHelperFlags _flags;
     private readonly DocumentationObject _documentationObject;
 
@@ -50,6 +39,8 @@ public sealed class TagHelperDescriptor : TagHelperObject<TagHelperDescriptor>
 
     internal bool IsComponentTagHelper => (_flags & TagHelperFlags.IsComponent) != 0;
 
+
+    internal TagHelperFlags Flags => _flags;
     /// <summary>
     /// Gets whether the component matches a tag with a fully qualified name.
     /// </summary>
@@ -62,9 +53,9 @@ public sealed class TagHelperDescriptor : TagHelperObject<TagHelperDescriptor>
         string name,
         string assemblyName,
         string displayName,
+        TagHelperFlags flags,
         DocumentationObject documentationObject,
         string? tagOutputHint,
-        bool caseSensitive,
         ImmutableArray<TagMatchingRuleDescriptor> tagMatchingRules,
         ImmutableArray<BoundAttributeDescriptor> attributeDescriptors,
         ImmutableArray<AllowedChildTagDescriptor> allowedChildTags,
@@ -76,37 +67,13 @@ public sealed class TagHelperDescriptor : TagHelperObject<TagHelperDescriptor>
         Name = name;
         AssemblyName = assemblyName;
         DisplayName = displayName;
+        _flags = flags;
         _documentationObject = documentationObject;
         TagOutputHint = tagOutputHint;
         TagMatchingRules = tagMatchingRules.NullToEmpty();
         BoundAttributes = attributeDescriptors.NullToEmpty();
         AllowedChildTags = allowedChildTags.NullToEmpty();
         Metadata = metadata ?? MetadataCollection.Empty;
-
-        TagHelperFlags flags = 0;
-
-        if (caseSensitive)
-        {
-            flags |= TagHelperFlags.CaseSensitive;
-        }
-
-        if (kind == ComponentMetadata.Component.TagHelperKind &&
-            !Metadata.ContainsKey(ComponentMetadata.SpecialKindKey))
-        {
-            flags |= TagHelperFlags.IsComponent;
-        }
-
-        if (Metadata.Contains(ComponentMetadata.Component.NameMatchKey, ComponentMetadata.Component.FullyQualifiedNameMatch))
-        {
-            flags |= TagHelperFlags.IsComponentFullyQualifiedNameMatch;
-        }
-
-        if (Metadata.Contains(ComponentMetadata.SpecialKindKey, ComponentMetadata.ChildContent.TagHelperKind))
-        {
-            flags |= TagHelperFlags.IsChildContent;
-        }
-
-        _flags = flags;
     }
 
     private protected override void BuildChecksum(in Checksum.Builder builder)
@@ -217,8 +184,8 @@ public sealed class TagHelperDescriptor : TagHelperObject<TagHelperDescriptor>
     internal TagHelperDescriptor WithName(string name)
     {
         return new(
-            Kind, name, AssemblyName, DisplayName,
-            DocumentationObject, TagOutputHint, CaseSensitive,
+            Kind, name, AssemblyName, DisplayName, _flags,
+            DocumentationObject, TagOutputHint,
             TagMatchingRules, BoundAttributes, AllowedChildTags,
             Metadata, Diagnostics);
     }

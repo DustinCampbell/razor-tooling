@@ -24,9 +24,9 @@ internal sealed class TagHelperFormatter : ValueFormatter<TagHelperDescriptor>
         var assemblyName = CachedStringFormatter.Instance.Deserialize(ref reader, options).AssumeNotNull();
 
         var displayName = CachedStringFormatter.Instance.Deserialize(ref reader, options).AssumeNotNull();
+        var flags = (TagHelperFlags)reader.ReadInt32();
         var documentationObject = reader.Deserialize<DocumentationObject>(options);
         var tagOutputHint = CachedStringFormatter.Instance.Deserialize(ref reader, options);
-        var caseSensitive = reader.ReadBoolean();
 
         var tagMatchingRules = reader.Deserialize<ImmutableArray<TagMatchingRuleDescriptor>>(options);
         var boundAttributes = reader.Deserialize<ImmutableArray<BoundAttributeDescriptor>>(options);
@@ -37,8 +37,7 @@ internal sealed class TagHelperFormatter : ValueFormatter<TagHelperDescriptor>
 
         return new TagHelperDescriptor(
             kind, name, assemblyName,
-            displayName, documentationObject,
-            tagOutputHint, caseSensitive,
+            displayName, flags, documentationObject, tagOutputHint,
             tagMatchingRules, boundAttributes, allowedChildTags,
             metadata, diagnostics);
     }
@@ -52,9 +51,9 @@ internal sealed class TagHelperFormatter : ValueFormatter<TagHelperDescriptor>
         CachedStringFormatter.Instance.Serialize(ref writer, value.AssemblyName, options);
 
         CachedStringFormatter.Instance.Serialize(ref writer, value.DisplayName, options);
+        writer.Write((int)value.Flags);
         writer.Serialize(value.DocumentationObject, options);
         CachedStringFormatter.Instance.Serialize(ref writer, value.TagOutputHint, options);
-        writer.Write(value.CaseSensitive);
 
         writer.Serialize(value.TagMatchingRules, options);
         writer.Serialize(value.BoundAttributes, options);
@@ -73,9 +72,9 @@ internal sealed class TagHelperFormatter : ValueFormatter<TagHelperDescriptor>
         CachedStringFormatter.Instance.Skim(ref reader, options); // AssemblyName
 
         CachedStringFormatter.Instance.Skim(ref reader, options); // DisplayName
+        reader.Skip(); // Flags
         DocumentationObjectFormatter.Instance.Skim(ref reader, options); // DocumentationObject
         CachedStringFormatter.Instance.Skim(ref reader, options); // TagOutputHint
-        reader.Skip(); // CaseSensitive
 
         TagMatchingRuleFormatter.Instance.SkimArray(ref reader, options); // TagMatchingRules
         BoundAttributeFormatter.Instance.SkimArray(ref reader, options); // BoundAttributes
