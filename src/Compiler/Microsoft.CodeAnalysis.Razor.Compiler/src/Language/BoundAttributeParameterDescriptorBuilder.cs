@@ -61,16 +61,43 @@ public sealed partial class BoundAttributeParameterDescriptorBuilder : TagHelper
 
     private protected override BoundAttributeParameterDescriptor BuildCore(ImmutableArray<RazorDiagnostic> diagnostics)
     {
+        var flags = ComputeFlags(IsEnum, CaseSensitive, TypeName);
+
         return new BoundAttributeParameterDescriptor(
             _kind,
             Name ?? string.Empty,
             TypeName ?? string.Empty,
-            IsEnum,
+            flags,
             _documentationObject,
             GetDisplayName(),
-            CaseSensitive,
             _metadata.GetMetadataCollection(),
             diagnostics);
+    }
+
+    private static BoundAttributeParameterFlags ComputeFlags(bool isEnum, bool caseSensitive, string? typeName)
+    {
+        BoundAttributeParameterFlags flags = 0;
+
+        if (isEnum)
+        {
+            flags |= BoundAttributeParameterFlags.IsEnum;
+        }
+
+        if (caseSensitive)
+        {
+            flags |= BoundAttributeParameterFlags.CaseSensitive;
+        }
+
+        if (typeName == typeof(string).FullName || typeName == "string")
+        {
+            flags |= BoundAttributeParameterFlags.IsStringProperty;
+        }
+        else if (typeName == typeof(bool).FullName || typeName == "bool")
+        {
+            flags |= BoundAttributeParameterFlags.IsBooleanProperty;
+        }
+
+        return flags;
     }
 
     private string GetDisplayName()

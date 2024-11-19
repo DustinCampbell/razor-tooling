@@ -4062,6 +4062,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onabort' event.",
                 "Metadata": {
@@ -4072,6 +4073,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onabort' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -4151,6 +4153,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onactivate' event.",
                 "Metadata": {
@@ -4161,6 +4164,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onactivate' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -4240,6 +4244,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onbeforeactivate' event.",
                 "Metadata": {
@@ -4250,6 +4255,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onbeforeactivate' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -4329,6 +4335,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onbeforecopy' event.",
                 "Metadata": {
@@ -4339,6 +4346,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onbeforecopy' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -4418,6 +4426,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onbeforecut' event.",
                 "Metadata": {
@@ -4428,6 +4437,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onbeforecut' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -4507,6 +4517,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onbeforedeactivate' event.",
                 "Metadata": {
@@ -4517,6 +4528,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onbeforedeactivate' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -4596,6 +4608,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onbeforepaste' event.",
                 "Metadata": {
@@ -4606,6 +4619,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onbeforepaste' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -4685,6 +4699,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onblur' event.",
                 "Metadata": {
@@ -4695,6 +4710,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onblur' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -4774,6 +4790,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@oncanplay' event.",
                 "Metadata": {
@@ -4784,6 +4801,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@oncanplay' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -4863,6 +4881,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@oncanplaythrough' event.",
                 "Metadata": {
@@ -4873,6 +4892,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@oncanplaythrough' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -4952,6 +4972,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onchange' event.",
                 "Metadata": {
@@ -4962,6 +4983,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onchange' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -5041,6 +5063,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onclick' event.",
                 "Metadata": {
@@ -5051,6 +5074,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onclick' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -5130,6 +5154,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@oncontextmenu' event.",
                 "Metadata": {
@@ -5140,6 +5165,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@oncontextmenu' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -5219,6 +5245,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@oncopy' event.",
                 "Metadata": {
@@ -5229,6 +5256,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@oncopy' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -5308,6 +5336,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@oncuechange' event.",
                 "Metadata": {
@@ -5318,6 +5347,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@oncuechange' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -5397,6 +5427,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@oncut' event.",
                 "Metadata": {
@@ -5407,6 +5438,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@oncut' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -5486,6 +5518,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@ondblclick' event.",
                 "Metadata": {
@@ -5496,6 +5529,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ondblclick' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -5575,6 +5609,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@ondeactivate' event.",
                 "Metadata": {
@@ -5585,6 +5620,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ondeactivate' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -5664,6 +5700,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@ondrag' event.",
                 "Metadata": {
@@ -5674,6 +5711,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ondrag' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -5753,6 +5791,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@ondragend' event.",
                 "Metadata": {
@@ -5763,6 +5802,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ondragend' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -5842,6 +5882,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@ondragenter' event.",
                 "Metadata": {
@@ -5852,6 +5893,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ondragenter' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -5931,6 +5973,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@ondragleave' event.",
                 "Metadata": {
@@ -5941,6 +5984,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ondragleave' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -6020,6 +6064,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@ondragover' event.",
                 "Metadata": {
@@ -6030,6 +6075,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ondragover' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -6109,6 +6155,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@ondragstart' event.",
                 "Metadata": {
@@ -6119,6 +6166,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ondragstart' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -6198,6 +6246,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@ondrop' event.",
                 "Metadata": {
@@ -6208,6 +6257,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ondrop' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -6287,6 +6337,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@ondurationchange' event.",
                 "Metadata": {
@@ -6297,6 +6348,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ondurationchange' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -6376,6 +6428,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onemptied' event.",
                 "Metadata": {
@@ -6386,6 +6439,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onemptied' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -6465,6 +6519,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onended' event.",
                 "Metadata": {
@@ -6475,6 +6530,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onended' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -6554,6 +6610,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onerror' event.",
                 "Metadata": {
@@ -6564,6 +6621,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onerror' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -6643,6 +6701,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onfocus' event.",
                 "Metadata": {
@@ -6653,6 +6712,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onfocus' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -6732,6 +6792,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onfocusin' event.",
                 "Metadata": {
@@ -6742,6 +6803,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onfocusin' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -6821,6 +6883,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onfocusout' event.",
                 "Metadata": {
@@ -6831,6 +6894,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onfocusout' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -6910,6 +6974,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onfullscreenchange' event.",
                 "Metadata": {
@@ -6920,6 +6985,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onfullscreenchange' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -6999,6 +7065,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onfullscreenerror' event.",
                 "Metadata": {
@@ -7009,6 +7076,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onfullscreenerror' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -7088,6 +7156,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@ongotpointercapture' event.",
                 "Metadata": {
@@ -7098,6 +7167,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ongotpointercapture' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -7177,6 +7247,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@oninput' event.",
                 "Metadata": {
@@ -7187,6 +7258,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@oninput' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -7266,6 +7338,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@oninvalid' event.",
                 "Metadata": {
@@ -7276,6 +7349,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@oninvalid' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -7355,6 +7429,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onkeydown' event.",
                 "Metadata": {
@@ -7365,6 +7440,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onkeydown' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -7444,6 +7520,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onkeypress' event.",
                 "Metadata": {
@@ -7454,6 +7531,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onkeypress' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -7533,6 +7611,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onkeyup' event.",
                 "Metadata": {
@@ -7543,6 +7622,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onkeyup' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -7622,6 +7702,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onload' event.",
                 "Metadata": {
@@ -7632,6 +7713,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onload' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -7711,6 +7793,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onloadeddata' event.",
                 "Metadata": {
@@ -7721,6 +7804,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onloadeddata' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -7800,6 +7884,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onloadedmetadata' event.",
                 "Metadata": {
@@ -7810,6 +7895,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onloadedmetadata' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -7889,6 +7975,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onloadend' event.",
                 "Metadata": {
@@ -7899,6 +7986,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onloadend' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -7978,6 +8066,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onloadstart' event.",
                 "Metadata": {
@@ -7988,6 +8077,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onloadstart' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -8067,6 +8157,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onlostpointercapture' event.",
                 "Metadata": {
@@ -8077,6 +8168,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onlostpointercapture' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -8156,6 +8248,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onmousedown' event.",
                 "Metadata": {
@@ -8166,6 +8259,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onmousedown' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -8245,6 +8339,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onmousemove' event.",
                 "Metadata": {
@@ -8255,6 +8350,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onmousemove' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -8334,6 +8430,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onmouseout' event.",
                 "Metadata": {
@@ -8344,6 +8441,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onmouseout' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -8423,6 +8521,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onmouseover' event.",
                 "Metadata": {
@@ -8433,6 +8532,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onmouseover' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -8512,6 +8612,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onmouseup' event.",
                 "Metadata": {
@@ -8522,6 +8623,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onmouseup' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -8601,6 +8703,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onmousewheel' event.",
                 "Metadata": {
@@ -8611,6 +8714,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onmousewheel' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -8690,6 +8794,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onpaste' event.",
                 "Metadata": {
@@ -8700,6 +8805,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onpaste' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -8779,6 +8885,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onpause' event.",
                 "Metadata": {
@@ -8789,6 +8896,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onpause' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -8868,6 +8976,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onplay' event.",
                 "Metadata": {
@@ -8878,6 +8987,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onplay' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -8957,6 +9067,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onplaying' event.",
                 "Metadata": {
@@ -8967,6 +9078,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onplaying' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -9046,6 +9158,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onpointercancel' event.",
                 "Metadata": {
@@ -9056,6 +9169,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onpointercancel' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -9135,6 +9249,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onpointerdown' event.",
                 "Metadata": {
@@ -9145,6 +9260,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onpointerdown' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -9224,6 +9340,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onpointerenter' event.",
                 "Metadata": {
@@ -9234,6 +9351,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onpointerenter' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -9313,6 +9431,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onpointerleave' event.",
                 "Metadata": {
@@ -9323,6 +9442,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onpointerleave' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -9402,6 +9522,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onpointerlockchange' event.",
                 "Metadata": {
@@ -9412,6 +9533,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onpointerlockchange' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -9491,6 +9613,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onpointerlockerror' event.",
                 "Metadata": {
@@ -9501,6 +9624,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onpointerlockerror' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -9580,6 +9704,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onpointermove' event.",
                 "Metadata": {
@@ -9590,6 +9715,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onpointermove' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -9669,6 +9795,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onpointerout' event.",
                 "Metadata": {
@@ -9679,6 +9806,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onpointerout' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -9758,6 +9886,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onpointerover' event.",
                 "Metadata": {
@@ -9768,6 +9897,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onpointerover' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -9847,6 +9977,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onpointerup' event.",
                 "Metadata": {
@@ -9857,6 +9988,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onpointerup' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -9936,6 +10068,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onprogress' event.",
                 "Metadata": {
@@ -9946,6 +10079,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onprogress' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -10025,6 +10159,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onratechange' event.",
                 "Metadata": {
@@ -10035,6 +10170,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onratechange' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -10114,6 +10250,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onreadystatechange' event.",
                 "Metadata": {
@@ -10124,6 +10261,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onreadystatechange' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -10203,6 +10341,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onreset' event.",
                 "Metadata": {
@@ -10213,6 +10352,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onreset' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -10292,6 +10432,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onscroll' event.",
                 "Metadata": {
@@ -10302,6 +10443,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onscroll' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -10381,6 +10523,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onseeked' event.",
                 "Metadata": {
@@ -10391,6 +10534,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onseeked' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -10470,6 +10614,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onseeking' event.",
                 "Metadata": {
@@ -10480,6 +10625,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onseeking' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -10559,6 +10705,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onselect' event.",
                 "Metadata": {
@@ -10569,6 +10716,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onselect' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -10648,6 +10796,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onselectionchange' event.",
                 "Metadata": {
@@ -10658,6 +10807,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onselectionchange' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -10737,6 +10887,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onselectstart' event.",
                 "Metadata": {
@@ -10747,6 +10898,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onselectstart' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -10826,6 +10978,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onstalled' event.",
                 "Metadata": {
@@ -10836,6 +10989,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onstalled' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -10915,6 +11069,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onstop' event.",
                 "Metadata": {
@@ -10925,6 +11080,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onstop' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -11004,6 +11160,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onsubmit' event.",
                 "Metadata": {
@@ -11014,6 +11171,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onsubmit' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -11093,6 +11251,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onsuspend' event.",
                 "Metadata": {
@@ -11103,6 +11262,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onsuspend' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -11182,6 +11342,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@ontimeout' event.",
                 "Metadata": {
@@ -11192,6 +11353,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ontimeout' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -11271,6 +11433,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@ontimeupdate' event.",
                 "Metadata": {
@@ -11281,6 +11444,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ontimeupdate' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -11360,6 +11524,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@ontouchcancel' event.",
                 "Metadata": {
@@ -11370,6 +11535,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ontouchcancel' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -11449,6 +11615,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@ontouchend' event.",
                 "Metadata": {
@@ -11459,6 +11626,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ontouchend' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -11538,6 +11706,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@ontouchenter' event.",
                 "Metadata": {
@@ -11548,6 +11717,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ontouchenter' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -11627,6 +11797,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@ontouchleave' event.",
                 "Metadata": {
@@ -11637,6 +11808,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ontouchleave' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -11716,6 +11888,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@ontouchmove' event.",
                 "Metadata": {
@@ -11726,6 +11899,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ontouchmove' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -11805,6 +11979,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@ontouchstart' event.",
                 "Metadata": {
@@ -11815,6 +11990,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ontouchstart' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -11894,6 +12070,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onvolumechange' event.",
                 "Metadata": {
@@ -11904,6 +12081,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onvolumechange' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -11983,6 +12161,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onwaiting' event.",
                 "Metadata": {
@@ -11993,6 +12172,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onwaiting' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -12072,6 +12252,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onwheel' event.",
                 "Metadata": {
@@ -12082,6 +12263,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onwheel' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -14989,6 +15171,7 @@
                 "Kind": "Components.Bind",
                 "Name": "format",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":format",
                 "Documentation": "Specifies a format to convert the value specified by the corresponding bind attribute. For example: <code>@bind-value:format=\"...\"</code> will apply a format string to the value specified in <code>@bind-value=\"...\"</code>. The format string can currently only be used with expressions of type <code>DateTime</code>.",
                 "Metadata": {
@@ -14999,6 +15182,7 @@
                 "Kind": "Components.Bind",
                 "Name": "event",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":event",
                 "Documentation": "Specifies the event handler name to attach for change notifications for the value provided by the '@bind-...' attribute.",
                 "Metadata": {
@@ -15067,6 +15251,7 @@
                 "Kind": "Components.Bind",
                 "Name": "format",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":format",
                 "Documentation": "Specifies a format to convert the value specified by the '@bind' attribute. The format string can currently only be used with expressions of type <code>DateTime</code>.",
                 "Metadata": {
@@ -15077,6 +15262,7 @@
                 "Kind": "Components.Bind",
                 "Name": "event",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":event",
                 "Documentation": "Specifies the event handler name to attach for change notifications for the value provided by the '@bind' attribute.",
                 "Metadata": {
@@ -15159,6 +15345,7 @@
                 "Kind": "Components.Bind",
                 "Name": "format",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":format",
                 "Documentation": "Specifies a format to convert the value specified by the '@bind' attribute. The format string can currently only be used with expressions of type <code>DateTime</code>.",
                 "Metadata": {
@@ -15169,6 +15356,7 @@
                 "Kind": "Components.Bind",
                 "Name": "event",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":event",
                 "Documentation": "Specifies the event handler name to attach for change notifications for the value provided by the '@bind' attribute.",
                 "Metadata": {
@@ -15257,6 +15445,7 @@
                 "Kind": "Components.Bind",
                 "Name": "format",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":format",
                 "Documentation": "Specifies a format to convert the value specified by the '@bind' attribute. The format string can currently only be used with expressions of type <code>DateTime</code>.",
                 "Metadata": {
@@ -15267,6 +15456,7 @@
                 "Kind": "Components.Bind",
                 "Name": "event",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":event",
                 "Documentation": "Specifies the event handler name to attach for change notifications for the value provided by the '@bind' attribute.",
                 "Metadata": {
@@ -15356,6 +15546,7 @@
                 "Kind": "Components.Bind",
                 "Name": "format",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":format",
                 "Documentation": "Specifies a format to convert the value specified by the '@bind-value' attribute. The format string can currently only be used with expressions of type <code>DateTime</code>.",
                 "Metadata": {
@@ -15366,6 +15557,7 @@
                 "Kind": "Components.Bind",
                 "Name": "event",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":event",
                 "Documentation": "Specifies the event handler name to attach for change notifications for the value provided by the '@bind-value' attribute.",
                 "Metadata": {
@@ -15455,6 +15647,7 @@
                 "Kind": "Components.Bind",
                 "Name": "format",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":format",
                 "Documentation": "Specifies a format to convert the value specified by the '@bind' attribute. The format string can currently only be used with expressions of type <code>DateTime</code>.",
                 "Metadata": {
@@ -15465,6 +15658,7 @@
                 "Kind": "Components.Bind",
                 "Name": "event",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":event",
                 "Documentation": "Specifies the event handler name to attach for change notifications for the value provided by the '@bind' attribute.",
                 "Metadata": {
@@ -15554,6 +15748,7 @@
                 "Kind": "Components.Bind",
                 "Name": "format",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":format",
                 "Documentation": "Specifies a format to convert the value specified by the '@bind-value' attribute. The format string can currently only be used with expressions of type <code>DateTime</code>.",
                 "Metadata": {
@@ -15564,6 +15759,7 @@
                 "Kind": "Components.Bind",
                 "Name": "event",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":event",
                 "Documentation": "Specifies the event handler name to attach for change notifications for the value provided by the '@bind-value' attribute.",
                 "Metadata": {
@@ -15653,6 +15849,7 @@
                 "Kind": "Components.Bind",
                 "Name": "format",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":format",
                 "Documentation": "Specifies a format to convert the value specified by the '@bind' attribute. The format string can currently only be used with expressions of type <code>DateTime</code>.",
                 "Metadata": {
@@ -15663,6 +15860,7 @@
                 "Kind": "Components.Bind",
                 "Name": "event",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":event",
                 "Documentation": "Specifies the event handler name to attach for change notifications for the value provided by the '@bind' attribute.",
                 "Metadata": {
@@ -15752,6 +15950,7 @@
                 "Kind": "Components.Bind",
                 "Name": "format",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":format",
                 "Documentation": "Specifies a format to convert the value specified by the '@bind-value' attribute. The format string can currently only be used with expressions of type <code>DateTime</code>.",
                 "Metadata": {
@@ -15762,6 +15961,7 @@
                 "Kind": "Components.Bind",
                 "Name": "event",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":event",
                 "Documentation": "Specifies the event handler name to attach for change notifications for the value provided by the '@bind-value' attribute.",
                 "Metadata": {
@@ -15851,6 +16051,7 @@
                 "Kind": "Components.Bind",
                 "Name": "format",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":format",
                 "Documentation": "Specifies a format to convert the value specified by the '@bind' attribute. The format string can currently only be used with expressions of type <code>DateTime</code>.",
                 "Metadata": {
@@ -15861,6 +16062,7 @@
                 "Kind": "Components.Bind",
                 "Name": "event",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":event",
                 "Documentation": "Specifies the event handler name to attach for change notifications for the value provided by the '@bind' attribute.",
                 "Metadata": {
@@ -15950,6 +16152,7 @@
                 "Kind": "Components.Bind",
                 "Name": "format",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":format",
                 "Documentation": "Specifies a format to convert the value specified by the '@bind-value' attribute. The format string can currently only be used with expressions of type <code>DateTime</code>.",
                 "Metadata": {
@@ -15960,6 +16163,7 @@
                 "Kind": "Components.Bind",
                 "Name": "event",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":event",
                 "Documentation": "Specifies the event handler name to attach for change notifications for the value provided by the '@bind-value' attribute.",
                 "Metadata": {
@@ -16049,6 +16253,7 @@
                 "Kind": "Components.Bind",
                 "Name": "format",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":format",
                 "Documentation": "Specifies a format to convert the value specified by the '@bind' attribute. The format string can currently only be used with expressions of type <code>DateTime</code>.",
                 "Metadata": {
@@ -16059,6 +16264,7 @@
                 "Kind": "Components.Bind",
                 "Name": "event",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":event",
                 "Documentation": "Specifies the event handler name to attach for change notifications for the value provided by the '@bind' attribute.",
                 "Metadata": {
@@ -16148,6 +16354,7 @@
                 "Kind": "Components.Bind",
                 "Name": "format",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":format",
                 "Documentation": "Specifies a format to convert the value specified by the '@bind' attribute. The format string can currently only be used with expressions of type <code>DateTime</code>.",
                 "Metadata": {
@@ -16158,6 +16365,7 @@
                 "Kind": "Components.Bind",
                 "Name": "event",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":event",
                 "Documentation": "Specifies the event handler name to attach for change notifications for the value provided by the '@bind' attribute.",
                 "Metadata": {
@@ -16247,6 +16455,7 @@
                 "Kind": "Components.Bind",
                 "Name": "format",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":format",
                 "Documentation": "Specifies a format to convert the value specified by the '@bind-value' attribute. The format string can currently only be used with expressions of type <code>DateTime</code>.",
                 "Metadata": {
@@ -16257,6 +16466,7 @@
                 "Kind": "Components.Bind",
                 "Name": "event",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":event",
                 "Documentation": "Specifies the event handler name to attach for change notifications for the value provided by the '@bind-value' attribute.",
                 "Metadata": {
@@ -16346,6 +16556,7 @@
                 "Kind": "Components.Bind",
                 "Name": "format",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":format",
                 "Documentation": "Specifies a format to convert the value specified by the '@bind' attribute. The format string can currently only be used with expressions of type <code>DateTime</code>.",
                 "Metadata": {
@@ -16356,6 +16567,7 @@
                 "Kind": "Components.Bind",
                 "Name": "event",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":event",
                 "Documentation": "Specifies the event handler name to attach for change notifications for the value provided by the '@bind' attribute.",
                 "Metadata": {
@@ -16439,6 +16651,7 @@
                 "Kind": "Components.Bind",
                 "Name": "format",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":format",
                 "Documentation": "Specifies a format to convert the value specified by the '@bind-value' attribute. The format string can currently only be used with expressions of type <code>DateTime</code>.",
                 "Metadata": {
@@ -16449,6 +16662,7 @@
                 "Kind": "Components.Bind",
                 "Name": "event",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":event",
                 "Documentation": "Specifies the event handler name to attach for change notifications for the value provided by the '@bind-value' attribute.",
                 "Metadata": {
@@ -16531,6 +16745,7 @@
                 "Kind": "Components.Bind",
                 "Name": "format",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":format",
                 "Documentation": "Specifies a format to convert the value specified by the '@bind' attribute. The format string can currently only be used with expressions of type <code>DateTime</code>.",
                 "Metadata": {
@@ -16541,6 +16756,7 @@
                 "Kind": "Components.Bind",
                 "Name": "event",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":event",
                 "Documentation": "Specifies the event handler name to attach for change notifications for the value provided by the '@bind' attribute.",
                 "Metadata": {
