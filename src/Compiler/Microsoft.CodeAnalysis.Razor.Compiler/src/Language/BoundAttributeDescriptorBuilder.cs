@@ -40,6 +40,7 @@ public sealed partial class BoundAttributeDescriptorBuilder : TagHelperObjectBui
     private DocumentationObject _documentationObject;
     private MetadataHolder _metadata;
     private bool? _caseSensitive;
+    private bool? _isDirectiveAttribute;
 
     private BoundAttributeDescriptorBuilder()
     {
@@ -83,6 +84,12 @@ public sealed partial class BoundAttributeDescriptorBuilder : TagHelperObjectBui
         set => _caseSensitive = value;
     }
 
+    internal bool IsDirectiveAttribute
+    {
+        get => _isDirectiveAttribute ?? (TryGetMetadataValue(ComponentMetadata.Common.DirectiveAttribute, out var value) && value == bool.TrueString);
+        set => _isDirectiveAttribute = value;
+    }
+
     private TagHelperObjectBuilderCollection<BoundAttributeParameterDescriptor, BoundAttributeParameterDescriptorBuilder> Parameters { get; }
         = new(BoundAttributeParameterDescriptorBuilder.Pool);
 
@@ -110,22 +117,74 @@ public sealed partial class BoundAttributeDescriptorBuilder : TagHelperObjectBui
 
     private protected override BoundAttributeDescriptor BuildCore(ImmutableArray<RazorDiagnostic> diagnostics)
     {
+        var metadata = _metadata.GetMetadataCollection();
+        var flags = ComputeFlags(CaseSensitive, TypeName, IsEnum, IsDictionary, IndexerValueTypeName, IsDirectiveAttribute, IsEditorRequired);
+
         return new BoundAttributeDescriptor(
             _kind,
             Name ?? string.Empty,
             TypeName ?? string.Empty,
-            IsEnum,
-            IsDictionary,
             IndexerAttributeNamePrefix,
             IndexerValueTypeName,
             _documentationObject,
             GetDisplayName(),
             ContainingType,
-            CaseSensitive,
-            IsEditorRequired,
+            flags,
             Parameters.ToImmutable(),
-            _metadata.GetMetadataCollection(),
+            metadata,
             diagnostics);
+    }
+
+    private static BoundAttributeFlags ComputeFlags(
+        bool caseSensitive, string? typeName, bool isEnum, bool isDictionary,
+        string? indexerValueTypeName, bool isDirectiveAttribute, bool isEditorRequired)
+    {
+        BoundAttributeFlags flags = 0;
+
+        if (isEnum)
+        {
+            flags |= BoundAttributeFlags.IsEnum;
+        }
+
+        if (isDictionary)
+        {
+            flags |= BoundAttributeFlags.HasIndexer;
+        }
+
+        if (caseSensitive)
+        {
+            flags |= BoundAttributeFlags.CaseSensitive;
+        }
+
+        if (isEditorRequired)
+        {
+            flags |= BoundAttributeFlags.IsEditorRequired;
+        }
+
+        if (indexerValueTypeName == typeof(string).FullName || indexerValueTypeName == "string")
+        {
+            flags |= BoundAttributeFlags.IsIndexerStringProperty;
+        }
+        else if (indexerValueTypeName == typeof(bool).FullName || indexerValueTypeName == "bool")
+        {
+            flags |= BoundAttributeFlags.IsIndexerBooleanProperty;
+        }
+
+        if (typeName == typeof(string).FullName || typeName == "string")
+        {
+            flags |= BoundAttributeFlags.IsStringProperty;
+        }
+        else if (typeName == typeof(bool).FullName || typeName == "bool")
+        {
+            flags |= BoundAttributeFlags.IsBooleanProperty;
+        }
+
+        if (isDirectiveAttribute)
+        {
+            flags |= BoundAttributeFlags.IsDirectiveAttribute;
+        }
+
+        return flags;
     }
 
     private string GetDisplayName()
@@ -161,16 +220,12 @@ public sealed partial class BoundAttributeDescriptorBuilder : TagHelperObjectBui
         return Name ?? string.Empty;
     }
 
-    private bool IsDirectiveAttribute()
-        => TryGetMetadataValue(ComponentMetadata.Common.DirectiveAttribute, out var value) &&
-           value == bool.TrueString;
-
     private protected override void CollectDiagnostics(ref PooledHashSet<RazorDiagnostic> diagnostics)
     {
         // data-* attributes are explicitly not implemented by user agents and are not intended for use on
         // the server; therefore it's invalid for TagHelpers to bind to them.
         const string DataDashPrefix = "data-";
-        var isDirectiveAttribute = IsDirectiveAttribute();
+        var isDirectiveAttribute = IsDirectiveAttribute;
 
         if (Name.IsNullOrWhiteSpace())
         {

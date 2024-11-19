@@ -96,15 +96,12 @@ internal static partial class ObjectWriters
                 writer.Write(nameof(value.Kind), value.Kind);
                 writer.Write(nameof(value.Name), value.Name);
                 writer.Write(nameof(value.TypeName), value.TypeName);
-                writer.WriteIfNotFalse(nameof(value.IsEnum), value.IsEnum);
-                writer.WriteIfNotFalse(nameof(value.HasIndexer), value.HasIndexer);
                 writer.WriteIfNotNull(nameof(value.IndexerNamePrefix), value.IndexerNamePrefix);
                 writer.WriteIfNotNull(nameof(value.IndexerTypeName), value.IndexerTypeName);
                 writer.WriteIfNotNull(nameof(value.DisplayName), value.DisplayName);
                 writer.WriteIfNotNull(nameof(value.ContainingType), value.ContainingType);
                 WriteDocumentationObject(writer, nameof(value.Documentation), value.DocumentationObject);
-                writer.WriteIfNotTrue(nameof(value.CaseSensitive), value.CaseSensitive);
-                writer.WriteIfNotFalse(nameof(value.IsEditorRequired), value.IsEditorRequired);
+                writer.WriteIfNotDefault(nameof(value.Flags), (int)value.Flags, (int)BoundAttributeFlags.CaseSensitive);
                 writer.WriteArrayIfNotNullOrEmpty("BoundAttributeParameters", value.Parameters, WriteBoundAttributeParameter);
 
                 WriteMetadata(writer, nameof(value.Metadata), value.Metadata);

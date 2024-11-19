@@ -1,9 +1,9 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.AspNetCore.Razor.Language.Components;
 using Microsoft.AspNetCore.Razor.Utilities;
 
@@ -14,20 +14,6 @@ namespace Microsoft.AspNetCore.Razor.Language;
 /// </summary>
 public sealed class BoundAttributeDescriptor : TagHelperObject<BoundAttributeDescriptor>
 {
-    [Flags]
-    private enum BoundAttributeFlags
-    {
-        CaseSensitive = 1 << 0,
-        HasIndexer = 1 << 1,
-        IsIndexerStringProperty = 1 << 2,
-        IsIndexerBooleanProperty = 1 << 3,
-        IsEnum = 1 << 4,
-        IsStringProperty = 1 << 5,
-        IsBooleanProperty = 1 << 6,
-        IsEditorRequired = 1 << 7,
-        IsDirectiveAttribute = 1 << 8
-    }
-
     private readonly BoundAttributeFlags _flags;
     private readonly DocumentationObject _documentationObject;
 
@@ -40,6 +26,7 @@ public sealed class BoundAttributeDescriptor : TagHelperObject<BoundAttributeDes
     public string? IndexerNamePrefix { get; }
     public string? IndexerTypeName { get; }
 
+    internal BoundAttributeFlags Flags => _flags;
     public bool CaseSensitive => (_flags & BoundAttributeFlags.CaseSensitive) != 0;
     public bool HasIndexer => (_flags & BoundAttributeFlags.HasIndexer) != 0;
     public bool IsIndexerStringProperty => (_flags & BoundAttributeFlags.IsIndexerStringProperty) != 0;
@@ -57,15 +44,12 @@ public sealed class BoundAttributeDescriptor : TagHelperObject<BoundAttributeDes
         string kind,
         string name,
         string typeName,
-        bool isEnum,
-        bool hasIndexer,
         string? indexerNamePrefix,
         string? indexerTypeName,
         DocumentationObject documentationObject,
         string displayName,
         string? containingType,
-        bool caseSensitive,
-        bool isEditorRequired,
+        BoundAttributeFlags flags,
         ImmutableArray<BoundAttributeParameterDescriptor> parameters,
         MetadataCollection metadata,
         ImmutableArray<RazorDiagnostic> diagnostics)
@@ -79,57 +63,9 @@ public sealed class BoundAttributeDescriptor : TagHelperObject<BoundAttributeDes
         _documentationObject = documentationObject;
         DisplayName = displayName;
         ContainingType = containingType;
+        _flags = flags;
         Parameters = parameters.NullToEmpty();
         Metadata = metadata ?? MetadataCollection.Empty;
-
-        BoundAttributeFlags flags = 0;
-
-        if (isEnum)
-        {
-            flags |= BoundAttributeFlags.IsEnum;
-        }
-
-        if (hasIndexer)
-        {
-            flags |= BoundAttributeFlags.HasIndexer;
-        }
-
-        if (caseSensitive)
-        {
-            flags |= BoundAttributeFlags.CaseSensitive;
-        }
-
-        if (isEditorRequired)
-        {
-            flags |= BoundAttributeFlags.IsEditorRequired;
-        }
-
-        if (indexerTypeName == typeof(string).FullName || indexerTypeName == "string")
-        {
-            flags |= BoundAttributeFlags.IsIndexerStringProperty;
-        }
-
-        if (indexerTypeName == typeof(bool).FullName || indexerTypeName == "bool")
-        {
-            flags |= BoundAttributeFlags.IsIndexerBooleanProperty;
-        }
-
-        if (typeName == typeof(string).FullName || typeName == "string")
-        {
-            flags |= BoundAttributeFlags.IsStringProperty;
-        }
-
-        if (typeName == typeof(bool).FullName || typeName == "bool")
-        {
-            flags |= BoundAttributeFlags.IsBooleanProperty;
-        }
-
-        if (Metadata.Contains(ComponentMetadata.Common.DirectiveAttribute, bool.TrueString))
-        {
-            flags |= BoundAttributeFlags.IsDirectiveAttribute;
-        }
-
-        _flags = flags;
     }
 
     private protected override void BuildChecksum(in Checksum.Builder builder)

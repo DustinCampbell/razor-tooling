@@ -65,11 +65,11 @@ internal sealed class RefTagHelperDescriptorProvider() : TagHelperDescriptorProv
         {
             attribute.SetDocumentation(DocumentationDescriptor.RefTagHelper);
             attribute.Name = "@ref";
+            attribute.IsDirectiveAttribute = true;
 
             attribute.TypeName = typeof(object).FullName;
             attribute.SetMetadata(
-                PropertyName("Ref"),
-                IsDirectiveAttribute);
+                PropertyName("Ref"));
         });
 
         return builder.Build();

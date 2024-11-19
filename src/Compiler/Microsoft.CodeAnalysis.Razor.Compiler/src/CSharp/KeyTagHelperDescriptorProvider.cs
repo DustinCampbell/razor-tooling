@@ -65,11 +65,11 @@ internal sealed class KeyTagHelperDescriptorProvider() : TagHelperDescriptorProv
         {
             attribute.SetDocumentation(DocumentationDescriptor.KeyTagHelper);
             attribute.Name = "@key";
+            attribute.IsDirectiveAttribute = true;
 
             attribute.TypeName = typeof(object).FullName;
             attribute.SetMetadata(
-                PropertyName("Key"),
-                IsDirectiveAttribute);
+                PropertyName("Key"));
         });
 
         return builder.Build();

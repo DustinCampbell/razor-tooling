@@ -211,6 +211,7 @@
         "Name": "Additional",
         "TypeName": "System.String",
         "DisplayName": "string BlazorServer_31.Pages.Counter.Additional",
+        "Flags": 33,
         "Metadata": {
           "Common.PropertyName": "Additional"
         }
@@ -229,6 +230,7 @@
         "Name": "MoreParams",
         "TypeName": "System.String",
         "DisplayName": "string BlazorServer_31.Pages.Counter.MoreParams",
+        "Flags": 33,
         "Metadata": {
           "Common.PropertyName": "MoreParams"
         }
@@ -271,6 +273,7 @@
         "Name": "Additional",
         "TypeName": "System.String",
         "DisplayName": "string BlazorServer_31.Pages.Counter.Additional",
+        "Flags": 33,
         "Metadata": {
           "Common.PropertyName": "Additional"
         }
@@ -289,6 +292,7 @@
         "Name": "MoreParams",
         "TypeName": "System.String",
         "DisplayName": "string BlazorServer_31.Pages.Counter.MoreParams",
+        "Flags": 33,
         "Metadata": {
           "Common.PropertyName": "MoreParams"
         }
@@ -649,6 +653,7 @@
         "TypeName": "System.Boolean",
         "DisplayName": "bool Microsoft.AspNetCore.Components.CascadingValue<TValue>.IsFixed",
         "Documentation": "\n<summary>\nIftrue,indicatesthat<seecref=\"P:Microsoft.AspNetCore.Components.CascadingValue`1.Value\"/>willnotchange.Thisisa\nperformanceoptimizationthatallowstheframeworktoskipsettingup\nchangenotifications.Setthisflagonlyifyouwillnotchange\n<seecref=\"P:Microsoft.AspNetCore.Components.CascadingValue`1.Value\"/>duringthecomponent'slifetime.\n</summary>\n",
+        "Flags": 65,
         "Metadata": {
           "Common.PropertyName": "IsFixed"
         }
@@ -659,6 +664,7 @@
         "TypeName": "System.String",
         "DisplayName": "string Microsoft.AspNetCore.Components.CascadingValue<TValue>.Name",
         "Documentation": "\n<summary>\nOptionallygivesanametotheprovidedvalue.Descendantcomponents\nwillbeabletoreceivethevaluebyspecifyingthisname.\n\nIfnonameisspecified,thendescendantcomponentswillreceivethe\nvaluebasedthetypeofvaluetheyarerequesting.\n</summary>\n",
+        "Flags": 33,
         "Metadata": {
           "Common.PropertyName": "Name"
         }
@@ -728,6 +734,7 @@
         "TypeName": "System.Boolean",
         "DisplayName": "bool Microsoft.AspNetCore.Components.CascadingValue<TValue>.IsFixed",
         "Documentation": "\n<summary>\nIftrue,indicatesthat<seecref=\"P:Microsoft.AspNetCore.Components.CascadingValue`1.Value\"/>willnotchange.Thisisa\nperformanceoptimizationthatallowstheframeworktoskipsettingup\nchangenotifications.Setthisflagonlyifyouwillnotchange\n<seecref=\"P:Microsoft.AspNetCore.Components.CascadingValue`1.Value\"/>duringthecomponent'slifetime.\n</summary>\n",
+        "Flags": 65,
         "Metadata": {
           "Common.PropertyName": "IsFixed"
         }
@@ -738,6 +745,7 @@
         "TypeName": "System.String",
         "DisplayName": "string Microsoft.AspNetCore.Components.CascadingValue<TValue>.Name",
         "Documentation": "\n<summary>\nOptionallygivesanametotheprovidedvalue.Descendantcomponents\nwillbeabletoreceivethevaluebyspecifyingthisname.\n\nIfnonameisspecified,thendescendantcomponentswillreceivethe\nvaluebasedthetypeofvaluetheyarerequesting.\n</summary>\n",
+        "Flags": 33,
         "Metadata": {
           "Common.PropertyName": "Name"
         }
@@ -1114,6 +1122,7 @@
         "TypeName": "System.String",
         "DisplayName": "string Microsoft.AspNetCore.Components.Routing.Router.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
+        "Flags": 33,
         "Metadata": {
           "Common.PropertyName": "Context",
           "Components.ChildContentParameterName": "True"
@@ -1192,6 +1201,7 @@
         "TypeName": "System.String",
         "DisplayName": "string Microsoft.AspNetCore.Components.Routing.Router.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
+        "Flags": 33,
         "Metadata": {
           "Common.PropertyName": "Context",
           "Components.ChildContentParameterName": "True"
@@ -1230,6 +1240,7 @@
         "TypeName": "System.String",
         "DisplayName": "string Microsoft.AspNetCore.Components.Routing.Router.Found.Context",
         "Documentation": "Specifiestheparameternameforthe'Found'childcontentexpression.",
+        "Flags": 33,
         "Metadata": {
           "Common.PropertyName": "Context",
           "Components.ChildContentParameterName": "True"
@@ -1268,6 +1279,7 @@
         "TypeName": "System.String",
         "DisplayName": "string Microsoft.AspNetCore.Components.Routing.Router.Found.Context",
         "Documentation": "Specifiestheparameternameforthe'Found'childcontentexpression.",
+        "Flags": 33,
         "Metadata": {
           "Common.PropertyName": "Context",
           "Components.ChildContentParameterName": "True"
@@ -1446,6 +1458,7 @@
         "TypeName": "System.String",
         "DisplayName": "string Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
+        "Flags": 33,
         "Metadata": {
           "Common.PropertyName": "Context",
           "Components.ChildContentParameterName": "True"
@@ -1524,6 +1537,7 @@
         "TypeName": "System.String",
         "DisplayName": "string Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
+        "Flags": 33,
         "Metadata": {
           "Common.PropertyName": "Context",
           "Components.ChildContentParameterName": "True"
@@ -1613,6 +1627,7 @@
         "TypeName": "System.String",
         "DisplayName": "string Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized.Context",
         "Documentation": "Specifiestheparameternameforthe'NotAuthorized'childcontentexpression.",
+        "Flags": 33,
         "Metadata": {
           "Common.PropertyName": "Context",
           "Components.ChildContentParameterName": "True"
@@ -1651,6 +1666,7 @@
         "TypeName": "System.String",
         "DisplayName": "string Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized.Context",
         "Documentation": "Specifiestheparameternameforthe'NotAuthorized'childcontentexpression.",
+        "Flags": 33,
         "Metadata": {
           "Common.PropertyName": "Context",
           "Components.ChildContentParameterName": "True"
@@ -1689,6 +1705,7 @@
         "TypeName": "System.String",
         "DisplayName": "string Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Policy",
         "Documentation": "\n<summary>\nThepolicynamethatdetermineswhetherthecontentcanbedisplayed.\n</summary>\n",
+        "Flags": 33,
         "Metadata": {
           "Common.PropertyName": "Policy"
         }
@@ -1699,6 +1716,7 @@
         "TypeName": "System.String",
         "DisplayName": "string Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Roles",
         "Documentation": "\n<summary>\nAcommadelimitedlistofrolesthatareallowedtodisplaythecontent.\n</summary>\n",
+        "Flags": 33,
         "Metadata": {
           "Common.PropertyName": "Roles"
         }
@@ -1763,6 +1781,7 @@
         "TypeName": "System.String",
         "DisplayName": "string Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
+        "Flags": 33,
         "Metadata": {
           "Common.PropertyName": "Context",
           "Components.ChildContentParameterName": "True"
@@ -1799,6 +1818,7 @@
         "TypeName": "System.String",
         "DisplayName": "string Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Policy",
         "Documentation": "\n<summary>\nThepolicynamethatdetermineswhetherthecontentcanbedisplayed.\n</summary>\n",
+        "Flags": 33,
         "Metadata": {
           "Common.PropertyName": "Policy"
         }
@@ -1809,6 +1829,7 @@
         "TypeName": "System.String",
         "DisplayName": "string Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Roles",
         "Documentation": "\n<summary>\nAcommadelimitedlistofrolesthatareallowedtodisplaythecontent.\n</summary>\n",
+        "Flags": 33,
         "Metadata": {
           "Common.PropertyName": "Roles"
         }
@@ -1873,6 +1894,7 @@
         "TypeName": "System.String",
         "DisplayName": "string Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
+        "Flags": 33,
         "Metadata": {
           "Common.PropertyName": "Context",
           "Components.ChildContentParameterName": "True"
@@ -1911,6 +1933,7 @@
         "TypeName": "System.String",
         "DisplayName": "string Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorized.Context",
         "Documentation": "Specifiestheparameternameforthe'Authorized'childcontentexpression.",
+        "Flags": 33,
         "Metadata": {
           "Common.PropertyName": "Context",
           "Components.ChildContentParameterName": "True"
@@ -1949,6 +1972,7 @@
         "TypeName": "System.String",
         "DisplayName": "string Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorized.Context",
         "Documentation": "Specifiestheparameternameforthe'Authorized'childcontentexpression.",
+        "Flags": 33,
         "Metadata": {
           "Common.PropertyName": "Context",
           "Components.ChildContentParameterName": "True"
@@ -2039,6 +2063,7 @@
         "TypeName": "System.String",
         "DisplayName": "string Microsoft.AspNetCore.Components.Authorization.AuthorizeView.ChildContent.Context",
         "Documentation": "Specifiestheparameternameforthe'ChildContent'childcontentexpression.",
+        "Flags": 33,
         "Metadata": {
           "Common.PropertyName": "Context",
           "Components.ChildContentParameterName": "True"
@@ -2077,6 +2102,7 @@
         "TypeName": "System.String",
         "DisplayName": "string Microsoft.AspNetCore.Components.Authorization.AuthorizeView.ChildContent.Context",
         "Documentation": "Specifiestheparameternameforthe'ChildContent'childcontentexpression.",
+        "Flags": 33,
         "Metadata": {
           "Common.PropertyName": "Context",
           "Components.ChildContentParameterName": "True"
@@ -2116,6 +2142,7 @@
         "TypeName": "System.String",
         "DisplayName": "string Microsoft.AspNetCore.Components.Authorization.AuthorizeView.NotAuthorized.Context",
         "Documentation": "Specifiestheparameternameforthe'NotAuthorized'childcontentexpression.",
+        "Flags": 33,
         "Metadata": {
           "Common.PropertyName": "Context",
           "Components.ChildContentParameterName": "True"
@@ -2154,6 +2181,7 @@
         "TypeName": "System.String",
         "DisplayName": "string Microsoft.AspNetCore.Components.Authorization.AuthorizeView.NotAuthorized.Context",
         "Documentation": "Specifiestheparameternameforthe'NotAuthorized'childcontentexpression.",
+        "Flags": 33,
         "Metadata": {
           "Common.PropertyName": "Context",
           "Components.ChildContentParameterName": "True"
@@ -2388,6 +2416,7 @@
         "TypeName": "System.String",
         "DisplayName": "string Microsoft.AspNetCore.Components.Forms.EditForm.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
+        "Flags": 33,
         "Metadata": {
           "Common.PropertyName": "Context",
           "Components.ChildContentParameterName": "True"
@@ -2498,6 +2527,7 @@
         "TypeName": "System.String",
         "DisplayName": "string Microsoft.AspNetCore.Components.Forms.EditForm.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
+        "Flags": 33,
         "Metadata": {
           "Common.PropertyName": "Context",
           "Components.ChildContentParameterName": "True"
@@ -2536,6 +2566,7 @@
         "TypeName": "System.String",
         "DisplayName": "string Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent.Context",
         "Documentation": "Specifiestheparameternameforthe'ChildContent'childcontentexpression.",
+        "Flags": 33,
         "Metadata": {
           "Common.PropertyName": "Context",
           "Components.ChildContentParameterName": "True"
@@ -2574,6 +2605,7 @@
         "TypeName": "System.String",
         "DisplayName": "string Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent.Context",
         "Documentation": "Specifiestheparameternameforthe'ChildContent'childcontentexpression.",
+        "Flags": 33,
         "Metadata": {
           "Common.PropertyName": "Context",
           "Components.ChildContentParameterName": "True"
@@ -2622,6 +2654,7 @@
         "TypeName": "System.Boolean",
         "DisplayName": "bool Microsoft.AspNetCore.Components.Forms.InputCheckbox.Value",
         "Documentation": "\n<summary>\nGetsorsetsthevalueoftheinput.Thisshouldbeusedwithtwo-waybinding.\n</summary>\n<example>\n@bind-Value=\"model.PropertyName\"\n</example>\n",
+        "Flags": 65,
         "Metadata": {
           "Common.PropertyName": "Value"
         }
@@ -2688,6 +2721,7 @@
         "TypeName": "System.Boolean",
         "DisplayName": "bool Microsoft.AspNetCore.Components.Forms.InputCheckbox.Value",
         "Documentation": "\n<summary>\nGetsorsetsthevalueoftheinput.Thisshouldbeusedwithtwo-waybinding.\n</summary>\n<example>\n@bind-Value=\"model.PropertyName\"\n</example>\n",
+        "Flags": 65,
         "Metadata": {
           "Common.PropertyName": "Value"
         }
@@ -2756,6 +2790,7 @@
         "TypeName": "System.String",
         "DisplayName": "string Microsoft.AspNetCore.Components.Forms.InputDate<TValue>.ParsingErrorMessage",
         "Documentation": "\n<summary>\nGetsorsetstheerrormessageusedwhendisplayinganaparsingerror.\n</summary>\n",
+        "Flags": 33,
         "Metadata": {
           "Common.PropertyName": "ParsingErrorMessage"
         }
@@ -2847,6 +2882,7 @@
         "TypeName": "System.String",
         "DisplayName": "string Microsoft.AspNetCore.Components.Forms.InputDate<TValue>.ParsingErrorMessage",
         "Documentation": "\n<summary>\nGetsorsetstheerrormessageusedwhendisplayinganaparsingerror.\n</summary>\n",
+        "Flags": 33,
         "Metadata": {
           "Common.PropertyName": "ParsingErrorMessage"
         }
@@ -2939,6 +2975,7 @@
         "TypeName": "System.String",
         "DisplayName": "string Microsoft.AspNetCore.Components.Forms.InputNumber<TValue>.ParsingErrorMessage",
         "Documentation": "\n<summary>\nGetsorsetstheerrormessageusedwhendisplayinganaparsingerror.\n</summary>\n",
+        "Flags": 33,
         "Metadata": {
           "Common.PropertyName": "ParsingErrorMessage"
         }
@@ -3030,6 +3067,7 @@
         "TypeName": "System.String",
         "DisplayName": "string Microsoft.AspNetCore.Components.Forms.InputNumber<TValue>.ParsingErrorMessage",
         "Documentation": "\n<summary>\nGetsorsetstheerrormessageusedwhendisplayinganaparsingerror.\n</summary>\n",
+        "Flags": 33,
         "Metadata": {
           "Common.PropertyName": "ParsingErrorMessage"
         }
@@ -3357,6 +3395,7 @@
         "TypeName": "System.String",
         "DisplayName": "string Microsoft.AspNetCore.Components.Forms.InputText.Value",
         "Documentation": "\n<summary>\nGetsorsetsthevalueoftheinput.Thisshouldbeusedwithtwo-waybinding.\n</summary>\n<example>\n@bind-Value=\"model.PropertyName\"\n</example>\n",
+        "Flags": 33,
         "Metadata": {
           "Common.PropertyName": "Value"
         }
@@ -3423,6 +3462,7 @@
         "TypeName": "System.String",
         "DisplayName": "string Microsoft.AspNetCore.Components.Forms.InputText.Value",
         "Documentation": "\n<summary>\nGetsorsetsthevalueoftheinput.Thisshouldbeusedwithtwo-waybinding.\n</summary>\n<example>\n@bind-Value=\"model.PropertyName\"\n</example>\n",
+        "Flags": 33,
         "Metadata": {
           "Common.PropertyName": "Value"
         }
@@ -3490,6 +3530,7 @@
         "TypeName": "System.String",
         "DisplayName": "string Microsoft.AspNetCore.Components.Forms.InputTextArea.Value",
         "Documentation": "\n<summary>\nGetsorsetsthevalueoftheinput.Thisshouldbeusedwithtwo-waybinding.\n</summary>\n<example>\n@bind-Value=\"model.PropertyName\"\n</example>\n",
+        "Flags": 33,
         "Metadata": {
           "Common.PropertyName": "Value"
         }
@@ -3556,6 +3597,7 @@
         "TypeName": "System.String",
         "DisplayName": "string Microsoft.AspNetCore.Components.Forms.InputTextArea.Value",
         "Documentation": "\n<summary>\nGetsorsetsthevalueoftheinput.Thisshouldbeusedwithtwo-waybinding.\n</summary>\n<example>\n@bind-Value=\"model.PropertyName\"\n</example>\n",
+        "Flags": 33,
         "Metadata": {
           "Common.PropertyName": "Value"
         }
@@ -3821,6 +3863,7 @@
         "TypeName": "System.String",
         "DisplayName": "string Microsoft.AspNetCore.Components.Routing.NavLink.ActiveClass",
         "Documentation": "\n<summary>\nGetsorsetstheCSSclassnameappliedtotheNavLinkwhenthe\ncurrentroutematchestheNavLinkhref.\n</summary>\n",
+        "Flags": 33,
         "Metadata": {
           "Common.PropertyName": "ActiveClass"
         }
@@ -3850,9 +3893,9 @@
         "Kind": "Components.Component",
         "Name": "Match",
         "TypeName": "Microsoft.AspNetCore.Components.Routing.NavLinkMatch",
-        "IsEnum": true,
         "DisplayName": "Microsoft.AspNetCore.Components.Routing.NavLinkMatch Microsoft.AspNetCore.Components.Routing.NavLink.Match",
         "Documentation": "\n<summary>\nGetsorsetsavaluerepresentingtheURLmatchingbehavior.\n</summary>\n",
+        "Flags": 17,
         "Metadata": {
           "Common.PropertyName": "Match"
         }
@@ -3888,6 +3931,7 @@
         "TypeName": "System.String",
         "DisplayName": "string Microsoft.AspNetCore.Components.Routing.NavLink.ActiveClass",
         "Documentation": "\n<summary>\nGetsorsetstheCSSclassnameappliedtotheNavLinkwhenthe\ncurrentroutematchestheNavLinkhref.\n</summary>\n",
+        "Flags": 33,
         "Metadata": {
           "Common.PropertyName": "ActiveClass"
         }
@@ -3917,9 +3961,9 @@
         "Kind": "Components.Component",
         "Name": "Match",
         "TypeName": "Microsoft.AspNetCore.Components.Routing.NavLinkMatch",
-        "IsEnum": true,
         "DisplayName": "Microsoft.AspNetCore.Components.Routing.NavLinkMatch Microsoft.AspNetCore.Components.Routing.NavLink.Match",
         "Documentation": "\n<summary>\nGetsorsetsavaluerepresentingtheURLmatchingbehavior.\n</summary>\n",
+        "Flags": 17,
         "Metadata": {
           "Common.PropertyName": "Match"
         }
@@ -4040,6 +4084,7 @@
         "TypeName": "System.Boolean",
         "DisplayName": "preventDefault",
         "Documentation": "Specifieswhethertocancel(ifcancelable)thedefaultactionthatbelongstothe'@onabort'event.",
+        "Flags": 321,
         "Metadata": {
           "Common.DirectiveAttribute": "True",
           "Common.PropertyName": "PreventDefault",
@@ -4062,6 +4107,7 @@
         "TypeName": "System.Boolean",
         "DisplayName": "stopPropagation",
         "Documentation": "Specifieswhethertopreventfurtherpropagationofthe'@onabort'eventinthecapturingandbubblingphases.",
+        "Flags": 65,
         "Metadata": {
           "Common.PropertyName": "StopPropagation"
         }

@@ -66,11 +66,11 @@ internal sealed class RenderModeTagHelperDescriptorProvider() : TagHelperDescrip
         {
             attribute.SetDocumentation(DocumentationDescriptor.RenderModeTagHelper);
             attribute.Name = "@rendermode";
+            attribute.IsDirectiveAttribute = true;
 
             attribute.TypeName = ComponentsApi.IComponentRenderMode.FullTypeName;
             attribute.SetMetadata(
-                PropertyName("RenderMode"),
-                IsDirectiveAttribute);
+                PropertyName("RenderMode"));
         });
 
         return builder.Build();
