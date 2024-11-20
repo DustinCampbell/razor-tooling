@@ -17,7 +17,7 @@ internal static partial class ObjectWriters
     public static void WriteProperties(JsonDataWriter writer, TagHelperDescriptor value)
     {
         writer.WriteObject(WellKnownPropertyNames.Checksum, value.Checksum, WriteProperties);
-        writer.Write(nameof(value.Kind), value.Kind);
+        writer.WriteIfNotZero(nameof(value.Kind), (int)value.Kind);
         writer.Write(nameof(value.Name), value.Name);
         writer.Write(nameof(value.AssemblyName), value.AssemblyName);
         writer.WriteIfNotNull(nameof(value.DisplayName), value.DisplayName);
@@ -93,7 +93,7 @@ internal static partial class ObjectWriters
         {
             writer.WriteObject(value, static (writer, value) =>
             {
-                writer.Write(nameof(value.Kind), value.Kind);
+                writer.WriteIfNotZero(nameof(value.Kind), (int)value.Kind);
                 writer.Write(nameof(value.Name), value.Name);
                 writer.Write(nameof(value.TypeName), value.TypeName);
                 writer.WriteIfNotNull(nameof(value.IndexerNamePrefix), value.IndexerNamePrefix);
@@ -113,7 +113,7 @@ internal static partial class ObjectWriters
         {
             writer.WriteObject(value, static (writer, value) =>
             {
-                writer.Write(nameof(value.Kind), value.Kind);
+                writer.WriteIfNotZero(nameof(value.Kind), (int)value.Kind);
                 writer.Write(nameof(value.Name), value.Name);
                 writer.Write(nameof(value.TypeName), value.TypeName);
                 writer.WriteIfNotDefault(nameof(value.Flags), (int)value.Flags, defaultValue: (int)BoundAttributeParameterFlags.CaseSensitive);

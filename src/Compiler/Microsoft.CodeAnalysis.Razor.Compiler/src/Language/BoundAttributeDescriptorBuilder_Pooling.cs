@@ -10,7 +10,7 @@ public partial class BoundAttributeDescriptorBuilder
 {
     internal static readonly ObjectPool<BoundAttributeDescriptorBuilder> Pool = DefaultPool.Create(Policy.Instance);
 
-    internal static BoundAttributeDescriptorBuilder GetInstance(TagHelperDescriptorBuilder parent, string kind)
+    internal static BoundAttributeDescriptorBuilder GetInstance(TagHelperDescriptorBuilder parent, TagHelperKind kind)
     {
         var builder = Pool.Get();
 
@@ -23,7 +23,7 @@ public partial class BoundAttributeDescriptorBuilder
     private protected override void Reset()
     {
         _parent = null;
-        _kind = null;
+        _kind = 0;
         _documentationObject = default;
         _caseSensitive = null;
 

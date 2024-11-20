@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
@@ -11,7 +11,7 @@ namespace Microsoft.AspNetCore.Razor.Language;
 
 public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<TagHelperDescriptor>
 {
-    private string? _kind;
+    private TagHelperKind _kind;
     private string? _name;
     private string? _assemblyName;
 
@@ -22,21 +22,21 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
     {
     }
 
-    internal TagHelperDescriptorBuilder(string kind, string name, string assemblyName)
+    internal TagHelperDescriptorBuilder(TagHelperKind kind, string name, string assemblyName)
         : this()
     {
-        _kind = kind ?? throw new ArgumentNullException(nameof(kind));
+        _kind = kind;
         _name = name ?? throw new ArgumentNullException(nameof(name));
         _assemblyName = assemblyName ?? throw new ArgumentNullException(nameof(assemblyName));
     }
 
     public static TagHelperDescriptorBuilder Create(string name, string assemblyName)
-        => new(TagHelperConventions.DefaultKind, name, assemblyName);
+        => new(TagHelperKind.Default, name, assemblyName);
 
-    public static TagHelperDescriptorBuilder Create(string kind, string name, string assemblyName)
+    public static TagHelperDescriptorBuilder Create(TagHelperKind kind, string name, string assemblyName)
         => new(kind, name, assemblyName);
 
-    public string Kind => _kind.AssumeNotNull();
+    public TagHelperKind Kind => _kind;
     public string Name => _name.AssumeNotNull();
     public string AssemblyName => _assemblyName.AssumeNotNull();
     public string? DisplayName { get; set; }
@@ -133,7 +133,7 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
             diagnostics);
     }
 
-    private static TagHelperFlags ComputeFlags(bool caseSensitive, string kind, MetadataCollection metadata)
+    private static TagHelperFlags ComputeFlags(bool caseSensitive, TagHelperKind kind, MetadataCollection metadata)
     {
         TagHelperFlags flags = 0;
 
@@ -142,7 +142,7 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
             flags |= TagHelperFlags.CaseSensitive;
         }
 
-        if (kind == ComponentMetadata.Component.TagHelperKind && !metadata.ContainsKey(ComponentMetadata.SpecialKindKey))
+        if (kind == TagHelperKind.Component && !metadata.ContainsKey(ComponentMetadata.SpecialKindKey))
         {
             flags |= TagHelperFlags.IsComponent;
         }

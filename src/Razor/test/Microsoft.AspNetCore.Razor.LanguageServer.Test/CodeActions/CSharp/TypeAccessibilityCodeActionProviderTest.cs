@@ -437,9 +437,9 @@ public class TypeAccessibilityCodeActionProviderTest(ITestOutputHelper testOutpu
         bool supportsFileCreation = true,
         bool supportsCodeActionResolve = true)
     {
-        var shortComponent = TagHelperDescriptorBuilder.Create(ComponentMetadata.Component.TagHelperKind, "Fully.Qualified.Component", "TestAssembly");
+        var shortComponent = TagHelperDescriptorBuilder.Create(TagHelperKind.Component, "Fully.Qualified.Component", "TestAssembly");
         shortComponent.TagMatchingRule(rule => rule.TagName = "Component");
-        var fullyQualifiedComponent = TagHelperDescriptorBuilder.Create(ComponentMetadata.Component.TagHelperKind, "Fully.Qualified.Component", "TestAssembly");
+        var fullyQualifiedComponent = TagHelperDescriptorBuilder.Create(TagHelperKind.Component, "Fully.Qualified.Component", "TestAssembly");
         fullyQualifiedComponent.TagMatchingRule(rule => rule.TagName = "Fully.Qualified.Component");
 
         var tagHelpers = ImmutableArray.Create(shortComponent.Build(), fullyQualifiedComponent.Build());

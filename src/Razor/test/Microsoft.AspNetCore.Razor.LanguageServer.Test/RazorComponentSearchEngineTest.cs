@@ -206,7 +206,7 @@ public class RazorComponentSearchEngineTest(ITestOutputHelper testOutput) : Lang
     {
         typeName ??= tagName;
         var fullyQualifiedName = $"{namespaceName}.{typeName}";
-        var builder1 = TagHelperDescriptorBuilder.Create(ComponentMetadata.Component.TagHelperKind, fullyQualifiedName, assemblyName);
+        var builder1 = TagHelperDescriptorBuilder.Create(TagHelperKind.Component, fullyQualifiedName, assemblyName);
         builder1.TagMatchingRule(rule => rule.TagName = tagName);
         builder1.SetMetadata(
             TypeNameIdentifier(typeName),

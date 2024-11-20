@@ -38,7 +38,7 @@ internal sealed class SplatTagHelperDescriptorProvider : TagHelperDescriptorProv
     private static TagHelperDescriptor CreateSplatTagHelper()
     {
         using var _ = TagHelperDescriptorBuilder.GetPooledInstance(
-            ComponentMetadata.Splat.TagHelperKind, "Attributes", ComponentsApi.AssemblyName,
+            TagHelperKind.Splat, "Attributes", ComponentsApi.AssemblyName,
             out var builder);
 
         builder.CaseSensitive = true;

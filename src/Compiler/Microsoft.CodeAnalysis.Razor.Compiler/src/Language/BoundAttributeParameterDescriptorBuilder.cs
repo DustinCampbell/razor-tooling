@@ -14,7 +14,7 @@ public sealed partial class BoundAttributeParameterDescriptorBuilder : TagHelper
     [AllowNull]
     private BoundAttributeDescriptorBuilder _parent;
     [AllowNull]
-    private string _kind;
+    private TagHelperKind _kind;
     private DocumentationObject _documentationObject;
     private MetadataHolder _metadata;
 
@@ -22,7 +22,7 @@ public sealed partial class BoundAttributeParameterDescriptorBuilder : TagHelper
     {
     }
 
-    internal BoundAttributeParameterDescriptorBuilder(BoundAttributeDescriptorBuilder parent, string kind)
+    internal BoundAttributeParameterDescriptorBuilder(BoundAttributeDescriptorBuilder parent, TagHelperKind kind)
     {
         _parent = parent;
         _kind = kind;

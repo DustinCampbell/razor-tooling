@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
-using Microsoft.AspNetCore.Razor.Language.Components;
 using Microsoft.AspNetCore.Razor.PooledObjects;
 
 namespace Microsoft.AspNetCore.Razor.Language;
@@ -36,7 +35,7 @@ public sealed partial class BoundAttributeDescriptorBuilder : TagHelperObjectBui
     [AllowNull]
     private TagHelperDescriptorBuilder _parent;
     [AllowNull]
-    private string _kind;
+    private TagHelperKind _kind;
     private DocumentationObject _documentationObject;
     private MetadataHolder _metadata;
     private bool? _caseSensitive;
@@ -45,7 +44,7 @@ public sealed partial class BoundAttributeDescriptorBuilder : TagHelperObjectBui
     {
     }
 
-    internal BoundAttributeDescriptorBuilder(TagHelperDescriptorBuilder parent, string kind)
+    internal BoundAttributeDescriptorBuilder(TagHelperDescriptorBuilder parent, TagHelperKind kind)
     {
         _parent = parent;
         _kind = kind;

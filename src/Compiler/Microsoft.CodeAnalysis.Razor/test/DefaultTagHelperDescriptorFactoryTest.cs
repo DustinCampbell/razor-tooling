@@ -199,7 +199,7 @@ public class DefaultTagHelperDescriptorFactoryTest : TagHelperDescriptorProvider
         IEnumerable<Action<RequiredAttributeDescriptorBuilder>> configureBuilders)
     {
         // Arrange
-        var tagHelperBuilder = new TagHelperDescriptorBuilder(TagHelperConventions.DefaultKind, "TestTagHelper", "Test");
+        var tagHelperBuilder = new TagHelperDescriptorBuilder(TagHelperKind.Default, "TestTagHelper", "Test");
         var ruleBuilder = new TagMatchingRuleDescriptorBuilder(tagHelperBuilder);
 
         var expectedRules = new List<RequiredAttributeDescriptor>();
@@ -294,7 +294,7 @@ public class DefaultTagHelperDescriptorFactoryTest : TagHelperDescriptorProvider
         IEnumerable<Action<RequiredAttributeDescriptorBuilder>> configureBuilders)
     {
         // Arrange
-        var tagHelperBuilder = new TagHelperDescriptorBuilder(TagHelperConventions.DefaultKind, "TestTagHelper", "Test");
+        var tagHelperBuilder = new TagHelperDescriptorBuilder(TagHelperKind.Default, "TestTagHelper", "Test");
         var ruleBuilder = new TagMatchingRuleDescriptorBuilder(tagHelperBuilder);
 
         var expectedRules = new List<RequiredAttributeDescriptor>();
@@ -1451,7 +1451,7 @@ public class DefaultTagHelperDescriptorFactoryTest : TagHelperDescriptorProvider
     {
         get
         {
-            var invalidBoundAttributeBuilder = new TagHelperDescriptorBuilder(TagHelperConventions.DefaultKind, "InvalidBoundAttribute", "Test");
+            var invalidBoundAttributeBuilder = new TagHelperDescriptorBuilder(TagHelperKind.Default, "InvalidBoundAttribute", "Test");
             invalidBoundAttributeBuilder.Metadata(TypeName("TestNamespace.InvalidBoundAttribute"));
 
             // type, expectedAttributeDescriptors
@@ -2429,10 +2429,10 @@ public class DefaultTagHelperDescriptorFactoryTest : TagHelperDescriptorProvider
 
     private static BoundAttributeDescriptor CreateAttributeFor(string tagHelperTypeFullName, Action<BoundAttributeDescriptorBuilder> configure)
     {
-        var tagHelperBuilder = new TagHelperDescriptorBuilder(TagHelperConventions.DefaultKind, tagHelperTypeFullName.Split('.')[^1], "Test");
+        var tagHelperBuilder = new TagHelperDescriptorBuilder(TagHelperKind.Default, tagHelperTypeFullName.Split('.')[^1], "Test");
         tagHelperBuilder.Metadata(TypeName(tagHelperTypeFullName));
 
-        var attributeBuilder = new BoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperConventions.DefaultKind);
+        var attributeBuilder = new BoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperKind.Default);
         configure(attributeBuilder);
         return attributeBuilder.Build();
     }

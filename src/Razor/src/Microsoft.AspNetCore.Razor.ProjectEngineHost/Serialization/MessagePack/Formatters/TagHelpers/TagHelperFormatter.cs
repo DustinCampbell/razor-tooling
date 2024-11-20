@@ -19,7 +19,7 @@ internal sealed class TagHelperFormatter : ValueFormatter<TagHelperDescriptor>
     {
         reader.ReadArrayHeaderAndVerify(12);
 
-        var kind = CachedStringFormatter.Instance.Deserialize(ref reader, options).AssumeNotNull();
+        var kind = (TagHelperKind)reader.ReadInt32();
         var name = CachedStringFormatter.Instance.Deserialize(ref reader, options).AssumeNotNull();
         var assemblyName = CachedStringFormatter.Instance.Deserialize(ref reader, options).AssumeNotNull();
 
@@ -46,7 +46,7 @@ internal sealed class TagHelperFormatter : ValueFormatter<TagHelperDescriptor>
     {
         writer.WriteArrayHeader(12);
 
-        CachedStringFormatter.Instance.Serialize(ref writer, value.Kind, options);
+        writer.Write((int)value.Kind);
         CachedStringFormatter.Instance.Serialize(ref writer, value.Name, options);
         CachedStringFormatter.Instance.Serialize(ref writer, value.AssemblyName, options);
 
@@ -67,7 +67,7 @@ internal sealed class TagHelperFormatter : ValueFormatter<TagHelperDescriptor>
     {
         reader.ReadArrayHeaderAndVerify(12);
 
-        CachedStringFormatter.Instance.Skim(ref reader, options); // Kind
+        reader.Skip(); // Kind
         CachedStringFormatter.Instance.Skim(ref reader, options); // Name
         CachedStringFormatter.Instance.Skim(ref reader, options); // AssemblyName
 

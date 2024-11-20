@@ -50,7 +50,7 @@ public class EventHandlerTagHelperDescriptorProviderTest : TagHelperDescriptorPr
         // here and then ignoring them.
         Assert.Empty(item.Diagnostics);
         Assert.False(item.HasErrors);
-        Assert.Equal(ComponentMetadata.EventHandler.TagHelperKind, item.Kind);
+        Assert.Equal(TagHelperKind.EventHandler, item.Kind);
         Assert.Equal(bool.TrueString, item.Metadata[TagHelperMetadata.Common.ClassifyAttributesOnly]);
         Assert.Equal(ComponentMetadata.EventHandler.RuntimeName, item.Metadata[TagHelperMetadata.Runtime.Name]);
         Assert.False(item.IsDefaultKind());
@@ -90,7 +90,7 @@ public class EventHandlerTagHelperDescriptorProviderTest : TagHelperDescriptorPr
         // Invariants
         Assert.Empty(attribute.Diagnostics);
         Assert.False(attribute.HasErrors);
-        Assert.Equal(ComponentMetadata.EventHandler.TagHelperKind, attribute.Kind);
+        Assert.Equal(TagHelperKind.EventHandler, attribute.Kind);
         Assert.False(attribute.IsDefaultKind());
         Assert.False(attribute.HasIndexer);
         Assert.Null(attribute.IndexerNamePrefix);
@@ -158,7 +158,7 @@ public class EventHandlerTagHelperDescriptorProviderTest : TagHelperDescriptorPr
         // here and then ignoring them.
         Assert.Empty(item.Diagnostics);
         Assert.False(item.HasErrors);
-        Assert.Equal(ComponentMetadata.EventHandler.TagHelperKind, item.Kind);
+        Assert.Equal(TagHelperKind.EventHandler, item.Kind);
         Assert.Equal(bool.TrueString, item.Metadata[TagHelperMetadata.Common.ClassifyAttributesOnly]);
         Assert.Equal(ComponentMetadata.EventHandler.RuntimeName, item.Metadata[TagHelperMetadata.Runtime.Name]);
         Assert.False(item.IsDefaultKind());
@@ -229,7 +229,7 @@ public class EventHandlerTagHelperDescriptorProviderTest : TagHelperDescriptorPr
         // Invariants
         Assert.Empty(attribute.Diagnostics);
         Assert.False(attribute.HasErrors);
-        Assert.Equal(ComponentMetadata.EventHandler.TagHelperKind, attribute.Kind);
+        Assert.Equal(TagHelperKind.EventHandler, attribute.Kind);
         Assert.False(attribute.IsDefaultKind());
         Assert.False(attribute.HasIndexer);
         Assert.Null(attribute.IndexerNamePrefix);

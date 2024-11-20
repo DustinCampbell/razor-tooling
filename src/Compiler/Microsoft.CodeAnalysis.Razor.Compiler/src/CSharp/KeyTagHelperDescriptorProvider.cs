@@ -39,7 +39,7 @@ internal sealed class KeyTagHelperDescriptorProvider() : TagHelperDescriptorProv
     private static TagHelperDescriptor CreateKeyTagHelper()
     {
         using var _ = TagHelperDescriptorBuilder.GetPooledInstance(
-            ComponentMetadata.Key.TagHelperKind, "Key", ComponentsApi.AssemblyName,
+            TagHelperKind.Key, "Key", ComponentsApi.AssemblyName,
             out var builder);
 
         builder.CaseSensitive = true;

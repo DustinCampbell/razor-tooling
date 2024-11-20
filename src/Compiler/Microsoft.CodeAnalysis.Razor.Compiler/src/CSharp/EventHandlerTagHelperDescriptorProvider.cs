@@ -155,7 +155,7 @@ internal sealed class EventHandlerTagHelperDescriptorProvider : TagHelperDescrip
             var attributeName = "@" + attribute;
             var eventArgType = eventArgsType.ToDisplayString();
             _ = TagHelperDescriptorBuilder.GetPooledInstance(
-                ComponentMetadata.EventHandler.TagHelperKind, attribute, ComponentsApi.AssemblyName,
+                TagHelperKind.EventHandler, attribute, ComponentsApi.AssemblyName,
                 out var builder);
             builder.CaseSensitive = true;
             builder.SetDocumentation(

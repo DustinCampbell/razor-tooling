@@ -39,7 +39,7 @@ internal sealed class RefTagHelperDescriptorProvider() : TagHelperDescriptorProv
     private static TagHelperDescriptor CreateRefTagHelper()
     {
         using var _ = TagHelperDescriptorBuilder.GetPooledInstance(
-            ComponentMetadata.Ref.TagHelperKind, "Ref", ComponentsApi.AssemblyName,
+            TagHelperKind.Ref, "Ref", ComponentsApi.AssemblyName,
             out var builder);
 
         builder.CaseSensitive = true;

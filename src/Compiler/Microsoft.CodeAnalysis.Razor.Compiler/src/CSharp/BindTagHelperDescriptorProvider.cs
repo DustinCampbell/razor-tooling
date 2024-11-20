@@ -121,7 +121,7 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
     private static TagHelperDescriptor CreateFallbackBindTagHelper()
     {
         using var _ = TagHelperDescriptorBuilder.GetPooledInstance(
-            ComponentMetadata.Bind.TagHelperKind, "Bind", ComponentsApi.AssemblyName,
+            TagHelperKind.Bind, "Bind", ComponentsApi.AssemblyName,
             out var builder);
 
         builder.CaseSensitive = true;
@@ -364,7 +364,7 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
                 eventName = "Event_" + suffix;
             }
             using var _ = TagHelperDescriptorBuilder.GetPooledInstance(
-                ComponentMetadata.Bind.TagHelperKind, name, ComponentsApi.AssemblyName,
+                TagHelperKind.Bind, name, ComponentsApi.AssemblyName,
                 out var builder);
             using var metadata = builder.GetMetadataBuilder(ComponentMetadata.Bind.RuntimeName);
             builder.CaseSensitive = true;
@@ -601,7 +601,7 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
                 }
 
                 using var _ = TagHelperDescriptorBuilder.GetPooledInstance(
-                    ComponentMetadata.Bind.TagHelperKind, tagHelper.Name, tagHelper.AssemblyName,
+                    TagHelperKind.Bind, tagHelper.Name, tagHelper.AssemblyName,
                     out var builder);
 
                 using var metadata = builder.GetMetadataBuilder(ComponentMetadata.Bind.RuntimeName);

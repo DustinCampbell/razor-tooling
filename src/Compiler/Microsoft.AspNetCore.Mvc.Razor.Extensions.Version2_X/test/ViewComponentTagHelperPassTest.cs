@@ -65,7 +65,7 @@ public class ViewComponentTagHelperPassTest
 
         var tagHelpers = new[]
         {
-            TagHelperDescriptorBuilder.Create(ViewComponentTagHelperConventions.Kind, "TestTagHelper", "TestAssembly")
+            TagHelperDescriptorBuilder.Create(TagHelperKind.ViewComponent, "TestTagHelper", "TestAssembly")
                 .Metadata(
                     TypeName("__Generated__TagCloudViewComponentTagHelper"),
                     new(ViewComponentTagHelperMetadata.Name, "TagCloud"))
@@ -112,7 +112,7 @@ public class ViewComponentTagHelperPassTest
 
         var tagHelpers = new[]
         {
-            TagHelperDescriptorBuilder.Create(ViewComponentTagHelperConventions.Kind, "TestTagHelper", "TestAssembly")
+            TagHelperDescriptorBuilder.Create(TagHelperKind.ViewComponent, "TestTagHelper", "TestAssembly")
                 .Metadata(
                     TypeName("__Generated__TagCloudViewComponentTagHelper"),
                     new(ViewComponentTagHelperMetadata.Name, "TagCloud"))
@@ -167,7 +167,7 @@ public class ViewComponentTagHelperPassTest
                     .TypeName("System.Int32"))
                 .TagMatchingRuleDescriptor(rule => rule.RequireTagName("p"))
                 .Build(),
-            TagHelperDescriptorBuilder.Create(ViewComponentTagHelperConventions.Kind, "TestTagHelper", "TestAssembly")
+            TagHelperDescriptorBuilder.Create(TagHelperKind.ViewComponent, "TestTagHelper", "TestAssembly")
                 .Metadata(
                     TypeName("__Generated__TagCloudViewComponentTagHelper"),
                     new(ViewComponentTagHelperMetadata.Name, "TagCloud"))

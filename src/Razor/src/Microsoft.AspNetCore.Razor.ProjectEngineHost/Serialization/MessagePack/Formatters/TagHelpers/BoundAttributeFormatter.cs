@@ -19,7 +19,7 @@ internal sealed class BoundAttributeFormatter : ValueFormatter<BoundAttributeDes
     {
         reader.ReadArrayHeaderAndVerify(12);
 
-        var kind = CachedStringFormatter.Instance.Deserialize(ref reader, options).AssumeNotNull();
+        var kind = (TagHelperKind)reader.ReadInt32();
         var name = CachedStringFormatter.Instance.Deserialize(ref reader, options);
         var typeName = CachedStringFormatter.Instance.Deserialize(ref reader, options).AssumeNotNull();
         var indexerNamePrefix = CachedStringFormatter.Instance.Deserialize(ref reader, options);
@@ -44,7 +44,7 @@ internal sealed class BoundAttributeFormatter : ValueFormatter<BoundAttributeDes
     {
         writer.WriteArrayHeader(12);
 
-        CachedStringFormatter.Instance.Serialize(ref writer, value.Kind, options);
+        writer.Write((int)value.Kind);
         CachedStringFormatter.Instance.Serialize(ref writer, value.Name, options);
         CachedStringFormatter.Instance.Serialize(ref writer, value.TypeName, options);
         CachedStringFormatter.Instance.Serialize(ref writer, value.IndexerNamePrefix, options);
@@ -52,7 +52,7 @@ internal sealed class BoundAttributeFormatter : ValueFormatter<BoundAttributeDes
         CachedStringFormatter.Instance.Serialize(ref writer, value.DisplayName, options);
         CachedStringFormatter.Instance.Serialize(ref writer, value.ContainingType, options);
         writer.Serialize(value.DocumentationObject, options);
-        writer.Serialize((int)value.Flags, options);
+        writer.Write((int)value.Flags);
         writer.Serialize(value.Parameters, options);
 
         writer.Serialize(value.Metadata, options);
@@ -63,7 +63,7 @@ internal sealed class BoundAttributeFormatter : ValueFormatter<BoundAttributeDes
     {
         reader.ReadArrayHeaderAndVerify(12);
 
-        CachedStringFormatter.Instance.Skim(ref reader, options); // Kind;
+        reader.Skip(); // Kind
         CachedStringFormatter.Instance.Skim(ref reader, options); // Name
         CachedStringFormatter.Instance.Skim(ref reader, options); // TypeName
         CachedStringFormatter.Instance.Skim(ref reader, options); // IndexerNamePrefix

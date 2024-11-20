@@ -19,7 +19,7 @@ public sealed class TagHelperDescriptor : TagHelperObject<TagHelperDescriptor>
 
     private ImmutableArray<BoundAttributeDescriptor> _editorRequiredAttributes;
 
-    public string Kind { get; }
+    public TagHelperKind Kind { get; }
     public string Name { get; }
     public string AssemblyName { get; }
 
@@ -37,10 +37,10 @@ public sealed class TagHelperDescriptor : TagHelperObject<TagHelperDescriptor>
 
     public MetadataCollection Metadata { get; }
 
+    internal TagHelperFlags Flags => _flags;
+
     internal bool IsComponentTagHelper => (_flags & TagHelperFlags.IsComponent) != 0;
 
-
-    internal TagHelperFlags Flags => _flags;
     /// <summary>
     /// Gets whether the component matches a tag with a fully qualified name.
     /// </summary>
@@ -49,7 +49,7 @@ public sealed class TagHelperDescriptor : TagHelperObject<TagHelperDescriptor>
     internal bool IsComponentOrChildContentTagHelper => IsComponentTagHelper || IsChildContentTagHelper;
 
     internal TagHelperDescriptor(
-        string kind,
+        TagHelperKind kind,
         string name,
         string assemblyName,
         string displayName,
@@ -78,7 +78,7 @@ public sealed class TagHelperDescriptor : TagHelperObject<TagHelperDescriptor>
 
     private protected override void BuildChecksum(in Checksum.Builder builder)
     {
-        builder.AppendData(Kind);
+        builder.AppendData((int)Kind);
         builder.AppendData(Name);
         builder.AppendData(AssemblyName);
         builder.AppendData(DisplayName);
@@ -86,7 +86,7 @@ public sealed class TagHelperDescriptor : TagHelperObject<TagHelperDescriptor>
 
         DocumentationObject.AppendToChecksum(in builder);
 
-        builder.AppendData(CaseSensitive);
+        builder.AppendData((int)Flags);
 
         foreach (var descriptor in AllowedChildTags)
         {
