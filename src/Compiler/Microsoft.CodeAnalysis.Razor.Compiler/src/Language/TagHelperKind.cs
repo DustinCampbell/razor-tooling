@@ -5,7 +5,8 @@ namespace Microsoft.AspNetCore.Razor.Language;
 
 public enum TagHelperKind
 {
-    ITagHelper,
+    Default = 0,
+
     Bind,
     ChildContent,
     Component,
@@ -15,7 +16,5 @@ public enum TagHelperKind
     Splat,
     Ref,
     RenderMode,
-    ViewComponent,
-
-    Default = ITagHelper
+    ViewComponent
 }

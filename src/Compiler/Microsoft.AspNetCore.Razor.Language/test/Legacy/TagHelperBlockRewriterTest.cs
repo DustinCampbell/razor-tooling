@@ -243,7 +243,7 @@ public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
         // Arrange
         ImmutableArray<TagHelperDescriptor> descriptors =
         [
-            TagHelperDescriptorBuilder.Create("InputTagHelper1", "SomeAssembly")
+            TagHelperDescriptorBuilder.Create(TagHelperKind.EventHandler, "InputTagHelper1", "SomeAssembly")
                 .TagMatchingRuleDescriptor(rule =>
                 {
                     rule
@@ -254,7 +254,6 @@ public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
                             b.IsDirectiveAttribute = true;
                         });
                 })
-                .Metadata(SpecialKind(ComponentMetadata.EventHandler.TagHelperKind))
                 .Build(),
         ];
 
@@ -268,7 +267,7 @@ public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
         // Arrange
         ImmutableArray<TagHelperDescriptor> descriptors =
         [
-            TagHelperDescriptorBuilder.Create("InputTagHelper1", "SomeAssembly")
+            TagHelperDescriptorBuilder.Create(TagHelperKind.EventHandler, "InputTagHelper1", "SomeAssembly")
                 .TagMatchingRuleDescriptor(rule =>
                 {
                     rule
@@ -280,7 +279,6 @@ public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
                         });
 
                 })
-                .Metadata(SpecialKind(ComponentMetadata.EventHandler.TagHelperKind))
                 .Build(),
         ];
 
@@ -2446,7 +2444,6 @@ public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
         [
             TagHelperDescriptorBuilder.Create(TagHelperKind.Bind, "Bind", ComponentsApi.AssemblyName)
                 .Metadata(
-                    SpecialKind(ComponentMetadata.Bind.TagHelperKind),
                     MakeTrue(TagHelperMetadata.Common.ClassifyAttributesOnly),
                     RuntimeName(ComponentMetadata.Bind.RuntimeName),
                     TypeName("Microsoft.AspNetCore.Components.Bind"),
@@ -2491,7 +2488,6 @@ public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
         [
             TagHelperDescriptorBuilder.Create(TagHelperKind.Bind, "Bind", ComponentsApi.AssemblyName)
                 .Metadata(
-                    SpecialKind(ComponentMetadata.Bind.TagHelperKind),
                     MakeTrue(TagHelperMetadata.Common.ClassifyAttributesOnly),
                     RuntimeName(ComponentMetadata.Bind.RuntimeName),
                     TypeName("Microsoft.AspNetCore.Components.Bind"),

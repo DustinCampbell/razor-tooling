@@ -46,7 +46,6 @@ internal sealed class RefTagHelperDescriptorProvider() : TagHelperDescriptorProv
         builder.SetDocumentation(DocumentationDescriptor.RefTagHelper);
 
         builder.SetMetadata(
-            SpecialKind(ComponentMetadata.Ref.TagHelperKind),
             MakeTrue(TagHelperMetadata.Common.ClassifyAttributesOnly),
             RuntimeName(ComponentMetadata.Ref.RuntimeName),
             TypeName("Microsoft.AspNetCore.Components.Ref"));

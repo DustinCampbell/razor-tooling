@@ -142,7 +142,7 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
             flags |= TagHelperFlags.CaseSensitive;
         }
 
-        if (kind == TagHelperKind.Component && !metadata.ContainsKey(ComponentMetadata.SpecialKindKey))
+        if (kind == TagHelperKind.Component)
         {
             flags |= TagHelperFlags.IsComponent;
         }
@@ -152,7 +152,7 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
             flags |= TagHelperFlags.IsComponentFullyQualifiedNameMatch;
         }
 
-        if (metadata.Contains(ComponentMetadata.SpecialKindKey, ComponentMetadata.ChildContent.TagHelperKind))
+        if (kind == TagHelperKind.ChildContent)
         {
             flags |= TagHelperFlags.IsChildContent;
         }

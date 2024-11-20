@@ -128,7 +128,6 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
         builder.SetDocumentation(DocumentationDescriptor.BindTagHelper_Fallback);
 
         builder.SetMetadata(
-            SpecialKind(ComponentMetadata.Bind.TagHelperKind),
             MakeTrue(TagHelperMetadata.Common.ClassifyAttributesOnly),
             RuntimeName(ComponentMetadata.Bind.RuntimeName),
             MakeTrue(ComponentMetadata.Bind.FallbackKey),
@@ -374,7 +373,6 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
                     valueAttribute,
                     changeAttribute));
 
-            metadata.Add(SpecialKind(ComponentMetadata.Bind.TagHelperKind));
             metadata.Add(MakeTrue(TagHelperMetadata.Common.ClassifyAttributesOnly));
             metadata.Add(ComponentMetadata.Bind.ValueAttribute, valueAttribute);
             metadata.Add(ComponentMetadata.Bind.ChangeAttribute, changeAttribute);
@@ -614,7 +612,6 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
                         valueAttribute.Name,
                         changeAttribute.Name));
 
-                metadata.Add(SpecialKind(ComponentMetadata.Bind.TagHelperKind));
                 metadata.Add(ComponentMetadata.Bind.ValueAttribute, valueAttribute.Name);
                 metadata.Add(ComponentMetadata.Bind.ChangeAttribute, changeAttribute.Name);
 

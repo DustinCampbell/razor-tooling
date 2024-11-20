@@ -50,7 +50,6 @@ internal sealed class FormNameTagHelperDescriptorProvider() : TagHelperDescripto
         builder.SetDocumentation(DocumentationDescriptor.FormNameTagHelper);
 
         builder.SetMetadata(
-            SpecialKind(ComponentMetadata.FormName.TagHelperKind),
             MakeTrue(TagHelperMetadata.Common.ClassifyAttributesOnly),
             RuntimeName(ComponentMetadata.FormName.RuntimeName),
             TypeName("Microsoft.AspNetCore.Components.FormName"));
