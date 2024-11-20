@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
@@ -11,9 +12,7 @@ namespace Microsoft.AspNetCore.Razor.Language;
 
 public sealed partial class BoundAttributeDescriptorBuilder : TagHelperObjectBuilder<BoundAttributeDescriptor>
 {
-    // PERF: A Dictionary<string, string> is used intentionally here for faster lookup over ImmutableDictionary<string, string>.
-    // This should never be mutated.
-    private static readonly Dictionary<string, string> s_primitiveDisplayTypeNameLookups = new(StringComparer.Ordinal)
+    private static readonly FrozenDictionary<string, string> s_primitiveDisplayTypeNameLookups = new Dictionary<string, string>(StringComparer.Ordinal)
     {
         { typeof(byte).FullName!, "byte" },
         { typeof(sbyte).FullName!, "sbyte" },
@@ -30,7 +29,7 @@ public sealed partial class BoundAttributeDescriptorBuilder : TagHelperObjectBui
         { typeof(object).FullName!, "object" },
         { typeof(string).FullName!, "string" },
         { typeof(decimal).FullName!, "decimal" }
-    };
+    }.ToFrozenDictionary();
 
     [AllowNull]
     private TagHelperDescriptorBuilder _parent;
