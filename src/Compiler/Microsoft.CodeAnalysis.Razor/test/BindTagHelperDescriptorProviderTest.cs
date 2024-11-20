@@ -479,7 +479,7 @@ namespace Test
         Assert.Empty(bind.Diagnostics);
         Assert.False(bind.HasErrors);
         Assert.Equal(TagHelperKind.Bind, bind.Kind);
-        Assert.Equal(bool.TrueString, bind.Metadata[TagHelperMetadata.Common.ClassifyAttributesOnly]);
+        Assert.True(bind.ClassifyAttributesOnly);
         Assert.Equal(RuntimeKind.None, bind.RuntimeKind);
         Assert.False(bind.IsDefaultKind());
         Assert.False(bind.KindUsesDefaultTagHelperRuntime());
@@ -1112,7 +1112,7 @@ namespace Test
         Assert.Empty(bind.Diagnostics);
         Assert.False(bind.HasErrors);
         Assert.Equal(TagHelperKind.Bind, bind.Kind);
-        Assert.Equal(bool.TrueString, bind.Metadata[TagHelperMetadata.Common.ClassifyAttributesOnly]);
+        Assert.True(bind.ClassifyAttributesOnly);
         Assert.Equal(RuntimeKind.None, bind.RuntimeKind);
         Assert.False(bind.IsDefaultKind());
         Assert.False(bind.KindUsesDefaultTagHelperRuntime());

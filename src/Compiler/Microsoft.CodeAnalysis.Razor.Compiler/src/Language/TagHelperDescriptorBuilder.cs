@@ -53,6 +53,7 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
     public string? TagOutputHint { get; set; }
     public bool CaseSensitive { get; set; }
     internal bool IsComponentFullyQualifiedNameMatch { get; set; }
+    internal bool ClassifyAttributesOnly { get; set; }
 
     public string? Documentation
     {
@@ -124,7 +125,7 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
 
     private protected override TagHelperDescriptor BuildCore(ImmutableArray<RazorDiagnostic> diagnostics)
     {
-        var flags = ComputeFlags(CaseSensitive, IsComponentFullyQualifiedNameMatch);
+        var flags = ComputeFlags(CaseSensitive, IsComponentFullyQualifiedNameMatch, ClassifyAttributesOnly);
         var metadata = _metadata.GetMetadataCollection();
 
         return new TagHelperDescriptor(
@@ -143,7 +144,7 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
             diagnostics);
     }
 
-    private static TagHelperFlags ComputeFlags(bool caseSensitive, bool isComponentFullQualifiedNameMatch)
+    private static TagHelperFlags ComputeFlags(bool caseSensitive, bool isComponentFullQualifiedNameMatch, bool classifyAttributesOnly)
     {
         TagHelperFlags flags = 0;
 
@@ -155,6 +156,11 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
         if (isComponentFullQualifiedNameMatch)
         {
             flags |= TagHelperFlags.IsComponentFullyQualifiedNameMatch;
+        }
+
+        if (classifyAttributesOnly)
+        {
+            flags |= TagHelperFlags.ClassifyAttributesOnly;
         }
 
         return flags;

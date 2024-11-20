@@ -6473,17 +6473,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -437675138654566126,
-      "Data2": -7283144602805764467,
-      "Data3": -5663982115579531274,
-      "Data4": -6889453549085475932
+      "Data1": -3543157542454603622,
+      "Data2": 8953975650247871063,
+      "Data3": 8172825065646955989,
+      "Data4": -8399041762974748702
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onfocus",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -6578,7 +6578,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -6587,17 +6586,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 6428532884186648102,
-      "Data2": -2670024332780665062,
-      "Data3": 9067774383298070030,
-      "Data4": 1322833590710716798
+      "Data1": 4144277912407106982,
+      "Data2": 8979132263052596460,
+      "Data3": -2855632713056750410,
+      "Data4": -9204711670689577365
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onblur",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -6692,7 +6691,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -6701,17 +6699,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -2323214265575150079,
-      "Data2": -6389207853201863870,
-      "Data3": 4708921982698587145,
-      "Data4": -753271690894936054
+      "Data1": -437211931647403171,
+      "Data2": 1225635639791666643,
+      "Data3": -7954522352359666888,
+      "Data4": -5291564803137891317
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onfocusin",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -6806,7 +6804,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -6815,17 +6812,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 3077437987483622526,
-      "Data2": 409853387840553265,
-      "Data3": 7544632873469339280,
-      "Data4": 7214203071902320880
+      "Data1": -1889655199019444108,
+      "Data2": -8476900874533872091,
+      "Data3": -4865908691565727963,
+      "Data4": 2379571282062764137
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onfocusout",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -6920,7 +6917,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -6929,17 +6925,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -5201278987223380407,
-      "Data2": -4901381925008755895,
-      "Data3": -8413397537178870819,
-      "Data4": 616906588688194958
+      "Data1": -662043823459245755,
+      "Data2": 4585772159672389528,
+      "Data3": 871538445885454056,
+      "Data4": -2334930999232623891
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onmouseover",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -7034,7 +7030,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -7043,17 +7038,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 5437329919571851358,
-      "Data2": -3990127711977380448,
-      "Data3": 8699562190012509832,
-      "Data4": -4344215428329648254
+      "Data1": -691200323942936580,
+      "Data2": 359502688801678205,
+      "Data3": 7864699250023083810,
+      "Data4": -795266763075101418
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onmouseout",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -7148,7 +7143,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -7157,17 +7151,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 5084149428834017352,
-      "Data2": -7762138449685113813,
-      "Data3": -5517099464596322767,
-      "Data4": 8116360106605970665
+      "Data1": -1853798210911639397,
+      "Data2": 8799970825635750458,
+      "Data3": -1761362395564961014,
+      "Data4": 2881112382821122328
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onmousemove",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -7262,7 +7256,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -7271,17 +7264,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -4987359163021173830,
-      "Data2": 4146424230788460334,
-      "Data3": 6493844010657636451,
-      "Data4": 614968887810537640
+      "Data1": -7806012355671299561,
+      "Data2": -6811783684398979796,
+      "Data3": -445519199138964222,
+      "Data4": -1455817787396003848
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onmousedown",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -7376,7 +7369,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -7385,17 +7377,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -7609201168680437504,
-      "Data2": 4124205181334041835,
-      "Data3": 7628715576613209963,
-      "Data4": -8832727653559818504
+      "Data1": -8775050433993968862,
+      "Data2": -1268426124216140984,
+      "Data3": -3840626632897086963,
+      "Data4": 1995490033550544775
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onmouseup",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -7490,7 +7482,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -7499,17 +7490,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 3543478624184038170,
-      "Data2": -3010429904846478757,
-      "Data3": 6643831759299898263,
-      "Data4": 840573197825895195
+      "Data1": -8421727146647239125,
+      "Data2": -2452423481223143560,
+      "Data3": 775565927183002674,
+      "Data4": -1403903750334462172
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onclick",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -7604,7 +7595,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -7613,17 +7603,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -475744476212371275,
-      "Data2": -1382025647911597651,
-      "Data3": 8440122889418968314,
-      "Data4": 3699250255740405720
+      "Data1": 1530952085498367868,
+      "Data2": -6943734221735001421,
+      "Data3": -4829092554232544215,
+      "Data4": 7064867933991844607
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "ondblclick",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -7718,7 +7708,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -7727,17 +7716,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 7415887601520709778,
-      "Data2": 8697784430888052715,
-      "Data3": -6540676494888367977,
-      "Data4": -1076581806704223718
+      "Data1": 887277031765404517,
+      "Data2": 1682157052422854870,
+      "Data3": -7332915852909364605,
+      "Data4": 9063596800733302472
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onwheel",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -7832,7 +7821,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -7841,17 +7829,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 8755080729663667331,
-      "Data2": -2249206774675302093,
-      "Data3": 2884172326510237938,
-      "Data4": -6445430134567241355
+      "Data1": -8139517121118212313,
+      "Data2": -4431150478523606379,
+      "Data3": 457659661368339648,
+      "Data4": -232001740673355637
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onmousewheel",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -7946,7 +7934,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -7955,17 +7942,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 1913157042695685043,
-      "Data2": 3688607287605502759,
-      "Data3": -4622911531267267151,
-      "Data4": 4904190253022352112
+      "Data1": -4142321257578249291,
+      "Data2": -9025650275647753081,
+      "Data3": -2982651158311215,
+      "Data4": 3315425813558354059
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "oncontextmenu",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -8060,7 +8047,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -8069,17 +8055,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -3818063362247077165,
-      "Data2": 2464634123756793304,
-      "Data3": 1208729017934938911,
-      "Data4": 8765688516845933564
+      "Data1": -6329317712830905555,
+      "Data2": 2254568869753800356,
+      "Data3": 764415987178825255,
+      "Data4": 8632349041798632696
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "ondrag",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -8174,7 +8160,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -8183,17 +8168,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -4987941446951546132,
-      "Data2": 4563526990149814749,
-      "Data3": -6978489134298417396,
-      "Data4": -1267439033324482675
+      "Data1": -2148929401975451571,
+      "Data2": 4190605349892430855,
+      "Data3": -7888435862657036385,
+      "Data4": 3548704977931352861
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "ondragend",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -8288,7 +8273,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -8297,17 +8281,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 6089382973211919008,
-      "Data2": 5078513776735858832,
-      "Data3": -7446139242762048261,
-      "Data4": 6975608617987193016
+      "Data1": 5470359249820105418,
+      "Data2": 2444264312854418198,
+      "Data3": -3476726752919320929,
+      "Data4": -2422317419206750514
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "ondragenter",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -8402,7 +8386,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -8411,17 +8394,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -5896432010604979356,
-      "Data2": -5419593629149763438,
-      "Data3": -2736059020145189965,
-      "Data4": -8617443352101936693
+      "Data1": -8925231548300514652,
+      "Data2": -6140816401917716017,
+      "Data3": -5991827312895094850,
+      "Data4": -5196040555978435395
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "ondragleave",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -8516,7 +8499,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -8525,17 +8507,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 2649938618126811614,
-      "Data2": 3995664136817997775,
-      "Data3": 4077519921746429067,
-      "Data4": -6492264987182456899
+      "Data1": 1924056899866387296,
+      "Data2": -4259306162477767333,
+      "Data3": 1315899751953646715,
+      "Data4": 5787713369622779701
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "ondragover",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -8630,7 +8612,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -8639,17 +8620,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -3380509614680911899,
-      "Data2": 6528399272166357684,
-      "Data3": -7865658787641411866,
-      "Data4": -1948969819366534373
+      "Data1": -5113647977758121219,
+      "Data2": -6232975288140393049,
+      "Data3": 8001590381104966471,
+      "Data4": -5072433550493338982
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "ondragstart",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -8744,7 +8725,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -8753,17 +8733,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 7193779116511905500,
-      "Data2": -8517742861020063042,
-      "Data3": -9185608315464386176,
-      "Data4": 8671007250294742949
+      "Data1": 3535880921364814060,
+      "Data2": -4034909203991186344,
+      "Data3": 8783180868399562942,
+      "Data4": 5463323896482519125
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "ondrop",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -8858,7 +8838,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -8867,17 +8846,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 7077015392074838007,
-      "Data2": -5010593620466195072,
-      "Data3": -4040850707063485749,
-      "Data4": -1722857601836597770
+      "Data1": -1609069634842293360,
+      "Data2": 1529211494217761531,
+      "Data3": -3858651738918667471,
+      "Data4": 7839496980812361070
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onkeydown",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -8972,7 +8951,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -8981,17 +8959,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -1172005394905295348,
-      "Data2": -2166260630744147890,
-      "Data3": -6268409156501301076,
-      "Data4": 6576024425748434091
+      "Data1": 2050302784397006374,
+      "Data2": -1883961621007394094,
+      "Data3": 9135172576832025795,
+      "Data4": -3396772022933711880
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onkeyup",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -9086,7 +9064,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -9095,17 +9072,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -6275061329149325828,
-      "Data2": 1511670636234297741,
-      "Data3": 2362240874540295755,
-      "Data4": -7373222599079113355
+      "Data1": -4405627078200102403,
+      "Data2": 6400622678815638399,
+      "Data3": 2176673259775754793,
+      "Data4": -6010378785018132542
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onkeypress",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -9200,7 +9177,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -9209,17 +9185,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 6990681477375963436,
-      "Data2": -410561447694780555,
-      "Data3": -8629400145439277528,
-      "Data4": 4484981396042815439
+      "Data1": 3898169774414808199,
+      "Data2": 5036547008270266935,
+      "Data3": 93946992385211114,
+      "Data4": -6434868082412374396
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onchange",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -9314,7 +9290,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -9323,17 +9298,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -37667118280489103,
-      "Data2": -6574552289077178470,
-      "Data3": 7920166154817552681,
-      "Data4": -7587221610218892263
+      "Data1": -1837751142115994675,
+      "Data2": -7091571362944798000,
+      "Data3": 798666029280454518,
+      "Data4": 5492950645576571285
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "oninput",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -9428,7 +9403,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -9437,17 +9411,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -7795221599089935487,
-      "Data2": 9128395962409773198,
-      "Data3": -9001161081956245196,
-      "Data4": -8378740065551412474
+      "Data1": -8881738537233703765,
+      "Data2": -4643187838074718437,
+      "Data3": 4166431730328036865,
+      "Data4": -2489260361876853779
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "oninvalid",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -9542,7 +9516,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -9551,17 +9524,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -3287273075579564864,
-      "Data2": 1578523940236452869,
-      "Data3": -1994223808596897053,
-      "Data4": 3030613477039086081
+      "Data1": 4982969787505483102,
+      "Data2": -5807489464294231279,
+      "Data3": -485588963980522338,
+      "Data4": -2107630048486371369
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onreset",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -9656,7 +9629,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -9665,17 +9637,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 6377014787817731137,
-      "Data2": -3045566174840858882,
-      "Data3": -4407008499563572007,
-      "Data4": 474728838215504871
+      "Data1": -4379818602302801900,
+      "Data2": 277703861522382691,
+      "Data3": 5125448151525745979,
+      "Data4": 3444304330008927185
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onselect",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -9770,7 +9742,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -9779,17 +9750,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -5243687492596946411,
-      "Data2": -180881908331162737,
-      "Data3": -9195909215998886723,
-      "Data4": 6743467134261356083
+      "Data1": 1744411201154922458,
+      "Data2": 6222841655520601318,
+      "Data3": 7840875315546839258,
+      "Data4": 2507134301347071689
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onselectstart",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -9884,7 +9855,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -9893,17 +9863,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -8008322256915298857,
-      "Data2": -5304468152476600521,
-      "Data3": -2736606345168194139,
-      "Data4": -4820214111702933135
+      "Data1": -4415670395343118419,
+      "Data2": -6739144441544084002,
+      "Data3": -7572035421239599313,
+      "Data4": 3349928298569882515
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onselectionchange",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -9998,7 +9968,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -10007,17 +9976,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -9203550459843458784,
-      "Data2": 8508967819997021217,
-      "Data3": 4062237034122285721,
-      "Data4": 3329154066240260878
+      "Data1": -5134788857291666491,
+      "Data2": 8652508744025003291,
+      "Data3": -3247951680220905836,
+      "Data4": -6729294881278873265
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onsubmit",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -10112,7 +10081,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -10121,17 +10089,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -1396328824260350156,
-      "Data2": 1284501910645343258,
-      "Data3": -4767088168192233960,
-      "Data4": 5741359144773624803
+      "Data1": 8539683273567711974,
+      "Data2": 1756575495753312034,
+      "Data3": -7658882969573727854,
+      "Data4": 3424513734742658573
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onbeforecopy",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -10226,7 +10194,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -10235,17 +10202,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -5930361740250012910,
-      "Data2": 8068882274218494005,
-      "Data3": -7730090659575858733,
-      "Data4": -5537803218956690471
+      "Data1": 7338867200783096591,
+      "Data2": 9116137811653667047,
+      "Data3": -5157469544431608870,
+      "Data4": 2083472479173019020
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onbeforecut",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -10340,7 +10307,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -10349,17 +10315,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 6028678082793433644,
-      "Data2": 416236260927808982,
-      "Data3": -223226181111082377,
-      "Data4": -272683851088465239
+      "Data1": 4946636233645809182,
+      "Data2": 9167985387598809101,
+      "Data3": 2035253953759481481,
+      "Data4": 8075882941710153718
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onbeforepaste",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -10454,7 +10420,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -10463,17 +10428,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 1366276545298926430,
-      "Data2": -7291341324758110037,
-      "Data3": 8233666708117445629,
-      "Data4": 1893275046335913614
+      "Data1": -8434667157814293756,
+      "Data2": -2035817253070089341,
+      "Data3": 1475769591734436722,
+      "Data4": 4024857493733983430
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "oncopy",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -10568,7 +10533,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -10577,17 +10541,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 7028413977704635835,
-      "Data2": -9169610435648290655,
-      "Data3": -7851373020285600688,
-      "Data4": 5549608095225923544
+      "Data1": -5275489424971651666,
+      "Data2": -2954194511386625040,
+      "Data3": -1056516152252788100,
+      "Data4": 2692507264099333375
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "oncut",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -10682,7 +10646,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -10691,17 +10654,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 352165755065483228,
-      "Data2": 4122271607939066141,
-      "Data3": -5692359034452512957,
-      "Data4": -8040166103294998545
+      "Data1": 7545790600381907802,
+      "Data2": 6114909028558685819,
+      "Data3": 2165227126504900030,
+      "Data4": -1162063296511414092
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onpaste",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -10796,7 +10759,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -10805,17 +10767,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 3799474829615528714,
-      "Data2": 2934876707717966426,
-      "Data3": 1849818304817184076,
-      "Data4": 1084882073018454290
+      "Data1": -2168764769969967108,
+      "Data2": 3972881801772753394,
+      "Data3": -1254616429518448379,
+      "Data4": -2873847709120993753
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "ontouchcancel",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -10910,7 +10872,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -10919,17 +10880,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -6391134080517341595,
-      "Data2": -6036489621818976287,
-      "Data3": -5420128958457395154,
-      "Data4": 1404697203505050207
+      "Data1": 484407305413769051,
+      "Data2": 6819117406305526654,
+      "Data3": -2051452538826641220,
+      "Data4": -4721919436687706993
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "ontouchend",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -11024,7 +10985,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -11033,17 +10993,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -9066108357076341250,
-      "Data2": 6174711941978027278,
-      "Data3": -7151582931664234948,
-      "Data4": -5814861442179342376
+      "Data1": 1588087833648146044,
+      "Data2": -6638331100730638318,
+      "Data3": -4537496352836737713,
+      "Data4": -6791362396924036941
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "ontouchmove",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -11138,7 +11098,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -11147,17 +11106,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -3116083309266297298,
-      "Data2": -9175433241429977958,
-      "Data3": -178423435277203739,
-      "Data4": 454425484106488872
+      "Data1": -3355849221330926383,
+      "Data2": 2257980058538745704,
+      "Data3": 5758508874883426554,
+      "Data4": 1600418813209347955
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "ontouchstart",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -11252,7 +11211,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -11261,17 +11219,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -2408574526411889637,
-      "Data2": 8890926445507206457,
-      "Data3": 5435538452733791806,
-      "Data4": 1919498006804951767
+      "Data1": 1567745563615849180,
+      "Data2": 2252151783723505370,
+      "Data3": 5579967874037045013,
+      "Data4": -2766582370166821612
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "ontouchenter",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -11366,7 +11324,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -11375,17 +11332,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 4380936291385055780,
-      "Data2": -1717364322370929643,
-      "Data3": -3806339693411826943,
-      "Data4": 4482839002234292137
+      "Data1": 3230642979555153777,
+      "Data2": 5405502464041697710,
+      "Data3": 2027206958984910930,
+      "Data4": 4455171552341738390
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "ontouchleave",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -11480,7 +11437,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -11489,17 +11445,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 2563579291919180080,
-      "Data2": 1302121265220457565,
-      "Data3": -2227220114808347819,
-      "Data4": 5285843688686728371
+      "Data1": 1537547521854227262,
+      "Data2": -6452695184889125105,
+      "Data3": -5078890965078506039,
+      "Data4": -1029284113158690671
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "ongotpointercapture",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -11594,7 +11550,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -11603,17 +11558,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 5944705957734268420,
-      "Data2": -5178554709053811092,
-      "Data3": 7565280676154740825,
-      "Data4": -1525396892953483080
+      "Data1": 5114002553416020612,
+      "Data2": 1370535984227312911,
+      "Data3": 7288000747275815029,
+      "Data4": -1560490104780161044
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onlostpointercapture",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -11708,7 +11663,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -11717,17 +11671,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 524474842418599884,
-      "Data2": -4954038965992250443,
-      "Data3": 590413482471677827,
-      "Data4": -3816078401221900044
+      "Data1": 6821636078522256865,
+      "Data2": -935576836916734673,
+      "Data3": -6316229625194704628,
+      "Data4": -5063965185931137808
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onpointercancel",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -11822,7 +11776,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -11831,17 +11784,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -1324580937036277315,
-      "Data2": 5311247275108377974,
-      "Data3": -87186647503661909,
-      "Data4": 2813254112325319431
+      "Data1": -4048856129768484120,
+      "Data2": -5814620732282458001,
+      "Data3": -1209530823212729406,
+      "Data4": -5042786773018778472
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onpointerdown",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -11936,7 +11889,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -11945,17 +11897,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 3008913515874072739,
-      "Data2": -4906325449246453381,
-      "Data3": 894449516649001431,
-      "Data4": 5160249014193728063
+      "Data1": -4790597741496201193,
+      "Data2": 2309652680203748384,
+      "Data3": 202373070194246856,
+      "Data4": -9128292576000799470
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onpointerenter",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -12050,7 +12002,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -12059,17 +12010,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 4224919473892344087,
-      "Data2": -1446282486957752329,
-      "Data3": -6331276065913347964,
-      "Data4": 1790833429691877333
+      "Data1": -1779555425317951384,
+      "Data2": -942315144000284430,
+      "Data3": 2793297854262395720,
+      "Data4": 4287978513631443938
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onpointerleave",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -12164,7 +12115,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -12173,17 +12123,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 1443118537273769760,
-      "Data2": 8606467585798786455,
-      "Data3": 3721893096958154995,
-      "Data4": 20941678560913682
+      "Data1": -8746695699491193409,
+      "Data2": -4286938945107385122,
+      "Data3": 7405791848029681250,
+      "Data4": -6277840078368971217
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onpointermove",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -12278,7 +12228,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -12287,17 +12236,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -3582770239719665516,
-      "Data2": -2712059249454056430,
-      "Data3": 139950798361533736,
-      "Data4": 3306249639146476557
+      "Data1": 5483789157511773127,
+      "Data2": -4990210895215519586,
+      "Data3": -3714318635596075372,
+      "Data4": -7314171640314531881
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onpointerout",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -12392,7 +12341,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -12401,17 +12349,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -2040905493196111362,
-      "Data2": -4355031214239719203,
-      "Data3": -6739799079223450133,
-      "Data4": -2360201042967444381
+      "Data1": 8990013804167901830,
+      "Data2": 2397453702181902662,
+      "Data3": -1952236181155116572,
+      "Data4": 7639524659071852190
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onpointerover",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -12506,7 +12454,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -12515,17 +12462,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -8656761126888731484,
-      "Data2": 8215548805030311646,
-      "Data3": -6731025410265534689,
-      "Data4": 894394644291900285
+      "Data1": -2690609798826990319,
+      "Data2": 3500617449908252,
+      "Data3": -7629725894144900839,
+      "Data4": 7379513917577253813
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onpointerup",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -12620,7 +12567,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -12629,17 +12575,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 2858003910487651420,
-      "Data2": -8436675819801547083,
-      "Data3": 8671308432598478824,
-      "Data4": -5284679956633034557
+      "Data1": 2088561741578974420,
+      "Data2": 681378853125288600,
+      "Data3": 8289830659484506409,
+      "Data4": 6090418255620573670
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "oncanplay",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -12734,7 +12680,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -12743,17 +12688,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 1519364024569434494,
-      "Data2": 1199334858827138819,
-      "Data3": 6393644800900991343,
-      "Data4": 602621489430071910
+      "Data1": 4146617814517322442,
+      "Data2": 3285715633279401893,
+      "Data3": 8945634014167013126,
+      "Data4": -4766229612478170973
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "oncanplaythrough",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -12848,7 +12793,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -12857,17 +12801,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 2777005926919970128,
-      "Data2": 7085057005666553390,
-      "Data3": 2475016591065738923,
-      "Data4": -4045873246977885604
+      "Data1": 3431747027935702309,
+      "Data2": 345402114695730854,
+      "Data3": 493488448034608880,
+      "Data4": -8164944039961417518
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "oncuechange",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -12962,7 +12906,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -12971,17 +12914,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -9092789547210056770,
-      "Data2": 5593490016579966723,
-      "Data3": 9166006012226959102,
-      "Data4": 6842536057482813398
+      "Data1": 5343904543252322334,
+      "Data2": -5809607810842795592,
+      "Data3": -5440367614062020547,
+      "Data4": -5591396739462769647
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "ondurationchange",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -13076,7 +13019,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -13085,17 +13027,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -920805313029620072,
-      "Data2": 1852366106627219870,
-      "Data3": 463948011580322325,
-      "Data4": 3097829699292321870
+      "Data1": -5842652563086504736,
+      "Data2": 1348759328368417873,
+      "Data3": -5657419560460866023,
+      "Data4": 7782765303528168615
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onemptied",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -13190,7 +13132,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -13199,17 +13140,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -2287035267399763972,
-      "Data2": -8724064712918400514,
-      "Data3": 8394662770476837049,
-      "Data4": 3156706835415357292
+      "Data1": -1187953277942695253,
+      "Data2": 2854642508756680302,
+      "Data3": 8906076110317043675,
+      "Data4": -5937637645445940375
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onpause",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -13304,7 +13245,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -13313,17 +13253,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -8421425433534651156,
-      "Data2": -1313120295268397898,
-      "Data3": -5024880089236149948,
-      "Data4": 2949547163477902806
+      "Data1": 6562097146256053411,
+      "Data2": 6498050955479619952,
+      "Data3": 1542891565184039468,
+      "Data4": -6745002154272978137
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onplay",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -13418,7 +13358,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -13427,17 +13366,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -1073709822333281221,
-      "Data2": -3749349305163855032,
-      "Data3": 5468781338452463460,
-      "Data4": 8332044340281522700
+      "Data1": -3889717592691972016,
+      "Data2": -6549938976425772163,
+      "Data3": 1474633389228998343,
+      "Data4": 4212554029656769982
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onplaying",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -13532,7 +13471,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -13541,17 +13479,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 1540293264170853168,
-      "Data2": 4352036046249221149,
-      "Data3": 8924268680760065874,
-      "Data4": -5476766631921646084
+      "Data1": -5728058657898930554,
+      "Data2": 1013891652317788248,
+      "Data3": -3492568324701243114,
+      "Data4": 8226077773319651715
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onratechange",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -13646,7 +13584,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -13655,17 +13592,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 8518591341418647186,
-      "Data2": 751676758050277528,
-      "Data3": 3220501842192638408,
-      "Data4": -218852372220548938
+      "Data1": 1304001045170085461,
+      "Data2": 8502725853991839232,
+      "Data3": 7362861536220362771,
+      "Data4": -6365605651379541196
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onseeked",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -13760,7 +13697,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -13769,17 +13705,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 5710233605050140327,
-      "Data2": 460949144308595423,
-      "Data3": -661911222814466772,
-      "Data4": 1643219662748284488
+      "Data1": -2118694653339510337,
+      "Data2": -5621661614942019742,
+      "Data3": -1982096452089539905,
+      "Data4": 1529651951337974444
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onseeking",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -13874,7 +13810,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -13883,17 +13818,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 5096837426570699009,
-      "Data2": 453991105849144907,
-      "Data3": -7096037143919667045,
-      "Data4": -2224117969388725485
+      "Data1": 4451386118875636057,
+      "Data2": -2779461924929840980,
+      "Data3": 2955749826867550792,
+      "Data4": -4750933124717868879
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onstalled",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -13988,7 +13923,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -13997,17 +13931,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -7926721248737032074,
-      "Data2": -1159100038734450681,
-      "Data3": -7906457503729607575,
-      "Data4": 5182735280585478073
+      "Data1": -4697470725778462478,
+      "Data2": -7538383700668157385,
+      "Data3": -1153022737518093614,
+      "Data4": 5820511319961028613
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onstop",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -14102,7 +14036,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -14111,17 +14044,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -6873043622168107338,
-      "Data2": 137037076219050420,
-      "Data3": 8035022308162824742,
-      "Data4": -5498555128281312281
+      "Data1": -8814776608641005283,
+      "Data2": 8222192722696249926,
+      "Data3": -4953063624017954416,
+      "Data4": -7871257332904963436
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onsuspend",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -14216,7 +14149,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -14225,17 +14157,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -8377684822962948331,
-      "Data2": -7760324790226129079,
-      "Data3": -5470199549062437827,
-      "Data4": 1573095101903196143
+      "Data1": -1616141354384078464,
+      "Data2": -8882807588585608233,
+      "Data3": 2099428168759239447,
+      "Data4": 2149394612824672501
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "ontimeupdate",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -14330,7 +14262,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -14339,17 +14270,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -3103889582226224924,
-      "Data2": -7328498826008150275,
-      "Data3": 5084680820315394534,
-      "Data4": -1674782412573376348
+      "Data1": 9133204529225362374,
+      "Data2": 4384942856469135910,
+      "Data3": -1665094470025185947,
+      "Data4": -3479306916790338280
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onvolumechange",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -14444,7 +14375,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -14453,17 +14383,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -7851869571846774317,
-      "Data2": 8430089582563472485,
-      "Data3": -5639002807218222929,
-      "Data4": 3318031993896669344
+      "Data1": -1888765621590289546,
+      "Data2": -5487399126483962813,
+      "Data3": -2525385773016577143,
+      "Data4": 5069759599086002910
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onwaiting",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -14558,7 +14488,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -14567,17 +14496,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 8158283745739027014,
-      "Data2": -4925878924646382633,
-      "Data3": 8539077673627385436,
-      "Data4": -5400271738101473741
+      "Data1": 7091363074936458426,
+      "Data2": 3917713432309899527,
+      "Data3": -4127490474604854679,
+      "Data4": 6982851538091649402
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onloadstart",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -14672,7 +14601,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -14681,17 +14609,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 8527216378063387753,
-      "Data2": 5693014019970679429,
-      "Data3": 7815461223856404597,
-      "Data4": -7145509727485886858
+      "Data1": 5751459793261501502,
+      "Data2": -7662402655630985144,
+      "Data3": -4379277427504251874,
+      "Data4": 121307386977819641
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "ontimeout",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -14786,7 +14714,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -14795,17 +14722,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -436700059156931103,
-      "Data2": 9152122267341669751,
-      "Data3": 4181114428737624352,
-      "Data4": 7078881048914310870
+      "Data1": -5342414111654016461,
+      "Data2": 8630271312700759386,
+      "Data3": 2871019689274405352,
+      "Data4": 4532737037182957162
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onabort",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -14900,7 +14827,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -14909,17 +14835,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -3366852956725049753,
-      "Data2": 1416946153113245414,
-      "Data3": 1511615101367092410,
-      "Data4": -4777941504751844212
+      "Data1": -482346131361899681,
+      "Data2": -2533484917773160911,
+      "Data3": 3348328864531023435,
+      "Data4": -1623328365738482430
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onload",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -15014,7 +14940,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -15023,17 +14948,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -5530670768416661467,
-      "Data2": 3035733659864055346,
-      "Data3": 7632226995626027181,
-      "Data4": 7825915659973715973
+      "Data1": -6742047850349262282,
+      "Data2": 5888796771244462603,
+      "Data3": -8948227676215625060,
+      "Data4": -6491629360697155416
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onloadend",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -15128,7 +15053,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -15137,17 +15061,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 5572162146182138054,
-      "Data2": -4710121993917882047,
-      "Data3": -3856698366541024095,
-      "Data4": -7583461169705634245
+      "Data1": -7048005959661689704,
+      "Data2": -2888194476349856616,
+      "Data3": -2093078517244485732,
+      "Data4": -1138609048517219379
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onprogress",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -15242,7 +15166,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -15251,17 +15174,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 5737270258441222894,
-      "Data2": -1241240990925668428,
-      "Data3": 5292285195184864085,
-      "Data4": -5858237062873595829
+      "Data1": -3854160463910016655,
+      "Data2": -8575485181606614646,
+      "Data3": -716950950709498217,
+      "Data4": 1831840414139074502
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onerror",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -15356,7 +15279,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -15365,17 +15287,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -4609198675984517237,
-      "Data2": 3634087053226480096,
-      "Data3": -3093532381065159737,
-      "Data4": -4196605185557181938
+      "Data1": -5279949518718286041,
+      "Data2": -4082133624200596212,
+      "Data3": -5201436328529040195,
+      "Data4": -4774193956156900613
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onactivate",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -15470,7 +15392,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -15479,17 +15400,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 5761024441489521482,
-      "Data2": -775254410851186846,
-      "Data3": -4260981449793875709,
-      "Data4": 3292846592162459584
+      "Data1": 6560868931850668805,
+      "Data2": -6364451394610067625,
+      "Data3": -7800600723629962848,
+      "Data4": 3900315797336402135
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onbeforeactivate",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -15584,7 +15505,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -15593,17 +15513,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -2299975915439929399,
-      "Data2": 5567644902866968201,
-      "Data3": -6723320365995220326,
-      "Data4": -3524183210052742291
+      "Data1": 2165341779090678047,
+      "Data2": -4173943694091760079,
+      "Data3": -5987631084867342004,
+      "Data4": 2144317617936101525
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onbeforedeactivate",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -15698,7 +15618,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -15707,17 +15626,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 3740657037045705177,
-      "Data2": 5724075056823627221,
-      "Data3": -6714606466451005519,
-      "Data4": 6433999505760496084
+      "Data1": -5310713064502982887,
+      "Data2": 4063669671741476847,
+      "Data3": -2417084099479295558,
+      "Data4": 8950917086401442832
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "ondeactivate",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -15812,7 +15731,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -15821,17 +15739,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 7210663854311645762,
-      "Data2": -6928451497933053386,
-      "Data3": -3109294109123185414,
-      "Data4": 140764261974410418
+      "Data1": -8925129567042631869,
+      "Data2": 4737858237146231685,
+      "Data3": 8746595729450615383,
+      "Data4": -7230076217020548896
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onended",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -15926,7 +15844,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -15935,17 +15852,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -6940166650833983532,
-      "Data2": -1943747792833762310,
-      "Data3": 5566211332159115113,
-      "Data4": -6953076940158765173
+      "Data1": 434933230514851461,
+      "Data2": -620092717365538350,
+      "Data3": 4059901233567819142,
+      "Data4": -2336727591305278049
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onfullscreenchange",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -16040,7 +15957,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -16049,17 +15965,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 984702438141810522,
-      "Data2": 1261591807415521094,
-      "Data3": 4321835612036029923,
-      "Data4": -4983561622094948894
+      "Data1": 2567666123026780614,
+      "Data2": 2190028398863443479,
+      "Data3": 8343544643743751960,
+      "Data4": -4388044792236386461
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onfullscreenerror",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -16154,7 +16070,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -16163,17 +16078,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 4928496225982646466,
-      "Data2": -2932541525192632904,
-      "Data3": 3408738091671218887,
-      "Data4": -8936609179173785700
+      "Data1": -4301313112361120945,
+      "Data2": 2254561448696900961,
+      "Data3": -4939228859209844161,
+      "Data4": 5975644863960892067
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onloadeddata",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -16268,7 +16183,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -16277,17 +16191,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 2153707270378476134,
-      "Data2": -4912478757141238625,
-      "Data3": -8514302849920898081,
-      "Data4": -443710632782147477
+      "Data1": 4327748200136484880,
+      "Data2": 8469078660965099560,
+      "Data3": 4576922165527184318,
+      "Data4": -7544280311158870561
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onloadedmetadata",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -16382,7 +16296,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -16391,17 +16304,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -2082026067766659616,
-      "Data2": 5456225136304866343,
-      "Data3": -7888345893535620031,
-      "Data4": 2616561801017842614
+      "Data1": -1190681273386115888,
+      "Data2": 8039460794605439845,
+      "Data3": -9099380641936239479,
+      "Data4": 1622210002448138028
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onpointerlockchange",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -16496,7 +16409,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -16505,17 +16417,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 7634206882473610198,
-      "Data2": 9052542063805846067,
-      "Data3": 7404696450583107146,
-      "Data4": 3812032689641988674
+      "Data1": 8400755200278039126,
+      "Data2": -2419082968054663559,
+      "Data3": 6183783028567457378,
+      "Data4": 4888501586129483282
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onpointerlockerror",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -16610,7 +16522,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -16619,17 +16530,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 8020448769560070361,
-      "Data2": -3308391921389788563,
-      "Data3": 8353528405948556355,
-      "Data4": 2264788398768152841
+      "Data1": -9143483013771425268,
+      "Data2": 3465984866031162103,
+      "Data3": 7354380899396287480,
+      "Data4": -2950054764815080838
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onreadystatechange",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -16724,7 +16635,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -16733,17 +16643,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 2568874884061777027,
-      "Data2": 5087244935841273378,
-      "Data3": -2128162456585280521,
-      "Data4": 519719802651583027
+      "Data1": -1128069207347562546,
+      "Data2": -1624570600149429760,
+      "Data3": -8630659346155210729,
+      "Data4": 52778309634428560
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "onscroll",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -16838,7 +16748,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -16847,17 +16756,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 3475460604467184343,
-      "Data2": 7310476703719034583,
-      "Data3": -4661448909281486758,
-      "Data4": -63648920015377172
+      "Data1": 7578234843395424453,
+      "Data2": 2177371099934696334,
+      "Data3": 7555443036470950656,
+      "Data4": -1228098431674627307
     },
     "Kind": 4,
     "RuntimeKind": 2,
     "Name": "ontoggle",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 14,
       "Args": [
@@ -16952,7 +16861,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
       "Common.TypeNameIdentifier": "EventHandlers",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -16961,17 +16869,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 6321931292277393643,
-      "Data2": 8661924972390335605,
-      "Data3": 2980782783019070962,
-      "Data4": 5210880219109135858
+      "Data1": -2650209005355391199,
+      "Data2": 2021531584069882331,
+      "Data3": -3413759994851968717,
+      "Data4": 6926054235855151555
     },
     "Kind": 7,
     "RuntimeKind": 2,
     "Name": "Attributes",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Attributes",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 19
     },
@@ -17003,7 +16911,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Attributes"
     }
   },
@@ -19727,17 +19634,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -3083311994834343442,
-      "Data2": 5991006358114966456,
-      "Data3": 9093674289602307552,
-      "Data4": -243303321515712913
+      "Data1": -2595176782618911143,
+      "Data2": -2952370609885885095,
+      "Data3": -3273163630066227117,
+      "Data4": -8026926218904873846
     },
     "Kind": 1,
     "RuntimeKind": 2,
     "Name": "Bind",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Bind",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 0
     },
@@ -19852,7 +19759,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Bind",
       "Common.TypeNameIdentifier": "Bind",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components",
@@ -19861,17 +19767,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 1590881030363560233,
-      "Data2": 7639102459807347588,
-      "Data3": 86489154479557636,
-      "Data4": 1390104107135979444
+      "Data1": -4450360695394292257,
+      "Data2": -6574366860611160714,
+      "Data3": 4134182048968453722,
+      "Data4": 4138375623225223035
     },
     "Kind": 1,
     "RuntimeKind": 2,
     "Name": "Bind",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 3,
       "Args": [
@@ -20025,7 +19931,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
       "Common.TypeNameIdentifier": "BindAttributes",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -20037,17 +19942,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 6529626380453753930,
-      "Data2": 91757051682201358,
-      "Data3": -4700393871954752592,
-      "Data4": -3477724286619294346
+      "Data1": 1471143925359530926,
+      "Data2": -7467140234584902056,
+      "Data3": -2894375000469528452,
+      "Data4": -7965593325230464554
     },
     "Kind": 1,
     "RuntimeKind": 2,
     "Name": "Bind_value",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 3,
       "Args": [
@@ -20201,7 +20106,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
       "Common.TypeNameIdentifier": "BindAttributes",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -20213,17 +20117,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 2988956705554242334,
-      "Data2": 8882957321982056277,
-      "Data3": 8472942948110572720,
-      "Data4": -4894345848512305893
+      "Data1": 1339067164902844146,
+      "Data2": -3333640305635051379,
+      "Data3": -6291415061013746497,
+      "Data4": 7743448652945287493
     },
     "Kind": 1,
     "RuntimeKind": 2,
     "Name": "Bind",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 3,
       "Args": [
@@ -20389,7 +20293,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
       "Common.TypeNameIdentifier": "BindAttributes",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -20402,17 +20305,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -6586503534380673498,
-      "Data2": 7258104871282986429,
-      "Data3": -3430657922392755359,
-      "Data4": -2808477013448930363
+      "Data1": 6481328890360719778,
+      "Data2": -6934438460764619317,
+      "Data3": 754777549673176717,
+      "Data4": 40448334090612383
     },
     "Kind": 1,
     "RuntimeKind": 2,
     "Name": "Bind",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 3,
       "Args": [
@@ -20578,7 +20481,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
       "Common.TypeNameIdentifier": "BindAttributes",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -20591,17 +20493,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 8571629097526699856,
-      "Data2": 7626792319071236954,
-      "Data3": -3640937366724250652,
-      "Data4": -1416917166585268285
+      "Data1": -3131494092731324558,
+      "Data2": -4037032003330688678,
+      "Data3": -7727246339874979501,
+      "Data4": 4592817652002140971
     },
     "Kind": 1,
     "RuntimeKind": 2,
     "Name": "Bind",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 3,
       "Args": [
@@ -20767,7 +20669,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
       "Common.TypeNameIdentifier": "BindAttributes",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -20780,17 +20681,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 5410017615566388068,
-      "Data2": 2146984498393548018,
-      "Data3": 5542719848318078481,
-      "Data4": 4599317593671115988
+      "Data1": -4683036401895126843,
+      "Data2": -8321888174875931565,
+      "Data3": -3250444999622323740,
+      "Data4": 1920195296578543689
     },
     "Kind": 1,
     "RuntimeKind": 2,
     "Name": "Bind_value",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 3,
       "Args": [
@@ -20956,7 +20857,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
       "Common.TypeNameIdentifier": "BindAttributes",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -20969,17 +20869,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -3627260670429851934,
-      "Data2": -6609234789701649965,
-      "Data3": -7412955316407525233,
-      "Data4": -8587953276103508676
+      "Data1": 2303511177126723244,
+      "Data2": -2240252614086777829,
+      "Data3": -2311655378259699115,
+      "Data4": -431614707206268198
     },
     "Kind": 1,
     "RuntimeKind": 2,
     "Name": "Bind",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 3,
       "Args": [
@@ -21145,7 +21045,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
       "Common.TypeNameIdentifier": "BindAttributes",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -21158,17 +21057,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 2129643299642331319,
-      "Data2": -5374785884153138516,
-      "Data3": -8309948088737972516,
-      "Data4": 5330809756977758153
+      "Data1": -2635081056753761182,
+      "Data2": -7503129377447790378,
+      "Data3": -773341943512627664,
+      "Data4": 8873147365883083624
     },
     "Kind": 1,
     "RuntimeKind": 2,
     "Name": "Bind_value",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 3,
       "Args": [
@@ -21334,7 +21233,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
       "Common.TypeNameIdentifier": "BindAttributes",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -21347,17 +21245,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 7191729291289181824,
-      "Data2": 3169762584409128168,
-      "Data3": -8383699910717756540,
-      "Data4": 2105536071175977838
+      "Data1": 6678100339795426800,
+      "Data2": 2499304961257098340,
+      "Data3": -2783428112394874355,
+      "Data4": 8931358151387047292
     },
     "Kind": 1,
     "RuntimeKind": 2,
     "Name": "Bind",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 3,
       "Args": [
@@ -21523,7 +21421,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
       "Common.TypeNameIdentifier": "BindAttributes",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -21536,17 +21433,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 4256549812068187911,
-      "Data2": 4613023138473256511,
-      "Data3": -8799792911978555446,
-      "Data4": -3325874484508876971
+      "Data1": 4644399747436946018,
+      "Data2": 5339160498548200923,
+      "Data3": 8349642426240070119,
+      "Data4": -3061794178724599589
     },
     "Kind": 1,
     "RuntimeKind": 2,
     "Name": "Bind_value",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 3,
       "Args": [
@@ -21712,7 +21609,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
       "Common.TypeNameIdentifier": "BindAttributes",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -21725,17 +21621,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 6593452861002801034,
-      "Data2": -710245054875809353,
-      "Data3": 3044675673597363202,
-      "Data4": -1635987679641478361
+      "Data1": -7720325336233535245,
+      "Data2": -2419846122844970466,
+      "Data3": -5197475094575179967,
+      "Data4": -4347310983146545861
     },
     "Kind": 1,
     "RuntimeKind": 2,
     "Name": "Bind",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 3,
       "Args": [
@@ -21901,7 +21797,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
       "Common.TypeNameIdentifier": "BindAttributes",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -21914,17 +21809,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -5888288908585362648,
-      "Data2": 7100564574499576730,
-      "Data3": -6125513035882050940,
-      "Data4": 3038792411436897016
+      "Data1": 4849664865583885718,
+      "Data2": 7421644826273910631,
+      "Data3": -8923590678014861592,
+      "Data4": -7855196060969811465
     },
     "Kind": 1,
     "RuntimeKind": 2,
     "Name": "Bind_value",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 3,
       "Args": [
@@ -22090,7 +21985,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
       "Common.TypeNameIdentifier": "BindAttributes",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -22103,17 +21997,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -7041453435355731845,
-      "Data2": -3880647284082837682,
-      "Data3": 3371303487189501805,
-      "Data4": 2017919519569230508
+      "Data1": -5242106117929223077,
+      "Data2": 8180556840058439932,
+      "Data3": 7636336684774908886,
+      "Data4": 4882500979958341670
     },
     "Kind": 1,
     "RuntimeKind": 2,
     "Name": "Bind",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 3,
       "Args": [
@@ -22279,7 +22173,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
       "Common.TypeNameIdentifier": "BindAttributes",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -22292,17 +22185,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 3487765541926689742,
-      "Data2": -4637495186103075951,
-      "Data3": 2808089208475702339,
-      "Data4": 4518627279589072808
+      "Data1": -2787233428652722660,
+      "Data2": 8383267373375087456,
+      "Data3": 5249246709886095773,
+      "Data4": -354104760507440845
     },
     "Kind": 1,
     "RuntimeKind": 2,
     "Name": "Bind_value",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 3,
       "Args": [
@@ -22468,7 +22361,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
       "Common.TypeNameIdentifier": "BindAttributes",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -22481,17 +22373,17 @@
   },
   {
     "__Checksum": {
-      "Data1": 6150246737443984115,
-      "Data2": -1309233544361622691,
-      "Data3": 4439305508802905335,
-      "Data4": -603976499918329707
+      "Data1": 4763703474150398643,
+      "Data2": 5106742964894972975,
+      "Data3": -3521728920413533716,
+      "Data4": -2923321304957478178
     },
     "Kind": 1,
     "RuntimeKind": 2,
     "Name": "Bind",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 3,
       "Args": [
@@ -22645,7 +22537,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
       "Common.TypeNameIdentifier": "BindAttributes",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -22657,17 +22548,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -168749781193914839,
-      "Data2": 7784240373982119042,
-      "Data3": 4274641274630924577,
-      "Data4": -8574053692842123317
+      "Data1": -6915233367189432592,
+      "Data2": -6044826105151662325,
+      "Data3": 1925700424310020846,
+      "Data4": 4901653736797833791
     },
     "Kind": 1,
     "RuntimeKind": 2,
     "Name": "Bind",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 3,
       "Args": [
@@ -22821,7 +22712,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
       "Common.TypeNameIdentifier": "BindAttributes",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
@@ -24429,17 +24319,17 @@
   },
   {
     "__Checksum": {
-      "Data1": -2396520494056444833,
-      "Data2": -8336601782578123999,
-      "Data3": -8141608931170219694,
-      "Data4": -7720409104487988688
+      "Data1": 3124397936973198544,
+      "Data2": -9101687953685412286,
+      "Data3": -4435868990924310243,
+      "Data4": 537354081345423798
     },
     "Kind": 8,
     "RuntimeKind": 2,
     "Name": "Ref",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Ref",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 18
     },
@@ -24471,23 +24361,22 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Ref"
     }
   },
   {
     "__Checksum": {
-      "Data1": -476481599540612966,
-      "Data2": -2433743770294881648,
-      "Data3": 789313908593189698,
-      "Data4": -6194248625583174701
+      "Data1": 2912973960774430925,
+      "Data2": 5953789242307515233,
+      "Data3": -7020670540007941603,
+      "Data4": 7752827218384776657
     },
     "Kind": 6,
     "RuntimeKind": 2,
     "Name": "Key",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Key",
-    "Flags": 1,
+    "Flags": 5,
     "Documentation": {
       "Id": 17
     },
@@ -24519,7 +24408,6 @@
       }
     ],
     "Metadata": {
-      "Common.ClassifyAttributesOnly": "True",
       "Common.TypeName": "Microsoft.AspNetCore.Components.Key"
     }
   }

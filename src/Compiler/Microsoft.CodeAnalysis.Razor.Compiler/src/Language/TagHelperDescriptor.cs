@@ -50,6 +50,8 @@ public sealed class TagHelperDescriptor : TagHelperObject<TagHelperDescriptor>
     /// </summary>
     internal bool IsComponentFullyQualifiedNameMatch => (_flags & TagHelperFlags.IsComponentFullyQualifiedNameMatch) != 0;
 
+    internal bool ClassifyAttributesOnly => (_flags & TagHelperFlags.ClassifyAttributesOnly) != 0;
+
     internal TagHelperDescriptor(
         TagHelperKind kind,
         RuntimeKind runtimeKind,

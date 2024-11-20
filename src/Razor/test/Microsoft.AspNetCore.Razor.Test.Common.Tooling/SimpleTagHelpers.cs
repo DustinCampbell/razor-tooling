@@ -96,6 +96,7 @@ internal static class SimpleTagHelpers
 
         var directiveAttribute1 = TagHelperDescriptorBuilder.Create(TagHelperKind.Component, "TestDirectiveAttribute", "TestAssembly");
         directiveAttribute1.IsComponentFullyQualifiedNameMatch = true;
+        directiveAttribute1.ClassifyAttributesOnly = true;
         directiveAttribute1.TagMatchingRule(rule =>
         {
             rule.TagName = "*";
@@ -130,11 +131,11 @@ internal static class SimpleTagHelpers
             });
         });
         directiveAttribute1.SetMetadata(
-            MakeTrue(TagHelperMetadata.Common.ClassifyAttributesOnly),
             TypeName("TestDirectiveAttribute"));
 
         var directiveAttribute2 = TagHelperDescriptorBuilder.Create(TagHelperKind.Component, "MinimizedDirectiveAttribute", "TestAssembly");
         directiveAttribute2.IsComponentFullyQualifiedNameMatch = true;
+        directiveAttribute2.ClassifyAttributesOnly = true;
         directiveAttribute2.TagMatchingRule(rule =>
         {
             rule.TagName = "*";
@@ -169,11 +170,11 @@ internal static class SimpleTagHelpers
             });
         });
         directiveAttribute2.SetMetadata(
-            MakeTrue(TagHelperMetadata.Common.ClassifyAttributesOnly),
             TypeName("TestDirectiveAttribute"));
 
         var directiveAttribute3 = TagHelperDescriptorBuilder.Create(TagHelperKind.EventHandler, RuntimeKind.None, "OnClickDirectiveAttribute", "TestAssembly");
         directiveAttribute3.IsComponentFullyQualifiedNameMatch = true;
+        directiveAttribute3.ClassifyAttributesOnly = true;
         directiveAttribute3.TagMatchingRule(rule =>
         {
             rule.TagName = "*";
@@ -203,7 +204,6 @@ internal static class SimpleTagHelpers
         });
         directiveAttribute3.SetMetadata(
             new(ComponentMetadata.EventHandler.EventArgsType, "Microsoft.AspNetCore.Components.Web.MouseEventArgs"),
-            MakeTrue(TagHelperMetadata.Common.ClassifyAttributesOnly),
             TypeName("OnClickDirectiveAttribute"),
             TypeNamespace("Microsoft.AspNetCore.Components.Web"),
             TypeNameIdentifier("EventHandlers"));

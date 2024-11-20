@@ -31,7 +31,7 @@ public class RefTagHelperDescriptorProviderTest : TagHelperDescriptorProviderTes
         Assert.Empty(item.Diagnostics);
         Assert.False(item.HasErrors);
         Assert.Equal(TagHelperKind.Ref, item.Kind);
-        Assert.Equal(bool.TrueString, item.Metadata[TagHelperMetadata.Common.ClassifyAttributesOnly]);
+        Assert.True(item.ClassifyAttributesOnly);
         Assert.Equal(RuntimeKind.None, item.RuntimeKind);
         Assert.False(item.IsDefaultKind());
         Assert.False(item.KindUsesDefaultTagHelperRuntime());

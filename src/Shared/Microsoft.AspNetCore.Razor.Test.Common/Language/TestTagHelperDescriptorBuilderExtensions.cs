@@ -86,6 +86,15 @@ public static class TestTagHelperDescriptorBuilderExtensions
         return builder;
     }
 
+    public static TagHelperDescriptorBuilder SetClassifyAttributesOnly(this TagHelperDescriptorBuilder builder)
+    {
+        ArgHelper.ThrowIfNull(builder);
+
+        builder.ClassifyAttributesOnly = true;
+
+        return builder;
+    }
+
     public static TagHelperDescriptorBuilder Documentation(this TagHelperDescriptorBuilder builder, string documentation)
     {
         if (builder == null)

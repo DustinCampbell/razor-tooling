@@ -51,7 +51,7 @@ public class EventHandlerTagHelperDescriptorProviderTest : TagHelperDescriptorPr
         Assert.Empty(item.Diagnostics);
         Assert.False(item.HasErrors);
         Assert.Equal(TagHelperKind.EventHandler, item.Kind);
-        Assert.Equal(bool.TrueString, item.Metadata[TagHelperMetadata.Common.ClassifyAttributesOnly]);
+        Assert.True(item.ClassifyAttributesOnly);
         Assert.Equal(RuntimeKind.None, item.RuntimeKind);
         Assert.False(item.IsDefaultKind());
         Assert.False(item.KindUsesDefaultTagHelperRuntime());
@@ -159,7 +159,7 @@ public class EventHandlerTagHelperDescriptorProviderTest : TagHelperDescriptorPr
         Assert.Empty(item.Diagnostics);
         Assert.False(item.HasErrors);
         Assert.Equal(TagHelperKind.EventHandler, item.Kind);
-        Assert.Equal(bool.TrueString, item.Metadata[TagHelperMetadata.Common.ClassifyAttributesOnly]);
+        Assert.True(item.ClassifyAttributesOnly);
         Assert.Equal(RuntimeKind.None, item.RuntimeKind);
         Assert.False(item.IsDefaultKind());
         Assert.False(item.KindUsesDefaultTagHelperRuntime());
