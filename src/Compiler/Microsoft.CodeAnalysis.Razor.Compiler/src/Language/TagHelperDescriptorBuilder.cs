@@ -11,6 +11,7 @@ namespace Microsoft.AspNetCore.Razor.Language;
 public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<TagHelperDescriptor>
 {
     private TagHelperKind _kind;
+    private RuntimeKind _runtimeKind;
     private string? _name;
     private string? _assemblyName;
 
@@ -22,9 +23,15 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
     }
 
     internal TagHelperDescriptorBuilder(TagHelperKind kind, string name, string assemblyName)
+        : this(kind, RuntimeKind.Default, name, assemblyName)
+    {
+    }
+
+    internal TagHelperDescriptorBuilder(TagHelperKind kind, RuntimeKind runtimeKind, string name, string assemblyName)
         : this()
     {
         _kind = kind;
+        _runtimeKind = runtimeKind;
         _name = name ?? throw new ArgumentNullException(nameof(name));
         _assemblyName = assemblyName ?? throw new ArgumentNullException(nameof(assemblyName));
     }
@@ -35,7 +42,11 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
     public static TagHelperDescriptorBuilder Create(TagHelperKind kind, string name, string assemblyName)
         => new(kind, name, assemblyName);
 
+    public static TagHelperDescriptorBuilder Create(TagHelperKind kind, RuntimeKind runtimeKind, string name, string assemblyName)
+        => new(kind, runtimeKind, name, assemblyName);
+
     public TagHelperKind Kind => _kind;
+    public RuntimeKind RuntimeKind => _runtimeKind;
     public string Name => _name.AssumeNotNull();
     public string AssemblyName => _assemblyName.AssumeNotNull();
     public string? DisplayName { get; set; }
@@ -113,13 +124,12 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
 
     private protected override TagHelperDescriptor BuildCore(ImmutableArray<RazorDiagnostic> diagnostics)
     {
-        _metadata.AddIfMissing(TagHelperMetadata.Runtime.Name, TagHelperConventions.DefaultKind);
-        var metadata = _metadata.GetMetadataCollection();
-
         var flags = ComputeFlags(CaseSensitive, IsComponentFullyQualifiedNameMatch);
+        var metadata = _metadata.GetMetadataCollection();
 
         return new TagHelperDescriptor(
             Kind,
+            RuntimeKind,
             Name,
             AssemblyName,
             GetDisplayName(),
@@ -160,14 +170,5 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
                 ? value
                 : null;
         }
-    }
-
-    internal MetadataBuilder GetMetadataBuilder(string? runtimeName = null)
-    {
-        var metadataBuilder = new MetadataBuilder();
-
-        metadataBuilder.Add(TagHelperMetadata.Runtime.Name, runtimeName ?? TagHelperConventions.DefaultKind);
-
-        return metadataBuilder;
     }
 }

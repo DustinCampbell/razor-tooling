@@ -52,7 +52,7 @@ public class EventHandlerTagHelperDescriptorProviderTest : TagHelperDescriptorPr
         Assert.False(item.HasErrors);
         Assert.Equal(TagHelperKind.EventHandler, item.Kind);
         Assert.Equal(bool.TrueString, item.Metadata[TagHelperMetadata.Common.ClassifyAttributesOnly]);
-        Assert.Equal(ComponentMetadata.EventHandler.RuntimeName, item.Metadata[TagHelperMetadata.Runtime.Name]);
+        Assert.Equal(RuntimeKind.None, item.RuntimeKind);
         Assert.False(item.IsDefaultKind());
         Assert.False(item.KindUsesDefaultTagHelperRuntime());
         Assert.False(item.IsComponentOrChildContentTagHelper);
@@ -160,7 +160,7 @@ public class EventHandlerTagHelperDescriptorProviderTest : TagHelperDescriptorPr
         Assert.False(item.HasErrors);
         Assert.Equal(TagHelperKind.EventHandler, item.Kind);
         Assert.Equal(bool.TrueString, item.Metadata[TagHelperMetadata.Common.ClassifyAttributesOnly]);
-        Assert.Equal(ComponentMetadata.EventHandler.RuntimeName, item.Metadata[TagHelperMetadata.Runtime.Name]);
+        Assert.Equal(RuntimeKind.None, item.RuntimeKind);
         Assert.False(item.IsDefaultKind());
         Assert.False(item.KindUsesDefaultTagHelperRuntime());
         Assert.False(item.IsComponentOrChildContentTagHelper);

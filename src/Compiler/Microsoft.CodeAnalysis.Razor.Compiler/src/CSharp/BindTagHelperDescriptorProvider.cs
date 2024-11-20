@@ -121,7 +121,7 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
     private static TagHelperDescriptor CreateFallbackBindTagHelper()
     {
         using var _ = TagHelperDescriptorBuilder.GetPooledInstance(
-            TagHelperKind.Bind, "Bind", ComponentsApi.AssemblyName,
+            TagHelperKind.Bind, RuntimeKind.None, "Bind", ComponentsApi.AssemblyName,
             out var builder);
 
         builder.CaseSensitive = true;
@@ -129,7 +129,6 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
 
         builder.SetMetadata(
             MakeTrue(TagHelperMetadata.Common.ClassifyAttributesOnly),
-            RuntimeName(ComponentMetadata.Bind.RuntimeName),
             MakeTrue(ComponentMetadata.Bind.FallbackKey),
             TypeName("Microsoft.AspNetCore.Components.Bind"),
             TypeNamespace("Microsoft.AspNetCore.Components"),
@@ -363,15 +362,17 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
                 eventName = "Event_" + suffix;
             }
             using var _ = TagHelperDescriptorBuilder.GetPooledInstance(
-                TagHelperKind.Bind, name, ComponentsApi.AssemblyName,
+                TagHelperKind.Bind, RuntimeKind.None, name, ComponentsApi.AssemblyName,
                 out var builder);
-            using var metadata = builder.GetMetadataBuilder(ComponentMetadata.Bind.RuntimeName);
+
             builder.CaseSensitive = true;
             builder.SetDocumentation(
                 DocumentationDescriptor.From(
                     DocumentationId.BindTagHelper_Element,
                     valueAttribute,
                     changeAttribute));
+
+            using var metadata = new MetadataBuilder();
 
             metadata.Add(MakeTrue(TagHelperMetadata.Common.ClassifyAttributesOnly));
             metadata.Add(ComponentMetadata.Bind.ValueAttribute, valueAttribute);
@@ -599,10 +600,8 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
                 }
 
                 using var _ = TagHelperDescriptorBuilder.GetPooledInstance(
-                    TagHelperKind.Bind, tagHelper.Name, tagHelper.AssemblyName,
+                    TagHelperKind.Bind, RuntimeKind.None, tagHelper.Name, tagHelper.AssemblyName,
                     out var builder);
-
-                using var metadata = builder.GetMetadataBuilder(ComponentMetadata.Bind.RuntimeName);
 
                 builder.DisplayName = tagHelper.DisplayName;
                 builder.CaseSensitive = true;
@@ -611,6 +610,8 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
                         DocumentationId.BindTagHelper_Component,
                         valueAttribute.Name,
                         changeAttribute.Name));
+
+                using var metadata = new MetadataBuilder();
 
                 metadata.Add(ComponentMetadata.Bind.ValueAttribute, valueAttribute.Name);
                 metadata.Add(ComponentMetadata.Bind.ChangeAttribute, changeAttribute.Name);

@@ -18,6 +18,7 @@ internal static partial class ObjectWriters
     {
         writer.WriteObject(WellKnownPropertyNames.Checksum, value.Checksum, WriteProperties);
         writer.WriteIfNotZero(nameof(value.Kind), (int)value.Kind);
+        writer.WriteIfNotZero(nameof(value.RuntimeKind), (int)value.RuntimeKind);
         writer.Write(nameof(value.Name), value.Name);
         writer.Write(nameof(value.AssemblyName), value.AssemblyName);
         writer.WriteIfNotNull(nameof(value.DisplayName), value.DisplayName);

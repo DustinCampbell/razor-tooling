@@ -38,7 +38,7 @@ internal sealed class SplatTagHelperDescriptorProvider : TagHelperDescriptorProv
     private static TagHelperDescriptor CreateSplatTagHelper()
     {
         using var _ = TagHelperDescriptorBuilder.GetPooledInstance(
-            TagHelperKind.Splat, "Attributes", ComponentsApi.AssemblyName,
+            TagHelperKind.Splat, RuntimeKind.None, "Attributes", ComponentsApi.AssemblyName,
             out var builder);
 
         builder.CaseSensitive = true;
@@ -46,7 +46,6 @@ internal sealed class SplatTagHelperDescriptorProvider : TagHelperDescriptorProv
 
         builder.SetMetadata(
             MakeTrue(TagHelperMetadata.Common.ClassifyAttributesOnly),
-            RuntimeName(ComponentMetadata.Splat.RuntimeName),
             TypeName("Microsoft.AspNetCore.Components.Attributes"));
 
         builder.TagMatchingRule(rule =>

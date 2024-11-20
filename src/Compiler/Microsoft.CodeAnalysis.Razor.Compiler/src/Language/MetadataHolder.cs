@@ -68,32 +68,6 @@ internal struct MetadataHolder
         _metadataCollection = null;
     }
 
-    public void AddIfMissing(string key, string? value)
-    {
-        if (_metadataCollection is { } metadataCollection)
-        {
-            if (!metadataCollection.ContainsKey(key))
-            {
-                // We need to maintain a semantic for TagHelperDescriptorBuilder that TagHelperMetadata.Runtime.Name
-                // is always included in the metadata. However, if the newer SetMetadata APIs are being used, we
-                // would need to create a new MetadataCollection to include new metadata. To avoid this allocation,
-                // we will require that the SetMetadata APIs *always* include TagHelperMetadata.Runtime.Name, and
-                // throw if they don't.
-                throw new InvalidOperationException(
-                    Resources.FormatCannot_add_item_with_key_0_to_an_existing_1(key, nameof(MetadataCollection)));
-            }
-        }
-        else // _metadataCollection is null
-        {
-            var metadataDictionary = _metadataDictionary ??= new Dictionary<string, string?>(StringComparer.Ordinal);
-
-            if (!metadataDictionary.ContainsKey(key))
-            {
-                metadataDictionary.Add(key, value);
-            }
-        }
-    }
-
     public readonly MetadataCollection GetMetadataCollection()
         => _metadataCollection ?? MetadataCollection.CreateOrEmpty(_metadataDictionary);
 }

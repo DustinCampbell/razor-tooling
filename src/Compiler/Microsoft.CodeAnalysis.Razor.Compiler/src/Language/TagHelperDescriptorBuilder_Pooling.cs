@@ -11,14 +11,15 @@ public partial class TagHelperDescriptorBuilder
 {
     private static readonly ObjectPool<TagHelperDescriptorBuilder> s_pool = DefaultPool.Create(Policy.Instance);
 
-    internal static TagHelperDescriptorBuilder GetInstance(string name, string assemblyName)
-        => GetInstance(TagHelperKind.Default, name, assemblyName);
+    internal static TagHelperDescriptorBuilder GetInstance(RuntimeKind runtimeKind, string name, string assemblyName)
+        => GetInstance(TagHelperKind.Default, runtimeKind, name, assemblyName);
 
-    internal static TagHelperDescriptorBuilder GetInstance(TagHelperKind kind, string name, string assemblyName)
+    internal static TagHelperDescriptorBuilder GetInstance(TagHelperKind kind, RuntimeKind runtimeKind, string name, string assemblyName)
     {
         var builder = s_pool.Get();
 
         builder._kind = kind;
+        builder._runtimeKind = runtimeKind;
         builder._name = name ?? throw new ArgumentNullException(nameof(name));
         builder._assemblyName = assemblyName ?? throw new ArgumentNullException(nameof(assemblyName));
 
@@ -28,6 +29,7 @@ public partial class TagHelperDescriptorBuilder
     private protected override void Reset()
     {
         _kind = 0;
+        _runtimeKind = 0;
         _name = null;
         _assemblyName = null;
         _documentationObject = default;
@@ -70,10 +72,10 @@ public partial class TagHelperDescriptorBuilder
     ///  Once disposed, the builder can no longer be used.
     /// </remarks>
     public static PooledBuilder GetPooledInstance(
-        TagHelperKind kind, string name, string assemblyName,
+        TagHelperKind kind, RuntimeKind runtimeKind, string name, string assemblyName,
         out TagHelperDescriptorBuilder builder)
     {
-        var defaultBuilder = GetInstance(kind, name, assemblyName);
+        var defaultBuilder = GetInstance(kind, runtimeKind, name, assemblyName);
         builder = defaultBuilder;
         return new(defaultBuilder);
     }
@@ -96,7 +98,7 @@ public partial class TagHelperDescriptorBuilder
         string name, string assemblyName,
         out TagHelperDescriptorBuilder builder)
     {
-        var defaultBuilder = GetInstance(name, assemblyName);
+        var defaultBuilder = GetInstance(RuntimeKind.Default, name, assemblyName);
         builder = defaultBuilder;
         return new(defaultBuilder);
     }

@@ -39,7 +39,7 @@ internal sealed class KeyTagHelperDescriptorProvider() : TagHelperDescriptorProv
     private static TagHelperDescriptor CreateKeyTagHelper()
     {
         using var _ = TagHelperDescriptorBuilder.GetPooledInstance(
-            TagHelperKind.Key, "Key", ComponentsApi.AssemblyName,
+            TagHelperKind.Key, RuntimeKind.None, "Key", ComponentsApi.AssemblyName,
             out var builder);
 
         builder.CaseSensitive = true;
@@ -47,7 +47,6 @@ internal sealed class KeyTagHelperDescriptorProvider() : TagHelperDescriptorProv
 
         builder.SetMetadata(
             MakeTrue(TagHelperMetadata.Common.ClassifyAttributesOnly),
-            RuntimeName(ComponentMetadata.Key.RuntimeName),
             TypeName("Microsoft.AspNetCore.Components.Key"));
 
         builder.TagMatchingRule(rule =>

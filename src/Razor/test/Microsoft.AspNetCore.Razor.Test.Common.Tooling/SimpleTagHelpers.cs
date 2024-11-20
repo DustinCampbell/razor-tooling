@@ -172,7 +172,7 @@ internal static class SimpleTagHelpers
             MakeTrue(TagHelperMetadata.Common.ClassifyAttributesOnly),
             TypeName("TestDirectiveAttribute"));
 
-        var directiveAttribute3 = TagHelperDescriptorBuilder.Create(TagHelperKind.EventHandler, "OnClickDirectiveAttribute", "TestAssembly");
+        var directiveAttribute3 = TagHelperDescriptorBuilder.Create(TagHelperKind.EventHandler, RuntimeKind.None, "OnClickDirectiveAttribute", "TestAssembly");
         directiveAttribute3.IsComponentFullyQualifiedNameMatch = true;
         directiveAttribute3.TagMatchingRule(rule =>
         {
@@ -202,7 +202,6 @@ internal static class SimpleTagHelpers
             attribute.TypeName = "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.MouseEventArgs>";
         });
         directiveAttribute3.SetMetadata(
-            RuntimeName(ComponentMetadata.EventHandler.RuntimeName),
             new(ComponentMetadata.EventHandler.EventArgsType, "Microsoft.AspNetCore.Components.Web.MouseEventArgs"),
             MakeTrue(TagHelperMetadata.Common.ClassifyAttributesOnly),
             TypeName("OnClickDirectiveAttribute"),

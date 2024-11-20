@@ -93,12 +93,13 @@ internal sealed class ComponentTagHelperDescriptorProvider : TagHelperDescriptor
             var typeName = type.ToDisplayString(SymbolExtensions.FullNameTypeDisplayFormat);
             var assemblyName = type.ContainingAssembly.Identity.Name;
 
-            using var _ = TagHelperDescriptorBuilder.GetPooledInstance(
-                TagHelperKind.Component, typeName, assemblyName, out var builder);
+            // RuntimeKind.IComponent opts out this 'component' tag helper for any processing
+            // that's specific to the default Razor ITagHelper runtime.
 
-            // This opts out this 'component' tag helper for any processing that's specific to the default
-            // Razor ITagHelper runtime.
-            using var metadata = builder.GetMetadataBuilder(ComponentMetadata.Component.RuntimeName);
+            using var _ = TagHelperDescriptorBuilder.GetPooledInstance(
+                TagHelperKind.Component, RuntimeKind.IComponent, typeName, assemblyName, out var builder);
+
+            using var metadata = new MetadataBuilder();
 
             metadata.Add(TypeName(typeName));
             metadata.Add(TypeNamespace(type.ContainingNamespace.ToDisplayString(SymbolExtensions.FullNameTypeDisplayFormat)));
@@ -495,13 +496,14 @@ internal sealed class ComponentTagHelperDescriptorProvider : TagHelperDescriptor
             var typeName = component.GetTypeName() + "." + attribute.Name;
             var assemblyName = component.AssemblyName;
 
+            // RuntimeKind.None opts out this 'component' tag helper for any processing
+            // that's specific to the default Razor ITagHelper runtime.
+
             using var _ = TagHelperDescriptorBuilder.GetPooledInstance(
-                TagHelperKind.ChildContent, typeName, assemblyName,
+                TagHelperKind.ChildContent, RuntimeKind.None, typeName, assemblyName,
                 out var builder);
 
-            // This opts out this 'component' tag helper for any processing that's specific to the default
-            // Razor ITagHelper runtime.
-            using var metadata = builder.GetMetadataBuilder(ComponentMetadata.ChildContent.RuntimeName);
+            using var metadata = new MetadataBuilder();
 
             metadata.Add(TypeName(typeName));
             metadata.Add(TypeNamespace(component.GetTypeNamespace()));

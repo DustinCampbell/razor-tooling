@@ -2442,10 +2442,9 @@ public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
         var document = @"<input @bind-value=""Message"" @bind-value:event=""onchange"" />";
         ImmutableArray<TagHelperDescriptor> descriptors =
         [
-            TagHelperDescriptorBuilder.Create(TagHelperKind.Bind, "Bind", ComponentsApi.AssemblyName)
+            TagHelperDescriptorBuilder.Create(TagHelperKind.Bind, RuntimeKind.None, "Bind", ComponentsApi.AssemblyName)
                 .Metadata(
                     MakeTrue(TagHelperMetadata.Common.ClassifyAttributesOnly),
-                    RuntimeName(ComponentMetadata.Bind.RuntimeName),
                     TypeName("Microsoft.AspNetCore.Components.Bind"),
                     MakeTrue(ComponentMetadata.Bind.FallbackKey))
                 .TagMatchingRuleDescriptor(rule =>
@@ -2486,10 +2485,9 @@ public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
         var document = @"<input @bind-foo @bind-foo:param />";
         ImmutableArray<TagHelperDescriptor> descriptors =
         [
-            TagHelperDescriptorBuilder.Create(TagHelperKind.Bind, "Bind", ComponentsApi.AssemblyName)
+            TagHelperDescriptorBuilder.Create(TagHelperKind.Bind, RuntimeKind.None, "Bind", ComponentsApi.AssemblyName)
                 .Metadata(
                     MakeTrue(TagHelperMetadata.Common.ClassifyAttributesOnly),
-                    RuntimeName(ComponentMetadata.Bind.RuntimeName),
                     TypeName("Microsoft.AspNetCore.Components.Bind"),
                     MakeTrue(ComponentMetadata.Bind.FallbackKey))
                 .TagMatchingRuleDescriptor(rule =>

@@ -5,7 +5,6 @@
 
 using System;
 using System.Collections.Generic;
-using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
@@ -23,24 +22,9 @@ public static class TestTagHelperDescriptorBuilderExtensions
 
     public static TagHelperDescriptorBuilder Metadata(this TagHelperDescriptorBuilder builder, params KeyValuePair<string, string>[] pairs)
     {
-        if (builder is null)
-        {
-            throw new ArgumentNullException(nameof(builder));
-        }
+        ArgHelper.ThrowIfNull(builder);
 
-        // We need to be sure to add TagHelperMetadata.Runtime.Name if it doesn't already exist.
-        if (Array.Exists(pairs, static pair => pair.Key == TagHelperMetadata.Runtime.Name))
-        {
-            builder.SetMetadata(pairs);
-        }
-        else
-        {
-            var newPairs = new KeyValuePair<string, string>[pairs.Length + 1];
-            newPairs[0] = RuntimeName(TagHelperConventions.DefaultKind);
-            Array.Copy(pairs, 0, newPairs, 1, pairs.Length);
-
-            builder.SetMetadata(newPairs);
-        }
+        builder.SetMetadata(pairs);
 
         return builder;
     }

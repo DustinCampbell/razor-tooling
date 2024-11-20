@@ -42,6 +42,7 @@ internal sealed class FormNameTagHelperDescriptorProvider() : TagHelperDescripto
     {
         using var _ = TagHelperDescriptorBuilder.GetPooledInstance(
             kind: TagHelperKind.FormName,
+            runtimeKind: RuntimeKind.None,
             name: "FormName",
             assemblyName: ComponentsApi.AssemblyName,
             builder: out var builder);
@@ -51,7 +52,6 @@ internal sealed class FormNameTagHelperDescriptorProvider() : TagHelperDescripto
 
         builder.SetMetadata(
             MakeTrue(TagHelperMetadata.Common.ClassifyAttributesOnly),
-            RuntimeName(ComponentMetadata.FormName.RuntimeName),
             TypeName("Microsoft.AspNetCore.Components.FormName"));
 
         builder.TagMatchingRule(rule =>

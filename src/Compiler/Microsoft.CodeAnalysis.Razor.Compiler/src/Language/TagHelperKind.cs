@@ -5,7 +5,7 @@ namespace Microsoft.AspNetCore.Razor.Language;
 
 public enum TagHelperKind
 {
-    Default = 0,
+    Default = 0, // ITagHelper
 
     Bind,
     ChildContent,
