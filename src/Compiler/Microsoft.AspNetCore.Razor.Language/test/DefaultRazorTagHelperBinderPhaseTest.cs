@@ -1482,6 +1482,7 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
         bool componentFullyQualified = false)
     {
         var builder = TagHelperDescriptorBuilder.Create(kind, typeName, assemblyName);
+
         using var metadata = builder.GetMetadataBuilder();
 
         metadata.Add(TypeName(typeName));
@@ -1514,7 +1515,7 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
 
         if (componentFullyQualified)
         {
-            metadata.Add(ComponentMetadata.Component.NameMatchKey, ComponentMetadata.Component.FullyQualifiedNameMatch);
+            builder.IsComponentFullyQualifiedNameMatch = true;
         }
 
         builder.SetMetadata(metadata.Build());

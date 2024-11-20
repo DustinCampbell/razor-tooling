@@ -108,6 +108,8 @@ internal sealed class ComponentTagHelperDescriptorProvider : TagHelperDescriptor
 
             if (fullyQualified)
             {
+                builder.IsComponentFullyQualifiedNameMatch = true;
+
                 var fullName = type.ContainingNamespace.IsGlobalNamespace
                     ? type.Name
                     : $"{type.ContainingNamespace.ToDisplayString(SymbolExtensions.FullNameTypeDisplayFormat)}.{type.Name}";
@@ -117,7 +119,6 @@ internal sealed class ComponentTagHelperDescriptorProvider : TagHelperDescriptor
                     r.TagName = fullName;
                 });
 
-                metadata.Add(ComponentMetadata.Component.NameMatchKey, ComponentMetadata.Component.FullyQualifiedNameMatch);
             }
             else
             {
@@ -530,7 +531,7 @@ internal sealed class ComponentTagHelperDescriptorProvider : TagHelperDescriptor
 
             if (component.IsComponentFullyQualifiedNameMatch)
             {
-                metadata.Add(ComponentMetadata.Component.NameMatchKey, ComponentMetadata.Component.FullyQualifiedNameMatch);
+                builder.IsComponentFullyQualifiedNameMatch = true;
             }
 
             builder.SetMetadata(metadata.Build());

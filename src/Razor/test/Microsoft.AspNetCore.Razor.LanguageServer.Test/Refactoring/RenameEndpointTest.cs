@@ -9,7 +9,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
-using Microsoft.AspNetCore.Razor.Language.Components;
 using Microsoft.AspNetCore.Razor.LanguageServer.Common;
 using Microsoft.AspNetCore.Razor.LanguageServer.Hosting;
 using Microsoft.AspNetCore.Razor.LanguageServer.ProjectSystem;
@@ -740,12 +739,12 @@ public class RenameEndpointTest(ITestOutputHelper testOutput) : LanguageServerTe
         yield return builder.Build();
 
         var fullyQualifiedBuilder = TagHelperDescriptorBuilder.Create(TagHelperKind.Component, fullyQualifiedName, assemblyName);
+        fullyQualifiedBuilder.IsComponentFullyQualifiedNameMatch = true;
         fullyQualifiedBuilder.TagMatchingRule(rule => rule.TagName = fullyQualifiedName);
         fullyQualifiedBuilder.SetMetadata(
             TypeName(fullyQualifiedName),
             TypeNameIdentifier(tagName),
-            TypeNamespace(namespaceName),
-            new(ComponentMetadata.Component.NameMatchKey, ComponentMetadata.Component.FullyQualifiedNameMatch));
+            TypeNamespace(namespaceName));
 
         yield return fullyQualifiedBuilder.Build();
     }

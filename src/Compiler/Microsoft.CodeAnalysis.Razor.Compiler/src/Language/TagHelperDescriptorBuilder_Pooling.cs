@@ -35,6 +35,7 @@ public partial class TagHelperDescriptorBuilder
         DisplayName = null;
         TagOutputHint = null;
         CaseSensitive = false;
+        IsComponentFullyQualifiedNameMatch = false;
 
         AllowedChildTags.Clear();
         BoundAttributes.Clear();

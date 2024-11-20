@@ -700,7 +700,7 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
 
                 if (tagHelper.IsComponentFullyQualifiedNameMatch)
                 {
-                    metadata.Add(ComponentMetadata.Component.NameMatchKey, ComponentMetadata.Component.FullyQualifiedNameMatch);
+                    builder.IsComponentFullyQualifiedNameMatch = true;
                 }
 
                 builder.SetMetadata(metadata.Build());

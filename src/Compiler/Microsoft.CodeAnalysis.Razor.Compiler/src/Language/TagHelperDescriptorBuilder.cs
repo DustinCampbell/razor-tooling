@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
@@ -42,6 +42,7 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
     public string? DisplayName { get; set; }
     public string? TagOutputHint { get; set; }
     public bool CaseSensitive { get; set; }
+    internal bool IsComponentFullyQualifiedNameMatch { get; set; }
 
     public string? Documentation
     {
@@ -116,7 +117,7 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
         _metadata.AddIfMissing(TagHelperMetadata.Runtime.Name, TagHelperConventions.DefaultKind);
         var metadata = _metadata.GetMetadataCollection();
 
-        var flags = ComputeFlags(CaseSensitive, Kind, metadata);
+        var flags = ComputeFlags(CaseSensitive, Kind, IsComponentFullyQualifiedNameMatch);
 
         return new TagHelperDescriptor(
             Kind,
@@ -133,7 +134,7 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
             diagnostics);
     }
 
-    private static TagHelperFlags ComputeFlags(bool caseSensitive, TagHelperKind kind, MetadataCollection metadata)
+    private static TagHelperFlags ComputeFlags(bool caseSensitive, TagHelperKind kind, bool isComponentFullQualifiedNameMatch)
     {
         TagHelperFlags flags = 0;
 
@@ -147,7 +148,7 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
             flags |= TagHelperFlags.IsComponent;
         }
 
-        if (metadata.Contains(ComponentMetadata.Component.NameMatchKey, ComponentMetadata.Component.FullyQualifiedNameMatch))
+        if (isComponentFullQualifiedNameMatch)
         {
             flags |= TagHelperFlags.IsComponentFullyQualifiedNameMatch;
         }
