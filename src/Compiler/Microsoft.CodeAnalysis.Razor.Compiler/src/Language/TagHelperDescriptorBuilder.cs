@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
-using Microsoft.AspNetCore.Razor.Language.Components;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
@@ -117,7 +116,7 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
         _metadata.AddIfMissing(TagHelperMetadata.Runtime.Name, TagHelperConventions.DefaultKind);
         var metadata = _metadata.GetMetadataCollection();
 
-        var flags = ComputeFlags(CaseSensitive, Kind, IsComponentFullyQualifiedNameMatch);
+        var flags = ComputeFlags(CaseSensitive, IsComponentFullyQualifiedNameMatch);
 
         return new TagHelperDescriptor(
             Kind,
@@ -134,7 +133,7 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
             diagnostics);
     }
 
-    private static TagHelperFlags ComputeFlags(bool caseSensitive, TagHelperKind kind, bool isComponentFullQualifiedNameMatch)
+    private static TagHelperFlags ComputeFlags(bool caseSensitive, bool isComponentFullQualifiedNameMatch)
     {
         TagHelperFlags flags = 0;
 
@@ -143,19 +142,9 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
             flags |= TagHelperFlags.CaseSensitive;
         }
 
-        if (kind == TagHelperKind.Component)
-        {
-            flags |= TagHelperFlags.IsComponent;
-        }
-
         if (isComponentFullQualifiedNameMatch)
         {
             flags |= TagHelperFlags.IsComponentFullyQualifiedNameMatch;
-        }
-
-        if (kind == TagHelperKind.ChildContent)
-        {
-            flags |= TagHelperFlags.IsChildContent;
         }
 
         return flags;

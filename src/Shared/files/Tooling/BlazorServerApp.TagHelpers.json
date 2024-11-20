@@ -1,16 +1,16 @@
 [
   {
     "__Checksum": {
-      "Data1": 369824664932257686,
-      "Data2": 3875751719401792547,
-      "Data3": -8674626775859774805,
-      "Data4": -8590073674829688942
+      "Data1": -2623415633540607196,
+      "Data2": -3218144455325277227,
+      "Data3": -7751366254827016995,
+      "Data4": -6688288327466443137
     },
     "Kind": 3,
     "Name": "BlazorApp1.Pages.Counter",
     "AssemblyName": "BlazorApp1",
     "DisplayName": "BlazorApp1.Pages.Counter",
-    "Flags": 3,
+    "Flags": 1,
     "TagMatchingRules": [
       {
         "TagName": "Counter"
@@ -25,16 +25,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 294673701143585840,
-      "Data2": -461146976000596446,
-      "Data3": -1305500108113242741,
-      "Data4": -4449530946768273442
+      "Data1": 7777210738686142860,
+      "Data2": 6311029851300805336,
+      "Data3": -8929099450645013966,
+      "Data4": 1208124857291808231
     },
     "Kind": 3,
     "Name": "BlazorApp1.Pages.Counter",
     "AssemblyName": "BlazorApp1",
     "DisplayName": "BlazorApp1.Pages.Counter",
-    "Flags": 7,
+    "Flags": 2,
     "TagMatchingRules": [
       {
         "TagName": "BlazorApp1.Pages.Counter"
@@ -49,16 +49,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -1370160226765479525,
-      "Data2": 4088572357707677940,
-      "Data3": -396087588738685003,
-      "Data4": 5834569575060492714
+      "Data1": 7704448559707008241,
+      "Data2": -5969750145030404009,
+      "Data3": 2241948181185045979,
+      "Data4": -4022923291363126867
     },
     "Kind": 3,
     "Name": "BlazorApp1.Shared.MainLayout",
     "AssemblyName": "BlazorApp1",
     "DisplayName": "BlazorApp1.Shared.MainLayout",
-    "Flags": 3,
+    "Flags": 1,
     "TagMatchingRules": [
       {
         "TagName": "MainLayout"
@@ -87,16 +87,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -283498577614321818,
-      "Data2": -8080354677423606967,
-      "Data3": 4345128533364117696,
-      "Data4": 7579607627649060347
+      "Data1": 3368703111378757467,
+      "Data2": -2578334516781345939,
+      "Data3": 8566331024571026774,
+      "Data4": 9182319144308800088
     },
     "Kind": 3,
     "Name": "BlazorApp1.Shared.MainLayout",
     "AssemblyName": "BlazorApp1",
     "DisplayName": "BlazorApp1.Shared.MainLayout",
-    "Flags": 7,
+    "Flags": 2,
     "TagMatchingRules": [
       {
         "TagName": "BlazorApp1.Shared.MainLayout"
@@ -125,16 +125,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -6219458010660443469,
-      "Data2": 1379853525221904233,
-      "Data3": 7610336142921077308,
-      "Data4": -5064001284498662311
+      "Data1": -7802031173218896654,
+      "Data2": -3716437694109265018,
+      "Data3": -8682718225757491284,
+      "Data4": -5380724902149309333
     },
     "Kind": 2,
     "Name": "BlazorApp1.Shared.MainLayout.Body",
     "AssemblyName": "BlazorApp1",
     "DisplayName": "BlazorApp1.Shared.MainLayout.Body",
-    "Flags": 9,
+    "Flags": 1,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.LayoutComponentBase.Body\">\r\n            <summary>\r\n            Gets the content to be rendered inside the layout.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -151,16 +151,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -5334204124429653303,
-      "Data2": -7485432950316341813,
-      "Data3": -98519424626556300,
-      "Data4": -4440935743196575701
+      "Data1": -1417673416544976830,
+      "Data2": 131670526681791215,
+      "Data3": -6861667851987685864,
+      "Data4": -4851188490472250039
     },
     "Kind": 2,
     "Name": "BlazorApp1.Shared.MainLayout.Body",
     "AssemblyName": "BlazorApp1",
     "DisplayName": "BlazorApp1.Shared.MainLayout.Body",
-    "Flags": 13,
+    "Flags": 2,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.LayoutComponentBase.Body\">\r\n            <summary>\r\n            Gets the content to be rendered inside the layout.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -177,16 +177,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -7869441255858155096,
-      "Data2": -5206896492288751888,
-      "Data3": 1032550785827979862,
-      "Data4": 7149422058365656719
+      "Data1": -5619583721721768468,
+      "Data2": 2678420611530124755,
+      "Data3": -3329117208991363490,
+      "Data4": -2425292042154936212
     },
     "Kind": 3,
     "Name": "BlazorApp1.Shared.NavMenu",
     "AssemblyName": "BlazorApp1",
     "DisplayName": "BlazorApp1.Shared.NavMenu",
-    "Flags": 3,
+    "Flags": 1,
     "TagMatchingRules": [
       {
         "TagName": "NavMenu"
@@ -201,16 +201,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 4076215374490336655,
-      "Data2": -2133775494355374964,
-      "Data3": 945091711717707383,
-      "Data4": 4747648238246537618
+      "Data1": 1267879306344109486,
+      "Data2": -3638598113442020087,
+      "Data3": 3156811109480685478,
+      "Data4": -7714269019362642441
     },
     "Kind": 3,
     "Name": "BlazorApp1.Shared.NavMenu",
     "AssemblyName": "BlazorApp1",
     "DisplayName": "BlazorApp1.Shared.NavMenu",
-    "Flags": 7,
+    "Flags": 2,
     "TagMatchingRules": [
       {
         "TagName": "BlazorApp1.Shared.NavMenu"
@@ -225,16 +225,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -270941927492575881,
-      "Data2": -767398922187625974,
-      "Data3": -3339255611127158471,
-      "Data4": 6248373328722062964
+      "Data1": -7311123850074426598,
+      "Data2": 1306044036820662410,
+      "Data3": -2430496017835384584,
+      "Data4": -7135910565298316078
     },
     "Kind": 3,
     "Name": "BlazorApp1.Shared.SurveyPrompt",
     "AssemblyName": "BlazorApp1",
     "DisplayName": "BlazorApp1.Shared.SurveyPrompt",
-    "Flags": 3,
+    "Flags": 1,
     "TagMatchingRules": [
       {
         "TagName": "SurveyPrompt"
@@ -262,16 +262,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 3174572531147496657,
-      "Data2": 6267078687096189671,
-      "Data3": -1023466644826636470,
-      "Data4": -3397822405247240789
+      "Data1": -6514228667235296813,
+      "Data2": 7436161929615771280,
+      "Data3": -8891613480267833382,
+      "Data4": -6416517446608672959
     },
     "Kind": 3,
     "Name": "BlazorApp1.Shared.SurveyPrompt",
     "AssemblyName": "BlazorApp1",
     "DisplayName": "BlazorApp1.Shared.SurveyPrompt",
-    "Flags": 7,
+    "Flags": 2,
     "TagMatchingRules": [
       {
         "TagName": "BlazorApp1.Shared.SurveyPrompt"
@@ -299,16 +299,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 4621269781366141521,
-      "Data2": 3247897373160670794,
-      "Data3": 2689369038377311785,
-      "Data4": 183201082158941073
+      "Data1": 3764015919758342867,
+      "Data2": 4200284026254660841,
+      "Data3": 6955279426337065288,
+      "Data4": -4527110164989930022
     },
     "Kind": 3,
     "Name": "BlazorApp1.Pages.Index",
     "AssemblyName": "BlazorApp1",
     "DisplayName": "BlazorApp1.Pages.Index",
-    "Flags": 3,
+    "Flags": 1,
     "TagMatchingRules": [
       {
         "TagName": "Index"
@@ -323,16 +323,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -5375009314536243930,
-      "Data2": 2167980998623523438,
-      "Data3": 8337538255943863043,
-      "Data4": 3354080230111145592
+      "Data1": -1531403787462658609,
+      "Data2": 2121133450818291888,
+      "Data3": 6400439532920629170,
+      "Data4": 5035099433163788360
     },
     "Kind": 3,
     "Name": "BlazorApp1.Pages.Index",
     "AssemblyName": "BlazorApp1",
     "DisplayName": "BlazorApp1.Pages.Index",
-    "Flags": 7,
+    "Flags": 2,
     "TagMatchingRules": [
       {
         "TagName": "BlazorApp1.Pages.Index"
@@ -347,16 +347,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -1348587314961459242,
-      "Data2": -7271695038238618926,
-      "Data3": -2180515091963481971,
-      "Data4": -2790790036851605755
+      "Data1": -7327447714981654032,
+      "Data2": -369432591217519997,
+      "Data3": -554713125853260086,
+      "Data4": 2532350776921352960
     },
     "Kind": 3,
     "Name": "BlazorApp1.Pages.FetchData",
     "AssemblyName": "BlazorApp1",
     "DisplayName": "BlazorApp1.Pages.FetchData",
-    "Flags": 3,
+    "Flags": 1,
     "TagMatchingRules": [
       {
         "TagName": "FetchData"
@@ -371,16 +371,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -3026124807551115204,
-      "Data2": 4235633192477526873,
-      "Data3": -5497694983650987833,
-      "Data4": 5214998306701648683
+      "Data1": 5662750542135627655,
+      "Data2": -875027488774224961,
+      "Data3": -5833682654958514903,
+      "Data4": -4115927672909615910
     },
     "Kind": 3,
     "Name": "BlazorApp1.Pages.FetchData",
     "AssemblyName": "BlazorApp1",
     "DisplayName": "BlazorApp1.Pages.FetchData",
-    "Flags": 7,
+    "Flags": 2,
     "TagMatchingRules": [
       {
         "TagName": "BlazorApp1.Pages.FetchData"
@@ -395,16 +395,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 1355233990070544131,
-      "Data2": 5466801203264224169,
-      "Data3": -2308472702803562358,
-      "Data4": -6880113941965586169
+      "Data1": -2752258966176756237,
+      "Data2": 2345092151591953351,
+      "Data3": -6344307268916237293,
+      "Data4": 7752902031533181786
     },
     "Kind": 3,
     "Name": "BlazorApp1.App",
     "AssemblyName": "BlazorApp1",
     "DisplayName": "BlazorApp1.App",
-    "Flags": 3,
+    "Flags": 1,
     "TagMatchingRules": [
       {
         "TagName": "App"
@@ -419,16 +419,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -169255622091996703,
-      "Data2": 1823288815413823072,
-      "Data3": 1950010589314141725,
-      "Data4": 1538541712620850023
+      "Data1": 56992877877000087,
+      "Data2": -3823875118641132437,
+      "Data3": 6171533664296108672,
+      "Data4": 1171250302488623347
     },
     "Kind": 3,
     "Name": "BlazorApp1.App",
     "AssemblyName": "BlazorApp1",
     "DisplayName": "BlazorApp1.App",
-    "Flags": 7,
+    "Flags": 2,
     "TagMatchingRules": [
       {
         "TagName": "BlazorApp1.App"
@@ -443,16 +443,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 1319485306290134986,
-      "Data2": -3798273816223807936,
-      "Data3": -1619202141414659702,
-      "Data4": 2327065859553320166
+      "Data1": -8602145834295039534,
+      "Data2": -6707076389534157222,
+      "Data3": -7453720984304633688,
+      "Data4": 7204299489123696419
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView",
-    "Flags": 3,
+    "Flags": 1,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView\">\r\n             <summary>\r\n             Combines the behaviors of <see cref=\"T:Microsoft.AspNetCore.Components.Authorization.AuthorizeView\" /> and <see cref=\"T:Microsoft.AspNetCore.Components.RouteView\" />,\r\n             so that it displays the page matching the specified route but only if the user\r\n             is authorized to see it.\r\n            \r\n             Additionally, this component supplies a cascading parameter of type <see cref=\"T:System.Threading.Tasks.Task`1\" />,\r\n             which makes the user's current authentication state available to descendants.\r\n             </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -542,16 +542,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 8743822205882369905,
-      "Data2": -934733698724262518,
-      "Data3": -6802099049426581424,
-      "Data4": -657578639708574231
+      "Data1": 558568971751356889,
+      "Data2": -3790096218783984340,
+      "Data3": 6079816383391471129,
+      "Data4": 539300585036172531
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView",
-    "Flags": 7,
+    "Flags": 2,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView\">\r\n             <summary>\r\n             Combines the behaviors of <see cref=\"T:Microsoft.AspNetCore.Components.Authorization.AuthorizeView\" /> and <see cref=\"T:Microsoft.AspNetCore.Components.RouteView\" />,\r\n             so that it displays the page matching the specified route but only if the user\r\n             is authorized to see it.\r\n            \r\n             Additionally, this component supplies a cascading parameter of type <see cref=\"T:System.Threading.Tasks.Task`1\" />,\r\n             which makes the user's current authentication state available to descendants.\r\n             </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -641,16 +641,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 5586592135775966729,
-      "Data2": -6859995617649516826,
-      "Data3": 4155746617827542493,
-      "Data4": 6230992226285356844
+      "Data1": 5288660757239814931,
+      "Data2": 3204111278515089670,
+      "Data3": -6550972995645167424,
+      "Data4": -3778537259224725114
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized",
-    "Flags": 9,
+    "Flags": 1,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized\">\r\n            <summary>\r\n            The content that will be displayed if the user is not authorized.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -686,16 +686,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -3343140364226326177,
-      "Data2": -6737937580404439216,
-      "Data3": -426998760516129426,
-      "Data4": 3255621912031384467
+      "Data1": 6025672104563657372,
+      "Data2": -5858928974577712849,
+      "Data3": -3680938320732499554,
+      "Data4": -8891910686798099934
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized",
-    "Flags": 13,
+    "Flags": 2,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized\">\r\n            <summary>\r\n            The content that will be displayed if the user is not authorized.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -731,16 +731,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -8531184019204031845,
-      "Data2": -6685994880881893449,
-      "Data3": 1996035002287783416,
-      "Data4": 8400008976682582258
+      "Data1": -5919724111987380698,
+      "Data2": 5529007310464532666,
+      "Data3": -106683062954452163,
+      "Data4": 5793900499150280568
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing",
-    "Flags": 9,
+    "Flags": 1,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing\">\r\n            <summary>\r\n            The content that will be displayed while asynchronous authorization is in progress.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -757,16 +757,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 8475149138423109310,
-      "Data2": 7720392151653303381,
-      "Data3": 6899733033367161243,
-      "Data4": 15407356836314096
+      "Data1": 7561359919756117846,
+      "Data2": 4628666640633389289,
+      "Data3": 5124176072537020748,
+      "Data4": -2622080373654642285
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing",
-    "Flags": 13,
+    "Flags": 2,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing\">\r\n            <summary>\r\n            The content that will be displayed while asynchronous authorization is in progress.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -783,16 +783,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 5724944197613095219,
-      "Data2": 8179901231686305353,
-      "Data3": 7663781805266275454,
-      "Data4": 6812850591372903249
+      "Data1": -1806326118480181137,
+      "Data2": -8499627081242996029,
+      "Data3": 7103390905678578470,
+      "Data4": 8209016053154734325
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView",
-    "Flags": 3,
+    "Flags": 1,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Authorization.AuthorizeView\">\r\n            <summary>\r\n            Displays differing content depending on the user's authorization status.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -907,16 +907,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 4391461448050728102,
-      "Data2": 6223815779855618714,
-      "Data3": -1525164013510425716,
-      "Data4": 5422112330842349354
+      "Data1": -403058705606685073,
+      "Data2": -4680029255427786551,
+      "Data3": -3313652011616959277,
+      "Data4": 3545412676072143560
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView",
-    "Flags": 7,
+    "Flags": 2,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Authorization.AuthorizeView\">\r\n            <summary>\r\n            Displays differing content depending on the user's authorization status.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -1031,16 +1031,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -7049154365029177173,
-      "Data2": 1048753218647378808,
-      "Data3": -8081762687156996579,
-      "Data4": -3538496159063825631
+      "Data1": -6167912168218933442,
+      "Data2": 2468228283865817446,
+      "Data3": -5930140040900921450,
+      "Data4": 2348467031382158278
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.ChildContent",
-    "Flags": 9,
+    "Flags": 1,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.ChildContent\">\r\n            <summary>\r\n            The content that will be displayed if the user is authorized.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -1076,16 +1076,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 5124753910078573158,
-      "Data2": 2745241831060027027,
-      "Data3": -664544345207279262,
-      "Data4": -7938324902361217109
+      "Data1": -5060428925057605914,
+      "Data2": -1835102362514623387,
+      "Data3": 6604464256654235965,
+      "Data4": -2492663345194201671
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.ChildContent",
-    "Flags": 13,
+    "Flags": 2,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.ChildContent\">\r\n            <summary>\r\n            The content that will be displayed if the user is authorized.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -1121,16 +1121,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 9137259894657272735,
-      "Data2": -862084252458123061,
-      "Data3": 5943987775668476530,
-      "Data4": -9060743275397816581
+      "Data1": 339698148132467850,
+      "Data2": -4141465547686113533,
+      "Data3": -1627028434431817132,
+      "Data4": 2284671393563162188
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.NotAuthorized",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.NotAuthorized",
-    "Flags": 9,
+    "Flags": 1,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.NotAuthorized\">\r\n            <summary>\r\n            The content that will be displayed if the user is not authorized.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -1166,16 +1166,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 6046363138398348931,
-      "Data2": -1325729138877615757,
-      "Data3": 4675591291020874247,
-      "Data4": -3849665674738463483
+      "Data1": 1764909884100509851,
+      "Data2": 2422218061908726340,
+      "Data3": 1115622486364648808,
+      "Data4": 5152719265758576612
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.NotAuthorized",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.NotAuthorized",
-    "Flags": 13,
+    "Flags": 2,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.NotAuthorized\">\r\n            <summary>\r\n            The content that will be displayed if the user is not authorized.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -1211,16 +1211,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 3897180558309201618,
-      "Data2": -2412577417271229466,
-      "Data3": 6033694592145246019,
-      "Data4": -1492079981322529010
+      "Data1": 3171354550946535628,
+      "Data2": -7114287656911924634,
+      "Data3": -646222801728365631,
+      "Data4": 1705857693835835345
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorized",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorized",
-    "Flags": 9,
+    "Flags": 1,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.Authorized\">\r\n            <summary>\r\n            The content that will be displayed if the user is authorized.\r\n            If you specify a value for this parameter, do not also specify a value for <see cref=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.ChildContent\" />.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -1256,16 +1256,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 7787210112169967880,
-      "Data2": -110862337071900505,
-      "Data3": 6232981195186996228,
-      "Data4": 1511334909703319407
+      "Data1": -5605085159250875024,
+      "Data2": 4021947413428556194,
+      "Data3": -8732365072844414004,
+      "Data4": 6562995296395118957
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorized",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorized",
-    "Flags": 13,
+    "Flags": 2,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.Authorized\">\r\n            <summary>\r\n            The content that will be displayed if the user is authorized.\r\n            If you specify a value for this parameter, do not also specify a value for <see cref=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.ChildContent\" />.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -1301,16 +1301,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 3023336905212486566,
-      "Data2": -3728093263353436195,
-      "Data3": -6548052793990135655,
-      "Data4": -3605927875737152463
+      "Data1": -4021684225991535464,
+      "Data2": -447380829060917491,
+      "Data3": -5261556668386654114,
+      "Data4": -2265718684565400518
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorizing",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorizing",
-    "Flags": 9,
+    "Flags": 1,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.Authorizing\">\r\n            <summary>\r\n            The content that will be displayed while asynchronous authorization is in progress.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -1327,16 +1327,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -5549529107545928713,
-      "Data2": -4106613242768573650,
-      "Data3": -7066095570299171627,
-      "Data4": -1074766190656547635
+      "Data1": -4083824939685662750,
+      "Data2": 6314193322433924425,
+      "Data3": 1641641608380157821,
+      "Data4": 4147761777383991389
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorizing",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorizing",
-    "Flags": 13,
+    "Flags": 2,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.Authorizing\">\r\n            <summary>\r\n            The content that will be displayed while asynchronous authorization is in progress.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -1353,16 +1353,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -7331686025579889049,
-      "Data2": 4648396950604494156,
-      "Data3": -1054900889671467218,
-      "Data4": -7137171959238688125
+      "Data1": 5774497033585609683,
+      "Data2": 2533988649305124289,
+      "Data3": 1531292600706591053,
+      "Data4": -1378060109126560419
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState",
-    "Flags": 3,
+    "Flags": 1,
     "TagMatchingRules": [
       {
         "TagName": "CascadingAuthenticationState"
@@ -1391,16 +1391,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 3819021910223076609,
-      "Data2": -7318116617172371814,
-      "Data3": 205507840429067713,
-      "Data4": -6112082659222484551
+      "Data1": 4931540988761539441,
+      "Data2": 2459244603966107750,
+      "Data3": -9000007785500670069,
+      "Data4": -469619563567200981
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState",
-    "Flags": 7,
+    "Flags": 2,
     "TagMatchingRules": [
       {
         "TagName": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState"
@@ -1429,16 +1429,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 5916121175275178378,
-      "Data2": 5860549721241157393,
-      "Data3": -7532667448339706177,
-      "Data4": -3762524117726960364
+      "Data1": -3646998140028865513,
+      "Data2": 7428403872678246570,
+      "Data3": -4837058394835819101,
+      "Data4": -3165687501563371890
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState.ChildContent",
-    "Flags": 9,
+    "Flags": 1,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState.ChildContent\">\r\n            <summary>\r\n            The content to which the authentication state should be provided.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -1455,16 +1455,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 6545658195475674783,
-      "Data2": 4890812350319046834,
-      "Data3": -3785344117561233719,
-      "Data4": -3872361737315620214
+      "Data1": 4145859194179927277,
+      "Data2": -6742048779426949074,
+      "Data3": 4563784763650979841,
+      "Data4": 6342231100935046402
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState.ChildContent",
-    "Flags": 13,
+    "Flags": 2,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState.ChildContent\">\r\n            <summary>\r\n            The content to which the authentication state should be provided.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -1481,16 +1481,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 5626390620905919526,
-      "Data2": -4367572904686740789,
-      "Data3": -5355995638821598960,
-      "Data4": 2341765777415125570
+      "Data1": 5716030573865461483,
+      "Data2": -5553811194571683722,
+      "Data3": 1441727704665754730,
+      "Data4": -3120337006799190387
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.CascadingValue<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.CascadingValue<TValue>",
-    "Flags": 3,
+    "Flags": 1,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.CascadingValue`1\">\r\n            <summary>\r\n            A component that provides a cascading value to all descendant components.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -1575,16 +1575,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -4281058649921976146,
-      "Data2": -7328454307742506507,
-      "Data3": -7353538453747160270,
-      "Data4": -2129143774729709734
+      "Data1": 3248044030301958925,
+      "Data2": 6979406425534469826,
+      "Data3": 4067158738816732012,
+      "Data4": 9077760247416153721
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.CascadingValue<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.CascadingValue<TValue>",
-    "Flags": 7,
+    "Flags": 2,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.CascadingValue`1\">\r\n            <summary>\r\n            A component that provides a cascading value to all descendant components.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -1669,16 +1669,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 6050311729550668787,
-      "Data2": 4669069955804516496,
-      "Data3": -6246716379736858082,
-      "Data4": -4210135431802406589
+      "Data1": -7332237319612989993,
+      "Data2": -8063217556908182779,
+      "Data3": 137369446946677717,
+      "Data4": 39744112497541168
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.CascadingValue<TValue>.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.CascadingValue<TValue>.ChildContent",
-    "Flags": 9,
+    "Flags": 1,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.CascadingValue`1.ChildContent\">\r\n            <summary>\r\n            The content to which the value should be provided.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -1695,16 +1695,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -3502077974432280190,
-      "Data2": -8342831920817424292,
-      "Data3": 7155328486558939874,
-      "Data4": 2097714491133536517
+      "Data1": 7232472663506183771,
+      "Data2": -8383578027788872091,
+      "Data3": 1685772889391945243,
+      "Data4": -981223268434874022
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.CascadingValue<TValue>.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.CascadingValue<TValue>.ChildContent",
-    "Flags": 13,
+    "Flags": 2,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.CascadingValue`1.ChildContent\">\r\n            <summary>\r\n            The content to which the value should be provided.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -1721,16 +1721,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -2260637996400239237,
-      "Data2": -3842387043492987415,
-      "Data3": -4288867224227161055,
-      "Data4": -4710257602831870957
+      "Data1": 5129651915118388707,
+      "Data2": -4076417333661033671,
+      "Data3": 4151639783153949010,
+      "Data4": -3434063752887550202
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.DynamicComponent",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.DynamicComponent",
-    "Flags": 3,
+    "Flags": 1,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.DynamicComponent\">\r\n            <summary>\r\n            A component that renders another component dynamically according to its\r\n            <see cref=\"P:Microsoft.AspNetCore.Components.DynamicComponent.Type\" /> parameter.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -1771,16 +1771,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -3483596227080903775,
-      "Data2": 289013580347665017,
-      "Data3": -3583990930125744387,
-      "Data4": -1691342398832297020
+      "Data1": 3320811169493512151,
+      "Data2": -8511750172511689739,
+      "Data3": 6793818566814868620,
+      "Data4": -1197012531561530739
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.DynamicComponent",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.DynamicComponent",
-    "Flags": 7,
+    "Flags": 2,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.DynamicComponent\">\r\n            <summary>\r\n            A component that renders another component dynamically according to its\r\n            <see cref=\"P:Microsoft.AspNetCore.Components.DynamicComponent.Type\" /> parameter.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -1821,16 +1821,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -3233312286206818929,
-      "Data2": -4302176932798235900,
-      "Data3": -5712308667216225530,
-      "Data4": -8522796735284573784
+      "Data1": -4044574396536796163,
+      "Data2": -4899047302544028561,
+      "Data3": -3940334661783698555,
+      "Data4": -1645241723211947517
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.LayoutView",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.LayoutView",
-    "Flags": 3,
+    "Flags": 1,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.LayoutView\">\r\n            <summary>\r\n            Displays the specified content inside the specified layout and any further\r\n            nested layouts.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -1871,16 +1871,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 2566116104548240297,
-      "Data2": 1769161583363398201,
-      "Data3": -3834068900046463876,
-      "Data4": -6267253384819292334
+      "Data1": -766883990812560914,
+      "Data2": -635470446856262450,
+      "Data3": 8768338982709007708,
+      "Data4": 2472525835752642726
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.LayoutView",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.LayoutView",
-    "Flags": 7,
+    "Flags": 2,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.LayoutView\">\r\n            <summary>\r\n            Displays the specified content inside the specified layout and any further\r\n            nested layouts.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -1921,16 +1921,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -6557561310265961598,
-      "Data2": -1264646022574676374,
-      "Data3": 3424071316932741376,
-      "Data4": -5769208919728716955
+      "Data1": 3219918638331515057,
+      "Data2": 8921861854626336605,
+      "Data3": 242212054534307915,
+      "Data4": 9120527599681531121
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.LayoutView.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.LayoutView.ChildContent",
-    "Flags": 9,
+    "Flags": 1,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.LayoutView.ChildContent\">\r\n            <summary>\r\n            Gets or sets the content to display.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -1947,16 +1947,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 7327304093633662275,
-      "Data2": -4691315892012558462,
-      "Data3": -1440954554136418608,
-      "Data4": -9097146449960303216
+      "Data1": -4863399224848951487,
+      "Data2": 6333323882122864364,
+      "Data3": 6001738062695239938,
+      "Data4": -6954274027996971888
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.LayoutView.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.LayoutView.ChildContent",
-    "Flags": 13,
+    "Flags": 2,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.LayoutView.ChildContent\">\r\n            <summary>\r\n            Gets or sets the content to display.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -1973,16 +1973,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -2172416423110801562,
-      "Data2": -5702160455235625942,
-      "Data3": -5519622534317754904,
-      "Data4": -2114568927975925777
+      "Data1": -8100910298518336362,
+      "Data2": 354378688100492185,
+      "Data3": 2119933138243117157,
+      "Data4": -3849998650450856237
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.RouteView",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.RouteView",
-    "Flags": 3,
+    "Flags": 1,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.RouteView\">\r\n            <summary>\r\n            Displays the specified page component, rendering it inside its layout\r\n            and any further nested layouts.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -2023,16 +2023,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -1116562388098875420,
-      "Data2": -7917569223409717175,
-      "Data3": -6115810726183367818,
-      "Data4": -8850165838176569080
+      "Data1": -2575010075324622106,
+      "Data2": -1911677351999509465,
+      "Data3": 6462797534841483973,
+      "Data4": 7782905450392580163
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.RouteView",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.RouteView",
-    "Flags": 7,
+    "Flags": 2,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.RouteView\">\r\n            <summary>\r\n            Displays the specified page component, rendering it inside its layout\r\n            and any further nested layouts.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -2073,16 +2073,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 5242124055645596971,
-      "Data2": 3757498216674919006,
-      "Data3": 6823137170228387297,
-      "Data4": -5352175688045167849
+      "Data1": 336047532803514608,
+      "Data2": 2865295334994889896,
+      "Data3": 8827416126016988219,
+      "Data4": 3960612112230721921
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Routing.Router",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.Router",
-    "Flags": 3,
+    "Flags": 1,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Routing.Router\">\r\n            <summary>\r\n            A component that supplies route data corresponding to the current navigation state.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -2199,16 +2199,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -5888446419772386457,
-      "Data2": -3765993359560267758,
-      "Data3": -3891287976848462582,
-      "Data4": -8169479354342166373
+      "Data1": -8641358406132910645,
+      "Data2": 1570642482340761430,
+      "Data3": 2607516554774565846,
+      "Data4": 920593418828843916
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Routing.Router",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.Router",
-    "Flags": 7,
+    "Flags": 2,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Routing.Router\">\r\n            <summary>\r\n            A component that supplies route data corresponding to the current navigation state.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -2325,16 +2325,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -6825896575731054869,
-      "Data2": 8671300181399250553,
-      "Data3": 207167829072762982,
-      "Data4": 4875506688702376075
+      "Data1": -7758619366185732466,
+      "Data2": 3415127141240467588,
+      "Data3": -4024846582999079639,
+      "Data4": 788576659771613852
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Routing.Router.NotFound",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.Router.NotFound",
-    "Flags": 9,
+    "Flags": 1,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Routing.Router.NotFound\">\r\n            <summary>\r\n            Gets or sets the content to display when no match is found for the requested route.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -2351,16 +2351,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 4946748895571624438,
-      "Data2": 5715175086011045640,
-      "Data3": -4670926608195435072,
-      "Data4": -382673787553959761
+      "Data1": 8654411849920680403,
+      "Data2": -3050669046628498384,
+      "Data3": 3568927768681436011,
+      "Data4": 5330814314058583037
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Routing.Router.NotFound",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.Router.NotFound",
-    "Flags": 13,
+    "Flags": 2,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Routing.Router.NotFound\">\r\n            <summary>\r\n            Gets or sets the content to display when no match is found for the requested route.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -2377,16 +2377,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 9019819399756719710,
-      "Data2": -6778752879943198886,
-      "Data3": 4567750345762638836,
-      "Data4": -4329358090959968466
+      "Data1": -6052417036516448224,
+      "Data2": 6573274167022653006,
+      "Data3": -8175263823016332495,
+      "Data4": 914378579453886723
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Routing.Router.Found",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.Router.Found",
-    "Flags": 9,
+    "Flags": 1,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Routing.Router.Found\">\r\n            <summary>\r\n            Gets or sets the content to display when a match is found for the requested route.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -2422,16 +2422,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -9032099380908701351,
-      "Data2": -6044498974706675343,
-      "Data3": 3727211823293724192,
-      "Data4": -247938023940339756
+      "Data1": 1591801506571428552,
+      "Data2": 4189249253471991513,
+      "Data3": 376478824966229008,
+      "Data4": 6591244293389651468
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Routing.Router.Found",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.Router.Found",
-    "Flags": 13,
+    "Flags": 2,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Routing.Router.Found\">\r\n            <summary>\r\n            Gets or sets the content to display when a match is found for the requested route.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -2467,16 +2467,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 3434817588106416248,
-      "Data2": 2547718068780026796,
-      "Data3": -5811347981433188103,
-      "Data4": 7056002051303442353
+      "Data1": 4978372212919629862,
+      "Data2": 9021896245720453854,
+      "Data3": -7961731906932777507,
+      "Data4": -7362205548724021352
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Routing.Router.Navigating",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.Router.Navigating",
-    "Flags": 9,
+    "Flags": 1,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Routing.Router.Navigating\">\r\n            <summary>\r\n            Get or sets the content to display when asynchronous navigation is in progress.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -2493,16 +2493,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 2525145401685395346,
-      "Data2": -2750091264627319900,
-      "Data3": 1046749906794900399,
-      "Data4": -8076341768518839006
+      "Data1": -2296401095124123951,
+      "Data2": 4842962478377355459,
+      "Data3": -73062227407134203,
+      "Data4": 8920459372311354461
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Routing.Router.Navigating",
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.Router.Navigating",
-    "Flags": 13,
+    "Flags": 2,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Routing.Router.Navigating\">\r\n            <summary>\r\n            Get or sets the content to display when asynchronous navigation is in progress.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -2519,16 +2519,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 8410359593590471451,
-      "Data2": 8506865007969880960,
-      "Data3": -7179092170763815049,
-      "Data4": 2988263942136547969
+      "Data1": -8419856595937757591,
+      "Data2": -8927164561692371129,
+      "Data3": -6803386511403650147,
+      "Data4": 6180155307069327368
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Forms.EditForm",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.EditForm",
-    "Flags": 3,
+    "Flags": 1,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.EditForm\">\r\n            <summary>\r\n            Renders a form element that cascades an <see cref=\"P:Microsoft.AspNetCore.Components.Forms.EditForm.EditContext\" /> to descendants.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -2641,16 +2641,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 5058759129729091971,
-      "Data2": 3643282259870340960,
-      "Data3": -574413325335811138,
-      "Data4": -6696623310306312153
+      "Data1": -1106826635804701319,
+      "Data2": 4482758867817883441,
+      "Data3": -5885061195912565744,
+      "Data4": -5795470764187517665
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Forms.EditForm",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.EditForm",
-    "Flags": 7,
+    "Flags": 2,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.EditForm\">\r\n            <summary>\r\n            Renders a form element that cascades an <see cref=\"P:Microsoft.AspNetCore.Components.Forms.EditForm.EditContext\" /> to descendants.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -2763,16 +2763,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 4609910709148181766,
-      "Data2": 7691544564040666428,
-      "Data3": -6939849568309842238,
-      "Data4": 5296360140412210820
+      "Data1": -6344048044459619848,
+      "Data2": -538033125531257793,
+      "Data3": 5314103518257778265,
+      "Data4": -2462212789406835621
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent",
-    "Flags": 9,
+    "Flags": 1,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent\">\r\n            <summary>\r\n            Specifies the content to be rendered inside this <see cref=\"T:Microsoft.AspNetCore.Components.Forms.EditForm\" />.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -2808,16 +2808,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 2870090433220568459,
-      "Data2": 9043017525728922182,
-      "Data3": 5323040720299076804,
-      "Data4": -596116439481597385
+      "Data1": 5744019235772685951,
+      "Data2": 8290707400984326692,
+      "Data3": -8133147251503363526,
+      "Data4": 2093305218811784626
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent",
-    "Flags": 13,
+    "Flags": 2,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent\">\r\n            <summary>\r\n            Specifies the content to be rendered inside this <see cref=\"T:Microsoft.AspNetCore.Components.Forms.EditForm\" />.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -2853,16 +2853,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -2559525425629173077,
-      "Data2": 4619985782245783524,
-      "Data3": -5668303249232016975,
-      "Data4": 1921230817377071747
+      "Data1": -5451385605524585019,
+      "Data2": 5412941222430027903,
+      "Data3": -7725853097212025852,
+      "Data4": 3067067611651347038
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputCheckbox",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputCheckbox",
-    "Flags": 3,
+    "Flags": 1,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.InputCheckbox\">\r\n            <summary>\r\n            An input component for editing <see cref=\"T:System.Boolean\" /> values.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -2938,16 +2938,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 5439969713480614408,
-      "Data2": 5688562006260946115,
-      "Data3": 8789543503941093020,
-      "Data4": 2880765678975273641
+      "Data1": -5306520483609443122,
+      "Data2": 2931901662360053251,
+      "Data3": -93408537542889724,
+      "Data4": -4565340330911899
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputCheckbox",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputCheckbox",
-    "Flags": 7,
+    "Flags": 2,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.InputCheckbox\">\r\n            <summary>\r\n            An input component for editing <see cref=\"T:System.Boolean\" /> values.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -3023,16 +3023,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 4850734956138344129,
-      "Data2": 1752531621974384818,
-      "Data3": -8620588172943885412,
-      "Data4": -5972265183905315942
+      "Data1": -3123272965715651823,
+      "Data2": 3699377169515025485,
+      "Data3": 3172199485861668753,
+      "Data4": 3382750542429852622
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputDate<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputDate<TValue>",
-    "Flags": 3,
+    "Flags": 1,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.InputDate`1\">\r\n            <summary>\r\n            An input component for editing date values.\r\n            Supported types are <see cref=\"T:System.DateTime\" /> and <see cref=\"T:System.DateTimeOffset\" />.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -3153,16 +3153,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 7791022580335766053,
-      "Data2": -6398011557200501720,
-      "Data3": -7310655908393379128,
-      "Data4": -6927370816270855399
+      "Data1": -8458900301766509383,
+      "Data2": 8349148330900284865,
+      "Data3": 1452803130640317119,
+      "Data4": -6479235884538996079
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputDate<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputDate<TValue>",
-    "Flags": 7,
+    "Flags": 2,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.InputDate`1\">\r\n            <summary>\r\n            An input component for editing date values.\r\n            Supported types are <see cref=\"T:System.DateTime\" /> and <see cref=\"T:System.DateTimeOffset\" />.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -3283,16 +3283,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -1446293296656148440,
-      "Data2": 3078070485861095663,
-      "Data3": -4656195036846036669,
-      "Data4": 5949269626520750972
+      "Data1": -7704916019324976156,
+      "Data2": -2756069090219517741,
+      "Data3": 5695310130303883493,
+      "Data4": 5092884016806226972
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputFile",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputFile",
-    "Flags": 3,
+    "Flags": 1,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.InputFile\">\r\n            <summary>\r\n            A component that wraps the HTML file input element and supplies a <see cref=\"T:System.IO.Stream\" /> for each file's contents.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -3333,16 +3333,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -1345995751787537923,
-      "Data2": -6133945275889275999,
-      "Data3": -2780200052710247182,
-      "Data4": 5670116588827015216
+      "Data1": 7397535960602975914,
+      "Data2": -1946181190375087175,
+      "Data3": 5412374209693314387,
+      "Data4": 4426681993078118031
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputFile",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputFile",
-    "Flags": 7,
+    "Flags": 2,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.InputFile\">\r\n            <summary>\r\n            A component that wraps the HTML file input element and supplies a <see cref=\"T:System.IO.Stream\" /> for each file's contents.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -3383,16 +3383,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -1522290751486641079,
-      "Data2": 7505287653922278526,
-      "Data3": -579453813016123356,
-      "Data4": 2875373029779024942
+      "Data1": 3846809322606718072,
+      "Data2": -1562389044311225642,
+      "Data3": -3382599676222109569,
+      "Data4": 1553426233727538719
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputNumber<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputNumber<TValue>",
-    "Flags": 3,
+    "Flags": 1,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.InputNumber`1\">\r\n            <summary>\r\n            An input component for editing numeric values.\r\n            Supported numeric types are <see cref=\"T:System.Int32\" />, <see cref=\"T:System.Int64\" />, <see cref=\"T:System.Int16\" />, <see cref=\"T:System.Single\" />, <see cref=\"T:System.Double\" />, <see cref=\"T:System.Decimal\" />.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -3501,16 +3501,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -1165892192493918245,
-      "Data2": 5304830130902900332,
-      "Data3": 7344557956582636648,
-      "Data4": -7581088783187002809
+      "Data1": 5424196119781718560,
+      "Data2": 6608600995450704345,
+      "Data3": 2821836533403144080,
+      "Data4": 397155051696973104
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputNumber<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputNumber<TValue>",
-    "Flags": 7,
+    "Flags": 2,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.InputNumber`1\">\r\n            <summary>\r\n            An input component for editing numeric values.\r\n            Supported numeric types are <see cref=\"T:System.Int32\" />, <see cref=\"T:System.Int64\" />, <see cref=\"T:System.Int16\" />, <see cref=\"T:System.Single\" />, <see cref=\"T:System.Double\" />, <see cref=\"T:System.Decimal\" />.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -3619,16 +3619,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -1831240783064448002,
-      "Data2": -5911325300284360339,
-      "Data3": -8768133407427908157,
-      "Data4": 6279045944605823830
+      "Data1": -1122697826684683986,
+      "Data2": -5844190148925503843,
+      "Data3": 2932363623269997159,
+      "Data4": -2294115206206212264
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputRadio<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputRadio<TValue>",
-    "Flags": 3,
+    "Flags": 1,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.InputRadio`1\">\r\n            <summary>\r\n            An input component used for selecting a value from a group of choices.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -3700,16 +3700,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -1146536109749344755,
-      "Data2": 3125324486660941886,
-      "Data3": -3801152855049576143,
-      "Data4": 6041163258172827190
+      "Data1": -2322609574875837104,
+      "Data2": 2874826238126975441,
+      "Data3": 2254470506830587404,
+      "Data4": -5047530133372879523
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputRadio<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputRadio<TValue>",
-    "Flags": 7,
+    "Flags": 2,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.InputRadio`1\">\r\n            <summary>\r\n            An input component used for selecting a value from a group of choices.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -3781,16 +3781,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -8423620859772706290,
-      "Data2": 6979908649290668258,
-      "Data3": -7426095347450434504,
-      "Data4": 3887599744321382392
+      "Data1": 8142413478369735041,
+      "Data2": 8871310613408579815,
+      "Data3": -1018576925375095318,
+      "Data4": -8030095665417447025
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputRadioGroup<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputRadioGroup<TValue>",
-    "Flags": 3,
+    "Flags": 1,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.InputRadioGroup`1\">\r\n            <summary>\r\n            Groups child <see cref=\"T:Microsoft.AspNetCore.Components.Forms.InputRadio`1\" /> components.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -3911,16 +3911,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 5924636038141318065,
-      "Data2": 8934669279087965103,
-      "Data3": 8084528544426184362,
-      "Data4": -6500488882503184471
+      "Data1": -2834975281185495438,
+      "Data2": -6095923830550661114,
+      "Data3": 8760962440886216331,
+      "Data4": 2590012197820399469
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputRadioGroup<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputRadioGroup<TValue>",
-    "Flags": 7,
+    "Flags": 2,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.InputRadioGroup`1\">\r\n            <summary>\r\n            Groups child <see cref=\"T:Microsoft.AspNetCore.Components.Forms.InputRadio`1\" /> components.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -4041,16 +4041,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -5529812108894193426,
-      "Data2": -5100333971707792659,
-      "Data3": 4657728469480894264,
-      "Data4": -9088695171131713505
+      "Data1": 8485967188813202543,
+      "Data2": -6503424807017296698,
+      "Data3": -8746362570013561101,
+      "Data4": 8483255924499233978
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputRadioGroup<TValue>.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputRadioGroup<TValue>.ChildContent",
-    "Flags": 9,
+    "Flags": 1,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Forms.InputRadioGroup`1.ChildContent\">\r\n            <summary>\r\n            Gets or sets the child content to be rendering inside the <see cref=\"T:Microsoft.AspNetCore.Components.Forms.InputRadioGroup`1\" />.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -4067,16 +4067,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -5773853564689321993,
-      "Data2": -8063462726564113756,
-      "Data3": -7355405367966665060,
-      "Data4": 789322993341047034
+      "Data1": 1445389199747318293,
+      "Data2": 3204605968112329194,
+      "Data3": 4509828875927376849,
+      "Data4": 172398454755337131
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputRadioGroup<TValue>.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputRadioGroup<TValue>.ChildContent",
-    "Flags": 13,
+    "Flags": 2,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Forms.InputRadioGroup`1.ChildContent\">\r\n            <summary>\r\n            Gets or sets the child content to be rendering inside the <see cref=\"T:Microsoft.AspNetCore.Components.Forms.InputRadioGroup`1\" />.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -4093,16 +4093,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -546720624276967515,
-      "Data2": 4724923518524912576,
-      "Data3": -783695677675214161,
-      "Data4": 7676135717639037178
+      "Data1": -1888729315803514453,
+      "Data2": 3244362336489449425,
+      "Data3": -3724789830835991123,
+      "Data4": -7130851002367724133
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>",
-    "Flags": 3,
+    "Flags": 1,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.InputSelect`1\">\r\n            <summary>\r\n            A dropdown selection component.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -4211,16 +4211,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 8515681511734499516,
-      "Data2": -8320023855369065305,
-      "Data3": -1079917666199329301,
-      "Data4": 959945683975652136
+      "Data1": -6037852940660245286,
+      "Data2": 7879868648153987273,
+      "Data3": -4961253637612319664,
+      "Data4": 7502779635904863361
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>",
-    "Flags": 7,
+    "Flags": 2,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.InputSelect`1\">\r\n            <summary>\r\n            A dropdown selection component.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -4329,16 +4329,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 4257294822296289359,
-      "Data2": -518009972674102264,
-      "Data3": 304670952258067791,
-      "Data4": -2090247806595204954
+      "Data1": 5219475253504479436,
+      "Data2": -4791338982641456842,
+      "Data3": -4507879473124597059,
+      "Data4": 5725627140973703261
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>.ChildContent",
-    "Flags": 9,
+    "Flags": 1,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Forms.InputSelect`1.ChildContent\">\r\n            <summary>\r\n            Gets or sets the child content to be rendering inside the select element.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -4355,16 +4355,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 2511966735715819185,
-      "Data2": 3216965540762801220,
-      "Data3": -2203253876633904642,
-      "Data4": 723857081573711793
+      "Data1": 4635057310749003982,
+      "Data2": 8659368330409756637,
+      "Data3": -5566177412605234800,
+      "Data4": 6958545469255724097
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>.ChildContent",
-    "Flags": 13,
+    "Flags": 2,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Forms.InputSelect`1.ChildContent\">\r\n            <summary>\r\n            Gets or sets the child content to be rendering inside the select element.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -4381,16 +4381,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -3818569916232861606,
-      "Data2": 8196342653966362439,
-      "Data3": -1187570911866448439,
-      "Data4": 1205295711090225736
+      "Data1": 4832899448526974282,
+      "Data2": -1362468538488923689,
+      "Data3": -664805325247281896,
+      "Data4": 7397094631843886379
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputText",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputText",
-    "Flags": 3,
+    "Flags": 1,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.InputText\">\r\n            <summary>\r\n            An input component for editing <see cref=\"T:System.String\" /> values.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -4466,16 +4466,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 3796228852446205445,
-      "Data2": -9181497489041768430,
-      "Data3": -7890568714950575836,
-      "Data4": 3604434288015301920
+      "Data1": -56473265922685419,
+      "Data2": 6573470221601793106,
+      "Data3": -8909753287589708531,
+      "Data4": 5102724112366042494
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputText",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputText",
-    "Flags": 7,
+    "Flags": 2,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.InputText\">\r\n            <summary>\r\n            An input component for editing <see cref=\"T:System.String\" /> values.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -4551,16 +4551,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 7831338700807896247,
-      "Data2": 2209983611026172069,
-      "Data3": -1861248252012892923,
-      "Data4": -2491553273015966533
+      "Data1": 5414483594090826698,
+      "Data2": -8458942319393437738,
+      "Data3": -2379883786767416373,
+      "Data4": 7113329560390210613
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputTextArea",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputTextArea",
-    "Flags": 3,
+    "Flags": 1,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.InputTextArea\">\r\n            <summary>\r\n            A multiline input component for editing <see cref=\"T:System.String\" /> values.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -4636,16 +4636,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 4891344979425878052,
-      "Data2": -6021089491389858403,
-      "Data3": -1898308964338353462,
-      "Data4": 668603133674521938
+      "Data1": -2026504187295368573,
+      "Data2": 94715561964364291,
+      "Data3": 2068221850283032392,
+      "Data4": -7996287204378350573
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputTextArea",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputTextArea",
-    "Flags": 7,
+    "Flags": 2,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.InputTextArea\">\r\n            <summary>\r\n            A multiline input component for editing <see cref=\"T:System.String\" /> values.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -4721,16 +4721,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 4777595252404931131,
-      "Data2": -5862113214062050756,
-      "Data3": -5179046469083831788,
-      "Data4": 7358182730976425319
+      "Data1": -7105908364680975869,
+      "Data2": 2496684634262668723,
+      "Data3": 2644938843357748083,
+      "Data4": -1342926237997929454
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Forms.ValidationMessage<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.ValidationMessage<TValue>",
-    "Flags": 3,
+    "Flags": 1,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.ValidationMessage`1\">\r\n            <summary>\r\n            Displays a list of validation messages for a specified field within a cascaded <see cref=\"T:Microsoft.AspNetCore.Components.Forms.EditContext\" />.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -4790,16 +4790,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 2153394175700337100,
-      "Data2": -8579722541660272855,
-      "Data3": 8235810524409867536,
-      "Data4": -5915697005590203530
+      "Data1": 3539222444837524853,
+      "Data2": -1900205163810910267,
+      "Data3": 6903841889300540184,
+      "Data4": -504918404487048017
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Forms.ValidationMessage<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.ValidationMessage<TValue>",
-    "Flags": 7,
+    "Flags": 2,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.ValidationMessage`1\">\r\n            <summary>\r\n            Displays a list of validation messages for a specified field within a cascaded <see cref=\"T:Microsoft.AspNetCore.Components.Forms.EditContext\" />.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -4859,16 +4859,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 3805314150022413434,
-      "Data2": -1750619896369882518,
-      "Data3": -2147224194216104469,
-      "Data4": 2569896292607305610
+      "Data1": -7227597126601153,
+      "Data2": -8714861677881274939,
+      "Data3": 5740932678790014672,
+      "Data4": -7148088329732366218
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Forms.ValidationSummary",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.ValidationSummary",
-    "Flags": 3,
+    "Flags": 1,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.ValidationSummary\">\r\n            <summary>\r\n            Displays a list of validation messages from a cascaded <see cref=\"T:Microsoft.AspNetCore.Components.Forms.EditContext\" />.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -4908,16 +4908,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -6156126450063798399,
-      "Data2": 1382779328174383790,
-      "Data3": 1639911093202662372,
-      "Data4": 2364150634545512203
+      "Data1": -8965017084394558378,
+      "Data2": -2066311411128301325,
+      "Data3": 2216474668318222437,
+      "Data4": -214729507075657641
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Forms.ValidationSummary",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.ValidationSummary",
-    "Flags": 7,
+    "Flags": 2,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.ValidationSummary\">\r\n            <summary>\r\n            Displays a list of validation messages from a cascaded <see cref=\"T:Microsoft.AspNetCore.Components.Forms.EditContext\" />.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -4957,16 +4957,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -9133245039452814388,
-      "Data2": -6179154805964639198,
-      "Data3": 7765353314953556237,
-      "Data4": -1946224279909213885
+      "Data1": 8100516884717216522,
+      "Data2": 8731430207434178009,
+      "Data3": -3326041595229744482,
+      "Data4": -3528415924084181550
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Routing.FocusOnNavigate",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.FocusOnNavigate",
-    "Flags": 3,
+    "Flags": 1,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Routing.FocusOnNavigate\">\r\n            <summary>\r\n            After navigating from one page to another, sets focus to an element\r\n            matching a CSS selector. This can be used to build an accessible\r\n            navigation system compatible with screen readers.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -5007,16 +5007,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 7403619182195991286,
-      "Data2": 430615070812808476,
-      "Data3": -40493007560101099,
-      "Data4": 1645259798992986838
+      "Data1": 5289413368014132941,
+      "Data2": 4950464271700459705,
+      "Data3": -1153529184928593589,
+      "Data4": -6294085378146176915
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Routing.FocusOnNavigate",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.FocusOnNavigate",
-    "Flags": 7,
+    "Flags": 2,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Routing.FocusOnNavigate\">\r\n            <summary>\r\n            After navigating from one page to another, sets focus to an element\r\n            matching a CSS selector. This can be used to build an accessible\r\n            navigation system compatible with screen readers.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -5057,16 +5057,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 7547578425265334625,
-      "Data2": 2432395387426192958,
-      "Data3": 6037839419216945121,
-      "Data4": 6707954352073493077
+      "Data1": -1785632085282572703,
+      "Data2": -5450433169908641560,
+      "Data3": 8630164889050268543,
+      "Data4": -994994109875223676
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Routing.NavLink",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.NavLink",
-    "Flags": 3,
+    "Flags": 1,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Routing.NavLink\">\r\n            <summary>\r\n            A component that renders an anchor tag, automatically toggling its 'active'\r\n            class based on whether its 'href' matches the current URI.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -5131,16 +5131,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 2458042444873306679,
-      "Data2": 5511211128323473558,
-      "Data3": -1288544609960941859,
-      "Data4": 4298575111432904366
+      "Data1": 370015378948706984,
+      "Data2": -2598315854614339236,
+      "Data3": -5987118864154619138,
+      "Data4": -4483423916689622821
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Routing.NavLink",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.NavLink",
-    "Flags": 7,
+    "Flags": 2,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Routing.NavLink\">\r\n            <summary>\r\n            A component that renders an anchor tag, automatically toggling its 'active'\r\n            class based on whether its 'href' matches the current URI.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -5205,16 +5205,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 9196740481872586550,
-      "Data2": -1956989039000681163,
-      "Data3": 6304559024145918993,
-      "Data4": -3397508480258587717
+      "Data1": -3241601007148650037,
+      "Data2": 4030256884275068531,
+      "Data3": -2335495477328903558,
+      "Data4": -277511974443961046
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent",
-    "Flags": 9,
+    "Flags": 1,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent\">\r\n            <summary>\r\n            Gets or sets the child content of the component.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -5231,16 +5231,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -4678761079301495995,
-      "Data2": 4984687018238218962,
-      "Data3": -6183871041687092262,
-      "Data4": -4204877935051994298
+      "Data1": 361481052083914698,
+      "Data2": -3608340828526916476,
+      "Data3": -974190919371552085,
+      "Data4": 5587432706633135171
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent",
-    "Flags": 13,
+    "Flags": 2,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent\">\r\n            <summary>\r\n            Gets or sets the child content of the component.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -5257,16 +5257,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -3745393173810299019,
-      "Data2": -6666882896947092261,
-      "Data3": -7789737511046885455,
-      "Data4": 295166770774367931
+      "Data1": 8642850108830867946,
+      "Data2": 6478590619828488945,
+      "Data3": -600332718021415183,
+      "Data4": -1005921538747425872
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Web.HeadContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.HeadContent",
-    "Flags": 3,
+    "Flags": 1,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Web.HeadContent\">\r\n            <summary>\r\n            Provides content to <see cref=\"T:Microsoft.AspNetCore.Components.Web.HeadOutlet\" /> components.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -5296,16 +5296,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -6489967745965303660,
-      "Data2": 1287472539313982044,
-      "Data3": 8312960139535805212,
-      "Data4": 5652417960514730681
+      "Data1": -7298968910596578108,
+      "Data2": -3108545993711114523,
+      "Data3": 433234502276192251,
+      "Data4": -2335254998716584119
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Web.HeadContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.HeadContent",
-    "Flags": 7,
+    "Flags": 2,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Web.HeadContent\">\r\n            <summary>\r\n            Provides content to <see cref=\"T:Microsoft.AspNetCore.Components.Web.HeadOutlet\" /> components.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -5335,16 +5335,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -584400853558457882,
-      "Data2": -4063621775879766229,
-      "Data3": 3883462706886267815,
-      "Data4": -4074719472059246184
+      "Data1": 9176812770130224664,
+      "Data2": -5925556717508151156,
+      "Data3": 5052336972991832596,
+      "Data4": 3094489865851862807
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Web.HeadContent.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.HeadContent.ChildContent",
-    "Flags": 9,
+    "Flags": 1,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Web.HeadContent.ChildContent\">\r\n            <summary>\r\n            Gets or sets the content to be rendered in <see cref=\"T:Microsoft.AspNetCore.Components.Web.HeadOutlet\" /> instances.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -5361,16 +5361,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 4994336904981331942,
-      "Data2": 2837747729364881423,
-      "Data3": 2756214865295385852,
-      "Data4": -2384498125269448099
+      "Data1": 7966962479684420061,
+      "Data2": -4126221303537518259,
+      "Data3": 2693894447383441530,
+      "Data4": -941995631054319669
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Web.HeadContent.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.HeadContent.ChildContent",
-    "Flags": 13,
+    "Flags": 2,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Web.HeadContent.ChildContent\">\r\n            <summary>\r\n            Gets or sets the content to be rendered in <see cref=\"T:Microsoft.AspNetCore.Components.Web.HeadOutlet\" /> instances.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -5387,16 +5387,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -8926126885767048977,
-      "Data2": 4660027853024616737,
-      "Data3": 1635999162898797533,
-      "Data4": 1912012629566686552
+      "Data1": 826333900404173957,
+      "Data2": 3371475505179058898,
+      "Data3": 4191376584677141251,
+      "Data4": -5538659872653939754
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Web.HeadOutlet",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.HeadOutlet",
-    "Flags": 3,
+    "Flags": 1,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Web.HeadOutlet\">\r\n            <summary>\r\n            Renders content provided by <see cref=\"T:Microsoft.AspNetCore.Components.Web.HeadContent\" /> components.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -5412,16 +5412,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 3336114866159874487,
-      "Data2": 1656036958282588734,
-      "Data3": -7921954522182119302,
-      "Data4": -4327700574458406863
+      "Data1": 1171491660097570952,
+      "Data2": -9212480187961052173,
+      "Data3": -5279639906123486080,
+      "Data4": 8463860605310567866
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Web.HeadOutlet",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.HeadOutlet",
-    "Flags": 7,
+    "Flags": 2,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Web.HeadOutlet\">\r\n            <summary>\r\n            Renders content provided by <see cref=\"T:Microsoft.AspNetCore.Components.Web.HeadContent\" /> components.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -5437,16 +5437,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -452717194447395941,
-      "Data2": 4463091721886210675,
-      "Data3": 6942007120820407658,
-      "Data4": -5710561911440305458
+      "Data1": -6235424494423214479,
+      "Data2": 2725017264036190678,
+      "Data3": 8747243949143492524,
+      "Data4": 3803101982071928899
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Web.PageTitle",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.PageTitle",
-    "Flags": 3,
+    "Flags": 1,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Web.PageTitle\">\r\n            <summary>\r\n            Enables rendering an HTML <c>&lt;title&gt;</c> to a <see cref=\"T:Microsoft.AspNetCore.Components.Web.HeadOutlet\" /> component.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -5476,16 +5476,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 1826342119123169839,
-      "Data2": -3748191559715303834,
-      "Data3": 2093367535142908375,
-      "Data4": 1814878941201258211
+      "Data1": -1368796606812678865,
+      "Data2": -108167460219911513,
+      "Data3": 2064484050117207585,
+      "Data4": -8736006734552258091
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Web.PageTitle",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.PageTitle",
-    "Flags": 7,
+    "Flags": 2,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Web.PageTitle\">\r\n            <summary>\r\n            Enables rendering an HTML <c>&lt;title&gt;</c> to a <see cref=\"T:Microsoft.AspNetCore.Components.Web.HeadOutlet\" /> component.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -5515,16 +5515,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -7628045258794586515,
-      "Data2": 9001502758983304703,
-      "Data3": -3502786988997759379,
-      "Data4": -3003693859007162058
+      "Data1": 3704176179202396197,
+      "Data2": 5177749264179486720,
+      "Data3": 5404894336187055773,
+      "Data4": 3826714120311619321
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Web.PageTitle.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.PageTitle.ChildContent",
-    "Flags": 9,
+    "Flags": 1,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Web.PageTitle.ChildContent\">\r\n            <summary>\r\n            Gets or sets the content to be rendered as the document title.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -5541,16 +5541,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -7538324555444174477,
-      "Data2": -3199847682480850282,
-      "Data3": -6812712526242166434,
-      "Data4": -1263871994963153320
+      "Data1": -1974032217160417768,
+      "Data2": 3644802485315780397,
+      "Data3": 3296863881021594860,
+      "Data4": -5754805983166943494
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Web.PageTitle.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.PageTitle.ChildContent",
-    "Flags": 13,
+    "Flags": 2,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Web.PageTitle.ChildContent\">\r\n            <summary>\r\n            Gets or sets the content to be rendered as the document title.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -5567,16 +5567,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -9133794738495096845,
-      "Data2": -6166518407882558720,
-      "Data3": 1169704508139621838,
-      "Data4": -1647013857786208445
+      "Data1": 6313078803640678409,
+      "Data2": 4453914557930391445,
+      "Data3": 5479468517955456731,
+      "Data4": 3454968564294375150
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Web.ErrorBoundary",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.ErrorBoundary",
-    "Flags": 3,
+    "Flags": 1,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Web.ErrorBoundary\">\r\n            <summary>\r\n            Captures errors thrown from its child content.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -5643,16 +5643,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 1477421842190052130,
-      "Data2": -2196992841234195149,
-      "Data3": 7920486735747900776,
-      "Data4": -2401430439802519936
+      "Data1": 2608973636016873863,
+      "Data2": -1803366841415047017,
+      "Data3": 746897633778108643,
+      "Data4": 7284414656738255274
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Web.ErrorBoundary",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.ErrorBoundary",
-    "Flags": 7,
+    "Flags": 2,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Web.ErrorBoundary\">\r\n            <summary>\r\n            Captures errors thrown from its child content.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -5719,16 +5719,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -7424792009084065345,
-      "Data2": -5828605096523476487,
-      "Data3": -3488537626664753505,
-      "Data4": 2420267071814109658
+      "Data1": 5738512470972268346,
+      "Data2": -356234031200778551,
+      "Data3": 462849294805922181,
+      "Data4": 7303490505085375657
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Web.ErrorBoundary.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.ErrorBoundary.ChildContent",
-    "Flags": 9,
+    "Flags": 1,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.ErrorBoundaryBase.ChildContent\">\r\n            <summary>\r\n            The content to be displayed when there is no error.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -5745,16 +5745,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 5656066609178743191,
-      "Data2": -2231931456805787994,
-      "Data3": -2091185024408172870,
-      "Data4": 7651280916657179261
+      "Data1": 1484796317610565347,
+      "Data2": -3261710650042401004,
+      "Data3": -1150646451514357631,
+      "Data4": -2059142578577949387
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Web.ErrorBoundary.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.ErrorBoundary.ChildContent",
-    "Flags": 13,
+    "Flags": 2,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.ErrorBoundaryBase.ChildContent\">\r\n            <summary>\r\n            The content to be displayed when there is no error.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -5771,16 +5771,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 4059422023999626222,
-      "Data2": -5202390393251744359,
-      "Data3": 5520035043349921690,
-      "Data4": -4183391128664845026
+      "Data1": -3075249971782702522,
+      "Data2": 6965310663712478600,
+      "Data3": -3752084643158061143,
+      "Data4": 6138906895611347268
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Web.ErrorBoundary.ErrorContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.ErrorBoundary.ErrorContent",
-    "Flags": 9,
+    "Flags": 1,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.ErrorBoundaryBase.ErrorContent\">\r\n            <summary>\r\n            The content to be displayed when there is an error.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -5816,16 +5816,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -4371697663204918635,
-      "Data2": -2296387548730756845,
-      "Data3": -1702882704231087139,
-      "Data4": -6251783474646365704
+      "Data1": 2765074886443818722,
+      "Data2": -9186952910496685617,
+      "Data3": -2431635198668315177,
+      "Data4": -2344294006651608830
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Web.ErrorBoundary.ErrorContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.ErrorBoundary.ErrorContent",
-    "Flags": 13,
+    "Flags": 2,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.ErrorBoundaryBase.ErrorContent\">\r\n            <summary>\r\n            The content to be displayed when there is an error.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -5861,16 +5861,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -8197120479411483562,
-      "Data2": 6375330586284033793,
-      "Data3": 8567315575824961184,
-      "Data4": 8035080680496655582
+      "Data1": 2403307058928749931,
+      "Data2": -1817103055659120907,
+      "Data3": 61903157605496171,
+      "Data4": 8251190872433785874
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>",
-    "Flags": 3,
+    "Flags": 1,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize`1\">\r\n            <summary>\r\n            Provides functionality for rendering a virtualized list of items.\r\n            </summary>\r\n            <typeparam name=\"TItem\">The <c>context</c> type for the items being rendered.</typeparam>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -6007,16 +6007,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 4154284184188728718,
-      "Data2": 3786594972221451855,
-      "Data3": -1036089469049283550,
-      "Data4": -6654552994092475525
+      "Data1": 4117071865967450637,
+      "Data2": 7846819168042359364,
+      "Data3": -5544665786590837027,
+      "Data4": -693284537305840273
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>",
-    "Flags": 7,
+    "Flags": 2,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize`1\">\r\n            <summary>\r\n            Provides functionality for rendering a virtualized list of items.\r\n            </summary>\r\n            <typeparam name=\"TItem\">The <c>context</c> type for the items being rendered.</typeparam>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -6153,16 +6153,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 5310003746986334684,
-      "Data2": -3483275895660715325,
-      "Data3": -6277677683668563557,
-      "Data4": -8318353929673317998
+      "Data1": -3611275911021868382,
+      "Data2": 1712692759132032009,
+      "Data3": 6992946488853677131,
+      "Data4": 8174838641704792251
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.ChildContent",
-    "Flags": 9,
+    "Flags": 1,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize`1.ChildContent\">\r\n            <summary>\r\n            Gets or sets the item template for the list.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -6198,16 +6198,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 5865947482543733994,
-      "Data2": 5318206906553713322,
-      "Data3": 3973968290471348157,
-      "Data4": -5125875157888173049
+      "Data1": -5098104740353871351,
+      "Data2": -337048242636674449,
+      "Data3": 7366876389157353775,
+      "Data4": -2252203047820174157
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.ChildContent",
-    "Flags": 13,
+    "Flags": 2,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize`1.ChildContent\">\r\n            <summary>\r\n            Gets or sets the item template for the list.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -6243,16 +6243,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -6055766333580689797,
-      "Data2": -4297343973707794875,
-      "Data3": -4431271527943606221,
-      "Data4": 7523507463384227296
+      "Data1": 3335248887178854257,
+      "Data2": -5104393412121345614,
+      "Data3": 483923052290270218,
+      "Data4": -5738114446297216506
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.ItemContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.ItemContent",
-    "Flags": 9,
+    "Flags": 1,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize`1.ItemContent\">\r\n            <summary>\r\n            Gets or sets the item template for the list.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -6288,16 +6288,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 1673741657012481476,
-      "Data2": 6535584916768920904,
-      "Data3": -6560396366848097608,
-      "Data4": 2279334541552842143
+      "Data1": 3020970422828249380,
+      "Data2": -1192997121659928301,
+      "Data3": -3994242291148548769,
+      "Data4": -7170154487874642930
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.ItemContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.ItemContent",
-    "Flags": 13,
+    "Flags": 2,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize`1.ItemContent\">\r\n            <summary>\r\n            Gets or sets the item template for the list.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -6333,16 +6333,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 7898795611780053843,
-      "Data2": 7155991884778729081,
-      "Data3": 6716709260877991335,
-      "Data4": -8807947760949732017
+      "Data1": -3266189294348180995,
+      "Data2": 3503070221413246875,
+      "Data3": 7407313892178962567,
+      "Data4": 3547849232749759972
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.Placeholder",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.Placeholder",
-    "Flags": 9,
+    "Flags": 1,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize`1.Placeholder\">\r\n            <summary>\r\n            Gets or sets the template for items that have not yet been loaded in memory.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -6378,16 +6378,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 6515195281963901286,
-      "Data2": 457018002119664190,
-      "Data3": -5956245951223818759,
-      "Data4": -1978751416980484864
+      "Data1": 1388747606943241268,
+      "Data2": 1188795411257512702,
+      "Data3": 1175010571487303919,
+      "Data4": -4976749772144980853
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.Placeholder",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.Placeholder",
-    "Flags": 13,
+    "Flags": 2,
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize`1.Placeholder\">\r\n            <summary>\r\n            Gets or sets the template for items that have not yet been loaded in memory.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -6423,16 +6423,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -1644573961486797552,
-      "Data2": 8539794646283156905,
-      "Data3": -6944789687930000573,
-      "Data4": 4054332113333954126
+      "Data1": 963409284267216834,
+      "Data2": -5101190959629409251,
+      "Data3": 1600198286724577360,
+      "Data4": -3626086658601858548
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator",
     "AssemblyName": "Microsoft.AspNetCore.Components.Forms",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator",
-    "Flags": 3,
+    "Flags": 1,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator\">\r\n            <summary>\r\n            Adds Data Annotations validation support to an <see cref=\"T:Microsoft.AspNetCore.Components.Forms.EditContext\" />.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -6448,16 +6448,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 1392156678729643052,
-      "Data2": -8606930912525426167,
-      "Data3": -5686556822892812741,
-      "Data4": 4441282413340077217
+      "Data1": -9004482002511927295,
+      "Data2": -448614924804206039,
+      "Data3": -581451280623580467,
+      "Data4": 404873680673170473
     },
     "Kind": 3,
     "Name": "Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator",
     "AssemblyName": "Microsoft.AspNetCore.Components.Forms",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator",
-    "Flags": 7,
+    "Flags": 2,
     "Documentation": "<member name=\"T:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator\">\r\n            <summary>\r\n            Adds Data Annotations validation support to an <see cref=\"T:Microsoft.AspNetCore.Components.Forms.EditContext\" />.\r\n            </summary>\r\n        </member>",
     "TagMatchingRules": [
       {
@@ -22967,16 +22967,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 949986454054306698,
-      "Data2": 6753257907490646590,
-      "Data3": -250654646505857356,
-      "Data4": 232271010189241574
+      "Data1": 5571168041673301720,
+      "Data2": -2120258403843143491,
+      "Data3": -1225597919998909671,
+      "Data4": 6242327391264254254
     },
     "Kind": 1,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputCheckbox",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputCheckbox",
-    "Flags": 5,
+    "Flags": 2,
     "Documentation": {
       "Id": 10,
       "Args": [
@@ -23195,16 +23195,16 @@
   },
   {
     "__Checksum": {
-      "Data1": 1967679842360907007,
-      "Data2": 8174388030824503277,
-      "Data3": -6465690093810308968,
-      "Data4": -3900524786413961438
+      "Data1": 7320699749572807327,
+      "Data2": -1881745751244722569,
+      "Data3": -5733973780711129981,
+      "Data4": -8821196782881287825
     },
     "Kind": 1,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputDate<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputDate<TValue>",
-    "Flags": 5,
+    "Flags": 2,
     "Documentation": {
       "Id": 10,
       "Args": [
@@ -23423,16 +23423,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -6866506496849510648,
-      "Data2": 3827328766192233469,
-      "Data3": -3791439134603567727,
-      "Data4": -2182287970002280743
+      "Data1": -6077911852112201237,
+      "Data2": -7159340315995318649,
+      "Data3": -9083774154014398264,
+      "Data4": 3845572275824497267
     },
     "Kind": 1,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputNumber<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputNumber<TValue>",
-    "Flags": 5,
+    "Flags": 2,
     "Documentation": {
       "Id": 10,
       "Args": [
@@ -23651,16 +23651,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -3047387859646474908,
-      "Data2": 4425975862789921128,
-      "Data3": 2948554478064678653,
-      "Data4": -910013888295357900
+      "Data1": -6548940154105019558,
+      "Data2": 8362964850006983749,
+      "Data3": -7094085870872224775,
+      "Data4": -1462309822192437357
     },
     "Kind": 1,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputRadioGroup<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputRadioGroup<TValue>",
-    "Flags": 5,
+    "Flags": 2,
     "Documentation": {
       "Id": 10,
       "Args": [
@@ -23879,16 +23879,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -5095043424841448161,
-      "Data2": 7476390528201942045,
-      "Data3": 8561140706357086727,
-      "Data4": 1627328609997849014
+      "Data1": 7827775108675159966,
+      "Data2": 4594045590274570200,
+      "Data3": -5857522141721622171,
+      "Data4": 1116192081495416877
     },
     "Kind": 1,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>",
-    "Flags": 5,
+    "Flags": 2,
     "Documentation": {
       "Id": 10,
       "Args": [
@@ -24107,16 +24107,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -2202133745536949074,
-      "Data2": 6835332629056213745,
-      "Data3": 6206392230022187203,
-      "Data4": 1022429455493795148
+      "Data1": -6658031331588662276,
+      "Data2": 5841570576715791205,
+      "Data3": 6039421739635575455,
+      "Data4": 598700800599615994
     },
     "Kind": 1,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputText",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputText",
-    "Flags": 5,
+    "Flags": 2,
     "Documentation": {
       "Id": 10,
       "Args": [
@@ -24335,16 +24335,16 @@
   },
   {
     "__Checksum": {
-      "Data1": -2520674242593366957,
-      "Data2": 8574619107773786755,
-      "Data3": -8879586781443778707,
-      "Data4": -3926081392995228486
+      "Data1": -6187469364233725393,
+      "Data2": 7815751946909987765,
+      "Data3": -8393027380297720241,
+      "Data4": 1550805292745465102
     },
     "Kind": 1,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputTextArea",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputTextArea",
-    "Flags": 5,
+    "Flags": 2,
     "Documentation": {
       "Id": 10,
       "Args": [
