@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Components;
 using Microsoft.AspNetCore.Razor.PooledObjects;
-using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
@@ -231,10 +230,9 @@ internal sealed class EventHandlerTagHelperDescriptorProvider : TagHelperDescrip
 
                 a.IsDirectiveAttribute = true;
 
-                a.SetMetadata(
-                    // Make this weakly typed (don't type check) - delegates have their own type-checking
-                    // logic that we don't want to interfere with.
-                    IsWeaklyTyped);
+                // Make this weakly typed (don't type check) - delegates have their own type-checking
+                // logic that we don't want to interfere with.
+                a.IsWeaklyTyped = true;
 
                 if (enablePreventDefault)
                 {

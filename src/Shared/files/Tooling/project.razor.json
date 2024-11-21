@@ -3633,10 +3633,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 6064772638388114636,
-          "Data2": 5112668460212791887,
-          "Data3": 7998363009307405347,
-          "Data4": -7222758984374399864
+          "Data1": 8766368367827740350,
+          "Data2": 342538736865863524,
+          "Data3": -9033311291478188841,
+          "Data4": 4616801799685218395
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -3686,7 +3686,7 @@
             "PropertyName": "onabort",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.ProgressEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onabort",
             "Documentation": "Sets the '@onabort' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.ProgressEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -3706,10 +3706,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onabort' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -3718,10 +3715,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -5873898245256812468,
-          "Data2": -7720418263089214708,
-          "Data3": -2817331723572520804,
-          "Data4": -1440272608462068141
+          "Data1": 8559382721100116586,
+          "Data2": 1629829525962327545,
+          "Data3": -29707710561528807,
+          "Data4": 7390058498323994115
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -3771,7 +3768,7 @@
             "PropertyName": "onactivate",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.EventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onactivate",
             "Documentation": "Sets the '@onactivate' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -3791,10 +3788,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onactivate' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -3803,10 +3797,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -8112005141746318349,
-          "Data2": -1767558661829652738,
-          "Data3": -1003386243011679320,
-          "Data4": 6027490693505072124
+          "Data1": 2677880534498793522,
+          "Data2": -7617242190773358346,
+          "Data3": -8437861163026038884,
+          "Data4": -6721962367372242225
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -3856,7 +3850,7 @@
             "PropertyName": "onbeforeactivate",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.EventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onbeforeactivate",
             "Documentation": "Sets the '@onbeforeactivate' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -3876,10 +3870,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onbeforeactivate' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -3888,10 +3879,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -6442922745889964843,
-          "Data2": 5965250950286149138,
-          "Data3": -5466236309629267552,
-          "Data4": -2237489995817188476
+          "Data1": -5166377379228091217,
+          "Data2": 1964523907914501864,
+          "Data3": 6152611383047654130,
+          "Data4": 5679492487995137634
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -3941,7 +3932,7 @@
             "PropertyName": "onbeforecopy",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.EventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onbeforecopy",
             "Documentation": "Sets the '@onbeforecopy' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -3961,10 +3952,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onbeforecopy' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -3973,10 +3961,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -5657850006041329705,
-          "Data2": -7273383847836753128,
-          "Data3": 2251621953310005305,
-          "Data4": -7085969417622495261
+          "Data1": -2587320659204618381,
+          "Data2": 6737144950663207713,
+          "Data3": 4113848063674885162,
+          "Data4": -308519735444277640
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -4026,7 +4014,7 @@
             "PropertyName": "onbeforecut",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.EventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onbeforecut",
             "Documentation": "Sets the '@onbeforecut' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -4046,10 +4034,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onbeforecut' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -4058,10 +4043,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -5876108114495726837,
-          "Data2": 6255220046094682011,
-          "Data3": -6159247341036702511,
-          "Data4": -8955419113463973894
+          "Data1": 8004788572485437828,
+          "Data2": 396863225351076548,
+          "Data3": -1607326608289292713,
+          "Data4": 508394545499475951
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -4111,7 +4096,7 @@
             "PropertyName": "onbeforedeactivate",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.EventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onbeforedeactivate",
             "Documentation": "Sets the '@onbeforedeactivate' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -4131,10 +4116,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onbeforedeactivate' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -4143,10 +4125,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 4209644501033247584,
-          "Data2": -1958144081000766397,
-          "Data3": -4688918367870242837,
-          "Data4": -8810384566046270
+          "Data1": -2265153687698763233,
+          "Data2": -2730982367243633687,
+          "Data3": 8837169766779547089,
+          "Data4": 3939564121652718010
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -4196,7 +4178,7 @@
             "PropertyName": "onbeforepaste",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.EventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onbeforepaste",
             "Documentation": "Sets the '@onbeforepaste' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -4216,10 +4198,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onbeforepaste' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -4228,10 +4207,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 5273691503276153880,
-          "Data2": 2744555108171444168,
-          "Data3": -4529731549082387385,
-          "Data4": 5271655463634636748
+          "Data1": 668362941235074282,
+          "Data2": -5967648131341970755,
+          "Data3": -5976142204212246123,
+          "Data4": -4394085892258543732
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -4281,7 +4260,7 @@
             "PropertyName": "onblur",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.FocusEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onblur",
             "Documentation": "Sets the '@onblur' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.FocusEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -4301,10 +4280,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onblur' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -4313,10 +4289,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -8997028452870803933,
-          "Data2": 5186055361252316837,
-          "Data3": -2868738895278155886,
-          "Data4": 201716047998635919
+          "Data1": 6904041998819828521,
+          "Data2": 6484501291305344934,
+          "Data3": -8516675559920849617,
+          "Data4": -6994497095726602703
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -4366,7 +4342,7 @@
             "PropertyName": "oncanplay",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.EventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.oncanplay",
             "Documentation": "Sets the '@oncanplay' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -4386,10 +4362,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@oncanplay' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -4398,10 +4371,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 706638269602564629,
-          "Data2": -6688871744768245959,
-          "Data3": -865144666744106083,
-          "Data4": 858766306191518823
+          "Data1": -5203277508499499452,
+          "Data2": 8611779271705995023,
+          "Data3": 4125540430705187673,
+          "Data4": -6089285637883509128
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -4451,7 +4424,7 @@
             "PropertyName": "oncanplaythrough",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.EventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.oncanplaythrough",
             "Documentation": "Sets the '@oncanplaythrough' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -4471,10 +4444,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@oncanplaythrough' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -4483,10 +4453,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -4562071881028136332,
-          "Data2": 6450119102097306599,
-          "Data3": 8541999600274826919,
-          "Data4": 7793900239775666597
+          "Data1": 2449326859214840848,
+          "Data2": 2867328640402072794,
+          "Data3": 7392118307511927386,
+          "Data4": -1859039926013931790
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -4536,7 +4506,7 @@
             "PropertyName": "onchange",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.ChangeEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onchange",
             "Documentation": "Sets the '@onchange' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.ChangeEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -4556,10 +4526,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onchange' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -4568,10 +4535,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -4749369113614563307,
-          "Data2": 1411126125567616370,
-          "Data3": -6542875661730526551,
-          "Data4": -1813544155090202195
+          "Data1": -2010929821654243205,
+          "Data2": -6863395781917167572,
+          "Data3": 5650849428305335728,
+          "Data4": 3123403480954943916
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -4621,7 +4588,7 @@
             "PropertyName": "onclick",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.MouseEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onclick",
             "Documentation": "Sets the '@onclick' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.MouseEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -4641,10 +4608,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onclick' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -4653,10 +4617,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -7810219371070397061,
-          "Data2": -3944567317527512275,
-          "Data3": 1497328504191182298,
-          "Data4": -7691829404570426134
+          "Data1": 7990805283701839271,
+          "Data2": 7964097300016470604,
+          "Data3": -7074179479359704685,
+          "Data4": -351751966515757663
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -4706,7 +4670,7 @@
             "PropertyName": "oncontextmenu",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.MouseEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.oncontextmenu",
             "Documentation": "Sets the '@oncontextmenu' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.MouseEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -4726,10 +4690,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@oncontextmenu' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -4738,10 +4699,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -7631822091078238722,
-          "Data2": 2083511225113557882,
-          "Data3": -3008760025617874627,
-          "Data4": 1521355763930363186
+          "Data1": 4247864656767913574,
+          "Data2": -1908342418400490213,
+          "Data3": 3757698619667480359,
+          "Data4": -3548989371057473830
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -4791,7 +4752,7 @@
             "PropertyName": "oncopy",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.ClipboardEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.oncopy",
             "Documentation": "Sets the '@oncopy' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.ClipboardEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -4811,10 +4772,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@oncopy' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -4823,10 +4781,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 1206501637939673393,
-          "Data2": -1175255199790324799,
-          "Data3": -2581484396617748516,
-          "Data4": -5828890473874733387
+          "Data1": 1274020279458154724,
+          "Data2": -6710592691093607563,
+          "Data3": -5072974059992872427,
+          "Data4": 5351950744945714673
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -4876,7 +4834,7 @@
             "PropertyName": "oncuechange",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.EventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.oncuechange",
             "Documentation": "Sets the '@oncuechange' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -4896,10 +4854,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@oncuechange' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -4908,10 +4863,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -4193309761532247796,
-          "Data2": -3748734175318783831,
-          "Data3": -5216318929598758081,
-          "Data4": 2007718758950316388
+          "Data1": 3393062377026178618,
+          "Data2": -3086630230257680008,
+          "Data3": 7115689024659716370,
+          "Data4": -6360267548801909719
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -4961,7 +4916,7 @@
             "PropertyName": "oncut",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.ClipboardEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.oncut",
             "Documentation": "Sets the '@oncut' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.ClipboardEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -4981,10 +4936,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@oncut' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -4993,10 +4945,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -7071208632221095660,
-          "Data2": 3866247086374840583,
-          "Data3": -5950972361868642413,
-          "Data4": 32853719039866309
+          "Data1": 8485204655236503079,
+          "Data2": 8315115290015929707,
+          "Data3": -686697311704922733,
+          "Data4": 3100258883237433470
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -5046,7 +4998,7 @@
             "PropertyName": "ondblclick",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.MouseEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.ondblclick",
             "Documentation": "Sets the '@ondblclick' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.MouseEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -5066,10 +5018,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ondblclick' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -5078,10 +5027,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -8170551406719493931,
-          "Data2": 983626771362331378,
-          "Data3": -7457115966882894539,
-          "Data4": 1576916349480635222
+          "Data1": -571862541617971927,
+          "Data2": 2675393579909752655,
+          "Data3": -2410283996055897463,
+          "Data4": 8205924077238137775
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -5131,7 +5080,7 @@
             "PropertyName": "ondeactivate",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.EventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.ondeactivate",
             "Documentation": "Sets the '@ondeactivate' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -5151,10 +5100,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ondeactivate' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -5163,10 +5109,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 8772728476718595612,
-          "Data2": -533994559719051426,
-          "Data3": 6845000725279942075,
-          "Data4": 3195773497999843537
+          "Data1": 5052404659640877045,
+          "Data2": -3723047130549131311,
+          "Data3": -1872304448520327619,
+          "Data4": 4558743793436830223
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -5216,7 +5162,7 @@
             "PropertyName": "ondrag",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.DragEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.ondrag",
             "Documentation": "Sets the '@ondrag' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.DragEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -5236,10 +5182,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ondrag' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -5248,10 +5191,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 6050581673725536691,
-          "Data2": 9159870817452117766,
-          "Data3": 8495009523041126171,
-          "Data4": -357270342818279030
+          "Data1": -6683697817480706784,
+          "Data2": 46437164372640352,
+          "Data3": 3196692798223171473,
+          "Data4": 6865706957346982261
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -5301,7 +5244,7 @@
             "PropertyName": "ondragend",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.DragEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.ondragend",
             "Documentation": "Sets the '@ondragend' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.DragEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -5321,10 +5264,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ondragend' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -5333,10 +5273,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -4139650470379825103,
-          "Data2": 1809069004337651892,
-          "Data3": -2681301998189615503,
-          "Data4": -9056194330759818462
+          "Data1": 1574912175250218518,
+          "Data2": 7243796555359041378,
+          "Data3": 2245641334376947123,
+          "Data4": -9095313125555934218
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -5386,7 +5326,7 @@
             "PropertyName": "ondragenter",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.DragEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.ondragenter",
             "Documentation": "Sets the '@ondragenter' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.DragEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -5406,10 +5346,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ondragenter' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -5418,10 +5355,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -1853108548002433358,
-          "Data2": 1344182290283035985,
-          "Data3": 6710557538408566824,
-          "Data4": 2091427722799509573
+          "Data1": -5300557617574089818,
+          "Data2": -5485165843424444109,
+          "Data3": 5909448418451084492,
+          "Data4": -52359596574252646
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -5471,7 +5408,7 @@
             "PropertyName": "ondragleave",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.DragEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.ondragleave",
             "Documentation": "Sets the '@ondragleave' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.DragEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -5491,10 +5428,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ondragleave' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -5503,10 +5437,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 3438464551035288760,
-          "Data2": -6165361057352023495,
-          "Data3": -3658031480814361036,
-          "Data4": -2628648732260146978
+          "Data1": -1697112556882235375,
+          "Data2": -2652989632382549383,
+          "Data3": -5502836187421976925,
+          "Data4": 6359002161225038541
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -5556,7 +5490,7 @@
             "PropertyName": "ondragover",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.DragEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.ondragover",
             "Documentation": "Sets the '@ondragover' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.DragEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -5576,10 +5510,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ondragover' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -5588,10 +5519,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 1470489432231726741,
-          "Data2": -1238789288179498197,
-          "Data3": -3753528797032135674,
-          "Data4": 6013679284262824517
+          "Data1": -3969138521399536330,
+          "Data2": -3167443297008601790,
+          "Data3": -70334307721535855,
+          "Data4": 2402580417723269118
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -5641,7 +5572,7 @@
             "PropertyName": "ondragstart",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.DragEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.ondragstart",
             "Documentation": "Sets the '@ondragstart' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.DragEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -5661,10 +5592,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ondragstart' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -5673,10 +5601,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 7021233917146895807,
-          "Data2": 4057324732188669114,
-          "Data3": -9086097688243198061,
-          "Data4": 2887470584634113419
+          "Data1": 165467090225885792,
+          "Data2": 5962924424050496603,
+          "Data3": 5647884345721112642,
+          "Data4": -4272469175168403055
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -5726,7 +5654,7 @@
             "PropertyName": "ondrop",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.DragEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.ondrop",
             "Documentation": "Sets the '@ondrop' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.DragEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -5746,10 +5674,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ondrop' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -5758,10 +5683,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -6607405864150325559,
-          "Data2": -8081309266736328044,
-          "Data3": -6303718692417384458,
-          "Data4": 5101366182713759044
+          "Data1": -8373716891903456839,
+          "Data2": 6721265748731153101,
+          "Data3": -5486216800174612923,
+          "Data4": -739078817590309591
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -5811,7 +5736,7 @@
             "PropertyName": "ondurationchange",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.EventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.ondurationchange",
             "Documentation": "Sets the '@ondurationchange' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -5831,10 +5756,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ondurationchange' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -5843,10 +5765,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 1398375148710168714,
-          "Data2": 7203663750644172869,
-          "Data3": 6497457787533623829,
-          "Data4": 2184273552539767762
+          "Data1": 8683782002517061371,
+          "Data2": -5608066373509902423,
+          "Data3": 1708489868157843442,
+          "Data4": 142159167002462039
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -5896,7 +5818,7 @@
             "PropertyName": "onemptied",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.EventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onemptied",
             "Documentation": "Sets the '@onemptied' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -5916,10 +5838,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onemptied' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -5928,10 +5847,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 3034259592758512719,
-          "Data2": 4500117207192277933,
-          "Data3": 3189298393501201712,
-          "Data4": -2667480251423081370
+          "Data1": 4110478202560837536,
+          "Data2": 4769144598620588323,
+          "Data3": 5356916582808168332,
+          "Data4": 5553753519316842403
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -5981,7 +5900,7 @@
             "PropertyName": "onended",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.EventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onended",
             "Documentation": "Sets the '@onended' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -6001,10 +5920,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onended' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -6013,10 +5929,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -4519302919998323437,
-          "Data2": 6067023330872902328,
-          "Data3": 871445664855106429,
-          "Data4": -2706038227277689985
+          "Data1": -7671379137603668239,
+          "Data2": 907124365715619587,
+          "Data3": 4803021244062870527,
+          "Data4": 4726414540441972226
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -6066,7 +5982,7 @@
             "PropertyName": "onerror",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.ErrorEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onerror",
             "Documentation": "Sets the '@onerror' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.ErrorEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -6086,10 +6002,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onerror' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -6098,10 +6011,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -2223512128336704277,
-          "Data2": -8182160765303953038,
-          "Data3": 3415297836913612147,
-          "Data4": 6453170817120094605
+          "Data1": -511798866212491448,
+          "Data2": -7782683238150231088,
+          "Data3": 2247812376846182148,
+          "Data4": 5194582251407803506
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -6151,7 +6064,7 @@
             "PropertyName": "onfocus",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.FocusEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onfocus",
             "Documentation": "Sets the '@onfocus' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.FocusEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -6171,10 +6084,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onfocus' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -6183,10 +6093,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 1609793766156512398,
-          "Data2": 2731390098272083143,
-          "Data3": -6409451704032143467,
-          "Data4": -851458473821365429
+          "Data1": 5604158928263809497,
+          "Data2": 2342711592495942256,
+          "Data3": -7776482000012619521,
+          "Data4": -5875279898454394818
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -6236,7 +6146,7 @@
             "PropertyName": "onfocusin",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.FocusEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onfocusin",
             "Documentation": "Sets the '@onfocusin' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.FocusEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -6256,10 +6166,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onfocusin' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -6268,10 +6175,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -1952185328893659377,
-          "Data2": -2390841391009263702,
-          "Data3": 3553809599247008739,
-          "Data4": -2590020457209705753
+          "Data1": 1301032442455587401,
+          "Data2": 6875770169061381140,
+          "Data3": 1780433581228222466,
+          "Data4": 3156815740221157065
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -6321,7 +6228,7 @@
             "PropertyName": "onfocusout",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.FocusEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onfocusout",
             "Documentation": "Sets the '@onfocusout' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.FocusEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -6341,10 +6248,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onfocusout' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -6353,10 +6257,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -4251362739116418765,
-          "Data2": -2537513857144468312,
-          "Data3": 7487824188261357600,
-          "Data4": -7110834035199629088
+          "Data1": -6333357322734022058,
+          "Data2": -7443459562917872925,
+          "Data3": 2647517942741437145,
+          "Data4": 2875384960286833263
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -6406,7 +6310,7 @@
             "PropertyName": "onfullscreenchange",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.EventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onfullscreenchange",
             "Documentation": "Sets the '@onfullscreenchange' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -6426,10 +6330,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onfullscreenchange' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -6438,10 +6339,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -1844318828365477224,
-          "Data2": 3156444463364505259,
-          "Data3": 4124175942423860788,
-          "Data4": 2271643261549867684
+          "Data1": 1251681175642377976,
+          "Data2": 2592769698205681848,
+          "Data3": -6702470373336623651,
+          "Data4": 4380449336559265525
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -6491,7 +6392,7 @@
             "PropertyName": "onfullscreenerror",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.EventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onfullscreenerror",
             "Documentation": "Sets the '@onfullscreenerror' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -6511,10 +6412,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onfullscreenerror' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -6523,10 +6421,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 4709494573146532710,
-          "Data2": -8916113334372651778,
-          "Data3": -6277458298114594303,
-          "Data4": -3044242138089155322
+          "Data1": -5913398934788684697,
+          "Data2": -3277580193760169723,
+          "Data3": 5714135023691598418,
+          "Data4": 3331379579782483822
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -6576,7 +6474,7 @@
             "PropertyName": "ongotpointercapture",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.PointerEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.ongotpointercapture",
             "Documentation": "Sets the '@ongotpointercapture' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.PointerEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -6596,10 +6494,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ongotpointercapture' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -6608,10 +6503,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 6375080860832600037,
-          "Data2": 4232005901263872422,
-          "Data3": -1044669407468260286,
-          "Data4": -6623395177170576338
+          "Data1": 8679471480197387526,
+          "Data2": 3353320784110483353,
+          "Data3": -4420858477407501874,
+          "Data4": -6224480485915300702
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -6661,7 +6556,7 @@
             "PropertyName": "oninput",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.ChangeEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.oninput",
             "Documentation": "Sets the '@oninput' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.ChangeEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -6681,10 +6576,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@oninput' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -6693,10 +6585,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -8431258570408507353,
-          "Data2": -6569635503487787323,
-          "Data3": -1731472683354939148,
-          "Data4": -992744729762592762
+          "Data1": -6481076357568910981,
+          "Data2": 4884318910298404824,
+          "Data3": 2061955500405368135,
+          "Data4": -7004600095756244516
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -6746,7 +6638,7 @@
             "PropertyName": "oninvalid",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.EventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.oninvalid",
             "Documentation": "Sets the '@oninvalid' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -6766,10 +6658,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@oninvalid' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -6778,10 +6667,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -5106755754263125631,
-          "Data2": 5397872577799539579,
-          "Data3": 3203822315293672618,
-          "Data4": -1879730854885941735
+          "Data1": 5608753431654585133,
+          "Data2": -7470275387628154310,
+          "Data3": 5990659919297375533,
+          "Data4": -6421044265649661422
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -6831,7 +6720,7 @@
             "PropertyName": "onkeydown",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.KeyboardEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onkeydown",
             "Documentation": "Sets the '@onkeydown' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.KeyboardEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -6851,10 +6740,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onkeydown' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -6863,10 +6749,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 7184353682740735247,
-          "Data2": -27217687542538271,
-          "Data3": 5979721372290068771,
-          "Data4": -8326634566965402705
+          "Data1": 3690644218871528612,
+          "Data2": 6514071268146376779,
+          "Data3": -4501011482618472941,
+          "Data4": 3351985551762611238
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -6916,7 +6802,7 @@
             "PropertyName": "onkeypress",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.KeyboardEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onkeypress",
             "Documentation": "Sets the '@onkeypress' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.KeyboardEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -6936,10 +6822,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onkeypress' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -6948,10 +6831,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 1018207051567427782,
-          "Data2": -8621438815870737436,
-          "Data3": -8102176293321372176,
-          "Data4": 7420032517417049858
+          "Data1": 3283097368238551106,
+          "Data2": 310941699646193966,
+          "Data3": -5160356209712751614,
+          "Data4": -5618875117653417941
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -7001,7 +6884,7 @@
             "PropertyName": "onkeyup",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.KeyboardEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onkeyup",
             "Documentation": "Sets the '@onkeyup' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.KeyboardEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -7021,10 +6904,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onkeyup' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -7033,10 +6913,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 9066290931351060736,
-          "Data2": -2276197377877701199,
-          "Data3": -186082120440049747,
-          "Data4": -4581443991831924294
+          "Data1": 8538080530319102364,
+          "Data2": -8390137014885916104,
+          "Data3": 9004563639228311215,
+          "Data4": -2541297576740021680
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -7086,7 +6966,7 @@
             "PropertyName": "onload",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.ProgressEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onload",
             "Documentation": "Sets the '@onload' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.ProgressEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -7106,10 +6986,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onload' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -7118,10 +6995,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -6508120047813060499,
-          "Data2": 414613956913473797,
-          "Data3": -3512590540436897167,
-          "Data4": 4833797270824048667
+          "Data1": 115386966278388892,
+          "Data2": 4334264944995489076,
+          "Data3": 2379433389140356464,
+          "Data4": -5975929647592124468
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -7171,7 +7048,7 @@
             "PropertyName": "onloadeddata",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.EventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onloadeddata",
             "Documentation": "Sets the '@onloadeddata' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -7191,10 +7068,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onloadeddata' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -7203,10 +7077,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -8735141927999736135,
-          "Data2": 71535293847409117,
-          "Data3": -7781534635950393126,
-          "Data4": 8225726182226295750
+          "Data1": 4903675654567930625,
+          "Data2": 3608938755218446935,
+          "Data3": -2564836076185340072,
+          "Data4": -7876036406978317902
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -7256,7 +7130,7 @@
             "PropertyName": "onloadedmetadata",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.EventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onloadedmetadata",
             "Documentation": "Sets the '@onloadedmetadata' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -7276,10 +7150,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onloadedmetadata' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -7288,10 +7159,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -7386009483489422507,
-          "Data2": -3186812504965314858,
-          "Data3": -5211553490834683046,
-          "Data4": 6811045248454822602
+          "Data1": 8926113241074841711,
+          "Data2": -3838072178500156553,
+          "Data3": 4689286938829476778,
+          "Data4": 1054364380989899132
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -7341,7 +7212,7 @@
             "PropertyName": "onloadend",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.ProgressEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onloadend",
             "Documentation": "Sets the '@onloadend' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.ProgressEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -7361,10 +7232,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onloadend' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -7373,10 +7241,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -976853351209521554,
-          "Data2": 556097717911310501,
-          "Data3": -5954634860008865802,
-          "Data4": 2372438337384324844
+          "Data1": -6187618972306205970,
+          "Data2": 2456643485481521262,
+          "Data3": -5749669087716195467,
+          "Data4": 8046146940159488530
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -7426,7 +7294,7 @@
             "PropertyName": "onloadstart",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.ProgressEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onloadstart",
             "Documentation": "Sets the '@onloadstart' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.ProgressEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -7446,10 +7314,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onloadstart' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -7458,10 +7323,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -759728856827305374,
-          "Data2": 5167937775462363694,
-          "Data3": -1615868877709153255,
-          "Data4": 3265834553745837363
+          "Data1": 4358627614661331592,
+          "Data2": 8444896187037062300,
+          "Data3": 4270075635859792601,
+          "Data4": 9094659895943306276
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -7511,7 +7376,7 @@
             "PropertyName": "onlostpointercapture",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.PointerEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onlostpointercapture",
             "Documentation": "Sets the '@onlostpointercapture' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.PointerEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -7531,10 +7396,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onlostpointercapture' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -7543,10 +7405,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -3007317016965474320,
-          "Data2": 5340424145503876102,
-          "Data3": -116328802691105386,
-          "Data4": -5821232556633546918
+          "Data1": 8314174335973012229,
+          "Data2": 6955627443284219450,
+          "Data3": 5069847749657844305,
+          "Data4": -2432927078175444602
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -7596,7 +7458,7 @@
             "PropertyName": "onmousedown",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.MouseEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onmousedown",
             "Documentation": "Sets the '@onmousedown' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.MouseEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -7616,10 +7478,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onmousedown' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -7628,10 +7487,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -3864483972916139660,
-          "Data2": -2222371385834187159,
-          "Data3": 9026662490802934906,
-          "Data4": 3348736049271075821
+          "Data1": 1578352480124944170,
+          "Data2": 536943317688584860,
+          "Data3": -3992662241585606123,
+          "Data4": 7755816157401184773
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -7681,7 +7540,7 @@
             "PropertyName": "onmousemove",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.MouseEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onmousemove",
             "Documentation": "Sets the '@onmousemove' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.MouseEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -7701,10 +7560,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onmousemove' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -7713,10 +7569,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 2264053773269370907,
-          "Data2": 7901449002150969279,
-          "Data3": -6077161215135989072,
-          "Data4": -9214320446728022606
+          "Data1": 3388858011897324803,
+          "Data2": -396458282041907930,
+          "Data3": -3210071693588020482,
+          "Data4": 6050842312588235925
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -7766,7 +7622,7 @@
             "PropertyName": "onmouseout",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.MouseEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onmouseout",
             "Documentation": "Sets the '@onmouseout' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.MouseEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -7786,10 +7642,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onmouseout' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -7798,10 +7651,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 9137416270766926486,
-          "Data2": -3933075741063419151,
-          "Data3": -583077482001912927,
-          "Data4": 4325606544825952038
+          "Data1": -7181520021189845782,
+          "Data2": -6544876093229331639,
+          "Data3": 2775556103415910407,
+          "Data4": 2044692722884679542
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -7851,7 +7704,7 @@
             "PropertyName": "onmouseover",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.MouseEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onmouseover",
             "Documentation": "Sets the '@onmouseover' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.MouseEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -7871,10 +7724,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onmouseover' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -7883,10 +7733,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -1039676086027601294,
-          "Data2": -2082566748704047845,
-          "Data3": 2704168040870942770,
-          "Data4": 7497741426647243040
+          "Data1": -6796992487924835687,
+          "Data2": -3088173162971494072,
+          "Data3": -3893095747764740050,
+          "Data4": -3412127853273203467
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -7936,7 +7786,7 @@
             "PropertyName": "onmouseup",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.MouseEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onmouseup",
             "Documentation": "Sets the '@onmouseup' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.MouseEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -7956,10 +7806,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onmouseup' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -7968,10 +7815,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 2216875440993926938,
-          "Data2": 6449021322562569812,
-          "Data3": -8913499476916946402,
-          "Data4": 5535627534828230752
+          "Data1": 78433250988362929,
+          "Data2": -2058477227383533793,
+          "Data3": 1396807356380199173,
+          "Data4": 8719633637255085198
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -8021,7 +7868,7 @@
             "PropertyName": "onmousewheel",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.WheelEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onmousewheel",
             "Documentation": "Sets the '@onmousewheel' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.WheelEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -8041,10 +7888,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onmousewheel' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -8053,10 +7897,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 5423165949338180616,
-          "Data2": -8883464041084145647,
-          "Data3": 6116228909432148171,
-          "Data4": 6359292997301489157
+          "Data1": -6985248060080798930,
+          "Data2": -7294087235778182702,
+          "Data3": -8883770351820672273,
+          "Data4": 442551638428268014
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -8106,7 +7950,7 @@
             "PropertyName": "onpaste",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.ClipboardEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onpaste",
             "Documentation": "Sets the '@onpaste' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.ClipboardEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -8126,10 +7970,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onpaste' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -8138,10 +7979,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 75168692893222479,
-          "Data2": 6915715080534159635,
-          "Data3": -2682274832163324470,
-          "Data4": -8823842811024842714
+          "Data1": -3780289278148183224,
+          "Data2": -5982671375486358041,
+          "Data3": 940444786496170344,
+          "Data4": -6716686957378283536
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -8191,7 +8032,7 @@
             "PropertyName": "onpause",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.EventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onpause",
             "Documentation": "Sets the '@onpause' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -8211,10 +8052,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onpause' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -8223,10 +8061,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 2053034011344428400,
-          "Data2": 3811880839371408803,
-          "Data3": -5755312606799068151,
-          "Data4": 2599607195031270113
+          "Data1": -2756123172061565081,
+          "Data2": -1554728085386473659,
+          "Data3": -4102205605639008365,
+          "Data4": 6826611954620238077
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -8276,7 +8114,7 @@
             "PropertyName": "onplay",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.EventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onplay",
             "Documentation": "Sets the '@onplay' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -8296,10 +8134,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onplay' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -8308,10 +8143,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 4532538956418743082,
-          "Data2": -5736583461143558459,
-          "Data3": 328422160767589242,
-          "Data4": 4328214329297072921
+          "Data1": -3952538051580062672,
+          "Data2": 4769598841069077638,
+          "Data3": 1350051311434996576,
+          "Data4": 6334787950925268451
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -8361,7 +8196,7 @@
             "PropertyName": "onplaying",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.EventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onplaying",
             "Documentation": "Sets the '@onplaying' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -8381,10 +8216,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onplaying' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -8393,10 +8225,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 8156296067395360309,
-          "Data2": 4192976160002838521,
-          "Data3": 4492094819394636984,
-          "Data4": -1802767267741960070
+          "Data1": -2239901038138402143,
+          "Data2": -1573925988278369077,
+          "Data3": 8856211610499357109,
+          "Data4": -337468397715173810
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -8446,7 +8278,7 @@
             "PropertyName": "onpointercancel",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.PointerEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onpointercancel",
             "Documentation": "Sets the '@onpointercancel' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.PointerEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -8466,10 +8298,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onpointercancel' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -8478,10 +8307,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -2502843845292533842,
-          "Data2": 3409072108370471932,
-          "Data3": -5633872734348760761,
-          "Data4": 8495509314392488043
+          "Data1": 5799716298061841333,
+          "Data2": 6302723218052915760,
+          "Data3": -362926499071584987,
+          "Data4": -8244227201260033465
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -8531,7 +8360,7 @@
             "PropertyName": "onpointerdown",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.PointerEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onpointerdown",
             "Documentation": "Sets the '@onpointerdown' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.PointerEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -8551,10 +8380,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onpointerdown' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -8563,10 +8389,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -2706540068734992896,
-          "Data2": -9144494450002653741,
-          "Data3": -4026864919198123082,
-          "Data4": -9046611797415658961
+          "Data1": 491190141196991147,
+          "Data2": 6709856578440032252,
+          "Data3": -1560660476904778446,
+          "Data4": 6362096865707532541
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -8616,7 +8442,7 @@
             "PropertyName": "onpointerenter",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.PointerEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onpointerenter",
             "Documentation": "Sets the '@onpointerenter' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.PointerEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -8636,10 +8462,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onpointerenter' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -8648,10 +8471,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -2603898065386470961,
-          "Data2": 4869340039361035355,
-          "Data3": -5464319933357056331,
-          "Data4": -4370128451643601934
+          "Data1": 8054298596476902213,
+          "Data2": -1203019584441048295,
+          "Data3": 7545402415466265130,
+          "Data4": 2879813518401580536
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -8701,7 +8524,7 @@
             "PropertyName": "onpointerleave",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.PointerEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onpointerleave",
             "Documentation": "Sets the '@onpointerleave' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.PointerEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -8721,10 +8544,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onpointerleave' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -8733,10 +8553,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -3265010322395700016,
-          "Data2": 4857393873532255390,
-          "Data3": 3405103233909765829,
-          "Data4": -5725035669069414272
+          "Data1": 7247731258755835251,
+          "Data2": -8023007545064796249,
+          "Data3": -6114244909816631746,
+          "Data4": -7221249929667439281
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -8786,7 +8606,7 @@
             "PropertyName": "onpointerlockchange",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.EventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onpointerlockchange",
             "Documentation": "Sets the '@onpointerlockchange' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -8806,10 +8626,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onpointerlockchange' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -8818,10 +8635,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 785858214108834607,
-          "Data2": -5035778984321021271,
-          "Data3": -7525108172838556917,
-          "Data4": 7263949590725895031
+          "Data1": 8766263713956245815,
+          "Data2": -4203071593684305377,
+          "Data3": -9052700121037183105,
+          "Data4": 572638367225172386
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -8871,7 +8688,7 @@
             "PropertyName": "onpointerlockerror",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.EventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onpointerlockerror",
             "Documentation": "Sets the '@onpointerlockerror' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -8891,10 +8708,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onpointerlockerror' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -8903,10 +8717,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -3138457045563264240,
-          "Data2": -6374868210579443229,
-          "Data3": 8950144535334003427,
-          "Data4": -6654124636072501846
+          "Data1": -4399750505865087664,
+          "Data2": 17119762114403569,
+          "Data3": 7949462256371640616,
+          "Data4": -3666976535607127632
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -8956,7 +8770,7 @@
             "PropertyName": "onpointermove",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.PointerEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onpointermove",
             "Documentation": "Sets the '@onpointermove' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.PointerEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -8976,10 +8790,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onpointermove' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -8988,10 +8799,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 3783846666445852366,
-          "Data2": 5872671254110793265,
-          "Data3": 6169812905248935126,
-          "Data4": -7457886009430314804
+          "Data1": -7630110478965502765,
+          "Data2": 4590093960856453136,
+          "Data3": -8731800680205283521,
+          "Data4": -4692623990587619454
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -9041,7 +8852,7 @@
             "PropertyName": "onpointerout",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.PointerEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onpointerout",
             "Documentation": "Sets the '@onpointerout' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.PointerEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -9061,10 +8872,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onpointerout' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -9073,10 +8881,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -48068020831480057,
-          "Data2": 1380751791795131635,
-          "Data3": -8727805233644165444,
-          "Data4": 1513338308942497191
+          "Data1": -5383518373131197016,
+          "Data2": 6588617203480338044,
+          "Data3": -7481534085234375089,
+          "Data4": -3340556447929705747
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -9126,7 +8934,7 @@
             "PropertyName": "onpointerover",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.PointerEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onpointerover",
             "Documentation": "Sets the '@onpointerover' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.PointerEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -9146,10 +8954,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onpointerover' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -9158,10 +8963,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -1402909283007206710,
-          "Data2": 6320937775003437873,
-          "Data3": -3248770741090902912,
-          "Data4": -7638208322410690668
+          "Data1": -7719560864930453393,
+          "Data2": 7371217764588160146,
+          "Data3": -3725010907755010554,
+          "Data4": 2995403223088026141
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -9211,7 +9016,7 @@
             "PropertyName": "onpointerup",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.PointerEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onpointerup",
             "Documentation": "Sets the '@onpointerup' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.PointerEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -9231,10 +9036,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onpointerup' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -9243,10 +9045,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 7928920333604164913,
-          "Data2": -5425139606292492753,
-          "Data3": 9218531036970727171,
-          "Data4": -1052070475829916655
+          "Data1": -6184756526223044261,
+          "Data2": -3507931365226706482,
+          "Data3": -5518207414610813194,
+          "Data4": 2960979326698068322
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -9296,7 +9098,7 @@
             "PropertyName": "onprogress",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.ProgressEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onprogress",
             "Documentation": "Sets the '@onprogress' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.ProgressEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -9316,10 +9118,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onprogress' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -9328,10 +9127,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -7381729794137929887,
-          "Data2": 4635107444653969620,
-          "Data3": 9050809848338892894,
-          "Data4": -7054950292253805601
+          "Data1": 6990154044549824494,
+          "Data2": 2389893451242842043,
+          "Data3": 819638614805969477,
+          "Data4": 998415980223090894
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -9381,7 +9180,7 @@
             "PropertyName": "onratechange",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.EventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onratechange",
             "Documentation": "Sets the '@onratechange' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -9401,10 +9200,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onratechange' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -9413,10 +9209,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -6742057734407388263,
-          "Data2": -4695136751817861890,
-          "Data3": 1667815432409490328,
-          "Data4": 5923636238290507585
+          "Data1": -3031489306188081435,
+          "Data2": 6137453353787777813,
+          "Data3": -8595425400552316187,
+          "Data4": 6233623580299913478
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -9466,7 +9262,7 @@
             "PropertyName": "onreadystatechange",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.EventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onreadystatechange",
             "Documentation": "Sets the '@onreadystatechange' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -9486,10 +9282,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onreadystatechange' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -9498,10 +9291,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -2411637648109620608,
-          "Data2": -9092898151852512341,
-          "Data3": 1591738532361926871,
-          "Data4": -6986941716056290224
+          "Data1": 1149521024516590915,
+          "Data2": -8045245008583349669,
+          "Data3": -5014483316740512568,
+          "Data4": -8568057260424488057
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -9551,7 +9344,7 @@
             "PropertyName": "onreset",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.EventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onreset",
             "Documentation": "Sets the '@onreset' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -9571,10 +9364,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onreset' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -9583,10 +9373,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 5629777177800038094,
-          "Data2": -3349515880099229150,
-          "Data3": 3629304195979902181,
-          "Data4": 26825283135864269
+          "Data1": -2819650331439697540,
+          "Data2": -2808731145172063127,
+          "Data3": -240376550823833746,
+          "Data4": 9069816691681622444
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -9636,7 +9426,7 @@
             "PropertyName": "onscroll",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.EventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onscroll",
             "Documentation": "Sets the '@onscroll' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -9656,10 +9446,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onscroll' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -9668,10 +9455,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -4020626323471667535,
-          "Data2": 1453280948892653496,
-          "Data3": -5627011516535513085,
-          "Data4": -6601086500641650798
+          "Data1": -9202080988626319997,
+          "Data2": -3338424760459231995,
+          "Data3": -8937349606930912108,
+          "Data4": 906771093840111692
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -9721,7 +9508,7 @@
             "PropertyName": "onseeked",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.EventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onseeked",
             "Documentation": "Sets the '@onseeked' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -9741,10 +9528,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onseeked' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -9753,10 +9537,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -2102349714955871538,
-          "Data2": -9090084214801772450,
-          "Data3": -4800915741298647551,
-          "Data4": -2260805240626807152
+          "Data1": -1875496280234417970,
+          "Data2": 7418055541775899084,
+          "Data3": 7939410068702032479,
+          "Data4": -4957473325175725951
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -9806,7 +9590,7 @@
             "PropertyName": "onseeking",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.EventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onseeking",
             "Documentation": "Sets the '@onseeking' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -9826,10 +9610,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onseeking' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -9838,10 +9619,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 2019546217898084665,
-          "Data2": -8263067348888898246,
-          "Data3": -1580837705665155773,
-          "Data4": 8041197062953031468
+          "Data1": -2236236576704344725,
+          "Data2": 2941048801714894265,
+          "Data3": -9121183570385900925,
+          "Data4": 24532423306350650
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -9891,7 +9672,7 @@
             "PropertyName": "onselect",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.EventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onselect",
             "Documentation": "Sets the '@onselect' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -9911,10 +9692,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onselect' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -9923,10 +9701,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 1629639783548705951,
-          "Data2": -8665353703051211896,
-          "Data3": -3920203645683677055,
-          "Data4": -8854908586061399109
+          "Data1": -3565214096266230674,
+          "Data2": 4738996932059522286,
+          "Data3": -464493118159387613,
+          "Data4": 8097327164198097135
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -9976,7 +9754,7 @@
             "PropertyName": "onselectionchange",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.EventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onselectionchange",
             "Documentation": "Sets the '@onselectionchange' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -9996,10 +9774,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onselectionchange' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -10008,10 +9783,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 6506546042541076107,
-          "Data2": -4946837662787172466,
-          "Data3": 6072730048319373506,
-          "Data4": 2651190393060147886
+          "Data1": -3229148316121190875,
+          "Data2": 2452706212597565980,
+          "Data3": -4782119540294260089,
+          "Data4": 221119364177007289
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -10061,7 +9836,7 @@
             "PropertyName": "onselectstart",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.EventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onselectstart",
             "Documentation": "Sets the '@onselectstart' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -10081,10 +9856,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onselectstart' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -10093,10 +9865,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 3896459451156905955,
-          "Data2": 24131387618403374,
-          "Data3": -2193687917897511133,
-          "Data4": -2187714178952180947
+          "Data1": 8845566562273086074,
+          "Data2": -7231980189641085887,
+          "Data3": -4129140263956693153,
+          "Data4": 6395190511728662776
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -10146,7 +9918,7 @@
             "PropertyName": "onstalled",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.EventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onstalled",
             "Documentation": "Sets the '@onstalled' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -10166,10 +9938,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onstalled' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -10178,10 +9947,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -4639773853530377017,
-          "Data2": 746588132006792357,
-          "Data3": 3640197573365477471,
-          "Data4": 7494470940349768590
+          "Data1": 5195650307140106482,
+          "Data2": 8516478417044642413,
+          "Data3": -4337721989508108527,
+          "Data4": 7638675787566236868
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -10231,7 +10000,7 @@
             "PropertyName": "onstop",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.EventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onstop",
             "Documentation": "Sets the '@onstop' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -10251,10 +10020,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onstop' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -10263,10 +10029,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -7304867434665728669,
-          "Data2": 327218977275269074,
-          "Data3": 8886255142855867331,
-          "Data4": 2008778991347878265
+          "Data1": 8072329370417386233,
+          "Data2": -4146328422445729585,
+          "Data3": -5346286787786218917,
+          "Data4": 9004911266795938476
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -10316,7 +10082,7 @@
             "PropertyName": "onsubmit",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.EventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onsubmit",
             "Documentation": "Sets the '@onsubmit' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -10336,10 +10102,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onsubmit' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -10348,10 +10111,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -6192434560601343878,
-          "Data2": 944875936016054010,
-          "Data3": 2322834206691455321,
-          "Data4": 6914556596151676200
+          "Data1": -8873454002567182944,
+          "Data2": -1270027457419786760,
+          "Data3": -8511982827408472917,
+          "Data4": -1718290579309490762
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -10401,7 +10164,7 @@
             "PropertyName": "onsuspend",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.EventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onsuspend",
             "Documentation": "Sets the '@onsuspend' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -10421,10 +10184,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onsuspend' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -10433,10 +10193,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -522936115114929504,
-          "Data2": 1048905833290024556,
-          "Data3": -2722756834456696175,
-          "Data4": 1756893642987091446
+          "Data1": -8787426718505256087,
+          "Data2": -8938745695448439130,
+          "Data3": 6647121699605400184,
+          "Data4": -8678606397743523385
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -10486,7 +10246,7 @@
             "PropertyName": "ontimeout",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.ProgressEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.ontimeout",
             "Documentation": "Sets the '@ontimeout' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.ProgressEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -10506,10 +10266,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ontimeout' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -10518,10 +10275,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 7870616580206538463,
-          "Data2": -3731629195595714149,
-          "Data3": 4733895608277895274,
-          "Data4": 738191397645470706
+          "Data1": -5773876142152398196,
+          "Data2": 1121294618455445804,
+          "Data3": -2999061506974386290,
+          "Data4": -4658503716458392515
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -10571,7 +10328,7 @@
             "PropertyName": "ontimeupdate",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.EventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.ontimeupdate",
             "Documentation": "Sets the '@ontimeupdate' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -10591,10 +10348,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ontimeupdate' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -10603,10 +10357,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 2786015128456819758,
-          "Data2": 5182343055553763734,
-          "Data3": -5544197912931483030,
-          "Data4": 4541590355147484473
+          "Data1": -7012696236680032493,
+          "Data2": 8412138094329235655,
+          "Data3": 3316319553070872200,
+          "Data4": -2093093329844665200
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -10656,7 +10410,7 @@
             "PropertyName": "ontouchcancel",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.TouchEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.ontouchcancel",
             "Documentation": "Sets the '@ontouchcancel' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.TouchEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -10676,10 +10430,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ontouchcancel' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -10688,10 +10439,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -5180664402357502459,
-          "Data2": 1833341200622862858,
-          "Data3": -140803534594428855,
-          "Data4": 5791010692329832870
+          "Data1": 1597791586142935879,
+          "Data2": 4701952821272412333,
+          "Data3": -7115922316258336782,
+          "Data4": -4430885593526909512
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -10741,7 +10492,7 @@
             "PropertyName": "ontouchend",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.TouchEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.ontouchend",
             "Documentation": "Sets the '@ontouchend' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.TouchEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -10761,10 +10512,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ontouchend' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -10773,10 +10521,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 1441381316071052920,
-          "Data2": -1660797158358646344,
-          "Data3": 1742669237741446534,
-          "Data4": -6871863520392089428
+          "Data1": 5985576346914281151,
+          "Data2": 1781256082362660009,
+          "Data3": 6562159805254503968,
+          "Data4": 5765168945409010215
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -10826,7 +10574,7 @@
             "PropertyName": "ontouchenter",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.TouchEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.ontouchenter",
             "Documentation": "Sets the '@ontouchenter' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.TouchEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -10846,10 +10594,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ontouchenter' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -10858,10 +10603,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -1895064659738231500,
-          "Data2": 8604054095425544338,
-          "Data3": 7012685825027414061,
-          "Data4": -3392449222190590752
+          "Data1": -863778813000300466,
+          "Data2": -1353887121850326615,
+          "Data3": 4091327855878216536,
+          "Data4": 4299215828710485779
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -10911,7 +10656,7 @@
             "PropertyName": "ontouchleave",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.TouchEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.ontouchleave",
             "Documentation": "Sets the '@ontouchleave' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.TouchEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -10931,10 +10676,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ontouchleave' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -10943,10 +10685,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -5411166890520075278,
-          "Data2": 9085262453842239506,
-          "Data3": -2049874388910949032,
-          "Data4": 2107030767663968331
+          "Data1": 2641199397039587975,
+          "Data2": 6536770244848972059,
+          "Data3": -8582278766738423551,
+          "Data4": -8546853455207887057
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -10996,7 +10738,7 @@
             "PropertyName": "ontouchmove",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.TouchEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.ontouchmove",
             "Documentation": "Sets the '@ontouchmove' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.TouchEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -11016,10 +10758,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ontouchmove' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -11028,10 +10767,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 506042030530563009,
-          "Data2": 7233976583496569523,
-          "Data3": 5527347908287122531,
-          "Data4": -6866876633217933983
+          "Data1": -8525057590828634991,
+          "Data2": 4762400675150012785,
+          "Data3": 8615105528605325368,
+          "Data4": 1507528023382167168
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -11081,7 +10820,7 @@
             "PropertyName": "ontouchstart",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.TouchEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.ontouchstart",
             "Documentation": "Sets the '@ontouchstart' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.TouchEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -11101,10 +10840,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ontouchstart' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -11113,10 +10849,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -3698981963191877864,
-          "Data2": -5075738923267680202,
-          "Data3": 5824467373417395727,
-          "Data4": 1955381303900117920
+          "Data1": -2686367112159577276,
+          "Data2": 9040889084659287159,
+          "Data3": -8215646959867900495,
+          "Data4": 4539446042821531208
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -11166,7 +10902,7 @@
             "PropertyName": "onvolumechange",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.EventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onvolumechange",
             "Documentation": "Sets the '@onvolumechange' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -11186,10 +10922,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onvolumechange' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -11198,10 +10931,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -5491897726656013881,
-          "Data2": 4740870733813076094,
-          "Data3": 4850746227765335791,
-          "Data4": 7833951537331060743
+          "Data1": 3644803045100405031,
+          "Data2": 7158027535374119565,
+          "Data3": 7267557962382053868,
+          "Data4": 5436575975006448736
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -11251,7 +10984,7 @@
             "PropertyName": "onwaiting",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.EventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onwaiting",
             "Documentation": "Sets the '@onwaiting' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -11271,10 +11004,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onwaiting' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {
@@ -11283,10 +11013,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -1726120309142943461,
-          "Data2": -4816957684501502637,
-          "Data3": -7439052049687677437,
-          "Data4": -3228871006368020498
+          "Data1": -5509373816841349595,
+          "Data2": 1447701790628138855,
+          "Data3": -4654842743412604224,
+          "Data4": -6688125405002711193
         },
         "Kind": 4,
         "RuntimeKind": 2,
@@ -11336,7 +11066,7 @@
             "PropertyName": "onwheel",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.WheelEventArgs> Microsoft.AspNetCore.Components.Web.EventHandlers.onwheel",
             "Documentation": "Sets the '@onwheel' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.WheelEventArgs'.",
-            "Flags": 257,
+            "Flags": 769,
             "BoundAttributeParameters": [
               {
                 "Kind": 4,
@@ -11356,10 +11086,7 @@
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onwheel' event in the capturing and bubbling phases."
               }
-            ],
-            "Metadata": {
-              "Components.IsWeaklyTyped": "True"
-            }
+            ]
           }
         ],
         "Metadata": {

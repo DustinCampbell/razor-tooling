@@ -3647,10 +3647,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -8129979108187918569,
-      "Data2": 6102569297999790491,
-      "Data3": 6266165472455286723,
-      "Data4": 8008599525605443413
+      "Data1": -8259478208512589420,
+      "Data2": -1213247861775584005,
+      "Data3": 3308604447250313554,
+      "Data4": 9135520902709667189
     },
     "Kind": 4,
     "Name": "onabort",
@@ -3698,11 +3698,7 @@
         "PropertyName": "PreventDefault",
         "DisplayName": "preventDefault",
         "Documentation": "Specifieswhethertocancel(ifcancelable)thedefaultactionthatbelongstothe'@onabort'event.",
-        "Flags": 321,
-        "Metadata": {
-          "Common.DirectiveAttribute": "True",
-          "Components.IsWeaklyTyped": "True"
-        },
+        "Flags": 833,
         "Diagnostics": [
           {
             "Id": "RZ3015",

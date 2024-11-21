@@ -16,5 +16,6 @@ internal enum BoundAttributeFlags
     IsStringProperty = 1 << 5,
     IsBooleanProperty = 1 << 6,
     IsEditorRequired = 1 << 7,
-    IsDirectiveAttribute = 1 << 8
+    IsDirectiveAttribute = 1 << 8,
+    IsWeaklyTyped = 1 << 9
 }

@@ -5883,10 +5883,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -8867712770256733767,
-      "Data2": -4960164562865300998,
-      "Data3": 3407714371329314349,
-      "Data4": -3093596799330966286
+      "Data1": -8123732160299307193,
+      "Data2": -631141062221283477,
+      "Data3": 4254821156840945653,
+      "Data4": 8442919448528942045
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -5950,7 +5950,7 @@
             "Microsoft.AspNetCore.Components.Web.FocusEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -5980,10 +5980,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -5993,10 +5990,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 7277159807660710168,
-      "Data2": -1709538691169139303,
-      "Data3": 4201547112902664054,
-      "Data4": 4954573171533786996
+      "Data1": -4188962851962226173,
+      "Data2": -7921854595496600483,
+      "Data3": -1424930279970372778,
+      "Data4": -7156077765775104473
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -6060,7 +6057,7 @@
             "Microsoft.AspNetCore.Components.Web.FocusEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -6090,10 +6087,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -6103,10 +6097,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 6420328714669111850,
-      "Data2": 2558278712661420850,
-      "Data3": 4521348592612324957,
-      "Data4": 7964546108613710709
+      "Data1": -7878571471889015163,
+      "Data2": 2426538872947265548,
+      "Data3": -9033722097889315696,
+      "Data4": 1294331217863840116
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -6170,7 +6164,7 @@
             "Microsoft.AspNetCore.Components.Web.FocusEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -6200,10 +6194,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -6213,10 +6204,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 721319336133247915,
-      "Data2": 9147240408475348099,
-      "Data3": 4955313573836789063,
-      "Data4": -9015904145434597884
+      "Data1": -5944491414834445260,
+      "Data2": -8446844786030668831,
+      "Data3": 3745984429362679922,
+      "Data4": 876369999313560367
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -6280,7 +6271,7 @@
             "Microsoft.AspNetCore.Components.Web.FocusEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -6310,10 +6301,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -6323,10 +6311,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -934707029898902187,
-      "Data2": 689256585025585365,
-      "Data3": 3155325926558224980,
-      "Data4": 8923951791904518927
+      "Data1": 3162254156822700991,
+      "Data2": 8304233027205032472,
+      "Data3": 5111253424792959774,
+      "Data4": 6279589159178107810
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -6390,7 +6378,7 @@
             "Microsoft.AspNetCore.Components.Web.MouseEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -6420,10 +6408,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -6433,10 +6418,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 1176950166130757155,
-      "Data2": -743667661171602338,
-      "Data3": -3478530354060872851,
-      "Data4": 9190751673787334850
+      "Data1": 6689760045695897752,
+      "Data2": -8404940238269912011,
+      "Data3": 4855505734547380690,
+      "Data4": -3100380338060459337
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -6500,7 +6485,7 @@
             "Microsoft.AspNetCore.Components.Web.MouseEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -6530,10 +6515,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -6543,10 +6525,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -7736947682403255875,
-      "Data2": -9085852450926927232,
-      "Data3": 5380488902311754501,
-      "Data4": -7839347147814650059
+      "Data1": -6444432165769920936,
+      "Data2": -7193476199189648062,
+      "Data3": -3029783171464929816,
+      "Data4": 244052802851908546
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -6610,7 +6592,7 @@
             "Microsoft.AspNetCore.Components.Web.MouseEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -6640,10 +6622,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -6653,10 +6632,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -7264061830214559085,
-      "Data2": 1040070348999518275,
-      "Data3": 8108308869647642927,
-      "Data4": 541209955379629155
+      "Data1": -2804545216449308538,
+      "Data2": 2093325972990229881,
+      "Data3": 8220410214642381607,
+      "Data4": 3165441450342619982
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -6720,7 +6699,7 @@
             "Microsoft.AspNetCore.Components.Web.MouseEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -6750,10 +6729,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -6763,10 +6739,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -2788709697228483254,
-      "Data2": 5917193564975876070,
-      "Data3": -9141743556345543028,
-      "Data4": 3530400331182440183
+      "Data1": -8786439009656477951,
+      "Data2": -388599090326083188,
+      "Data3": -8574478501707823698,
+      "Data4": 6132538832875381040
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -6830,7 +6806,7 @@
             "Microsoft.AspNetCore.Components.Web.MouseEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -6860,10 +6836,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -6873,10 +6846,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -3488584035096145295,
-      "Data2": -4200496197850546772,
-      "Data3": 1597466656619776931,
-      "Data4": -3161595545427359584
+      "Data1": 4444164489210237486,
+      "Data2": -7292060237173914575,
+      "Data3": 2896822652112143191,
+      "Data4": 7165709424103933419
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -6940,7 +6913,7 @@
             "Microsoft.AspNetCore.Components.Web.MouseEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -6970,10 +6943,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -6983,10 +6953,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 4999228845648765533,
-      "Data2": 6525017560571214724,
-      "Data3": -6827358951461575693,
-      "Data4": 9216352402173123719
+      "Data1": 3962401502917439002,
+      "Data2": 8854465202920230852,
+      "Data3": 36749939575004091,
+      "Data4": -4782245686896907614
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -7050,7 +7020,7 @@
             "Microsoft.AspNetCore.Components.Web.MouseEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -7080,10 +7050,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -7093,10 +7060,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 7439812006835965430,
-      "Data2": -4364735374740709691,
-      "Data3": -5388779167742238829,
-      "Data4": 2009004841697653647
+      "Data1": 5210419994119627063,
+      "Data2": -645567583967688638,
+      "Data3": -8559668959766315306,
+      "Data4": 7369607333090991514
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -7160,7 +7127,7 @@
             "Microsoft.AspNetCore.Components.Web.MouseEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -7190,10 +7157,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -7203,10 +7167,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 7231159735849887112,
-      "Data2": 4958911831478549641,
-      "Data3": 452292582331024791,
-      "Data4": -8414764602318457868
+      "Data1": 1656041436060827617,
+      "Data2": -4110443796238126528,
+      "Data3": 4459497186659478887,
+      "Data4": 678963577607605619
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -7270,7 +7234,7 @@
             "Microsoft.AspNetCore.Components.Web.MouseEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -7300,10 +7264,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -7313,10 +7274,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -3142362503027758881,
-      "Data2": 2905943940686927291,
-      "Data3": 461550782827739094,
-      "Data4": 2548116581144141425
+      "Data1": 5105246496197094224,
+      "Data2": -6276322316925436464,
+      "Data3": 2491714038549238190,
+      "Data4": -3685642040465139833
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -7380,7 +7341,7 @@
             "Microsoft.AspNetCore.Components.Web.WheelEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -7410,10 +7371,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -7423,10 +7381,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -2007263275373410850,
-      "Data2": 2364251624239543447,
-      "Data3": 8455256373871173090,
-      "Data4": 7393452469997639803
+      "Data1": -435379975273638580,
+      "Data2": 3536591443757445001,
+      "Data3": -1982242234692033651,
+      "Data4": -8353983357255372936
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -7490,7 +7448,7 @@
             "Microsoft.AspNetCore.Components.Web.WheelEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -7520,10 +7478,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -7533,10 +7488,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 8800521671634202801,
-      "Data2": 8007037286871295386,
-      "Data3": 3227679416721424938,
-      "Data4": 7593502448340038926
+      "Data1": -6312022326775603261,
+      "Data2": -7119398031685828739,
+      "Data3": 6090562159741095873,
+      "Data4": -131538462488723460
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -7600,7 +7555,7 @@
             "Microsoft.AspNetCore.Components.Web.MouseEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -7630,10 +7585,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -7643,10 +7595,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -6521461635431546948,
-      "Data2": -5630365630805984553,
-      "Data3": -5467168180407757428,
-      "Data4": 8228861337938363919
+      "Data1": 7540004582710986800,
+      "Data2": 8844946481642946600,
+      "Data3": -4623477430671428778,
+      "Data4": -6344320956001587976
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -7710,7 +7662,7 @@
             "Microsoft.AspNetCore.Components.Web.DragEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -7740,10 +7692,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -7753,10 +7702,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 3272161977926577797,
-      "Data2": -1474388622411599561,
-      "Data3": -6199145854232558236,
-      "Data4": 8357364796258201068
+      "Data1": -3560797327037715065,
+      "Data2": 3158967749526598905,
+      "Data3": 4910183607283906447,
+      "Data4": -1329159843844507984
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -7820,7 +7769,7 @@
             "Microsoft.AspNetCore.Components.Web.DragEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -7850,10 +7799,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -7863,10 +7809,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 2715872097411636190,
-      "Data2": 6802622490270470120,
-      "Data3": 5844211334584636590,
-      "Data4": 4989191577401540186
+      "Data1": 7327183219137859314,
+      "Data2": 3784417474579095035,
+      "Data3": -5992903621088125545,
+      "Data4": 2651851506580954298
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -7930,7 +7876,7 @@
             "Microsoft.AspNetCore.Components.Web.DragEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -7960,10 +7906,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -7973,10 +7916,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 7930722600634249461,
-      "Data2": -2248524186632619275,
-      "Data3": -5417958226787243463,
-      "Data4": -4271544468110830018
+      "Data1": 5969165428784512671,
+      "Data2": -7461396597422624177,
+      "Data3": -8069033174200327483,
+      "Data4": 5120242155969002190
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -8040,7 +7983,7 @@
             "Microsoft.AspNetCore.Components.Web.DragEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -8070,10 +8013,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -8083,10 +8023,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -1286713307472721895,
-      "Data2": 671245172363655369,
-      "Data3": 4421133429882209590,
-      "Data4": 7306684949593955923
+      "Data1": 2263827132634728162,
+      "Data2": -6777377532341142949,
+      "Data3": -6302931219482831439,
+      "Data4": 3319158728667714240
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -8150,7 +8090,7 @@
             "Microsoft.AspNetCore.Components.Web.DragEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -8180,10 +8120,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -8193,10 +8130,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 3197649156088056720,
-      "Data2": -1329437085236774505,
-      "Data3": 2542786941763532182,
-      "Data4": 7227938619188169804
+      "Data1": 1633734336576795121,
+      "Data2": -727470718571961716,
+      "Data3": -2931310364117548953,
+      "Data4": 5570745710372174195
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -8260,7 +8197,7 @@
             "Microsoft.AspNetCore.Components.Web.DragEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -8290,10 +8227,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -8303,10 +8237,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 6187964212448312874,
-      "Data2": 2428012481975855363,
-      "Data3": 219803476264311728,
-      "Data4": -5297065894641716658
+      "Data1": 8178296663143766060,
+      "Data2": -4139569812418125582,
+      "Data3": -6910452196105829092,
+      "Data4": 1236732437139851391
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -8370,7 +8304,7 @@
             "Microsoft.AspNetCore.Components.Web.DragEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -8400,10 +8334,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -8413,10 +8344,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -2861159666752868345,
-      "Data2": 7585220259989578771,
-      "Data3": 3413900839677856837,
-      "Data4": 6830410175159766461
+      "Data1": -8062665299530272596,
+      "Data2": 156547470240326073,
+      "Data3": -8829792567228458369,
+      "Data4": -6264942139622893426
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -8480,7 +8411,7 @@
             "Microsoft.AspNetCore.Components.Web.KeyboardEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -8510,10 +8441,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -8523,10 +8451,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -1928805179555143957,
-      "Data2": 4424117999502895011,
-      "Data3": -7045439463217291726,
-      "Data4": 3081763013680792870
+      "Data1": 711997305323491191,
+      "Data2": 1922817318984438656,
+      "Data3": 1994540974996584884,
+      "Data4": -8894974175374254310
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -8590,7 +8518,7 @@
             "Microsoft.AspNetCore.Components.Web.KeyboardEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -8620,10 +8548,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -8633,10 +8558,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 2474622185993151020,
-      "Data2": -2697727447286843345,
-      "Data3": 9028298062286823227,
-      "Data4": -4637385546698162209
+      "Data1": -5142210531863608056,
+      "Data2": -1708495229874297992,
+      "Data3": -1213123722344198240,
+      "Data4": -7565327354722991498
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -8700,7 +8625,7 @@
             "Microsoft.AspNetCore.Components.Web.KeyboardEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -8730,10 +8655,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -8743,10 +8665,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -4140396636597539381,
-      "Data2": -5034385416087730865,
-      "Data3": -4586536182320432154,
-      "Data4": -1458626344489223009
+      "Data1": 7930924077334371269,
+      "Data2": 8939452418476346855,
+      "Data3": 6082566765905528622,
+      "Data4": -316595209205630553
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -8810,7 +8732,7 @@
             "Microsoft.AspNetCore.Components.ChangeEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -8840,10 +8762,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -8853,10 +8772,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -8335484228899243408,
-      "Data2": -2449189785347738895,
-      "Data3": 3237037008540419255,
-      "Data4": -7281685915882607195
+      "Data1": 3261522158509823564,
+      "Data2": 249571854789031749,
+      "Data3": 2333439159660053427,
+      "Data4": -2529269331916917561
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -8920,7 +8839,7 @@
             "Microsoft.AspNetCore.Components.ChangeEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -8950,10 +8869,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -8963,10 +8879,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 908006580601804088,
-      "Data2": 8616696421041937785,
-      "Data3": -6277787460003565890,
-      "Data4": -8825602293103347830
+      "Data1": -3091901089070937746,
+      "Data2": 4293757573190880949,
+      "Data3": 7592345644412623576,
+      "Data4": 8774566551140190840
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -9030,7 +8946,7 @@
             "System.EventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -9060,10 +8976,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -9073,10 +8986,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 3723491526959227009,
-      "Data2": 4510875778513606974,
-      "Data3": -4360989986832822123,
-      "Data4": -6776608018508731766
+      "Data1": -4827452725135878924,
+      "Data2": 7306079559492775514,
+      "Data3": 4332084414606900702,
+      "Data4": -915457146969460515
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -9140,7 +9053,7 @@
             "System.EventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -9170,10 +9083,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -9183,10 +9093,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -2656294604823457702,
-      "Data2": -1067363138266749644,
-      "Data3": 7109846963547705091,
-      "Data4": 3226021171626943555
+      "Data1": -6760599561117402225,
+      "Data2": -3640049325867163446,
+      "Data3": 1548028341084326147,
+      "Data4": -6631872026857257383
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -9250,7 +9160,7 @@
             "System.EventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -9280,10 +9190,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -9293,10 +9200,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 2124433873086879520,
-      "Data2": -2609880821651089205,
-      "Data3": -4684617523801784386,
-      "Data4": -1875472806274914468
+      "Data1": -3622035633219959039,
+      "Data2": 4618258804286361595,
+      "Data3": -6598691550022670024,
+      "Data4": -676430620520894258
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -9360,7 +9267,7 @@
             "System.EventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -9390,10 +9297,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -9403,10 +9307,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -4339893713500689993,
-      "Data2": -8888000224812698821,
-      "Data3": 4726996406877844805,
-      "Data4": -7883685882372862287
+      "Data1": 3521951300309150387,
+      "Data2": -5698682669594063142,
+      "Data3": 978689529674370629,
+      "Data4": -1510525616674826602
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -9470,7 +9374,7 @@
             "System.EventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -9500,10 +9404,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -9513,10 +9414,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -2325612389761586570,
-      "Data2": -7994486418829125762,
-      "Data3": -7583966316952844374,
-      "Data4": 1055736475910096643
+      "Data1": -8248807402856523462,
+      "Data2": 8176274541180249795,
+      "Data3": -3232286988326796430,
+      "Data4": 7465516500071483499
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -9580,7 +9481,7 @@
             "System.EventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -9610,10 +9511,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -9623,10 +9521,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 6902731702033109159,
-      "Data2": 8681110979575170210,
-      "Data3": 2187848813301416495,
-      "Data4": -4711379780150521226
+      "Data1": 8807600744997479877,
+      "Data2": -4220505033290290145,
+      "Data3": -2209688904318644830,
+      "Data4": 8685181397479070132
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -9690,7 +9588,7 @@
             "System.EventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -9720,10 +9618,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -9733,10 +9628,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -1344055015476875690,
-      "Data2": 2008119642671250961,
-      "Data3": 638579755532027982,
-      "Data4": 342477020795863126
+      "Data1": 1978276091241330053,
+      "Data2": 2442182752866275883,
+      "Data3": -8596078952740944279,
+      "Data4": -6604392469214751767
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -9800,7 +9695,7 @@
             "System.EventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -9830,10 +9725,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -9843,10 +9735,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 6175800320444350911,
-      "Data2": 3999897291357070607,
-      "Data3": 5484612310095367707,
-      "Data4": -6914270859657184334
+      "Data1": 8607277667090110257,
+      "Data2": 1621769202519641411,
+      "Data3": 8344821786745003274,
+      "Data4": 4383087271797425356
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -9910,7 +9802,7 @@
             "System.EventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -9940,10 +9832,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -9953,10 +9842,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 6976721136826704913,
-      "Data2": -7152100705059272592,
-      "Data3": -5291929072159567790,
-      "Data4": -4552639010483266211
+      "Data1": -2436346825160703664,
+      "Data2": -4832629873237974575,
+      "Data3": -444970732525004163,
+      "Data4": 5093298928437907949
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -10020,7 +9909,7 @@
             "Microsoft.AspNetCore.Components.Web.ClipboardEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -10050,10 +9939,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -10063,10 +9949,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 4021337757193509772,
-      "Data2": -7382423891695088365,
-      "Data3": -8758795119881714534,
-      "Data4": 3552348106410751396
+      "Data1": 4440101536358141458,
+      "Data2": -1748577230771963862,
+      "Data3": -1902535410007334101,
+      "Data4": -2310602582785512166
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -10130,7 +10016,7 @@
             "Microsoft.AspNetCore.Components.Web.ClipboardEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -10160,10 +10046,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -10173,10 +10056,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -1979824903215844459,
-      "Data2": -6970936052372687161,
-      "Data3": -1895447875970770021,
-      "Data4": -4635771124803263223
+      "Data1": 5029845722498790405,
+      "Data2": -5866680461949027560,
+      "Data3": -8882519414324466821,
+      "Data4": 960788956560770000
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -10240,7 +10123,7 @@
             "Microsoft.AspNetCore.Components.Web.ClipboardEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -10270,10 +10153,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -10283,10 +10163,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 3320240593821975645,
-      "Data2": 7276165032642867123,
-      "Data3": 8066581994755435253,
-      "Data4": 4415030809775208999
+      "Data1": -8551302095653967525,
+      "Data2": 5054787845792825101,
+      "Data3": 8494685470648774456,
+      "Data4": 9041864320619491465
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -10350,7 +10230,7 @@
             "Microsoft.AspNetCore.Components.Web.TouchEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -10380,10 +10260,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -10393,10 +10270,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -7268292041560753610,
-      "Data2": -852817859967995525,
-      "Data3": 1558495286720199976,
-      "Data4": -8167074775907581263
+      "Data1": -2366573911159840341,
+      "Data2": 1061948196539123003,
+      "Data3": 2262275144767932629,
+      "Data4": 5346710663372855083
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -10460,7 +10337,7 @@
             "Microsoft.AspNetCore.Components.Web.TouchEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -10490,10 +10367,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -10503,10 +10377,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 374646581740185072,
-      "Data2": -2800008846419151571,
-      "Data3": -4802644000285682258,
-      "Data4": 2975791955150127954
+      "Data1": 6676094810855600849,
+      "Data2": 9190081683041486909,
+      "Data3": 6055632015310741613,
+      "Data4": -1866833273909328916
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -10570,7 +10444,7 @@
             "Microsoft.AspNetCore.Components.Web.TouchEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -10600,10 +10474,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -10613,10 +10484,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 762301559286902916,
-      "Data2": 3969136509558935212,
-      "Data3": -2689412523043361868,
-      "Data4": -5673988878982246162
+      "Data1": 2419783113940607628,
+      "Data2": 7929556907125032061,
+      "Data3": -859237492805053558,
+      "Data4": 920595336949508214
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -10680,7 +10551,7 @@
             "Microsoft.AspNetCore.Components.Web.TouchEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -10710,10 +10581,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -10723,10 +10591,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 7529400371190769759,
-      "Data2": 7003947826041054634,
-      "Data3": 1892379470257945567,
-      "Data4": 3714877296528012166
+      "Data1": -1433715761256318054,
+      "Data2": 4703528762116108787,
+      "Data3": 2927274974367178176,
+      "Data4": -1939613329394885686
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -10790,7 +10658,7 @@
             "Microsoft.AspNetCore.Components.Web.TouchEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -10820,10 +10688,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -10833,10 +10698,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 8991913856744406141,
-      "Data2": 8837239728817208690,
-      "Data3": 2771438536395035296,
-      "Data4": -6422580437119173115
+      "Data1": -8701150751058666836,
+      "Data2": -7409889066258796223,
+      "Data3": -5442300433722023954,
+      "Data4": 5471064492114114668
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -10900,7 +10765,7 @@
             "Microsoft.AspNetCore.Components.Web.TouchEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -10930,10 +10795,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -10943,10 +10805,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -8940529562448589871,
-      "Data2": -3192708116127711584,
-      "Data3": 2416308244647822929,
-      "Data4": 3389845484223416264
+      "Data1": 5775081349596216068,
+      "Data2": 1834926305739492714,
+      "Data3": 8076035944953237272,
+      "Data4": -8407916345340883314
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -11010,7 +10872,7 @@
             "Microsoft.AspNetCore.Components.Web.PointerEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -11040,10 +10902,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -11053,10 +10912,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -1870840662467667392,
-      "Data2": -3426831194118871097,
-      "Data3": -9042454736531224930,
-      "Data4": 7186075076862128787
+      "Data1": 151907039771714465,
+      "Data2": -6585118077794561090,
+      "Data3": -7634344631189456707,
+      "Data4": 6227260651158955321
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -11120,7 +10979,7 @@
             "Microsoft.AspNetCore.Components.Web.PointerEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -11150,10 +11009,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -11163,10 +11019,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -4891394640084272184,
-      "Data2": 4544585027850324481,
-      "Data3": -4119419133331245569,
-      "Data4": 1787322128507824378
+      "Data1": -6759555150877724882,
+      "Data2": 1282377954758124697,
+      "Data3": -1567032844989068408,
+      "Data4": -814235911819222018
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -11230,7 +11086,7 @@
             "Microsoft.AspNetCore.Components.Web.PointerEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -11260,10 +11116,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -11273,10 +11126,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -2004051529131779196,
-      "Data2": -1456556313152344700,
-      "Data3": 2056757398595463884,
-      "Data4": 6544832382354749490
+      "Data1": 227894999656688816,
+      "Data2": 5544314957085775300,
+      "Data3": -379613266574941008,
+      "Data4": 2684095347682249473
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -11340,7 +11193,7 @@
             "Microsoft.AspNetCore.Components.Web.PointerEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -11370,10 +11223,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -11383,10 +11233,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 4573189697628237517,
-      "Data2": -442942376318703945,
-      "Data3": 989641794587958528,
-      "Data4": 2692772043810994605
+      "Data1": -6303684736618449656,
+      "Data2": 6099415390055181852,
+      "Data3": -5423839293387462596,
+      "Data4": 8070736459079839011
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -11450,7 +11300,7 @@
             "Microsoft.AspNetCore.Components.Web.PointerEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -11480,10 +11330,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -11493,10 +11340,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -6036942139651889025,
-      "Data2": -8314518835221388241,
-      "Data3": 5804653010500357209,
-      "Data4": -4667283477210025768
+      "Data1": 1676197823048545243,
+      "Data2": 1926917660280714185,
+      "Data3": -5769208050755220087,
+      "Data4": -2404656115832241880
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -11560,7 +11407,7 @@
             "Microsoft.AspNetCore.Components.Web.PointerEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -11590,10 +11437,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -11603,10 +11447,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 7889400739292037899,
-      "Data2": -2212096900139375305,
-      "Data3": -3830499969163250592,
-      "Data4": -1248130225809036588
+      "Data1": 294393766128927463,
+      "Data2": -6080657963919460452,
+      "Data3": -2156757966615976742,
+      "Data4": -5702090630409202887
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -11670,7 +11514,7 @@
             "Microsoft.AspNetCore.Components.Web.PointerEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -11700,10 +11544,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -11713,10 +11554,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 6438830917294999114,
-      "Data2": -5740784793940079440,
-      "Data3": 8811974858481801825,
-      "Data4": 8693435676849345916
+      "Data1": -3852283010872093432,
+      "Data2": 6247040194958728679,
+      "Data3": -2713944156865961469,
+      "Data4": 7841222020394070753
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -11780,7 +11621,7 @@
             "Microsoft.AspNetCore.Components.Web.PointerEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -11810,10 +11651,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -11823,10 +11661,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -7053438206678487130,
-      "Data2": -1303215121548289027,
-      "Data3": -6470143243320819442,
-      "Data4": -3004570615063539216
+      "Data1": -1506740653620008399,
+      "Data2": 1579595871916848533,
+      "Data3": -2054402899801778379,
+      "Data4": 5749632331172744635
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -11890,7 +11728,7 @@
             "Microsoft.AspNetCore.Components.Web.PointerEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -11920,10 +11758,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -11933,10 +11768,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -3504027886601131530,
-      "Data2": -1677074369541482884,
-      "Data3": -3119837360172206562,
-      "Data4": -6187826802248015730
+      "Data1": 3966769543661099662,
+      "Data2": 5283079682218234021,
+      "Data3": -175258005788825383,
+      "Data4": 4134480209157397988
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -12000,7 +11835,7 @@
             "Microsoft.AspNetCore.Components.Web.PointerEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -12030,10 +11865,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -12043,10 +11875,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 2025779480329503879,
-      "Data2": -3007651947858715485,
-      "Data3": -4175015499224277586,
-      "Data4": -9202030047484620246
+      "Data1": -3208055260818016924,
+      "Data2": -8942825931734602008,
+      "Data3": 4416071503900088771,
+      "Data4": -3748679542313947115
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -12110,7 +11942,7 @@
             "System.EventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -12140,10 +11972,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -12153,10 +11982,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 5100516013796591862,
-      "Data2": -3937226368268319728,
-      "Data3": -8671538816777266501,
-      "Data4": -1350882511415597019
+      "Data1": -7711887925800927411,
+      "Data2": -1255011756773421265,
+      "Data3": 7414471320845969183,
+      "Data4": -1634813354723580266
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -12220,7 +12049,7 @@
             "System.EventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -12250,10 +12079,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -12263,10 +12089,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -7105780331171684197,
-      "Data2": 2633673881158138434,
-      "Data3": 5703403813207317044,
-      "Data4": 3916067866560914528
+      "Data1": -7427352006231084361,
+      "Data2": -8185038352880617100,
+      "Data3": -2582817379495750587,
+      "Data4": -4317317814134321376
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -12330,7 +12156,7 @@
             "System.EventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -12360,10 +12186,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -12373,10 +12196,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 7456320450379131383,
-      "Data2": -5429247819711928626,
-      "Data3": -6242259561614772378,
-      "Data4": 8640474532137305169
+      "Data1": -491126875944141843,
+      "Data2": 7604857843096992406,
+      "Data3": -3240061252020866218,
+      "Data4": 5038854581426596317
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -12440,7 +12263,7 @@
             "System.EventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -12470,10 +12293,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -12483,10 +12303,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 4700970213357893375,
-      "Data2": 2555691763641049033,
-      "Data3": 6652222553518588643,
-      "Data4": -8953641960289969429
+      "Data1": -6782195092948899716,
+      "Data2": 7860625757628174730,
+      "Data3": 4777242504205207164,
+      "Data4": -4607889855140594227
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -12550,7 +12370,7 @@
             "System.EventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -12580,10 +12400,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -12593,10 +12410,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 7991229358702205598,
-      "Data2": -4567562546234405219,
-      "Data3": -7477947571462087562,
-      "Data4": -520430307392800016
+      "Data1": 1504765125385746306,
+      "Data2": 6627884103575202302,
+      "Data3": 2610866582124151682,
+      "Data4": -6524028126235499499
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -12660,7 +12477,7 @@
             "System.EventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -12690,10 +12507,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -12703,10 +12517,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -204094665187620444,
-      "Data2": 5774784705138406668,
-      "Data3": -8564692476648746107,
-      "Data4": -5681120326439046848
+      "Data1": -2988464241166747631,
+      "Data2": 6921182887561587416,
+      "Data3": 6229517936878696895,
+      "Data4": -7282563953735063264
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -12770,7 +12584,7 @@
             "System.EventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -12800,10 +12614,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -12813,10 +12624,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -5628412720776494528,
-      "Data2": -5376733164597547295,
-      "Data3": 1116988501175689269,
-      "Data4": 2401397431113953508
+      "Data1": -8689618962812052578,
+      "Data2": 3172183352473691888,
+      "Data3": 5318937621032483255,
+      "Data4": 5606342821742194616
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -12880,7 +12691,7 @@
             "System.EventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -12910,10 +12721,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -12923,10 +12731,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -1145874187689995641,
-      "Data2": -137791066308140820,
-      "Data3": -5783739971439002741,
-      "Data4": 4310309185373766076
+      "Data1": 4024303461211070249,
+      "Data2": 1509724806174869857,
+      "Data3": 3018310279117938469,
+      "Data4": -5577881096611662011
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -12990,7 +12798,7 @@
             "System.EventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -13020,10 +12828,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -13033,10 +12838,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -8012083927617544389,
-      "Data2": -4618843689357020187,
-      "Data3": -3941766583902275752,
-      "Data4": -2479914744768584096
+      "Data1": 320325820186392455,
+      "Data2": -5726366564616291286,
+      "Data3": -5603838679289598894,
+      "Data4": 5679878020170215940
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -13100,7 +12905,7 @@
             "System.EventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -13130,10 +12935,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -13143,10 +12945,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 2859509699394980302,
-      "Data2": 828466642961822671,
-      "Data3": -314277669201321193,
-      "Data4": 2494281631688984768
+      "Data1": 5483547036201425426,
+      "Data2": -7269529247984628595,
+      "Data3": -653415691201245016,
+      "Data4": -6442636438773783228
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -13210,7 +13012,7 @@
             "System.EventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -13240,10 +13042,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -13253,10 +13052,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -7439970165720624120,
-      "Data2": -6585700306287088723,
-      "Data3": -2258705876126269798,
-      "Data4": 3934110659046098635
+      "Data1": 3555823496206853548,
+      "Data2": 157026942032620044,
+      "Data3": -8574156433082639551,
+      "Data4": -2462559026055238117
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -13320,7 +13119,7 @@
             "System.EventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -13350,10 +13149,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -13363,10 +13159,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 5091248913281938522,
-      "Data2": -6870886694318555806,
-      "Data3": 6675061923725804365,
-      "Data4": -1894210360040636230
+      "Data1": 2148453761656092651,
+      "Data2": 3092247435910770072,
+      "Data3": -5168891403626797414,
+      "Data4": 5012403562473192678
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -13430,7 +13226,7 @@
             "System.EventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -13460,10 +13256,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -13473,10 +13266,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 5514681580495328874,
-      "Data2": -5397740578167366437,
-      "Data3": -1231813014178273728,
-      "Data4": 3610629804672017388
+      "Data1": 7417530964469378944,
+      "Data2": -4102160212430423632,
+      "Data3": 3836134203708615930,
+      "Data4": 8411508599267924967
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -13540,7 +13333,7 @@
             "System.EventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -13570,10 +13363,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -13583,10 +13373,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 1066847421391490065,
-      "Data2": -3677743898279404324,
-      "Data3": 7957983966712703215,
-      "Data4": -4760341962111147618
+      "Data1": 339805183469421307,
+      "Data2": 1161291700177544155,
+      "Data3": 2898355577007104765,
+      "Data4": -6585154558062577930
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -13650,7 +13440,7 @@
             "System.EventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -13680,10 +13470,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -13693,10 +13480,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 1316283974181895751,
-      "Data2": -394304935408825119,
-      "Data3": 5659708110058325408,
-      "Data4": -8666265173144801351
+      "Data1": 5600006211872173841,
+      "Data2": 3314030938788151738,
+      "Data3": -1094963349704661374,
+      "Data4": -782482059425979732
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -13760,7 +13547,7 @@
             "System.EventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -13790,10 +13577,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -13803,10 +13587,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -5159189811962247612,
-      "Data2": -8166369487278979145,
-      "Data3": 7330598384052349109,
-      "Data4": 4520015568697709225
+      "Data1": -5519994381662063672,
+      "Data2": 4510251985545334126,
+      "Data3": 7577723766249317389,
+      "Data4": 2108880850298800742
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -13870,7 +13654,7 @@
             "System.EventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -13900,10 +13684,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -13913,10 +13694,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -1554321386999207437,
-      "Data2": -2455444124991983395,
-      "Data3": 8720930862810000244,
-      "Data4": 4196264261419266357
+      "Data1": -1648960655667699946,
+      "Data2": 9132964984037131351,
+      "Data3": 6231653045884385415,
+      "Data4": -387041567199360336
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -13980,7 +13761,7 @@
             "Microsoft.AspNetCore.Components.Web.ProgressEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -14010,10 +13791,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -14023,10 +13801,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -7346119822165524232,
-      "Data2": 3151993350906482433,
-      "Data3": 4339676121775503089,
-      "Data4": 8690958022212097641
+      "Data1": -2455599300835630852,
+      "Data2": -2068223309304537566,
+      "Data3": 5263483754718096396,
+      "Data4": -6819376904747928563
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -14090,7 +13868,7 @@
             "Microsoft.AspNetCore.Components.Web.ProgressEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -14120,10 +13898,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -14133,10 +13908,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -2534395912490350383,
-      "Data2": -9204006409212333319,
-      "Data3": -1526384502644972959,
-      "Data4": -5782891750167724082
+      "Data1": 2230910204183296375,
+      "Data2": 3415775801495782226,
+      "Data3": -9015301493223123123,
+      "Data4": -6649084844835175797
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -14200,7 +13975,7 @@
             "Microsoft.AspNetCore.Components.Web.ProgressEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -14230,10 +14005,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -14243,10 +14015,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -7882761985932192542,
-      "Data2": -2990483634311814989,
-      "Data3": -7680096143674602783,
-      "Data4": -8345988365210672761
+      "Data1": 4132321785008892586,
+      "Data2": 4166953696441182939,
+      "Data3": -5064879232374403790,
+      "Data4": 2704235694752836061
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -14310,7 +14082,7 @@
             "Microsoft.AspNetCore.Components.Web.ProgressEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -14340,10 +14112,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -14353,10 +14122,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -5098685771444018121,
-      "Data2": -6417852290729237504,
-      "Data3": 980431584854829276,
-      "Data4": -5774337007761974936
+      "Data1": 8988371046318137571,
+      "Data2": 5142743829766501189,
+      "Data3": -1296450360903720439,
+      "Data4": 2891617495105024225
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -14420,7 +14189,7 @@
             "Microsoft.AspNetCore.Components.Web.ProgressEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -14450,10 +14219,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -14463,10 +14229,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -4285135768552974056,
-      "Data2": 6693576691621617864,
-      "Data3": -2601297630340676101,
-      "Data4": 709046460987460836
+      "Data1": 6096724546130462189,
+      "Data2": -8722170880218712476,
+      "Data3": 5543336343714280483,
+      "Data4": 2927234153914630050
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -14530,7 +14296,7 @@
             "Microsoft.AspNetCore.Components.Web.ProgressEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -14560,10 +14326,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -14573,10 +14336,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -655129085403664998,
-      "Data2": -7478766139907443953,
-      "Data3": -4736633617951521446,
-      "Data4": -8248952464128112137
+      "Data1": 571934850724143680,
+      "Data2": 1937204065179920923,
+      "Data3": 9178856037968863567,
+      "Data4": -7824274191950800808
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -14640,7 +14403,7 @@
             "Microsoft.AspNetCore.Components.Web.ErrorEventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -14670,10 +14433,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -14683,10 +14443,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 3043950873928706675,
-      "Data2": 5268307860893837693,
-      "Data3": 8092174272583661975,
-      "Data4": -2496062720651963663
+      "Data1": 7059074382073712077,
+      "Data2": 4659052617995051129,
+      "Data3": 3641279712555171161,
+      "Data4": -246045503664572202
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -14750,7 +14510,7 @@
             "System.EventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -14780,10 +14540,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -14793,10 +14550,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 3491127290845731228,
-      "Data2": 6057300832319945208,
-      "Data3": 8024222034985162780,
-      "Data4": 8499041352667320500
+      "Data1": -6143424373570766974,
+      "Data2": -8695634696684966628,
+      "Data3": 3896389879387088869,
+      "Data4": -9000919120781207167
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -14860,7 +14617,7 @@
             "System.EventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -14890,10 +14647,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -14903,10 +14657,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -5944073215349713564,
-      "Data2": 6359758342912359756,
-      "Data3": 4462003462257308852,
-      "Data4": -8493752454983316038
+      "Data1": -5273594210504207751,
+      "Data2": -1729385588482498088,
+      "Data3": 2358999154142958212,
+      "Data4": -6103783891932552623
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -14970,7 +14724,7 @@
             "System.EventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -15000,10 +14754,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -15013,10 +14764,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -3407145120926479888,
-      "Data2": 2297107459069265247,
-      "Data3": 6939720586812379900,
-      "Data4": -9188757870850368879
+      "Data1": -6482058064100720474,
+      "Data2": -822633140296517659,
+      "Data3": 1002473572741829494,
+      "Data4": -4912304105436402816
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -15080,7 +14831,7 @@
             "System.EventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -15110,10 +14861,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -15123,10 +14871,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -4909532250060415666,
-      "Data2": -709813161771827007,
-      "Data3": -2322979902846624209,
-      "Data4": 8238854702794321519
+      "Data1": 1507687880669347475,
+      "Data2": 6391082275830122446,
+      "Data3": -7314481976837739714,
+      "Data4": -6507789803074344185
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -15190,7 +14938,7 @@
             "System.EventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -15220,10 +14968,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -15233,10 +14978,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 1881309239714595381,
-      "Data2": 5510120408002409148,
-      "Data3": 8653032239400772444,
-      "Data4": 2165679393097176702
+      "Data1": 5318342948597593416,
+      "Data2": 2277117924850635633,
+      "Data3": 3056723957306725885,
+      "Data4": 7946928488877161456
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -15300,7 +15045,7 @@
             "System.EventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -15330,10 +15075,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -15343,10 +15085,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -5886644256323364799,
-      "Data2": 6765617136727522814,
-      "Data3": -4651352890681817583,
-      "Data4": 7151116129475078375
+      "Data1": 8698621314474288773,
+      "Data2": 1536299123319057528,
+      "Data3": 7706282455413695111,
+      "Data4": 698381047513139809
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -15410,7 +15152,7 @@
             "System.EventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -15440,10 +15182,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -15453,10 +15192,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 2096903008115512399,
-      "Data2": 2445610898142859368,
-      "Data3": -4646966517505836045,
-      "Data4": -5922469608732527162
+      "Data1": -1358817572789222458,
+      "Data2": 8899394581087810160,
+      "Data3": -4791588134130124433,
+      "Data4": -4296805594373783204
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -15520,7 +15259,7 @@
             "System.EventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -15550,10 +15289,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -15563,10 +15299,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -6792389589319055727,
-      "Data2": 6551540027117040280,
-      "Data3": 6737698999596770941,
-      "Data4": -7835695037044028972
+      "Data1": 2526067885005806971,
+      "Data2": -3131943263266200977,
+      "Data3": 8187061959300791516,
+      "Data4": -5102359409695526864
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -15630,7 +15366,7 @@
             "System.EventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -15660,10 +15396,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -15673,10 +15406,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -126189701792473855,
-      "Data2": -3138399378701318127,
-      "Data3": -7464592557733128174,
-      "Data4": -6550156478137471201
+      "Data1": -9081004986247152696,
+      "Data2": -8609743318242655763,
+      "Data3": 4152523604242098637,
+      "Data4": 6020617831685531867
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -15740,7 +15473,7 @@
             "System.EventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -15770,10 +15503,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -15783,10 +15513,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -6876081293489576380,
-      "Data2": 4640848202603240945,
-      "Data3": 2012565974625044427,
-      "Data4": -8031328151676521552
+      "Data1": 584293098078529826,
+      "Data2": -9178886712830266320,
+      "Data3": 3171339726640195781,
+      "Data4": -7932067836277041141
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -15850,7 +15580,7 @@
             "System.EventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -15880,10 +15610,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -15893,10 +15620,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -8080602586313535478,
-      "Data2": -8052400056634764774,
-      "Data3": -3923915826049121280,
-      "Data4": -530372657560346067
+      "Data1": 2980945763722877182,
+      "Data2": 9120010364576807630,
+      "Data3": -433324203280367684,
+      "Data4": -8182645295224625336
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -15960,7 +15687,7 @@
             "System.EventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -15990,10 +15717,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -16003,10 +15727,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -2455156516183991964,
-      "Data2": -6601225730210861682,
-      "Data3": -2689460490243532607,
-      "Data4": -2520488250242279098
+      "Data1": -3796797797748182111,
+      "Data2": 2653562519010839397,
+      "Data3": 7185149389593574436,
+      "Data4": 8059432665505292745
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -16070,7 +15794,7 @@
             "System.EventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -16100,10 +15824,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {
@@ -16113,10 +15834,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 4433548873368590470,
-      "Data2": 2690031052418633830,
-      "Data3": -5075167553146397735,
-      "Data4": -595256409807388379
+      "Data1": -7463868902062631947,
+      "Data2": 8883972827719230563,
+      "Data3": -3093928208241580451,
+      "Data4": -4886518042507347931
     },
     "Kind": 4,
     "RuntimeKind": 2,
@@ -16180,7 +15901,7 @@
             "System.EventArgs"
           ]
         },
-        "Flags": 257,
+        "Flags": 769,
         "BoundAttributeParameters": [
           {
             "Kind": 4,
@@ -16210,10 +15931,7 @@
               ]
             }
           }
-        ],
-        "Metadata": {
-          "Components.IsWeaklyTyped": "True"
-        }
+        ]
       }
     ],
     "Metadata": {

@@ -60,6 +60,7 @@ public sealed partial class BoundAttributeDescriptorBuilder : TagHelperObjectBui
     public string? IndexerValueTypeName { get; set; }
     internal bool IsEditorRequired { get; set; }
     internal bool IsDirectiveAttribute { get; set; }
+    public bool IsWeaklyTyped { get; set; }
 
     public string? Documentation
     {
@@ -112,7 +113,10 @@ public sealed partial class BoundAttributeDescriptorBuilder : TagHelperObjectBui
     private protected override BoundAttributeDescriptor BuildCore(ImmutableArray<RazorDiagnostic> diagnostics)
     {
         var metadata = _metadata.GetMetadataCollection();
-        var flags = ComputeFlags(CaseSensitive, TypeName, IsEnum, IsDictionary, IndexerValueTypeName, IsDirectiveAttribute, IsEditorRequired);
+        var flags = ComputeFlags(
+            CaseSensitive, TypeName, IsEnum, IsDictionary,
+            IndexerValueTypeName, IsDirectiveAttribute, IsEditorRequired,
+            IsWeaklyTyped);
 
         return new BoundAttributeDescriptor(
             _kind,
@@ -133,7 +137,8 @@ public sealed partial class BoundAttributeDescriptorBuilder : TagHelperObjectBui
 
     private static BoundAttributeFlags ComputeFlags(
         bool caseSensitive, string? typeName, bool isEnum, bool isDictionary,
-        string? indexerValueTypeName, bool isDirectiveAttribute, bool isEditorRequired)
+        string? indexerValueTypeName, bool isDirectiveAttribute, bool isEditorRequired,
+        bool isWeaklyTyped)
     {
         BoundAttributeFlags flags = 0;
 
@@ -178,6 +183,11 @@ public sealed partial class BoundAttributeDescriptorBuilder : TagHelperObjectBui
         if (isDirectiveAttribute)
         {
             flags |= BoundAttributeFlags.IsDirectiveAttribute;
+        }
+
+        if (isWeaklyTyped)
+        {
+            flags |= BoundAttributeFlags.IsWeaklyTyped;
         }
 
         return flags;

@@ -102,8 +102,6 @@ internal static class ComponentMetadata
 
         public const string EventCallbackKey = "Components.EventCallback";
 
-        public const string WeaklyTypedKey = "Components.IsWeaklyTyped";
-
         public const string GenericTypedKey = "Components.GenericTyped";
 
         public const string ExplicitTypeNameKey = "Components.ExplicitTypeName";

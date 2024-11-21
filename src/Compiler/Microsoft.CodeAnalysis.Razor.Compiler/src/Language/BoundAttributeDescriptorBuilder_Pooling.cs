@@ -35,6 +35,7 @@ public partial class BoundAttributeDescriptorBuilder
         IsDictionary = false;
         IsDirectiveAttribute = false;
         IsEditorRequired = false;
+        IsWeaklyTyped = false;
         IndexerAttributeNamePrefix = null;
         IndexerValueTypeName = null;
         DisplayName = null;

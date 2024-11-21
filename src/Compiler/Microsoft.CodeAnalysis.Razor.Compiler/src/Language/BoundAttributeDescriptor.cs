@@ -36,6 +36,7 @@ public sealed class BoundAttributeDescriptor : TagHelperObject<BoundAttributeDes
     public bool IsBooleanProperty => (_flags & BoundAttributeFlags.IsBooleanProperty) != 0;
     internal bool IsEditorRequired => (_flags & BoundAttributeFlags.IsEditorRequired) != 0;
     public bool IsDirectiveAttribute => (_flags & BoundAttributeFlags.IsDirectiveAttribute) != 0;
+    public bool IsWeaklyTyped => (_flags & BoundAttributeFlags.IsWeaklyTyped) != 0;
 
     public ImmutableArray<BoundAttributeParameterDescriptor> Parameters { get; }
     public MetadataCollection Metadata { get; }
@@ -69,6 +70,7 @@ public sealed class BoundAttributeDescriptor : TagHelperObject<BoundAttributeDes
         ContainingType = containingType;
         _flags = flags;
         Parameters = parameters.NullToEmpty();
+
         Metadata = metadata ?? MetadataCollection.Empty;
     }
 
