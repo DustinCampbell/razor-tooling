@@ -133,7 +133,7 @@ internal static class TagHelperDescriptorExtensions
     {
         foreach (var attribute in tagHelper.BoundAttributes)
         {
-            if (attribute.IsChildContentProperty())
+            if (attribute.IsChildContentProperty)
             {
                 yield return attribute;
             }

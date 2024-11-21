@@ -24,6 +24,7 @@ public partial class BoundAttributeDescriptorBuilder
     {
         _parent = null;
         _kind = 0;
+        _flags = 0;
         _documentationObject = default;
         _caseSensitive = null;
 

@@ -212,7 +212,7 @@ internal sealed class ComponentTagHelperDescriptorProvider : TagHelperDescriptor
 
                 if (kind == PropertyKind.ChildContent)
                 {
-                    metadata.Add(MakeTrue(ComponentMetadata.Component.ChildContentKey));
+                    pb.IsChildContentProperty = true;
                 }
 
                 if (kind == PropertyKind.EventCallback)

@@ -1,10 +1,10 @@
 [
   {
     "__Checksum": {
-      "Data1": 7533998855054617581,
-      "Data2": 4253694415488220520,
-      "Data3": 887533276914745101,
-      "Data4": -9040254607434026554
+      "Data1": -5632165490858507794,
+      "Data2": 6699360326440102043,
+      "Data3": 6024167719951627814,
+      "Data4": -1415145507326280423
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -30,9 +30,7 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment<global::Microsoft.AspNetCore.Components.Authorization.AuthenticationState>",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment<Microsoft.AspNetCore.Components.Authorization.AuthenticationState> Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized\">\r\n            <summary>\r\n            The content that will be displayed if the user is not authorized.\r\n            </summary>\r\n        </member>",
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1025
       },
       {
         "Kind": 3,
@@ -42,9 +40,7 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing\">\r\n            <summary>\r\n            The content that will be displayed while asynchronous authorization is in progress.\r\n            </summary>\r\n        </member>",
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1025
       },
       {
         "Kind": 3,
@@ -92,10 +88,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -1686513769166532139,
-      "Data2": 8238500547746105823,
-      "Data3": -5031526909279591691,
-      "Data4": -4386584763540882495
+      "Data1": -8811378204014338291,
+      "Data2": -3559622172304555837,
+      "Data3": -5753229853917448895,
+      "Data4": -7958703682617916822
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -121,9 +117,7 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment<global::Microsoft.AspNetCore.Components.Authorization.AuthenticationState>",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment<Microsoft.AspNetCore.Components.Authorization.AuthenticationState> Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized\">\r\n            <summary>\r\n            The content that will be displayed if the user is not authorized.\r\n            </summary>\r\n        </member>",
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1025
       },
       {
         "Kind": 3,
@@ -133,9 +127,7 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing\">\r\n            <summary>\r\n            The content that will be displayed while asynchronous authorization is in progress.\r\n            </summary>\r\n        </member>",
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1025
       },
       {
         "Kind": 3,
@@ -329,10 +321,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 1608549475791250450,
-      "Data2": 1186640739936952150,
-      "Data3": -3294749914555170852,
-      "Data4": 8001475773910717020
+      "Data1": 3195344448523768653,
+      "Data2": -8025900332246425682,
+      "Data3": 6679157390733426352,
+      "Data4": -1227518094020800370
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -378,9 +370,7 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment<global::Microsoft.AspNetCore.Components.Authorization.AuthenticationState>",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment<Microsoft.AspNetCore.Components.Authorization.AuthenticationState> Microsoft.AspNetCore.Components.Authorization.AuthorizeView.ChildContent",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.ChildContent\">\r\n            <summary>\r\n            The content that will be displayed if the user is authorized.\r\n            </summary>\r\n        </member>",
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1025
       },
       {
         "Kind": 3,
@@ -390,9 +380,7 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment<global::Microsoft.AspNetCore.Components.Authorization.AuthenticationState>",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment<Microsoft.AspNetCore.Components.Authorization.AuthenticationState> Microsoft.AspNetCore.Components.Authorization.AuthorizeView.NotAuthorized",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.NotAuthorized\">\r\n            <summary>\r\n            The content that will be displayed if the user is not authorized.\r\n            </summary>\r\n        </member>",
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1025
       },
       {
         "Kind": 3,
@@ -402,9 +390,7 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment<global::Microsoft.AspNetCore.Components.Authorization.AuthenticationState>",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment<Microsoft.AspNetCore.Components.Authorization.AuthenticationState> Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorized",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.Authorized\">\r\n            <summary>\r\n            The content that will be displayed if the user is authorized.\r\n            If you specify a value for this parameter, do not also specify a value for <see cref=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.ChildContent\" />.\r\n            </summary>\r\n        </member>",
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1025
       },
       {
         "Kind": 3,
@@ -414,9 +400,7 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorizing",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.Authorizing\">\r\n            <summary>\r\n            The content that will be displayed while asynchronous authorization is in progress.\r\n            </summary>\r\n        </member>",
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1025
       },
       {
         "Kind": 3,
@@ -445,10 +429,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 8532513147704704966,
-      "Data2": -4036643123578044112,
-      "Data3": 16924466586135219,
-      "Data4": 3268161833860499001
+      "Data1": 1161796355589239321,
+      "Data2": 8196275325931788875,
+      "Data3": -991077432483911066,
+      "Data4": -1456889044318994216
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -494,9 +478,7 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment<global::Microsoft.AspNetCore.Components.Authorization.AuthenticationState>",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment<Microsoft.AspNetCore.Components.Authorization.AuthenticationState> Microsoft.AspNetCore.Components.Authorization.AuthorizeView.ChildContent",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.ChildContent\">\r\n            <summary>\r\n            The content that will be displayed if the user is authorized.\r\n            </summary>\r\n        </member>",
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1025
       },
       {
         "Kind": 3,
@@ -506,9 +488,7 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment<global::Microsoft.AspNetCore.Components.Authorization.AuthenticationState>",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment<Microsoft.AspNetCore.Components.Authorization.AuthenticationState> Microsoft.AspNetCore.Components.Authorization.AuthorizeView.NotAuthorized",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.NotAuthorized\">\r\n            <summary>\r\n            The content that will be displayed if the user is not authorized.\r\n            </summary>\r\n        </member>",
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1025
       },
       {
         "Kind": 3,
@@ -518,9 +498,7 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment<global::Microsoft.AspNetCore.Components.Authorization.AuthenticationState>",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment<Microsoft.AspNetCore.Components.Authorization.AuthenticationState> Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorized",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.Authorized\">\r\n            <summary>\r\n            The content that will be displayed if the user is authorized.\r\n            If you specify a value for this parameter, do not also specify a value for <see cref=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.ChildContent\" />.\r\n            </summary>\r\n        </member>",
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1025
       },
       {
         "Kind": 3,
@@ -530,9 +508,7 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorizing",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.Authorizing\">\r\n            <summary>\r\n            The content that will be displayed while asynchronous authorization is in progress.\r\n            </summary>\r\n        </member>",
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1025
       },
       {
         "Kind": 3,
@@ -891,10 +867,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -1928612642231652302,
-      "Data2": 154494048529122956,
-      "Data3": 1130812714094526647,
-      "Data4": 7702791334117110707
+      "Data1": -1713170361436655755,
+      "Data2": -930531342071348849,
+      "Data3": -4138421396570541607,
+      "Data4": -6704133756094439897
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -919,18 +895,16 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState.ChildContent",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState.ChildContent\">\r\n            <summary>\r\n            The content to which the authentication state should be provided.\r\n            </summary>\r\n        </member>",
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1025
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -5490743776200485461,
-      "Data2": 7426532313343886594,
-      "Data3": -4934245025922895874,
-      "Data4": -4942774842603504133
+      "Data1": 3414312539526575945,
+      "Data2": 1206302684956136673,
+      "Data3": -4816653004188478073,
+      "Data4": -4573477745153651657
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -955,9 +929,7 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState.ChildContent",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState.ChildContent\">\r\n            <summary>\r\n            The content to which the authentication state should be provided.\r\n            </summary>\r\n        </member>",
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1025
       }
     ]
   },
@@ -1017,10 +989,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -2267233357149716264,
-      "Data2": 1223149996626158727,
-      "Data3": 7153107804978452322,
-      "Data4": 8897906786000837101
+      "Data1": 6883019520738049869,
+      "Data2": 1386275496544218274,
+      "Data3": 1868390218741066747,
+      "Data4": 3586839821003289079
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -1064,9 +1036,7 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment Microsoft.AspNetCore.Components.CascadingValue<TValue>.ChildContent",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.CascadingValue`1.ChildContent\">\r\n            <summary>\r\n            The content to which the value should be provided.\r\n            </summary>\r\n        </member>",
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1025
       },
       {
         "Kind": 3,
@@ -1107,10 +1077,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 290672218407062899,
-      "Data2": -4667769359575393434,
-      "Data3": -4792590791641539918,
-      "Data4": -8360828523847113954
+      "Data1": 1903195612638179883,
+      "Data2": 9032582460398706553,
+      "Data3": -2490131639169382338,
+      "Data4": -203448804078109234
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -1154,9 +1124,7 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment Microsoft.AspNetCore.Components.CascadingValue<TValue>.ChildContent",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.CascadingValue`1.ChildContent\">\r\n            <summary>\r\n            The content to which the value should be provided.\r\n            </summary>\r\n        </member>",
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1025
       },
       {
         "Kind": 3,
@@ -1339,10 +1307,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -4549281271502248603,
-      "Data2": 3592884141251379258,
-      "Data3": -8137826001155811402,
-      "Data4": 9217129511269539174
+      "Data1": -114369224111760363,
+      "Data2": 3633277230891713252,
+      "Data3": -1980365069416426546,
+      "Data4": 8166125381064094252
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -1368,9 +1336,7 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment Microsoft.AspNetCore.Components.LayoutView.ChildContent",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.LayoutView.ChildContent\">\r\n            <summary>\r\n            Gets or sets the content to display.\r\n            </summary>\r\n        </member>",
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1025
       },
       {
         "Kind": 3,
@@ -1385,10 +1351,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 4493729213325237396,
-      "Data2": -6448004261789659868,
-      "Data3": -7007132802168894300,
-      "Data4": 1179384383635879972
+      "Data1": 1423920664546120120,
+      "Data2": -8276230096630756765,
+      "Data3": -1274205067586917722,
+      "Data4": 6038835062947956727
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -1414,9 +1380,7 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment Microsoft.AspNetCore.Components.LayoutView.ChildContent",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.LayoutView.ChildContent\">\r\n            <summary>\r\n            Gets or sets the content to display.\r\n            </summary>\r\n        </member>",
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1025
       },
       {
         "Kind": 3,
@@ -1573,10 +1537,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -5352563041392109913,
-      "Data2": 7202199059609414819,
-      "Data3": -2790438202985031910,
-      "Data4": -4606039860651636605
+      "Data1": 5499692784343892025,
+      "Data2": -7635061320577422843,
+      "Data3": 5572664863113298703,
+      "Data4": -323571081910051231
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -1621,10 +1585,7 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment Microsoft.AspNetCore.Components.Routing.Router.NotFound",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Routing.Router.NotFound\">\r\n            <summary>\r\n            Gets or sets the content to display when no match is found for the requested route.\r\n            </summary>\r\n        </member>",
-        "Flags": 129,
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1153
       },
       {
         "Kind": 3,
@@ -1634,10 +1595,7 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment<global::Microsoft.AspNetCore.Components.RouteData>",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment<Microsoft.AspNetCore.Components.RouteData> Microsoft.AspNetCore.Components.Routing.Router.Found",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Routing.Router.Found\">\r\n            <summary>\r\n            Gets or sets the content to display when a match is found for the requested route.\r\n            </summary>\r\n        </member>",
-        "Flags": 129,
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1153
       },
       {
         "Kind": 3,
@@ -1647,9 +1605,7 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment Microsoft.AspNetCore.Components.Routing.Router.Navigating",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Routing.Router.Navigating\">\r\n            <summary>\r\n            Get or sets the content to display when asynchronous navigation is in progress.\r\n            </summary>\r\n        </member>",
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1025
       },
       {
         "Kind": 3,
@@ -1691,10 +1647,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 8985620046646386596,
-      "Data2": -5309470143409767703,
-      "Data3": -4637940928503397597,
-      "Data4": 8173896137682356559
+      "Data1": 6434958302441393373,
+      "Data2": -6722094377626888343,
+      "Data3": 2300108111063725026,
+      "Data4": -8899714910177232328
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -1739,10 +1695,7 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment Microsoft.AspNetCore.Components.Routing.Router.NotFound",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Routing.Router.NotFound\">\r\n            <summary>\r\n            Gets or sets the content to display when no match is found for the requested route.\r\n            </summary>\r\n        </member>",
-        "Flags": 129,
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1153
       },
       {
         "Kind": 3,
@@ -1752,10 +1705,7 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment<global::Microsoft.AspNetCore.Components.RouteData>",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment<Microsoft.AspNetCore.Components.RouteData> Microsoft.AspNetCore.Components.Routing.Router.Found",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Routing.Router.Found\">\r\n            <summary>\r\n            Gets or sets the content to display when a match is found for the requested route.\r\n            </summary>\r\n        </member>",
-        "Flags": 129,
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1153
       },
       {
         "Kind": 3,
@@ -1765,9 +1715,7 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment Microsoft.AspNetCore.Components.Routing.Router.Navigating",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Routing.Router.Navigating\">\r\n            <summary>\r\n            Get or sets the content to display when asynchronous navigation is in progress.\r\n            </summary>\r\n        </member>",
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1025
       },
       {
         "Kind": 3,
@@ -2055,10 +2003,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 5552740138569761260,
-      "Data2": 4130166930196493191,
-      "Data3": -3814952870332400760,
-      "Data4": -6735628587779236325
+      "Data1": -7500499300813790418,
+      "Data2": -1710794593685804869,
+      "Data3": 604805455611457026,
+      "Data4": -2377310962506767209
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -2111,9 +2059,7 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment<global::Microsoft.AspNetCore.Components.Forms.EditContext>",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment<Microsoft.AspNetCore.Components.Forms.EditContext> Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent\">\r\n            <summary>\r\n            Specifies the content to be rendered inside this <see cref=\"T:Microsoft.AspNetCore.Components.Forms.EditForm\" />.\r\n            </summary>\r\n        </member>",
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1025
       },
       {
         "Kind": 3,
@@ -2169,10 +2115,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -8787904966316920663,
-      "Data2": 427035391099824729,
-      "Data3": -2813776846537519097,
-      "Data4": 6526551268790237295
+      "Data1": -514578201841271950,
+      "Data2": -9127377842193085281,
+      "Data3": 3755091473030940372,
+      "Data4": 4871531040978122605
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -2225,9 +2171,7 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment<global::Microsoft.AspNetCore.Components.Forms.EditContext>",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment<Microsoft.AspNetCore.Components.Forms.EditContext> Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent\">\r\n            <summary>\r\n            Specifies the content to be rendered inside this <see cref=\"T:Microsoft.AspNetCore.Components.Forms.EditForm\" />.\r\n            </summary>\r\n        </member>",
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1025
       },
       {
         "Kind": 3,
@@ -3239,10 +3183,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 4944690137491268312,
-      "Data2": -9070014757211397013,
-      "Data3": -9034089015857567977,
-      "Data4": -7245671279299642940
+      "Data1": -2514602087354859134,
+      "Data2": -3905999275827016821,
+      "Data3": 1214779087938715123,
+      "Data4": 716798248526355977
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -3286,9 +3230,7 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment Microsoft.AspNetCore.Components.Forms.InputRadioGroup<TValue>.ChildContent",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Forms.InputRadioGroup`1.ChildContent\">\r\n            <summary>\r\n            Gets or sets the child content to be rendering inside the <see cref=\"T:Microsoft.AspNetCore.Components.Forms.InputRadioGroup`1\" />.\r\n            </summary>\r\n        </member>",
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1025
       },
       {
         "Kind": 3,
@@ -3363,10 +3305,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 8524723855954603641,
-      "Data2": -2721060823595703163,
-      "Data3": -42059728916814517,
-      "Data4": -6635584560858820150
+      "Data1": -3918836376089998760,
+      "Data2": -460405370138794732,
+      "Data3": 7398779146529251218,
+      "Data4": 7759148496051011009
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -3410,9 +3352,7 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment Microsoft.AspNetCore.Components.Forms.InputRadioGroup<TValue>.ChildContent",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Forms.InputRadioGroup`1.ChildContent\">\r\n            <summary>\r\n            Gets or sets the child content to be rendering inside the <see cref=\"T:Microsoft.AspNetCore.Components.Forms.InputRadioGroup`1\" />.\r\n            </summary>\r\n        </member>",
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1025
       },
       {
         "Kind": 3,
@@ -3541,10 +3481,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -4489861781662759357,
-      "Data2": -4095438306515478416,
-      "Data3": 5945356954207522543,
-      "Data4": 6220616971542727486
+      "Data1": -5056554504601870986,
+      "Data2": 1865507610296191836,
+      "Data3": -8967663048409588993,
+      "Data4": -4255729066770541084
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -3588,9 +3528,7 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>.ChildContent",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Forms.InputSelect`1.ChildContent\">\r\n            <summary>\r\n            Gets or sets the child content to be rendering inside the select element.\r\n            </summary>\r\n        </member>",
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1025
       },
       {
         "Kind": 3,
@@ -3655,10 +3593,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -399983782326945027,
-      "Data2": 1738568187529565169,
-      "Data3": -1961820170651102973,
-      "Data4": -2689436554014284714
+      "Data1": -5772928995190455992,
+      "Data2": -8556749508886129344,
+      "Data3": 7117232538194755056,
+      "Data4": 1110156367500616896
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -3702,9 +3640,7 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>.ChildContent",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Forms.InputSelect`1.ChildContent\">\r\n            <summary>\r\n            Gets or sets the child content to be rendering inside the select element.\r\n            </summary>\r\n        </member>",
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1025
       },
       {
         "Kind": 3,
@@ -4525,10 +4461,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -4425383124067482057,
-      "Data2": -1207409091113651325,
-      "Data3": -6409686525809675690,
-      "Data4": -4274376169594788229
+      "Data1": 4848789597180926365,
+      "Data2": 845580382745887336,
+      "Data3": -3495538584375014565,
+      "Data4": -8103025073862478452
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -4573,9 +4509,7 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent\">\r\n            <summary>\r\n            Gets or sets the child content of the component.\r\n            </summary>\r\n        </member>",
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1025
       },
       {
         "Kind": 3,
@@ -4591,10 +4525,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 255975805520995369,
-      "Data2": 8352590391976357257,
-      "Data3": -4332060196791220526,
-      "Data4": 7679578233334571255
+      "Data1": -7677605453577243759,
+      "Data2": 4187313165366277242,
+      "Data3": 7675689460650050424,
+      "Data4": 1769347335776492733
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -4639,9 +4573,7 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent\">\r\n            <summary>\r\n            Gets or sets the child content of the component.\r\n            </summary>\r\n        </member>",
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1025
       },
       {
         "Kind": 3,
@@ -4711,10 +4643,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -7576332964123152302,
-      "Data2": -5073149361103108449,
-      "Data3": -3751230260565221596,
-      "Data4": -8457962573476620786
+      "Data1": 495905732236899216,
+      "Data2": -3692738737615454268,
+      "Data3": -3714245318749856135,
+      "Data4": 6977816963680901024
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -4740,18 +4672,16 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment Microsoft.AspNetCore.Components.Web.HeadContent.ChildContent",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Web.HeadContent.ChildContent\">\r\n            <summary>\r\n            Gets or sets the content to be rendered in <see cref=\"T:Microsoft.AspNetCore.Components.Web.HeadOutlet\" /> instances.\r\n            </summary>\r\n        </member>",
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1025
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -2317321297843622068,
-      "Data2": -5106549793117704541,
-      "Data3": 6331333365681299298,
-      "Data4": -4805145044292606857
+      "Data1": 4597845327294539725,
+      "Data2": 1260550989548725277,
+      "Data3": -2354051418971908261,
+      "Data4": 3522634832828728411
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -4777,9 +4707,7 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment Microsoft.AspNetCore.Components.Web.HeadContent.ChildContent",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Web.HeadContent.ChildContent\">\r\n            <summary>\r\n            Gets or sets the content to be rendered in <see cref=\"T:Microsoft.AspNetCore.Components.Web.HeadOutlet\" /> instances.\r\n            </summary>\r\n        </member>",
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1025
       }
     ]
   },
@@ -4885,10 +4813,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 8735642144884009219,
-      "Data2": -7489062866523405952,
-      "Data3": 5965314919915874506,
-      "Data4": 5697874740954330249
+      "Data1": 4429958884449254272,
+      "Data2": -6894722628148579049,
+      "Data3": 5893704164705349352,
+      "Data4": 8156256103755080765
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -4914,18 +4842,16 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment Microsoft.AspNetCore.Components.Web.PageTitle.ChildContent",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Web.PageTitle.ChildContent\">\r\n            <summary>\r\n            Gets or sets the content to be rendered as the document title.\r\n            </summary>\r\n        </member>",
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1025
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -359404661230594448,
-      "Data2": -5575213581950555466,
-      "Data3": 8259628975066827530,
-      "Data4": 5925528004651914688
+      "Data1": -2851322883827000994,
+      "Data2": 8759482823433207737,
+      "Data3": -6539472290516056791,
+      "Data4": -1512879857040705783
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -4951,9 +4877,7 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment Microsoft.AspNetCore.Components.Web.PageTitle.ChildContent",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Web.PageTitle.ChildContent\">\r\n            <summary>\r\n            Gets or sets the content to be rendered as the document title.\r\n            </summary>\r\n        </member>",
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1025
       }
     ]
   },
@@ -5013,10 +4937,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 6984487968481190050,
-      "Data2": -3857896570529686967,
-      "Data3": 946794478307395032,
-      "Data4": 2451824609641854601
+      "Data1": 2284311977452748392,
+      "Data2": 6320930635733177169,
+      "Data3": -7595410566873114867,
+      "Data4": 8760968448995055701
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -5042,9 +4966,7 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment Microsoft.AspNetCore.Components.Web.ErrorBoundary.ChildContent",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.ErrorBoundaryBase.ChildContent\">\r\n            <summary>\r\n            The content to be displayed when there is no error.\r\n            </summary>\r\n        </member>",
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1025
       },
       {
         "Kind": 3,
@@ -5054,9 +4976,7 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment<global::System.Exception>",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment<System.Exception> Microsoft.AspNetCore.Components.Web.ErrorBoundary.ErrorContent",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.ErrorBoundaryBase.ErrorContent\">\r\n            <summary>\r\n            The content to be displayed when there is an error.\r\n            </summary>\r\n        </member>",
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1025
       },
       {
         "Kind": 3,
@@ -5085,10 +5005,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 3369154538117183399,
-      "Data2": 4127316969619140055,
-      "Data3": -4720452400808550212,
-      "Data4": 6676616812992926708
+      "Data1": 211467913791641964,
+      "Data2": -3630002846509825278,
+      "Data3": -4893184839843758464,
+      "Data4": -4868225686262500346
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -5114,9 +5034,7 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment Microsoft.AspNetCore.Components.Web.ErrorBoundary.ChildContent",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.ErrorBoundaryBase.ChildContent\">\r\n            <summary>\r\n            The content to be displayed when there is no error.\r\n            </summary>\r\n        </member>",
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1025
       },
       {
         "Kind": 3,
@@ -5126,9 +5044,7 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment<global::System.Exception>",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment<System.Exception> Microsoft.AspNetCore.Components.Web.ErrorBoundary.ErrorContent",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.ErrorBoundaryBase.ErrorContent\">\r\n            <summary>\r\n            The content to be displayed when there is an error.\r\n            </summary>\r\n        </member>",
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1025
       },
       {
         "Kind": 3,
@@ -5303,10 +5219,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 3981594945835254211,
-      "Data2": 6522093628979737817,
-      "Data3": -3567687814980481055,
-      "Data4": -3116595578454672550
+      "Data1": -1888477240280578376,
+      "Data2": 2586264593576865533,
+      "Data3": -2949168116811146860,
+      "Data4": 8543587164492515611
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -5350,8 +5266,8 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment<TItem>",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment<TItem> Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.ChildContent",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize`1.ChildContent\">\r\n            <summary>\r\n            Gets or sets the item template for the list.\r\n            </summary>\r\n        </member>",
+        "Flags": 1025,
         "Metadata": {
-          "Components.ChildContent": "True",
           "Components.GenericTyped": "True"
         }
       },
@@ -5363,8 +5279,8 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment<TItem>",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment<TItem> Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.ItemContent",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize`1.ItemContent\">\r\n            <summary>\r\n            Gets or sets the item template for the list.\r\n            </summary>\r\n        </member>",
+        "Flags": 1025,
         "Metadata": {
-          "Components.ChildContent": "True",
           "Components.GenericTyped": "True"
         }
       },
@@ -5376,9 +5292,7 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment<global::Microsoft.AspNetCore.Components.Web.Virtualization.PlaceholderContext>",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment<Microsoft.AspNetCore.Components.Web.Virtualization.PlaceholderContext> Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.Placeholder",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize`1.Placeholder\">\r\n            <summary>\r\n            Gets or sets the template for items that have not yet been loaded in memory.\r\n            </summary>\r\n        </member>",
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1025
       },
       {
         "Kind": 3,
@@ -5455,10 +5369,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -128538019139862650,
-      "Data2": -7395361280331524683,
-      "Data3": 6592387017845083663,
-      "Data4": -773273363457660189
+      "Data1": 4646252869555739253,
+      "Data2": 762772532552545066,
+      "Data3": -4157942213002750480,
+      "Data4": -8176005713520538538
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -5502,8 +5416,8 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment<TItem>",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment<TItem> Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.ChildContent",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize`1.ChildContent\">\r\n            <summary>\r\n            Gets or sets the item template for the list.\r\n            </summary>\r\n        </member>",
+        "Flags": 1025,
         "Metadata": {
-          "Components.ChildContent": "True",
           "Components.GenericTyped": "True"
         }
       },
@@ -5515,8 +5429,8 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment<TItem>",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment<TItem> Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.ItemContent",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize`1.ItemContent\">\r\n            <summary>\r\n            Gets or sets the item template for the list.\r\n            </summary>\r\n        </member>",
+        "Flags": 1025,
         "Metadata": {
-          "Components.ChildContent": "True",
           "Components.GenericTyped": "True"
         }
       },
@@ -5528,9 +5442,7 @@
         "GloballyQualifiedTypeName": "global::Microsoft.AspNetCore.Components.RenderFragment<global::Microsoft.AspNetCore.Components.Web.Virtualization.PlaceholderContext>",
         "DisplayName": "Microsoft.AspNetCore.Components.RenderFragment<Microsoft.AspNetCore.Components.Web.Virtualization.PlaceholderContext> Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.Placeholder",
         "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize`1.Placeholder\">\r\n            <summary>\r\n            Gets or sets the template for items that have not yet been loaded in memory.\r\n            </summary>\r\n        </member>",
-        "Metadata": {
-          "Components.ChildContent": "True"
-        }
+        "Flags": 1025
       },
       {
         "Kind": 3,

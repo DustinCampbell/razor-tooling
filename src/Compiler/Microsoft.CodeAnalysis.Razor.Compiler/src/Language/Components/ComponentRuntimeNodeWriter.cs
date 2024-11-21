@@ -661,7 +661,7 @@ internal class ComponentRuntimeNodeWriter : ComponentNodeWriter
             // See comments in ComponentDesignTimeNodeWriter for a description of the cases that are possible.
             var tokens = GetCSharpTokens(node);
             if ((node.BoundAttribute?.IsDelegateProperty() ?? false) ||
-                (node.BoundAttribute?.IsChildContentProperty() ?? false))
+                (node.BoundAttribute?.IsChildContentProperty ?? false))
             {
                 if (canTypeCheck)
                 {

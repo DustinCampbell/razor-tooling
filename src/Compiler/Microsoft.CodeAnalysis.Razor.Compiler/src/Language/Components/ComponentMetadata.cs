@@ -90,8 +90,6 @@ internal static class ComponentMetadata
 
     public static class Component
     {
-        public const string ChildContentKey = "Components.ChildContent";
-
         public const string ChildContentParameterNameKey = "Components.ChildContentParameterName";
 
         public const string DelegateSignatureKey = "Components.DelegateSignature";

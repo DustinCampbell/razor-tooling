@@ -38,6 +38,12 @@ public sealed class BoundAttributeDescriptor : TagHelperObject<BoundAttributeDes
     public bool IsDirectiveAttribute => (_flags & BoundAttributeFlags.IsDirectiveAttribute) != 0;
     public bool IsWeaklyTyped => (_flags & BoundAttributeFlags.IsWeaklyTyped) != 0;
 
+    /// <summary>
+    /// Gets a value that indicates whether the property is a child content property. Properties are
+    /// considered child content if they have the type <c>RenderFragment</c> or <c>RenderFragment{T}</c>.
+    /// </summary>
+    public bool IsChildContentProperty => (_flags & BoundAttributeFlags.IsChildContentProperty) != 0;
+
     public ImmutableArray<BoundAttributeParameterDescriptor> Parameters { get; }
     public MetadataCollection Metadata { get; }
 
@@ -70,7 +76,6 @@ public sealed class BoundAttributeDescriptor : TagHelperObject<BoundAttributeDes
         ContainingType = containingType;
         _flags = flags;
         Parameters = parameters.NullToEmpty();
-
         Metadata = metadata ?? MetadataCollection.Empty;
     }
 

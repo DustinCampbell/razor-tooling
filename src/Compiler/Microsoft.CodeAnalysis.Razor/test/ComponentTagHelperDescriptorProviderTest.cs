@@ -629,7 +629,7 @@ namespace Test
         Assert.False(attribute.IsEnum);
         Assert.False(attribute.IsStringProperty);
         Assert.True(attribute.IsDelegateProperty());
-        Assert.False(attribute.IsChildContentProperty());
+        Assert.False(attribute.IsChildContentProperty);
     }
 
     [Fact]
@@ -679,7 +679,7 @@ namespace Test
                 Assert.False(a.IsEnum);
                 Assert.False(a.IsStringProperty);
                 Assert.True(a.IsDelegateProperty());
-                Assert.False(a.IsChildContentProperty());
+                Assert.False(a.IsChildContentProperty);
                 Assert.True(a.IsGenericTypedProperty());
 
             },
@@ -738,7 +738,7 @@ namespace Test
         Assert.False(attribute.IsStringProperty);
         Assert.True(attribute.IsEventCallbackProperty());
         Assert.False(attribute.IsDelegateProperty());
-        Assert.False(attribute.IsChildContentProperty());
+        Assert.False(attribute.IsChildContentProperty);
     }
 
     [Fact]
@@ -789,7 +789,7 @@ namespace Test
                 Assert.False(a.IsStringProperty);
                 Assert.True(a.IsEventCallbackProperty());
                 Assert.False(a.IsDelegateProperty());
-                Assert.False(a.IsChildContentProperty());
+                Assert.False(a.IsChildContentProperty);
                 Assert.False(a.IsGenericTypedProperty());
 
             });
@@ -842,7 +842,7 @@ namespace Test
                 Assert.False(a.IsStringProperty);
                 Assert.True(a.IsEventCallbackProperty());
                 Assert.False(a.IsDelegateProperty());
-                Assert.False(a.IsChildContentProperty());
+                Assert.False(a.IsChildContentProperty);
                 Assert.True(a.IsGenericTypedProperty());
 
             },
@@ -900,7 +900,7 @@ namespace Test
         Assert.False(attribute.IsEnum);
         Assert.False(attribute.IsStringProperty);
         Assert.False(attribute.IsDelegateProperty()); // We treat RenderFragment as separate from generalized delegates
-        Assert.True(attribute.IsChildContentProperty());
+        Assert.True(attribute.IsChildContentProperty);
         Assert.False(attribute.IsParameterizedChildContentProperty());
 
         var childContent = Assert.Single(components, c => c.IsChildContentTagHelper);
@@ -958,7 +958,7 @@ namespace Test
                 Assert.False(a.IsEnum);
                 Assert.False(a.IsStringProperty);
                 Assert.False(a.IsDelegateProperty()); // We treat RenderFragment as separate from generalized delegates
-                    Assert.True(a.IsChildContentProperty());
+                    Assert.True(a.IsChildContentProperty);
                 Assert.True(a.IsParameterizedChildContentProperty());
                 Assert.False(a.IsGenericTypedProperty());
             },
@@ -1031,7 +1031,7 @@ namespace Test
                 Assert.False(a.IsEnum);
                 Assert.False(a.IsStringProperty);
                 Assert.False(a.IsDelegateProperty()); // We treat RenderFragment as separate from generalized delegates
-                    Assert.True(a.IsChildContentProperty());
+                    Assert.True(a.IsChildContentProperty);
                 Assert.True(a.IsParameterizedChildContentProperty());
                 Assert.False(a.IsGenericTypedProperty());
             },
@@ -1101,7 +1101,7 @@ namespace Test
                 Assert.False(a.IsEnum);
                 Assert.False(a.IsStringProperty);
                 Assert.False(a.IsDelegateProperty()); // We treat RenderFragment as separate from generalized delegates
-                    Assert.True(a.IsChildContentProperty());
+                    Assert.True(a.IsChildContentProperty);
                 Assert.True(a.IsParameterizedChildContentProperty());
                 Assert.True(a.IsGenericTypedProperty());
 
@@ -1181,7 +1181,7 @@ namespace Test
                 Assert.False(a.IsEnum);
                 Assert.False(a.IsStringProperty);
                 Assert.False(a.IsDelegateProperty()); // We treat RenderFragment as separate from generalized delegates
-                    Assert.True(a.IsChildContentProperty());
+                    Assert.True(a.IsChildContentProperty);
                 Assert.True(a.IsParameterizedChildContentProperty());
                 Assert.False(a.IsGenericTypedProperty());
 
@@ -1261,7 +1261,7 @@ namespace Test
                 Assert.False(a.IsEnum);
                 Assert.False(a.IsStringProperty);
                 Assert.False(a.IsDelegateProperty()); // We treat RenderFragment as separate from generalized delegates
-                    Assert.True(a.IsChildContentProperty());
+                    Assert.True(a.IsChildContentProperty);
                 Assert.True(a.IsParameterizedChildContentProperty());
                 Assert.True(a.IsGenericTypedProperty());
 
@@ -1345,7 +1345,7 @@ namespace Test
                 Assert.False(a.IsEnum);
                 Assert.False(a.IsStringProperty);
                 Assert.False(a.IsDelegateProperty()); // We treat RenderFragment as separate from generalized delegates
-                    Assert.True(a.IsChildContentProperty());
+                    Assert.True(a.IsChildContentProperty);
                 Assert.True(a.IsParameterizedChildContentProperty());
                 Assert.True(a.IsGenericTypedProperty());
 
@@ -1423,7 +1423,7 @@ namespace Test
             {
                 Assert.Equal("ChildContent", a.Name);
                 Assert.Equal("Microsoft.AspNetCore.Components.RenderFragment", a.TypeName);
-                Assert.True(a.IsChildContentProperty());
+                Assert.True(a.IsChildContentProperty);
             },
             a =>
             {
@@ -1434,13 +1434,13 @@ namespace Test
             {
                 Assert.Equal("Footer", a.Name);
                 Assert.Equal("Microsoft.AspNetCore.Components.RenderFragment<System.String>", a.TypeName);
-                Assert.True(a.IsChildContentProperty());
+                Assert.True(a.IsChildContentProperty);
             },
             a =>
             {
                 Assert.Equal("Header", a.Name);
                 Assert.Equal("Microsoft.AspNetCore.Components.RenderFragment<System.String>", a.TypeName);
-                Assert.True(a.IsChildContentProperty());
+                Assert.True(a.IsChildContentProperty);
             });
 
 

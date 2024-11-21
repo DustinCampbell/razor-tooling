@@ -35,6 +35,7 @@ public sealed partial class BoundAttributeDescriptorBuilder : TagHelperObjectBui
     private TagHelperDescriptorBuilder _parent;
     [AllowNull]
     private TagHelperKind _kind;
+    private BoundAttributeFlags _flags;
     private DocumentationObject _documentationObject;
     private MetadataHolder _metadata;
     private bool? _caseSensitive;
@@ -54,13 +55,50 @@ public sealed partial class BoundAttributeDescriptorBuilder : TagHelperObjectBui
     public string? TypeName { get; set; }
     public string? PropertyName { get; set; }
     public string? GloballyQualifiedTypeName { get; set;  }
-    public bool IsEnum { get; set; }
-    public bool IsDictionary { get; set; }
     public string? IndexerAttributeNamePrefix { get; set; }
     public string? IndexerValueTypeName { get; set; }
-    internal bool IsEditorRequired { get; set; }
-    internal bool IsDirectiveAttribute { get; set; }
-    public bool IsWeaklyTyped { get; set; }
+
+    public bool IsEnum
+    {
+        get => _flags.IsFlagSet(BoundAttributeFlags.IsEnum);
+        set => _flags.UpdateFlag(BoundAttributeFlags.IsEnum, value);
+    }
+
+    public bool IsDictionary
+    {
+        get => _flags.IsFlagSet(BoundAttributeFlags.HasIndexer);
+        set => _flags.UpdateFlag(BoundAttributeFlags.HasIndexer, value);
+    }
+
+    internal bool IsEditorRequired
+    {
+        get => _flags.IsFlagSet(BoundAttributeFlags.IsEditorRequired);
+        set => _flags.UpdateFlag(BoundAttributeFlags.IsEditorRequired, value);
+    }
+
+    internal bool IsDirectiveAttribute
+    {
+        get => _flags.IsFlagSet(BoundAttributeFlags.IsDirectiveAttribute);
+        set => _flags.UpdateFlag(BoundAttributeFlags.IsDirectiveAttribute, value);
+    }
+
+    public bool IsWeaklyTyped
+    {
+        get => _flags.IsFlagSet(BoundAttributeFlags.IsWeaklyTyped);
+        set => _flags.UpdateFlag(BoundAttributeFlags.IsWeaklyTyped, value);
+    }
+
+    public bool IsChildContentProperty
+    {
+        get => _flags.IsFlagSet(BoundAttributeFlags.IsChildContentProperty);
+        set => _flags.UpdateFlag(BoundAttributeFlags.IsChildContentProperty, value);
+    }
+
+    internal BoundAttributeFlags Flags
+    {
+        get => _flags;
+        set => _flags = value;
+    }
 
     public string? Documentation
     {
@@ -112,12 +150,6 @@ public sealed partial class BoundAttributeDescriptorBuilder : TagHelperObjectBui
 
     private protected override BoundAttributeDescriptor BuildCore(ImmutableArray<RazorDiagnostic> diagnostics)
     {
-        var metadata = _metadata.GetMetadataCollection();
-        var flags = ComputeFlags(
-            CaseSensitive, TypeName, IsEnum, IsDictionary,
-            IndexerValueTypeName, IsDirectiveAttribute, IsEditorRequired,
-            IsWeaklyTyped);
-
         return new BoundAttributeDescriptor(
             _kind,
             Name ?? string.Empty,
@@ -129,65 +161,37 @@ public sealed partial class BoundAttributeDescriptorBuilder : TagHelperObjectBui
             _documentationObject,
             GetDisplayName(),
             ContainingType,
-            flags,
+            ComputeFlags(),
             Parameters.ToImmutable(),
-            metadata,
+            _metadata.GetMetadataCollection(),
             diagnostics);
     }
 
-    private static BoundAttributeFlags ComputeFlags(
-        bool caseSensitive, string? typeName, bool isEnum, bool isDictionary,
-        string? indexerValueTypeName, bool isDirectiveAttribute, bool isEditorRequired,
-        bool isWeaklyTyped)
+    private BoundAttributeFlags ComputeFlags()
     {
-        BoundAttributeFlags flags = 0;
+        BoundAttributeFlags flags = _flags;
 
-        if (isEnum)
-        {
-            flags |= BoundAttributeFlags.IsEnum;
-        }
-
-        if (isDictionary)
-        {
-            flags |= BoundAttributeFlags.HasIndexer;
-        }
-
-        if (caseSensitive)
+        if (CaseSensitive)
         {
             flags |= BoundAttributeFlags.CaseSensitive;
         }
 
-        if (isEditorRequired)
-        {
-            flags |= BoundAttributeFlags.IsEditorRequired;
-        }
-
-        if (indexerValueTypeName == typeof(string).FullName || indexerValueTypeName == "string")
+        if (IndexerValueTypeName == typeof(string).FullName || IndexerValueTypeName == "string")
         {
             flags |= BoundAttributeFlags.IsIndexerStringProperty;
         }
-        else if (indexerValueTypeName == typeof(bool).FullName || indexerValueTypeName == "bool")
+        else if (IndexerValueTypeName == typeof(bool).FullName || IndexerValueTypeName == "bool")
         {
             flags |= BoundAttributeFlags.IsIndexerBooleanProperty;
         }
 
-        if (typeName == typeof(string).FullName || typeName == "string")
+        if (TypeName == typeof(string).FullName || TypeName == "string")
         {
             flags |= BoundAttributeFlags.IsStringProperty;
         }
-        else if (typeName == typeof(bool).FullName || typeName == "bool")
+        else if (TypeName == typeof(bool).FullName || TypeName == "bool")
         {
             flags |= BoundAttributeFlags.IsBooleanProperty;
-        }
-
-        if (isDirectiveAttribute)
-        {
-            flags |= BoundAttributeFlags.IsDirectiveAttribute;
-        }
-
-        if (isWeaklyTyped)
-        {
-            flags |= BoundAttributeFlags.IsWeaklyTyped;
         }
 
         return flags;
