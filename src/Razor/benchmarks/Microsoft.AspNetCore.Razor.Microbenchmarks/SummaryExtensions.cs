@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using BenchmarkDotNet.Reports;
+using Microsoft.AspNetCore.Razor.Language;
 
 namespace Microsoft.AspNetCore.Razor.Microbenchmarks;
 
