@@ -662,11 +662,11 @@ public class LanguageServerTagHelperCompletionServiceTest(ITestOutputHelper test
                 .Build(),
             TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly")
                 .TagMatchingRuleDescriptor(rule => rule.RequireTagName("TestAssembly.Test"))
-                .SetIsFullyQualifiedNameMatch()
+                .SetFlags(TagHelperFlags.IsComponentFullyQualifiedNameMatch)
                 .Build(),
             TagHelperDescriptorBuilder.Create("Test2TagHelper", "TestAssembly")
                 .TagMatchingRuleDescriptor(rule => rule.RequireTagName("Test2Assembly.Test"))
-                .SetIsFullyQualifiedNameMatch()
+                .SetFlags(TagHelperFlags.IsComponentFullyQualifiedNameMatch)
                 .Build(),
         ];
 

@@ -11,4 +11,5 @@ internal enum TagHelperFlags
     CaseSensitive = 1 << 0,
     IsComponentFullyQualifiedNameMatch = 1 << 1,
     ClassifyAttributesOnly = 1 << 2,
+    IsBindFallback = 1 << 3
 }

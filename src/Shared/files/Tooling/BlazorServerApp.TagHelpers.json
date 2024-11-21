@@ -18310,10 +18310,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 5556262136503475112,
-      "Data2": 3536096036521475920,
-      "Data3": 164570553722375310,
-      "Data4": -1589003622509087069
+      "Data1": 8787083381811193591,
+      "Data2": -5540572647824282924,
+      "Data3": -2820740787365076345,
+      "Data4": 1204027552594704814
     },
     "Kind": 1,
     "RuntimeKind": 2,
@@ -18323,7 +18323,7 @@
     "TypeNamespace": "Microsoft.AspNetCore.Components",
     "TypeNameIdentifier": "Bind",
     "DisplayName": "Microsoft.AspNetCore.Components.Bind",
-    "Flags": 5,
+    "Flags": 13,
     "Documentation": {
       "Id": 0
     },
@@ -18422,10 +18422,7 @@
           }
         ]
       }
-    ],
-    "Metadata": {
-      "Components.Bind.Fallback": "True"
-    }
+    ]
   },
   {
     "__Checksum": {

@@ -32,6 +32,7 @@ public partial class TagHelperDescriptorBuilder
         _runtimeKind = 0;
         _name = null;
         _assemblyName = null;
+        _flags = 0;
         _documentationObject = default;
 
         TypeName = null;
@@ -39,9 +40,6 @@ public partial class TagHelperDescriptorBuilder
         TypeNameIdentifier = null;
         DisplayName = null;
         TagOutputHint = null;
-        CaseSensitive = false;
-        IsComponentFullyQualifiedNameMatch = false;
-        ClassifyAttributesOnly = false;
 
         AllowedChildTags.Clear();
         BoundAttributes.Clear();

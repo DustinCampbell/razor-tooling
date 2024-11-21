@@ -104,20 +104,11 @@ public static class TestTagHelperDescriptorBuilderExtensions
         return builder;
     }
 
-    public static TagHelperDescriptorBuilder SetIsFullyQualifiedNameMatch(this TagHelperDescriptorBuilder builder)
+    internal static TagHelperDescriptorBuilder SetFlags(this TagHelperDescriptorBuilder builder, TagHelperFlags flags)
     {
         ArgHelper.ThrowIfNull(builder);
 
-        builder.IsComponentFullyQualifiedNameMatch = true;
-
-        return builder;
-    }
-
-    public static TagHelperDescriptorBuilder SetClassifyAttributesOnly(this TagHelperDescriptorBuilder builder)
-    {
-        ArgHelper.ThrowIfNull(builder);
-
-        builder.ClassifyAttributesOnly = true;
+        builder.Flags = flags;
 
         return builder;
     }

@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Components;
 using Microsoft.AspNetCore.Razor.PooledObjects;
-using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
@@ -130,10 +129,8 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
 
         builder.CaseSensitive = true;
         builder.ClassifyAttributesOnly = true;
+        builder.IsBindFallback = true;
         builder.SetDocumentation(DocumentationDescriptor.BindTagHelper_Fallback);
-
-        builder.SetMetadata(
-            MakeTrue(ComponentMetadata.Bind.FallbackKey));
 
         builder.TagMatchingRule(rule =>
         {

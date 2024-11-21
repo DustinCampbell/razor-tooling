@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
+using Microsoft.AspNetCore.Razor.Language.Components;
 using Microsoft.AspNetCore.Razor.PooledObjects;
 using Microsoft.AspNetCore.Razor.Utilities;
 using Microsoft.CodeAnalysis;
@@ -55,6 +56,7 @@ public sealed class TagHelperDescriptor : TagHelperObject<TagHelperDescriptor>
     internal bool IsComponentFullyQualifiedNameMatch => (_flags & TagHelperFlags.IsComponentFullyQualifiedNameMatch) != 0;
 
     internal bool ClassifyAttributesOnly => (_flags & TagHelperFlags.ClassifyAttributesOnly) != 0;
+    internal bool IsBindFallback => (_flags & TagHelperFlags.IsBindFallback) != 0;
 
     internal TagHelperDescriptor(
         TagHelperKind kind,

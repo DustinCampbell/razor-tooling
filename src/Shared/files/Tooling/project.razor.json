@@ -13542,10 +13542,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -2006500314763919888,
-          "Data2": -7936214000613238323,
-          "Data3": -2382802996930929319,
-          "Data4": -717727970899919914
+          "Data1": 6997887247472833122,
+          "Data2": 8849713354958545805,
+          "Data3": -2510114155996453437,
+          "Data4": 1134538795007201418
         },
         "Kind": 1,
         "RuntimeKind": 2,
@@ -13553,7 +13553,7 @@
         "AssemblyName": "Microsoft.AspNetCore.Components",
         "TypeName": "Microsoft.AspNetCore.Components.Bind",
         "DisplayName": "Microsoft.AspNetCore.Components.Bind",
-        "Flags": 5,
+        "Flags": 13,
         "Documentation": "Binds the provided expression to an attribute and a change event, based on the naming of the bind attribute. For example: <code>@bind-value=\"...\"</code> and <code>@bind-value:event=\"onchange\"</code> will assign the current value of the expression to the 'value' attribute, and assign a delegate that attempts to set the value to the 'onchange' attribute.",
         "TagMatchingRules": [
           {
@@ -13608,10 +13608,7 @@
               }
             ]
           }
-        ],
-        "Metadata": {
-          "Components.Bind.Fallback": "True"
-        }
+        ]
       },
       {
         "__Checksum": {

@@ -42,8 +42,6 @@ internal static class ComponentMetadata
 
     public static class Bind
     {
-        public const string FallbackKey = "Components.Bind.Fallback";
-
         public const string TypeAttribute = "Components.Bind.TypeAttribute";
 
         public const string ValueAttribute = "Components.Bind.ValueAttribute";

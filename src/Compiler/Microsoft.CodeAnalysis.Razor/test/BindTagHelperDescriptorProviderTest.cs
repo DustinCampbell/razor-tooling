@@ -1100,7 +1100,7 @@ namespace Test
         provider.Execute(context);
 
         // Assert
-        var bind = Assert.Single(context.Results, r => r.IsFallbackBindTagHelper());
+        var bind = Assert.Single(context.Results, r => r.IsBindFallback);
 
         // These are features Bind Tags Helpers don't use. Verifying them once here and
         // then ignoring them.
@@ -1121,7 +1121,7 @@ namespace Test
 
         Assert.False(bind.Metadata.ContainsKey(ComponentMetadata.Bind.ValueAttribute));
         Assert.False(bind.Metadata.ContainsKey(ComponentMetadata.Bind.ChangeAttribute));
-        Assert.True(bind.IsFallbackBindTagHelper());
+        Assert.True(bind.IsBindFallback);
 
         Assert.Equal(
             "Binds the provided expression to an attribute and a change event, based on the naming of " +

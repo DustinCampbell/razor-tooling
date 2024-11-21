@@ -20,14 +20,6 @@ internal static class TagHelperDescriptorExtensions
         return tagHelper.Kind == TagHelperKind.Bind;
     }
 
-    public static bool IsFallbackBindTagHelper(this TagHelperDescriptor tagHelper)
-    {
-        return
-            tagHelper.IsBindTagHelper() &&
-            tagHelper.Metadata.TryGetValue(ComponentMetadata.Bind.FallbackKey, out var fallback) &&
-            string.Equals(bool.TrueString, fallback);
-    }
-
     public static bool IsFormNameTagHelper(this TagHelperDescriptor tagHelper)
     {
         return tagHelper.Kind == TagHelperKind.FormName;

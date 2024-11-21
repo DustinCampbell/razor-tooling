@@ -92708,10 +92708,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 139890656724958810,
-      "Data2": 4910768430316568964,
-      "Data3": -5316087512274219336,
-      "Data4": 5279842036401561258
+      "Data1": -8159392856876119350,
+      "Data2": 5194961781474180796,
+      "Data3": 5080052122551057859,
+      "Data4": -6222876190437531807
     },
     "Kind": 1,
     "RuntimeKind": 2,
@@ -92719,7 +92719,7 @@
     "AssemblyName": "Microsoft.AspNetCore.Components",
     "TypeName": "Microsoft.AspNetCore.Components.Bind",
     "DisplayName": "Microsoft.AspNetCore.Components.Bind",
-    "Flags": 5,
+    "Flags": 13,
     "Documentation": "Bindstheprovidedexpressiontoanattributeandachangeevent,basedonthenamingofthebindattribute.Forexample:<code>@bind-value=\"...\"</code>and<code>@bind-value:event=\"onchange\"</code>willassignthecurrentvalueoftheexpressiontothe'value'attribute,andassignadelegatethatattemptstosetthevaluetothe'onchange'attribute.",
     "TagMatchingRules": [
       {
@@ -92774,10 +92774,7 @@
           }
         ]
       }
-    ],
-    "Metadata": {
-      "Components.Bind.Fallback": "True"
-    }
+    ]
   },
   {
     "__Checksum": {

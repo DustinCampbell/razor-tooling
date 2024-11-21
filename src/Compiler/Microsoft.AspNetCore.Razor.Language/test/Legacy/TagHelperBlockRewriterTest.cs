@@ -2444,9 +2444,7 @@ public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
         [
             TagHelperDescriptorBuilder.Create(TagHelperKind.Bind, RuntimeKind.None, "Bind", ComponentsApi.AssemblyName)
                 .TypeName("Microsoft.AspNetCore.Components.Bind")
-                .SetClassifyAttributesOnly()
-                .Metadata(
-                    MakeTrue(ComponentMetadata.Bind.FallbackKey))
+                .SetFlags(TagHelperFlags.ClassifyAttributesOnly | TagHelperFlags.IsBindFallback)
                 .TagMatchingRuleDescriptor(rule =>
                     rule
                         .RequireTagName("*")
@@ -2487,9 +2485,7 @@ public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
         [
             TagHelperDescriptorBuilder.Create(TagHelperKind.Bind, RuntimeKind.None, "Bind", ComponentsApi.AssemblyName)
                 .TypeName("Microsoft.AspNetCore.Components.Bind")
-                .SetClassifyAttributesOnly()
-                .Metadata(
-                    MakeTrue(ComponentMetadata.Bind.FallbackKey))
+                .SetFlags(TagHelperFlags.ClassifyAttributesOnly | TagHelperFlags.IsBindFallback)
                 .TagMatchingRuleDescriptor(rule =>
                     rule
                         .RequireTagName("*")

@@ -240,7 +240,7 @@ internal class ComponentBindLoweringPass : ComponentIntermediateNodePassBase, IR
             }
             if (attribute != null &&
                 tagHelper != null &&
-                tagHelper.IsFallbackBindTagHelper())
+                tagHelper.IsBindFallback)
             {
                 for (var j = 0; j < node.Children.Count; j++)
                 {

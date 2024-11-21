@@ -14,6 +14,7 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
     private RuntimeKind _runtimeKind;
     private string? _name;
     private string? _assemblyName;
+    private TagHelperFlags _flags;
 
     private DocumentationObject _documentationObject;
     private MetadataHolder _metadata;
@@ -54,9 +55,44 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
     public string? TypeNameIdentifier { get; set; }
     public string? DisplayName { get; set; }
     public string? TagOutputHint { get; set; }
-    public bool CaseSensitive { get; set; }
-    internal bool IsComponentFullyQualifiedNameMatch { get; set; }
-    internal bool ClassifyAttributesOnly { get; set; }
+
+    public bool CaseSensitive
+    {
+        get => _flags.IsFlagSet(TagHelperFlags.CaseSensitive);
+        set => _flags.UpdateFlag(TagHelperFlags.CaseSensitive, value);
+    }
+
+    internal bool IsComponentFullyQualifiedNameMatch
+    {
+        get => _flags.IsFlagSet(TagHelperFlags.IsComponentFullyQualifiedNameMatch);
+        set => _flags.UpdateFlag(TagHelperFlags.IsComponentFullyQualifiedNameMatch, value);
+    }
+
+    internal bool ClassifyAttributesOnly
+    {
+        get => _flags.IsFlagSet(TagHelperFlags.ClassifyAttributesOnly);
+        set => _flags.UpdateFlag(TagHelperFlags.ClassifyAttributesOnly, value);
+    }
+
+    internal bool IsBindFallback
+    {
+        get => _flags.IsFlagSet(TagHelperFlags.IsBindFallback);
+        set
+        {
+            if (Kind is not TagHelperKind.Bind)
+            {
+                ThrowHelper.ThrowInvalidOperationException($"Invalid flag for {Kind} tag helper");
+            }
+
+            _flags.UpdateFlag(TagHelperFlags.IsBindFallback, value);
+        }
+    }
+
+    internal TagHelperFlags Flags
+    {
+        get => _flags;
+        set => _flags = value;
+    }
 
     public string? Documentation
     {
@@ -128,7 +164,6 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
 
     private protected override TagHelperDescriptor BuildCore(ImmutableArray<RazorDiagnostic> diagnostics)
     {
-        var flags = ComputeFlags(CaseSensitive, IsComponentFullyQualifiedNameMatch, ClassifyAttributesOnly);
         var metadata = _metadata.GetMetadataCollection();
 
         return new TagHelperDescriptor(
@@ -140,7 +175,7 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
             TypeNamespace,
             TypeNameIdentifier,
             GetDisplayName(),
-            flags,
+            _flags,
             _documentationObject,
             TagOutputHint,
             TagMatchingRules.ToImmutable(),
@@ -148,28 +183,6 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
             AllowedChildTags.ToImmutable(),
             metadata,
             diagnostics);
-    }
-
-    private static TagHelperFlags ComputeFlags(bool caseSensitive, bool isComponentFullQualifiedNameMatch, bool classifyAttributesOnly)
-    {
-        TagHelperFlags flags = 0;
-
-        if (caseSensitive)
-        {
-            flags |= TagHelperFlags.CaseSensitive;
-        }
-
-        if (isComponentFullQualifiedNameMatch)
-        {
-            flags |= TagHelperFlags.IsComponentFullyQualifiedNameMatch;
-        }
-
-        if (classifyAttributesOnly)
-        {
-            flags |= TagHelperFlags.ClassifyAttributesOnly;
-        }
-
-        return flags;
     }
 
     internal string GetDisplayName()
