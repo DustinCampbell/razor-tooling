@@ -30,6 +30,7 @@ public partial class BoundAttributeParameterDescriptorBuilder
         TypeName = null;
         PropertyName = null;
         IsEnum = false;
+        IsBindAttributeGetSet = false;
         DisplayName = null;
 
         _metadata.Clear();

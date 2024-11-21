@@ -119269,10 +119269,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 4046372024143586683,
-      "Data2": -1102416731001306331,
-      "Data3": -2378033710046578262,
-      "Data4": -7535706613128536666
+      "Data1": 3916749704895800334,
+      "Data2": 9210906245072570108,
+      "Data3": 8307323336503611589,
+      "Data4": 8110353503674906403
     },
     "Kind": 1,
     "RuntimeKind": 2,
@@ -119353,12 +119353,10 @@
             "Name": "get",
             "TypeName": "System.Object",
             "PropertyName": "Get",
+            "Flags": 17,
             "DisplayName": ":get",
             "Documentation": {
               "Id": 8
-            },
-            "Metadata": {
-              "Components.Bind.AlternativeNotation": "True"
             }
           },
           {
@@ -119391,10 +119389,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -3226936590399778348,
-      "Data2": 6356207593834370891,
-      "Data3": -6497821844394017394,
-      "Data4": 5695592962437328963
+      "Data1": -4826167564938310605,
+      "Data2": 5629882567679364064,
+      "Data3": -4328451203215967743,
+      "Data4": -8750215950332849724
     },
     "Kind": 1,
     "RuntimeKind": 2,
@@ -119498,12 +119496,10 @@
             "Name": "get",
             "TypeName": "System.Object",
             "PropertyName": "Get",
+            "Flags": 17,
             "DisplayName": ":get",
             "Documentation": {
               "Id": 8
-            },
-            "Metadata": {
-              "Components.Bind.AlternativeNotation": "True"
             }
           },
           {
@@ -119553,10 +119549,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -4825635470256351463,
-      "Data2": 7817021070296028148,
-      "Data3": -4979679426971317008,
-      "Data4": 3400089265689707499
+      "Data1": -3907154252984747925,
+      "Data2": 2976384443201835008,
+      "Data3": -846383125961772760,
+      "Data4": -3169990491307476724
     },
     "Kind": 1,
     "RuntimeKind": 2,
@@ -119660,12 +119656,10 @@
             "Name": "get",
             "TypeName": "System.Object",
             "PropertyName": "Get",
+            "Flags": 17,
             "DisplayName": ":get",
             "Documentation": {
               "Id": 8
-            },
-            "Metadata": {
-              "Components.Bind.AlternativeNotation": "True"
             }
           },
           {
@@ -119715,10 +119709,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 2803031863033803104,
-      "Data2": 6946176150223574035,
-      "Data3": -1771724629347254589,
-      "Data4": -2656159817741338010
+      "Data1": -4024878679621462629,
+      "Data2": -6358890913774559197,
+      "Data3": 6117715960190482819,
+      "Data4": -2722632116501896971
     },
     "Kind": 1,
     "RuntimeKind": 2,
@@ -119834,12 +119828,10 @@
             "Name": "get",
             "TypeName": "System.Object",
             "PropertyName": "Get",
+            "Flags": 17,
             "DisplayName": ":get",
             "Documentation": {
               "Id": 8
-            },
-            "Metadata": {
-              "Components.Bind.AlternativeNotation": "True"
             }
           },
           {
@@ -119890,10 +119882,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 8363150532153529465,
-      "Data2": -28137820015341869,
-      "Data3": 2290725734412229914,
-      "Data4": 5128640807947423316
+      "Data1": 5491459434618769083,
+      "Data2": 3565370675340211718,
+      "Data3": 6137695445110789686,
+      "Data4": -5988647924270200076
     },
     "Kind": 1,
     "RuntimeKind": 2,
@@ -120009,12 +120001,10 @@
             "Name": "get",
             "TypeName": "System.Object",
             "PropertyName": "Get",
+            "Flags": 17,
             "DisplayName": ":get",
             "Documentation": {
               "Id": 8
-            },
-            "Metadata": {
-              "Components.Bind.AlternativeNotation": "True"
             }
           },
           {
@@ -120065,10 +120055,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 4452576815327752717,
-      "Data2": -2813417768124378868,
-      "Data3": -2772231931331072565,
-      "Data4": 3001522654193423086
+      "Data1": 839004066448090255,
+      "Data2": -1804021811275640414,
+      "Data3": -3147343030798872260,
+      "Data4": 8176502038314446456
     },
     "Kind": 1,
     "RuntimeKind": 2,
@@ -120184,12 +120174,10 @@
             "Name": "get",
             "TypeName": "System.Object",
             "PropertyName": "Get",
+            "Flags": 17,
             "DisplayName": ":get",
             "Documentation": {
               "Id": 8
-            },
-            "Metadata": {
-              "Components.Bind.AlternativeNotation": "True"
             }
           },
           {
@@ -120240,10 +120228,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -3684714420658031094,
-      "Data2": 3485798444337637437,
-      "Data3": -3223952361756120372,
-      "Data4": 3179577549552614791
+      "Data1": 3692699927672684332,
+      "Data2": 5749297297281436596,
+      "Data3": -6826518514227539870,
+      "Data4": 5863727258674588760
     },
     "Kind": 1,
     "RuntimeKind": 2,
@@ -120359,12 +120347,10 @@
             "Name": "get",
             "TypeName": "System.Object",
             "PropertyName": "Get",
+            "Flags": 17,
             "DisplayName": ":get",
             "Documentation": {
               "Id": 8
-            },
-            "Metadata": {
-              "Components.Bind.AlternativeNotation": "True"
             }
           },
           {
@@ -120415,10 +120401,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -6113352782450430146,
-      "Data2": 6486507524513552241,
-      "Data3": -2146255507633134575,
-      "Data4": -8894029362409099297
+      "Data1": -2708258010972128101,
+      "Data2": -4598329930040855844,
+      "Data3": 7165601687546532721,
+      "Data4": -6944429608894203364
     },
     "Kind": 1,
     "RuntimeKind": 2,
@@ -120534,12 +120520,10 @@
             "Name": "get",
             "TypeName": "System.Object",
             "PropertyName": "Get",
+            "Flags": 17,
             "DisplayName": ":get",
             "Documentation": {
               "Id": 8
-            },
-            "Metadata": {
-              "Components.Bind.AlternativeNotation": "True"
             }
           },
           {
@@ -120590,10 +120574,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -8632135331049974383,
-      "Data2": -4238371009904514751,
-      "Data3": -2397225138766957720,
-      "Data4": -3280200619004180112
+      "Data1": -4572361567817836618,
+      "Data2": 4899694323526029011,
+      "Data3": -6799060590891139702,
+      "Data4": -3439383689872435023
     },
     "Kind": 1,
     "RuntimeKind": 2,
@@ -120709,12 +120693,10 @@
             "Name": "get",
             "TypeName": "System.Object",
             "PropertyName": "Get",
+            "Flags": 17,
             "DisplayName": ":get",
             "Documentation": {
               "Id": 8
-            },
-            "Metadata": {
-              "Components.Bind.AlternativeNotation": "True"
             }
           },
           {
@@ -120765,10 +120747,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 9122393040093077370,
-      "Data2": 8958650112806589824,
-      "Data3": 4547365811122480715,
-      "Data4": 2690823332881114427
+      "Data1": -1459057876791496910,
+      "Data2": -62375616049407283,
+      "Data3": 5880895345891945332,
+      "Data4": 8180982654828526787
     },
     "Kind": 1,
     "RuntimeKind": 2,
@@ -120884,12 +120866,10 @@
             "Name": "get",
             "TypeName": "System.Object",
             "PropertyName": "Get",
+            "Flags": 17,
             "DisplayName": ":get",
             "Documentation": {
               "Id": 8
-            },
-            "Metadata": {
-              "Components.Bind.AlternativeNotation": "True"
             }
           },
           {
@@ -120940,10 +120920,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -1436771777492562011,
-      "Data2": 5009215416324356846,
-      "Data3": -1760413092218959441,
-      "Data4": 3726205218583068023
+      "Data1": -2018332423767989805,
+      "Data2": -4155221515147640678,
+      "Data3": 5149523621752672774,
+      "Data4": 8054893947921304451
     },
     "Kind": 1,
     "RuntimeKind": 2,
@@ -121059,12 +121039,10 @@
             "Name": "get",
             "TypeName": "System.Object",
             "PropertyName": "Get",
+            "Flags": 17,
             "DisplayName": ":get",
             "Documentation": {
               "Id": 8
-            },
-            "Metadata": {
-              "Components.Bind.AlternativeNotation": "True"
             }
           },
           {
@@ -121115,10 +121093,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -880772068278691158,
-      "Data2": -7447741690885607355,
-      "Data3": 8677169745926343099,
-      "Data4": -4305041238040144954
+      "Data1": 3857637502935284481,
+      "Data2": 103327269963244967,
+      "Data3": -6562166987735953642,
+      "Data4": 7730590654483988999
     },
     "Kind": 1,
     "RuntimeKind": 2,
@@ -121234,12 +121212,10 @@
             "Name": "get",
             "TypeName": "System.Object",
             "PropertyName": "Get",
+            "Flags": 17,
             "DisplayName": ":get",
             "Documentation": {
               "Id": 8
-            },
-            "Metadata": {
-              "Components.Bind.AlternativeNotation": "True"
             }
           },
           {
@@ -121290,10 +121266,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 7591659394062804348,
-      "Data2": 435586120026075812,
-      "Data3": -1994962302932013229,
-      "Data4": 1624885376294329481
+      "Data1": 1398681427343302262,
+      "Data2": 2737359491933870049,
+      "Data3": 50395008795635002,
+      "Data4": -5425576782434633305
     },
     "Kind": 1,
     "RuntimeKind": 2,
@@ -121409,12 +121385,10 @@
             "Name": "get",
             "TypeName": "System.Object",
             "PropertyName": "Get",
+            "Flags": 17,
             "DisplayName": ":get",
             "Documentation": {
               "Id": 8
-            },
-            "Metadata": {
-              "Components.Bind.AlternativeNotation": "True"
             }
           },
           {
@@ -121465,10 +121439,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 8212351202174892437,
-      "Data2": -6471853144696344345,
-      "Data3": -9139960317383495139,
-      "Data4": 2462150073546537807
+      "Data1": 4907552209974761272,
+      "Data2": 2118910792753491196,
+      "Data3": -2681038083190893459,
+      "Data4": 7476786479092300841
     },
     "Kind": 1,
     "RuntimeKind": 2,
@@ -121584,12 +121558,10 @@
             "Name": "get",
             "TypeName": "System.Object",
             "PropertyName": "Get",
+            "Flags": 17,
             "DisplayName": ":get",
             "Documentation": {
               "Id": 8
-            },
-            "Metadata": {
-              "Components.Bind.AlternativeNotation": "True"
             }
           },
           {
@@ -121640,10 +121612,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 4411641778022412603,
-      "Data2": -3204774495875255521,
-      "Data3": 3951952597425494359,
-      "Data4": -7723613736892135712
+      "Data1": -3391756973429284752,
+      "Data2": 1059958050835479550,
+      "Data3": -3212573877162190126,
+      "Data4": -7777977458048817190
     },
     "Kind": 1,
     "RuntimeKind": 2,
@@ -121759,12 +121731,10 @@
             "Name": "get",
             "TypeName": "System.Object",
             "PropertyName": "Get",
+            "Flags": 17,
             "DisplayName": ":get",
             "Documentation": {
               "Id": 8
-            },
-            "Metadata": {
-              "Components.Bind.AlternativeNotation": "True"
             }
           },
           {
@@ -121815,10 +121785,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -1178577209923609143,
-      "Data2": -6059885986615848453,
-      "Data3": -1740929116591542629,
-      "Data4": -7240667380768061775
+      "Data1": 8775201456325682591,
+      "Data2": 1389256480806583077,
+      "Data3": 7110767446205626753,
+      "Data4": -8452258505036715336
     },
     "Kind": 1,
     "RuntimeKind": 2,
@@ -121922,12 +121892,10 @@
             "Name": "get",
             "TypeName": "System.Object",
             "PropertyName": "Get",
+            "Flags": 17,
             "DisplayName": ":get",
             "Documentation": {
               "Id": 8
-            },
-            "Metadata": {
-              "Components.Bind.AlternativeNotation": "True"
             }
           },
           {
@@ -121977,10 +121945,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 3664241225902722448,
-      "Data2": 3290545241291464237,
-      "Data3": -5178319217821690044,
-      "Data4": -3641694998193377454
+      "Data1": -8686765645185081240,
+      "Data2": -864295023752935958,
+      "Data3": 2700283231699953767,
+      "Data4": -514995421957400699
     },
     "Kind": 1,
     "RuntimeKind": 2,
@@ -122084,12 +122052,10 @@
             "Name": "get",
             "TypeName": "System.Object",
             "PropertyName": "Get",
+            "Flags": 17,
             "DisplayName": ":get",
             "Documentation": {
               "Id": 8
-            },
-            "Metadata": {
-              "Components.Bind.AlternativeNotation": "True"
             }
           },
           {
@@ -122139,10 +122105,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -7396924261772055133,
-      "Data2": -7730885743480947441,
-      "Data3": 1126449236361419960,
-      "Data4": -1389114642677504253
+      "Data1": -7870423568329514913,
+      "Data2": -8061718025162452645,
+      "Data3": 5966649859898581391,
+      "Data4": 9143066931239197250
     },
     "Kind": 1,
     "RuntimeKind": 2,
@@ -122208,12 +122174,10 @@
             "Name": "get",
             "TypeName": "System.Object",
             "PropertyName": "Get",
+            "Flags": 17,
             "DisplayName": ":get",
             "Documentation": {
               "Id": 8
-            },
-            "Metadata": {
-              "Components.Bind.AlternativeNotation": "True"
             }
           },
           {
@@ -122248,10 +122212,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -5635426180418210535,
-      "Data2": -1993119037684895122,
-      "Data3": 7947519935863597558,
-      "Data4": -2491172462729357380
+      "Data1": -698187412151737968,
+      "Data2": 543654367334127036,
+      "Data3": -623908797203399281,
+      "Data4": -2883006543947857207
     },
     "Kind": 1,
     "RuntimeKind": 2,
@@ -122317,12 +122281,10 @@
             "Name": "get",
             "TypeName": "System.Object",
             "PropertyName": "Get",
+            "Flags": 17,
             "DisplayName": ":get",
             "Documentation": {
               "Id": 8
-            },
-            "Metadata": {
-              "Components.Bind.AlternativeNotation": "True"
             }
           },
           {
@@ -122357,10 +122319,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -6402518522572555929,
-      "Data2": -4712242009718075216,
-      "Data3": 7133943005232308690,
-      "Data4": 149845847439059475
+      "Data1": -7587098054297636578,
+      "Data2": -4170873656911721920,
+      "Data3": 3198280691352245740,
+      "Data4": 8789259105666096056
     },
     "Kind": 1,
     "RuntimeKind": 2,
@@ -122426,12 +122388,10 @@
             "Name": "get",
             "TypeName": "System.Object",
             "PropertyName": "Get",
+            "Flags": 17,
             "DisplayName": ":get",
             "Documentation": {
               "Id": 8
-            },
-            "Metadata": {
-              "Components.Bind.AlternativeNotation": "True"
             }
           },
           {
@@ -122466,10 +122426,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -6772326812540291472,
-      "Data2": -5492167280156639703,
-      "Data3": -5830606017759241592,
-      "Data4": -5801230366613310380
+      "Data1": -5966839181188164398,
+      "Data2": -7199509263994889969,
+      "Data3": 861793936296480480,
+      "Data4": 4553552981808704067
     },
     "Kind": 1,
     "RuntimeKind": 2,
@@ -122535,12 +122495,10 @@
             "Name": "get",
             "TypeName": "System.Object",
             "PropertyName": "Get",
+            "Flags": 17,
             "DisplayName": ":get",
             "Documentation": {
               "Id": 8
-            },
-            "Metadata": {
-              "Components.Bind.AlternativeNotation": "True"
             }
           },
           {
@@ -122575,10 +122533,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 121146084691803522,
-      "Data2": 772246070169690714,
-      "Data3": -771458406143134989,
-      "Data4": 6793200475784089280
+      "Data1": -3443787291618111027,
+      "Data2": -3165163957777638099,
+      "Data3": 2511044379527183867,
+      "Data4": -1072264789755704234
     },
     "Kind": 1,
     "RuntimeKind": 2,
@@ -122644,12 +122602,10 @@
             "Name": "get",
             "TypeName": "System.Object",
             "PropertyName": "Get",
+            "Flags": 17,
             "DisplayName": ":get",
             "Documentation": {
               "Id": 8
-            },
-            "Metadata": {
-              "Components.Bind.AlternativeNotation": "True"
             }
           },
           {
@@ -122684,10 +122640,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -8130898886952389769,
-      "Data2": -2467750391062359382,
-      "Data3": 5118729640677327217,
-      "Data4": 8399002453515571189
+      "Data1": 241147193110618777,
+      "Data2": -8487752147097453505,
+      "Data3": 5101230012885319636,
+      "Data4": 1626014167896892176
     },
     "Kind": 1,
     "RuntimeKind": 2,
@@ -122753,12 +122709,10 @@
             "Name": "get",
             "TypeName": "System.Object",
             "PropertyName": "Get",
+            "Flags": 17,
             "DisplayName": ":get",
             "Documentation": {
               "Id": 8
-            },
-            "Metadata": {
-              "Components.Bind.AlternativeNotation": "True"
             }
           },
           {
@@ -122793,10 +122747,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -7301106739129657731,
-      "Data2": 8431523234100949121,
-      "Data3": -1886631266038117288,
-      "Data4": -1325955777768787196
+      "Data1": -7952756246764177875,
+      "Data2": 3527125279827034129,
+      "Data3": 5777032563102579716,
+      "Data4": 6788577360030932644
     },
     "Kind": 1,
     "RuntimeKind": 2,
@@ -122862,12 +122816,10 @@
             "Name": "get",
             "TypeName": "System.Object",
             "PropertyName": "Get",
+            "Flags": 17,
             "DisplayName": ":get",
             "Documentation": {
               "Id": 8
-            },
-            "Metadata": {
-              "Components.Bind.AlternativeNotation": "True"
             }
           },
           {
@@ -122902,10 +122854,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 4762493256726538180,
-      "Data2": 2726405539546561657,
-      "Data3": -6495207538967379153,
-      "Data4": 6410494013521024057
+      "Data1": -8226258495088850793,
+      "Data2": -7993121469619070709,
+      "Data3": -896401479367389091,
+      "Data4": 5906196778999543100
     },
     "Kind": 1,
     "RuntimeKind": 2,
@@ -122971,12 +122923,10 @@
             "Name": "get",
             "TypeName": "System.Object",
             "PropertyName": "Get",
+            "Flags": 17,
             "DisplayName": ":get",
             "Documentation": {
               "Id": 8
-            },
-            "Metadata": {
-              "Components.Bind.AlternativeNotation": "True"
             }
           },
           {
@@ -123011,10 +122961,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 1374015994370437770,
-      "Data2": 4217906263680411791,
-      "Data3": 1413358370722784890,
-      "Data4": -5991143470866515858
+      "Data1": 7835507149662461282,
+      "Data2": -6141441727368627608,
+      "Data3": 898791747563804433,
+      "Data4": 1564219242771250668
     },
     "Kind": 1,
     "RuntimeKind": 2,
@@ -123080,12 +123030,10 @@
             "Name": "get",
             "TypeName": "System.Object",
             "PropertyName": "Get",
+            "Flags": 17,
             "DisplayName": ":get",
             "Documentation": {
               "Id": 8
-            },
-            "Metadata": {
-              "Components.Bind.AlternativeNotation": "True"
             }
           },
           {
@@ -123120,10 +123068,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -3131226085371860602,
-      "Data2": 2267039411674768537,
-      "Data3": 5483877341652046355,
-      "Data4": 5592189260873832465
+      "Data1": 720526501116886392,
+      "Data2": 3560052556139031081,
+      "Data3": -8026946811245430953,
+      "Data4": 2909083965882830717
     },
     "Kind": 1,
     "RuntimeKind": 2,
@@ -123189,12 +123137,10 @@
             "Name": "get",
             "TypeName": "System.Object",
             "PropertyName": "Get",
+            "Flags": 17,
             "DisplayName": ":get",
             "Documentation": {
               "Id": 8
-            },
-            "Metadata": {
-              "Components.Bind.AlternativeNotation": "True"
             }
           },
           {
@@ -123229,10 +123175,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -6134379602655519563,
-      "Data2": -3498397321701136884,
-      "Data3": 7582744524664784593,
-      "Data4": -322509675506236182
+      "Data1": -8692117404785115395,
+      "Data2": 4071437211731991420,
+      "Data3": 1204704095094419373,
+      "Data4": 1737144168153099624
     },
     "Kind": 1,
     "RuntimeKind": 2,
@@ -123298,12 +123244,10 @@
             "Name": "get",
             "TypeName": "System.Object",
             "PropertyName": "Get",
+            "Flags": 17,
             "DisplayName": ":get",
             "Documentation": {
               "Id": 8
-            },
-            "Metadata": {
-              "Components.Bind.AlternativeNotation": "True"
             }
           },
           {
@@ -123338,10 +123282,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 1306954261290165624,
-      "Data2": 3959743815414465299,
-      "Data3": -360306646949770551,
-      "Data4": 5666660339995087798
+      "Data1": 2106298262639854894,
+      "Data2": 9123117736134883080,
+      "Data3": 2132464465872513169,
+      "Data4": -2114689660657177634
     },
     "Kind": 1,
     "RuntimeKind": 2,
@@ -123407,12 +123351,10 @@
             "Name": "get",
             "TypeName": "System.Object",
             "PropertyName": "Get",
+            "Flags": 17,
             "DisplayName": ":get",
             "Documentation": {
               "Id": 8
-            },
-            "Metadata": {
-              "Components.Bind.AlternativeNotation": "True"
             }
           },
           {
@@ -123447,10 +123389,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -3989860439301745378,
-      "Data2": -5456652339373168060,
-      "Data3": 7042627012073013779,
-      "Data4": -5787275278887661211
+      "Data1": -1815642181763675086,
+      "Data2": 2321576033049903203,
+      "Data3": -7984928783885583325,
+      "Data4": -5214204571532650463
     },
     "Kind": 1,
     "RuntimeKind": 2,
@@ -123516,12 +123458,10 @@
             "Name": "get",
             "TypeName": "System.Object",
             "PropertyName": "Get",
+            "Flags": 17,
             "DisplayName": ":get",
             "Documentation": {
               "Id": 8
-            },
-            "Metadata": {
-              "Components.Bind.AlternativeNotation": "True"
             }
           },
           {
@@ -123556,10 +123496,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -6134550567460100172,
-      "Data2": 7245148997750938725,
-      "Data3": 2772695094236852372,
-      "Data4": -64316808494618901
+      "Data1": -8672056995807470712,
+      "Data2": -5457782600677848431,
+      "Data3": -7157070382720582434,
+      "Data4": 1236963612799216189
     },
     "Kind": 1,
     "RuntimeKind": 2,
@@ -123625,12 +123565,10 @@
             "Name": "get",
             "TypeName": "System.Object",
             "PropertyName": "Get",
+            "Flags": 17,
             "DisplayName": ":get",
             "Documentation": {
               "Id": 8
-            },
-            "Metadata": {
-              "Components.Bind.AlternativeNotation": "True"
             }
           },
           {

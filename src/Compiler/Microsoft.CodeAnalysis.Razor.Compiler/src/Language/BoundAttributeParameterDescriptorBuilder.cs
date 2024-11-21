@@ -32,6 +32,7 @@ public sealed partial class BoundAttributeParameterDescriptorBuilder : TagHelper
     public string? TypeName { get; set; }
     public string? PropertyName { get; set; }
     public bool IsEnum { get; set; }
+    public bool IsBindAttributeGetSet { get; set; }
 
     public string? Documentation
     {
@@ -62,7 +63,7 @@ public sealed partial class BoundAttributeParameterDescriptorBuilder : TagHelper
 
     private protected override BoundAttributeParameterDescriptor BuildCore(ImmutableArray<RazorDiagnostic> diagnostics)
     {
-        var flags = ComputeFlags(IsEnum, CaseSensitive, TypeName);
+        var flags = ComputeFlags(IsEnum, CaseSensitive, TypeName, IsBindAttributeGetSet);
 
         return new BoundAttributeParameterDescriptor(
             _kind,
@@ -76,7 +77,7 @@ public sealed partial class BoundAttributeParameterDescriptorBuilder : TagHelper
             diagnostics);
     }
 
-    private static BoundAttributeParameterFlags ComputeFlags(bool isEnum, bool caseSensitive, string? typeName)
+    private static BoundAttributeParameterFlags ComputeFlags(bool isEnum, bool caseSensitive, string? typeName, bool isBindAttributeGetSet)
     {
         BoundAttributeParameterFlags flags = 0;
 
@@ -97,6 +98,11 @@ public sealed partial class BoundAttributeParameterDescriptorBuilder : TagHelper
         else if (typeName == typeof(bool).FullName || typeName == "bool")
         {
             flags |= BoundAttributeParameterFlags.IsBooleanProperty;
+        }
+
+        if (isBindAttributeGetSet)
+        {
+            flags |= BoundAttributeParameterFlags.IsBindAttributeGetSet;
         }
 
         return flags;

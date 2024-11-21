@@ -8,8 +8,6 @@ namespace Microsoft.AspNetCore.Razor.Language;
 
 public static class CommonMetadata
 {
-    internal static readonly KeyValuePair<string, string?> BindAttributeGetSet
-        = MakeTrue(ComponentMetadata.Bind.BindAttributeGetSet);
     internal static readonly KeyValuePair<string, string?> IsWeaklyTyped
         = MakeTrue(ComponentMetadata.Component.WeaklyTypedKey);
 
