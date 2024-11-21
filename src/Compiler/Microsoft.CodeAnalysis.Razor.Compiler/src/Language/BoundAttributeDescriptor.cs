@@ -19,6 +19,7 @@ public sealed class BoundAttributeDescriptor : TagHelperObject<BoundAttributeDes
     public string Name { get; }
     public string TypeName { get; }
     public string? PropertyName { get; }
+    public string? GloballyQualifiedTypeName { get; }
     public string DisplayName { get; }
     public string? ContainingType { get; }
 
@@ -44,6 +45,7 @@ public sealed class BoundAttributeDescriptor : TagHelperObject<BoundAttributeDes
         string name,
         string typeName,
         string? propertyName,
+        string? globallyQualifiedTypeName,
         string? indexerNamePrefix,
         string? indexerTypeName,
         DocumentationObject documentationObject,
@@ -59,6 +61,7 @@ public sealed class BoundAttributeDescriptor : TagHelperObject<BoundAttributeDes
         Name = name;
         TypeName = typeName;
         PropertyName = propertyName;
+        GloballyQualifiedTypeName = globallyQualifiedTypeName;
         IndexerNamePrefix = indexerNamePrefix;
         IndexerTypeName = indexerTypeName;
         _documentationObject = documentationObject;
@@ -75,6 +78,7 @@ public sealed class BoundAttributeDescriptor : TagHelperObject<BoundAttributeDes
         builder.AppendData(Name);
         builder.AppendData(TypeName);
         builder.AppendData(PropertyName);
+        builder.AppendData(GloballyQualifiedTypeName);
         builder.AppendData(IndexerNamePrefix);
         builder.AppendData(IndexerTypeName);
         builder.AppendData(DisplayName);

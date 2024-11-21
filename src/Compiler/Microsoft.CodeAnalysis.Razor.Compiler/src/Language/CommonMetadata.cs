@@ -15,6 +15,4 @@ public static class CommonMetadata
 
     internal static KeyValuePair<string, string?> MakeTrue(string key)
         => new(key, bool.TrueString);
-    internal static KeyValuePair<string, string?> GloballyQualifiedTypeName(string value)
-        => new(TagHelperMetadata.Common.GloballyQualifiedTypeName, value);
 }

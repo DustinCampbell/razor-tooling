@@ -193,23 +193,22 @@ internal sealed class ComponentTagHelperDescriptorProvider : TagHelperDescriptor
         {
             builder.BindAttribute(pb =>
             {
-                using var metadata = new MetadataBuilder();
-
                 pb.Name = property.Name;
                 pb.PropertyName = property.Name;
                 pb.ContainingType = containingSymbol.ToDisplayString(SymbolExtensions.FullNameTypeDisplayFormat);
                 pb.TypeName = property.Type.ToDisplayString(SymbolExtensions.FullNameTypeDisplayFormat);
+                pb.GloballyQualifiedTypeName = property.Type.ToDisplayString(GloballyQualifiedFullNameTypeDisplayFormat);
                 pb.IsEditorRequired = property.GetAttributes().Any(
                     static a => a.HasFullName("Microsoft.AspNetCore.Components.EditorRequiredAttribute"));
 
                 pb.CaseSensitive = false;
 
-                metadata.Add(GloballyQualifiedTypeName(property.Type.ToDisplayString(GloballyQualifiedFullNameTypeDisplayFormat)));
-
                 if (kind == PropertyKind.Enum)
                 {
                     pb.IsEnum = true;
                 }
+
+                using var metadata = new MetadataBuilder();
 
                 if (kind == PropertyKind.ChildContent)
                 {

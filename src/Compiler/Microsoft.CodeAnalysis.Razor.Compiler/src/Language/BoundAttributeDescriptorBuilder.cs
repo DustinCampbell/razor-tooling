@@ -53,6 +53,7 @@ public sealed partial class BoundAttributeDescriptorBuilder : TagHelperObjectBui
     public string Name { get; set; }
     public string? TypeName { get; set; }
     public string? PropertyName { get; set; }
+    public string? GloballyQualifiedTypeName { get; set;  }
     public bool IsEnum { get; set; }
     public bool IsDictionary { get; set; }
     public string? IndexerAttributeNamePrefix { get; set; }
@@ -118,6 +119,7 @@ public sealed partial class BoundAttributeDescriptorBuilder : TagHelperObjectBui
             Name ?? string.Empty,
             TypeName ?? string.Empty,
             PropertyName,
+            GloballyQualifiedTypeName,
             IndexerAttributeNamePrefix,
             IndexerValueTypeName,
             _documentationObject,

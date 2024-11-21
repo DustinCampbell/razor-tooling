@@ -101,6 +101,7 @@ internal static partial class ObjectWriters
                 writer.Write(nameof(value.Name), value.Name);
                 writer.Write(nameof(value.TypeName), value.TypeName);
                 writer.WriteIfNotNull(nameof(value.PropertyName), value.PropertyName);
+                writer.WriteIfNotNull(nameof(value.GloballyQualifiedTypeName), value.GloballyQualifiedTypeName);
                 writer.WriteIfNotNull(nameof(value.IndexerNamePrefix), value.IndexerNamePrefix);
                 writer.WriteIfNotNull(nameof(value.IndexerTypeName), value.IndexerTypeName);
                 writer.WriteIfNotNull(nameof(value.DisplayName), value.DisplayName);

@@ -416,7 +416,7 @@ internal abstract class ComponentNodeWriter : IntermediateNodeWriter, ITemplateT
             var typeName = childContent.TypeName;
             if (childContent.BoundAttribute != null && !childContent.BoundAttribute.IsGenericTypedProperty())
             {
-                typeName = childContent.BoundAttribute.GetGloballyQualifiedTypeName();
+                typeName = childContent.BoundAttribute.GloballyQualifiedTypeName;
             }
             p.Add(new TypeInferenceMethodParameter($"__seq{p.Count}", typeName, $"__arg{p.Count}", usedForTypeInference: false, childContent));
         }
@@ -490,7 +490,7 @@ internal abstract class ComponentNodeWriter : IntermediateNodeWriter, ITemplateT
         {
             context.CodeWriter.Write(node.TypeName);
         }
-        else if (node.BoundAttribute?.GetGloballyQualifiedTypeName() is string typeName)
+        else if (node.BoundAttribute?.GloballyQualifiedTypeName is string typeName)
         {
             context.CodeWriter.Write(typeName);
         }
@@ -502,7 +502,7 @@ internal abstract class ComponentNodeWriter : IntermediateNodeWriter, ITemplateT
 
     protected static void WriteGloballyQualifiedTypeName(CodeRenderingContext context, ComponentChildContentIntermediateNode node)
     {
-        if (node.BoundAttribute?.GetGloballyQualifiedTypeName() is string typeName &&
+        if (node.BoundAttribute?.GloballyQualifiedTypeName is string typeName &&
             !node.BoundAttribute.IsGenericTypedProperty())
         {
             context.CodeWriter.Write(typeName);
