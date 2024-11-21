@@ -75,6 +75,7 @@ namespace Test
         Assert.Equal("Test.MyComponent", component.Name);
         Assert.Equal("Test.MyComponent", component.DisplayName);
         Assert.Equal("Test.MyComponent", component.TypeName);
+        Assert.Equal("Test", component.TypeNamespace);
 
         // Our use of matching rules is also very simple, and derived from the name. Verifying
         // it once in detail here and then ignoring it.
@@ -90,8 +91,7 @@ namespace Test
         // which is trivial. Verifying it once in detail and then ignoring it.
         Assert.Collection(
             component.Metadata.OrderBy(kvp => kvp.Key),
-            kvp => { Assert.Equal(TagHelperMetadata.Common.TypeNameIdentifier, kvp.Key); Assert.Equal("MyComponent", kvp.Value); },
-            kvp => { Assert.Equal(TagHelperMetadata.Common.TypeNamespace, kvp.Key); Assert.Equal("Test", kvp.Value); });
+            kvp => { Assert.Equal(TagHelperMetadata.Common.TypeNameIdentifier, kvp.Key); Assert.Equal("MyComponent", kvp.Value); });
 
         // Our use of bound attributes is what tests will focus on. As you might expect right now, this test
         // is going to cover a lot of trivial stuff that will be true for all components/component-properties.

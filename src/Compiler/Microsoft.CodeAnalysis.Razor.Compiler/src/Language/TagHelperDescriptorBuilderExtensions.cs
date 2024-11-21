@@ -43,24 +43,6 @@ public static class TagHelperDescriptorBuilderExtensions
     }
 
     [Obsolete($"Do not use this method. {nameof(TagHelperDescriptorBuilder.SetMetadata)} should be used instead.")]
-    public static void SetTypeNamespace(this TagHelperDescriptorBuilder builder, string typeNamespace)
-    {
-        if (builder == null)
-        {
-            throw new ArgumentNullException(nameof(builder));
-        }
-
-        if (typeNamespace == null)
-        {
-            throw new ArgumentNullException(nameof(typeNamespace));
-        }
-
-        Debug.Fail($"Do not use this method. {nameof(TagHelperDescriptorBuilder.SetMetadata)} should be used instead.");
-
-        builder.Metadata[TagHelperMetadata.Common.TypeNamespace] = typeNamespace;
-    }
-
-    [Obsolete($"Do not use this method. {nameof(TagHelperDescriptorBuilder.SetMetadata)} should be used instead.")]
     public static void SetTypeNameIdentifier(this TagHelperDescriptorBuilder builder, string typeNameIdentifier)
     {
         if (builder == null)

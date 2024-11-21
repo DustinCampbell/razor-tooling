@@ -50,6 +50,7 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
     public string Name => _name.AssumeNotNull();
     public string AssemblyName => _assemblyName.AssumeNotNull();
     public string? TypeName { get; set; }
+    public string? TypeNamespace { get; set; }
     public string? DisplayName { get; set; }
     public string? TagOutputHint { get; set; }
     public bool CaseSensitive { get; set; }
@@ -135,6 +136,7 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
             Name,
             AssemblyName,
             TypeName,
+            TypeNamespace,
             GetDisplayName(),
             flags,
             _documentationObject,

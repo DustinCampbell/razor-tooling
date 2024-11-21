@@ -159,6 +159,7 @@ internal sealed class EventHandlerTagHelperDescriptorProvider : TagHelperDescrip
                 out var builder);
 
             builder.TypeName = typeName;
+            builder.TypeNamespace = typeNamespace;
 
             builder.CaseSensitive = true;
             builder.ClassifyAttributesOnly = true;
@@ -170,7 +171,6 @@ internal sealed class EventHandlerTagHelperDescriptorProvider : TagHelperDescrip
 
             builder.SetMetadata(
                 new(ComponentMetadata.EventHandler.EventArgsType, eventArgType),
-                TypeNamespace(typeNamespace),
                 TypeNameIdentifier(typeNameIdentifier));
 
             builder.TagMatchingRule(rule =>

@@ -1369,9 +1369,9 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
            AssemblyA);
         var descriptors = new[]
         {
-                componentDescriptor,
-                anotherComponentDescriptor,
-            };
+            componentDescriptor,
+            anotherComponentDescriptor,
+        };
         var filePath = "C:\\SomeFolder\\SomeProject\\Counter.cshtml";
         var content = @"
 @using Bar = SomeProject.SomeOtherFolder
@@ -1483,10 +1483,10 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
     {
         var builder = TagHelperDescriptorBuilder.Create(kind, typeName, assemblyName);
         builder.TypeName = typeName;
+        builder.TypeNamespace = typeNamespace ?? (typeName.LastIndexOf('.') == -1 ? "" : typeName[..typeName.LastIndexOf('.')]);
 
         using var metadata = new MetadataBuilder();
 
-        metadata.Add(TypeNamespace(typeNamespace ?? (typeName.LastIndexOf('.') == -1 ? "" : typeName[..typeName.LastIndexOf('.')])));
         metadata.Add(TypeNameIdentifier(typeNameIdentifier ?? (typeName.LastIndexOf('.') == -1 ? typeName : typeName[(typeName.LastIndexOf('.') + 1)..])));
 
         if (attributes != null)

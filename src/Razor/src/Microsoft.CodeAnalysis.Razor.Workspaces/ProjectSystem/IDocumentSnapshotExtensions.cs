@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
@@ -35,7 +36,7 @@ internal static class IDocumentSnapshotExtensions
         {
             // Check the typename and namespace match
             if (documentSnapshot.IsPathCandidateForComponent(tagHelper.GetTypeNameIdentifier().AsMemory()) &&
-                razorCodeDocument.ComponentNamespaceMatches(tagHelper.GetTypeNamespace()))
+                razorCodeDocument.ComponentNamespaceMatches(tagHelper.TypeNamespace.AssumeNotNull()))
             {
                 return tagHelper;
             }

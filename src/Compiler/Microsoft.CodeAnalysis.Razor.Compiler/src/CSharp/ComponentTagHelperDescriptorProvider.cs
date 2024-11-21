@@ -91,6 +91,7 @@ internal sealed class ComponentTagHelperDescriptorProvider : TagHelperDescriptor
             bool fullyQualified)
         {
             var typeName = type.ToDisplayString(SymbolExtensions.FullNameTypeDisplayFormat);
+            var typeNamespace = type.ContainingNamespace.ToDisplayString(SymbolExtensions.FullNameTypeDisplayFormat);
             var assemblyName = type.ContainingAssembly.Identity.Name;
 
             // RuntimeKind.IComponent opts out this 'component' tag helper for any processing
@@ -100,10 +101,10 @@ internal sealed class ComponentTagHelperDescriptorProvider : TagHelperDescriptor
                 TagHelperKind.Component, RuntimeKind.IComponent, typeName, assemblyName, out var builder);
 
             builder.TypeName = typeName;
+            builder.TypeNamespace = typeNamespace;
 
             using var metadata = new MetadataBuilder();
 
-            metadata.Add(TypeNamespace(type.ContainingNamespace.ToDisplayString(SymbolExtensions.FullNameTypeDisplayFormat)));
             metadata.Add(TypeNameIdentifier(type.Name));
 
             builder.CaseSensitive = true;
@@ -114,13 +115,12 @@ internal sealed class ComponentTagHelperDescriptorProvider : TagHelperDescriptor
 
                 var fullName = type.ContainingNamespace.IsGlobalNamespace
                     ? type.Name
-                    : $"{type.ContainingNamespace.ToDisplayString(SymbolExtensions.FullNameTypeDisplayFormat)}.{type.Name}";
+                    : $"{typeNamespace}.{type.Name}";
 
                 builder.TagMatchingRule(r =>
                 {
                     r.TagName = fullName;
                 });
-
             }
             else
             {
@@ -260,7 +260,7 @@ internal sealed class ComponentTagHelperDescriptorProvider : TagHelperDescriptor
                 // [Parameter] public List<string> MyProperty { get; set; }
                 //
                 // We need to inspect the type arguments to tell the difference between a property that
-                // uses the containing class' type parameter(s) and a vanilla usage of generic types like
+                // uses the containing class's type parameter(s) and a vanilla usage of generic types like
                 // List<> and Dictionary<,>
                 //
                 // Since we need to handle cases like RenderFragment<List<T>>, this check must be recursive.
@@ -505,10 +505,10 @@ internal sealed class ComponentTagHelperDescriptorProvider : TagHelperDescriptor
                 out var builder);
 
             builder.TypeName = typeName;
+            builder.TypeNamespace = component.TypeNamespace;
 
             using var metadata = new MetadataBuilder();
 
-            metadata.Add(TypeNamespace(component.GetTypeNamespace()));
             metadata.Add(TypeNameIdentifier(component.GetTypeNameIdentifier()));
 
             builder.CaseSensitive = true;

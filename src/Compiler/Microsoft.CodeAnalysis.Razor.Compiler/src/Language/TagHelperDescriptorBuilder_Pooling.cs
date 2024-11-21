@@ -35,6 +35,7 @@ public partial class TagHelperDescriptorBuilder
         _documentationObject = default;
 
         TypeName = null;
+        TypeNamespace = null;
         DisplayName = null;
         TagOutputHint = null;
         CaseSensitive = false;

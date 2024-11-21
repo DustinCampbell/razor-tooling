@@ -45,7 +45,7 @@ internal class RazorComponentSearchEngine(ILoggerFactory loggerFactory) : IRazor
         CancellationToken cancellationToken)
     {
         var typeName = tagHelper.GetTypeNameIdentifier();
-        var namespaceName = tagHelper.GetTypeNamespace();
+        var namespaceName = tagHelper.TypeNamespace;
         if (typeName == null || namespaceName == null)
         {
             _logger.LogWarning($"Could not split namespace and type for name {tagHelper.Name}.");

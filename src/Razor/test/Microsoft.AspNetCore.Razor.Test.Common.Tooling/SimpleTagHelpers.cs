@@ -62,10 +62,10 @@ internal static class SimpleTagHelpers
 
         var builder3 = TagHelperDescriptorBuilder.Create(TagHelperKind.Component, "Component1TagHelper", "TestAssembly");
         builder3.TypeName = "Component1";
+        builder3.TypeNamespace = "System";
         builder3.IsComponentFullyQualifiedNameMatch = true;
         builder3.TagMatchingRule(rule => rule.TagName = "Component1");
         builder3.SetMetadata(
-            TypeNamespace("System"), // Just so we can reasonably assume a using directive is in place
             TypeNameIdentifier("Component1"));
         builder3.BindAttribute(attribute =>
         {
@@ -89,9 +89,9 @@ internal static class SimpleTagHelpers
         var textComponent = TagHelperDescriptorBuilder.Create(TagHelperKind.Component, "TextTagHelper", "TestAssembly");
         textComponent.IsComponentFullyQualifiedNameMatch = true;
         textComponent.TypeName = "Text";
+        textComponent.TypeNamespace = "System";
         textComponent.TagMatchingRule(rule => rule.TagName = "Text");
         textComponent.SetMetadata(
-            TypeNamespace("System"),
             TypeNameIdentifier("Text"));
 
         var directiveAttribute1 = TagHelperDescriptorBuilder.Create(TagHelperKind.Component, "TestDirectiveAttribute", "TestAssembly");
@@ -172,6 +172,7 @@ internal static class SimpleTagHelpers
 
         var directiveAttribute3 = TagHelperDescriptorBuilder.Create(TagHelperKind.EventHandler, RuntimeKind.None, "OnClickDirectiveAttribute", "TestAssembly");
         directiveAttribute3.TypeName = "OnClickDirectiveAttribute";
+        directiveAttribute3.TypeNamespace = "Microsoft.AspNetCore.Components.Web";
         directiveAttribute3.IsComponentFullyQualifiedNameMatch = true;
         directiveAttribute3.ClassifyAttributesOnly = true;
         directiveAttribute3.TagMatchingRule(rule =>
@@ -203,7 +204,6 @@ internal static class SimpleTagHelpers
         });
         directiveAttribute3.SetMetadata(
             new(ComponentMetadata.EventHandler.EventArgsType, "Microsoft.AspNetCore.Components.Web.MouseEventArgs"),
-            TypeNamespace("Microsoft.AspNetCore.Components.Web"),
             TypeNameIdentifier("EventHandlers"));
 
         var htmlTagMutator = TagHelperDescriptorBuilder.Create("HtmlMutator", "TestAssembly");

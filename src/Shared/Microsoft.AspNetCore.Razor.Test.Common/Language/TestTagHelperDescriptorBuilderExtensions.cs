@@ -38,6 +38,15 @@ public static class TestTagHelperDescriptorBuilderExtensions
         return builder;
     }
 
+    public static TagHelperDescriptorBuilder TypeNamespace(this TagHelperDescriptorBuilder builder, string typeNamespace)
+    {
+        ArgHelper.ThrowIfNull(typeNamespace);
+
+        builder.TypeNamespace = typeNamespace;
+
+        return builder;
+    }
+
     public static TagHelperDescriptorBuilder DisplayName(this TagHelperDescriptorBuilder builder, string displayName)
     {
         if (builder == null)

@@ -481,7 +481,7 @@ internal sealed partial class DefaultRazorTagHelperContextDiscoveryPhase : Razor
 
         internal static bool IsTypeInNamespace(TagHelperDescriptor tagHelper, string @namespace)
         {
-            var typeNamespace = tagHelper.GetTypeNamespace();
+            var typeNamespace = tagHelper.TypeNamespace;
 
             if (typeNamespace.IsNullOrEmpty())
             {
@@ -502,7 +502,7 @@ internal sealed partial class DefaultRazorTagHelperContextDiscoveryPhase : Razor
         // Whereas `MyComponents.SomethingElse.OtherComponent` is not in scope.
         internal static bool IsTypeInScope(TagHelperDescriptor tagHelper, string @namespace)
         {
-            var typeNamespace = tagHelper.GetTypeNamespace();
+            var typeNamespace = tagHelper.TypeNamespace;
 
             if (typeNamespace.IsNullOrEmpty())
             {
