@@ -36,6 +36,7 @@ public partial class TagHelperDescriptorBuilder
 
         TypeName = null;
         TypeNamespace = null;
+        TypeNameIdentifier = null;
         DisplayName = null;
         TagOutputHint = null;
         CaseSensitive = false;

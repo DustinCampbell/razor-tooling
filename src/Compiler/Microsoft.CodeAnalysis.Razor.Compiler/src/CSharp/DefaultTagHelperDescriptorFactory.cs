@@ -50,9 +50,7 @@ internal class DefaultTagHelperDescriptorFactory
 
         descriptorBuilder.TypeName = typeName;
         descriptorBuilder.TypeNamespace = type.ContainingNamespace.ToDisplayString(SymbolExtensions.FullNameTypeDisplayFormat);
-
-        descriptorBuilder.SetMetadata(
-            TypeNameIdentifier(type.Name));
+        descriptorBuilder.TypeNameIdentifier = type.Name;
 
         AddBoundAttributes(type, descriptorBuilder);
         AddTagMatchingRules(type, descriptorBuilder);

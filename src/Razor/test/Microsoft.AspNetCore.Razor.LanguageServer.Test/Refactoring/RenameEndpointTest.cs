@@ -27,7 +27,6 @@ using Microsoft.VisualStudio.LanguageServer.Protocol;
 using Moq;
 using Xunit;
 using Xunit.Abstractions;
-using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.Refactoring;
 
@@ -732,19 +731,17 @@ public class RenameEndpointTest(ITestOutputHelper testOutput) : LanguageServerTe
         var builder = TagHelperDescriptorBuilder.Create(TagHelperKind.Component, fullyQualifiedName, assemblyName);
         builder.TypeName = fullyQualifiedName;
         builder.TypeNamespace = namespaceName;
+        builder.TypeNameIdentifier = tagName;
         builder.TagMatchingRule(rule => rule.TagName = tagName);
-        builder.SetMetadata(
-            TypeNameIdentifier(tagName));
 
         yield return builder.Build();
 
         var fullyQualifiedBuilder = TagHelperDescriptorBuilder.Create(TagHelperKind.Component, fullyQualifiedName, assemblyName);
         fullyQualifiedBuilder.TypeName = fullyQualifiedName;
         fullyQualifiedBuilder.TypeNamespace = namespaceName;
+        fullyQualifiedBuilder.TypeNameIdentifier = tagName;
         fullyQualifiedBuilder.IsComponentFullyQualifiedNameMatch = true;
         fullyQualifiedBuilder.TagMatchingRule(rule => rule.TagName = fullyQualifiedName);
-        fullyQualifiedBuilder.SetMetadata(
-            TypeNameIdentifier(tagName));
 
         yield return fullyQualifiedBuilder.Build();
     }

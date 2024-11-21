@@ -1,6 +1,7 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Components;
@@ -63,10 +64,9 @@ internal static class SimpleTagHelpers
         var builder3 = TagHelperDescriptorBuilder.Create(TagHelperKind.Component, "Component1TagHelper", "TestAssembly");
         builder3.TypeName = "Component1";
         builder3.TypeNamespace = "System";
+        builder3.TypeNameIdentifier = "Component1";
         builder3.IsComponentFullyQualifiedNameMatch = true;
         builder3.TagMatchingRule(rule => rule.TagName = "Component1");
-        builder3.SetMetadata(
-            TypeNameIdentifier("Component1"));
         builder3.BindAttribute(attribute =>
         {
             attribute.Name = "bool-val";
@@ -90,9 +90,8 @@ internal static class SimpleTagHelpers
         textComponent.IsComponentFullyQualifiedNameMatch = true;
         textComponent.TypeName = "Text";
         textComponent.TypeNamespace = "System";
+        textComponent.TypeNameIdentifier = "Text";
         textComponent.TagMatchingRule(rule => rule.TagName = "Text");
-        textComponent.SetMetadata(
-            TypeNameIdentifier("Text"));
 
         var directiveAttribute1 = TagHelperDescriptorBuilder.Create(TagHelperKind.Component, "TestDirectiveAttribute", "TestAssembly");
         directiveAttribute1.TypeName = "TestDirectiveAttribute";
@@ -173,6 +172,7 @@ internal static class SimpleTagHelpers
         var directiveAttribute3 = TagHelperDescriptorBuilder.Create(TagHelperKind.EventHandler, RuntimeKind.None, "OnClickDirectiveAttribute", "TestAssembly");
         directiveAttribute3.TypeName = "OnClickDirectiveAttribute";
         directiveAttribute3.TypeNamespace = "Microsoft.AspNetCore.Components.Web";
+        directiveAttribute3.TypeNameIdentifier = "EventHandlers";
         directiveAttribute3.IsComponentFullyQualifiedNameMatch = true;
         directiveAttribute3.ClassifyAttributesOnly = true;
         directiveAttribute3.TagMatchingRule(rule =>
@@ -203,8 +203,7 @@ internal static class SimpleTagHelpers
             attribute.TypeName = "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.MouseEventArgs>";
         });
         directiveAttribute3.SetMetadata(
-            new(ComponentMetadata.EventHandler.EventArgsType, "Microsoft.AspNetCore.Components.Web.MouseEventArgs"),
-            TypeNameIdentifier("EventHandlers"));
+            new KeyValuePair<string, string>(ComponentMetadata.EventHandler.EventArgsType, "Microsoft.AspNetCore.Components.Web.MouseEventArgs"));
 
         var htmlTagMutator = TagHelperDescriptorBuilder.Create("HtmlMutator", "TestAssembly");
         htmlTagMutator.TypeName = "HtmlMutator";

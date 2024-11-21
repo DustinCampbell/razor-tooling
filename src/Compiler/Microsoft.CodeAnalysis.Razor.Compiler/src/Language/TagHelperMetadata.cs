@@ -11,8 +11,6 @@ public static class TagHelperMetadata
     {
         public static readonly string PropertyName = "Common.PropertyName";
 
-        public static readonly string TypeNameIdentifier = "Common.TypeNameIdentifier";
-
         public static readonly string GloballyQualifiedTypeName = "Common.GloballyQualifiedTypeName";
     }
 }

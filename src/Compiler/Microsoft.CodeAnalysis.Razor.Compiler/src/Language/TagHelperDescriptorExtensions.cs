@@ -9,17 +9,6 @@ namespace Microsoft.AspNetCore.Razor.Language;
 
 public static class TagHelperDescriptorExtensions
 {
-    public static string GetTypeNameIdentifier(this TagHelperDescriptor tagHelper)
-    {
-        if (tagHelper == null)
-        {
-            throw new ArgumentNullException(nameof(tagHelper));
-        }
-
-        tagHelper.Metadata.TryGetValue(TagHelperMetadata.Common.TypeNameIdentifier, out var typeNameIdentifier);
-        return typeNameIdentifier;
-    }
-
     public static bool IsDefaultKind(this TagHelperDescriptor tagHelper)
     {
         ArgHelper.ThrowIfNull(tagHelper);

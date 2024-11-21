@@ -3,9 +3,7 @@
 
 #nullable disable
 
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
@@ -40,23 +38,5 @@ public static class TagHelperDescriptorBuilderExtensions
         params KeyValuePair<string, string>[] pairs)
     {
         builder.SetMetadata(MetadataCollection.Create(pairs));
-    }
-
-    [Obsolete($"Do not use this method. {nameof(TagHelperDescriptorBuilder.SetMetadata)} should be used instead.")]
-    public static void SetTypeNameIdentifier(this TagHelperDescriptorBuilder builder, string typeNameIdentifier)
-    {
-        if (builder == null)
-        {
-            throw new ArgumentNullException(nameof(builder));
-        }
-
-        if (typeNameIdentifier == null)
-        {
-            throw new ArgumentNullException(nameof(typeNameIdentifier));
-        }
-
-        Debug.Fail($"Do not use this method. {nameof(TagHelperDescriptorBuilder.SetMetadata)} should be used instead.");
-
-        builder.Metadata[TagHelperMetadata.Common.TypeNameIdentifier] = typeNameIdentifier;
     }
 }

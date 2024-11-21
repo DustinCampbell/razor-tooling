@@ -102,12 +102,11 @@ internal sealed class ComponentTagHelperDescriptorProvider : TagHelperDescriptor
 
             builder.TypeName = typeName;
             builder.TypeNamespace = typeNamespace;
-
-            using var metadata = new MetadataBuilder();
-
-            metadata.Add(TypeNameIdentifier(type.Name));
+            builder.TypeNameIdentifier = type.Name;
 
             builder.CaseSensitive = true;
+
+            using var metadata = new MetadataBuilder();
 
             if (fullyQualified)
             {
@@ -506,10 +505,7 @@ internal sealed class ComponentTagHelperDescriptorProvider : TagHelperDescriptor
 
             builder.TypeName = typeName;
             builder.TypeNamespace = component.TypeNamespace;
-
-            using var metadata = new MetadataBuilder();
-
-            metadata.Add(TypeNameIdentifier(component.GetTypeNameIdentifier()));
+            builder.TypeNameIdentifier = component.TypeNameIdentifier;
 
             builder.CaseSensitive = true;
 
@@ -537,8 +533,6 @@ internal sealed class ComponentTagHelperDescriptorProvider : TagHelperDescriptor
             {
                 builder.IsComponentFullyQualifiedNameMatch = true;
             }
-
-            builder.SetMetadata(metadata.Build());
 
             var descriptor = builder.Build();
 

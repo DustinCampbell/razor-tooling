@@ -17,7 +17,6 @@ using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
 using Xunit;
 using Xunit.Abstractions;
-using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.DocumentPresentation;
 
@@ -43,7 +42,7 @@ public class TextDocumentUriPresentationEndpointTests(ITestOutputHelper testOutp
         var droppedUri = new Uri("file:///c:/path/MyTagHelper.razor");
         var builder = TagHelperDescriptorBuilder.Create("MyTagHelper", "MyAssembly");
         builder.TypeNamespace = "TestRootNamespace";
-        builder.SetMetadata(TypeNameIdentifier("MyTagHelper"));
+        builder.TypeNameIdentifier = "MyTagHelper";
 
         await projectManager.UpdateAsync(updater =>
         {
@@ -104,7 +103,7 @@ public class TextDocumentUriPresentationEndpointTests(ITestOutputHelper testOutp
         var droppedUri = new Uri("file:///c:/path/MyTagHelper.razor");
         var builder = TagHelperDescriptorBuilder.Create("MyTagHelper", "MyAssembly");
         builder.TypeNamespace = "TestRootNamespace";
-        builder.SetMetadata(TypeNameIdentifier("MyTagHelper"));
+        builder.TypeNameIdentifier = "MyTagHelper";
 
         await projectManager.UpdateAsync(updater =>
         {
@@ -170,7 +169,7 @@ public class TextDocumentUriPresentationEndpointTests(ITestOutputHelper testOutp
         var droppedUri = new Uri("file:///c:/path/fetchdata.razor");
         var builder = TagHelperDescriptorBuilder.Create("FetchData", "MyAssembly");
         builder.TypeNamespace = "TestRootNamespace";
-        builder.SetMetadata(TypeNameIdentifier("FetchData"));
+        builder.TypeNameIdentifier = "FetchData";
         builder.BindAttribute(b =>
         {
             b.IsEditorRequired = true;
@@ -332,7 +331,7 @@ public class TextDocumentUriPresentationEndpointTests(ITestOutputHelper testOutp
         var droppedUri2 = new Uri("file:///c:/path/fetchdata.razor");
         var builder = TagHelperDescriptorBuilder.Create("FetchData", "MyAssembly");
         builder.TypeNamespace = "TestRootNamespace";
-        builder.SetMetadata(TypeNameIdentifier("FetchData"));
+        builder.TypeNameIdentifier = "FetchData";
 
         await projectManager.UpdateAsync(updater =>
         {

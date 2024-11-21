@@ -126,14 +126,14 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
 
         builder.TypeName = "Microsoft.AspNetCore.Components.Bind";
         builder.TypeNamespace = "Microsoft.AspNetCore.Components";
+        builder.TypeNameIdentifier = "Bind";
 
         builder.CaseSensitive = true;
         builder.ClassifyAttributesOnly = true;
         builder.SetDocumentation(DocumentationDescriptor.BindTagHelper_Fallback);
 
         builder.SetMetadata(
-            MakeTrue(ComponentMetadata.Bind.FallbackKey),
-            TypeNameIdentifier("Bind"));
+            MakeTrue(ComponentMetadata.Bind.FallbackKey));
 
         builder.TagMatchingRule(rule =>
         {
@@ -368,6 +368,7 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
 
             builder.TypeName = typeName;
             builder.TypeNamespace = typeNamespace;
+            builder.TypeNameIdentifier = typeNameIdentifier;
 
             builder.CaseSensitive = true;
             builder.ClassifyAttributesOnly = true;
@@ -397,8 +398,6 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
                 // tag helpers match.
                 metadata.Add(ComponentMetadata.Bind.TypeAttribute, typeAttribute);
             }
-
-            metadata.Add(TypeNameIdentifier(typeNameIdentifier));
 
             builder.SetMetadata(metadata.Build());
 
@@ -607,6 +606,7 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
 
                 builder.TypeName = tagHelper.TypeName;
                 builder.TypeNamespace = tagHelper.TypeNamespace;
+                builder.TypeNameIdentifier = tagHelper.TypeNameIdentifier;
                 builder.DisplayName = tagHelper.DisplayName;
                 builder.CaseSensitive = true;
                 builder.SetDocumentation(
@@ -624,8 +624,6 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
                 {
                     metadata.Add(ComponentMetadata.Bind.ExpressionAttribute, expressionAttribute.Name);
                 }
-
-                metadata.Add(TypeNameIdentifier(tagHelper.GetTypeNameIdentifier()));
 
                 // Match the component and attribute name
                 builder.TagMatchingRule(rule =>
