@@ -11,7 +11,6 @@ using Microsoft.CodeAnalysis.Razor.Workspaces.Test;
 using Roslyn.Test.Utilities;
 using Xunit;
 using Xunit.Abstractions;
-using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
 namespace Microsoft.CodeAnalysis.Razor.Tooltip;
 
@@ -31,10 +30,10 @@ public class ProjectAvailabilityTests(ITestOutputHelper testOutput) : ToolingTes
     [Fact]
     public async Task GetProjectAvailabilityText_OneProject_ReturnsNull()
     {
-        var builder = TagHelperDescriptorBuilder.Create(TagHelperKind.Component, "TestTagHelper", "TestAssembly");
-        builder.TagMatchingRule(rule => rule.TagName = "Test");
         var tagHelperTypeName = "TestNamespace.TestTagHelper";
-        builder.Metadata(TypeName(tagHelperTypeName));
+        var builder = TagHelperDescriptorBuilder.Create(TagHelperKind.Component, "TestTagHelper", "TestAssembly");
+        builder.TypeName = tagHelperTypeName;
+        builder.TagMatchingRule(rule => rule.TagName = "Test");
         var tagHelpers = ImmutableArray.Create(builder.Build());
         var projectWorkspaceState = ProjectWorkspaceState.Create(tagHelpers);
 
@@ -69,10 +68,10 @@ public class ProjectAvailabilityTests(ITestOutputHelper testOutput) : ToolingTes
     [Fact]
     public async Task GetProjectAvailabilityText_AvailableInAllProjects_ReturnsNull()
     {
-        var builder = TagHelperDescriptorBuilder.Create(TagHelperKind.Component, "TestTagHelper", "TestAssembly");
-        builder.TagMatchingRule(rule => rule.TagName = "Test");
         var tagHelperTypeName = "TestNamespace.TestTagHelper";
-        builder.Metadata(TypeName(tagHelperTypeName));
+        var builder = TagHelperDescriptorBuilder.Create(TagHelperKind.Component, "TestTagHelper", "TestAssembly");
+        builder.TypeName = tagHelperTypeName;
+        builder.TagMatchingRule(rule => rule.TagName = "Test");
         var tagHelpers = ImmutableArray.Create(builder.Build());
         var projectWorkspaceState = ProjectWorkspaceState.Create(tagHelpers);
 
@@ -118,10 +117,10 @@ public class ProjectAvailabilityTests(ITestOutputHelper testOutput) : ToolingTes
     [Fact]
     public async Task GetProjectAvailabilityText_NotAvailableInAllProjects_ReturnsText()
     {
-        var builder = TagHelperDescriptorBuilder.Create(TagHelperKind.Component, "TestTagHelper", "TestAssembly");
-        builder.TagMatchingRule(rule => rule.TagName = "Test");
         var tagHelperTypeName = "TestNamespace.TestTagHelper";
-        builder.Metadata(TypeName(tagHelperTypeName));
+        var builder = TagHelperDescriptorBuilder.Create(TagHelperKind.Component, "TestTagHelper", "TestAssembly");
+        builder.TypeName = tagHelperTypeName;
+        builder.TagMatchingRule(rule => rule.TagName = "Test");
         var tagHelpers = ImmutableArray.Create(builder.Build());
         var projectWorkspaceState = ProjectWorkspaceState.Create(tagHelpers);
 

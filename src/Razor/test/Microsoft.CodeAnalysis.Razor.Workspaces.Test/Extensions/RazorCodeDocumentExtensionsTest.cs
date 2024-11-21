@@ -20,8 +20,8 @@ public class RazorCodeDocumentExtensionsTest(ITestOutputHelper testOutput) : Too
     {
         // Arrange
         var descriptor = TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly");
+        descriptor.TypeName = "TestTagHelper";
         descriptor.TagMatchingRule(rule => rule.TagName = "test");
-        descriptor.SetMetadata(TypeName("TestTagHelper"));
 
         TestCode code = """
             @addTagHelper *, TestAssembly
@@ -42,8 +42,8 @@ public class RazorCodeDocumentExtensionsTest(ITestOutputHelper testOutput) : Too
     {
         // Arrange
         var descriptor = TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly");
+        descriptor.TypeName = "TestTagHelper";
         descriptor.TagMatchingRule(rule => rule.TagName = "test");
-        descriptor.SetMetadata(TypeName("TestTagHelper"));
 
         TestCode code = """
             @addTagHelper *, TestAssembly
@@ -64,6 +64,7 @@ public class RazorCodeDocumentExtensionsTest(ITestOutputHelper testOutput) : Too
     {
         // Arrange
         var descriptor = TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly");
+        descriptor.TypeName = "TestTagHelper";
         descriptor.TagMatchingRule(rule => rule.TagName = "test");
         descriptor.BindAttribute(builder =>
         {
@@ -71,7 +72,6 @@ public class RazorCodeDocumentExtensionsTest(ITestOutputHelper testOutput) : Too
             builder.TypeName = typeof(int).FullName;
             builder.SetMetadata(PropertyName("AspInt"));
         });
-        descriptor.SetMetadata(TypeName("TestTagHelper"));
 
         TestCode code = """
             @addTagHelper *, TestAssembly
@@ -306,8 +306,8 @@ public class RazorCodeDocumentExtensionsTest(ITestOutputHelper testOutput) : Too
     {
         // Arrange
         var descriptor = TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly");
+        descriptor.TypeName = "TestTagHelper";
         descriptor.TagMatchingRule(rule => rule.TagName = "test");
-        descriptor.SetMetadata(TypeName("TestTagHelper"));
 
         TestCode code = """
             @addTagHelper *, TestAssembly

@@ -42,12 +42,11 @@ internal sealed class RefTagHelperDescriptorProvider() : TagHelperDescriptorProv
             TagHelperKind.Ref, RuntimeKind.None, "Ref", ComponentsApi.AssemblyName,
             out var builder);
 
+        builder.TypeName = "Microsoft.AspNetCore.Components.Ref";
+
         builder.CaseSensitive = true;
         builder.ClassifyAttributesOnly = true;
         builder.SetDocumentation(DocumentationDescriptor.RefTagHelper);
-
-        builder.SetMetadata(
-            TypeName("Microsoft.AspNetCore.Components.Ref"));
 
         builder.TagMatchingRule(rule =>
         {

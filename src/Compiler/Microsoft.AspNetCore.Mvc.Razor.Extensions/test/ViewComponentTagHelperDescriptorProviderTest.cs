@@ -38,9 +38,8 @@ public class ViewComponentTagHelperDescriptorProviderTest
             TagHelperKind.ViewComponent,
             "__Generated__StringParameterViewComponentTagHelper",
             TestCompilation.AssemblyName)
-            .Metadata(
-                TypeName("__Generated__StringParameterViewComponentTagHelper"),
-                new(ViewComponentTagHelperMetadata.Name, "StringParameter"))
+            .TypeName("__Generated__StringParameterViewComponentTagHelper")
+            .Metadata(ViewComponentTagHelperMetadata.Name, "StringParameter")
             .DisplayName("StringParameterViewComponentTagHelper")
             .TagMatchingRuleDescriptor(rule =>
                 rule

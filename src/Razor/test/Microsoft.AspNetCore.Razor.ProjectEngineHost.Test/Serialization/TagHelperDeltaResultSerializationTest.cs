@@ -257,7 +257,7 @@ public class TagHelperDeltaResultSerializationTest(ITestOutputHelper testOutput)
         Action<TagHelperDescriptorBuilder>? configureAction = null)
     {
         var builder = TagHelperDescriptorBuilder.Create(kind, typeName, assemblyName);
-        builder.Metadata(TypeName(typeName));
+        builder.TypeName = typeName;
 
         if (attributes != null)
         {

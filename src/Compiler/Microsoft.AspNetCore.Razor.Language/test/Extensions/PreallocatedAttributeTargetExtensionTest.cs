@@ -127,8 +127,10 @@ public class PreallocatedAttributeTargetExtensionTest
         var extension = new PreallocatedAttributeTargetExtension();
         using var context = TestCodeRenderingContext.CreateRuntime();
 
-        var tagHelperBuilder = new TagHelperDescriptorBuilder(TagHelperKind.Default, "FooTagHelper", "Test");
-        tagHelperBuilder.Metadata(TypeName("FooTagHelper"));
+        var tagHelperBuilder = new TagHelperDescriptorBuilder(TagHelperKind.Default, "FooTagHelper", "Test")
+        {
+            TypeName = "FooTagHelper"
+        };
 
         var builder = new BoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperKind.Default);
         builder
@@ -170,8 +172,10 @@ __tagHelperExecutionContext.AddTagHelperAttribute(_tagHelper1);
         var extension = new PreallocatedAttributeTargetExtension();
         using var context = TestCodeRenderingContext.CreateRuntime();
 
-        var tagHelperBuilder = new TagHelperDescriptorBuilder(TagHelperKind.Default, "FooTagHelper", "Test");
-        tagHelperBuilder.Metadata(TypeName("FooTagHelper"));
+        var tagHelperBuilder = new TagHelperDescriptorBuilder(TagHelperKind.Default, "FooTagHelper", "Test")
+        {
+            TypeName = "FooTagHelper"
+        };
 
         var builder = new BoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperKind.Default);
         builder
@@ -220,8 +224,10 @@ __tagHelperExecutionContext.AddTagHelperAttribute(_tagHelper1);
         var extension = new PreallocatedAttributeTargetExtension();
         using var context = TestCodeRenderingContext.CreateRuntime();
 
-        var tagHelperBuilder = new TagHelperDescriptorBuilder(TagHelperKind.Default, "FooTagHelper", "Test");
-        tagHelperBuilder.Metadata(TypeName("FooTagHelper"));
+        var tagHelperBuilder = new TagHelperDescriptorBuilder(TagHelperKind.Default, "FooTagHelper", "Test")
+        {
+            TypeName = "FooTagHelper"
+        };
 
         var builder = new BoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperKind.Default);
         builder

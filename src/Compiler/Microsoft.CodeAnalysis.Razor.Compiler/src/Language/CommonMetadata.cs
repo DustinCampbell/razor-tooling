@@ -19,8 +19,6 @@ public static class CommonMetadata
         => new(TagHelperMetadata.Common.GloballyQualifiedTypeName, value);
     public static KeyValuePair<string, string?> PropertyName(string value)
         => new(TagHelperMetadata.Common.PropertyName, value);
-    public static KeyValuePair<string, string?> TypeName(string value)
-        => new(TagHelperMetadata.Common.TypeName, value);
     internal static KeyValuePair<string, string?> TypeNamespace(string value)
         => new(TagHelperMetadata.Common.TypeNamespace, value);
     internal static KeyValuePair<string, string?> TypeNameIdentifier(string value)

@@ -124,13 +124,14 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
             TagHelperKind.Bind, RuntimeKind.None, "Bind", ComponentsApi.AssemblyName,
             out var builder);
 
+        builder.TypeName = "Microsoft.AspNetCore.Components.Bind";
+
         builder.CaseSensitive = true;
         builder.ClassifyAttributesOnly = true;
         builder.SetDocumentation(DocumentationDescriptor.BindTagHelper_Fallback);
 
         builder.SetMetadata(
             MakeTrue(ComponentMetadata.Bind.FallbackKey),
-            TypeName("Microsoft.AspNetCore.Components.Bind"),
             TypeNamespace("Microsoft.AspNetCore.Components"),
             TypeNameIdentifier("Bind"));
 
@@ -365,6 +366,8 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
                 TagHelperKind.Bind, RuntimeKind.None, name, ComponentsApi.AssemblyName,
                 out var builder);
 
+            builder.TypeName = typeName;
+
             builder.CaseSensitive = true;
             builder.ClassifyAttributesOnly = true;
             builder.SetDocumentation(
@@ -394,7 +397,6 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
                 metadata.Add(ComponentMetadata.Bind.TypeAttribute, typeAttribute);
             }
 
-            metadata.Add(TypeName(typeName));
             metadata.Add(TypeNamespace(typeNamespace));
             metadata.Add(TypeNameIdentifier(typeNameIdentifier));
 
@@ -603,6 +605,7 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
                     TagHelperKind.Bind, RuntimeKind.None, tagHelper.Name, tagHelper.AssemblyName,
                     out var builder);
 
+                builder.TypeName = tagHelper.TypeName;
                 builder.DisplayName = tagHelper.DisplayName;
                 builder.CaseSensitive = true;
                 builder.SetDocumentation(
@@ -621,7 +624,6 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
                     metadata.Add(ComponentMetadata.Bind.ExpressionAttribute, expressionAttribute.Name);
                 }
 
-                metadata.Add(TypeName(tagHelper.GetTypeName()));
                 metadata.Add(TypeNamespace(tagHelper.GetTypeNamespace()));
                 metadata.Add(TypeNameIdentifier(tagHelper.GetTypeNameIdentifier()));
 

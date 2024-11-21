@@ -586,7 +586,7 @@ public class TestTagHelperDescriptors
         IEnumerable<Action<TagMatchingRuleDescriptorBuilder>> ruleBuilders = null)
     {
         var builder = TagHelperDescriptorBuilder.Create(typeName, assemblyName);
-        builder.Metadata(TypeName(typeName));
+        builder.TypeName = typeName;
 
         if (attributes != null)
         {

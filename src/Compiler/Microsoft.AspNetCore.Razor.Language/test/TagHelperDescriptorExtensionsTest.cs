@@ -4,7 +4,6 @@
 #nullable disable
 
 using Xunit;
-using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
@@ -15,10 +14,10 @@ public class TagHelperDescriptorExtensionsTest
     {
         // Arrange
         var expectedTypeName = "TestTagHelper";
-        var descriptor = TagHelperDescriptorBuilder.Create(expectedTypeName, "TestAssembly").Metadata(TypeName(expectedTypeName)).Build();
+        var descriptor = TagHelperDescriptorBuilder.Create(expectedTypeName, "TestAssembly").TypeName(expectedTypeName).Build();
 
         // Act
-        var typeName = descriptor.GetTypeName();
+        var typeName = descriptor.TypeName;
 
         // Assert
         Assert.Equal(expectedTypeName, typeName);
@@ -31,7 +30,7 @@ public class TagHelperDescriptorExtensionsTest
         var descriptor = TagHelperDescriptorBuilder.Create("Test", "TestAssembly").Build();
 
         // Act
-        var typeName = descriptor.GetTypeName();
+        var typeName = descriptor.TypeName;
 
         // Assert
         Assert.Null(typeName);

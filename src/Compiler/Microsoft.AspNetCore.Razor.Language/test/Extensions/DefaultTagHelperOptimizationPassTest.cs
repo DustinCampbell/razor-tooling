@@ -25,7 +25,7 @@ public class DefaultTagHelperOptimizationPassTest
         var tagHelpers = new[]
         {
             TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly")
-                .Metadata(TypeName("TestTagHelper"))
+                .TypeName("TestTagHelper")
                 .BoundAttributeDescriptor(attribute => attribute
                     .Name("Foo")
                     .TypeName("System.Int32")

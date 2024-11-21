@@ -49,6 +49,7 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
     public RuntimeKind RuntimeKind => _runtimeKind;
     public string Name => _name.AssumeNotNull();
     public string AssemblyName => _assemblyName.AssumeNotNull();
+    public string? TypeName { get; set; }
     public string? DisplayName { get; set; }
     public string? TagOutputHint { get; set; }
     public bool CaseSensitive { get; set; }
@@ -133,6 +134,7 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
             RuntimeKind,
             Name,
             AssemblyName,
+            TypeName,
             GetDisplayName(),
             flags,
             _documentationObject,
@@ -167,14 +169,5 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
     }
 
     internal string GetDisplayName()
-    {
-        return DisplayName ?? GetTypeName() ?? Name;
-
-        string? GetTypeName()
-        {
-            return TryGetMetadataValue(TagHelperMetadata.Common.TypeName, out var value)
-                ? value
-                : null;
-        }
-    }
+        => DisplayName ?? TypeName ?? Name;
 }

@@ -144,7 +144,7 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
             Component = tagHelper,
             Source = node.Source,
             TagName = node.TagName,
-            TypeName = tagHelper.GetTypeName(),
+            TypeName = tagHelper.TypeName,
         };
 
         for (var i = 0; i < node.Diagnostics.Count; i++)

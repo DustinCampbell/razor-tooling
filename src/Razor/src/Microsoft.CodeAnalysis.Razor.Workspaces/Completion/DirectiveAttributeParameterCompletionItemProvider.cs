@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.PooledObjects;
 using Microsoft.CodeAnalysis.Razor.Tooltip;
@@ -104,7 +105,7 @@ internal class DirectiveAttributeParameterCompletionItemProvider : DirectiveAttr
                             attributeCompletions[parameterDescriptor.Name] = attributeDescriptionInfos;
                         }
 
-                        var tagHelperTypeName = descriptor.GetTypeName();
+                        var tagHelperTypeName = descriptor.TypeName.AssumeNotNull();
                         var descriptionInfo = BoundAttributeDescriptionInfo.From(parameterDescriptor, tagHelperTypeName);
                         attributeDescriptionInfos.Add(descriptionInfo);
                     }

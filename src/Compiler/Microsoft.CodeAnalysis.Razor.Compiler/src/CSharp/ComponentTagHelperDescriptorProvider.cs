@@ -99,9 +99,10 @@ internal sealed class ComponentTagHelperDescriptorProvider : TagHelperDescriptor
             using var _ = TagHelperDescriptorBuilder.GetPooledInstance(
                 TagHelperKind.Component, RuntimeKind.IComponent, typeName, assemblyName, out var builder);
 
+            builder.TypeName = typeName;
+
             using var metadata = new MetadataBuilder();
 
-            metadata.Add(TypeName(typeName));
             metadata.Add(TypeNamespace(type.ContainingNamespace.ToDisplayString(SymbolExtensions.FullNameTypeDisplayFormat)));
             metadata.Add(TypeNameIdentifier(type.Name));
 
@@ -493,7 +494,7 @@ internal sealed class ComponentTagHelperDescriptorProvider : TagHelperDescriptor
 
         private static TagHelperDescriptor CreateChildContentDescriptor(TagHelperDescriptor component, BoundAttributeDescriptor attribute)
         {
-            var typeName = component.GetTypeName() + "." + attribute.Name;
+            var typeName = component.TypeName + "." + attribute.Name;
             var assemblyName = component.AssemblyName;
 
             // RuntimeKind.None opts out this 'component' tag helper for any processing
@@ -503,9 +504,10 @@ internal sealed class ComponentTagHelperDescriptorProvider : TagHelperDescriptor
                 TagHelperKind.ChildContent, RuntimeKind.None, typeName, assemblyName,
                 out var builder);
 
+            builder.TypeName = typeName;
+
             using var metadata = new MetadataBuilder();
 
-            metadata.Add(TypeName(typeName));
             metadata.Add(TypeNamespace(component.GetTypeNamespace()));
             metadata.Add(TypeNameIdentifier(component.GetTypeNameIdentifier()));
 

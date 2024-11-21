@@ -108,6 +108,7 @@ public class TagHelperFactsServiceTest(ITestOutputHelper testOutput) : TagHelper
     {
         // Arrange
         var tagHelper = TagHelperDescriptorBuilder.Create("WithBoundAttribute", "TestAssembly");
+        tagHelper.TypeName = "WithBoundAttribute";
         tagHelper.TagMatchingRule(rule => rule.TagName = "test");
         tagHelper.BindAttribute(attribute =>
         {
@@ -115,7 +116,6 @@ public class TagHelperFactsServiceTest(ITestOutputHelper testOutput) : TagHelper
             attribute.SetMetadata(PropertyName("Bound"));
             attribute.TypeName = typeof(bool).FullName;
         });
-        tagHelper.SetMetadata(TypeName("WithBoundAttribute"));
         var codeDocument = CreateCodeDocument("""
             @addTagHelper *, TestAssembly
             <test bound='true' />
@@ -141,6 +141,7 @@ public class TagHelperFactsServiceTest(ITestOutputHelper testOutput) : TagHelper
     {
         // Arrange
         var tagHelper = TagHelperDescriptorBuilder.Create("WithBoundAttribute", "TestAssembly");
+        tagHelper.TypeName = "WithBoundAttribute";
         tagHelper.TagMatchingRule(rule => rule.TagName = "test");
         tagHelper.BindAttribute(attribute =>
         {
@@ -148,7 +149,6 @@ public class TagHelperFactsServiceTest(ITestOutputHelper testOutput) : TagHelper
             attribute.SetMetadata(PropertyName("Bound"));
             attribute.TypeName = typeof(bool).FullName;
         });
-        tagHelper.SetMetadata(TypeName("WithBoundAttribute"));
         var codeDocument = CreateCodeDocument("""
             @addTagHelper *, TestAssembly
             <test bound />

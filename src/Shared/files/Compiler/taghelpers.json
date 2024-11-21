@@ -1,191 +1,176 @@
 [
   {
     "__Checksum": {
-      "Data1": -535492888912281645,
-      "Data2": 367007129014423620,
-      "Data3": 7723356496830790637,
-      "Data4": 8354045214992460496
+      "Data1": 6961339244718621094,
+      "Data2": 5084089922013477617,
+      "Data3": -7454563476548914797,
+      "Data4": 2269436086003914722
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "BlazorServer_31.Pages.FetchData",
     "AssemblyName": "BlazorServer_31",
+    "TypeName": "BlazorServer_31.Pages.FetchData",
     "DisplayName": "BlazorServer_31.Pages.FetchData",
     "Flags": 1,
     "TagMatchingRules": [
       {
         "TagName": "FetchData"
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "BlazorServer_31.Pages.FetchData"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": 7989248538654751143,
-      "Data2": 3209177138149036851,
-      "Data3": -688617223472893159,
-      "Data4": 3004060139468465865
+      "Data1": -5932180009977769777,
+      "Data2": 7986102140447979569,
+      "Data3": 5100693830420020693,
+      "Data4": 9097543566618345756
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "BlazorServer_31.Pages.FetchData",
     "AssemblyName": "BlazorServer_31",
+    "TypeName": "BlazorServer_31.Pages.FetchData",
     "DisplayName": "BlazorServer_31.Pages.FetchData",
     "Flags": 2,
     "TagMatchingRules": [
       {
         "TagName": "BlazorServer_31.Pages.FetchData"
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "BlazorServer_31.Pages.FetchData"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": 4526102427015627519,
-      "Data2": 8305989267508804096,
-      "Data3": 4576754429455296173,
-      "Data4": 7678284952169268269
+      "Data1": 8629805245740856229,
+      "Data2": 8982220471713113041,
+      "Data3": -4939591204302940986,
+      "Data4": 7141831065437212540
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "BlazorServer_31.Pages.Component1",
     "AssemblyName": "BlazorServer_31",
+    "TypeName": "BlazorServer_31.Pages.Component1",
     "DisplayName": "BlazorServer_31.Pages.Component1",
     "Flags": 1,
     "TagMatchingRules": [
       {
         "TagName": "Component1"
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "BlazorServer_31.Pages.Component1"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": 8077770576450995043,
-      "Data2": 4062774939318448183,
-      "Data3": -8187717188218677901,
-      "Data4": 1824540535247734396
+      "Data1": 4751257066499550914,
+      "Data2": 5146345794100701907,
+      "Data3": -2937555350841442155,
+      "Data4": 4729085290553556657
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "BlazorServer_31.Pages.Component1",
     "AssemblyName": "BlazorServer_31",
+    "TypeName": "BlazorServer_31.Pages.Component1",
     "DisplayName": "BlazorServer_31.Pages.Component1",
     "Flags": 2,
     "TagMatchingRules": [
       {
         "TagName": "BlazorServer_31.Pages.Component1"
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "BlazorServer_31.Pages.Component1"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": 5120998802975660186,
-      "Data2": 8858191406971634672,
-      "Data3": 7953098642666638773,
-      "Data4": -6547312032864894814
+      "Data1": 5060090760442683205,
+      "Data2": -5718139697132308986,
+      "Data3": 8419959162991574721,
+      "Data4": 4275855757823392349
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "BlazorServer_31.Pages.Index",
     "AssemblyName": "BlazorServer_31",
+    "TypeName": "BlazorServer_31.Pages.Index",
     "DisplayName": "BlazorServer_31.Pages.Index",
     "Flags": 1,
     "TagMatchingRules": [
       {
         "TagName": "Index"
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "BlazorServer_31.Pages.Index"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -2315949274560546832,
-      "Data2": -5392297616914639136,
-      "Data3": 5560849235618601919,
-      "Data4": -7625722031056982677
+      "Data1": 2979438418222910351,
+      "Data2": -4192200372337800790,
+      "Data3": 84543939421819794,
+      "Data4": -2800823693876294419
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "BlazorServer_31.Pages.Index",
     "AssemblyName": "BlazorServer_31",
+    "TypeName": "BlazorServer_31.Pages.Index",
     "DisplayName": "BlazorServer_31.Pages.Index",
     "Flags": 2,
     "TagMatchingRules": [
       {
         "TagName": "BlazorServer_31.Pages.Index"
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "BlazorServer_31.Pages.Index"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": 1568529132643306503,
-      "Data2": -3153123999288801066,
-      "Data3": 180522839097946649,
-      "Data4": 583318714810184530
+      "Data1": 2617574708605500592,
+      "Data2": 2909438922472138471,
+      "Data3": -4632891912709164895,
+      "Data4": 9155757987371710623
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "BlazorServer_31.Pages.Component",
     "AssemblyName": "BlazorServer_31",
+    "TypeName": "BlazorServer_31.Pages.Component",
     "DisplayName": "BlazorServer_31.Pages.Component",
     "Flags": 1,
     "TagMatchingRules": [
       {
         "TagName": "Component"
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "BlazorServer_31.Pages.Component"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -8051718047306407648,
-      "Data2": -8694874972196546546,
-      "Data3": -1504746235130085887,
-      "Data4": -1040299538243057271
+      "Data1": 4287010167379074659,
+      "Data2": 3613275667744080047,
+      "Data3": -4314875794740432258,
+      "Data4": -6160115967090081967
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "BlazorServer_31.Pages.Component",
     "AssemblyName": "BlazorServer_31",
+    "TypeName": "BlazorServer_31.Pages.Component",
     "DisplayName": "BlazorServer_31.Pages.Component",
     "Flags": 2,
     "TagMatchingRules": [
       {
         "TagName": "BlazorServer_31.Pages.Component"
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "BlazorServer_31.Pages.Component"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": 8338414525868236116,
-      "Data2": -4679193388811717891,
-      "Data3": -1684230094759969539,
-      "Data4": 3640465327315157717
+      "Data1": 7824439112723375699,
+      "Data2": 773267987732518122,
+      "Data3": 4948720671152544045,
+      "Data4": 6805038495994213708
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "BlazorServer_31.Pages.Counter",
     "AssemblyName": "BlazorServer_31",
+    "TypeName": "BlazorServer_31.Pages.Counter",
     "DisplayName": "BlazorServer_31.Pages.Counter",
     "Flags": 1,
     "TagMatchingRules": [
@@ -232,22 +217,20 @@
           "Common.PropertyName": "MoreParams"
         }
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "BlazorServer_31.Pages.Counter"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -6735195764711994566,
-      "Data2": 630952899344057761,
-      "Data3": -2885158977008684637,
-      "Data4": 7146347683885878233
+      "Data1": 7759603450299760962,
+      "Data2": -2067264897135061247,
+      "Data3": -5568246476655453611,
+      "Data4": -6398739964430280042
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "BlazorServer_31.Pages.Counter",
     "AssemblyName": "BlazorServer_31",
+    "TypeName": "BlazorServer_31.Pages.Counter",
     "DisplayName": "BlazorServer_31.Pages.Counter",
     "Flags": 2,
     "TagMatchingRules": [
@@ -294,154 +277,140 @@
           "Common.PropertyName": "MoreParams"
         }
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "BlazorServer_31.Pages.Counter"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -5431163726668035659,
-      "Data2": 3174160685855281547,
-      "Data3": 6902318698700236472,
-      "Data4": 7951059991286422506
+      "Data1": -37559394136671995,
+      "Data2": -2382618951033830967,
+      "Data3": 3985761656263802580,
+      "Data4": -6645798279597160707
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "BlazorServer_31.Pages.Error",
     "AssemblyName": "BlazorServer_31",
+    "TypeName": "BlazorServer_31.Pages.Error",
     "DisplayName": "BlazorServer_31.Pages.Error",
     "Flags": 1,
     "TagMatchingRules": [
       {
         "TagName": "Error"
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "BlazorServer_31.Pages.Error"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -8662994144119563444,
-      "Data2": 2575143304590497058,
-      "Data3": -9098973800370492272,
-      "Data4": -903382716454307958
+      "Data1": -6974590474928154755,
+      "Data2": 2505918902465874325,
+      "Data3": -4314986895792476437,
+      "Data4": -7412834131342538888
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "BlazorServer_31.Pages.Error",
     "AssemblyName": "BlazorServer_31",
+    "TypeName": "BlazorServer_31.Pages.Error",
     "DisplayName": "BlazorServer_31.Pages.Error",
     "Flags": 2,
     "TagMatchingRules": [
       {
         "TagName": "BlazorServer_31.Pages.Error"
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "BlazorServer_31.Pages.Error"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": 6641488835086731348,
-      "Data2": 6934016612925747224,
-      "Data3": 2750222733495409029,
-      "Data4": 7007321693247766818
+      "Data1": 4956486985845399702,
+      "Data2": -8843747782689124561,
+      "Data3": 6827402107758493567,
+      "Data4": 3903557907969613357
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "BlazorServer_31.Pages.Component2",
     "AssemblyName": "BlazorServer_31",
+    "TypeName": "BlazorServer_31.Pages.Component2",
     "DisplayName": "BlazorServer_31.Pages.Component2",
     "Flags": 1,
     "TagMatchingRules": [
       {
         "TagName": "Component2"
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "BlazorServer_31.Pages.Component2"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -5079820181120348888,
-      "Data2": -5386990489755664356,
-      "Data3": 7020658080764796416,
-      "Data4": 3171510462041473598
+      "Data1": 7920336705929517389,
+      "Data2": -3663539470894862756,
+      "Data3": 4205812029107705600,
+      "Data4": 4062736771602961622
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "BlazorServer_31.Pages.Component2",
     "AssemblyName": "BlazorServer_31",
+    "TypeName": "BlazorServer_31.Pages.Component2",
     "DisplayName": "BlazorServer_31.Pages.Component2",
     "Flags": 2,
     "TagMatchingRules": [
       {
         "TagName": "BlazorServer_31.Pages.Component2"
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "BlazorServer_31.Pages.Component2"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": 59848828673638330,
-      "Data2": -3238846347776472463,
-      "Data3": -822190396263734925,
-      "Data4": -3417529277757291348
+      "Data1": 8041325981507608426,
+      "Data2": -349827288068167774,
+      "Data3": 3386396604444969508,
+      "Data4": -4780023033655881923
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "BlazorServer_31.Shared.NavMenu",
     "AssemblyName": "BlazorServer_31",
+    "TypeName": "BlazorServer_31.Shared.NavMenu",
     "DisplayName": "BlazorServer_31.Shared.NavMenu",
     "Flags": 1,
     "TagMatchingRules": [
       {
         "TagName": "NavMenu"
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "BlazorServer_31.Shared.NavMenu"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -4600214778210984877,
-      "Data2": 734628607263574430,
-      "Data3": -6865454240429979078,
-      "Data4": -4194118582661840913
+      "Data1": 6925431622404798980,
+      "Data2": 7227251279970105555,
+      "Data3": -7684623334015882206,
+      "Data4": -7160620222664874806
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "BlazorServer_31.Shared.NavMenu",
     "AssemblyName": "BlazorServer_31",
+    "TypeName": "BlazorServer_31.Shared.NavMenu",
     "DisplayName": "BlazorServer_31.Shared.NavMenu",
     "Flags": 2,
     "TagMatchingRules": [
       {
         "TagName": "BlazorServer_31.Shared.NavMenu"
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "BlazorServer_31.Shared.NavMenu"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -1369489708467774088,
-      "Data2": -2594176141861371967,
-      "Data3": 2180967933404112329,
-      "Data4": -5253200697232051630
+      "Data1": 8334548791701789994,
+      "Data2": -3071589697279679179,
+      "Data3": 2559791233537427929,
+      "Data4": -584469880152258018
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "BlazorServer_31.Shared.MainLayout",
     "AssemblyName": "BlazorServer_31",
+    "TypeName": "BlazorServer_31.Shared.MainLayout",
     "DisplayName": "BlazorServer_31.Shared.MainLayout",
     "Flags": 1,
     "TagMatchingRules": [
@@ -461,22 +430,20 @@
           "Components.ChildContent": "True"
         }
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "BlazorServer_31.Shared.MainLayout"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -7567221242242824274,
-      "Data2": -649170888410073461,
-      "Data3": -5832288508930553410,
-      "Data4": -801545285897785425
+      "Data1": -3010603282379494517,
+      "Data2": -4433357141489699500,
+      "Data3": 6091176394910762092,
+      "Data4": 4820552204700428190
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "BlazorServer_31.Shared.MainLayout",
     "AssemblyName": "BlazorServer_31",
+    "TypeName": "BlazorServer_31.Shared.MainLayout",
     "DisplayName": "BlazorServer_31.Shared.MainLayout",
     "Flags": 2,
     "TagMatchingRules": [
@@ -496,22 +463,20 @@
           "Components.ChildContent": "True"
         }
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "BlazorServer_31.Shared.MainLayout"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -3736472072897392271,
-      "Data2": 1164758482205478934,
-      "Data3": 5229770327857301391,
-      "Data4": 6752732194133377405
+      "Data1": -4448569494984132074,
+      "Data2": -2489569846456366520,
+      "Data3": 3288477011402555238,
+      "Data4": -7900614547350431674
     },
     "Kind": 2,
     "RuntimeKind": 2,
     "Name": "BlazorServer_31.Shared.MainLayout.Body",
     "AssemblyName": "BlazorServer_31",
+    "TypeName": "BlazorServer_31.Shared.MainLayout.Body",
     "DisplayName": "BlazorServer_31.Shared.MainLayout.Body",
     "Flags": 1,
     "Documentation": "\n<summary>\nGetsthecontenttoberenderedinsidethelayout.\n</summary>\n",
@@ -520,22 +485,20 @@
         "TagName": "Body",
         "ParentTag": "MainLayout"
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "BlazorServer_31.Shared.MainLayout.Body"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": 8057541586047076751,
-      "Data2": 3485141221201655198,
-      "Data3": -4533903096960488401,
-      "Data4": -3581544357064828480
+      "Data1": 4808974369263827293,
+      "Data2": 1435933229935930350,
+      "Data3": 1429357976233984657,
+      "Data4": -317828109393611886
     },
     "Kind": 2,
     "RuntimeKind": 2,
     "Name": "BlazorServer_31.Shared.MainLayout.Body",
     "AssemblyName": "BlazorServer_31",
+    "TypeName": "BlazorServer_31.Shared.MainLayout.Body",
     "DisplayName": "BlazorServer_31.Shared.MainLayout.Body",
     "Flags": 2,
     "Documentation": "\n<summary>\nGetsthecontenttoberenderedinsidethelayout.\n</summary>\n",
@@ -544,66 +507,60 @@
         "TagName": "Body",
         "ParentTag": "BlazorServer_31.Shared.MainLayout"
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "BlazorServer_31.Shared.MainLayout.Body"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -73365866855801508,
-      "Data2": -8811549249914970079,
-      "Data3": 1544159987012252830,
-      "Data4": 1097827631559720294
+      "Data1": 6538147136140752845,
+      "Data2": -5990288411409422833,
+      "Data3": 1107516899532090268,
+      "Data4": 7486484579015560392
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "BlazorServer_31.App",
     "AssemblyName": "BlazorServer_31",
+    "TypeName": "BlazorServer_31.App",
     "DisplayName": "BlazorServer_31.App",
     "Flags": 1,
     "TagMatchingRules": [
       {
         "TagName": "App"
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "BlazorServer_31.App"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -7313582664998862309,
-      "Data2": -5279108291437399839,
-      "Data3": -2494622827056890476,
-      "Data4": -6343736473183491622
+      "Data1": -4318513088318173462,
+      "Data2": 6680423891394802531,
+      "Data3": 371945746715147879,
+      "Data4": 7053010453897606335
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "BlazorServer_31.App",
     "AssemblyName": "BlazorServer_31",
+    "TypeName": "BlazorServer_31.App",
     "DisplayName": "BlazorServer_31.App",
     "Flags": 2,
     "TagMatchingRules": [
       {
         "TagName": "BlazorServer_31.App"
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "BlazorServer_31.App"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": 1796588000278705246,
-      "Data2": 4396058210608777187,
-      "Data3": -3591630852423336181,
-      "Data4": 5746962700123154539
+      "Data1": 8918673935801864310,
+      "Data2": -1748957452389760068,
+      "Data3": -5872953131789786045,
+      "Data4": -8251785357463743298
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "Microsoft.AspNetCore.Components.CascadingValue<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components",
+    "TypeName": "Microsoft.AspNetCore.Components.CascadingValue<TValue>",
     "DisplayName": "Microsoft.AspNetCore.Components.CascadingValue<TValue>",
     "Flags": 1,
     "Documentation": "\n<summary>\nAcomponentthatprovidesacascadingvaluetoalldescendantcomponents.\n</summary>\n",
@@ -670,21 +627,21 @@
       }
     ],
     "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.CascadingValue<TValue>",
       "Components.GenericTyped": "True"
     }
   },
   {
     "__Checksum": {
-      "Data1": -4028133551407623983,
-      "Data2": -419755585316878450,
-      "Data3": -5525570306827918928,
-      "Data4": 7702948347289065570
+      "Data1": 2795094296967012644,
+      "Data2": 5049525642795036495,
+      "Data3": -1075316768139702968,
+      "Data4": -1874394211313336878
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "Microsoft.AspNetCore.Components.CascadingValue<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components",
+    "TypeName": "Microsoft.AspNetCore.Components.CascadingValue<TValue>",
     "DisplayName": "Microsoft.AspNetCore.Components.CascadingValue<TValue>",
     "Flags": 2,
     "Documentation": "\n<summary>\nAcomponentthatprovidesacascadingvaluetoalldescendantcomponents.\n</summary>\n",
@@ -751,21 +708,21 @@
       }
     ],
     "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.CascadingValue<TValue>",
       "Components.GenericTyped": "True"
     }
   },
   {
     "__Checksum": {
-      "Data1": -948672433886783759,
-      "Data2": 1938467684122524372,
-      "Data3": 215059736044703952,
-      "Data4": -7582789642916896275
+      "Data1": 5083558979897567345,
+      "Data2": 3959386617991257010,
+      "Data3": -5417891271424570448,
+      "Data4": -8491640668969738600
     },
     "Kind": 2,
     "RuntimeKind": 2,
     "Name": "Microsoft.AspNetCore.Components.CascadingValue<TValue>.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components",
+    "TypeName": "Microsoft.AspNetCore.Components.CascadingValue<TValue>.ChildContent",
     "DisplayName": "Microsoft.AspNetCore.Components.CascadingValue<TValue>.ChildContent",
     "Flags": 1,
     "Documentation": "\n<summary>\nThecontenttowhichthevalueshouldbeprovided.\n</summary>\n",
@@ -774,22 +731,20 @@
         "TagName": "ChildContent",
         "ParentTag": "CascadingValue"
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.CascadingValue<TValue>.ChildContent"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -1559674217309526542,
-      "Data2": 3528224289537711046,
-      "Data3": -5504514437302691193,
-      "Data4": -8899852464525329126
+      "Data1": 8974990004896217477,
+      "Data2": -4522507275664175693,
+      "Data3": 6120509333730468411,
+      "Data4": 883222551740742989
     },
     "Kind": 2,
     "RuntimeKind": 2,
     "Name": "Microsoft.AspNetCore.Components.CascadingValue<TValue>.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components",
+    "TypeName": "Microsoft.AspNetCore.Components.CascadingValue<TValue>.ChildContent",
     "DisplayName": "Microsoft.AspNetCore.Components.CascadingValue<TValue>.ChildContent",
     "Flags": 2,
     "Documentation": "\n<summary>\nThecontenttowhichthevalueshouldbeprovided.\n</summary>\n",
@@ -798,22 +753,20 @@
         "TagName": "ChildContent",
         "ParentTag": "Microsoft.AspNetCore.Components.CascadingValue"
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.CascadingValue<TValue>.ChildContent"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": 1569749290904656756,
-      "Data2": 7264060406775209072,
-      "Data3": 5914989124799750757,
-      "Data4": 5647323358701396249
+      "Data1": -5144444475746869231,
+      "Data2": -224075717336028867,
+      "Data3": -7186551894198265478,
+      "Data4": 1798731974232781450
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "Microsoft.AspNetCore.Components.LayoutView",
     "AssemblyName": "Microsoft.AspNetCore.Components",
+    "TypeName": "Microsoft.AspNetCore.Components.LayoutView",
     "DisplayName": "Microsoft.AspNetCore.Components.LayoutView",
     "Flags": 1,
     "Documentation": "\n<summary>\nDisplaysthespecifiedcontentinsidethespecifiedlayoutandanyfurther\nnestedlayouts.\n</summary>\n",
@@ -844,22 +797,20 @@
           "Common.PropertyName": "Layout"
         }
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.LayoutView"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -1276632734167127829,
-      "Data2": 6036772771825498705,
-      "Data3": 5277243583472565478,
-      "Data4": -5394587295024597006
+      "Data1": -6141189040675975874,
+      "Data2": -5476555076998334268,
+      "Data3": 616724429567750761,
+      "Data4": -8437431443551821500
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "Microsoft.AspNetCore.Components.LayoutView",
     "AssemblyName": "Microsoft.AspNetCore.Components",
+    "TypeName": "Microsoft.AspNetCore.Components.LayoutView",
     "DisplayName": "Microsoft.AspNetCore.Components.LayoutView",
     "Flags": 2,
     "Documentation": "\n<summary>\nDisplaysthespecifiedcontentinsidethespecifiedlayoutandanyfurther\nnestedlayouts.\n</summary>\n",
@@ -890,22 +841,20 @@
           "Common.PropertyName": "Layout"
         }
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.LayoutView"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": 6497033428982429293,
-      "Data2": -8673435295665157317,
-      "Data3": 2986656589072035220,
-      "Data4": -8281965804548942805
+      "Data1": 364916560818131608,
+      "Data2": 8178463273186645691,
+      "Data3": -7166178420618676474,
+      "Data4": -5375476215039823031
     },
     "Kind": 2,
     "RuntimeKind": 2,
     "Name": "Microsoft.AspNetCore.Components.LayoutView.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components",
+    "TypeName": "Microsoft.AspNetCore.Components.LayoutView.ChildContent",
     "DisplayName": "Microsoft.AspNetCore.Components.LayoutView.ChildContent",
     "Flags": 1,
     "Documentation": "\n<summary>\nGetsorsetsthecontenttodisplay.\n</summary>\n",
@@ -914,22 +863,20 @@
         "TagName": "ChildContent",
         "ParentTag": "LayoutView"
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.LayoutView.ChildContent"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -2635531448978545809,
-      "Data2": -132168417368162371,
-      "Data3": -407682221532894989,
-      "Data4": 7105157985956225677
+      "Data1": 3763926081602232969,
+      "Data2": 6372151586940434277,
+      "Data3": 5153699135370215831,
+      "Data4": -7494473667436687324
     },
     "Kind": 2,
     "RuntimeKind": 2,
     "Name": "Microsoft.AspNetCore.Components.LayoutView.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components",
+    "TypeName": "Microsoft.AspNetCore.Components.LayoutView.ChildContent",
     "DisplayName": "Microsoft.AspNetCore.Components.LayoutView.ChildContent",
     "Flags": 2,
     "Documentation": "\n<summary>\nGetsorsetsthecontenttodisplay.\n</summary>\n",
@@ -938,22 +885,20 @@
         "TagName": "ChildContent",
         "ParentTag": "Microsoft.AspNetCore.Components.LayoutView"
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.LayoutView.ChildContent"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": 1628936503959011321,
-      "Data2": -7268516748696560808,
-      "Data3": 3407750864312332290,
-      "Data4": 5994511082107790982
+      "Data1": -7882085406286334126,
+      "Data2": -6684194843920606034,
+      "Data3": 8327577734910855850,
+      "Data4": -2597962020430928950
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "Microsoft.AspNetCore.Components.RouteView",
     "AssemblyName": "Microsoft.AspNetCore.Components",
+    "TypeName": "Microsoft.AspNetCore.Components.RouteView",
     "DisplayName": "Microsoft.AspNetCore.Components.RouteView",
     "Flags": 1,
     "Documentation": "\n<summary>\nDisplaysthespecifiedpagecomponent,renderingitinsideitslayout\nandanyfurthernestedlayouts.\n</summary>\n",
@@ -983,22 +928,20 @@
           "Common.PropertyName": "RouteData"
         }
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.RouteView"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -4390838814060871707,
-      "Data2": 892477733326303870,
-      "Data3": -2110474713246928659,
-      "Data4": 5616871155106630482
+      "Data1": 1539406112038900656,
+      "Data2": -1370538197403243215,
+      "Data3": 2812405935711381879,
+      "Data4": -2296375567812579091
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "Microsoft.AspNetCore.Components.RouteView",
     "AssemblyName": "Microsoft.AspNetCore.Components",
+    "TypeName": "Microsoft.AspNetCore.Components.RouteView",
     "DisplayName": "Microsoft.AspNetCore.Components.RouteView",
     "Flags": 2,
     "Documentation": "\n<summary>\nDisplaysthespecifiedpagecomponent,renderingitinsideitslayout\nandanyfurthernestedlayouts.\n</summary>\n",
@@ -1028,22 +971,20 @@
           "Common.PropertyName": "RouteData"
         }
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.RouteView"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -720842341756650732,
-      "Data2": 1157935287497746548,
-      "Data3": 8402621774957368045,
-      "Data4": 8040859439294639028
+      "Data1": 6886408249792014810,
+      "Data2": -1689108028514860297,
+      "Data3": 5240022648805885965,
+      "Data4": 13173352694407954
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "Microsoft.AspNetCore.Components.Routing.Router",
     "AssemblyName": "Microsoft.AspNetCore.Components",
+    "TypeName": "Microsoft.AspNetCore.Components.Routing.Router",
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.Router",
     "Flags": 1,
     "Documentation": "\n<summary>\nAcomponentthatsuppliesroutedatacorrespondingtothecurrentnavigationstate.\n</summary>\n",
@@ -1107,22 +1048,20 @@
           "Components.ChildContentParameterName": "True"
         }
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Routing.Router"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -2871978292688433881,
-      "Data2": 4687528595370045610,
-      "Data3": -4986276009028236330,
-      "Data4": -3956104969614015936
+      "Data1": 135722307849504104,
+      "Data2": 2369261660347100669,
+      "Data3": -6561627935087218561,
+      "Data4": -698031159542399
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "Microsoft.AspNetCore.Components.Routing.Router",
     "AssemblyName": "Microsoft.AspNetCore.Components",
+    "TypeName": "Microsoft.AspNetCore.Components.Routing.Router",
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.Router",
     "Flags": 2,
     "Documentation": "\n<summary>\nAcomponentthatsuppliesroutedatacorrespondingtothecurrentnavigationstate.\n</summary>\n",
@@ -1186,22 +1125,20 @@
           "Components.ChildContentParameterName": "True"
         }
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Routing.Router"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -8278156124118597715,
-      "Data2": 7199235619134695269,
-      "Data3": 6655458308876139816,
-      "Data4": -5364717336093880623
+      "Data1": -4814240221140765639,
+      "Data2": 620990803050051850,
+      "Data3": -5012107686140910927,
+      "Data4": -4738408746902812872
     },
     "Kind": 2,
     "RuntimeKind": 2,
     "Name": "Microsoft.AspNetCore.Components.Routing.Router.Found",
     "AssemblyName": "Microsoft.AspNetCore.Components",
+    "TypeName": "Microsoft.AspNetCore.Components.Routing.Router.Found",
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.Router.Found",
     "Flags": 1,
     "Documentation": "\n<summary>\nGetsorsetsthecontenttodisplaywhenamatchisfoundfortherequestedroute.\n</summary>\n",
@@ -1224,22 +1161,20 @@
           "Components.ChildContentParameterName": "True"
         }
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Routing.Router.Found"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": 4893210856402338459,
-      "Data2": 1348029906767133637,
-      "Data3": -510301432633076895,
-      "Data4": 2382629731178992152
+      "Data1": 2885404131714977180,
+      "Data2": 2909665637985595089,
+      "Data3": -7060257322441906358,
+      "Data4": 4839495062915552215
     },
     "Kind": 2,
     "RuntimeKind": 2,
     "Name": "Microsoft.AspNetCore.Components.Routing.Router.Found",
     "AssemblyName": "Microsoft.AspNetCore.Components",
+    "TypeName": "Microsoft.AspNetCore.Components.Routing.Router.Found",
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.Router.Found",
     "Flags": 2,
     "Documentation": "\n<summary>\nGetsorsetsthecontenttodisplaywhenamatchisfoundfortherequestedroute.\n</summary>\n",
@@ -1262,22 +1197,20 @@
           "Components.ChildContentParameterName": "True"
         }
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Routing.Router.Found"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": 1875186526867890020,
-      "Data2": 6733362113679572329,
-      "Data3": -2724389060984302729,
-      "Data4": 4933363927138556821
+      "Data1": 3960653731046312412,
+      "Data2": 4017381338289097816,
+      "Data3": 2980679508778556425,
+      "Data4": 8562104903571321384
     },
     "Kind": 2,
     "RuntimeKind": 2,
     "Name": "Microsoft.AspNetCore.Components.Routing.Router.NotFound",
     "AssemblyName": "Microsoft.AspNetCore.Components",
+    "TypeName": "Microsoft.AspNetCore.Components.Routing.Router.NotFound",
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.Router.NotFound",
     "Flags": 1,
     "Documentation": "\n<summary>\nGetsorsetsthecontenttodisplaywhennomatchisfoundfortherequestedroute.\n</summary>\n",
@@ -1286,22 +1219,20 @@
         "TagName": "NotFound",
         "ParentTag": "Router"
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Routing.Router.NotFound"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": 2946741529766381383,
-      "Data2": 4829300740883584628,
-      "Data3": -2010669681989905552,
-      "Data4": 832527541253637674
+      "Data1": -625502185870344172,
+      "Data2": -7678386575791637260,
+      "Data3": -1018644395974993911,
+      "Data4": -5513211837547549618
     },
     "Kind": 2,
     "RuntimeKind": 2,
     "Name": "Microsoft.AspNetCore.Components.Routing.Router.NotFound",
     "AssemblyName": "Microsoft.AspNetCore.Components",
+    "TypeName": "Microsoft.AspNetCore.Components.Routing.Router.NotFound",
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.Router.NotFound",
     "Flags": 2,
     "Documentation": "\n<summary>\nGetsorsetsthecontenttodisplaywhennomatchisfoundfortherequestedroute.\n</summary>\n",
@@ -1310,22 +1241,20 @@
         "TagName": "NotFound",
         "ParentTag": "Microsoft.AspNetCore.Components.Routing.Router"
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Routing.Router.NotFound"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -3322102189381222125,
-      "Data2": 7081224344405098013,
-      "Data3": -8958888655300560914,
-      "Data4": -6819670177978815558
+      "Data1": 6405378094935614157,
+      "Data2": -3357724074912220092,
+      "Data3": -6318721398715182679,
+      "Data4": 1656008752908480703
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator",
     "AssemblyName": "Microsoft.AspNetCore.Components.Forms",
+    "TypeName": "Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator",
     "Flags": 1,
     "Documentation": "\n<summary>\nAddsDataAnnotationsvalidationsupporttoan<seecref=\"T:Microsoft.AspNetCore.Components.Forms.EditContext\"/>.\n</summary>\n",
@@ -1333,22 +1262,20 @@
       {
         "TagName": "DataAnnotationsValidator"
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -8758794403446552463,
-      "Data2": 1355053945637022161,
-      "Data3": 517037685901766605,
-      "Data4": 1522123932670823024
+      "Data1": -7913797034026382186,
+      "Data2": 3585019743853848375,
+      "Data3": -8172590684084171484,
+      "Data4": 8750597029112647359
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator",
     "AssemblyName": "Microsoft.AspNetCore.Components.Forms",
+    "TypeName": "Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator",
     "Flags": 2,
     "Documentation": "\n<summary>\nAddsDataAnnotationsvalidationsupporttoan<seecref=\"T:Microsoft.AspNetCore.Components.Forms.EditContext\"/>.\n</summary>\n",
@@ -1356,22 +1283,20 @@
       {
         "TagName": "Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator"
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -6712019761701400594,
-      "Data2": 4235753552398110785,
-      "Data3": 6313197451721449871,
-      "Data4": -7386982470911471982
+      "Data1": -7989120488589390227,
+      "Data2": 3255859135489122653,
+      "Data3": -7143423564922171047,
+      "Data4": -3260889300767385183
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
+    "TypeName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView",
     "Flags": 1,
     "Documentation": "\n<summary>\nCombinesthebehaviorsof<seecref=\"T:Microsoft.AspNetCore.Components.Authorization.AuthorizeView\"/>and<seecref=\"T:Microsoft.AspNetCore.Components.RouteView\"/>,\nsothatitdisplaysthepagematchingthespecifiedroutebutonlyiftheuser\nisauthorizedtoseeit.\n\nAdditionally,thiscomponentsuppliesacascadingparameteroftype<seecref=\"T:System.Threading.Tasks.Task`1\"/>,\nwhichmakestheuser'scurrentauthenticationstateavailabletodescendants.\n</summary>\n",
@@ -1435,22 +1360,20 @@
           "Components.ChildContentParameterName": "True"
         }
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -3069820773076135984,
-      "Data2": 41040501075693469,
-      "Data3": 4204087178649285188,
-      "Data4": 634678891599198407
+      "Data1": -865881926051535059,
+      "Data2": -6861605438062525020,
+      "Data3": -6767450851072245804,
+      "Data4": 6230769584355933731
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
+    "TypeName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView",
     "Flags": 2,
     "Documentation": "\n<summary>\nCombinesthebehaviorsof<seecref=\"T:Microsoft.AspNetCore.Components.Authorization.AuthorizeView\"/>and<seecref=\"T:Microsoft.AspNetCore.Components.RouteView\"/>,\nsothatitdisplaysthepagematchingthespecifiedroutebutonlyiftheuser\nisauthorizedtoseeit.\n\nAdditionally,thiscomponentsuppliesacascadingparameteroftype<seecref=\"T:System.Threading.Tasks.Task`1\"/>,\nwhichmakestheuser'scurrentauthenticationstateavailabletodescendants.\n</summary>\n",
@@ -1514,22 +1437,20 @@
           "Components.ChildContentParameterName": "True"
         }
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": 7452519997057663618,
-      "Data2": 6573670984994963333,
-      "Data3": -7862158167324538132,
-      "Data4": 1319236607753847246
+      "Data1": 6131410277647062086,
+      "Data2": -7866099545774111428,
+      "Data3": 3003783583096679105,
+      "Data4": 8621004838351736853
     },
     "Kind": 2,
     "RuntimeKind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
+    "TypeName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing",
     "Flags": 1,
     "Documentation": "\n<summary>\nThecontentthatwillbedisplayedwhileasynchronousauthorizationisinprogress.\n</summary>\n",
@@ -1538,22 +1459,20 @@
         "TagName": "Authorizing",
         "ParentTag": "AuthorizeRouteView"
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": 4572947865487008968,
-      "Data2": 2274491910762488937,
-      "Data3": 1654463350835926416,
-      "Data4": -1355131398029250721
+      "Data1": 3650265361141013733,
+      "Data2": -5507999975562365049,
+      "Data3": -4143984177068859391,
+      "Data4": -3854796531073688138
     },
     "Kind": 2,
     "RuntimeKind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
+    "TypeName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing",
     "Flags": 2,
     "Documentation": "\n<summary>\nThecontentthatwillbedisplayedwhileasynchronousauthorizationisinprogress.\n</summary>\n",
@@ -1562,22 +1481,20 @@
         "TagName": "Authorizing",
         "ParentTag": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView"
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": 6664197032951500791,
-      "Data2": 184650158399761104,
-      "Data3": -4876180721797294131,
-      "Data4": -222340956983711125
+      "Data1": 4120861166340371659,
+      "Data2": 7965179918586308041,
+      "Data3": -7789053827662570456,
+      "Data4": -8853362982085670007
     },
     "Kind": 2,
     "RuntimeKind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
+    "TypeName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized",
     "Flags": 1,
     "Documentation": "\n<summary>\nThecontentthatwillbedisplayediftheuserisnotauthorized.\n</summary>\n",
@@ -1600,22 +1517,20 @@
           "Components.ChildContentParameterName": "True"
         }
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -1510279891784894921,
-      "Data2": 179709697993372629,
-      "Data3": 7767837180843900811,
-      "Data4": 927135556465068298
+      "Data1": 1166458287999274496,
+      "Data2": -4888446547062417240,
+      "Data3": 8376577490590589180,
+      "Data4": 2455505409811422506
     },
     "Kind": 2,
     "RuntimeKind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
+    "TypeName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized",
     "Flags": 2,
     "Documentation": "\n<summary>\nThecontentthatwillbedisplayediftheuserisnotauthorized.\n</summary>\n",
@@ -1638,22 +1553,20 @@
           "Components.ChildContentParameterName": "True"
         }
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -2104958638486493202,
-      "Data2": -1093730037172487848,
-      "Data3": 8773529255631678920,
-      "Data4": 4982731984419524039
+      "Data1": 2812864196845483698,
+      "Data2": -657147431544148211,
+      "Data3": -3239029734401256166,
+      "Data4": -5658414462874306845
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
+    "TypeName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView",
     "Flags": 1,
     "Documentation": "\n<summary>\nDisplaysdifferingcontentdependingontheuser'sauthorizationstatus.\n</summary>\n",
@@ -1751,22 +1664,20 @@
           "Components.ChildContentParameterName": "True"
         }
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -66716773969509483,
-      "Data2": 7783669303363912267,
-      "Data3": -4516694650753464943,
-      "Data4": -7280012380652581558
+      "Data1": -3132572969845812963,
+      "Data2": 8120701514964229865,
+      "Data3": -8048417578918615891,
+      "Data4": 755458144541485382
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
+    "TypeName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView",
     "Flags": 2,
     "Documentation": "\n<summary>\nDisplaysdifferingcontentdependingontheuser'sauthorizationstatus.\n</summary>\n",
@@ -1864,22 +1775,20 @@
           "Components.ChildContentParameterName": "True"
         }
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -5682586847220797816,
-      "Data2": -4674979886686062738,
-      "Data3": -7403585154878178942,
-      "Data4": 5413411604678908992
+      "Data1": 1603554826731157886,
+      "Data2": -8038443684795461191,
+      "Data3": 3362084353862563223,
+      "Data4": 6304335357196841317
     },
     "Kind": 2,
     "RuntimeKind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorized",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
+    "TypeName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorized",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorized",
     "Flags": 1,
     "Documentation": "\n<summary>\nThecontentthatwillbedisplayediftheuserisauthorized.\nIfyouspecifyavalueforthisparameter,donotalsospecifyavaluefor<seecref=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.ChildContent\"/>.\n</summary>\n",
@@ -1902,22 +1811,20 @@
           "Components.ChildContentParameterName": "True"
         }
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorized"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": 1872632506508563779,
-      "Data2": 2379732690038544602,
-      "Data3": 7072008964619112030,
-      "Data4": 4864639759893912981
+      "Data1": -2392563619243584924,
+      "Data2": 8179232287638422307,
+      "Data3": -4696350656223532213,
+      "Data4": 5858384752340575241
     },
     "Kind": 2,
     "RuntimeKind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorized",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
+    "TypeName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorized",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorized",
     "Flags": 2,
     "Documentation": "\n<summary>\nThecontentthatwillbedisplayediftheuserisauthorized.\nIfyouspecifyavalueforthisparameter,donotalsospecifyavaluefor<seecref=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.ChildContent\"/>.\n</summary>\n",
@@ -1940,22 +1847,20 @@
           "Components.ChildContentParameterName": "True"
         }
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorized"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -4642562256356090801,
-      "Data2": 1739746464389556003,
-      "Data3": -8246912017707211215,
-      "Data4": -6525564005008141648
+      "Data1": 1576273447903706598,
+      "Data2": 2249503682782109383,
+      "Data3": 2530735094206272329,
+      "Data4": 960637853393850504
     },
     "Kind": 2,
     "RuntimeKind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorizing",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
+    "TypeName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorizing",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorizing",
     "Flags": 1,
     "Documentation": "\n<summary>\nThecontentthatwillbedisplayedwhileasynchronousauthorizationisinprogress.\n</summary>\n",
@@ -1964,22 +1869,20 @@
         "TagName": "Authorizing",
         "ParentTag": "AuthorizeView"
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorizing"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": 8134606765451421305,
-      "Data2": 4632973573417778332,
-      "Data3": 2548309336931156736,
-      "Data4": -8291698275231729524
+      "Data1": -4497230908216338125,
+      "Data2": -1166187639250092314,
+      "Data3": -3430673072673222163,
+      "Data4": -7701807194446030432
     },
     "Kind": 2,
     "RuntimeKind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorizing",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
+    "TypeName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorizing",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorizing",
     "Flags": 2,
     "Documentation": "\n<summary>\nThecontentthatwillbedisplayedwhileasynchronousauthorizationisinprogress.\n</summary>\n",
@@ -1988,22 +1891,20 @@
         "TagName": "Authorizing",
         "ParentTag": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView"
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorizing"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": 7994223277489146242,
-      "Data2": 2519272349581453512,
-      "Data3": 1429146392790169798,
-      "Data4": -7620357415765673448
+      "Data1": -7709639862727507956,
+      "Data2": 7767124198136008251,
+      "Data3": 5574724213287706342,
+      "Data4": 3256683523354889890
     },
     "Kind": 2,
     "RuntimeKind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
+    "TypeName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.ChildContent",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.ChildContent",
     "Flags": 1,
     "Documentation": "\n<summary>\nThecontentthatwillbedisplayediftheuserisauthorized.\n</summary>\n",
@@ -2026,22 +1927,20 @@
           "Components.ChildContentParameterName": "True"
         }
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.ChildContent"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": 7928438862369558724,
-      "Data2": -4201519537926472495,
-      "Data3": -2108083170306939938,
-      "Data4": -9029402665896143878
+      "Data1": -3410919615650825550,
+      "Data2": 6394903219656240937,
+      "Data3": 6654782255191885250,
+      "Data4": -7601970185086775110
     },
     "Kind": 2,
     "RuntimeKind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
+    "TypeName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.ChildContent",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.ChildContent",
     "Flags": 2,
     "Documentation": "\n<summary>\nThecontentthatwillbedisplayediftheuserisauthorized.\n</summary>\n",
@@ -2064,22 +1963,20 @@
           "Components.ChildContentParameterName": "True"
         }
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.ChildContent"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -8505689774455025920,
-      "Data2": 2331308693273532957,
-      "Data3": 1361802963644895946,
-      "Data4": 2319255013195830790
+      "Data1": 4397489531061576093,
+      "Data2": -9223370058828760076,
+      "Data3": -7425862972637185711,
+      "Data4": -5728926784512038969
     },
     "Kind": 2,
     "RuntimeKind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.NotAuthorized",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
+    "TypeName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.NotAuthorized",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.NotAuthorized",
     "Flags": 1,
     "Documentation": "\n<summary>\nThecontentthatwillbedisplayediftheuserisnotauthorized.\n</summary>\n",
@@ -2102,22 +1999,20 @@
           "Components.ChildContentParameterName": "True"
         }
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.NotAuthorized"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": 6004770425758595059,
-      "Data2": 2838527675735788894,
-      "Data3": 2259597094526050823,
-      "Data4": -424400642888423873
+      "Data1": 1476764644538341433,
+      "Data2": -1974613057060204521,
+      "Data3": 834530649238785540,
+      "Data4": 5221527391388932504
     },
     "Kind": 2,
     "RuntimeKind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.NotAuthorized",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
+    "TypeName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.NotAuthorized",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.NotAuthorized",
     "Flags": 2,
     "Documentation": "\n<summary>\nThecontentthatwillbedisplayediftheuserisnotauthorized.\n</summary>\n",
@@ -2140,22 +2035,20 @@
           "Components.ChildContentParameterName": "True"
         }
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.NotAuthorized"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": 2590092560640289698,
-      "Data2": -7011017753368636096,
-      "Data3": 2155811046414433893,
-      "Data4": 4384855878511748400
+      "Data1": -760420134657711066,
+      "Data2": 7651731346273399535,
+      "Data3": 2819335244385921002,
+      "Data4": 7491726032252258715
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
+    "TypeName": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState",
     "Flags": 1,
     "TagMatchingRules": [
@@ -2175,22 +2068,20 @@
           "Components.ChildContent": "True"
         }
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -3722021623435680274,
-      "Data2": 8368896319529600824,
-      "Data3": 1672828741375113770,
-      "Data4": -5037087771008200229
+      "Data1": -5165226003123607151,
+      "Data2": -8500683508014408295,
+      "Data3": 2000304740592896811,
+      "Data4": 2968212504573450969
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
+    "TypeName": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState",
     "Flags": 2,
     "TagMatchingRules": [
@@ -2210,22 +2101,20 @@
           "Components.ChildContent": "True"
         }
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -1811170543577462493,
-      "Data2": 261257922825053043,
-      "Data3": -4774140180599094121,
-      "Data4": -8817954815716191333
+      "Data1": -198236209353344997,
+      "Data2": 8506238846756638422,
+      "Data3": 4500005951380145649,
+      "Data4": 7038215757890575821
     },
     "Kind": 2,
     "RuntimeKind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
+    "TypeName": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState.ChildContent",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState.ChildContent",
     "Flags": 1,
     "Documentation": "\n<summary>\nThecontenttowhichtheauthenticationstateshouldbeprovided.\n</summary>\n",
@@ -2234,22 +2123,20 @@
         "TagName": "ChildContent",
         "ParentTag": "CascadingAuthenticationState"
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState.ChildContent"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -169954304092227781,
-      "Data2": 4842260304703600569,
-      "Data3": 8972973788409750069,
-      "Data4": -8285728355792519003
+      "Data1": 5057915621548434342,
+      "Data2": -4420282474069072929,
+      "Data3": 4360536838729073121,
+      "Data4": 583966836774313071
     },
     "Kind": 2,
     "RuntimeKind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
+    "TypeName": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState.ChildContent",
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState.ChildContent",
     "Flags": 2,
     "Documentation": "\n<summary>\nThecontenttowhichtheauthenticationstateshouldbeprovided.\n</summary>\n",
@@ -2258,22 +2145,20 @@
         "TagName": "ChildContent",
         "ParentTag": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState"
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState.ChildContent"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -5746145944407625670,
-      "Data2": 92521747111417413,
-      "Data3": -641071659141470188,
-      "Data4": 4734560587957389566
+      "Data1": 1403839937423244552,
+      "Data2": 4203491990498658422,
+      "Data3": 2971197290158446244,
+      "Data4": -8799514459917378882
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "Microsoft.AspNetCore.Components.Forms.EditForm",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
+    "TypeName": "Microsoft.AspNetCore.Components.Forms.EditForm",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.EditForm",
     "Flags": 1,
     "Documentation": "\n<summary>\nRendersaformelementthatcascadesan<seecref=\"P:Microsoft.AspNetCore.Components.Forms.EditForm.EditContext\"/>todescendants.\n</summary>\n",
@@ -2369,22 +2254,20 @@
           "Components.ChildContentParameterName": "True"
         }
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Forms.EditForm"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -3116237358274546238,
-      "Data2": 122254400659427929,
-      "Data3": 6996969566749828366,
-      "Data4": -4592704342153952797
+      "Data1": 477006274146195526,
+      "Data2": -7318497681736179942,
+      "Data3": -5653272116258374286,
+      "Data4": -442598067370954539
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "Microsoft.AspNetCore.Components.Forms.EditForm",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
+    "TypeName": "Microsoft.AspNetCore.Components.Forms.EditForm",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.EditForm",
     "Flags": 2,
     "Documentation": "\n<summary>\nRendersaformelementthatcascadesan<seecref=\"P:Microsoft.AspNetCore.Components.Forms.EditForm.EditContext\"/>todescendants.\n</summary>\n",
@@ -2480,22 +2363,20 @@
           "Components.ChildContentParameterName": "True"
         }
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Forms.EditForm"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": 1346053605453270990,
-      "Data2": 4188872794728422386,
-      "Data3": -3503345051695349428,
-      "Data4": 9084700471306224501
+      "Data1": 8545452435376852785,
+      "Data2": -2882606162786729242,
+      "Data3": 1232323527464748185,
+      "Data4": -638455758648725025
     },
     "Kind": 2,
     "RuntimeKind": 2,
     "Name": "Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
+    "TypeName": "Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent",
     "Flags": 1,
     "Documentation": "\n<summary>\nSpecifiesthecontenttoberenderedinsidethis<seecref=\"T:Microsoft.AspNetCore.Components.Forms.EditForm\"/>.\n</summary>\n",
@@ -2518,22 +2399,20 @@
           "Components.ChildContentParameterName": "True"
         }
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": 6526292631896775830,
-      "Data2": 7663790052122667163,
-      "Data3": 1166296014947754938,
-      "Data4": -8296530973707035904
+      "Data1": -3548526341046369828,
+      "Data2": 499362322615628568,
+      "Data3": -1564254808192636458,
+      "Data4": -8291475417112205135
     },
     "Kind": 2,
     "RuntimeKind": 2,
     "Name": "Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
+    "TypeName": "Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent",
     "Flags": 2,
     "Documentation": "\n<summary>\nSpecifiesthecontenttoberenderedinsidethis<seecref=\"T:Microsoft.AspNetCore.Components.Forms.EditForm\"/>.\n</summary>\n",
@@ -2556,22 +2435,20 @@
           "Components.ChildContentParameterName": "True"
         }
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -5354295598215979459,
-      "Data2": 7756047846220791068,
-      "Data3": 8655343599477791754,
-      "Data4": 2738584565591849670
+      "Data1": -7464399537369552925,
+      "Data2": 1226997464579445435,
+      "Data3": 5543856264095148000,
+      "Data4": 7054029698165692280
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputCheckbox",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
+    "TypeName": "Microsoft.AspNetCore.Components.Forms.InputCheckbox",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputCheckbox",
     "Flags": 1,
     "Documentation": "\n<summary>\nAninputcomponentforediting<seecref=\"T:System.Boolean\"/>values.\n</summary>\n",
@@ -2623,22 +2500,20 @@
           "Common.PropertyName": "ValueExpression"
         }
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Forms.InputCheckbox"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -6313664205255482797,
-      "Data2": 6207554273622830258,
-      "Data3": 2397584939760471926,
-      "Data4": -8790553373747994073
+      "Data1": -2820125431403332077,
+      "Data2": 6296204515378161974,
+      "Data3": 841412583314857611,
+      "Data4": -30831625522732043
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputCheckbox",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
+    "TypeName": "Microsoft.AspNetCore.Components.Forms.InputCheckbox",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputCheckbox",
     "Flags": 2,
     "Documentation": "\n<summary>\nAninputcomponentforediting<seecref=\"T:System.Boolean\"/>values.\n</summary>\n",
@@ -2690,22 +2565,20 @@
           "Common.PropertyName": "ValueExpression"
         }
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Forms.InputCheckbox"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": 7007502104232492097,
-      "Data2": -3130993861329135801,
-      "Data3": -5463254938350378792,
-      "Data4": -7858396816688757930
+      "Data1": -6808304549937370759,
+      "Data2": 7930706384898890219,
+      "Data3": 2439051083249556695,
+      "Data4": -8491520894490264797
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputDate<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
+    "TypeName": "Microsoft.AspNetCore.Components.Forms.InputDate<TValue>",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputDate<TValue>",
     "Flags": 1,
     "Documentation": "\n<summary>\nAninputcomponentforeditingdatevalues.\nSupportedtypesare<seecref=\"T:System.DateTime\"/>and<seecref=\"T:System.DateTimeOffset\"/>.\n</summary>\n",
@@ -2783,21 +2656,21 @@
       }
     ],
     "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Forms.InputDate<TValue>",
       "Components.GenericTyped": "True"
     }
   },
   {
     "__Checksum": {
-      "Data1": 7472999866214439872,
-      "Data2": 2474375784972161598,
-      "Data3": -1359492305404315899,
-      "Data4": -5941329469790778654
+      "Data1": 3691330903387550024,
+      "Data2": 6469944376741102145,
+      "Data3": -6083118781487886411,
+      "Data4": -5827222262819914747
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputDate<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
+    "TypeName": "Microsoft.AspNetCore.Components.Forms.InputDate<TValue>",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputDate<TValue>",
     "Flags": 2,
     "Documentation": "\n<summary>\nAninputcomponentforeditingdatevalues.\nSupportedtypesare<seecref=\"T:System.DateTime\"/>and<seecref=\"T:System.DateTimeOffset\"/>.\n</summary>\n",
@@ -2875,21 +2748,21 @@
       }
     ],
     "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Forms.InputDate<TValue>",
       "Components.GenericTyped": "True"
     }
   },
   {
     "__Checksum": {
-      "Data1": 2120727324859974735,
-      "Data2": -8303527895864062820,
-      "Data3": 5631257477917078234,
-      "Data4": -563182832832314145
+      "Data1": 2188075203067924704,
+      "Data2": -2071950515766556144,
+      "Data3": -5278471346606350266,
+      "Data4": 6843517512918280213
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputNumber<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
+    "TypeName": "Microsoft.AspNetCore.Components.Forms.InputNumber<TValue>",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputNumber<TValue>",
     "Flags": 1,
     "Documentation": "\n<summary>\nAninputcomponentforeditingnumericvalues.\nSupportednumerictypesare<seecref=\"T:System.Int32\"/>,<seecref=\"T:System.Int64\"/>,<seecref=\"T:System.Single\"/>,<seecref=\"T:System.Double\"/>,<seecref=\"T:System.Decimal\"/>.\n</summary>\n",
@@ -2967,21 +2840,21 @@
       }
     ],
     "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Forms.InputNumber<TValue>",
       "Components.GenericTyped": "True"
     }
   },
   {
     "__Checksum": {
-      "Data1": -2498827061593217927,
-      "Data2": -2643543758237249631,
-      "Data3": -6188291958884699003,
-      "Data4": -5619771327798079045
+      "Data1": 3363649505802338210,
+      "Data2": -4831588871096588448,
+      "Data3": -1279995095533175636,
+      "Data4": -3612488037876896018
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputNumber<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
+    "TypeName": "Microsoft.AspNetCore.Components.Forms.InputNumber<TValue>",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputNumber<TValue>",
     "Flags": 2,
     "Documentation": "\n<summary>\nAninputcomponentforeditingnumericvalues.\nSupportednumerictypesare<seecref=\"T:System.Int32\"/>,<seecref=\"T:System.Int64\"/>,<seecref=\"T:System.Single\"/>,<seecref=\"T:System.Double\"/>,<seecref=\"T:System.Decimal\"/>.\n</summary>\n",
@@ -3059,21 +2932,21 @@
       }
     ],
     "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Forms.InputNumber<TValue>",
       "Components.GenericTyped": "True"
     }
   },
   {
     "__Checksum": {
-      "Data1": -6823102844966149377,
-      "Data2": 4370038709228494780,
-      "Data3": -4413287988231161420,
-      "Data4": 4538469972436435096
+      "Data1": -3391955302838942310,
+      "Data2": 5594522575749443707,
+      "Data3": 1312116509248344376,
+      "Data4": -621557280394578154
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
+    "TypeName": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>",
     "Flags": 1,
     "Documentation": "\n<summary>\nAdropdownselectioncomponent.\n</summary>\n",
@@ -3151,21 +3024,21 @@
       }
     ],
     "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>",
       "Components.GenericTyped": "True"
     }
   },
   {
     "__Checksum": {
-      "Data1": 6071512318803170103,
-      "Data2": 6097397262238710303,
-      "Data3": 1475360775090708521,
-      "Data4": -6758530592079700577
+      "Data1": -6416040089036639077,
+      "Data2": -1812353356963723633,
+      "Data3": -4330289572881262567,
+      "Data4": -6402998004505307310
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
+    "TypeName": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>",
     "Flags": 2,
     "Documentation": "\n<summary>\nAdropdownselectioncomponent.\n</summary>\n",
@@ -3243,21 +3116,21 @@
       }
     ],
     "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>",
       "Components.GenericTyped": "True"
     }
   },
   {
     "__Checksum": {
-      "Data1": 2579781926933123297,
-      "Data2": -2884897659878456596,
-      "Data3": -6182254435407543657,
-      "Data4": -6182907073628410337
+      "Data1": 5578230789185216365,
+      "Data2": 8519271727418978751,
+      "Data3": -3864853870208678770,
+      "Data4": -3094172641679507011
     },
     "Kind": 2,
     "RuntimeKind": 2,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
+    "TypeName": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>.ChildContent",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>.ChildContent",
     "Flags": 1,
     "Documentation": "\n<summary>\nGetsorsetsthechildcontenttoberenderinginsidetheselectelement.\n</summary>\n",
@@ -3266,22 +3139,20 @@
         "TagName": "ChildContent",
         "ParentTag": "InputSelect"
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>.ChildContent"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -4538561025415895222,
-      "Data2": 2253060490040792173,
-      "Data3": -5231736447841887812,
-      "Data4": -2065792341395517037
+      "Data1": -4699868239347162528,
+      "Data2": -8912232365008151902,
+      "Data3": 789410206820275897,
+      "Data4": -5306848458931940272
     },
     "Kind": 2,
     "RuntimeKind": 2,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
+    "TypeName": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>.ChildContent",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>.ChildContent",
     "Flags": 2,
     "Documentation": "\n<summary>\nGetsorsetsthechildcontenttoberenderinginsidetheselectelement.\n</summary>\n",
@@ -3290,22 +3161,20 @@
         "TagName": "ChildContent",
         "ParentTag": "Microsoft.AspNetCore.Components.Forms.InputSelect"
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>.ChildContent"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -7066889285992804445,
-      "Data2": 1560648104377195762,
-      "Data3": 7789064696357805683,
-      "Data4": 2699846216572331488
+      "Data1": 22453045839731203,
+      "Data2": 8517811097694531151,
+      "Data3": 2756132597301659237,
+      "Data4": 1607897133587773759
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputText",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
+    "TypeName": "Microsoft.AspNetCore.Components.Forms.InputText",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputText",
     "Flags": 1,
     "Documentation": "\n<summary>\nAninputcomponentforediting<seecref=\"T:System.String\"/>values.\n</summary>\n",
@@ -3357,22 +3226,20 @@
           "Common.PropertyName": "ValueExpression"
         }
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Forms.InputText"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": 2124770578047974970,
-      "Data2": 1261813876488171335,
-      "Data3": 8134751144010128121,
-      "Data4": -925737879211980100
+      "Data1": 7856174309802189935,
+      "Data2": 5022552763596130590,
+      "Data3": 415213093875058924,
+      "Data4": -8841387706974770092
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputText",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
+    "TypeName": "Microsoft.AspNetCore.Components.Forms.InputText",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputText",
     "Flags": 2,
     "Documentation": "\n<summary>\nAninputcomponentforediting<seecref=\"T:System.String\"/>values.\n</summary>\n",
@@ -3424,22 +3291,20 @@
           "Common.PropertyName": "ValueExpression"
         }
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Forms.InputText"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -740272367795083848,
-      "Data2": 5811333207087912136,
-      "Data3": -4881347681906260520,
-      "Data4": -6320529301643589651
+      "Data1": 4499135594038747906,
+      "Data2": 2931932833145044697,
+      "Data3": 3052774078004457287,
+      "Data4": 5711895078813807138
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputTextArea",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
+    "TypeName": "Microsoft.AspNetCore.Components.Forms.InputTextArea",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputTextArea",
     "Flags": 1,
     "Documentation": "\n<summary>\nAmultilineinputcomponentforediting<seecref=\"T:System.String\"/>values.\n</summary>\n",
@@ -3491,22 +3356,20 @@
           "Common.PropertyName": "ValueExpression"
         }
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Forms.InputTextArea"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": 1241063565630797266,
-      "Data2": 4664127920163292286,
-      "Data3": -1758334625495313390,
-      "Data4": -1918935487489338981
+      "Data1": -7215950558582344143,
+      "Data2": -4072487116501442098,
+      "Data3": -5042437432605760047,
+      "Data4": 8303082655205199663
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputTextArea",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
+    "TypeName": "Microsoft.AspNetCore.Components.Forms.InputTextArea",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputTextArea",
     "Flags": 2,
     "Documentation": "\n<summary>\nAmultilineinputcomponentforediting<seecref=\"T:System.String\"/>values.\n</summary>\n",
@@ -3558,22 +3421,20 @@
           "Common.PropertyName": "ValueExpression"
         }
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Forms.InputTextArea"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -5950444925734977775,
-      "Data2": 1013741900936099503,
-      "Data3": 5837108562944386037,
-      "Data4": -8585008886128498120
+      "Data1": -1777866766340799540,
+      "Data2": -3639707199954856205,
+      "Data3": -5178127647846008937,
+      "Data4": 842995477717356410
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "Microsoft.AspNetCore.Components.Forms.ValidationMessage<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
+    "TypeName": "Microsoft.AspNetCore.Components.Forms.ValidationMessage<TValue>",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.ValidationMessage<TValue>",
     "Flags": 1,
     "Documentation": "\n<summary>\nDisplaysalistofvalidationmessagesforaspecifiedfieldwithinacascaded<seecref=\"T:Microsoft.AspNetCore.Components.Forms.EditContext\"/>.\n</summary>\n",
@@ -3617,21 +3478,21 @@
       }
     ],
     "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Forms.ValidationMessage<TValue>",
       "Components.GenericTyped": "True"
     }
   },
   {
     "__Checksum": {
-      "Data1": -4239351988683078910,
-      "Data2": -1442801880001948458,
-      "Data3": -3495717103989989875,
-      "Data4": 5687248975527749027
+      "Data1": -7346161250850404901,
+      "Data2": 7315034994363463675,
+      "Data3": 9056634371267008102,
+      "Data4": -6781129146823480561
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "Microsoft.AspNetCore.Components.Forms.ValidationMessage<TValue>",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
+    "TypeName": "Microsoft.AspNetCore.Components.Forms.ValidationMessage<TValue>",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.ValidationMessage<TValue>",
     "Flags": 2,
     "Documentation": "\n<summary>\nDisplaysalistofvalidationmessagesforaspecifiedfieldwithinacascaded<seecref=\"T:Microsoft.AspNetCore.Components.Forms.EditContext\"/>.\n</summary>\n",
@@ -3675,21 +3536,21 @@
       }
     ],
     "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Forms.ValidationMessage<TValue>",
       "Components.GenericTyped": "True"
     }
   },
   {
     "__Checksum": {
-      "Data1": 4361196376804301583,
-      "Data2": 3072818810870467927,
-      "Data3": 4226551334939866354,
-      "Data4": 3714290579756303641
+      "Data1": 3047691016090071094,
+      "Data2": -6665363647556123671,
+      "Data3": 7450993325664994294,
+      "Data4": 2746929604436113317
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "Microsoft.AspNetCore.Components.Forms.ValidationSummary",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
+    "TypeName": "Microsoft.AspNetCore.Components.Forms.ValidationSummary",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.ValidationSummary",
     "Flags": 1,
     "Documentation": "\n<summary>\nDisplaysalistofvalidationmessagesfromacascaded<seecref=\"T:Microsoft.AspNetCore.Components.Forms.EditContext\"/>.\n</summary>\n",
@@ -3719,22 +3580,20 @@
           "Common.PropertyName": "Model"
         }
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Forms.ValidationSummary"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -3211857363425721008,
-      "Data2": -277300494620624341,
-      "Data3": 6767285454832576320,
-      "Data4": 2139891608542025268
+      "Data1": -3207903722706265862,
+      "Data2": 4676094060722192055,
+      "Data3": -2453012589610851492,
+      "Data4": -8732749212090488226
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "Microsoft.AspNetCore.Components.Forms.ValidationSummary",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
+    "TypeName": "Microsoft.AspNetCore.Components.Forms.ValidationSummary",
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.ValidationSummary",
     "Flags": 2,
     "Documentation": "\n<summary>\nDisplaysalistofvalidationmessagesfromacascaded<seecref=\"T:Microsoft.AspNetCore.Components.Forms.EditContext\"/>.\n</summary>\n",
@@ -3764,22 +3623,20 @@
           "Common.PropertyName": "Model"
         }
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Forms.ValidationSummary"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": 7605046351357998432,
-      "Data2": -2806053628543308279,
-      "Data3": 4705919463165403394,
-      "Data4": 6870063547238680552
+      "Data1": -2790915878433857735,
+      "Data2": -5547944537143451052,
+      "Data3": -7886336458615561563,
+      "Data4": -7750978603857207358
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "Microsoft.AspNetCore.Components.Routing.NavLink",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
+    "TypeName": "Microsoft.AspNetCore.Components.Routing.NavLink",
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.NavLink",
     "Flags": 1,
     "Documentation": "\n<summary>\nAcomponentthatrendersananchortag,automaticallytogglingits'active'\nclassbasedonwhetherits'href'matchesthecurrentURI.\n</summary>\n",
@@ -3832,22 +3689,20 @@
           "Common.PropertyName": "Match"
         }
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Routing.NavLink"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": -6400435320743829410,
-      "Data2": -790793942846614448,
-      "Data3": 5421127180494860762,
-      "Data4": -711238979059346295
+      "Data1": 6202367284970328982,
+      "Data2": 3351624560353390112,
+      "Data3": -697766625422752979,
+      "Data4": -6099746068933049332
     },
     "Kind": 3,
     "RuntimeKind": 1,
     "Name": "Microsoft.AspNetCore.Components.Routing.NavLink",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
+    "TypeName": "Microsoft.AspNetCore.Components.Routing.NavLink",
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.NavLink",
     "Flags": 2,
     "Documentation": "\n<summary>\nAcomponentthatrendersananchortag,automaticallytogglingits'active'\nclassbasedonwhetherits'href'matchesthecurrentURI.\n</summary>\n",
@@ -3900,22 +3755,20 @@
           "Common.PropertyName": "Match"
         }
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Routing.NavLink"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": 4480183970178990102,
-      "Data2": -8685372024650631300,
-      "Data3": 5473583672582312573,
-      "Data4": -8191154470106281405
+      "Data1": 6532217206775410101,
+      "Data2": -2498803329219643091,
+      "Data3": -9164836294706339321,
+      "Data4": 310558478189795025
     },
     "Kind": 2,
     "RuntimeKind": 2,
     "Name": "Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
+    "TypeName": "Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent",
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent",
     "Flags": 1,
     "Documentation": "\n<summary>\nGetsorsetsthechildcontentofthecomponent.\n</summary>\n",
@@ -3924,22 +3777,20 @@
         "TagName": "ChildContent",
         "ParentTag": "NavLink"
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": 3607255660801100945,
-      "Data2": -3803379186301097234,
-      "Data3": -5241788741308962529,
-      "Data4": -7242537457248802823
+      "Data1": 8927675323817253442,
+      "Data2": 7584151902076775729,
+      "Data3": -3288521858894284636,
+      "Data4": 2424232988858808054
     },
     "Kind": 2,
     "RuntimeKind": 2,
     "Name": "Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
+    "TypeName": "Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent",
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent",
     "Flags": 2,
     "Documentation": "\n<summary>\nGetsorsetsthechildcontentofthecomponent.\n</summary>\n",
@@ -3948,17 +3799,14 @@
         "TagName": "ChildContent",
         "ParentTag": "Microsoft.AspNetCore.Components.Routing.NavLink"
       }
-    ],
-    "Metadata": {
-      "Common.TypeName": "Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent"
-    }
+    ]
   },
   {
     "__Checksum": {
-      "Data1": 1249554860602379058,
-      "Data2": -6249563148974719987,
-      "Data3": -5883867983927347591,
-      "Data4": -2629455854845781027
+      "Data1": 6549117028043733919,
+      "Data2": -46609983812320029,
+      "Data3": 7730660665562692936,
+      "Data4": 4222389365306807360
     },
     "Kind": 4,
     "Name": "onabort",

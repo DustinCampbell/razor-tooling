@@ -34,6 +34,7 @@ public partial class TagHelperDescriptorBuilder
         _assemblyName = null;
         _documentationObject = default;
 
+        TypeName = null;
         DisplayName = null;
         TagOutputHint = null;
         CaseSensitive = false;

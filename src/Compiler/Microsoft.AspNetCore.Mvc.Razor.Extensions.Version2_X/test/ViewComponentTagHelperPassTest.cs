@@ -27,7 +27,7 @@ public class ViewComponentTagHelperPassTest
         var tagHelpers = new[]
         {
             TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly")
-                .Metadata(TypeName("TestTagHelper"))
+                .TypeName("TestTagHelper")
                 .BoundAttributeDescriptor(attribute => attribute
                     .Name("Foo")
                     .TypeName("System.Int32"))
@@ -66,9 +66,8 @@ public class ViewComponentTagHelperPassTest
         var tagHelpers = new[]
         {
             TagHelperDescriptorBuilder.Create(TagHelperKind.ViewComponent, "TestTagHelper", "TestAssembly")
-                .Metadata(
-                    TypeName("__Generated__TagCloudViewComponentTagHelper"),
-                    new(ViewComponentTagHelperMetadata.Name, "TagCloud"))
+                .TypeName("__Generated__TagCloudViewComponentTagHelper")
+                .Metadata(ViewComponentTagHelperMetadata.Name, "TagCloud")
                 .BoundAttributeDescriptor(attribute => attribute
                     .Name("Foo")
                     .TypeName("System.Int32")
@@ -113,9 +112,8 @@ public class ViewComponentTagHelperPassTest
         var tagHelpers = new[]
         {
             TagHelperDescriptorBuilder.Create(TagHelperKind.ViewComponent, "TestTagHelper", "TestAssembly")
-                .Metadata(
-                    TypeName("__Generated__TagCloudViewComponentTagHelper"),
-                    new(ViewComponentTagHelperMetadata.Name, "TagCloud"))
+                .TypeName("__Generated__TagCloudViewComponentTagHelper")
+                .Metadata(ViewComponentTagHelperMetadata.Name, "TagCloud")
                 .BoundAttributeDescriptor(attribute => attribute
                     .Name("Foo")
                     .TypeName("System.Collections.Generic.Dictionary<System.String, System.Int32>")
@@ -160,7 +158,7 @@ public class ViewComponentTagHelperPassTest
         var tagHelpers = new[]
         {
             TagHelperDescriptorBuilder.Create("PTestTagHelper", "TestAssembly")
-                .Metadata(TypeName("PTestTagHelper"))
+                .TypeName("PTestTagHelper")
                 .BoundAttributeDescriptor(attribute => attribute
                     .Metadata(PropertyName("Foo"))
                     .Name("Foo")
@@ -168,9 +166,8 @@ public class ViewComponentTagHelperPassTest
                 .TagMatchingRuleDescriptor(rule => rule.RequireTagName("p"))
                 .Build(),
             TagHelperDescriptorBuilder.Create(TagHelperKind.ViewComponent, "TestTagHelper", "TestAssembly")
-                .Metadata(
-                    TypeName("__Generated__TagCloudViewComponentTagHelper"),
-                    new(ViewComponentTagHelperMetadata.Name, "TagCloud"))
+                .TypeName("__Generated__TagCloudViewComponentTagHelper")
+                .Metadata(ViewComponentTagHelperMetadata.Name, "TagCloud")
                 .BoundAttributeDescriptor(attribute => attribute
                     .Metadata(PropertyName("Foo"))
                     .Name("Foo")

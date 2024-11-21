@@ -4,7 +4,6 @@
 using System.Collections.Immutable;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.PooledObjects;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
@@ -92,7 +91,7 @@ internal static class Extensions
 
         foreach (var tagHelper in tagHelpers)
         {
-            if (tagHelper.GetTypeName() == tagHelperTypeName)
+            if (tagHelper.TypeName == tagHelperTypeName)
             {
                 return true;
             }

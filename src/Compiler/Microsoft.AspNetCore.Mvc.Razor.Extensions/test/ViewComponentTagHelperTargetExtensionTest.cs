@@ -18,9 +18,8 @@ public class ViewComponentTagHelperTargetExtensionTest
         // Arrange
         var tagHelper = TagHelperDescriptorBuilder
             .Create(TagHelperKind.ViewComponent, "TestTagHelper", "TestAssembly")
-            .Metadata(
-                TypeName("__Generated__TagCloudViewComponentTagHelper"),
-                new(ViewComponentTagHelperMetadata.Name, "TagCloud"))
+            .TypeName("__Generated__TagCloudViewComponentTagHelper")
+            .Metadata(ViewComponentTagHelperMetadata.Name, "TagCloud")
             .BoundAttributeDescriptor(attribute => attribute
                 .Name("Foo")
                 .TypeName("System.Int32")
@@ -81,9 +80,8 @@ public class __Generated__TagCloudViewComponentTagHelper : Microsoft.AspNetCore.
         // Arrange
         var tagHelper = TagHelperDescriptorBuilder
             .Create(TagHelperKind.ViewComponent, "TestTagHelper", "TestAssembly")
-            .Metadata(
-                TypeName("__Generated__TagCloudViewComponentTagHelper"),
-                new(ViewComponentTagHelperMetadata.Name, "TagCloud"))
+            .TypeName("__Generated__TagCloudViewComponentTagHelper")
+            .Metadata(ViewComponentTagHelperMetadata.Name, "TagCloud")
             .BoundAttributeDescriptor(attribute => attribute
                 .Name("Foo")
                 .TypeName("System.Collections.Generic.Dictionary<System.String, System.Int32>")

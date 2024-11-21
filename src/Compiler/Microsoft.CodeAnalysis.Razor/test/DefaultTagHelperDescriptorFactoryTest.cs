@@ -324,6 +324,7 @@ public class DefaultTagHelperDescriptorFactoryTest : TagHelperDescriptorProvider
                 {
                     "TestNamespace.EnumTagHelper",
                     TagHelperDescriptorBuilder.Create("TestNamespace.EnumTagHelper", AssemblyName)
+                        .TypeName("TestNamespace.EnumTagHelper")
                         .Metadata(GetMetadata("TestNamespace", "EnumTagHelper"))
                         .TagMatchingRuleDescriptor(ruleBuilder => ruleBuilder.RequireTagName("enum"))
                         .BoundAttributeDescriptor(builder =>
@@ -342,6 +343,7 @@ public class DefaultTagHelperDescriptorFactoryTest : TagHelperDescriptorProvider
                 {
                     "TestNamespace.MultiEnumTagHelper",
                     TagHelperDescriptorBuilder.Create("TestNamespace.MultiEnumTagHelper", AssemblyName)
+                        .TypeName("TestNamespace.MultiEnumTagHelper")
                         .Metadata(GetMetadata("TestNamespace", "MultiEnumTagHelper"))
                         .TagMatchingRuleDescriptor(ruleBuilder => ruleBuilder.RequireTagName("p"))
                         .TagMatchingRuleDescriptor(ruleBuilder => ruleBuilder.RequireTagName("input"))
@@ -361,6 +363,7 @@ public class DefaultTagHelperDescriptorFactoryTest : TagHelperDescriptorProvider
                 {
                     "TestNamespace.NestedEnumTagHelper",
                     TagHelperDescriptorBuilder.Create("TestNamespace.NestedEnumTagHelper", AssemblyName)
+                        .TypeName("TestNamespace.NestedEnumTagHelper")
                         .Metadata(GetMetadata("TestNamespace", "NestedEnumTagHelper"))
                         .TagMatchingRuleDescriptor(ruleBuilder => ruleBuilder.RequireTagName("nested-enum"))
                         .BoundAttributeDescriptor(builder =>
@@ -413,6 +416,7 @@ public class DefaultTagHelperDescriptorFactoryTest : TagHelperDescriptorProvider
                 {
                     "TestNamespace.RequiredParentTagHelper",
                     TagHelperDescriptorBuilder.Create("TestNamespace.RequiredParentTagHelper", AssemblyName)
+                        .TypeName("TestNamespace.RequiredParentTagHelper")
                         .Metadata(GetMetadata("TestNamespace", "RequiredParentTagHelper"))
                         .TagMatchingRuleDescriptor(builder => builder.RequireTagName("input").RequireParentTag("div"))
                         .Build()
@@ -420,6 +424,7 @@ public class DefaultTagHelperDescriptorFactoryTest : TagHelperDescriptorProvider
                 {
                     "TestNamespace.MultiSpecifiedRequiredParentTagHelper",
                     TagHelperDescriptorBuilder.Create("TestNamespace.MultiSpecifiedRequiredParentTagHelper", AssemblyName)
+                        .TypeName("TestNamespace.MultiSpecifiedRequiredParentTagHelper")
                         .Metadata(GetMetadata("TestNamespace", "MultiSpecifiedRequiredParentTagHelper"))
                         .TagMatchingRuleDescriptor(builder => builder.RequireTagName("p").RequireParentTag("div"))
                         .TagMatchingRuleDescriptor(builder => builder.RequireTagName("input").RequireParentTag("section"))
@@ -428,6 +433,7 @@ public class DefaultTagHelperDescriptorFactoryTest : TagHelperDescriptorProvider
                 {
                     "TestNamespace.MultiWithUnspecifiedRequiredParentTagHelper",
                     TagHelperDescriptorBuilder.Create("TestNamespace.MultiWithUnspecifiedRequiredParentTagHelper", AssemblyName)
+                        .TypeName("TestNamespace.MultiWithUnspecifiedRequiredParentTagHelper")
                         .Metadata(GetMetadata("TestNamespace", "MultiWithUnspecifiedRequiredParentTagHelper"))
                         .TagMatchingRuleDescriptor(builder => builder.RequireTagName("p"))
                         .TagMatchingRuleDescriptor(builder => builder.RequireTagName("input").RequireParentTag("div"))
@@ -456,14 +462,10 @@ public class DefaultTagHelperDescriptorFactoryTest : TagHelperDescriptorProvider
 
     private static KeyValuePair<string, string>[] GetMetadata(string @namespace, string name)
     {
-        var fullName = $"{@namespace}.{name}";
-
-        return new[]
-        {
-            TypeName(fullName),
+        return [
             TypeNamespace(@namespace),
             TypeNameIdentifier(name)
-        };
+        ];
     }
 
     public static TheoryData RestrictChildrenData
@@ -476,6 +478,7 @@ public class DefaultTagHelperDescriptorFactoryTest : TagHelperDescriptorProvider
                 {
                     "TestNamespace.RestrictChildrenTagHelper",
                     TagHelperDescriptorBuilder.Create("TestNamespace.RestrictChildrenTagHelper", AssemblyName)
+                        .TypeName("TestNamespace.RestrictChildrenTagHelper")
                         .Metadata(GetMetadata("TestNamespace", "RestrictChildrenTagHelper"))
                         .TagMatchingRuleDescriptor(builder => builder.RequireTagName("restrict-children"))
                         .AllowChildTag("p")
@@ -484,6 +487,7 @@ public class DefaultTagHelperDescriptorFactoryTest : TagHelperDescriptorProvider
                 {
                     "TestNamespace.DoubleRestrictChildrenTagHelper",
                     TagHelperDescriptorBuilder.Create("TestNamespace.DoubleRestrictChildrenTagHelper", AssemblyName)
+                        .TypeName("TestNamespace.DoubleRestrictChildrenTagHelper")
                         .Metadata(GetMetadata("TestNamespace", "DoubleRestrictChildrenTagHelper"))
                         .TagMatchingRuleDescriptor(builder => builder.RequireTagName("double-restrict-children"))
                         .AllowChildTag("p")
@@ -493,6 +497,7 @@ public class DefaultTagHelperDescriptorFactoryTest : TagHelperDescriptorProvider
                 {
                     "TestNamespace.MultiTargetRestrictChildrenTagHelper",
                     TagHelperDescriptorBuilder.Create("TestNamespace.MultiTargetRestrictChildrenTagHelper", AssemblyName)
+                        .TypeName("TestNamespace.MultiTargetRestrictChildrenTagHelper")
                         .Metadata(GetMetadata("TestNamespace", "MultiTargetRestrictChildrenTagHelper"))
                         .TagMatchingRuleDescriptor(builder => builder.RequireTagName("p"))
                         .TagMatchingRuleDescriptor(builder => builder.RequireTagName("div"))
@@ -532,6 +537,7 @@ public class DefaultTagHelperDescriptorFactoryTest : TagHelperDescriptorProvider
                 {
                     "TestNamespace.TagStructureTagHelper",
                     TagHelperDescriptorBuilder.Create("TestNamespace.TagStructureTagHelper", AssemblyName)
+                        .TypeName("TestNamespace.TagStructureTagHelper")
                         .Metadata(GetMetadata("TestNamespace", "TagStructureTagHelper"))
                         .TagMatchingRuleDescriptor(builder => builder
                             .RequireTagName("input")
@@ -541,6 +547,7 @@ public class DefaultTagHelperDescriptorFactoryTest : TagHelperDescriptorProvider
                 {
                     "TestNamespace.MultiSpecifiedTagStructureTagHelper",
                     TagHelperDescriptorBuilder.Create("TestNamespace.MultiSpecifiedTagStructureTagHelper", AssemblyName)
+                        .TypeName("TestNamespace.MultiSpecifiedTagStructureTagHelper")
                         .Metadata(GetMetadata("TestNamespace", "MultiSpecifiedTagStructureTagHelper"))
                         .TagMatchingRuleDescriptor(builder => builder
                             .RequireTagName("p")
@@ -553,6 +560,7 @@ public class DefaultTagHelperDescriptorFactoryTest : TagHelperDescriptorProvider
                 {
                     "TestNamespace.MultiWithUnspecifiedTagStructureTagHelper",
                     TagHelperDescriptorBuilder.Create("TestNamespace.MultiWithUnspecifiedTagStructureTagHelper", AssemblyName)
+                        .TypeName("TestNamespace.MultiWithUnspecifiedTagStructureTagHelper")
                         .Metadata(GetMetadata("TestNamespace", "MultiWithUnspecifiedTagStructureTagHelper"))
                         .TagMatchingRuleDescriptor(builder => builder
                             .RequireTagName("p"))
@@ -1451,8 +1459,10 @@ public class DefaultTagHelperDescriptorFactoryTest : TagHelperDescriptorProvider
     {
         get
         {
-            var invalidBoundAttributeBuilder = new TagHelperDescriptorBuilder(TagHelperKind.Default, "InvalidBoundAttribute", "Test");
-            invalidBoundAttributeBuilder.Metadata(TypeName("TestNamespace.InvalidBoundAttribute"));
+            var invalidBoundAttributeBuilder = new TagHelperDescriptorBuilder(TagHelperKind.Default, "InvalidBoundAttribute", "Test")
+            {
+                TypeName = "TestNamespace.InvalidBoundAttribute"
+            };
 
             // type, expectedAttributeDescriptors
             return new TheoryData<string, IEnumerable<BoundAttributeDescriptor>>
@@ -2101,6 +2111,7 @@ public class DefaultTagHelperDescriptorFactoryTest : TagHelperDescriptorProvider
                 {
                     "TestNamespace.MultipleDescriptorTagHelperWithOutputElementHint",
                     TagHelperDescriptorBuilder.Create("TestNamespace.MultipleDescriptorTagHelperWithOutputElementHint", AssemblyName)
+                        .TypeName("TestNamespace.MultipleDescriptorTagHelperWithOutputElementHint")
                         .Metadata(GetMetadata("TestNamespace", "MultipleDescriptorTagHelperWithOutputElementHint"))
                         .TagMatchingRuleDescriptor(builder => builder.RequireTagName("a"))
                         .TagMatchingRuleDescriptor(builder => builder.RequireTagName("p"))
@@ -2110,6 +2121,7 @@ public class DefaultTagHelperDescriptorFactoryTest : TagHelperDescriptorProvider
                 {
                     "TestNamespace2.InheritedOutputElementHintTagHelper",
                     TagHelperDescriptorBuilder.Create("TestNamespace2.InheritedOutputElementHintTagHelper", AssemblyName)
+                        .TypeName("TestNamespace2.InheritedOutputElementHintTagHelper")
                         .Metadata(GetMetadata("TestNamespace2", "InheritedOutputElementHintTagHelper"))
                         .TagMatchingRuleDescriptor(builder => builder.RequireTagName("inherited-output-element-hint"))
                         .Build()
@@ -2117,6 +2129,7 @@ public class DefaultTagHelperDescriptorFactoryTest : TagHelperDescriptorProvider
                 {
                     "TestNamespace2.OutputElementHintTagHelper",
                     TagHelperDescriptorBuilder.Create("TestNamespace2.OutputElementHintTagHelper", AssemblyName)
+                        .TypeName("TestNamespace2.OutputElementHintTagHelper")
                         .Metadata(GetMetadata("TestNamespace2", "OutputElementHintTagHelper"))
                         .TagMatchingRuleDescriptor(builder => builder.RequireTagName("output-element-hint"))
                         .TagOutputHint("hinted-value")
@@ -2125,6 +2138,7 @@ public class DefaultTagHelperDescriptorFactoryTest : TagHelperDescriptorProvider
                 {
                     "TestNamespace2.OverriddenOutputElementHintTagHelper",
                     TagHelperDescriptorBuilder.Create("TestNamespace2.OverriddenOutputElementHintTagHelper", AssemblyName)
+                        .TypeName("TestNamespace2.OverriddenOutputElementHintTagHelper")
                         .Metadata(GetMetadata("TestNamespace2", "OverriddenOutputElementHintTagHelper"))
                         .TagMatchingRuleDescriptor(builder => builder.RequireTagName("overridden-output-element-hint"))
                         .TagOutputHint("overridden")
@@ -2391,9 +2405,9 @@ public class DefaultTagHelperDescriptorFactoryTest : TagHelperDescriptorProvider
         IEnumerable<Action<TagMatchingRuleDescriptorBuilder>> ruleBuilders = null)
     {
         var builder = TagHelperDescriptorBuilder.Create(typeName, assemblyName);
+        builder.TypeName = typeName;
 
         builder.SetMetadata(
-            TypeName(typeName),
             TypeNamespace(typeNamespace),
             TypeNameIdentifier(typeNameIdentifier));
 
@@ -2428,8 +2442,10 @@ public class DefaultTagHelperDescriptorFactoryTest : TagHelperDescriptorProvider
 
     private static BoundAttributeDescriptor CreateAttributeFor(string tagHelperTypeFullName, Action<BoundAttributeDescriptorBuilder> configure)
     {
-        var tagHelperBuilder = new TagHelperDescriptorBuilder(TagHelperKind.Default, tagHelperTypeFullName.Split('.')[^1], "Test");
-        tagHelperBuilder.Metadata(TypeName(tagHelperTypeFullName));
+        var tagHelperBuilder = new TagHelperDescriptorBuilder(TagHelperKind.Default, tagHelperTypeFullName.Split('.')[^1], "Test")
+        {
+            TypeName = tagHelperTypeFullName
+        };
 
         var attributeBuilder = new BoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperKind.Default);
         configure(attributeBuilder);

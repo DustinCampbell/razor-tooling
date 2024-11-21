@@ -47,12 +47,11 @@ internal sealed class FormNameTagHelperDescriptorProvider() : TagHelperDescripto
             assemblyName: ComponentsApi.AssemblyName,
             builder: out var builder);
 
+        builder.TypeName = "Microsoft.AspNetCore.Components.FormName";
+
         builder.CaseSensitive = true;
         builder.ClassifyAttributesOnly = true;
         builder.SetDocumentation(DocumentationDescriptor.FormNameTagHelper);
-
-        builder.SetMetadata(
-            TypeName("Microsoft.AspNetCore.Components.FormName"));
 
         builder.TagMatchingRule(rule =>
         {

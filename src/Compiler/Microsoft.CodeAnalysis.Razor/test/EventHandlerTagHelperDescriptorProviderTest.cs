@@ -67,7 +67,7 @@ public class EventHandlerTagHelperDescriptorProviderTest : TagHelperDescriptorPr
         Assert.Equal("Microsoft.AspNetCore.Components", item.AssemblyName);
         Assert.Equal("onclick", item.Name);
         Assert.Equal("Test.EventHandlers", item.DisplayName);
-        Assert.Equal("Test.EventHandlers", item.GetTypeName());
+        Assert.Equal("Test.EventHandlers", item.TypeName);
 
         // The tag matching rule for an event handler is just the attribute name
         var rule = Assert.Single(item.TagMatchingRules);
@@ -175,7 +175,7 @@ public class EventHandlerTagHelperDescriptorProviderTest : TagHelperDescriptorPr
         Assert.Equal("Microsoft.AspNetCore.Components", item.AssemblyName);
         Assert.Equal("onclick", item.Name);
         Assert.Equal("Test.EventHandlers", item.DisplayName);
-        Assert.Equal("Test.EventHandlers", item.GetTypeName());
+        Assert.Equal("Test.EventHandlers", item.TypeName);
 
         Assert.Equal(3, item.TagMatchingRules.Length);
 

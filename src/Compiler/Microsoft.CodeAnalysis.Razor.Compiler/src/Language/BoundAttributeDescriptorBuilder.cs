@@ -186,11 +186,6 @@ public sealed partial class BoundAttributeDescriptorBuilder : TagHelperObjectBui
             return DisplayName;
         }
 
-        if (!_parent.TryGetMetadataValue(TagHelperMetadata.Common.TypeName, out var parentTypeName))
-        {
-            parentTypeName = null;
-        }
-
         if (!TryGetMetadataValue(TagHelperMetadata.Common.PropertyName, out var propertyName))
         {
             propertyName = null;
@@ -198,7 +193,7 @@ public sealed partial class BoundAttributeDescriptorBuilder : TagHelperObjectBui
 
         if (TypeName != null &&
             propertyName != null &&
-            parentTypeName != null)
+            _parent.TypeName is string parentTypeName)
         {
             // This looks like a normal c# property, so lets compute a display name based on that.
             if (!s_primitiveDisplayTypeNameLookups.TryGetValue(TypeName, out var simpleTypeName))

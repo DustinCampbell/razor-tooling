@@ -410,8 +410,8 @@ public class RazorCompletionListProviderTest : LanguageServerTestBase
         // Arrange
         var documentPath = "C:/path/to/document.razor";
         var builder = TagHelperDescriptorBuilder.Create(TagHelperKind.Component, "TestTagHelper", "TestAssembly");
+        builder.TypeName = "TestNamespace.TestTagHelper";
         builder.TagMatchingRule(rule => rule.TagName = "Test");
-        builder.Metadata(TypeName("TestNamespace.TestTagHelper"));
         var tagHelper = builder.Build();
         var tagHelperContext = TagHelperDocumentContext.Create(prefix: string.Empty, [tagHelper]);
         var codeDocument = CreateCodeDocument("@in");
@@ -439,8 +439,8 @@ public class RazorCompletionListProviderTest : LanguageServerTestBase
         // Arrange
         var documentPath = "C:/path/to/document.razor";
         var builder = TagHelperDescriptorBuilder.Create(TagHelperKind.Component, "TestTagHelper", "TestAssembly");
+        builder.TypeName = "TestNamespace.TestTagHelper";
         builder.TagMatchingRule(rule => rule.TagName = "Test");
-        builder.Metadata(TypeName("TestNamespace.TestTagHelper"));
         var tagHelper = builder.Build();
         var tagHelperContext = TagHelperDocumentContext.Create(prefix: string.Empty, [tagHelper]);
         var codeDocument = CreateCodeDocument("@inje");
@@ -467,8 +467,8 @@ public class RazorCompletionListProviderTest : LanguageServerTestBase
         // Arrange
         var documentPath = "C:/path/to/document.razor";
         var builder = TagHelperDescriptorBuilder.Create(TagHelperKind.Component, "TestTagHelper", "TestAssembly");
+        builder.TypeName = "TestNamespace.TestTagHelper";
         builder.TagMatchingRule(rule => rule.TagName = "Test");
-        builder.Metadata(TypeName("TestNamespace.TestTagHelper"));
         var tagHelper = builder.Build();
         var tagHelperContext = TagHelperDocumentContext.Create(prefix: string.Empty, [tagHelper]);
         var codeDocument = CreateCodeDocument("@inje");
@@ -497,8 +497,8 @@ public class RazorCompletionListProviderTest : LanguageServerTestBase
         // Arrange
         var documentPath = "C:/path/to/document.cshtml";
         var builder = TagHelperDescriptorBuilder.Create(TagHelperKind.Component, "TestTagHelper", "TestAssembly");
+        builder.TypeName = "TestNamespace.TestTagHelper";
         builder.TagMatchingRule(rule => rule.TagName = "Test");
-        builder.Metadata(TypeName("TestNamespace.TestTagHelper"));
         var tagHelper = builder.Build();
         var tagHelperContext = TagHelperDocumentContext.Create(prefix: string.Empty, [tagHelper]);
         var codeDocument = CreateCodeDocument("<");
@@ -521,6 +521,7 @@ public class RazorCompletionListProviderTest : LanguageServerTestBase
         // Arrange
         var documentPath = "C:/path/to/document.cshtml";
         var builder = TagHelperDescriptorBuilder.Create(TagHelperKind.Component, "TestTagHelper", "TestAssembly");
+        builder.TypeName = "TestNamespace.TestTagHelper";
         builder.TagMatchingRule(rule => rule.TagName = "*");
         builder.BindAttribute(attribute =>
         {
@@ -528,7 +529,6 @@ public class RazorCompletionListProviderTest : LanguageServerTestBase
             attribute.TypeName = typeof(string).FullName;
             attribute.SetMetadata(PropertyName("TestAttribute"));
         });
-        builder.Metadata(TypeName("TestNamespace.TestTagHelper"));
         var tagHelper = builder.Build();
         var tagHelperContext = TagHelperDocumentContext.Create(prefix: string.Empty, [tagHelper]);
         var codeDocument = CreateCodeDocument("<test  ");
@@ -550,6 +550,7 @@ public class RazorCompletionListProviderTest : LanguageServerTestBase
         // Arrange
         var documentPath = "C:/path/to/document.cshtml";
         var builder = TagHelperDescriptorBuilder.Create(TagHelperKind.Component, "TestTagHelper", "TestAssembly");
+        builder.TypeName = "TestNamespace.TestTagHelper";
         builder.TagMatchingRule(rule => rule.TagName = "*");
         builder.BindAttribute(attribute =>
         {
@@ -557,7 +558,6 @@ public class RazorCompletionListProviderTest : LanguageServerTestBase
             attribute.TypeName = typeof(string).FullName;
             attribute.SetMetadata(PropertyName("TestAttribute"));
         });
-        builder.SetMetadata(TypeName("TestNamespace.TestTagHelper"));
         var tagHelper = builder.Build();
         var tagHelperContext = TagHelperDocumentContext.Create(prefix: string.Empty, [tagHelper]);
         var codeDocument = CreateCodeDocument("<test  ");

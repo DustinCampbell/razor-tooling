@@ -21,6 +21,7 @@ internal static partial class ObjectWriters
         writer.WriteIfNotZero(nameof(value.RuntimeKind), (int)value.RuntimeKind);
         writer.Write(nameof(value.Name), value.Name);
         writer.Write(nameof(value.AssemblyName), value.AssemblyName);
+        writer.WriteIfNotNull(nameof(value.TypeName), value.TypeName);
         writer.WriteIfNotNull(nameof(value.DisplayName), value.DisplayName);
         writer.WriteIfNotZero(nameof(value.Flags), (int)value.Flags);
         WriteDocumentationObject(writer, nameof(value.Documentation), value.DocumentationObject);

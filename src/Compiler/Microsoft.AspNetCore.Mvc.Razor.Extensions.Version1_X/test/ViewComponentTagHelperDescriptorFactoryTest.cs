@@ -29,9 +29,8 @@ public class ViewComponentTagHelperDescriptorFactoryTest
             TagHelperKind.ViewComponent,
             "__Generated__StringParameterViewComponentTagHelper",
             typeof(StringParameterViewComponent).GetTypeInfo().Assembly.GetName().Name)
-            .Metadata(
-                TypeName("__Generated__StringParameterViewComponentTagHelper"),
-                new(ViewComponentTagHelperMetadata.Name, "StringParameter"))
+            .TypeName("__Generated__StringParameterViewComponentTagHelper")
+            .Metadata(ViewComponentTagHelperMetadata.Name, "StringParameter")
             .DisplayName("StringParameterViewComponentTagHelper")
             .TagMatchingRuleDescriptor(rule =>
                 rule
@@ -71,9 +70,8 @@ public class ViewComponentTagHelperDescriptorFactoryTest
             TagHelperKind.ViewComponent,
             "__Generated__VariousParameterViewComponentTagHelper",
             typeof(VariousParameterViewComponent).GetTypeInfo().Assembly.GetName().Name)
-            .Metadata(
-                TypeName("__Generated__VariousParameterViewComponentTagHelper"),
-                new(ViewComponentTagHelperMetadata.Name, "VariousParameter"))
+            .TypeName("__Generated__VariousParameterViewComponentTagHelper")
+            .Metadata(ViewComponentTagHelperMetadata.Name, "VariousParameter")
             .DisplayName("VariousParameterViewComponentTagHelper")
             .TagMatchingRuleDescriptor(rule =>
                 rule
@@ -121,9 +119,8 @@ public class ViewComponentTagHelperDescriptorFactoryTest
             TagHelperKind.ViewComponent,
             "__Generated__GenericParameterViewComponentTagHelper",
             typeof(GenericParameterViewComponent).GetTypeInfo().Assembly.GetName().Name)
-            .Metadata(
-                TypeName("__Generated__GenericParameterViewComponentTagHelper"),
-                new(ViewComponentTagHelperMetadata.Name, "GenericParameter"))
+            .TypeName("__Generated__GenericParameterViewComponentTagHelper")
+            .Metadata(ViewComponentTagHelperMetadata.Name, "GenericParameter")
             .DisplayName("GenericParameterViewComponentTagHelper")
             .TagMatchingRuleDescriptor(rule =>
                 rule

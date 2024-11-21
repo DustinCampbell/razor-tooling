@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
-using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
@@ -47,8 +46,8 @@ public class TagHelperDescriptorBuilderTest
         var builder2 = TagHelperDescriptorBuilder.Create("TestTagHelper1", "TestAssembly1");
 
         var metadata = MetadataCollection.Create(
-            TypeName("TestTagHelper1"),
-            TypeNameIdentifier("TestTagHelper1"));
+            new("Key_1", "TestTagHelper1"),
+            new("Key_2", "TestTagHelper1"));
 
         builder1.SetMetadata(metadata);
         builder2.SetMetadata(metadata);
@@ -71,11 +70,11 @@ public class TagHelperDescriptorBuilderTest
         var builder1 = TagHelperDescriptorBuilder.Create("TestTagHelper1", "TestAssembly1");
         var builder2 = TagHelperDescriptorBuilder.Create("TestTagHelper1", "TestAssembly1");
 
-        builder1.Metadata.Add(TypeName("TestTagHelper1"));
-        builder1.Metadata.Add(TypeNameIdentifier("TestTagHelper1"));
+        builder1.Metadata.Add(new("Key_1", "TestTagHelper1"));
+        builder1.Metadata.Add(new("Key_2", "TestTagHelper1"));
 
-        builder2.Metadata.Add(TypeName("TestTagHelper1"));
-        builder2.Metadata.Add(TypeNameIdentifier("TestTagHelper1"));
+        builder2.Metadata.Add(new("Key_1", "TestTagHelper1"));
+        builder2.Metadata.Add(new("Key_2", "TestTagHelper1"));
 
         // Act
         var descriptor1 = builder1.Build();

@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Razor.Test.Common;
 using Microsoft.CodeAnalysis.Razor.AutoInsert;
 using Xunit;
 using Xunit.Abstractions;
-using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.AutoInsert;
 
@@ -18,7 +17,7 @@ public class AutoClosingTagOnAutoInsertProviderTest(ITestOutputHelper testOutput
         get
         {
             var descriptor = TagHelperDescriptorBuilder.Create("CatchAllTagHelper", "TestAssembly");
-            descriptor.SetMetadata(TypeName("TestNamespace.CatchAllTagHelper"));
+            descriptor.TypeName = "TestNamespace.CatchAllTagHelper";
             descriptor.TagMatchingRule(builder => builder.RequireTagName("*").RequireTagStructure(TagStructure.Unspecified));
 
             return descriptor.Build();
@@ -30,7 +29,7 @@ public class AutoClosingTagOnAutoInsertProviderTest(ITestOutputHelper testOutput
         get
         {
             var descriptor = TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly");
-            descriptor.SetMetadata(TypeName("TestNamespace.TestTagHelper"));
+            descriptor.TypeName = "TestNamespace.TestTagHelper";
             descriptor.TagMatchingRule(builder => builder.RequireTagName("Input").RequireTagStructure(TagStructure.Unspecified));
 
             return descriptor.Build();
@@ -42,7 +41,7 @@ public class AutoClosingTagOnAutoInsertProviderTest(ITestOutputHelper testOutput
         get
         {
             var descriptor = TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly");
-            descriptor.SetMetadata(TypeName("TestNamespace.TestTagHelper"));
+            descriptor.TypeName = "TestNamespace.TestTagHelper";
             descriptor.TagMatchingRule(builder => builder.RequireTagName("test").RequireTagStructure(TagStructure.Unspecified));
 
             return descriptor.Build();
@@ -54,7 +53,7 @@ public class AutoClosingTagOnAutoInsertProviderTest(ITestOutputHelper testOutput
         get
         {
             var descriptor = TagHelperDescriptorBuilder.Create("TestInputTagHelper", "TestAssembly");
-            descriptor.SetMetadata(TypeName("TestNamespace.TestInputTagHelper"));
+            descriptor.TypeName = "TestNamespace.TestInputTagHelper";
             descriptor.TagMatchingRule(builder => builder.RequireTagName("input").RequireTagStructure(TagStructure.Unspecified));
 
             return descriptor.Build();
@@ -66,7 +65,7 @@ public class AutoClosingTagOnAutoInsertProviderTest(ITestOutputHelper testOutput
         get
         {
             var descriptor = TagHelperDescriptorBuilder.Create("TestInputTagHelper", "TestAssembly");
-            descriptor.SetMetadata(TypeName("TestNamespace.TestInputTagHelper"));
+            descriptor.TypeName = "TestNamespace.TestInputTagHelper";
             descriptor.TagMatchingRule(builder => builder.RequireTagName("input").RequireTagStructure(TagStructure.NormalOrSelfClosing));
 
             return descriptor.Build();
@@ -78,7 +77,7 @@ public class AutoClosingTagOnAutoInsertProviderTest(ITestOutputHelper testOutput
         get
         {
             var descriptor = TagHelperDescriptorBuilder.Create("TestTagHelper2", "TestAssembly");
-            descriptor.SetMetadata(TypeName("TestNamespace.TestTagHelper2"));
+            descriptor.TypeName = "TestNamespace.TestTagHelper2";
             descriptor.TagMatchingRule(builder => builder.RequireTagName("test").RequireTagStructure(TagStructure.NormalOrSelfClosing));
 
             return descriptor.Build();
@@ -90,7 +89,7 @@ public class AutoClosingTagOnAutoInsertProviderTest(ITestOutputHelper testOutput
         get
         {
             var descriptor = TagHelperDescriptorBuilder.Create("TestTagHelper3", "TestAssembly");
-            descriptor.SetMetadata(TypeName("TestNamespace.TestTagHelper3"));
+            descriptor.TypeName = "TestNamespace.TestTagHelper3";
             descriptor.TagMatchingRule(builder => builder.RequireTagName("test").RequireTagStructure(TagStructure.WithoutEndTag));
 
             return descriptor.Build();

@@ -5,8 +5,6 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Syntax;
 using Microsoft.AspNetCore.Razor.Test.Common;
@@ -548,8 +546,8 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
     {
         // Arrange
         var tagHelper = TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly");
+        tagHelper.TypeName = "TestTagHelper";
         tagHelper.TagMatchingRule(rule => rule.TagName = "test");
-        tagHelper.SetMetadata(TypeName("TestTagHelper"));
         tagHelper.BindAttribute(attribute =>
         {
             attribute.Name = "bool-val";
@@ -591,8 +589,8 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
     {
         // Arrange
         var tagHelper = TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly");
+        tagHelper.TypeName = "TestTagHelper";
         tagHelper.TagMatchingRule(rule => rule.TagName = "test");
-        tagHelper.SetMetadata(TypeName("TestTagHelper"));
         tagHelper.BindAttribute(attribute =>
         {
             attribute.Name = "int-val";

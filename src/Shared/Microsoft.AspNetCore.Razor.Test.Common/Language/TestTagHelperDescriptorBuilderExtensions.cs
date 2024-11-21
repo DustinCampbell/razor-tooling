@@ -29,6 +29,15 @@ public static class TestTagHelperDescriptorBuilderExtensions
         return builder;
     }
 
+    public static TagHelperDescriptorBuilder TypeName(this TagHelperDescriptorBuilder builder, string typeName)
+    {
+        ArgHelper.ThrowIfNull(typeName);
+
+        builder.TypeName = typeName;
+
+        return builder;
+    }
+
     public static TagHelperDescriptorBuilder DisplayName(this TagHelperDescriptorBuilder builder, string displayName)
     {
         if (builder == null)

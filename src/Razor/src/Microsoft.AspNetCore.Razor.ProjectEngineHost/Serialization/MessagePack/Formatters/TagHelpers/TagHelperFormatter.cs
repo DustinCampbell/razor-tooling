@@ -17,13 +17,14 @@ internal sealed class TagHelperFormatter : ValueFormatter<TagHelperDescriptor>
 
     public override TagHelperDescriptor Deserialize(ref MessagePackReader reader, SerializerCachingOptions options)
     {
-        reader.ReadArrayHeaderAndVerify(13);
+        reader.ReadArrayHeaderAndVerify(14);
 
         var kind = (TagHelperKind)reader.ReadInt32();
         var runtimeKind = (RuntimeKind)reader.ReadInt32();
         var name = CachedStringFormatter.Instance.Deserialize(ref reader, options).AssumeNotNull();
         var assemblyName = CachedStringFormatter.Instance.Deserialize(ref reader, options).AssumeNotNull();
 
+        var typeName = CachedStringFormatter.Instance.Deserialize(ref reader, options);
         var displayName = CachedStringFormatter.Instance.Deserialize(ref reader, options).AssumeNotNull();
         var flags = (TagHelperFlags)reader.ReadInt32();
         var documentationObject = reader.Deserialize<DocumentationObject>(options);
@@ -37,7 +38,7 @@ internal sealed class TagHelperFormatter : ValueFormatter<TagHelperDescriptor>
         var diagnostics = reader.Deserialize<ImmutableArray<RazorDiagnostic>>(options);
 
         return new TagHelperDescriptor(
-            kind, runtimeKind, name, assemblyName,
+            kind, runtimeKind, name, assemblyName, typeName,
             displayName, flags, documentationObject, tagOutputHint,
             tagMatchingRules, boundAttributes, allowedChildTags,
             metadata, diagnostics);
@@ -45,13 +46,14 @@ internal sealed class TagHelperFormatter : ValueFormatter<TagHelperDescriptor>
 
     public override void Serialize(ref MessagePackWriter writer, TagHelperDescriptor value, SerializerCachingOptions options)
     {
-        writer.WriteArrayHeader(13);
+        writer.WriteArrayHeader(14);
 
         writer.Write((int)value.Kind);
         writer.Write((int)value.RuntimeKind);
         CachedStringFormatter.Instance.Serialize(ref writer, value.Name, options);
         CachedStringFormatter.Instance.Serialize(ref writer, value.AssemblyName, options);
 
+        CachedStringFormatter.Instance.Serialize(ref writer, value.TypeName, options);
         CachedStringFormatter.Instance.Serialize(ref writer, value.DisplayName, options);
         writer.Write((int)value.Flags);
         writer.Serialize(value.DocumentationObject, options);
@@ -67,13 +69,14 @@ internal sealed class TagHelperFormatter : ValueFormatter<TagHelperDescriptor>
 
     public override void Skim(ref MessagePackReader reader, SerializerCachingOptions options)
     {
-        reader.ReadArrayHeaderAndVerify(13);
+        reader.ReadArrayHeaderAndVerify(14);
 
         reader.Skip(); // Kind
         reader.Skip(); // RuntimeKind
         CachedStringFormatter.Instance.Skim(ref reader, options); // Name
         CachedStringFormatter.Instance.Skim(ref reader, options); // AssemblyName
 
+        CachedStringFormatter.Instance.Skim(ref reader, options); // TypeName
         CachedStringFormatter.Instance.Skim(ref reader, options); // DisplayName
         reader.Skip(); // Flags
         DocumentationObjectFormatter.Instance.Skim(ref reader, options); // DocumentationObject
