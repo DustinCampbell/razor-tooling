@@ -29,6 +29,7 @@ public partial class BoundAttributeDescriptorBuilder
 
         Name = null;
         TypeName = null;
+        PropertyName = null;
         IsEnum = false;
         IsDictionary = false;
         IsDirectiveAttribute = false;

@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.NET.Sdk.Razor.SourceGenerators;
 using Xunit;
-using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X;
 
@@ -70,8 +69,8 @@ public class ViewComponentTagHelperPassTest
                 .Metadata(ViewComponentTagHelperMetadata.Name, "TagCloud")
                 .BoundAttributeDescriptor(attribute => attribute
                     .Name("Foo")
-                    .TypeName("System.Int32")
-                    .Metadata(PropertyName("Foo")))
+                    .PropertyName("Foo")
+                    .TypeName("System.Int32"))
                 .TagMatchingRuleDescriptor(rule => rule.RequireTagName("tagcloud"))
                 .Build()
         };
@@ -116,8 +115,8 @@ public class ViewComponentTagHelperPassTest
                 .Metadata(ViewComponentTagHelperMetadata.Name, "TagCloud")
                 .BoundAttributeDescriptor(attribute => attribute
                     .Name("Foo")
+                    .PropertyName("Tags")
                     .TypeName("System.Collections.Generic.Dictionary<System.String, System.Int32>")
-                    .Metadata(PropertyName("Tags"))
                     .AsDictionaryAttribute("foo-", "System.Int32"))
                 .TagMatchingRuleDescriptor(rule => rule.RequireTagName("tagcloud"))
                 .Build()
@@ -160,8 +159,8 @@ public class ViewComponentTagHelperPassTest
             TagHelperDescriptorBuilder.Create("PTestTagHelper", "TestAssembly")
                 .TypeName("PTestTagHelper")
                 .BoundAttributeDescriptor(attribute => attribute
-                    .Metadata(PropertyName("Foo"))
                     .Name("Foo")
+                    .PropertyName("Foo")
                     .TypeName("System.Int32"))
                 .TagMatchingRuleDescriptor(rule => rule.RequireTagName("p"))
                 .Build(),
@@ -169,8 +168,8 @@ public class ViewComponentTagHelperPassTest
                 .TypeName("__Generated__TagCloudViewComponentTagHelper")
                 .Metadata(ViewComponentTagHelperMetadata.Name, "TagCloud")
                 .BoundAttributeDescriptor(attribute => attribute
-                    .Metadata(PropertyName("Foo"))
                     .Name("Foo")
+                    .PropertyName("Foo")
                     .TypeName("System.Int32"))
                 .TagMatchingRuleDescriptor(rule => rule.RequireTagName("tagcloud"))
                 .Build()

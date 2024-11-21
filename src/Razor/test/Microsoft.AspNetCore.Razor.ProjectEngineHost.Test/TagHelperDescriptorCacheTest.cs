@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Razor.Test.Common;
 using Microsoft.AspNetCore.Razor.Utilities;
 using Xunit;
 using Xunit.Abstractions;
-using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
 namespace Microsoft.AspNetCore.Razor.ProjectEngineHost.Test;
 
@@ -30,7 +29,7 @@ public class TagHelperDescriptorCacheTest(ITestOutputHelper testOutput) : Toolin
         intTagHelperBuilder.BoundAttributeDescriptor(intBuilder =>
             intBuilder
                 .Name("test")
-                .Metadata(PropertyName(expectedPropertyName))
+                .PropertyName(expectedPropertyName)
                 .TypeName(typeof(int).FullName)
         );
         var intTagHelper = intTagHelperBuilder.Build();
@@ -43,7 +42,7 @@ public class TagHelperDescriptorCacheTest(ITestOutputHelper testOutput) : Toolin
         stringTagHelperBuilder.BoundAttributeDescriptor(stringBuilder =>
             stringBuilder
                 .Name("test")
-                .Metadata(PropertyName(expectedPropertyName))
+                .PropertyName(expectedPropertyName)
                 .TypeName(typeof(string).FullName)
         );
         var stringTagHelper = stringTagHelperBuilder.Build();

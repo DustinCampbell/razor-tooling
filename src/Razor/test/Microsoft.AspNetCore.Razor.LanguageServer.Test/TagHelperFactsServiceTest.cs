@@ -13,7 +13,6 @@ using Microsoft.NET.Sdk.Razor.SourceGenerators;
 using Microsoft.VisualStudio.Editor.Razor;
 using Xunit;
 using Xunit.Abstractions;
-using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.Test;
 
@@ -113,7 +112,7 @@ public class TagHelperFactsServiceTest(ITestOutputHelper testOutput) : TagHelper
         tagHelper.BindAttribute(attribute =>
         {
             attribute.Name = "bound";
-            attribute.SetMetadata(PropertyName("Bound"));
+            attribute.PropertyName = "Bound";
             attribute.TypeName = typeof(bool).FullName;
         });
         var codeDocument = CreateCodeDocument("""
@@ -146,7 +145,7 @@ public class TagHelperFactsServiceTest(ITestOutputHelper testOutput) : TagHelper
         tagHelper.BindAttribute(attribute =>
         {
             attribute.Name = "bound";
-            attribute.SetMetadata(PropertyName("Bound"));
+            attribute.PropertyName = "Bound";
             attribute.TypeName = typeof(bool).FullName;
         });
         var codeDocument = CreateCodeDocument("""

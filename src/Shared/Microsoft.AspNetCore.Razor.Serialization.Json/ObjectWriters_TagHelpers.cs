@@ -100,6 +100,7 @@ internal static partial class ObjectWriters
                 writer.WriteIfNotZero(nameof(value.Kind), (int)value.Kind);
                 writer.Write(nameof(value.Name), value.Name);
                 writer.Write(nameof(value.TypeName), value.TypeName);
+                writer.WriteIfNotNull(nameof(value.PropertyName), value.PropertyName);
                 writer.WriteIfNotNull(nameof(value.IndexerNamePrefix), value.IndexerNamePrefix);
                 writer.WriteIfNotNull(nameof(value.IndexerTypeName), value.IndexerTypeName);
                 writer.WriteIfNotNull(nameof(value.DisplayName), value.DisplayName);
@@ -120,6 +121,7 @@ internal static partial class ObjectWriters
                 writer.WriteIfNotZero(nameof(value.Kind), (int)value.Kind);
                 writer.Write(nameof(value.Name), value.Name);
                 writer.Write(nameof(value.TypeName), value.TypeName);
+                writer.WriteIfNotNull(nameof(value.PropertyName), value.PropertyName);
                 writer.WriteIfNotDefault(nameof(value.Flags), (int)value.Flags, defaultValue: (int)BoundAttributeParameterFlags.CaseSensitive);
                 writer.WriteIfNotNull(nameof(value.DisplayName), value.DisplayName);
                 WriteDocumentationObject(writer, nameof(value.Documentation), value.DocumentationObject);

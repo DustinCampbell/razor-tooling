@@ -9,17 +9,6 @@ namespace Microsoft.AspNetCore.Razor.Language;
 
 public static class BoundAttributeDescriptorExtensions
 {
-    public static string GetPropertyName(this BoundAttributeDescriptor attribute)
-    {
-        if (attribute == null)
-        {
-            throw new ArgumentNullException(nameof(attribute));
-        }
-
-        attribute.Metadata.TryGetValue(TagHelperMetadata.Common.PropertyName, out var propertyName);
-        return propertyName;
-    }
-
     public static string GetGloballyQualifiedTypeName(this BoundAttributeDescriptor attribute)
     {
         if (attribute == null)
@@ -65,16 +54,5 @@ public static class BoundAttributeDescriptorExtensions
         ArgHelper.ThrowIfNull(parameter);
 
         return parameter.Kind == TagHelperKind.Default;
-    }
-
-    public static string GetPropertyName(this BoundAttributeParameterDescriptor parameter)
-    {
-        if (parameter == null)
-        {
-            throw new ArgumentNullException(nameof(parameter));
-        }
-
-        parameter.Metadata.TryGetValue(TagHelperMetadata.Common.PropertyName, out var propertyName);
-        return propertyName;
     }
 }

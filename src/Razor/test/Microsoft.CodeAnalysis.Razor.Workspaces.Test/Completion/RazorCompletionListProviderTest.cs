@@ -16,7 +16,6 @@ using Microsoft.CodeAnalysis.Testing;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
 using Xunit;
 using Xunit.Abstractions;
-using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
 namespace Microsoft.CodeAnalysis.Razor.Completion;
 
@@ -526,8 +525,8 @@ public class RazorCompletionListProviderTest : LanguageServerTestBase
         builder.BindAttribute(attribute =>
         {
             attribute.Name = "testAttribute";
+            attribute.PropertyName("TestAttribute");
             attribute.TypeName = typeof(string).FullName;
-            attribute.SetMetadata(PropertyName("TestAttribute"));
         });
         var tagHelper = builder.Build();
         var tagHelperContext = TagHelperDocumentContext.Create(prefix: string.Empty, [tagHelper]);
@@ -555,8 +554,8 @@ public class RazorCompletionListProviderTest : LanguageServerTestBase
         builder.BindAttribute(attribute =>
         {
             attribute.Name = "testAttribute";
+            attribute.PropertyName("TestAttribute");
             attribute.TypeName = typeof(string).FullName;
-            attribute.SetMetadata(PropertyName("TestAttribute"));
         });
         var tagHelper = builder.Build();
         var tagHelperContext = TagHelperDocumentContext.Create(prefix: string.Empty, [tagHelper]);

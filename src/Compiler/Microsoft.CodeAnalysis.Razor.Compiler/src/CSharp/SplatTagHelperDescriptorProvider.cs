@@ -5,7 +5,6 @@ using System;
 using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Components;
-using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
@@ -61,11 +60,9 @@ internal sealed class SplatTagHelperDescriptorProvider : TagHelperDescriptorProv
         {
             attribute.SetDocumentation(DocumentationDescriptor.SplatTagHelper);
             attribute.Name = "@attributes";
-            attribute.IsDirectiveAttribute = true;
-
+            attribute.PropertyName = "Attributes";
             attribute.TypeName = typeof(object).FullName;
-            attribute.SetMetadata(
-                PropertyName("Attributes"));
+            attribute.IsDirectiveAttribute = true;
         });
 
         return builder.Build();

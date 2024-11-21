@@ -6,14 +6,12 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using MessagePack;
 using MessagePack.Resolvers;
-using Microsoft.AspNetCore.Mvc.Razor.Extensions;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Serialization;
 using Microsoft.AspNetCore.Razor.Serialization.MessagePack.Resolvers;
 using Microsoft.AspNetCore.Razor.Test.Common;
 using Xunit;
 using Xunit.Abstractions;
-using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
 namespace Microsoft.AspNetCore.Razor.ProjectEngineHost.Test.Serialization;
 
@@ -63,7 +61,7 @@ public class TagHelperDeltaResultSerializationTest(ITestOutputHelper testOutput)
             [
                 builder => builder
                     .Name("test-attribute")
-                    .Metadata(PropertyName("TestAttribute"))
+                    .PropertyName("TestAttribute")
                     .TypeName("string"),
             ],
             ruleBuilders:
@@ -113,7 +111,7 @@ public class TagHelperDeltaResultSerializationTest(ITestOutputHelper testOutput)
             [
                 builder => builder
                     .Name("test-attribute")
-                    .Metadata(PropertyName("TestAttribute"))
+                    .PropertyName("TestAttribute")
                     .TypeName("string"),
             ],
             ruleBuilders:
@@ -163,7 +161,7 @@ public class TagHelperDeltaResultSerializationTest(ITestOutputHelper testOutput)
             [
                 builder => builder
                     .Name("test-attribute")
-                    .Metadata(PropertyName("TestAttribute"))
+                    .PropertyName("TestAttribute")
                     .TypeName("string"),
             ],
             ruleBuilders:
@@ -211,13 +209,13 @@ public class TagHelperDeltaResultSerializationTest(ITestOutputHelper testOutput)
             [
                 builder => builder
                     .Name("test-attribute")
-                    .Metadata(PropertyName("TestAttribute"))
+                    .PropertyName("TestAttribute")
                     .TypeName("SomeEnum")
                     .AsEnum()
                     .Documentation("Summary"),
                 builder => builder
                     .Name("test-attribute2")
-                    .Metadata(PropertyName("TestAttribute2"))
+                    .PropertyName("TestAttribute2")
                     .TypeName("SomeDictionary")
                     .AsDictionaryAttribute("dict-prefix-", "string"),
             ],

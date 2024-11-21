@@ -5,7 +5,6 @@ using System;
 using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Components;
-using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
@@ -62,11 +61,9 @@ internal sealed class RefTagHelperDescriptorProvider() : TagHelperDescriptorProv
         {
             attribute.SetDocumentation(DocumentationDescriptor.RefTagHelper);
             attribute.Name = "@ref";
-            attribute.IsDirectiveAttribute = true;
-
+            attribute.PropertyName = "Ref";
             attribute.TypeName = typeof(object).FullName;
-            attribute.SetMetadata(
-                PropertyName("Ref"));
+            attribute.IsDirectiveAttribute = true;
         });
 
         return builder.Build();

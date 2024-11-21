@@ -160,7 +160,7 @@ namespace Test
             attribute.Documentation);
 
         Assert.Equal("@bind-MyProperty", attribute.Name);
-        Assert.Equal("MyProperty", attribute.GetPropertyName());
+        Assert.Equal("MyProperty", attribute.PropertyName);
         Assert.Equal("System.Action<System.String> Test.MyComponent.MyProperty", attribute.DisplayName);
 
         // Defined from the property type
@@ -384,7 +384,7 @@ namespace Test
             attribute.Documentation);
 
         Assert.Equal("@bind-MyProperty", attribute.Name);
-        Assert.Equal("MyProperty", attribute.GetPropertyName());
+        Assert.Equal("MyProperty", attribute.PropertyName);
         Assert.Equal("Microsoft.AspNetCore.Components.EventCallback<System.String> Test.MyComponent.MyProperty", attribute.DisplayName);
 
         // Defined from the property type
@@ -577,7 +577,7 @@ namespace Test
                 attribute.Documentation);
 
             Assert.Equal("@bind", attribute.Name);
-            Assert.Equal("Bind", attribute.GetPropertyName());
+            Assert.Equal("Bind", attribute.PropertyName);
             Assert.Equal("object Test.BindAttributes.Bind", attribute.DisplayName);
 
             // Defined from the property type
@@ -600,7 +600,7 @@ namespace Test
                 parameter.Documentation);
 
             Assert.Equal("format", parameter.Name);
-            Assert.Equal("Format_myprop", parameter.GetPropertyName());
+            Assert.Equal("Format_myprop", parameter.PropertyName);
             Assert.Equal(":format", parameter.DisplayName);
 
             // Defined from the property type
@@ -622,7 +622,7 @@ namespace Test
                 parameter.Documentation);
 
             Assert.Equal("culture", parameter.Name);
-            Assert.Equal("Culture", parameter.GetPropertyName());
+            Assert.Equal("Culture", parameter.PropertyName);
             Assert.Equal(":culture", parameter.DisplayName);
 
             // Defined from the property type
@@ -644,7 +644,7 @@ namespace Test
                 parameter.Documentation);
 
             Assert.Equal("get", parameter.Name);
-            Assert.Equal("Get", parameter.GetPropertyName());
+            Assert.Equal("Get", parameter.PropertyName);
             Assert.Equal(":get", parameter.DisplayName);
 
             // Defined from the property type
@@ -666,7 +666,7 @@ namespace Test
                 parameter.Documentation);
 
             Assert.Equal("set", parameter.Name);
-            Assert.Equal("Set", parameter.GetPropertyName());
+            Assert.Equal("Set", parameter.PropertyName);
             Assert.Equal(":set", parameter.DisplayName);
 
             // Defined from the property type
@@ -688,7 +688,7 @@ namespace Test
                 parameter.Documentation);
 
             Assert.Equal("after", parameter.Name);
-            Assert.Equal("After", parameter.GetPropertyName());
+            Assert.Equal("After", parameter.PropertyName);
             Assert.Equal(":after", parameter.DisplayName);
 
             // Defined from the property type
@@ -745,12 +745,12 @@ namespace Test
 
                 var attribute = Assert.Single(bind.BoundAttributes, a => a.Name.StartsWith("@bind", StringComparison.Ordinal));
                 Assert.Equal("@bind-myprop", attribute.Name);
-                Assert.Equal("Bind_myprop", attribute.GetPropertyName());
+                Assert.Equal("Bind_myprop", attribute.PropertyName);
                 Assert.Equal("object Test.BindAttributes.Bind_myprop", attribute.DisplayName);
 
                 attribute = Assert.Single(bind.BoundAttributes, a => a.Name.StartsWith("format", StringComparison.Ordinal));
                 Assert.Equal("format-myprop", attribute.Name);
-                Assert.Equal("Format_myprop", attribute.GetPropertyName());
+                Assert.Equal("Format_myprop", attribute.PropertyName);
                 Assert.Equal("string Test.BindAttributes.Format_myprop", attribute.DisplayName);
             },
             rule =>
@@ -773,12 +773,12 @@ namespace Test
 
         var attribute = Assert.Single(bind.BoundAttributes, a => a.Name.StartsWith("@bind", StringComparison.Ordinal));
         Assert.Equal("@bind-myprop", attribute.Name);
-        Assert.Equal("Bind_myprop", attribute.GetPropertyName());
+        Assert.Equal("Bind_myprop", attribute.PropertyName);
         Assert.Equal("object Test.BindAttributes.Bind_myprop", attribute.DisplayName);
 
         attribute = Assert.Single(bind.BoundAttributes, a => a.Name.StartsWith("format", StringComparison.Ordinal));
         Assert.Equal("format-myprop", attribute.Name);
-        Assert.Equal("Format_myprop", attribute.GetPropertyName());
+        Assert.Equal("Format_myprop", attribute.PropertyName);
         Assert.Equal("string Test.BindAttributes.Format_myprop", attribute.DisplayName);
     }
 
@@ -847,12 +847,12 @@ namespace Test
 
         var attribute = Assert.Single(bind.BoundAttributes, a => a.Name.StartsWith("@bind", StringComparison.Ordinal));
         Assert.Equal("@bind", attribute.Name);
-        Assert.Equal("Bind", attribute.GetPropertyName());
+        Assert.Equal("Bind", attribute.PropertyName);
         Assert.Equal("object Test.BindAttributes.Bind", attribute.DisplayName);
 
         var parameter = Assert.Single(attribute.Parameters, a => a.Name.Equals("format"));
         Assert.Equal("format", parameter.Name);
-        Assert.Equal("Format_myprop", parameter.GetPropertyName());
+        Assert.Equal("Format_myprop", parameter.PropertyName);
         Assert.Equal(":format", parameter.DisplayName);
     }
 
@@ -942,12 +942,12 @@ namespace Test
 
         var attribute = Assert.Single(bind.BoundAttributes, a => a.Name.StartsWith("@bind", StringComparison.Ordinal));
         Assert.Equal("@bind", attribute.Name);
-        Assert.Equal("Bind", attribute.GetPropertyName());
+        Assert.Equal("Bind", attribute.PropertyName);
         Assert.Equal("object Test.BindAttributes.Bind", attribute.DisplayName);
 
         var parameter = Assert.Single(attribute.Parameters, a => a.Name.Equals("format"));
         Assert.Equal("format", parameter.Name);
-        Assert.Equal("Format_myprop", parameter.GetPropertyName());
+        Assert.Equal("Format_myprop", parameter.PropertyName);
         Assert.Equal(":format", parameter.DisplayName);
     }
 
@@ -1039,12 +1039,12 @@ namespace Test
 
         var attribute = Assert.Single(bind.BoundAttributes, a => a.Name.StartsWith("@bind", StringComparison.Ordinal));
         Assert.Equal("@bind-somevalue", attribute.Name);
-        Assert.Equal("Bind_somevalue", attribute.GetPropertyName());
+        Assert.Equal("Bind_somevalue", attribute.PropertyName);
         Assert.Equal("object Test.BindAttributes.Bind_somevalue", attribute.DisplayName);
 
         var parameter = Assert.Single(attribute.Parameters, a => a.Name.Equals("format"));
         Assert.Equal("format", parameter.Name);
-        Assert.Equal("Format_somevalue", parameter.GetPropertyName());
+        Assert.Equal("Format_somevalue", parameter.PropertyName);
         Assert.Equal(":format", parameter.DisplayName);
     }
 
@@ -1174,7 +1174,7 @@ namespace Test
             attribute.Documentation);
 
         Assert.Equal("@bind-...", attribute.Name);
-        Assert.Equal("Bind", attribute.GetPropertyName());
+        Assert.Equal("Bind", attribute.PropertyName);
         Assert.Equal(
             "System.Collections.Generic.Dictionary<string, object> Microsoft.AspNetCore.Components.Bind.Bind",
             attribute.DisplayName);
@@ -1201,7 +1201,7 @@ namespace Test
             parameter.Documentation);
 
         Assert.Equal("format", parameter.Name);
-        Assert.Equal("Format", parameter.GetPropertyName());
+        Assert.Equal("Format", parameter.PropertyName);
         Assert.Equal(":format", parameter.DisplayName);
 
         // Defined from the property type
@@ -1223,7 +1223,7 @@ namespace Test
             parameter.Documentation);
 
         Assert.Equal("culture", parameter.Name);
-        Assert.Equal("Culture", parameter.GetPropertyName());
+        Assert.Equal("Culture", parameter.PropertyName);
         Assert.Equal(":culture", parameter.DisplayName);
 
         // Defined from the property type

@@ -380,7 +380,7 @@ public class RazorComponentDefinitionHelpersTest(ITestOutputHelper testOutput) :
         {
             Assert.True(result);
             Assert.NotNull(boundAttribute);
-            Assert.Equal(attributeDescriptorPropertyName, boundAttribute.GetPropertyName());
+            Assert.Equal(attributeDescriptorPropertyName, boundAttribute.PropertyName);
         }
     }
 

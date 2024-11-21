@@ -6,7 +6,6 @@
 using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 using Xunit;
-using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
 namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 
@@ -135,8 +134,8 @@ public class PreallocatedAttributeTargetExtensionTest
         var builder = new BoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperKind.Default);
         builder
             .Name("Foo")
-            .TypeName("System.String")
-            .Metadata(PropertyName("FooProp"));
+            .PropertyName("FooProp")
+            .TypeName("System.String");
 
         var descriptor = builder.Build();
 
@@ -180,9 +179,9 @@ __tagHelperExecutionContext.AddTagHelperAttribute(_tagHelper1);
         var builder = new BoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperKind.Default);
         builder
             .Name("Foo")
+            .PropertyName("FooProp")
             .TypeName("System.Collections.Generic.Dictionary<System.String, System.String>")
-            .AsDictionaryAttribute("pre-", "System.String")
-            .Metadata(PropertyName("FooProp"));
+            .AsDictionaryAttribute("pre-", "System.String");
 
         var descriptor = builder.Build();
 
@@ -232,9 +231,9 @@ __tagHelperExecutionContext.AddTagHelperAttribute(_tagHelper1);
         var builder = new BoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperKind.Default);
         builder
             .Name("Foo")
+            .PropertyName("FooProp")
             .TypeName("System.Collections.Generic.Dictionary<System.String, System.String>")
-            .AsDictionaryAttribute("pre-", "System.String")
-            .Metadata(PropertyName("FooProp"));
+            .AsDictionaryAttribute("pre-", "System.String");
 
         var boundAttribute = builder.Build();
         var tagHelper = tagHelperBuilder.Build();

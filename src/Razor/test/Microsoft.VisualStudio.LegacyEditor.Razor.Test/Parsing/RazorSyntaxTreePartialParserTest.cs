@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Razor.Language.Legacy;
 using Microsoft.AspNetCore.Razor.Test.Common.Editor;
 using Xunit;
 using Xunit.Abstractions;
-using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
 namespace Microsoft.VisualStudio.LegacyEditor.Razor.Parsing;
 
@@ -108,14 +107,14 @@ public class RazorSyntaxTreePartialParserTest(ITestOutputHelper testOutput) : To
         builder.BindAttribute(attribute =>
         {
             attribute.Name = "obj-attr";
+            attribute.PropertyName("ObjectAttribute");
             attribute.TypeName = typeof(object).FullName;
-            attribute.SetMetadata(PropertyName("ObjectAttribute"));
         });
         builder.BindAttribute(attribute =>
         {
             attribute.Name = "str-attr";
+            attribute.PropertyName("StringAttribute");
             attribute.TypeName = typeof(string).FullName;
-            attribute.SetMetadata(PropertyName("StringAttribute"));
         });
         var descriptors = new[] { builder.Build() };
         var projectEngine = CreateProjectEngine(tagHelpers: descriptors);

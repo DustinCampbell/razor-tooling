@@ -30,6 +30,7 @@ public sealed partial class BoundAttributeParameterDescriptorBuilder : TagHelper
 
     public string? Name { get; set; }
     public string? TypeName { get; set; }
+    public string? PropertyName { get; set; }
     public bool IsEnum { get; set; }
 
     public string? Documentation
@@ -67,6 +68,7 @@ public sealed partial class BoundAttributeParameterDescriptorBuilder : TagHelper
             _kind,
             Name ?? string.Empty,
             TypeName ?? string.Empty,
+            PropertyName,
             flags,
             _documentationObject,
             GetDisplayName(),

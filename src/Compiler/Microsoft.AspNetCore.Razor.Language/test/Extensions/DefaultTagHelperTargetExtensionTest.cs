@@ -9,7 +9,6 @@ using System.Linq;
 using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 using Xunit;
-using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
 namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 
@@ -25,7 +24,7 @@ public class DefaultTagHelperTargetExtensionTest : RazorProjectEngineTestBase
         {
             builder => builder
                 .Name("bound")
-                .Metadata(PropertyName("StringProp"))
+                .PropertyName("StringProp")
                 .TypeName("System.String"),
         });
 
@@ -37,7 +36,7 @@ public class DefaultTagHelperTargetExtensionTest : RazorProjectEngineTestBase
         {
             builder => builder
                 .Name("bound")
-                .Metadata(PropertyName("IntProp"))
+                .PropertyName("IntProp")
                 .TypeName("System.Int32"),
         });
 
@@ -49,7 +48,7 @@ public class DefaultTagHelperTargetExtensionTest : RazorProjectEngineTestBase
         {
             builder => builder
                 .Name("bound")
-                .Metadata(PropertyName("IntIndexer"))
+                .PropertyName("IntIndexer")
                 .TypeName("System.Collections.Generic.Dictionary<System.String, System.Int32>")
                 .AsDictionary("foo-", "System.Int32"),
         });

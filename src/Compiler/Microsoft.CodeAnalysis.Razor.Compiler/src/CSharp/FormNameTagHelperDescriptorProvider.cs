@@ -6,7 +6,6 @@ using System.Linq;
 using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Components;
-using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
@@ -67,11 +66,9 @@ internal sealed class FormNameTagHelperDescriptorProvider() : TagHelperDescripto
         {
             attribute.SetDocumentation(DocumentationDescriptor.FormNameTagHelper);
             attribute.Name = "@formname";
-            attribute.IsDirectiveAttribute = true;
-
+            attribute.PropertyName = "FormName";
             attribute.TypeName = typeof(string).FullName;
-            attribute.SetMetadata(
-                PropertyName("FormName"));
+            attribute.IsDirectiveAttribute = true;
         });
 
         return builder.Build();

@@ -1,8 +1,8 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System.Collections.Generic;
 using Xunit;
-using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
@@ -56,7 +56,7 @@ public class DefaultRequiredAttributeDescriptorBuilderTest
         var tagHelperBuilder = new TagHelperDescriptorBuilder(TagHelperKind.Default, "TestTagHelper", "Test");
         var tagMatchingRuleBuilder = new TagMatchingRuleDescriptorBuilder(tagHelperBuilder);
 
-        var metadata = MetadataCollection.Create(PropertyName("SomeProperty"));
+        var metadata = MetadataCollection.Create(new KeyValuePair<string, string?>("Key", "Value"));
 
         var builder1 = new RequiredAttributeDescriptorBuilder(tagMatchingRuleBuilder);
         var builder2 = new RequiredAttributeDescriptorBuilder(tagMatchingRuleBuilder);
@@ -85,8 +85,8 @@ public class DefaultRequiredAttributeDescriptorBuilderTest
         var builder1 = new RequiredAttributeDescriptorBuilder(tagMatchingRuleBuilder);
         var builder2 = new RequiredAttributeDescriptorBuilder(tagMatchingRuleBuilder);
 
-        builder1.Metadata.Add(PropertyName("SomeProperty"));
-        builder2.Metadata.Add(PropertyName("SomeProperty"));
+        builder1.Metadata.Add("Key", "Value");
+        builder2.Metadata.Add("Key", "Value");
 
         // Act
         var descriptor1 = builder1.Build();

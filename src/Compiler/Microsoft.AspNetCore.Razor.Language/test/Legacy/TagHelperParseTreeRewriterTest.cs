@@ -7,10 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using Microsoft.AspNetCore.Razor.Language.Components;
 using Microsoft.AspNetCore.Razor.Language.Syntax;
 using Xunit;
-using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
@@ -1314,7 +1312,7 @@ public class TagHelperParseTreeRewriterTest : TagHelperRewritingTestBase
             .BoundAttributeDescriptor(attribute =>
                 attribute
                 .Name("bound")
-                .Metadata(PropertyName("Bound"))
+                .PropertyName("Bound")
                 .TypeName(typeof(bool).FullName))
             .Build()
     ];
@@ -1921,7 +1919,7 @@ public class TagHelperParseTreeRewriterTest : TagHelperRewritingTestBase
             .BoundAttributeDescriptor(attribute =>
                 attribute
                 .Name("bound")
-                .Metadata(PropertyName("Bound"))
+                .PropertyName("Bound")
                 .TypeName(typeof(bool).FullName))
             .TagMatchingRuleDescriptor(rule =>
                 rule

@@ -6,7 +6,6 @@
 using System;
 using System.Collections.Generic;
 using Xunit;
-using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
 namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
@@ -48,8 +47,8 @@ public class TagHelpersIntegrationTest() : IntegrationTestBase(layer: TestProjec
                     {
                         builder => builder
                             .Name("bound")
-                            .Metadata(PropertyName("FooProp"))
-                            .TypeName("System.String"),
+                            .PropertyName("FooProp")
+                            .TypeName("System.String")
                     })
             };
 
@@ -85,8 +84,8 @@ public class TagHelpersIntegrationTest() : IntegrationTestBase(layer: TestProjec
                     {
                         builder => builder
                             .Name("value")
-                            .Metadata(PropertyName("FooProp"))
-                            .TypeName("System.String"),
+                            .PropertyName("FooProp")
+                            .TypeName("System.String")
                     })
             };
 

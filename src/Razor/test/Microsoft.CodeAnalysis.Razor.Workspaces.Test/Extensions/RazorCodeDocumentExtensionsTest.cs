@@ -9,7 +9,6 @@ using Microsoft.CodeAnalysis.Razor.Protocol;
 using Microsoft.NET.Sdk.Razor.SourceGenerators;
 using Xunit;
 using Xunit.Abstractions;
-using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
 namespace Microsoft.CodeAnalysis.Razor.Workspaces.Test.Extensions;
 
@@ -69,8 +68,8 @@ public class RazorCodeDocumentExtensionsTest(ITestOutputHelper testOutput) : Too
         descriptor.BindAttribute(builder =>
         {
             builder.Name = "asp-int";
+            builder.PropertyName("AspInt");
             builder.TypeName = typeof(int).FullName;
-            builder.SetMetadata(PropertyName("AspInt"));
         });
 
         TestCode code = """

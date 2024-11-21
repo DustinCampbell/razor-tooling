@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.NET.Sdk.Razor.SourceGenerators;
 using Xunit;
-using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
 namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 
@@ -28,8 +27,8 @@ public class DefaultTagHelperOptimizationPassTest
                 .TypeName("TestTagHelper")
                 .BoundAttributeDescriptor(attribute => attribute
                     .Name("Foo")
-                    .TypeName("System.Int32")
-                    .Metadata(PropertyName("FooProp")))
+                    .PropertyName("FooProp")
+                    .TypeName("System.Int32"))
                 .TagMatchingRuleDescriptor(rule => rule.RequireTagName("p"))
                 .Build()
         };

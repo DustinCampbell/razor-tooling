@@ -13,7 +13,6 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.NET.Sdk.Razor.SourceGenerators;
 using Moq;
 using Xunit;
-using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 using static Microsoft.AspNetCore.Razor.Language.Intermediate.IntermediateNodeAssert;
 
 namespace Microsoft.AspNetCore.Razor.Language;
@@ -324,9 +323,9 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
                     {
                         builder => builder
                             .Name("bound")
-                            .Metadata(PropertyName("FooProp"))
-                            .TypeName("System.String"),
-                            })
+                            .PropertyName("FooProp")
+                            .TypeName("System.String")
+                    })
             };
 
         // Act

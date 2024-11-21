@@ -6,7 +6,6 @@
 using System;
 using System.Collections.Generic;
 using Xunit;
-using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
@@ -24,8 +23,8 @@ public class TagHelperDescriptorComparerTest
                 {
                     builder => builder
                         .Name("value")
-                        .Metadata(PropertyName("FooProp"))
-                        .TypeName("System.String"),
+                        .PropertyName("FooProp")
+                        .TypeName("System.String")
                 });
         var descriptor2 = CreateTagHelperDescriptor(
                 tagName: "input",
@@ -35,8 +34,8 @@ public class TagHelperDescriptorComparerTest
                 {
                     builder => builder
                         .Name("value")
-                        .Metadata(PropertyName("FooProp"))
-                        .TypeName("System.String"),
+                        .PropertyName("FooProp")
+                        .TypeName("System.String")
                 });
 
         // Act
@@ -60,7 +59,7 @@ public class TagHelperDescriptorComparerTest
             {
                 builder => builder
                     .Name("IncrementBy")
-                    .Metadata(PropertyName("IncrementBy"))
+                    .PropertyName("IncrementBy")
                     .TypeName("System.Int32"),
             });
 
@@ -73,8 +72,8 @@ public class TagHelperDescriptorComparerTest
             {
                 builder => builder
                     .Name("value")
-                    .Metadata(PropertyName("FooProp"))
-                    .TypeName("System.String"),
+                    .PropertyName("FooProp")
+                    .TypeName("System.String")
             });
 
         // Act

@@ -5,7 +5,6 @@ using System;
 using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Components;
-using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
@@ -62,11 +61,9 @@ internal sealed class KeyTagHelperDescriptorProvider() : TagHelperDescriptorProv
         {
             attribute.SetDocumentation(DocumentationDescriptor.KeyTagHelper);
             attribute.Name = "@key";
-            attribute.IsDirectiveAttribute = true;
-
+            attribute.PropertyName = "Key";
             attribute.TypeName = typeof(object).FullName;
-            attribute.SetMetadata(
-                PropertyName("Key"));
+            attribute.IsDirectiveAttribute = true;
         });
 
         return builder.Build();

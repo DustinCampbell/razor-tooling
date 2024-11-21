@@ -28,6 +28,7 @@ public partial class BoundAttributeParameterDescriptorBuilder
 
         Name = null;
         TypeName = null;
+        PropertyName = null;
         IsEnum = false;
         DisplayName = null;
 

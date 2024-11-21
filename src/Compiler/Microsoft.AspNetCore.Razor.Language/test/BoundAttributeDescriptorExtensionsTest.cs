@@ -4,7 +4,6 @@
 #nullable disable
 
 using Xunit;
-using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
@@ -24,13 +23,13 @@ public class BoundAttributeDescriptorExtensionsTest
         var builder = new BoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperKind.Default);
         builder
             .Name("test")
-            .Metadata(PropertyName(expectedPropertyName))
+            .PropertyName(expectedPropertyName)
             .TypeName(typeof(int).FullName);
 
         var descriptor = builder.Build();
 
         // Act
-        var propertyName = descriptor.GetPropertyName();
+        var propertyName = descriptor.PropertyName;
 
         // Assert
         Assert.Equal(expectedPropertyName, propertyName);
@@ -53,7 +52,7 @@ public class BoundAttributeDescriptorExtensionsTest
         var descriptor = builder.Build();
 
         // Act
-        var propertyName = descriptor.GetPropertyName();
+        var propertyName = descriptor.PropertyName;
 
         // Assert
         Assert.Null(propertyName);
@@ -71,7 +70,7 @@ public class BoundAttributeDescriptorExtensionsTest
         var builder = new BoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperKind.Default);
         builder
             .Name("test")
-            .Metadata(PropertyName("IntProperty"))
+            .PropertyName("IntProperty")
             .TypeName(typeof(int).FullName);
 
         var descriptor = builder.Build();
@@ -95,7 +94,7 @@ public class BoundAttributeDescriptorExtensionsTest
         var builder = new BoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperKind.Ref);
         builder
             .Name("test")
-            .Metadata(PropertyName("IntProperty"))
+            .PropertyName("IntProperty")
             .TypeName(typeof(int).FullName);
 
         var descriptor = builder.Build();
@@ -119,7 +118,7 @@ public class BoundAttributeDescriptorExtensionsTest
         var builder = new BoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperKind.Default);
         builder
             .Name("test")
-            .Metadata(PropertyName("BoundProp"))
+            .PropertyName("BoundProp")
             .TypeName(typeof(string).FullName);
 
         var descriptor = builder.Build();
@@ -143,7 +142,7 @@ public class BoundAttributeDescriptorExtensionsTest
         var builder = new BoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperKind.Default);
         builder
             .Name("test")
-            .Metadata(PropertyName("BoundProp"))
+            .PropertyName("BoundProp")
             .TypeName(typeof(bool).FullName);
 
         var descriptor = builder.Build();
@@ -167,7 +166,7 @@ public class BoundAttributeDescriptorExtensionsTest
         var builder = new BoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperKind.Default);
         builder
             .Name("test")
-            .Metadata(PropertyName("BoundProp"))
+            .PropertyName("BoundProp")
             .TypeName("System.Collection.Generic.IDictionary<string, string>")
             .AsDictionary("prefix-test-", typeof(string).FullName);
 
@@ -192,7 +191,7 @@ public class BoundAttributeDescriptorExtensionsTest
         var builder = new BoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperKind.Default);
         builder
             .Name("test")
-            .Metadata(PropertyName("BoundProp"))
+            .PropertyName("BoundProp")
             .TypeName("System.Collection.Generic.IDictionary<string, string>")
             .AsDictionary("prefix-test-", typeof(string).FullName);
 
@@ -217,7 +216,7 @@ public class BoundAttributeDescriptorExtensionsTest
         var builder = new BoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperKind.Default);
         builder
             .Name("test")
-            .Metadata(PropertyName("BoundProp"))
+            .PropertyName("BoundProp")
             .TypeName(typeof(bool).FullName);
 
         var descriptor = builder.Build();
@@ -241,7 +240,7 @@ public class BoundAttributeDescriptorExtensionsTest
         var builder = new BoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperKind.Default);
         builder
             .Name("test")
-            .Metadata(PropertyName("BoundProp"))
+            .PropertyName("BoundProp")
             .TypeName(typeof(int).FullName);
 
         var descriptor = builder.Build();
@@ -265,7 +264,7 @@ public class BoundAttributeDescriptorExtensionsTest
         var builder = new BoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperKind.Default);
         builder
             .Name("test")
-            .Metadata(PropertyName("BoundProp"))
+            .PropertyName("BoundProp")
             .TypeName("System.Collection.Generic.IDictionary<string, bool>")
             .AsDictionary("prefix-test-", typeof(bool).FullName);
 
@@ -290,7 +289,7 @@ public class BoundAttributeDescriptorExtensionsTest
         var builder = new BoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperKind.Default);
         builder
             .Name("test")
-            .Metadata(PropertyName("BoundProp"))
+            .PropertyName("BoundProp")
             .TypeName("System.Collection.Generic.IDictionary<string, bool>")
             .AsDictionary("prefix-test-", typeof(bool).FullName);
 

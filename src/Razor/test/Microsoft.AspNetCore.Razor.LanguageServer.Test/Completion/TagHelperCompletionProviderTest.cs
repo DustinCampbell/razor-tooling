@@ -13,7 +13,6 @@ using Microsoft.CodeAnalysis.Testing;
 using Microsoft.VisualStudio.Editor.Razor;
 using Xunit;
 using Xunit.Abstractions;
-using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.Completion;
 
@@ -551,7 +550,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
         tagHelper.BindAttribute(attribute =>
         {
             attribute.Name = "bool-val";
-            attribute.SetMetadata(PropertyName("BoolVal"));
+            attribute.PropertyName = "BoolVal";
             attribute.TypeName = "System.Collections.Generic.IDictionary<System.String, System.Boolean>";
             attribute.AsDictionary("bool-val-", typeof(bool).FullName);
         });
@@ -594,7 +593,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
         tagHelper.BindAttribute(attribute =>
         {
             attribute.Name = "int-val";
-            attribute.SetMetadata(PropertyName("IntVal"));
+            attribute.PropertyName = "IntVal";
             attribute.TypeName = "System.Collections.Generic.IDictionary<System.String, System.Int32>";
             attribute.AsDictionary("int-val-", typeof(int).FullName);
         });

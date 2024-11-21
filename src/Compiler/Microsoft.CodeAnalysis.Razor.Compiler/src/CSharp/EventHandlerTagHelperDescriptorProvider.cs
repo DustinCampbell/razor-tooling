@@ -224,6 +224,7 @@ internal sealed class EventHandlerTagHelperDescriptorProvider : TagHelperDescrip
                         eventArgType));
 
                 a.Name = attributeName;
+                a.PropertyName = attribute;
 
                 // We want event handler directive attributes to default to C# context.
                 a.TypeName = $"Microsoft.AspNetCore.Components.EventCallback<{eventArgType}>";
@@ -233,21 +234,19 @@ internal sealed class EventHandlerTagHelperDescriptorProvider : TagHelperDescrip
                 a.SetMetadata(
                     // Make this weakly typed (don't type check) - delegates have their own type-checking
                     // logic that we don't want to interfere with.
-                    IsWeaklyTyped,
-                    PropertyName(attribute));
+                    IsWeaklyTyped);
 
                 if (enablePreventDefault)
                 {
                     a.BindAttributeParameter(parameter =>
                     {
                         parameter.Name = "preventDefault";
+                        parameter.PropertyName = "PreventDefault";
                         parameter.TypeName = typeof(bool).FullName;
                         parameter.SetDocumentation(
                             DocumentationDescriptor.From(
                                 DocumentationId.EventHandlerTagHelper_PreventDefault,
                                 attributeName));
-
-                        parameter.SetMetadata(Parameters.PreventDefault);
                     });
                 }
 
@@ -256,13 +255,12 @@ internal sealed class EventHandlerTagHelperDescriptorProvider : TagHelperDescrip
                     a.BindAttributeParameter(parameter =>
                     {
                         parameter.Name = "stopPropagation";
+                        parameter.PropertyName = "StopPropagation";
                         parameter.TypeName = typeof(bool).FullName;
                         parameter.SetDocumentation(
                             DocumentationDescriptor.From(
                                 DocumentationId.EventHandlerTagHelper_StopPropagation,
                                 attributeName));
-
-                        parameter.SetMetadata(Parameters.StopPropagation);
                     });
                 }
             });
