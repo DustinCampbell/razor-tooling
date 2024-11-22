@@ -198,7 +198,7 @@ public sealed class ComponentAttributeIntermediateNode : IntermediateNode
         // to parse this. We need to parse this just before we write it out to the code generator,
         // so we can't compute it up front either.
 
-        if (BoundAttribute == null || !BoundAttribute.IsEventCallbackProperty())
+        if (BoundAttribute == null || !BoundAttribute.IsEventCallbackProperty)
         {
             throw new InvalidOperationException("This attribute is not an EventCallback attribute.");
         }

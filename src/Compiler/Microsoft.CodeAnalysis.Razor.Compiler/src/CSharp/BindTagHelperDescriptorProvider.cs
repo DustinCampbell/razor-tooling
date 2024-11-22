@@ -548,7 +548,7 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
                     //
                     // We assume that the Delegate or EventCallback<> has a matching type, and the C# compiler will help
                     // you figure figure it out if you did it wrongly.
-                    (!changeAttribute.IsDelegateProperty() && !changeAttribute.IsEventCallbackProperty()))
+                    (!changeAttribute.IsDelegateProperty() && !changeAttribute.IsEventCallbackProperty))
                 {
                     continue;
                 }

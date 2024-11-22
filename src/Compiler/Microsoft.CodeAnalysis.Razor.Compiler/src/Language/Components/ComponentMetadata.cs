@@ -96,8 +96,6 @@ internal static class ComponentMetadata
 
         public const string DelegateWithAwaitableResultKey = "Components.IsDelegateAwaitableResult";
 
-        public const string EventCallbackKey = "Components.EventCallback";
-
         public const string GenericTypedKey = "Components.GenericTyped";
 
         public const string ExplicitTypeNameKey = "Components.ExplicitTypeName";

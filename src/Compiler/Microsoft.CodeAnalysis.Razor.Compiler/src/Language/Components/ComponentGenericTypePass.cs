@@ -369,7 +369,7 @@ internal class ComponentGenericTypePass : ComponentIntermediateNodePassBase, IRa
                     {
                         attribute.Annotations.Add(ComponentMetadata.Component.ExplicitTypeNameKey, true);
                     }
-                    else if(attribute.BoundAttribute?.IsEventCallbackProperty() ?? false)
+                    else if(attribute.BoundAttribute?.IsEventCallbackProperty ?? false)
                     {
                         var typeParameters = typeNameFeature.ParseTypeParameters(attribute.TypeName);
                         for (int i = 0; i < typeParameters.Count; i++)
@@ -388,7 +388,7 @@ internal class ComponentGenericTypePass : ComponentIntermediateNodePassBase, IRa
                     // This is a weakly typed delegate, treat it as Action<object>
                     attribute.TypeName = "global::System.Action<global::System.Object>";
                 }
-                else if (attribute.TypeName == null && (attribute.BoundAttribute?.IsEventCallbackProperty() ?? false))
+                else if (attribute.TypeName == null && (attribute.BoundAttribute?.IsEventCallbackProperty ?? false))
                 {
                     // This is a weakly typed event-callback, treat it as EventCallback (non-generic)
                     attribute.TypeName = $"global::{ComponentsApi.EventCallback.FullTypeName}";

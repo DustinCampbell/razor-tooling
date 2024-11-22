@@ -816,7 +816,7 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
                     context.CodeWriter.Write(")");
                 }
             }
-            else if (node.BoundAttribute?.IsEventCallbackProperty() ?? false)
+            else if (node.BoundAttribute?.IsEventCallbackProperty ?? false)
             {
                 // This is the case where we are writing an EventCallback (a delegate with super-powers).
                 //

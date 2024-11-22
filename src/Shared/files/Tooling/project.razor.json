@@ -1209,10 +1209,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 1997828848194881335,
-          "Data2": -135282105040077100,
-          "Data3": 1648039651273539047,
-          "Data4": -976083291893877984
+          "Data1": 7597695647131171801,
+          "Data2": -5517794168006855859,
+          "Data3": -5601772085179547859,
+          "Data4": -1920257546534858819
         },
         "Kind": 3,
         "RuntimeKind": 1,
@@ -1268,9 +1268,7 @@
             "PropertyName": "OnInvalidSubmit",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Forms.EditContext> Microsoft.AspNetCore.Components.Forms.EditForm.OnInvalidSubmit",
             "Documentation": "\n            <summary>\n            A callback that will be invoked when the form is submitted and the\n            <see cref=\"P:Microsoft.AspNetCore.Components.Forms.EditForm.EditContext\" /> is determined to be invalid.\n            </summary>\n        ",
-            "Metadata": {
-              "Components.EventCallback": "True"
-            }
+            "Flags": 2049
           },
           {
             "Kind": 3,
@@ -1279,9 +1277,7 @@
             "PropertyName": "OnSubmit",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Forms.EditContext> Microsoft.AspNetCore.Components.Forms.EditForm.OnSubmit",
             "Documentation": "\n             <summary>\n             A callback that will be invoked when the form is submitted.\n            \n             If using this parameter, you are responsible for triggering any validation\n             manually, e.g., by calling <see cref=\"M:Microsoft.AspNetCore.Components.Forms.EditContext.Validate\" />.\n             </summary>\n        ",
-            "Metadata": {
-              "Components.EventCallback": "True"
-            }
+            "Flags": 2049
           },
           {
             "Kind": 3,
@@ -1290,9 +1286,7 @@
             "PropertyName": "OnValidSubmit",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Forms.EditContext> Microsoft.AspNetCore.Components.Forms.EditForm.OnValidSubmit",
             "Documentation": "\n            <summary>\n            A callback that will be invoked when the form is submitted and the\n            <see cref=\"P:Microsoft.AspNetCore.Components.Forms.EditForm.EditContext\" /> is determined to be valid.\n            </summary>\n        ",
-            "Metadata": {
-              "Components.EventCallback": "True"
-            }
+            "Flags": 2049
           },
           {
             "Kind": 3,
@@ -1310,10 +1304,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 402239643549934853,
-          "Data2": 6098447180634174749,
-          "Data3": -3384335821598803098,
-          "Data4": 7360974913519696135
+          "Data1": -4775238873513714634,
+          "Data2": -8929806412987251171,
+          "Data3": 7007307471490057356,
+          "Data4": 8547814495692183204
         },
         "Kind": 3,
         "RuntimeKind": 1,
@@ -1369,9 +1363,7 @@
             "PropertyName": "OnInvalidSubmit",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Forms.EditContext> Microsoft.AspNetCore.Components.Forms.EditForm.OnInvalidSubmit",
             "Documentation": "\n            <summary>\n            A callback that will be invoked when the form is submitted and the\n            <see cref=\"P:Microsoft.AspNetCore.Components.Forms.EditForm.EditContext\" /> is determined to be invalid.\n            </summary>\n        ",
-            "Metadata": {
-              "Components.EventCallback": "True"
-            }
+            "Flags": 2049
           },
           {
             "Kind": 3,
@@ -1380,9 +1372,7 @@
             "PropertyName": "OnSubmit",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Forms.EditContext> Microsoft.AspNetCore.Components.Forms.EditForm.OnSubmit",
             "Documentation": "\n             <summary>\n             A callback that will be invoked when the form is submitted.\n            \n             If using this parameter, you are responsible for triggering any validation\n             manually, e.g., by calling <see cref=\"M:Microsoft.AspNetCore.Components.Forms.EditContext.Validate\" />.\n             </summary>\n        ",
-            "Metadata": {
-              "Components.EventCallback": "True"
-            }
+            "Flags": 2049
           },
           {
             "Kind": 3,
@@ -1391,9 +1381,7 @@
             "PropertyName": "OnValidSubmit",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Forms.EditContext> Microsoft.AspNetCore.Components.Forms.EditForm.OnValidSubmit",
             "Documentation": "\n            <summary>\n            A callback that will be invoked when the form is submitted and the\n            <see cref=\"P:Microsoft.AspNetCore.Components.Forms.EditForm.EditContext\" /> is determined to be valid.\n            </summary>\n        ",
-            "Metadata": {
-              "Components.EventCallback": "True"
-            }
+            "Flags": 2049
           },
           {
             "Kind": 3,
@@ -1483,10 +1471,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -5884608610926589818,
-          "Data2": 6619699645530862113,
-          "Data3": -2668772235861942261,
-          "Data4": -8659154519092827075
+          "Data1": 8567950025352922200,
+          "Data2": 6980336228992154684,
+          "Data3": 870882370674803224,
+          "Data4": -5405460074919323047
         },
         "Kind": 3,
         "RuntimeKind": 1,
@@ -1526,9 +1514,7 @@
             "PropertyName": "ValueChanged",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.Boolean> Microsoft.AspNetCore.Components.Forms.InputCheckbox.ValueChanged",
             "Documentation": "\n            <summary>\n            Gets or sets a callback that updates the bound value.\n            </summary>\n        ",
-            "Metadata": {
-              "Components.EventCallback": "True"
-            }
+            "Flags": 2049
           },
           {
             "Kind": 3,
@@ -1542,10 +1528,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 7565608248092035103,
-          "Data2": -7406402032442621912,
-          "Data3": 4675309816828016316,
-          "Data4": 4355848377118003472
+          "Data1": 9101956222050554301,
+          "Data2": 3324898992173714914,
+          "Data3": -4523202046190744819,
+          "Data4": 6363713509886670203
         },
         "Kind": 3,
         "RuntimeKind": 1,
@@ -1585,9 +1571,7 @@
             "PropertyName": "ValueChanged",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.Boolean> Microsoft.AspNetCore.Components.Forms.InputCheckbox.ValueChanged",
             "Documentation": "\n            <summary>\n            Gets or sets a callback that updates the bound value.\n            </summary>\n        ",
-            "Metadata": {
-              "Components.EventCallback": "True"
-            }
+            "Flags": 2049
           },
           {
             "Kind": 3,
@@ -1601,10 +1585,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 70962886659164799,
-          "Data2": -7726233389912742280,
-          "Data3": -1665683089584847907,
-          "Data4": -7184386505817378879
+          "Data1": 8879246115418152029,
+          "Data2": 7176589015541974625,
+          "Data3": 3969116223914164829,
+          "Data4": 1023799374870821651
         },
         "Kind": 3,
         "RuntimeKind": 1,
@@ -1666,8 +1650,8 @@
             "PropertyName": "ValueChanged",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<TValue> Microsoft.AspNetCore.Components.Forms.InputDate<TValue>.ValueChanged",
             "Documentation": "\n            <summary>\n            Gets or sets a callback that updates the bound value.\n            </summary>\n        ",
+            "Flags": 2049,
             "Metadata": {
-              "Components.EventCallback": "True",
               "Components.GenericTyped": "True"
             }
           },
@@ -1689,10 +1673,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -3900208962817323764,
-          "Data2": 9040286141916812960,
-          "Data3": -5940445016485272764,
-          "Data4": 4250065745813238732
+          "Data1": -5530747242112094251,
+          "Data2": 6404884519035458636,
+          "Data3": 5979771714931711564,
+          "Data4": -8897694537302948257
         },
         "Kind": 3,
         "RuntimeKind": 1,
@@ -1754,8 +1738,8 @@
             "PropertyName": "ValueChanged",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<TValue> Microsoft.AspNetCore.Components.Forms.InputDate<TValue>.ValueChanged",
             "Documentation": "\n            <summary>\n            Gets or sets a callback that updates the bound value.\n            </summary>\n        ",
+            "Flags": 2049,
             "Metadata": {
-              "Components.EventCallback": "True",
               "Components.GenericTyped": "True"
             }
           },
@@ -1777,10 +1761,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 4057055538772519999,
-          "Data2": 4439433214546753550,
-          "Data3": -5004106902942251922,
-          "Data4": -2866762906819036714
+          "Data1": 5244705436050919012,
+          "Data2": -7219500821791426492,
+          "Data3": 4055273732809772122,
+          "Data4": -2677018069315992847
         },
         "Kind": 3,
         "RuntimeKind": 1,
@@ -1842,8 +1826,8 @@
             "PropertyName": "ValueChanged",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<TValue> Microsoft.AspNetCore.Components.Forms.InputNumber<TValue>.ValueChanged",
             "Documentation": "\n            <summary>\n            Gets or sets a callback that updates the bound value.\n            </summary>\n        ",
+            "Flags": 2049,
             "Metadata": {
-              "Components.EventCallback": "True",
               "Components.GenericTyped": "True"
             }
           },
@@ -1865,10 +1849,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -863696928494566847,
-          "Data2": 5589616989302209770,
-          "Data3": 4111390164784045310,
-          "Data4": 5575232631288405045
+          "Data1": 7335586831984359566,
+          "Data2": 5857657352408094515,
+          "Data3": -1781542284322452831,
+          "Data4": 3182698191823649139
         },
         "Kind": 3,
         "RuntimeKind": 1,
@@ -1930,8 +1914,8 @@
             "PropertyName": "ValueChanged",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<TValue> Microsoft.AspNetCore.Components.Forms.InputNumber<TValue>.ValueChanged",
             "Documentation": "\n            <summary>\n            Gets or sets a callback that updates the bound value.\n            </summary>\n        ",
+            "Flags": 2049,
             "Metadata": {
-              "Components.EventCallback": "True",
               "Components.GenericTyped": "True"
             }
           },
@@ -1953,10 +1937,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 6431650450776157122,
-          "Data2": 5892013028702970798,
-          "Data3": -5653374120224374923,
-          "Data4": 6728993490037923891
+          "Data1": -6162500296839554529,
+          "Data2": -6022193261525838064,
+          "Data3": -2315103975490268424,
+          "Data4": 4319442429483943939
         },
         "Kind": 3,
         "RuntimeKind": 1,
@@ -2018,8 +2002,8 @@
             "PropertyName": "ValueChanged",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<TValue> Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>.ValueChanged",
             "Documentation": "\n            <summary>\n            Gets or sets a callback that updates the bound value.\n            </summary>\n        ",
+            "Flags": 2049,
             "Metadata": {
-              "Components.EventCallback": "True",
               "Components.GenericTyped": "True"
             }
           },
@@ -2041,10 +2025,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 216850927456423974,
-          "Data2": -3616127833776294527,
-          "Data3": 5491896392441899810,
-          "Data4": 988370942295125859
+          "Data1": -4301739385773657116,
+          "Data2": 4614083724700820103,
+          "Data3": 9181217192898111781,
+          "Data4": 5323839377591729210
         },
         "Kind": 3,
         "RuntimeKind": 1,
@@ -2106,8 +2090,8 @@
             "PropertyName": "ValueChanged",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<TValue> Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>.ValueChanged",
             "Documentation": "\n            <summary>\n            Gets or sets a callback that updates the bound value.\n            </summary>\n        ",
+            "Flags": 2049,
             "Metadata": {
-              "Components.EventCallback": "True",
               "Components.GenericTyped": "True"
             }
           },
@@ -2173,10 +2157,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 4268527859135210905,
-          "Data2": -3361202095154469275,
-          "Data3": 1120545680675897408,
-          "Data4": -6069982227085194689
+          "Data1": -4885056300905793735,
+          "Data2": 2127584030235738080,
+          "Data3": 699809575345816266,
+          "Data4": -4540818499293916148
         },
         "Kind": 3,
         "RuntimeKind": 1,
@@ -2216,9 +2200,7 @@
             "PropertyName": "ValueChanged",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.String> Microsoft.AspNetCore.Components.Forms.InputText.ValueChanged",
             "Documentation": "\n            <summary>\n            Gets or sets a callback that updates the bound value.\n            </summary>\n        ",
-            "Metadata": {
-              "Components.EventCallback": "True"
-            }
+            "Flags": 2049
           },
           {
             "Kind": 3,
@@ -2232,10 +2214,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -3144994427261139860,
-          "Data2": -5242646494185164656,
-          "Data3": -2940540755564265439,
-          "Data4": -8232062921719083960
+          "Data1": 5341967504966890053,
+          "Data2": 376392185615474110,
+          "Data3": 1212315645800258842,
+          "Data4": 2641111914904314385
         },
         "Kind": 3,
         "RuntimeKind": 1,
@@ -2275,9 +2257,7 @@
             "PropertyName": "ValueChanged",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.String> Microsoft.AspNetCore.Components.Forms.InputText.ValueChanged",
             "Documentation": "\n            <summary>\n            Gets or sets a callback that updates the bound value.\n            </summary>\n        ",
-            "Metadata": {
-              "Components.EventCallback": "True"
-            }
+            "Flags": 2049
           },
           {
             "Kind": 3,
@@ -2291,10 +2271,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 4948747318278712033,
-          "Data2": -1462327430194268043,
-          "Data3": -8715394514096217879,
-          "Data4": -3081381028690484138
+          "Data1": -1369459778067694325,
+          "Data2": -1195830666727045203,
+          "Data3": 1241766317426201211,
+          "Data4": -7516947114023856016
         },
         "Kind": 3,
         "RuntimeKind": 1,
@@ -2334,9 +2314,7 @@
             "PropertyName": "ValueChanged",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.String> Microsoft.AspNetCore.Components.Forms.InputTextArea.ValueChanged",
             "Documentation": "\n            <summary>\n            Gets or sets a callback that updates the bound value.\n            </summary>\n        ",
-            "Metadata": {
-              "Components.EventCallback": "True"
-            }
+            "Flags": 2049
           },
           {
             "Kind": 3,
@@ -2350,10 +2328,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 7142887417154969573,
-          "Data2": -284387040114151845,
-          "Data3": -4697815155155268984,
-          "Data4": 4317745052257504883
+          "Data1": 811551244148809104,
+          "Data2": -8572666262629517859,
+          "Data3": -7573682537216385630,
+          "Data4": 548041724990700449
         },
         "Kind": 3,
         "RuntimeKind": 1,
@@ -2393,9 +2371,7 @@
             "PropertyName": "ValueChanged",
             "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.String> Microsoft.AspNetCore.Components.Forms.InputTextArea.ValueChanged",
             "Documentation": "\n            <summary>\n            Gets or sets a callback that updates the bound value.\n            </summary>\n        ",
-            "Metadata": {
-              "Components.EventCallback": "True"
-            }
+            "Flags": 2049
           },
           {
             "Kind": 3,

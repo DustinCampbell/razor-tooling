@@ -2037,10 +2037,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -2484955046451645682,
-      "Data2": 3241996481384044301,
-      "Data3": -5073555478772709855,
-      "Data4": -6256805139637857326
+      "Data1": 3309596743987867364,
+      "Data2": 7208749291448878128,
+      "Data3": -5102507357119658182,
+      "Data4": 3993274475758106535
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -2096,9 +2096,7 @@
         "PropertyName": "OnInvalidSubmit",
         "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Forms.EditContext> Microsoft.AspNetCore.Components.Forms.EditForm.OnInvalidSubmit",
         "Documentation": "\n<summary>\nAcallbackthatwillbeinvokedwhentheformissubmittedandthe\n<seecref=\"P:Microsoft.AspNetCore.Components.Forms.EditForm.EditContext\"/>isdeterminedtobeinvalid.\n</summary>\n",
-        "Metadata": {
-          "Components.EventCallback": "True"
-        }
+        "Flags": 2049
       },
       {
         "Kind": 3,
@@ -2107,9 +2105,7 @@
         "PropertyName": "OnSubmit",
         "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Forms.EditContext> Microsoft.AspNetCore.Components.Forms.EditForm.OnSubmit",
         "Documentation": "\n<summary>\nAcallbackthatwillbeinvokedwhentheformissubmitted.\n\nIfusingthisparameter,youareresponsiblefortriggeringanyvalidation\nmanually,e.g.,bycalling<seecref=\"M:Microsoft.AspNetCore.Components.Forms.EditContext.Validate\"/>.\n</summary>\n",
-        "Metadata": {
-          "Components.EventCallback": "True"
-        }
+        "Flags": 2049
       },
       {
         "Kind": 3,
@@ -2118,9 +2114,7 @@
         "PropertyName": "OnValidSubmit",
         "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Forms.EditContext> Microsoft.AspNetCore.Components.Forms.EditForm.OnValidSubmit",
         "Documentation": "\n<summary>\nAcallbackthatwillbeinvokedwhentheformissubmittedandthe\n<seecref=\"P:Microsoft.AspNetCore.Components.Forms.EditForm.EditContext\"/>isdeterminedtobevalid.\n</summary>\n",
-        "Metadata": {
-          "Components.EventCallback": "True"
-        }
+        "Flags": 2049
       },
       {
         "Kind": 3,
@@ -2138,10 +2132,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 2892810268340369383,
-      "Data2": 8711342216504909804,
-      "Data3": 7560691702976629267,
-      "Data4": -5868819247441004589
+      "Data1": 7941768684782474526,
+      "Data2": -1852437131463118651,
+      "Data3": 5737788803456022782,
+      "Data4": -8941225160621870286
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -2197,9 +2191,7 @@
         "PropertyName": "OnInvalidSubmit",
         "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Forms.EditContext> Microsoft.AspNetCore.Components.Forms.EditForm.OnInvalidSubmit",
         "Documentation": "\n<summary>\nAcallbackthatwillbeinvokedwhentheformissubmittedandthe\n<seecref=\"P:Microsoft.AspNetCore.Components.Forms.EditForm.EditContext\"/>isdeterminedtobeinvalid.\n</summary>\n",
-        "Metadata": {
-          "Components.EventCallback": "True"
-        }
+        "Flags": 2049
       },
       {
         "Kind": 3,
@@ -2208,9 +2200,7 @@
         "PropertyName": "OnSubmit",
         "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Forms.EditContext> Microsoft.AspNetCore.Components.Forms.EditForm.OnSubmit",
         "Documentation": "\n<summary>\nAcallbackthatwillbeinvokedwhentheformissubmitted.\n\nIfusingthisparameter,youareresponsiblefortriggeringanyvalidation\nmanually,e.g.,bycalling<seecref=\"M:Microsoft.AspNetCore.Components.Forms.EditContext.Validate\"/>.\n</summary>\n",
-        "Metadata": {
-          "Components.EventCallback": "True"
-        }
+        "Flags": 2049
       },
       {
         "Kind": 3,
@@ -2219,9 +2209,7 @@
         "PropertyName": "OnValidSubmit",
         "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Forms.EditContext> Microsoft.AspNetCore.Components.Forms.EditForm.OnValidSubmit",
         "Documentation": "\n<summary>\nAcallbackthatwillbeinvokedwhentheformissubmittedandthe\n<seecref=\"P:Microsoft.AspNetCore.Components.Forms.EditForm.EditContext\"/>isdeterminedtobevalid.\n</summary>\n",
-        "Metadata": {
-          "Components.EventCallback": "True"
-        }
+        "Flags": 2049
       },
       {
         "Kind": 3,
@@ -2311,10 +2299,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 1411877345405246807,
-      "Data2": 3311979186320991877,
-      "Data3": 1454305461679246459,
-      "Data4": -5829989701630851870
+      "Data1": 6731305000505094545,
+      "Data2": 4236172955683408797,
+      "Data3": -4663986390211547256,
+      "Data4": 6418187721660410160
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -2354,9 +2342,7 @@
         "PropertyName": "ValueChanged",
         "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.Boolean> Microsoft.AspNetCore.Components.Forms.InputCheckbox.ValueChanged",
         "Documentation": "\n<summary>\nGetsorsetsacallbackthatupdatestheboundvalue.\n</summary>\n",
-        "Metadata": {
-          "Components.EventCallback": "True"
-        }
+        "Flags": 2049
       },
       {
         "Kind": 3,
@@ -2370,10 +2356,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 8562866699754909060,
-      "Data2": -5126302679392336765,
-      "Data3": 6965305105283119437,
-      "Data4": 4369073713771552257
+      "Data1": 3572988266093208135,
+      "Data2": -157414494750138076,
+      "Data3": -4434586669896472551,
+      "Data4": 4803007039348700597
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -2413,9 +2399,7 @@
         "PropertyName": "ValueChanged",
         "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.Boolean> Microsoft.AspNetCore.Components.Forms.InputCheckbox.ValueChanged",
         "Documentation": "\n<summary>\nGetsorsetsacallbackthatupdatestheboundvalue.\n</summary>\n",
-        "Metadata": {
-          "Components.EventCallback": "True"
-        }
+        "Flags": 2049
       },
       {
         "Kind": 3,
@@ -2429,10 +2413,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 7736323621867204804,
-      "Data2": -107776352813876950,
-      "Data3": -7650220573924978568,
-      "Data4": -7612597751147146289
+      "Data1": 7368303193421710184,
+      "Data2": 828840855255731258,
+      "Data3": -8175682348540015536,
+      "Data4": -8062914123944229354
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -2494,8 +2478,8 @@
         "PropertyName": "ValueChanged",
         "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<TValue> Microsoft.AspNetCore.Components.Forms.InputDate<TValue>.ValueChanged",
         "Documentation": "\n<summary>\nGetsorsetsacallbackthatupdatestheboundvalue.\n</summary>\n",
+        "Flags": 2049,
         "Metadata": {
-          "Components.EventCallback": "True",
           "Components.GenericTyped": "True"
         }
       },
@@ -2517,10 +2501,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -2604377080050605467,
-      "Data2": 7863183383605230440,
-      "Data3": 325802483320323508,
-      "Data4": 3650847536647915244
+      "Data1": 8198131353379574818,
+      "Data2": -3246121534407497086,
+      "Data3": 3687882654482228097,
+      "Data4": 3440594707671049553
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -2582,8 +2566,8 @@
         "PropertyName": "ValueChanged",
         "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<TValue> Microsoft.AspNetCore.Components.Forms.InputDate<TValue>.ValueChanged",
         "Documentation": "\n<summary>\nGetsorsetsacallbackthatupdatestheboundvalue.\n</summary>\n",
+        "Flags": 2049,
         "Metadata": {
-          "Components.EventCallback": "True",
           "Components.GenericTyped": "True"
         }
       },
@@ -2605,10 +2589,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -643078468852318313,
-      "Data2": 7174815552580050716,
-      "Data3": -4329883569223551104,
-      "Data4": 7816172319429259936
+      "Data1": 4477639566418902234,
+      "Data2": -7366623962646626082,
+      "Data3": 6426272043216581619,
+      "Data4": -4068033088017489907
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -2670,8 +2654,8 @@
         "PropertyName": "ValueChanged",
         "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<TValue> Microsoft.AspNetCore.Components.Forms.InputNumber<TValue>.ValueChanged",
         "Documentation": "\n<summary>\nGetsorsetsacallbackthatupdatestheboundvalue.\n</summary>\n",
+        "Flags": 2049,
         "Metadata": {
-          "Components.EventCallback": "True",
           "Components.GenericTyped": "True"
         }
       },
@@ -2693,10 +2677,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 4078619830323618236,
-      "Data2": -5688625230097741136,
-      "Data3": -6852077588009318559,
-      "Data4": -5977483072214299214
+      "Data1": 7280455826120169781,
+      "Data2": -1243677832611505476,
+      "Data3": -162202928044217188,
+      "Data4": 3658366138645250542
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -2758,8 +2742,8 @@
         "PropertyName": "ValueChanged",
         "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<TValue> Microsoft.AspNetCore.Components.Forms.InputNumber<TValue>.ValueChanged",
         "Documentation": "\n<summary>\nGetsorsetsacallbackthatupdatestheboundvalue.\n</summary>\n",
+        "Flags": 2049,
         "Metadata": {
-          "Components.EventCallback": "True",
           "Components.GenericTyped": "True"
         }
       },
@@ -2781,10 +2765,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 348628215128394600,
-      "Data2": 3099395696822445557,
-      "Data3": 7186072567920686281,
-      "Data4": 3854339119906662089
+      "Data1": 3699747218776699430,
+      "Data2": 4307411639319507820,
+      "Data3": -4221491405880676167,
+      "Data4": -3363065896592224369
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -2846,8 +2830,8 @@
         "PropertyName": "ValueChanged",
         "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<TValue> Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>.ValueChanged",
         "Documentation": "\n<summary>\nGetsorsetsacallbackthatupdatestheboundvalue.\n</summary>\n",
+        "Flags": 2049,
         "Metadata": {
-          "Components.EventCallback": "True",
           "Components.GenericTyped": "True"
         }
       },
@@ -2869,10 +2853,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -5097789898998991469,
-      "Data2": 5635301191179888722,
-      "Data3": 7902111880664976445,
-      "Data4": -2499485089173643590
+      "Data1": -2804343805916436814,
+      "Data2": -7742277773281428741,
+      "Data3": -5028283137878048375,
+      "Data4": -7507032778812062690
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -2934,8 +2918,8 @@
         "PropertyName": "ValueChanged",
         "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<TValue> Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>.ValueChanged",
         "Documentation": "\n<summary>\nGetsorsetsacallbackthatupdatestheboundvalue.\n</summary>\n",
+        "Flags": 2049,
         "Metadata": {
-          "Components.EventCallback": "True",
           "Components.GenericTyped": "True"
         }
       },
@@ -3001,10 +2985,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 110917230589689592,
-      "Data2": -7781463493741940117,
-      "Data3": 4529205062405351117,
-      "Data4": -3156144909361915201
+      "Data1": -1780064279735653682,
+      "Data2": -6849478403369477002,
+      "Data3": -9103898932536882980,
+      "Data4": 1454330877714215489
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -3044,9 +3028,7 @@
         "PropertyName": "ValueChanged",
         "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.String> Microsoft.AspNetCore.Components.Forms.InputText.ValueChanged",
         "Documentation": "\n<summary>\nGetsorsetsacallbackthatupdatestheboundvalue.\n</summary>\n",
-        "Metadata": {
-          "Components.EventCallback": "True"
-        }
+        "Flags": 2049
       },
       {
         "Kind": 3,
@@ -3060,10 +3042,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -6523052192913852880,
-      "Data2": -1687593163605938650,
-      "Data3": -5681734879543546835,
-      "Data4": -6594360796721992283
+      "Data1": 7504916743730899985,
+      "Data2": -577953651060286020,
+      "Data3": -6907775704298146713,
+      "Data4": 107292622529064807
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -3103,9 +3085,7 @@
         "PropertyName": "ValueChanged",
         "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.String> Microsoft.AspNetCore.Components.Forms.InputText.ValueChanged",
         "Documentation": "\n<summary>\nGetsorsetsacallbackthatupdatestheboundvalue.\n</summary>\n",
-        "Metadata": {
-          "Components.EventCallback": "True"
-        }
+        "Flags": 2049
       },
       {
         "Kind": 3,
@@ -3119,10 +3099,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 8876664579677260679,
-      "Data2": 6430202155881813050,
-      "Data3": -3767683906190490571,
-      "Data4": -4034701339145986821
+      "Data1": 7232675124937148767,
+      "Data2": -1388390207867574907,
+      "Data3": 2890751423226630647,
+      "Data4": -2285643320010375868
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -3162,9 +3142,7 @@
         "PropertyName": "ValueChanged",
         "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.String> Microsoft.AspNetCore.Components.Forms.InputTextArea.ValueChanged",
         "Documentation": "\n<summary>\nGetsorsetsacallbackthatupdatestheboundvalue.\n</summary>\n",
-        "Metadata": {
-          "Components.EventCallback": "True"
-        }
+        "Flags": 2049
       },
       {
         "Kind": 3,
@@ -3178,10 +3156,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 4821227355899733032,
-      "Data2": 2027519661387131428,
-      "Data3": -4083021441627744833,
-      "Data4": 3846410608891580873
+      "Data1": -8936022560825571127,
+      "Data2": -6828102905295384503,
+      "Data3": -1567164888734061447,
+      "Data4": 3040325594065593954
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -3221,9 +3199,7 @@
         "PropertyName": "ValueChanged",
         "DisplayName": "Microsoft.AspNetCore.Components.EventCallback<System.String> Microsoft.AspNetCore.Components.Forms.InputTextArea.ValueChanged",
         "Documentation": "\n<summary>\nGetsorsetsacallbackthatupdatestheboundvalue.\n</summary>\n",
-        "Metadata": {
-          "Components.EventCallback": "True"
-        }
+        "Flags": 2049
       },
       {
         "Kind": 3,

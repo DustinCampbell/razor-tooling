@@ -94,6 +94,12 @@ public sealed partial class BoundAttributeDescriptorBuilder : TagHelperObjectBui
         set => _flags.UpdateFlag(BoundAttributeFlags.IsChildContentProperty, value);
     }
 
+    public bool IsEventCallbackProperty
+    {
+        get => _flags.IsFlagSet(BoundAttributeFlags.IsEventCallbackProperty);
+        set => _flags.UpdateFlag(BoundAttributeFlags.IsEventCallbackProperty, value);
+    }
+
     internal BoundAttributeFlags Flags
     {
         get => _flags;
@@ -169,7 +175,7 @@ public sealed partial class BoundAttributeDescriptorBuilder : TagHelperObjectBui
 
     private BoundAttributeFlags ComputeFlags()
     {
-        BoundAttributeFlags flags = _flags;
+        var flags = _flags;
 
         if (CaseSensitive)
         {

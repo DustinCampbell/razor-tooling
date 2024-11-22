@@ -14,15 +14,6 @@ internal static class TagHelperBoundAttributeDescriptorExtensions
     public static bool IsDelegateWithAwaitableResult(this BoundAttributeDescriptor attribute)
         => attribute.IsTrue(ComponentMetadata.Component.DelegateWithAwaitableResultKey);
 
-    /// <summary>
-    /// Gets a value indicating whether the attribute is of type <c>EventCallback</c> or
-    /// <c>EventCallback{T}</c>
-    /// </summary>
-    /// <param name="attribute">The <see cref="BoundAttributeDescriptor"/>.</param>
-    /// <returns><c>true</c> if the attribute is an event callback, otherwise <c>false</c>.</returns>
-    public static bool IsEventCallbackProperty(this BoundAttributeDescriptor attribute)
-        => attribute.IsTrue(ComponentMetadata.Component.EventCallbackKey);
-
     public static bool IsGenericTypedProperty(this BoundAttributeDescriptor attribute)
         => attribute.IsTrue(ComponentMetadata.Component.GenericTypedKey);
 

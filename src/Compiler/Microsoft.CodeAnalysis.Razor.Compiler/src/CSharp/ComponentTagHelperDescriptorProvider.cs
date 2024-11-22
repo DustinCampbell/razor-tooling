@@ -217,7 +217,7 @@ internal sealed class ComponentTagHelperDescriptorProvider : TagHelperDescriptor
 
                 if (kind == PropertyKind.EventCallback)
                 {
-                    metadata.Add(MakeTrue(ComponentMetadata.Component.EventCallbackKey));
+                    pb.IsEventCallbackProperty = true;
                 }
 
                 if (kind == PropertyKind.Delegate)

@@ -681,7 +681,7 @@ internal class ComponentRuntimeNodeWriter : ComponentNodeWriter
                     context.CodeWriter.Write(")");
                 }
             }
-            else if (node.BoundAttribute?.IsEventCallbackProperty() ?? false)
+            else if (node.BoundAttribute?.IsEventCallbackProperty ?? false)
             {
                 var explicitType = (bool?)node.Annotations[ComponentMetadata.Component.ExplicitTypeNameKey];
                 var isInferred = (bool?)node.Annotations[ComponentMetadata.Component.OpenGenericKey];

@@ -736,7 +736,7 @@ namespace Test
         Assert.False(attribute.IsBooleanProperty);
         Assert.False(attribute.IsEnum);
         Assert.False(attribute.IsStringProperty);
-        Assert.True(attribute.IsEventCallbackProperty());
+        Assert.True(attribute.IsEventCallbackProperty);
         Assert.False(attribute.IsDelegateProperty());
         Assert.False(attribute.IsChildContentProperty);
     }
@@ -787,7 +787,7 @@ namespace Test
                 Assert.False(a.IsBooleanProperty);
                 Assert.False(a.IsEnum);
                 Assert.False(a.IsStringProperty);
-                Assert.True(a.IsEventCallbackProperty());
+                Assert.True(a.IsEventCallbackProperty);
                 Assert.False(a.IsDelegateProperty());
                 Assert.False(a.IsChildContentProperty);
                 Assert.False(a.IsGenericTypedProperty());
@@ -840,7 +840,7 @@ namespace Test
                 Assert.False(a.IsBooleanProperty);
                 Assert.False(a.IsEnum);
                 Assert.False(a.IsStringProperty);
-                Assert.True(a.IsEventCallbackProperty());
+                Assert.True(a.IsEventCallbackProperty);
                 Assert.False(a.IsDelegateProperty());
                 Assert.False(a.IsChildContentProperty);
                 Assert.True(a.IsGenericTypedProperty());

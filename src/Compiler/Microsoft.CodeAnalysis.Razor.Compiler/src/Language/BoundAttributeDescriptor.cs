@@ -44,6 +44,12 @@ public sealed class BoundAttributeDescriptor : TagHelperObject<BoundAttributeDes
     /// </summary>
     public bool IsChildContentProperty => (_flags & BoundAttributeFlags.IsChildContentProperty) != 0;
 
+    /// <summary>
+    /// Gets a value indicating whether the attribute is of type <c>EventCallback</c> or
+    /// <c>EventCallback{T}</c>
+    /// </summary>
+    public bool IsEventCallbackProperty => (_flags & BoundAttributeFlags.IsEventCallbackProperty) != 0;
+
     public ImmutableArray<BoundAttributeParameterDescriptor> Parameters { get; }
     public MetadataCollection Metadata { get; }
 

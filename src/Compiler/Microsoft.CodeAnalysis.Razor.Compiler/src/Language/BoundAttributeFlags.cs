@@ -18,5 +18,6 @@ internal enum BoundAttributeFlags
     IsEditorRequired = 1 << 7,
     IsDirectiveAttribute = 1 << 8,
     IsWeaklyTyped = 1 << 9,
-    IsChildContentProperty = 1 << 10
+    IsChildContentProperty = 1 << 10,
+    IsEventCallbackProperty = 1 << 11
 }
