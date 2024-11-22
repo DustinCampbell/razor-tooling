@@ -545,8 +545,7 @@ internal sealed class ComponentTagHelperDescriptorProvider : TagHelperDescriptor
                 b.Name = ComponentMetadata.ChildContent.ParameterAttributeName;
                 b.PropertyName = b.Name;
                 b.TypeName = typeof(string).FullName;
-                b.SetMetadata(
-                    MakeTrue(ComponentMetadata.Component.ChildContentParameterNameKey));
+                b.IsChildContentParameterNameProperty = true;
 
                 var documentation = childContentName == null
                     ? DocumentationDescriptor.ChildContentParameterName_TopLevel

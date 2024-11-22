@@ -387,7 +387,7 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
                 }
                 else if (child is TagHelperPropertyIntermediateNode property)
                 {
-                    if (property.BoundAttribute.IsChildContentParameterNameProperty())
+                    if (property.BoundAttribute.IsChildContentParameterNameProperty)
                     {
                         // Check for each child content with a parameter name, that the parameter name is specified
                         // with literal text. For instance, the following is not allowed and should generate a diagnostic.
@@ -513,7 +513,7 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
 
             // Another special case here -- this might be a 'Context' parameter, which specifies the name
             // for lambda parameter for parameterized child content
-            if (node.BoundAttribute.IsChildContentParameterNameProperty())
+            if (node.BoundAttribute.IsChildContentParameterNameProperty)
             {
                 // Check for each child content with a parameter name, that the parameter name is specified
                 // with literal text. For instance, the following is not allowed and should generate a diagnostic.

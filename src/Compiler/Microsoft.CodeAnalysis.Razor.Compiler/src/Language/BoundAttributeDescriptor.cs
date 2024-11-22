@@ -45,6 +45,12 @@ public sealed class BoundAttributeDescriptor : TagHelperObject<BoundAttributeDes
     public bool IsChildContentProperty => (_flags & BoundAttributeFlags.IsChildContentProperty) != 0;
 
     /// <summary>
+    /// Gets a value that indicates whether the property is used to specify the name of the parameter
+    /// for a parameterized child content property.
+    /// </summary>
+    public bool IsChildContentParameterNameProperty => (_flags & BoundAttributeFlags.IsChildContentParameterNameProperty) != 0;
+
+    /// <summary>
     /// Gets a value indicating whether the attribute is of type <c>EventCallback</c> or
     /// <c>EventCallback{T}</c>
     /// </summary>

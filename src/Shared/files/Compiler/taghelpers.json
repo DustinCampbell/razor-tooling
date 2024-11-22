@@ -927,10 +927,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 2121361284079376197,
-      "Data2": 6591325183588842241,
-      "Data3": -2708244348213305563,
-      "Data4": -1480976456009742739
+      "Data1": 7108253313628058247,
+      "Data2": 2854359760417130057,
+      "Data3": -5923084450452865095,
+      "Data4": 8668457478249980982
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -987,19 +987,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Microsoft.AspNetCore.Components.Routing.Router.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -1246139957146372468,
-      "Data2": -7184362178616482125,
-      "Data3": -3749161747843976450,
-      "Data4": -1090149676339137809
+      "Data1": 5699196978629961576,
+      "Data2": 277909377459840096,
+      "Data3": 8279725431600668596,
+      "Data4": 1123685003592509267
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -1056,19 +1053,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Microsoft.AspNetCore.Components.Routing.Router.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -6060234033279486631,
-      "Data2": -2589447099805256694,
-      "Data3": -8635630845239539280,
-      "Data4": 1690598896120045902
+      "Data1": -1923219155022024429,
+      "Data2": 6902102472187226454,
+      "Data3": -6226200583235339503,
+      "Data4": -5409899037351520422
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -1092,19 +1086,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Microsoft.AspNetCore.Components.Routing.Router.Found.Context",
         "Documentation": "Specifiestheparameternameforthe'Found'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": 3191292184751116164,
-      "Data2": 6233832811139992355,
-      "Data3": -4189078126309214214,
-      "Data4": 3464104285110935131
+      "Data1": -8688151553313166158,
+      "Data2": -5921222549368837877,
+      "Data3": -5300677305549030117,
+      "Data4": -6182978778848383911
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -1128,10 +1119,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Microsoft.AspNetCore.Components.Routing.Router.Found.Context",
         "Documentation": "Specifiestheparameternameforthe'Found'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -1223,10 +1211,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -7981619752030763799,
-      "Data2": 8697872811054350629,
-      "Data3": -3570082623844410781,
-      "Data4": -1521879824211252493
+      "Data1": 1342752817377192753,
+      "Data2": -4428936386509530147,
+      "Data3": -3288818447478636503,
+      "Data4": 7715130772639822004
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -1283,19 +1271,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": 4178079414888420102,
-      "Data2": -6610480325974469924,
-      "Data3": -8871322431423760509,
-      "Data4": 8047741201058433199
+      "Data1": 7408764911664986197,
+      "Data2": -6892058790458517974,
+      "Data3": -8477345275149653666,
+      "Data4": -6822675690306177667
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -1352,10 +1337,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -1405,10 +1387,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -7763134688542886834,
-      "Data2": -3247280023746225709,
-      "Data3": -2129378780287539940,
-      "Data4": -220796422849441710
+      "Data1": -5817668925044355419,
+      "Data2": 296774338932096706,
+      "Data3": 480782998081288652,
+      "Data4": -3641974272387609635
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -1432,19 +1414,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized.Context",
         "Documentation": "Specifiestheparameternameforthe'NotAuthorized'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -2998837546844697505,
-      "Data2": -7446114015504681514,
-      "Data3": -4385839426763906833,
-      "Data4": -6952802456999780181
+      "Data1": 6492041295651420740,
+      "Data2": -8842620630207934604,
+      "Data3": -5734343284872260691,
+      "Data4": -5541875736670443690
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -1468,19 +1447,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized.Context",
         "Documentation": "Specifiestheparameternameforthe'NotAuthorized'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -9170027968357922134,
-      "Data2": -7835839806659997095,
-      "Data3": 382704687212602338,
-      "Data4": -8171908343637166164
+      "Data1": 7286694191885649817,
+      "Data2": 5718348584624728441,
+      "Data3": -1048975127361451963,
+      "Data4": 3513664863303171529
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -1565,19 +1541,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -6245176905772854732,
-      "Data2": 2727062305723692708,
-      "Data3": -627382256624719881,
-      "Data4": -7865760038782471236
+      "Data1": 6496459380418832698,
+      "Data2": -5557245101347776092,
+      "Data3": 7794587315485236427,
+      "Data4": -9171426184685246060
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -1662,19 +1635,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": 7112624362656032322,
-      "Data2": -2747397479379695597,
-      "Data3": -3052300057032649834,
-      "Data4": -8653656379979080853
+      "Data1": -4223089062048089036,
+      "Data2": 2870284224559390716,
+      "Data3": 6444333611006883845,
+      "Data4": -231380821947584867
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -1698,19 +1668,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorized.Context",
         "Documentation": "Specifiestheparameternameforthe'Authorized'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": 7470100051788859883,
-      "Data2": 3046680246086656114,
-      "Data3": -8487528682639964250,
-      "Data4": 1753731380306674850
+      "Data1": 1352650081874535817,
+      "Data2": -3449385214929043258,
+      "Data3": 5593473228454366123,
+      "Data4": -8153951406419099175
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -1734,10 +1701,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorized.Context",
         "Documentation": "Specifiestheparameternameforthe'Authorized'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -1787,10 +1751,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 6464457745376059679,
-      "Data2": -8178411472026726003,
-      "Data3": 5823545535807595649,
-      "Data4": 8143686482652855842
+      "Data1": -2299311790303377512,
+      "Data2": -7981514264725093641,
+      "Data3": 6398341890806360943,
+      "Data4": -5858242051058791765
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -1814,19 +1778,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Microsoft.AspNetCore.Components.Authorization.AuthorizeView.ChildContent.Context",
         "Documentation": "Specifiestheparameternameforthe'ChildContent'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": 2246552745849670894,
-      "Data2": -6408264523025810716,
-      "Data3": 7467830410253021651,
-      "Data4": -549297167209143358
+      "Data1": -6791086017620833187,
+      "Data2": -5179502867186019206,
+      "Data3": -7159863624931947404,
+      "Data4": 6265231130951648216
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -1850,19 +1811,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Microsoft.AspNetCore.Components.Authorization.AuthorizeView.ChildContent.Context",
         "Documentation": "Specifiestheparameternameforthe'ChildContent'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -4386033858714618896,
-      "Data2": -8835088812882312995,
-      "Data3": 7405032293376418748,
-      "Data4": -4646497221166455188
+      "Data1": -4303044095683630276,
+      "Data2": -2744905497090364867,
+      "Data3": 4671784265406889861,
+      "Data4": -7204795884063712619
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -1886,19 +1844,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Microsoft.AspNetCore.Components.Authorization.AuthorizeView.NotAuthorized.Context",
         "Documentation": "Specifiestheparameternameforthe'NotAuthorized'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -4878041270934364558,
-      "Data2": -7075856240940675982,
-      "Data3": -3021466379030610634,
-      "Data4": 8889529533945870603
+      "Data1": -4125975645790647892,
+      "Data2": 1596119485749444710,
+      "Data3": 8682191759548533687,
+      "Data4": 6783554094951798200
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -1922,10 +1877,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Microsoft.AspNetCore.Components.Authorization.AuthorizeView.NotAuthorized.Context",
         "Documentation": "Specifiestheparameternameforthe'NotAuthorized'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -2037,10 +1989,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 3309596743987867364,
-      "Data2": 7208749291448878128,
-      "Data3": -5102507357119658182,
-      "Data4": 3993274475758106535
+      "Data1": -3683253223424984790,
+      "Data2": 6717886912204315107,
+      "Data3": 9078761233044727630,
+      "Data4": 4794153349803791263
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -2123,19 +2075,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Microsoft.AspNetCore.Components.Forms.EditForm.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": 7941768684782474526,
-      "Data2": -1852437131463118651,
-      "Data3": 5737788803456022782,
-      "Data4": -8941225160621870286
+      "Data1": -4904518825320748769,
+      "Data2": 1702246136729108809,
+      "Data3": -6487985795775580664,
+      "Data4": 3752117708154974492
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -2218,19 +2167,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Microsoft.AspNetCore.Components.Forms.EditForm.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -6993420608187054910,
-      "Data2": 3868744288217241614,
-      "Data3": 2335826643286719546,
-      "Data4": -71383380301477523
+      "Data1": 3298787859471365030,
+      "Data2": 2498200224652063844,
+      "Data3": -3138596717850953500,
+      "Data4": 6813435323701963769
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -2254,19 +2200,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent.Context",
         "Documentation": "Specifiestheparameternameforthe'ChildContent'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": 2397313524148512194,
-      "Data2": -8601133277746858485,
-      "Data3": -2346429841228516549,
-      "Data4": 4890145709722917708
+      "Data1": 3937845348718746355,
+      "Data2": 876505024765259734,
+      "Data3": -3909460442597288013,
+      "Data4": 7607230499580681030
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -2290,10 +2233,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent.Context",
         "Documentation": "Specifiestheparameternameforthe'ChildContent'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },

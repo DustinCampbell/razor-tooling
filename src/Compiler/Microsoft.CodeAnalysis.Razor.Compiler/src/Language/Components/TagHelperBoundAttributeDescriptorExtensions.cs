@@ -42,16 +42,4 @@ internal static class TagHelperBoundAttributeDescriptorExtensions
     public static bool IsParameterizedChildContentProperty(this BoundAttributeDescriptorBuilder attribute)
         => attribute.IsChildContentProperty &&
            attribute.TypeName != ComponentsApi.RenderFragment.FullTypeName;
-
-    /// <summary>
-    /// Gets a value that indicates whether the property is used to specify the name of the parameter
-    /// for a parameterized child content property.
-    /// </summary>
-    /// <param name="attribute">The <see cref="BoundAttributeDescriptor"/>.</param>
-    /// <returns>
-    /// Returns <c>true</c> if the property specifies the name of a parameter for a parameterized child content,
-    /// otherwise <c>false</c>.
-    /// </returns>
-    public static bool IsChildContentParameterNameProperty(this BoundAttributeDescriptor attribute)
-        => attribute.IsTrue(ComponentMetadata.Component.ChildContentParameterNameKey);
 }

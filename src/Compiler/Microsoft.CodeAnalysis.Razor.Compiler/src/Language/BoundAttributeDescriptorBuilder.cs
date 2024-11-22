@@ -94,6 +94,12 @@ public sealed partial class BoundAttributeDescriptorBuilder : TagHelperObjectBui
         set => _flags.UpdateFlag(BoundAttributeFlags.IsChildContentProperty, value);
     }
 
+    public bool IsChildContentParameterNameProperty
+    {
+        get => _flags.IsFlagSet(BoundAttributeFlags.IsChildContentParameterNameProperty);
+        set => _flags.UpdateFlag(BoundAttributeFlags.IsChildContentParameterNameProperty, value);
+    }
+
     public bool IsEventCallbackProperty
     {
         get => _flags.IsFlagSet(BoundAttributeFlags.IsEventCallbackProperty);

@@ -19,5 +19,6 @@ internal enum BoundAttributeFlags
     IsDirectiveAttribute = 1 << 8,
     IsWeaklyTyped = 1 << 9,
     IsChildContentProperty = 1 << 10,
-    IsEventCallbackProperty = 1 << 11
+    IsEventCallbackProperty = 1 << 11,
+    IsChildContentParameterNameProperty = 1 << 12
 }

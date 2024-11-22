@@ -227,10 +227,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 6032364602041685649,
-      "Data2": -3167932560708188111,
-      "Data3": 4542110198772798657,
-      "Data4": -7894460702396186143
+      "Data1": -7761869716113734567,
+      "Data2": 3239522447836297184,
+      "Data3": 1782216627233854198,
+      "Data4": -2998917253204709106
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -287,19 +287,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": 7121290710778507378,
-      "Data2": -7615761137603774439,
-      "Data3": 3761731120602505072,
-      "Data4": 5410120042930206343
+      "Data1": 8245377572888356683,
+      "Data2": 3155801574775303314,
+      "Data3": 4862716533700050776,
+      "Data4": 6651356534755014994
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -356,10 +353,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -409,10 +403,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -7763134688542886834,
-      "Data2": -3247280023746225709,
-      "Data3": -2129378780287539940,
-      "Data4": -220796422849441710
+      "Data1": -5817668925044355419,
+      "Data2": 296774338932096706,
+      "Data3": 480782998081288652,
+      "Data4": -3641974272387609635
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -436,19 +430,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized.Context",
         "Documentation": "Specifiestheparameternameforthe'NotAuthorized'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -2998837546844697505,
-      "Data2": -7446114015504681514,
-      "Data3": -4385839426763906833,
-      "Data4": -6952802456999780181
+      "Data1": 6492041295651420740,
+      "Data2": -8842620630207934604,
+      "Data3": -5734343284872260691,
+      "Data4": -5541875736670443690
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -472,19 +463,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized.Context",
         "Documentation": "Specifiestheparameternameforthe'NotAuthorized'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -9170027968357922134,
-      "Data2": -7835839806659997095,
-      "Data3": 382704687212602338,
-      "Data4": -8171908343637166164
+      "Data1": 7286694191885649817,
+      "Data2": 5718348584624728441,
+      "Data3": -1048975127361451963,
+      "Data4": 3513664863303171529
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -569,19 +557,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -6245176905772854732,
-      "Data2": 2727062305723692708,
-      "Data3": -627382256624719881,
-      "Data4": -7865760038782471236
+      "Data1": 6496459380418832698,
+      "Data2": -5557245101347776092,
+      "Data3": 7794587315485236427,
+      "Data4": -9171426184685246060
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -666,19 +651,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": 7112624362656032322,
-      "Data2": -2747397479379695597,
-      "Data3": -3052300057032649834,
-      "Data4": -8653656379979080853
+      "Data1": -4223089062048089036,
+      "Data2": 2870284224559390716,
+      "Data3": 6444333611006883845,
+      "Data4": -231380821947584867
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -702,19 +684,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorized.Context",
         "Documentation": "Specifiestheparameternameforthe'Authorized'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": 7470100051788859883,
-      "Data2": 3046680246086656114,
-      "Data3": -8487528682639964250,
-      "Data4": 1753731380306674850
+      "Data1": 1352650081874535817,
+      "Data2": -3449385214929043258,
+      "Data3": 5593473228454366123,
+      "Data4": -8153951406419099175
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -738,10 +717,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorized.Context",
         "Documentation": "Specifiestheparameternameforthe'Authorized'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -791,10 +767,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 6464457745376059679,
-      "Data2": -8178411472026726003,
-      "Data3": 5823545535807595649,
-      "Data4": 8143686482652855842
+      "Data1": -2299311790303377512,
+      "Data2": -7981514264725093641,
+      "Data3": 6398341890806360943,
+      "Data4": -5858242051058791765
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -818,19 +794,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Microsoft.AspNetCore.Components.Authorization.AuthorizeView.ChildContent.Context",
         "Documentation": "Specifiestheparameternameforthe'ChildContent'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": 2246552745849670894,
-      "Data2": -6408264523025810716,
-      "Data3": 7467830410253021651,
-      "Data4": -549297167209143358
+      "Data1": -6791086017620833187,
+      "Data2": -5179502867186019206,
+      "Data3": -7159863624931947404,
+      "Data4": 6265231130951648216
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -854,19 +827,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Microsoft.AspNetCore.Components.Authorization.AuthorizeView.ChildContent.Context",
         "Documentation": "Specifiestheparameternameforthe'ChildContent'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -4386033858714618896,
-      "Data2": -8835088812882312995,
-      "Data3": 7405032293376418748,
-      "Data4": -4646497221166455188
+      "Data1": -4303044095683630276,
+      "Data2": -2744905497090364867,
+      "Data3": 4671784265406889861,
+      "Data4": -7204795884063712619
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -890,19 +860,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Microsoft.AspNetCore.Components.Authorization.AuthorizeView.NotAuthorized.Context",
         "Documentation": "Specifiestheparameternameforthe'NotAuthorized'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -4878041270934364558,
-      "Data2": -7075856240940675982,
-      "Data3": -3021466379030610634,
-      "Data4": 8889529533945870603
+      "Data1": -4125975645790647892,
+      "Data2": 1596119485749444710,
+      "Data3": 8682191759548533687,
+      "Data4": 6783554094951798200
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -926,10 +893,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Microsoft.AspNetCore.Components.Authorization.AuthorizeView.NotAuthorized.Context",
         "Documentation": "Specifiestheparameternameforthe'NotAuthorized'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -1041,10 +1005,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 6101682102782107760,
-      "Data2": 5980699129303931639,
-      "Data3": 5184067541363037657,
-      "Data4": -548770360997221154
+      "Data1": -863111140808199037,
+      "Data2": 7218357428452265999,
+      "Data3": -2792626194694290124,
+      "Data4": -1513490201938308246
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -1127,19 +1091,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Microsoft.AspNetCore.Components.Forms.EditForm.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": 8552943698455427016,
-      "Data2": 5951005349291307203,
-      "Data3": -2664837971074193810,
-      "Data4": 1623974942526205976
+      "Data1": 4989354310945741748,
+      "Data2": -6477069568736246227,
+      "Data3": -2314898981425017927,
+      "Data4": -6355298865346997142
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -1222,19 +1183,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Microsoft.AspNetCore.Components.Forms.EditForm.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -6993420608187054910,
-      "Data2": 3868744288217241614,
-      "Data3": 2335826643286719546,
-      "Data4": -71383380301477523
+      "Data1": 3298787859471365030,
+      "Data2": 2498200224652063844,
+      "Data3": -3138596717850953500,
+      "Data4": 6813435323701963769
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -1258,19 +1216,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent.Context",
         "Documentation": "Specifiestheparameternameforthe'ChildContent'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": 2397313524148512194,
-      "Data2": -8601133277746858485,
-      "Data3": -2346429841228516549,
-      "Data4": 4890145709722917708
+      "Data1": 3937845348718746355,
+      "Data2": 876505024765259734,
+      "Data3": -3909460442597288013,
+      "Data4": 7607230499580681030
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -1294,10 +1249,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent.Context",
         "Documentation": "Specifiestheparameternameforthe'ChildContent'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -2947,10 +2899,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 332888706586559421,
-      "Data2": -3051380210921906724,
-      "Data3": 7187087566881919083,
-      "Data4": -7839392442017994580
+      "Data1": 57571723052171370,
+      "Data2": 7100998294143758466,
+      "Data3": -8461792698435174752,
+      "Data4": 3134254888070406890
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -3175,10 +3127,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikAutoComplete<TItem>.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ],
     "Metadata": {
@@ -3187,10 +3136,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 1259990181437654999,
-      "Data2": -3211361402674460838,
-      "Data3": 8429629797770974319,
-      "Data4": -1156413482253169004
+      "Data1": -4657189181844189750,
+      "Data2": 9079342272632676720,
+      "Data3": 2020963285012068221,
+      "Data4": -6436951835586627830
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -3415,10 +3364,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikAutoComplete<TItem>.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ],
     "Metadata": {
@@ -3515,10 +3461,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 4426745340007279961,
-      "Data2": 899937344840657608,
-      "Data3": 1961960225653859831,
-      "Data4": 4951783034497832077
+      "Data1": -8926765521340138084,
+      "Data2": 3689410614491830508,
+      "Data3": 1374869631268913172,
+      "Data4": 994447666868076830
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -3542,19 +3488,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikAutoComplete<TItem>.ItemTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'ItemTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": 5321728924270367169,
-      "Data2": 8446248181008668450,
-      "Data3": 8876324551653700631,
-      "Data4": 3360558299445121115
+      "Data1": 6954847576705125893,
+      "Data2": 6323438690600060255,
+      "Data3": 5616244492035992190,
+      "Data4": -3523918662465256605
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -3578,10 +3521,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikAutoComplete<TItem>.ItemTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'ItemTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -11511,10 +11451,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -19909576517318049,
-      "Data2": 4096521414302690719,
-      "Data3": -2407738283288816146,
-      "Data4": 1117192859901734992
+      "Data1": 7985807494103829939,
+      "Data2": 4470435114533992352,
+      "Data3": -5423680599974033484,
+      "Data4": -7879303482852259476
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -11580,19 +11520,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.ChartSeriesTooltip.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -8886731673955427344,
-      "Data2": 4893363202026545489,
-      "Data3": 7648952275614368622,
-      "Data4": -7243795961954373703
+      "Data1": -6434953790068840283,
+      "Data2": 664849037682594752,
+      "Data3": 3305644598217643717,
+      "Data4": 4451646342888619290
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -11658,10 +11595,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.ChartSeriesTooltip.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -11709,10 +11643,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -3300542983349290149,
-      "Data2": -8316530557521173096,
-      "Data3": -4481297506578206141,
-      "Data4": -2778321169209301489
+      "Data1": 7527066631820642081,
+      "Data2": -8808972691088178049,
+      "Data3": 157848031645881501,
+      "Data4": 3379673427412311745
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -11736,19 +11670,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.ChartSeriesTooltip.Template.Context",
         "Documentation": "Specifiestheparameternameforthe'Template'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -7422217659244344583,
-      "Data2": 3958565366762273267,
-      "Data3": 2178557986343780326,
-      "Data4": 9184165241479776789
+      "Data1": -8428258874556430731,
+      "Data2": -4810318674875842389,
+      "Data3": 1521636153788998395,
+      "Data4": -4362373670664136760
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -11772,10 +11703,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.ChartSeriesTooltip.Template.Context",
         "Documentation": "Specifiestheparameternameforthe'Template'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -12495,10 +12423,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -3827165366394761783,
-      "Data2": 7216239522954031327,
-      "Data3": -5528346598269896133,
-      "Data4": -4940599774760760999
+      "Data1": 9211327498106391091,
+      "Data2": 4860761177476563514,
+      "Data3": -234673597882071811,
+      "Data4": -1750063587739838101
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -12597,19 +12525,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.ChartTooltip.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": 8884194182036510251,
-      "Data2": -2592990492197906423,
-      "Data3": -3438081216235750923,
-      "Data4": -680538723255184658
+      "Data1": -5965994109500905970,
+      "Data2": -521641583358144214,
+      "Data3": -2824513937807338727,
+      "Data4": 7645695590339581120
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -12708,10 +12633,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.ChartTooltip.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -12759,10 +12681,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 1024799902602817438,
-      "Data2": -2319886344163519712,
-      "Data3": 6785173699482556807,
-      "Data4": -6401461442915988808
+      "Data1": 5625903679914276173,
+      "Data2": 6384324460837233433,
+      "Data3": -8842302120615385835,
+      "Data4": 2434976666956011050
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -12786,19 +12708,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.ChartTooltip.SharedTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'SharedTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": 6089787647794407549,
-      "Data2": 3808898173862250632,
-      "Data3": 2118872929936381539,
-      "Data4": -906310873673467257
+      "Data1": -2681050537880913773,
+      "Data2": 7132326166414555543,
+      "Data3": 7588828096847461295,
+      "Data4": -4511488312042789234
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -12822,19 +12741,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.ChartTooltip.SharedTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'SharedTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -1630867568479863018,
-      "Data2": 1528665986385935560,
-      "Data3": -2438106982239939440,
-      "Data4": 4294934418636095884
+      "Data1": 6772607724819038871,
+      "Data2": -2093245035773361109,
+      "Data3": 274600705487256536,
+      "Data4": -6076791631494654254
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -12858,19 +12774,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.ChartTooltip.Template.Context",
         "Documentation": "Specifiestheparameternameforthe'Template'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -1550453408324488680,
-      "Data2": -1416294847596685032,
-      "Data3": 6911391366039110874,
-      "Data4": 5630138195262487855
+      "Data1": -6299027470402234867,
+      "Data2": -7658304596607511728,
+      "Data3": -208848796615281321,
+      "Data4": -7756633988775763465
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -12894,10 +12807,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.ChartTooltip.Template.Context",
         "Documentation": "Specifiestheparameternameforthe'Template'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -22201,10 +22111,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -5455304049383538576,
-      "Data2": 1071983796328589384,
-      "Data3": -2433694754638866996,
-      "Data4": 582173197316002573
+      "Data1": 3188024865771722317,
+      "Data2": 8858037238094082302,
+      "Data3": 6456250327144610432,
+      "Data4": -3018142157647491262
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -22458,10 +22368,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikComboBox<TItem,TValue>.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ],
     "Metadata": {
@@ -22470,10 +22377,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 4891127334675748334,
-      "Data2": 6462130924917261241,
-      "Data3": 1905837084388388122,
-      "Data4": -7766602807103527940
+      "Data1": 4340139122846875326,
+      "Data2": 4516077033733494614,
+      "Data3": 2798758220318860406,
+      "Data4": 6938525512512447248
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -22727,10 +22634,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikComboBox<TItem,TValue>.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ],
     "Metadata": {
@@ -22827,10 +22731,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 6462427157919276497,
-      "Data2": -5378575032006607602,
-      "Data3": -8103779397802392251,
-      "Data4": -6782227668752533039
+      "Data1": -5942908337608661804,
+      "Data2": 2757922757697338080,
+      "Data3": -5301334217631593912,
+      "Data4": 7811883164522951987
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -22854,19 +22758,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikComboBox<TItem,TValue>.ItemTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'ItemTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -6043276433046218952,
-      "Data2": -2912581102696698202,
-      "Data3": 1898552403512803125,
-      "Data4": 3175297877128916226
+      "Data1": 8574833326772509229,
+      "Data2": -5129295958272900727,
+      "Data3": -778400636064898139,
+      "Data4": -7176176640489906494
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -22890,10 +22791,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikComboBox<TItem,TValue>.ItemTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'ItemTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -23017,10 +22915,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -6727310017213880855,
-      "Data2": 7024735660802224460,
-      "Data3": -1868693631892328486,
-      "Data4": 9111357906748245222
+      "Data1": -3815322010859981414,
+      "Data2": 2337458577170855392,
+      "Data3": -5850807880249219655,
+      "Data4": -8141295356135652352
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -23209,10 +23107,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikContextMenu<TItem>.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ],
     "Metadata": {
@@ -23221,10 +23116,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 2252382296864527692,
-      "Data2": 6526732324720820189,
-      "Data3": -1014753802896079646,
-      "Data4": 7386121955297761016
+      "Data1": -8005161137472424324,
+      "Data2": 8594430694781529510,
+      "Data3": 2771546454661989495,
+      "Data4": 3113567328665078941
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -23413,10 +23308,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikContextMenu<TItem>.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ],
     "Metadata": {
@@ -23425,10 +23317,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 3389059997619758404,
-      "Data2": 1883563954874300485,
-      "Data3": -4361618226188494553,
-      "Data4": -5740096667880982016
+      "Data1": 9173375429244309481,
+      "Data2": 2935166158066673332,
+      "Data3": 3927031740807665462,
+      "Data4": -2593952345434449255
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -23452,19 +23344,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikContextMenu<TItem>.Template.Context",
         "Documentation": "Specifiestheparameternameforthe'Template'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -6510107099324492994,
-      "Data2": -5793455106416220035,
-      "Data3": -8514585861470051155,
-      "Data4": -8426839859205852585
+      "Data1": -8702683967534387982,
+      "Data2": -3398741426193801587,
+      "Data3": 4482196191528787499,
+      "Data4": 1804815741569824105
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -23488,19 +23377,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikContextMenu<TItem>.Template.Context",
         "Documentation": "Specifiestheparameternameforthe'Template'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -2305810083599738498,
-      "Data2": -2140848675010923126,
-      "Data3": 6474026582109650747,
-      "Data4": -550702153135536143
+      "Data1": -6585349993269343631,
+      "Data2": 7685180334634043587,
+      "Data3": 4641209454698913751,
+      "Data4": 3571184857515789158
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -23524,19 +23410,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikContextMenu<TItem>.ItemTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'ItemTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -3385150985211087144,
-      "Data2": -7574966533197476999,
-      "Data3": -811073598005636144,
-      "Data4": 3925585387191395260
+      "Data1": -2556368666611708202,
+      "Data2": -2347053746348120389,
+      "Data3": -3961069453827391894,
+      "Data4": -7459457426362697233
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -23560,10 +23443,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikContextMenu<TItem>.ItemTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'ItemTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -24923,10 +24803,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 7602823031673551602,
-      "Data2": -3065662600786503423,
-      "Data3": -934695893191739091,
-      "Data4": -2841782259531329405
+      "Data1": 4788251646352150686,
+      "Data2": 2196586892617752791,
+      "Data3": -6875215610259027045,
+      "Data4": -410779427107164229
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -25144,10 +25024,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikDrawer<TItem>.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ],
     "Metadata": {
@@ -25156,10 +25033,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 3950649289774124292,
-      "Data2": -8035094171358440088,
-      "Data3": -2005193417853575349,
-      "Data4": -1108261935939499440
+      "Data1": -5381996579160754934,
+      "Data2": -899239975632311400,
+      "Data3": -7602076850822440267,
+      "Data4": -581338520463878201
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -25377,10 +25254,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikDrawer<TItem>.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ],
     "Metadata": {
@@ -25389,10 +25263,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 1262259993156745351,
-      "Data2": 4313828998129095569,
-      "Data3": 72818274757419249,
-      "Data4": -7783240603156152950
+      "Data1": -7941152267767510101,
+      "Data2": -7777851341239793149,
+      "Data3": -7174408735163881093,
+      "Data4": 2186992090574746068
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -25416,19 +25290,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikDrawer<TItem>.Template.Context",
         "Documentation": "Specifiestheparameternameforthe'Template'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": 8361253775939259213,
-      "Data2": -6459672704614461508,
-      "Data3": -4030130521919648293,
-      "Data4": -6536334369895933582
+      "Data1": 602847364508263837,
+      "Data2": -9214084703054456642,
+      "Data3": 6859064040191905973,
+      "Data4": 9107218359640994394
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -25452,19 +25323,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikDrawer<TItem>.Template.Context",
         "Documentation": "Specifiestheparameternameforthe'Template'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -8275807917398966280,
-      "Data2": 7025409602356235582,
-      "Data3": 3924870213578200449,
-      "Data4": 2557427215122511979
+      "Data1": -6801914928620852770,
+      "Data2": 2981665876418960881,
+      "Data3": -4616230536045466059,
+      "Data4": 6311531050394857653
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -25488,19 +25356,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikDrawer<TItem>.ItemTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'ItemTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -4073882743637304414,
-      "Data2": -4969993909794760588,
-      "Data3": -6488120737214609525,
-      "Data4": 8721405399642810396
+      "Data1": 8749475376332053750,
+      "Data2": 2127042618634929870,
+      "Data3": -4840898956348548487,
+      "Data4": 5531227428180881444
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -25524,10 +25389,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikDrawer<TItem>.ItemTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'ItemTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -25577,10 +25439,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 1920495217540716591,
-      "Data2": -4296983538998969521,
-      "Data3": -6238857714665459066,
-      "Data4": 2316536760435721237
+      "Data1": 8026449581537457679,
+      "Data2": -1167686891721918631,
+      "Data3": -6262104226963396078,
+      "Data4": -1078771293259461110
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -25820,10 +25682,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikDropDownList<TItem,TValue>.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ],
     "Metadata": {
@@ -25832,10 +25691,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 605222291968968660,
-      "Data2": 882494515717466655,
-      "Data3": 7439027261390203072,
-      "Data4": 6865071413120362022
+      "Data1": 3587339356226920122,
+      "Data2": -4052724356907210535,
+      "Data3": 5187904160581300624,
+      "Data4": -6120159689312138622
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -26075,10 +25934,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikDropDownList<TItem,TValue>.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ],
     "Metadata": {
@@ -26087,10 +25943,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -6319558023705061557,
-      "Data2": -697178264113408423,
-      "Data3": -8857113560277134505,
-      "Data4": 405869289905632490
+      "Data1": 3494326097172256486,
+      "Data2": 6134688711115187458,
+      "Data3": 2123996559560660972,
+      "Data4": -6482693198847140347
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -26114,19 +25970,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikDropDownList<TItem,TValue>.ValueTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'ValueTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": 7774171119533770679,
-      "Data2": 6519054185683697189,
-      "Data3": 6934011972033001058,
-      "Data4": -2030318293825355943
+      "Data1": 5025876592341726056,
+      "Data2": -2073632341754683695,
+      "Data3": 6972449759182090372,
+      "Data4": 6198351523343641767
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -26150,10 +26003,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikDropDownList<TItem,TValue>.ValueTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'ValueTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -26247,10 +26097,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 4226452262748924194,
-      "Data2": -2845999814170813116,
-      "Data3": 4683089390444981532,
-      "Data4": 4993495230975182329
+      "Data1": 5554111350047095476,
+      "Data2": -2152936378189765526,
+      "Data3": 9020812372299530037,
+      "Data4": 3411499013012859342
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -26274,19 +26124,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikDropDownList<TItem,TValue>.ItemTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'ItemTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -8258581496731638515,
-      "Data2": 4177473383546667406,
-      "Data3": -5658646105254470281,
-      "Data4": 4684461759158068614
+      "Data1": -8442194388491187994,
+      "Data2": -1333240246654144788,
+      "Data3": 8300461556847846840,
+      "Data4": -5365812697980097197
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -26310,10 +26157,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikDropDownList<TItem,TValue>.ItemTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'ItemTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -27059,10 +26903,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 1454207121940385221,
-      "Data2": 2061946773726325536,
-      "Data3": -6494363100581747371,
-      "Data4": -8288080081807781379
+      "Data1": -417463083514447331,
+      "Data2": 1580465175175727917,
+      "Data3": -4590216157188191913,
+      "Data4": -6776728622375015089
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -27299,19 +27143,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.GridColumn.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": 2476813839648095874,
-      "Data2": -6623020694782910384,
-      "Data3": -662486101596421681,
-      "Data4": 2074148045188095015
+      "Data1": -899701603822329622,
+      "Data2": 5973340108916319353,
+      "Data3": 3545980331034667986,
+      "Data4": -6859882421832535374
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -27548,19 +27389,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.GridColumn.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -942563374325823449,
-      "Data2": -7210974506922898165,
-      "Data3": 5803104182045847582,
-      "Data4": 7859542104448631817
+      "Data1": 1968673199310101494,
+      "Data2": -2838665084408120782,
+      "Data3": -5749972149166485539,
+      "Data4": 2770465676500592820
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -27584,19 +27422,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.GridColumn.GroupHeaderTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'GroupHeaderTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -9203846057766485692,
-      "Data2": -7574078125859424050,
-      "Data3": 797260058567612030,
-      "Data4": 7290488497702361360
+      "Data1": 2501311507759072042,
+      "Data2": -6542180189496026766,
+      "Data3": -5681467264806797400,
+      "Data4": 7941109878746665473
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -27620,19 +27455,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.GridColumn.GroupHeaderTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'GroupHeaderTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -7460268729794223963,
-      "Data2": 5101198163550879154,
-      "Data3": -3173225618255986191,
-      "Data4": -6815628217170220003
+      "Data1": 801551881766460422,
+      "Data2": 6590026863008207576,
+      "Data3": -8466058214164501723,
+      "Data4": -1108307100797791783
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -27656,19 +27488,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.GridColumn.GroupFooterTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'GroupFooterTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": 782560900999133118,
-      "Data2": 6661189841839442427,
-      "Data3": -1531561216615330933,
-      "Data4": -3086835891223262070
+      "Data1": 1509939485841676179,
+      "Data2": 8021912465068604339,
+      "Data3": -6066942519074398731,
+      "Data4": -3689257580093847933
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -27692,19 +27521,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.GridColumn.GroupFooterTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'GroupFooterTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -4182467885364167178,
-      "Data2": 1762973638082560177,
-      "Data3": 7355377017880264118,
-      "Data4": 3230402683892018243
+      "Data1": 2559766914353560781,
+      "Data2": 8070374459731184910,
+      "Data3": 6767918318713948431,
+      "Data4": 5929849846859315423
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -27728,19 +27554,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.GridColumn.Template.Context",
         "Documentation": "Specifiestheparameternameforthe'Template'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -1327876049852899840,
-      "Data2": 766999843022745194,
-      "Data3": -4358015667752314991,
-      "Data4": -8917620448004775458
+      "Data1": 1653677742726847594,
+      "Data2": -358682109530522797,
+      "Data3": 3314928738691863876,
+      "Data4": 8261558623095619249
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -27764,10 +27587,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.GridColumn.Template.Context",
         "Documentation": "Specifiestheparameternameforthe'Template'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -27817,10 +27637,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 2915534131321447955,
-      "Data2": 6979164971008342923,
-      "Data3": -4887495336727394368,
-      "Data4": -1587544073994470972
+      "Data1": -5231683384861121856,
+      "Data2": 6318483759520101880,
+      "Data3": 1464969228125334386,
+      "Data4": -7091385079882812604
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -27844,19 +27664,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.GridColumn.FooterTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'FooterTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -6479950130046733143,
-      "Data2": -8133264323620285863,
-      "Data3": 8634648822315565355,
-      "Data4": -6140889894936244585
+      "Data1": -5790784783329617900,
+      "Data2": 7479205013797420292,
+      "Data3": -3175165850971108616,
+      "Data4": 2956776990966332975
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -27880,19 +27697,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.GridColumn.FooterTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'FooterTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -3633426423357242444,
-      "Data2": -5250595711242042640,
-      "Data3": 8785499080186377878,
-      "Data4": 4572582048089742716
+      "Data1": 1973129248535136314,
+      "Data2": 1673364922327686261,
+      "Data3": 6480238368131194741,
+      "Data4": 5838425142238986861
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -27916,19 +27730,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.GridColumn.EditorTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'EditorTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": 668458356220676808,
-      "Data2": -3825973313922672028,
-      "Data3": -4000000285998587034,
-      "Data4": -8166024658773119615
+      "Data1": 503091808165841562,
+      "Data2": -2246008408886130793,
+      "Data3": -6832958306573103266,
+      "Data4": 2988714085907431856
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -27952,19 +27763,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.GridColumn.EditorTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'EditorTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -5137848515473383097,
-      "Data2": 6954896720903052912,
-      "Data3": -5529328481378629576,
-      "Data4": -8581952665882943480
+      "Data1": -5956414389120690012,
+      "Data2": 3793876378892069189,
+      "Data3": -2602235613601831230,
+      "Data4": 1870556627381530024
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -27988,19 +27796,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.GridColumn.FilterCellTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'FilterCellTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": 1968208495608692085,
-      "Data2": -5036172620680349057,
-      "Data3": 8732032173967225531,
-      "Data4": -3980488155206109722
+      "Data1": 5328141858966730418,
+      "Data2": 7960274717280210419,
+      "Data3": -3500166254602835927,
+      "Data4": -856645510943269861
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -28024,19 +27829,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.GridColumn.FilterCellTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'FilterCellTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -1243413147291968660,
-      "Data2": -1680836092855031522,
-      "Data3": 963799789838637824,
-      "Data4": 5952816345931595726
+      "Data1": 5464043285910765485,
+      "Data2": -3669143631461541680,
+      "Data3": -1567444332616773417,
+      "Data4": -3369649232162047338
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -28060,19 +27862,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.GridColumn.FilterMenuTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'FilterMenuTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": 6746781421637000191,
-      "Data2": -7325593087581663720,
-      "Data3": 3320805991802015055,
-      "Data4": 5656821813617781932
+      "Data1": 7566460891064545072,
+      "Data2": 8303196781557301806,
+      "Data3": 3098174217273579809,
+      "Data4": -5060991088831486654
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -28096,10 +27895,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.GridColumn.FilterMenuTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'FilterMenuTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -28921,10 +28717,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -658495250030892239,
-      "Data2": 4744491791653881437,
-      "Data3": -6760129921020209045,
-      "Data4": 6455342437522060861
+      "Data1": 345864196202294821,
+      "Data2": 212886843850307142,
+      "Data3": 927224284646346384,
+      "Data4": -7023275404492286607
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -29376,10 +29172,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikGrid<TItem>.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ],
     "Metadata": {
@@ -29388,10 +29181,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 1035990626564411043,
-      "Data2": 5110092573642887480,
-      "Data3": 282846027409287082,
-      "Data4": 6443404386079071288
+      "Data1": -4721892352640218818,
+      "Data2": 1189418563746863790,
+      "Data3": 7683080849919954951,
+      "Data4": -7321313077245870757
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -29843,10 +29636,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikGrid<TItem>.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ],
     "Metadata": {
@@ -30031,10 +29821,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -6051977004230833560,
-      "Data2": 7840874396112328661,
-      "Data3": -5956878522914038916,
-      "Data4": -8964594061478697678
+      "Data1": -9092668415749493425,
+      "Data2": -4668696032550918426,
+      "Data3": -7146656271386837556,
+      "Data4": -4225555735297138667
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -30058,19 +29848,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikGrid<TItem>.DetailTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'DetailTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -1512818203016699196,
-      "Data2": 2428662404927836693,
-      "Data3": -6722373811524142968,
-      "Data4": -1132738307177545085
+      "Data1": 5630531291045863541,
+      "Data2": -2382493368231315007,
+      "Data3": -3879627504819148024,
+      "Data4": 5873499191478092302
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -30094,10 +29881,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikGrid<TItem>.DetailTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'DetailTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -30145,10 +29929,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 2401459675440100780,
-      "Data2": -4411027244458151454,
-      "Data3": -2460659940231351394,
-      "Data4": 6746810151302660916
+      "Data1": -979024709090349053,
+      "Data2": 2226326747974237058,
+      "Data3": 6845161336869858640,
+      "Data4": -4646877934981202490
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -30172,19 +29956,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikGrid<TItem>.RowTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'RowTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -2518963723825181790,
-      "Data2": 2460293710857758839,
-      "Data3": 5523337765545430748,
-      "Data4": 869385395279894253
+      "Data1": 3131971340754443833,
+      "Data2": 7367264632446732711,
+      "Data3": -5293071045384007765,
+      "Data4": -7731482121673219312
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -30208,10 +29989,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikGrid<TItem>.RowTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'RowTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -30533,10 +30311,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 5892056888087137809,
-      "Data2": -4095994084800215842,
-      "Data3": -5100897402025022870,
-      "Data4": 5915683461449004032
+      "Data1": 866364738458445718,
+      "Data2": 1014358860575262613,
+      "Data3": 6107639130810194697,
+      "Data4": -2903083793483388447
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -30746,10 +30524,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikListView<TItem>.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ],
     "Metadata": {
@@ -30758,10 +30533,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 4668667539520545593,
-      "Data2": 934745084021718421,
-      "Data3": -6683531951370045114,
-      "Data4": 5634518363932530309
+      "Data1": 7540346376781101406,
+      "Data2": -409868606774859809,
+      "Data3": 3829356589005203663,
+      "Data4": -2518195869364808694
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -30971,10 +30746,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikListView<TItem>.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ],
     "Metadata": {
@@ -30983,10 +30755,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 485336521163921898,
-      "Data2": 4229100476204931729,
-      "Data3": -7835167236119228140,
-      "Data4": -5675169938269226890
+      "Data1": -2952078947536660829,
+      "Data2": -4927291825749508367,
+      "Data3": 10283940994385715,
+      "Data4": -4355209558815040257
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -31010,19 +30782,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikListView<TItem>.Template.Context",
         "Documentation": "Specifiestheparameternameforthe'Template'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -8828959291146963669,
-      "Data2": -5536969379052544999,
-      "Data3": -1279764495540004887,
-      "Data4": -5208640890862025017
+      "Data1": -7862626249867401137,
+      "Data2": 1650975355795837842,
+      "Data3": 8956680386639812667,
+      "Data4": -1588348630956243355
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -31046,19 +30815,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikListView<TItem>.Template.Context",
         "Documentation": "Specifiestheparameternameforthe'Template'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -7416910879276670381,
-      "Data2": 1177560275481322942,
-      "Data3": -6712802852658844459,
-      "Data4": -6505644830984564315
+      "Data1": 3351669178241935910,
+      "Data2": -8334527162533207595,
+      "Data3": -1432891810345264127,
+      "Data4": 7783561499601566739
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -31082,19 +30848,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikListView<TItem>.EditTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'EditTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": 2169189533524802625,
-      "Data2": -1375178494770765041,
-      "Data3": -5129847655080722798,
-      "Data4": 3648848847523622146
+      "Data1": -4497154666088095324,
+      "Data2": -7952460523643449217,
+      "Data3": 4870726406018422592,
+      "Data4": -2087721266210520316
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -31118,10 +30881,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikListView<TItem>.EditTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'EditTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -31351,10 +31111,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -7758764565445943021,
-      "Data2": 323774337162392991,
-      "Data3": 7552331380798900566,
-      "Data4": 8175701443611039101
+      "Data1": -992423609769933164,
+      "Data2": -5609302454300965994,
+      "Data3": 5700224598512158667,
+      "Data4": 3758801967467611133
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -31540,10 +31300,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikMenu<TItem>.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ],
     "Metadata": {
@@ -31552,10 +31309,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 9172363920966643615,
-      "Data2": 7645619484328725223,
-      "Data3": -428659088343599579,
-      "Data4": 6264627880609365557
+      "Data1": -5448203108478650168,
+      "Data2": 1753049447218033559,
+      "Data3": -7464649721758170071,
+      "Data4": -9112114723023631538
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -31741,10 +31498,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikMenu<TItem>.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ],
     "Metadata": {
@@ -31753,10 +31507,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -5915615475828182891,
-      "Data2": -8804063461380701181,
-      "Data3": -7072603330832038677,
-      "Data4": -6535730470604779646
+      "Data1": -2741293722954428219,
+      "Data2": 5067218105227473795,
+      "Data3": -6671269960166994325,
+      "Data4": 5050713754007064396
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -31780,19 +31534,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikMenu<TItem>.ItemTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'ItemTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": 3322175349884551709,
-      "Data2": 5098181560205687200,
-      "Data3": 3141660797399204253,
-      "Data4": -3709960022891082601
+      "Data1": -5201626127309871143,
+      "Data2": 7751896353312484903,
+      "Data3": -6197060960451021350,
+      "Data4": -6083185130280353047
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -31816,19 +31567,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikMenu<TItem>.ItemTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'ItemTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -8480975906924846632,
-      "Data2": 1966709088818010471,
-      "Data3": -816211969194536041,
-      "Data4": -7242134268699557596
+      "Data1": -7683592676959843313,
+      "Data2": -6156131765280872136,
+      "Data3": -1297765038808091213,
+      "Data4": -2098823807275894096
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -32081,10 +31829,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikMultiSelect<TItem,TValue>.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ],
     "Metadata": {
@@ -32093,10 +31838,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 1161481439602795035,
-      "Data2": 3213925140410571326,
-      "Data3": 3503551496692313806,
-      "Data4": 1431019637704499390
+      "Data1": 3380307043848924525,
+      "Data2": 8402076880134916951,
+      "Data3": 110323736933487458,
+      "Data4": 8454113224337151228
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -32349,10 +32094,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikMultiSelect<TItem,TValue>.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ],
     "Metadata": {
@@ -32449,10 +32191,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 4461486956367812309,
-      "Data2": -5863471704571158913,
-      "Data3": 2606304704276836136,
-      "Data4": 4776788730463874964
+      "Data1": 4168069047480393247,
+      "Data2": -8044107901982607187,
+      "Data3": -7453073132170374539,
+      "Data4": -2120249675267129146
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -32476,19 +32218,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikMultiSelect<TItem,TValue>.ItemTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'ItemTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": 6480310322436912690,
-      "Data2": 6054958059564847885,
-      "Data3": -6543483622250466464,
-      "Data4": 4209965630557968713
+      "Data1": 169540074189772478,
+      "Data2": 2780289894207294175,
+      "Data3": 6741998936068870713,
+      "Data4": -4420811926861638721
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -32512,10 +32251,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikMultiSelect<TItem,TValue>.ItemTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'ItemTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -34517,10 +34253,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 7043637848461832063,
-      "Data2": 1787215404922231945,
-      "Data3": 3089210246683518218,
-      "Data4": -882268812558522179
+      "Data1": 4510553492295483545,
+      "Data2": 854000765027096740,
+      "Data3": -7307669966001453681,
+      "Data4": 2257661406125858722
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -34586,19 +34322,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.StockChartCategoryAxisCrosshairTooltip.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -7129980970851557565,
-      "Data2": -7838368615382834850,
-      "Data3": -2043270628271098805,
-      "Data4": -8670721921247796633
+      "Data1": 2609578768760476976,
+      "Data2": 8551758049668135423,
+      "Data3": -2649227279303031540,
+      "Data4": 8503326864864129088
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -34664,10 +34397,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.StockChartCategoryAxisCrosshairTooltip.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -34715,10 +34445,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -6155320130027083757,
-      "Data2": -466194717690381901,
-      "Data3": 3203114595595117992,
-      "Data4": 3493317324219233032
+      "Data1": -4548894143156916034,
+      "Data2": 582783101913242809,
+      "Data3": 2141968783966496307,
+      "Data4": 3093679579200699805
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -34742,19 +34472,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.StockChartCategoryAxisCrosshairTooltip.Template.Context",
         "Documentation": "Specifiestheparameternameforthe'Template'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -2501537747809671626,
-      "Data2": 8376009066295399460,
-      "Data3": 2788986663914818509,
-      "Data4": 8962260354628793891
+      "Data1": 4781887637553093203,
+      "Data2": -8347435519703727093,
+      "Data3": -8547977343331561947,
+      "Data4": -7620125524921307320
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -34778,10 +34505,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.StockChartCategoryAxisCrosshairTooltip.Template.Context",
         "Documentation": "Specifiestheparameternameforthe'Template'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -42187,10 +41911,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 1862392504116785673,
-      "Data2": -2351959063996152178,
-      "Data3": -1377938208653258490,
-      "Data4": 5267267255291566373
+      "Data1": -3030935532039465438,
+      "Data2": -8427242926155238121,
+      "Data3": -6791217649313345003,
+      "Data4": -911007841705384367
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -42256,19 +41980,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.StockChartSeriesTooltip.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": 8133036714653464887,
-      "Data2": 4429077316763994290,
-      "Data3": 6859386129492382928,
-      "Data4": 834378007899458989
+      "Data1": -7249538353750882461,
+      "Data2": -5328461296158904292,
+      "Data3": -3138161383122713329,
+      "Data4": 7626561883764824089
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -42334,10 +42055,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.StockChartSeriesTooltip.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -42385,10 +42103,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 2645511787365354028,
-      "Data2": -8071783115259622519,
-      "Data3": 6257045857782877609,
-      "Data4": 2129636593349435656
+      "Data1": 3007966336302318663,
+      "Data2": 8749024974039200635,
+      "Data3": -6339306472911716337,
+      "Data4": 5506979066187268250
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -42412,19 +42130,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.StockChartSeriesTooltip.Template.Context",
         "Documentation": "Specifiestheparameternameforthe'Template'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": 1662161927509078126,
-      "Data2": -786253451613172043,
-      "Data3": 5165444816383889540,
-      "Data4": -290827790043487271
+      "Data1": 4158864319457835733,
+      "Data2": -2396164427216485261,
+      "Data3": -1648770062195318993,
+      "Data4": 8025987437683097956
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -42448,10 +42163,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.StockChartSeriesTooltip.Template.Context",
         "Documentation": "Specifiestheparameternameforthe'Template'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -42817,10 +42529,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -6350750377212620537,
-      "Data2": 6487785640193095612,
-      "Data3": 6029937968674968031,
-      "Data4": 6399331688539342593
+      "Data1": -4470789640064637832,
+      "Data2": 2166226303569396790,
+      "Data3": 621140907630313258,
+      "Data4": -1692787908099349308
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -42903,19 +42615,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.StockChartTooltip.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": 7797829549879667182,
-      "Data2": -4227179157423909265,
-      "Data3": 2765113823160034714,
-      "Data4": -4632853456345991888
+      "Data1": -4326723805554154884,
+      "Data2": 5152262403289967501,
+      "Data3": 1564281590289479702,
+      "Data4": -7649559679097693246
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -42998,10 +42707,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.StockChartTooltip.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -43049,10 +42755,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 1244028331857827556,
-      "Data2": 4010456647625758721,
-      "Data3": -8138686906579003917,
-      "Data4": -5184301242788387838
+      "Data1": 8942386613974419337,
+      "Data2": 9117004320825256329,
+      "Data3": -7624316517851033745,
+      "Data4": 4758501805024009616
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -43076,19 +42782,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.StockChartTooltip.SharedTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'SharedTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": 19306625389364169,
-      "Data2": 6016815838008017751,
-      "Data3": -3338658390881937702,
-      "Data4": 1869053800319345079
+      "Data1": 2033349677141915754,
+      "Data2": -3126658798134192439,
+      "Data3": -4804879744228914005,
+      "Data4": -4618367130483042741
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -43112,19 +42815,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.StockChartTooltip.SharedTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'SharedTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -6002384793597366694,
-      "Data2": -891136457394933352,
-      "Data3": 920032494793368853,
-      "Data4": -5404241439549012826
+      "Data1": 7198694589643913997,
+      "Data2": -5230880446521099348,
+      "Data3": -6097917574506724329,
+      "Data4": -2537838184938617835
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -43148,19 +42848,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.StockChartTooltip.Template.Context",
         "Documentation": "Specifiestheparameternameforthe'Template'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -4238033320800458677,
-      "Data2": -4859300027394189193,
-      "Data3": 7952758244503903024,
-      "Data4": 1761688346339196379
+      "Data1": 7575757958631745070,
+      "Data2": -7271457500722119105,
+      "Data3": -1252147887040114589,
+      "Data4": 8574765702001340934
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -43184,10 +42881,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.StockChartTooltip.Template.Context",
         "Documentation": "Specifiestheparameternameforthe'Template'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -43703,10 +43397,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 6883929768081429961,
-      "Data2": 6796488476983277088,
-      "Data3": -4078514359296152311,
-      "Data4": 7646429172415941226
+      "Data1": -5658614001896826153,
+      "Data2": 1680873964785815958,
+      "Data3": 542571302431908979,
+      "Data4": -3687428058416280766
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -43772,19 +43466,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.StockChartValueAxisCrosshairTooltip.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -511472411050445498,
-      "Data2": 7765395301538180355,
-      "Data3": -4281598490242212416,
-      "Data4": -4544227178939627751
+      "Data1": 5452810371974363781,
+      "Data2": -8514026617698936242,
+      "Data3": -7450896391633719700,
+      "Data4": -3004532707658558951
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -43850,10 +43541,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.StockChartValueAxisCrosshairTooltip.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -43901,10 +43589,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 553711880023821261,
-      "Data2": 8425310716539111366,
-      "Data3": 7327311849711094021,
-      "Data4": 4170397226450572144
+      "Data1": 8296700316920937343,
+      "Data2": 6184588726819965350,
+      "Data3": 1260684166188127221,
+      "Data4": -8313465538861790259
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -43928,19 +43616,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.StockChartValueAxisCrosshairTooltip.Template.Context",
         "Documentation": "Specifiestheparameternameforthe'Template'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -2072526171882727668,
-      "Data2": -813373838235123855,
-      "Data3": -6879159444332733938,
-      "Data4": 201125272343493874
+      "Data1": 4153443419032097346,
+      "Data2": -7983625257938880941,
+      "Data3": -4690157656611529241,
+      "Data4": -7712434273909611774
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -43964,10 +43649,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.StockChartValueAxisCrosshairTooltip.Template.Context",
         "Documentation": "Specifiestheparameternameforthe'Template'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -47917,10 +47599,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -5863591246089299582,
-      "Data2": -546063196862141687,
-      "Data3": -7781367433328555953,
-      "Data4": -8860275062888739300
+      "Data1": -1961351690232880990,
+      "Data2": -7164450417491755427,
+      "Data3": 8356662219698592388,
+      "Data4": -8151481092420671079
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -48015,19 +47697,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikTooltip.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -13283083999990609,
-      "Data2": -2194109017904448064,
-      "Data3": -6557895577068894353,
-      "Data4": -3389851497022406563
+      "Data1": -528958843496879754,
+      "Data2": -4420526238879668175,
+      "Data3": -4638173848259678227,
+      "Data4": -5166136480692102572
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -48122,19 +47801,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikTooltip.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -3758323868374525352,
-      "Data2": -1775358560906859336,
-      "Data3": -2016801527596690094,
-      "Data4": 3901091218361149517
+      "Data1": -1309218218323206671,
+      "Data2": -5404478033199250042,
+      "Data3": -5756681108223878092,
+      "Data4": -8559643264155642003
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -48158,19 +47834,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikTooltip.Template.Context",
         "Documentation": "Specifiestheparameternameforthe'Template'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": 4891984182768209568,
-      "Data2": 8388168842269955343,
-      "Data3": 9005155928632075389,
-      "Data4": 4350584562081710679
+      "Data1": 5835470914589194112,
+      "Data2": -4417321846177772645,
+      "Data3": -6967318088016817093,
+      "Data4": 2924729611574710705
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -48194,10 +47867,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikTooltip.Template.Context",
         "Documentation": "Specifiestheparameternameforthe'Template'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -48469,10 +48139,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -3554841504999635607,
-      "Data2": 4318411996311529008,
-      "Data3": -6176337561345612598,
-      "Data4": 6317577142239919120
+      "Data1": -7677623990165257690,
+      "Data2": 5272848801540098435,
+      "Data3": -54830485250366923,
+      "Data4": -2937190889937298663
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -48646,19 +48316,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TreeListColumn.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": 8592253931131076400,
-      "Data2": 3079647052229486469,
-      "Data3": 2781406344227220771,
-      "Data4": 6966751789998071573
+      "Data1": -3053705421472375492,
+      "Data2": 2583893576093986174,
+      "Data3": -1931059857145412413,
+      "Data4": -6593913486758351371
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -48832,19 +48499,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TreeListColumn.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -4276488986078431193,
-      "Data2": -137411260476210960,
-      "Data3": -8709692203060160878,
-      "Data4": 594767594148107
+      "Data1": -1850116526119789384,
+      "Data2": -7193038236960652771,
+      "Data3": 2132134025834669405,
+      "Data4": 4266096380005491536
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -48868,19 +48532,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TreeListColumn.Template.Context",
         "Documentation": "Specifiestheparameternameforthe'Template'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -214494106518608930,
-      "Data2": -3906945938552340533,
-      "Data3": -8650120653144737856,
-      "Data4": 6901812935477890726
+      "Data1": 7469777295957070476,
+      "Data2": 7032788311764461396,
+      "Data3": 4852214544548866661,
+      "Data4": -161542988496138017
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -48904,10 +48565,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TreeListColumn.Template.Context",
         "Documentation": "Specifiestheparameternameforthe'Template'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -48957,10 +48615,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 2969696261913245331,
-      "Data2": -4208652136281178761,
-      "Data3": -1978468517082225807,
-      "Data4": 2571597992227570410
+      "Data1": -5474840028967659427,
+      "Data2": 1285723273221127278,
+      "Data3": -7855215760510771854,
+      "Data4": 3263882730889221616
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -48984,19 +48642,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TreeListColumn.EditorTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'EditorTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": 6617033236665280824,
-      "Data2": -5476754206044638202,
-      "Data3": -2687068210773080698,
-      "Data4": -2350703988087251862
+      "Data1": -4672886557138369046,
+      "Data2": -2534904467674246011,
+      "Data3": -4477024389438195462,
+      "Data4": 208487374888482003
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -49020,19 +48675,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TreeListColumn.EditorTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'EditorTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -5756385117641927675,
-      "Data2": 7142577959075096584,
-      "Data3": 4145935015457899830,
-      "Data4": -445158191708841848
+      "Data1": 7934122571476460143,
+      "Data2": 6435312532912954326,
+      "Data3": -6647243741467983736,
+      "Data4": 4356423240931630890
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -49056,19 +48708,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TreeListColumn.FilterCellTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'FilterCellTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": 5470624798701572081,
-      "Data2": 5457616084498261245,
-      "Data3": -1861502843186634219,
-      "Data4": -2066000660902438087
+      "Data1": 2076404201605105192,
+      "Data2": 9062487458445233422,
+      "Data3": 81770225151578761,
+      "Data4": 9049020050685607669
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -49092,19 +48741,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TreeListColumn.FilterCellTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'FilterCellTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -5836702291424406066,
-      "Data2": 2133754852194801605,
-      "Data3": 6758582697353436966,
-      "Data4": 328456258975968784
+      "Data1": 1145585045857117638,
+      "Data2": 3532155283085002743,
+      "Data3": -1057385579411668308,
+      "Data4": -3786187243088357676
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -49128,19 +48774,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TreeListColumn.FilterMenuTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'FilterMenuTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -5295963971793858587,
-      "Data2": -725692309822734178,
-      "Data3": 8651877909243077663,
-      "Data4": 4489936411922179980
+      "Data1": -472439587261204109,
+      "Data2": 4824636876405610273,
+      "Data3": -9023731825717294872,
+      "Data4": -2035001822334213973
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -49164,10 +48807,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TreeListColumn.FilterMenuTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'FilterMenuTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -49405,10 +49045,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -8367665504174384433,
-      "Data2": -2533093785355214227,
-      "Data3": 3690970889030724511,
-      "Data4": 1631904756780552820
+      "Data1": 6694796102289409989,
+      "Data2": 3416241840644411764,
+      "Data3": 1837468463119789523,
+      "Data4": -7928387845750493047
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -49755,10 +49395,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikTreeList<TItem>.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ],
     "Metadata": {
@@ -49767,10 +49404,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -6514204394373657955,
-      "Data2": 1892526672417850915,
-      "Data3": 2050370821348081491,
-      "Data4": -2527521240565593895
+      "Data1": -7625706971530131963,
+      "Data2": -8540865365219666155,
+      "Data3": -3329044697450505302,
+      "Data4": -5424151552526523744
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -50117,10 +49754,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikTreeList<TItem>.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ],
     "Metadata": {
@@ -50217,10 +49851,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -3064460922486181900,
-      "Data2": 4453878940299220348,
-      "Data3": 6772566012462592082,
-      "Data4": -8971672238433422006
+      "Data1": 5542683635263103206,
+      "Data2": -8534217107362104226,
+      "Data3": 3210726936699712475,
+      "Data4": -1229601614072897691
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -50244,19 +49878,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikTreeList<TItem>.RowTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'RowTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -2631645415649567608,
-      "Data2": 4067789313381611403,
-      "Data3": 4376744823195394369,
-      "Data4": -1907575202587463677
+      "Data1": -5294290151507002060,
+      "Data2": -6161665843640232124,
+      "Data3": 4935797543206115099,
+      "Data4": 576136976085871635
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -50280,10 +49911,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TelerikTreeList<TItem>.RowTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'RowTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -52865,10 +52493,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -6273092877880741262,
-      "Data2": 5852519111127419023,
-      "Data3": 1735145294216928985,
-      "Data4": 919943926119614119
+      "Data1": 3948748138392816108,
+      "Data2": -6709476462654853975,
+      "Data3": 9065608768482324974,
+      "Data4": -1318133958137546104
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -52997,19 +52625,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TreeViewBinding.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -1774686012734551693,
-      "Data2": 1553117265591300483,
-      "Data3": 4659411200268845138,
-      "Data4": 4538587701079788379
+      "Data1": 1590301780824921429,
+      "Data2": -6762963196404234940,
+      "Data3": 8847049825493619408,
+      "Data4": -7001120745816977595
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -53138,19 +52763,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TreeViewBinding.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -7873218825010670400,
-      "Data2": -328167157804469062,
-      "Data3": 3097344120724686640,
-      "Data4": 2489831769413081509
+      "Data1": -2935811975715517895,
+      "Data2": 6965251291010253549,
+      "Data3": 2367654485211116672,
+      "Data4": -7786395373599139028
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -53174,19 +52796,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TreeViewBinding.ItemTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'ItemTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -6293648124165341406,
-      "Data2": 6719236014077238024,
-      "Data3": 6557203360666759159,
-      "Data4": 4370389357171046818
+      "Data1": -9191774594747157738,
+      "Data2": -6324610338828877353,
+      "Data3": -5618819308461360054,
+      "Data4": -1803876760390694407
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -53210,10 +52829,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.TreeViewBinding.ItemTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'ItemTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -58239,10 +57855,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 5095647015165806900,
-      "Data2": 465339735276334875,
-      "Data3": -5861266701486614826,
-      "Data4": 8232911995495953172
+      "Data1": 2838050142227802209,
+      "Data2": 8403915792652543032,
+      "Data3": -6824873381989358180,
+      "Data4": 1478947342946639695
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -58308,10 +57924,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.Common.Dropdowns.ListContainer<TItem>.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ],
     "Metadata": {
@@ -58320,10 +57933,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 60248018486715826,
-      "Data2": 8997585164255087766,
-      "Data3": 2660976324541777227,
-      "Data4": -6048806126898690395
+      "Data1": -975652936847232311,
+      "Data2": -3757063099878260028,
+      "Data3": -6695252334259552471,
+      "Data4": 2798079692796238777
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -58389,10 +58002,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.Common.Dropdowns.ListContainer<TItem>.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ],
     "Metadata": {
@@ -58401,10 +58011,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 5537615395447525259,
-      "Data2": -7334351433346853026,
-      "Data3": 774563680552871300,
-      "Data4": -3724606479661591761
+      "Data1": -3240068561938929754,
+      "Data2": -31231754843296635,
+      "Data3": -978084213174132398,
+      "Data4": 7642789753808806081
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -58427,19 +58037,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.Common.Dropdowns.ListContainer<TItem>.ItemTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'ItemTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -1483022295951716901,
-      "Data2": -4062039221587313018,
-      "Data3": 3837782597567996926,
-      "Data4": 2071898979354274838
+      "Data1": 6698312967470191633,
+      "Data2": 7756380073986226628,
+      "Data3": -8568363993224424444,
+      "Data4": -7560810073665605242
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -58462,10 +58069,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.Common.Dropdowns.ListContainer<TItem>.ItemTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'ItemTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -61871,10 +61475,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -3371731322932762877,
-      "Data2": -5000405678344409617,
-      "Data3": 7092888343651257399,
-      "Data4": 739358716014999017
+      "Data1": -7272763283045641156,
+      "Data2": 1329940508610807017,
+      "Data3": -8639134129917392397,
+      "Data4": -1577720593118270849
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -61964,10 +61568,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.Common.Layout.BindingComponentBase<TItem>.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ],
     "Metadata": {
@@ -61976,10 +61577,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 7374824627872009843,
-      "Data2": -8650306753489238215,
-      "Data3": 2046063065433095679,
-      "Data4": 7699436486069318694
+      "Data1": 8950483231469597531,
+      "Data2": -4301070474704717444,
+      "Data3": -6630259403790918210,
+      "Data4": 938221539737449317
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -62069,10 +61670,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.Common.Layout.BindingComponentBase<TItem>.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ],
     "Metadata": {
@@ -62081,10 +61679,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 7387733123540434506,
-      "Data2": -3306401920176248612,
-      "Data3": 8079402662623643537,
-      "Data4": 9188297581138561343
+      "Data1": -4015847816069857561,
+      "Data2": 5468424965678727874,
+      "Data3": 754620106668503764,
+      "Data4": 2332981897148932407
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -62108,19 +61706,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.Common.Layout.BindingComponentBase<TItem>.ItemTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'ItemTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": 4614963985232298715,
-      "Data2": 7648225104605724554,
-      "Data3": 8880774648740712985,
-      "Data4": 3210528296477929115
+      "Data1": 5878255526424057043,
+      "Data2": -5344490919399654340,
+      "Data3": 1554468021401044909,
+      "Data4": 378456632898881595
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -62144,19 +61739,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.Common.Layout.BindingComponentBase<TItem>.ItemTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'ItemTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -2758702267802113168,
-      "Data2": -142674470300778653,
-      "Data3": -4611274778532448414,
-      "Data4": -23566563350238668
+      "Data1": 3212393836859378659,
+      "Data2": -7932894733890628717,
+      "Data3": 892475515120082273,
+      "Data4": 6088386415382215278
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -62282,10 +61874,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.Common.Layout.HierarchicalBindingComponentBase<TItem>.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ],
     "Metadata": {
@@ -62294,10 +61883,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -409865679838721310,
-      "Data2": 3240554651996262260,
-      "Data3": -570247842041478220,
-      "Data4": -8227435372838075220
+      "Data1": 6496407867419491976,
+      "Data2": -334218560035999400,
+      "Data3": 854214972830121007,
+      "Data4": 6024089802895720689
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -62423,10 +62012,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.Common.Layout.HierarchicalBindingComponentBase<TItem>.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ],
     "Metadata": {
@@ -62435,10 +62021,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -1126588023834271914,
-      "Data2": 8170396041533711195,
-      "Data3": -4759781042397117977,
-      "Data4": 4335075738116661167
+      "Data1": 5886362375517550147,
+      "Data2": -8328333074461933907,
+      "Data3": 2289695651529140069,
+      "Data4": 3420981793906164151
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -62462,19 +62048,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.Common.Layout.HierarchicalBindingComponentBase<TItem>.ItemTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'ItemTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -1784961274234885389,
-      "Data2": 3047021416725627302,
-      "Data3": -1407455747482807222,
-      "Data4": 2432767525087478035
+      "Data1": -9122430055102431660,
+      "Data2": 1694925611811820509,
+      "Data3": 9219094461686865829,
+      "Data4": 843208396876621320
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -62498,10 +62081,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.Common.Layout.HierarchicalBindingComponentBase<TItem>.ItemTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'ItemTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -65801,10 +65381,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 632008526973432319,
-      "Data2": -2355841690192378591,
-      "Data3": 5651874062215761798,
-      "Data4": 3944992555140922386
+      "Data1": -5996544918670320767,
+      "Data2": 8186135732325425702,
+      "Data3": -5620725125096953013,
+      "Data4": -2390584101497495128
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -65887,10 +65467,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.Grid.DetailRowBase<TItem>.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ],
     "Metadata": {
@@ -65899,10 +65476,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -850872942846092638,
-      "Data2": 7950806873480578948,
-      "Data3": -2500508947817885584,
-      "Data4": 8876625221048325588
+      "Data1": 3751721391982268483,
+      "Data2": 7834444803814001619,
+      "Data3": 2151497372800485713,
+      "Data4": 7189209628395241685
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -65985,10 +65562,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.Grid.DetailRowBase<TItem>.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ],
     "Metadata": {
@@ -65997,10 +65571,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -4266615601173465570,
-      "Data2": -4280952021372842191,
-      "Data3": -8374197360249111267,
-      "Data4": 3955221586984368728
+      "Data1": 2104377864380971361,
+      "Data2": 5755596838308172983,
+      "Data3": 6562143489751251062,
+      "Data4": -6910228144595236518
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -66023,19 +65597,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.Grid.DetailRowBase<TItem>.Template.Context",
         "Documentation": "Specifiestheparameternameforthe'Template'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -4448919615517154778,
-      "Data2": 7344386230101547428,
-      "Data3": 5634828140135910709,
-      "Data4": 3530466609246733963
+      "Data1": -8575423471635779998,
+      "Data2": 4127751879929003229,
+      "Data3": 8827986193916516164,
+      "Data4": -5512031873104447521
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -66058,10 +65629,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.Grid.DetailRowBase<TItem>.Template.Context",
         "Documentation": "Specifiestheparameternameforthe'Template'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -66429,10 +65997,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -5367721525179047146,
-      "Data2": -6883239568397152506,
-      "Data3": 7200959249295210821,
-      "Data4": -4967583673397336147
+      "Data1": -7959204490681598851,
+      "Data2": 2519885939869605284,
+      "Data3": 742437934715662403,
+      "Data4": -6152210159381470516
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -66577,10 +66145,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.Grid.GridRowBase<TItem>.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ],
     "Metadata": {
@@ -66589,10 +66154,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 5412487089225523981,
-      "Data2": -4719936629693785982,
-      "Data3": -1141095642850336896,
-      "Data4": -9152508997754125792
+      "Data1": -9159065892417131058,
+      "Data2": 295221475956159798,
+      "Data3": -2590236824154210548,
+      "Data4": 1448401952089957709
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -66737,10 +66302,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.Grid.GridRowBase<TItem>.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ],
     "Metadata": {
@@ -66749,10 +66311,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -6523105483554431522,
-      "Data2": -1787074991004528015,
-      "Data3": 3990975842206701313,
-      "Data4": -5662109845013630628
+      "Data1": 2260641134017740132,
+      "Data2": 2102319726165687460,
+      "Data3": 4074930052997165219,
+      "Data4": 1265565639351020444
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -66775,19 +66337,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.Grid.GridRowBase<TItem>.DetailTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'DetailTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": 3577853018726329536,
-      "Data2": -4292853304311709292,
-      "Data3": -3676569766855803648,
-      "Data4": 1841778696867069241
+      "Data1": -1131435233230986856,
+      "Data2": 5948365062929682048,
+      "Data3": 2714878569746369750,
+      "Data4": 374242640053099943
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -66810,10 +66369,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.Grid.GridRowBase<TItem>.DetailTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'DetailTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -67867,10 +67423,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 2783642163295460004,
-      "Data2": -928177084767708448,
-      "Data3": -2519945641363461716,
-      "Data4": -2745042839835576026
+      "Data1": 7413283039093509730,
+      "Data2": 9140401815217070376,
+      "Data3": 2162664445250086177,
+      "Data4": -118848735212746914
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -68015,10 +67571,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.Grid.GridRow<TItem>.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ],
     "Metadata": {
@@ -68027,10 +67580,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 6627065942041737407,
-      "Data2": 7370210187624867568,
-      "Data3": -1252197010804524417,
-      "Data4": 7551521049090547740
+      "Data1": -2282904412490182152,
+      "Data2": -2249500735925265282,
+      "Data3": -160947717542930074,
+      "Data4": 2885502956044760414
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -68175,10 +67728,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.Grid.GridRow<TItem>.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ],
     "Metadata": {
@@ -68187,10 +67737,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -2890834534932540111,
-      "Data2": -3260800544986622614,
-      "Data3": -4621517920339361342,
-      "Data4": 3422574671188595024
+      "Data1": -7639035661152030023,
+      "Data2": 8576062599203036907,
+      "Data3": -4942608228980349318,
+      "Data4": -4453860862806163691
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -68213,19 +67763,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.Grid.GridRow<TItem>.DetailTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'DetailTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": 3962939663347792442,
-      "Data2": 7041650208412100731,
-      "Data3": 8940925176087353580,
-      "Data4": 4218932025030438122
+      "Data1": 8226699402348080911,
+      "Data2": -3246474508402767010,
+      "Data3": -4404223861733952553,
+      "Data4": 543095057128164152
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -68248,10 +67795,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.Grid.GridRow<TItem>.DetailTemplate.Context",
         "Documentation": "Specifiestheparameternameforthe'DetailTemplate'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -69501,10 +69045,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 9091060124177604143,
-      "Data2": 2908380448603996536,
-      "Data3": -2898250823071731821,
-      "Data4": 709533025138532484
+      "Data1": -5313126350503132694,
+      "Data2": -5662254179226045701,
+      "Data3": 8275857819518742342,
+      "Data4": -1532949456005678371
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -69587,10 +69131,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.Grid.DetailTemplate.DetailRow<TItem>.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ],
     "Metadata": {
@@ -69599,10 +69140,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -3001917855073961572,
-      "Data2": 4966635099501900422,
-      "Data3": -3140663313781004490,
-      "Data4": 1780384966177388869
+      "Data1": -2937336198424462254,
+      "Data2": 596186593411610123,
+      "Data3": -3765886188478422062,
+      "Data4": 1803268250180786121
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -69685,10 +69226,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.Grid.DetailTemplate.DetailRow<TItem>.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ],
     "Metadata": {
@@ -69697,10 +69235,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 488239192807216124,
-      "Data2": -293057974249071364,
-      "Data3": 4762766344665772881,
-      "Data4": -1546258397461506798
+      "Data1": 8644657145074355775,
+      "Data2": 2036304089149226642,
+      "Data3": -1080409716422686414,
+      "Data4": 5482562967107564276
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -69723,19 +69261,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.Grid.DetailTemplate.DetailRow<TItem>.Template.Context",
         "Documentation": "Specifiestheparameternameforthe'Template'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -6832550036143638670,
-      "Data2": -8617478002206980728,
-      "Data3": 9108041704411928512,
-      "Data4": 6617045634977405749
+      "Data1": -927832902804866288,
+      "Data2": 2339608102164954261,
+      "Data3": -7614405744001068252,
+      "Data4": 4309632403434181134
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -69758,10 +69293,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.Grid.DetailTemplate.DetailRow<TItem>.Template.Context",
         "Documentation": "Specifiestheparameternameforthe'Template'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -70963,10 +70495,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -8837818517924890092,
-      "Data2": -8674378937740106954,
-      "Data3": 498344706930644450,
-      "Data4": 5394452146501998034
+      "Data1": -6397870414953721568,
+      "Data2": 310230483260670146,
+      "Data3": -3868244825278544741,
+      "Data4": 4942834998249032603
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -71038,10 +70570,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.ListView.ListViewItem<TItem>.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ],
     "Metadata": {
@@ -71050,10 +70579,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 1171678859977341361,
-      "Data2": -7276784968597375511,
-      "Data3": 5797738158957179146,
-      "Data4": -1291432762645574955
+      "Data1": 809278895388570690,
+      "Data2": 6355808290700744915,
+      "Data3": -6908551229326949287,
+      "Data4": -8181767532180190583
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -71125,10 +70654,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.ListView.ListViewItem<TItem>.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ],
     "Metadata": {
@@ -71137,10 +70663,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 8882855413446633955,
-      "Data2": 5549590279204617735,
-      "Data3": -6442648374349613789,
-      "Data4": -7550606556871150249
+      "Data1": -685857823355461835,
+      "Data2": -2176017673704894958,
+      "Data3": 1014361486323159905,
+      "Data4": -2621768182469828573
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -71163,19 +70689,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.ListView.ListViewItem<TItem>.Template.Context",
         "Documentation": "Specifiestheparameternameforthe'Template'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": -5683790376138537673,
-      "Data2": 5760398043173995249,
-      "Data3": 8633736844493801129,
-      "Data4": 6241626887790691539
+      "Data1": -1291220068743123875,
+      "Data2": -1563602987379994290,
+      "Data3": -6451589632615807921,
+      "Data4": 5362438662534585609
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -71198,10 +70721,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Telerik.Blazor.Components.ListView.ListViewItem<TItem>.Template.Context",
         "Documentation": "Specifiestheparameternameforthe'Template'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -80653,10 +80173,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -83797506525782857,
-      "Data2": -2623400413685560133,
-      "Data3": 3778055815342014853,
-      "Data4": 4229443988686701681
+      "Data1": 9017354806908971199,
+      "Data2": -7185347874430027403,
+      "Data3": -797605465231311263,
+      "Data4": -291373522303554920
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -80713,19 +80233,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Microsoft.AspNetCore.Components.Routing.Router.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": 8351240690721539469,
-      "Data2": 9154027930605529714,
-      "Data3": -4905819958497434742,
-      "Data4": 5491579423169879731
+      "Data1": -6165806097019151593,
+      "Data2": -8503420719612275645,
+      "Data3": -5104223322179460814,
+      "Data4": 8777175390218773058
     },
     "Kind": 3,
     "RuntimeKind": 1,
@@ -80782,10 +80299,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Microsoft.AspNetCore.Components.Routing.Router.Context",
         "Documentation": "Specifiestheparameternameforallchildcontentexpressions.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
@@ -80835,10 +80349,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -6060234033279486631,
-      "Data2": -2589447099805256694,
-      "Data3": -8635630845239539280,
-      "Data4": 1690598896120045902
+      "Data1": -1923219155022024429,
+      "Data2": 6902102472187226454,
+      "Data3": -6226200583235339503,
+      "Data4": -5409899037351520422
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -80862,19 +80376,16 @@
         "PropertyName": "Context",
         "DisplayName": "string Microsoft.AspNetCore.Components.Routing.Router.Found.Context",
         "Documentation": "Specifiestheparameternameforthe'Found'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
   {
     "__Checksum": {
-      "Data1": 3191292184751116164,
-      "Data2": 6233832811139992355,
-      "Data3": -4189078126309214214,
-      "Data4": 3464104285110935131
+      "Data1": -8688151553313166158,
+      "Data2": -5921222549368837877,
+      "Data3": -5300677305549030117,
+      "Data4": -6182978778848383911
     },
     "Kind": 2,
     "RuntimeKind": 2,
@@ -80898,10 +80409,7 @@
         "PropertyName": "Context",
         "DisplayName": "string Microsoft.AspNetCore.Components.Routing.Router.Found.Context",
         "Documentation": "Specifiestheparameternameforthe'Found'childcontentexpression.",
-        "Flags": 33,
-        "Metadata": {
-          "Components.ChildContentParameterName": "True"
-        }
+        "Flags": 4129
       }
     ]
   },
