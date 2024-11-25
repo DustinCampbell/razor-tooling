@@ -126,6 +126,18 @@ internal partial class DocumentState
         }
     }
 
+    public bool TryGetTextAndVersion([NotNullWhen(true)] out TextAndVersion? result)
+    {
+        if (_textAndVersion is { } textAndVersion)
+        {
+            result = textAndVersion;
+            return true;
+        }
+
+        result = null;
+        return false;
+    }
+
     public bool TryGetText([NotNullWhen(true)] out SourceText? result)
     {
         if (_textAndVersion is { } textAndVersion)

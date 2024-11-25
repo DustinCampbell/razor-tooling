@@ -24,7 +24,7 @@ internal partial class TestProjectSnapshotManager
 
                 if (solutionIsClosing is bool b)
                 {
-                    Assert.Equal(b, notification.SolutionIsClosing);
+                    Assert.Equal(b, notification.IsSolutionClosing);
                 }
             }
 

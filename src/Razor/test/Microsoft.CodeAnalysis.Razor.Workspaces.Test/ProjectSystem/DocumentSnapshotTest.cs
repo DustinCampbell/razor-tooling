@@ -13,7 +13,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
-public class DefaultDocumentSnapshotTest : WorkspaceTestBase
+public class DocumentSnapshotTest : WorkspaceTestBase
 {
     private static readonly HostDocument s_componentHostDocument = TestProjectData.SomeProjectComponentFile1;
     private static readonly HostDocument s_componentCshtmlHostDocument = TestProjectData.SomeProjectCshtmlComponentFile5;
@@ -27,7 +27,7 @@ public class DefaultDocumentSnapshotTest : WorkspaceTestBase
     private readonly DocumentSnapshot _legacyDocument;
     private readonly DocumentSnapshot _nestedComponentDocument;
 
-    public DefaultDocumentSnapshotTest(ITestOutputHelper testOutput)
+    public DocumentSnapshotTest(ITestOutputHelper testOutput)
         : base(testOutput)
     {
         _sourceText = SourceText.From("<p>Hello World</p>");

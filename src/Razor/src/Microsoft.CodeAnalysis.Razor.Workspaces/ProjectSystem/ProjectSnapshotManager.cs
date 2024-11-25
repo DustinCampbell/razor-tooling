@@ -7,7 +7,6 @@ using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.PooledObjects;
 using Microsoft.AspNetCore.Razor.ProjectEngineHost;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
@@ -111,7 +110,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
             foreach (var (_, entry) in _projectMap)
             {
-                builder.Add(entry.GetSnapshot());
+                builder.Add(entry.Snapshot);
             }
 
             return builder.DrainToImmutable();
@@ -132,7 +131,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
         {
             if (_projectMap.TryGetValue(projectKey, out var entry))
             {
-                return entry.GetSnapshot();
+                return entry.Snapshot;
             }
         }
 
@@ -145,7 +144,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
         {
             if (_projectMap.TryGetValue(projectKey, out var entry))
             {
-                project = entry.GetSnapshot();
+                project = entry.Snapshot;
                 return true;
             }
         }
@@ -180,39 +179,37 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
         }
     }
 
-    private void DocumentAdded(ProjectKey projectKey, HostDocument document, TextLoader textLoader)
+    private void DocumentAdded(ProjectKey projectKey, HostDocument hostDocument, TextLoader textLoader)
     {
         if (_initialized)
         {
             _dispatcher.AssertRunningOnDispatcher();
         }
 
-        if (TryUpdate(
+        if (TryUpdateProject(
             projectKey,
-            document.FilePath,
-            new AddDocumentAction(document, textLoader),
+            projectStateUpdater: state => state.AddDocument(hostDocument, textLoader),
             out var oldSnapshot,
             out var newSnapshot))
         {
-            NotifyListeners(oldSnapshot, newSnapshot, document.FilePath, ProjectChangeKind.DocumentAdded);
+            NotifyListeners(ProjectChangeEventArgs.DocumentAdded(oldSnapshot, newSnapshot, hostDocument.FilePath, IsSolutionClosing));
         }
     }
 
-    private void DocumentRemoved(ProjectKey projectKey, HostDocument document)
+    private void DocumentRemoved(ProjectKey projectKey, HostDocument hostDocument)
     {
         if (_initialized)
         {
             _dispatcher.AssertRunningOnDispatcher();
         }
 
-        if (TryUpdate(
+        if (TryUpdateProject(
             projectKey,
-            document.FilePath,
-            new RemoveDocumentAction(document),
+            projectStateUpdater: state => state.RemoveDocument(hostDocument.FilePath),
             out var oldSnapshot,
             out var newSnapshot))
         {
-            NotifyListeners(oldSnapshot, newSnapshot, document.FilePath, ProjectChangeKind.DocumentRemoved);
+            NotifyListeners(ProjectChangeEventArgs.DocumentRemoved(oldSnapshot, newSnapshot, hostDocument.FilePath, IsSolutionClosing));
         }
     }
 
@@ -223,14 +220,14 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
             _dispatcher.AssertRunningOnDispatcher();
         }
 
-        if (TryUpdate(
+        if (TryUpdateProject(
             projectKey,
-            documentFilePath,
-            new OpenDocumentAction(sourceText),
+            projectStateUpdater: state => state.UpdateDocumentText(documentFilePath, sourceText),
+            managerStateUpdater: () => _openDocumentSet.Add(documentFilePath),
             out var oldSnapshot,
             out var newSnapshot))
         {
-            NotifyListeners(oldSnapshot, newSnapshot, documentFilePath, ProjectChangeKind.DocumentChanged);
+            NotifyListeners(ProjectChangeEventArgs.DocumentChanged(oldSnapshot, newSnapshot, documentFilePath, IsSolutionClosing));
         }
     }
 
@@ -241,14 +238,14 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
             _dispatcher.AssertRunningOnDispatcher();
         }
 
-        if (TryUpdate(
+        if (TryUpdateProject(
             projectKey,
-            documentFilePath,
-            new CloseDocumentAction(textLoader),
+            projectStateUpdater: state => state.UpdateDocumentText(documentFilePath, textLoader),
+            managerStateUpdater: () => _openDocumentSet.Remove(documentFilePath),
             out var oldSnapshot,
             out var newSnapshot))
         {
-            NotifyListeners(oldSnapshot, newSnapshot, documentFilePath, ProjectChangeKind.DocumentChanged);
+            NotifyListeners(ProjectChangeEventArgs.DocumentChanged(oldSnapshot, newSnapshot, documentFilePath, IsSolutionClosing));
         }
     }
 
@@ -259,14 +256,13 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
             _dispatcher.AssertRunningOnDispatcher();
         }
 
-        if (TryUpdate(
+        if (TryUpdateProject(
             projectKey,
-            documentFilePath,
-            new DocumentTextChangedAction(sourceText),
+            projectStateUpdater: state => state.UpdateDocumentText(documentFilePath, sourceText),
             out var oldSnapshot,
             out var newSnapshot))
         {
-            NotifyListeners(oldSnapshot, newSnapshot, documentFilePath, ProjectChangeKind.DocumentChanged);
+            NotifyListeners(ProjectChangeEventArgs.DocumentChanged(oldSnapshot, newSnapshot, documentFilePath, IsSolutionClosing));
         }
     }
 
@@ -277,14 +273,13 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
             _dispatcher.AssertRunningOnDispatcher();
         }
 
-        if (TryUpdate(
+        if (TryUpdateProject(
             projectKey,
-            documentFilePath,
-            new DocumentTextLoaderChangedAction(textLoader),
+            projectStateUpdater: state => state.UpdateDocumentText(documentFilePath, textLoader),
             out var oldSnapshot,
             out var newSnapshot))
         {
-            NotifyListeners(oldSnapshot, newSnapshot, documentFilePath, ProjectChangeKind.DocumentChanged);
+            NotifyListeners(ProjectChangeEventArgs.DocumentChanged(oldSnapshot, newSnapshot, documentFilePath, IsSolutionClosing));
         }
     }
 
@@ -295,50 +290,9 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
             _dispatcher.AssertRunningOnDispatcher();
         }
 
-        if (TryUpdate(
-            hostProject.Key,
-            documentFilePath: null,
-            new ProjectAddedAction(hostProject),
-            out _,
-            out var newSnapshot))
+        if (TryAddProject(hostProject, out var newSnapshot))
         {
-            NotifyListeners(older: null, newSnapshot, documentFilePath: null, ProjectChangeKind.ProjectAdded);
-        }
-    }
-
-    private void ProjectConfigurationChanged(HostProject hostProject)
-    {
-        if (_initialized)
-        {
-            _dispatcher.AssertRunningOnDispatcher();
-        }
-
-        if (TryUpdate(
-            hostProject.Key,
-            documentFilePath: null,
-            new HostProjectUpdatedAction(hostProject),
-            out var oldSnapshot,
-            out var newSnapshot))
-        {
-            NotifyListeners(oldSnapshot, newSnapshot, documentFilePath: null, ProjectChangeKind.ProjectChanged);
-        }
-    }
-
-    private void ProjectWorkspaceStateChanged(ProjectKey projectKey, ProjectWorkspaceState projectWorkspaceState)
-    {
-        if (_initialized)
-        {
-            _dispatcher.AssertRunningOnDispatcher();
-        }
-
-        if (TryUpdate(
-            projectKey,
-            documentFilePath: null,
-            new ProjectWorkspaceStateChangedAction(projectWorkspaceState),
-            out var oldSnapshot,
-            out var newSnapshot))
-        {
-            NotifyListeners(oldSnapshot, newSnapshot, documentFilePath: null, ProjectChangeKind.ProjectChanged);
+            NotifyListeners(ProjectChangeEventArgs.ProjectAdded(newSnapshot, IsSolutionClosing));
         }
     }
 
@@ -349,14 +303,43 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
             _dispatcher.AssertRunningOnDispatcher();
         }
 
-        if (TryUpdate(
+        if (TryRemoveProject(projectKey, out var oldSnapshot))
+        {
+            NotifyListeners(ProjectChangeEventArgs.ProjectRemoved(oldSnapshot, IsSolutionClosing));
+        }
+    }
+
+    private void ProjectWorkspaceStateChanged(ProjectKey projectKey, ProjectWorkspaceState projectWorkspaceState)
+    {
+        if (_initialized)
+        {
+            _dispatcher.AssertRunningOnDispatcher();
+        }
+
+        if (TryUpdateProject(
             projectKey,
-            documentFilePath: null,
-            new ProjectRemovedAction(projectKey),
+            projectStateUpdater: state => state.WithProjectWorkspaceState(projectWorkspaceState),
             out var oldSnapshot,
             out var newSnapshot))
         {
-            NotifyListeners(oldSnapshot, newSnapshot, documentFilePath: null, ProjectChangeKind.ProjectRemoved);
+            NotifyListeners(ProjectChangeEventArgs.ProjectChanged(oldSnapshot, newSnapshot, IsSolutionClosing));
+        }
+    }
+
+    private void ProjectConfigurationChanged(HostProject hostProject)
+    {
+        if (_initialized)
+        {
+            _dispatcher.AssertRunningOnDispatcher();
+        }
+
+        if (TryUpdateProject(
+            hostProject.Key,
+            projectStateUpdater: state => state.WithHostProject(hostProject),
+            out var oldSnapshot,
+            out var newSnapshot))
+        {
+            NotifyListeners(ProjectChangeEventArgs.ProjectChanged(oldSnapshot, newSnapshot, IsSolutionClosing));
         }
     }
 
@@ -386,14 +369,16 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
         }
     }
 
-    private void NotifyListeners(IProjectSnapshot? older, IProjectSnapshot? newer, string? documentFilePath, ProjectChangeKind kind)
+    private void NotifyListeners(ProjectChangeEventArgs args)
     {
         if (!_initialized)
         {
             return;
         }
 
-        _notificationQueue.Enqueue(new ProjectChangeEventArgs(older, newer, documentFilePath, kind, IsSolutionClosing));
+        _dispatcher.AssertRunningOnDispatcher();
+
+        _notificationQueue.Enqueue(args);
 
         if (_notificationQueue.Count == 1)
         {
@@ -410,9 +395,9 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
             {
                 // Don't dequeue yet, we want the notification to sit in the queue until we've finished
                 // notifying to ensure other calls to NotifyListeners know there's a currently running event loop.
-                var args = _notificationQueue.Peek();
-                PriorityChanged?.Invoke(this, args);
-                Changed?.Invoke(this, args);
+                var currentArgs = _notificationQueue.Peek();
+                PriorityChanged?.Invoke(this, currentArgs);
+                Changed?.Invoke(this, currentArgs);
 
                 _notificationQueue.Dequeue();
             }
@@ -420,200 +405,108 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
         }
     }
 
-    private bool TryUpdate(
+    private bool TryAddProject(HostProject hostProject, [NotNullWhen(true)] out IProjectSnapshot? newSnapshot)
+    {
+        using var upgradeableLock = _readerWriterLock.DisposableUpgradeableRead();
+
+        // If the project already exists, we can't add it again, so return false.
+        if (_projectMap.ContainsKey(hostProject.Key))
+        {
+            newSnapshot = null;
+            return false;
+        }
+
+        // ... otherwise, add the project and return true.
+
+        var newState = ProjectState.Create(
+            _projectEngineFactoryProvider,
+            _languageServerFeatureOptions,
+            hostProject,
+            ProjectWorkspaceState.Default);
+
+        var newEntry = new Entry(newState);
+
+        upgradeableLock.EnterWrite();
+
+        _projectMap.Add(hostProject.Key, newEntry);
+
+        newSnapshot = newEntry.Snapshot;
+        return true;
+    }
+
+    private bool TryRemoveProject(
         ProjectKey projectKey,
-        string? documentFilePath,
-        IUpdateProjectAction action,
+        [NotNullWhen(true)] out IProjectSnapshot? oldSnapshot)
+    {
+        using var upgradeableLock = _readerWriterLock.DisposableUpgradeableRead();
+
+        if (!_projectMap.TryGetValue(projectKey, out var entry))
+        {
+            oldSnapshot = null;
+            return false;
+        }
+
+        // If the solution is closing we don't need to bother computing new state
+        if (!_isSolutionClosing)
+        {
+            upgradeableLock.EnterWrite();
+
+            _projectMap.Remove(projectKey);
+        }
+
+        oldSnapshot = entry.Snapshot;
+        return true;
+    }
+
+    private bool TryUpdateProject(
+        ProjectKey projectKey,
+        Func<ProjectState, ProjectState> projectStateUpdater,
+        [NotNullWhen(true)] out IProjectSnapshot? oldSnapshot,
+        [NotNullWhen(true)] out IProjectSnapshot? newSnapshot)
+        => TryUpdateProject(projectKey, projectStateUpdater, managerStateUpdater: null, out oldSnapshot, out newSnapshot);
+
+    private bool TryUpdateProject(
+        ProjectKey projectKey,
+        Func<ProjectState, ProjectState> projectStateUpdater,
+        Action? managerStateUpdater,
         [NotNullWhen(true)] out IProjectSnapshot? oldSnapshot,
         [NotNullWhen(true)] out IProjectSnapshot? newSnapshot)
     {
         using var upgradeableLock = _readerWriterLock.DisposableUpgradeableRead();
 
-        if (action is ProjectAddedAction(var hostProject))
+        if (!_projectMap.TryGetValue(projectKey, out var entry))
         {
-            // If the project already exists, we can't add it again, so return false.
-            if (_projectMap.ContainsKey(hostProject.Key))
-            {
-                oldSnapshot = newSnapshot = null;
-                return false;
-            }
+            oldSnapshot = newSnapshot = null;
+            return false;
+        }
 
-            // ... otherwise, add the project and return true.
-
-            var state = ProjectState.Create(
-                _projectEngineFactoryProvider,
-                _languageServerFeatureOptions,
-                hostProject,
-                ProjectWorkspaceState.Default);
-
-            var newEntry = new Entry(state);
-
-            upgradeableLock.EnterWrite();
-            _projectMap[hostProject.Key] = newEntry;
-
-            oldSnapshot = newSnapshot = newEntry.GetSnapshot();
+        // if the solution is closing we don't need to bother computing new state
+        if (_isSolutionClosing)
+        {
+            oldSnapshot = newSnapshot = entry.Snapshot;
             return true;
         }
 
-        if (_projectMap.TryGetValue(projectKey, out var entry))
+        // ... otherwise, compute a new entry and update if it's changed from the old state.
+        var newState = projectStateUpdater(entry.State);
+
+        if (ReferenceEquals(newState, entry.State))
         {
-            // if the solution is closing we don't need to bother computing new state
-            if (_isSolutionClosing)
-            {
-                oldSnapshot = newSnapshot = entry.GetSnapshot();
-                return true;
-            }
-
-            // If we're removing a project, we don't need to try and compute new state for it.
-            // We can just remove it.
-            if (action is ProjectRemovedAction)
-            {
-                upgradeableLock.EnterWrite();
-
-                _projectMap.Remove(projectKey);
-
-                oldSnapshot = newSnapshot = entry.GetSnapshot();
-                return true;
-            }
-
-            // ... otherwise, compute a new entry and update if it's changed from the old state.
-            var documentState = documentFilePath is not null
-                ? entry.State.Documents.GetValueOrDefault(documentFilePath)
-                : null;
-
-            var newEntry = ComputeNewEntry(entry, action, documentState);
-
-            if (!ReferenceEquals(newEntry.State, entry.State))
-            {
-                upgradeableLock.EnterWrite();
-
-                _projectMap[projectKey] = newEntry;
-
-                switch (action)
-                {
-                    case OpenDocumentAction:
-                        _openDocumentSet.Add(documentFilePath.AssumeNotNull());
-                        break;
-                    case CloseDocumentAction:
-                        _openDocumentSet.Remove(documentFilePath.AssumeNotNull());
-                        break;
-                }
-
-                oldSnapshot = entry.GetSnapshot();
-                newSnapshot = newEntry.GetSnapshot();
-
-                return true;
-            }
+            oldSnapshot = newSnapshot = null;
+            return false;
         }
 
-        oldSnapshot = newSnapshot = null;
-        return false;
-    }
+        upgradeableLock.EnterWrite();
 
-    private static Entry ComputeNewEntry(Entry originalEntry, IUpdateProjectAction action, DocumentState? documentState)
-    {
-        switch (action)
-        {
-            case AddDocumentAction(var newDocument, var textLoader):
-                return new Entry(originalEntry.State.WithAddedHostDocument(newDocument, textLoader));
+        var newEntry = new Entry(newState);
+        _projectMap[projectKey] = newEntry;
 
-            case RemoveDocumentAction(var originalDocument):
-                return new Entry(originalEntry.State.WithRemovedHostDocument(originalDocument));
+        managerStateUpdater?.Invoke();
 
-            case CloseDocumentAction(var textLoader):
-                {
-                    // If the document being closed has already been removed from the project then we no-op
-                    if (documentState is null)
-                    {
-                        return originalEntry;
-                    }
+        oldSnapshot = entry.Snapshot;
+        newSnapshot = newEntry.Snapshot;
 
-                    var state = originalEntry.State.WithChangedHostDocument(
-                        documentState.HostDocument,
-                        textLoader);
-
-                    return new Entry(state);
-                }
-
-            case OpenDocumentAction(var sourceText):
-                {
-                    documentState.AssumeNotNull();
-
-                    if (documentState.TryGetText(out var olderText) &&
-                        documentState.TryGetTextVersion(out var olderVersion))
-                    {
-                        var version = sourceText.ContentEquals(olderText) ? olderVersion : olderVersion.GetNewerVersion();
-                        var newState = originalEntry.State.WithChangedHostDocument(documentState.HostDocument, sourceText, version);
-                        return new Entry(newState);
-                    }
-                    else
-                    {
-                        var newState = originalEntry.State.WithChangedHostDocument(
-                            documentState.HostDocument,
-                            new UpdatedTextLoader(documentState, sourceText));
-
-                        return new Entry(newState);
-                    }
-                }
-
-            case DocumentTextLoaderChangedAction(var textLoader):
-                {
-                    var newState = originalEntry.State.WithChangedHostDocument(
-                        documentState.AssumeNotNull().HostDocument,
-                        textLoader);
-
-                    return new Entry(newState);
-                }
-
-            case DocumentTextChangedAction(var sourceText):
-                {
-                    // If the document being changed has already been removed from the project then we no-op
-                    if (documentState is null)
-                    {
-                        return originalEntry;
-                    }
-
-                    if (documentState.TryGetText(out var olderText) &&
-                        documentState.TryGetTextVersion(out var olderVersion))
-                    {
-                        var version = sourceText.ContentEquals(olderText) ? olderVersion : olderVersion.GetNewerVersion();
-                        var state = originalEntry.State.WithChangedHostDocument(documentState.HostDocument, sourceText, version);
-
-                        return new Entry(state);
-                    }
-                    else
-                    {
-                        var state = originalEntry.State.WithChangedHostDocument(
-                            documentState.HostDocument,
-                            new UpdatedTextLoader(documentState, sourceText));
-
-                        return new Entry(state);
-                    }
-                }
-
-            case ProjectWorkspaceStateChangedAction(var workspaceState):
-                return new Entry(originalEntry.State.WithProjectWorkspaceState(workspaceState));
-
-            case HostProjectUpdatedAction(var hostProject):
-                return new Entry(originalEntry.State.WithHostProject(hostProject));
-
-            default:
-                throw new InvalidOperationException($"Unexpected action type {action.GetType()}");
-        }
-    }
-
-    private sealed class UpdatedTextLoader(DocumentState oldState, SourceText newSourceText) : TextLoader
-    {
-        public override async Task<TextAndVersion> LoadTextAndVersionAsync(LoadTextOptions options, CancellationToken cancellationToken)
-        {
-            var oldTextAndVersion = await oldState.GetTextAndVersionAsync(cancellationToken).ConfigureAwait(false);
-
-            var version = newSourceText.ContentEquals(oldTextAndVersion.Text)
-                ? oldTextAndVersion.Version
-                : oldTextAndVersion.Version.GetNewerVersion();
-
-            return TextAndVersion.Create(newSourceText, version);
-        }
+        return true;
     }
 
     public Task UpdateAsync(Action<Updater> updater, CancellationToken cancellationToken)

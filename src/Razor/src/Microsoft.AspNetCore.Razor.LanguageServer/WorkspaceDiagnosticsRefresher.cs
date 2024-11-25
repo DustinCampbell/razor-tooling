@@ -65,7 +65,7 @@ internal sealed class WorkspaceDiagnosticsRefresher : IRazorStartupService, IDis
 
     private void ProjectSnapshotManager_Changed(object? sender, ProjectChangeEventArgs e)
     {
-        if (e.SolutionIsClosing)
+        if (e.IsSolutionClosing)
         {
             return;
         }

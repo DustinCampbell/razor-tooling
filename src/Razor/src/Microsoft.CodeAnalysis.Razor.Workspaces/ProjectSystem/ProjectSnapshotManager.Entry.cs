@@ -5,13 +5,9 @@ namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
 internal partial class ProjectSnapshotManager
 {
-    private sealed record Entry(ProjectState State)
+    private readonly struct Entry(ProjectState state)
     {
-        private IProjectSnapshot? _snapshotUnsafe;
-
-        public IProjectSnapshot GetSnapshot()
-        {
-            return _snapshotUnsafe ??= new ProjectSnapshot(State);
-        }
+        public ProjectState State => state;
+        public ProjectSnapshot Snapshot { get; } = new(state);
     }
 }
