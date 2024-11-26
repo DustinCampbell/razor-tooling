@@ -7,7 +7,6 @@ using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Razor.PooledObjects;
 using Microsoft.AspNetCore.Razor.ProjectEngineHost;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Threading;
@@ -36,25 +35,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
     private readonly ReaderWriterLockSlim _readerWriterLock = new(LockRecursionPolicy.NoRecursion);
 
-    #region protected by lock
-
-    /// <summary>
-    /// A map of <see cref="ProjectKey"/> to <see cref="Entry"/>, which wraps a <see cref="ProjectState"/>
-    /// and lazily creates a <see cref="ProjectSnapshot"/>.
-    /// </summary>
-    private readonly Dictionary<ProjectKey, Entry> _projectMap = [];
-
-    /// <summary>
-    /// The set of open documents.
-    /// </summary>
-    private readonly HashSet<string> _openDocumentSet = new(FilePathComparer.Instance);
-
-    /// <summary>
-    /// Determines whether or not the solution is closing.
-    /// </summary>
-    private bool _isSolutionClosing;
-
-    #endregion
+    private SolutionState _state = SolutionState.Empty;
 
     // We have a queue for changes because if one change results in another change aka, add -> open
     // we want to make sure the "add" finishes running first before "open" is notified.
@@ -97,7 +78,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
         {
             using (_readerWriterLock.DisposableRead())
             {
-                return _isSolutionClosing;
+                return _state.IsSolutionClosing;
             }
         }
     }
@@ -106,14 +87,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
     {
         using (_readerWriterLock.DisposableRead())
         {
-            using var builder = new PooledArrayBuilder<IProjectSnapshot>(_projectMap.Count);
-
-            foreach (var (_, entry) in _projectMap)
-            {
-                builder.Add(entry.Snapshot);
-            }
-
-            return builder.DrainToImmutable();
+            return _state.GetProjects();
         }
     }
 
@@ -121,7 +95,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
     {
         using (_readerWriterLock.DisposableRead())
         {
-            return [.. _openDocumentSet];
+            return _state.GetOpenDocuments();
         }
     }
 
@@ -129,45 +103,23 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
     {
         using (_readerWriterLock.DisposableRead())
         {
-            if (_projectMap.TryGetValue(projectKey, out var entry))
-            {
-                return entry.Snapshot;
-            }
+            return _state.GetLoadedProject(projectKey);
         }
-
-        throw new InvalidOperationException($"No project snapshot exists with the key, '{projectKey}'");
     }
 
     public bool TryGetLoadedProject(ProjectKey projectKey, [NotNullWhen(true)] out IProjectSnapshot? project)
     {
         using (_readerWriterLock.DisposableRead())
         {
-            if (_projectMap.TryGetValue(projectKey, out var entry))
-            {
-                project = entry.Snapshot;
-                return true;
-            }
+            return _state.TryGetLoadedProject(projectKey, out project);
         }
-
-        project = null;
-        return false;
     }
 
-    public ImmutableArray<ProjectKey> GetAllProjectKeys(string projectFileName)
+    public ImmutableArray<ProjectKey> GetAllProjectKeys(string projectFilePath)
     {
         using (_readerWriterLock.DisposableRead())
         {
-            using var projects = new PooledArrayBuilder<ProjectKey>(capacity: _projectMap.Count);
-
-            foreach (var (key, entry) in _projectMap)
-            {
-                if (FilePathComparer.Instance.Equals(entry.State.HostProject.FilePath, projectFileName))
-                {
-                    projects.Add(key);
-                }
-            }
-
-            return projects.DrainToImmutable();
+            return _state.GetAllProjectKeys(projectFilePath);
         }
     }
 
@@ -175,7 +127,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
     {
         using (_readerWriterLock.DisposableRead())
         {
-            return _openDocumentSet.Contains(documentFilePath);
+            return _state.IsDocumentOpen(documentFilePath);
         }
     }
 
@@ -188,7 +140,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
         if (TryUpdateProject(
             projectKey,
-            projectStateUpdater: state => state.AddDocument(hostDocument, textLoader),
+            solutionStateUpdater: state => state.AddDocument(projectKey, hostDocument, textLoader),
             out var oldSnapshot,
             out var newSnapshot))
         {
@@ -205,7 +157,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
         if (TryUpdateProject(
             projectKey,
-            projectStateUpdater: state => state.RemoveDocument(hostDocument.FilePath),
+            solutionStateUpdater: state => state.RemoveDocument(projectKey, hostDocument.FilePath),
             out var oldSnapshot,
             out var newSnapshot))
         {
@@ -222,8 +174,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
         if (TryUpdateProject(
             projectKey,
-            projectStateUpdater: state => state.UpdateDocumentText(documentFilePath, sourceText),
-            managerStateUpdater: () => _openDocumentSet.Add(documentFilePath),
+            solutionStateUpdater: state => state.OpenDocument(projectKey, documentFilePath, sourceText),
             out var oldSnapshot,
             out var newSnapshot))
         {
@@ -240,8 +191,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
         if (TryUpdateProject(
             projectKey,
-            projectStateUpdater: state => state.UpdateDocumentText(documentFilePath, textLoader),
-            managerStateUpdater: () => _openDocumentSet.Remove(documentFilePath),
+            solutionStateUpdater: state => state.CloseDocument(projectKey, documentFilePath, textLoader),
             out var oldSnapshot,
             out var newSnapshot))
         {
@@ -258,7 +208,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
         if (TryUpdateProject(
             projectKey,
-            projectStateUpdater: state => state.UpdateDocumentText(documentFilePath, sourceText),
+            solutionStateUpdater: state => state.UpdateDocumentText(projectKey, documentFilePath, sourceText),
             out var oldSnapshot,
             out var newSnapshot))
         {
@@ -275,7 +225,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
         if (TryUpdateProject(
             projectKey,
-            projectStateUpdater: state => state.UpdateDocumentText(documentFilePath, textLoader),
+            solutionStateUpdater: state => state.UpdateDocumentText(projectKey, documentFilePath, textLoader),
             out var oldSnapshot,
             out var newSnapshot))
         {
@@ -318,7 +268,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
         if (TryUpdateProject(
             projectKey,
-            projectStateUpdater: state => state.WithProjectWorkspaceState(projectWorkspaceState),
+            solutionStateUpdater: state => state.UpdateProjectWorkspaceState(projectKey, projectWorkspaceState),
             out var oldSnapshot,
             out var newSnapshot))
         {
@@ -335,7 +285,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
         if (TryUpdateProject(
             hostProject.Key,
-            projectStateUpdater: state => state.WithHostProject(hostProject),
+            solutionStateUpdater: state => state.UpdateProjectConfiguration(hostProject),
             out var oldSnapshot,
             out var newSnapshot))
         {
@@ -352,7 +302,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
         using (_readerWriterLock.DisposableWrite())
         {
-            _isSolutionClosing = false;
+            _state = _state.UpdateIsSolutionClosing(false);
         }
     }
 
@@ -365,7 +315,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
         using (_readerWriterLock.DisposableWrite())
         {
-            _isSolutionClosing = true;
+            _state = _state.UpdateIsSolutionClosing(true);
         }
     }
 
@@ -409,28 +359,20 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
     {
         using var upgradeableLock = _readerWriterLock.DisposableUpgradeableRead();
 
-        // If the project already exists, we can't add it again, so return false.
-        if (_projectMap.ContainsKey(hostProject.Key))
+        var oldState = _state;
+        var newState = oldState.AddProject(hostProject, _projectEngineFactoryProvider, _languageServerFeatureOptions);
+
+        if (ReferenceEquals(oldState, newState))
         {
             newSnapshot = null;
             return false;
         }
 
-        // ... otherwise, add the project and return true.
-
-        var newState = ProjectState.Create(
-            _projectEngineFactoryProvider,
-            _languageServerFeatureOptions,
-            hostProject,
-            ProjectWorkspaceState.Default);
-
-        var newEntry = new Entry(newState);
-
         upgradeableLock.EnterWrite();
 
-        _projectMap.Add(hostProject.Key, newEntry);
+        _state = newState;
 
-        newSnapshot = newEntry.Snapshot;
+        newSnapshot = newState.GetLoadedProject(hostProject.Key);
         return true;
     }
 
@@ -440,57 +382,45 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
     {
         using var upgradeableLock = _readerWriterLock.DisposableUpgradeableRead();
 
-        if (!_projectMap.TryGetValue(projectKey, out var entry))
-        {
-            oldSnapshot = null;
-            return false;
-        }
+        var oldState = _state;
 
         // If the solution is closing we don't need to bother computing new state
-        if (!_isSolutionClosing)
+        if (!oldState.IsSolutionClosing)
         {
-            upgradeableLock.EnterWrite();
+            var newState = oldState.RemoveProject(projectKey);
 
-            _projectMap.Remove(projectKey);
+            if (!ReferenceEquals(oldState, newState))
+            {
+                upgradeableLock.EnterWrite();
+
+                _state = newState;
+            }
         }
 
-        oldSnapshot = entry.Snapshot;
+        oldSnapshot = oldState.GetLoadedProject(projectKey);
         return true;
     }
 
     private bool TryUpdateProject(
         ProjectKey projectKey,
-        Func<ProjectState, ProjectState> projectStateUpdater,
-        [NotNullWhen(true)] out IProjectSnapshot? oldSnapshot,
-        [NotNullWhen(true)] out IProjectSnapshot? newSnapshot)
-        => TryUpdateProject(projectKey, projectStateUpdater, managerStateUpdater: null, out oldSnapshot, out newSnapshot);
-
-    private bool TryUpdateProject(
-        ProjectKey projectKey,
-        Func<ProjectState, ProjectState> projectStateUpdater,
-        Action? managerStateUpdater,
+        Func<SolutionState, SolutionState> solutionStateUpdater,
         [NotNullWhen(true)] out IProjectSnapshot? oldSnapshot,
         [NotNullWhen(true)] out IProjectSnapshot? newSnapshot)
     {
         using var upgradeableLock = _readerWriterLock.DisposableUpgradeableRead();
 
-        if (!_projectMap.TryGetValue(projectKey, out var entry))
-        {
-            oldSnapshot = newSnapshot = null;
-            return false;
-        }
+        var oldState = _state;
 
-        // if the solution is closing we don't need to bother computing new state
-        if (_isSolutionClosing)
+        // If the solution is closing we don't need to bother computing new state
+        if (oldState.IsSolutionClosing)
         {
-            oldSnapshot = newSnapshot = entry.Snapshot;
+            oldSnapshot = newSnapshot = oldState.GetLoadedProject(projectKey);
             return true;
         }
 
-        // ... otherwise, compute a new entry and update if it's changed from the old state.
-        var newState = projectStateUpdater(entry.State);
+        var newState = solutionStateUpdater(oldState);
 
-        if (ReferenceEquals(newState, entry.State))
+        if (ReferenceEquals(oldState, newState))
         {
             oldSnapshot = newSnapshot = null;
             return false;
@@ -498,13 +428,10 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
         upgradeableLock.EnterWrite();
 
-        var newEntry = new Entry(newState);
-        _projectMap[projectKey] = newEntry;
+        _state = newState;
 
-        managerStateUpdater?.Invoke();
-
-        oldSnapshot = entry.Snapshot;
-        newSnapshot = newEntry.Snapshot;
+        oldSnapshot = oldState.GetLoadedProject(projectKey);
+        newSnapshot = newState.GetLoadedProject(projectKey);
 
         return true;
     }

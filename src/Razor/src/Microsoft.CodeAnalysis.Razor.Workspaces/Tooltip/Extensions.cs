@@ -71,6 +71,8 @@ internal static class Extensions
             return [];
         }
 
+        projects.Unsafe().OrderBy(static x => x.DisplayName);
+
         using var result = new PooledArrayBuilder<(IProjectSnapshot, bool IsAvailable)>(capacity: projects.Length);
 
         foreach (var project in projects)
