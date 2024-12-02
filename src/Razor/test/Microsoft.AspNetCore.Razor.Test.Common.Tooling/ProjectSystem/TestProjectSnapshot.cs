@@ -21,23 +21,33 @@ internal sealed class TestProjectSnapshot : IProjectSnapshot
 {
     public ProjectSnapshot RealSnapshot { get; }
 
-    private TestProjectSnapshot(ProjectState state)
+    private TestProjectSnapshot(ProjectSnapshot realSnapshot)
     {
-        RealSnapshot = new ProjectSnapshot(state);
+        RealSnapshot = realSnapshot;
     }
 
     public static TestProjectSnapshot Create(string filePath, ProjectWorkspaceState? projectWorkspaceState = null)
     {
         var hostProject = TestHostProject.Create(filePath);
-        projectWorkspaceState ??= ProjectWorkspaceState.Default;
 
-        var state = ProjectState.Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, hostProject, projectWorkspaceState);
+        var solutionState = SolutionState
+            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance)
+            .AddProject(hostProject);
 
-        return new TestProjectSnapshot(state);
+        if (projectWorkspaceState is not null)
+        {
+            solutionState = solutionState.UpdateProjectWorkspaceState(hostProject.Key, projectWorkspaceState);
+        }
+
+        var solution = new SolutionSnapshot(solutionState);
+        var project = solution.GetLoadedProject(hostProject.Key);
+
+        return new TestProjectSnapshot(project);
     }
 
     public HostProject HostProject => RealSnapshot.HostProject;
 
+    public ISolutionSnapshot Solution => RealSnapshot.Solution;
     public ProjectKey Key => RealSnapshot.Key;
     public RazorConfiguration Configuration => RealSnapshot.Configuration;
     public IEnumerable<string> DocumentFilePaths => RealSnapshot.DocumentFilePaths;
@@ -65,5 +75,14 @@ internal sealed class TestProjectSnapshot : IProjectSnapshot
         => RealSnapshot.GetDocument(filePath);
 
     public bool TryGetDocument(string filePath, [NotNullWhen(true)] out IDocumentSnapshot? document)
-        => RealSnapshot.TryGetDocument(filePath, out document);
+    {
+        if (RealSnapshot.TryGetDocument(filePath, out var snapshot))
+        {
+            document = snapshot;
+            return true;
+        }
+
+        document = null;
+        return false;
+    }
 }

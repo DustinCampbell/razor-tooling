@@ -5,7 +5,6 @@
 
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Test.Common;
 using Microsoft.AspNetCore.Razor.Test.Common.Workspaces;
 using Xunit;
@@ -29,10 +28,12 @@ public class GeneratedDocumentTextLoaderTest : WorkspaceTestBase
     public async Task LoadAsync_SpecifiesEncoding()
     {
         // Arrange
-        var project = new ProjectSnapshot(
-            ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, ProjectWorkspaceState.Default)
-            .AddDocument(_hostDocument, TestMocks.CreateTextLoader("", VersionStamp.Create())));
-
+        var solutionState = SolutionState
+            .Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions)
+            .AddProject(_hostProject)
+            .AddDocument(_hostProject.Key, _hostDocument, TestMocks.CreateTextLoader("", VersionStamp.Create()));
+        var solution = new SolutionSnapshot(solutionState);
+        var project = solution.GetLoadedProject(_hostProject.Key);
         var document = project.GetDocument(_hostDocument.FilePath);
 
         var loader = new GeneratedDocumentTextLoader(document, "file.cshtml");

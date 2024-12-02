@@ -28,6 +28,7 @@ internal sealed class RemoteProjectSnapshot : IProjectSnapshot
 {
     public RemoteSolutionSnapshot SolutionSnapshot { get; }
 
+    public ISolutionSnapshot Solution => SolutionSnapshot;
     public ProjectKey Key { get; }
 
     private readonly Project _project;
@@ -37,7 +38,7 @@ internal sealed class RemoteProjectSnapshot : IProjectSnapshot
 
     private ImmutableArray<TagHelperDescriptor> _tagHelpers;
 
-    public RemoteProjectSnapshot(Project project, RemoteSolutionSnapshot solutionSnapshot)
+    public RemoteProjectSnapshot(Project project, ProjectKey projectKey, RemoteSolutionSnapshot solutionSnapshot)
     {
         if (!project.ContainsRazorDocuments())
         {
@@ -45,8 +46,8 @@ internal sealed class RemoteProjectSnapshot : IProjectSnapshot
         }
 
         _project = project;
+        Key = projectKey;
         SolutionSnapshot = solutionSnapshot;
-        Key = _project.ToProjectKey();
 
         _lazyConfiguration = new AsyncLazy<RazorConfiguration>(CreateRazorConfigurationAsync, joinableTaskFactory: null);
         _lazyProjectEngine = new AsyncLazy<RazorProjectEngine>(async () =>
@@ -164,12 +165,12 @@ internal sealed class RemoteProjectSnapshot : IProjectSnapshot
         return false;
     }
 
-    public IDocumentSnapshot? GetDocument(string filePath)
+    public RemoteDocumentSnapshot? GetDocument(string filePath)
         => TryGetDocument(filePath, out var document)
             ? document
             : null;
 
-    public bool TryGetDocument(string filePath, [NotNullWhen(true)] out IDocumentSnapshot? document)
+    public bool TryGetDocument(string filePath, [NotNullWhen(true)] out RemoteDocumentSnapshot? document)
     {
         if (!filePath.IsRazorFilePath())
         {
@@ -190,6 +191,18 @@ internal sealed class RemoteProjectSnapshot : IProjectSnapshot
 
         document = null;
         return false;
+    }
+
+    IDocumentSnapshot? IProjectSnapshot.GetDocument(string filePath)
+        => GetDocument(filePath);
+
+    bool IProjectSnapshot.TryGetDocument(string filePath, [NotNullWhen(true)] out IDocumentSnapshot? document)
+    {
+        document = TryGetDocument(filePath, out var snapshot)
+            ? snapshot
+            : null;
+
+        return document is not null;
     }
 
     public RazorProjectEngine GetProjectEngine() => throw new InvalidOperationException("Should not be called for cohosted projects.");

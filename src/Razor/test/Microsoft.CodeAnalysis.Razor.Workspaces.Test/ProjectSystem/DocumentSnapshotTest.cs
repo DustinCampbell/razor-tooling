@@ -4,7 +4,6 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
-using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Test.Common;
 using Microsoft.AspNetCore.Razor.Test.Common.Workspaces;
 using Microsoft.CodeAnalysis.Text;
@@ -33,8 +32,12 @@ public class DocumentSnapshotTest : WorkspaceTestBase
         _sourceText = SourceText.From("<p>Hello World</p>");
         _version = VersionStamp.Create();
 
-        var projectState = ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, TestProjectData.SomeProject, ProjectWorkspaceState.Default);
-        var project = new ProjectSnapshot(projectState);
+        var solutionState = SolutionState
+            .Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions)
+            .AddProject(TestProjectData.SomeProject);
+
+        var solution = new SolutionSnapshot(solutionState);
+        var project = solution.GetLoadedProject(TestProjectData.SomeProject.Key);
 
         var textLoader = TestMocks.CreateTextLoader(_sourceText, _version);
 

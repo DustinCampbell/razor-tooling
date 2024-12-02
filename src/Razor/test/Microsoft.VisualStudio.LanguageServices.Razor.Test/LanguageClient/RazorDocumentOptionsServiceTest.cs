@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
-using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Test.Common;
 using Microsoft.AspNetCore.Razor.Test.Common.Workspaces;
 using Microsoft.AspNetCore.Razor.Utilities;
@@ -96,11 +95,15 @@ public class RazorDocumentOptionsServiceTest(ITestOutputHelper testOutput) : Wor
         var hostDocument = new HostDocument(
             Path.Combine(baseDirectory, "SomeProject", "File1.cshtml"), "File1.cshtml", FileKinds.Legacy);
 
-        var project = new ProjectSnapshot(ProjectState
-            .Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, hostProject, ProjectWorkspaceState.Default)
-            .AddDocument(hostDocument, TestMocks.CreateTextLoader(sourceText, VersionStamp.Create())));
+        var solutionState = SolutionState
+            .Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions)
+            .AddProject(hostProject)
+            .AddDocument(hostProject.Key, hostDocument, TestMocks.CreateTextLoader(sourceText, VersionStamp.Create()));
 
-        var documentSnapshot = project.GetDocument(hostDocument.FilePath);
+        var solutionSnapshot = new SolutionSnapshot(solutionState);
+        var projectSnapshot = solutionSnapshot.GetLoadedProject(hostProject.Key);
+
+        var documentSnapshot = projectSnapshot.GetDocument(hostDocument.FilePath);
         Assert.NotNull(documentSnapshot);
 
         var solution = Workspace.CurrentSolution.AddProject(ProjectInfo.Create(

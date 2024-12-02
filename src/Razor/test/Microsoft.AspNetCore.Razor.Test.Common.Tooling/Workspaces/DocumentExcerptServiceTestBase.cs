@@ -7,7 +7,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
-using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Text;
@@ -41,12 +40,13 @@ public abstract class DocumentExcerptServiceTestBase(ITestOutputHelper testOutpu
     // Adds the text to a ProjectSnapshot, generates code, and updates the workspace.
     private (IDocumentSnapshot primary, Document secondary) InitializeDocument(SourceText sourceText)
     {
-        var state = ProjectState
-            .Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, ProjectWorkspaceState.Default)
-            .AddDocument(_hostDocument, TestMocks.CreateTextLoader(sourceText, VersionStamp.Create()));
+        var solutionState = SolutionState
+            .Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions)
+            .AddProject(_hostProject)
+            .AddDocument(_hostProject.Key, _hostDocument, TestMocks.CreateTextLoader(sourceText, VersionStamp.Create()));
 
-        var project = new ProjectSnapshot(state);
-
+        var solutionSnapshot = new SolutionSnapshot(solutionState);
+        var project = solutionSnapshot.GetLoadedProject(_hostProject.Key);
         var primary = project.GetDocument(_hostDocument.FilePath).AssumeNotNull();
 
         var solution = Workspace.CurrentSolution.AddProject(ProjectInfo.Create(

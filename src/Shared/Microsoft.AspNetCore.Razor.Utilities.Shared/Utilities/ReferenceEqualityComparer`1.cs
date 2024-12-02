@@ -6,17 +6,18 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.AspNetCore.Razor.Utilities;
 
-internal sealed class ReferenceEqualityComparer : IEqualityComparer<object>
+internal sealed class ReferenceEqualityComparer<T> : IEqualityComparer<T>
+    where T : class
 {
-    public static readonly ReferenceEqualityComparer Instance = new();
+    public static readonly ReferenceEqualityComparer<T> Instance = new();
 
     private ReferenceEqualityComparer()
     {
     }
 
-    public new bool Equals(object? x, object? y)
+    public bool Equals(T? x, T? y)
         => ReferenceEquals(x, y);
 
-    public int GetHashCode(object obj)
+    public int GetHashCode(T obj)
         => RuntimeHelpers.GetHashCode(obj);
 }

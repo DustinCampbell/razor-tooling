@@ -5,7 +5,6 @@
 
 using System.Collections.Immutable;
 using Microsoft.AspNetCore.Razor.Language;
-using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Test.Common;
 using Microsoft.AspNetCore.Razor.Test.Common.Workspaces;
 using Microsoft.CodeAnalysis.Razor;
@@ -33,29 +32,39 @@ public class ProjectEngineFactoryProviderTest : ToolingTestBase
         : base(testOutput)
     {
         var projectFilePath = "/TestPath/SomePath/Test.csproj";
-        var intermediateOutputPath = "/TestPath/SomePath/obj";
-        var hostProject_For_1_0 = new HostProject(projectFilePath, intermediateOutputPath, FallbackRazorConfiguration.MVC_1_0, "Test");
-        var hostProject_For_1_1 = new HostProject(projectFilePath, intermediateOutputPath, FallbackRazorConfiguration.MVC_1_1, "Test");
-        var hostProject_For_2_0 = new HostProject(projectFilePath, intermediateOutputPath, FallbackRazorConfiguration.MVC_2_0, "Test");
+        var hostProject_For_1_0 = new HostProject(projectFilePath, "/TestPath/SomePath_1_0/obj", FallbackRazorConfiguration.MVC_1_0, "Test");
+        var hostProject_For_1_1 = new HostProject(projectFilePath, "/TestPath/SomePath_1_1/obj", FallbackRazorConfiguration.MVC_1_1, "Test");
+        var hostProject_For_2_0 = new HostProject(projectFilePath, "/TestPath/SomePath_2_0/obj", FallbackRazorConfiguration.MVC_2_0, "Test");
 
         var hostProject_For_2_1 = new HostProject(
-            projectFilePath, intermediateOutputPath,
+            projectFilePath, "/TestPath/SomePath_2_1/obj",
             new(RazorLanguageVersion.Version_2_1, "MVC-2.1", Extensions: []), "Test");
 
         var hostProject_For_3_0 = new HostProject(
-            projectFilePath, intermediateOutputPath,
+            projectFilePath, "/TestPath/SomePath_3_0/obj",
             new(RazorLanguageVersion.Version_3_0, "MVC-3.0", Extensions: []), "Test");
 
         var hostProject_For_UnknownConfiguration = new HostProject(
-            projectFilePath, intermediateOutputPath,
+            projectFilePath, "/TestPath/SomePath_Random_0_1/obj",
             new(RazorLanguageVersion.Version_2_1, "Random-0.1", Extensions: []), rootNamespace: null);
 
-        _snapshot_For_1_0 = new ProjectSnapshot(ProjectState.Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, hostProject_For_1_0, ProjectWorkspaceState.Default));
-        _snapshot_For_1_1 = new ProjectSnapshot(ProjectState.Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, hostProject_For_1_1, ProjectWorkspaceState.Default));
-        _snapshot_For_2_0 = new ProjectSnapshot(ProjectState.Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, hostProject_For_2_0, ProjectWorkspaceState.Default));
-        _snapshot_For_2_1 = new ProjectSnapshot(ProjectState.Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, hostProject_For_2_1, ProjectWorkspaceState.Default));
-        _snapshot_For_3_0 = new ProjectSnapshot(ProjectState.Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, hostProject_For_3_0, ProjectWorkspaceState.Default));
-        _snapshot_For_UnknownConfiguration = new ProjectSnapshot(ProjectState.Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, hostProject_For_UnknownConfiguration, ProjectWorkspaceState.Default));
+        var solutionState = SolutionState
+            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance)
+            .AddProject(hostProject_For_1_0)
+            .AddProject(hostProject_For_1_1)
+            .AddProject(hostProject_For_2_0)
+            .AddProject(hostProject_For_2_1)
+            .AddProject(hostProject_For_3_0)
+            .AddProject(hostProject_For_UnknownConfiguration);
+
+        var solution = new SolutionSnapshot(solutionState);
+
+        _snapshot_For_1_0 = solution.GetLoadedProject(hostProject_For_1_0.Key);
+        _snapshot_For_1_1 = solution.GetLoadedProject(hostProject_For_1_1.Key);
+        _snapshot_For_2_0 = solution.GetLoadedProject(hostProject_For_2_0.Key);
+        _snapshot_For_2_1 = solution.GetLoadedProject(hostProject_For_2_1.Key);
+        _snapshot_For_3_0 = solution.GetLoadedProject(hostProject_For_3_0.Key);
+        _snapshot_For_UnknownConfiguration = solution.GetLoadedProject(hostProject_For_UnknownConfiguration.Key);
 
         _customFactories =
         [

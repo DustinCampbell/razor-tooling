@@ -15,16 +15,17 @@ internal sealed class DocumentSnapshot(ProjectSnapshot project, DocumentState st
 {
     private static readonly object s_csharpSyntaxTreeKey = new();
 
+    public ProjectSnapshot Project { get; } = project;
     private readonly DocumentState _state = state;
-    private readonly ProjectSnapshot _project = project;
 
     public HostDocument HostDocument => _state.HostDocument;
 
     public string FileKind => _state.HostDocument.FileKind;
     public string FilePath => _state.HostDocument.FilePath;
     public string TargetPath => _state.HostDocument.TargetPath;
-    public IProjectSnapshot Project => _project;
     public int Version => _state.Version;
+
+    IProjectSnapshot IDocumentSnapshot.Project => Project;
 
     public ValueTask<SourceText> GetTextAsync(CancellationToken cancellationToken)
         => _state.GetTextAsync(cancellationToken);
@@ -52,7 +53,7 @@ internal sealed class DocumentSnapshot(ProjectSnapshot project, DocumentState st
 
     public IDocumentSnapshot WithText(SourceText text)
     {
-        return new DocumentSnapshot(_project, _state.WithText(text, VersionStamp.Create()));
+        return new DocumentSnapshot(Project, _state.WithText(text, VersionStamp.Create()));
     }
 
     public ValueTask<SyntaxTree> GetCSharpSyntaxTreeAsync(CancellationToken cancellationToken)
@@ -76,11 +77,14 @@ internal sealed class DocumentSnapshot(ProjectSnapshot project, DocumentState st
         }
 
         var (output, _) = await _state
-            .GetGeneratedOutputAndVersionAsync(_project, this, cancellationToken)
+            .GetGeneratedOutputAndVersionAsync(this, cancellationToken)
             .ConfigureAwait(false);
 
         return output;
     }
+
+    public Task<(RazorCodeDocument, VersionStamp)> GetGeneratedOutputAndVersionAsync(CancellationToken cancellationToken)
+        => _state.GetGeneratedOutputAndVersionAsync(this, cancellationToken);
 
     private Task<RazorCodeDocument> GetDesignTimeGeneratedOutputAsync(CancellationToken cancellationToken)
         => DocumentState.GenerateCodeDocumentAsync(this, Project.GetProjectEngine(), forceRuntimeCodeGeneration: false, cancellationToken);

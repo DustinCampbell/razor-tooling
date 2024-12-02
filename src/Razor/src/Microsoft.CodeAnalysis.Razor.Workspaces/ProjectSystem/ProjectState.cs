@@ -63,7 +63,7 @@ internal partial class ProjectState
         _languageServerFeatureOptions = languageServerFeatureOptions;
         HostProject = hostProject;
         ProjectWorkspaceState = projectWorkspaceState;
-        Documents = ImmutableDictionary.Create<string, DocumentState>(FilePathNormalizingComparer.Instance);
+        DocumentStates = ImmutableDictionary.Create<string, DocumentState>(FilePathNormalizingComparer.Instance);
         ImportsToRelatedDocuments = s_emptyImportsToRelatedDocuments;
         Version = VersionStamp.Create();
         ProjectWorkspaceStateVersion = Version;
@@ -84,7 +84,7 @@ internal partial class ProjectState
 
         HostProject = hostProject;
         ProjectWorkspaceState = projectWorkspaceState;
-        Documents = documents;
+        DocumentStates = documents;
         ImportsToRelatedDocuments = importsToRelatedDocuments;
 
         if ((difference & ClearDocumentCollectionVersionMask) == 0)
@@ -128,10 +128,7 @@ internal partial class ProjectState
         }
     }
 
-    // Internal set for testing.
-    public ImmutableDictionary<string, DocumentState> Documents { get; internal set; }
-
-    // Internal set for testing.
+    public ImmutableDictionary<string, DocumentState> DocumentStates { get; internal set; }
     public ImmutableDictionary<string, ImmutableArray<string>> ImportsToRelatedDocuments { get; internal set; }
 
     public HostProject HostProject { get; }
@@ -201,13 +198,13 @@ internal partial class ProjectState
 
         // Ignore attempts to 'add' a document with different data, we only
         // care about one, so it might as well be the one we have.
-        if (Documents.ContainsKey(hostDocument.FilePath))
+        if (DocumentStates.ContainsKey(hostDocument.FilePath))
         {
             return this;
         }
 
         var documentState = DocumentState.Create(hostDocument, version: 1, textLoader);
-        var newDocuments = Documents.Add(hostDocument.FilePath, documentState);
+        var newDocuments = DocumentStates.Add(hostDocument.FilePath, documentState);
 
         // Compute the effect on the import map
         var importsToRelatedDocuments = AddToImportsToRelatedDocuments(hostDocument, ImportsToRelatedDocuments);
@@ -229,12 +226,12 @@ internal partial class ProjectState
     {
         ArgHelper.ThrowIfNull(documentFilePath);
 
-        if (!Documents.TryGetValue(documentFilePath, out var documentState))
+        if (!DocumentStates.TryGetValue(documentFilePath, out var documentState))
         {
             return this;
         }
 
-        var documents = Documents.Remove(documentFilePath);
+        var documents = DocumentStates.Remove(documentFilePath);
 
         var hostDocument = documentState.HostDocument;
 
@@ -258,12 +255,12 @@ internal partial class ProjectState
     {
         ArgHelper.ThrowIfNull(documentFilePath);
 
-        if (!Documents.TryGetValue(documentFilePath, out var documentState))
+        if (!DocumentStates.TryGetValue(documentFilePath, out var documentState))
         {
             return this;
         }
 
-        var documents = Documents.SetItem(documentFilePath, documentState.WithTextLoader(textLoader));
+        var documents = DocumentStates.SetItem(documentFilePath, documentState.WithTextLoader(textLoader));
 
         if (ImportsToRelatedDocuments.TryGetValue(documentState.HostDocument.TargetPath, out var relatedDocuments))
         {
@@ -280,7 +277,7 @@ internal partial class ProjectState
     {
         ArgHelper.ThrowIfNull(documentFilePath);
 
-        if (!Documents.TryGetValue(documentFilePath, out var documentState))
+        if (!DocumentStates.TryGetValue(documentFilePath, out var documentState))
         {
             return this;
         }
@@ -303,7 +300,7 @@ internal partial class ProjectState
     private ProjectState UpdateDocumentText(DocumentState documentState, Func<DocumentState, DocumentState> documentStateUpdater)
     {
         var hostDocument = documentState.HostDocument;
-        var documents = Documents.SetItem(hostDocument.FilePath, documentStateUpdater(documentState));
+        var documents = DocumentStates.SetItem(hostDocument.FilePath, documentStateUpdater(documentState));
 
         if (ImportsToRelatedDocuments.TryGetValue(hostDocument.TargetPath, out var relatedDocuments))
         {
@@ -326,7 +323,7 @@ internal partial class ProjectState
             return this;
         }
 
-        var documents = Documents.ToImmutableDictionary(
+        var documents = DocumentStates.ToImmutableDictionary(
             kvp => kvp.Key,
             kvp => kvp.Value.WithConfigurationChange(),
             FilePathNormalizingComparer.Instance);
@@ -351,7 +348,7 @@ internal partial class ProjectState
         }
 
         var difference = ProjectDifference.ProjectWorkspaceStateChanged;
-        var documents = Documents.ToImmutableDictionary(
+        var documents = DocumentStates.ToImmutableDictionary(
             kvp => kvp.Key,
             kvp => kvp.Value.WithProjectWorkspaceStateChange(),
             FilePathNormalizingComparer.Instance);

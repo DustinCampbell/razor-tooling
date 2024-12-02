@@ -15,8 +15,9 @@ using Microsoft.CodeAnalysis.Razor.Workspaces;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
-internal sealed class ProjectSnapshot(ProjectState state) : IProjectSnapshot
+internal sealed class ProjectSnapshot(SolutionSnapshot solution, ProjectState state) : IProjectSnapshot
 {
+    public SolutionSnapshot Solution { get; } = solution;
     private readonly ProjectState _state = state;
 
     private readonly object _gate = new();
@@ -27,7 +28,7 @@ internal sealed class ProjectSnapshot(ProjectState state) : IProjectSnapshot
 
     public ProjectKey Key => _state.HostProject.Key;
     public RazorConfiguration Configuration => _state.HostProject.Configuration;
-    public IEnumerable<string> DocumentFilePaths => _state.Documents.Keys;
+    public IEnumerable<string> DocumentFilePaths => _state.DocumentStates.Keys;
     public string FilePath => _state.HostProject.FilePath;
     public string IntermediateOutputPath => _state.HostProject.IntermediateOutputPath;
     public string? RootNamespace => _state.HostProject.RootNamespace;
@@ -36,11 +37,13 @@ internal sealed class ProjectSnapshot(ProjectState state) : IProjectSnapshot
     public LanguageVersion CSharpLanguageVersion => _state.CSharpLanguageVersion;
     public ProjectWorkspaceState ProjectWorkspaceState => _state.ProjectWorkspaceState;
 
-    public int DocumentCount => _state.Documents.Count;
+    public int DocumentCount => _state.DocumentStates.Count;
 
     public VersionStamp ConfigurationVersion => _state.ConfigurationVersion;
     public VersionStamp ProjectWorkspaceStateVersion => _state.ProjectWorkspaceStateVersion;
     public VersionStamp DocumentCollectionVersion => _state.DocumentCollectionVersion;
+
+    ISolutionSnapshot IProjectSnapshot.Solution => Solution;
 
     public RazorProjectEngine GetProjectEngine()
         => _state.ProjectEngine;
@@ -60,16 +63,16 @@ internal sealed class ProjectSnapshot(ProjectState state) : IProjectSnapshot
             // first is faster if the DocumentSnapshot has already been created.
 
             return _filePathToDocumentMap.ContainsKey(filePath) ||
-                   _state.Documents.ContainsKey(filePath);
+                   _state.DocumentStates.ContainsKey(filePath);
         }
     }
 
-    public IDocumentSnapshot? GetDocument(string filePath)
+    public DocumentSnapshot? GetDocument(string filePath)
         => TryGetDocument(filePath, out var document)
             ? document
             : null;
 
-    public bool TryGetDocument(string filePath, [NotNullWhen(true)] out IDocumentSnapshot? document)
+    public bool TryGetDocument(string filePath, [NotNullWhen(true)] out DocumentSnapshot? document)
     {
         lock (_gate)
         {
@@ -81,7 +84,7 @@ internal sealed class ProjectSnapshot(ProjectState state) : IProjectSnapshot
             }
 
             // Do we have DocumentSate for this document? If not, we're done!
-            if (!_state.Documents.TryGetValue(filePath, out var state))
+            if (!_state.DocumentStates.TryGetValue(filePath, out var state))
             {
                 document = null;
                 return false;
@@ -124,5 +127,20 @@ internal sealed class ProjectSnapshot(ProjectState state) : IProjectSnapshot
 
             return builder.DrainToImmutable();
         }
+    }
+
+    IDocumentSnapshot? IProjectSnapshot.GetDocument(string filePath)
+        => GetDocument(filePath);
+
+    bool IProjectSnapshot.TryGetDocument(string filePath, [NotNullWhen(true)] out IDocumentSnapshot? document)
+    {
+        if (TryGetDocument(filePath, out var snapshot))
+        {
+            document = snapshot;
+            return true;
+        }
+
+        document = null;
+        return false;
     }
 }

@@ -59,8 +59,7 @@ internal partial class DocumentState
         }
 
         public async Task<(RazorCodeDocument, VersionStamp)> GetGeneratedOutputAndVersionAsync(
-            ProjectSnapshot project,
-            IDocumentSnapshot document,
+            DocumentSnapshot document,
             CancellationToken cancellationToken)
         {
             if (_computedOutput?.TryGetCachedOutput(out var cachedCodeDocument, out var cachedInputVersion) == true)
@@ -68,7 +67,7 @@ internal partial class DocumentState
                 return (cachedCodeDocument, cachedInputVersion);
             }
 
-            var (codeDocument, inputVersion) = await GetMemoizedGeneratedOutputAndVersionAsync(project, document, cancellationToken)
+            var (codeDocument, inputVersion) = await GetMemoizedGeneratedOutputAndVersionAsync(document, cancellationToken)
                 .ConfigureAwait(false);
 
             _computedOutput = new ComputedOutput(codeDocument, inputVersion);
@@ -76,20 +75,9 @@ internal partial class DocumentState
         }
 
         private Task<(RazorCodeDocument, VersionStamp)> GetMemoizedGeneratedOutputAndVersionAsync(
-            ProjectSnapshot project,
-            IDocumentSnapshot document,
+            DocumentSnapshot document,
             CancellationToken cancellationToken)
         {
-            if (project is null)
-            {
-                throw new ArgumentNullException(nameof(project));
-            }
-
-            if (document is null)
-            {
-                throw new ArgumentNullException(nameof(document));
-            }
-
             if (_taskUnsafeReference is null ||
                 !_taskUnsafeReference.TryGetTarget(out var taskUnsafe))
             {
@@ -118,7 +106,7 @@ internal partial class DocumentState
                 }
 
                 // Typically in VS scenarios this will run synchronously because all resources are readily available.
-                var outputTask = ComputeGeneratedOutputAndVersionAsync(project, document, cancellationToken);
+                var outputTask = ComputeGeneratedOutputAndVersionAsync(document, cancellationToken);
                 if (outputTask.IsCompleted)
                 {
                     // Compiling ran synchronously, lets just immediately propagate to the TCS
@@ -170,8 +158,7 @@ internal partial class DocumentState
         }
 
         private async Task<(RazorCodeDocument, VersionStamp)> ComputeGeneratedOutputAndVersionAsync(
-            ProjectSnapshot project,
-            IDocumentSnapshot document,
+            DocumentSnapshot document,
             CancellationToken cancellationToken)
         {
             // We only need to produce the generated code if any of our inputs is newer than the
@@ -183,6 +170,7 @@ internal partial class DocumentState
             // - This document
             //
             // All of these things are cached, so no work is wasted if we do need to generate the code.
+            var project = document.Project;
             var configurationVersion = project.ConfigurationVersion;
             var projectWorkspaceStateVersion = project.ProjectWorkspaceStateVersion;
             var documentCollectionVersion = project.DocumentCollectionVersion;

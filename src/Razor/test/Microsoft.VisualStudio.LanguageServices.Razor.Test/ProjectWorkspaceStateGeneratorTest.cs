@@ -41,8 +41,14 @@ public class ProjectWorkspaceStateGeneratorTest : VisualStudioWorkspaceTestBase
             LanguageNames.CSharp,
             TestProjectData.SomeProject.FilePath));
         _workspaceProject = solution.GetProject(projectId).AssumeNotNull();
-        _projectSnapshot = new ProjectSnapshot(
-            ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, TestProjectData.SomeProject, ProjectWorkspaceState.Default));
+
+        var solutionState = SolutionState
+            .Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions)
+            .AddProject(TestProjectData.SomeProject);
+
+        var solutionSnapshot = new SolutionSnapshot(solutionState);
+
+        _projectSnapshot = solutionSnapshot.GetLoadedProject(TestProjectData.SomeProject.Key);
         _projectWorkspaceStateWithTagHelpers = ProjectWorkspaceState.Create(
             [TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly").Build()]);
 

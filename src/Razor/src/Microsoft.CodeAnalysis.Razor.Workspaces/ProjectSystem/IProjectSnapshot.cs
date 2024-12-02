@@ -14,6 +14,8 @@ namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
 internal interface IProjectSnapshot
 {
+    ISolutionSnapshot Solution { get; }
+
     ProjectKey Key { get; }
 
     RazorConfiguration Configuration { get; }

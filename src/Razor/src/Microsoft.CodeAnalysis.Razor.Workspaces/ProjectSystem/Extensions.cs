@@ -7,6 +7,7 @@ using System;
 
 using System.Collections.Immutable;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.PooledObjects;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
@@ -94,4 +95,20 @@ internal static class Extensions
 
         return targetPaths.DrainToImmutable();
     }
+
+    public static IProjectSnapshot? GetProject(this ISolutionSnapshot solution, ProjectKey projectKey)
+        => solution.TryGetProject(projectKey, out var project)
+            ? project
+            : null;
+
+    public static IProjectSnapshot GetRequiredProject(this ISolutionSnapshot solution, ProjectKey projectKey)
+        => solution.GetProject(projectKey).AssumeNotNull();
+
+    public static IDocumentSnapshot? GetDocument(this ISolutionSnapshot solution, ProjectKey projectKey, string documentFilePath)
+        => solution.TryGetProject(projectKey, out var project)
+            ? project.GetDocument(documentFilePath)
+            : null;
+
+    public static IDocumentSnapshot GetRequiredDocument(this ISolutionSnapshot solution, ProjectKey projectKey, string documentFilePath)
+        => solution.GetDocument(projectKey, documentFilePath).AssumeNotNull();
 }

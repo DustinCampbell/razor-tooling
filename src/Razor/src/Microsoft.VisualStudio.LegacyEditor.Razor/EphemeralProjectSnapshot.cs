@@ -34,6 +34,8 @@ internal class EphemeralProjectSnapshot : IProjectSnapshot
         Key = new ProjectKey(IntermediateOutputPath);
     }
 
+    public ISolutionSnapshot Solution => throw new NotImplementedException();
+
     public ProjectKey Key { get; }
 
     public RazorConfiguration Configuration => FallbackRazorConfiguration.Latest;

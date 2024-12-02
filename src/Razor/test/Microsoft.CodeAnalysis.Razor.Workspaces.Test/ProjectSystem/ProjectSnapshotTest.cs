@@ -1,7 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
@@ -22,8 +21,7 @@ public class ProjectSnapshotTest : WorkspaceTestBase
         : base(testOutput)
     {
         _hostProject = TestProjectData.SomeProject with { Configuration = FallbackRazorConfiguration.MVC_2_0 };
-        _projectWorkspaceState = ProjectWorkspaceState.Create(ImmutableArray.Create(
-            TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly").Build()));
+        _projectWorkspaceState = ProjectWorkspaceState.Create([TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly").Build()]);
 
         _documents =
         [
@@ -44,11 +42,16 @@ public class ProjectSnapshotTest : WorkspaceTestBase
     public void ProjectSnapshot_CachesDocumentSnapshots()
     {
         // Arrange
-        var state = ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, _projectWorkspaceState)
-            .AddDocument(_documents[0], DocumentState.EmptyLoader)
-            .AddDocument(_documents[1], DocumentState.EmptyLoader)
-            .AddDocument(_documents[2], DocumentState.EmptyLoader);
-        var snapshot = new ProjectSnapshot(state);
+        var solutionState = SolutionState
+            .Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions)
+            .AddProject(_hostProject)
+            .UpdateProjectWorkspaceState(_hostProject.Key, _projectWorkspaceState)
+            .AddDocument(_hostProject.Key, _documents[0], DocumentState.EmptyLoader)
+            .AddDocument(_hostProject.Key, _documents[1], DocumentState.EmptyLoader)
+            .AddDocument(_hostProject.Key, _documents[2], DocumentState.EmptyLoader);
+
+        var solution = new SolutionSnapshot(solutionState);
+        var snapshot = solution.GetLoadedProject(_hostProject.Key);
 
         // Act
         var documents = snapshot.DocumentFilePaths.ToDictionary(f => f, f => snapshot.GetDocument(f));
@@ -65,9 +68,14 @@ public class ProjectSnapshotTest : WorkspaceTestBase
     public void GetRelatedDocuments_NonImportDocument_ReturnsEmpty()
     {
         // Arrange
-        var state = ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, _projectWorkspaceState)
-            .AddDocument(_documents[0], DocumentState.EmptyLoader);
-        var snapshot = new ProjectSnapshot(state);
+        var solutionState = SolutionState
+            .Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions)
+            .AddProject(_hostProject)
+            .UpdateProjectWorkspaceState(_hostProject.Key, _projectWorkspaceState)
+            .AddDocument(_hostProject.Key, _documents[0], DocumentState.EmptyLoader);
+
+        var solution = new SolutionSnapshot(solutionState);
+        var snapshot = solution.GetLoadedProject(_hostProject.Key);
 
         var document = snapshot.GetDocument(_documents[0].FilePath);
         Assert.NotNull(document);
@@ -83,11 +91,15 @@ public class ProjectSnapshotTest : WorkspaceTestBase
     public void GetRelatedDocuments_ImportDocument_ReturnsRelated()
     {
         // Arrange
-        var state = ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, _projectWorkspaceState)
-            .AddDocument(_documents[0], DocumentState.EmptyLoader)
-            .AddDocument(_documents[1], DocumentState.EmptyLoader)
-            .AddDocument(TestProjectData.SomeProjectImportFile, DocumentState.EmptyLoader);
-        var snapshot = new ProjectSnapshot(state);
+        var solutionState = SolutionState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions)
+            .AddProject(_hostProject)
+            .UpdateProjectWorkspaceState(_hostProject.Key, _projectWorkspaceState)
+            .AddDocument(_hostProject.Key, _documents[0], DocumentState.EmptyLoader)
+            .AddDocument(_hostProject.Key, _documents[1], DocumentState.EmptyLoader)
+            .AddDocument(_hostProject.Key, TestProjectData.SomeProjectImportFile, DocumentState.EmptyLoader);
+
+        var solution = new SolutionSnapshot(solutionState);
+        var snapshot = solution.GetLoadedProject(_hostProject.Key);
 
         var document = snapshot.GetDocument(TestProjectData.SomeProjectImportFile.FilePath);
         Assert.NotNull(document);
