@@ -116,9 +116,6 @@ internal sealed class RemoteSolutionSnapshot(Solution solution, RemoteSnapshotMa
             .Where(static p => p.ContainsRazorDocuments())
             .Select(GetProjectCore);
 
-    IEnumerable<IProjectSnapshot> ISolutionQueryOperations.GetProjects()
-        => Projects;
-
     public ImmutableArray<IProjectSnapshot> GetProjectsContainingDocument(string documentFilePath)
     {
         if (!documentFilePath.IsRazorFilePath())
