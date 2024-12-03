@@ -202,8 +202,7 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         });
 
         // Assert
-        var projectKeys = _projectManager.GetAllProjectKeys(s_hostProject.FilePath);
-        Assert.Empty(projectKeys);
+        Assert.Empty(_projectManager.CurrentSolution.GetProjectKeysWithFilePath(s_hostProject.FilePath));
     }
 
     [UIFact]
@@ -378,8 +377,7 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         });
 
         // Assert
-        var projectKeys = _projectManager.GetAllProjectKeys(s_hostProject.FilePath);
-        Assert.Empty(projectKeys);
+        Assert.Empty(_projectManager.CurrentSolution.GetProjectKeysWithFilePath(s_hostProject.FilePath));
     }
 
     [UIFact]

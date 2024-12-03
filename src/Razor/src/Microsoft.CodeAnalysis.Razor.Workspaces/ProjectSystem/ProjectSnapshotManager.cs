@@ -83,9 +83,6 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
     public ImmutableArray<string> GetOpenDocuments()
         => CurrentSolutionSnapshot.GetOpenDocuments();
 
-    public ImmutableArray<ProjectKey> GetAllProjectKeys(string projectFilePath)
-        => CurrentSolutionSnapshot.GetAllProjectKeys(projectFilePath);
-
     public bool IsDocumentOpen(string documentFilePath)
         => CurrentSolutionSnapshot.IsDocumentOpen(documentFilePath);
 

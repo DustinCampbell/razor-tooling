@@ -97,8 +97,7 @@ internal class ProjectSnapshotSynchronizationService(
             await _projectManager.UpdateAsync(
                 static (updater, guestPath) =>
                 {
-                    var projectKeys = updater.GetAllProjectKeys(guestPath);
-                    foreach (var projectKey in projectKeys)
+                    foreach (var projectKey in updater.CurrentSolution.GetProjectKeysWithFilePath(guestPath))
                     {
                         updater.ProjectRemoved(projectKey);
                     }
@@ -125,9 +124,7 @@ internal class ProjectSnapshotSynchronizationService(
                 await _projectManager.UpdateAsync(
                     static (updater, state) =>
                     {
-                        var projectKeys = updater.GetAllProjectKeys(state.guestPath);
-
-                        foreach (var projectKey in projectKeys)
+                        foreach (var projectKey in updater.CurrentSolution.GetProjectKeysWithFilePath(state.guestPath))
                         {
                             updater.ProjectWorkspaceStateChanged(projectKey, state.projectWorkspaceState);
                         }

@@ -44,13 +44,15 @@ internal partial class RazorProjectSystemInProcess
         Assert.NotNull(projectManager);
         await Helper.RetryAsync(ct =>
         {
-            var projectKeys = projectManager.GetAllProjectKeys(projectFilePath);
+            var solution = projectManager.CurrentSolution;
+
+            var projectKeys = solution.GetProjectKeysWithFilePath(projectFilePath);
             if (projectKeys.Length == 0)
             {
                 return SpecializedTasks.False;
             }
 
-            return Task.FromResult(projectManager.CurrentSolution.TryGetProject(projectKeys[0], out _));
+            return Task.FromResult(solution.TryGetProject(projectKeys[0], out _));
         }, TimeSpan.FromMilliseconds(100), cancellationToken);
     }
 
@@ -61,13 +63,15 @@ internal partial class RazorProjectSystemInProcess
         Assert.NotNull(projectManager);
         await Helper.RetryAsync(async ct =>
         {
-            var projectKeys = projectManager.GetAllProjectKeys(projectFileName);
+            var solution = projectManager.CurrentSolution;
+
+            var projectKeys = solution.GetProjectKeysWithFilePath(projectFileName);
             if (projectKeys.Length == 0)
             {
                 return false;
             }
 
-            if (!projectManager.CurrentSolution.TryGetProject(projectKeys[0], out var project))
+            if (!solution.TryGetProject(projectKeys[0], out var project))
             {
                 return false;
             }
@@ -79,13 +83,15 @@ internal partial class RazorProjectSystemInProcess
 
     public async Task WaitForRazorFileInProjectAsync(string projectFilePath, string filePath, CancellationToken cancellationToken)
     {
-        var projectSnapshotManager = await TestServices.Shell.GetComponentModelServiceAsync<IProjectSnapshotManager>(cancellationToken);
-        Assert.NotNull(projectSnapshotManager);
+        var projectManager = await TestServices.Shell.GetComponentModelServiceAsync<IProjectSnapshotManager>(cancellationToken);
+        Assert.NotNull(projectManager);
         await Helper.RetryAsync(ct =>
         {
-            var projectKeys = projectSnapshotManager.GetAllProjectKeys(projectFilePath);
+            var solution = projectManager.CurrentSolution;
+
+            var projectKeys = solution.GetProjectKeysWithFilePath(projectFilePath);
             if (projectKeys.Length == 0 ||
-                !projectSnapshotManager.CurrentSolution.TryGetProject(projectKeys[0], out var project))
+                !solution.TryGetProject(projectKeys[0], out var project))
             {
                 return SpecializedTasks.False;
             }
@@ -101,7 +107,7 @@ internal partial class RazorProjectSystemInProcess
         var projectManager = await TestServices.Shell.GetComponentModelServiceAsync<IProjectSnapshotManager>(cancellationToken);
         Assert.NotNull(projectManager);
 
-        var projectKeys = projectManager.GetAllProjectKeys(projectFilePath);
+        var projectKeys = projectManager.CurrentSolution.GetProjectKeysWithFilePath(projectFilePath);
 
         return projectKeys.SelectAsArray(key => key.Id);
     }

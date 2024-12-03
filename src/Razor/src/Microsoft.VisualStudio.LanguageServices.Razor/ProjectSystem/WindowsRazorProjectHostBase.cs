@@ -213,8 +213,7 @@ internal abstract partial class WindowsRazorProjectHostBase : OnceInitializedOnc
         // FilePath.
         return ExecuteWithLockAsync(() => UpdateAsync(updater =>
         {
-            var projectKeys = updater.GetAllProjectKeys(oldProjectFilePath);
-            foreach (var projectKey in projectKeys)
+            foreach (var projectKey in updater.CurrentSolution.GetProjectKeysWithFilePath(oldProjectFilePath))
             {
                 if (updater.CurrentSolution.TryGetProject(projectKey, out var current))
                 {
@@ -237,11 +236,6 @@ internal abstract partial class WindowsRazorProjectHostBase : OnceInitializedOnc
                 }
             }
         }, CancellationToken.None));
-    }
-
-    protected ImmutableArray<ProjectKey> GetAllProjectKeys(string projectFilePath)
-    {
-        return _projectManager.GetAllProjectKeys(projectFilePath);
     }
 
     protected Task UpdateAsync(Action<ProjectSnapshotManager.Updater> action, CancellationToken cancellationToken)

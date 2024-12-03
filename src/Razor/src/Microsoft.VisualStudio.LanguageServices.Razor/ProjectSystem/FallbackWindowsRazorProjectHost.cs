@@ -73,8 +73,7 @@ internal class FallbackWindowsRazorProjectHost : WindowsRazorProjectHostBase
             await UpdateAsync(
                 updater =>
                 {
-                    var projectKeys = GetAllProjectKeys(CommonServices.UnconfiguredProject.FullPath);
-                    foreach (var projectKey in projectKeys)
+                    foreach (var projectKey in updater.CurrentSolution.GetProjectKeysWithFilePath(CommonServices.UnconfiguredProject.FullPath))
                     {
                         RemoveProject(updater, projectKey);
                     }
@@ -91,8 +90,7 @@ internal class FallbackWindowsRazorProjectHost : WindowsRazorProjectHostBase
             await UpdateAsync(
                 updater =>
                 {
-                    var projectKeys = GetAllProjectKeys(CommonServices.UnconfiguredProject.FullPath);
-                    foreach (var projectKey in projectKeys)
+                    foreach (var projectKey in updater.CurrentSolution.GetProjectKeysWithFilePath(CommonServices.UnconfiguredProject.FullPath))
                     {
                         RemoveProject(updater, projectKey);
                     }

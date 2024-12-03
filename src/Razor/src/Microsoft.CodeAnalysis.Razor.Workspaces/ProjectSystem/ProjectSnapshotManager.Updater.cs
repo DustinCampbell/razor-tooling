@@ -14,9 +14,6 @@ internal partial class ProjectSnapshotManager
         public ISolutionSnapshot CurrentSolution
             => instance.CurrentSolution;
 
-        public ImmutableArray<ProjectKey> GetAllProjectKeys(string projectFileName)
-            => instance.GetAllProjectKeys(projectFileName);
-
         public bool IsDocumentOpen(string documentFilePath)
             => instance.IsDocumentOpen(documentFilePath);
         public ImmutableArray<string> GetOpenDocuments()

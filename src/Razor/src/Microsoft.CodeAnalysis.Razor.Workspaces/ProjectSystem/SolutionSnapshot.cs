@@ -65,13 +65,13 @@ internal sealed class SolutionSnapshot(SolutionState state) : ISolutionSnapshot
     IEnumerable<IProjectSnapshot> ISolutionSnapshot.Projects
         => Projects;
 
-    public ImmutableArray<ProjectKey> GetAllProjectKeys(string projectFilePath)
+    public ImmutableArray<ProjectKey> GetProjectKeysWithFilePath(string filePath)
     {
         using var projectKeys = new PooledArrayBuilder<ProjectKey>(capacity: _state.ProjectStates.Count);
 
         foreach (var (key, state) in _state.ProjectStates)
         {
-            if (FilePathComparer.Instance.Equals(state.HostProject.FilePath, projectFilePath))
+            if (FilePathComparer.Instance.Equals(state.HostProject.FilePath, filePath))
             {
                 projectKeys.Add(key);
             }

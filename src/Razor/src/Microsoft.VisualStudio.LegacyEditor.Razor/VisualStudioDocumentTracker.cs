@@ -152,10 +152,11 @@ internal sealed class VisualStudioDocumentTracker : IVisualStudioDocumentTracker
 
     private IProjectSnapshot GetOrCreateProject(string projectPath)
     {
-        var projectKeys = _projectManager.GetAllProjectKeys(projectPath);
+        var solution = _projectManager.CurrentSolution;
+        var projectKeys = solution.GetProjectKeysWithFilePath(projectPath);
 
         if (projectKeys.Length == 0 ||
-            !_projectManager.CurrentSolution.TryGetProject(projectKeys[0], out var project))
+            !solution.TryGetProject(projectKeys[0], out var project))
         {
             return new EphemeralProjectSnapshot(_projectEngineFactoryProvider, projectPath);
         }

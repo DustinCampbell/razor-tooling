@@ -9,6 +9,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Razor.PooledObjects;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Utilities;
+using Microsoft.CodeAnalysis.Razor;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
 namespace Microsoft.CodeAnalysis.Remote.Razor.ProjectSystem;
@@ -22,6 +23,29 @@ internal sealed class RemoteSolutionSnapshot(Solution solution, RemoteSnapshotMa
     private readonly object _gate = new();
     private readonly Dictionary<Project, RemoteProjectSnapshot> _projectToSnapshotMap = new(ReferenceEqualityComparer.Instance);
     private readonly Dictionary<ProjectKey, RemoteProjectSnapshot> _projectKeyToSnapshotMap = [];
+
+    public IEnumerable<IProjectSnapshot> Projects
+        => _solution.Projects
+            .Where(static p => p.ContainsRazorDocuments())
+            .Select(GetProjectCore);
+
+    public ImmutableArray<ProjectKey> GetProjectKeysWithFilePath(string filePath)
+    {
+        lock (_gate)
+        {
+            using var projectKeys = new PooledArrayBuilder<ProjectKey>();
+
+            foreach (var project in _solution.Projects)
+            {
+                if (FilePathComparer.Instance.Equals(project.FilePath, filePath))
+                {
+                    projectKeys.Add(GetProjectCore(project).Key);
+                }
+            }
+
+            return projectKeys.DrainToImmutableOrdered();
+        }
+    }
 
     public RemoteProjectSnapshot GetProject(ProjectId projectId)
     {
@@ -110,11 +134,6 @@ internal sealed class RemoteSolutionSnapshot(Solution solution, RemoteSnapshotMa
 
         return document is not null;
     }
-
-    public IEnumerable<IProjectSnapshot> Projects
-        => _solution.Projects
-            .Where(static p => p.ContainsRazorDocuments())
-            .Select(GetProjectCore);
 
     public ImmutableArray<IProjectSnapshot> GetProjectsContainingDocument(string documentFilePath)
     {

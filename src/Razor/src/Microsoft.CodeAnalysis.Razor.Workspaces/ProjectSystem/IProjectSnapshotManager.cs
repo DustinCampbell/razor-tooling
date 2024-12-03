@@ -5,7 +5,6 @@ using System;
 using System.Collections.Immutable;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Razor.ProjectSystem;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
@@ -16,8 +15,6 @@ internal interface IProjectSnapshotManager
 
     ISolutionSnapshot CurrentSolution { get; }
     bool IsSolutionClosing { get; }
-
-    ImmutableArray<ProjectKey> GetAllProjectKeys(string projectFileName);
 
     bool IsDocumentOpen(string documentFilePath);
     ImmutableArray<string> GetOpenDocuments();
