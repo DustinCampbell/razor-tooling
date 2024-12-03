@@ -68,7 +68,7 @@ public class DocumentContextFactoryTest : LanguageServerTestBase
             updater.DocumentAdded(MiscFilesHostProject.Instance.Key, hostDocument, TestMocks.CreateTextLoader(filePath, ""));
         });
 
-        var miscFilesProject = _projectManager.GetMiscellaneousProject();
+        var miscFilesProject = _projectManager.CurrentSolution.GetMiscellaneousProject();
         var documentSnapshot = miscFilesProject.GetDocument(filePath);
         Assert.NotNull(documentSnapshot);
 
@@ -123,7 +123,7 @@ public class DocumentContextFactoryTest : LanguageServerTestBase
             updater.DocumentAdded(MiscFilesHostProject.Instance.Key, hostDocument, TestMocks.CreateTextLoader(filePath, ""));
         });
 
-        var miscFilesProject = _projectManager.GetMiscellaneousProject();
+        var miscFilesProject = _projectManager.CurrentSolution.GetMiscellaneousProject();
         var documentSnapshot = miscFilesProject.GetDocument(filePath);
         Assert.NotNull(documentSnapshot);
 

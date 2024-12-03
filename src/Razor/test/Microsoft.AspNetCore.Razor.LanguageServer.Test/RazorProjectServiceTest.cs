@@ -155,12 +155,10 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         var hostProject = new HostProject("C:/path/to/project.csproj", "C:/path/to/obj", RazorConfiguration.Default, "TestRootNamespace");
         var hostDocument = new HostDocument("C:/path/to/file.cshtml", "file.cshtml", FileKinds.Legacy);
 
-        var miscProject = _projectManager.GetMiscellaneousProject();
-
         await _projectManager.UpdateAsync(updater =>
         {
             updater.ProjectAdded(hostProject);
-            updater.DocumentAdded(miscProject.Key, hostDocument, StrictMock.Of<TextLoader>());
+            updater.DocumentAdded(MiscFilesHostProject.Instance.Key, hostDocument, StrictMock.Of<TextLoader>());
         });
 
         var solution = _projectManager.CurrentSolution;
@@ -186,7 +184,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         var projectFilePaths = project.DocumentFilePaths.OrderBy(static x => x);
         Assert.Equal(projectFilePaths, [addedDocument.FilePath]);
 
-        miscProject = solution.GetMiscellaneousProject();
+        var miscProject = solution.GetMiscellaneousProject();
         Assert.Empty(miscProject.DocumentFilePaths);
     }
 
@@ -498,8 +496,6 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         await _projectService.AddDocumentToPotentialProjectsAsync(DocumentFilePath, DisposalToken);
         await _projectService.OpenDocumentAsync(DocumentFilePath, s_emptyText, DisposalToken);
 
-        var miscProject = _projectManager.GetMiscellaneousProject();
-
         Assert.True(_projectManager.IsDocumentOpen(DocumentFilePath));
 
         using var listener = _projectManager.ListenToNotifications();
@@ -509,7 +505,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
 
         // Assert
         listener.AssertNotifications(
-            x => x.DocumentChanged(DocumentFilePath, miscProject.Key));
+            x => x.DocumentChanged(DocumentFilePath, MiscFilesHostProject.Instance.Key));
 
         Assert.False(_projectManager.IsDocumentOpen(DocumentFilePath));
     }
@@ -586,8 +582,6 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
 
         await _projectService.AddDocumentToMiscProjectAsync(DocumentFilePath, DisposalToken);
 
-        var miscProject = _projectManager.GetMiscellaneousProject();
-
         Assert.False(_projectManager.IsDocumentOpen(DocumentFilePath));
 
         using var listener = _projectManager.ListenToNotifications();
@@ -597,7 +591,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
 
         // Assert
         listener.AssertNotifications(
-            x => x.DocumentChanged(DocumentFilePath, miscProject.Key));
+            x => x.DocumentChanged(DocumentFilePath, MiscFilesHostProject.Instance.Key));
 
         Assert.True(_projectManager.IsDocumentOpen(DocumentFilePath));
     }
@@ -614,8 +608,6 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         var ownerProjectKey = await _projectService.GetTestAccessor().AddProjectAsync(
             ProjectFilePath, IntermediateOutputPath, RazorConfiguration.Default, RootNamespace, displayName: null, DisposalToken);
 
-        var miscProject = _projectManager.GetMiscellaneousProject();
-
         using var listener = _projectManager.ListenToNotifications();
 
         // Act
@@ -623,8 +615,8 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
 
         // Assert
         listener.AssertNotifications(
-            x => x.DocumentAdded(DocumentFilePath, miscProject.Key),
-            x => x.DocumentChanged(DocumentFilePath, miscProject.Key));
+            x => x.DocumentAdded(DocumentFilePath, MiscFilesHostProject.Instance.Key),
+            x => x.DocumentChanged(DocumentFilePath, MiscFilesHostProject.Instance.Key));
 
         Assert.True(_projectManager.IsDocumentOpen(DocumentFilePath));
     }
@@ -678,8 +670,6 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         // Arrange
         const string DocumentFilePath = "document.cshtml";
 
-        var miscProject = _projectManager.GetMiscellaneousProject();
-
         using var listener = _projectManager.ListenToNotifications();
 
         // Act
@@ -687,7 +677,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
 
         // Assert
         listener.AssertNotifications(
-            x => x.DocumentAdded(DocumentFilePath, miscProject.Key));
+            x => x.DocumentAdded(DocumentFilePath, MiscFilesHostProject.Instance.Key));
 
         Assert.False(_projectManager.IsDocumentOpen(DocumentFilePath));
     }
@@ -834,8 +824,6 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
 
         await _projectService.AddDocumentToMiscProjectAsync(DocumentFilePath, DisposalToken);
 
-        var miscProject = _projectManager.GetMiscellaneousProject();
-
         Assert.False(_projectManager.IsDocumentOpen(DocumentFilePath));
 
         using var listener = _projectManager.ListenToNotifications();
@@ -845,7 +833,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
 
         // Assert
         listener.AssertNotifications(
-            x => x.DocumentRemoved(DocumentFilePath, miscProject.Key));
+            x => x.DocumentRemoved(DocumentFilePath, MiscFilesHostProject.Instance.Key));
     }
 
     [Fact]
@@ -955,8 +943,6 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         await _projectService.AddDocumentToPotentialProjectsAsync(DocumentFilePath, DisposalToken);
         await _projectService.OpenDocumentAsync(DocumentFilePath, s_emptyText, DisposalToken);
 
-        var miscProject = _projectManager.GetMiscellaneousProject();
-
         Assert.True(_projectManager.IsDocumentOpen(DocumentFilePath));
 
         using var listener = _projectManager.ListenToNotifications();
@@ -966,7 +952,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
 
         // Assert
         listener.AssertNotifications(
-            x => x.DocumentChanged(DocumentFilePath, miscProject.Key));
+            x => x.DocumentChanged(DocumentFilePath, MiscFilesHostProject.Instance.Key));
 
         Assert.True(_projectManager.IsDocumentOpen(DocumentFilePath));
     }

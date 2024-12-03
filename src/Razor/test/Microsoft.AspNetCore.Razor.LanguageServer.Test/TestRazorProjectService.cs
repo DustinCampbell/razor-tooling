@@ -44,7 +44,9 @@ internal class TestRazorProjectService(
 
     public async Task AddDocumentToPotentialProjectsAsync(string textDocumentPath, CancellationToken cancellationToken)
     {
-        foreach (var projectSnapshot in _projectManager.FindPotentialProjects(textDocumentPath))
+        var solution = _projectManager.CurrentSolution;
+
+        foreach (var projectSnapshot in solution.FindPotentialProjects(textDocumentPath))
         {
             var normalizedProjectPath = FilePathNormalizer.NormalizeDirectory(projectSnapshot.FilePath);
             var documents = ImmutableArray

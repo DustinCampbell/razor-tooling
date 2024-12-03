@@ -158,14 +158,16 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
         var textDocumentPath = FilePathNormalizer.Normalize(filePath);
         _logger.LogDebug($"Asked to add {textDocumentPath} to the miscellaneous files project, because we don't have project info (yet?)");
 
-        if (_projectManager.TryResolveDocumentInAnyProject(textDocumentPath, _logger, out var document))
+        var solution = _projectManager.CurrentSolution;
+
+        if (solution.TryResolveDocumentInAnyProject(textDocumentPath, _logger, out var document))
         {
             // Already in a known project, so we don't want it in the misc files project
             _logger.LogDebug($"File {textDocumentPath} is already in {document.Project.Key}, so we're not adding it to the miscellaneous files project");
             return;
         }
 
-        var miscFilesProject = _projectManager.GetMiscellaneousProject();
+        var miscFilesProject = solution.GetMiscellaneousProject();
 
         // Representing all of our host documents with a re-normalized target path to workaround GetRelatedDocument limitations.
         var normalizedTargetFilePath = textDocumentPath.Replace('/', '\\').TrimStart('\\');
@@ -190,7 +192,7 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
                 // We are okay to use the non-project-key overload of TryResolveDocument here because we really are just checking if the document
                 // has been added to _any_ project. AddDocument will take care of adding to all of the necessary ones, and then below we ensure
                 // we process them all too
-                if (!_projectManager.TryResolveDocumentInAnyProject(textDocumentPath, _logger, out var document))
+                if (!_projectManager.CurrentSolution.TryResolveDocumentInAnyProject(textDocumentPath, _logger, out var document))
                 {
                     // Document hasn't been added. This usually occurs when VSCode trumps all other initialization
                     // processes and pre-initializes already open documents. We add this to the misc project, and
@@ -262,7 +264,7 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
                             _logger.LogInformation($"Moving document '{textDocumentPath}' from project '{projectSnapshot.Key}' to misc files because it is open.");
                             if (!MiscFilesHostProject.IsMiscellaneousProject(projectSnapshot))
                             {
-                                var miscellaneousProject = _projectManager.GetMiscellaneousProject();
+                                var miscellaneousProject = _projectManager.CurrentSolution.GetMiscellaneousProject();
                                 MoveDocument(updater, textDocumentPath, fromProject: projectSnapshot, toProject: miscellaneousProject);
                             }
                         }
@@ -300,10 +302,12 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
 
     private void ActOnDocumentInMultipleProjects(string filePath, Action<IProjectSnapshot, string> action)
     {
+        var solution = _projectManager.CurrentSolution;
+
         var textDocumentPath = FilePathNormalizer.Normalize(filePath);
-        if (!_projectManager.TryResolveAllProjects(textDocumentPath, out var projects))
+        if (!solution.TryResolveAllProjects(textDocumentPath, out var projects))
         {
-            var miscFilesProject = _projectManager.GetMiscellaneousProject();
+            var miscFilesProject = solution.GetMiscellaneousProject();
             projects = [miscFilesProject];
         }
 

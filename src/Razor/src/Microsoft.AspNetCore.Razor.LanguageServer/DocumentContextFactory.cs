@@ -43,12 +43,12 @@ internal sealed class DocumentContextFactory(
         VSProjectContext? projectContext,
         [NotNullWhen(true)] out IDocumentSnapshot? documentSnapshot)
     {
+        var solution = _projectManager.CurrentSolution;
+
         if (projectContext is null)
         {
-            return _projectManager.TryResolveDocumentInAnyProject(filePath, _logger, out documentSnapshot);
+            return solution.TryResolveDocumentInAnyProject(filePath, _logger, out documentSnapshot);
         }
-
-        var solution = _projectManager.CurrentSolution;
 
         if (solution.TryGetDocument(projectContext.ToProjectKey(), filePath, out documentSnapshot))
         {
