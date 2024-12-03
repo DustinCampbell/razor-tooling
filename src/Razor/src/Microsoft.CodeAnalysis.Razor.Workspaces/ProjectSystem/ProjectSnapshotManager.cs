@@ -86,9 +86,6 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
     public ImmutableArray<string> GetOpenDocuments()
         => CurrentSolutionSnapshot.GetOpenDocuments();
 
-    public IProjectSnapshot GetLoadedProject(ProjectKey projectKey)
-        => CurrentSolutionSnapshot.GetLoadedProject(projectKey);
-
     public bool TryGetLoadedProject(ProjectKey projectKey, [NotNullWhen(true)] out IProjectSnapshot? project)
         => CurrentSolution.TryGetProject(projectKey, out project);
 
@@ -352,7 +349,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
         _currentSolution = newSolution;
 
         isSolutionClosing = newSolution.IsSolutionClosing;
-        newSnapshot = newSolution.GetLoadedProject(hostProject.Key);
+        newSnapshot = newSolution.GetRequiredProject(hostProject.Key);
         return true;
     }
 
@@ -379,7 +376,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
         }
 
         isSolutionClosing = oldState.IsSolutionClosing;
-        oldSnapshot = oldState.GetLoadedProject(projectKey);
+        oldSnapshot = oldState.GetRequiredProject(projectKey);
         return true;
     }
 
@@ -398,7 +395,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
         if (oldSolution.IsSolutionClosing)
         {
             isSolutionClosing = true;
-            oldSnapshot = newSnapshot = oldSolution.GetLoadedProject(projectKey);
+            oldSnapshot = newSnapshot = oldSolution.GetRequiredProject(projectKey);
             return true;
         }
 
@@ -416,8 +413,8 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
         _currentSolution = newSolution;
 
         isSolutionClosing = newSolution.IsSolutionClosing;
-        oldSnapshot = oldSolution.GetLoadedProject(projectKey);
-        newSnapshot = newSolution.GetLoadedProject(projectKey);
+        oldSnapshot = oldSolution.GetRequiredProject(projectKey);
+        newSnapshot = newSolution.GetRequiredProject(projectKey);
 
         return true;
     }

@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
 using System.Linq;
+using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Test.Common;
@@ -51,17 +52,17 @@ public class ProjectSnapshotTest : WorkspaceTestBase
             .AddDocument(_hostProject.Key, _documents[2], DocumentState.EmptyLoader);
 
         var solution = new SolutionSnapshot(solutionState);
-        var snapshot = solution.GetLoadedProject(_hostProject.Key);
+        var project = solution.GetRequiredProject(_hostProject.Key);
 
         // Act
-        var documents = snapshot.DocumentFilePaths.ToDictionary(f => f, f => snapshot.GetDocument(f));
+        var documents = project.DocumentFilePaths.ToDictionary(f => f, f => project.GetDocument(f));
 
         // Assert
         Assert.Collection(
             documents,
-            d => Assert.Same(d.Value, snapshot.GetDocument(d.Key)),
-            d => Assert.Same(d.Value, snapshot.GetDocument(d.Key)),
-            d => Assert.Same(d.Value, snapshot.GetDocument(d.Key)));
+            d => Assert.Same(d.Value, project.GetDocument(d.Key)),
+            d => Assert.Same(d.Value, project.GetDocument(d.Key)),
+            d => Assert.Same(d.Value, project.GetDocument(d.Key)));
     }
 
     [Fact]
@@ -75,13 +76,11 @@ public class ProjectSnapshotTest : WorkspaceTestBase
             .AddDocument(_hostProject.Key, _documents[0], DocumentState.EmptyLoader);
 
         var solution = new SolutionSnapshot(solutionState);
-        var snapshot = solution.GetLoadedProject(_hostProject.Key);
-
-        var document = snapshot.GetDocument(_documents[0].FilePath);
-        Assert.NotNull(document);
+        var project = solution.GetRequiredProject(_hostProject.Key);
+        var document = project.GetDocument(_documents[0].FilePath).AssumeNotNull();
 
         // Act
-        var documents = snapshot.GetRelatedDocuments(document);
+        var documents = project.GetRelatedDocuments(document);
 
         // Assert
         Assert.Empty(documents);
@@ -99,13 +98,11 @@ public class ProjectSnapshotTest : WorkspaceTestBase
             .AddDocument(_hostProject.Key, TestProjectData.SomeProjectImportFile, DocumentState.EmptyLoader);
 
         var solution = new SolutionSnapshot(solutionState);
-        var snapshot = solution.GetLoadedProject(_hostProject.Key);
-
-        var document = snapshot.GetDocument(TestProjectData.SomeProjectImportFile.FilePath);
-        Assert.NotNull(document);
+        var project = solution.GetRequiredProject(_hostProject.Key);
+        var document = project.GetDocument(TestProjectData.SomeProjectImportFile.FilePath).AssumeNotNull();
 
         // Act
-        var documents = snapshot.GetRelatedDocuments(document);
+        var documents = project.GetRelatedDocuments(document);
 
         // Assert
         Assert.Collection(

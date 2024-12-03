@@ -3,6 +3,7 @@
 
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Test.Common;
 using Microsoft.AspNetCore.Razor.Test.Common.Workspaces;
@@ -32,26 +33,23 @@ public class DocumentSnapshotTest : WorkspaceTestBase
         _sourceText = SourceText.From("<p>Hello World</p>");
         _version = VersionStamp.Create();
 
-        var solutionState = SolutionState
-            .Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions)
-            .AddProject(TestProjectData.SomeProject);
-
-        var solution = new SolutionSnapshot(solutionState);
-        var project = solution.GetLoadedProject(TestProjectData.SomeProject.Key);
-
         var textLoader = TestMocks.CreateTextLoader(_sourceText, _version);
 
-        var documentState = DocumentState.Create(s_legacyHostDocument, textLoader);
-        _legacyDocument = new DocumentSnapshot(project, documentState);
+        var solutionState = SolutionState
+            .Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions)
+            .AddProject(TestProjectData.SomeProject)
+            .AddDocument(TestProjectData.SomeProject.Key, s_legacyHostDocument, textLoader)
+            .AddDocument(TestProjectData.SomeProject.Key, s_componentHostDocument, textLoader)
+            .AddDocument(TestProjectData.SomeProject.Key, s_componentCshtmlHostDocument, textLoader)
+            .AddDocument(TestProjectData.SomeProject.Key, s_nestedComponentHostDocument, textLoader);
 
-        documentState = DocumentState.Create(s_componentHostDocument, textLoader);
-        _componentDocument = new DocumentSnapshot(project, documentState);
+        var solution = new SolutionSnapshot(solutionState);
+        var project = solution.GetRequiredProject(TestProjectData.SomeProject.Key);
 
-        documentState = DocumentState.Create(s_componentCshtmlHostDocument, textLoader);
-        _componentCshtmlDocument = new DocumentSnapshot(project, documentState);
-
-        documentState = DocumentState.Create(s_nestedComponentHostDocument, textLoader);
-        _nestedComponentDocument = new DocumentSnapshot(project, documentState);
+        _legacyDocument = project.GetDocument(s_legacyHostDocument.FilePath).AssumeNotNull();
+        _componentDocument = project.GetDocument(s_componentHostDocument.FilePath).AssumeNotNull();
+        _componentCshtmlDocument = project.GetDocument(s_componentCshtmlHostDocument.FilePath).AssumeNotNull();
+        _nestedComponentDocument = project.GetDocument(s_nestedComponentHostDocument.FilePath).AssumeNotNull();
     }
 
     [Fact]

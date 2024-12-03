@@ -101,10 +101,7 @@ public class RazorDocumentOptionsServiceTest(ITestOutputHelper testOutput) : Wor
             .AddDocument(hostProject.Key, hostDocument, TestMocks.CreateTextLoader(sourceText, VersionStamp.Create()));
 
         var solutionSnapshot = new SolutionSnapshot(solutionState);
-        var projectSnapshot = solutionSnapshot.GetLoadedProject(hostProject.Key);
-
-        var documentSnapshot = projectSnapshot.GetDocument(hostDocument.FilePath);
-        Assert.NotNull(documentSnapshot);
+        var documentSnapshot = solutionSnapshot.GetRequiredDocument(hostProject.Key, hostDocument.FilePath);
 
         var solution = Workspace.CurrentSolution.AddProject(ProjectInfo.Create(
             ProjectId.CreateNewId(Path.GetFileNameWithoutExtension(hostDocument.FilePath)),

@@ -75,14 +75,12 @@ public class RazorDiagnosticsPublisherTest(ITestOutputHelper testOutput) : Langu
             updater.DocumentAdded(hostProject.Key, closedHostDocument, TextLoader.From(textAndVersion));
         });
 
-        var project = testProjectManager.GetLoadedProject(hostProject.Key);
+        var solution = testProjectManager.CurrentSolution;
 
-        var openedDocument = project.GetDocument(openedHostDocument.FilePath).AssumeNotNull();
-        _openedDocument = openedDocument;
+        _openedDocument = solution.GetRequiredDocument(hostProject.Key, openedHostDocument.FilePath);
         _openedDocumentUri = new Uri("C:/project/open_document.cshtml");
 
-        var closedDocument = project.GetDocument(closedHostDocument.FilePath).AssumeNotNull();
-        _closedDocument = closedDocument;
+        _closedDocument = solution.GetRequiredDocument(hostProject.Key, closedHostDocument.FilePath);
 
         _projectManager = testProjectManager;
         _testCodeDocument = TestRazorCodeDocument.CreateEmpty();

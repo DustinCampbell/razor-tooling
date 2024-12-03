@@ -4,7 +4,6 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
-using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Test.Common;
 using Microsoft.AspNetCore.Razor.Test.Common.Workspaces;
 using Microsoft.CodeAnalysis;
@@ -35,10 +34,7 @@ public class RazorSpanMappingServiceTest(ITestOutputHelper testOutput) : Workspa
             .AddDocument(_hostProject.Key, _hostDocument, TestMocks.CreateTextLoader(sourceText, VersionStamp.Create()));
 
         var solution = new SolutionSnapshot(solutionState);
-        var project = solution.GetLoadedProject(_hostProject.Key);
-
-        var document = project.GetDocument(_hostDocument.FilePath);
-        Assert.NotNull(document);
+        var document = solution.GetRequiredDocument(_hostProject.Key, _hostDocument.FilePath);
 
         var output = await document.GetGeneratedOutputAsync(DisposalToken);
         var generated = output.GetCSharpDocument();
@@ -71,10 +67,7 @@ public class RazorSpanMappingServiceTest(ITestOutputHelper testOutput) : Workspa
             .AddDocument(_hostProject.Key, _hostDocument, TestMocks.CreateTextLoader(sourceText, VersionStamp.Create()));
 
         var solution = new SolutionSnapshot(solutionState);
-        var project = solution.GetLoadedProject(_hostProject.Key);
-
-        var document = project.GetDocument(_hostDocument.FilePath);
-        Assert.NotNull(document);
+        var document = solution.GetRequiredDocument(_hostProject.Key, _hostDocument.FilePath);
 
         var output = await document.GetGeneratedOutputAsync(DisposalToken);
         var generated = output.GetCSharpDocument();
@@ -108,10 +101,7 @@ public class RazorSpanMappingServiceTest(ITestOutputHelper testOutput) : Workspa
             .AddDocument(_hostProject.Key, _hostDocument, TestMocks.CreateTextLoader(sourceText, VersionStamp.Create()));
 
         var solution = new SolutionSnapshot(solutionState);
-        var project = solution.GetLoadedProject(_hostProject.Key);
-
-        var document = project.GetDocument(_hostDocument.FilePath);
-        Assert.NotNull(document);
+        var document = solution.GetRequiredDocument(_hostProject.Key, _hostDocument.FilePath);
 
         var output = await document.GetGeneratedOutputAsync(DisposalToken);
         var generated = output.GetCSharpDocument();
@@ -144,10 +134,7 @@ public class RazorSpanMappingServiceTest(ITestOutputHelper testOutput) : Workspa
             .AddDocument(_hostProject.Key, _hostDocument, TestMocks.CreateTextLoader(sourceText, VersionStamp.Create()));
 
         var solution = new SolutionSnapshot(solutionState);
-        var project = solution.GetLoadedProject(_hostProject.Key);
-
-        var document = project.GetDocument(_hostDocument.FilePath);
-        Assert.NotNull(document);
+        var document = solution.GetRequiredDocument(_hostProject.Key, _hostDocument.FilePath);
 
         var output = await document.GetGeneratedOutputAsync(DisposalToken);
         var generated = output.GetCSharpDocument();

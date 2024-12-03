@@ -149,13 +149,13 @@ public class VsSolutionUpdatesProjectSnapshotChangeTriggerTest : VisualStudioTes
 
         var expectedProjectPath = s_someProject.FilePath;
 
-        var expectedProjectSnapshot = await projectManager.UpdateAsync(updater =>
+        await projectManager.UpdateAsync(updater =>
         {
             updater.ProjectAdded(s_someProject);
             updater.ProjectAdded(s_someOtherProject);
-
-            return updater.GetLoadedProject(s_someProject.Key);
         });
+
+        var expectedProjectSnapshot = projectManager.CurrentSolution.GetRequiredProject(s_someProject.Key);
 
         var serviceProvider = VsMocks.CreateServiceProvider();
         var workspaceStateGenerator = new TestProjectWorkspaceStateGenerator();
@@ -202,13 +202,13 @@ public class VsSolutionUpdatesProjectSnapshotChangeTriggerTest : VisualStudioTes
 
         var expectedProjectPath = s_someProject.FilePath;
 
-        var expectedProjectSnapshot = await projectManager.UpdateAsync(updater =>
+        await projectManager.UpdateAsync(updater =>
         {
             updater.ProjectAdded(s_someProject);
             updater.ProjectAdded(s_someOtherProject);
-
-            return updater.GetLoadedProject(s_someProject.Key);
         });
+
+        var expectedProjectSnapshot = projectManager.CurrentSolution.GetRequiredProject(s_someProject.Key);
 
         var serviceProvider = VsMocks.CreateServiceProvider();
         var workspaceStateGenerator = new TestProjectWorkspaceStateGenerator();

@@ -101,9 +101,8 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         });
 
         // Assert
-        var project = _projectManager.GetLoadedProject(s_hostProject.Key);
-        Assert.Single(project.DocumentFilePaths,
-            filePath => filePath == s_documents[0].FilePath);
+        var project = _projectManager.CurrentSolution.GetRequiredProject(s_hostProject.Key);
+        Assert.Single(project.DocumentFilePaths, static x => x == s_documents[0].FilePath);
 
         listener.AssertNotifications(
             x => x.DocumentAdded());
@@ -127,7 +126,7 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         });
 
         // Assert
-        var project = _projectManager.GetLoadedProject(s_hostProject.Key);
+        var project = _projectManager.CurrentSolution.GetRequiredProject(s_hostProject.Key);
         Assert.Single(
             project.DocumentFilePaths,
             filePath => filePath == s_documents[0].FilePath &&
@@ -155,7 +154,7 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         });
 
         // Assert
-        var project = _projectManager.GetLoadedProject(s_hostProject.Key);
+        var project = _projectManager.CurrentSolution.GetRequiredProject(s_hostProject.Key);
         Assert.Single(
             project.DocumentFilePaths,
             filePath => filePath == s_documents[3].FilePath &&
@@ -184,9 +183,8 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         });
 
         // Assert
-        var project = _projectManager.GetLoadedProject(s_hostProject.Key);
-        Assert.Single(project.DocumentFilePaths,
-            filePath => filePath == s_documents[0].FilePath);
+        var project = _projectManager.CurrentSolution.GetRequiredProject(s_hostProject.Key);
+        Assert.Single(project.DocumentFilePaths, static x => x == s_documents[0].FilePath);
 
         listener.AssertNoNotifications();
 
@@ -225,7 +223,7 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         });
 
         // Assert
-        var project = _projectManager.GetLoadedProject(s_hostProject.Key);
+        var project = _projectManager.CurrentSolution.GetRequiredProject(s_hostProject.Key);
         var documentFilePath = Assert.Single(project.DocumentFilePaths);
         var document = project.GetDocument(documentFilePath);
         Assert.NotNull(document);
@@ -252,7 +250,7 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         });
 
         // Assert
-        var project = _projectManager.GetLoadedProject(s_hostProject.Key);
+        var project = _projectManager.CurrentSolution.GetRequiredProject(s_hostProject.Key);
         var documentFilePath = Assert.Single(project.DocumentFilePaths);
         var document = project.GetDocument(documentFilePath);
         Assert.NotNull(document);
@@ -271,7 +269,9 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
             updater.ProjectWorkspaceStateChanged(s_hostProject.Key, _projectWorkspaceStateWithTagHelpers);
         });
 
-        var originalTagHelpers = await _projectManager.GetLoadedProject(s_hostProject.Key).GetTagHelpersAsync(DisposalToken);
+        var originalTagHelpers = await _projectManager.CurrentSolution
+            .GetRequiredProject(s_hostProject.Key)
+            .GetTagHelpersAsync(DisposalToken);
 
         // Act
         await _projectManager.UpdateAsync(updater =>
@@ -280,7 +280,9 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         });
 
         // Assert
-        var newTagHelpers = await _projectManager.GetLoadedProject(s_hostProject.Key).GetTagHelpersAsync(DisposalToken);
+        var newTagHelpers = await _projectManager.CurrentSolution
+            .GetRequiredProject(s_hostProject.Key)
+            .GetTagHelpersAsync(DisposalToken);
 
         Assert.Equal(originalTagHelpers.Length, newTagHelpers.Length);
         for (var i = 0; i < originalTagHelpers.Length; i++)
@@ -298,7 +300,7 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
             updater.ProjectAdded(s_hostProject);
         });
 
-        var project = _projectManager.GetLoadedProject(s_hostProject.Key);
+        var project = _projectManager.CurrentSolution.GetRequiredProject(s_hostProject.Key);
         var projectEngine = project.GetProjectEngine();
 
         // Act
@@ -308,7 +310,7 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         });
 
         // Assert
-        project = _projectManager.GetLoadedProject(s_hostProject.Key);
+        project = _projectManager.CurrentSolution.GetRequiredProject(s_hostProject.Key);
         Assert.Same(projectEngine, project.GetProjectEngine());
     }
 
@@ -333,11 +335,11 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         });
 
         // Assert
-        var project = _projectManager.GetLoadedProject(s_hostProject.Key);
+        var project = _projectManager.CurrentSolution.GetRequiredProject(s_hostProject.Key);
         Assert.Collection(
-            project.DocumentFilePaths.OrderBy(f => f),
-            f => Assert.Equal(s_documents[2].FilePath, f),
-            f => Assert.Equal(s_documents[0].FilePath, f));
+            project.DocumentFilePaths.OrderBy(static x => x),
+            x => Assert.Equal(s_documents[2].FilePath, x),
+            x => Assert.Equal(s_documents[0].FilePath, x));
 
         listener.AssertNotifications(
             x => x.DocumentRemoved());
@@ -361,7 +363,7 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         });
 
         // Assert
-        var project = _projectManager.GetLoadedProject(s_hostProject.Key);
+        var project = _projectManager.CurrentSolution.GetRequiredProject(s_hostProject.Key);
         Assert.Empty(project.DocumentFilePaths);
 
         listener.AssertNoNotifications();
@@ -396,7 +398,9 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
             updater.DocumentAdded(s_hostProject.Key, s_documents[2], s_documents[2].CreateEmptyTextLoader());
         });
 
-        var originalTagHelpers = await _projectManager.GetLoadedProject(s_hostProject.Key).GetTagHelpersAsync(DisposalToken);
+        var originalTagHelpers = await _projectManager.CurrentSolution
+            .GetRequiredProject(s_hostProject.Key)
+            .GetTagHelpersAsync(DisposalToken);
 
         // Act
         await _projectManager.UpdateAsync(updater =>
@@ -405,9 +409,12 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         });
 
         // Assert
-        var newTagHelpers = await _projectManager.GetLoadedProject(s_hostProject.Key).GetTagHelpersAsync(DisposalToken);
+        var newTagHelpers = await _projectManager.CurrentSolution
+            .GetRequiredProject(s_hostProject.Key)
+            .GetTagHelpersAsync(DisposalToken);
 
         Assert.Equal(originalTagHelpers.Length, newTagHelpers.Length);
+
         for (var i = 0; i < originalTagHelpers.Length; i++)
         {
             Assert.Same(originalTagHelpers[i], newTagHelpers[i]);
@@ -426,7 +433,7 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
             updater.DocumentAdded(s_hostProject.Key, s_documents[2], s_documents[2].CreateEmptyTextLoader());
         });
 
-        var project = _projectManager.GetLoadedProject(s_hostProject.Key);
+        var project = _projectManager.CurrentSolution.GetRequiredProject(s_hostProject.Key);
         var projectEngine = project.GetProjectEngine();
 
         // Act
@@ -436,7 +443,7 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         });
 
         // Assert
-        project = _projectManager.GetLoadedProject(s_hostProject.Key);
+        project = _projectManager.CurrentSolution.GetRequiredProject(s_hostProject.Key);
         Assert.Same(projectEngine, project.GetProjectEngine());
     }
 
@@ -462,14 +469,12 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         listener.AssertNotifications(
             x => x.DocumentChanged());
 
-        var project = _projectManager.GetLoadedProject(s_hostProject.Key);
-        var document = project.GetDocument(s_documents[0].FilePath);
-        Assert.NotNull(document);
+        var document = _projectManager.CurrentSolution.GetRequiredDocument(s_hostProject.Key, s_documents[0].FilePath);
+
         var text = await document.GetTextAsync(DisposalToken);
         Assert.Same(_sourceText, text);
 
         Assert.True(_projectManager.IsDocumentOpen(s_documents[0].FilePath));
-
         Assert.Equal(2, document.Version);
     }
 
@@ -501,11 +506,11 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         listener.AssertNotifications(
             x => x.DocumentChanged());
 
-        var project = _projectManager.GetLoadedProject(s_hostProject.Key);
-        var document = project.GetDocument(s_documents[0].FilePath);
-        Assert.NotNull(document);
+        var document = _projectManager.CurrentSolution.GetRequiredDocument(s_hostProject.Key, s_documents[0].FilePath);
+
         var text = await document.GetTextAsync(DisposalToken);
         Assert.Same(expected, text);
+
         Assert.False(_projectManager.IsDocumentOpen(s_documents[0].FilePath));
         Assert.Equal(3, document.Version);
     }
@@ -535,9 +540,8 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         listener.AssertNotifications(
             x => x.DocumentChanged());
 
-        var project = _projectManager.GetLoadedProject(s_hostProject.Key);
-        var document = project.GetDocument(s_documents[0].FilePath);
-        Assert.NotNull(document);
+        var document = _projectManager.CurrentSolution.GetRequiredDocument(s_hostProject.Key, s_documents[0].FilePath);
+
         var text = await document.GetTextAsync(DisposalToken);
         Assert.Same(expected, text);
     }
@@ -567,9 +571,8 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         listener.AssertNotifications(
             x => x.DocumentChanged());
 
-        var project = _projectManager.GetLoadedProject(s_hostProject.Key);
-        var document = project.GetDocument(s_documents[0].FilePath);
-        Assert.NotNull(document);
+        var document = _projectManager.CurrentSolution.GetRequiredDocument(s_hostProject.Key, s_documents[0].FilePath);
+
         var text = await document.GetTextAsync(DisposalToken);
         Assert.Same(expected, text);
         Assert.Equal(3, document.Version);
@@ -601,9 +604,8 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         listener.AssertNotifications(
             x => x.DocumentChanged());
 
-        var project = _projectManager.GetLoadedProject(s_hostProject.Key);
-        var document = project.GetDocument(s_documents[0].FilePath);
-        Assert.NotNull(document);
+        var document = _projectManager.CurrentSolution.GetRequiredDocument(s_hostProject.Key, s_documents[0].FilePath);
+
         var text = await document.GetTextAsync(DisposalToken);
         Assert.Same(expected, text);
         Assert.Equal(3, document.Version);
@@ -680,7 +682,7 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
             updater.ProjectAdded(s_hostProject);
         });
 
-        var project = _projectManager.GetLoadedProject(s_hostProject.Key);
+        var project = _projectManager.CurrentSolution.GetRequiredProject(s_hostProject.Key);
         var projectEngine = project.GetProjectEngine();
 
         // Act
@@ -690,7 +692,7 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         });
 
         // Assert
-        project = _projectManager.GetLoadedProject(s_hostProjectWithConfigurationChange.Key);
+        project = _projectManager.CurrentSolution.GetRequiredProject(s_hostProjectWithConfigurationChange.Key);
         Assert.NotSame(projectEngine, project.GetProjectEngine());
     }
 
@@ -771,9 +773,8 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         });
 
         // Assert
-        var document = _projectManager.GetLoadedProject(s_hostProject.Key).GetDocument(s_documents[0].FilePath);
+        var document = _projectManager.CurrentSolution.GetRequiredDocument(s_hostProject.Key, s_documents[0].FilePath);
 
-        Assert.NotNull(document);
         Assert.Equal(2, document.Version);
     }
 

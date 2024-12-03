@@ -1,6 +1,7 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
+using System.Data;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Test.Common.LanguageServer;
@@ -131,14 +132,14 @@ public class IProjectSnapshotManagerExtensionsTest(ITestOutputHelper testOutput)
 
         var projectManager = CreateProjectSnapshotManager();
 
-        var expectedProject = await projectManager.UpdateAsync(updater =>
+        await projectManager.UpdateAsync(updater =>
         {
             updater.ProjectAdded(hostProject);
             updater.ProjectAdded(otherHostProject);
             updater.DocumentAdded(hostProject.Key, hostDocument, hostDocument.CreateEmptyTextLoader());
-
-            return updater.GetLoadedProject(hostProject.Key);
         });
+
+        var expectedProject = projectManager.CurrentSolution.GetRequiredProject(hostProject.Key);
 
         // Act
         Assert.True(projectManager.TryResolveAllProjects(hostDocument.FilePath, out var projects));
@@ -161,13 +162,13 @@ public class IProjectSnapshotManagerExtensionsTest(ITestOutputHelper testOutput)
 
         var projectManager = CreateProjectSnapshotManager();
 
-        var miscProject = await projectManager.UpdateAsync(updater =>
+        await projectManager.UpdateAsync(updater =>
         {
             updater.DocumentAdded(miscFilesHostProject.Key, hostDocument, hostDocument.CreateEmptyTextLoader());
             updater.ProjectAdded(hostProject);
-
-            return updater.GetLoadedProject(miscFilesHostProject.Key);
         });
+
+        var miscProject = projectManager.CurrentSolution.GetRequiredProject(miscFilesHostProject.Key);
 
         // Act
         Assert.True(projectManager.TryResolveAllProjects(documentFilePath, out var projects));
@@ -186,20 +187,20 @@ public class IProjectSnapshotManagerExtensionsTest(ITestOutputHelper testOutput)
 
         var projectManager = CreateProjectSnapshotManager();
 
-        var ownerProject = await projectManager.UpdateAsync(updater =>
+        await projectManager.UpdateAsync(updater =>
         {
             updater.ProjectAdded(hostProject);
             updater.DocumentAdded(hostProject.Key, hostDocument, hostDocument.CreateEmptyTextLoader());
-
-            return updater.GetLoadedProject(hostProject.Key);
         });
+
+        var expectedProject = projectManager.CurrentSolution.GetRequiredProject(hostProject.Key);
 
         // Act
         Assert.True(projectManager.TryResolveAllProjects(hostDocument.FilePath, out var projects));
 
         // Assert
         var project = Assert.Single(projects);
-        AssertSnapshotsEqual(ownerProject, project);
+        AssertSnapshotsEqual(expectedProject, project);
     }
 
     [Fact]
@@ -209,11 +210,12 @@ public class IProjectSnapshotManagerExtensionsTest(ITestOutputHelper testOutput)
         var projectManager = CreateProjectSnapshotManager();
 
         // Act
-        var project = projectManager.GetMiscellaneousProject();
-        var inManager = projectManager.GetLoadedProject(MiscFilesHostProject.Instance.Key);
+        var solution = projectManager.CurrentSolution;
+        var miscProject = solution.GetMiscellaneousProject();
+        var project = solution.GetRequiredProject(MiscFilesHostProject.Instance.Key);
 
         // Assert
-        Assert.Same(inManager, project);
+        Assert.Same(project, miscProject);
     }
 
     [Fact]
@@ -223,11 +225,13 @@ public class IProjectSnapshotManagerExtensionsTest(ITestOutputHelper testOutput)
         var projectManager = CreateProjectSnapshotManager();
 
         // Act
-        var project = projectManager.GetMiscellaneousProject();
+        var solution = projectManager.CurrentSolution;
+        var miscProject = solution.GetMiscellaneousProject();
 
         // Assert
-        Assert.Single(projectManager.GetProjects());
-        Assert.Equal(MiscFilesHostProject.Instance.FilePath, project.FilePath);
+        var project = Assert.Single(solution.Projects);
+        Assert.Same(miscProject, project);
+        Assert.Equal(MiscFilesHostProject.Instance.FilePath, miscProject.FilePath);
     }
 
     private async Task<TestProjectSnapshotManager> CreateProjectManagerAsync(string documentFilePath, bool addToMiscellaneous = false)

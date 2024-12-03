@@ -40,7 +40,7 @@ internal sealed class TestProjectSnapshot : IProjectSnapshot
         }
 
         var solution = new SolutionSnapshot(solutionState);
-        var project = solution.GetLoadedProject(hostProject.Key);
+        var project = solution.GetRequiredProject(hostProject.Key);
 
         return new TestProjectSnapshot(project);
     }

@@ -12,12 +12,13 @@ internal partial class ProjectSnapshotManager
 {
     public readonly struct Updater(ProjectSnapshotManager instance)
     {
+        public ISolutionSnapshot CurrentSolution
+            => instance.CurrentSolution;
+
         public ImmutableArray<ProjectKey> GetAllProjectKeys(string projectFileName)
             => instance.GetAllProjectKeys(projectFileName);
         public ImmutableArray<IProjectSnapshot> GetProjects()
             => instance.GetProjects();
-        public IProjectSnapshot GetLoadedProject(ProjectKey projectKey)
-            => instance.GetLoadedProject(projectKey);
         public bool TryGetLoadedProject(ProjectKey projectKey, [NotNullWhen(true)] out IProjectSnapshot? project)
             => instance.TryGetLoadedProject(projectKey, out project);
 

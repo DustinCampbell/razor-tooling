@@ -59,12 +59,12 @@ public class ProjectEngineFactoryProviderTest : ToolingTestBase
 
         var solution = new SolutionSnapshot(solutionState);
 
-        _snapshot_For_1_0 = solution.GetLoadedProject(hostProject_For_1_0.Key);
-        _snapshot_For_1_1 = solution.GetLoadedProject(hostProject_For_1_1.Key);
-        _snapshot_For_2_0 = solution.GetLoadedProject(hostProject_For_2_0.Key);
-        _snapshot_For_2_1 = solution.GetLoadedProject(hostProject_For_2_1.Key);
-        _snapshot_For_3_0 = solution.GetLoadedProject(hostProject_For_3_0.Key);
-        _snapshot_For_UnknownConfiguration = solution.GetLoadedProject(hostProject_For_UnknownConfiguration.Key);
+        _snapshot_For_1_0 = solution.GetRequiredProject(hostProject_For_1_0.Key);
+        _snapshot_For_1_1 = solution.GetRequiredProject(hostProject_For_1_1.Key);
+        _snapshot_For_2_0 = solution.GetRequiredProject(hostProject_For_2_0.Key);
+        _snapshot_For_2_1 = solution.GetRequiredProject(hostProject_For_2_1.Key);
+        _snapshot_For_3_0 = solution.GetRequiredProject(hostProject_For_3_0.Key);
+        _snapshot_For_UnknownConfiguration = solution.GetRequiredProject(hostProject_For_UnknownConfiguration.Key);
 
         _customFactories =
         [

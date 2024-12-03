@@ -59,16 +59,14 @@ public class CodeDocumentReferenceHolderTest(ITestOutputHelper testOutput) : Lan
         // Arrange
         var documentSnapshot = await CreateDocumentSnapshotAsync();
         var unrelatedHostDocument = new HostDocument("C:/path/to/otherfile.razor", "otherfile.razor");
-        var unrelatedDocumentSnapshot = await _projectManager.UpdateAsync(updater =>
+
+        await _projectManager.UpdateAsync(updater =>
         {
             var unrelatedTextLoader = new SourceTextLoader("<p>Unrelated</p>", unrelatedHostDocument.FilePath);
             updater.DocumentAdded(s_hostProject.Key, unrelatedHostDocument, unrelatedTextLoader);
-            var project = updater.GetLoadedProject(s_hostProject.Key);
-
-            return project.GetDocument(unrelatedHostDocument.FilePath);
         });
 
-        Assert.NotNull(unrelatedDocumentSnapshot);
+        var unrelatedDocumentSnapshot = _projectManager.CurrentSolution.GetRequiredDocument(s_hostProject.Key, unrelatedHostDocument.FilePath);
 
         var mainCodeDocumentReference = await ProcessDocumentAndRetrieveOutputAsync(documentSnapshot, DisposalToken);
         var unrelatedCodeDocumentReference = await ProcessDocumentAndRetrieveOutputAsync(unrelatedDocumentSnapshot, DisposalToken);
@@ -163,16 +161,16 @@ public class CodeDocumentReferenceHolderTest(ITestOutputHelper testOutput) : Lan
         Assert.False(codeDocumentReference.TryGetTarget(out _));
     }
 
-    private Task<IDocumentSnapshot> CreateDocumentSnapshotAsync()
+    private async Task<IDocumentSnapshot> CreateDocumentSnapshotAsync()
     {
-        return _projectManager.UpdateAsync(updater =>
+        await _projectManager.UpdateAsync(updater =>
         {
             updater.ProjectAdded(s_hostProject);
             var textLoader = new SourceTextLoader("<p>Hello World</p>", s_hostDocument.FilePath);
             updater.DocumentAdded(s_hostProject.Key, s_hostDocument, textLoader);
-            var project = updater.GetLoadedProject(s_hostProject.Key);
-            return project.GetDocument(s_hostDocument.FilePath).AssumeNotNull();
         });
+
+        return _projectManager.CurrentSolution.GetRequiredDocument(s_hostProject.Key, s_hostDocument.FilePath);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]

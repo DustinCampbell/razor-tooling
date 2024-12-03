@@ -46,8 +46,7 @@ public abstract class DocumentExcerptServiceTestBase(ITestOutputHelper testOutpu
             .AddDocument(_hostProject.Key, _hostDocument, TestMocks.CreateTextLoader(sourceText, VersionStamp.Create()));
 
         var solutionSnapshot = new SolutionSnapshot(solutionState);
-        var project = solutionSnapshot.GetLoadedProject(_hostProject.Key);
-        var primary = project.GetDocument(_hostDocument.FilePath).AssumeNotNull();
+        var primary = solutionSnapshot.GetRequiredDocument(_hostProject.Key, _hostDocument.FilePath);
 
         var solution = Workspace.CurrentSolution.AddProject(ProjectInfo.Create(
             ProjectId.CreateNewId(Path.GetFileNameWithoutExtension(_hostDocument.FilePath)),

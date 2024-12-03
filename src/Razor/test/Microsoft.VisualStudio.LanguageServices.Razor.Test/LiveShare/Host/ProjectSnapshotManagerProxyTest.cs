@@ -59,8 +59,9 @@ public class ProjectSnapshotManagerProxyTest(ITestOutputHelper testOutput) : Vis
         var state = await JoinableTaskFactory.RunAsync(() => proxy.CalculateUpdatedStateAsync(projectManager.GetProjects()));
 
         // Assert
-        var project1TagHelpers = await projectManager.GetLoadedProject(_hostProject1.Key).GetTagHelpersAsync(DisposalToken);
-        var project2TagHelpers = await projectManager.GetLoadedProject(_hostProject2.Key).GetTagHelpersAsync(DisposalToken);
+        var solution = projectManager.CurrentSolution;
+        var project1TagHelpers = await solution.GetRequiredProject(_hostProject1.Key).GetTagHelpersAsync(DisposalToken);
+        var project2TagHelpers = await solution.GetRequiredProject(_hostProject2.Key).GetTagHelpersAsync(DisposalToken);
 
         Assert.Collection(
             state.ProjectHandles,
@@ -101,13 +102,7 @@ public class ProjectSnapshotManagerProxyTest(ITestOutputHelper testOutput) : Vis
         await projectManager.UpdateAsync(updater =>
         {
             // Change the project's configuration to force a changed event to be raised.
-            var project = updater.GetLoadedProject(_hostProject1.Key);
-            updater.ProjectConfigurationChanged(new(
-                project.FilePath,
-                project.IntermediateOutputPath,
-                FallbackRazorConfiguration.MVC_1_0,
-                project.RootNamespace,
-                project.DisplayName));
+            updater.ProjectConfigurationChanged(_hostProject1 with { Configuration = FallbackRazorConfiguration.MVC_1_0 });
         });
 
         await proxyAccessor.ProcessingChangedEventTestTask.AssumeNotNull().JoinAsync();
@@ -142,13 +137,7 @@ public class ProjectSnapshotManagerProxyTest(ITestOutputHelper testOutput) : Vis
         await projectManager.UpdateAsync(updater =>
         {
             // Change the project's configuration to force a changed event to be raised.
-            var project = updater.GetLoadedProject(_hostProject1.Key);
-            updater.ProjectConfigurationChanged(new(
-                project.FilePath,
-                project.IntermediateOutputPath,
-                FallbackRazorConfiguration.MVC_1_0,
-                project.RootNamespace,
-                project.DisplayName));
+            updater.ProjectConfigurationChanged(_hostProject1 with { Configuration = FallbackRazorConfiguration.MVC_1_0 });
         });
 
         // Assert
@@ -211,8 +200,9 @@ public class ProjectSnapshotManagerProxyTest(ITestOutputHelper testOutput) : Vis
         var state = await JoinableTaskFactory.RunAsync(() => proxy.GetProjectManagerStateAsync(DisposalToken));
 
         // Assert
-        var project1TagHelpers = await projectManager.GetLoadedProject(_hostProject1.Key).GetTagHelpersAsync(DisposalToken);
-        var project2TagHelpers = await projectManager.GetLoadedProject(_hostProject2.Key).GetTagHelpersAsync(DisposalToken);
+        var solution = projectManager.CurrentSolution;
+        var project1TagHelpers = await solution.GetRequiredProject(_hostProject1.Key).GetTagHelpersAsync(DisposalToken);
+        var project2TagHelpers = await solution.GetRequiredProject(_hostProject2.Key).GetTagHelpersAsync(DisposalToken);
 
         Assert.Collection(
             state.ProjectHandles,

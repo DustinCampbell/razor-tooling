@@ -32,9 +32,9 @@ public class GeneratedDocumentTextLoaderTest : WorkspaceTestBase
             .Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions)
             .AddProject(_hostProject)
             .AddDocument(_hostProject.Key, _hostDocument, TestMocks.CreateTextLoader("", VersionStamp.Create()));
+
         var solution = new SolutionSnapshot(solutionState);
-        var project = solution.GetLoadedProject(_hostProject.Key);
-        var document = project.GetDocument(_hostDocument.FilePath);
+        var document = solution.GetRequiredDocument(_hostProject.Key, _hostDocument.FilePath);
 
         var loader = new GeneratedDocumentTextLoader(document, "file.cshtml");
 

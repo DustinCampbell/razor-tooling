@@ -118,11 +118,6 @@ internal sealed class SolutionSnapshot(SolutionState state) : ISolutionSnapshot
     public DocumentSnapshot GetRequiredDocument(ProjectKey projectKey, string documentFilePath)
         => GetDocument(projectKey, documentFilePath).AssumeNotNull();
 
-    public ProjectSnapshot GetLoadedProject(ProjectKey projectKey)
-        => TryGetLoadedProject(projectKey, out var project)
-            ? project
-            : ThrowHelper.ThrowInvalidOperationException<ProjectSnapshot>($"No project snapshot exists with the key, '{projectKey}'");
-
     public bool TryGetLoadedProject(ProjectKey projectKey, [NotNullWhen(true)] out ProjectSnapshot? project)
     {
         lock (_gate)
