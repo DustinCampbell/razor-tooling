@@ -21,7 +21,7 @@ file sealed class TestSolutionQueryOperations(IProjectSnapshotManager projectMan
     {
         using var projects = new PooledArrayBuilder<IProjectSnapshot>();
 
-        foreach (var project in _projectManager.GetProjects())
+        foreach (var project in _projectManager.CurrentSolution.Projects)
         {
             if (project.ContainsDocument(documentFilePath))
             {

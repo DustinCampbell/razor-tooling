@@ -709,7 +709,7 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         });
 
         // Assert
-        Assert.Empty(_projectManager.GetProjects());
+        Assert.Empty(_projectManager.CurrentSolution.Projects);
 
         listener.AssertNoNotifications();
     }
@@ -732,7 +732,7 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         });
 
         // Assert
-        Assert.Empty(_projectManager.GetProjects());
+        Assert.Empty(_projectManager.CurrentSolution.Projects);
 
         listener.AssertNotifications(
             x => x.ProjectRemoved());
@@ -751,7 +751,7 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         });
 
         // Assert
-        Assert.Empty(_projectManager.GetProjects());
+        Assert.Empty(_projectManager.CurrentSolution.Projects);
 
         listener.AssertNoNotifications();
     }

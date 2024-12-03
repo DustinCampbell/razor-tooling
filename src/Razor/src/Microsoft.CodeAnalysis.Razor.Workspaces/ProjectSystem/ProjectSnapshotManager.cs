@@ -80,9 +80,6 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
     public bool IsSolutionClosing
         => CurrentSolutionSnapshot.IsSolutionClosing;
 
-    public ImmutableArray<IProjectSnapshot> GetProjects()
-        => CurrentSolutionSnapshot.Projects;
-
     public ImmutableArray<string> GetOpenDocuments()
         => CurrentSolutionSnapshot.GetOpenDocuments();
 

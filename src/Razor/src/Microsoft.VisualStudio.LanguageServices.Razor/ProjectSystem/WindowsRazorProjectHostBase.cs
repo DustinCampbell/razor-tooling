@@ -182,8 +182,7 @@ internal abstract partial class WindowsRazorProjectHostBase : OnceInitializedOnc
                     () => UpdateAsync(updater =>
                     {
                         // The Projects property creates a copy, so its okay to iterate through this
-                        var projects = updater.GetProjects();
-                        foreach (var project in projects)
+                        foreach (var project in updater.CurrentSolution.Projects)
                         {
                             RemoveProject(updater, project.Key);
                         }

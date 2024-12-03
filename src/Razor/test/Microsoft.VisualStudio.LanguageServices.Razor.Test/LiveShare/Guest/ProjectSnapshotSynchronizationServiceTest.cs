@@ -61,7 +61,7 @@ public class ProjectSnapshotSynchronizationServiceTest : VisualStudioWorkspaceTe
         await synchronizationService.InitializeAsync(DisposalToken);
 
         // Assert
-        var projects = _projectManager.GetProjects();
+        var projects = _projectManager.CurrentSolution.Projects;
         var project = Assert.Single(projects);
         Assert.Equal("/guest/path/project.csproj", project.FilePath);
         Assert.Same(RazorConfiguration.Default, project.Configuration);
@@ -96,7 +96,7 @@ public class ProjectSnapshotSynchronizationServiceTest : VisualStudioWorkspaceTe
         await synchronizationService.UpdateGuestProjectManagerAsync(args);
 
         // Assert
-        var projects = _projectManager.GetProjects();
+        var projects = _projectManager.CurrentSolution.Projects;
         var project = Assert.Single(projects);
         Assert.Equal("/guest/path/project.csproj", project.FilePath);
         Assert.Same(RazorConfiguration.Default, project.Configuration);
@@ -138,7 +138,7 @@ public class ProjectSnapshotSynchronizationServiceTest : VisualStudioWorkspaceTe
         await synchronizationService.UpdateGuestProjectManagerAsync(args);
 
         // Assert
-        var projects = _projectManager.GetProjects();
+        var projects = _projectManager.CurrentSolution.Projects;
         Assert.Empty(projects);
     }
 
@@ -179,7 +179,7 @@ public class ProjectSnapshotSynchronizationServiceTest : VisualStudioWorkspaceTe
         await synchronizationService.UpdateGuestProjectManagerAsync(args);
 
         // Assert
-        var projects = _projectManager.GetProjects();
+        var projects = _projectManager.CurrentSolution.Projects;
         var project = Assert.Single(projects);
         Assert.Equal("/guest/path/project.csproj", project.FilePath);
         Assert.Same(newConfiguration, project.Configuration);
@@ -223,7 +223,7 @@ public class ProjectSnapshotSynchronizationServiceTest : VisualStudioWorkspaceTe
         await synchronizationService.UpdateGuestProjectManagerAsync(args);
 
         // Assert
-        var projects = _projectManager.GetProjects();
+        var projects = _projectManager.CurrentSolution.Projects;
         var project = Assert.Single(projects);
         Assert.Equal("/guest/path/project.csproj", project.FilePath);
         Assert.Same(RazorConfiguration.Default, project.Configuration);

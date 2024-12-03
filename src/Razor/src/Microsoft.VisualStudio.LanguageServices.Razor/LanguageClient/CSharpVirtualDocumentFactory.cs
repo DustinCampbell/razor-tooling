@@ -193,11 +193,10 @@ internal class CSharpVirtualDocumentFactory : VirtualDocumentFactoryBase
             yield break;
         }
 
-        var projects = _projectManager.GetProjects();
-
         var inAny = false;
         var normalizedDocumentPath = RazorDynamicFileInfoProvider.GetProjectSystemFilePath(hostDocumentUri);
-        foreach (var projectSnapshot in projects)
+
+        foreach (var projectSnapshot in _projectManager.CurrentSolution.Projects)
         {
             if (projectSnapshot.ContainsDocument(normalizedDocumentPath))
             {

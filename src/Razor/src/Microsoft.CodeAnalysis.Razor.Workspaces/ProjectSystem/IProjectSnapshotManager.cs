@@ -18,7 +18,6 @@ internal interface IProjectSnapshotManager
     bool IsSolutionClosing { get; }
 
     ImmutableArray<ProjectKey> GetAllProjectKeys(string projectFileName);
-    ImmutableArray<IProjectSnapshot> GetProjects();
 
     bool IsDocumentOpen(string documentFilePath);
     ImmutableArray<string> GetOpenDocuments();

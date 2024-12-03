@@ -41,7 +41,7 @@ internal class ProjectSnapshotSynchronizationService(
     {
         _hostProjectManagerProxy.Changed -= HostProxyProjectManager_Changed;
 
-        var projects = _projectManager.GetProjects();
+        var projects = _projectManager.CurrentSolution.Projects;
 
         await _projectManager.UpdateAsync(
             static (updater, state) =>

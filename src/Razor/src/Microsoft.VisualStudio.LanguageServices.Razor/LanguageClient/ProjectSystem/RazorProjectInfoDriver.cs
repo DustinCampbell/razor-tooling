@@ -31,7 +31,7 @@ internal sealed partial class RazorProjectInfoDriver : AbstractRazorProjectInfoD
         // current set of projects and connected to the Changed event.
         return _projectManager.UpdateAsync(updater =>
         {
-            foreach (var project in updater.GetProjects())
+            foreach (var project in updater.CurrentSolution.Projects)
             {
                 EnqueueUpdate(project.ToRazorProjectInfo());
             }

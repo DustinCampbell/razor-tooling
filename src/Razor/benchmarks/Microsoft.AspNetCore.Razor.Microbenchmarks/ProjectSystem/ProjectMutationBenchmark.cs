@@ -63,7 +63,7 @@ public class ProjectMutationBenchmark : ProjectSnapshotManagerBenchmarkBase
                     return;
                 }
 
-                _ = ProjectManager.GetProjects();
+                _ = ProjectManager.CurrentSolution.Projects;
                 Thread.Sleep(0);
                 _ = ProjectManager.GetOpenDocuments();
                 Thread.Sleep(0);

@@ -75,7 +75,7 @@ public class FallbackProjectManagerTest : VisualStudioWorkspaceTestBase
 
         await WaitForProjectManagerUpdatesAsync();
 
-        var project = Assert.Single(_projectManager.GetProjects());
+        var project = Assert.Single(_projectManager.CurrentSolution.Projects);
         Assert.IsNotType<FallbackHostProject>(((ProjectSnapshot)project).HostProject);
     }
 
@@ -99,7 +99,7 @@ public class FallbackProjectManagerTest : VisualStudioWorkspaceTestBase
 
         await WaitForProjectManagerUpdatesAsync();
 
-        var project = Assert.Single(_projectManager.GetProjects());
+        var project = Assert.Single(_projectManager.CurrentSolution.Projects);
         Assert.Equal("DisplayName", project.DisplayName);
         Assert.Equal("RootNamespace", project.RootNamespace);
 
@@ -130,7 +130,7 @@ public class FallbackProjectManagerTest : VisualStudioWorkspaceTestBase
 
         await WaitForProjectManagerUpdatesAsync();
 
-        var project = Assert.Single(_projectManager.GetProjects());
+        var project = Assert.Single(_projectManager.CurrentSolution.Projects);
         Assert.IsType<FallbackHostProject>(((ProjectSnapshot)project).HostProject);
 
         var hostProject = SomeProject with
@@ -145,7 +145,7 @@ public class FallbackProjectManagerTest : VisualStudioWorkspaceTestBase
             updater.ProjectConfigurationChanged(hostProject);
         });
 
-        project = Assert.Single(_projectManager.GetProjects());
+        project = Assert.Single(_projectManager.CurrentSolution.Projects);
         Assert.IsNotType<FallbackHostProject>(((ProjectSnapshot)project).HostProject);
     }
 
@@ -183,7 +183,7 @@ public class FallbackProjectManagerTest : VisualStudioWorkspaceTestBase
 
         await WaitForProjectManagerUpdatesAsync();
 
-        var project = Assert.Single(_projectManager.GetProjects());
+        var project = Assert.Single(_projectManager.CurrentSolution.Projects);
 
         Assert.Collection(project.DocumentFilePaths.OrderBy(f => f), // DocumentFilePaths comes from a dictionary, so no sort guarantee
             f => Assert.Equal(SomeProjectFile1.FilePath, f),
@@ -231,7 +231,7 @@ public class FallbackProjectManagerTest : VisualStudioWorkspaceTestBase
 
         await WaitForProjectManagerUpdatesAsync();
 
-        var project = Assert.Single(_projectManager.GetProjects());
+        var project = Assert.Single(_projectManager.CurrentSolution.Projects);
 
         Assert.Single(project.DocumentFilePaths,
             filePath => filePath == SomeProjectFile1.FilePath);

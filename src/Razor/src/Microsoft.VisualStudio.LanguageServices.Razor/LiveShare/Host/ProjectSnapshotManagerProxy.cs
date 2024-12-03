@@ -66,18 +66,18 @@ internal class ProjectSnapshotManagerProxy : IProjectSnapshotManagerProxy, IColl
     }
 
     // Internal for testing
-    internal async Task<IReadOnlyList<IProjectSnapshot>> GetLatestProjectsAsync()
+    internal async Task<IEnumerable<IProjectSnapshot>> GetLatestProjectsAsync()
     {
         if (!_jtf.Context.IsOnMainThread)
         {
             await _jtf.SwitchToMainThreadAsync(CancellationToken.None);
         }
 
-        return _projectSnapshotManager.GetProjects();
+        return _projectSnapshotManager.CurrentSolution.Projects;
     }
 
     // Internal for testing
-    internal async Task<ProjectSnapshotManagerProxyState> CalculateUpdatedStateAsync(IReadOnlyList<IProjectSnapshot> projects)
+    internal async Task<ProjectSnapshotManagerProxyState> CalculateUpdatedStateAsync(IEnumerable<IProjectSnapshot> projects)
     {
         using (await _latestStateSemaphore.EnterAsync().ConfigureAwait(false))
         {

@@ -305,10 +305,10 @@ public class FallbackWindowsRazorProjectHostTest : VisualStudioWorkspaceTestBase
 
         // Act & Assert
         await host.LoadAsync();
-        Assert.Empty(_projectManager.GetProjects());
+        Assert.Empty(_projectManager.CurrentSolution.Projects);
 
         await host.DisposeAsync();
-        Assert.Empty(_projectManager.GetProjects());
+        Assert.Empty(_projectManager.CurrentSolution.Projects);
     }
 
     [UIFact]
@@ -321,10 +321,10 @@ public class FallbackWindowsRazorProjectHostTest : VisualStudioWorkspaceTestBase
 
         // Act & Assert
         await Task.Run(async () => await host.LoadAsync());
-        Assert.Empty(_projectManager.GetProjects());
+        Assert.Empty(_projectManager.CurrentSolution.Projects);
 
         await Task.Run(async () => await host.DisposeAsync());
-        Assert.Empty(_projectManager.GetProjects());
+        Assert.Empty(_projectManager.CurrentSolution.Projects);
     }
 
     [UIFact] // This can happen if the .xaml files aren't included correctly.
@@ -344,10 +344,10 @@ public class FallbackWindowsRazorProjectHostTest : VisualStudioWorkspaceTestBase
 
         // Act & Assert
         await Task.Run(async () => await host.LoadAsync());
-        Assert.Empty(_projectManager.GetProjects());
+        Assert.Empty(_projectManager.CurrentSolution.Projects);
 
         await Task.Run(async () => await host.OnProjectChangedAsync(string.Empty, services.CreateUpdate(changes)));
-        Assert.Empty(_projectManager.GetProjects());
+        Assert.Empty(_projectManager.CurrentSolution.Projects);
     }
 
     [UIFact]
@@ -379,13 +379,13 @@ public class FallbackWindowsRazorProjectHostTest : VisualStudioWorkspaceTestBase
         };
 
         await Task.Run(async () => await host.LoadAsync());
-        Assert.Empty(_projectManager.GetProjects());
+        Assert.Empty(_projectManager.CurrentSolution.Projects);
 
         // Act
         await Task.Run(async () => await host.OnProjectChangedAsync(string.Empty, services.CreateUpdate(changes)));
 
         // Assert
-        var snapshot = Assert.Single(_projectManager.GetProjects());
+        var snapshot = Assert.Single(_projectManager.CurrentSolution.Projects);
         Assert.Equal("C:\\Path\\Test.csproj", snapshot.FilePath);
         Assert.Same(FallbackRazorConfiguration.MVC_2_0, snapshot.Configuration);
 
@@ -395,7 +395,7 @@ public class FallbackWindowsRazorProjectHostTest : VisualStudioWorkspaceTestBase
             filePath => Assert.Equal("C:\\Path\\Index.cshtml", filePath));
 
         await Task.Run(async () => await host.DisposeAsync());
-        Assert.Empty(_projectManager.GetProjects());
+        Assert.Empty(_projectManager.CurrentSolution.Projects);
     }
 
     [UIFact]
@@ -411,16 +411,16 @@ public class FallbackWindowsRazorProjectHostTest : VisualStudioWorkspaceTestBase
         var host = new TestFallbackRazorProjectHost(services, _serviceProvider, _projectManager);
 
         await Task.Run(async () => await host.LoadAsync());
-        Assert.Empty(_projectManager.GetProjects());
+        Assert.Empty(_projectManager.CurrentSolution.Projects);
 
         // Act
         await Task.Run(async () => await host.OnProjectChangedAsync(string.Empty, services.CreateUpdate(changes)));
 
         // Assert
-        Assert.Empty(_projectManager.GetProjects());
+        Assert.Empty(_projectManager.CurrentSolution.Projects);
 
         await Task.Run(async () => await host.DisposeAsync());
-        Assert.Empty(_projectManager.GetProjects());
+        Assert.Empty(_projectManager.CurrentSolution.Projects);
     }
 
     [UIFact]
@@ -439,16 +439,16 @@ public class FallbackWindowsRazorProjectHostTest : VisualStudioWorkspaceTestBase
         var host = new TestFallbackRazorProjectHost(services, _serviceProvider, _projectManager);
 
         await Task.Run(async () => await host.LoadAsync());
-        Assert.Empty(_projectManager.GetProjects());
+        Assert.Empty(_projectManager.CurrentSolution.Projects);
 
         // Act
         await Task.Run(async () => await host.OnProjectChangedAsync(string.Empty, services.CreateUpdate(changes)));
 
         // Assert
-        Assert.Empty(_projectManager.GetProjects());
+        Assert.Empty(_projectManager.CurrentSolution.Projects);
 
         await Task.Run(async () => await host.DisposeAsync());
-        Assert.Empty(_projectManager.GetProjects());
+        Assert.Empty(_projectManager.CurrentSolution.Projects);
     }
 
     [UIFact]
@@ -481,13 +481,13 @@ public class FallbackWindowsRazorProjectHostTest : VisualStudioWorkspaceTestBase
         };
 
         await Task.Run(async () => await host.LoadAsync());
-        Assert.Empty(_projectManager.GetProjects());
+        Assert.Empty(_projectManager.CurrentSolution.Projects);
 
         // Act - 1
         await Task.Run(async () => await host.OnProjectChangedAsync(string.Empty, services.CreateUpdate(initialChanges)));
 
         // Assert - 1
-        var snapshot = Assert.Single(_projectManager.GetProjects());
+        var snapshot = Assert.Single(_projectManager.CurrentSolution.Projects);
         Assert.Equal("C:\\Path\\Test.csproj", snapshot.FilePath);
         Assert.Same(FallbackRazorConfiguration.MVC_2_0, snapshot.Configuration);
         var filePath = Assert.Single(snapshot.DocumentFilePaths);
@@ -498,13 +498,13 @@ public class FallbackWindowsRazorProjectHostTest : VisualStudioWorkspaceTestBase
         await Task.Run(async () => await host.OnProjectChangedAsync(string.Empty, services.CreateUpdate(changes)));
 
         // Assert - 2
-        snapshot = Assert.Single(_projectManager.GetProjects());
+        snapshot = Assert.Single(_projectManager.CurrentSolution.Projects);
         Assert.Equal("C:\\Path\\Test.csproj", snapshot.FilePath);
         Assert.Same(FallbackRazorConfiguration.MVC_1_0, snapshot.Configuration);
         Assert.Empty(snapshot.DocumentFilePaths);
 
         await Task.Run(async () => await host.DisposeAsync());
-        Assert.Empty(_projectManager.GetProjects());
+        Assert.Empty(_projectManager.CurrentSolution.Projects);
     }
 
     [UIFact]
@@ -526,13 +526,13 @@ public class FallbackWindowsRazorProjectHostTest : VisualStudioWorkspaceTestBase
         };
 
         await Task.Run(async () => await host.LoadAsync());
-        Assert.Empty(_projectManager.GetProjects());
+        Assert.Empty(_projectManager.CurrentSolution.Projects);
 
         // Act - 1
         await Task.Run(async () => await host.OnProjectChangedAsync(string.Empty, services.CreateUpdate(changes)));
 
         // Assert - 1
-        var snapshot = Assert.Single(_projectManager.GetProjects());
+        var snapshot = Assert.Single(_projectManager.CurrentSolution.Projects);
         Assert.Equal("Test.csproj", snapshot.FilePath);
         Assert.Same(FallbackRazorConfiguration.MVC_2_0, snapshot.Configuration);
 
@@ -541,10 +541,10 @@ public class FallbackWindowsRazorProjectHostTest : VisualStudioWorkspaceTestBase
         await Task.Run(async () => await host.OnProjectChangedAsync(string.Empty, services.CreateUpdate(changes)));
 
         // Assert - 2
-        Assert.Empty(_projectManager.GetProjects());
+        Assert.Empty(_projectManager.CurrentSolution.Projects);
 
         await Task.Run(async () => await host.DisposeAsync());
-        Assert.Empty(_projectManager.GetProjects());
+        Assert.Empty(_projectManager.CurrentSolution.Projects);
     }
 
     [UIFact]
@@ -571,13 +571,13 @@ public class FallbackWindowsRazorProjectHostTest : VisualStudioWorkspaceTestBase
         };
 
         await Task.Run(async () => await host.LoadAsync());
-        Assert.Empty(_projectManager.GetProjects());
+        Assert.Empty(_projectManager.CurrentSolution.Projects);
 
         // Act - 1
         await Task.Run(async () => await host.OnProjectChangedAsync(string.Empty, services.CreateUpdate(changes)));
 
         // Assert - 1
-        var snapshot = Assert.Single(_projectManager.GetProjects());
+        var snapshot = Assert.Single(_projectManager.CurrentSolution.Projects);
         Assert.Equal("C:\\Path\\Test.csproj", snapshot.FilePath);
         Assert.Same(FallbackRazorConfiguration.MVC_2_0, snapshot.Configuration);
         var filePath = Assert.Single(snapshot.DocumentFilePaths);
@@ -587,14 +587,14 @@ public class FallbackWindowsRazorProjectHostTest : VisualStudioWorkspaceTestBase
         await Task.Run(async () => await host.DisposeAsync());
 
         // Assert - 2
-        Assert.Empty(_projectManager.GetProjects());
+        Assert.Empty(_projectManager.CurrentSolution.Projects);
 
         // Act - 3
         host.AssemblyVersion = new Version(1, 1);
         await Task.Run(async () => await host.OnProjectChangedAsync(string.Empty, services.CreateUpdate(changes)));
 
         // Assert - 3
-        Assert.Empty(_projectManager.GetProjects());
+        Assert.Empty(_projectManager.CurrentSolution.Projects);
     }
 
     [UIFact]
@@ -616,13 +616,13 @@ public class FallbackWindowsRazorProjectHostTest : VisualStudioWorkspaceTestBase
         };
 
         await Task.Run(async () => await host.LoadAsync());
-        Assert.Empty(_projectManager.GetProjects());
+        Assert.Empty(_projectManager.CurrentSolution.Projects);
 
         // Act - 1
         await Task.Run(async () => await host.OnProjectChangedAsync(string.Empty, services.CreateUpdate(changes)));
 
         // Assert - 1
-        var snapshot = Assert.Single(_projectManager.GetProjects());
+        var snapshot = Assert.Single(_projectManager.CurrentSolution.Projects);
         Assert.Equal("Test.csproj", snapshot.FilePath);
         Assert.Same(FallbackRazorConfiguration.MVC_2_0, snapshot.Configuration);
 
@@ -631,12 +631,12 @@ public class FallbackWindowsRazorProjectHostTest : VisualStudioWorkspaceTestBase
         await Task.Run(async () => await host.OnProjectRenamingAsync("Test.csproj", "Test2.csproj"));
 
         // Assert - 1
-        snapshot = Assert.Single(_projectManager.GetProjects());
+        snapshot = Assert.Single(_projectManager.CurrentSolution.Projects);
         Assert.Equal("Test2.csproj", snapshot.FilePath);
         Assert.Same(FallbackRazorConfiguration.MVC_2_0, snapshot.Configuration);
 
         await Task.Run(async () => await host.DisposeAsync());
-        Assert.Empty(_projectManager.GetProjects());
+        Assert.Empty(_projectManager.CurrentSolution.Projects);
     }
 
     private class TestFallbackRazorProjectHost : FallbackWindowsRazorProjectHost

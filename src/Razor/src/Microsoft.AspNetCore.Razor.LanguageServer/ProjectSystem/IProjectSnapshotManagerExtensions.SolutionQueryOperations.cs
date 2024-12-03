@@ -17,7 +17,7 @@ internal static partial class IProjectSnapshotManagerExtensions
         {
             using var projects = new PooledArrayBuilder<IProjectSnapshot>();
 
-            foreach (var project in _projectManager.GetProjects())
+            foreach (var project in _projectManager.CurrentSolution.Projects)
             {
                 // Always exclude the miscellaneous project.
                 if (project.IsMiscellaneousProject())
