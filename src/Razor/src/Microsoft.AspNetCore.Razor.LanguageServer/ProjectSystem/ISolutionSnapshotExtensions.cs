@@ -61,9 +61,8 @@ internal static class ISolutionSnapshotExtensions
             }
         }
 
-        var normalizedDocumentPath = FilePathNormalizer.Normalize(documentFilePath);
         var miscProject = solution.GetMiscellaneousProject();
-        if (miscProject.ContainsDocument(normalizedDocumentPath))
+        if (miscProject.ContainsDocument(documentFilePath))
         {
             builder.Add(miscProject);
         }
@@ -80,13 +79,11 @@ internal static class ISolutionSnapshotExtensions
     {
         logger.LogTrace($"Looking for {documentFilePath}.");
 
-        var normalizedDocumentPath = FilePathNormalizer.Normalize(documentFilePath);
-
         var potentialProjects = solution.FindPotentialProjects(documentFilePath);
 
         foreach (var project in potentialProjects)
         {
-            if (project.TryGetDocument(normalizedDocumentPath, out document))
+            if (project.TryGetDocument(documentFilePath, out document))
             {
                 logger.LogTrace($"Found {documentFilePath} in {project.FilePath}");
                 return true;
@@ -96,7 +93,7 @@ internal static class ISolutionSnapshotExtensions
         logger.LogTrace($"Looking for {documentFilePath} in miscellaneous project.");
         var miscellaneousProject = solution.GetMiscellaneousProject();
 
-        if (miscellaneousProject.TryGetDocument(normalizedDocumentPath, out document))
+        if (miscellaneousProject.TryGetDocument(documentFilePath, out document))
         {
             logger.LogTrace($"Found {documentFilePath} in miscellaneous project.");
             return true;

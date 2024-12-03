@@ -99,6 +99,18 @@ internal sealed class ProjectSnapshot(SolutionSnapshot solution, ProjectState st
         }
     }
 
+    bool IProjectSnapshot.TryGetDocument(string filePath, [NotNullWhen(true)] out IDocumentSnapshot? document)
+    {
+        if (TryGetDocument(filePath, out var snapshot))
+        {
+            document = snapshot;
+            return true;
+        }
+
+        document = null;
+        return false;
+    }
+
     /// <summary>
     /// If the provided document is an import document, gets the other documents in the project
     /// that include directives specified by the provided document. Otherwise returns an empty
@@ -127,20 +139,5 @@ internal sealed class ProjectSnapshot(SolutionSnapshot solution, ProjectState st
 
             return builder.DrainToImmutable();
         }
-    }
-
-    IDocumentSnapshot? IProjectSnapshot.GetDocument(string filePath)
-        => GetDocument(filePath);
-
-    bool IProjectSnapshot.TryGetDocument(string filePath, [NotNullWhen(true)] out IDocumentSnapshot? document)
-    {
-        if (TryGetDocument(filePath, out var snapshot))
-        {
-            document = snapshot;
-            return true;
-        }
-
-        document = null;
-        return false;
     }
 }

@@ -52,8 +52,7 @@ internal class TestRazorProjectService(
             var documents = ImmutableArray
                 .CreateRange(projectSnapshot.DocumentFilePaths)
                 .Add(textDocumentPath)
-                .Select(d => new DocumentSnapshotHandle(d, d, FileKinds.GetFileKindFromFilePath(d)))
-                .ToImmutableArray();
+                .SelectAsArray(static d => new DocumentSnapshotHandle(d, d, FileKinds.GetFileKindFromFilePath(d)));
 
             await ((IRazorProjectInfoListener)this).UpdatedAsync(new RazorProjectInfo(projectSnapshot.Key, projectSnapshot.FilePath, projectSnapshot.Configuration, projectSnapshot.RootNamespace, projectSnapshot.DisplayName, projectSnapshot.ProjectWorkspaceState,
                 documents), cancellationToken).ConfigureAwait(false);

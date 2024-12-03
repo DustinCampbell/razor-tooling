@@ -6,7 +6,6 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Test.Common;
@@ -130,7 +129,7 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         Assert.Single(
             project.DocumentFilePaths,
             filePath => filePath == s_documents[0].FilePath &&
-                        project.GetDocument(filePath).AssumeNotNull().FileKind == FileKinds.Legacy);
+                        project.GetRequiredDocument(filePath).FileKind == FileKinds.Legacy);
 
         listener.AssertNotifications(
             x => x.DocumentAdded());
@@ -158,7 +157,7 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         Assert.Single(
             project.DocumentFilePaths,
             filePath => filePath == s_documents[3].FilePath &&
-                        project.GetDocument(filePath).AssumeNotNull().FileKind == FileKinds.Component);
+                        project.GetRequiredDocument(filePath).FileKind == FileKinds.Component);
 
         listener.AssertNotifications(
             x => x.DocumentAdded());
@@ -188,7 +187,7 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
 
         listener.AssertNoNotifications();
 
-        Assert.Equal(1, project.GetDocument(s_documents[0].FilePath)!.Version);
+        Assert.Equal(1, project.GetRequiredDocument(s_documents[0].FilePath).Version);
     }
 
     [UIFact]
@@ -225,8 +224,7 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         // Assert
         var project = _projectManager.CurrentSolution.GetRequiredProject(s_hostProject.Key);
         var documentFilePath = Assert.Single(project.DocumentFilePaths);
-        var document = project.GetDocument(documentFilePath);
-        Assert.NotNull(document);
+        var document = project.GetRequiredDocument(documentFilePath);
 
         var text = await document.GetTextAsync(DisposalToken);
         Assert.Equal(0, text.Length);
@@ -252,8 +250,7 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         // Assert
         var project = _projectManager.CurrentSolution.GetRequiredProject(s_hostProject.Key);
         var documentFilePath = Assert.Single(project.DocumentFilePaths);
-        var document = project.GetDocument(documentFilePath);
-        Assert.NotNull(document);
+        var document = project.GetRequiredDocument(documentFilePath);
 
         var actual = await document.GetTextAsync(DisposalToken);
         Assert.Same(expected, actual);

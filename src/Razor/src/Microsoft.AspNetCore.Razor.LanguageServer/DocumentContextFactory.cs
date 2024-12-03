@@ -59,8 +59,7 @@ internal sealed class DocumentContextFactory(
         // that the IDE is asking us about. In that case, we might have the document in our misc files project, and we'll
         // move it to the real project when/if we find out about it.
         var miscellaneousProject = solution.GetMiscellaneousProject();
-        var normalizedDocumentPath = FilePathNormalizer.Normalize(filePath);
-        if (miscellaneousProject.TryGetDocument(normalizedDocumentPath, out documentSnapshot))
+        if (miscellaneousProject.TryGetDocument(filePath, out documentSnapshot))
         {
             _logger.LogDebug($"Found document {filePath} in the misc files project, but was asked for project context {projectContext.Id}");
             return true;

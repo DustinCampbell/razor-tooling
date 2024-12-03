@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.IO;
@@ -242,12 +243,6 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
                     filePath,
                     (projectSnapshot, textDocumentPath) =>
                     {
-                        if (!projectSnapshot.DocumentFilePaths.Contains(textDocumentPath, FilePathComparer.Instance))
-                        {
-                            _logger.LogInformation($"Containing project is not tracking document '{textDocumentPath}'");
-                            return;
-                        }
-
                         if (projectSnapshot.GetDocument(textDocumentPath) is not DocumentSnapshot documentSnapshot)
                         {
                             _logger.LogError($"Containing project does not contain document '{textDocumentPath}'");
@@ -480,22 +475,20 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
         miscellaneousProject = solution.GetMiscellaneousProject();
 
         // Add (or migrate from misc) any new documents
-        foreach (var documentKvp in documentMap)
+        foreach (var (documentFilePath, documentHandle) in documentMap)
         {
-            var documentFilePath = documentKvp.Key;
-            if (project.DocumentFilePaths.Contains(documentFilePath, FilePathComparer.Instance))
+            if (project.ContainsDocument(documentFilePath))
             {
                 // Already know about this document
                 continue;
             }
 
-            if (miscellaneousProject.DocumentFilePaths.Contains(documentFilePath, FilePathComparer.Instance))
+            if (miscellaneousProject.ContainsDocument(documentFilePath))
             {
                 MoveDocument(updater, documentFilePath, fromProject: miscellaneousProject, toProject: project);
             }
             else
             {
-                var documentHandle = documentKvp.Value;
                 var remoteTextLoader = _remoteTextLoaderFactory.Create(documentFilePath);
                 var newHostDocument = new HostDocument(documentFilePath, documentHandle.TargetPath, documentHandle.FileKind);
 
@@ -512,8 +505,8 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
         IProjectSnapshot fromProject,
         IProjectSnapshot toProject)
     {
-        Debug.Assert(fromProject.DocumentFilePaths.Contains(documentFilePath, FilePathComparer.Instance));
-        Debug.Assert(!toProject.DocumentFilePaths.Contains(documentFilePath, FilePathComparer.Instance));
+        Debug.Assert(fromProject.ContainsDocument(documentFilePath));
+        Debug.Assert(!toProject.ContainsDocument(documentFilePath));
 
         if (fromProject.GetDocument(documentFilePath) is not DocumentSnapshot documentSnapshot)
         {

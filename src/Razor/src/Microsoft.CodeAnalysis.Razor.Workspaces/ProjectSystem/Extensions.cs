@@ -111,4 +111,12 @@ internal static class Extensions
 
     public static IDocumentSnapshot GetRequiredDocument(this ISolutionSnapshot solution, ProjectKey projectKey, string documentFilePath)
         => solution.GetDocument(projectKey, documentFilePath).AssumeNotNull();
+
+    public static IDocumentSnapshot? GetDocument(this IProjectSnapshot project, string filePath)
+        => project.TryGetDocument(filePath, out var document)
+            ? document
+            : null;
+
+    public static IDocumentSnapshot GetRequiredDocument(this IProjectSnapshot project, string filePath)
+        => project.GetDocument(filePath).AssumeNotNull();
 }
