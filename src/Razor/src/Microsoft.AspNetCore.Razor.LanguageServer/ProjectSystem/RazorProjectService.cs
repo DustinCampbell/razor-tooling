@@ -19,8 +19,6 @@ using Microsoft.CodeAnalysis.Razor.Logging;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.Workspaces;
 using Microsoft.CodeAnalysis.Text;
-using Microsoft.CommonLanguageServerProtocol.Framework;
-using Microsoft.VisualStudio.Threading;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.ProjectSystem;
 
@@ -262,7 +260,7 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
                         if (_projectManager.IsDocumentOpen(textDocumentPath))
                         {
                             _logger.LogInformation($"Moving document '{textDocumentPath}' from project '{projectSnapshot.Key}' to misc files because it is open.");
-                            if (!MiscFilesHostProject.IsMiscellaneousProject(projectSnapshot))
+                            if (!projectSnapshot.IsMiscellaneousProject())
                             {
                                 var miscellaneousProject = _projectManager.CurrentSolution.GetMiscellaneousProject();
                                 MoveDocument(updater, textDocumentPath, fromProject: projectSnapshot, toProject: miscellaneousProject);

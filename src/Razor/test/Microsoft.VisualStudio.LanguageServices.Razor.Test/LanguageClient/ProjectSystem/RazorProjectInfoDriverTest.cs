@@ -60,7 +60,7 @@ public class RazorProjectInfoDriverTest(ITestOutputHelper testOutput) : Language
         // Sort the remaining projects by project key.
         var projects = latestProjects
             .WhereAsArray(x => x.ProjectKey != MiscFilesHostProject.Instance.Key)
-            .Sort((x, y) => x.ProjectKey.Id.CompareTo(y.ProjectKey.Id));
+            .OrderByAsArray(static x => x.ProjectKey);
 
         Assert.Equal(2, projects.Length);
 
@@ -106,7 +106,7 @@ public class RazorProjectInfoDriverTest(ITestOutputHelper testOutput) : Language
         var projects = driver
             .GetLatestProjectInfo()
             .WhereAsArray(x => x.ProjectKey != MiscFilesHostProject.Instance.Key)
-            .Sort((x, y) => x.ProjectKey.Id.CompareTo(y.ProjectKey.Id));
+            .OrderByAsArray(static x => x.ProjectKey);
 
         Assert.Equal(2, projects.Length);
 
@@ -144,7 +144,7 @@ public class RazorProjectInfoDriverTest(ITestOutputHelper testOutput) : Language
         var projects = driver
             .GetLatestProjectInfo()
             .WhereAsArray(x => x.ProjectKey != MiscFilesHostProject.Instance.Key)
-            .Sort((x, y) => x.ProjectKey.Id.CompareTo(y.ProjectKey.Id));
+            .OrderByAsArray(static x => x.ProjectKey);
 
         var projectInfo1 = Assert.Single(projects);
         Assert.Equal(s_hostProject1.Key, projectInfo1.ProjectKey);
@@ -170,7 +170,7 @@ public class RazorProjectInfoDriverTest(ITestOutputHelper testOutput) : Language
         var projects = driver
             .GetLatestProjectInfo()
             .WhereAsArray(x => x.ProjectKey != MiscFilesHostProject.Instance.Key)
-            .Sort((x, y) => x.ProjectKey.Id.CompareTo(y.ProjectKey.Id));
+            .OrderByAsArray(static x => x.ProjectKey);
 
         var projectInfo1 = Assert.Single(projects);
         Assert.Equal(s_hostProject1.Key, projectInfo1.ProjectKey);

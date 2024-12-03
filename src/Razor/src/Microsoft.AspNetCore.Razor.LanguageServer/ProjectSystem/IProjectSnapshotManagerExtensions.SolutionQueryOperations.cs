@@ -20,7 +20,7 @@ internal static partial class IProjectSnapshotManagerExtensions
             foreach (var project in _projectManager.GetProjects())
             {
                 // Always exclude the miscellaneous project.
-                if (project.Key == MiscFilesHostProject.Instance.Key)
+                if (project.IsMiscellaneousProject())
                 {
                     continue;
                 }

@@ -15,9 +15,7 @@ namespace Microsoft.AspNetCore.Razor.LanguageServer.ProjectSystem;
 internal static class ISolutionSnapshotExtensions
 {
     public static IProjectSnapshot GetMiscellaneousProject(this ISolutionSnapshot solution)
-    {
-        return solution.GetRequiredProject(MiscFilesHostProject.Instance.Key);
-    }
+        => solution.GetRequiredProject(MiscFilesHostProject.Instance.Key);
 
     /// <summary>
     /// Finds all the projects where the document path starts with the path of the folder that contains the project file.
@@ -31,7 +29,7 @@ internal static class ISolutionSnapshotExtensions
         foreach (var project in solution.Projects)
         {
             // Always exclude the miscellaneous project.
-            if (project.Key == MiscFilesHostProject.Instance.Key)
+            if (project.IsMiscellaneousProject())
             {
                 continue;
             }

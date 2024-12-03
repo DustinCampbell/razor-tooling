@@ -15,11 +15,6 @@ internal sealed record class MiscFilesHostProject : HostProject
 {
     public static MiscFilesHostProject Instance { get; } = Create();
 
-    public static bool IsMiscellaneousProject(IProjectSnapshot project)
-    {
-        return project.Key == Instance.Key;
-    }
-
     public string DirectoryPath { get; }
 
     private MiscFilesHostProject(
