@@ -409,7 +409,7 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
 
         var projectKey = project.ToProjectKey();
 
-        return _projectManager.TryGetLoadedProject(projectKey, out projectSnapshot);
+        return _projectManager.CurrentSolution.TryGetProject(projectKey, out projectSnapshot);
     }
 
     internal TestAccessor GetTestAccessor() => new(this);

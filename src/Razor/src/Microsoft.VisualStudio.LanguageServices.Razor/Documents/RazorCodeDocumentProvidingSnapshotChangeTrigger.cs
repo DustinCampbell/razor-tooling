@@ -70,12 +70,7 @@ internal class RazorCodeDocumentProvidingSnapshotChangeTrigger : IRazorStartupSe
             return null;
         }
 
-        if (!_projectManager.TryGetLoadedProject(projectKey, out var project))
-        {
-            return null;
-        }
-
-        if (!project.TryGetDocument(filePath, out var document))
+        if (!_projectManager.CurrentSolution.TryGetDocument(projectKey, filePath, out var document))
         {
             return null;
         }

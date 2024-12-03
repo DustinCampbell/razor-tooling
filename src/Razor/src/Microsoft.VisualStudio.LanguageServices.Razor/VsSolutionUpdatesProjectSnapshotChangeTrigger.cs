@@ -122,18 +122,19 @@ internal class VsSolutionUpdatesProjectSnapshotChangeTrigger : IRazorStartupServ
             return;
         }
 
+        var solution = _projectManager.CurrentSolution;
         var projectKeys = _projectManager.GetAllProjectKeys(projectFilePath);
         foreach (var projectKey in projectKeys)
         {
-            if (_projectManager.TryGetLoadedProject(projectKey, out var projectSnapshot))
+            if (solution.TryGetProject(projectKey, out var project))
             {
                 var workspace = _workspaceProvider.GetWorkspace();
-                var workspaceProject = workspace.CurrentSolution.Projects.FirstOrDefault(wp => wp.ToProjectKey() == projectSnapshot.Key);
+                var workspaceProject = workspace.CurrentSolution.Projects.FirstOrDefault(wp => project.Key.Matches(wp));
                 if (workspaceProject is not null)
                 {
                     // Trigger a tag helper update by forcing the project manager to see the workspace Project
                     // from the current solution.
-                    _workspaceStateGenerator.EnqueueUpdate(workspaceProject, projectSnapshot);
+                    _workspaceStateGenerator.EnqueueUpdate(workspaceProject, project);
                 }
             }
         }

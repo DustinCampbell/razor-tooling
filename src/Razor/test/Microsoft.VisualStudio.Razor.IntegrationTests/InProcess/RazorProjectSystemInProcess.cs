@@ -50,7 +50,7 @@ internal partial class RazorProjectSystemInProcess
                 return SpecializedTasks.False;
             }
 
-            return Task.FromResult(projectManager.TryGetLoadedProject(projectKeys[0], out _));
+            return Task.FromResult(projectManager.CurrentSolution.TryGetProject(projectKeys[0], out _));
         }, TimeSpan.FromMilliseconds(100), cancellationToken);
     }
 
@@ -67,7 +67,7 @@ internal partial class RazorProjectSystemInProcess
                 return false;
             }
 
-            if (!projectManager.TryGetLoadedProject(projectKeys[0], out var project))
+            if (!projectManager.CurrentSolution.TryGetProject(projectKeys[0], out var project))
             {
                 return false;
             }
@@ -85,7 +85,7 @@ internal partial class RazorProjectSystemInProcess
         {
             var projectKeys = projectSnapshotManager.GetAllProjectKeys(projectFilePath);
             if (projectKeys.Length == 0 ||
-                !projectSnapshotManager.TryGetLoadedProject(projectKeys[0], out var project))
+                !projectSnapshotManager.CurrentSolution.TryGetProject(projectKeys[0], out var project))
             {
                 return SpecializedTasks.False;
             }

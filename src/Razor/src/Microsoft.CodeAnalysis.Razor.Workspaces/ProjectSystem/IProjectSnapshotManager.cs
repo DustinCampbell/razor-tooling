@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Immutable;
-using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
@@ -20,7 +19,6 @@ internal interface IProjectSnapshotManager
 
     ImmutableArray<ProjectKey> GetAllProjectKeys(string projectFileName);
     ImmutableArray<IProjectSnapshot> GetProjects();
-    bool TryGetLoadedProject(ProjectKey projectKey, [NotNullWhen(true)] out IProjectSnapshot? project);
 
     bool IsDocumentOpen(string documentFilePath);
     ImmutableArray<string> GetOpenDocuments();
