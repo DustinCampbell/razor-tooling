@@ -12,6 +12,6 @@ internal interface IRazorComponentSearchEngine
 {
     Task<IDocumentSnapshot?> TryLocateComponentAsync(
         TagHelperDescriptor tagHelper,
-        ISolutionQueryOperations solutionQueryOperations,
+        ISolutionSnapshot solution,
         CancellationToken cancellationToken);
 }

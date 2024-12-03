@@ -6,7 +6,6 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.Rename;
 using Microsoft.CodeAnalysis.Razor.Workspaces;
@@ -52,17 +51,6 @@ public class RenameEndpointDelegationTest(ITestOutputHelper testOutput) : Single
 
         var languageServer = await CreateLanguageServerAsync(codeDocument, razorFilePath);
 
-        var projectManager = CreateProjectSnapshotManager();
-
-        await projectManager.UpdateAsync(updater =>
-        {
-            updater.ProjectAdded(new(
-                filePath: "C:/path/to/project.csproj",
-                intermediateOutputPath: "C:/path/to/obj",
-                configuration: RazorConfiguration.Default,
-                rootNamespace: "project"));
-        });
-
         var searchEngine = new RazorComponentSearchEngine(LoggerFactory);
 
         var renameService = new RenameService(searchEngine, LanguageServerFeatureOptions);
@@ -72,7 +60,6 @@ public class RenameEndpointDelegationTest(ITestOutputHelper testOutput) : Single
             LanguageServerFeatureOptions,
             DocumentMappingService,
             EditMappingService,
-            projectManager,
             languageServer,
             LoggerFactory);
 

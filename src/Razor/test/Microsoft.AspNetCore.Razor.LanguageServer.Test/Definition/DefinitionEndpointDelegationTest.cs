@@ -226,17 +226,6 @@ public class DefinitionEndpointDelegationTest(ITestOutputHelper testOutput) : Si
     {
         var languageServer = await CreateLanguageServerAsync(codeDocument, razorFilePath, additionalRazorDocuments);
 
-        var projectManager = CreateProjectSnapshotManager();
-
-        await projectManager.UpdateAsync(updater =>
-        {
-            updater.ProjectAdded(new(
-                filePath: "C:/path/to/project.csproj",
-                intermediateOutputPath: "C:/path/to/obj",
-                configuration: RazorConfiguration.Default,
-                rootNamespace: "project"));
-        });
-
         var componentSearchEngine = new RazorComponentSearchEngine(LoggerFactory);
         var componentDefinitionService = new RazorComponentDefinitionService(componentSearchEngine, DocumentMappingService, LoggerFactory);
 
@@ -244,7 +233,7 @@ public class DefinitionEndpointDelegationTest(ITestOutputHelper testOutput) : Si
         Assert.True(DocumentContextFactory.TryCreate(razorUri, out var documentContext));
         var requestContext = CreateRazorRequestContext(documentContext);
 
-        var endpoint = new DefinitionEndpoint(componentDefinitionService, DocumentMappingService, projectManager, LanguageServerFeatureOptions, languageServer, LoggerFactory);
+        var endpoint = new DefinitionEndpoint(componentDefinitionService, DocumentMappingService, LanguageServerFeatureOptions, languageServer, LoggerFactory);
 
         var request = new TextDocumentPositionParams
         {

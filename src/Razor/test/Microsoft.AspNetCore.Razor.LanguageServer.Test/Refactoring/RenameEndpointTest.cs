@@ -720,7 +720,6 @@ public class RenameEndpointTest(ITestOutputHelper testOutput) : LanguageServerTe
             options,
             documentMappingService,
             editMappingService,
-            projectManager,
             clientConnection,
             LoggerFactory);
 

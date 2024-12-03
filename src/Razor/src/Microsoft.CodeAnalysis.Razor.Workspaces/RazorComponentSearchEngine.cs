@@ -20,8 +20,8 @@ internal class RazorComponentSearchEngine(ILoggerFactory loggerFactory) : IRazor
     /// <param name="tagHelper">
     ///  A <see cref="TagHelperDescriptor"/> to find the corresponding Razor component for.
     /// </param>
-    /// <param name="solutionQueryOperations">
-    ///  An <see cref="ISolutionQueryOperations"/> to enumerate project snapshots.
+    /// <param name="solution">
+    ///  An <see cref="ISolutionSnapshot"/> to enumerate projects.
     /// </param>
     /// <param name="cancellationToken">
     ///  A token that is checked to cancel work.
@@ -41,7 +41,7 @@ internal class RazorComponentSearchEngine(ILoggerFactory loggerFactory) : IRazor
     /// </exception>
     public async Task<IDocumentSnapshot?> TryLocateComponentAsync(
         TagHelperDescriptor tagHelper,
-        ISolutionQueryOperations solutionQueryOperations,
+        ISolutionSnapshot solution,
         CancellationToken cancellationToken)
     {
         var typeName = tagHelper.GetTypeNameIdentifier();
@@ -54,7 +54,7 @@ internal class RazorComponentSearchEngine(ILoggerFactory loggerFactory) : IRazor
 
         var lookupSymbolName = RemoveGenericContent(typeName.AsMemory());
 
-        foreach (var project in solutionQueryOperations.GetProjects())
+        foreach (var project in solution.Projects)
         {
             foreach (var path in project.DocumentFilePaths)
             {

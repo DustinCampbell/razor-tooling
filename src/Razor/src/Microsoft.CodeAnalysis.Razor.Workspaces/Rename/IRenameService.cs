@@ -15,6 +15,5 @@ internal interface IRenameService
         DocumentContext documentContext,
         DocumentPositionInfo positionInfo,
         string newName,
-        ISolutionQueryOperations solutionQueryOperations,
         CancellationToken cancellationToken);
 }

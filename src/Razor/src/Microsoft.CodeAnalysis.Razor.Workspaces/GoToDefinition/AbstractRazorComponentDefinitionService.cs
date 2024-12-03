@@ -25,9 +25,8 @@ internal abstract class AbstractRazorComponentDefinitionService(
     private readonly ILogger _logger = logger;
 
     public async Task<LspLocation?> GetDefinitionAsync(
-        IDocumentSnapshot documentSnapshot,
+        IDocumentSnapshot document,
         DocumentPositionInfo positionInfo,
-        ISolutionQueryOperations solutionQueryOperations,
         bool ignoreAttributes,
         CancellationToken cancellationToken)
     {
@@ -37,13 +36,13 @@ internal abstract class AbstractRazorComponentDefinitionService(
             return null;
         }
 
-        if (!FileKinds.IsComponent(documentSnapshot.FileKind))
+        if (!FileKinds.IsComponent(document.FileKind))
         {
-            _logger.LogInformation($"'{documentSnapshot.FileKind}' is not a component type.");
+            _logger.LogInformation($"'{document.FileKind}' is not a component type.");
             return null;
         }
 
-        var codeDocument = await documentSnapshot.GetGeneratedOutputAsync(cancellationToken).ConfigureAwait(false);
+        var codeDocument = await document.GetGeneratedOutputAsync(cancellationToken).ConfigureAwait(false);
 
         if (!RazorComponentDefinitionHelpers.TryGetBoundTagHelpers(codeDocument, positionInfo.HostDocumentIndex, ignoreAttributes, _logger, out var boundTagHelper, out var boundAttribute))
         {
@@ -51,8 +50,10 @@ internal abstract class AbstractRazorComponentDefinitionService(
             return null;
         }
 
+        var solution = document.Project.Solution;
+
         var componentDocument = await _componentSearchEngine
-            .TryLocateComponentAsync(boundTagHelper, solutionQueryOperations, cancellationToken)
+            .TryLocateComponentAsync(boundTagHelper, solution, cancellationToken)
             .ConfigureAwait(false);
 
         if (componentDocument is null)
