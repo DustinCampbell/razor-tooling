@@ -19,7 +19,6 @@ internal sealed class SolutionSnapshot(SolutionState state) : ISolutionSnapshot
     private readonly Dictionary<ProjectKey, ProjectSnapshot> _projectKeyToSnapshotMap = [];
 
     private ImmutableArray<IProjectSnapshot> _projects;
-    private ImmutableArray<string> _openDocuments;
 
     public bool IsSolutionClosing => _state.IsSolutionClosing;
 
@@ -80,28 +79,6 @@ internal sealed class SolutionSnapshot(SolutionState state) : ISolutionSnapshot
         return projectKeys.DrainToImmutable();
     }
 
-    public ImmutableArray<string> GetOpenDocuments()
-    {
-        if (_openDocuments.IsDefault)
-        {
-            ImmutableInterlocked.InterlockedInitialize(ref _openDocuments, GetOpenDocumentsCore(_state.OpenDocuments));
-        }
-
-        return _openDocuments;
-
-        static ImmutableArray<string> GetOpenDocumentsCore(ImmutableHashSet<string> openDocumentSet)
-        {
-            using var builder = new PooledArrayBuilder<string>(openDocumentSet.Count);
-
-            foreach (var documentFilePath in openDocumentSet)
-            {
-                builder.Add(documentFilePath);
-            }
-
-            return builder.DrainToImmutableOrdered(FilePathComparer.Instance);
-        }
-    }
-
     public ProjectSnapshot? GetProject(ProjectKey projectKey)
         => TryGetLoadedProject(projectKey, out var project)
             ? project
@@ -158,9 +135,6 @@ internal sealed class SolutionSnapshot(SolutionState state) : ISolutionSnapshot
 
         return document is not null;
     }
-
-    public bool IsDocumentOpen(string documentFilePath)
-        => _state.OpenDocuments.Contains(documentFilePath);
 
     public SolutionSnapshot AddProject(HostProject hostProject)
     {
@@ -249,30 +223,6 @@ internal sealed class SolutionSnapshot(SolutionState state) : ISolutionSnapshot
     public SolutionSnapshot UpdateDocumentText(ProjectKey projectKey, string documentFilePath, TextLoader textLoader)
     {
         var newState = _state.UpdateDocumentText(projectKey, documentFilePath, textLoader);
-
-        if (ReferenceEquals(newState, _state))
-        {
-            return this;
-        }
-
-        return new SolutionSnapshot(newState);
-    }
-
-    public SolutionSnapshot OpenDocument(ProjectKey projectKey, string documentFilePath, SourceText sourceText)
-    {
-        var newState = _state.OpenDocument(projectKey, documentFilePath, sourceText);
-
-        if (ReferenceEquals(newState, _state))
-        {
-            return this;
-        }
-
-        return new SolutionSnapshot(newState);
-    }
-
-    public SolutionSnapshot CloseDocument(ProjectKey projectKey, string documentFilePath, TextLoader textLoader)
-    {
-        var newState = _state.CloseDocument(projectKey, documentFilePath, textLoader);
 
         if (ReferenceEquals(newState, _state))
         {

@@ -34,6 +34,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
     private readonly ReaderWriterLockSlim _readerWriterLock = new(LockRecursionPolicy.NoRecursion);
 
     private SolutionSnapshot _currentSolution;
+    private readonly HashSet<string> _openDocumentSet = new(FilePathComparer.Instance);
 
     // We have a queue for changes because if one change results in another change aka, add -> open
     // we want to make sure the "add" finishes running first before "open" is notified.
@@ -81,10 +82,20 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
         => CurrentSolutionSnapshot.IsSolutionClosing;
 
     public ImmutableArray<string> GetOpenDocuments()
-        => CurrentSolutionSnapshot.GetOpenDocuments();
+    {
+        using (_readerWriterLock.DisposableRead())
+        {
+            return [.. _openDocumentSet];
+        }
+    }
 
-    public bool IsDocumentOpen(string documentFilePath)
-        => CurrentSolutionSnapshot.IsDocumentOpen(documentFilePath);
+    public bool IsDocumentOpen(string filePath)
+    {
+        using (_readerWriterLock.DisposableRead())
+        {
+            return _openDocumentSet.Contains(filePath);
+        }
+    }
 
     private void DocumentAdded(ProjectKey projectKey, HostDocument hostDocument, TextLoader textLoader)
     {
@@ -95,7 +106,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
         if (TryUpdateProject(
             projectKey,
-            solutionStateUpdater: state => state.AddDocument(projectKey, hostDocument, textLoader),
+            transformation: solution => solution.AddDocument(projectKey, hostDocument, textLoader),
             out var oldSnapshot,
             out var newSnapshot,
             out var isSolutionClosing))
@@ -113,7 +124,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
         if (TryUpdateProject(
             projectKey,
-            solutionStateUpdater: state => state.RemoveDocument(projectKey, hostDocument.FilePath),
+            transformation: solution => solution.RemoveDocument(projectKey, hostDocument.FilePath),
             out var oldSnapshot,
             out var newSnapshot,
             out var isSolutionClosing))
@@ -131,7 +142,8 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
         if (TryUpdateProject(
             projectKey,
-            solutionStateUpdater: state => state.OpenDocument(projectKey, documentFilePath, sourceText),
+            transformation: solution => solution.UpdateDocumentText(projectKey, documentFilePath, sourceText),
+            onAfterUpdate: () => _openDocumentSet.Add(documentFilePath),
             out var oldSnapshot,
             out var newSnapshot,
             out var isSolutionClosing))
@@ -149,7 +161,8 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
         if (TryUpdateProject(
             projectKey,
-            solutionStateUpdater: state => state.CloseDocument(projectKey, documentFilePath, textLoader),
+            transformation: solution => solution.UpdateDocumentText(projectKey, documentFilePath, textLoader),
+            onAfterUpdate: () => _openDocumentSet.Remove(documentFilePath),
             out var oldSnapshot,
             out var newSnapshot,
             out var isSolutionClosing))
@@ -167,7 +180,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
         if (TryUpdateProject(
             projectKey,
-            solutionStateUpdater: state => state.UpdateDocumentText(projectKey, documentFilePath, sourceText),
+            transformation: solution => solution.UpdateDocumentText(projectKey, documentFilePath, sourceText),
             out var oldSnapshot,
             out var newSnapshot,
             out var isSolutionClosing))
@@ -185,7 +198,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
         if (TryUpdateProject(
             projectKey,
-            solutionStateUpdater: state => state.UpdateDocumentText(projectKey, documentFilePath, textLoader),
+            transformation: solution => solution.UpdateDocumentText(projectKey, documentFilePath, textLoader),
             out var oldSnapshot,
             out var newSnapshot,
             out var isSolutionClosing))
@@ -229,7 +242,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
         if (TryUpdateProject(
             projectKey,
-            solutionStateUpdater: state => state.UpdateProjectWorkspaceState(projectKey, projectWorkspaceState),
+            transformation: solution => solution.UpdateProjectWorkspaceState(projectKey, projectWorkspaceState),
             out var oldSnapshot,
             out var newSnapshot,
             out var isSolutionClosing))
@@ -247,7 +260,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
         if (TryUpdateProject(
             hostProject.Key,
-            solutionStateUpdater: state => state.UpdateProjectConfiguration(hostProject),
+            transformation: solution => solution.UpdateProjectConfiguration(hostProject),
             out var oldSnapshot,
             out var newSnapshot,
             out var isSolutionClosing))
@@ -373,7 +386,16 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
     private bool TryUpdateProject(
         ProjectKey projectKey,
-        Func<SolutionSnapshot, SolutionSnapshot> solutionStateUpdater,
+        Func<SolutionSnapshot, SolutionSnapshot> transformation,
+        [NotNullWhen(true)] out IProjectSnapshot? oldSnapshot,
+        [NotNullWhen(true)] out IProjectSnapshot? newSnapshot,
+        out bool isSolutionClosing)
+        => TryUpdateProject(projectKey, transformation, onAfterUpdate: null, out oldSnapshot, out newSnapshot, out isSolutionClosing);
+
+    private bool TryUpdateProject(
+        ProjectKey projectKey,
+        Func<SolutionSnapshot, SolutionSnapshot> transformation,
+        Action? onAfterUpdate,
         [NotNullWhen(true)] out IProjectSnapshot? oldSnapshot,
         [NotNullWhen(true)] out IProjectSnapshot? newSnapshot,
         out bool isSolutionClosing)
@@ -390,7 +412,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
             return true;
         }
 
-        var newSolution = solutionStateUpdater(oldSolution);
+        var newSolution = transformation(oldSolution);
 
         if (ReferenceEquals(oldSolution, newSolution))
         {
@@ -402,6 +424,8 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
         upgradeableLock.EnterWrite();
 
         _currentSolution = newSolution;
+
+        onAfterUpdate?.Invoke();
 
         isSolutionClosing = newSolution.IsSolutionClosing;
         oldSnapshot = oldSolution.GetRequiredProject(projectKey);

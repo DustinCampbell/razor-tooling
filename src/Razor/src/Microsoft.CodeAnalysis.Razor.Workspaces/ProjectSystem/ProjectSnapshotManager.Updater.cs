@@ -14,10 +14,11 @@ internal partial class ProjectSnapshotManager
         public ISolutionSnapshot CurrentSolution
             => instance.CurrentSolution;
 
-        public bool IsDocumentOpen(string documentFilePath)
-            => instance.IsDocumentOpen(documentFilePath);
         public ImmutableArray<string> GetOpenDocuments()
             => instance.GetOpenDocuments();
+
+        public bool IsDocumentOpen(string documentFilePath)
+            => instance.IsDocumentOpen(documentFilePath);
 
         public void DocumentAdded(ProjectKey projectKey, HostDocument document, TextLoader textLoader)
             => instance.DocumentAdded(projectKey, document, textLoader);
