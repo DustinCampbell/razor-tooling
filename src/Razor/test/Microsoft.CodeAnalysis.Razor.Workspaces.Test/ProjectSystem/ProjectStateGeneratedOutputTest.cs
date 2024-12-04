@@ -238,6 +238,6 @@ public class ProjectStateGeneratedOutputTest : WorkspaceTestBase
     {
         var projectSnapshot = new ProjectSnapshot(project);
         var documentSnapshot = new DocumentSnapshot(projectSnapshot, document);
-        return document.GetGeneratedOutputAndVersionAsync(documentSnapshot, cancellationToken);
+        return documentSnapshot.GetGeneratedOutputAndVersionAsync(cancellationToken);
     }
 }

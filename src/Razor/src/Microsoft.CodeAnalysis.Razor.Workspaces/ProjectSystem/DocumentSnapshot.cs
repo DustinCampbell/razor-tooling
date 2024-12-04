@@ -76,12 +76,13 @@ internal sealed class DocumentSnapshot(ProjectSnapshot project, DocumentState st
             return await GetDesignTimeGeneratedOutputAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        var (output, _) = await _state
-            .GetGeneratedOutputAndVersionAsync(this, cancellationToken)
-            .ConfigureAwait(false);
+        var (output, _) = await GetGeneratedOutputAndVersionAsync(cancellationToken).ConfigureAwait(false);
 
         return output;
     }
+
+    public Task<(RazorCodeDocument, VersionStamp)> GetGeneratedOutputAndVersionAsync(CancellationToken cancellationToken)
+        => _state.GetGeneratedOutputAndVersionAsync(this, cancellationToken);
 
     private Task<RazorCodeDocument> GetDesignTimeGeneratedOutputAsync(CancellationToken cancellationToken)
         => DocumentState.GenerateCodeDocumentAsync(this, Project.GetProjectEngine(), forceRuntimeCodeGeneration: false, cancellationToken);
