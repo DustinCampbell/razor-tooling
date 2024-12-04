@@ -77,7 +77,7 @@ internal sealed class DocumentSnapshot(ProjectSnapshot project, DocumentState st
         }
 
         var (output, _) = await _state
-            .GetGeneratedOutputAndVersionAsync(Project, this, cancellationToken)
+            .GetGeneratedOutputAndVersionAsync(this, cancellationToken)
             .ConfigureAwait(false);
 
         return output;
