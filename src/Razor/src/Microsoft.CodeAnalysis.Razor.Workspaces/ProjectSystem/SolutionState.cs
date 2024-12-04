@@ -21,18 +21,14 @@ internal sealed partial class SolutionState
 
     private readonly ImmutableDictionary<ProjectKey, ProjectState> _projectKeyToStateMap;
 
-    public bool IsSolutionClosing { get; }
-
     private SolutionState(
         IProjectEngineFactoryProvider projectEngineFactoryProvider,
         LanguageServerFeatureOptions languageServerFeatureOptions,
-        ImmutableDictionary<ProjectKey, ProjectState> projectKeyToStateMap,
-        bool isSolutionClosing)
+        ImmutableDictionary<ProjectKey, ProjectState> projectKeyToStateMap)
     {
         _projectEngineFactoryProvider = projectEngineFactoryProvider;
         _languageServerFeatureOptions = languageServerFeatureOptions;
         _projectKeyToStateMap = projectKeyToStateMap;
-        IsSolutionClosing = isSolutionClosing;
     }
 
     public static SolutionState Create(
@@ -41,19 +37,12 @@ internal sealed partial class SolutionState
         => new(
             projectEngineFactoryProvider,
             languageServerFeatureOptions,
-            projectKeyToStateMap: ImmutableDictionary<ProjectKey, ProjectState>.Empty,
-            isSolutionClosing: false);
+            projectKeyToStateMap: ImmutableDictionary<ProjectKey, ProjectState>.Empty);
 
     public ImmutableDictionary<ProjectKey, ProjectState> ProjectStates => _projectKeyToStateMap;
 
     public SolutionState AddProject(HostProject hostProject)
     {
-        // Don't compute new state if the solution is closing.
-        if (IsSolutionClosing)
-        {
-            return this;
-        }
-
         if (_projectKeyToStateMap.ContainsKey(hostProject.Key))
         {
             // Project already exists.
@@ -66,18 +55,11 @@ internal sealed partial class SolutionState
         return new(
             _projectEngineFactoryProvider,
             _languageServerFeatureOptions,
-            _projectKeyToStateMap.Add(hostProject.Key, projectState),
-            IsSolutionClosing);
+            _projectKeyToStateMap.Add(hostProject.Key, projectState));
     }
 
     public SolutionState RemoveProject(ProjectKey projectKey)
     {
-        // Don't compute new state if the solution is closing.
-        if (IsSolutionClosing)
-        {
-            return this;
-        }
-
         if (!_projectKeyToStateMap.ContainsKey(projectKey))
         {
             // Project does not exist.
@@ -90,8 +72,7 @@ internal sealed partial class SolutionState
         return new(
             _projectEngineFactoryProvider,
             _languageServerFeatureOptions,
-            _projectKeyToStateMap.Remove(projectKey),
-            IsSolutionClosing);
+            _projectKeyToStateMap.Remove(projectKey));
     }
 
     public SolutionState UpdateProjectConfiguration(HostProject hostProject)
@@ -124,16 +105,8 @@ internal sealed partial class SolutionState
         return UpdateProject(projectKey, projectState => projectState.UpdateDocumentText(documentFilePath, sourceText));
     }
 
-    private SolutionState UpdateProject(
-        ProjectKey projectKey,
-        Func<ProjectState, ProjectState> projectStateUpdater)
+    private SolutionState UpdateProject(ProjectKey projectKey, Func<ProjectState, ProjectState> transformation)
     {
-        // Don't compute new state if the solution is closing.
-        if (IsSolutionClosing)
-        {
-            return this;
-        }
-
         if (!_projectKeyToStateMap.TryGetValue(projectKey, out var oldState))
         {
             // Project does not exist.
@@ -141,7 +114,8 @@ internal sealed partial class SolutionState
             return this;
         }
 
-        var newState = projectStateUpdater(oldState);
+        var newState = transformation(oldState);
+
         if (ReferenceEquals(oldState, newState))
         {
             return this;
@@ -150,16 +124,6 @@ internal sealed partial class SolutionState
         return new(
             _projectEngineFactoryProvider,
             _languageServerFeatureOptions,
-            _projectKeyToStateMap.SetItem(projectKey, newState),
-            IsSolutionClosing);
+            _projectKeyToStateMap.SetItem(projectKey, newState));
     }
-
-    public SolutionState UpdateIsSolutionClosing(bool value)
-        => IsSolutionClosing == value
-            ? this
-            : new(
-                _projectEngineFactoryProvider,
-                _languageServerFeatureOptions,
-                _projectKeyToStateMap,
-                value);
 }

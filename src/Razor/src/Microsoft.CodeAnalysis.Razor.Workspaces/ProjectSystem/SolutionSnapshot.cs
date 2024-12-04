@@ -20,8 +20,6 @@ internal sealed class SolutionSnapshot(SolutionState state) : ISolutionSnapshot
 
     private ImmutableArray<IProjectSnapshot> _projects;
 
-    public bool IsSolutionClosing => _state.IsSolutionClosing;
-
     public ImmutableArray<IProjectSnapshot> Projects
     {
         get
@@ -223,18 +221,6 @@ internal sealed class SolutionSnapshot(SolutionState state) : ISolutionSnapshot
     public SolutionSnapshot UpdateDocumentText(ProjectKey projectKey, string documentFilePath, TextLoader textLoader)
     {
         var newState = _state.UpdateDocumentText(projectKey, documentFilePath, textLoader);
-
-        if (ReferenceEquals(newState, _state))
-        {
-            return this;
-        }
-
-        return new SolutionSnapshot(newState);
-    }
-
-    public SolutionSnapshot UpdateIsSolutionClosing(bool value)
-    {
-        var newState = _state.UpdateIsSolutionClosing(value);
 
         if (ReferenceEquals(newState, _state))
         {

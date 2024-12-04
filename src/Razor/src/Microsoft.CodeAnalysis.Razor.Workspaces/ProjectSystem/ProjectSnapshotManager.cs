@@ -34,6 +34,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
     private readonly ReaderWriterLockSlim _readerWriterLock = new(LockRecursionPolicy.NoRecursion);
 
     private SolutionSnapshot _currentSolution;
+    private bool _isSolutionClosing;
     private readonly HashSet<string> _openDocumentSet = new(FilePathComparer.Instance);
 
     // We have a queue for changes because if one change results in another change aka, add -> open
@@ -73,13 +74,10 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
     }
 
     public ISolutionSnapshot CurrentSolution
-        => CurrentSolutionSnapshot;
-
-    private SolutionSnapshot CurrentSolutionSnapshot
         => Volatile.Read(ref _currentSolution);
 
     public bool IsSolutionClosing
-        => CurrentSolutionSnapshot.IsSolutionClosing;
+        => Volatile.Read(ref _isSolutionClosing);
 
     public ImmutableArray<string> GetOpenDocuments()
     {
@@ -278,7 +276,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
         using (_readerWriterLock.DisposableWrite())
         {
-            _currentSolution = _currentSolution.UpdateIsSolutionClosing(false);
+            _isSolutionClosing = false;
         }
     }
 
@@ -291,7 +289,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
         using (_readerWriterLock.DisposableWrite())
         {
-            _currentSolution = _currentSolution.UpdateIsSolutionClosing(true);
+            _isSolutionClosing = true;
         }
     }
 
@@ -338,13 +336,21 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
     {
         using var upgradeableLock = _readerWriterLock.DisposableUpgradeableRead();
 
+        // Don't compute new state if the solution is closing.
+        if (_isSolutionClosing)
+        {
+            newSnapshot = null;
+            isSolutionClosing = true;
+            return false;
+        }
+
         var oldSolution = _currentSolution;
         var newSolution = oldSolution.AddProject(hostProject);
 
         if (ReferenceEquals(oldSolution, newSolution))
         {
             newSnapshot = null;
-            isSolutionClosing = oldSolution.IsSolutionClosing;
+            isSolutionClosing = _isSolutionClosing;
             return false;
         }
 
@@ -352,7 +358,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
         _currentSolution = newSolution;
 
-        isSolutionClosing = newSolution.IsSolutionClosing;
+        isSolutionClosing = _isSolutionClosing;
         newSnapshot = newSolution.GetRequiredProject(hostProject.Key);
         return true;
     }
@@ -364,23 +370,26 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
     {
         using var upgradeableLock = _readerWriterLock.DisposableUpgradeableRead();
 
-        var oldState = _currentSolution;
+        var oldSolution = _currentSolution;
+        oldSnapshot = oldSolution.GetRequiredProject(projectKey);
 
-        // If the solution is closing we don't need to bother computing new state
-        if (!oldState.IsSolutionClosing)
+        // Don't compute new state if the solution is closing.
+        if (_isSolutionClosing)
         {
-            var newState = oldState.RemoveProject(projectKey);
-
-            if (!ReferenceEquals(oldState, newState))
-            {
-                upgradeableLock.EnterWrite();
-
-                _currentSolution = newState;
-            }
+            isSolutionClosing = true;
+            return true;
         }
 
-        isSolutionClosing = oldState.IsSolutionClosing;
-        oldSnapshot = oldState.GetRequiredProject(projectKey);
+        var newSolution = oldSolution.RemoveProject(projectKey);
+
+        if (!ReferenceEquals(oldSolution, newSolution))
+        {
+            upgradeableLock.EnterWrite();
+
+            _currentSolution = newSolution;
+        }
+
+        isSolutionClosing = false;
         return true;
     }
 
@@ -405,7 +414,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
         var oldSolution = _currentSolution;
 
         // If the solution is closing we don't need to bother computing new state
-        if (oldSolution.IsSolutionClosing)
+        if (_isSolutionClosing)
         {
             isSolutionClosing = true;
             oldSnapshot = newSnapshot = oldSolution.GetRequiredProject(projectKey);
@@ -416,7 +425,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
         if (ReferenceEquals(oldSolution, newSolution))
         {
-            isSolutionClosing = oldSolution.IsSolutionClosing;
+            isSolutionClosing = _isSolutionClosing;
             oldSnapshot = newSnapshot = null;
             return false;
         }
@@ -427,7 +436,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
         onAfterUpdate?.Invoke();
 
-        isSolutionClosing = newSolution.IsSolutionClosing;
+        isSolutionClosing = _isSolutionClosing;
         oldSnapshot = oldSolution.GetRequiredProject(projectKey);
         newSnapshot = newSolution.GetRequiredProject(projectKey);
 
