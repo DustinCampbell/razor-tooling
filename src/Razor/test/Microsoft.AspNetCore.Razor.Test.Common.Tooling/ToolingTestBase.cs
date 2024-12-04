@@ -226,9 +226,5 @@ public abstract partial class ToolingTestBase : IAsyncLifetime
         => CreateProjectSnapshotManager(projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance);
 
     private protected virtual TestProjectSnapshotManager CreateProjectSnapshotManager(IProjectEngineFactoryProvider projectEngineFactoryProvider, LanguageServerFeatureOptions languageServerFeatureOptions)
-        => new(
-            projectEngineFactoryProvider,
-            languageServerFeatureOptions,
-            LoggerFactory,
-            DisposalToken);
+        => new(projectEngineFactoryProvider, languageServerFeatureOptions, LoggerFactory, DisposalToken);
 }

@@ -20,6 +20,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.ExternalAccess.Razor;
 using Microsoft.CodeAnalysis.Razor;
+using Microsoft.CodeAnalysis.Razor.Logging;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.Protocol;
 using Microsoft.CodeAnalysis.Razor.Workspaces;
@@ -47,12 +48,18 @@ public abstract class LanguageServerTestBase : ToolingTestBase
 
     private protected override TestProjectSnapshotManager CreateProjectSnapshotManager(
         IProjectEngineFactoryProvider projectEngineFactoryProvider, LanguageServerFeatureOptions languageServerFeatureOptions)
-        => new(
-            projectEngineFactoryProvider,
-            languageServerFeatureOptions,
-            LoggerFactory,
-            DisposalToken,
-            initializer: static updater => updater.ProjectAdded(MiscFilesHostProject.Instance));
+        => new LspTestProjectSnapshotManager(projectEngineFactoryProvider, languageServerFeatureOptions, LoggerFactory, DisposalToken);
+
+    private sealed class LspTestProjectSnapshotManager(
+        IProjectEngineFactoryProvider projectEngineFactoryProvider,
+        LanguageServerFeatureOptions languageServerFeatureOptions,
+        ILoggerFactory loggerFactory,
+        CancellationToken disposalToken)
+        : TestProjectSnapshotManager(projectEngineFactoryProvider, languageServerFeatureOptions, loggerFactory, disposalToken)
+    {
+        protected override SolutionSnapshot InitializeSolution(SolutionSnapshot solution)
+            => solution.AddProject(MiscFilesHostProject.Instance);
+    }
 
     private protected static RazorRequestContext CreateRazorRequestContext(
         DocumentContext? documentContext,

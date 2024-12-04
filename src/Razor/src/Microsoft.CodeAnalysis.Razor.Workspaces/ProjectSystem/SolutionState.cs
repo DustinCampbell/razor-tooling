@@ -11,8 +11,7 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
 /// <summary>
-///  Represents a Razor-specific view of the world. The only projects tracked within contain Razor
-///  files.
+///  Represents a Razor-specific view of the world. The only projects tracked within contain Razor files.
 /// </summary>
 internal sealed partial class SolutionState
 {

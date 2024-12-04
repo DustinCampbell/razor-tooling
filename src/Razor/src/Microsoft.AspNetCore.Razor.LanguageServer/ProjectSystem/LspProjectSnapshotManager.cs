@@ -12,10 +12,8 @@ internal class LspProjectSnapshotManager(
     IProjectEngineFactoryProvider projectEngineFactoryProvider,
     LanguageServerFeatureOptions languageServerFeatureOptions,
     ILoggerFactory loggerFactory)
-    : ProjectSnapshotManager(projectEngineFactoryProvider, languageServerFeatureOptions, loggerFactory, initializer: AddMiscFilesProject)
+    : ProjectSnapshotManager(projectEngineFactoryProvider, languageServerFeatureOptions, loggerFactory)
 {
-    private static void AddMiscFilesProject(Updater updater)
-    {
-        updater.ProjectAdded(MiscFilesHostProject.Instance);
-    }
+    protected override SolutionSnapshot InitializeSolution(SolutionSnapshot solution)
+        => solution.AddProject(MiscFilesHostProject.Instance);
 }

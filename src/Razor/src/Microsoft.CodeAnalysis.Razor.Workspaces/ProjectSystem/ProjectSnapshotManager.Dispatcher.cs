@@ -86,7 +86,7 @@ internal partial class ProjectSnapshotManager
             }
         }
 
-        private class CustomScheduler : TaskScheduler, IDisposable
+        private sealed class CustomScheduler : TaskScheduler, IDisposable
         {
             private readonly AsyncQueue<Task> _taskQueue = new();
             private readonly ILogger _logger;

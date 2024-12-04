@@ -4,9 +4,11 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.ProjectEngineHost;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Threading;
@@ -16,80 +18,157 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
-// The implementation of project snapshot manager abstracts the host's underlying project system (HostProject),
-// to provide a immutable view of the underlying project systems.
-//
-// The HostProject support all of the configuration that the Razor SDK exposes via the project system
-// (language version, extensions, named configuration).
-//
-// The implementation will create a ProjectSnapshot for each HostProject.
+/// <summary>
+///  <see cref="ProjectSnapshotManager"/> exposes the current Razor <see cref="ISolutionSnapshot"/>
+///  and provides methods to mutate it and events that will be triggered when it changes.
+/// </summary>
 internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDisposable
 {
+    /// <summary>
+    ///  Used to schedule updates that run in sequential order.
+    /// </summary>
+    /// <remarks>
+    ///  If an update is scheduled when running on the dispatcher, the update will be run inline.
+    /// </remarks>
     private readonly Dispatcher _dispatcher;
-    private readonly bool _initialized;
 
-    public event EventHandler<ProjectChangeEventArgs>? PriorityChanged;
-    public event EventHandler<ProjectChangeEventArgs>? Changed;
+    /// <summary>
+    ///  <see cref="ILogger"/> to use 
+    /// </summary>
+    private readonly ILogger _logger;
 
-    private readonly ReaderWriterLockSlim _readerWriterLock = new(LockRecursionPolicy.NoRecursion);
+    #region protected by lock
 
+    /// <summary>
+    ///  A <see cref="ReaderWriterLockSlim"/> is used to avoid lock contention.
+    /// </summary>
+    private readonly ReaderWriterLockSlim _stateLock = new(LockRecursionPolicy.NoRecursion);
+
+    /// <summary>
+    ///  The current <see cref="SolutionSnapshot"/>.
+    /// </summary>
+    /// <remarks>
+    ///  ⚠️ This field must be read/written under <see cref="_stateLock"/>.
+    /// </remarks>
     private SolutionSnapshot _currentSolution;
+
+    /// <summary>
+    ///  <see langword="true"/> if the solution is being closed by the host; otherwise, <see langword="false"/>.
+    /// </summary>
+    /// <remarks>
+    ///  ⚠️ This field must be read/written under <see cref="_stateLock"/>.
+    /// </remarks>
     private bool _isSolutionClosing;
+
+    /// <summary>
+    ///  The set of open document file paths.
+    /// </summary>
+    /// <remarks>
+    ///  ⚠️ This field must be read/written under <see cref="_stateLock"/>.
+    /// </remarks>
     private readonly HashSet<string> _openDocumentSet = new(FilePathComparer.Instance);
 
-    // We have a queue for changes because if one change results in another change aka, add -> open
-    // we want to make sure the "add" finishes running first before "open" is notified.
+    #endregion
+
+    #region protected by dispatcher
+
+    /// <summary>
+    ///  A queue of ordered notifications to process.
+    /// </summary>
+    /// <remarks>
+    ///  ⚠️ This field must only be accessed when running on the dispatcher.
+    /// </remarks>
     private readonly Queue<ProjectChangeEventArgs> _notificationQueue = new();
 
     /// <summary>
-    /// Constructs an instance of <see cref="ProjectSnapshotManager"/>.
+    ///  <see langword="true"/> while <see cref="_notificationQueue"/> is being processed.
     /// </summary>
-    /// <param name="projectEngineFactoryProvider">The <see cref="IProjectEngineFactoryProvider"/> to
-    /// use when creating <see cref="ProjectState"/>.</param>
+    /// <remarks>
+    ///  ⚠️ This field must only be accessed when running on the dispatcher.
+    /// </remarks>
+    private bool _processingNotifications;
+
+    #endregion
+
+    /// <summary>
+    ///  Constructs an instance of <see cref="ProjectSnapshotManager"/>.
+    /// </summary>
+    /// <param name="projectEngineFactoryProvider">
+    ///  The <see cref="IProjectEngineFactoryProvider"/> to use for creating <see cref="RazorProjectEngine">project engines</see>.
+    /// </param>
     /// <param name="languageServerFeatureOptions">The options that were used to start the language server</param>
     /// <param name="loggerFactory">The <see cref="ILoggerFactory"/> to use.</param>
-    /// <param name="initializer">An optional callback to set up the initial set of projects and documents.
-    /// Note that this is called during construction, so it does not run on the dispatcher and notifications
-    /// will not be sent.</param>
     public ProjectSnapshotManager(
         IProjectEngineFactoryProvider projectEngineFactoryProvider,
         LanguageServerFeatureOptions languageServerFeatureOptions,
-        ILoggerFactory loggerFactory,
-        Action<Updater>? initializer = null)
+        ILoggerFactory loggerFactory)
     {
-        var solutionState = SolutionState.Create(projectEngineFactoryProvider, languageServerFeatureOptions);
-        _currentSolution = new SolutionSnapshot(solutionState);
-
         _dispatcher = new(loggerFactory);
+        _logger = loggerFactory.GetOrCreateLogger(GetType());
 
-        initializer?.Invoke(new(this));
-
-        _initialized = true;
+        var solutionState = SolutionState.Create(projectEngineFactoryProvider, languageServerFeatureOptions);
+        var solution = new SolutionSnapshot(solutionState);
+        _currentSolution = InitializeSolution(solution);
     }
+
+    /// <summary>
+    ///  Override to set up the initial set of projects and documents.
+    /// </summary>
+    protected virtual SolutionSnapshot InitializeSolution(SolutionSnapshot solution)
+        => solution;
 
     public void Dispose()
     {
         _dispatcher.Dispose();
-        _readerWriterLock.Dispose();
+        _stateLock.Dispose();
     }
 
-    public ISolutionSnapshot CurrentSolution
-        => Volatile.Read(ref _currentSolution);
+    /// <inheritdoc/>
+    public event EventHandler<ProjectChangeEventArgs>? PriorityChanged;
 
+    /// <inheritdoc/>
+    public event EventHandler<ProjectChangeEventArgs>? Changed;
+
+    /// <inheritdoc cref="IProjectSnapshotManager.CurrentSolution"/>
+    public SolutionSnapshot CurrentSolution
+    {
+        get
+        {
+            using (_stateLock.DisposableRead())
+            {
+                return _currentSolution;
+            }
+        }
+    }
+
+    /// <inheritdoc/>
+    ISolutionSnapshot IProjectSnapshotManager.CurrentSolution => CurrentSolution;
+
+    /// <inheritdoc/>
     public bool IsSolutionClosing
-        => Volatile.Read(ref _isSolutionClosing);
+    {
+        get
+        {
+            using (_stateLock.DisposableRead())
+            {
+                return _isSolutionClosing;
+            }
+        }
+    }
 
+    /// <inheritdoc/>
     public ImmutableArray<string> GetOpenDocuments()
     {
-        using (_readerWriterLock.DisposableRead())
+        using (_stateLock.DisposableRead())
         {
             return [.. _openDocumentSet];
         }
     }
 
+    /// <inheritdoc/>
     public bool IsDocumentOpen(string filePath)
     {
-        using (_readerWriterLock.DisposableRead())
+        using (_stateLock.DisposableRead())
         {
             return _openDocumentSet.Contains(filePath);
         }
@@ -97,11 +176,6 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
     private void DocumentAdded(ProjectKey projectKey, HostDocument hostDocument, TextLoader textLoader)
     {
-        if (_initialized)
-        {
-            _dispatcher.AssertRunningOnDispatcher();
-        }
-
         if (TryUpdateProject(
             projectKey,
             transformation: solution => solution.AddDocument(projectKey, hostDocument, textLoader),
@@ -115,11 +189,6 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
     private void DocumentRemoved(ProjectKey projectKey, HostDocument hostDocument)
     {
-        if (_initialized)
-        {
-            _dispatcher.AssertRunningOnDispatcher();
-        }
-
         if (TryUpdateProject(
             projectKey,
             transformation: solution => solution.RemoveDocument(projectKey, hostDocument.FilePath),
@@ -133,11 +202,6 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
     private void DocumentOpened(ProjectKey projectKey, string documentFilePath, SourceText sourceText)
     {
-        if (_initialized)
-        {
-            _dispatcher.AssertRunningOnDispatcher();
-        }
-
         if (TryUpdateProject(
             projectKey,
             transformation: solution => solution.UpdateDocumentText(projectKey, documentFilePath, sourceText),
@@ -152,11 +216,6 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
     private void DocumentClosed(ProjectKey projectKey, string documentFilePath, TextLoader textLoader)
     {
-        if (_initialized)
-        {
-            _dispatcher.AssertRunningOnDispatcher();
-        }
-
         if (TryUpdateProject(
             projectKey,
             transformation: solution => solution.UpdateDocumentText(projectKey, documentFilePath, textLoader),
@@ -171,11 +230,6 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
     private void DocumentChanged(ProjectKey projectKey, string documentFilePath, SourceText sourceText)
     {
-        if (_initialized)
-        {
-            _dispatcher.AssertRunningOnDispatcher();
-        }
-
         if (TryUpdateProject(
             projectKey,
             transformation: solution => solution.UpdateDocumentText(projectKey, documentFilePath, sourceText),
@@ -189,11 +243,6 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
     private void DocumentChanged(ProjectKey projectKey, string documentFilePath, TextLoader textLoader)
     {
-        if (_initialized)
-        {
-            _dispatcher.AssertRunningOnDispatcher();
-        }
-
         if (TryUpdateProject(
             projectKey,
             transformation: solution => solution.UpdateDocumentText(projectKey, documentFilePath, textLoader),
@@ -207,11 +256,6 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
     private void ProjectAdded(HostProject hostProject)
     {
-        if (_initialized)
-        {
-            _dispatcher.AssertRunningOnDispatcher();
-        }
-
         if (TryAddProject(hostProject, out var newSnapshot, out var isSolutionClosing))
         {
             NotifyListeners(ProjectChangeEventArgs.ProjectAdded(newSnapshot, isSolutionClosing));
@@ -220,11 +264,6 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
     private void ProjectRemoved(ProjectKey projectKey)
     {
-        if (_initialized)
-        {
-            _dispatcher.AssertRunningOnDispatcher();
-        }
-
         if (TryRemoveProject(projectKey, out var oldSnapshot, out var isSolutionClosing))
         {
             NotifyListeners(ProjectChangeEventArgs.ProjectRemoved(oldSnapshot, isSolutionClosing));
@@ -233,11 +272,6 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
     private void ProjectWorkspaceStateChanged(ProjectKey projectKey, ProjectWorkspaceState projectWorkspaceState)
     {
-        if (_initialized)
-        {
-            _dispatcher.AssertRunningOnDispatcher();
-        }
-
         if (TryUpdateProject(
             projectKey,
             transformation: solution => solution.UpdateProjectWorkspaceState(projectKey, projectWorkspaceState),
@@ -251,11 +285,6 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
     private void ProjectConfigurationChanged(HostProject hostProject)
     {
-        if (_initialized)
-        {
-            _dispatcher.AssertRunningOnDispatcher();
-        }
-
         if (TryUpdateProject(
             hostProject.Key,
             transformation: solution => solution.UpdateProjectConfiguration(hostProject),
@@ -269,12 +298,9 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
     private void SolutionOpened()
     {
-        if (_initialized)
-        {
-            _dispatcher.AssertRunningOnDispatcher();
-        }
+        _dispatcher.AssertRunningOnDispatcher();
 
-        using (_readerWriterLock.DisposableWrite())
+        using (_stateLock.DisposableWrite())
         {
             _isSolutionClosing = false;
         }
@@ -282,50 +308,11 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
     private void SolutionClosed()
     {
-        if (_initialized)
-        {
-            _dispatcher.AssertRunningOnDispatcher();
-        }
-
-        using (_readerWriterLock.DisposableWrite())
-        {
-            _isSolutionClosing = true;
-        }
-    }
-
-    private void NotifyListeners(ProjectChangeEventArgs args)
-    {
-        if (!_initialized)
-        {
-            return;
-        }
-
         _dispatcher.AssertRunningOnDispatcher();
 
-        _notificationQueue.Enqueue(args);
-
-        if (_notificationQueue.Count == 1)
+        using (_stateLock.DisposableWrite())
         {
-            // Only one notification, go ahead and start notifying. In the situation where Count > 1
-            // it means an event was triggered as a response to another event. To ensure order we won't
-            // immediately re-invoke Changed here, we'll wait for the stack to unwind to notify others.
-            // This process still happens synchronously it just ensures that events happen in the correct
-            // order. For instance, let's take the situation where a document is added to a project.
-            // That document will be added and then opened. However, if the result of "adding" causes an
-            // "open" to trigger we want to ensure that "add" finishes prior to "open" being notified.
-
-            // Start unwinding the notification queue
-            do
-            {
-                // Don't dequeue yet, we want the notification to sit in the queue until we've finished
-                // notifying to ensure other calls to NotifyListeners know there's a currently running event loop.
-                var currentArgs = _notificationQueue.Peek();
-                PriorityChanged?.Invoke(this, currentArgs);
-                Changed?.Invoke(this, currentArgs);
-
-                _notificationQueue.Dequeue();
-            }
-            while (_notificationQueue.Count > 0);
+            _isSolutionClosing = true;
         }
     }
 
@@ -334,31 +321,34 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
         [NotNullWhen(true)] out IProjectSnapshot? newSnapshot,
         out bool isSolutionClosing)
     {
-        using var upgradeableLock = _readerWriterLock.DisposableUpgradeableRead();
+        _dispatcher.AssertRunningOnDispatcher();
 
-        // Don't compute new state if the solution is closing.
-        if (_isSolutionClosing)
+        SolutionSnapshot newSolution;
+
+        using (var upgradeableLock = _stateLock.DisposableUpgradeableRead())
         {
-            newSnapshot = null;
-            isSolutionClosing = true;
-            return false;
-        }
-
-        var oldSolution = _currentSolution;
-        var newSolution = oldSolution.AddProject(hostProject);
-
-        if (ReferenceEquals(oldSolution, newSolution))
-        {
-            newSnapshot = null;
             isSolutionClosing = _isSolutionClosing;
-            return false;
+
+            // Don't bother adding a project if the solution is closing.
+            if (isSolutionClosing)
+            {
+                newSnapshot = null;
+                return false;
+            }
+
+            var oldSolution = _currentSolution;
+            newSolution = oldSolution.AddProject(hostProject);
+
+            if (ReferenceEquals(oldSolution, newSolution))
+            {
+                newSnapshot = null;
+                return false;
+            }
+
+            upgradeableLock.EnterWrite();
+            _currentSolution = newSolution;
         }
 
-        upgradeableLock.EnterWrite();
-
-        _currentSolution = newSolution;
-
-        isSolutionClosing = _isSolutionClosing;
         newSnapshot = newSolution.GetRequiredProject(hostProject.Key);
         return true;
     }
@@ -368,15 +358,18 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
         [NotNullWhen(true)] out IProjectSnapshot? oldSnapshot,
         out bool isSolutionClosing)
     {
-        using var upgradeableLock = _readerWriterLock.DisposableUpgradeableRead();
+        _dispatcher.AssertRunningOnDispatcher();
+
+        using var upgradeableLock = _stateLock.DisposableUpgradeableRead();
+
+        isSolutionClosing = _isSolutionClosing;
 
         var oldSolution = _currentSolution;
         oldSnapshot = oldSolution.GetRequiredProject(projectKey);
 
-        // Don't compute new state if the solution is closing.
-        if (_isSolutionClosing)
+        // Don't remove a project if the solution is closing.
+        if (isSolutionClosing)
         {
-            isSolutionClosing = true;
             return true;
         }
 
@@ -385,11 +378,9 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
         if (!ReferenceEquals(oldSolution, newSolution))
         {
             upgradeableLock.EnterWrite();
-
             _currentSolution = newSolution;
         }
 
-        isSolutionClosing = false;
         return true;
     }
 
@@ -409,40 +400,87 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
         [NotNullWhen(true)] out IProjectSnapshot? newSnapshot,
         out bool isSolutionClosing)
     {
-        using var upgradeableLock = _readerWriterLock.DisposableUpgradeableRead();
+        _dispatcher.AssertRunningOnDispatcher();
 
-        var oldSolution = _currentSolution;
+        SolutionSnapshot oldSolution;
+        SolutionSnapshot newSolution;
 
-        // If the solution is closing we don't need to bother computing new state
-        if (_isSolutionClosing)
-        {
-            isSolutionClosing = true;
-            oldSnapshot = newSnapshot = oldSolution.GetRequiredProject(projectKey);
-            return true;
-        }
-
-        var newSolution = transformation(oldSolution);
-
-        if (ReferenceEquals(oldSolution, newSolution))
+        using (var upgradeableLock = _stateLock.DisposableUpgradeableRead())
         {
             isSolutionClosing = _isSolutionClosing;
-            oldSnapshot = newSnapshot = null;
-            return false;
+            oldSolution = _currentSolution;
+
+            // If the solution is closing we don't need to bother computing new state
+            if (isSolutionClosing)
+            {
+                oldSnapshot = newSnapshot = oldSolution.GetRequiredProject(projectKey);
+                return true;
+            }
+
+            newSolution = transformation(oldSolution);
+
+            if (ReferenceEquals(oldSolution, newSolution))
+            {
+                oldSnapshot = newSnapshot = null;
+                return false;
+            }
+
+            upgradeableLock.EnterWrite();
+
+            _currentSolution = newSolution;
+            onAfterUpdate?.Invoke();
         }
 
-        upgradeableLock.EnterWrite();
-
-        _currentSolution = newSolution;
-
-        onAfterUpdate?.Invoke();
-
-        isSolutionClosing = _isSolutionClosing;
         oldSnapshot = oldSolution.GetRequiredProject(projectKey);
         newSnapshot = newSolution.GetRequiredProject(projectKey);
 
         return true;
     }
 
+    private void NotifyListeners(ProjectChangeEventArgs args)
+    {
+        // Notifications are *always* sent using the dispatcher.
+        // This ensures that _notificationQueue and _processingNotifications are synchronized.
+        _dispatcher.AssertRunningOnDispatcher();
+
+        // Enqueue the latest notification.
+        _notificationQueue.Enqueue(args);
+
+        // We're already processing the notification queue, so we're done.
+        if (_processingNotifications)
+        {
+            return;
+        }
+
+        Debug.Assert(_notificationQueue.Count == 1, "There should only be a single queued notification when it processing begins.");
+
+        // The notification queue is processed when it contains *exactly* one notification.
+        // Note that a notification subscriber may mutate the current solution and cause additional
+        // notifications to be be enqueued. However, because we are already running on the dispatcher,
+        // those updates will occur synchronously.
+
+        _processingNotifications = true;
+        try
+        {
+            while (_notificationQueue.Count > 0)
+            {
+                var currentArgs = _notificationQueue.Dequeue();
+
+                PriorityChanged?.Invoke(this, currentArgs);
+                Changed?.Invoke(this, currentArgs);
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Exception occurred while sending notifications.");
+        }
+        finally
+        {
+            _processingNotifications = false;
+        }
+    }
+
+    /// <inheritdoc/>
     public Task UpdateAsync(Action<Updater> updater, CancellationToken cancellationToken)
     {
         return _dispatcher.RunAsync(
@@ -451,6 +489,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
             cancellationToken);
     }
 
+    /// <inheritdoc/>
     public Task UpdateAsync<TState>(Action<Updater, TState> updater, TState state, CancellationToken cancellationToken)
     {
         return _dispatcher.RunAsync(
@@ -459,6 +498,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
             cancellationToken);
     }
 
+    /// <inheritdoc/>
     public Task<TResult> UpdateAsync<TResult>(Func<Updater, TResult> updater, CancellationToken cancellationToken)
     {
         return _dispatcher.RunAsync(
@@ -467,6 +507,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
             cancellationToken);
     }
 
+    /// <inheritdoc/>
     public Task<TResult> UpdateAsync<TState, TResult>(Func<Updater, TState, TResult> updater, TState state, CancellationToken cancellationToken)
     {
         return _dispatcher.RunAsync(
@@ -475,6 +516,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
             cancellationToken);
     }
 
+    /// <inheritdoc/>
     public Task UpdateAsync(Func<Updater, Task> updater, CancellationToken cancellationToken)
     {
         return _dispatcher.RunAsync(
@@ -483,6 +525,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
             cancellationToken).Unwrap();
     }
 
+    /// <inheritdoc/>
     public Task UpdateAsync<TState>(Func<Updater, TState, Task> updater, TState state, CancellationToken cancellationToken)
     {
         return _dispatcher.RunAsync(
@@ -491,6 +534,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
             cancellationToken).Unwrap();
     }
 
+    /// <inheritdoc/>
     public Task<TResult> UpdateAsync<TResult>(Func<Updater, Task<TResult>> updater, CancellationToken cancellationToken)
     {
         return _dispatcher.RunAsync(
@@ -499,6 +543,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
             cancellationToken).Unwrap();
     }
 
+    /// <inheritdoc/>
     public Task<TResult> UpdateAsync<TState, TResult>(Func<Updater, TState, Task<TResult>> updater, TState state, CancellationToken cancellationToken)
     {
         return _dispatcher.RunAsync(
