@@ -64,8 +64,6 @@ internal partial class DocumentState
         return new DocumentState(hostDocument, version: 1, loader);
     }
 
-    public bool IsGeneratedOutputResultAvailable => ComputedState.IsResultAvailable;
-
     private ComputedStateTracker ComputedState
         => _computedState ??= InterlockedOperations.Initialize(ref _computedState, new ComputedStateTracker());
 
