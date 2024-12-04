@@ -5,7 +5,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Razor.Language;
+using Microsoft.AspNetCore.Razor;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
@@ -19,15 +19,15 @@ internal partial class DocumentState
 
         // We utilize a WeakReference here to avoid bloating committed memory. If pieces request document output inbetween GC collections
         // then we will provide the weak referenced task; otherwise we require any state requests to be re-computed.
-        private WeakReference<Task<(RazorCodeDocument, VersionStamp)>>? _taskUnsafeReference;
+        private WeakReference<Task<OutputAndVersion>>? _taskUnsafeReference;
 
-        private ComputedOutput? _computedOutput;
+        private OutputAndVersion? _outputAndVersion;
 
-        public bool TryGetGeneratedOutputAndVersion(out (RazorCodeDocument Output, VersionStamp InputVersion) result)
+        public bool TryGetGeneratedOutputAndVersion([NotNullWhen(true)] out OutputAndVersion? result)
         {
-            if (_computedOutput?.TryGetCachedOutput(out var output, out var version) == true)
+            if (_outputAndVersion is { } outputAndVersion)
             {
-                result = (output, version);
+                result = outputAndVersion;
                 return true;
             }
 
@@ -35,23 +35,23 @@ internal partial class DocumentState
             return false;
         }
 
-        public async Task<(RazorCodeDocument, VersionStamp)> GetGeneratedOutputAndVersionAsync(
+        public ValueTask<OutputAndVersion> GetGeneratedOutputAndVersionAsync(
             DocumentSnapshot document,
             CancellationToken cancellationToken)
         {
-            if (_computedOutput?.TryGetCachedOutput(out var cachedCodeDocument, out var cachedInputVersion) == true)
+            return TryGetGeneratedOutputAndVersion(out var result)
+                ? new(result)
+                : GetGeneratedOutputAndVersionCoreAsync(document, cancellationToken);
+
+            async ValueTask<OutputAndVersion> GetGeneratedOutputAndVersionCoreAsync(DocumentSnapshot document, CancellationToken cancellationToken)
             {
-                return (cachedCodeDocument, cachedInputVersion);
+                var result = await GetMemoizedGeneratedOutputAndVersionAsync(document, cancellationToken).ConfigureAwait(false);
+
+                return InterlockedOperations.Initialize(ref _outputAndVersion, result);
             }
-
-            var (codeDocument, inputVersion) = await GetMemoizedGeneratedOutputAndVersionAsync(document, cancellationToken)
-                .ConfigureAwait(false);
-
-            _computedOutput = new ComputedOutput(codeDocument, inputVersion);
-            return (codeDocument, inputVersion);
         }
 
-        private Task<(RazorCodeDocument, VersionStamp)> GetMemoizedGeneratedOutputAndVersionAsync(
+        private Task<OutputAndVersion> GetMemoizedGeneratedOutputAndVersionAsync(
             DocumentSnapshot document,
             CancellationToken cancellationToken)
         {
@@ -63,7 +63,7 @@ internal partial class DocumentState
             if (_taskUnsafeReference is null ||
                 !_taskUnsafeReference.TryGetTarget(out var taskUnsafe))
             {
-                TaskCompletionSource<(RazorCodeDocument, VersionStamp)>? tcs = null;
+                TaskCompletionSource<OutputAndVersion>? tcs = null;
 
                 lock (_lock)
                 {
@@ -77,7 +77,7 @@ internal partial class DocumentState
 
                         tcs = new(TaskCreationOptions.RunContinuationsAsynchronously);
                         taskUnsafe = tcs.Task;
-                        _taskUnsafeReference = new WeakReference<Task<(RazorCodeDocument, VersionStamp)>>(taskUnsafe);
+                        _taskUnsafeReference = new WeakReference<Task<OutputAndVersion>>(taskUnsafe);
                     }
                 }
 
@@ -102,7 +102,7 @@ internal partial class DocumentState
                         static (task, state) =>
                         {
                             Assumes.NotNull(state);
-                            var tcs = (TaskCompletionSource<(RazorCodeDocument, VersionStamp)>)state;
+                            var tcs = (TaskCompletionSource<OutputAndVersion>)state;
 
                             PropagateToTaskCompletionSource(task, tcs);
                         },
@@ -116,8 +116,8 @@ internal partial class DocumentState
             return taskUnsafe;
 
             static void PropagateToTaskCompletionSource(
-                Task<(RazorCodeDocument, VersionStamp)> targetTask,
-                TaskCompletionSource<(RazorCodeDocument, VersionStamp)> tcs)
+                Task<OutputAndVersion> targetTask,
+                TaskCompletionSource<OutputAndVersion> tcs)
             {
                 if (targetTask.Status == TaskStatus.RanToCompletion)
                 {
@@ -139,9 +139,7 @@ internal partial class DocumentState
             }
         }
 
-        private async Task<(RazorCodeDocument, VersionStamp)> ComputeGeneratedOutputAndVersionAsync(
-            DocumentSnapshot document,
-            CancellationToken cancellationToken)
+        private async Task<OutputAndVersion> ComputeGeneratedOutputAndVersionAsync(DocumentSnapshot document, CancellationToken cancellationToken)
         {
             // We only need to produce the generated code if any of our inputs is newer than the
             // previously cached output.
@@ -189,49 +187,22 @@ internal partial class DocumentState
             if (_older?._taskUnsafeReference != null &&
                 _older._taskUnsafeReference.TryGetTarget(out var taskUnsafe))
             {
-                var (olderOutput, olderInputVersion) = await taskUnsafe.ConfigureAwait(false);
-                if (inputVersion.GetNewerVersion(olderInputVersion) == olderInputVersion)
+                var olderOutputAndVersion = await taskUnsafe.ConfigureAwait(false);
+                if (inputVersion.GetNewerVersion(olderOutputAndVersion.Version) == olderOutputAndVersion.Version)
                 {
                     // Nothing has changed, we can use the cached result.
                     lock (_lock)
                     {
                         _taskUnsafeReference = _older._taskUnsafeReference;
                         _older = null;
-                        return (olderOutput, olderInputVersion);
+                        return olderOutputAndVersion;
                     }
                 }
             }
 
             var forceRuntimeCodeGeneration = project.LanguageServerFeatureOptions.ForceRuntimeCodeGeneration;
             var codeDocument = await GenerateCodeDocumentAsync(document, project.GetProjectEngine(), importItems, forceRuntimeCodeGeneration, cancellationToken).ConfigureAwait(false);
-            return (codeDocument, inputVersion);
-        }
-
-        private class ComputedOutput
-        {
-            private readonly VersionStamp _inputVersion;
-            private readonly WeakReference<RazorCodeDocument> _codeDocumentReference;
-
-            public ComputedOutput(RazorCodeDocument codeDocument, VersionStamp inputVersion)
-            {
-                _codeDocumentReference = new WeakReference<RazorCodeDocument>(codeDocument);
-                _inputVersion = inputVersion;
-            }
-
-            public bool TryGetCachedOutput([NotNullWhen(true)] out RazorCodeDocument? codeDocument, out VersionStamp inputVersion)
-            {
-                // The goal here is to capture a weak reference to the code document so if there's ever a sub-system that's still utilizing it
-                // our computed output maintains its cache.
-
-                if (_codeDocumentReference.TryGetTarget(out codeDocument))
-                {
-                    inputVersion = _inputVersion;
-                    return true;
-                }
-
-                inputVersion = default;
-                return false;
-            }
+            return new(codeDocument, inputVersion);
         }
     }
 }

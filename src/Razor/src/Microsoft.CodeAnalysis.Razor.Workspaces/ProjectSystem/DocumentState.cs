@@ -67,12 +67,10 @@ internal partial class DocumentState
     private ComputedStateTracker ComputedState
         => _computedState ??= InterlockedOperations.Initialize(ref _computedState, new ComputedStateTracker());
 
-    public bool TryGetGeneratedOutputAndVersion(out (RazorCodeDocument output, VersionStamp inputVersion) result)
-    {
-        return ComputedState.TryGetGeneratedOutputAndVersion(out result);
-    }
+    public bool TryGetGeneratedOutputAndVersion([NotNullWhen(true)] out OutputAndVersion? result)
+        => ComputedState.TryGetGeneratedOutputAndVersion(out result);
 
-    public Task<(RazorCodeDocument output, VersionStamp inputVersion)> GetGeneratedOutputAndVersionAsync(
+    public ValueTask<OutputAndVersion> GetGeneratedOutputAndVersionAsync(
         DocumentSnapshot document,
         CancellationToken cancellationToken)
     {
