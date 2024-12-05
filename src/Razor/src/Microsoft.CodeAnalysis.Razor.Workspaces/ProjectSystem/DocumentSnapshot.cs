@@ -81,7 +81,7 @@ internal sealed class DocumentSnapshot(ProjectSnapshot project, DocumentState st
         return result.Output;
     }
 
-    public ValueTask<OutputAndVersion> GetGeneratedOutputAndVersionAsync(CancellationToken cancellationToken)
+    public Task<OutputAndVersion> GetGeneratedOutputAndVersionAsync(CancellationToken cancellationToken)
         => _state.GetGeneratedOutputAndVersionAsync(this, cancellationToken);
 
     private Task<RazorCodeDocument> GetDesignTimeGeneratedOutputAsync(CancellationToken cancellationToken)

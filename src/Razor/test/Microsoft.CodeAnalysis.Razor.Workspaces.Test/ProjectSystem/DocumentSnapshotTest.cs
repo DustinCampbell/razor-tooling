@@ -4,6 +4,7 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
+using Microsoft.AspNetCore.Razor.ProjectEngineHost;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Test.Common;
 using Microsoft.AspNetCore.Razor.Test.Common.Workspaces;
@@ -13,49 +14,19 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
-public class DefaultDocumentSnapshotTest : WorkspaceTestBase
+public class DocumentSnapshotTest(ITestOutputHelper testOutput) : ToolingTestBase(testOutput)
 {
     private static readonly HostDocument s_componentHostDocument = TestProjectData.SomeProjectComponentFile1;
     private static readonly HostDocument s_componentCshtmlHostDocument = TestProjectData.SomeProjectCshtmlComponentFile5;
     private static readonly HostDocument s_legacyHostDocument = TestProjectData.SomeProjectFile1;
     private static readonly HostDocument s_nestedComponentHostDocument = TestProjectData.SomeProjectNestedComponentFile3;
 
-    private readonly SourceText _sourceText;
-    private readonly VersionStamp _version;
-    private readonly DocumentSnapshot _componentDocument;
-    private readonly DocumentSnapshot _componentCshtmlDocument;
-    private readonly DocumentSnapshot _legacyDocument;
-    private readonly DocumentSnapshot _nestedComponentDocument;
-
-    public DefaultDocumentSnapshotTest(ITestOutputHelper testOutput)
-        : base(testOutput)
-    {
-        _sourceText = SourceText.From("<p>Hello World</p>");
-        _version = VersionStamp.Create();
-
-        var projectState = ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, TestProjectData.SomeProject, ProjectWorkspaceState.Default);
-        var project = new ProjectSnapshot(projectState);
-
-        var textLoader = TestMocks.CreateTextLoader(_sourceText, _version);
-
-        var documentState = DocumentState.Create(s_legacyHostDocument, textLoader);
-        _legacyDocument = new DocumentSnapshot(project, documentState);
-
-        documentState = DocumentState.Create(s_componentHostDocument, textLoader);
-        _componentDocument = new DocumentSnapshot(project, documentState);
-
-        documentState = DocumentState.Create(s_componentCshtmlHostDocument, textLoader);
-        _componentCshtmlDocument = new DocumentSnapshot(project, documentState);
-
-        documentState = DocumentState.Create(s_nestedComponentHostDocument, textLoader);
-        _nestedComponentDocument = new DocumentSnapshot(project, documentState);
-    }
-
     [Fact]
     public async Task GCCollect_OutputIsNoLongerCached()
     {
         // Arrange
-        await Task.Run(async () => { await _legacyDocument.GetGeneratedOutputAsync(DisposalToken); });
+        var document = CreateDocument(s_legacyHostDocument);
+        await Task.Run(async () => { await document.GetGeneratedOutputAsync(DisposalToken); });
 
         // Act
 
@@ -63,30 +34,31 @@ public class DefaultDocumentSnapshotTest : WorkspaceTestBase
         GC.Collect();
 
         // Assert
-        Assert.False(_legacyDocument.TryGetGeneratedOutput(out _));
+        Assert.False(document.TryGetGeneratedOutput(out _));
     }
 
     [Fact]
     public async Task RegeneratingWithReference_CachesOutput()
     {
         // Arrange
-        var output = await _legacyDocument.GetGeneratedOutputAsync(DisposalToken);
+        var document = CreateDocument(s_legacyHostDocument);
+        var output = await document.GetGeneratedOutputAsync(DisposalToken);
 
         // Mostly doing this to ensure "var output" doesn't get optimized out
         Assert.NotNull(output);
 
         // Act & Assert
-        Assert.True(_legacyDocument.TryGetGeneratedOutput(out _));
+        Assert.True(document.TryGetGeneratedOutput(out _));
     }
-
-    // This is a sanity test that we invoke component codegen for components.It's a little fragile but
-    // necessary.
 
     [Fact]
     public async Task GetGeneratedOutputAsync_CshtmlComponent_ContainsComponentImports()
     {
+        // This is a sanity test that we invoke component codegen for components. It's a little fragile but necessary.
+
         // Act
-        var codeDocument = await _componentCshtmlDocument.GetGeneratedOutputAsync(DisposalToken);
+        var document = CreateDocument(s_componentCshtmlHostDocument);
+        var codeDocument = await document.GetGeneratedOutputAsync(DisposalToken);
 
         // Assert
         Assert.Contains("using global::Microsoft.AspNetCore.Components", codeDocument.GetCSharpSourceText().ToString(), StringComparison.Ordinal);
@@ -96,7 +68,8 @@ public class DefaultDocumentSnapshotTest : WorkspaceTestBase
     public async Task GetGeneratedOutputAsync_Component()
     {
         // Act
-        var codeDocument = await _componentDocument.GetGeneratedOutputAsync(DisposalToken);
+        var document = CreateDocument(s_componentHostDocument);
+        var codeDocument = await document.GetGeneratedOutputAsync(DisposalToken);
 
         // Assert
         Assert.Contains("ComponentBase", codeDocument.GetCSharpSourceText().ToString(), StringComparison.Ordinal);
@@ -106,7 +79,8 @@ public class DefaultDocumentSnapshotTest : WorkspaceTestBase
     public async Task GetGeneratedOutputAsync_NestedComponentDocument_SetsCorrectNamespaceAndClassName()
     {
         // Act
-        var codeDocument = await _nestedComponentDocument.GetGeneratedOutputAsync(DisposalToken);
+        var document = CreateDocument(s_nestedComponentHostDocument);
+        var codeDocument = await document.GetGeneratedOutputAsync(DisposalToken);
 
         // Assert
         Assert.Contains("ComponentBase", codeDocument.GetCSharpSourceText().ToString(), StringComparison.Ordinal);
@@ -114,15 +88,37 @@ public class DefaultDocumentSnapshotTest : WorkspaceTestBase
         Assert.Contains("class File3", codeDocument.GetCSharpSourceText().ToString(), StringComparison.Ordinal);
     }
 
-    // This is a sanity test that we invoke legacy codegen for .cshtml files. It's a little fragile but
-    // necessary.
     [Fact]
     public async Task GetGeneratedOutputAsync_Legacy()
     {
+        // This is a sanity test that we invoke legacy codegen for .cshtml files. It's a little fragile but necessary.
+
         // Act
-        var codeDocument = await _legacyDocument.GetGeneratedOutputAsync(DisposalToken);
+        var document = CreateDocument(s_legacyHostDocument);
+        var codeDocument = await document.GetGeneratedOutputAsync(DisposalToken);
 
         // Assert
         Assert.Contains("Template", codeDocument.GetCSharpSourceText().ToString(), StringComparison.Ordinal);
+    }
+
+    private static DocumentSnapshot CreateDocument(HostDocument hostDocument)
+    {
+        var sourceText = SourceText.From("<p>Hello World</p>");
+        var version = VersionStamp.Create();
+
+        var projectState = ProjectState.Create(
+            ProjectEngineFactories.DefaultProvider,
+            TestLanguageServerFeatureOptions.Instance,
+            TestProjectData.SomeProject,
+
+            ProjectWorkspaceState.Default);
+
+        var project = new ProjectSnapshot(projectState);
+
+        var textLoader = TestMocks.CreateTextLoader(sourceText, version);
+
+        var documentState = DocumentState.Create(hostDocument, textLoader);
+
+        return new DocumentSnapshot(project, documentState);
     }
 }

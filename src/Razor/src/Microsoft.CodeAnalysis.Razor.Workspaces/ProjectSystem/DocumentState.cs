@@ -70,7 +70,7 @@ internal partial class DocumentState
     public bool TryGetGeneratedOutputAndVersion([NotNullWhen(true)] out OutputAndVersion? result)
         => ComputedState.TryGetGeneratedOutputAndVersion(out result);
 
-    public ValueTask<OutputAndVersion> GetGeneratedOutputAndVersionAsync(
+    public Task<OutputAndVersion> GetGeneratedOutputAndVersionAsync(
         DocumentSnapshot document,
         CancellationToken cancellationToken)
     {
@@ -159,7 +159,7 @@ internal partial class DocumentState
         var state = new DocumentState(HostDocument, Version + 1, _textAndVersion, _textLoader);
 
         // Optimistically cache the computed state
-        state._computedState = new ComputedStateTracker(_computedState);
+        state._computedState = _computedState;
 
         return state;
     }
@@ -169,7 +169,7 @@ internal partial class DocumentState
         var state = new DocumentState(HostDocument, Version + 1, _textAndVersion, _textLoader);
 
         // Optimistically cache the computed state
-        state._computedState = new ComputedStateTracker(_computedState);
+        state._computedState = _computedState;
 
         return state;
     }
@@ -216,7 +216,10 @@ internal partial class DocumentState
             : projectEngine.ProcessDesignTime(source, document.FileKind, importSources, tagHelpers);
     }
 
-    private static async Task<ImmutableArray<ImportItem>> GetImportItemsAsync(IDocumentSnapshot document, RazorProjectEngine projectEngine, CancellationToken cancellationToken)
+    private static async Task<ImmutableArray<ImportItem>> GetImportItemsAsync(
+        IDocumentSnapshot document,
+        RazorProjectEngine projectEngine,
+        CancellationToken cancellationToken)
     {
         var projectItem = projectEngine.FileSystem.GetItem(document.FilePath, document.FileKind);
 
