@@ -32,37 +32,42 @@ internal partial class DocumentState
 
     private DocumentState(
         HostDocument hostDocument,
-        int version,
         TextAndVersion? textAndVersion,
         TextLoader? textLoader)
     {
         HostDocument = hostDocument;
-        Version = version;
+        Version = 1;
         _textAndVersion = textAndVersion;
         _textLoader = textLoader ?? EmptyLoader;
     }
 
-    // Internal for testing
-    internal DocumentState(HostDocument hostDocument, int version, SourceText text, VersionStamp textVersion)
-        : this(hostDocument, version, TextAndVersion.Create(text, textVersion), textLoader: null)
+    private DocumentState(
+        DocumentState other,
+        TextAndVersion? textAndVersion,
+        TextLoader? textLoader,
+        ComputedStateTracker? computedState)
+    {
+        HostDocument = other.HostDocument;
+        Version = other.Version + 1;
+        _textAndVersion = textAndVersion;
+        _textLoader = textLoader ?? EmptyLoader;
+        _computedState = computedState;
+    }
+
+    // Private protected for testing
+    private protected DocumentState(HostDocument hostDocument, TextLoader? loader)
+        : this(hostDocument, textAndVersion: null, loader)
     {
     }
 
-    // Internal for testing
-    internal DocumentState(HostDocument hostDocument, int version, TextLoader loader)
-        : this(hostDocument, version, textAndVersion: null, loader)
-    {
-    }
-
-    public static DocumentState Create(HostDocument hostDocument, int version, TextLoader loader)
-    {
-        return new DocumentState(hostDocument, version, loader);
-    }
+    public static DocumentState Create(HostDocument hostDocument, TextAndVersion textAndVersion)
+        => new(hostDocument, textAndVersion, textLoader: null);
 
     public static DocumentState Create(HostDocument hostDocument, TextLoader loader)
-    {
-        return new DocumentState(hostDocument, version: 1, loader);
-    }
+        => new(hostDocument, textAndVersion: null, loader);
+
+    public static DocumentState Create(HostDocument hostDocument)
+        => new(hostDocument, textAndVersion: null, textLoader: null);
 
     private ComputedStateTracker ComputedState
         => _computedState ??= InterlockedOperations.Initialize(ref _computedState, new ComputedStateTracker());
@@ -147,45 +152,29 @@ internal partial class DocumentState
 
     public virtual DocumentState WithConfigurationChange()
     {
-        var state = new DocumentState(HostDocument, Version + 1, _textAndVersion, _textLoader);
-
-        // Do not cache computed state
-
-        return state;
+        return new DocumentState(this, _textAndVersion, _textLoader, computedState: null);
     }
 
     public virtual DocumentState WithImportsChange()
     {
-        var state = new DocumentState(HostDocument, Version + 1, _textAndVersion, _textLoader);
-
         // Optimistically cache the computed state
-        state._computedState = _computedState;
-
-        return state;
+        return new DocumentState(this, _textAndVersion, _textLoader, _computedState);
     }
 
     public virtual DocumentState WithProjectWorkspaceStateChange()
     {
-        var state = new DocumentState(HostDocument, Version + 1, _textAndVersion, _textLoader);
-
         // Optimistically cache the computed state
-        state._computedState = _computedState;
-
-        return state;
+        return new DocumentState(this, _textAndVersion, _textLoader, _computedState);
     }
 
     public virtual DocumentState WithText(SourceText text, VersionStamp textVersion)
     {
-        // Do not cache the computed state
-
-        return new DocumentState(HostDocument, Version + 1, TextAndVersion.Create(text, textVersion), textLoader: null);
+        return new DocumentState(this, TextAndVersion.Create(text, textVersion), textLoader: null, computedState: null);
     }
 
     public virtual DocumentState WithTextLoader(TextLoader textLoader)
     {
-        // Do not cache the computed state
-
-        return new DocumentState(HostDocument, Version + 1, textAndVersion: null, textLoader);
+        return new DocumentState(this, textAndVersion: null, textLoader, computedState: null);
     }
 
     internal static async Task<RazorCodeDocument> GenerateCodeDocumentAsync(

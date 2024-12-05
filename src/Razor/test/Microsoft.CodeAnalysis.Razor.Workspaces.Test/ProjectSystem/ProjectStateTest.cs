@@ -1012,13 +1012,13 @@ public class ProjectStateTest : WorkspaceTestBase
 
         private TestDocumentState(
             HostDocument hostDocument,
-            TextLoader? loader,
+            TextLoader? textLoader,
             Action? onTextChange,
             Action? onTextLoaderChange,
             Action? onConfigurationChange,
             Action? onImportsChange,
             Action? onProjectWorkspaceStateChange)
-            : base(hostDocument, version: 1, loader ?? EmptyLoader)
+            : base(hostDocument, textLoader)
         {
             _onTextChange = onTextChange;
             _onTextLoaderChange = onTextLoaderChange;

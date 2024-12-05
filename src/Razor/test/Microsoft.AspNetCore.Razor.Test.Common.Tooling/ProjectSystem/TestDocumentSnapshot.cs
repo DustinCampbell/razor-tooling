@@ -25,36 +25,30 @@ internal sealed class TestDocumentSnapshot : IDocumentSnapshot
     }
 
     public static TestDocumentSnapshot Create(string filePath)
-        => Create(filePath, text: string.Empty, ProjectWorkspaceState.Default, version: 0);
+        => Create(filePath, text: string.Empty, ProjectWorkspaceState.Default);
 
-    public static TestDocumentSnapshot Create(string filePath, string text, int version = 0)
-        => Create(filePath, text, ProjectWorkspaceState.Default, version);
+    public static TestDocumentSnapshot Create(string filePath, string text)
+        => Create(filePath, text, ProjectWorkspaceState.Default);
 
-    public static TestDocumentSnapshot Create(string filePath, string text, ProjectWorkspaceState projectWorkspaceState, int version = 0)
+    private static TestDocumentSnapshot Create(string filePath, string text, ProjectWorkspaceState projectWorkspaceState)
     {
         var project = TestProjectSnapshot.Create(filePath + ".csproj", projectWorkspaceState);
         var hostDocument = TestHostDocument.Create(project.HostProject, filePath);
-
-        var sourceText = SourceText.From(text);
-        var textVersion = VersionStamp.Default;
-
-        var documentState = new DocumentState(hostDocument, version, sourceText, textVersion);
+        var textAndVersion = TextAndVersion.Create(SourceText.From(text), version: VersionStamp.Create());
+        var documentState = DocumentState.Create(hostDocument, textAndVersion);
 
         return new TestDocumentSnapshot(project, documentState);
     }
 
-    public static TestDocumentSnapshot Create(string filePath, RazorCodeDocument codeDocument, int version = 0)
-        => Create(filePath, codeDocument, ProjectWorkspaceState.Create([.. codeDocument.GetTagHelpers() ?? []]), version);
+    public static TestDocumentSnapshot Create(string filePath, RazorCodeDocument codeDocument)
+        => Create(filePath, codeDocument, ProjectWorkspaceState.Create([.. codeDocument.GetTagHelpers() ?? []]));
 
-    public static TestDocumentSnapshot Create(string filePath, RazorCodeDocument codeDocument, ProjectWorkspaceState projectWorkspaceState, int version = 0)
+    private static TestDocumentSnapshot Create(string filePath, RazorCodeDocument codeDocument, ProjectWorkspaceState projectWorkspaceState)
     {
         var project = TestProjectSnapshot.Create(filePath + ".csproj", projectWorkspaceState);
         var hostDocument = TestHostDocument.Create(project.HostProject, filePath);
-
-        var sourceText = codeDocument.Source.Text;
-        var textVersion = VersionStamp.Default;
-
-        var documentState = new DocumentState(hostDocument, version, sourceText, textVersion);
+        var textAndVersion = TextAndVersion.Create(codeDocument.Source.Text, version: VersionStamp.Create());
+        var documentState = DocumentState.Create(hostDocument, textAndVersion);
 
         return new TestDocumentSnapshot(project, documentState, codeDocument);
     }
