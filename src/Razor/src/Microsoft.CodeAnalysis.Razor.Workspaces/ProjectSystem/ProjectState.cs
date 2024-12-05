@@ -185,6 +185,17 @@ internal class ProjectState
         }
     }
 
+    public VersionStamp GetLatestVersion()
+    {
+        VersionStamp result = default;
+
+        result = result.GetNewerVersion(ConfigurationVersion);
+        result = result.GetNewerVersion(ProjectWorkspaceStateVersion);
+        result = result.GetNewerVersion(DocumentCollectionVersion);
+
+        return result;
+    }
+
     /// <summary>
     /// Gets the version of this project based on the project workspace state, NOT INCLUDING content
     /// changes. The computed state is guaranteed to change when the configuration or tag helpers

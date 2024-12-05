@@ -946,9 +946,6 @@ public partial class SemanticTokensTest(ITestOutputHelper testOutput) : TagHelpe
         var document = CreateCodeDocument(documentText, isRazorFile, tagHelpers);
 
         var projectSnapshot = new StrictMock<IProjectSnapshot>();
-        projectSnapshot
-            .SetupGet(p => p.Version)
-            .Returns(VersionStamp.Default);
 
         var documentSnapshotMock = new StrictMock<IDocumentSnapshot>();
         documentSnapshotMock

@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.ProjectEngineHost;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Test.Common.Workspaces;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.NET.Sdk.Razor.SourceGenerators;
@@ -47,7 +46,6 @@ internal sealed class TestProjectSnapshot : IProjectSnapshot
     public string DisplayName => RealSnapshot.DisplayName;
     public LanguageVersion CSharpLanguageVersion => RealSnapshot.CSharpLanguageVersion;
     public ProjectWorkspaceState ProjectWorkspaceState => RealSnapshot.ProjectWorkspaceState;
-    public VersionStamp Version => RealSnapshot.Version;
 
     public RazorProjectEngine GetProjectEngine()
         => RazorProjectEngine.Create(

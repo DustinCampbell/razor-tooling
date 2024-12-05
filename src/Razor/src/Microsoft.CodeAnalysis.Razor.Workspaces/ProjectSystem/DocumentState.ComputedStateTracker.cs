@@ -80,11 +80,8 @@ internal partial class DocumentState
             // All of these things are cached, so no work is wasted if we do need to generate the code.
 
             var version = await document.GetTextVersionAsync(cancellationToken).ConfigureAwait(false);
-            var project = document.Project;
 
-            version = version.GetNewerVersion(project.ConfigurationVersion);
-            version = version.GetNewerVersion(project.ProjectWorkspaceStateVersion);
-            version = version.GetNewerVersion(project.DocumentCollectionVersion);
+            version = version.GetNewerVersion(document.Project.GetLatestVersion());
 
             foreach (var import in importItems)
             {
