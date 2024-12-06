@@ -159,15 +159,11 @@ internal partial class DocumentState
         return new DocumentState(this, _textAndVersion, _textLoader, _computedState);
     }
 
-    public virtual DocumentState WithText(SourceText text, VersionStamp textVersion)
-    {
-        return new DocumentState(this, TextAndVersion.Create(text, textVersion), textLoader: null, computedState: null);
-    }
+    public DocumentState WithText(SourceText text, VersionStamp textVersion)
+        => new(this, TextAndVersion.Create(text, textVersion), textLoader: null, computedState: null);
 
-    public virtual DocumentState WithTextLoader(TextLoader textLoader)
-    {
-        return new DocumentState(this, textAndVersion: null, textLoader, computedState: null);
-    }
+    public DocumentState WithTextLoader(TextLoader textLoader)
+        => new(this, textAndVersion: null, textLoader, computedState: null);
 
     internal static async Task<RazorCodeDocument> GenerateCodeDocumentAsync(
         IDocumentSnapshot document,

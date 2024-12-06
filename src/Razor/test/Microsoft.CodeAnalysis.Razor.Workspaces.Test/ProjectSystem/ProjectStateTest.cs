@@ -6,6 +6,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
+using Microsoft.AspNetCore.Razor.ProjectEngineHost;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Test.Common;
 using Microsoft.AspNetCore.Razor.Test.Common.Workspaces;
@@ -16,47 +17,30 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
-public class ProjectStateTest : WorkspaceTestBase
+public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(testOutput)
 {
-    private readonly HostDocument[] _documents;
-    private readonly HostProject _hostProject;
-    private readonly HostProject _hostProjectWithConfigurationChange;
-    private readonly ProjectWorkspaceState _projectWorkspaceState;
-    private readonly TextLoader _textLoader;
-    private readonly SourceText _text;
+    private static readonly HostProject s_project = TestProjectData.SomeProject with { Configuration = FallbackRazorConfiguration.MVC_2_0 };
+    private static readonly HostProject s_projectWithConfigurationChange = TestProjectData.SomeProject with { Configuration = FallbackRazorConfiguration.MVC_1_0 };
+    private static readonly ProjectWorkspaceState s_projectWorkspaceState = ProjectWorkspaceState.Create([TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly").Build()]);
 
-    public ProjectStateTest(ITestOutputHelper testOutput)
-        : base(testOutput)
-    {
-        _hostProject = TestProjectData.SomeProject with { Configuration = FallbackRazorConfiguration.MVC_2_0 };
-        _hostProjectWithConfigurationChange = TestProjectData.SomeProject with { Configuration = FallbackRazorConfiguration.MVC_1_0 };
-        _projectWorkspaceState = ProjectWorkspaceState.Create(
-            ImmutableArray.Create(
-                TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly").Build()));
+    private static readonly HostDocument[] s_documents =
+    [
+        TestProjectData.SomeProjectFile1,
+        TestProjectData.SomeProjectFile2,
 
-        _documents = new HostDocument[]
-        {
-            TestProjectData.SomeProjectFile1,
-            TestProjectData.SomeProjectFile2,
+        // linked file
+        TestProjectData.AnotherProjectNestedFile3
+    ];
 
-            // linked file
-            TestProjectData.AnotherProjectNestedFile3,
-        };
-
-        _text = SourceText.From("Hello, world!");
-        _textLoader = TestMocks.CreateTextLoader(_text, VersionStamp.Create());
-    }
-
-    protected override void ConfigureProjectEngine(RazorProjectEngineBuilder builder)
-    {
-        builder.SetImportFeature(new TestImportProjectFeature());
-    }
+    private static readonly SourceText s_text = SourceText.From("Hello, world!");
+    private static readonly TextAndVersion s_textAndVersion = TextAndVersion.Create(s_text, VersionStamp.Create());
+    private static readonly TextLoader s_textLoader = TestMocks.CreateTextLoader(s_textAndVersion);
 
     [Fact]
     public void GetImportDocumentTargetPaths_DoesNotIncludeCurrentImport()
     {
         // Arrange
-        var state = ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, _projectWorkspaceState);
+        var state = ProjectState.Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState);
 
         // Act
         var paths = state.GetImportDocumentTargetPaths(TestProjectData.SomeProjectComponentImportFile1);
@@ -68,10 +52,8 @@ public class ProjectStateTest : WorkspaceTestBase
     [Fact]
     public void ProjectState_ConstructedNew()
     {
-        // Arrange
-
-        // Act
-        var state = ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, _projectWorkspaceState);
+        // Arrange & act
+        var state = ProjectState.Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState);
 
         // Assert
         Assert.Empty(state.Documents);
@@ -82,31 +64,29 @@ public class ProjectStateTest : WorkspaceTestBase
     public void ProjectState_AddHostDocument_ToEmpty()
     {
         // Arrange
-        var original = ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, _projectWorkspaceState);
+        var state = ProjectState.Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState);
 
         // Act
-        var state = original.WithAddedHostDocument(_documents[0], EmptyTextLoader.Instance);
+        var newState = state.WithAddedHostDocument(s_documents[0], EmptyTextLoader.Instance);
 
         // Assert
-        Assert.NotEqual(original.Version, state.Version);
+        Assert.NotEqual(state.Version, newState.Version);
 
-        Assert.Collection(
-            state.Documents.OrderBy(kvp => kvp.Key),
-            d => Assert.Same(_documents[0], d.Value.HostDocument));
-        Assert.NotEqual(original.DocumentCollectionVersion, state.DocumentCollectionVersion);
+        Assert.Single(newState.Documents, static d => ReferenceEquals(s_documents[0], d.Value.HostDocument));
+        Assert.NotEqual(state.DocumentCollectionVersion, newState.DocumentCollectionVersion);
     }
 
-    [Fact] // When we first add a document, we have no way to read the text, so it's empty.
+    [Fact]
     public async Task ProjectState_AddHostDocument_DocumentIsEmpty()
     {
         // Arrange
-        var original = ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, _projectWorkspaceState);
+        var state = ProjectState.Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState);
 
         // Act
-        var state = original.WithAddedHostDocument(_documents[0], EmptyTextLoader.Instance);
+        var newState = state.WithAddedHostDocument(s_documents[0], EmptyTextLoader.Instance);
 
         // Assert
-        var text = await state.Documents[_documents[0].FilePath].GetTextAsync(DisposalToken);
+        var text = await newState.Documents[s_documents[0].FilePath].GetTextAsync(DisposalToken);
         Assert.Equal(0, text.Length);
     }
 
@@ -114,31 +94,32 @@ public class ProjectStateTest : WorkspaceTestBase
     public void ProjectState_AddHostDocument_ToProjectWithDocuments()
     {
         // Arrange
-        var original = ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, _projectWorkspaceState)
-            .WithAddedHostDocument(_documents[2], EmptyTextLoader.Instance)
-            .WithAddedHostDocument(_documents[1], EmptyTextLoader.Instance);
+        var state = ProjectState
+            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .WithAddedHostDocument(s_documents[2], EmptyTextLoader.Instance)
+            .WithAddedHostDocument(s_documents[1], EmptyTextLoader.Instance);
 
         // Act
-        var state = original.WithAddedHostDocument(_documents[0], EmptyTextLoader.Instance);
+        var newState = state.WithAddedHostDocument(s_documents[0], EmptyTextLoader.Instance);
 
         // Assert
-        Assert.NotEqual(original.Version, state.Version);
+        Assert.NotEqual(state.Version, newState.Version);
 
         Assert.Collection(
-            state.Documents.OrderBy(kvp => kvp.Key),
-            d => Assert.Same(_documents[2], d.Value.HostDocument),
-            d => Assert.Same(_documents[0], d.Value.HostDocument),
-            d => Assert.Same(_documents[1], d.Value.HostDocument));
-        Assert.NotEqual(original.DocumentCollectionVersion, state.DocumentCollectionVersion);
+            newState.Documents.OrderBy(static kvp => kvp.Key),
+            d => Assert.Same(s_documents[2], d.Value.HostDocument),
+            d => Assert.Same(s_documents[0], d.Value.HostDocument),
+            d => Assert.Same(s_documents[1], d.Value.HostDocument));
+
+        Assert.NotEqual(state.DocumentCollectionVersion, newState.DocumentCollectionVersion);
     }
 
     [Fact]
     public void ProjectState_AddHostDocument_TracksImports()
     {
-        // Arrange
-
-        // Act
-        var state = ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, _projectWorkspaceState)
+        // Arrange & Act
+        var state = ProjectState
+            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
             .WithAddedHostDocument(TestProjectData.SomeProjectFile1, EmptyTextLoader.Instance)
             .WithAddedHostDocument(TestProjectData.SomeProjectFile2, EmptyTextLoader.Instance)
             .WithAddedHostDocument(TestProjectData.SomeProjectNestedFile3, EmptyTextLoader.Instance)
@@ -146,30 +127,28 @@ public class ProjectStateTest : WorkspaceTestBase
 
         // Assert
         Assert.Collection(
-            state.ImportsToRelatedDocuments.OrderBy(kvp => kvp.Key),
-            kvp =>
+            state.ImportsToRelatedDocuments.OrderBy(static kvp => kvp.Key),
+            static kvp =>
             {
                 Assert.Equal(TestProjectData.SomeProjectImportFile.TargetPath, kvp.Key);
                 Assert.Equal(
-                    new string[]
-                    {
+                    [
                         TestProjectData.AnotherProjectNestedFile4.FilePath,
                         TestProjectData.SomeProjectFile1.FilePath,
                         TestProjectData.SomeProjectFile2.FilePath,
                         TestProjectData.SomeProjectNestedFile3.FilePath,
-                    },
-                    kvp.Value.OrderBy(f => f));
+                    ],
+                    kvp.Value.OrderBy(static f => f));
             },
-            kvp =>
+            static kvp =>
             {
                 Assert.Equal(TestProjectData.SomeProjectNestedImportFile.TargetPath, kvp.Key);
                 Assert.Equal(
-                    new string[]
-                    {
+                    [
                         TestProjectData.AnotherProjectNestedFile4.FilePath,
                         TestProjectData.SomeProjectNestedFile3.FilePath,
-                    },
-                    kvp.Value.OrderBy(f => f));
+                    ],
+                    kvp.Value.OrderBy(static f => f));
             });
     }
 
@@ -177,42 +156,40 @@ public class ProjectStateTest : WorkspaceTestBase
     public void ProjectState_AddHostDocument_TracksImports_AddImportFile()
     {
         // Arrange
-        var original = ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, _projectWorkspaceState)
+        var state = ProjectState
+            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
             .WithAddedHostDocument(TestProjectData.SomeProjectFile1, EmptyTextLoader.Instance)
             .WithAddedHostDocument(TestProjectData.SomeProjectFile2, EmptyTextLoader.Instance)
             .WithAddedHostDocument(TestProjectData.SomeProjectNestedFile3, EmptyTextLoader.Instance)
             .WithAddedHostDocument(TestProjectData.AnotherProjectNestedFile4, EmptyTextLoader.Instance);
 
         // Act
-        var state = original
-            .WithAddedHostDocument(TestProjectData.AnotherProjectImportFile, EmptyTextLoader.Instance);
+        var newState = state.WithAddedHostDocument(TestProjectData.AnotherProjectImportFile, EmptyTextLoader.Instance);
 
         // Assert
         Assert.Collection(
-            state.ImportsToRelatedDocuments.OrderBy(kvp => kvp.Key),
-            kvp =>
+            newState.ImportsToRelatedDocuments.OrderBy(static kvp => kvp.Key),
+            static kvp =>
             {
                 Assert.Equal(TestProjectData.SomeProjectImportFile.TargetPath, kvp.Key);
                 Assert.Equal(
-                    new string[]
-                    {
+                    [
                         TestProjectData.AnotherProjectNestedFile4.FilePath,
                         TestProjectData.SomeProjectFile1.FilePath,
                         TestProjectData.SomeProjectFile2.FilePath,
                         TestProjectData.SomeProjectNestedFile3.FilePath,
-                    },
-                    kvp.Value.OrderBy(f => f));
+                    ],
+                    kvp.Value.OrderBy(static f => f));
             },
-            kvp =>
+            static kvp =>
             {
                 Assert.Equal(TestProjectData.SomeProjectNestedImportFile.TargetPath, kvp.Key);
                 Assert.Equal(
-                    new string[]
-                    {
+                    [
                         TestProjectData.AnotherProjectNestedFile4.FilePath,
                         TestProjectData.SomeProjectNestedFile3.FilePath,
-                    },
-                    kvp.Value.OrderBy(f => f));
+                    ],
+                    kvp.Value.OrderBy(static f => f));
             });
     }
 
@@ -220,210 +197,211 @@ public class ProjectStateTest : WorkspaceTestBase
     public void ProjectState_AddHostDocument_RetainsComputedState()
     {
         // Arrange
-        var original = ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, _projectWorkspaceState)
-            .WithAddedHostDocument(_documents[2], EmptyTextLoader.Instance)
-            .WithAddedHostDocument(_documents[1], EmptyTextLoader.Instance);
+        var state = ProjectState
+            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .WithAddedHostDocument(s_documents[2], EmptyTextLoader.Instance)
+            .WithAddedHostDocument(s_documents[1], EmptyTextLoader.Instance);
 
-        // Force init
-        var originalTagHelpers = original.TagHelpers;
-        var originalProjectWorkspaceStateVersion = original.ProjectWorkspaceStateVersion;
+        var tagHelpers = state.TagHelpers;
+        var projectWorkspaceStateVersion = state.ProjectWorkspaceStateVersion;
 
         // Act
-        var state = original.WithAddedHostDocument(_documents[0], EmptyTextLoader.Instance);
+        var newState = state.WithAddedHostDocument(s_documents[0], EmptyTextLoader.Instance);
+        var newTagHelpers = newState.TagHelpers;
+        var newProjectWorkspaceStateVersion = newState.ProjectWorkspaceStateVersion;
 
         // Assert
-        var actualTagHelpers = state.TagHelpers;
-        var actualProjectWorkspaceStateVersion = state.ProjectWorkspaceStateVersion;
+        Assert.Same(state.ProjectEngine, newState.ProjectEngine);
 
-        Assert.Same(original.ProjectEngine, state.ProjectEngine);
-
-        Assert.Equal(originalTagHelpers.Length, actualTagHelpers.Length);
-        for (var i = 0; i < originalTagHelpers.Length; i++)
+        Assert.Equal(tagHelpers.Length, newTagHelpers.Length);
+        for (var i = 0; i < tagHelpers.Length; i++)
         {
-            Assert.Same(originalTagHelpers[i], actualTagHelpers[i]);
+            Assert.Same(tagHelpers[i], newTagHelpers[i]);
         }
 
-        Assert.Equal(originalProjectWorkspaceStateVersion, actualProjectWorkspaceStateVersion);
+        Assert.Equal(projectWorkspaceStateVersion, newProjectWorkspaceStateVersion);
 
-        Assert.Same(original.Documents[_documents[1].FilePath], state.Documents[_documents[1].FilePath]);
-        Assert.Same(original.Documents[_documents[2].FilePath], state.Documents[_documents[2].FilePath]);
+        Assert.Same(state.Documents[s_documents[1].FilePath], newState.Documents[s_documents[1].FilePath]);
+        Assert.Same(state.Documents[s_documents[2].FilePath], newState.Documents[s_documents[2].FilePath]);
     }
 
     [Fact]
-    public void ProjectState_AddHostDocument_DuplicateNoops()
+    public void ProjectState_AddHostDocument_DuplicateIgnored()
     {
         // Arrange
-        var original = ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, _projectWorkspaceState)
-            .WithAddedHostDocument(_documents[2], EmptyTextLoader.Instance)
-            .WithAddedHostDocument(_documents[1], EmptyTextLoader.Instance);
+        var state = ProjectState
+            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .WithAddedHostDocument(s_documents[2], EmptyTextLoader.Instance)
+            .WithAddedHostDocument(s_documents[1], EmptyTextLoader.Instance);
 
         // Act
-        var state = original.WithAddedHostDocument(new HostDocument(_documents[1].FilePath, "SomePath.cshtml"), EmptyTextLoader.Instance);
+        var newState = state.WithAddedHostDocument(new HostDocument(s_documents[1].FilePath, "SomePath.cshtml"), EmptyTextLoader.Instance);
 
         // Assert
-        Assert.Same(original, state);
+        Assert.Same(state, newState);
     }
 
     [Fact]
     public async Task ProjectState_WithChangedHostDocument_Loader()
     {
         // Arrange
-        var original = ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, _projectWorkspaceState)
-            .WithAddedHostDocument(_documents[2], EmptyTextLoader.Instance)
-            .WithAddedHostDocument(_documents[1], EmptyTextLoader.Instance);
+        var state = ProjectState
+            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .WithAddedHostDocument(s_documents[2], EmptyTextLoader.Instance)
+            .WithAddedHostDocument(s_documents[1], EmptyTextLoader.Instance);
 
         // Act
-        var state = original.WithChangedHostDocument(_documents[1], _textLoader);
+        var newState = state.WithChangedHostDocument(s_documents[1], s_textLoader);
 
         // Assert
-        Assert.NotEqual(original.Version, state.Version);
+        Assert.NotEqual(state.Version, newState.Version);
 
-        var text = await state.Documents[_documents[1].FilePath].GetTextAsync(DisposalToken);
-        Assert.Same(_text, text);
-
-        Assert.Equal(original.DocumentCollectionVersion, state.DocumentCollectionVersion);
+        var text = await newState.Documents[s_documents[1].FilePath].GetTextAsync(DisposalToken);
+        Assert.Same(s_text, text);
+        Assert.Equal(state.DocumentCollectionVersion, newState.DocumentCollectionVersion);
     }
 
     [Fact]
     public async Task ProjectState_WithChangedHostDocument_Snapshot()
     {
         // Arrange
-        var original = ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, _projectWorkspaceState)
-            .WithAddedHostDocument(_documents[2], EmptyTextLoader.Instance)
-            .WithAddedHostDocument(_documents[1], EmptyTextLoader.Instance);
+        var state = ProjectState
+            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .WithAddedHostDocument(s_documents[2], EmptyTextLoader.Instance)
+            .WithAddedHostDocument(s_documents[1], EmptyTextLoader.Instance);
 
         // Act
-        var state = original.WithChangedHostDocument(_documents[1], _text, VersionStamp.Create());
+        var newState = state.WithChangedHostDocument(s_documents[1], s_text, VersionStamp.Create());
 
         // Assert
-        Assert.NotEqual(original.Version, state.Version);
+        Assert.NotEqual(state.Version, newState.Version);
 
-        var text = await state.Documents[_documents[1].FilePath].GetTextAsync(DisposalToken);
-        Assert.Same(_text, text);
+        var text = await newState.Documents[s_documents[1].FilePath].GetTextAsync(DisposalToken);
+        Assert.Same(s_text, text);
 
-        Assert.Equal(original.DocumentCollectionVersion, state.DocumentCollectionVersion);
+        Assert.Equal(state.DocumentCollectionVersion, newState.DocumentCollectionVersion);
     }
 
     [Fact]
     public void ProjectState_WithChangedHostDocument_Loader_RetainsComputedState()
     {
         // Arrange
-        var original = ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, _projectWorkspaceState)
-            .WithAddedHostDocument(_documents[2], EmptyTextLoader.Instance)
-            .WithAddedHostDocument(_documents[1], EmptyTextLoader.Instance);
+        var state = ProjectState
+            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .WithAddedHostDocument(s_documents[2], EmptyTextLoader.Instance)
+            .WithAddedHostDocument(s_documents[1], EmptyTextLoader.Instance);
 
-        // Force init
-        var originalTagHelpers = original.TagHelpers;
-        var originalProjectWorkspaceStateVersion = original.ProjectWorkspaceStateVersion;
+        var tagHelpers = state.TagHelpers;
+        var projectWorkspaceStateVersion = state.ProjectWorkspaceStateVersion;
 
         // Act
-        var state = original.WithChangedHostDocument(_documents[1], _textLoader);
+        var newState = state.WithChangedHostDocument(s_documents[1], s_textLoader);
+        var newTagHelpers = newState.TagHelpers;
+        var newProjectWorkspaceStateVersion = newState.ProjectWorkspaceStateVersion;
 
         // Assert
-        var actualTagHelpers = state.TagHelpers;
-        var actualProjectWorkspaceStateVersion = state.ProjectWorkspaceStateVersion;
+        Assert.Same(state.ProjectEngine, newState.ProjectEngine);
 
-        Assert.Same(original.ProjectEngine, state.ProjectEngine);
-
-        Assert.Equal(originalTagHelpers.Length, actualTagHelpers.Length);
-        for (var i = 0; i < originalTagHelpers.Length; i++)
+        Assert.Equal(tagHelpers.Length, newTagHelpers.Length);
+        for (var i = 0; i < tagHelpers.Length; i++)
         {
-            Assert.Same(originalTagHelpers[i], actualTagHelpers[i]);
+            Assert.Same(tagHelpers[i], newTagHelpers[i]);
         }
 
-        Assert.Equal(originalProjectWorkspaceStateVersion, actualProjectWorkspaceStateVersion);
+        Assert.Equal(projectWorkspaceStateVersion, newProjectWorkspaceStateVersion);
 
-        Assert.NotSame(original.Documents[_documents[1].FilePath], state.Documents[_documents[1].FilePath]);
+        Assert.NotSame(state.Documents[s_documents[1].FilePath], newState.Documents[s_documents[1].FilePath]);
     }
 
     [Fact]
     public void ProjectState_WithChangedHostDocument_Snapshot_RetainsComputedState()
     {
         // Arrange
-        var original = ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, _projectWorkspaceState)
-            .WithAddedHostDocument(_documents[2], EmptyTextLoader.Instance)
-            .WithAddedHostDocument(_documents[1], EmptyTextLoader.Instance);
+        var state = ProjectState
+            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .WithAddedHostDocument(s_documents[2], EmptyTextLoader.Instance)
+            .WithAddedHostDocument(s_documents[1], EmptyTextLoader.Instance);
 
-        // Force init
-        var originalTagHelpers = original.TagHelpers;
-        var originalProjectWorkspaceStateVersion = original.ProjectWorkspaceStateVersion;
+        var tagHelpers = state.TagHelpers;
+        var projectWorkspaceStateVersion = state.ProjectWorkspaceStateVersion;
 
         // Act
-        var state = original.WithChangedHostDocument(_documents[1], _text, VersionStamp.Create());
+        var newState = state.WithChangedHostDocument(s_documents[1], s_text, VersionStamp.Create());
+        var newTagHelpers = newState.TagHelpers;
+        var newProjectWorkspaceStateVersion = newState.ProjectWorkspaceStateVersion;
 
         // Assert
-        var actualTagHelpers = state.TagHelpers;
-        var actualProjectWorkspaceStateVersion = state.ProjectWorkspaceStateVersion;
+        Assert.Same(state.ProjectEngine, newState.ProjectEngine);
 
-        Assert.Same(original.ProjectEngine, state.ProjectEngine);
-
-        Assert.Equal(originalTagHelpers.Length, actualTagHelpers.Length);
-        for (var i = 0; i < originalTagHelpers.Length; i++)
+        Assert.Equal(tagHelpers.Length, newTagHelpers.Length);
+        for (var i = 0; i < tagHelpers.Length; i++)
         {
-            Assert.Same(originalTagHelpers[i], actualTagHelpers[i]);
+            Assert.Same(tagHelpers[i], newTagHelpers[i]);
         }
 
-        Assert.Equal(originalProjectWorkspaceStateVersion, actualProjectWorkspaceStateVersion);
+        Assert.Equal(projectWorkspaceStateVersion, newProjectWorkspaceStateVersion);
 
-        Assert.NotSame(original.Documents[_documents[1].FilePath], state.Documents[_documents[1].FilePath]);
+        Assert.NotSame(state.Documents[s_documents[1].FilePath], newState.Documents[s_documents[1].FilePath]);
     }
 
     [Fact]
-    public void ProjectState_WithChangedHostDocument_Loader_NotFoundNoops()
+    public void ProjectState_WithChangedHostDocument_Loader_NotFoundIgnored()
     {
         // Arrange
-        var original = ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, _projectWorkspaceState)
-            .WithAddedHostDocument(_documents[2], EmptyTextLoader.Instance)
-            .WithAddedHostDocument(_documents[1], EmptyTextLoader.Instance);
+        var state = ProjectState
+            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .WithAddedHostDocument(s_documents[2], EmptyTextLoader.Instance)
+            .WithAddedHostDocument(s_documents[1], EmptyTextLoader.Instance);
 
         // Act
-        var state = original.WithChangedHostDocument(_documents[0], _textLoader);
+        var newState = state.WithChangedHostDocument(s_documents[0], s_textLoader);
 
         // Assert
-        Assert.Same(original, state);
+        Assert.Same(state, newState);
     }
 
     [Fact]
-    public void ProjectState_WithChangedHostDocument_Snapshot_NotFoundNoops()
+    public void ProjectState_WithChangedHostDocument_Snapshot_NotFoundIgnored()
     {
         // Arrange
-        var original = ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, _projectWorkspaceState)
-            .WithAddedHostDocument(_documents[2], EmptyTextLoader.Instance)
-            .WithAddedHostDocument(_documents[1], EmptyTextLoader.Instance);
+        var state = ProjectState
+            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .WithAddedHostDocument(s_documents[2], EmptyTextLoader.Instance)
+            .WithAddedHostDocument(s_documents[1], EmptyTextLoader.Instance);
 
         // Act
-        var state = original.WithChangedHostDocument(_documents[0], _text, VersionStamp.Create());
+        var newState = state.WithChangedHostDocument(s_documents[0], s_text, VersionStamp.Create());
 
         // Assert
-        Assert.Same(original, state);
+        Assert.Same(state, newState);
     }
 
     [Fact]
     public void ProjectState_RemoveHostDocument_FromProjectWithDocuments()
     {
         // Arrange
-        var original = ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, _projectWorkspaceState)
-            .WithAddedHostDocument(_documents[2], EmptyTextLoader.Instance)
-            .WithAddedHostDocument(_documents[1], EmptyTextLoader.Instance);
+        var state = ProjectState
+            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .WithAddedHostDocument(s_documents[2], EmptyTextLoader.Instance)
+            .WithAddedHostDocument(s_documents[1], EmptyTextLoader.Instance);
 
         // Act
-        var state = original.WithRemovedHostDocument(_documents[1]);
+        var newState = state.WithRemovedHostDocument(s_documents[1]);
 
         // Assert
-        Assert.NotEqual(original.Version, state.Version);
+        Assert.NotEqual(state.Version, newState.Version);
 
-        Assert.Collection(
-            state.Documents.OrderBy(kvp => kvp.Key),
-            d => Assert.Same(_documents[2], d.Value.HostDocument));
+        Assert.Single(newState.Documents, d => ReferenceEquals(s_documents[2], d.Value.HostDocument));
 
-        Assert.NotEqual(original.DocumentCollectionVersion, state.DocumentCollectionVersion);
+        Assert.NotEqual(state.DocumentCollectionVersion, newState.DocumentCollectionVersion);
     }
 
     [Fact]
     public void ProjectState_RemoveHostDocument_TracksImports()
     {
         // Arrange
-        var original = ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, _projectWorkspaceState)
+        var original = ProjectState
+            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
             .WithAddedHostDocument(TestProjectData.SomeProjectFile1, EmptyTextLoader.Instance)
             .WithAddedHostDocument(TestProjectData.SomeProjectFile2, EmptyTextLoader.Instance)
             .WithAddedHostDocument(TestProjectData.SomeProjectNestedFile3, EmptyTextLoader.Instance)
@@ -434,28 +412,26 @@ public class ProjectStateTest : WorkspaceTestBase
 
         // Assert
         Assert.Collection(
-            state.ImportsToRelatedDocuments.OrderBy(kvp => kvp.Key),
-            kvp =>
+            state.ImportsToRelatedDocuments.OrderBy(static kvp => kvp.Key),
+            static kvp =>
             {
                 Assert.Equal(TestProjectData.SomeProjectImportFile.TargetPath, kvp.Key);
                 Assert.Equal(
-                    new string[]
-                    {
+                    [
                         TestProjectData.AnotherProjectNestedFile4.FilePath,
                         TestProjectData.SomeProjectFile1.FilePath,
                         TestProjectData.SomeProjectFile2.FilePath,
-                    },
-                    kvp.Value.OrderBy(f => f));
+                    ],
+                    kvp.Value.OrderBy(static f => f));
             },
-            kvp =>
+            static kvp =>
             {
                 Assert.Equal(TestProjectData.SomeProjectNestedImportFile.TargetPath, kvp.Key);
                 Assert.Equal(
-                    new string[]
-                    {
+                    [
                         TestProjectData.AnotherProjectNestedFile4.FilePath,
-                    },
-                    kvp.Value.OrderBy(f => f));
+                    ],
+                    kvp.Value.OrderBy(static f => f));
             });
     }
 
@@ -463,145 +439,139 @@ public class ProjectStateTest : WorkspaceTestBase
     public void ProjectState_RemoveHostDocument_TracksImports_RemoveAllDocuments()
     {
         // Arrange
-        var original = ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, _projectWorkspaceState)
+        var state = ProjectState.Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
             .WithAddedHostDocument(TestProjectData.SomeProjectFile1, EmptyTextLoader.Instance)
             .WithAddedHostDocument(TestProjectData.SomeProjectFile2, EmptyTextLoader.Instance)
             .WithAddedHostDocument(TestProjectData.SomeProjectNestedFile3, EmptyTextLoader.Instance)
             .WithAddedHostDocument(TestProjectData.AnotherProjectNestedFile4, EmptyTextLoader.Instance);
 
         // Act
-        var state = original
+        var newState = state
             .WithRemovedHostDocument(TestProjectData.SomeProjectFile1)
             .WithRemovedHostDocument(TestProjectData.SomeProjectFile2)
             .WithRemovedHostDocument(TestProjectData.SomeProjectNestedFile3)
             .WithRemovedHostDocument(TestProjectData.AnotherProjectNestedFile4);
 
         // Assert
-        Assert.Empty(state.Documents);
-        Assert.Empty(state.ImportsToRelatedDocuments);
+        Assert.Empty(newState.Documents);
+        Assert.Empty(newState.ImportsToRelatedDocuments);
     }
 
     [Fact]
     public void ProjectState_RemoveHostDocument_RetainsComputedState()
     {
         // Arrange
-        var original = ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, _projectWorkspaceState)
-            .WithAddedHostDocument(_documents[2], EmptyTextLoader.Instance)
-            .WithAddedHostDocument(_documents[1], EmptyTextLoader.Instance);
+        var state = ProjectState.Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .WithAddedHostDocument(s_documents[2], EmptyTextLoader.Instance)
+            .WithAddedHostDocument(s_documents[1], EmptyTextLoader.Instance);
 
-        // Force init
-        var originalTagHelpers = original.TagHelpers;
-        var originalProjectWorkspaceStateVersion = original.ProjectWorkspaceStateVersion;
+        var tagHelpers = state.TagHelpers;
+        var projectWorkspaceStateVersion = state.ProjectWorkspaceStateVersion;
 
         // Act
-        var state = original.WithRemovedHostDocument(_documents[2]);
+        var newState = state.WithRemovedHostDocument(s_documents[2]);
+        var newTagHelpers = newState.TagHelpers;
+        var newProjectWorkspaceStateVersion = newState.ProjectWorkspaceStateVersion;
 
         // Assert
-        var actualTagHelpers = state.TagHelpers;
-        var actualProjectWorkspaceStateVersion = state.ProjectWorkspaceStateVersion;
+        Assert.Same(state.ProjectEngine, newState.ProjectEngine);
 
-        Assert.Same(original.ProjectEngine, state.ProjectEngine);
-
-        Assert.Equal(originalTagHelpers.Length, actualTagHelpers.Length);
-        for (var i = 0; i < originalTagHelpers.Length; i++)
+        Assert.Equal(tagHelpers.Length, newTagHelpers.Length);
+        for (var i = 0; i < tagHelpers.Length; i++)
         {
-            Assert.Same(originalTagHelpers[i], actualTagHelpers[i]);
+            Assert.Same(tagHelpers[i], newTagHelpers[i]);
         }
 
-        Assert.Equal(originalProjectWorkspaceStateVersion, actualProjectWorkspaceStateVersion);
+        Assert.Equal(projectWorkspaceStateVersion, newProjectWorkspaceStateVersion);
 
-        Assert.Same(original.Documents[_documents[1].FilePath], state.Documents[_documents[1].FilePath]);
+        Assert.Same(state.Documents[s_documents[1].FilePath], newState.Documents[s_documents[1].FilePath]);
     }
 
     [Fact]
-    public void ProjectState_RemoveHostDocument_NotFoundNoops()
+    public void ProjectState_RemoveHostDocument_NotFoundIgnored()
     {
         // Arrange
-        var original = ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, _projectWorkspaceState)
-            .WithAddedHostDocument(_documents[2], EmptyTextLoader.Instance)
-            .WithAddedHostDocument(_documents[1], EmptyTextLoader.Instance);
+        var state = ProjectState
+            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .WithAddedHostDocument(s_documents[2], EmptyTextLoader.Instance)
+            .WithAddedHostDocument(s_documents[1], EmptyTextLoader.Instance);
 
         // Act
-        var state = original.WithRemovedHostDocument(_documents[0]);
+        var newState = state.WithRemovedHostDocument(s_documents[0]);
 
         // Assert
-        Assert.Same(original, state);
+        Assert.Same(state, newState);
     }
 
     [Fact]
     public void ProjectState_WithHostProject_ConfigurationChange_UpdatesConfigurationState()
     {
         // Arrange
-        var original = ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, _projectWorkspaceState)
-            .WithAddedHostDocument(_documents[2], EmptyTextLoader.Instance)
-            .WithAddedHostDocument(_documents[1], EmptyTextLoader.Instance);
+        var state = ProjectState
+            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .WithAddedHostDocument(s_documents[2], EmptyTextLoader.Instance)
+            .WithAddedHostDocument(s_documents[1], EmptyTextLoader.Instance);
 
-        // Force init
-        var originalTagHelpers = original.TagHelpers;
-        var originalProjectWorkspaceStateVersion = original.ConfigurationVersion;
+        var tagHelpers = state.TagHelpers;
+        var projectWorkspaceStateVersion = state.ConfigurationVersion;
 
         // Act
-        var state = original.WithHostProject(_hostProjectWithConfigurationChange);
+        var newState = state.WithHostProject(s_projectWithConfigurationChange);
+        Assert.NotEqual(state.Version, newState.Version);
+        Assert.Same(s_projectWithConfigurationChange, newState.HostProject);
 
         // Assert
-        Assert.NotEqual(original.Version, state.Version);
-        Assert.Same(_hostProjectWithConfigurationChange, state.HostProject);
+        var actualTagHelpers = newState.TagHelpers;
+        var actualProjectWorkspaceStateVersion = newState.ConfigurationVersion;
 
-        var actualTagHelpers = state.TagHelpers;
-        var actualProjectWorkspaceStateVersion = state.ConfigurationVersion;
+        Assert.NotSame(state.ProjectEngine, newState.ProjectEngine);
 
-        Assert.NotSame(original.ProjectEngine, state.ProjectEngine);
-
-        Assert.Equal(originalTagHelpers.Length, actualTagHelpers.Length);
-        for (var i = 0; i < originalTagHelpers.Length; i++)
+        Assert.Equal(tagHelpers.Length, actualTagHelpers.Length);
+        for (var i = 0; i < tagHelpers.Length; i++)
         {
-            Assert.Same(originalTagHelpers[i], actualTagHelpers[i]);
+            Assert.Same(tagHelpers[i], actualTagHelpers[i]);
         }
 
-        Assert.NotEqual(originalProjectWorkspaceStateVersion, actualProjectWorkspaceStateVersion);
+        Assert.NotEqual(projectWorkspaceStateVersion, actualProjectWorkspaceStateVersion);
 
-        Assert.NotSame(original.Documents[_documents[1].FilePath], state.Documents[_documents[1].FilePath]);
-        Assert.NotSame(original.Documents[_documents[2].FilePath], state.Documents[_documents[2].FilePath]);
+        Assert.NotSame(state.Documents[s_documents[1].FilePath], newState.Documents[s_documents[1].FilePath]);
+        Assert.NotSame(state.Documents[s_documents[2].FilePath], newState.Documents[s_documents[2].FilePath]);
 
-        Assert.NotEqual(original.DocumentCollectionVersion, state.DocumentCollectionVersion);
+        Assert.NotEqual(state.DocumentCollectionVersion, newState.DocumentCollectionVersion);
     }
 
     [Fact]
     public void ProjectState_WithHostProject_RootNamespaceChange_UpdatesConfigurationState()
     {
         // Arrange
-        var original = ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, _projectWorkspaceState)
-            .WithAddedHostDocument(_documents[2], EmptyTextLoader.Instance)
-            .WithAddedHostDocument(_documents[1], EmptyTextLoader.Instance);
-        var hostProjectWithRootNamespaceChange = original.HostProject with { RootNamespace = "ChangedRootNamespace" };
+        var state = ProjectState
+            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .WithAddedHostDocument(s_documents[2], EmptyTextLoader.Instance)
+            .WithAddedHostDocument(s_documents[1], EmptyTextLoader.Instance);
 
-        // Force init
-        _ = original.TagHelpers;
-        _ = original.ConfigurationVersion;
+        var hostProjectWithRootNamespaceChange = state.HostProject with { RootNamespace = "ChangedRootNamespace" };
 
         // Act
-        var state = original.WithHostProject(hostProjectWithRootNamespaceChange);
+        var newState = state.WithHostProject(hostProjectWithRootNamespaceChange);
 
         // Assert
-        Assert.NotSame(original, state);
+        Assert.NotSame(state, newState);
     }
 
     [Fact]
-    public void ProjectState_WithHostProject_NoConfigurationChange_Noops()
+    public void ProjectState_WithHostProject_NoConfigurationChange_Ignored()
     {
         // Arrange
-        var original = ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, _projectWorkspaceState)
-            .WithAddedHostDocument(_documents[2], EmptyTextLoader.Instance)
-            .WithAddedHostDocument(_documents[1], EmptyTextLoader.Instance);
-
-        // Force init
-        _ = original.ProjectWorkspaceStateVersion;
+        var state = ProjectState
+            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .WithAddedHostDocument(s_documents[2], EmptyTextLoader.Instance)
+            .WithAddedHostDocument(s_documents[1], EmptyTextLoader.Instance);
 
         // Act
-        var state = original.WithHostProject(_hostProject);
+        var newState = state.WithHostProject(s_project);
 
         // Assert
-        Assert.Same(original, state);
+        Assert.Same(state, newState);
     }
 
     [Fact]
@@ -611,18 +581,18 @@ public class ProjectStateTest : WorkspaceTestBase
         var callCount = 0;
 
         var documents = ImmutableDictionary.CreateBuilder<string, DocumentState>(FilePathComparer.Instance);
-        documents[_documents[1].FilePath] = TestDocumentState.Create(_documents[1], onConfigurationChange: () => callCount++);
-        documents[_documents[2].FilePath] = TestDocumentState.Create(_documents[2], onConfigurationChange: () => callCount++);
+        documents[s_documents[1].FilePath] = TestDocumentState.Create(s_documents[1], onConfigurationChange: () => callCount++);
+        documents[s_documents[2].FilePath] = TestDocumentState.Create(s_documents[2], onConfigurationChange: () => callCount++);
 
-        var original = ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, _projectWorkspaceState);
-        original.Documents = documents.ToImmutable();
+        var state = ProjectState.Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState);
+        state.Documents = documents.ToImmutable();
 
         // Act
-        var state = original.WithHostProject(_hostProjectWithConfigurationChange);
+        var newState = state.WithHostProject(s_projectWithConfigurationChange);
 
         // Assert
-        Assert.NotEqual(original.Version, state.Version);
-        Assert.Same(_hostProjectWithConfigurationChange, state.HostProject);
+        Assert.NotEqual(state.Version, newState.Version);
+        Assert.Same(s_projectWithConfigurationChange, newState.HostProject);
         Assert.Equal(2, callCount);
     }
 
@@ -630,14 +600,15 @@ public class ProjectStateTest : WorkspaceTestBase
     public void ProjectState_WithHostProject_ResetsImportedDocuments()
     {
         // Arrange
-        var original = ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, _projectWorkspaceState);
-        original = original.WithAddedHostDocument(TestProjectData.SomeProjectFile1, EmptyTextLoader.Instance);
+        var state = ProjectState
+            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .WithAddedHostDocument(TestProjectData.SomeProjectFile1, EmptyTextLoader.Instance);
 
         // Act
-        var state = original.WithHostProject(_hostProjectWithConfigurationChange);
+        var newState = state.WithHostProject(s_projectWithConfigurationChange);
 
         // Assert
-        var importMap = Assert.Single(state.ImportsToRelatedDocuments);
+        var importMap = Assert.Single(newState.ImportsToRelatedDocuments);
         var documentFilePath = Assert.Single(importMap.Value);
         Assert.Equal(TestProjectData.SomeProjectFile1.FilePath, documentFilePath);
     }
@@ -646,94 +617,87 @@ public class ProjectStateTest : WorkspaceTestBase
     public void ProjectState_WithProjectWorkspaceState_Changed()
     {
         // Arrange
-        var original = ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, _projectWorkspaceState)
-            .WithAddedHostDocument(_documents[2], EmptyTextLoader.Instance)
-            .WithAddedHostDocument(_documents[1], EmptyTextLoader.Instance);
+        var state = ProjectState
+            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .WithAddedHostDocument(s_documents[2], EmptyTextLoader.Instance)
+            .WithAddedHostDocument(s_documents[1], EmptyTextLoader.Instance);
 
-        // Force init
-        var originalTagHelpers = original.TagHelpers;
-        var originalProjectWorkspaceStateVersion = original.ProjectWorkspaceStateVersion;
-
-        var changed = ProjectWorkspaceState.Create(_projectWorkspaceState.TagHelpers, LanguageVersion.CSharp6);
+        var tagHelpers = state.TagHelpers;
+        var projectWorkspaceStateVersion = state.ProjectWorkspaceStateVersion;
 
         // Act
-        var state = original.WithProjectWorkspaceState(changed);
+        var newProjectWorkspaceState = ProjectWorkspaceState.Create(s_projectWorkspaceState.TagHelpers, LanguageVersion.CSharp6);
+        var newState = state.WithProjectWorkspaceState(newProjectWorkspaceState);
 
         // Assert
-        Assert.NotEqual(original.Version, state.Version);
-        Assert.Same(changed, state.ProjectWorkspaceState);
+        Assert.NotEqual(state.Version, newState.Version);
+        Assert.Same(newProjectWorkspaceState, newState.ProjectWorkspaceState);
 
-        var actualTagHelpers = state.TagHelpers;
-        var actualProjectWorkspaceStateVersion = state.ProjectWorkspaceStateVersion;
+        var actualTagHelpers = newState.TagHelpers;
+        var actualProjectWorkspaceStateVersion = newState.ProjectWorkspaceStateVersion;
 
         // The C# language version changed, and the tag helpers didn't change
-        Assert.NotSame(original.ProjectEngine, state.ProjectEngine);
+        Assert.NotSame(state.ProjectEngine, newState.ProjectEngine);
 
-        Assert.Equal(originalTagHelpers.Length, actualTagHelpers.Length);
-        for (var i = 0; i < originalTagHelpers.Length; i++)
+        Assert.Equal(tagHelpers.Length, actualTagHelpers.Length);
+        for (var i = 0; i < tagHelpers.Length; i++)
         {
-            Assert.Same(originalTagHelpers[i], actualTagHelpers[i]);
+            Assert.Same(tagHelpers[i], actualTagHelpers[i]);
         }
 
-        Assert.NotEqual(originalProjectWorkspaceStateVersion, actualProjectWorkspaceStateVersion);
+        Assert.NotEqual(projectWorkspaceStateVersion, actualProjectWorkspaceStateVersion);
 
-        Assert.NotSame(original.Documents[_documents[1].FilePath], state.Documents[_documents[1].FilePath]);
-        Assert.NotSame(original.Documents[_documents[2].FilePath], state.Documents[_documents[2].FilePath]);
+        Assert.NotSame(state.Documents[s_documents[1].FilePath], newState.Documents[s_documents[1].FilePath]);
+        Assert.NotSame(state.Documents[s_documents[2].FilePath], newState.Documents[s_documents[2].FilePath]);
     }
 
     [Fact]
     public void ProjectState_WithProjectWorkspaceState_Changed_TagHelpersChanged()
     {
         // Arrange
-        var original = ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, _projectWorkspaceState)
-            .WithAddedHostDocument(_documents[2], EmptyTextLoader.Instance)
-            .WithAddedHostDocument(_documents[1], EmptyTextLoader.Instance);
+        var state = ProjectState
+            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .WithAddedHostDocument(s_documents[2], EmptyTextLoader.Instance)
+            .WithAddedHostDocument(s_documents[1], EmptyTextLoader.Instance);
 
-        // Force init
-        var originalTagHelpers = original.TagHelpers;
-        var originalProjectWorkspaceStateVersion = original.ProjectWorkspaceStateVersion;
-
-        var changed = ProjectWorkspaceState.Default;
+        var tagHelpers = state.TagHelpers;
+        var projectWorkspaceStateVersion = state.ProjectWorkspaceStateVersion;
 
         // Act
-        var state = original.WithProjectWorkspaceState(changed);
+        var newState = state.WithProjectWorkspaceState(ProjectWorkspaceState.Default);
 
         // Assert
-        Assert.NotEqual(original.Version, state.Version);
-        Assert.Same(changed, state.ProjectWorkspaceState);
+        Assert.NotEqual(state.Version, newState.Version);
+        Assert.Same(ProjectWorkspaceState.Default, newState.ProjectWorkspaceState);
 
-        var actualTagHelpers = state.TagHelpers;
-        var actualProjectWorkspaceStateVersion = state.ProjectWorkspaceStateVersion;
+        var actualTagHelpers = newState.TagHelpers;
+        var actualProjectWorkspaceStateVersion = newState.ProjectWorkspaceStateVersion;
 
         // The configuration didn't change, but the tag helpers did
-        Assert.Same(original.ProjectEngine, state.ProjectEngine);
-        Assert.NotEqual(originalTagHelpers, actualTagHelpers);
-        Assert.NotEqual(originalProjectWorkspaceStateVersion, actualProjectWorkspaceStateVersion);
-        Assert.Equal(state.Version, actualProjectWorkspaceStateVersion);
+        Assert.Same(state.ProjectEngine, newState.ProjectEngine);
+        Assert.NotEqual(tagHelpers, actualTagHelpers);
+        Assert.NotEqual(projectWorkspaceStateVersion, actualProjectWorkspaceStateVersion);
+        Assert.Equal(newState.Version, actualProjectWorkspaceStateVersion);
 
-        Assert.NotSame(original.Documents[_documents[1].FilePath], state.Documents[_documents[1].FilePath]);
-        Assert.NotSame(original.Documents[_documents[2].FilePath], state.Documents[_documents[2].FilePath]);
+        Assert.NotSame(state.Documents[s_documents[1].FilePath], newState.Documents[s_documents[1].FilePath]);
+        Assert.NotSame(state.Documents[s_documents[2].FilePath], newState.Documents[s_documents[2].FilePath]);
     }
 
     [Fact]
     public void ProjectState_WithProjectWorkspaceState_IdenticalState_Caches()
     {
         // Arrange
-        var original = ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, _projectWorkspaceState)
-            .WithAddedHostDocument(_documents[2], EmptyTextLoader.Instance)
-            .WithAddedHostDocument(_documents[1], EmptyTextLoader.Instance);
-
-        // Force init
-        _ = original.TagHelpers;
-        _ = original.ProjectWorkspaceStateVersion;
-
-        var changed = ProjectWorkspaceState.Create(original.TagHelpers, original.CSharpLanguageVersion);
+        var state = ProjectState
+            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .WithAddedHostDocument(s_documents[2], EmptyTextLoader.Instance)
+            .WithAddedHostDocument(s_documents[1], EmptyTextLoader.Instance);
 
         // Act
-        var state = original.WithProjectWorkspaceState(changed);
+        var newProjectWorkspaceState = ProjectWorkspaceState.Create(state.TagHelpers, state.CSharpLanguageVersion);
+        var newState = state.WithProjectWorkspaceState(newProjectWorkspaceState);
 
         // Assert
-        Assert.Same(original, state);
+        Assert.Same(state, newState);
     }
 
     [Fact]
@@ -743,19 +707,17 @@ public class ProjectStateTest : WorkspaceTestBase
         var callCount = 0;
 
         var documents = ImmutableDictionary.CreateBuilder<string, DocumentState>(FilePathComparer.Instance);
-        documents[_documents[1].FilePath] = TestDocumentState.Create(_documents[1], onProjectWorkspaceStateChange: () => callCount++);
-        documents[_documents[2].FilePath] = TestDocumentState.Create(_documents[2], onProjectWorkspaceStateChange: () => callCount++);
+        documents[s_documents[1].FilePath] = TestDocumentState.Create(s_documents[1], onProjectWorkspaceStateChange: () => callCount++);
+        documents[s_documents[2].FilePath] = TestDocumentState.Create(s_documents[2], onProjectWorkspaceStateChange: () => callCount++);
 
-        var original = ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, _projectWorkspaceState);
-        original.Documents = documents.ToImmutable();
-
-        var changed = ProjectWorkspaceState.Default;
+        var state = ProjectState.Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState);
+        state.Documents = documents.ToImmutable();
 
         // Act
-        var state = original.WithProjectWorkspaceState(changed);
+        var newState = state.WithProjectWorkspaceState(ProjectWorkspaceState.Default);
 
         // Assert
-        Assert.NotEqual(original.Version, state.Version);
+        Assert.NotEqual(state.Version, newState.Version);
         Assert.Equal(2, callCount);
     }
 
@@ -779,26 +741,28 @@ public class ProjectStateTest : WorkspaceTestBase
         var importsToRelatedDocuments = ImmutableDictionary.CreateBuilder<string, ImmutableArray<string>>(FilePathComparer.Instance);
         importsToRelatedDocuments.Add(
             TestProjectData.SomeProjectImportFile.TargetPath,
-            ImmutableArray.Create(
+            [
                 TestProjectData.SomeProjectFile1.FilePath,
                 TestProjectData.SomeProjectFile2.FilePath,
                 TestProjectData.SomeProjectNestedFile3.FilePath,
-                TestProjectData.AnotherProjectNestedFile4.FilePath));
+                TestProjectData.AnotherProjectNestedFile4.FilePath,
+            ]);
         importsToRelatedDocuments.Add(
             TestProjectData.SomeProjectNestedImportFile.TargetPath,
-            ImmutableArray.Create(
+            [
                 TestProjectData.SomeProjectNestedFile3.FilePath,
-                TestProjectData.AnotherProjectNestedFile4.FilePath));
+                TestProjectData.AnotherProjectNestedFile4.FilePath
+            ]);
 
-        var original = ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, _projectWorkspaceState);
-        original.Documents = documents.ToImmutable();
-        original.ImportsToRelatedDocuments = importsToRelatedDocuments.ToImmutable();
+        var state = ProjectState.Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState);
+        state.Documents = documents.ToImmutable();
+        state.ImportsToRelatedDocuments = importsToRelatedDocuments.ToImmutable();
 
         // Act
-        var state = original.WithAddedHostDocument(TestProjectData.AnotherProjectImportFile, EmptyTextLoader.Instance);
+        var newState = state.WithAddedHostDocument(TestProjectData.AnotherProjectImportFile, EmptyTextLoader.Instance);
 
         // Assert
-        Assert.NotEqual(original.Version, state.Version);
+        Assert.NotEqual(state.Version, newState.Version);
         Assert.Equal(4, callCount);
     }
 
@@ -822,26 +786,28 @@ public class ProjectStateTest : WorkspaceTestBase
         var importsToRelatedDocuments = ImmutableDictionary.CreateBuilder<string, ImmutableArray<string>>(FilePathComparer.Instance);
         importsToRelatedDocuments.Add(
             TestProjectData.SomeProjectImportFile.TargetPath,
-            ImmutableArray.Create(
+            [
                 TestProjectData.SomeProjectFile1.FilePath,
                 TestProjectData.SomeProjectFile2.FilePath,
                 TestProjectData.SomeProjectNestedFile3.FilePath,
-                TestProjectData.AnotherProjectNestedFile4.FilePath));
+                TestProjectData.AnotherProjectNestedFile4.FilePath,
+            ]);
         importsToRelatedDocuments.Add(
             TestProjectData.SomeProjectNestedImportFile.TargetPath,
-            ImmutableArray.Create(
+            [
                 TestProjectData.SomeProjectNestedFile3.FilePath,
-                TestProjectData.AnotherProjectNestedFile4.FilePath));
+                TestProjectData.AnotherProjectNestedFile4.FilePath
+            ]);
 
-        var original = ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, _projectWorkspaceState);
-        original.Documents = documents.ToImmutable();
-        original.ImportsToRelatedDocuments = importsToRelatedDocuments.ToImmutable();
+        var state = ProjectState.Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState);
+        state.Documents = documents.ToImmutable();
+        state.ImportsToRelatedDocuments = importsToRelatedDocuments.ToImmutable();
 
         // Act
-        var state = original.WithAddedHostDocument(TestProjectData.AnotherProjectNestedImportFile, EmptyTextLoader.Instance);
+        var newState = state.WithAddedHostDocument(TestProjectData.AnotherProjectNestedImportFile, EmptyTextLoader.Instance);
 
         // Assert
-        Assert.NotEqual(original.Version, state.Version);
+        Assert.NotEqual(state.Version, newState.Version);
         Assert.Equal(2, callCount);
     }
 
@@ -867,27 +833,29 @@ public class ProjectStateTest : WorkspaceTestBase
         var importsToRelatedDocuments = ImmutableDictionary.CreateBuilder<string, ImmutableArray<string>>(FilePathComparer.Instance);
         importsToRelatedDocuments.Add(
             TestProjectData.SomeProjectImportFile.TargetPath,
-            ImmutableArray.Create(
+            [
                 TestProjectData.SomeProjectFile1.FilePath,
                 TestProjectData.SomeProjectFile2.FilePath,
                 TestProjectData.SomeProjectNestedFile3.FilePath,
                 TestProjectData.AnotherProjectNestedFile4.FilePath,
-                TestProjectData.AnotherProjectNestedImportFile.FilePath));
+                TestProjectData.AnotherProjectNestedImportFile.FilePath,
+            ]);
         importsToRelatedDocuments.Add(
             TestProjectData.SomeProjectNestedImportFile.TargetPath,
-            ImmutableArray.Create(
+            [
                 TestProjectData.SomeProjectNestedFile3.FilePath,
-                TestProjectData.AnotherProjectNestedFile4.FilePath));
+                TestProjectData.AnotherProjectNestedFile4.FilePath
+            ]);
 
-        var original = ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, _projectWorkspaceState);
-        original.Documents = documents.ToImmutable();
-        original.ImportsToRelatedDocuments = importsToRelatedDocuments.ToImmutable();
+        var state = ProjectState.Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState);
+        state.Documents = documents.ToImmutable();
+        state.ImportsToRelatedDocuments = importsToRelatedDocuments.ToImmutable();
 
         // Act
-        var state = original.WithChangedHostDocument(document5, EmptyTextLoader.Instance);
+        var newState = state.WithChangedHostDocument(document5, EmptyTextLoader.Instance);
 
         // Assert
-        Assert.NotEqual(original.Version, state.Version);
+        Assert.NotEqual(state.Version, newState.Version);
         Assert.Equal(2, callCount);
     }
 
@@ -913,27 +881,29 @@ public class ProjectStateTest : WorkspaceTestBase
         var importsToRelatedDocuments = ImmutableDictionary.CreateBuilder<string, ImmutableArray<string>>(FilePathComparer.Instance);
         importsToRelatedDocuments.Add(
             TestProjectData.SomeProjectImportFile.TargetPath,
-            ImmutableArray.Create(
+            [
                 TestProjectData.SomeProjectFile1.FilePath,
                 TestProjectData.SomeProjectFile2.FilePath,
                 TestProjectData.SomeProjectNestedFile3.FilePath,
                 TestProjectData.AnotherProjectNestedFile4.FilePath,
-                TestProjectData.AnotherProjectNestedImportFile.FilePath));
+                TestProjectData.AnotherProjectNestedImportFile.FilePath,
+            ]);
         importsToRelatedDocuments.Add(
             TestProjectData.SomeProjectNestedImportFile.TargetPath,
-            ImmutableArray.Create(
+            [
                 TestProjectData.SomeProjectNestedFile3.FilePath,
-                TestProjectData.AnotherProjectNestedFile4.FilePath));
+                TestProjectData.AnotherProjectNestedFile4.FilePath
+            ]);
 
-        var original = ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, _projectWorkspaceState);
-        original.Documents = documents.ToImmutable();
-        original.ImportsToRelatedDocuments = importsToRelatedDocuments.ToImmutable();
+        var state = ProjectState.Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState);
+        state.Documents = documents.ToImmutable();
+        state.ImportsToRelatedDocuments = importsToRelatedDocuments.ToImmutable();
 
         // Act
-        var state = original.WithChangedHostDocument(document5, _text, VersionStamp.Create());
+        var newState = state.WithChangedHostDocument(document5, s_text, VersionStamp.Create());
 
         // Assert
-        Assert.NotEqual(original.Version, state.Version);
+        Assert.NotEqual(state.Version, newState.Version);
         Assert.Equal(2, callCount);
     }
 
@@ -959,27 +929,29 @@ public class ProjectStateTest : WorkspaceTestBase
         var importsToRelatedDocuments = ImmutableDictionary.CreateBuilder<string, ImmutableArray<string>>(FilePathComparer.Instance);
         importsToRelatedDocuments.Add(
             TestProjectData.SomeProjectImportFile.TargetPath,
-            ImmutableArray.Create(
+            [
                 TestProjectData.SomeProjectFile1.FilePath,
                 TestProjectData.SomeProjectFile2.FilePath,
                 TestProjectData.SomeProjectNestedFile3.FilePath,
                 TestProjectData.AnotherProjectNestedFile4.FilePath,
-                TestProjectData.AnotherProjectNestedImportFile.FilePath));
+                TestProjectData.AnotherProjectNestedImportFile.FilePath,
+            ]);
         importsToRelatedDocuments.Add(
             TestProjectData.SomeProjectNestedImportFile.TargetPath,
-            ImmutableArray.Create(
+            [
                 TestProjectData.SomeProjectNestedFile3.FilePath,
-                TestProjectData.AnotherProjectNestedFile4.FilePath));
+                TestProjectData.AnotherProjectNestedFile4.FilePath
+            ]);
 
-        var original = ProjectState.Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, _projectWorkspaceState);
-        original.Documents = documents.ToImmutable();
-        original.ImportsToRelatedDocuments = importsToRelatedDocuments.ToImmutable();
+        var state = ProjectState.Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState);
+        state.Documents = documents.ToImmutable();
+        state.ImportsToRelatedDocuments = importsToRelatedDocuments.ToImmutable();
 
         // Act
-        var state = original.WithRemovedHostDocument(document5);
+        var newState = state.WithRemovedHostDocument(document5);
 
         // Assert
-        Assert.NotEqual(original.Version, state.Version);
+        Assert.NotEqual(state.Version, newState.Version);
         Assert.Equal(2, callCount);
     }
 
@@ -988,8 +960,6 @@ public class ProjectStateTest : WorkspaceTestBase
         public static TestDocumentState Create(
             HostDocument hostDocument,
             TextLoader? loader = null,
-            Action? onTextChange = null,
-            Action? onTextLoaderChange = null,
             Action? onConfigurationChange = null,
             Action? onImportsChange = null,
             Action? onProjectWorkspaceStateChange = null)
@@ -997,15 +967,11 @@ public class ProjectStateTest : WorkspaceTestBase
             return new TestDocumentState(
                 hostDocument,
                 loader,
-                onTextChange,
-                onTextLoaderChange,
                 onConfigurationChange,
                 onImportsChange,
                 onProjectWorkspaceStateChange);
         }
 
-        private readonly Action? _onTextChange;
-        private readonly Action? _onTextLoaderChange;
         private readonly Action? _onConfigurationChange;
         private readonly Action? _onImportsChange;
         private readonly Action? _onProjectWorkspaceStateChange;
@@ -1013,30 +979,14 @@ public class ProjectStateTest : WorkspaceTestBase
         private TestDocumentState(
             HostDocument hostDocument,
             TextLoader? textLoader,
-            Action? onTextChange,
-            Action? onTextLoaderChange,
             Action? onConfigurationChange,
             Action? onImportsChange,
             Action? onProjectWorkspaceStateChange)
             : base(hostDocument, textLoader)
         {
-            _onTextChange = onTextChange;
-            _onTextLoaderChange = onTextLoaderChange;
             _onConfigurationChange = onConfigurationChange;
             _onImportsChange = onImportsChange;
             _onProjectWorkspaceStateChange = onProjectWorkspaceStateChange;
-        }
-
-        public override DocumentState WithText(SourceText sourceText, VersionStamp textVersion)
-        {
-            _onTextChange?.Invoke();
-            return base.WithText(sourceText, textVersion);
-        }
-
-        public override DocumentState WithTextLoader(TextLoader loader)
-        {
-            _onTextLoaderChange?.Invoke();
-            return base.WithTextLoader(loader);
         }
 
         public override DocumentState WithConfigurationChange()
