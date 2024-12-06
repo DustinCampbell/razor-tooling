@@ -42,7 +42,7 @@ public class ProjectWorkspaceStateGeneratorTest : VisualStudioWorkspaceTestBase
             TestProjectData.SomeProject.FilePath));
         _workspaceProject = solution.GetProject(projectId).AssumeNotNull();
 
-        var state = ProjectState.Create(ProjectEngineFactoryProvider, TestProjectData.SomeProject, ProjectWorkspaceState.Default);
+        var state = ProjectState.Create(TestProjectData.SomeProject, ProjectEngineFactoryProvider);
         _projectSnapshot = new ProjectSnapshot(state);
 
         _projectWorkspaceStateWithTagHelpers = ProjectWorkspaceState.Create(

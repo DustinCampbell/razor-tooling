@@ -32,7 +32,7 @@ public class ProjectStateGeneratedOutputTest(ITestOutputHelper testOutput) : Too
     {
         // Arrange
         var state = ProjectState
-            .Create(s_projectEngineFactoryProvider, s_project, ProjectWorkspaceState.Default)
+            .Create(s_project, s_projectEngineFactoryProvider)
             .AddDocument(s_document1, EmptyTextLoader.Instance);
 
         var result = await GetOutputAsync(state, s_document1, DisposalToken);
@@ -51,7 +51,7 @@ public class ProjectStateGeneratedOutputTest(ITestOutputHelper testOutput) : Too
     {
         // Arrange
         var state = ProjectState
-            .Create(s_projectEngineFactoryProvider, s_project, ProjectWorkspaceState.Default)
+            .Create(s_project, s_projectEngineFactoryProvider)
             .AddDocument(s_document1, EmptyTextLoader.Instance)
             .AddDocument(s_importDocument, EmptyTextLoader.Instance);
 
@@ -73,7 +73,7 @@ public class ProjectStateGeneratedOutputTest(ITestOutputHelper testOutput) : Too
     {
         // Arrange
         var state = ProjectState
-            .Create(s_projectEngineFactoryProvider, s_project, ProjectWorkspaceState.Default)
+            .Create(s_project, s_projectEngineFactoryProvider)
             .AddDocument(s_document1, EmptyTextLoader.Instance)
             .AddDocument(s_document2, EmptyTextLoader.Instance);
 
@@ -94,7 +94,7 @@ public class ProjectStateGeneratedOutputTest(ITestOutputHelper testOutput) : Too
     {
         // Arrange
         var state = ProjectState
-            .Create(s_projectEngineFactoryProvider, s_project, ProjectWorkspaceState.Default)
+            .Create(s_project, s_projectEngineFactoryProvider)
             .AddDocument(s_document1, EmptyTextLoader.Instance);
 
         var result = await GetOutputAsync(state, s_document1, DisposalToken);
@@ -113,7 +113,7 @@ public class ProjectStateGeneratedOutputTest(ITestOutputHelper testOutput) : Too
     {
         // Arrange
         var state = ProjectState
-            .Create(s_projectEngineFactoryProvider, s_project, ProjectWorkspaceState.Default)
+            .Create(s_project, s_projectEngineFactoryProvider)
             .AddDocument(s_document1, EmptyTextLoader.Instance)
             .AddDocument(s_importDocument, EmptyTextLoader.Instance);
 
@@ -135,7 +135,7 @@ public class ProjectStateGeneratedOutputTest(ITestOutputHelper testOutput) : Too
     {
         // Arrange
         var state = ProjectState
-            .Create(s_projectEngineFactoryProvider, s_project, ProjectWorkspaceState.Default)
+            .Create(s_project, s_projectEngineFactoryProvider)
             .AddDocument(s_document1, EmptyTextLoader.Instance)
             .AddDocument(s_importDocument, EmptyTextLoader.Instance);
 
@@ -156,7 +156,7 @@ public class ProjectStateGeneratedOutputTest(ITestOutputHelper testOutput) : Too
     {
         // Arrange
         var state = ProjectState
-            .Create(s_projectEngineFactoryProvider, s_project, ProjectWorkspaceState.Default)
+            .Create(s_project, s_projectEngineFactoryProvider)
             .AddDocument(s_document1, EmptyTextLoader.Instance);
 
         var result = await GetOutputAsync(state, s_document1, DisposalToken);
@@ -175,7 +175,7 @@ public class ProjectStateGeneratedOutputTest(ITestOutputHelper testOutput) : Too
     {
         // Arrange
         var state = ProjectState
-            .Create(s_projectEngineFactoryProvider, s_project, ProjectWorkspaceState.Default)
+            .Create(s_project, s_projectEngineFactoryProvider)
             .AddDocument(s_document1, EmptyTextLoader.Instance);
 
         var result = await GetOutputAsync(state, s_document1, DisposalToken);
@@ -203,7 +203,7 @@ public class ProjectStateGeneratedOutputTest(ITestOutputHelper testOutput) : Too
         };
 
         var state = ProjectState
-            .Create(s_projectEngineFactoryProvider, hostProject, ProjectWorkspaceState.Create(s_someTagHelpers, LanguageVersion.CSharp7))
+            .Create(hostProject, ProjectWorkspaceState.Create(s_someTagHelpers, LanguageVersion.CSharp7), s_projectEngineFactoryProvider)
             .AddDocument(s_document1, TestMocks.CreateTextLoader("@DateTime.Now", VersionStamp.Default));
 
         var result = await GetOutputAsync(state, s_document1, DisposalToken);
@@ -223,7 +223,7 @@ public class ProjectStateGeneratedOutputTest(ITestOutputHelper testOutput) : Too
     {
         // Arrange
         var state = ProjectState
-            .Create(s_projectEngineFactoryProvider, s_project, ProjectWorkspaceState.Default)
+            .Create(s_project, s_projectEngineFactoryProvider)
             .AddDocument(s_document1, EmptyTextLoader.Instance);
 
         var result = await GetOutputAsync(state, s_document1, DisposalToken);

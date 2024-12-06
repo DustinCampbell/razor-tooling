@@ -33,7 +33,7 @@ public class ProjectSnapshotTest(ITestOutputHelper testOutput) : ToolingTestBase
     {
         // Arrange
         var state = ProjectState
-            .Create(s_projectEngineFactoryProvider, s_hostProject, s_projectWorkspaceState)
+            .Create(s_hostProject, s_projectWorkspaceState, s_projectEngineFactoryProvider)
             .AddDocument(s_documents[0], EmptyTextLoader.Instance)
             .AddDocument(s_documents[1], EmptyTextLoader.Instance)
             .AddDocument(s_documents[2], EmptyTextLoader.Instance);
@@ -57,7 +57,7 @@ public class ProjectSnapshotTest(ITestOutputHelper testOutput) : ToolingTestBase
     {
         // Arrange
         var state = ProjectState
-            .Create(s_projectEngineFactoryProvider, s_hostProject, s_projectWorkspaceState)
+            .Create(s_hostProject, s_projectWorkspaceState, s_projectEngineFactoryProvider)
             .AddDocument(s_documents[0], EmptyTextLoader.Instance);
 
         var project = new ProjectSnapshot(state);
@@ -77,7 +77,7 @@ public class ProjectSnapshotTest(ITestOutputHelper testOutput) : ToolingTestBase
     {
         // Arrange
         var state = ProjectState
-            .Create(s_projectEngineFactoryProvider, s_hostProject, s_projectWorkspaceState)
+            .Create(s_hostProject, s_projectWorkspaceState, s_projectEngineFactoryProvider)
             .AddDocument(s_documents[0], EmptyTextLoader.Instance)
             .AddDocument(s_documents[1], EmptyTextLoader.Instance)
             .AddDocument(TestProjectData.SomeProjectImportFile, EmptyTextLoader.Instance);

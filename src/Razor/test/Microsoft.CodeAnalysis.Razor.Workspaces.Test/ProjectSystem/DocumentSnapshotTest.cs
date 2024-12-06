@@ -4,8 +4,6 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
-using Microsoft.AspNetCore.Razor.ProjectEngineHost;
-using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Test.Common;
 using Xunit;
 using Xunit.Abstractions;
@@ -104,7 +102,7 @@ public class DocumentSnapshotTest(ITestOutputHelper testOutput) : ToolingTestBas
         var textLoader = TestMocks.CreateTextLoader("<p>Hello World</p>");
 
         var state = ProjectState
-            .Create(ProjectEngineFactories.DefaultProvider, TestProjectData.SomeProject, ProjectWorkspaceState.Default)
+            .Create(TestProjectData.SomeProject)
             .AddDocument(hostDocument, textLoader);
 
         var project = new ProjectSnapshot(state);

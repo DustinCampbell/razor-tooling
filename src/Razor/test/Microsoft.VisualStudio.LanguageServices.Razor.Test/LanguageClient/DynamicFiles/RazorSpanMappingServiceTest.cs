@@ -29,7 +29,7 @@ public class RazorSpanMappingServiceTest(ITestOutputHelper testOutput) : Tooling
 ");
 
         var state = ProjectState
-            .Create(ProjectEngineFactories.DefaultProvider, _hostProject, ProjectWorkspaceState.Default)
+            .Create(_hostProject)
             .AddDocument(_hostDocument, TestMocks.CreateTextLoader(sourceText));
 
         var project = new ProjectSnapshot(state);
@@ -63,7 +63,7 @@ public class RazorSpanMappingServiceTest(ITestOutputHelper testOutput) : Tooling
 ");
 
         var state = ProjectState
-            .Create(ProjectEngineFactories.DefaultProvider, _hostProject, ProjectWorkspaceState.Default)
+            .Create(_hostProject)
             .AddDocument(_hostDocument, TestMocks.CreateTextLoader(sourceText));
 
         var project = new ProjectSnapshot(state);
@@ -98,7 +98,7 @@ public class RazorSpanMappingServiceTest(ITestOutputHelper testOutput) : Tooling
 ");
 
         var state = ProjectState
-            .Create(ProjectEngineFactories.DefaultProvider, _hostProject, ProjectWorkspaceState.Default)
+            .Create(_hostProject)
             .AddDocument(_hostDocument, TestMocks.CreateTextLoader(sourceText));
 
         var project = new ProjectSnapshot(state);
@@ -132,7 +132,7 @@ public class RazorSpanMappingServiceTest(ITestOutputHelper testOutput) : Tooling
 ");
 
         var state = ProjectState
-            .Create(ProjectEngineFactories.DefaultProvider, _hostProject, ProjectWorkspaceState.Default)
+            .Create(_hostProject)
             .AddDocument(_hostDocument, TestMocks.CreateTextLoader(sourceText));
 
         var project = new ProjectSnapshot(state);

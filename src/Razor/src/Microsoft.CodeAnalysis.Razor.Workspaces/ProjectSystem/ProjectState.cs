@@ -35,26 +35,37 @@ internal class ProjectState
         ProjectDifference.DocumentAdded |
         ProjectDifference.DocumentRemoved;
 
-    private static readonly ImmutableDictionary<string, DocumentState> s_emptyDocuments = ImmutableDictionary.Create<string, DocumentState>(FilePathNormalizingComparer.Instance);
-    private static readonly ImmutableDictionary<string, ImmutableArray<string>> s_emptyImportsToRelatedDocuments = ImmutableDictionary.Create<string, ImmutableArray<string>>(FilePathNormalizingComparer.Instance);
+    private static readonly ImmutableDictionary<string, DocumentState> s_emptyDocuments =
+        ImmutableDictionary<string, DocumentState>.Empty.WithComparers(keyComparer: FilePathNormalizingComparer.Instance);
+    private static readonly ImmutableDictionary<string, ImmutableArray<string>> s_emptyImportsToRelatedDocuments =
+        ImmutableDictionary<string, ImmutableArray<string>>.Empty.WithComparers(keyComparer: FilePathNormalizingComparer.Instance);
+
+    public HostProject HostProject { get; }
+    public RazorCompilerOptions CompilerOptions { get; }
+    public ProjectWorkspaceState ProjectWorkspaceState { get; }
 
     private readonly IProjectEngineFactoryProvider _projectEngineFactoryProvider;
 
-    public RazorCompilerOptions CompilerOptions { get; }
+    // Internal set for testing.
+    public ImmutableDictionary<string, DocumentState> Documents { get; internal set; }
+
+    // Internal set for testing.
+    public ImmutableDictionary<string, ImmutableArray<string>> ImportsToRelatedDocuments { get; internal set; }
 
     private readonly object _lock = new();
     private RazorProjectEngine? _projectEngine;
 
     private ProjectState(
-        IProjectEngineFactoryProvider projectEngineFactoryProvider,
-        RazorCompilerOptions compilerOptions,
         HostProject hostProject,
-        ProjectWorkspaceState projectWorkspaceState)
+        RazorCompilerOptions compilerOptions,
+        ProjectWorkspaceState projectWorkspaceState,
+        IProjectEngineFactoryProvider projectEngineFactoryProvider)
     {
-        _projectEngineFactoryProvider = projectEngineFactoryProvider;
-        CompilerOptions = compilerOptions;
         HostProject = hostProject;
+        CompilerOptions = compilerOptions;
         ProjectWorkspaceState = projectWorkspaceState;
+        _projectEngineFactoryProvider = projectEngineFactoryProvider;
+
         Documents = s_emptyDocuments;
         ImportsToRelatedDocuments = s_emptyImportsToRelatedDocuments;
         Version = VersionStamp.Create();
@@ -126,27 +137,32 @@ internal class ProjectState
     }
 
     public static ProjectState Create(
-        IProjectEngineFactoryProvider projectEngineFactoryProvider,
-        RazorCompilerOptions compilerOptions,
         HostProject hostProject,
-        ProjectWorkspaceState projectWorkspaceState)
-        => new(projectEngineFactoryProvider, compilerOptions, hostProject, projectWorkspaceState);
+        RazorCompilerOptions compilerOptions = RazorCompilerOptions.None,
+        ProjectWorkspaceState? projectWorkspaceState = null,
+        IProjectEngineFactoryProvider? projectEngineFactoryProvider = null)
+        => new(
+            hostProject,
+            compilerOptions,
+            projectWorkspaceState ?? ProjectWorkspaceState.Default,
+            projectEngineFactoryProvider ?? ProjectEngineFactories.DefaultProvider);
 
     public static ProjectState Create(
-        IProjectEngineFactoryProvider projectEngineFactoryProvider,
         HostProject hostProject,
-        ProjectWorkspaceState projectWorkspaceState)
-        => new(projectEngineFactoryProvider, RazorCompilerOptions.None, hostProject, projectWorkspaceState);
+        RazorCompilerOptions compilerOptions,
+        IProjectEngineFactoryProvider projectEngineFactoryProvider)
+        => Create(hostProject, compilerOptions, projectWorkspaceState: null, projectEngineFactoryProvider);
 
-    // Internal set for testing.
-    public ImmutableDictionary<string, DocumentState> Documents { get; internal set; }
+    public static ProjectState Create(
+        HostProject hostProject,
+        ProjectWorkspaceState projectWorkspaceState,
+        IProjectEngineFactoryProvider? projectEngineFactoryProvider = null)
+        => Create(hostProject, RazorCompilerOptions.None, projectWorkspaceState, projectEngineFactoryProvider);
 
-    // Internal set for testing.
-    public ImmutableDictionary<string, ImmutableArray<string>> ImportsToRelatedDocuments { get; internal set; }
-
-    public HostProject HostProject { get; }
-
-    public ProjectWorkspaceState ProjectWorkspaceState { get; }
+    public static ProjectState Create(
+        HostProject hostProject,
+        IProjectEngineFactoryProvider projectEngineFactoryProvider)
+        => Create(hostProject, RazorCompilerOptions.None, projectWorkspaceState: null, projectEngineFactoryProvider);
 
     public ImmutableArray<TagHelperDescriptor> TagHelpers => ProjectWorkspaceState.TagHelpers;
 
