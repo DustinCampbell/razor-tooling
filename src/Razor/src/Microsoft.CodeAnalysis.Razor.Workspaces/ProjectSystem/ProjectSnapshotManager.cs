@@ -515,10 +515,10 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
         switch (action)
         {
             case AddDocumentAction(var newDocument, var textLoader):
-                return new Entry(originalEntry.State.WithAddedHostDocument(newDocument, textLoader));
+                return new Entry(originalEntry.State.AddDocument(newDocument, textLoader));
 
             case RemoveDocumentAction(var originalDocument):
-                return new Entry(originalEntry.State.WithRemovedHostDocument(originalDocument));
+                return new Entry(originalEntry.State.RemoveDocument(originalDocument));
 
             case CloseDocumentAction(var textLoader):
                 {
@@ -528,7 +528,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
                         return originalEntry;
                     }
 
-                    var state = originalEntry.State.WithChangedHostDocument(
+                    var state = originalEntry.State.UpdateDocumentText(
                         documentState.HostDocument,
                         textLoader);
 
@@ -543,12 +543,12 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
                         documentState.TryGetTextVersion(out var olderVersion))
                     {
                         var version = sourceText.ContentEquals(olderText) ? olderVersion : olderVersion.GetNewerVersion();
-                        var newState = originalEntry.State.WithChangedHostDocument(documentState.HostDocument, sourceText, version);
+                        var newState = originalEntry.State.UpdateDocumentText(documentState.HostDocument, sourceText, version);
                         return new Entry(newState);
                     }
                     else
                     {
-                        var newState = originalEntry.State.WithChangedHostDocument(
+                        var newState = originalEntry.State.UpdateDocumentText(
                             documentState.HostDocument,
                             new UpdatedTextLoader(documentState, sourceText));
 
@@ -558,7 +558,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
             case DocumentTextLoaderChangedAction(var textLoader):
                 {
-                    var newState = originalEntry.State.WithChangedHostDocument(
+                    var newState = originalEntry.State.UpdateDocumentText(
                         documentState.AssumeNotNull().HostDocument,
                         textLoader);
 
@@ -577,13 +577,13 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
                         documentState.TryGetTextVersion(out var olderVersion))
                     {
                         var version = sourceText.ContentEquals(olderText) ? olderVersion : olderVersion.GetNewerVersion();
-                        var state = originalEntry.State.WithChangedHostDocument(documentState.HostDocument, sourceText, version);
+                        var state = originalEntry.State.UpdateDocumentText(documentState.HostDocument, sourceText, version);
 
                         return new Entry(state);
                     }
                     else
                     {
-                        var state = originalEntry.State.WithChangedHostDocument(
+                        var state = originalEntry.State.UpdateDocumentText(
                             documentState.HostDocument,
                             new UpdatedTextLoader(documentState, sourceText));
 

@@ -207,7 +207,7 @@ internal class ProjectState
 
     public VersionStamp ConfigurationVersion { get; }
 
-    public ProjectState WithAddedHostDocument(HostDocument hostDocument, TextLoader textLoader)
+    public ProjectState AddDocument(HostDocument hostDocument, TextLoader textLoader)
     {
         ArgHelper.ThrowIfNull(hostDocument);
         ArgHelper.ThrowIfNull(textLoader);
@@ -238,7 +238,7 @@ internal class ProjectState
         return new(this, ProjectDifference.DocumentAdded, HostProject, ProjectWorkspaceState, documents, importsToRelatedDocuments);
     }
 
-    public ProjectState WithRemovedHostDocument(HostDocument hostDocument)
+    public ProjectState RemoveDocument(HostDocument hostDocument)
     {
         ArgHelper.ThrowIfNull(hostDocument);
 
@@ -279,7 +279,7 @@ internal class ProjectState
         return new(this, ProjectDifference.DocumentRemoved, HostProject, ProjectWorkspaceState, documents, importsToRelatedDocuments);
     }
 
-    public ProjectState WithChangedHostDocument(HostDocument hostDocument, SourceText sourceText, VersionStamp textVersion)
+    public ProjectState UpdateDocumentText(HostDocument hostDocument, SourceText sourceText, VersionStamp textVersion)
     {
         ArgHelper.ThrowIfNull(hostDocument);
 
@@ -294,7 +294,7 @@ internal class ProjectState
         return new(this, ProjectDifference.DocumentChanged, HostProject, ProjectWorkspaceState, documents, ImportsToRelatedDocuments);
     }
 
-    public ProjectState WithChangedHostDocument(HostDocument hostDocument, TextLoader loader)
+    public ProjectState UpdateDocumentText(HostDocument hostDocument, TextLoader loader)
     {
         ArgHelper.ThrowIfNull(hostDocument);
 
@@ -352,8 +352,8 @@ internal class ProjectState
             return this;
         }
 
-        var newDocuments = Documents.Select(kvp => KeyValuePair.Create(kvp.Key, kvp.Value.WithConfigurationChange()));
-        var documents = Documents.SetItems(newDocuments);
+        var updates = Documents.Select(kvp => KeyValuePair.Create(kvp.Key, kvp.Value.WithConfigurationChange()));
+        var documents = Documents.SetItems(updates);
 
         // If the host project has changed then we need to recompute the imports map
         var importsToRelatedDocuments = s_emptyImportsToRelatedDocuments;
@@ -375,8 +375,8 @@ internal class ProjectState
             return this;
         }
 
-        var newDocuments = Documents.Select(kvp => KeyValuePair.Create(kvp.Key, kvp.Value.WithProjectWorkspaceStateChange()));
-        var documents = Documents.SetItems(newDocuments);
+        var updates = Documents.Select(kvp => KeyValuePair.Create(kvp.Key, kvp.Value.WithProjectWorkspaceStateChange()));
+        var documents = Documents.SetItems(updates);
 
         return new(this, ProjectDifference.ProjectWorkspaceStateChanged, HostProject, projectWorkspaceState, documents, ImportsToRelatedDocuments);
     }

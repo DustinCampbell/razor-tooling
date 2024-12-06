@@ -32,9 +32,9 @@ public class ProjectSnapshotTest(ITestOutputHelper testOutput) : ToolingTestBase
         // Arrange
         var state = ProjectState
             .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_hostProject, s_projectWorkspaceState)
-            .WithAddedHostDocument(s_documents[0], EmptyTextLoader.Instance)
-            .WithAddedHostDocument(s_documents[1], EmptyTextLoader.Instance)
-            .WithAddedHostDocument(s_documents[2], EmptyTextLoader.Instance);
+            .AddDocument(s_documents[0], EmptyTextLoader.Instance)
+            .AddDocument(s_documents[1], EmptyTextLoader.Instance)
+            .AddDocument(s_documents[2], EmptyTextLoader.Instance);
 
         var project = new ProjectSnapshot(state);
 
@@ -56,7 +56,7 @@ public class ProjectSnapshotTest(ITestOutputHelper testOutput) : ToolingTestBase
         // Arrange
         var state = ProjectState
             .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_hostProject, s_projectWorkspaceState)
-            .WithAddedHostDocument(s_documents[0], EmptyTextLoader.Instance);
+            .AddDocument(s_documents[0], EmptyTextLoader.Instance);
 
         var project = new ProjectSnapshot(state);
 
@@ -76,9 +76,9 @@ public class ProjectSnapshotTest(ITestOutputHelper testOutput) : ToolingTestBase
         // Arrange
         var state = ProjectState
             .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_hostProject, s_projectWorkspaceState)
-            .WithAddedHostDocument(s_documents[0], EmptyTextLoader.Instance)
-            .WithAddedHostDocument(s_documents[1], EmptyTextLoader.Instance)
-            .WithAddedHostDocument(TestProjectData.SomeProjectImportFile, EmptyTextLoader.Instance);
+            .AddDocument(s_documents[0], EmptyTextLoader.Instance)
+            .AddDocument(s_documents[1], EmptyTextLoader.Instance)
+            .AddDocument(TestProjectData.SomeProjectImportFile, EmptyTextLoader.Instance);
 
         var project = new ProjectSnapshot(state);
 
