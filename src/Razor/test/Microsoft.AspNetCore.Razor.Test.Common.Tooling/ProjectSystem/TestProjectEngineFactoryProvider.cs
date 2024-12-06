@@ -7,18 +7,16 @@ using Microsoft.AspNetCore.Razor.ProjectEngineHost;
 
 namespace Microsoft.AspNetCore.Razor.Test.Common.ProjectSystem;
 
-internal class TestProjectEngineFactoryProvider : IProjectEngineFactoryProvider
+internal class TestProjectEngineFactoryProvider(Action<RazorProjectEngineBuilder>? configure = null) : IProjectEngineFactoryProvider
 {
-    public Action<RazorProjectEngineBuilder>? Configure { get; set; }
+    private readonly Action<RazorProjectEngineBuilder>? _configure = configure;
 
     public IProjectEngineFactory GetFactory(RazorConfiguration configuration)
-    {
-        return new Factory(Configure);
-    }
+        => new FactoryWrapper(ProjectEngineFactories.DefaultProvider.GetFactory(configuration), _configure);
 
-    private sealed class Factory(Action<RazorProjectEngineBuilder>? outerConfigure) : IProjectEngineFactory
+    private sealed class FactoryWrapper(IProjectEngineFactory factory, Action<RazorProjectEngineBuilder>? outerConfigure) : IProjectEngineFactory
     {
-        public string ConfigurationName => "Test";
+        public string ConfigurationName => factory.ConfigurationName;
 
         public RazorProjectEngine Create(
             RazorConfiguration configuration,

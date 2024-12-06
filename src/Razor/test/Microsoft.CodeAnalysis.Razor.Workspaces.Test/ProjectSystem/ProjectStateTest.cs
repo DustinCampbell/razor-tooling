@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.ProjectEngineHost;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Test.Common;
+using Microsoft.AspNetCore.Razor.Test.Common.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Test.Common.Workspaces;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
@@ -19,6 +20,8 @@ namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
 public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(testOutput)
 {
+    private static readonly IProjectEngineFactoryProvider s_projectEngineFactoryProvider = new TestProjectEngineFactoryProvider(b => b.SetImportFeature(TestImportProjectFeature.Instance));
+
     private static readonly HostProject s_project = TestProjectData.SomeProject with { Configuration = FallbackRazorConfiguration.MVC_2_0 };
     private static readonly HostProject s_projectWithConfigurationChange = TestProjectData.SomeProject with { Configuration = FallbackRazorConfiguration.MVC_1_0 };
     private static readonly ProjectWorkspaceState s_projectWorkspaceState = ProjectWorkspaceState.Create([TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly").Build()]);
@@ -40,7 +43,9 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     public void GetImportDocumentTargetPaths_DoesNotIncludeCurrentImport()
     {
         // Arrange
-        var state = ProjectState.Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState);
+        var state = ProjectState
+            .Create(s_projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .AddDocument(TestProjectData.SomeProjectComponentImportFile1, EmptyTextLoader.Instance);
 
         // Act
         var paths = state.GetImportDocumentTargetPaths(TestProjectData.SomeProjectComponentImportFile1);
@@ -53,7 +58,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     public void ProjectState_ConstructedNew()
     {
         // Arrange & act
-        var state = ProjectState.Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState);
+        var state = ProjectState.Create(s_projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState);
 
         // Assert
         Assert.Empty(state.Documents);
@@ -64,7 +69,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     public void ProjectState_AddHostDocument_ToEmpty()
     {
         // Arrange
-        var state = ProjectState.Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState);
+        var state = ProjectState.Create(s_projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState);
 
         // Act
         var newState = state.AddDocument(s_documents[0], EmptyTextLoader.Instance);
@@ -80,7 +85,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     public async Task ProjectState_AddHostDocument_DocumentIsEmpty()
     {
         // Arrange
-        var state = ProjectState.Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState);
+        var state = ProjectState.Create(s_projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState);
 
         // Act
         var newState = state.AddDocument(s_documents[0], EmptyTextLoader.Instance);
@@ -95,7 +100,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     {
         // Arrange
         var state = ProjectState
-            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .Create(s_projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
             .AddDocument(s_documents[2], EmptyTextLoader.Instance)
             .AddDocument(s_documents[1], EmptyTextLoader.Instance);
 
@@ -119,7 +124,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     {
         // Arrange & Act
         var state = ProjectState
-            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .Create(s_projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
             .AddDocument(TestProjectData.SomeProjectFile1, EmptyTextLoader.Instance)
             .AddDocument(TestProjectData.SomeProjectFile2, EmptyTextLoader.Instance)
             .AddDocument(TestProjectData.SomeProjectNestedFile3, EmptyTextLoader.Instance)
@@ -157,7 +162,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     {
         // Arrange
         var state = ProjectState
-            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .Create(s_projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
             .AddDocument(TestProjectData.SomeProjectFile1, EmptyTextLoader.Instance)
             .AddDocument(TestProjectData.SomeProjectFile2, EmptyTextLoader.Instance)
             .AddDocument(TestProjectData.SomeProjectNestedFile3, EmptyTextLoader.Instance)
@@ -198,7 +203,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     {
         // Arrange
         var state = ProjectState
-            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .Create(s_projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
             .AddDocument(s_documents[2], EmptyTextLoader.Instance)
             .AddDocument(s_documents[1], EmptyTextLoader.Instance);
 
@@ -230,7 +235,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     {
         // Arrange
         var state = ProjectState
-            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .Create(s_projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
             .AddDocument(s_documents[2], EmptyTextLoader.Instance)
             .AddDocument(s_documents[1], EmptyTextLoader.Instance);
 
@@ -246,7 +251,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     {
         // Arrange
         var state = ProjectState
-            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .Create(s_projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
             .AddDocument(s_documents[2], EmptyTextLoader.Instance)
             .AddDocument(s_documents[1], EmptyTextLoader.Instance);
 
@@ -266,7 +271,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     {
         // Arrange
         var state = ProjectState
-            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .Create(s_projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
             .AddDocument(s_documents[2], EmptyTextLoader.Instance)
             .AddDocument(s_documents[1], EmptyTextLoader.Instance);
 
@@ -287,7 +292,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     {
         // Arrange
         var state = ProjectState
-            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .Create(s_projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
             .AddDocument(s_documents[2], EmptyTextLoader.Instance)
             .AddDocument(s_documents[1], EmptyTextLoader.Instance);
 
@@ -318,7 +323,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     {
         // Arrange
         var state = ProjectState
-            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .Create(s_projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
             .AddDocument(s_documents[2], EmptyTextLoader.Instance)
             .AddDocument(s_documents[1], EmptyTextLoader.Instance);
 
@@ -349,7 +354,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     {
         // Arrange
         var state = ProjectState
-            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .Create(s_projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
             .AddDocument(s_documents[2], EmptyTextLoader.Instance)
             .AddDocument(s_documents[1], EmptyTextLoader.Instance);
 
@@ -365,7 +370,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     {
         // Arrange
         var state = ProjectState
-            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .Create(s_projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
             .AddDocument(s_documents[2], EmptyTextLoader.Instance)
             .AddDocument(s_documents[1], EmptyTextLoader.Instance);
 
@@ -381,7 +386,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     {
         // Arrange
         var state = ProjectState
-            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .Create(s_projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
             .AddDocument(s_documents[2], EmptyTextLoader.Instance)
             .AddDocument(s_documents[1], EmptyTextLoader.Instance);
 
@@ -401,7 +406,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     {
         // Arrange
         var original = ProjectState
-            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .Create(s_projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
             .AddDocument(TestProjectData.SomeProjectFile1, EmptyTextLoader.Instance)
             .AddDocument(TestProjectData.SomeProjectFile2, EmptyTextLoader.Instance)
             .AddDocument(TestProjectData.SomeProjectNestedFile3, EmptyTextLoader.Instance)
@@ -439,7 +444,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     public void ProjectState_RemoveHostDocument_TracksImports_RemoveAllDocuments()
     {
         // Arrange
-        var state = ProjectState.Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+        var state = ProjectState.Create(s_projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
             .AddDocument(TestProjectData.SomeProjectFile1, EmptyTextLoader.Instance)
             .AddDocument(TestProjectData.SomeProjectFile2, EmptyTextLoader.Instance)
             .AddDocument(TestProjectData.SomeProjectNestedFile3, EmptyTextLoader.Instance)
@@ -461,7 +466,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     public void ProjectState_RemoveHostDocument_RetainsComputedState()
     {
         // Arrange
-        var state = ProjectState.Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+        var state = ProjectState.Create(s_projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
             .AddDocument(s_documents[2], EmptyTextLoader.Instance)
             .AddDocument(s_documents[1], EmptyTextLoader.Instance);
 
@@ -492,7 +497,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     {
         // Arrange
         var state = ProjectState
-            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .Create(s_projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
             .AddDocument(s_documents[2], EmptyTextLoader.Instance)
             .AddDocument(s_documents[1], EmptyTextLoader.Instance);
 
@@ -508,7 +513,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     {
         // Arrange
         var state = ProjectState
-            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .Create(s_projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
             .AddDocument(s_documents[2], EmptyTextLoader.Instance)
             .AddDocument(s_documents[1], EmptyTextLoader.Instance);
 
@@ -545,7 +550,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     {
         // Arrange
         var state = ProjectState
-            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .Create(s_projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
             .AddDocument(s_documents[2], EmptyTextLoader.Instance)
             .AddDocument(s_documents[1], EmptyTextLoader.Instance);
 
@@ -563,7 +568,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     {
         // Arrange
         var state = ProjectState
-            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .Create(s_projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
             .AddDocument(s_documents[2], EmptyTextLoader.Instance)
             .AddDocument(s_documents[1], EmptyTextLoader.Instance);
 
@@ -584,7 +589,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
         documents[s_documents[1].FilePath] = TestDocumentState.Create(s_documents[1], onConfigurationChange: () => callCount++);
         documents[s_documents[2].FilePath] = TestDocumentState.Create(s_documents[2], onConfigurationChange: () => callCount++);
 
-        var state = ProjectState.Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState);
+        var state = ProjectState.Create(s_projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState);
         state.Documents = documents.ToImmutable();
 
         // Act
@@ -601,7 +606,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     {
         // Arrange
         var state = ProjectState
-            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .Create(s_projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
             .AddDocument(TestProjectData.SomeProjectFile1, EmptyTextLoader.Instance);
 
         // Act
@@ -618,7 +623,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     {
         // Arrange
         var state = ProjectState
-            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .Create(s_projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
             .AddDocument(s_documents[2], EmptyTextLoader.Instance)
             .AddDocument(s_documents[1], EmptyTextLoader.Instance);
 
@@ -656,7 +661,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     {
         // Arrange
         var state = ProjectState
-            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .Create(s_projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
             .AddDocument(s_documents[2], EmptyTextLoader.Instance)
             .AddDocument(s_documents[1], EmptyTextLoader.Instance);
 
@@ -688,7 +693,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     {
         // Arrange
         var state = ProjectState
-            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
+            .Create(s_projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState)
             .AddDocument(s_documents[2], EmptyTextLoader.Instance)
             .AddDocument(s_documents[1], EmptyTextLoader.Instance);
 
@@ -710,7 +715,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
         documents[s_documents[1].FilePath] = TestDocumentState.Create(s_documents[1], onProjectWorkspaceStateChange: () => callCount++);
         documents[s_documents[2].FilePath] = TestDocumentState.Create(s_documents[2], onProjectWorkspaceStateChange: () => callCount++);
 
-        var state = ProjectState.Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState);
+        var state = ProjectState.Create(s_projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState);
         state.Documents = documents.ToImmutable();
 
         // Act
@@ -754,7 +759,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
                 TestProjectData.AnotherProjectNestedFile4.FilePath
             ]);
 
-        var state = ProjectState.Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState);
+        var state = ProjectState.Create(s_projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState);
         state.Documents = documents.ToImmutable();
         state.ImportsToRelatedDocuments = importsToRelatedDocuments.ToImmutable();
 
@@ -799,7 +804,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
                 TestProjectData.AnotherProjectNestedFile4.FilePath
             ]);
 
-        var state = ProjectState.Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState);
+        var state = ProjectState.Create(s_projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState);
         state.Documents = documents.ToImmutable();
         state.ImportsToRelatedDocuments = importsToRelatedDocuments.ToImmutable();
 
@@ -847,7 +852,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
                 TestProjectData.AnotherProjectNestedFile4.FilePath
             ]);
 
-        var state = ProjectState.Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState);
+        var state = ProjectState.Create(s_projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState);
         state.Documents = documents.ToImmutable();
         state.ImportsToRelatedDocuments = importsToRelatedDocuments.ToImmutable();
 
@@ -895,7 +900,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
                 TestProjectData.AnotherProjectNestedFile4.FilePath
             ]);
 
-        var state = ProjectState.Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState);
+        var state = ProjectState.Create(s_projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState);
         state.Documents = documents.ToImmutable();
         state.ImportsToRelatedDocuments = importsToRelatedDocuments.ToImmutable();
 
@@ -943,7 +948,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
                 TestProjectData.AnotherProjectNestedFile4.FilePath
             ]);
 
-        var state = ProjectState.Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState);
+        var state = ProjectState.Create(s_projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance, s_project, s_projectWorkspaceState);
         state.Documents = documents.ToImmutable();
         state.ImportsToRelatedDocuments = importsToRelatedDocuments.ToImmutable();
 

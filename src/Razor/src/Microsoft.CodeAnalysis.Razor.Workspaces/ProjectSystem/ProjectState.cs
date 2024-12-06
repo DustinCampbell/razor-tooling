@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Razor.Utilities;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Razor.Workspaces;
 using Microsoft.CodeAnalysis.Text;
+using Microsoft.Extensions.ObjectPool;
 using Microsoft.NET.Sdk.Razor.SourceGenerators;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
@@ -21,6 +22,9 @@ namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 // Internal tracker for DefaultProjectSnapshot
 internal class ProjectState
 {
+    private static readonly ObjectPool<Dictionary<string, ImmutableArray<string>.Builder>> s_importMapBuilderPool =
+        DictionaryPool<string, ImmutableArray<string>.Builder>.Create(FilePathNormalizingComparer.Instance);
+
     private const ProjectDifference ClearConfigurationVersionMask = ProjectDifference.ConfigurationChanged;
 
     private const ProjectDifference ClearProjectWorkspaceStateVersionMask =
@@ -356,15 +360,48 @@ internal class ProjectState
         var documents = Documents.SetItems(updates);
 
         // If the host project has changed then we need to recompute the imports map
-        var importsToRelatedDocuments = s_emptyImportsToRelatedDocuments;
+        var importsToRelatedDocuments = BuildImportsMap(documents.Values);
+
+        return new(this, ProjectDifference.ConfigurationChanged, hostProject, ProjectWorkspaceState, documents, importsToRelatedDocuments);
+    }
+
+    private ImmutableDictionary<string, ImmutableArray<string>> BuildImportsMap(IEnumerable<DocumentState> documents)
+    {
+        using var _ = s_importMapBuilderPool.GetPooledObject(out var map);
+
+#if NET
+        map.EnsureCapacity(ImportsToRelatedDocuments.Count);
+#endif
+
+        using var importTargetPaths = new PooledArrayBuilder<string>();
+
+        var projectEngine = ProjectEngine;
 
         foreach (var document in documents)
         {
-            var importTargetPaths = GetImportDocumentTargetPaths(document.Value.HostDocument);
-            importsToRelatedDocuments = AddToImportsToRelatedDocuments(importsToRelatedDocuments, document.Value.HostDocument.FilePath, importTargetPaths);
+            if (importTargetPaths.Count > 0)
+            {
+                importTargetPaths.Clear();
+            }
+
+            CollectImportDocumentTargetPaths(document.HostDocument, projectEngine, ref importTargetPaths.AsRef());
+
+            foreach (var importTargetPath in importTargetPaths)
+            {
+                if (!map.TryGetValue(importTargetPath, out var relatedDocuments))
+                {
+                    relatedDocuments = ImmutableArray.CreateBuilder<string>();
+                    map.Add(importTargetPath, relatedDocuments);
+                }
+
+                relatedDocuments.Add(document.HostDocument.FilePath);
+            }
         }
 
-        return new(this, ProjectDifference.ConfigurationChanged, hostProject, ProjectWorkspaceState, documents, importsToRelatedDocuments);
+        return map.ToImmutableDictionary(
+            keySelector: kvp => kvp.Key,
+            elementSelector: kvp => kvp.Value.ToImmutable(),
+            keyComparer: FilePathNormalizingComparer.Instance);
     }
 
     public ProjectState WithProjectWorkspaceState(ProjectWorkspaceState projectWorkspaceState)
@@ -381,10 +418,10 @@ internal class ProjectState
         return new(this, ProjectDifference.ProjectWorkspaceStateChanged, HostProject, projectWorkspaceState, documents, ImportsToRelatedDocuments);
     }
 
-    internal static ImmutableDictionary<string, ImmutableArray<string>> AddToImportsToRelatedDocuments(
+    private static ImmutableDictionary<string, ImmutableArray<string>> AddToImportsToRelatedDocuments(
         ImmutableDictionary<string, ImmutableArray<string>> importsToRelatedDocuments,
         string documentFilePath,
-        List<string> importTargetPaths)
+        ImmutableArray<string> importTargetPaths)
     {
         foreach (var importTargetPath in importTargetPaths)
         {
@@ -403,7 +440,7 @@ internal class ProjectState
     private static ImmutableDictionary<string, ImmutableArray<string>> RemoveFromImportsToRelatedDocuments(
         ImmutableDictionary<string, ImmutableArray<string>> importsToRelatedDocuments,
         HostDocument hostDocument,
-        List<string> importTargetPaths)
+        ImmutableArray<string> importTargetPaths)
     {
         foreach (var importTargetPath in importTargetPaths)
         {
@@ -419,22 +456,30 @@ internal class ProjectState
         return importsToRelatedDocuments;
     }
 
-    public List<string> GetImportDocumentTargetPaths(HostDocument hostDocument)
+    public ImmutableArray<string> GetImportDocumentTargetPaths(HostDocument hostDocument)
     {
-        return GetImportDocumentTargetPaths(hostDocument.TargetPath, hostDocument.FileKind, ProjectEngine);
+        return GetImportDocumentTargetPaths(hostDocument, ProjectEngine);
     }
 
-    internal static List<string> GetImportDocumentTargetPaths(string targetPath, string fileKind, RazorProjectEngine projectEngine)
+    private static ImmutableArray<string> GetImportDocumentTargetPaths(HostDocument hostDocument, RazorProjectEngine projectEngine)
     {
-        var importFeatures = projectEngine.ProjectFeatures.OfType<IImportProjectFeature>();
-        var projectItem = projectEngine.FileSystem.GetItem(targetPath, fileKind);
-        var importItems = importFeatures.SelectMany(f => f.GetImports(projectItem)).Where(i => i.FilePath != null);
+        var targetPath = hostDocument.TargetPath;
+        var projectItem = projectEngine.FileSystem.GetItem(targetPath, hostDocument.FileKind);
+
+        using var importProjectItems = new PooledArrayBuilder<RazorProjectItem>();
+        CollectImportProjectItems(projectItem, projectEngine, ref importProjectItems.AsRef());
+
+        if (importProjectItems.Count == 0)
+        {
+            return [];
+        }
 
         // Target path looks like `Foo\\Bar.cshtml`
-        var targetPaths = new List<string>();
-        foreach (var importItem in importItems)
+        using var targetPaths = new PooledArrayBuilder<string>(importProjectItems.Count);
+
+        foreach (var importProjectItem in importProjectItems)
         {
-            var itemTargetPath = importItem.FilePath.Replace('/', '\\').TrimStart('\\');
+            var itemTargetPath = importProjectItem.FilePath.Replace('/', '\\').TrimStart('\\');
 
             if (FilePathNormalizingComparer.Instance.Equals(itemTargetPath, targetPath))
             {
@@ -447,6 +492,57 @@ internal class ProjectState
             targetPaths.Add(itemTargetPath);
         }
 
-        return targetPaths;
+        return targetPaths.DrainToImmutable();
+    }
+
+    private static void CollectImportDocumentTargetPaths(HostDocument hostDocument, RazorProjectEngine projectEngine, ref PooledArrayBuilder<string> targetPaths)
+    {
+        var targetPath = hostDocument.TargetPath;
+        var projectItem = projectEngine.FileSystem.GetItem(targetPath, hostDocument.FileKind);
+
+        using var importProjectItems = new PooledArrayBuilder<RazorProjectItem>();
+        CollectImportProjectItems(projectItem, projectEngine, ref importProjectItems.AsRef());
+
+        if (importProjectItems.Count == 0)
+        {
+            return;
+        }
+
+        // Target path looks like `Foo\\Bar.cshtml`
+
+        foreach (var importProjectItem in importProjectItems)
+        {
+            var itemTargetPath = importProjectItem.FilePath.Replace('/', '\\').TrimStart('\\');
+
+            if (FilePathNormalizingComparer.Instance.Equals(itemTargetPath, targetPath))
+            {
+                // We've normalized the original importItem.FilePath into the HostDocument.TargetPath. For instance, if the HostDocument.TargetPath
+                // was '/_Imports.razor' it'd be normalized down into '_Imports.razor'. The purpose of this method is to get the associated document
+                // paths for a given import file (_Imports.razor / _ViewImports.cshtml); therefore, an import importing itself doesn't make sense.
+                continue;
+            }
+
+            targetPaths.Add(itemTargetPath);
+        }
+    }
+
+    private static void CollectImportProjectItems(
+        RazorProjectItem projectItem,
+        RazorProjectEngine projectEngine,
+        ref PooledArrayBuilder<RazorProjectItem> importProjectItems)
+    {
+        foreach (var projectFeature in projectEngine.ProjectFeatures)
+        {
+            if (projectFeature is IImportProjectFeature importProjectFeature)
+            {
+                foreach (var importProjectItem in importProjectFeature.GetImports(projectItem))
+                {
+                    if (importProjectItem.FilePath != null)
+                    {
+                        importProjectItems.Add(importProjectItem);
+                    }
+                }
+            }
+        }
     }
 }

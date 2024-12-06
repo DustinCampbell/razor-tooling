@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.ProjectEngineHost;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Test.Common;
+using Microsoft.AspNetCore.Razor.Test.Common.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Test.Common.Workspaces;
 using Xunit;
 using Xunit.Abstractions;
@@ -14,6 +15,8 @@ namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
 public class ProjectSnapshotTest(ITestOutputHelper testOutput) : ToolingTestBase(testOutput)
 {
+    private static readonly IProjectEngineFactoryProvider s_projectEngineFactoryProvider = new TestProjectEngineFactoryProvider(b => b.SetImportFeature(TestImportProjectFeature.Instance));
+
     private static readonly HostProject s_hostProject = TestProjectData.SomeProject with { Configuration = FallbackRazorConfiguration.MVC_2_0 };
     private static readonly ProjectWorkspaceState s_projectWorkspaceState = ProjectWorkspaceState.Create([TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly").Build()]);
 
@@ -31,7 +34,7 @@ public class ProjectSnapshotTest(ITestOutputHelper testOutput) : ToolingTestBase
     {
         // Arrange
         var state = ProjectState
-            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_hostProject, s_projectWorkspaceState)
+            .Create(s_projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance, s_hostProject, s_projectWorkspaceState)
             .AddDocument(s_documents[0], EmptyTextLoader.Instance)
             .AddDocument(s_documents[1], EmptyTextLoader.Instance)
             .AddDocument(s_documents[2], EmptyTextLoader.Instance);
@@ -55,7 +58,7 @@ public class ProjectSnapshotTest(ITestOutputHelper testOutput) : ToolingTestBase
     {
         // Arrange
         var state = ProjectState
-            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_hostProject, s_projectWorkspaceState)
+            .Create(s_projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance, s_hostProject, s_projectWorkspaceState)
             .AddDocument(s_documents[0], EmptyTextLoader.Instance);
 
         var project = new ProjectSnapshot(state);
@@ -75,7 +78,7 @@ public class ProjectSnapshotTest(ITestOutputHelper testOutput) : ToolingTestBase
     {
         // Arrange
         var state = ProjectState
-            .Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, s_hostProject, s_projectWorkspaceState)
+            .Create(s_projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance, s_hostProject, s_projectWorkspaceState)
             .AddDocument(s_documents[0], EmptyTextLoader.Instance)
             .AddDocument(s_documents[1], EmptyTextLoader.Instance)
             .AddDocument(TestProjectData.SomeProjectImportFile, EmptyTextLoader.Instance);

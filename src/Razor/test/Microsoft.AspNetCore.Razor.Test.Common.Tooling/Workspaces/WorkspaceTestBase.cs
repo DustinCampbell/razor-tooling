@@ -1,6 +1,7 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
+using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.ProjectEngineHost;
@@ -68,7 +69,7 @@ public abstract class WorkspaceTestBase(ITestOutputHelper testOutput) : ToolingT
     }
 
     private protected override TestProjectSnapshotManager CreateProjectSnapshotManager()
-        => CreateProjectSnapshotManager(ProjectEngineFactoryProvider, LanguageServerFeatureOptions);
+        => base.CreateProjectSnapshotManager(ProjectEngineFactoryProvider, LanguageServerFeatureOptions);
 
     private protected override TestProjectSnapshotManager CreateProjectSnapshotManager(IProjectEngineFactoryProvider projectEngineFactoryProvider)
         => base.CreateProjectSnapshotManager(projectEngineFactoryProvider, LanguageServerFeatureOptions);
@@ -110,5 +111,32 @@ public abstract class WorkspaceTestBase(ITestOutputHelper testOutput) : ToolingT
     private sealed class TestWorkspaceProvider(Workspace workspace) : IWorkspaceProvider
     {
         public Workspace GetWorkspace() => workspace;
+    }
+
+    private sealed class TestProjectEngineFactoryProvider : IProjectEngineFactoryProvider
+    {
+        public Action<RazorProjectEngineBuilder>? Configure { get; init; }
+
+        public IProjectEngineFactory GetFactory(RazorConfiguration configuration)
+        {
+            return new Factory(Configure);
+        }
+
+        private sealed class Factory(Action<RazorProjectEngineBuilder>? outerConfigure) : IProjectEngineFactory
+        {
+            public string ConfigurationName => "Test";
+
+            public RazorProjectEngine Create(
+                RazorConfiguration configuration,
+                RazorProjectFileSystem fileSystem,
+                Action<RazorProjectEngineBuilder>? innerConfigure)
+            {
+                return RazorProjectEngine.Create(configuration, fileSystem, b =>
+                {
+                    innerConfigure?.Invoke(b);
+                    outerConfigure?.Invoke(b);
+                });
+            }
+        }
     }
 }
