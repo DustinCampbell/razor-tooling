@@ -52,8 +52,8 @@ public class RazorDynamicFileInfoProviderTest(ITestOutputHelper testOutput) : Vi
         await _projectManager.UpdateAsync(updater =>
         {
             updater.ProjectAdded(hostProject);
-            updater.DocumentAdded(hostProject.Key, hostDocument1, new EmptyTextLoader(hostDocument1.FilePath));
-            updater.DocumentAdded(hostProject.Key, hostDocument2, new EmptyTextLoader(hostDocument2.FilePath));
+            updater.DocumentAdded(hostProject.Key, hostDocument1, EmptyTextLoader.Instance);
+            updater.DocumentAdded(hostProject.Key, hostDocument2, EmptyTextLoader.Instance);
         });
 
         var projectKey = _projectManager.GetAllProjectKeys(hostProject.FilePath).Single();
@@ -87,7 +87,7 @@ public class RazorDynamicFileInfoProviderTest(ITestOutputHelper testOutput) : Vi
             .Verifiable();
         lspDocumentContainerMock
             .Setup(container => container.GetTextLoader(It.IsAny<string>()))
-            .Returns(new EmptyTextLoader(string.Empty));
+            .Returns(EmptyTextLoader.Instance);
         _lspDocumentContainer = lspDocumentContainerMock.Object;
 
         var projectInfo = ProjectInfo.Create(
@@ -165,7 +165,7 @@ public class RazorDynamicFileInfoProviderTest(ITestOutputHelper testOutput) : Vi
         await _projectManager.UpdateAsync(updater =>
         {
             updater.SolutionClosed();
-            updater.DocumentClosed(_project.Key, _document1.FilePath, new EmptyTextLoader(string.Empty));
+            updater.DocumentClosed(_project.Key, _document1.FilePath, EmptyTextLoader.Instance);
         });
 
         // Act & Assert

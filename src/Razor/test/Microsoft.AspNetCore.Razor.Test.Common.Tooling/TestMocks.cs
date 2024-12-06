@@ -35,10 +35,11 @@ internal static class TestMocks
         => CreateTextLoader(SourceText.From(text), version);
 
     public static TextLoader CreateTextLoader(SourceText text, VersionStamp version)
+        => CreateTextLoader(TextAndVersion.Create(text, version));
+
+    public static TextLoader CreateTextLoader(TextAndVersion textAndVersion)
     {
         var mock = new StrictMock<TextLoader>();
-
-        var textAndVersion = TextAndVersion.Create(text, version);
 
         mock.Setup(x => x.LoadTextAndVersionAsync(It.IsAny<LoadTextOptions>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(textAndVersion);

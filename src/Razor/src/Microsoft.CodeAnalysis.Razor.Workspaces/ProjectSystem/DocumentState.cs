@@ -14,14 +14,6 @@ namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
 internal partial class DocumentState
 {
-    private static readonly LoadTextOptions s_loadTextOptions = new(SourceHashAlgorithm.Sha256);
-
-    private static readonly TextAndVersion s_emptyTextAndVersion = TextAndVersion.Create(
-        SourceText.From(string.Empty),
-        VersionStamp.Default);
-
-    public static readonly TextLoader EmptyLoader = TextLoader.From(s_emptyTextAndVersion);
-
     public HostDocument HostDocument { get; }
     public int Version { get; }
 
@@ -38,7 +30,7 @@ internal partial class DocumentState
         HostDocument = hostDocument;
         Version = 1;
         _textAndVersion = textAndVersion;
-        _textLoader = textLoader ?? EmptyLoader;
+        _textLoader = textLoader ?? EmptyTextLoader.Instance;
     }
 
     private DocumentState(
@@ -50,7 +42,7 @@ internal partial class DocumentState
         HostDocument = other.HostDocument;
         Version = other.Version + 1;
         _textAndVersion = textAndVersion;
-        _textLoader = textLoader ?? EmptyLoader;
+        _textLoader = textLoader ?? EmptyTextLoader.Instance;
         _computedState = computedState;
     }
 
@@ -91,7 +83,7 @@ internal partial class DocumentState
         async ValueTask<TextAndVersion> LoadTextAndVersionAsync(TextLoader loader, CancellationToken cancellationToken)
         {
             var textAndVersion = await loader
-                .LoadTextAndVersionAsync(s_loadTextOptions, cancellationToken)
+                .LoadTextAndVersionAsync(new(SourceHashAlgorithm.Sha256), cancellationToken)
                 .ConfigureAwait(false);
 
             return InterlockedOperations.Initialize(ref _textAndVersion, textAndVersion);
