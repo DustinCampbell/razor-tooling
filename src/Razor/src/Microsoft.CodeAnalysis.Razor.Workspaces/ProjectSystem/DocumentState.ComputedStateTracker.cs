@@ -50,7 +50,7 @@ internal partial class DocumentState
                 return result;
             }
 
-            var forceRuntimeCodeGeneration = project.LanguageServerFeatureOptions.ForceRuntimeCodeGeneration;
+            var forceRuntimeCodeGeneration = project.CompilerOptions.HasFlag(RazorCompilerOptions.ForceRuntimeCodeGeneration);
             var codeDocument = await GenerateCodeDocumentAsync(document, projectEngine, importItems, forceRuntimeCodeGeneration, cancellationToken).ConfigureAwait(false);
 
             result = new OutputAndVersion(codeDocument, version);

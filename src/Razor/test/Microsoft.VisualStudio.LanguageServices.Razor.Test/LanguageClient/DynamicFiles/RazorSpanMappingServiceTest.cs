@@ -4,10 +4,9 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
+using Microsoft.AspNetCore.Razor.ProjectEngineHost;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Test.Common;
-using Microsoft.AspNetCore.Razor.Test.Common.Workspaces;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.Razor.DynamicFiles;
@@ -16,7 +15,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.VisualStudio.Razor.LanguageClient.DynamicFiles;
 
-public class RazorSpanMappingServiceTest(ITestOutputHelper testOutput) : WorkspaceTestBase(testOutput)
+public class RazorSpanMappingServiceTest(ITestOutputHelper testOutput) : ToolingTestBase(testOutput)
 {
     private readonly HostProject _hostProject = TestProjectData.SomeProject;
     private readonly HostDocument _hostDocument = TestProjectData.SomeProjectFile1;
@@ -29,9 +28,11 @@ public class RazorSpanMappingServiceTest(ITestOutputHelper testOutput) : Workspa
 @SomeProperty
 ");
 
-        var project = new ProjectSnapshot(ProjectState
-            .Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, ProjectWorkspaceState.Default)
-            .AddDocument(_hostDocument, TestMocks.CreateTextLoader(sourceText, VersionStamp.Create())));
+        var state = ProjectState
+            .Create(ProjectEngineFactories.DefaultProvider, _hostProject, ProjectWorkspaceState.Default)
+            .AddDocument(_hostDocument, TestMocks.CreateTextLoader(sourceText));
+
+        var project = new ProjectSnapshot(state);
 
         var document = project.GetDocument(_hostDocument.FilePath);
         Assert.NotNull(document);
@@ -61,9 +62,11 @@ public class RazorSpanMappingServiceTest(ITestOutputHelper testOutput) : Workspa
 @SomeProperty
 ");
 
-        var project = new ProjectSnapshot(ProjectState
-            .Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, ProjectWorkspaceState.Default)
-            .AddDocument(_hostDocument, TestMocks.CreateTextLoader(sourceText, VersionStamp.Create())));
+        var state = ProjectState
+            .Create(ProjectEngineFactories.DefaultProvider, _hostProject, ProjectWorkspaceState.Default)
+            .AddDocument(_hostDocument, TestMocks.CreateTextLoader(sourceText));
+
+        var project = new ProjectSnapshot(state);
 
         var document = project.GetDocument(_hostDocument.FilePath);
         Assert.NotNull(document);
@@ -94,9 +97,11 @@ public class RazorSpanMappingServiceTest(ITestOutputHelper testOutput) : Workspa
 }
 ");
 
-        var project = new ProjectSnapshot(ProjectState
-            .Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, ProjectWorkspaceState.Default)
-            .AddDocument(_hostDocument, TestMocks.CreateTextLoader(sourceText, VersionStamp.Create())));
+        var state = ProjectState
+            .Create(ProjectEngineFactories.DefaultProvider, _hostProject, ProjectWorkspaceState.Default)
+            .AddDocument(_hostDocument, TestMocks.CreateTextLoader(sourceText));
+
+        var project = new ProjectSnapshot(state);
 
         var document = project.GetDocument(_hostDocument.FilePath);
         Assert.NotNull(document);
@@ -126,9 +131,11 @@ public class RazorSpanMappingServiceTest(ITestOutputHelper testOutput) : Workspa
 }
 ");
 
-        var project = new ProjectSnapshot(ProjectState
-            .Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, _hostProject, ProjectWorkspaceState.Default)
-            .AddDocument(_hostDocument, TestMocks.CreateTextLoader(sourceText, VersionStamp.Create())));
+        var state = ProjectState
+            .Create(ProjectEngineFactories.DefaultProvider, _hostProject, ProjectWorkspaceState.Default)
+            .AddDocument(_hostDocument, TestMocks.CreateTextLoader(sourceText));
+
+        var project = new ProjectSnapshot(state);
 
         var document = project.GetDocument(_hostDocument.FilePath);
         Assert.NotNull(document);

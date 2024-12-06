@@ -32,11 +32,9 @@ public class RazorDiagnosticsBenchmark : RazorLanguageServerBenchmarkBase
     private DocumentPullDiagnosticsEndpoint? DocumentPullDiagnosticsEndpoint { get; set; }
     private RazorRequestContext RazorRequestContext { get; set; }
     private RazorCodeDocument? RazorCodeDocument { get; set; }
-    private SourceText? SourceText { get; set; }
     private ImmutableArray<SourceMapping> SourceMappings { get; set; }
     private string? GeneratedCode { get; set; }
     private object? Diagnostics { get; set; }
-    private DocumentContext? DocumentContext { get; set; }
     private VSInternalDocumentDiagnosticsParams? Request { get; set; }
     private IEnumerable<VSInternalDiagnosticReport?>? Response { get; set; }
 
@@ -72,7 +70,6 @@ public class RazorDiagnosticsBenchmark : RazorLanguageServerBenchmarkBase
         mockRazorCodeDocument.Setup(r => r.Items).Returns(itemCollection);
         RazorCodeDocument = mockRazorCodeDocument.Object;
 
-        SourceText = RazorCodeDocument.Source.Text;
         var documentContext = new Mock<DocumentContext>(
             MockBehavior.Strict,
             new object[] { It.IsAny<Uri>(), It.IsAny<IDocumentSnapshot>(), It.IsAny<VSProjectContext>(), It.IsAny<int>() });
@@ -83,7 +80,6 @@ public class RazorDiagnosticsBenchmark : RazorLanguageServerBenchmarkBase
         documentContext.Setup(r => r.Snapshot.Version).Returns(It.IsAny<int>());
         documentContext.Setup(r => r.GetSourceTextAsync(It.IsAny<CancellationToken>())).ReturnsAsync(It.IsAny<SourceText>());
         RazorRequestContext = new RazorRequestContext(documentContext.Object, null!, "lsp/method", uri: null);
-        DocumentContext = documentContext.Object;
 
         var loggerFactory = EmptyLoggerFactory.Instance;
         var languageServerFeatureOptions = BuildFeatureOptions();

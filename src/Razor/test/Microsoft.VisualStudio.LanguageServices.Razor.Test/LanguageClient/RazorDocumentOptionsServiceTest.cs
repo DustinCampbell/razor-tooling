@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Test.Common;
-using Microsoft.AspNetCore.Razor.Test.Common.Workspaces;
+using Microsoft.AspNetCore.Razor.Test.Common.VisualStudio;
 using Microsoft.AspNetCore.Razor.Utilities;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Formatting;
@@ -21,7 +21,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.VisualStudio.Razor.LanguageClient;
 
-public class RazorDocumentOptionsServiceTest(ITestOutputHelper testOutput) : WorkspaceTestBase(testOutput)
+public class RazorDocumentOptionsServiceTest(ITestOutputHelper testOutput) : VisualStudioWorkspaceTestBase(testOutput)
 {
     [Fact]
     public async Task RazorDocumentOptionsService_ReturnsCorrectOptions_UseTabs()
@@ -97,8 +97,8 @@ public class RazorDocumentOptionsServiceTest(ITestOutputHelper testOutput) : Wor
             Path.Combine(baseDirectory, "SomeProject", "File1.cshtml"), "File1.cshtml", FileKinds.Legacy);
 
         var project = new ProjectSnapshot(ProjectState
-            .Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, hostProject, ProjectWorkspaceState.Default)
-            .AddDocument(hostDocument, TestMocks.CreateTextLoader(sourceText, VersionStamp.Create())));
+            .Create(ProjectEngineFactoryProvider, hostProject, ProjectWorkspaceState.Default)
+            .AddDocument(hostDocument, TestMocks.CreateTextLoader(sourceText)));
 
         var documentSnapshot = project.GetDocument(hostDocument.FilePath);
         Assert.NotNull(documentSnapshot);

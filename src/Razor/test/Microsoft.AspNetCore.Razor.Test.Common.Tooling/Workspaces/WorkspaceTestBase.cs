@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Razor.Test.Common.ProjectSystem;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Host;
 using Microsoft.CodeAnalysis.Host.Mef;
+using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.Workspaces;
 using Xunit.Abstractions;
 
@@ -69,10 +70,10 @@ public abstract class WorkspaceTestBase(ITestOutputHelper testOutput) : ToolingT
     }
 
     private protected override TestProjectSnapshotManager CreateProjectSnapshotManager()
-        => base.CreateProjectSnapshotManager(ProjectEngineFactoryProvider, LanguageServerFeatureOptions);
+        => base.CreateProjectSnapshotManager(ProjectEngineFactoryProvider, LanguageServerFeatureOptions.ToCompilerOptions());
 
     private protected override TestProjectSnapshotManager CreateProjectSnapshotManager(IProjectEngineFactoryProvider projectEngineFactoryProvider)
-        => base.CreateProjectSnapshotManager(projectEngineFactoryProvider, LanguageServerFeatureOptions);
+        => base.CreateProjectSnapshotManager(projectEngineFactoryProvider, LanguageServerFeatureOptions.ToCompilerOptions());
 
     protected virtual void ConfigureWorkspace(AdhocWorkspace workspace)
     {

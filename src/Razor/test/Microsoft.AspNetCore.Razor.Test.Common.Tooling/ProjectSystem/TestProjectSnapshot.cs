@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.ProjectEngineHost;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
-using Microsoft.AspNetCore.Razor.Test.Common.Workspaces;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.NET.Sdk.Razor.SourceGenerators;
@@ -30,7 +29,7 @@ internal sealed class TestProjectSnapshot : IProjectSnapshot
         var hostProject = TestHostProject.Create(filePath);
         projectWorkspaceState ??= ProjectWorkspaceState.Default;
 
-        var state = ProjectState.Create(ProjectEngineFactories.DefaultProvider, TestLanguageServerFeatureOptions.Instance, hostProject, projectWorkspaceState);
+        var state = ProjectState.Create(ProjectEngineFactories.DefaultProvider, hostProject, projectWorkspaceState);
 
         return new TestProjectSnapshot(state);
     }

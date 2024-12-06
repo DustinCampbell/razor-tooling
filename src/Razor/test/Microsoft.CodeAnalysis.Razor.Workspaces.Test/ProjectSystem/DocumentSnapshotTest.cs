@@ -7,8 +7,6 @@ using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.ProjectEngineHost;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Test.Common;
-using Microsoft.AspNetCore.Razor.Test.Common.Workspaces;
-using Microsoft.CodeAnalysis.Text;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -103,22 +101,16 @@ public class DocumentSnapshotTest(ITestOutputHelper testOutput) : ToolingTestBas
 
     private static DocumentSnapshot CreateDocument(HostDocument hostDocument)
     {
-        var sourceText = SourceText.From("<p>Hello World</p>");
-        var version = VersionStamp.Create();
+        var textLoader = TestMocks.CreateTextLoader("<p>Hello World</p>");
 
-        var projectState = ProjectState.Create(
-            ProjectEngineFactories.DefaultProvider,
-            TestLanguageServerFeatureOptions.Instance,
-            TestProjectData.SomeProject,
+        var state = ProjectState
+            .Create(ProjectEngineFactories.DefaultProvider, TestProjectData.SomeProject, ProjectWorkspaceState.Default)
+            .AddDocument(hostDocument, textLoader);
 
-            ProjectWorkspaceState.Default);
+        var project = new ProjectSnapshot(state);
+        var document = (DocumentSnapshot?)project.GetDocument(hostDocument.FilePath);
+        Assert.NotNull(document);
 
-        var project = new ProjectSnapshot(projectState);
-
-        var textLoader = TestMocks.CreateTextLoader(sourceText, version);
-
-        var documentState = DocumentState.Create(hostDocument, textLoader);
-
-        return new DocumentSnapshot(project, documentState);
+        return document;
     }
 }

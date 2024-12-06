@@ -31,8 +31,14 @@ internal static class TestMocks
         return mock.Object;
     }
 
+    public static TextLoader CreateTextLoader(string text)
+        => CreateTextLoader(text, version: default);
+
     public static TextLoader CreateTextLoader(string text, VersionStamp version)
         => CreateTextLoader(SourceText.From(text), version);
+
+    public static TextLoader CreateTextLoader(SourceText text)
+        => CreateTextLoader(text, version: default);
 
     public static TextLoader CreateTextLoader(SourceText text, VersionStamp version)
         => CreateTextLoader(TextAndVersion.Create(text, version));

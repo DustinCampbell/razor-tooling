@@ -5,17 +5,20 @@ using System.Collections.Immutable;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
+using Microsoft.AspNetCore.Razor.ProjectEngineHost;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Test.Common;
-using Microsoft.AspNetCore.Razor.Test.Common.Workspaces;
+using Microsoft.AspNetCore.Razor.Test.Common.ProjectSystem;
 using Microsoft.CodeAnalysis.CSharp;
 using Xunit;
 using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
-public class ProjectStateGeneratedOutputTest(ITestOutputHelper testOutput) : WorkspaceTestBase(testOutput)
+public class ProjectStateGeneratedOutputTest(ITestOutputHelper testOutput) : ToolingTestBase(testOutput)
 {
+    private static readonly IProjectEngineFactoryProvider s_projectEngineFactoryProvider = new TestProjectEngineFactoryProvider(b => b.SetImportFeature(TestImportProjectFeature.Instance));
+
     private static readonly HostProject s_project = TestProjectData.SomeProject with { Configuration = FallbackRazorConfiguration.MVC_2_0 };
 
     private static readonly HostDocument s_document1 = TestProjectData.SomeProjectFile1;
@@ -24,17 +27,12 @@ public class ProjectStateGeneratedOutputTest(ITestOutputHelper testOutput) : Wor
 
     private static readonly ImmutableArray<TagHelperDescriptor> s_someTagHelpers = [TagHelperDescriptorBuilder.Create("Test1", "TestAssembly").Build()];
 
-    protected override void ConfigureProjectEngine(RazorProjectEngineBuilder builder)
-    {
-        builder.SetImportFeature(new TestImportProjectFeature());
-    }
-
     [Fact]
     public async Task DocumentAdded_DoesNotCacheOutput()
     {
         // Arrange
         var state = ProjectState
-            .Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, s_project, ProjectWorkspaceState.Default)
+            .Create(s_projectEngineFactoryProvider, s_project, ProjectWorkspaceState.Default)
             .AddDocument(s_document1, EmptyTextLoader.Instance);
 
         var result = await GetOutputAsync(state, s_document1, DisposalToken);
@@ -53,7 +51,7 @@ public class ProjectStateGeneratedOutputTest(ITestOutputHelper testOutput) : Wor
     {
         // Arrange
         var state = ProjectState
-            .Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, s_project, ProjectWorkspaceState.Default)
+            .Create(s_projectEngineFactoryProvider, s_project, ProjectWorkspaceState.Default)
             .AddDocument(s_document1, EmptyTextLoader.Instance)
             .AddDocument(s_importDocument, EmptyTextLoader.Instance);
 
@@ -75,7 +73,7 @@ public class ProjectStateGeneratedOutputTest(ITestOutputHelper testOutput) : Wor
     {
         // Arrange
         var state = ProjectState
-            .Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, s_project, ProjectWorkspaceState.Default)
+            .Create(s_projectEngineFactoryProvider, s_project, ProjectWorkspaceState.Default)
             .AddDocument(s_document1, EmptyTextLoader.Instance)
             .AddDocument(s_document2, EmptyTextLoader.Instance);
 
@@ -96,7 +94,7 @@ public class ProjectStateGeneratedOutputTest(ITestOutputHelper testOutput) : Wor
     {
         // Arrange
         var state = ProjectState
-            .Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, s_project, ProjectWorkspaceState.Default)
+            .Create(s_projectEngineFactoryProvider, s_project, ProjectWorkspaceState.Default)
             .AddDocument(s_document1, EmptyTextLoader.Instance);
 
         var result = await GetOutputAsync(state, s_document1, DisposalToken);
@@ -115,7 +113,7 @@ public class ProjectStateGeneratedOutputTest(ITestOutputHelper testOutput) : Wor
     {
         // Arrange
         var state = ProjectState
-            .Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, s_project, ProjectWorkspaceState.Default)
+            .Create(s_projectEngineFactoryProvider, s_project, ProjectWorkspaceState.Default)
             .AddDocument(s_document1, EmptyTextLoader.Instance)
             .AddDocument(s_importDocument, EmptyTextLoader.Instance);
 
@@ -137,7 +135,7 @@ public class ProjectStateGeneratedOutputTest(ITestOutputHelper testOutput) : Wor
     {
         // Arrange
         var state = ProjectState
-            .Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, s_project, ProjectWorkspaceState.Default)
+            .Create(s_projectEngineFactoryProvider, s_project, ProjectWorkspaceState.Default)
             .AddDocument(s_document1, EmptyTextLoader.Instance)
             .AddDocument(s_importDocument, EmptyTextLoader.Instance);
 
@@ -158,7 +156,7 @@ public class ProjectStateGeneratedOutputTest(ITestOutputHelper testOutput) : Wor
     {
         // Arrange
         var state = ProjectState
-            .Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, s_project, ProjectWorkspaceState.Default)
+            .Create(s_projectEngineFactoryProvider, s_project, ProjectWorkspaceState.Default)
             .AddDocument(s_document1, EmptyTextLoader.Instance);
 
         var result = await GetOutputAsync(state, s_document1, DisposalToken);
@@ -177,7 +175,7 @@ public class ProjectStateGeneratedOutputTest(ITestOutputHelper testOutput) : Wor
     {
         // Arrange
         var state = ProjectState
-            .Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, s_project, ProjectWorkspaceState.Default)
+            .Create(s_projectEngineFactoryProvider, s_project, ProjectWorkspaceState.Default)
             .AddDocument(s_document1, EmptyTextLoader.Instance);
 
         var result = await GetOutputAsync(state, s_document1, DisposalToken);
@@ -205,7 +203,7 @@ public class ProjectStateGeneratedOutputTest(ITestOutputHelper testOutput) : Wor
         };
 
         var state = ProjectState
-            .Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, hostProject, ProjectWorkspaceState.Create(s_someTagHelpers, LanguageVersion.CSharp7))
+            .Create(s_projectEngineFactoryProvider, hostProject, ProjectWorkspaceState.Create(s_someTagHelpers, LanguageVersion.CSharp7))
             .AddDocument(s_document1, TestMocks.CreateTextLoader("@DateTime.Now", VersionStamp.Default));
 
         var result = await GetOutputAsync(state, s_document1, DisposalToken);
@@ -225,7 +223,7 @@ public class ProjectStateGeneratedOutputTest(ITestOutputHelper testOutput) : Wor
     {
         // Arrange
         var state = ProjectState
-            .Create(ProjectEngineFactoryProvider, LanguageServerFeatureOptions, s_project, ProjectWorkspaceState.Default)
+            .Create(s_projectEngineFactoryProvider, s_project, ProjectWorkspaceState.Default)
             .AddDocument(s_document1, EmptyTextLoader.Instance);
 
         var result = await GetOutputAsync(state, s_document1, DisposalToken);

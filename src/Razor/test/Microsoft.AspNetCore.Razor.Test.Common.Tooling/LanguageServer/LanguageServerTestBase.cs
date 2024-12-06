@@ -30,26 +30,17 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Razor.Test.Common.LanguageServer;
 
-public abstract class LanguageServerTestBase : ToolingTestBase
+public abstract class LanguageServerTestBase(ITestOutputHelper testOutput) : ToolingTestBase(testOutput)
 {
-    private protected IRazorSpanMappingService SpanMappingService { get; }
-    private protected IFilePathService FilePathService { get; }
-    private protected JsonSerializerOptions SerializerOptions { get; }
-
-    protected LanguageServerTestBase(ITestOutputHelper testOutput)
-        : base(testOutput)
-    {
-        SpanMappingService = new ThrowingRazorSpanMappingService();
-
-        SerializerOptions = JsonHelpers.VsLspJsonSerializerOptions;
-        FilePathService = new LSPFilePathService(TestLanguageServerFeatureOptions.Instance);
-    }
+    private protected IRazorSpanMappingService SpanMappingService { get; } = new ThrowingRazorSpanMappingService();
+    private protected IFilePathService FilePathService { get; } = new LSPFilePathService(TestLanguageServerFeatureOptions.Instance);
+    private protected JsonSerializerOptions SerializerOptions { get; } = JsonHelpers.VsLspJsonSerializerOptions;
 
     private protected override TestProjectSnapshotManager CreateProjectSnapshotManager(
-        IProjectEngineFactoryProvider projectEngineFactoryProvider, LanguageServerFeatureOptions languageServerFeatureOptions)
+        IProjectEngineFactoryProvider projectEngineFactoryProvider, RazorCompilerOptions compilerOptions)
         => new(
             projectEngineFactoryProvider,
-            languageServerFeatureOptions,
+            compilerOptions,
             LoggerFactory,
             DisposalToken,
             initializer: static updater => updater.ProjectAdded(MiscFilesHostProject.Instance));

@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Razor.ProjectEngineHost;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Utilities;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.Razor.Workspaces;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.Extensions.ObjectPool;
 using Microsoft.NET.Sdk.Razor.SourceGenerators;
@@ -40,19 +39,20 @@ internal class ProjectState
     private static readonly ImmutableDictionary<string, ImmutableArray<string>> s_emptyImportsToRelatedDocuments = ImmutableDictionary.Create<string, ImmutableArray<string>>(FilePathNormalizingComparer.Instance);
 
     private readonly IProjectEngineFactoryProvider _projectEngineFactoryProvider;
-    private readonly LanguageServerFeatureOptions _languageServerFeatureOptions;
+
+    public RazorCompilerOptions CompilerOptions { get; }
 
     private readonly object _lock = new();
     private RazorProjectEngine? _projectEngine;
 
     private ProjectState(
         IProjectEngineFactoryProvider projectEngineFactoryProvider,
-        LanguageServerFeatureOptions languageServerFeatureOptions,
+        RazorCompilerOptions compilerOptions,
         HostProject hostProject,
         ProjectWorkspaceState projectWorkspaceState)
     {
         _projectEngineFactoryProvider = projectEngineFactoryProvider;
-        _languageServerFeatureOptions = languageServerFeatureOptions;
+        CompilerOptions = compilerOptions;
         HostProject = hostProject;
         ProjectWorkspaceState = projectWorkspaceState;
         Documents = s_emptyDocuments;
@@ -73,7 +73,7 @@ internal class ProjectState
         ImmutableDictionary<string, ImmutableArray<string>> importsToRelatedDocuments)
     {
         _projectEngineFactoryProvider = older._projectEngineFactoryProvider;
-        _languageServerFeatureOptions = older._languageServerFeatureOptions;
+        CompilerOptions = older.CompilerOptions;
         Version = older.Version.GetNewerVersion();
 
         HostProject = hostProject;
@@ -127,12 +127,16 @@ internal class ProjectState
 
     public static ProjectState Create(
         IProjectEngineFactoryProvider projectEngineFactoryProvider,
-        LanguageServerFeatureOptions languageServerFeatureOptions,
+        RazorCompilerOptions compilerOptions,
         HostProject hostProject,
         ProjectWorkspaceState projectWorkspaceState)
-    {
-        return new(projectEngineFactoryProvider, languageServerFeatureOptions, hostProject, projectWorkspaceState);
-    }
+        => new(projectEngineFactoryProvider, compilerOptions, hostProject, projectWorkspaceState);
+
+    public static ProjectState Create(
+        IProjectEngineFactoryProvider projectEngineFactoryProvider,
+        HostProject hostProject,
+        ProjectWorkspaceState projectWorkspaceState)
+        => new(projectEngineFactoryProvider, RazorCompilerOptions.None, hostProject, projectWorkspaceState);
 
     // Internal set for testing.
     public ImmutableDictionary<string, DocumentState> Documents { get; internal set; }
@@ -141,8 +145,6 @@ internal class ProjectState
     public ImmutableDictionary<string, ImmutableArray<string>> ImportsToRelatedDocuments { get; internal set; }
 
     public HostProject HostProject { get; }
-
-    internal LanguageServerFeatureOptions LanguageServerFeatureOptions => _languageServerFeatureOptions;
 
     public ProjectWorkspaceState ProjectWorkspaceState { get; }
 
@@ -178,7 +180,7 @@ internal class ProjectState
             {
                 var configuration = HostProject.Configuration;
                 var rootDirectoryPath = Path.GetDirectoryName(HostProject.FilePath).AssumeNotNull();
-                var useRoslynTokenizer = LanguageServerFeatureOptions.UseRoslynTokenizer;
+                var useRoslynTokenizer = CompilerOptions.IsFlagSet(RazorCompilerOptions.UseRoslynTokenizer);
 
                 return _projectEngineFactoryProvider.Create(configuration, rootDirectoryPath, builder =>
                 {

@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Razor.ProjectEngineHost;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Test.Common;
 using Microsoft.AspNetCore.Razor.Test.Common.ProjectSystem;
-using Microsoft.AspNetCore.Razor.Test.Common.Workspaces;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -34,7 +33,7 @@ public class ProjectSnapshotTest(ITestOutputHelper testOutput) : ToolingTestBase
     {
         // Arrange
         var state = ProjectState
-            .Create(s_projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance, s_hostProject, s_projectWorkspaceState)
+            .Create(s_projectEngineFactoryProvider, s_hostProject, s_projectWorkspaceState)
             .AddDocument(s_documents[0], EmptyTextLoader.Instance)
             .AddDocument(s_documents[1], EmptyTextLoader.Instance)
             .AddDocument(s_documents[2], EmptyTextLoader.Instance);
@@ -58,7 +57,7 @@ public class ProjectSnapshotTest(ITestOutputHelper testOutput) : ToolingTestBase
     {
         // Arrange
         var state = ProjectState
-            .Create(s_projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance, s_hostProject, s_projectWorkspaceState)
+            .Create(s_projectEngineFactoryProvider, s_hostProject, s_projectWorkspaceState)
             .AddDocument(s_documents[0], EmptyTextLoader.Instance);
 
         var project = new ProjectSnapshot(state);
@@ -78,7 +77,7 @@ public class ProjectSnapshotTest(ITestOutputHelper testOutput) : ToolingTestBase
     {
         // Arrange
         var state = ProjectState
-            .Create(s_projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance, s_hostProject, s_projectWorkspaceState)
+            .Create(s_projectEngineFactoryProvider, s_hostProject, s_projectWorkspaceState)
             .AddDocument(s_documents[0], EmptyTextLoader.Instance)
             .AddDocument(s_documents[1], EmptyTextLoader.Instance)
             .AddDocument(TestProjectData.SomeProjectImportFile, EmptyTextLoader.Instance);
