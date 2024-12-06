@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
-internal partial class DocumentState
+internal sealed partial class DocumentState
 {
     public HostDocument HostDocument { get; }
     public int Version { get; }
@@ -44,12 +44,6 @@ internal partial class DocumentState
         _textAndVersion = textAndVersion;
         _textLoader = textLoader ?? EmptyTextLoader.Instance;
         _computedState = computedState;
-    }
-
-    // Private protected for testing
-    private protected DocumentState(HostDocument hostDocument, TextLoader? textLoader)
-        : this(hostDocument, textAndVersion: null, textLoader)
-    {
     }
 
     public static DocumentState Create(HostDocument hostDocument, TextAndVersion textAndVersion)
@@ -142,22 +136,16 @@ internal partial class DocumentState
         return false;
     }
 
-    public virtual DocumentState WithConfigurationChange()
-    {
-        return new DocumentState(this, _textAndVersion, _textLoader, computedState: null);
-    }
+    public DocumentState WithConfigurationChange()
+        => new(this, _textAndVersion, _textLoader, computedState: null);
 
-    public virtual DocumentState WithImportsChange()
-    {
+    public DocumentState WithImportsChange()
         // Optimistically cache the computed state
-        return new DocumentState(this, _textAndVersion, _textLoader, _computedState);
-    }
+        => new(this, _textAndVersion, _textLoader, _computedState);
 
-    public virtual DocumentState WithProjectWorkspaceStateChange()
-    {
+    public DocumentState WithProjectWorkspaceStateChange()
         // Optimistically cache the computed state
-        return new DocumentState(this, _textAndVersion, _textLoader, _computedState);
-    }
+        => new(this, _textAndVersion, _textLoader, _computedState);
 
     public DocumentState WithText(SourceText text, VersionStamp textVersion)
         => new(this, TextAndVersion.Create(text, textVersion), textLoader: null, computedState: null);

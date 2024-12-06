@@ -222,7 +222,7 @@ public abstract partial class ToolingTestBase : IAsyncLifetime
         => CreateProjectSnapshotManager(ProjectEngineFactories.DefaultProvider);
 
     private protected virtual TestProjectSnapshotManager CreateProjectSnapshotManager(IProjectEngineFactoryProvider projectEngineFactoryProvider)
-        => CreateProjectSnapshotManager(projectEngineFactoryProvider);
+        => CreateProjectSnapshotManager(projectEngineFactoryProvider, RazorCompilerOptions.None);
 
     private protected virtual TestProjectSnapshotManager CreateProjectSnapshotManager(IProjectEngineFactoryProvider projectEngineFactoryProvider, RazorCompilerOptions compilerOptions)
         => new(projectEngineFactoryProvider, compilerOptions, LoggerFactory, DisposalToken);

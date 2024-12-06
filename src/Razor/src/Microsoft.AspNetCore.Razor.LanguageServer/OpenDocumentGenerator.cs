@@ -148,9 +148,7 @@ internal partial class OpenDocumentGenerator : IRazorStartupService, IDisposable
                     {
                         foreach (var relatedDocument in oldProject.GetRelatedDocuments(document))
                         {
-                            var relatedDocumentFilePath = relatedDocument.FilePath;
-
-                            if (newProject.TryGetDocument(relatedDocumentFilePath, out var newRelatedDocument))
+                            if (newProject.TryGetDocument(relatedDocument.FilePath, out var newRelatedDocument))
                             {
                                 EnqueueIfNecessary(newRelatedDocument);
                             }

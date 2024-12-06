@@ -471,6 +471,8 @@ internal class ProjectState
             }
         }
 
+        importsToRelatedDocuments = importsToRelatedDocuments.Remove(hostDocument.TargetPath);
+
         return importsToRelatedDocuments;
     }
 

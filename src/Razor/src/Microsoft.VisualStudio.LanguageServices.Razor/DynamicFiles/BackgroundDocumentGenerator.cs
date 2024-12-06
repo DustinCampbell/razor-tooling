@@ -239,9 +239,12 @@ internal partial class BackgroundDocumentGenerator : IRazorStartupService, IDisp
 
                     if (oldProject.TryGetDocument(documentFilePath, out var document))
                     {
-                        foreach (var relatedDocument in newProject.GetRelatedDocuments(document))
+                        foreach (var relatedDocument in oldProject.GetRelatedDocuments(document))
                         {
-                            Enqueue(newProject, relatedDocument);
+                            if (newProject.TryGetDocument(relatedDocument.FilePath, out var newRelatedDocument))
+                            {
+                                Enqueue(newProject, newRelatedDocument);
+                            }
                         }
                     }
 
