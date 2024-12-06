@@ -47,16 +47,16 @@ internal partial class DocumentState
     }
 
     // Private protected for testing
-    private protected DocumentState(HostDocument hostDocument, TextLoader? loader)
-        : this(hostDocument, textAndVersion: null, loader)
+    private protected DocumentState(HostDocument hostDocument, TextLoader? textLoader)
+        : this(hostDocument, textAndVersion: null, textLoader)
     {
     }
 
     public static DocumentState Create(HostDocument hostDocument, TextAndVersion textAndVersion)
         => new(hostDocument, textAndVersion, textLoader: null);
 
-    public static DocumentState Create(HostDocument hostDocument, TextLoader loader)
-        => new(hostDocument, textAndVersion: null, loader);
+    public static DocumentState Create(HostDocument hostDocument, TextLoader textLoader)
+        => new(hostDocument, textAndVersion: null, textLoader);
 
     public static DocumentState Create(HostDocument hostDocument)
         => new(hostDocument, textAndVersion: null, textLoader: null);
@@ -80,9 +80,9 @@ internal partial class DocumentState
             ? new(result)
             : LoadTextAndVersionAsync(_textLoader, cancellationToken);
 
-        async ValueTask<TextAndVersion> LoadTextAndVersionAsync(TextLoader loader, CancellationToken cancellationToken)
+        async ValueTask<TextAndVersion> LoadTextAndVersionAsync(TextLoader textLoader, CancellationToken cancellationToken)
         {
-            var textAndVersion = await loader
+            var textAndVersion = await textLoader
                 .LoadTextAndVersionAsync(new(SourceHashAlgorithm.Sha256), cancellationToken)
                 .ConfigureAwait(false);
 
