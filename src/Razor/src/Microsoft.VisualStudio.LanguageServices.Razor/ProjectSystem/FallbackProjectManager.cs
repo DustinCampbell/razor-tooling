@@ -2,7 +2,9 @@
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Immutable;
 using System.ComponentModel.Composition;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Threading;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
@@ -22,20 +24,57 @@ namespace Microsoft.VisualStudio.Razor.ProjectSystem;
 /// use the Razor or Web SDK, or otherwise don't get picked up by our CPS bits, but have
 /// .razor or .cshtml files regardless.
 /// </summary>
+[Export(typeof(IFallbackProjectManager))]
 [Export(typeof(FallbackProjectManager))]
-[method: ImportingConstructor]
-internal sealed class FallbackProjectManager(
-    [Import(typeof(SVsServiceProvider))] IServiceProvider serviceProvider,
-    IProjectSnapshotManager projectManager,
-    IWorkspaceProvider workspaceProvider,
-    ITelemetryReporter telemetryReporter)
+internal sealed class FallbackProjectManager : IFallbackProjectManager
 {
-    private readonly IServiceProvider _serviceProvider = serviceProvider;
-    private readonly IProjectSnapshotManager _projectManager = projectManager;
-    private readonly IWorkspaceProvider _workspaceProvider = workspaceProvider;
-    private readonly ITelemetryReporter _telemetryReporter = telemetryReporter;
+    private readonly IServiceProvider _serviceProvider;
+    private readonly IProjectSnapshotManager _projectManager;
+    private readonly IWorkspaceProvider _workspaceProvider;
+    private readonly ITelemetryReporter _telemetryReporter;
 
-    internal void DynamicFileAdded(
+    // Tracks project keys that are known to be fallback projects.
+    private ImmutableHashSet<ProjectKey> _fallbackProjects = [];
+
+    [ImportingConstructor]
+    public FallbackProjectManager(
+        [Import(typeof(SVsServiceProvider))] IServiceProvider serviceProvider,
+        IProjectSnapshotManager projectManager,
+        IWorkspaceProvider workspaceProvider,
+        ITelemetryReporter telemetryReporter)
+    {
+        _serviceProvider = serviceProvider;
+        _projectManager = projectManager;
+        _workspaceProvider = workspaceProvider;
+        _telemetryReporter = telemetryReporter;
+
+        // Use PriorityChanged to ensure that project changes or removes update _fallbackProjects
+        // before IProjectSnapshotManager.Changed listeners are notified.
+        _projectManager.PriorityChanged += ProjectManager_Changed;
+    }
+
+    private void ProjectManager_Changed(object sender, ProjectChangeEventArgs e)
+    {
+        // If a project is changed, we know that this is no longer a fallback project because
+        // one of two things has happened:
+        //
+        // 1. The project system has updated the project's configuration or root namespace.
+        // 2. The project's ProjectWorkspaceState has been updated.
+        //
+        // In either of these two cases, we assume that something else is properly tracking the
+        // project and no longer treat it as a fallback project.
+        //
+        // In addition, if a project is removed, we can stop tracking it as a fallback project.
+        if (e.Kind is ProjectChangeKind.ProjectChanged or ProjectChangeKind.ProjectRemoved)
+        {
+            ImmutableInterlocked.Update(ref _fallbackProjects, set => set.Remove(e.ProjectKey));
+        }
+    }
+
+    public bool IsFallbackProject(IProjectSnapshot project)
+        => _fallbackProjects.Contains(project.Key);
+
+    public void DynamicFileAdded(
         ProjectId projectId,
         ProjectKey razorProjectKey,
         string projectFilePath,
@@ -46,7 +85,7 @@ internal sealed class FallbackProjectManager(
         {
             if (_projectManager.TryGetLoadedProject(razorProjectKey, out var project))
             {
-                if (project is ProjectSnapshot { HostProject: FallbackHostProject })
+                if (IsFallbackProject(project))
                 {
                     // If this is a fallback project, then Roslyn may not track documents in the project, so these dynamic file notifications
                     // are the only way to know about files in the project.
@@ -67,7 +106,7 @@ internal sealed class FallbackProjectManager(
         }
     }
 
-    internal void DynamicFileRemoved(
+    public void DynamicFileRemoved(
         ProjectId projectId,
         ProjectKey razorProjectKey,
         string projectFilePath,
@@ -77,7 +116,7 @@ internal sealed class FallbackProjectManager(
         try
         {
             if (_projectManager.TryGetLoadedProject(razorProjectKey, out var project) &&
-                project is ProjectSnapshot { HostProject: FallbackHostProject })
+                IsFallbackProject(project))
             {
                 // If this is a fallback project, then Roslyn may not track documents in the project, so these dynamic file notifications
                 // are the only way to know about files in the project.
@@ -98,21 +137,26 @@ internal sealed class FallbackProjectManager(
             return;
         }
 
+        // If we can't retrieve intermediate output path, we can't create a ProjectKey.
+        // So, we have to ignore this project.
         var intermediateOutputPath = Path.GetDirectoryName(project.CompilationOutputInfo.AssemblyPath);
         if (intermediateOutputPath is null)
         {
             return;
         }
 
-        var rootNamespace = project.DefaultNamespace;
-
-        var configuration = FallbackRazorConfiguration.Latest;
-
         // We create this as a fallback project so that other parts of the system can reason about them - eg we don't do code
         // generation for closed files for documents in these projects. If these projects become "real", either because capabilities
         // change or simply a timing difference between Roslyn and our CPS components, the HostProject instance associated with
         // the project will be updated, and it will no longer be a fallback project.
-        var hostProject = new FallbackHostProject(project.FilePath, intermediateOutputPath, configuration, rootNamespace, project.Name);
+        var hostProject = new HostProject(
+            project.FilePath,
+            intermediateOutputPath,
+            FallbackRazorConfiguration.Latest,
+            project.DefaultNamespace,
+            project.Name);
+
+        ImmutableInterlocked.Update(ref _fallbackProjects, set => set.Add(hostProject.Key));
 
         EnqueueProjectManagerUpdate(
             updater => updater.ProjectAdded(hostProject),
@@ -123,8 +167,7 @@ internal sealed class FallbackProjectManager(
 
     private void AddFallbackDocument(ProjectKey projectKey, string filePath, string projectFilePath, CancellationToken cancellationToken)
     {
-        var hostDocument = CreateHostDocument(filePath, projectFilePath);
-        if (hostDocument is null)
+        if (!TryCreateHostDocument(filePath, projectFilePath, out var hostDocument))
         {
             return;
         }
@@ -136,20 +179,22 @@ internal sealed class FallbackProjectManager(
             cancellationToken);
     }
 
-    private static HostDocument? CreateHostDocument(string filePath, string projectFilePath)
+    private static bool TryCreateHostDocument(string filePath, string projectFilePath, [NotNullWhen(true)] out HostDocument? hostDocument)
     {
         // The compiler only supports paths that are relative to the project root, so filter our files
         // that don't match
         var projectPath = FilePathNormalizer.GetNormalizedDirectoryName(projectFilePath);
         var normalizedFilePath = FilePathNormalizer.Normalize(filePath);
-        if (!normalizedFilePath.StartsWith(projectPath, FilePathComparison.Instance))
+
+        if (normalizedFilePath.StartsWith(projectPath, FilePathComparison.Instance))
         {
-            return null;
+            var targetPath = filePath[projectPath.Length..];
+            hostDocument = new(filePath, targetPath);
+            return true;
         }
 
-        var targetPath = filePath[projectPath.Length..];
-        var hostDocument = new HostDocument(filePath, targetPath);
-        return hostDocument;
+        hostDocument = null;
+        return false;
     }
 
     private void RemoveFallbackDocument(ProjectId projectId, string filePath, string projectFilePath, CancellationToken cancellationToken)
@@ -162,8 +207,7 @@ internal sealed class FallbackProjectManager(
 
         var projectKey = project.ToProjectKey();
 
-        var hostDocument = CreateHostDocument(filePath, projectFilePath);
-        if (hostDocument is null)
+        if (!TryCreateHostDocument(filePath, projectFilePath, out var hostDocument))
         {
             return;
         }
