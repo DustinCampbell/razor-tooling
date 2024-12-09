@@ -135,7 +135,8 @@ public class CodeDocumentReferenceHolderTest(ITestOutputHelper testOutput) : Lan
         // Act
         await _projectManager.UpdateAsync(updater =>
         {
-            updater.ProjectConfigurationChanged(s_hostProject with { Configuration = RazorConfiguration.Default, RootNamespace = "NewRootNamespace" });
+            updater.UpdateProjectConfiguration(s_hostProject.Key, RazorConfiguration.Default);
+            updater.UpdateRootNamespace(s_hostProject.Key, "NewRootNamespace");
         });
 
         PerformFullGC();

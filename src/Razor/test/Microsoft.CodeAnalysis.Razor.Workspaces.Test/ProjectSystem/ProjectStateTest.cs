@@ -5,6 +5,7 @@
 using System.Collections.Generic;
 #endif
 
+using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
@@ -25,7 +26,6 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     private static readonly IProjectEngineFactoryProvider s_projectEngineFactoryProvider = new TestProjectEngineFactoryProvider(b => b.SetImportFeature(TestImportProjectFeature.Instance));
 
     private static readonly HostProject s_project = TestProjectData.SomeProject with { Configuration = FallbackRazorConfiguration.MVC_2_0 };
-    private static readonly HostProject s_projectWithConfigurationChange = TestProjectData.SomeProject with { Configuration = FallbackRazorConfiguration.MVC_1_0 };
     private static readonly ProjectWorkspaceState s_projectWorkspaceState = ProjectWorkspaceState.Create([TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly").Build()]);
 
     private static readonly HostDocument[] s_documents =
@@ -68,7 +68,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     }
 
     [Fact]
-    public void ProjectState_AddHostDocument_ToEmpty()
+    public void ProjectState_AddDocument_ToEmpty()
     {
         // Arrange
         var state = ProjectState.Create(s_project, s_projectWorkspaceState, s_projectEngineFactoryProvider);
@@ -84,7 +84,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     }
 
     [Fact]
-    public async Task ProjectState_AddHostDocument_DocumentIsEmpty()
+    public async Task ProjectState_AddDocument_DocumentIsEmpty()
     {
         // Arrange
         var state = ProjectState.Create(s_project, s_projectWorkspaceState, s_projectEngineFactoryProvider);
@@ -98,7 +98,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     }
 
     [Fact]
-    public void ProjectState_AddHostDocument_ToProjectWithDocuments()
+    public void ProjectState_AddDocument_ToProjectWithDocuments()
     {
         // Arrange
         var state = ProjectState
@@ -122,7 +122,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     }
 
     [Fact]
-    public void ProjectState_AddHostDocument_TracksImports()
+    public void ProjectState_AddDocument_TracksImports()
     {
         // Arrange & Act
         var state = ProjectState
@@ -160,7 +160,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     }
 
     [Fact]
-    public void ProjectState_AddHostDocument_TracksImports_AddImportFile()
+    public void ProjectState_AddDocument_TracksImports_AddImportFile()
     {
         // Arrange
         var state = ProjectState
@@ -201,7 +201,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     }
 
     [Fact]
-    public void ProjectState_AddHostDocument_RetainsComputedState()
+    public void ProjectState_AddDocument_RetainsComputedState()
     {
         // Arrange
         var state = ProjectState
@@ -209,31 +209,21 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
             .AddDocument(s_documents[2], EmptyTextLoader.Instance)
             .AddDocument(s_documents[1], EmptyTextLoader.Instance);
 
-        var tagHelpers = state.TagHelpers;
-        var projectWorkspaceStateVersion = state.ProjectWorkspaceStateVersion;
-
         // Act
         var newState = state.AddDocument(s_documents[0], EmptyTextLoader.Instance);
-        var newTagHelpers = newState.TagHelpers;
-        var newProjectWorkspaceStateVersion = newState.ProjectWorkspaceStateVersion;
 
         // Assert
         Assert.Same(state.ProjectEngine, newState.ProjectEngine);
+        AssertSameTagHelpers(state.TagHelpers, newState.TagHelpers);
 
-        Assert.Equal(tagHelpers.Length, newTagHelpers.Length);
-        for (var i = 0; i < tagHelpers.Length; i++)
-        {
-            Assert.Same(tagHelpers[i], newTagHelpers[i]);
-        }
-
-        Assert.Equal(projectWorkspaceStateVersion, newProjectWorkspaceStateVersion);
+        Assert.Equal(state.ProjectWorkspaceStateVersion, newState.ProjectWorkspaceStateVersion);
 
         Assert.Same(state.Documents[s_documents[1].FilePath], newState.Documents[s_documents[1].FilePath]);
         Assert.Same(state.Documents[s_documents[2].FilePath], newState.Documents[s_documents[2].FilePath]);
     }
 
     [Fact]
-    public void ProjectState_AddHostDocument_DuplicateIgnored()
+    public void ProjectState_AddDocument_DuplicateIgnored()
     {
         // Arrange
         var state = ProjectState
@@ -249,7 +239,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     }
 
     [Fact]
-    public async Task ProjectState_WithChangedHostDocument_Loader()
+    public async Task ProjectState_WithDocumentText_Loader()
     {
         // Arrange
         var state = ProjectState
@@ -269,7 +259,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     }
 
     [Fact]
-    public async Task ProjectState_WithChangedHostDocument_Snapshot()
+    public async Task ProjectState_WithDocumentText_Snapshot()
     {
         // Arrange
         var state = ProjectState
@@ -290,38 +280,28 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     }
 
     [Fact]
-    public void ProjectState_WithChangedHostDocument_Loader_RetainsComputedState()
+    public void ProjectState_WithDocumentText_Loader_RetainsComputedState()
     {
         // Arrange
         var state = ProjectState
             .Create(s_project, s_projectWorkspaceState, s_projectEngineFactoryProvider)
             .AddDocument(s_documents[2], EmptyTextLoader.Instance)
             .AddDocument(s_documents[1], EmptyTextLoader.Instance);
-
-        var tagHelpers = state.TagHelpers;
-        var projectWorkspaceStateVersion = state.ProjectWorkspaceStateVersion;
 
         // Act
         var newState = state.UpdateDocumentText(s_documents[1], s_textLoader);
-        var newTagHelpers = newState.TagHelpers;
-        var newProjectWorkspaceStateVersion = newState.ProjectWorkspaceStateVersion;
 
         // Assert
         Assert.Same(state.ProjectEngine, newState.ProjectEngine);
+        AssertSameTagHelpers(state.TagHelpers, newState.TagHelpers);
 
-        Assert.Equal(tagHelpers.Length, newTagHelpers.Length);
-        for (var i = 0; i < tagHelpers.Length; i++)
-        {
-            Assert.Same(tagHelpers[i], newTagHelpers[i]);
-        }
-
-        Assert.Equal(projectWorkspaceStateVersion, newProjectWorkspaceStateVersion);
+        Assert.Equal(state.ProjectWorkspaceStateVersion, newState.ProjectWorkspaceStateVersion);
 
         Assert.NotSame(state.Documents[s_documents[1].FilePath], newState.Documents[s_documents[1].FilePath]);
     }
 
     [Fact]
-    public void ProjectState_WithChangedHostDocument_Snapshot_RetainsComputedState()
+    public void ProjectState_WithDocumentText_Snapshot_RetainsComputedState()
     {
         // Arrange
         var state = ProjectState
@@ -329,30 +309,20 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
             .AddDocument(s_documents[2], EmptyTextLoader.Instance)
             .AddDocument(s_documents[1], EmptyTextLoader.Instance);
 
-        var tagHelpers = state.TagHelpers;
-        var projectWorkspaceStateVersion = state.ProjectWorkspaceStateVersion;
-
         // Act
         var newState = state.UpdateDocumentText(s_documents[1], s_text, VersionStamp.Create());
-        var newTagHelpers = newState.TagHelpers;
-        var newProjectWorkspaceStateVersion = newState.ProjectWorkspaceStateVersion;
 
         // Assert
         Assert.Same(state.ProjectEngine, newState.ProjectEngine);
+        AssertSameTagHelpers(state.TagHelpers, newState.TagHelpers);
 
-        Assert.Equal(tagHelpers.Length, newTagHelpers.Length);
-        for (var i = 0; i < tagHelpers.Length; i++)
-        {
-            Assert.Same(tagHelpers[i], newTagHelpers[i]);
-        }
-
-        Assert.Equal(projectWorkspaceStateVersion, newProjectWorkspaceStateVersion);
+        Assert.Equal(state.ProjectWorkspaceStateVersion, newState.ProjectWorkspaceStateVersion);
 
         Assert.NotSame(state.Documents[s_documents[1].FilePath], newState.Documents[s_documents[1].FilePath]);
     }
 
     [Fact]
-    public void ProjectState_WithChangedHostDocument_Loader_NotFoundIgnored()
+    public void ProjectState_WithDocumentText_Loader_NotFoundIgnored()
     {
         // Arrange
         var state = ProjectState
@@ -368,7 +338,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     }
 
     [Fact]
-    public void ProjectState_WithChangedHostDocument_Snapshot_NotFoundIgnored()
+    public void ProjectState_WithDocumentText_Snapshot_NotFoundIgnored()
     {
         // Arrange
         var state = ProjectState
@@ -384,7 +354,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     }
 
     [Fact]
-    public void ProjectState_RemoveHostDocument_FromProjectWithDocuments()
+    public void ProjectState_RemoveDocument_FromProjectWithDocuments()
     {
         // Arrange
         var state = ProjectState
@@ -404,7 +374,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     }
 
     [Fact]
-    public void ProjectState_RemoveHostDocument_TracksImports()
+    public void ProjectState_RemoveDocument_TracksImports()
     {
         // Arrange
         var original = ProjectState
@@ -443,7 +413,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     }
 
     [Fact]
-    public void ProjectState_RemoveHostDocument_TracksImports_RemoveAllDocuments()
+    public void ProjectState_RemoveDocument_TracksImports_RemoveAllDocuments()
     {
         // Arrange
         var state = ProjectState.Create(s_project, s_projectWorkspaceState, s_projectEngineFactoryProvider)
@@ -465,37 +435,27 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     }
 
     [Fact]
-    public void ProjectState_RemoveHostDocument_RetainsComputedState()
+    public void ProjectState_RemoveDocument_RetainsComputedState()
     {
         // Arrange
         var state = ProjectState.Create(s_project, s_projectWorkspaceState, s_projectEngineFactoryProvider)
             .AddDocument(s_documents[2], EmptyTextLoader.Instance)
             .AddDocument(s_documents[1], EmptyTextLoader.Instance);
 
-        var tagHelpers = state.TagHelpers;
-        var projectWorkspaceStateVersion = state.ProjectWorkspaceStateVersion;
-
         // Act
         var newState = state.RemoveDocument(s_documents[2]);
-        var newTagHelpers = newState.TagHelpers;
-        var newProjectWorkspaceStateVersion = newState.ProjectWorkspaceStateVersion;
 
         // Assert
         Assert.Same(state.ProjectEngine, newState.ProjectEngine);
+        AssertSameTagHelpers(state.TagHelpers, newState.TagHelpers);
 
-        Assert.Equal(tagHelpers.Length, newTagHelpers.Length);
-        for (var i = 0; i < tagHelpers.Length; i++)
-        {
-            Assert.Same(tagHelpers[i], newTagHelpers[i]);
-        }
-
-        Assert.Equal(projectWorkspaceStateVersion, newProjectWorkspaceStateVersion);
+        Assert.Equal(state.ProjectWorkspaceStateVersion, newState.ProjectWorkspaceStateVersion);
 
         Assert.Same(state.Documents[s_documents[1].FilePath], newState.Documents[s_documents[1].FilePath]);
     }
 
     [Fact]
-    public void ProjectState_RemoveHostDocument_NotFoundIgnored()
+    public void ProjectState_RemoveDocument_NotFoundIgnored()
     {
         // Arrange
         var state = ProjectState
@@ -511,7 +471,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     }
 
     [Fact]
-    public void ProjectState_WithHostProject_ConfigurationChange_UpdatesConfigurationState()
+    public void ProjectState_WithConfiguration_Change_UpdatesConfigurationState()
     {
         // Arrange
         var state = ProjectState
@@ -519,27 +479,19 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
             .AddDocument(s_documents[2], EmptyTextLoader.Instance)
             .AddDocument(s_documents[1], EmptyTextLoader.Instance);
 
-        var tagHelpers = state.TagHelpers;
-        var projectWorkspaceStateVersion = state.ConfigurationVersion;
-
         // Act
-        var newState = state.WithHostProject(s_projectWithConfigurationChange);
-        Assert.NotEqual(state.Version, newState.Version);
-        Assert.Same(s_projectWithConfigurationChange, newState.HostProject);
+        var newState = state.WithConfiguration(FallbackRazorConfiguration.MVC_1_0);
 
         // Assert
-        var actualTagHelpers = newState.TagHelpers;
-        var actualProjectWorkspaceStateVersion = newState.ConfigurationVersion;
+        Assert.NotSame(state, newState);
+        Assert.NotEqual(state.Version, newState.Version);
+        Assert.NotSame(state.HostProject, newState.HostProject);
+        Assert.Equal(FallbackRazorConfiguration.MVC_1_0, newState.HostProject.Configuration);
 
         Assert.NotSame(state.ProjectEngine, newState.ProjectEngine);
+        AssertSameTagHelpers(state.TagHelpers, newState.TagHelpers);
 
-        Assert.Equal(tagHelpers.Length, actualTagHelpers.Length);
-        for (var i = 0; i < tagHelpers.Length; i++)
-        {
-            Assert.Same(tagHelpers[i], actualTagHelpers[i]);
-        }
-
-        Assert.NotEqual(projectWorkspaceStateVersion, actualProjectWorkspaceStateVersion);
+        Assert.NotEqual(state.ConfigurationVersion, newState.ConfigurationVersion);
 
         Assert.NotSame(state.Documents[s_documents[1].FilePath], newState.Documents[s_documents[1].FilePath]);
         Assert.NotSame(state.Documents[s_documents[2].FilePath], newState.Documents[s_documents[2].FilePath]);
@@ -548,25 +500,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     }
 
     [Fact]
-    public void ProjectState_WithHostProject_RootNamespaceChange_UpdatesConfigurationState()
-    {
-        // Arrange
-        var state = ProjectState
-            .Create(s_project, s_projectWorkspaceState, s_projectEngineFactoryProvider)
-            .AddDocument(s_documents[2], EmptyTextLoader.Instance)
-            .AddDocument(s_documents[1], EmptyTextLoader.Instance);
-
-        var hostProjectWithRootNamespaceChange = state.HostProject with { RootNamespace = "ChangedRootNamespace" };
-
-        // Act
-        var newState = state.WithHostProject(hostProjectWithRootNamespaceChange);
-
-        // Assert
-        Assert.NotSame(state, newState);
-    }
-
-    [Fact]
-    public void ProjectState_WithHostProject_NoConfigurationChange_Ignored()
+    public void ProjectState_WithConfiguration_NoChange_Ignored()
     {
         // Arrange
         var state = ProjectState
@@ -575,14 +509,17 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
             .AddDocument(s_documents[1], EmptyTextLoader.Instance);
 
         // Act
-        var newState = state.WithHostProject(s_project);
+        var newState = state.WithConfiguration(s_project.Configuration);
 
         // Assert
         Assert.Same(state, newState);
+        Assert.Equal(state.Version, newState.Version);
+        Assert.Same(state.HostProject, newState.HostProject);
+        Assert.Equal(state.HostProject.Configuration, newState.HostProject.Configuration);
     }
 
     [Fact]
-    public void ProjectState_WithHostProject_UpdatesAllDocuments()
+    public void ProjectState_WithConfiguration_Change_UpdatesAllDocuments()
     {
         // Arrange
         var state = ProjectState
@@ -593,11 +530,11 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
         var documentPathSet = state.Documents.Keys.ToHashSet(FilePathNormalizingComparer.Instance);
 
         // Act
-        var newState = state.WithHostProject(s_projectWithConfigurationChange);
+        var newState = state.WithConfiguration(FallbackRazorConfiguration.MVC_1_0);
 
         // Assert
         Assert.NotEqual(state.Version, newState.Version);
-        Assert.Same(s_projectWithConfigurationChange, newState.HostProject);
+        Assert.Equal(FallbackRazorConfiguration.MVC_1_0, newState.HostProject.Configuration);
 
         // all documents were updated
         foreach (var filePath in documentPathSet.ToArray())
@@ -611,7 +548,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     }
 
     [Fact]
-    public void ProjectState_WithHostProject_ResetsImportedDocuments()
+    public void ProjectState_WithConfiguration_Change_ResetsImportMap()
     {
         // Arrange
         var state = ProjectState
@@ -619,7 +556,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
             .AddDocument(TestProjectData.SomeProjectFile1, EmptyTextLoader.Instance);
 
         // Act
-        var newState = state.WithHostProject(s_projectWithConfigurationChange);
+        var newState = state.WithConfiguration(FallbackRazorConfiguration.MVC_1_0);
 
         // Assert
         var importMap = Assert.Single(newState.ImportsToRelatedDocuments);
@@ -628,7 +565,45 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     }
 
     [Fact]
-    public void ProjectState_WithProjectWorkspaceState_Changed()
+    public void ProjectState_WithRootNamespace_Change_UpdatesConfigurationState()
+    {
+        // Arrange
+        var state = ProjectState
+            .Create(s_project, s_projectWorkspaceState, s_projectEngineFactoryProvider)
+            .AddDocument(s_documents[2], EmptyTextLoader.Instance)
+            .AddDocument(s_documents[1], EmptyTextLoader.Instance);
+
+        const string NewNamespace = "ChangedRootNamespace";
+
+        // Act
+        var newState = state.WithRootNamespace(NewNamespace);
+
+        // Assert
+        Assert.NotSame(state, newState);
+        Assert.NotSame(state.HostProject, newState.HostProject);
+        Assert.Equal(NewNamespace, newState.HostProject.RootNamespace);
+    }
+
+    [Fact]
+    public void ProjectState_WithRootNamespace_NoChange_Ignored()
+    {
+        // Arrange
+        var state = ProjectState
+            .Create(s_project, s_projectWorkspaceState, s_projectEngineFactoryProvider)
+            .AddDocument(s_documents[2], EmptyTextLoader.Instance)
+            .AddDocument(s_documents[1], EmptyTextLoader.Instance);
+
+        // Act
+        var newState = state.WithRootNamespace(s_project.RootNamespace);
+
+        // Assert
+        Assert.Same(state, newState);
+        Assert.Same(state.HostProject, newState.HostProject);
+        Assert.Equal(s_project.RootNamespace, newState.HostProject.RootNamespace);
+    }
+
+    [Fact]
+    public void ProjectState_WithProjectWorkspaceState_Change()
     {
         // Arrange
         var state = ProjectState
@@ -666,7 +641,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     }
 
     [Fact]
-    public void ProjectState_WithProjectWorkspaceState_Changed_TagHelpersChanged()
+    public void ProjectState_WithProjectWorkspaceState_Change_TagHelpersChanged()
     {
         // Arrange
         var state = ProjectState
@@ -814,7 +789,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     }
 
     [Fact]
-    public void ProjectState_UpdateDocumentText_UpdatesRelatedDocuments_TextLoader()
+    public void ProjectState_WithImportDocumentText_UpdatesRelatedDocuments_TextLoader()
     {
         // Arrange
         var state = ProjectState.Create(s_project, s_projectWorkspaceState, s_projectEngineFactoryProvider)
@@ -856,7 +831,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     }
 
     [Fact]
-    public void ProjectState_UpdateDocumentText_UpdatesRelatedDocuments_Snapshot()
+    public void ProjectState_WithImportDocumentText_UpdatesRelatedDocuments_Snapshot()
     {
         // Arrange
         var state = ProjectState.Create(s_project, s_projectWorkspaceState, s_projectEngineFactoryProvider)
@@ -898,7 +873,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
     }
 
     [Fact]
-    public void ProjectState_WhenImportDocumentRemoved_UpdatesRelatedDocuments()
+    public void ProjectState_RemoveImportDocument_UpdatesRelatedDocuments()
     {
         // Arrange
         var state = ProjectState
@@ -956,5 +931,15 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
         Assert.True(newState.Documents.TryGetValue(filePath, out var newDocument));
 
         Assert.Same(document, newDocument);
+    }
+
+    private static void AssertSameTagHelpers(ImmutableArray<TagHelperDescriptor> expected, ImmutableArray<TagHelperDescriptor> actual)
+    {
+        Assert.Equal(expected.Length, actual.Length);
+
+        for (var i = 0; i < expected.Length; i++)
+        {
+            Assert.Same(expected[i], actual[i]);
+        }
     }
 }

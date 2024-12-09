@@ -9,6 +9,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
+using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
@@ -222,6 +223,7 @@ internal abstract partial class WindowsRazorProjectHostBase : OnceInitializedOnc
                     RemoveProject(updater, projectKey);
 
                     var hostProject = new HostProject(newProjectFilePath, current.IntermediateOutputPath, current.Configuration, current.RootNamespace);
+
                     UpdateProject(updater, hostProject);
 
                     // This should no-op in the common case, just putting it here for insurance.
@@ -263,19 +265,20 @@ internal abstract partial class WindowsRazorProjectHostBase : OnceInitializedOnc
             cancellationToken);
     }
 
-    protected static void UpdateProject(ProjectSnapshotManager.Updater updater, HostProject project)
+    protected static void UpdateProject(ProjectSnapshotManager.Updater updater, HostProject hostProject)
     {
-        if (!updater.TryGetLoadedProject(project.Key, out _))
+        if (!updater.TryGetLoadedProject(hostProject.Key, out _))
         {
             // Just in case we somehow got in a state where VS didn't tell us that solution close was finished, lets just
             // ensure we're going to actually do something with the new project that we've just been told about.
             // If VS did tell us, then this is a no-op.
             updater.SolutionOpened();
-            updater.ProjectAdded(project);
+            updater.ProjectAdded(hostProject);
         }
         else
         {
-            updater.ProjectConfigurationChanged(project);
+            updater.UpdateProjectConfiguration(hostProject.Key, hostProject.Configuration);
+            updater.UpdateRootNamespace(hostProject.Key, hostProject.RootNamespace);
         }
     }
 

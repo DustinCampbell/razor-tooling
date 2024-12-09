@@ -364,12 +364,11 @@ internal class ProjectState
         return documentStateMap.SetItems(updates.ToArray());
     }
 
-    public ProjectState WithHostProject(HostProject hostProject)
+    public ProjectState WithConfiguration(RazorConfiguration configuration)
     {
-        ArgHelper.ThrowIfNull(hostProject);
+        ArgHelper.ThrowIfNull(configuration);
 
-        if (HostProject.Configuration == hostProject.Configuration &&
-            HostProject.RootNamespace == hostProject.RootNamespace)
+        if (HostProject.Configuration == configuration)
         {
             return this;
         }
@@ -380,7 +379,27 @@ internal class ProjectState
         // If the host project has changed then we need to recompute the imports map
         var importsToRelatedDocuments = BuildImportsMap(documents.Values);
 
-        return new(this, ProjectDifference.ConfigurationChanged, hostProject, ProjectWorkspaceState, documents, importsToRelatedDocuments);
+        var newHostProject = HostProject with { Configuration = configuration };
+
+        return new(this, ProjectDifference.ConfigurationChanged, newHostProject, ProjectWorkspaceState, documents, importsToRelatedDocuments);
+    }
+
+    public ProjectState WithRootNamespace(string? rootNamespace)
+    {
+        if (HostProject.RootNamespace == rootNamespace)
+        {
+            return this;
+        }
+
+        var updates = Documents.Select(kvp => KeyValuePair.Create(kvp.Key, kvp.Value.WithConfigurationChange()));
+        var documents = Documents.SetItems(updates);
+
+        // If the host project has changed then we need to recompute the imports map
+        var importsToRelatedDocuments = BuildImportsMap(documents.Values);
+
+        var newHostProject = HostProject with { RootNamespace = rootNamespace };
+
+        return new(this, ProjectDifference.ConfigurationChanged, newHostProject, ProjectWorkspaceState, documents, importsToRelatedDocuments);
     }
 
     private ImmutableDictionary<string, ImmutableArray<string>> BuildImportsMap(IEnumerable<DocumentState> documents)

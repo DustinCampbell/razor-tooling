@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Razor;
+using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.Logging;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.VisualStudio.LiveShare;
@@ -74,9 +76,11 @@ internal class ProjectSnapshotSynchronizationService(
     {
         if (args.Kind == ProjectProxyChangeKind.ProjectAdded)
         {
-            var guestPath = ResolveGuestPath(args.ProjectFilePath);
-            var guestIntermediateOutputPath = ResolveGuestPath(args.IntermediateOutputPath);
-            var hostProject = new HostProject(guestPath, guestIntermediateOutputPath, args.Newer!.Configuration, args.Newer.RootNamespace);
+            var newer = args.Newer.AssumeNotNull();
+
+            var guestPath = ResolveGuestPath(newer.FilePath);
+            var guestIntermediateOutputPath = ResolveGuestPath(newer.IntermediateOutputPath);
+            var hostProject = new HostProject(guestPath, guestIntermediateOutputPath, newer.Configuration, newer.RootNamespace);
 
             await _projectManager.UpdateAsync(
                 static (updater, state) =>
@@ -88,12 +92,15 @@ internal class ProjectSnapshotSynchronizationService(
                         updater.ProjectWorkspaceStateChanged(state.hostProject.Key, state.projectWorkspaceState);
                     }
                 },
-                state: (hostProject, projectWorkspaceState: args.Newer.ProjectWorkspaceState),
+                state: (hostProject, projectWorkspaceState: newer.ProjectWorkspaceState),
                 CancellationToken.None);
         }
         else if (args.Kind == ProjectProxyChangeKind.ProjectRemoved)
         {
-            var guestPath = ResolveGuestPath(args.ProjectFilePath);
+            var older = args.Older.AssumeNotNull();
+
+            var guestPath = ResolveGuestPath(older.FilePath);
+
             await _projectManager.UpdateAsync(
                 static (updater, guestPath) =>
                 {
@@ -108,20 +115,32 @@ internal class ProjectSnapshotSynchronizationService(
         }
         else if (args.Kind == ProjectProxyChangeKind.ProjectChanged)
         {
-            if (!args.Older!.Configuration.Equals(args.Newer!.Configuration))
+            var older = args.Older.AssumeNotNull();
+            var newer = args.Newer.AssumeNotNull();
+
+            if (older.Configuration != newer.Configuration)
             {
-                var guestPath = ResolveGuestPath(args.Newer.FilePath);
-                var guestIntermediateOutputPath = ResolveGuestPath(args.Newer.IntermediateOutputPath);
-                var hostProject = new HostProject(guestPath, guestIntermediateOutputPath, args.Newer.Configuration, args.Newer.RootNamespace);
+                var guestPath = ResolveGuestPath(newer.FilePath);
+                var guestIntermediateOutputPath = ResolveGuestPath(newer.IntermediateOutputPath);
+
+                var projectKey = new ProjectKey(guestIntermediateOutputPath);
+                var newConfiguration = newer.Configuration;
+                var newRootNamespace = newer.RootNamespace;
+
                 await _projectManager.UpdateAsync(
-                    static (updater, hostProject) => updater.ProjectConfigurationChanged(hostProject),
-                    state: hostProject,
+                    static (updater, state) =>
+                    {
+                        updater.UpdateProjectConfiguration(state.projectKey, state.newConfiguration);
+                        updater.UpdateRootNamespace(state.projectKey, state.newRootNamespace);
+                    },
+                    state: (projectKey, newConfiguration, newRootNamespace),
                     CancellationToken.None);
             }
-            else if (args.Older.ProjectWorkspaceState != args.Newer.ProjectWorkspaceState ||
-                args.Older.ProjectWorkspaceState?.Equals(args.Newer.ProjectWorkspaceState) == false)
+            else if (!ReferenceEquals(older.ProjectWorkspaceState, newer.ProjectWorkspaceState) ||
+                !older.ProjectWorkspaceState.Equals(newer.ProjectWorkspaceState))
             {
                 var guestPath = ResolveGuestPath(args.Newer.FilePath);
+
                 await _projectManager.UpdateAsync(
                     static (updater, state) =>
                     {

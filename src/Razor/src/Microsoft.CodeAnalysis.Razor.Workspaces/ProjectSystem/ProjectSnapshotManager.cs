@@ -8,6 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor;
+using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.PooledObjects;
 using Microsoft.AspNetCore.Razor.ProjectEngineHost;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
@@ -305,7 +306,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
         }
     }
 
-    private void ProjectConfigurationChanged(HostProject hostProject)
+    private void UpdateProjectConfiguration(ProjectKey projectKey, RazorConfiguration configuration)
     {
         if (_initialized)
         {
@@ -313,9 +314,27 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
         }
 
         if (TryUpdate(
-            hostProject.Key,
+            projectKey,
             documentFilePath: null,
-            new HostProjectUpdatedAction(hostProject),
+            new UpdateProjectConfigurationAction(configuration),
+            out var oldSnapshot,
+            out var newSnapshot))
+        {
+            NotifyListeners(oldSnapshot, newSnapshot, documentFilePath: null, ProjectChangeKind.ProjectChanged);
+        }
+    }
+
+    private void UpdateRootNamespace(ProjectKey projectKey, string? rootNamespace)
+    {
+        if (_initialized)
+        {
+            _dispatcher.AssertRunningOnDispatcher();
+        }
+
+        if (TryUpdate(
+            projectKey,
+            documentFilePath: null,
+            new UpdateRootNamespaceAction(rootNamespace),
             out var oldSnapshot,
             out var newSnapshot))
         {
@@ -589,8 +608,11 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
             case ProjectWorkspaceStateChangedAction(var workspaceState):
                 return new Entry(originalEntry.State.WithProjectWorkspaceState(workspaceState));
 
-            case HostProjectUpdatedAction(var hostProject):
-                return new Entry(originalEntry.State.WithHostProject(hostProject));
+            case UpdateProjectConfigurationAction(var configuration):
+                return new Entry(originalEntry.State.WithConfiguration(configuration));
+
+            case UpdateRootNamespaceAction(var rootNamespace):
+                return new Entry(originalEntry.State.WithRootNamespace(rootNamespace));
 
             default:
                 throw new InvalidOperationException($"Unexpected action type {action.GetType()}");

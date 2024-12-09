@@ -3,6 +3,7 @@
 
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Text;
 
@@ -50,8 +51,11 @@ internal partial class ProjectSnapshotManager
         public void ProjectRemoved(ProjectKey projectKey)
             => instance.ProjectRemoved(projectKey);
 
-        public void ProjectConfigurationChanged(HostProject project)
-            => instance.ProjectConfigurationChanged(project);
+        public void UpdateProjectConfiguration(ProjectKey projectKey, RazorConfiguration configuration)
+            => instance.UpdateProjectConfiguration(projectKey, configuration);
+
+        public void UpdateRootNamespace(ProjectKey projectKey, string? rootNamespace)
+            => instance.UpdateRootNamespace(projectKey, rootNamespace);
 
         public void ProjectWorkspaceStateChanged(ProjectKey projectKey, ProjectWorkspaceState projectWorkspaceState)
             => instance.ProjectWorkspaceStateChanged(projectKey, projectWorkspaceState);

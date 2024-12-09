@@ -1,6 +1,7 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
+using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Text;
 
@@ -30,6 +31,8 @@ internal record ProjectAddedAction(HostProject HostProject) : IUpdateProjectActi
 
 internal record ProjectRemovedAction(ProjectKey ProjectKey) : IUpdateProjectAction;
 
-internal record HostProjectUpdatedAction(HostProject HostProject) : IUpdateProjectAction;
+internal record UpdateProjectConfigurationAction(RazorConfiguration Configuration) : IUpdateProjectAction;
+
+internal record UpdateRootNamespaceAction(string? RootNamespace) : IUpdateProjectAction;
 
 internal record ProjectWorkspaceStateChangedAction(ProjectWorkspaceState WorkspaceState) : IUpdateProjectAction;

@@ -41,11 +41,6 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         Configuration = FallbackRazorConfiguration.MVC_2_0
     };
 
-    private static readonly HostProject s_hostProjectWithConfigurationChange = TestProjectData.SomeProject with
-    {
-        Configuration = FallbackRazorConfiguration.MVC_1_0
-    };
-
     private readonly ProjectWorkspaceState _projectWorkspaceStateWithTagHelpers;
     private readonly TestProjectSnapshotManager _projectManager;
     private readonly SourceText _sourceText;
@@ -627,7 +622,7 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
     }
 
     [UIFact]
-    public async Task ProjectConfigurationChanged_ConfigurationChange_ProjectWorkspaceState_NotifiesListeners()
+    public async Task UpdateProjectConfiguration_Change_NotifiesListeners()
     {
         // Arrange
         await _projectManager.UpdateAsync(updater =>
@@ -640,7 +635,7 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         // Act
         await _projectManager.UpdateAsync(updater =>
         {
-            updater.ProjectConfigurationChanged(s_hostProjectWithConfigurationChange);
+            updater.UpdateProjectConfiguration(s_hostProject.Key, FallbackRazorConfiguration.MVC_1_0);
         });
 
         // Assert
@@ -649,7 +644,7 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
     }
 
     [UIFact]
-    public async Task ProjectConfigurationChanged_ConfigurationChange_WithProjectWorkspaceState_NotifiesListeners()
+    public async Task UpdateProjectConfiguration_Change_WithProjectWorkspaceState_NotifiesListeners()
     {
         // Arrange
         await _projectManager.UpdateAsync(updater =>
@@ -663,7 +658,7 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         // Act
         await _projectManager.UpdateAsync(updater =>
         {
-            updater.ProjectConfigurationChanged(s_hostProjectWithConfigurationChange);
+            updater.UpdateProjectConfiguration(s_hostProject.Key, FallbackRazorConfiguration.MVC_1_0);
         });
 
         // Assert
@@ -672,7 +667,7 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
     }
 
     [UIFact]
-    public async Task ProjectConfigurationChanged_ConfigurationChange_DoesNotCacheProjectEngine()
+    public async Task UpdateProjectConfiguration_DoesNotCacheProjectEngine()
     {
         // Arrange
         await _projectManager.UpdateAsync(updater =>
@@ -686,16 +681,17 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         // Act
         await _projectManager.UpdateAsync(updater =>
         {
-            updater.ProjectConfigurationChanged(s_hostProjectWithConfigurationChange);
+            updater.UpdateProjectConfiguration(s_hostProject.Key, FallbackRazorConfiguration.MVC_1_0);
         });
 
+        var updatedProject = _projectManager.GetLoadedProject(s_hostProject.Key);
+
         // Assert
-        project = _projectManager.GetLoadedProject(s_hostProjectWithConfigurationChange.Key);
-        Assert.NotSame(projectEngine, project.GetProjectEngine());
+        Assert.NotSame(projectEngine, updatedProject.GetProjectEngine());
     }
 
     [UIFact]
-    public async Task ProjectConfigurationChanged_IgnoresUnknownProject()
+    public async Task UpdateProjectConfiguration_IgnoresUnknownProject()
     {
         // Arrange
         using var listener = _projectManager.ListenToNotifications();
@@ -703,7 +699,7 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
         // Act
         await _projectManager.UpdateAsync(updater =>
         {
-            updater.ProjectConfigurationChanged(s_hostProject);
+            updater.UpdateProjectConfiguration(s_hostProject.Key, RazorConfiguration.Default);
         });
 
         // Assert

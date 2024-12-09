@@ -229,7 +229,7 @@ public class ProjectStateGeneratedOutputTest(ITestOutputHelper testOutput) : Too
         var result = await GetOutputAsync(state, s_document1, DisposalToken);
 
         // Act
-        var newState = state.WithHostProject(s_project with { Configuration = FallbackRazorConfiguration.MVC_1_0 });
+        var newState = state.WithConfiguration(FallbackRazorConfiguration.MVC_1_0);
         var newResult = await GetOutputAsync(newState, s_document1, DisposalToken);
 
         // Assert

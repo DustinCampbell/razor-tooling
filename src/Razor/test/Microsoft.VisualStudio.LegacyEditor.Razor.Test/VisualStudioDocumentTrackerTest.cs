@@ -27,7 +27,6 @@ public class VisualStudioDocumentTrackerTest : VisualStudioWorkspaceTestBase
     private readonly ITextBuffer _textBuffer;
     private readonly string _filePath;
     private readonly HostProject _hostProject;
-    private readonly HostProject _updatedHostProject;
     private readonly HostProject _otherHostProject;
     private readonly TestProjectSnapshotManager _projectManager;
     private readonly VisualStudioDocumentTracker _documentTracker;
@@ -53,7 +52,6 @@ public class VisualStudioDocumentTrackerTest : VisualStudioWorkspaceTestBase
         _projectManager = CreateProjectSnapshotManager();
 
         _hostProject = TestProjectData.SomeProject with { Configuration = FallbackRazorConfiguration.MVC_2_1 };
-        _updatedHostProject = TestProjectData.SomeProject with { Configuration = FallbackRazorConfiguration.MVC_2_0 };
         _otherHostProject = TestProjectData.AnotherProject with { Configuration = FallbackRazorConfiguration.MVC_2_0 };
 
         _documentTracker = new VisualStudioDocumentTracker(
@@ -470,13 +468,14 @@ public class VisualStudioDocumentTrackerTest : VisualStudioWorkspaceTestBase
         // Act
         await _projectManager.UpdateAsync(updater =>
         {
-            updater.ProjectConfigurationChanged(_updatedHostProject);
+            updater.UpdateProjectConfiguration(_hostProject.Key, FallbackRazorConfiguration.MVC_2_0);
         });
 
         // Assert
         var snapshot = Assert.IsType<ProjectSnapshot>(_documentTracker.ProjectSnapshot);
 
-        Assert.Same(_updatedHostProject, snapshot.HostProject);
+        Assert.NotSame(_hostProject, snapshot.HostProject);
+        Assert.Equal(FallbackRazorConfiguration.MVC_2_0, snapshot.Configuration);
 
         var currentArgs = Assert.Single(args);
         Assert.Equal(ContextChangeKind.ProjectChanged, currentArgs.Kind);
