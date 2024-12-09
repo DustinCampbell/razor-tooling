@@ -100,8 +100,8 @@ internal sealed class RemoteDocumentSnapshot : IDocumentSnapshot
 
             var projectEngine = await ProjectSnapshot.GetProjectEngine_CohostOnlyAsync(cancellationToken).ConfigureAwait(false);
 
-            return await DocumentState
-                .GenerateCodeDocumentAsync(this, projectEngine, forceRuntimeCodeGeneration, cancellationToken)
+            return await this
+                .GenerateCodeDocumentAsync(projectEngine, forceRuntimeCodeGeneration, cancellationToken)
                 .ConfigureAwait(false);
         }
     }

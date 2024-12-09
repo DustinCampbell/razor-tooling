@@ -1,13 +1,14 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
-using Microsoft.AspNetCore.Razor.PooledObjects;
+using Microsoft.AspNetCore.Razor.Threading;
 using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
@@ -20,7 +21,9 @@ internal sealed partial class DocumentState
     private TextAndVersion? _textAndVersion;
     private readonly TextLoader _textLoader;
 
-    private ComputedStateTracker? _computedState;
+    // SemaphoreSlim instance does not need to be disposed if SemaphoreSlim.AvailableWaitHandle is not accessed.
+    private readonly SemaphoreSlim _gate = new(initialCount: 1);
+    private WeakReference<OutputAndVersion>? _weakComputedState;
 
     private DocumentState(
         HostDocument hostDocument,
@@ -37,13 +40,17 @@ internal sealed partial class DocumentState
         DocumentState other,
         TextAndVersion? textAndVersion,
         TextLoader? textLoader,
-        ComputedStateTracker? computedState)
+        OutputAndVersion? computedState)
     {
         HostDocument = other.HostDocument;
         Version = other.Version + 1;
         _textAndVersion = textAndVersion;
         _textLoader = textLoader ?? EmptyTextLoader.Instance;
-        _computedState = computedState;
+
+        if (computedState is not null)
+        {
+            _weakComputedState = new(computedState);
+        }
     }
 
     public static DocumentState Create(HostDocument hostDocument, TextAndVersion textAndVersion)
@@ -54,19 +61,6 @@ internal sealed partial class DocumentState
 
     public static DocumentState Create(HostDocument hostDocument)
         => new(hostDocument, textAndVersion: null, textLoader: null);
-
-    private ComputedStateTracker ComputedState
-        => _computedState ??= InterlockedOperations.Initialize(ref _computedState, new ComputedStateTracker());
-
-    public bool TryGetGeneratedOutputAndVersion([NotNullWhen(true)] out OutputAndVersion? result)
-        => ComputedState.TryGetGeneratedOutputAndVersion(out result);
-
-    public Task<OutputAndVersion> GetGeneratedOutputAndVersionAsync(
-        DocumentSnapshot document,
-        CancellationToken cancellationToken)
-    {
-        return ComputedState.GetGeneratedOutputAndVersionAsync(document, cancellationToken);
-    }
 
     public ValueTask<TextAndVersion> GetTextAndVersionAsync(CancellationToken cancellationToken)
     {
@@ -112,11 +106,73 @@ internal sealed partial class DocumentState
         }
     }
 
+    public async Task<OutputAndVersion> GetGeneratedOutputAndVersionAsync(DocumentSnapshot document, RazorProjectEngine projectEngine, CancellationToken cancellationToken)
+    {
+        var project = document.Project;
+        var importItems = await document.GetImportItemsAsync(projectEngine, cancellationToken).ConfigureAwait(false);
+        var version = await GetLatestVersionAsync(document, importItems, cancellationToken).ConfigureAwait(false);
+
+        using var _ = await _gate.DisposableWaitAsync(cancellationToken).ConfigureAwait(false);
+
+        var weakOutputAndVersion = _weakComputedState;
+
+        // Do we already have cached output with the same version? If so, there's no reason to re-generate it.
+        if (weakOutputAndVersion is not null &&
+            weakOutputAndVersion.TryGetTarget(out var result) &&
+            result.Version == version)
+        {
+            return result;
+        }
+
+        var forceRuntimeCodeGeneration = project.CompilerOptions.HasFlag(RazorCompilerOptions.ForceRuntimeCodeGeneration);
+        var codeDocument = await document.GenerateCodeDocumentAsync(projectEngine, importItems, forceRuntimeCodeGeneration, cancellationToken).ConfigureAwait(false);
+
+        result = new OutputAndVersion(codeDocument, version);
+
+        if (weakOutputAndVersion is not null)
+        {
+            weakOutputAndVersion.SetTarget(result);
+        }
+        else
+        {
+            _weakComputedState = new(result);
+        }
+
+        return result;
+    }
+
+    private static async ValueTask<VersionStamp> GetLatestVersionAsync(
+        DocumentSnapshot document,
+        ImmutableArray<ImportItem> importItems,
+        CancellationToken cancellationToken)
+    {
+        // We only need to produce the generated code if any of our inputs is newer than the
+        // previously cached output.
+        //
+        // First find the versions that are the inputs:
+        // - The project + computed state
+        // - The imports
+        // - This document
+        //
+        // All of these things are cached, so no work is wasted if we do need to generate the code.
+
+        var version = await document.GetTextVersionAsync(cancellationToken).ConfigureAwait(false);
+
+        version = version.GetNewerVersion(document.Project.GetLatestVersion());
+
+        foreach (var import in importItems)
+        {
+            version = version.GetNewerVersion(import.Version);
+        }
+
+        return version;
+    }
+
     public bool TryGetText([NotNullWhen(true)] out SourceText? result)
     {
-        if (_textAndVersion is { } textAndVersion)
+        if (_textAndVersion is { Text: var text })
         {
-            result = textAndVersion.Text;
+            result = text;
             return true;
         }
 
@@ -126,9 +182,9 @@ internal sealed partial class DocumentState
 
     public bool TryGetTextVersion(out VersionStamp result)
     {
-        if (_textAndVersion is { } textAndVersion)
+        if (_textAndVersion is { Version: var version })
         {
-            result = textAndVersion.Version;
+            result = version;
             return true;
         }
 
@@ -136,133 +192,40 @@ internal sealed partial class DocumentState
         return false;
     }
 
+    public bool TryGetGeneratedOutputAndVersion([NotNullWhen(true)] out OutputAndVersion? result)
+    {
+        result = GetComputedStateOrNull();
+        return result is not null;
+    }
+
+    private OutputAndVersion? GetComputedStateOrNull()
+    {
+        using (_gate.DisposableWait())
+        {
+            if (_weakComputedState is { } weakComputedState &&
+                weakComputedState.TryGetTarget(out var result))
+            {
+                return result;
+            }
+        }
+
+        return null;
+    }
+
     public DocumentState WithConfigurationChange()
         => new(this, _textAndVersion, _textLoader, computedState: null);
 
     public DocumentState WithImportsChange()
         // Optimistically cache the computed state
-        => new(this, _textAndVersion, _textLoader, _computedState);
+        => new(this, _textAndVersion, _textLoader, computedState: GetComputedStateOrNull());
 
     public DocumentState WithProjectWorkspaceStateChange()
         // Optimistically cache the computed state
-        => new(this, _textAndVersion, _textLoader, _computedState);
+        => new(this, _textAndVersion, _textLoader, computedState: GetComputedStateOrNull());
 
     public DocumentState WithText(SourceText text, VersionStamp textVersion)
         => new(this, TextAndVersion.Create(text, textVersion), textLoader: null, computedState: null);
 
     public DocumentState WithTextLoader(TextLoader textLoader)
         => new(this, textAndVersion: null, textLoader, computedState: null);
-
-    internal static async Task<RazorCodeDocument> GenerateCodeDocumentAsync(
-        IDocumentSnapshot document,
-        RazorProjectEngine projectEngine,
-        bool forceRuntimeCodeGeneration,
-        CancellationToken cancellationToken)
-    {
-        var importItems = await GetImportItemsAsync(document, projectEngine, cancellationToken).ConfigureAwait(false);
-
-        return await GenerateCodeDocumentAsync(
-            document, projectEngine, importItems, forceRuntimeCodeGeneration, cancellationToken).ConfigureAwait(false);
-    }
-
-    private static async Task<RazorCodeDocument> GenerateCodeDocumentAsync(
-        IDocumentSnapshot document,
-        RazorProjectEngine projectEngine,
-        ImmutableArray<ImportItem> imports,
-        bool forceRuntimeCodeGeneration,
-        CancellationToken cancellationToken)
-    {
-        var importSources = GetImportSources(imports, projectEngine);
-        var tagHelpers = await document.Project.GetTagHelpersAsync(cancellationToken).ConfigureAwait(false);
-        var source = await GetSourceAsync(document, projectEngine, cancellationToken).ConfigureAwait(false);
-
-        return forceRuntimeCodeGeneration
-            ? projectEngine.Process(source, document.FileKind, importSources, tagHelpers)
-            : projectEngine.ProcessDesignTime(source, document.FileKind, importSources, tagHelpers);
-    }
-
-    private static async Task<ImmutableArray<ImportItem>> GetImportItemsAsync(
-        IDocumentSnapshot document,
-        RazorProjectEngine projectEngine,
-        CancellationToken cancellationToken)
-    {
-        var projectItem = projectEngine.FileSystem.GetItem(document.FilePath, document.FileKind);
-
-        using var importProjectItems = new PooledArrayBuilder<RazorProjectItem>();
-
-        foreach (var feature in projectEngine.ProjectFeatures.OfType<IImportProjectFeature>())
-        {
-            if (feature.GetImports(projectItem) is { } featureImports)
-            {
-                importProjectItems.AddRange(featureImports);
-            }
-        }
-
-        if (importProjectItems.Count == 0)
-        {
-            return [];
-        }
-
-        var project = document.Project;
-
-        using var importItems = new PooledArrayBuilder<ImportItem>(capacity: importProjectItems.Count);
-
-        foreach (var importProjectItem in importProjectItems)
-        {
-            if (importProjectItem is NotFoundProjectItem)
-            {
-                continue;
-            }
-
-            if (importProjectItem.PhysicalPath is null)
-            {
-                // This is a default import.
-                using var stream = importProjectItem.Read();
-                var text = SourceText.From(stream);
-                var defaultImport = ImportItem.CreateDefault(text);
-
-                importItems.Add(defaultImport);
-            }
-            else if (project.TryGetDocument(importProjectItem.PhysicalPath, out var importDocument))
-            {
-                var text = await importDocument.GetTextAsync(cancellationToken).ConfigureAwait(false);
-                var versionStamp = await importDocument.GetTextVersionAsync(cancellationToken).ConfigureAwait(false);
-                var importItem = new ImportItem(importDocument.FilePath, importDocument.FileKind, text, versionStamp);
-
-                importItems.Add(importItem);
-            }
-        }
-
-        return importItems.DrainToImmutable();
-    }
-
-    private static ImmutableArray<RazorSourceDocument> GetImportSources(ImmutableArray<ImportItem> importItems, RazorProjectEngine projectEngine)
-    {
-        using var importSources = new PooledArrayBuilder<RazorSourceDocument>(importItems.Length);
-
-        foreach (var importItem in importItems)
-        {
-            var importProjectItem = importItem is { FilePath: string filePath, FileKind: var fileKind }
-                ? projectEngine.FileSystem.GetItem(filePath, fileKind)
-                : null;
-
-            var properties = RazorSourceDocumentProperties.Create(importItem.FilePath, importProjectItem?.RelativePhysicalPath);
-            var importSource = RazorSourceDocument.Create(importItem.Text, properties);
-
-            importSources.Add(importSource);
-        }
-
-        return importSources.DrainToImmutable();
-    }
-
-    private static async Task<RazorSourceDocument> GetSourceAsync(IDocumentSnapshot document, RazorProjectEngine projectEngine, CancellationToken cancellationToken)
-    {
-        var projectItem = document is { FilePath: string filePath, FileKind: var fileKind }
-            ? projectEngine.FileSystem.GetItem(filePath, fileKind)
-            : null;
-
-        var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
-        var properties = RazorSourceDocumentProperties.Create(document.FilePath, projectItem?.RelativePhysicalPath);
-        return RazorSourceDocument.Create(text, properties);
-    }
 }

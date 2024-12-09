@@ -82,10 +82,10 @@ internal sealed class DocumentSnapshot(ProjectSnapshot project, DocumentState st
     }
 
     public Task<OutputAndVersion> GetGeneratedOutputAndVersionAsync(CancellationToken cancellationToken)
-        => _state.GetGeneratedOutputAndVersionAsync(this, cancellationToken);
+        => _state.GetGeneratedOutputAndVersionAsync(this, Project.GetProjectEngine(), cancellationToken);
 
     private Task<RazorCodeDocument> GetDesignTimeGeneratedOutputAsync(CancellationToken cancellationToken)
-        => DocumentState.GenerateCodeDocumentAsync(this, Project.GetProjectEngine(), forceRuntimeCodeGeneration: false, cancellationToken);
+        => this.GenerateCodeDocumentAsync(Project.GetProjectEngine(), forceRuntimeCodeGeneration: false, cancellationToken);
 
     /// <summary>
     ///  Retrieves a cached Roslyn <see cref="SyntaxTree"/> from the generated C# document.
