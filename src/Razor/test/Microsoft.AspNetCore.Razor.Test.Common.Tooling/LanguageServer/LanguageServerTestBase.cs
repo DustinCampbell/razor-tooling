@@ -43,7 +43,7 @@ public abstract class LanguageServerTestBase(ITestOutputHelper testOutput) : Too
             compilerOptions,
             LoggerFactory,
             DisposalToken,
-            initializer: static updater => updater.ProjectAdded(MiscFilesHostProject.Instance));
+            initializer: static updater => updater.ProjectAdded(MiscFilesProject.HostProject));
 
     private protected static RazorRequestContext CreateRazorRequestContext(
         DocumentContext? documentContext,
