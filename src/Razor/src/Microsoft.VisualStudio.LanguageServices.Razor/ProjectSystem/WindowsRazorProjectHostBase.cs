@@ -266,7 +266,7 @@ internal abstract partial class WindowsRazorProjectHostBase : OnceInitializedOnc
 
     protected static void UpdateProject(ProjectSnapshotManager.Updater updater, HostProject hostProject)
     {
-        if (!updater.TryGetProject(hostProject.Key, out _))
+        if (!updater.ContainsProject(hostProject.Key))
         {
             // Just in case we somehow got in a state where VS didn't tell us that solution close was finished, lets just
             // ensure we're going to actually do something with the new project that we've just been told about.

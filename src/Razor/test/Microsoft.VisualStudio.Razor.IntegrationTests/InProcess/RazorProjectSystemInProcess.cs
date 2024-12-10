@@ -50,7 +50,7 @@ internal partial class RazorProjectSystemInProcess
                 return SpecializedTasks.False;
             }
 
-            return Task.FromResult(projectManager.TryGetProject(projectKeys[0], out _));
+            return Task.FromResult(projectManager.ContainsProject(projectKeys[0]));
         }, TimeSpan.FromMilliseconds(100), cancellationToken);
     }
 
