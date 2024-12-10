@@ -58,8 +58,8 @@ public class RazorDynamicFileInfoProviderTest(ITestOutputHelper testOutput) : Vi
 
         var projectKey = _projectManager.GetAllProjectKeys(hostProject.FilePath).Single();
         _project = _projectManager.GetRequiredProject(projectKey);
-        _document1 = _project.GetDocument(hostDocument1.FilePath).AssumeNotNull();
-        _document2 = _project.GetDocument(hostDocument2.FilePath).AssumeNotNull();
+        _document1 = _project.GetRequiredDocument(hostDocument1.FilePath);
+        _document2 = _project.GetRequiredDocument(hostDocument2.FilePath);
 
         var languageServerFeatureOptions = new TestLanguageServerFeatureOptions(includeProjectKeyInGeneratedFilePath: true);
         var filePathService = new VisualStudioFilePathService(languageServerFeatureOptions);

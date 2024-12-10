@@ -344,8 +344,7 @@ public class TextDocumentUriPresentationEndpointTests(ITestOutputHelper testOutp
 
         var documentSnapshot = projectManager
             .GetRequiredProject(hostProject.Key)
-            .GetDocument(hostDocument1.FilePath);
-        Assert.NotNull(documentSnapshot);
+            .GetRequiredDocument(hostDocument1.FilePath);
 
         var documentContextFactory = new DocumentContextFactory(projectManager, LoggerFactory);
         Assert.True(documentContextFactory.TryCreate(uri, projectContext: null, out var documentContext));

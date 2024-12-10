@@ -112,8 +112,8 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
 
         // Assert
         var project = _projectManager.GetRequiredProject(hostProject.Key);
-        var document = project.GetDocument(hostDocument.FilePath);
-        Assert.NotNull(document);
+        var document = project.GetRequiredDocument(hostDocument.FilePath);
+
         Assert.Equal(FileKinds.Component, document.FileKind);
     }
 
@@ -326,8 +326,8 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
 
         // Assert
         var project = _projectManager.GetRequiredProject(hostProject.Key);
-        var document = project.GetDocument(newDocument.FilePath);
-        Assert.NotNull(document);
+        var document = project.GetRequiredDocument(newDocument.FilePath);
+
         Assert.Equal(FileKinds.Component, document.FileKind);
     }
 
@@ -992,7 +992,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         listener.AssertNotifications(
             x => x.DocumentChanged(DocumentFilePath, ownerProject.Key));
 
-        var latestVersion = _projectManager.GetRequiredProject(ownerProjectKey).GetDocument(DocumentFilePath)!.Version;
+        var latestVersion = _projectManager.GetRequiredProject(ownerProjectKey).GetRequiredDocument(DocumentFilePath).Version;
         Assert.Equal(2, latestVersion);
     }
 

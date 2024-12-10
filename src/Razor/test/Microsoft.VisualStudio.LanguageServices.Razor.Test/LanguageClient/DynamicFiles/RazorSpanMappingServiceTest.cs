@@ -33,9 +33,7 @@ public class RazorSpanMappingServiceTest(ITestOutputHelper testOutput) : Tooling
             .AddDocument(_hostDocument, TestMocks.CreateTextLoader(sourceText));
 
         var project = new ProjectSnapshot(state);
-
-        var document = project.GetDocument(_hostDocument.FilePath);
-        Assert.NotNull(document);
+        var document = project.GetRequiredDocument(_hostDocument.FilePath);
 
         var output = await document.GetGeneratedOutputAsync(DisposalToken);
         var generated = output.GetCSharpDocument();
@@ -67,9 +65,7 @@ public class RazorSpanMappingServiceTest(ITestOutputHelper testOutput) : Tooling
             .AddDocument(_hostDocument, TestMocks.CreateTextLoader(sourceText));
 
         var project = new ProjectSnapshot(state);
-
-        var document = project.GetDocument(_hostDocument.FilePath);
-        Assert.NotNull(document);
+        var document = project.GetRequiredDocument(_hostDocument.FilePath);
 
         var output = await document.GetGeneratedOutputAsync(DisposalToken);
         var generated = output.GetCSharpDocument();
@@ -102,9 +98,7 @@ public class RazorSpanMappingServiceTest(ITestOutputHelper testOutput) : Tooling
             .AddDocument(_hostDocument, TestMocks.CreateTextLoader(sourceText));
 
         var project = new ProjectSnapshot(state);
-
-        var document = project.GetDocument(_hostDocument.FilePath);
-        Assert.NotNull(document);
+        var document = project.GetRequiredDocument(_hostDocument.FilePath);
 
         var output = await document.GetGeneratedOutputAsync(DisposalToken);
         var generated = output.GetCSharpDocument();
@@ -136,9 +130,7 @@ public class RazorSpanMappingServiceTest(ITestOutputHelper testOutput) : Tooling
             .AddDocument(_hostDocument, TestMocks.CreateTextLoader(sourceText));
 
         var project = new ProjectSnapshot(state);
-
-        var document = project.GetDocument(_hostDocument.FilePath);
-        Assert.NotNull(document);
+        var document = project.GetRequiredDocument(_hostDocument.FilePath);
 
         var output = await document.GetGeneratedOutputAsync(DisposalToken);
         var generated = output.GetCSharpDocument();

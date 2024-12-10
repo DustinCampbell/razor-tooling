@@ -57,7 +57,7 @@ public class BackgroundCodeGenerationBenchmark : ProjectSnapshotManagerBenchmark
     {
         // The real work happens here.
         var project = ProjectManager.GetRequiredProject(e.ProjectKey);
-        var document = project.GetDocument(e.DocumentFilePath);
+        var document = project.GetRequiredDocument(e.DocumentFilePath);
 
         Tasks.Add(document.GetGeneratedOutputAsync(CancellationToken.None).AsTask());
     }

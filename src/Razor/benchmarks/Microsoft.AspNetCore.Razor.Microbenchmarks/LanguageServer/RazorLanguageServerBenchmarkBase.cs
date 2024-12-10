@@ -83,7 +83,7 @@ public class RazorLanguageServerBenchmarkBase : ProjectSnapshotManagerBenchmarkB
 
         var projectSnapshot = projectManager.GetRequiredProject(hostProject.Key);
 
-        return projectSnapshot.GetDocument(filePath);
+        return projectSnapshot.GetRequiredDocument(filePath);
     }
 
     private sealed class NoOpClientNotifierService : IClientConnection, IOnInitialized

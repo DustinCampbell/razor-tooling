@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Test.Common;
 using Microsoft.AspNetCore.Razor.Test.Common.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Test.Common.VisualStudio;
+using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.VisualStudio.ProjectSystem.Properties;
 using Xunit;
 using Xunit.Abstractions;
@@ -725,14 +726,14 @@ public class DefaultWindowsRazorProjectHostTest : VisualStudioWorkspaceTestBase
             snapshot.DocumentFilePaths.OrderBy(d => d),
             d =>
             {
-                var document = snapshot.GetDocument(d);
+                var document = snapshot.GetRequiredDocument(d);
                 Assert.Equal(TestProjectData.SomeProjectFile1.FilePath, document.FilePath);
                 Assert.Equal(TestProjectData.SomeProjectFile1.TargetPath, document.TargetPath);
                 Assert.Equal(FileKinds.Legacy, document.FileKind);
             },
             d =>
             {
-                var document = snapshot.GetDocument(d);
+                var document = snapshot.GetRequiredDocument(d);
                 Assert.Equal(TestProjectData.SomeProjectComponentFile1.FilePath, document.FilePath);
                 Assert.Equal(TestProjectData.SomeProjectComponentFile1.TargetPath, document.TargetPath);
                 Assert.Equal(FileKinds.Component, document.FileKind);
@@ -926,20 +927,20 @@ public class DefaultWindowsRazorProjectHostTest : VisualStudioWorkspaceTestBase
             snapshot.DocumentFilePaths.OrderBy(d => d),
             d =>
             {
-                var document = snapshot.GetDocument(d);
+                var document = snapshot.GetRequiredDocument(d);
                 Assert.Equal(TestProjectData.SomeProjectComponentImportFile1.FilePath, document.FilePath);
                 Assert.Equal(TestProjectData.SomeProjectComponentImportFile1.TargetPath, document.TargetPath);
                 Assert.Equal(FileKinds.ComponentImport, document.FileKind);
             },
             d =>
             {
-                var document = snapshot.GetDocument(d);
+                var document = snapshot.GetRequiredDocument(d);
                 Assert.Equal(TestProjectData.SomeProjectFile1.FilePath, document.FilePath);
                 Assert.Equal(TestProjectData.SomeProjectFile1.TargetPath, document.TargetPath);
             },
             d =>
             {
-                var document = snapshot.GetDocument(d);
+                var document = snapshot.GetRequiredDocument(d);
                 Assert.Equal(TestProjectData.SomeProjectComponentFile1.FilePath, document.FilePath);
                 Assert.Equal(TestProjectData.SomeProjectComponentFile1.TargetPath, document.TargetPath);
                 Assert.Equal(FileKinds.Component, document.FileKind);
@@ -987,35 +988,35 @@ public class DefaultWindowsRazorProjectHostTest : VisualStudioWorkspaceTestBase
             snapshot.DocumentFilePaths.OrderBy(d => d),
             d =>
             {
-                var document = snapshot.GetDocument(d);
+                var document = snapshot.GetRequiredDocument(d);
                 Assert.Equal(TestProjectData.AnotherProjectNestedFile3.FilePath, document.FilePath);
                 Assert.Equal(TestProjectData.AnotherProjectNestedFile3.TargetPath, document.TargetPath);
                 Assert.Equal(FileKinds.Legacy, document.FileKind);
             },
             d =>
             {
-                var document = snapshot.GetDocument(d);
+                var document = snapshot.GetRequiredDocument(d);
                 Assert.Equal(TestProjectData.AnotherProjectNestedComponentFile3.FilePath, document.FilePath);
                 Assert.Equal(TestProjectData.AnotherProjectNestedComponentFile3.TargetPath, document.TargetPath);
                 Assert.Equal(FileKinds.Component, document.FileKind);
             },
             d =>
             {
-                var document = snapshot.GetDocument(d);
+                var document = snapshot.GetRequiredDocument(d);
                 Assert.Equal(TestProjectData.SomeProjectComponentImportFile1.FilePath, document.FilePath);
                 Assert.Equal(TestProjectData.SomeProjectComponentImportFile1.TargetPath, document.TargetPath);
                 Assert.Equal(FileKinds.ComponentImport, document.FileKind);
             },
             d =>
             {
-                var document = snapshot.GetDocument(d);
+                var document = snapshot.GetRequiredDocument(d);
                 Assert.Equal(TestProjectData.SomeProjectFile1.FilePath, document.FilePath);
                 Assert.Equal(TestProjectData.SomeProjectFile1.TargetPath, document.TargetPath);
                 Assert.Equal(FileKinds.Legacy, document.FileKind);
             },
             d =>
             {
-                var document = snapshot.GetDocument(d);
+                var document = snapshot.GetRequiredDocument(d);
                 Assert.Equal(TestProjectData.SomeProjectComponentFile1.FilePath, document.FilePath);
                 Assert.Equal(TestProjectData.SomeProjectComponentFile1.TargetPath, document.TargetPath);
                 Assert.Equal(FileKinds.Component, document.FileKind);
@@ -1231,14 +1232,14 @@ public class DefaultWindowsRazorProjectHostTest : VisualStudioWorkspaceTestBase
            snapshot.DocumentFilePaths.OrderBy(d => d),
            d =>
            {
-               var document = snapshot.GetDocument(d);
+               var document = snapshot.GetRequiredDocument(d);
                Assert.Equal(TestProjectData.SomeProjectFile1.FilePath, document.FilePath);
                Assert.Equal(TestProjectData.SomeProjectFile1.TargetPath, document.TargetPath);
                Assert.Equal(FileKinds.Legacy, document.FileKind);
            },
            d =>
            {
-               var document = snapshot.GetDocument(d);
+               var document = snapshot.GetRequiredDocument(d);
                Assert.Equal(TestProjectData.SomeProjectComponentFile1.FilePath, document.FilePath);
                Assert.Equal(TestProjectData.SomeProjectComponentFile1.TargetPath, document.TargetPath);
                Assert.Equal(FileKinds.Component, document.FileKind);
@@ -1257,14 +1258,14 @@ public class DefaultWindowsRazorProjectHostTest : VisualStudioWorkspaceTestBase
            snapshot.DocumentFilePaths.OrderBy(d => d),
            d =>
            {
-               var document = snapshot.GetDocument(d);
+               var document = snapshot.GetRequiredDocument(d);
                Assert.Equal(TestProjectData.SomeProjectFile1.FilePath, document.FilePath);
                Assert.Equal(TestProjectData.SomeProjectFile1.TargetPath, document.TargetPath);
                Assert.Equal(FileKinds.Legacy, document.FileKind);
            },
            d =>
            {
-               var document = snapshot.GetDocument(d);
+               var document = snapshot.GetRequiredDocument(d);
                Assert.Equal(TestProjectData.SomeProjectComponentFile1.FilePath, document.FilePath);
                Assert.Equal(TestProjectData.SomeProjectComponentFile1.TargetPath, document.TargetPath);
                Assert.Equal(FileKinds.Component, document.FileKind);
@@ -1334,20 +1335,20 @@ public class DefaultWindowsRazorProjectHostTest : VisualStudioWorkspaceTestBase
             snapshot.DocumentFilePaths.OrderBy(d => d),
             d =>
             {
-                var document = snapshot.GetDocument(d);
+                var document = snapshot.GetRequiredDocument(d);
                 Assert.Equal(TestProjectData.SomeProjectComponentImportFile1.FilePath, document.FilePath);
                 Assert.Equal(TestProjectData.SomeProjectComponentImportFile1.TargetPath, document.TargetPath);
                 Assert.Equal(FileKinds.ComponentImport, document.FileKind);
             },
             d =>
             {
-                var document = snapshot.GetDocument(d);
+                var document = snapshot.GetRequiredDocument(d);
                 Assert.Equal(TestProjectData.SomeProjectFile1.FilePath, document.FilePath);
                 Assert.Equal(TestProjectData.SomeProjectFile1.TargetPath, document.TargetPath);
             },
             d =>
             {
-                var document = snapshot.GetDocument(d);
+                var document = snapshot.GetRequiredDocument(d);
                 Assert.Equal(TestProjectData.SomeProjectComponentFile1.FilePath, document.FilePath);
                 Assert.Equal(TestProjectData.SomeProjectComponentFile1.TargetPath, document.TargetPath);
                 Assert.Equal(FileKinds.Component, document.FileKind);

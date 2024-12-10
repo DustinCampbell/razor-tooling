@@ -102,8 +102,7 @@ public class RazorDocumentOptionsServiceTest(ITestOutputHelper testOutput) : Vis
 
         var project = new ProjectSnapshot(state);
 
-        var documentSnapshot = project.GetDocument(hostDocument.FilePath);
-        Assert.NotNull(documentSnapshot);
+        var documentSnapshot = project.GetRequiredDocument(hostDocument.FilePath);
 
         var solution = Workspace.CurrentSolution.AddProject(ProjectInfo.Create(
             ProjectId.CreateNewId(Path.GetFileNameWithoutExtension(hostDocument.FilePath)),

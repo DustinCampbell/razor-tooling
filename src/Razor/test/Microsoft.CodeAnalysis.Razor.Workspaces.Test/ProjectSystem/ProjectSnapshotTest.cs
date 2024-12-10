@@ -42,14 +42,14 @@ public class ProjectSnapshotTest(ITestOutputHelper testOutput) : ToolingTestBase
 
         // Act
         var documents = project.DocumentFilePaths
-            .Select(filePath => (filePath, document: project.GetDocument(filePath)));
+            .Select(filePath => (filePath, document: project.GetRequiredDocument(filePath)));
 
         // Assert
         Assert.Collection(
             documents,
-            t => Assert.Same(t.document, project.GetDocument(t.filePath)),
-            t => Assert.Same(t.document, project.GetDocument(t.filePath)),
-            t => Assert.Same(t.document, project.GetDocument(t.filePath)));
+            t => Assert.Same(t.document, project.GetRequiredDocument(t.filePath)),
+            t => Assert.Same(t.document, project.GetRequiredDocument(t.filePath)),
+            t => Assert.Same(t.document, project.GetRequiredDocument(t.filePath)));
     }
 
     [Fact]
@@ -61,9 +61,7 @@ public class ProjectSnapshotTest(ITestOutputHelper testOutput) : ToolingTestBase
             .AddDocument(s_documents[0], EmptyTextLoader.Instance);
 
         var project = new ProjectSnapshot(state);
-
-        var document = project.GetDocument(s_documents[0].FilePath);
-        Assert.NotNull(document);
+        var document = project.GetRequiredDocument(s_documents[0].FilePath);
 
         // Act
         var documents = project.GetRelatedDocuments(document);
@@ -83,9 +81,7 @@ public class ProjectSnapshotTest(ITestOutputHelper testOutput) : ToolingTestBase
             .AddDocument(TestProjectData.SomeProjectImportFile, EmptyTextLoader.Instance);
 
         var project = new ProjectSnapshot(state);
-
-        var document = project.GetDocument(TestProjectData.SomeProjectImportFile.FilePath);
-        Assert.NotNull(document);
+        var document = project.GetRequiredDocument(TestProjectData.SomeProjectImportFile.FilePath);
 
         // Act
         var documents = project.GetRelatedDocuments(document);
