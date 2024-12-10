@@ -2,17 +2,17 @@
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Immutable;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Razor.Threading;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.Workspaces;
 using Microsoft.VisualStudio.LanguageServer.ContainedLanguage;
 using Microsoft.VisualStudio.Razor.IntegrationTests.InProcess;
-using Xunit;
 using Microsoft.VisualStudio.Razor.LanguageClient;
-using Microsoft.AspNetCore.Razor.Threading;
-using System.Collections.Immutable;
-using System.Linq;
+using Xunit;
 
 namespace Microsoft.VisualStudio.Extensibility.Testing;
 
@@ -84,15 +84,15 @@ internal partial class RazorProjectSystemInProcess
         await Helper.RetryAsync(ct =>
         {
             var projectKeys = projectSnapshotManager.GetAllProjectKeys(projectFilePath);
-            if (projectKeys.Length == 0 ||
-                !projectSnapshotManager.TryGetProject(projectKeys[0], out var project))
+
+            if (projectKeys.Length == 0)
             {
                 return SpecializedTasks.False;
             }
 
-            var document = project.GetDocument(filePath);
-
-            return Task.FromResult(document is not null);
+            return projectSnapshotManager.ContainsDocument(projectKeys[0], filePath)
+                ? SpecializedTasks.True
+                : SpecializedTasks.False;
         }, TimeSpan.FromMilliseconds(100), cancellationToken);
     }
 

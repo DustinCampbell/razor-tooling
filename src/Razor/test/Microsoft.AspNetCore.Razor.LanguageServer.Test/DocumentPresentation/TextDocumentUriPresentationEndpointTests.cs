@@ -342,9 +342,7 @@ public class TextDocumentUriPresentationEndpointTests(ITestOutputHelper testOutp
             updater.DocumentOpened(hostProject.Key, hostDocument1.FilePath, SourceText.From("<div></div>"));
         });
 
-        var documentSnapshot = projectManager
-            .GetRequiredProject(hostProject.Key)
-            .GetRequiredDocument(hostDocument1.FilePath);
+        var documentSnapshot = projectManager.GetRequiredDocument(hostProject.Key, hostDocument1.FilePath);
 
         var documentContextFactory = new DocumentContextFactory(projectManager, LoggerFactory);
         Assert.True(documentContextFactory.TryCreate(uri, projectContext: null, out var documentContext));

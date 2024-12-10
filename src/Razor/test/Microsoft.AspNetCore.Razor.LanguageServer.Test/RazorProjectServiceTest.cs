@@ -111,8 +111,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
             DisposalToken);
 
         // Assert
-        var project = _projectManager.GetRequiredProject(hostProject.Key);
-        var document = project.GetRequiredDocument(hostDocument.FilePath);
+        var document = _projectManager.GetRequiredDocument(hostProject.Key, hostDocument.FilePath);
 
         Assert.Equal(FileKinds.Component, document.FileKind);
     }
@@ -236,14 +235,10 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
 
         var miscProject = _projectManager.GetMiscellaneousProject();
 
-        var project = await _projectManager.UpdateAsync(updater =>
+        await _projectManager.UpdateAsync(updater =>
         {
             updater.ProjectAdded(hostProject);
-
-            var project = updater.GetRequiredProject(hostProject.Key);
             updater.DocumentAdded(hostProject.Key, hostDocument, StrictMock.Of<TextLoader>());
-
-            return project;
         });
 
         var newDocument = new DocumentSnapshotHandle("C:/path/to/file2.cshtml", "file2.cshtml", FileKinds.Legacy);
@@ -260,7 +255,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
             DisposalToken);
 
         // Assert
-        project = _projectManager.GetRequiredProject(hostProject.Key);
+        var project = _projectManager.GetRequiredProject(hostProject.Key);
         Assert.Equal(project.DocumentFilePaths, [newDocument.FilePath]);
 
         miscProject = _projectManager.GetMiscellaneousProject();
@@ -325,8 +320,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
             DisposalToken);
 
         // Assert
-        var project = _projectManager.GetRequiredProject(hostProject.Key);
-        var document = project.GetRequiredDocument(newDocument.FilePath);
+        var document = _projectManager.GetRequiredDocument(hostProject.Key, newDocument.FilePath);
 
         Assert.Equal(FileKinds.Component, document.FileKind);
     }
@@ -992,7 +986,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         listener.AssertNotifications(
             x => x.DocumentChanged(DocumentFilePath, ownerProject.Key));
 
-        var latestVersion = _projectManager.GetRequiredProject(ownerProjectKey).GetRequiredDocument(DocumentFilePath).Version;
+        var latestVersion = _projectManager.GetRequiredDocument(ownerProjectKey, DocumentFilePath).Version;
         Assert.Equal(2, latestVersion);
     }
 

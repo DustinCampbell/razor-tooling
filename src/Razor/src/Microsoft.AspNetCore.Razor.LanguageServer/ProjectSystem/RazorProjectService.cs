@@ -240,7 +240,7 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
                     filePath,
                     (projectSnapshot, textDocumentPath) =>
                     {
-                        if (!projectSnapshot.DocumentFilePaths.Contains(textDocumentPath, FilePathComparer.Instance))
+                        if (!projectSnapshot.ContainsDocument(textDocumentPath))
                         {
                             _logger.LogInformation($"Containing project is not tracking document '{textDocumentPath}'");
                             return;
@@ -498,8 +498,8 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
         IProjectSnapshot fromProject,
         IProjectSnapshot toProject)
     {
-        Debug.Assert(fromProject.DocumentFilePaths.Contains(documentFilePath, FilePathComparer.Instance));
-        Debug.Assert(!toProject.DocumentFilePaths.Contains(documentFilePath, FilePathComparer.Instance));
+        Debug.Assert(fromProject.ContainsDocument(documentFilePath));
+        Debug.Assert(!toProject.ContainsDocument(documentFilePath));
 
         if (fromProject.GetDocument(documentFilePath) is not DocumentSnapshot documentSnapshot)
         {
