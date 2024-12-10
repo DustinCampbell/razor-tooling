@@ -7,6 +7,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
+using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
@@ -35,7 +36,7 @@ internal static class IDocumentSnapshotExtensions
         var tagHelpers = await project.GetTagHelpersAsync(cancellationToken).ConfigureAwait(false);
         foreach (var tagHelper in tagHelpers)
         {
-            // Check the typename and namespace match
+            // Check the type name and namespace match
             if (documentSnapshot.IsPathCandidateForComponent(tagHelper.GetTypeNameIdentifier().AsMemory()) &&
                 razorCodeDocument.ComponentNamespaceMatches(tagHelper.GetTypeNamespace()))
             {
