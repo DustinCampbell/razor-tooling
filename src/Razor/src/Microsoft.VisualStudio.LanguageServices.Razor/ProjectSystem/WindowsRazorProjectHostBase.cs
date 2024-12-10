@@ -217,7 +217,7 @@ internal abstract partial class WindowsRazorProjectHostBase : OnceInitializedOnc
             var projectKeys = updater.GetAllProjectKeys(oldProjectFilePath);
             foreach (var projectKey in projectKeys)
             {
-                if (updater.TryGetLoadedProject(projectKey, out var current))
+                if (updater.TryGetProject(projectKey, out var current))
                 {
                     RemoveProject(updater, projectKey);
 
@@ -266,7 +266,7 @@ internal abstract partial class WindowsRazorProjectHostBase : OnceInitializedOnc
 
     protected static void UpdateProject(ProjectSnapshotManager.Updater updater, HostProject hostProject)
     {
-        if (!updater.TryGetLoadedProject(hostProject.Key, out _))
+        if (!updater.TryGetProject(hostProject.Key, out _))
         {
             // Just in case we somehow got in a state where VS didn't tell us that solution close was finished, lets just
             // ensure we're going to actually do something with the new project that we've just been told about.

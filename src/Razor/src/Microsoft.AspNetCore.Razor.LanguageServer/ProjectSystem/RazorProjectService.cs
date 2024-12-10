@@ -341,7 +341,7 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
         return _projectManager.UpdateAsync(
             updater =>
             {
-                if (!_projectManager.TryGetLoadedProject(projectKey, out var project))
+                if (!_projectManager.TryGetProject(projectKey, out var project))
                 {
                     if (filePath is null)
                     {
@@ -357,7 +357,7 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
                     var newKey = AddProjectCore(updater, filePath, intermediateOutputPath, configuration, rootNamespace, displayName);
                     Debug.Assert(newKey == projectKey);
 
-                    project = _projectManager.GetLoadedProject(projectKey);
+                    project = _projectManager.GetRequiredProject(projectKey);
                 }
 
                 UpdateProjectDocuments(updater, documents, project.Key);
@@ -402,7 +402,7 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
     {
         _logger.LogDebug($"UpdateProjectDocuments for {projectKey} with {documents.Length} documents: {string.Join(", ", documents.Select(d => d.FilePath))}");
 
-        var project = _projectManager.GetLoadedProject(projectKey);
+        var project = _projectManager.GetRequiredProject(projectKey);
         var currentProjectKey = project.Key;
         var projectDirectory = FilePathNormalizer.GetNormalizedDirectoryName(project.FilePath);
         var documentMap = documents.ToDictionary(document => EnsureFullPath(document.FilePath, projectDirectory), FilePathComparer.Instance);
@@ -422,7 +422,7 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
             MoveDocument(updater, documentFilePath, fromProject: project, toProject: miscellaneousProject);
         }
 
-        project = _projectManager.GetLoadedProject(projectKey);
+        project = _projectManager.GetRequiredProject(projectKey);
 
         // Update existing documents
         foreach (var documentFilePath in project.DocumentFilePaths)
@@ -462,7 +462,7 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
             updater.DocumentAdded(currentProjectKey, newHostDocument, textLoader);
         }
 
-        project = _projectManager.GetLoadedProject(project.Key);
+        project = _projectManager.GetRequiredProject(project.Key);
         miscellaneousProject = _projectManager.GetMiscellaneousProject();
 
         // Add (or migrate from misc) any new documents

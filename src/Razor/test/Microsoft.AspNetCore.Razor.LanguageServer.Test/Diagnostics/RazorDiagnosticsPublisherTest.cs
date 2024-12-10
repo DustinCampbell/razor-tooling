@@ -75,7 +75,7 @@ public class RazorDiagnosticsPublisherTest(ITestOutputHelper testOutput) : Langu
             updater.DocumentAdded(hostProject.Key, closedHostDocument, TextLoader.From(textAndVersion));
         });
 
-        var project = testProjectManager.GetLoadedProject(hostProject.Key);
+        var project = testProjectManager.GetRequiredProject(hostProject.Key);
 
         var openedDocument = project.GetDocument(openedHostDocument.FilePath).AssumeNotNull();
         _openedDocument = openedDocument;

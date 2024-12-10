@@ -65,7 +65,7 @@ public class BackgroundDocumentGeneratorTest(ITestOutputHelper testOutput) : Vis
             .Returns(tcs.Task);
         var hostDocument = s_documents[0];
 
-        var project = projectManager.GetLoadedProject(s_hostProject1.Key);
+        var project = projectManager.GetRequiredProject(s_hostProject1.Key);
         using var generator = new TestBackgroundDocumentGenerator(projectManager, s_fallbackProjectManager, _dynamicFileInfoProvider, LoggerFactory)
         {
             NotifyBackgroundWorkStarting = new ManualResetEventSlim(initialState: false)
@@ -129,7 +129,7 @@ public class BackgroundDocumentGeneratorTest(ITestOutputHelper testOutput) : Vis
             updater.DocumentAdded(s_hostProject1.Key, s_documents[0], textLoader.Object);
         });
 
-        var project = projectManager.GetLoadedProject(s_hostProject1.Key);
+        var project = projectManager.GetRequiredProject(s_hostProject1.Key);
 
         using var generator = new TestBackgroundDocumentGenerator(projectManager, s_fallbackProjectManager, _dynamicFileInfoProvider, loggerFactoryMock.Object);
 
@@ -170,7 +170,7 @@ public class BackgroundDocumentGeneratorTest(ITestOutputHelper testOutput) : Vis
             updater.DocumentAdded(s_hostProject1.Key, s_documents[0], textLoaderMock.Object);
         });
 
-        var project = projectManager.GetLoadedProject(s_hostProject1.Key);
+        var project = projectManager.GetRequiredProject(s_hostProject1.Key);
 
         using var generator = new TestBackgroundDocumentGenerator(projectManager, s_fallbackProjectManager, _dynamicFileInfoProvider, loggerFactoryMock.Object);
 
@@ -194,7 +194,7 @@ public class BackgroundDocumentGeneratorTest(ITestOutputHelper testOutput) : Vis
             updater.DocumentAdded(s_hostProject1.Key, s_documents[1], s_documents[1].CreateEmptyTextLoader());
         });
 
-        var project = projectManager.GetLoadedProject(s_hostProject1.Key);
+        var project = projectManager.GetRequiredProject(s_hostProject1.Key);
         var documentKey1 = new DocumentKey(project.Key, s_documents[0].FilePath);
 
         using var generator = new TestBackgroundDocumentGenerator(projectManager, s_fallbackProjectManager, _dynamicFileInfoProvider, LoggerFactory);
@@ -233,7 +233,7 @@ public class BackgroundDocumentGeneratorTest(ITestOutputHelper testOutput) : Vis
             updater.DocumentAdded(hostProject1.Key, hostDocument2, hostDocument2.CreateEmptyTextLoader());
         });
 
-        var project = projectManager.GetLoadedProject(hostProject1.Key);
+        var project = projectManager.GetRequiredProject(hostProject1.Key);
         var documentKey1 = new DocumentKey(project.Key, hostDocument1.FilePath);
         var documentKey2 = new DocumentKey(project.Key, hostDocument2.FilePath);
 

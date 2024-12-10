@@ -15,9 +15,7 @@ namespace Microsoft.AspNetCore.Razor.LanguageServer.ProjectSystem;
 internal static partial class IProjectSnapshotManagerExtensions
 {
     public static IProjectSnapshot GetMiscellaneousProject(this IProjectSnapshotManager projectManager)
-    {
-        return projectManager.GetLoadedProject(MiscFilesProject.HostProject.Key);
-    }
+        => projectManager.GetRequiredProject(MiscFilesProject.HostProject.Key);
 
     /// <summary>
     /// Finds all the projects where the document path starts with the path of the folder that contains the project file.

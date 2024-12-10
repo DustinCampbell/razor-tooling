@@ -343,7 +343,7 @@ public class TextDocumentUriPresentationEndpointTests(ITestOutputHelper testOutp
         });
 
         var documentSnapshot = projectManager
-            .GetLoadedProject(hostProject.Key)
+            .GetRequiredProject(hostProject.Key)
             .GetDocument(hostDocument1.FilePath);
         Assert.NotNull(documentSnapshot);
 

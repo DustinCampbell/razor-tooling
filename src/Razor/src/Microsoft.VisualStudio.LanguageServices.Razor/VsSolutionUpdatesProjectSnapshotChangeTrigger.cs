@@ -125,7 +125,7 @@ internal class VsSolutionUpdatesProjectSnapshotChangeTrigger : IRazorStartupServ
         var projectKeys = _projectManager.GetAllProjectKeys(projectFilePath);
         foreach (var projectKey in projectKeys)
         {
-            if (_projectManager.TryGetLoadedProject(projectKey, out var projectSnapshot))
+            if (_projectManager.TryGetProject(projectKey, out var projectSnapshot))
             {
                 var workspace = _workspaceProvider.GetWorkspace();
                 var workspaceProject = workspace.CurrentSolution.Projects.FirstOrDefault(wp => wp.ToProjectKey() == projectSnapshot.Key);

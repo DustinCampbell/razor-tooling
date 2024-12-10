@@ -57,7 +57,7 @@ public class RazorDynamicFileInfoProviderTest(ITestOutputHelper testOutput) : Vi
         });
 
         var projectKey = _projectManager.GetAllProjectKeys(hostProject.FilePath).Single();
-        _project = _projectManager.GetLoadedProject(projectKey);
+        _project = _projectManager.GetRequiredProject(projectKey);
         _document1 = _project.GetDocument(hostDocument1.FilePath).AssumeNotNull();
         _document2 = _project.GetDocument(hostDocument2.FilePath).AssumeNotNull();
 

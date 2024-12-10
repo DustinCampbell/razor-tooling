@@ -81,7 +81,7 @@ public class RazorLanguageServerBenchmarkBase : ProjectSnapshotManagerBenchmarkB
             },
             CancellationToken.None);
 
-        var projectSnapshot = projectManager.GetLoadedProject(hostProject.Key);
+        var projectSnapshot = projectManager.GetRequiredProject(hostProject.Key);
 
         return projectSnapshot.GetDocument(filePath);
     }
