@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
-using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Test.Common;
 using Microsoft.AspNetCore.Razor.Test.Common.VisualStudio;
 using Microsoft.AspNetCore.Razor.Utilities;
@@ -101,8 +100,7 @@ public class RazorDocumentOptionsServiceTest(ITestOutputHelper testOutput) : Vis
             .AddDocument(hostDocument, TestMocks.CreateTextLoader(sourceText));
 
         var project = new ProjectSnapshot(state);
-
-        var documentSnapshot = project.GetRequiredDocument(hostDocument.FilePath);
+        var document = project.GetRequiredDocument(hostDocument.FilePath);
 
         var solution = Workspace.CurrentSolution.AddProject(ProjectInfo.Create(
             ProjectId.CreateNewId(Path.GetFileNameWithoutExtension(hostDocument.FilePath)),
@@ -115,9 +113,8 @@ public class RazorDocumentOptionsServiceTest(ITestOutputHelper testOutput) : Vis
         solution = solution.AddDocument(
             DocumentId.CreateNewId(solution.ProjectIds.Single(), hostDocument.FilePath),
             hostDocument.FilePath,
-            new GeneratedDocumentTextLoader(documentSnapshot, hostDocument.FilePath));
+            new GeneratedDocumentTextLoader(document, hostDocument.FilePath));
 
-        var document = solution.Projects.Single().Documents.Single();
-        return document;
+        return solution.Projects.Single().Documents.Single();
     }
 }

@@ -161,7 +161,7 @@ public class CodeDocumentReferenceHolderTest(ITestOutputHelper testOutput) : Lan
         Assert.False(codeDocumentReference.TryGetTarget(out _));
     }
 
-    private Task<IDocumentSnapshot> CreateDocumentSnapshotAsync()
+    private Task<DocumentSnapshot> CreateDocumentSnapshotAsync()
     {
         return _projectManager.UpdateAsync(updater =>
         {

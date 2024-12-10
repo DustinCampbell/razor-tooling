@@ -107,6 +107,6 @@ public class DocumentSnapshotTest(ITestOutputHelper testOutput) : ToolingTestBas
 
         var project = new ProjectSnapshot(state);
 
-        return (DocumentSnapshot)project.GetRequiredDocument(hostDocument.FilePath);
+        return project.GetRequiredDocument(hostDocument.FilePath);
     }
 }

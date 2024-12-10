@@ -62,7 +62,7 @@ internal sealed class ProjectSnapshot(ProjectState state) : IProjectSnapshot
         }
     }
 
-    public bool TryGetDocument(string filePath, [NotNullWhen(true)] out IDocumentSnapshot? document)
+    public bool TryGetDocument(string filePath, [NotNullWhen(true)] out DocumentSnapshot? document)
     {
         lock (_gate)
         {
@@ -87,6 +87,15 @@ internal sealed class ProjectSnapshot(ProjectState state) : IProjectSnapshot
             document = snapshot;
             return true;
         }
+    }
+
+    bool IProjectSnapshot.TryGetDocument(string filePath, [NotNullWhen(true)] out IDocumentSnapshot? document)
+    {
+        document = TryGetDocument(filePath, out var snapshot)
+            ? snapshot
+            : null;
+
+        return document is not null;
     }
 
     /// <summary>

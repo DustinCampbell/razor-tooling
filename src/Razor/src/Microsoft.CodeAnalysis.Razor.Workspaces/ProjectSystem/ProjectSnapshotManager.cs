@@ -103,11 +103,11 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
         }
     }
 
-    public ImmutableArray<IProjectSnapshot> GetProjects()
+    public ImmutableArray<ProjectSnapshot> GetProjects()
     {
         using (_readerWriterLock.DisposableRead())
         {
-            using var builder = new PooledArrayBuilder<IProjectSnapshot>(_projectMap.Count);
+            using var builder = new PooledArrayBuilder<ProjectSnapshot>(_projectMap.Count);
 
             foreach (var (_, entry) in _projectMap)
             {
@@ -117,6 +117,9 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
             return builder.DrainToImmutable();
         }
     }
+
+    ImmutableArray<IProjectSnapshot> IProjectSnapshotManager.GetProjects()
+        => GetProjects().CastArray<IProjectSnapshot>();
 
     public ImmutableArray<string> GetOpenDocuments()
     {
@@ -134,7 +137,7 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
         }
     }
 
-    public bool TryGetProject(ProjectKey projectKey, [NotNullWhen(true)] out IProjectSnapshot? project)
+    public bool TryGetProject(ProjectKey projectKey, [NotNullWhen(true)] out ProjectSnapshot? project)
     {
         using (_readerWriterLock.DisposableRead())
         {
@@ -147,6 +150,15 @@ internal partial class ProjectSnapshotManager : IProjectSnapshotManager, IDispos
 
         project = null;
         return false;
+    }
+
+    bool IProjectSnapshotManager.TryGetProject(ProjectKey projectKey, [NotNullWhen(true)] out IProjectSnapshot? project)
+    {
+        project = TryGetProject(projectKey, out var result)
+            ? result
+            : null;
+
+        return project is not null;
     }
 
     public ImmutableArray<ProjectKey> GetAllProjectKeys(string projectFileName)

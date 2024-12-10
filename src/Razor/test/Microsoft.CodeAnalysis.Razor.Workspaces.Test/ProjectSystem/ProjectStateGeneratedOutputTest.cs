@@ -35,11 +35,11 @@ public class ProjectStateGeneratedOutputTest(ITestOutputHelper testOutput) : Too
             .Create(s_project, s_projectEngineFactoryProvider)
             .AddDocument(s_document1, EmptyTextLoader.Instance);
 
-        var result = await GetOutputAsync(state, s_document1, DisposalToken);
+        var result = await GetOutputAsync(state, s_document1.FilePath, DisposalToken);
 
         // Act
         var newState = state.AddDocument(s_document2, EmptyTextLoader.Instance);
-        var newResult = await GetOutputAsync(newState, s_document1, DisposalToken);
+        var newResult = await GetOutputAsync(newState, s_document1.FilePath, DisposalToken);
 
         // Assert
         Assert.NotSame(result.Output, newResult.Output);
@@ -55,12 +55,12 @@ public class ProjectStateGeneratedOutputTest(ITestOutputHelper testOutput) : Too
             .AddDocument(s_document1, EmptyTextLoader.Instance)
             .AddDocument(s_importDocument, EmptyTextLoader.Instance);
 
-        var result = await GetOutputAsync(state, s_document1, DisposalToken);
+        var result = await GetOutputAsync(state, s_document1.FilePath, DisposalToken);
 
         // Act
         var version = VersionStamp.Create();
         var newState = state.WithDocumentText(s_document1, TestMocks.CreateTextLoader("@using System", version));
-        var newResult = await GetOutputAsync(newState, s_document1, DisposalToken);
+        var newResult = await GetOutputAsync(newState, s_document1.FilePath, DisposalToken);
 
         // Assert
         Assert.NotSame(result.Output, newResult.Output);
@@ -77,11 +77,11 @@ public class ProjectStateGeneratedOutputTest(ITestOutputHelper testOutput) : Too
             .AddDocument(s_document1, EmptyTextLoader.Instance)
             .AddDocument(s_document2, EmptyTextLoader.Instance);
 
-        var result = await GetOutputAsync(state, s_document1, DisposalToken);
+        var result = await GetOutputAsync(state, s_document1.FilePath, DisposalToken);
 
         // Act
         var newState = state.RemoveDocument(s_document2);
-        var newResult = await GetOutputAsync(newState, s_document1, DisposalToken);
+        var newResult = await GetOutputAsync(newState, s_document1.FilePath, DisposalToken);
 
         // Assert
         Assert.NotSame(result.Output, newResult.Output);
@@ -97,11 +97,11 @@ public class ProjectStateGeneratedOutputTest(ITestOutputHelper testOutput) : Too
             .Create(s_project, s_projectEngineFactoryProvider)
             .AddDocument(s_document1, EmptyTextLoader.Instance);
 
-        var result = await GetOutputAsync(state, s_document1, DisposalToken);
+        var result = await GetOutputAsync(state, s_document1.FilePath, DisposalToken);
 
         // Act
         var newState = state.AddDocument(s_importDocument, EmptyTextLoader.Instance);
-        var newResult = await GetOutputAsync(newState, s_document1, DisposalToken);
+        var newResult = await GetOutputAsync(newState, s_document1.FilePath, DisposalToken);
 
         // Assert
         Assert.NotSame(result.Output, newResult.Output);
@@ -117,12 +117,12 @@ public class ProjectStateGeneratedOutputTest(ITestOutputHelper testOutput) : Too
             .AddDocument(s_document1, EmptyTextLoader.Instance)
             .AddDocument(s_importDocument, EmptyTextLoader.Instance);
 
-        var result = await GetOutputAsync(state, s_document1, DisposalToken);
+        var result = await GetOutputAsync(state, s_document1.FilePath, DisposalToken);
 
         // Act
         var version = VersionStamp.Create();
         var newState = state.WithDocumentText(s_importDocument, TestMocks.CreateTextLoader("@using System", version));
-        var newResult = await GetOutputAsync(newState, s_document1, DisposalToken);
+        var newResult = await GetOutputAsync(newState, s_document1.FilePath, DisposalToken);
 
         // Assert
         Assert.NotSame(result.Output, newResult.Output);
@@ -139,11 +139,11 @@ public class ProjectStateGeneratedOutputTest(ITestOutputHelper testOutput) : Too
             .AddDocument(s_document1, EmptyTextLoader.Instance)
             .AddDocument(s_importDocument, EmptyTextLoader.Instance);
 
-        var result = await GetOutputAsync(state, s_document1, DisposalToken);
+        var result = await GetOutputAsync(state, s_document1.FilePath, DisposalToken);
 
         // Act
         var newState = state.RemoveDocument(s_importDocument);
-        var newResult = await GetOutputAsync(newState, s_document1, DisposalToken);
+        var newResult = await GetOutputAsync(newState, s_document1.FilePath, DisposalToken);
 
         // Assert
         Assert.NotSame(result.Output, newResult.Output);
@@ -159,11 +159,11 @@ public class ProjectStateGeneratedOutputTest(ITestOutputHelper testOutput) : Too
             .Create(s_project, s_projectEngineFactoryProvider)
             .AddDocument(s_document1, EmptyTextLoader.Instance);
 
-        var result = await GetOutputAsync(state, s_document1, DisposalToken);
+        var result = await GetOutputAsync(state, s_document1.FilePath, DisposalToken);
 
         // Act
         var newState = state.WithProjectWorkspaceState(ProjectWorkspaceState.Default);
-        var newResult = await GetOutputAsync(newState, s_document1, DisposalToken);
+        var newResult = await GetOutputAsync(newState, s_document1.FilePath, DisposalToken);
 
         // Assert
         Assert.Same(result.Output, newResult.Output);
@@ -178,11 +178,11 @@ public class ProjectStateGeneratedOutputTest(ITestOutputHelper testOutput) : Too
             .Create(s_project, s_projectEngineFactoryProvider)
             .AddDocument(s_document1, EmptyTextLoader.Instance);
 
-        var result = await GetOutputAsync(state, s_document1, DisposalToken);
+        var result = await GetOutputAsync(state, s_document1.FilePath, DisposalToken);
 
         // Act
         var newState = state.WithProjectWorkspaceState(ProjectWorkspaceState.Create(s_someTagHelpers));
-        var newResult = await GetOutputAsync(newState, s_document1, DisposalToken);
+        var newResult = await GetOutputAsync(newState, s_document1.FilePath, DisposalToken);
 
         // Assert
         Assert.NotSame(result.Output, newResult.Output);
@@ -206,11 +206,11 @@ public class ProjectStateGeneratedOutputTest(ITestOutputHelper testOutput) : Too
             .Create(hostProject, ProjectWorkspaceState.Create(s_someTagHelpers, LanguageVersion.CSharp7), s_projectEngineFactoryProvider)
             .AddDocument(s_document1, TestMocks.CreateTextLoader("@DateTime.Now", VersionStamp.Default));
 
-        var result = await GetOutputAsync(state, s_document1, DisposalToken);
+        var result = await GetOutputAsync(state, s_document1.FilePath, DisposalToken);
 
         // Act
         var newState = state.WithProjectWorkspaceState(ProjectWorkspaceState.Create(s_someTagHelpers, LanguageVersion.CSharp8));
-        var newResult = await GetOutputAsync(newState, s_document1, DisposalToken);
+        var newResult = await GetOutputAsync(newState, s_document1.FilePath, DisposalToken);
 
         // Assert
         Assert.NotSame(result.Output, newResult.Output);
@@ -226,11 +226,11 @@ public class ProjectStateGeneratedOutputTest(ITestOutputHelper testOutput) : Too
             .Create(s_project, s_projectEngineFactoryProvider)
             .AddDocument(s_document1, EmptyTextLoader.Instance);
 
-        var result = await GetOutputAsync(state, s_document1, DisposalToken);
+        var result = await GetOutputAsync(state, s_document1.FilePath, DisposalToken);
 
         // Act
         var newState = state.WithConfiguration(FallbackRazorConfiguration.MVC_1_0);
-        var newResult = await GetOutputAsync(newState, s_document1, DisposalToken);
+        var newResult = await GetOutputAsync(newState, s_document1.FilePath, DisposalToken);
 
         // Assert
         Assert.NotSame(result.Output, newResult.Output);
@@ -238,16 +238,11 @@ public class ProjectStateGeneratedOutputTest(ITestOutputHelper testOutput) : Too
         Assert.NotEqual(newState.ProjectWorkspaceStateVersion, newResult.Version);
     }
 
-    private static Task<OutputAndVersion> GetOutputAsync(ProjectState project, HostDocument hostDocument, CancellationToken cancellationToken)
+    private static Task<OutputAndVersion> GetOutputAsync(ProjectState state, string filePath, CancellationToken cancellationToken)
     {
-        var document = project.Documents[hostDocument.FilePath];
-        return GetOutputAsync(project, document, cancellationToken);
-    }
+        var project = new ProjectSnapshot(state);
+        var document = project.GetRequiredDocument(filePath);
 
-    private static Task<OutputAndVersion> GetOutputAsync(ProjectState project, DocumentState document, CancellationToken cancellationToken)
-    {
-        var projectSnapshot = new ProjectSnapshot(project);
-        var documentSnapshot = new DocumentSnapshot(projectSnapshot, document);
-        return documentSnapshot.GetGeneratedOutputAndVersionAsync(cancellationToken);
+        return document.GetGeneratedOutputAndVersionAsync(cancellationToken);
     }
 }
