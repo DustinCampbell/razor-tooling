@@ -59,7 +59,7 @@ public class ProjectStateGeneratedOutputTest(ITestOutputHelper testOutput) : Too
 
         // Act
         var version = VersionStamp.Create();
-        var newState = state.UpdateDocumentText(s_document1, TestMocks.CreateTextLoader("@using System", version));
+        var newState = state.WithDocumentText(s_document1, TestMocks.CreateTextLoader("@using System", version));
         var newResult = await GetOutputAsync(newState, s_document1, DisposalToken);
 
         // Assert
@@ -121,7 +121,7 @@ public class ProjectStateGeneratedOutputTest(ITestOutputHelper testOutput) : Too
 
         // Act
         var version = VersionStamp.Create();
-        var newState = state.UpdateDocumentText(s_importDocument, TestMocks.CreateTextLoader("@using System", version));
+        var newState = state.WithDocumentText(s_importDocument, TestMocks.CreateTextLoader("@using System", version));
         var newResult = await GetOutputAsync(newState, s_document1, DisposalToken);
 
         // Assert

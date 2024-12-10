@@ -248,7 +248,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
             .AddDocument(s_documents[1], EmptyTextLoader.Instance);
 
         // Act
-        var newState = state.UpdateDocumentText(s_documents[1], s_textLoader);
+        var newState = state.WithDocumentText(s_documents[1], s_textLoader);
 
         // Assert
         Assert.NotEqual(state.Version, newState.Version);
@@ -268,7 +268,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
             .AddDocument(s_documents[1], EmptyTextLoader.Instance);
 
         // Act
-        var newState = state.UpdateDocumentText(s_documents[1], s_text, VersionStamp.Create());
+        var newState = state.WithDocumentText(s_documents[1], s_text, VersionStamp.Create());
 
         // Assert
         Assert.NotEqual(state.Version, newState.Version);
@@ -289,7 +289,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
             .AddDocument(s_documents[1], EmptyTextLoader.Instance);
 
         // Act
-        var newState = state.UpdateDocumentText(s_documents[1], s_textLoader);
+        var newState = state.WithDocumentText(s_documents[1], s_textLoader);
 
         // Assert
         Assert.Same(state.ProjectEngine, newState.ProjectEngine);
@@ -310,7 +310,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
             .AddDocument(s_documents[1], EmptyTextLoader.Instance);
 
         // Act
-        var newState = state.UpdateDocumentText(s_documents[1], s_text, VersionStamp.Create());
+        var newState = state.WithDocumentText(s_documents[1], s_text, VersionStamp.Create());
 
         // Assert
         Assert.Same(state.ProjectEngine, newState.ProjectEngine);
@@ -331,7 +331,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
             .AddDocument(s_documents[1], EmptyTextLoader.Instance);
 
         // Act
-        var newState = state.UpdateDocumentText(s_documents[0], s_textLoader);
+        var newState = state.WithDocumentText(s_documents[0], s_textLoader);
 
         // Assert
         Assert.Same(state, newState);
@@ -347,7 +347,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
             .AddDocument(s_documents[1], EmptyTextLoader.Instance);
 
         // Act
-        var newState = state.UpdateDocumentText(s_documents[0], s_text, VersionStamp.Create());
+        var newState = state.WithDocumentText(s_documents[0], s_text, VersionStamp.Create());
 
         // Assert
         Assert.Same(state, newState);
@@ -611,9 +611,6 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
             .AddDocument(s_documents[2], EmptyTextLoader.Instance)
             .AddDocument(s_documents[1], EmptyTextLoader.Instance);
 
-        var tagHelpers = state.TagHelpers;
-        var projectWorkspaceStateVersion = state.ProjectWorkspaceStateVersion;
-
         // Act
         var newProjectWorkspaceState = ProjectWorkspaceState.Create(s_projectWorkspaceState.TagHelpers, LanguageVersion.CSharp6);
         var newState = state.WithProjectWorkspaceState(newProjectWorkspaceState);
@@ -622,19 +619,11 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
         Assert.NotEqual(state.Version, newState.Version);
         Assert.Same(newProjectWorkspaceState, newState.ProjectWorkspaceState);
 
-        var actualTagHelpers = newState.TagHelpers;
-        var actualProjectWorkspaceStateVersion = newState.ProjectWorkspaceStateVersion;
-
         // The C# language version changed, and the tag helpers didn't change
         Assert.NotSame(state.ProjectEngine, newState.ProjectEngine);
+        AssertSameTagHelpers(state.TagHelpers, newState.TagHelpers);
 
-        Assert.Equal(tagHelpers.Length, actualTagHelpers.Length);
-        for (var i = 0; i < tagHelpers.Length; i++)
-        {
-            Assert.Same(tagHelpers[i], actualTagHelpers[i]);
-        }
-
-        Assert.NotEqual(projectWorkspaceStateVersion, actualProjectWorkspaceStateVersion);
+        Assert.NotEqual(state.ProjectWorkspaceStateVersion, newState.ProjectWorkspaceStateVersion);
 
         Assert.NotSame(state.Documents[s_documents[1].FilePath], newState.Documents[s_documents[1].FilePath]);
         Assert.NotSame(state.Documents[s_documents[2].FilePath], newState.Documents[s_documents[2].FilePath]);
@@ -802,7 +791,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
         var documentPathSet = state.Documents.Keys.ToHashSet(FilePathNormalizingComparer.Instance);
 
         // Act
-        var newState = state.UpdateDocumentText(TestProjectData.AnotherProjectNestedImportFile, EmptyTextLoader.Instance);
+        var newState = state.WithDocumentText(TestProjectData.AnotherProjectNestedImportFile, EmptyTextLoader.Instance);
 
         // Assert
         Assert.NotEqual(state.Version, newState.Version);
@@ -844,7 +833,7 @@ public class ProjectStateTest(ITestOutputHelper testOutput) : ToolingTestBase(te
         var documentPathSet = state.Documents.Keys.ToHashSet(FilePathNormalizingComparer.Instance);
 
         // Act
-        var newState = state.UpdateDocumentText(TestProjectData.AnotherProjectNestedImportFile, s_text, VersionStamp.Create());
+        var newState = state.WithDocumentText(TestProjectData.AnotherProjectNestedImportFile, s_text, VersionStamp.Create());
 
         // Assert
         Assert.NotEqual(state.Version, newState.Version);

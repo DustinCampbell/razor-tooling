@@ -25,10 +25,7 @@ internal sealed partial class DocumentState
     private readonly SemaphoreSlim _gate = new(initialCount: 1);
     private WeakReference<OutputAndVersion>? _weakComputedState;
 
-    private DocumentState(
-        HostDocument hostDocument,
-        TextAndVersion? textAndVersion,
-        TextLoader? textLoader)
+    private DocumentState(HostDocument hostDocument, TextAndVersion? textAndVersion, TextLoader? textLoader)
     {
         HostDocument = hostDocument;
         Version = 1;
@@ -36,11 +33,7 @@ internal sealed partial class DocumentState
         _textLoader = textLoader ?? EmptyTextLoader.Instance;
     }
 
-    private DocumentState(
-        DocumentState other,
-        TextAndVersion? textAndVersion,
-        TextLoader? textLoader,
-        OutputAndVersion? computedState)
+    private DocumentState(DocumentState other, TextAndVersion? textAndVersion, TextLoader? textLoader, OutputAndVersion? computedState)
     {
         HostDocument = other.HostDocument;
         Version = other.Version + 1;
