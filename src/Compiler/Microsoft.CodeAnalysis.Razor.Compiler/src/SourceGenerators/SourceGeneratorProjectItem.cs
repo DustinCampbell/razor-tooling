@@ -11,12 +11,12 @@ namespace Microsoft.NET.Sdk.Razor.SourceGenerators
 {
     internal class SourceGeneratorProjectItem : RazorProjectItem, IEquatable<SourceGeneratorProjectItem>
     {
-        public SourceGeneratorProjectItem(string basePath, string filePath, string relativePhysicalPath, string fileKind, AdditionalText additionalText, string? cssScope)
+        public SourceGeneratorProjectItem(string basePath, string filePath, string relativePhysicalPath, RazorFileKind fileKind, AdditionalText additionalText, string? cssScope)
         {
             BasePath = basePath;
             FilePath = filePath;
             RelativePhysicalPath = relativePhysicalPath;
-            FileKind = fileKind.ToRazorFileKind(filePath);
+            FileKind = fileKind;
             AdditionalText = additionalText;
             CssScope = cssScope;
             var text = AdditionalText.GetText();

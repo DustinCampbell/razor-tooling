@@ -20,7 +20,7 @@ namespace Microsoft.NET.Sdk.Razor.SourceGenerators
                 filePath: path,
                 basePath: emptyBasePath,
                 relativePhysicalPath: "/foo",
-                fileKind: FileKinds.Legacy,
+                fileKind: RazorFileKind.Legacy,
                 additionalText: new TestAdditionalText(string.Empty),
                 cssScope: null);
 
@@ -41,7 +41,7 @@ namespace Microsoft.NET.Sdk.Razor.SourceGenerators
                 filePath: path,
                 basePath: "/views",
                 relativePhysicalPath: "/foo",
-                fileKind: FileKinds.Legacy,
+                fileKind: RazorFileKind.Legacy,
                 additionalText: new TestAdditionalText(string.Empty),
                 cssScope: null);
 
@@ -63,7 +63,7 @@ namespace Microsoft.NET.Sdk.Razor.SourceGenerators
                 filePath: path,
                 basePath: "/views",
                 relativePhysicalPath: "/foo",
-                fileKind: FileKinds.Legacy,
+                fileKind: RazorFileKind.Legacy,
                 additionalText: new TestAdditionalText(string.Empty),
                 cssScope: null);
 
@@ -84,7 +84,7 @@ namespace Microsoft.NET.Sdk.Razor.SourceGenerators
                 filePath: path,
                 basePath: "/",
                 relativePhysicalPath: "/foo",
-                fileKind: FileKinds.Legacy,
+                fileKind: RazorFileKind.Legacy,
                 additionalText: new TestAdditionalText(string.Empty),
                 cssScope: null);
 
@@ -107,7 +107,7 @@ namespace Microsoft.NET.Sdk.Razor.SourceGenerators
                 filePath: path,
                 basePath: "/",
                 relativePhysicalPath: "/foo",
-                fileKind: FileKinds.Legacy,
+                fileKind: RazorFileKind.Legacy,
                 additionalText: new TestAdditionalText(string.Empty),
                 cssScope: null);
 
