@@ -13,8 +13,6 @@ namespace Microsoft.AspNetCore.Razor.Language;
 /// </summary>
 public sealed class RazorSourceDocument
 {
-    internal const int LargeObjectHeapLimitInChars = 40 * 1024; // 40K Unicode chars is 80KB which is less than the large object heap limit.
-
     private readonly RazorSourceDocumentProperties _properties;
 
     /// <summary>
