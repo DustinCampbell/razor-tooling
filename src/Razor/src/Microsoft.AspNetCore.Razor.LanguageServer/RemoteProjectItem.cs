@@ -9,11 +9,11 @@ namespace Microsoft.AspNetCore.Razor.LanguageServer;
 
 internal class RemoteProjectItem : RazorProjectItem
 {
-    public RemoteProjectItem(string filePath, string physicalPath, string? fileKind)
+    public RemoteProjectItem(string filePath, string physicalPath, RazorFileKind fileKind)
     {
         FilePath = filePath;
         PhysicalPath = physicalPath;
-        FileKind = fileKind.ToRazorFileKind(filePath);
+        FileKind = fileKind;
         RelativePhysicalPath = FilePath.StartsWith("/", StringComparison.Ordinal)
             ? FilePath[1..]
             : FilePath;
