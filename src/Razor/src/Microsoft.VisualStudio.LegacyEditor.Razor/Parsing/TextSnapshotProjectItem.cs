@@ -13,7 +13,7 @@ internal class TextSnapshotProjectItem : RazorProjectItem
 {
     private readonly ITextSnapshot _snapshot;
 
-    public TextSnapshotProjectItem(ITextSnapshot snapshot, string projectDirectory, string relativeFilePath, string filePath, string fileKind)
+    public TextSnapshotProjectItem(ITextSnapshot snapshot, string projectDirectory, string relativeFilePath, string filePath, RazorFileKind fileKind)
     {
         if (snapshot is null)
         {
@@ -35,16 +35,11 @@ internal class TextSnapshotProjectItem : RazorProjectItem
             throw new ArgumentException(SR.ArgumentCannotBeNullOrEmpty, nameof(filePath));
         }
 
-        if (fileKind is null)
-        {
-            throw new ArgumentNullException(nameof(fileKind));
-        }
-
         _snapshot = snapshot;
         BasePath = projectDirectory;
         FilePath = relativeFilePath;
         PhysicalPath = filePath;
-        FileKind = fileKind.ToRazorFileKind();
+        FileKind = fileKind;
     }
 
     public override string BasePath { get; }
