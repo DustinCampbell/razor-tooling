@@ -23,13 +23,13 @@ internal sealed class RoslynCodeActionHelpers(IClientConnection clientConnection
 
     private readonly IClientConnection _clientConnection = clientConnection;
 
-    public async Task<string> GetFormattedNewFileContentsAsync(IProjectSnapshot projectSnapshot, Uri csharpFileUri, string newFileContent, CancellationToken cancellationToken)
+    public async Task<string> GetFormattedNewFileContentsAsync(IRazorProject project, Uri csharpFileUri, string newFileContent, CancellationToken cancellationToken)
     {
         var parameters = new FormatNewFileParams()
         {
             Project = new TextDocumentIdentifier
             {
-                Uri = new Uri(projectSnapshot.FilePath, UriKind.Absolute)
+                Uri = new Uri(project.FilePath, UriKind.Absolute)
             },
             Document = new TextDocumentIdentifier
             {

@@ -946,12 +946,12 @@ public partial class SemanticTokensTest(ITestOutputHelper testOutput) : TagHelpe
     {
         var document = CreateCodeDocument(documentText, isRazorFile, tagHelpers);
 
-        var projectSnapshot = StrictMock.Of<IProjectSnapshot>();
+        var project = StrictMock.Of<IRazorProject>();
 
         var documentMock = new StrictMock<IRazorDocument>();
         documentMock
             .SetupGet(x => x.Project)
-            .Returns(projectSnapshot);
+            .Returns(project);
         documentMock
             .Setup(x => x.GetGeneratedOutputAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(document);

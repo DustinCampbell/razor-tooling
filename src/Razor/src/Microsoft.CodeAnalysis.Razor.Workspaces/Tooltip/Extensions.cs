@@ -60,7 +60,7 @@ internal static class Extensions
     ///  Returns the Razor projects that contain the document specified by file path and a <see cref="bool"/>
     ///  that indicates whether or not the given tag helper is available within a project.
     /// </summary>
-    internal static async Task<ImmutableArray<(IProjectSnapshot, bool IsAvailable)>> GetProjectAvailabilityAsync(
+    internal static async Task<ImmutableArray<(IRazorProject, bool IsAvailable)>> GetProjectAvailabilityAsync(
         this ISolutionQueryOperations solutionQueryOperations,
         string documentFilePath,
         string tagHelperTypeName,
@@ -72,7 +72,7 @@ internal static class Extensions
             return [];
         }
 
-        using var result = new PooledArrayBuilder<(IProjectSnapshot, bool IsAvailable)>(capacity: projects.Length);
+        using var result = new PooledArrayBuilder<(IRazorProject, bool IsAvailable)>(capacity: projects.Length);
 
         foreach (var project in projects)
         {
@@ -85,11 +85,11 @@ internal static class Extensions
     }
 
     internal static async Task<bool> ContainsTagHelperAsync(
-        this IProjectSnapshot projectSnapshot,
+        this IRazorProject project,
         string tagHelperTypeName,
         CancellationToken cancellationToken)
     {
-        var tagHelpers = await projectSnapshot.GetTagHelpersAsync(cancellationToken).ConfigureAwait(false);
+        var tagHelpers = await project.GetTagHelpersAsync(cancellationToken).ConfigureAwait(false);
 
         foreach (var tagHelper in tagHelpers)
         {

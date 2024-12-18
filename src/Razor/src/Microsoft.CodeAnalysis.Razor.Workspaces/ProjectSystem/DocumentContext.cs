@@ -26,7 +26,7 @@ internal class DocumentContext(Uri uri, IRazorDocument document, VSProjectContex
     public IRazorDocument Document { get; } = document;
     public string FilePath => Document.FilePath;
     public string FileKind => Document.FileKind;
-    public IProjectSnapshot Project => Document.Project;
+    public IRazorProject Project => Document.Project;
 
     public TextDocumentIdentifier GetTextDocumentIdentifier()
         => new VSTextDocumentIdentifier()

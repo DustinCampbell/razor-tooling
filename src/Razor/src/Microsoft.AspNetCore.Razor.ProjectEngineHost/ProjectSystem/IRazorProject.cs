@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.CSharp;
 
 namespace Microsoft.AspNetCore.Razor.ProjectSystem;
 
-internal interface IProjectSnapshot
+internal interface IRazorProject
 {
     ProjectKey Key { get; }
 

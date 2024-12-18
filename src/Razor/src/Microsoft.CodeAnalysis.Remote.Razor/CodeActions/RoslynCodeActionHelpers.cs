@@ -23,12 +23,12 @@ namespace Microsoft.CodeAnalysis.Remote.Razor;
 [Export(typeof(IRoslynCodeActionHelpers)), Shared]
 internal sealed class RoslynCodeActionHelpers : IRoslynCodeActionHelpers
 {
-    public Task<string> GetFormattedNewFileContentsAsync(IProjectSnapshot projectSnapshot, Uri csharpFileUri, string newFileContent, CancellationToken cancellationToken)
+    public Task<string> GetFormattedNewFileContentsAsync(IRazorProject project, Uri csharpFileUri, string newFileContent, CancellationToken cancellationToken)
     {
-        Debug.Assert(projectSnapshot is RemoteProjectSnapshot);
-        var project = ((RemoteProjectSnapshot)projectSnapshot).Project;
+        Debug.Assert(project is RemoteProjectSnapshot);
+        var roslynProject = ((RemoteProjectSnapshot)project).Project;
 
-        var document = project.AddDocument(RazorUri.GetDocumentFilePathFromUri(csharpFileUri), newFileContent);
+        var document = roslynProject.AddDocument(RazorUri.GetDocumentFilePathFromUri(csharpFileUri), newFileContent);
 
         return ExternalHandlers.CodeActions.GetFormattedNewFileContentAsync(document, cancellationToken);
     }

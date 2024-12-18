@@ -14,7 +14,7 @@ using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
 namespace Microsoft.AspNetCore.Razor.Test.Common.ProjectSystem;
 
-internal sealed class TestProjectSnapshot : IProjectSnapshot
+internal sealed class TestProjectSnapshot : IRazorProject
 {
     public ProjectSnapshot RealSnapshot { get; }
 

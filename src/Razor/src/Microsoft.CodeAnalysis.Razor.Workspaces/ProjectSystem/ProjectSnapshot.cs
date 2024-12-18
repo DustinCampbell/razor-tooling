@@ -16,7 +16,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
-internal sealed class ProjectSnapshot(ProjectState state) : IProjectSnapshot, ILegacyProjectSnapshot
+internal sealed class ProjectSnapshot(ProjectState state) : IRazorProject, ILegacyProjectSnapshot
 {
     private readonly ProjectState _state = state;
 
@@ -86,7 +86,7 @@ internal sealed class ProjectSnapshot(ProjectState state) : IProjectSnapshot, IL
         }
     }
 
-    bool IProjectSnapshot.TryGetDocument(string filePath, [NotNullWhen(true)] out IRazorDocument? document)
+    bool IRazorProject.TryGetDocument(string filePath, [NotNullWhen(true)] out IRazorDocument? document)
     {
         if (TryGetDocument(filePath, out var result))
         {

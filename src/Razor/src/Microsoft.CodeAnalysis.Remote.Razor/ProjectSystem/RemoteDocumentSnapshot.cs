@@ -42,7 +42,7 @@ internal sealed class RemoteDocumentSnapshot : IRazorDocument, IDesignTimeCodeGe
     public string FilePath => TextDocument.FilePath.AssumeNotNull();
     public string TargetPath => TextDocument.FilePath.AssumeNotNull();
 
-    public IProjectSnapshot Project => ProjectSnapshot;
+    public IRazorProject Project => ProjectSnapshot;
 
     public int Version => -999; // We don't expect to use this in cohosting, but plenty of existing code logs it's value
 

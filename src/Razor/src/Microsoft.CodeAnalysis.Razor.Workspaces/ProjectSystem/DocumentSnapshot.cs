@@ -24,7 +24,7 @@ internal sealed class DocumentSnapshot(ProjectSnapshot project, DocumentState st
     public string TargetPath => _state.HostDocument.TargetPath;
     public int Version => _state.Version;
 
-    IProjectSnapshot IRazorDocument.Project => Project;
+    IRazorProject IRazorDocument.Project => Project;
 
     public bool TryGetText([NotNullWhen(true)] out SourceText? result)
         => _state.TryGetText(out result);
