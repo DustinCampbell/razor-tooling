@@ -44,12 +44,12 @@ internal class TextSnapshotProjectItem : RazorProjectItem
         BasePath = projectDirectory;
         FilePath = relativeFilePath;
         PhysicalPath = filePath;
-        FileKind = fileKind;
+        FileKind = fileKind.ToRazorFileKind();
     }
 
     public override string BasePath { get; }
 
-    public override string FileKind { get; }
+    public override RazorFileKind FileKind { get; }
     public override string FilePath { get; }
 
     public override string PhysicalPath { get; }

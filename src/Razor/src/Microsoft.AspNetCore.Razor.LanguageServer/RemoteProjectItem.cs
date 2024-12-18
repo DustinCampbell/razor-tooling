@@ -13,7 +13,7 @@ internal class RemoteProjectItem : RazorProjectItem
     {
         FilePath = filePath;
         PhysicalPath = physicalPath;
-        FileKind = fileKind ?? FileKinds.GetFileKindFromFilePath(FilePath);
+        FileKind = (fileKind ?? FileKinds.GetFileKindFromFilePath(FilePath)).ToRazorFileKind();
         RelativePhysicalPath = FilePath.StartsWith("/", StringComparison.Ordinal)
             ? FilePath[1..]
             : FilePath;
@@ -25,7 +25,7 @@ internal class RemoteProjectItem : RazorProjectItem
 
     public override string PhysicalPath { get; }
 
-    public override string FileKind { get; }
+    public override RazorFileKind FileKind { get; }
 
     public override string RelativePhysicalPath { get; }
 

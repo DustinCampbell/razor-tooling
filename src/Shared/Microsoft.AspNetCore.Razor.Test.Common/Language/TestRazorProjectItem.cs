@@ -30,7 +30,7 @@ public class TestRazorProjectItem : RazorProjectItem
 
     public override string BasePath { get; }
 
-    public override string FileKind => _fileKind ?? base.FileKind;
+    public override RazorFileKind FileKind => _fileKind is null ? base.FileKind : _fileKind.ToRazorFileKind();
 
     public override string FilePath { get; }
 

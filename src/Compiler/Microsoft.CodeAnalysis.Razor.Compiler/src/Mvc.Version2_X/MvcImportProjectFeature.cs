@@ -24,7 +24,7 @@ internal class MvcImportProjectFeature : RazorProjectEngineFeatureBase, IImportP
         }
 
         // Don't add MVC imports for a component - this shouldn't happen for v2, but just in case.
-        if (FileKinds.IsComponent(projectItem.FileKind))
+        if (RazorFileKinds.IsComponent(projectItem.FileKind))
         {
             return Array.Empty<RazorProjectItem>();
         }

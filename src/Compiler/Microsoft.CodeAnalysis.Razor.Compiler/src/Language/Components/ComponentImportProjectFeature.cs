@@ -32,7 +32,7 @@ internal class ComponentImportProjectFeature : IImportProjectFeature
         }
 
         // Don't add Component imports for a non-component.
-        if (!FileKinds.IsComponent(projectItem.FileKind))
+        if (!RazorFileKinds.IsComponent(projectItem.FileKind))
         {
             return Array.Empty<RazorProjectItem>();
         }
@@ -77,7 +77,7 @@ internal class ComponentImportProjectFeature : IImportProjectFeature
 
         public override bool Exists => true;
 
-        public override string FileKind => FileKinds.ComponentImport;
+        public override RazorFileKind FileKind => RazorFileKind.ComponentImport;
 
         public override Stream Read() => new MemoryStream(_bytes);
     }

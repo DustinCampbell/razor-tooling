@@ -23,7 +23,7 @@ internal class NotFoundProjectItem : RazorProjectItem
     {
         BasePath = basePath;
         FilePath = path;
-        FileKind = fileKind ?? FileKinds.GetFileKindFromFilePath(path);
+        FileKind = (fileKind ?? FileKinds.GetFileKindFromFilePath(path)).ToRazorFileKind();
     }
 
     /// <inheritdoc />
@@ -33,7 +33,7 @@ internal class NotFoundProjectItem : RazorProjectItem
     public override string FilePath { get; }
 
     /// <inheritdoc />
-    public override string FileKind { get; }
+    public override RazorFileKind FileKind { get; }
 
     /// <inheritdoc />
     public override bool Exists => false;

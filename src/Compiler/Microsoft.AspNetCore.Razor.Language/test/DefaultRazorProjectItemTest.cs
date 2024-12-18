@@ -22,14 +22,14 @@ public class DefaultRazorProjectItemTest
         var fileInfo = new FileInfo(Path.Combine(TestFolder, "Home.cshtml"));
 
         // Act
-        var projectItem = new DefaultRazorProjectItem("/", "/Home.cshtml", "Home.cshtml", "test", fileInfo, "MyCssScope");
+        var projectItem = new DefaultRazorProjectItem("/", "/Home.cshtml", "Home.cshtml", fileKind: null, fileInfo, "MyCssScope");
 
         // Assert
         Assert.Equal("/Home.cshtml", projectItem.FilePath);
         Assert.Equal("/", projectItem.BasePath);
         Assert.True(projectItem.Exists);
         Assert.Equal("Home.cshtml", projectItem.FileName);
-        Assert.Equal("test", projectItem.FileKind);
+        Assert.Equal(RazorFileKind.Legacy, projectItem.FileKind);
         Assert.Equal(fileInfo.FullName, projectItem.PhysicalPath);
         Assert.Equal("Home.cshtml", projectItem.RelativePhysicalPath);
         Assert.Equal("MyCssScope", projectItem.CssScope);
@@ -45,7 +45,7 @@ public class DefaultRazorProjectItemTest
         var projectItem = new DefaultRazorProjectItem("/", "/Home.razor", "Home.cshtml", fileKind: null, fileInfo, cssScope: null);
 
         // Assert
-        Assert.Equal(FileKinds.Component, projectItem.FileKind);
+        Assert.Equal(RazorFileKind.Component, projectItem.FileKind);
     }
 
     [Fact]
@@ -58,11 +58,11 @@ public class DefaultRazorProjectItemTest
         var projectItem = new DefaultRazorProjectItem("/", "/Home.cshtml", "Home.cshtml", fileKind: null, fileInfo, cssScope: null);
 
         // Assert
-        Assert.Equal(FileKinds.Legacy, projectItem.FileKind);
+        Assert.Equal(RazorFileKind.Legacy, projectItem.FileKind);
     }
 
     [Fact]
-    public void DefaultRazorProjectItem_InfersFileKind_Null()
+    public void DefaultRazorProjectItem_InfersFileKind_None()
     {
         // Arrange
         var fileInfo = new FileInfo(Path.Combine(TestFolder, "Home.cshtml"));
@@ -71,7 +71,7 @@ public class DefaultRazorProjectItemTest
         var projectItem = new DefaultRazorProjectItem("/", filePath: null, "Home.cshtml", fileKind: null, fileInfo, cssScope: null);
 
         // Assert
-        Assert.Null(projectItem.FileKind);
+        Assert.Equal(RazorFileKind.None, projectItem.FileKind);
     }
 
     [Fact]

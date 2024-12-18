@@ -163,7 +163,7 @@ public class RazorProjectEngine
         }
 
         var importSourceDocuments = GetImportSourceDocuments(importItems.DrainToImmutable());
-        return CreateCodeDocumentCore(sourceDocument, projectItem.FileKind, importSourceDocuments, tagHelpers: null, configureParser, configureCodeGeneration, cssScope: projectItem.CssScope);
+        return CreateCodeDocumentCore(sourceDocument, projectItem.FileKind.ToFileKindString(), importSourceDocuments, tagHelpers: null, configureParser, configureCodeGeneration, cssScope: projectItem.CssScope);
     }
 
     internal RazorCodeDocument CreateCodeDocumentCore(
@@ -240,7 +240,7 @@ public class RazorProjectEngine
         }
 
         var importSourceDocuments = GetImportSourceDocuments(importItems.DrainToImmutable(), suppressExceptions: true);
-        return CreateCodeDocumentDesignTimeCore(sourceDocument, projectItem.FileKind, importSourceDocuments, tagHelpers: null, configureParser, configureCodeGeneration);
+        return CreateCodeDocumentDesignTimeCore(sourceDocument, projectItem.FileKind.ToFileKindString(), importSourceDocuments, tagHelpers: null, configureParser, configureCodeGeneration);
     }
 
     private RazorCodeDocument CreateCodeDocumentDesignTimeCore(

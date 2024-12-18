@@ -42,7 +42,7 @@ internal class DefaultRazorProjectItem : RazorProjectItem
 
     public override string RelativePhysicalPath { get; }
 
-    public override string FileKind => _fileKind ?? base.FileKind;
+    public override RazorFileKind FileKind => _fileKind is null ? base.FileKind : _fileKind.ToRazorFileKind();
 
     public override string CssScope { get; }
 
