@@ -152,7 +152,7 @@ public class CohostFoldingRangeEndpointTest(ITestOutputHelper testOutputHelper) 
 
             <p>hello!</p>
             """,
-            fileKind: FileKinds.Legacy);
+            fileKind: RazorFileKind.Legacy);
 
     [Fact]
     public Task Section()
@@ -165,7 +165,7 @@ public class CohostFoldingRangeEndpointTest(ITestOutputHelper testOutputHelper) 
 
             <p>hello!</p>
             """,
-            fileKind: FileKinds.Legacy);
+            fileKind: RazorFileKind.Legacy);
 
     [Fact]
     public Task Section_Invalid()
@@ -178,7 +178,7 @@ public class CohostFoldingRangeEndpointTest(ITestOutputHelper testOutputHelper) 
 
             <p>hello!</p>
             """,
-            fileKind: FileKinds.Legacy);
+            fileKind: RazorFileKind.Legacy);
 
     [Fact]
     public Task CSharpCodeInCodeBlocks()
@@ -214,7 +214,7 @@ public class CohostFoldingRangeEndpointTest(ITestOutputHelper testOutputHelper) 
             }|]
             """);
 
-    private async Task VerifyFoldingRangesAsync(string input, string? fileKind = null)
+    private async Task VerifyFoldingRangesAsync(string input, RazorFileKind? fileKind = null)
     {
         TestFileMarkupParser.GetSpans(input, out var source, out ImmutableDictionary<string, ImmutableArray<TextSpan>> spans);
         var document = await CreateProjectAndRazorDocumentAsync(source, fileKind);

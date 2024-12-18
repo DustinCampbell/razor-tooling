@@ -942,7 +942,7 @@ public class CohostCodeActionsEndpointTest(ITestOutputHelper testOutputHelper) :
                 </div>
                 """,
             codeActionName: LanguageServerConstants.CodeActions.PromoteUsingDirective,
-            fileKind: FileKinds.Legacy,
+            fileKind: RazorFileKind.Legacy,
             additionalExpectedFiles: [
                 (FileUri(@"..\_ViewImports.cshtml"), """
                     @using System
@@ -1044,7 +1044,14 @@ public class CohostCodeActionsEndpointTest(ITestOutputHelper testOutputHelper) :
                     """)]);
     }
 
-    private async Task VerifyCodeActionAsync(TestCode input, string? expected, string codeActionName, int childActionIndex = 0, string? fileKind = null, (string filePath, string contents)[]? additionalFiles = null, (Uri fileUri, string contents)[]? additionalExpectedFiles = null)
+    private async Task VerifyCodeActionAsync(
+        TestCode input,
+        string? expected,
+        string codeActionName,
+        int childActionIndex = 0,
+        RazorFileKind? fileKind = null,
+        (string filePath, string contents)[]? additionalFiles = null,
+        (Uri fileUri, string contents)[]? additionalExpectedFiles = null)
     {
         var fileSystem = (RemoteFileSystem)OOPExportProvider.GetExportedValue<IFileSystem>();
         fileSystem.GetTestAccessor().SetFileSystem(new TestFileSystem(additionalFiles));

@@ -153,13 +153,13 @@ public class RazorToolingIntegrationTestBase : ToolingTestBase
             physicalPath: fullPath,
             relativePhysicalPath: cshtmlRelativePath,
             basePath: WorkingDirectory,
-            fileKind: fileKind ?? FileKind)
+            fileKind: (fileKind ?? FileKind).ToRazorFileKind())
         {
             Content = cshtmlContent.TrimStart(),
         };
     }
 
-    protected CompileToCSharpResult CompileToCSharp(string cshtmlContent, bool throwOnFailure=true)
+    protected CompileToCSharpResult CompileToCSharp(string cshtmlContent, bool throwOnFailure = true)
     {
         return CompileToCSharp(DefaultFileName, cshtmlContent, throwOnFailure);
     }
@@ -346,7 +346,7 @@ public class RazorToolingIntegrationTestBase : ToolingTestBase
     private class CompilationFailedException : XunitException
     {
         public CompilationFailedException(Compilation compilation)
-            :base("Compilation failed")
+            : base("Compilation failed")
         {
             Compilation = compilation;
         }

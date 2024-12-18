@@ -15,7 +15,7 @@ public class TestRazorProjectItem : RazorProjectItem
         string physicalPath = null,
         string relativePhysicalPath = null,
         string basePath = "/",
-        string fileKind = null,
+        RazorFileKind? fileKind = null,
         string cssScope = null)
     {
         FilePath = filePath;
@@ -23,7 +23,7 @@ public class TestRazorProjectItem : RazorProjectItem
         RelativePhysicalPath = relativePhysicalPath;
         BasePath = basePath;
         CssScope = cssScope;
-        FileKind = fileKind.ToRazorFileKind(filePath);
+        FileKind = fileKind ?? RazorFileKinds.GetFileKindFromFilePath(filePath);
     }
 
     public override string BasePath { get; }

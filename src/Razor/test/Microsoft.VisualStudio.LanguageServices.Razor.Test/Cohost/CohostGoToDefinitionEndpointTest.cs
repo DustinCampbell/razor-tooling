@@ -104,7 +104,7 @@ public class CohostGoToDefinitionEndpointTest(ITestOutputHelper testOutputHelper
             }
             """;
 
-        await VerifyGoToDefinitionAsync(input, FileKinds.Component);
+        await VerifyGoToDefinitionAsync(input, RazorFileKind.Component);
     }
 
     [Fact]
@@ -123,7 +123,7 @@ public class CohostGoToDefinitionEndpointTest(ITestOutputHelper testOutputHelper
             }
             """;
 
-        await VerifyGoToDefinitionAsync(input, FileKinds.Component);
+        await VerifyGoToDefinitionAsync(input, RazorFileKind.Component);
     }
 
     [Fact]
@@ -158,7 +158,7 @@ public class CohostGoToDefinitionEndpointTest(ITestOutputHelper testOutputHelper
             }
             """;
 
-        var result = await GetGoToDefinitionResultAsync(input, FileKinds.Component,
+        var result = await GetGoToDefinitionResultAsync(input, RazorFileKind.Component,
             (FileName("SurveyPrompt.razor"), surveyPrompt.Text),
             (FileName("SurveyPrompt.razor.g.cs"), surveyPromptGeneratedCode.Text));
 
@@ -284,7 +284,7 @@ public class CohostGoToDefinitionEndpointTest(ITestOutputHelper testOutputHelper
             """;
         #endregion
 
-        var result = await GetGoToDefinitionResultAsync(input, FileKinds.Component,
+        var result = await GetGoToDefinitionResultAsync(input, RazorFileKind.Component,
             (FileName("SurveyPrompt.razor"), surveyPrompt.Text),
             (FileName("SurveyPrompt.razor.g.cs"), surveyPromptGeneratedCode.Text));
 
@@ -330,7 +330,7 @@ public class CohostGoToDefinitionEndpointTest(ITestOutputHelper testOutputHelper
     private static string FileName(string projectRelativeFileName)
         => Path.Combine(TestProjectData.SomeProjectPath, projectRelativeFileName);
 
-    private async Task VerifyGoToDefinitionAsync(TestCode input, string? fileKind = null, SumType<Location, Location[], DocumentLink[]>? htmlResponse = null)
+    private async Task VerifyGoToDefinitionAsync(TestCode input, RazorFileKind? fileKind = null, SumType<Location, Location[], DocumentLink[]>? htmlResponse = null)
     {
         var document = await CreateProjectAndRazorDocumentAsync(input.Text, fileKind);
         var result = await GetGoToDefinitionResultAsync(document, input, htmlResponse);
@@ -349,7 +349,7 @@ public class CohostGoToDefinitionEndpointTest(ITestOutputHelper testOutputHelper
     }
 
     private async Task<SumType<RoslynLocation, RoslynLocation[], RoslynDocumentLink[]>?> GetGoToDefinitionResultAsync(
-        TestCode input, string? fileKind = null, params (string fileName, string contents)[]? additionalFiles)
+        TestCode input, RazorFileKind? fileKind = null, params (string fileName, string contents)[]? additionalFiles)
     {
         var document = await CreateProjectAndRazorDocumentAsync(input.Text, fileKind, additionalFiles);
         return await GetGoToDefinitionResultAsync(document, input, htmlResponse: null);

@@ -34,7 +34,7 @@ public class DocumentFormattingTest(FormattingTestContext context, HtmlFormattin
                         <meta property="a" content="b">
                     }
                     """,
-            fileKind: FileKinds.Legacy);
+            fileKind: RazorFileKind.Legacy);
     }
 
     [FormattingTestFact]
@@ -51,7 +51,7 @@ public class DocumentFormattingTest(FormattingTestContext context, HtmlFormattin
                         <meta property="a" content="b">
                     }
                     """,
-            fileKind: FileKinds.Legacy);
+            fileKind: RazorFileKind.Legacy);
     }
 
     [FormattingTestTheory, CombinatorialData]
@@ -446,7 +446,7 @@ public class DocumentFormattingTest(FormattingTestContext context, HtmlFormattin
                         }
                     }
                     """,
-            fileKind: FileKinds.Legacy);
+            fileKind: RazorFileKind.Legacy);
     }
 
     [FormattingTestFact]
@@ -473,7 +473,7 @@ public class DocumentFormattingTest(FormattingTestContext context, HtmlFormattin
                         }
                     }
                     """,
-            fileKind: FileKinds.Legacy);
+            fileKind: RazorFileKind.Legacy);
     }
 
     [FormattingTestFact]
@@ -501,7 +501,7 @@ public class DocumentFormattingTest(FormattingTestContext context, HtmlFormattin
                         }
                     }
                     """,
-            fileKind: FileKinds.Legacy,
+            fileKind: RazorFileKind.Legacy,
             codeBlockBraceOnNextLine: true);
     }
 
@@ -529,7 +529,7 @@ public class DocumentFormattingTest(FormattingTestContext context, HtmlFormattin
                         }
                     }
                     """,
-            fileKind: FileKinds.Legacy);
+            fileKind: RazorFileKind.Legacy);
     }
 
     [FormattingTestFact]
@@ -555,7 +555,7 @@ public class DocumentFormattingTest(FormattingTestContext context, HtmlFormattin
                         }
                     }
                     """,
-            fileKind: FileKinds.Legacy);
+            fileKind: RazorFileKind.Legacy);
     }
 
     [FormattingTestFact]
@@ -584,7 +584,7 @@ public class DocumentFormattingTest(FormattingTestContext context, HtmlFormattin
                     """,
             insertSpaces: false,
             tabSize: 8,
-            fileKind: FileKinds.Legacy);
+            fileKind: RazorFileKind.Legacy);
     }
 
     [FormattingTestFact]
@@ -693,7 +693,7 @@ public class DocumentFormattingTest(FormattingTestContext context, HtmlFormattin
             expected: """
                     @model MyModel
                     """,
-            fileKind: FileKinds.Legacy);
+            fileKind: RazorFileKind.Legacy);
     }
 
     [FormattingTestFact]
@@ -706,7 +706,7 @@ public class DocumentFormattingTest(FormattingTestContext context, HtmlFormattin
             expected: """
                     @page "MyPage"
                     """,
-            fileKind: FileKinds.Legacy);
+            fileKind: RazorFileKind.Legacy);
     }
 
     [FormattingTestFact]
@@ -731,7 +731,7 @@ public class DocumentFormattingTest(FormattingTestContext context, HtmlFormattin
                         *@
                     </div>
                     """,
-            fileKind: FileKinds.Legacy);
+            fileKind: RazorFileKind.Legacy);
     }
 
     // Regression prevention tests:
@@ -789,7 +789,7 @@ public class DocumentFormattingTest(FormattingTestContext context, HtmlFormattin
                     @removeTagHelper    "*,  Microsoft.AspNetCore.Mvc.TagHelpers"
                     @tagHelperPrefix    th:
                     """,
-            fileKind: FileKinds.Legacy);
+            fileKind: RazorFileKind.Legacy);
     }
 
     [FormattingTestFact]
@@ -1356,7 +1356,7 @@ public class DocumentFormattingTest(FormattingTestContext context, HtmlFormattin
                     """,
             tabSize: 4, // Due to a bug in the HTML formatter, this needs to be 4
             insertSpaces: false,
-            fileKind: FileKinds.Legacy);
+            fileKind: RazorFileKind.Legacy);
     }
 
     [FormattingTestFact]
@@ -1398,7 +1398,7 @@ public class DocumentFormattingTest(FormattingTestContext context, HtmlFormattin
                     """,
             tabSize: 4, // Due to a bug in the HTML formatter, this needs to be 4
             insertSpaces: false,
-            fileKind: FileKinds.Legacy);
+            fileKind: RazorFileKind.Legacy);
     }
 
     [FormattingTestFact]
@@ -1699,7 +1699,7 @@ public class DocumentFormattingTest(FormattingTestContext context, HtmlFormattin
                         public bool VarBool { get; set; }
                     }
                     """,
-            fileKind: FileKinds.Component);
+            fileKind: RazorFileKind.Component);
     }
 
     [FormattingTestFact(SkipFlipLineEnding = true)]
@@ -1757,7 +1757,7 @@ public class DocumentFormattingTest(FormattingTestContext context, HtmlFormattin
                         public bool VarBool { get; set; }
                     }
                     """,
-            fileKind: FileKinds.Component); // tracked by https://github.com/dotnet/razor/issues/10836
+            fileKind: RazorFileKind.Component); // tracked by https://github.com/dotnet/razor/issues/10836
     }
 
     [FormattingTestFact]
@@ -1817,7 +1817,7 @@ public class DocumentFormattingTest(FormattingTestContext context, HtmlFormattin
                         public bool VarBool { get; set; }
                     }
                     """,
-            fileKind: FileKinds.Component);
+            fileKind: RazorFileKind.Component);
     }
 
     [FormattingTestFact(SkipFlipLineEnding = true)]
@@ -1869,7 +1869,7 @@ public class DocumentFormattingTest(FormattingTestContext context, HtmlFormattin
                         public bool VarBool { get; set; }
                     }
                     """,
-            fileKind: FileKinds.Component); // tracked by https://github.com/dotnet/razor/issues/10836
+            fileKind: RazorFileKind.Component); // tracked by https://github.com/dotnet/razor/issues/10836
     }
 
     [FormattingTestFact(SkipFlipLineEnding = true)]
@@ -1927,7 +1927,7 @@ public class DocumentFormattingTest(FormattingTestContext context, HtmlFormattin
                         public bool VarBool { get; set; }
                     }
                     """,
-            fileKind: FileKinds.Component); // tracked by https://github.com/dotnet/razor/issues/10836
+            fileKind: RazorFileKind.Component); // tracked by https://github.com/dotnet/razor/issues/10836
     }
 
     [FormattingTestFact]
@@ -1977,7 +1977,7 @@ public class DocumentFormattingTest(FormattingTestContext context, HtmlFormattin
                         }
                     </div>
                     """,
-            fileKind: FileKinds.Component);
+            fileKind: RazorFileKind.Component);
     }
 
     [FormattingTestFact]
@@ -2021,7 +2021,7 @@ public class DocumentFormattingTest(FormattingTestContext context, HtmlFormattin
                         </div>
                     </div>
                     """,
-            fileKind: FileKinds.Component);
+            fileKind: RazorFileKind.Component);
     }
 
     [FormattingTestFact]
@@ -2059,7 +2059,7 @@ public class DocumentFormattingTest(FormattingTestContext context, HtmlFormattin
                         </div>
                     </div>
                     """,
-            fileKind: FileKinds.Component);
+            fileKind: RazorFileKind.Component);
     }
 
     [FormattingTestFact]
@@ -2103,7 +2103,7 @@ public class DocumentFormattingTest(FormattingTestContext context, HtmlFormattin
                         }
                     </div>
                     """,
-            fileKind: FileKinds.Component);
+            fileKind: RazorFileKind.Component);
     }
 
     [FormattingTestFact]
@@ -2153,7 +2153,7 @@ public class DocumentFormattingTest(FormattingTestContext context, HtmlFormattin
                         }
                     </div>
                     """,
-            fileKind: FileKinds.Component);
+            fileKind: RazorFileKind.Component);
     }
 
     [FormattingTestFact]
@@ -2197,7 +2197,7 @@ public class DocumentFormattingTest(FormattingTestContext context, HtmlFormattin
                         }
                     </div>
                     """,
-            fileKind: FileKinds.Component);
+            fileKind: RazorFileKind.Component);
     }
 
     [FormattingTestFact]
@@ -2291,7 +2291,7 @@ public class DocumentFormattingTest(FormattingTestContext context, HtmlFormattin
                         }
                     }
                     """,
-            fileKind: FileKinds.Legacy);
+            fileKind: RazorFileKind.Legacy);
     }
 
     [FormattingTestFact]
@@ -2569,7 +2569,7 @@ public class DocumentFormattingTest(FormattingTestContext context, HtmlFormattin
                                     </div>
                         </section>
                     """,
-            fileKind: FileKinds.Legacy,
+            fileKind: RazorFileKind.Legacy,
             allowDiagnostics: true);
     }
 
@@ -2720,7 +2720,7 @@ public class DocumentFormattingTest(FormattingTestContext context, HtmlFormattin
                         }
                     }
                     """,
-            fileKind: FileKinds.Legacy);
+            fileKind: RazorFileKind.Legacy);
     }
 
     [FormattingTestFact]
@@ -2750,7 +2750,7 @@ public class DocumentFormattingTest(FormattingTestContext context, HtmlFormattin
                         <script></script>
                     }
                     """,
-            fileKind: FileKinds.Legacy);
+            fileKind: RazorFileKind.Legacy);
     }
 
     [FormattingTestFact]
@@ -2786,7 +2786,7 @@ public class DocumentFormattingTest(FormattingTestContext context, HtmlFormattin
                         </script>
                     }
                     """,
-            fileKind: FileKinds.Legacy);
+            fileKind: RazorFileKind.Legacy);
     }
 
     [FormattingTestFact]
@@ -2824,7 +2824,7 @@ public class DocumentFormattingTest(FormattingTestContext context, HtmlFormattin
                         }
                     }
                     """,
-            fileKind: FileKinds.Legacy);
+            fileKind: RazorFileKind.Legacy);
     }
 
     [FormattingTestFact]
@@ -2865,7 +2865,7 @@ public class DocumentFormattingTest(FormattingTestContext context, HtmlFormattin
                         <p></p>
                     }
                     """,
-            fileKind: FileKinds.Legacy);
+            fileKind: RazorFileKind.Legacy);
     }
 
     [FormattingTestFact]
@@ -2913,7 +2913,7 @@ public class DocumentFormattingTest(FormattingTestContext context, HtmlFormattin
 
                     <p></p>
                     """,
-            fileKind: FileKinds.Legacy);
+            fileKind: RazorFileKind.Legacy);
     }
 
     [FormattingTestFact]
@@ -2957,7 +2957,7 @@ public class DocumentFormattingTest(FormattingTestContext context, HtmlFormattin
                         }
                     }
                     """,
-            fileKind: FileKinds.Legacy);
+            fileKind: RazorFileKind.Legacy);
     }
 
     [FormattingTestFact]
@@ -3003,7 +3003,7 @@ public class DocumentFormattingTest(FormattingTestContext context, HtmlFormattin
                         }
                     }
                     """,
-            fileKind: FileKinds.Legacy);
+            fileKind: RazorFileKind.Legacy);
     }
 
     [FormattingTestFact]
@@ -3043,7 +3043,7 @@ public class DocumentFormattingTest(FormattingTestContext context, HtmlFormattin
                         <p>and finally this</p>
                     }
                     """,
-            fileKind: FileKinds.Legacy);
+            fileKind: RazorFileKind.Legacy);
     }
 
     [FormattingTestFact]
@@ -3100,7 +3100,7 @@ public class DocumentFormattingTest(FormattingTestContext context, HtmlFormattin
                         }
                     }
                     """,
-            fileKind: FileKinds.Legacy);
+            fileKind: RazorFileKind.Legacy);
     }
 
     [FormattingTestFact]
@@ -3224,7 +3224,7 @@ public class DocumentFormattingTest(FormattingTestContext context, HtmlFormattin
                         }
                     }
                     """,
-            fileKind: FileKinds.Legacy);
+            fileKind: RazorFileKind.Legacy);
     }
 
     [FormattingTestFact]
@@ -4462,7 +4462,7 @@ public class DocumentFormattingTest(FormattingTestContext context, HtmlFormattin
 
                 """;
 
-        await RunFormattingTestAsync(input, input, fileKind: FileKinds.Component);
+        await RunFormattingTestAsync(input, input, fileKind: RazorFileKind.Component);
     }
 
     [FormattingTestFact]
