@@ -1,7 +1,6 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
 using System.IO;
 using System.Text;
 using Microsoft.CodeAnalysis.Text;
@@ -55,10 +54,7 @@ public sealed class RazorSourceDocument
     /// <returns>The <see cref="RazorSourceDocument"/>.</returns>
     public static RazorSourceDocument ReadFrom(Stream stream, string fileName)
     {
-        if (stream == null)
-        {
-            throw new ArgumentNullException(nameof(stream));
-        }
+        ArgHelper.ThrowIfNull(stream);
 
         var properties = RazorSourceDocumentProperties.Create(fileName, relativePath: null);
         var sourceText = SourceText.From(stream, checksumAlgorithm: SourceHashAlgorithm.Sha256);
@@ -74,15 +70,8 @@ public sealed class RazorSourceDocument
     /// <returns>The <see cref="RazorSourceDocument"/>.</returns>
     public static RazorSourceDocument ReadFrom(Stream stream, string fileName, Encoding encoding)
     {
-        if (stream == null)
-        {
-            throw new ArgumentNullException(nameof(stream));
-        }
-
-        if (encoding == null)
-        {
-            throw new ArgumentNullException(nameof(encoding));
-        }
+        ArgHelper.ThrowIfNull(stream);
+        ArgHelper.ThrowIfNull(encoding);
 
         var properties = RazorSourceDocumentProperties.Create(fileName, relativePath: null);
         var sourceText = SourceText.From(stream, encoding, checksumAlgorithm: SourceHashAlgorithm.Sha256);
@@ -98,20 +87,9 @@ public sealed class RazorSourceDocument
     /// <returns>The <see cref="RazorSourceDocument"/>.</returns>
     public static RazorSourceDocument ReadFrom(Stream stream, Encoding encoding, RazorSourceDocumentProperties properties)
     {
-        if (stream == null)
-        {
-            throw new ArgumentNullException(nameof(stream));
-        }
-
-        if (encoding == null)
-        {
-            throw new ArgumentNullException(nameof(encoding));
-        }
-
-        if (properties == null)
-        {
-            throw new ArgumentNullException(nameof(properties));
-        }
+        ArgHelper.ThrowIfNull(stream);
+        ArgHelper.ThrowIfNull(encoding);
+        ArgHelper.ThrowIfNull(properties);
 
         var sourceText = SourceText.From(stream, encoding, checksumAlgorithm: SourceHashAlgorithm.Sha256);
         return new RazorSourceDocument(sourceText, properties);
@@ -124,10 +102,7 @@ public sealed class RazorSourceDocument
     /// <returns>The <see cref="RazorSourceDocument"/>.</returns>
     public static RazorSourceDocument ReadFrom(RazorProjectItem projectItem)
     {
-        if (projectItem == null)
-        {
-            throw new ArgumentNullException(nameof(projectItem));
-        }
+        ArgHelper.ThrowIfNull(projectItem);
 
         // ProjectItem.PhysicalPath is usually an absolute (rooted) path.
         var filePath = projectItem.PhysicalPath;
@@ -167,14 +142,10 @@ public sealed class RazorSourceDocument
     /// <remarks>Uses <see cref="System.Text.Encoding.UTF8" /></remarks>
     public static RazorSourceDocument Create(string content, string fileName)
     {
-        if (content == null)
-        {
-            throw new ArgumentNullException(nameof(content));
-        }
+        ArgHelper.ThrowIfNull(content);
 
         return Create(content, fileName, Encoding.UTF8);
     }
-
 
     /// <summary>
     /// Creates a <see cref="RazorSourceDocument"/> from the specified <paramref name="content"/>.
@@ -185,15 +156,8 @@ public sealed class RazorSourceDocument
     /// <remarks>Uses <see cref="System.Text.Encoding.UTF8" /></remarks>
     public static RazorSourceDocument Create(string content, RazorSourceDocumentProperties properties)
     {
-        if (content == null)
-        {
-            throw new ArgumentNullException(nameof(content));
-        }
-
-        if (properties == null)
-        {
-            throw new ArgumentNullException(nameof(properties));
-        }
+        ArgHelper.ThrowIfNull(content);
+        ArgHelper.ThrowIfNull(properties);
 
         return Create(content, Encoding.UTF8, properties);
     }
@@ -207,15 +171,8 @@ public sealed class RazorSourceDocument
     /// <returns>The <see cref="RazorSourceDocument"/>.</returns>
     public static RazorSourceDocument Create(string content, string fileName, Encoding encoding)
     {
-        if (content == null)
-        {
-            throw new ArgumentNullException(nameof(content));
-        }
-
-        if (encoding == null)
-        {
-            throw new ArgumentNullException(nameof(encoding));
-        }
+        ArgHelper.ThrowIfNull(content);
+        ArgHelper.ThrowIfNull(encoding);
 
         var properties = RazorSourceDocumentProperties.Create(fileName, relativePath: null);
         var sourceText = SourceText.From(content, encoding, checksumAlgorithm: SourceHashAlgorithm.Sha256);
@@ -231,20 +188,9 @@ public sealed class RazorSourceDocument
     /// <returns>The <see cref="RazorSourceDocument"/>.</returns>
     public static RazorSourceDocument Create(string content, Encoding encoding, RazorSourceDocumentProperties properties)
     {
-        if (content == null)
-        {
-            throw new ArgumentNullException(nameof(content));
-        }
-
-        if (encoding == null)
-        {
-            throw new ArgumentNullException(nameof(encoding));
-        }
-
-        if (properties == null)
-        {
-            throw new ArgumentNullException(nameof(properties));
-        }
+        ArgHelper.ThrowIfNull(content);
+        ArgHelper.ThrowIfNull(encoding);
+        ArgHelper.ThrowIfNull(properties);
 
         var sourceText = SourceText.From(content, encoding, checksumAlgorithm: SourceHashAlgorithm.Sha256);
         return new RazorSourceDocument(sourceText, properties);
@@ -258,15 +204,8 @@ public sealed class RazorSourceDocument
     /// <returns>The <see cref="RazorSourceDocument"/>.</returns>
     public static RazorSourceDocument Create(SourceText text, RazorSourceDocumentProperties properties)
     {
-        if (text == null)
-        {
-            throw new ArgumentNullException(nameof(text));
-        }
-
-        if (properties == null)
-        {
-            throw new ArgumentNullException(nameof(properties));
-        }
+        ArgHelper.ThrowIfNull(text);
+        ArgHelper.ThrowIfNull(properties);
 
         return new RazorSourceDocument(text, properties);
     }
