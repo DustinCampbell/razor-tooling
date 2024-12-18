@@ -11,16 +11,17 @@ using Microsoft.AspNetCore.Razor.ProjectEngineHost;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
+using RazorProject = Microsoft.CodeAnalysis.Razor.ProjectSystem.RazorProject;
 
 namespace Microsoft.AspNetCore.Razor.Test.Common.ProjectSystem;
 
 internal sealed class TestProjectSnapshot : IRazorProject
 {
-    public ProjectSnapshot RealSnapshot { get; }
+    public RazorProject RealSnapshot { get; }
 
     private TestProjectSnapshot(ProjectState state)
     {
-        RealSnapshot = new ProjectSnapshot(state);
+        RealSnapshot = new RazorProject(state);
     }
 
     public static TestProjectSnapshot Create(string filePath, ProjectWorkspaceState? projectWorkspaceState = null)

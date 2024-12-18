@@ -19,6 +19,7 @@ using Microsoft.CodeAnalysis.Razor.Logging;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.Workspaces;
 using Microsoft.CodeAnalysis.Text;
+using RazorProject = Microsoft.CodeAnalysis.Razor.ProjectSystem.RazorProject;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.ProjectSystem;
 
@@ -296,7 +297,7 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
             .ConfigureAwait(false);
     }
 
-    private void ActOnDocumentInMultipleProjects(string filePath, Action<ProjectSnapshot, string> action)
+    private void ActOnDocumentInMultipleProjects(string filePath, Action<RazorProject, string> action)
     {
         var textDocumentPath = FilePathNormalizer.Normalize(filePath);
         if (!_projectManager.TryResolveAllProjects(textDocumentPath, out var projects))
@@ -499,8 +500,8 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
     private void MoveDocument(
         ProjectSnapshotManager.Updater updater,
         string documentFilePath,
-        ProjectSnapshot fromProject,
-        ProjectSnapshot toProject)
+        RazorProject fromProject,
+        RazorProject toProject)
     {
         Debug.Assert(fromProject.ContainsDocument(documentFilePath));
         Debug.Assert(!toProject.ContainsDocument(documentFilePath));

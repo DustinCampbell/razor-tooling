@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Razor.Utilities;
 using Microsoft.CodeAnalysis.Razor;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.Extensions.Internal;
+using RazorProject = Microsoft.CodeAnalysis.Razor.ProjectSystem.RazorProject;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.ProjectSystem;
 
@@ -36,9 +37,9 @@ internal static class MiscFilesProject
             "Miscellaneous Files");
     }
 
-    public static ProjectSnapshot GetMiscellaneousProject(this ProjectSnapshotManager projectManager)
+    public static RazorProject GetMiscellaneousProject(this ProjectSnapshotManager projectManager)
         => projectManager.GetRequiredProject(Key);
 
-    public static bool IsMiscellaneousProject(this ProjectSnapshot project)
+    public static bool IsMiscellaneousProject(this RazorProject project)
         => project.Key == Key;
 }

@@ -13,6 +13,7 @@ using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Text;
 using Xunit;
 using Xunit.Abstractions;
+using RazorProject = Microsoft.CodeAnalysis.Razor.ProjectSystem.RazorProject;
 using TestFileMarkupParser = Microsoft.CodeAnalysis.Testing.TestFileMarkupParser;
 
 namespace Microsoft.AspNetCore.Razor.Test.Common.Workspaces;
@@ -45,7 +46,7 @@ public abstract class DocumentExcerptServiceTestBase(ITestOutputHelper testOutpu
             .Create(_hostProject, LanguageServerFeatureOptions.ToCompilerOptions(), ProjectEngineFactoryProvider)
             .AddDocument(_hostDocument, sourceText);
 
-        var project = new ProjectSnapshot(state);
+        var project = new RazorProject(state);
 
         var primary = project.GetRequiredDocument(_hostDocument.FilePath);
 

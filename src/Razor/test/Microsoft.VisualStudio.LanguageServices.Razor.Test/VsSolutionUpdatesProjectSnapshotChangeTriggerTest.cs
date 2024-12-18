@@ -188,9 +188,9 @@ public class VsSolutionUpdatesProjectSnapshotChangeTriggerTest : VisualStudioTes
         });
 
         var update = Assert.Single(workspaceStateGenerator.Updates);
-        Assert.NotNull(update.WorkspaceProject);
-        Assert.Equal(update.WorkspaceProject.Id, _someWorkspaceProject.Id);
-        Assert.Same(expectedProjectSnapshot, update.ProjectSnapshot);
+        Assert.NotNull(update.RoslynProject);
+        Assert.Equal(update.RoslynProject.Id, _someWorkspaceProject.Id);
+        Assert.Same(expectedProjectSnapshot, update.Project);
         Assert.True(update.IsCancelled);
     }
 
@@ -233,9 +233,9 @@ public class VsSolutionUpdatesProjectSnapshotChangeTriggerTest : VisualStudioTes
 
         // Assert
         var update = Assert.Single(workspaceStateGenerator.Updates);
-        Assert.NotNull(update.WorkspaceProject);
-        Assert.Equal(update.WorkspaceProject.Id, _someWorkspaceProject.Id);
-        Assert.Same(expectedProjectSnapshot, update.ProjectSnapshot);
+        Assert.NotNull(update.RoslynProject);
+        Assert.Equal(update.RoslynProject.Id, _someWorkspaceProject.Id);
+        Assert.Same(expectedProjectSnapshot, update.Project);
     }
 
     [UIFact]

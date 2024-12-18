@@ -17,11 +17,11 @@ internal static partial class ProjectSnapshotManagerExtensions
     /// <summary>
     /// Finds all the projects where the document path starts with the path of the folder that contains the project file.
     /// </summary>
-    public static ImmutableArray<ProjectSnapshot> FindPotentialProjects(this ProjectSnapshotManager projectManager, string documentFilePath)
+    public static ImmutableArray<RazorProject> FindPotentialProjects(this ProjectSnapshotManager projectManager, string documentFilePath)
     {
         var normalizedDocumentPath = FilePathNormalizer.Normalize(documentFilePath);
 
-        using var projects = new PooledArrayBuilder<ProjectSnapshot>();
+        using var projects = new PooledArrayBuilder<RazorProject>();
 
         foreach (var project in projectManager.GetProjects())
         {
@@ -44,11 +44,11 @@ internal static partial class ProjectSnapshotManagerExtensions
     public static bool TryResolveAllProjects(
         this ProjectSnapshotManager projectManager,
         string documentFilePath,
-        out ImmutableArray<ProjectSnapshot> projects)
+        out ImmutableArray<RazorProject> projects)
     {
         var potentialProjects = projectManager.FindPotentialProjects(documentFilePath);
 
-        using var builder = new PooledArrayBuilder<ProjectSnapshot>(capacity: potentialProjects.Length);
+        using var builder = new PooledArrayBuilder<RazorProject>(capacity: potentialProjects.Length);
 
         foreach (var project in potentialProjects)
         {

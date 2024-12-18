@@ -31,7 +31,7 @@ public class DefaultDocumentSnapshotTest : WorkspaceTestBase
         _sourceText = SourceText.From("<p>Hello World</p>");
 
         var projectState = ProjectState.Create(TestProjectData.SomeProject, CompilerOptions, ProjectEngineFactoryProvider);
-        var project = new ProjectSnapshot(projectState);
+        var project = new RazorProject(projectState);
 
         var textLoader = TestMocks.CreateTextLoader(_sourceText);
 

@@ -11,8 +11,8 @@ using Microsoft.AspNetCore.Razor.Telemetry;
 using Microsoft.AspNetCore.Razor.Utilities;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Razor.Logging;
-using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.Remote;
+using RazorProject = Microsoft.CodeAnalysis.Razor.ProjectSystem.RazorProject;
 
 namespace Microsoft.VisualStudio.Razor.Remote;
 
@@ -24,15 +24,15 @@ public partial class OutOfProcTagHelperResolverTest
         ITelemetryReporter telemetryReporter)
         : OutOfProcTagHelperResolver(remoteServiceInvoker, loggerFactory, telemetryReporter)
     {
-        public Func<ProjectSnapshot, ValueTask<ImmutableArray<TagHelperDescriptor>>>? OnResolveOutOfProcess { get; init; }
+        public Func<RazorProject, ValueTask<ImmutableArray<TagHelperDescriptor>>>? OnResolveOutOfProcess { get; init; }
 
-        public Func<ProjectSnapshot, ValueTask<ImmutableArray<TagHelperDescriptor>>>? OnResolveInProcess { get; init; }
+        public Func<RazorProject, ValueTask<ImmutableArray<TagHelperDescriptor>>>? OnResolveInProcess { get; init; }
 
-        protected override ValueTask<ImmutableArray<TagHelperDescriptor>> ResolveTagHelpersOutOfProcessAsync(Project project, ProjectSnapshot projectSnapshot, CancellationToken cancellationToken)
-            => OnResolveOutOfProcess?.Invoke(projectSnapshot) ?? default;
+        protected override ValueTask<ImmutableArray<TagHelperDescriptor>> ResolveTagHelpersOutOfProcessAsync(Project roslynProject, RazorProject project, CancellationToken cancellationToken)
+            => OnResolveOutOfProcess?.Invoke(project) ?? default;
 
-        protected override ValueTask<ImmutableArray<TagHelperDescriptor>> ResolveTagHelpersInProcessAsync(Project project, ProjectSnapshot projectSnapshot, CancellationToken cancellationToken)
-            => OnResolveInProcess?.Invoke(projectSnapshot) ?? default;
+        protected override ValueTask<ImmutableArray<TagHelperDescriptor>> ResolveTagHelpersInProcessAsync(Project roslynProject, RazorProject project, CancellationToken cancellationToken)
+            => OnResolveInProcess?.Invoke(project) ?? default;
 
         public ImmutableArray<Checksum> PublicProduceChecksumsFromDelta(ProjectId projectId, int lastResultId, TagHelperDeltaResult deltaResult)
             => ProduceChecksumsFromDelta(projectId, lastResultId, deltaResult);

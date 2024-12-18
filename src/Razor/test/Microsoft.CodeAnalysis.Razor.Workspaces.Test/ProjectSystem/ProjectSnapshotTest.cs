@@ -40,17 +40,17 @@ public class ProjectSnapshotTest(ITestOutputHelper testOutput) : WorkspaceTestBa
             .AddEmptyDocument(s_documents[1])
             .AddEmptyDocument(s_documents[2]);
 
-        var snapshot = new ProjectSnapshot(state);
+        var project = new RazorProject(state);
 
         // Act
-        var documents = snapshot.DocumentFilePaths.ToDictionary(f => f, snapshot.GetRequiredDocument);
+        var documents = project.DocumentFilePaths.ToDictionary(f => f, project.GetRequiredDocument);
 
         // Assert
         Assert.Collection(
             documents,
-            d => Assert.Same(d.Value, snapshot.GetRequiredDocument(d.Key)),
-            d => Assert.Same(d.Value, snapshot.GetRequiredDocument(d.Key)),
-            d => Assert.Same(d.Value, snapshot.GetRequiredDocument(d.Key)));
+            d => Assert.Same(d.Value, project.GetRequiredDocument(d.Key)),
+            d => Assert.Same(d.Value, project.GetRequiredDocument(d.Key)),
+            d => Assert.Same(d.Value, project.GetRequiredDocument(d.Key)));
     }
 
     [Fact]
@@ -61,12 +61,12 @@ public class ProjectSnapshotTest(ITestOutputHelper testOutput) : WorkspaceTestBa
             .WithProjectWorkspaceState(s_projectWorkspaceState)
             .AddEmptyDocument(s_documents[0]);
 
-        var snapshot = new ProjectSnapshot(state);
+        var project = new RazorProject(state);
 
-        var document = snapshot.GetRequiredDocument(s_documents[0].FilePath);
+        var document = project.GetRequiredDocument(s_documents[0].FilePath);
 
         // Act
-        var documents = snapshot.GetRelatedDocuments(document);
+        var documents = project.GetRelatedDocuments(document);
 
         // Assert
         Assert.Empty(documents);
@@ -81,13 +81,12 @@ public class ProjectSnapshotTest(ITestOutputHelper testOutput) : WorkspaceTestBa
             .AddEmptyDocument(s_documents[0])
             .AddEmptyDocument(s_documents[1])
             .AddEmptyDocument(TestProjectData.SomeProjectImportFile);
+        var project = new RazorProject(state);
 
-        var snapshot = new ProjectSnapshot(state);
-
-        var document = snapshot.GetRequiredDocument(TestProjectData.SomeProjectImportFile.FilePath);
+        var document = project.GetRequiredDocument(TestProjectData.SomeProjectImportFile.FilePath);
 
         // Act
-        var documents = snapshot.GetRelatedDocuments(document);
+        var documents = project.GetRelatedDocuments(document);
 
         // Assert
         Assert.Collection(

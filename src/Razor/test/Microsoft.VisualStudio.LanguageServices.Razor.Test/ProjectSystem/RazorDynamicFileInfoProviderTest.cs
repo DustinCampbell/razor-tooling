@@ -18,6 +18,7 @@ using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 using static Microsoft.VisualStudio.Razor.DynamicFiles.RazorDynamicFileInfoProvider;
+using RazorProject = Microsoft.CodeAnalysis.Razor.ProjectSystem.RazorProject;
 
 namespace Microsoft.VisualStudio.Razor.ProjectSystem;
 
@@ -30,7 +31,7 @@ public class RazorDynamicFileInfoProviderTest(ITestOutputHelper testOutput) : Vi
     private RazorDynamicFileInfoProvider _provider;
     private TestAccessor _testAccessor;
     private TestProjectSnapshotManager _projectManager;
-    private ProjectSnapshot _project;
+    private RazorProject _project;
     private RazorDocument _document1;
     private RazorDocument _document2;
     private IDynamicDocumentContainer _lspDocumentContainer;

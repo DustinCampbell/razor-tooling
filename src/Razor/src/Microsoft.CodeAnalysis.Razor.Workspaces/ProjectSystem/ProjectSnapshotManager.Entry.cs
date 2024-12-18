@@ -7,11 +7,11 @@ internal partial class ProjectSnapshotManager
 {
     private sealed record Entry(ProjectState State)
     {
-        private ProjectSnapshot? _snapshotUnsafe;
+        private RazorProject? _snapshotUnsafe;
 
-        public ProjectSnapshot GetSnapshot()
+        public RazorProject GetSnapshot()
         {
-            return _snapshotUnsafe ??= new ProjectSnapshot(State);
+            return _snapshotUnsafe ??= new RazorProject(State);
         }
     }
 }

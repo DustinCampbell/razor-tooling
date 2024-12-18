@@ -18,15 +18,15 @@ internal static class ProjectSnapshotExtensions
     public static IRazorDocument GetRequiredDocument(this IRazorProject project, string filePath)
         => project.GetDocument(filePath).AssumeNotNull();
 
-    public static RazorDocument? GetDocument(this ProjectSnapshot project, string filePath)
+    public static RazorDocument? GetDocument(this RazorProject project, string filePath)
         => project.TryGetDocument(filePath, out var result)
             ? result
             : null;
 
-    public static RazorDocument GetRequiredDocument(this ProjectSnapshot project, string filePath)
+    public static RazorDocument GetRequiredDocument(this RazorProject project, string filePath)
         => project.GetDocument(filePath).AssumeNotNull();
 
-    public static RazorProjectInfo ToRazorProjectInfo(this ProjectSnapshot project)
+    public static RazorProjectInfo ToRazorProjectInfo(this RazorProject project)
     {
         using var documents = new PooledArrayBuilder<DocumentSnapshotHandle>();
 

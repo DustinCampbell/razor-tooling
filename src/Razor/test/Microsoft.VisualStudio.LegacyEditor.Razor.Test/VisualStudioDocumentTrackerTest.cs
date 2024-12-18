@@ -452,7 +452,7 @@ public class VisualStudioDocumentTrackerTest : VisualStudioWorkspaceTestBase
         _documentTracker.Subscribe();
 
         // Assert
-        Assert.IsType<ProjectSnapshot>(_documentTracker.ProjectSnapshot);
+        Assert.IsType<RazorProject>(_documentTracker.ProjectSnapshot);
     }
 
     [UIFact]
@@ -476,7 +476,7 @@ public class VisualStudioDocumentTrackerTest : VisualStudioWorkspaceTestBase
         });
 
         // Assert
-        var snapshot = Assert.IsType<ProjectSnapshot>(_documentTracker.ProjectSnapshot);
+        var snapshot = Assert.IsType<RazorProject>(_documentTracker.ProjectSnapshot);
 
         Assert.Same(_updatedHostProject, snapshot.HostProject);
 

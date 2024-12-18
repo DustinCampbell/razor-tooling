@@ -211,12 +211,12 @@ public class ProjectStateGeneratedOutputTest : WorkspaceTestBase
         Assert.NotSame(output, newOutput);
     }
 
-    private ValueTask<RazorCodeDocument> GetGeneratedOutputAsync(ProjectState project, HostDocument hostDocument)
+    private ValueTask<RazorCodeDocument> GetGeneratedOutputAsync(ProjectState projectState, HostDocument hostDocument)
     {
-        var documentState = project.Documents[hostDocument.FilePath];
+        var documentState = projectState.Documents[hostDocument.FilePath];
 
-        var projectSnapshot = new ProjectSnapshot(project);
-        var document = new RazorDocument(projectSnapshot, documentState);
+        var project = new RazorProject(projectState);
+        var document = new RazorDocument(project, documentState);
 
         return document.GetGeneratedOutputAsync(DisposalToken);
     }

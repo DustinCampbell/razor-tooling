@@ -192,9 +192,9 @@ public class WorkspaceProjectStateChangeDetectorTest : VisualStudioWorkspaceTest
 
         // Assert
         Assert.Equal(3, generator.Updates.Count);
-        Assert.Contains(generator.Updates, u => u.ProjectSnapshot.Key == _projectNumberOne.ToProjectKey());
-        Assert.Contains(generator.Updates, u => u.ProjectSnapshot.Key == _projectNumberTwo.ToProjectKey());
-        Assert.Contains(generator.Updates, u => u.ProjectSnapshot.Key == _projectNumberThree.ToProjectKey());
+        Assert.Contains(generator.Updates, u => u.Project.Key == _projectNumberOne.ToProjectKey());
+        Assert.Contains(generator.Updates, u => u.Project.Key == _projectNumberTwo.ToProjectKey());
+        Assert.Contains(generator.Updates, u => u.Project.Key == _projectNumberThree.ToProjectKey());
     }
 
     [UITheory]
@@ -233,9 +233,9 @@ public class WorkspaceProjectStateChangeDetectorTest : VisualStudioWorkspaceTest
 
         // Assert
         Assert.Equal(3, generator.Updates.Count);
-        Assert.Contains(generator.Updates, u => u.ProjectSnapshot.Key == _projectNumberOne.ToProjectKey());
-        Assert.Contains(generator.Updates, u => u.ProjectSnapshot.Key == _projectNumberTwo.ToProjectKey());
-        Assert.Contains(generator.Updates, u => u.ProjectSnapshot.Key == _projectNumberThree.ToProjectKey());
+        Assert.Contains(generator.Updates, u => u.Project.Key == _projectNumberOne.ToProjectKey());
+        Assert.Contains(generator.Updates, u => u.Project.Key == _projectNumberTwo.ToProjectKey());
+        Assert.Contains(generator.Updates, u => u.Project.Key == _projectNumberThree.ToProjectKey());
     }
 
     [UITheory]
@@ -268,8 +268,8 @@ public class WorkspaceProjectStateChangeDetectorTest : VisualStudioWorkspaceTest
         // Assert
         Assert.Collection(
             generator.Updates,
-            p => Assert.Equal(_projectNumberOne.Id, p.WorkspaceProject?.Id),
-            p => Assert.Equal(_projectNumberTwo.Id, p.WorkspaceProject?.Id));
+            p => Assert.Equal(_projectNumberOne.Id, p.RoslynProject?.Id),
+            p => Assert.Equal(_projectNumberTwo.Id, p.RoslynProject?.Id));
     }
 
     [UITheory]
@@ -309,10 +309,10 @@ public class WorkspaceProjectStateChangeDetectorTest : VisualStudioWorkspaceTest
         // Assert
         Assert.Collection(
             generator.Updates,
-            p => Assert.Equal(_projectNumberThree.Id, p.WorkspaceProject?.Id),
-            p => Assert.Null(p.WorkspaceProject),
-            p => Assert.Equal(_projectNumberOne.Id, p.WorkspaceProject?.Id),
-            p => Assert.Equal(_projectNumberTwo.Id, p.WorkspaceProject?.Id));
+            p => Assert.Equal(_projectNumberThree.Id, p.RoslynProject?.Id),
+            p => Assert.Null(p.RoslynProject),
+            p => Assert.Equal(_projectNumberOne.Id, p.RoslynProject?.Id),
+            p => Assert.Equal(_projectNumberTwo.Id, p.RoslynProject?.Id));
     }
 
     [UITheory]
@@ -349,8 +349,8 @@ public class WorkspaceProjectStateChangeDetectorTest : VisualStudioWorkspaceTest
 
         // Assert
         var update = Assert.Single(generator.Updates);
-        Assert.Equal(_projectNumberOne.Id, update.WorkspaceProject?.Id);
-        Assert.Equal(_hostProjectOne.FilePath, update.ProjectSnapshot.FilePath);
+        Assert.Equal(_projectNumberOne.Id, update.RoslynProject?.Id);
+        Assert.Equal(_hostProjectOne.FilePath, update.Project.FilePath);
     }
 
     [UIFact]
@@ -381,8 +381,8 @@ public class WorkspaceProjectStateChangeDetectorTest : VisualStudioWorkspaceTest
 
         // Assert
         var update = Assert.Single(generator.Updates);
-        Assert.Equal(_projectNumberOne.Id, update.WorkspaceProject?.Id);
-        Assert.Equal(_hostProjectOne.FilePath, update.ProjectSnapshot.FilePath);
+        Assert.Equal(_projectNumberOne.Id, update.RoslynProject?.Id);
+        Assert.Equal(_hostProjectOne.FilePath, update.Project.FilePath);
     }
 
     [UIFact]
@@ -413,8 +413,8 @@ public class WorkspaceProjectStateChangeDetectorTest : VisualStudioWorkspaceTest
 
         // Assert
         var update = Assert.Single(generator.Updates);
-        Assert.Equal(_projectNumberOne.Id, update.WorkspaceProject?.Id);
-        Assert.Equal(_hostProjectOne.FilePath, update.ProjectSnapshot.FilePath);
+        Assert.Equal(_projectNumberOne.Id, update.RoslynProject?.Id);
+        Assert.Equal(_hostProjectOne.FilePath, update.Project.FilePath);
     }
 
     [UIFact]
@@ -445,8 +445,8 @@ public class WorkspaceProjectStateChangeDetectorTest : VisualStudioWorkspaceTest
 
         // Assert
         var update = Assert.Single(generator.Updates);
-        Assert.Equal(_projectNumberOne.Id, update.WorkspaceProject?.Id);
-        Assert.Equal(_hostProjectOne.FilePath, update.ProjectSnapshot.FilePath);
+        Assert.Equal(_projectNumberOne.Id, update.RoslynProject?.Id);
+        Assert.Equal(_hostProjectOne.FilePath, update.Project.FilePath);
     }
 
     [UIFact]
@@ -494,8 +494,8 @@ public class WorkspaceProjectStateChangeDetectorTest : VisualStudioWorkspaceTest
 
         // Assert
         var update = Assert.Single(generator.Updates);
-        Assert.Equal(_projectNumberOne.Id, update.WorkspaceProject?.Id);
-        Assert.Equal(_hostProjectOne.FilePath, update.ProjectSnapshot.FilePath);
+        Assert.Equal(_projectNumberOne.Id, update.RoslynProject?.Id);
+        Assert.Equal(_hostProjectOne.FilePath, update.Project.FilePath);
     }
 
     [UIFact]
@@ -523,7 +523,7 @@ public class WorkspaceProjectStateChangeDetectorTest : VisualStudioWorkspaceTest
         // Assert
         Assert.Single(
             generator.Updates,
-            p => p.WorkspaceProject is null);
+            p => p.RoslynProject is null);
     }
 
     [UIFact]
@@ -552,7 +552,7 @@ public class WorkspaceProjectStateChangeDetectorTest : VisualStudioWorkspaceTest
         // Assert
         Assert.Single(
             generator.Updates,
-            p => p.WorkspaceProject?.Id == _projectNumberThree.Id);
+            p => p.RoslynProject?.Id == _projectNumberThree.Id);
     }
 
     [Fact]

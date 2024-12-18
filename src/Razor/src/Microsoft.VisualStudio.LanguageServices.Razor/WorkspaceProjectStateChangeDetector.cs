@@ -30,7 +30,7 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
     private readonly CodeAnalysis.Workspace _workspace;
 
     private readonly CancellationTokenSource _disposeTokenSource;
-    private readonly AsyncBatchingWorkQueue<(Project?, ProjectSnapshot)> _workQueue;
+    private readonly AsyncBatchingWorkQueue<(Project?, RazorProject)> _workQueue;
 
     private WorkspaceChangedListener? _workspaceChangedListener;
 
@@ -56,7 +56,7 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
         _options = options;
 
         _disposeTokenSource = new();
-        _workQueue = new AsyncBatchingWorkQueue<(Project?, ProjectSnapshot)>(
+        _workQueue = new AsyncBatchingWorkQueue<(Project?, RazorProject)>(
             delay,
             ProcessBatchAsync,
             _disposeTokenSource.Token);
@@ -85,16 +85,16 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
         _disposeTokenSource.Dispose();
     }
 
-    private ValueTask ProcessBatchAsync(ImmutableArray<(Project? Project, ProjectSnapshot ProjectSnapshot)> items, CancellationToken token)
+    private ValueTask ProcessBatchAsync(ImmutableArray<(Project? RoslynProject, RazorProject Project)> items, CancellationToken token)
     {
-        foreach (var (project, projectSnapshot) in items.GetMostRecentUniqueItems(Comparer.Instance))
+        foreach (var (roslynProject, project) in items.GetMostRecentUniqueItems(Comparer.Instance))
         {
             if (token.IsCancellationRequested)
             {
                 return default;
             }
 
-            _generator.EnqueueUpdate(project, projectSnapshot);
+            _generator.EnqueueUpdate(roslynProject, project);
         }
 
         return default;
@@ -126,7 +126,7 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
 
                     if (TryGetProjectSnapshot(project, out var projectSnapshot))
                     {
-                        EnqueueUpdateOnProjectAndDependencies(projectId, project: null, oldSolution, projectSnapshot);
+                        EnqueueUpdateOnProjectAndDependencies(projectId, roslynProject: null, oldSolution, projectSnapshot);
                     }
                 }
 
@@ -247,7 +247,7 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
                     {
                         if (TryGetProjectSnapshot(project, out var projectSnapshot))
                         {
-                            EnqueueUpdate(project: null, projectSnapshot);
+                            EnqueueUpdate(roslynProject: null, projectSnapshot);
                         }
                     }
 
@@ -377,9 +377,9 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
         }
     }
 
-    private void EnqueueUpdateOnProjectAndDependencies(ProjectId projectId, Project? project, Solution solution, ProjectSnapshot projectSnapshot)
+    private void EnqueueUpdateOnProjectAndDependencies(ProjectId projectId, Project? roslynProject, Solution solution, RazorProject project)
     {
-        EnqueueUpdate(project, projectSnapshot);
+        EnqueueUpdate(roslynProject, project);
 
         var dependencyGraph = solution.GetProjectDependencyGraph();
         var dependentProjectIds = dependencyGraph.GetProjectsThatTransitivelyDependOnThisProject(projectId);
@@ -394,22 +394,22 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
         }
     }
 
-    private void EnqueueUpdate(Project? project, ProjectSnapshot projectSnapshot)
+    private void EnqueueUpdate(Project? roslynProject, RazorProject project)
     {
-        _workQueue.AddWork((project, projectSnapshot));
+        _workQueue.AddWork((roslynProject, project));
     }
 
-    private bool TryGetProjectSnapshot(Project? project, [NotNullWhen(true)] out ProjectSnapshot? projectSnapshot)
+    private bool TryGetProjectSnapshot(Project? roslynProject, [NotNullWhen(true)] out RazorProject? result)
     {
-        if (project?.CompilationOutputInfo.AssemblyPath is null)
+        if (roslynProject?.CompilationOutputInfo.AssemblyPath is null)
         {
-            projectSnapshot = null;
+            result = null;
             return false;
         }
 
-        var projectKey = project.ToProjectKey();
+        var projectKey = roslynProject.ToProjectKey();
 
-        return _projectManager.TryGetProject(projectKey, out projectSnapshot);
+        return _projectManager.TryGetProject(projectKey, out result);
     }
 
     internal TestAccessor GetTestAccessor() => new(this);

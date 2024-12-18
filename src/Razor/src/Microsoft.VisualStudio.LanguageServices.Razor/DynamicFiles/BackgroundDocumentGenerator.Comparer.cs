@@ -9,7 +9,7 @@ namespace Microsoft.VisualStudio.Razor.DynamicFiles;
 
 internal partial class BackgroundDocumentGenerator
 {
-    private sealed class Comparer : IEqualityComparer<(ProjectSnapshot, RazorDocument)>
+    private sealed class Comparer : IEqualityComparer<(RazorProject, RazorDocument)>
     {
         public static readonly Comparer Instance = new();
 
@@ -17,7 +17,7 @@ internal partial class BackgroundDocumentGenerator
         {
         }
 
-        public bool Equals((ProjectSnapshot, RazorDocument) x, (ProjectSnapshot, RazorDocument) y)
+        public bool Equals((RazorProject, RazorDocument) x, (RazorProject, RazorDocument) y)
         {
             var (projectX, documentX) = x;
             var (projectY, documentY) = y;
@@ -28,7 +28,7 @@ internal partial class BackgroundDocumentGenerator
             return documentKeyX.Equals(documentKeyY);
         }
 
-        public int GetHashCode((ProjectSnapshot, RazorDocument) obj)
+        public int GetHashCode((RazorProject, RazorDocument) obj)
         {
             var (project, document) = obj;
             var documentKey = new DocumentKey(project.Key, document.FilePath);

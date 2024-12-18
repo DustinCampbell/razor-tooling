@@ -11,6 +11,7 @@ using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.Razor.DynamicFiles;
 using Xunit;
 using Xunit.Abstractions;
+using RazorProject = Microsoft.CodeAnalysis.Razor.ProjectSystem.RazorProject;
 
 namespace Microsoft.VisualStudio.Razor.LanguageClient.DynamicFiles;
 
@@ -30,7 +31,7 @@ public class RazorSpanMappingServiceTest(ITestOutputHelper testOutput) : Workspa
         var state = ProjectState
             .Create(_hostProject, CompilerOptions, ProjectEngineFactoryProvider)
             .AddDocument(_hostDocument, TestMocks.CreateTextLoader(sourceText));
-        var project = new ProjectSnapshot(state);
+        var project = new RazorProject(state);
 
         var document = project.GetRequiredDocument(_hostDocument.FilePath);
 
@@ -63,7 +64,7 @@ public class RazorSpanMappingServiceTest(ITestOutputHelper testOutput) : Workspa
         var state = ProjectState
             .Create(_hostProject, CompilerOptions, ProjectEngineFactoryProvider)
             .AddDocument(_hostDocument, TestMocks.CreateTextLoader(code));
-        var project = new ProjectSnapshot(state);
+        var project = new RazorProject(state);
 
         var document = project.GetRequiredDocument(_hostDocument.FilePath);
 
@@ -97,7 +98,7 @@ public class RazorSpanMappingServiceTest(ITestOutputHelper testOutput) : Workspa
         var state = ProjectState
             .Create(_hostProject, CompilerOptions, ProjectEngineFactoryProvider)
             .AddDocument(_hostDocument, TestMocks.CreateTextLoader(code));
-        var project = new ProjectSnapshot(state);
+        var project = new RazorProject(state);
 
         var document = project.GetRequiredDocument(_hostDocument.FilePath);
 
@@ -130,7 +131,7 @@ public class RazorSpanMappingServiceTest(ITestOutputHelper testOutput) : Workspa
         var state = ProjectState
             .Create(_hostProject, CompilerOptions, ProjectEngineFactoryProvider)
             .AddDocument(_hostDocument, TestMocks.CreateTextLoader(code));
-        var project = new ProjectSnapshot(state);
+        var project = new RazorProject(state);
 
         var document = project.GetRequiredDocument(_hostDocument.FilePath);
 

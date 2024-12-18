@@ -9,12 +9,12 @@ namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
 internal static class ProjectSnapshotManagerExtensions
 {
-    public static ProjectSnapshot? GetProject(this ProjectSnapshotManager projectManager, ProjectKey projectKey)
+    public static RazorProject? GetProject(this ProjectSnapshotManager projectManager, ProjectKey projectKey)
         => projectManager.TryGetProject(projectKey, out var result)
             ? result
             : null;
 
-    public static ProjectSnapshot GetRequiredProject(this ProjectSnapshotManager projectManager, ProjectKey projectKey)
+    public static RazorProject GetRequiredProject(this ProjectSnapshotManager projectManager, ProjectKey projectKey)
         => projectManager.GetProject(projectKey).AssumeNotNull();
 
     public static bool ContainsDocument(this ProjectSnapshotManager projectManager, ProjectKey projectKey, string documentFilePath)
@@ -42,12 +42,12 @@ internal static class ProjectSnapshotManagerExtensions
     public static RazorDocument GetRequiredDocument(this ProjectSnapshotManager projectManager, ProjectKey projectKey, string documentFilePath)
         => projectManager.GetDocument(projectKey, documentFilePath).AssumeNotNull();
 
-    public static ProjectSnapshot? GetProject(this ProjectSnapshotManager.Updater updater, ProjectKey projectKey)
+    public static RazorProject? GetProject(this ProjectSnapshotManager.Updater updater, ProjectKey projectKey)
         => updater.TryGetProject(projectKey, out var result)
             ? result
             : null;
 
-    public static ProjectSnapshot GetRequiredProject(this ProjectSnapshotManager.Updater updater, ProjectKey projectKey)
+    public static RazorProject GetRequiredProject(this ProjectSnapshotManager.Updater updater, ProjectKey projectKey)
         => updater.GetProject(projectKey).AssumeNotNull();
 
     public static bool ContainsDocument(this ProjectSnapshotManager.Updater updater, ProjectKey projectKey, string documentFilePath)

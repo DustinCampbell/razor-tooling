@@ -65,7 +65,7 @@ internal sealed partial class ProjectWorkspaceStateGenerator(
         _blockBackgroundWorkStart?.Set();
     }
 
-    public void EnqueueUpdate(Project? workspaceProject, ProjectSnapshot projectSnapshot)
+    public void EnqueueUpdate(Project? roslynProject, RazorProject project)
     {
         if (_disposed)
         {
@@ -74,7 +74,7 @@ internal sealed partial class ProjectWorkspaceStateGenerator(
 
         lock (_updates)
         {
-            var projectKey = projectSnapshot.Key;
+            var projectKey = project.Key;
 
             if (_updates.TryGetValue(projectKey, out var updateItem))
             {
@@ -89,7 +89,7 @@ internal sealed partial class ProjectWorkspaceStateGenerator(
             _logger.LogTrace($"Enqueuing update for '{projectKey}'");
 
             _updates[projectKey] = UpdateItem.CreateAndStartWork(
-                token => UpdateWorkspaceStateAsync(workspaceProject, projectSnapshot, token));
+                token => UpdateWorkspaceStateAsync(roslynProject, project, token));
         }
     }
 
@@ -113,9 +113,9 @@ internal sealed partial class ProjectWorkspaceStateGenerator(
         }
     }
 
-    private async Task UpdateWorkspaceStateAsync(Project? workspaceProject, ProjectSnapshot projectSnapshot, CancellationToken cancellationToken)
+    private async Task UpdateWorkspaceStateAsync(Project? roslynProject, RazorProject project, CancellationToken cancellationToken)
     {
-        var projectKey = projectSnapshot.Key;
+        var projectKey = project.Key;
 
         // Only allow a single TagHelper resolver request to process at a time in order to reduce
         // Visual Studio memory pressure. Typically a TagHelper resolution result can be upwards of 10mb+.
@@ -138,7 +138,7 @@ internal sealed partial class ProjectWorkspaceStateGenerator(
                 return;
             }
 
-            var workspaceState = await GetProjectWorkspaceStateAsync(workspaceProject, projectSnapshot, cancellationToken);
+            var workspaceState = await GetProjectWorkspaceStateAsync(roslynProject, project, cancellationToken);
 
             if (workspaceState is null)
             {
@@ -253,33 +253,33 @@ internal sealed partial class ProjectWorkspaceStateGenerator(
     }
 
     /// <summary>
-    ///  Attempts to produce a <see cref="ProjectWorkspaceState"/> from the provide <see cref="Project"/> and <see cref="ProjectSnapshot"/>.
+    ///  Attempts to produce a <see cref="ProjectWorkspaceState"/> from the provide <see cref="Project"/> and <see cref="RazorProject"/>.
     ///  Returns <see langword="null"/> if an error is encountered.
     /// </summary>
     private async Task<ProjectWorkspaceState?> GetProjectWorkspaceStateAsync(
-        Project? workspaceProject,
-        ProjectSnapshot projectSnapshot,
+        Project? roslynProject,
+        RazorProject project,
         CancellationToken cancellationToken)
     {
         // This is the simplest case. If we don't have a project (likely because it is being removed),
         // we just a default ProjectWorkspaceState.
-        if (workspaceProject is null)
+        if (roslynProject is null)
         {
             return ProjectWorkspaceState.Default;
         }
 
-        _logger.LogTrace($"Starting tag helper discovery for {projectSnapshot.FilePath}");
+        _logger.LogTrace($"Starting tag helper discovery for {project.FilePath}");
 
         // Specifically not using BeginBlock because we want to capture cases where tag helper discovery never finishes.
         var telemetryId = Guid.NewGuid();
 
         _telemetryReporter.ReportEvent("taghelperresolve/begin", Severity.Normal,
             new("id", telemetryId),
-            new("tagHelperCount", projectSnapshot.ProjectWorkspaceState.TagHelpers.Length));
+            new("tagHelperCount", project.ProjectWorkspaceState.TagHelpers.Length));
 
         try
         {
-            var csharpLanguageVersion = workspaceProject.ParseOptions is CSharpParseOptions csharpParseOptions
+            var csharpLanguageVersion = roslynProject.ParseOptions is CSharpParseOptions csharpParseOptions
                 ? csharpParseOptions.LanguageVersion
                 : LanguageVersion.Default;
 
@@ -287,7 +287,7 @@ internal sealed partial class ProjectWorkspaceStateGenerator(
 
             watch.Restart();
             var tagHelpers = await _tagHelperResolver
-                .GetTagHelpersAsync(workspaceProject, projectSnapshot, cancellationToken)
+                .GetTagHelpersAsync(roslynProject, project, cancellationToken)
                 .ConfigureAwait(false);
             watch.Stop();
 
@@ -302,7 +302,7 @@ internal sealed partial class ProjectWorkspaceStateGenerator(
 
             _logger.LogInformation($"""
                 Resolved tag helpers for project in {watch.ElapsedMilliseconds} ms.
-                Project: {projectSnapshot.FilePath}
+                Project: {project.FilePath}
                 """);
 
             return ProjectWorkspaceState.Create(tagHelpers, csharpLanguageVersion);
@@ -322,7 +322,7 @@ internal sealed partial class ProjectWorkspaceStateGenerator(
 
             _logger.LogError(ex, $"""
                 Exception thrown during tag helper resolution for project.
-                Project: {projectSnapshot.FilePath}
+                Project: {project.FilePath}
                 """);
         }
 

@@ -11,9 +11,9 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
-internal sealed class RazorDocument(ProjectSnapshot project, DocumentState state) : IRazorDocument, IDesignTimeCodeGenerator, ILegacyDocumentSnapshot
+internal sealed class RazorDocument(RazorProject project, DocumentState state) : IRazorDocument, IDesignTimeCodeGenerator, ILegacyDocumentSnapshot
 {
-    public ProjectSnapshot Project { get; } = project;
+    public RazorProject Project { get; } = project;
 
     private readonly DocumentState _state = state;
 
