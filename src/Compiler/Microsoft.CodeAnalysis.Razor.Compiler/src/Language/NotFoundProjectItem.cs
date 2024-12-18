@@ -19,11 +19,11 @@ internal class NotFoundProjectItem : RazorProjectItem
     /// <param name="basePath">The base path.</param>
     /// <param name="path">The path.</param>
     /// <param name="fileKind">The file kind</param>
-    public NotFoundProjectItem(string basePath, string path, string fileKind)
+    public NotFoundProjectItem(string basePath, string path, RazorFileKind fileKind)
     {
         BasePath = basePath;
         FilePath = path;
-        FileKind = fileKind.ToRazorFileKind(path);
+        FileKind = fileKind;
     }
 
     /// <inheritdoc />

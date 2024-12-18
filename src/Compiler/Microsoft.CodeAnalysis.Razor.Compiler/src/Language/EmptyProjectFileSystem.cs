@@ -3,7 +3,6 @@
 
 #nullable disable
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -26,6 +25,6 @@ internal class EmptyProjectFileSystem : RazorProjectFileSystem
     public override RazorProjectItem GetItem(string path, string fileKind)
     {
         NormalizeAndEnsureValidPath(path);
-        return new NotFoundProjectItem(string.Empty, path, fileKind);
+        return new NotFoundProjectItem(string.Empty, path, fileKind.ToRazorFileKind(path));
     }
 }
