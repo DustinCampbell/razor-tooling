@@ -34,5 +34,5 @@ internal interface IRazorProject
     ValueTask<ImmutableArray<TagHelperDescriptor>> GetTagHelpersAsync(CancellationToken cancellationToken);
 
     bool ContainsDocument(string filePath);
-    bool TryGetDocument(string filePath, [NotNullWhen(true)] out IRazorDocument? document);
+    bool TryGetDocument(string filePath, [NotNullWhen(true)] out IRazorDocument? result);
 }

@@ -20,10 +20,10 @@ public class DefaultDocumentSnapshotTest : WorkspaceTestBase
     private static readonly HostDocument s_nestedComponentHostDocument = TestProjectData.SomeProjectNestedComponentFile3;
 
     private readonly SourceText _sourceText;
-    private readonly DocumentSnapshot _componentDocument;
-    private readonly DocumentSnapshot _componentCshtmlDocument;
-    private readonly DocumentSnapshot _legacyDocument;
-    private readonly DocumentSnapshot _nestedComponentDocument;
+    private readonly RazorDocument _componentDocument;
+    private readonly RazorDocument _componentCshtmlDocument;
+    private readonly RazorDocument _legacyDocument;
+    private readonly RazorDocument _nestedComponentDocument;
 
     public DefaultDocumentSnapshotTest(ITestOutputHelper testOutput)
         : base(testOutput)
@@ -36,16 +36,16 @@ public class DefaultDocumentSnapshotTest : WorkspaceTestBase
         var textLoader = TestMocks.CreateTextLoader(_sourceText);
 
         var documentState = DocumentState.Create(s_legacyHostDocument, textLoader);
-        _legacyDocument = new DocumentSnapshot(project, documentState);
+        _legacyDocument = new RazorDocument(project, documentState);
 
         documentState = DocumentState.Create(s_componentHostDocument, textLoader);
-        _componentDocument = new DocumentSnapshot(project, documentState);
+        _componentDocument = new RazorDocument(project, documentState);
 
         documentState = DocumentState.Create(s_componentCshtmlHostDocument, textLoader);
-        _componentCshtmlDocument = new DocumentSnapshot(project, documentState);
+        _componentCshtmlDocument = new RazorDocument(project, documentState);
 
         documentState = DocumentState.Create(s_nestedComponentHostDocument, textLoader);
-        _nestedComponentDocument = new DocumentSnapshot(project, documentState);
+        _nestedComponentDocument = new RazorDocument(project, documentState);
     }
 
     [Fact(Skip = "Weak cache removed")]

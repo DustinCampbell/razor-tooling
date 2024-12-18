@@ -49,7 +49,7 @@ internal partial class RazorDiagnosticsPublisher
             instance.ClearClosedDocuments();
         }
 
-        public Task PublishDiagnosticsAsync(DocumentSnapshot document, CancellationToken cancellationToken)
+        public Task PublishDiagnosticsAsync(RazorDocument document, CancellationToken cancellationToken)
         {
             return instance.PublishDiagnosticsAsync(document, cancellationToken);
         }

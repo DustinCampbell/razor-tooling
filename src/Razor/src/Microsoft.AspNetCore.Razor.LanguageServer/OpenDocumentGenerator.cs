@@ -32,7 +32,7 @@ internal partial class OpenDocumentGenerator : IRazorStartupService, IDisposable
     private readonly LanguageServerFeatureOptions _options;
     private readonly ILogger _logger;
 
-    private readonly AsyncBatchingWorkQueue<DocumentSnapshot> _workQueue;
+    private readonly AsyncBatchingWorkQueue<RazorDocument> _workQueue;
     private readonly CancellationTokenSource _disposeTokenSource;
 
     public OpenDocumentGenerator(
@@ -46,7 +46,7 @@ internal partial class OpenDocumentGenerator : IRazorStartupService, IDisposable
         _options = options;
 
         _disposeTokenSource = new();
-        _workQueue = new AsyncBatchingWorkQueue<DocumentSnapshot>(
+        _workQueue = new AsyncBatchingWorkQueue<RazorDocument>(
             s_delay,
             ProcessBatchAsync,
             _disposeTokenSource.Token);
@@ -66,7 +66,7 @@ internal partial class OpenDocumentGenerator : IRazorStartupService, IDisposable
         _disposeTokenSource.Dispose();
     }
 
-    private async ValueTask ProcessBatchAsync(ImmutableArray<DocumentSnapshot> items, CancellationToken token)
+    private async ValueTask ProcessBatchAsync(ImmutableArray<RazorDocument> items, CancellationToken token)
     {
         foreach (var document in items.GetMostRecentUniqueItems(Comparer.Instance))
         {
@@ -167,7 +167,7 @@ internal partial class OpenDocumentGenerator : IRazorStartupService, IDisposable
                 }
         }
 
-        void EnqueueIfNecessary(DocumentSnapshot document)
+        void EnqueueIfNecessary(RazorDocument document)
         {
             if (!_projectManager.IsDocumentOpen(document.FilePath) &&
                 !_options.UpdateBuffersForClosedDocuments)

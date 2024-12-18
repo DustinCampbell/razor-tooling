@@ -25,21 +25,21 @@ internal static class ProjectSnapshotManagerExtensions
         this ProjectSnapshotManager projectManager,
         ProjectKey projectKey,
         string documentFilePath,
-        [NotNullWhen(true)] out DocumentSnapshot? document)
+        [NotNullWhen(true)] out RazorDocument? result)
     {
-        document = projectManager.TryGetProject(projectKey, out var project)
+        result = projectManager.TryGetProject(projectKey, out var project)
             ? project.GetDocument(documentFilePath)
             : null;
 
-        return document is not null;
+        return result is not null;
     }
 
-    public static DocumentSnapshot? GetDocument(this ProjectSnapshotManager projectManager, ProjectKey projectKey, string documentFilePath)
+    public static RazorDocument? GetDocument(this ProjectSnapshotManager projectManager, ProjectKey projectKey, string documentFilePath)
         => projectManager.TryGetDocument(projectKey, documentFilePath, out var result)
             ? result
             : null;
 
-    public static DocumentSnapshot GetRequiredDocument(this ProjectSnapshotManager projectManager, ProjectKey projectKey, string documentFilePath)
+    public static RazorDocument GetRequiredDocument(this ProjectSnapshotManager projectManager, ProjectKey projectKey, string documentFilePath)
         => projectManager.GetDocument(projectKey, documentFilePath).AssumeNotNull();
 
     public static ProjectSnapshot? GetProject(this ProjectSnapshotManager.Updater updater, ProjectKey projectKey)
@@ -58,20 +58,20 @@ internal static class ProjectSnapshotManagerExtensions
         this ProjectSnapshotManager.Updater updater,
         ProjectKey projectKey,
         string documentFilePath,
-        [NotNullWhen(true)] out DocumentSnapshot? document)
+        [NotNullWhen(true)] out RazorDocument? result)
     {
-        document = updater.TryGetProject(projectKey, out var project)
+        result = updater.TryGetProject(projectKey, out var project)
             ? project.GetDocument(documentFilePath)
             : null;
 
-        return document is not null;
+        return result is not null;
     }
 
-    public static DocumentSnapshot? GetDocument(this ProjectSnapshotManager.Updater updater, ProjectKey projectKey, string documentFilePath)
+    public static RazorDocument? GetDocument(this ProjectSnapshotManager.Updater updater, ProjectKey projectKey, string documentFilePath)
         => updater.TryGetDocument(projectKey, documentFilePath, out var result)
             ? result
             : null;
 
-    public static DocumentSnapshot GetRequiredDocument(this ProjectSnapshotManager.Updater updater, ProjectKey projectKey, string documentFilePath)
+    public static RazorDocument GetRequiredDocument(this ProjectSnapshotManager.Updater updater, ProjectKey projectKey, string documentFilePath)
         => updater.GetDocument(projectKey, documentFilePath).AssumeNotNull();
 }

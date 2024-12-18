@@ -49,7 +49,7 @@ internal sealed partial class DocumentState
     public bool TryGetGeneratedOutput([NotNullWhen(true)] out RazorCodeDocument? result)
         => _generatedOutputSource.TryGetValue(out result);
 
-    public ValueTask<RazorCodeDocument> GetGeneratedOutputAsync(DocumentSnapshot document, CancellationToken cancellationToken)
+    public ValueTask<RazorCodeDocument> GetGeneratedOutputAsync(RazorDocument document, CancellationToken cancellationToken)
         => _generatedOutputSource.GetValueAsync(document, cancellationToken);
 
     public bool TryGetTextAndVersion([NotNullWhen(true)] out TextAndVersion? result)

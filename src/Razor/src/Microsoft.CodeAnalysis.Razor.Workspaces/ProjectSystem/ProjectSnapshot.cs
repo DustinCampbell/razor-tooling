@@ -21,7 +21,7 @@ internal sealed class ProjectSnapshot(ProjectState state) : IRazorProject, ILega
     private readonly ProjectState _state = state;
 
     private readonly object _gate = new();
-    private readonly Dictionary<string, DocumentSnapshot> _filePathToDocumentMap = new(FilePathNormalizingComparer.Instance);
+    private readonly Dictionary<string, RazorDocument> _filePathToDocumentMap = new(FilePathNormalizingComparer.Instance);
 
     public HostProject HostProject => _state.HostProject;
     public RazorCompilerOptions CompilerOptions => _state.CompilerOptions;
@@ -59,42 +59,42 @@ internal sealed class ProjectSnapshot(ProjectState state) : IRazorProject, ILega
         }
     }
 
-    public bool TryGetDocument(string filePath, [NotNullWhen(true)] out DocumentSnapshot? document)
+    public bool TryGetDocument(string filePath, [NotNullWhen(true)] out RazorDocument? result)
     {
         lock (_gate)
         {
             // Have we already seen this document? If so, return it!
-            if (_filePathToDocumentMap.TryGetValue(filePath, out var snapshot))
+            if (_filePathToDocumentMap.TryGetValue(filePath, out var document))
             {
-                document = snapshot;
+                result = document;
                 return true;
             }
 
             // Do we have DocumentSate for this document? If not, we're done!
             if (!_state.Documents.TryGetValue(filePath, out var state))
             {
-                document = null;
+                result = null;
                 return false;
             }
 
             // If we have DocumentState, go ahead and create a new DocumentSnapshot.
-            snapshot = new DocumentSnapshot(this, state);
-            _filePathToDocumentMap.Add(filePath, snapshot);
+            document = new RazorDocument(this, state);
+            _filePathToDocumentMap.Add(filePath, document);
 
-            document = snapshot;
+            result = document;
             return true;
         }
     }
 
-    bool IRazorProject.TryGetDocument(string filePath, [NotNullWhen(true)] out IRazorDocument? document)
+    bool IRazorProject.TryGetDocument(string filePath, [NotNullWhen(true)] out IRazorDocument? result)
     {
-        if (TryGetDocument(filePath, out var result))
+        if (TryGetDocument(filePath, out var document))
         {
-            document = result;
+            result = document;
             return true;
         }
 
-        document = null;
+        result = null;
         return false;
     }
 
@@ -103,7 +103,7 @@ internal sealed class ProjectSnapshot(ProjectState state) : IRazorProject, ILega
     /// that include directives specified by the provided document. Otherwise returns an empty
     /// list.
     /// </summary>
-    public ImmutableArray<DocumentSnapshot> GetRelatedDocuments(DocumentSnapshot document)
+    public ImmutableArray<RazorDocument> GetRelatedDocuments(RazorDocument document)
     {
         var targetPath = document.TargetPath;
 
@@ -114,7 +114,7 @@ internal sealed class ProjectSnapshot(ProjectState state) : IRazorProject, ILega
 
         lock (_gate)
         {
-            using var builder = new PooledArrayBuilder<DocumentSnapshot>(capacity: relatedDocuments.Count);
+            using var builder = new PooledArrayBuilder<RazorDocument>(capacity: relatedDocuments.Count);
 
             foreach (var relatedDocumentFilePath in relatedDocuments)
             {

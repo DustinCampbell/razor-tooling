@@ -29,7 +29,7 @@ internal partial class BackgroundDocumentGenerator : IRazorStartupService, IDisp
     private readonly ILogger _logger;
 
     private readonly CancellationTokenSource _disposeTokenSource;
-    private readonly AsyncBatchingWorkQueue<(ProjectSnapshot, DocumentSnapshot)> _workQueue;
+    private readonly AsyncBatchingWorkQueue<(ProjectSnapshot, RazorDocument)> _workQueue;
     private ImmutableHashSet<string> _suppressedDocuments;
     private bool _solutionIsClosing;
 
@@ -58,7 +58,7 @@ internal partial class BackgroundDocumentGenerator : IRazorStartupService, IDisp
         _logger = loggerFactory.GetOrCreateLogger<BackgroundDocumentGenerator>();
 
         _disposeTokenSource = new();
-        _workQueue = new AsyncBatchingWorkQueue<(ProjectSnapshot, DocumentSnapshot)>(
+        _workQueue = new AsyncBatchingWorkQueue<(ProjectSnapshot, RazorDocument)>(
             delay,
             processBatchAsync: ProcessBatchAsync,
             equalityComparer: null,
@@ -82,14 +82,14 @@ internal partial class BackgroundDocumentGenerator : IRazorStartupService, IDisp
     protected Task WaitUntilCurrentBatchCompletesAsync()
         => _workQueue.WaitUntilCurrentBatchCompletesAsync();
 
-    protected virtual async Task ProcessDocumentAsync(ProjectSnapshot project, DocumentSnapshot document, CancellationToken cancellationToken)
+    protected virtual async Task ProcessDocumentAsync(ProjectSnapshot project, RazorDocument document, CancellationToken cancellationToken)
     {
         await document.GetGeneratedOutputAsync(cancellationToken).ConfigureAwait(false);
 
         UpdateFileInfo(project, document);
     }
 
-    public virtual void Enqueue(ProjectSnapshot project, DocumentSnapshot document)
+    public virtual void Enqueue(ProjectSnapshot project, RazorDocument document)
     {
         if (_disposeTokenSource.IsCancellationRequested)
         {
@@ -110,7 +110,7 @@ internal partial class BackgroundDocumentGenerator : IRazorStartupService, IDisp
         _workQueue.AddWork((project, document));
     }
 
-    protected virtual async ValueTask ProcessBatchAsync(ImmutableArray<(ProjectSnapshot, DocumentSnapshot)> items, CancellationToken token)
+    protected virtual async ValueTask ProcessBatchAsync(ImmutableArray<(ProjectSnapshot, RazorDocument)> items, CancellationToken token)
     {
         foreach (var (project, document) in items.GetMostRecentUniqueItems(Comparer.Instance))
         {
@@ -145,7 +145,7 @@ internal partial class BackgroundDocumentGenerator : IRazorStartupService, IDisp
         }
     }
 
-    private bool Suppressed(ProjectSnapshot project, DocumentSnapshot document)
+    private bool Suppressed(ProjectSnapshot project, RazorDocument document)
     {
         var filePath = document.FilePath;
 
@@ -160,7 +160,7 @@ internal partial class BackgroundDocumentGenerator : IRazorStartupService, IDisp
         return false;
     }
 
-    private void UpdateFileInfo(ProjectSnapshot project, DocumentSnapshot document)
+    private void UpdateFileInfo(ProjectSnapshot project, RazorDocument document)
     {
         var filePath = document.FilePath;
 

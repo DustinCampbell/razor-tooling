@@ -42,7 +42,7 @@ internal partial class RazorDiagnosticsPublisher : IDocumentProcessedListener, I
     private readonly Lazy<IDocumentContextFactory> _documentContextFactory;
 
     private readonly CancellationTokenSource _disposeTokenSource;
-    private readonly AsyncBatchingWorkQueue<DocumentSnapshot> _workQueue;
+    private readonly AsyncBatchingWorkQueue<RazorDocument> _workQueue;
     private readonly Dictionary<string, PublishedDiagnostics> _publishedDiagnostics;
 
     private Task _clearClosedDocumentsTask = Task.CompletedTask;
@@ -77,7 +77,7 @@ internal partial class RazorDiagnosticsPublisher : IDocumentProcessedListener, I
         _documentContextFactory = documentContextFactory;
 
         _disposeTokenSource = new();
-        _workQueue = new AsyncBatchingWorkQueue<DocumentSnapshot>(publishDelay, ProcessBatchAsync, _disposeTokenSource.Token);
+        _workQueue = new AsyncBatchingWorkQueue<RazorDocument>(publishDelay, ProcessBatchAsync, _disposeTokenSource.Token);
 
         _publishedDiagnostics = new Dictionary<string, PublishedDiagnostics>(FilePathComparer.Instance);
         _logger = loggerFactory.GetOrCreateLogger<RazorDiagnosticsPublisher>();
@@ -94,14 +94,14 @@ internal partial class RazorDiagnosticsPublisher : IDocumentProcessedListener, I
         _disposeTokenSource.Dispose();
     }
 
-    public void DocumentProcessed(RazorCodeDocument codeDocument, DocumentSnapshot document)
+    public void DocumentProcessed(RazorCodeDocument codeDocument, RazorDocument document)
     {
         _workQueue.AddWork(document);
 
         StartDelayToClearDocuments();
     }
 
-    private async ValueTask ProcessBatchAsync(ImmutableArray<DocumentSnapshot> items, CancellationToken token)
+    private async ValueTask ProcessBatchAsync(ImmutableArray<RazorDocument> items, CancellationToken token)
     {
         foreach (var document in items.GetMostRecentUniqueItems(Comparer.Instance))
         {
@@ -114,7 +114,7 @@ internal partial class RazorDiagnosticsPublisher : IDocumentProcessedListener, I
         }
     }
 
-    private async Task PublishDiagnosticsAsync(DocumentSnapshot document, CancellationToken cancellationToken)
+    private async Task PublishDiagnosticsAsync(RazorDocument document, CancellationToken cancellationToken)
     {
         var result = await document.GetGeneratedOutputAsync(cancellationToken).ConfigureAwait(false);
         var csharpDiagnostics = await GetCSharpDiagnosticsAsync(document, cancellationToken).ConfigureAwait(false);

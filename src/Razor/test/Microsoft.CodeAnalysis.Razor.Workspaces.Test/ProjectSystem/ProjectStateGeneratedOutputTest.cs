@@ -213,11 +213,11 @@ public class ProjectStateGeneratedOutputTest : WorkspaceTestBase
 
     private ValueTask<RazorCodeDocument> GetGeneratedOutputAsync(ProjectState project, HostDocument hostDocument)
     {
-        var document = project.Documents[hostDocument.FilePath];
+        var documentState = project.Documents[hostDocument.FilePath];
 
         var projectSnapshot = new ProjectSnapshot(project);
-        var documentSnapshot = new DocumentSnapshot(projectSnapshot, document);
+        var document = new RazorDocument(projectSnapshot, documentState);
 
-        return documentSnapshot.GetGeneratedOutputAsync(DisposalToken);
+        return document.GetGeneratedOutputAsync(DisposalToken);
     }
 }

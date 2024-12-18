@@ -151,18 +151,18 @@ internal partial class ProjectSnapshotManager : IDisposable
         }
     }
 
-    public bool TryGetProject(ProjectKey projectKey, [NotNullWhen(true)] out ProjectSnapshot? project)
+    public bool TryGetProject(ProjectKey projectKey, [NotNullWhen(true)] out ProjectSnapshot? result)
     {
         using (_readerWriterLock.DisposableRead())
         {
             if (_projectMap.TryGetValue(projectKey, out var entry))
             {
-                project = entry.GetSnapshot();
+                result = entry.GetSnapshot();
                 return true;
             }
         }
 
-        project = null;
+        result = null;
         return false;
     }
 
