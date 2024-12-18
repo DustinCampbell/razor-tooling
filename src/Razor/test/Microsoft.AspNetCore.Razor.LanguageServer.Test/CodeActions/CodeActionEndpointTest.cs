@@ -470,7 +470,7 @@ public class CodeActionEndpointTest(ITestOutputHelper testOutput) : LanguageServ
         };
 
         // Act
-        var results = await endpoint.GetTestAccessor().GetCSharpCodeActionsAsync(documentContext.Snapshot, request, Guid.Empty, DisposalToken);
+        var results = await endpoint.GetTestAccessor().GetCSharpCodeActionsAsync(documentContext.Document, request, Guid.Empty, DisposalToken);
 
         // Assert
         Assert.Empty(results);
@@ -502,7 +502,7 @@ public class CodeActionEndpointTest(ITestOutputHelper testOutput) : LanguageServ
         };
 
         // Act
-        var results = await endpoint.GetTestAccessor().GetCSharpCodeActionsAsync(documentContext.Snapshot, request, Guid.Empty, DisposalToken);
+        var results = await endpoint.GetTestAccessor().GetCSharpCodeActionsAsync(documentContext.Document, request, Guid.Empty, DisposalToken);
 
         // Assert
         var result = Assert.Single(results);

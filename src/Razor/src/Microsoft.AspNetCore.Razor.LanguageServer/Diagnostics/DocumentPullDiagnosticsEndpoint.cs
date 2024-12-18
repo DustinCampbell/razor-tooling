@@ -79,7 +79,7 @@ internal class DocumentPullDiagnosticsEndpoint : IRazorRequestHandler<VSInternal
             return null;
         }
 
-        var documentSnapshot = documentContext.Snapshot;
+        var documentSnapshot = documentContext.Document;
 
         var razorDiagnostics = await GetRazorDiagnosticsAsync(documentSnapshot, cancellationToken).ConfigureAwait(false);
 
@@ -136,9 +136,9 @@ internal class DocumentPullDiagnosticsEndpoint : IRazorRequestHandler<VSInternal
         return allDiagnostics.ToArray();
     }
 
-    private static async Task<VSInternalDiagnosticReport[]?> GetRazorDiagnosticsAsync(IDocumentSnapshot documentSnapshot, CancellationToken cancellationToken)
+    private static async Task<VSInternalDiagnosticReport[]?> GetRazorDiagnosticsAsync(IRazorDocument document, CancellationToken cancellationToken)
     {
-        var codeDocument = await documentSnapshot.GetGeneratedOutputAsync(cancellationToken).ConfigureAwait(false);
+        var codeDocument = await document.GetGeneratedOutputAsync(cancellationToken).ConfigureAwait(false);
         var sourceText = codeDocument.Source.Text;
         var csharpDocument = codeDocument.GetCSharpDocument();
         var diagnostics = csharpDocument.Diagnostics;
@@ -148,7 +148,7 @@ internal class DocumentPullDiagnosticsEndpoint : IRazorRequestHandler<VSInternal
             return null;
         }
 
-        var convertedDiagnostics = RazorDiagnosticConverter.Convert(diagnostics, sourceText, documentSnapshot);
+        var convertedDiagnostics = RazorDiagnosticConverter.Convert(diagnostics, sourceText, document);
 
         return
         [

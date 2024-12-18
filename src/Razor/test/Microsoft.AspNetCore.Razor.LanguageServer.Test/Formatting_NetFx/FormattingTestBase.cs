@@ -253,7 +253,7 @@ public abstract class FormattingTestBase : RazorToolingIntegrationTestBase
     protected static TextEdit Edit(int startLine, int startChar, int endLine, int endChar, string newText)
         => VsLspFactory.CreateTextEdit(startLine, startChar, endLine, endChar, newText);
 
-    private static (RazorCodeDocument, IDocumentSnapshot) CreateCodeDocumentAndSnapshot(SourceText text, string path, ImmutableArray<TagHelperDescriptor> tagHelpers = default, string? fileKind = null, bool allowDiagnostics = false, bool inGlobalNamespace = false)
+    private static (RazorCodeDocument, IRazorDocument) CreateCodeDocumentAndSnapshot(SourceText text, string path, ImmutableArray<TagHelperDescriptor> tagHelpers = default, string? fileKind = null, bool allowDiagnostics = false, bool inGlobalNamespace = false)
     {
         fileKind ??= FileKinds.Component;
         tagHelpers = tagHelpers.NullToEmpty();
@@ -280,14 +280,14 @@ public abstract class FormattingTestBase : RazorToolingIntegrationTestBase
         var importPath = new Uri("file:///path/to/_Imports.razor").AbsolutePath;
         var importText = SourceText.From(DefaultImports);
         var importSource = RazorSourceDocument.Create(importText, RazorSourceDocumentProperties.Create(importPath, importPath));
-        var importSnapshotMock = new StrictMock<IDocumentSnapshot>();
-        importSnapshotMock
+        var importDocumentMock = new StrictMock<IRazorDocument>();
+        importDocumentMock
             .Setup(d => d.GetTextAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(importText);
-        importSnapshotMock
+        importDocumentMock
             .Setup(d => d.FilePath)
             .Returns(importPath);
-        importSnapshotMock
+        importDocumentMock
             .Setup(d => d.TargetPath)
             .Returns(importPath);
 
@@ -313,49 +313,49 @@ public abstract class FormattingTestBase : RazorToolingIntegrationTestBase
             Assert.False(codeDocument.GetCSharpDocument().Diagnostics.Any(), "Error creating document:" + Environment.NewLine + string.Join(Environment.NewLine, codeDocument.GetCSharpDocument().Diagnostics));
         }
 
-        var documentSnapshot = CreateDocumentSnapshot(
-            path, fileKind, codeDocument, projectEngine, [importSnapshotMock.Object], [importSource], tagHelpers, inGlobalNamespace);
+        var documentSnapshot = CreateDocument(
+            path, fileKind, codeDocument, projectEngine, [importDocumentMock.Object], [importSource], tagHelpers, inGlobalNamespace);
 
         return (codeDocument, documentSnapshot);
     }
 
-    internal static IDocumentSnapshot CreateDocumentSnapshot(
+    internal static IRazorDocument CreateDocument(
         string path,
         string fileKind,
         RazorCodeDocument codeDocument,
         RazorProjectEngine projectEngine,
-        ImmutableArray<IDocumentSnapshot> imports,
+        ImmutableArray<IRazorDocument> imports,
         ImmutableArray<RazorSourceDocument> importDocuments,
         ImmutableArray<TagHelperDescriptor> tagHelpers,
         bool inGlobalNamespace)
     {
-        var snapshotMock = new StrictMock<IDocumentSnapshot>();
+        var documentMock = new StrictMock<IRazorDocument>();
 
-        snapshotMock
+        documentMock
             .Setup(d => d.GetGeneratedOutputAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(codeDocument);
-        snapshotMock
+        documentMock
             .Setup(d => d.FilePath)
             .Returns(path);
-        snapshotMock
+        documentMock
             .Setup(d => d.Project.Key)
             .Returns(TestProjectKey.Create("/obj"));
-        snapshotMock
+        documentMock
             .Setup(d => d.TargetPath)
             .Returns(path);
-        snapshotMock
+        documentMock
             .Setup(d => d.GetTextAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(codeDocument.Source.Text);
-        snapshotMock
+        documentMock
             .Setup(d => d.Project.GetTagHelpersAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(tagHelpers);
-        snapshotMock
+        documentMock
             .Setup(d => d.FileKind)
             .Returns(fileKind);
-        snapshotMock
+        documentMock
             .Setup(d => d.Version)
             .Returns(1);
-        snapshotMock
+        documentMock
             .Setup(d => d.WithText(It.IsAny<SourceText>()))
             .Returns<SourceText>(text =>
             {
@@ -365,15 +365,15 @@ public abstract class FormattingTestBase : RazorToolingIntegrationTestBase
 
                 var codeDocument = projectEngine.ProcessDesignTime(source, fileKind, importDocuments, tagHelpers);
 
-                return CreateDocumentSnapshot(
+                return CreateDocument(
                     path, fileKind, codeDocument, projectEngine, imports, importDocuments, tagHelpers, inGlobalNamespace);
             });
 
-        var generatorMock = snapshotMock.As<IDesignTimeCodeGenerator>();
+        var generatorMock = documentMock.As<IDesignTimeCodeGenerator>();
         generatorMock
             .Setup(x => x.GenerateDesignTimeOutputAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(codeDocument);
 
-        return snapshotMock.Object;
+        return documentMock.Object;
     }
 }

@@ -948,23 +948,23 @@ public partial class SemanticTokensTest(ITestOutputHelper testOutput) : TagHelpe
 
         var projectSnapshot = StrictMock.Of<IProjectSnapshot>();
 
-        var documentSnapshotMock = new StrictMock<IDocumentSnapshot>();
-        documentSnapshotMock
+        var documentMock = new StrictMock<IRazorDocument>();
+        documentMock
             .SetupGet(x => x.Project)
             .Returns(projectSnapshot);
-        documentSnapshotMock
+        documentMock
             .Setup(x => x.GetGeneratedOutputAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(document);
-        documentSnapshotMock
+        documentMock
             .Setup(x => x.GetTextAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(document.Source.Text);
-        documentSnapshotMock
+        documentMock
             .SetupGet(x => x.Version)
             .Returns(version);
 
         return new DocumentContext(
             uri: new Uri($@"c:\${GetFileName(isRazorFile)}"),
-            snapshot: documentSnapshotMock.Object,
+            document: documentMock.Object,
             projectContext: null);
     }
 

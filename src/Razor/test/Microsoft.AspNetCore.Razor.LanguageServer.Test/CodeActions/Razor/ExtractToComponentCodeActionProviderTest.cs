@@ -631,8 +631,8 @@ public class ExtractToComponentCodeActionProviderTest(ITestOutputHelper testOutp
         }));
         codeDocument.SetSyntaxTree(syntaxTree);
 
-        var documentSnapshot = new StrictMock<IDocumentSnapshot>();
-        documentSnapshot
+        var documentMock = new StrictMock<IRazorDocument>();
+        documentMock
             .Setup(document => document.GetTextAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(codeDocument.Source.Text);
 
@@ -640,7 +640,7 @@ public class ExtractToComponentCodeActionProviderTest(ITestOutputHelper testOutp
 
         var context = new RazorCodeActionContext(
             request,
-            documentSnapshot.Object,
+            documentMock.Object,
             codeDocument,
             DelegatedDocumentUri: null,
             selectionSpan.Start,

@@ -253,27 +253,27 @@ public class HoverEndpointTest(ITestOutputHelper testOutput) : TagHelperServiceT
         var hostProject = TestHostProject.Create("C:/project.csproj");
         var projectSnapshot = TestMocks.CreateProjectSnapshot(hostProject, projectWorkspaceState);
 
-        var documentSnapshotMock = new StrictMock<IDocumentSnapshot>();
-        documentSnapshotMock
+        var documentMock = new StrictMock<IRazorDocument>();
+        documentMock
             .Setup(x => x.GetGeneratedOutputAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(codeDocument);
-        documentSnapshotMock
+        documentMock
             .Setup(x => x.GetTextAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(codeDocument.Source.Text);
-        documentSnapshotMock
+        documentMock
             .SetupGet(x => x.FilePath)
             .Returns(path);
-        documentSnapshotMock
+        documentMock
             .SetupGet(x => x.FileKind)
             .Returns(FileKinds.Component);
-        documentSnapshotMock
+        documentMock
             .SetupGet(x => x.Version)
             .Returns(0);
-        documentSnapshotMock
+        documentMock
             .SetupGet(x => x.Project)
             .Returns(projectSnapshot);
 
-        var documentContext = new DocumentContext(new Uri(path), documentSnapshotMock.Object, projectContext: null);
+        var documentContext = new DocumentContext(new Uri(path), documentMock.Object, projectContext: null);
         var position = codeDocument.Source.Text.GetPosition(code.Position);
 
         return (documentContext, position);

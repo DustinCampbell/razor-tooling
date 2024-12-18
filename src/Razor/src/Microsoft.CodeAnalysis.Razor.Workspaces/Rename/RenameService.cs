@@ -79,7 +79,7 @@ internal class RenameService(
         documentChanges.Add(fileRename);
         AddEditsForCodeDocument(documentChanges, originTagHelpers, newName, documentContext.Uri, codeDocument);
 
-        var documentSnapshots = GetAllDocumentSnapshots(documentContext.FilePath, solutionQueryOperations);
+        var documentSnapshots = GetAllDocuments(documentContext.FilePath, solutionQueryOperations);
 
         foreach (var documentSnapshot in documentSnapshots)
         {
@@ -101,9 +101,9 @@ internal class RenameService(
         };
     }
 
-    private static ImmutableArray<IDocumentSnapshot> GetAllDocumentSnapshots(string filePath, ISolutionQueryOperations solutionQueryOperations)
+    private static ImmutableArray<IRazorDocument> GetAllDocuments(string filePath, ISolutionQueryOperations solutionQueryOperations)
     {
-        using var documentSnapshots = new PooledArrayBuilder<IDocumentSnapshot>();
+        using var documents = new PooledArrayBuilder<IRazorDocument>();
         using var _ = StringHashSetPool.GetPooledObject(out var documentPaths);
 
         foreach (var project in solutionQueryOperations.GetProjects())
@@ -128,17 +128,17 @@ internal class RenameService(
                     throw new InvalidOperationException($"{documentPath} in project {project.FilePath} but not retrievable");
                 }
 
-                documentSnapshots.Add(snapshot);
+                documents.Add(snapshot);
             }
         }
 
-        return documentSnapshots.DrainToImmutable();
+        return documents.DrainToImmutable();
     }
 
-    private RenameFile GetFileRenameForComponent(IDocumentSnapshot documentSnapshot, string newPath)
+    private RenameFile GetFileRenameForComponent(IRazorDocument document, string newPath)
         => new RenameFile
         {
-            OldUri = BuildUri(documentSnapshot.FilePath),
+            OldUri = BuildUri(document.FilePath),
             NewUri = BuildUri(newPath),
         };
 
@@ -168,22 +168,22 @@ internal class RenameService(
         List<SumType<TextDocumentEdit, CreateFile, RenameFile, DeleteFile>> documentChanges,
         ImmutableArray<TagHelperDescriptor> originTagHelpers,
         string newName,
-        IDocumentSnapshot documentSnapshot,
+        IRazorDocument document,
         CancellationToken cancellationToken)
     {
-        if (!FileKinds.IsComponent(documentSnapshot.FileKind))
+        if (!FileKinds.IsComponent(document.FileKind))
         {
             return;
         }
 
-        var codeDocument = await documentSnapshot.GetGeneratedOutputAsync(cancellationToken).ConfigureAwait(false);
+        var codeDocument = await document.GetGeneratedOutputAsync(cancellationToken).ConfigureAwait(false);
         if (codeDocument.IsUnsupported())
         {
             return;
         }
 
         // VS Code in Windows expects path to start with '/'
-        var uri = BuildUri(documentSnapshot.FilePath);
+        var uri = BuildUri(document.FilePath);
 
         AddEditsForCodeDocument(documentChanges, originTagHelpers, newName, uri, codeDocument);
     }
@@ -270,7 +270,7 @@ internal class RenameService(
             return default;
         }
 
-        var tagHelpers = await documentContext.Snapshot.Project.GetTagHelpersAsync(cancellationToken).ConfigureAwait(false);
+        var tagHelpers = await documentContext.Document.Project.GetTagHelpersAsync(cancellationToken).ConfigureAwait(false);
         var associatedTagHelper = FindAssociatedTagHelper(primaryTagHelper, tagHelpers);
         if (associatedTagHelper is null)
         {

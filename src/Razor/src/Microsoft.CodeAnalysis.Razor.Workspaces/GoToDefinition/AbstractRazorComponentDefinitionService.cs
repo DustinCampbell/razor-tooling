@@ -26,7 +26,7 @@ internal abstract class AbstractRazorComponentDefinitionService(
     private readonly ILogger _logger = logger;
 
     public async Task<LspLocation?> GetDefinitionAsync(
-        IDocumentSnapshot documentSnapshot,
+        IRazorDocument document,
         DocumentPositionInfo positionInfo,
         ISolutionQueryOperations solutionQueryOperations,
         bool ignoreAttributes,
@@ -38,13 +38,13 @@ internal abstract class AbstractRazorComponentDefinitionService(
             return null;
         }
 
-        if (!FileKinds.IsComponent(documentSnapshot.FileKind))
+        if (!FileKinds.IsComponent(document.FileKind))
         {
-            _logger.LogInformation($"'{documentSnapshot.FileKind}' is not a component type.");
+            _logger.LogInformation($"'{document.FileKind}' is not a component type.");
             return null;
         }
 
-        var codeDocument = await documentSnapshot.GetGeneratedOutputAsync(cancellationToken).ConfigureAwait(false);
+        var codeDocument = await document.GetGeneratedOutputAsync(cancellationToken).ConfigureAwait(false);
 
         if (!RazorComponentDefinitionHelpers.TryGetBoundTagHelpers(codeDocument, positionInfo.HostDocumentIndex, ignoreAttributes, _logger, out var boundTagHelper, out var boundAttribute))
         {
@@ -71,14 +71,14 @@ internal abstract class AbstractRazorComponentDefinitionService(
         return VsLspFactory.CreateLocation(componentFilePath, range);
     }
 
-    private async Task<LspRange> GetNavigateRangeAsync(IDocumentSnapshot documentSnapshot, BoundAttributeDescriptor? attributeDescriptor, CancellationToken cancellationToken)
+    private async Task<LspRange> GetNavigateRangeAsync(IRazorDocument document, BoundAttributeDescriptor? attributeDescriptor, CancellationToken cancellationToken)
     {
         if (attributeDescriptor is not null)
         {
             _logger.LogInformation($"Attempting to get definition from an attribute directly.");
 
             var range = await RazorComponentDefinitionHelpers
-                .TryGetPropertyRangeAsync(documentSnapshot, attributeDescriptor.GetPropertyName(), _documentMappingService, _logger, cancellationToken)
+                .TryGetPropertyRangeAsync(document, attributeDescriptor.GetPropertyName(), _documentMappingService, _logger, cancellationToken)
                 .ConfigureAwait(false);
 
             if (range is not null)

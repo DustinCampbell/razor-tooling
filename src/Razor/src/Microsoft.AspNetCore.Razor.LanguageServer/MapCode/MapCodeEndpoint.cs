@@ -95,7 +95,7 @@ internal sealed class MapCodeEndpoint(
             var fileKind = FileKinds.GetFileKindFromFilePath(documentContext.FilePath);
             var extension = Path.GetExtension(documentContext.FilePath);
 
-            var snapshot = documentContext.Snapshot;
+            var snapshot = documentContext.Document;
 
             foreach (var content in mapping.Contents)
             {
@@ -229,7 +229,7 @@ internal sealed class MapCodeEndpoint(
                     razorNodesToMap.Add(nodeToMap);
                 }
 
-                var sourceText = await documentContext.Snapshot.GetTextAsync(cancellationToken).ConfigureAwait(false);
+                var sourceText = await documentContext.Document.GetTextAsync(cancellationToken).ConfigureAwait(false);
 
                 foreach (var nodeToMap in razorNodesToMap)
                 {

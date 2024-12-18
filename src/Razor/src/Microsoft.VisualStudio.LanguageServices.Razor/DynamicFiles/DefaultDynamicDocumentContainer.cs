@@ -13,17 +13,17 @@ using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 namespace Microsoft.VisualStudio.Razor.DynamicFiles;
 
 // This types purpose is to serve as a non-Razor specific document delivery mechanism for Roslyn.
-// Given a DocumentSnapshot this class allows the retrieval of a TextLoader for the generated C#
+// Given an IRazorDocument this class allows the retrieval of a TextLoader for the generated C#
 // and services to help map spans and excerpts to and from the top-level Razor document to behind
 // the scenes C#.
-internal sealed class DefaultDynamicDocumentContainer(IDocumentSnapshot documentSnapshot, ILoggerFactory loggerFactory) : IDynamicDocumentContainer
+internal sealed class DefaultDynamicDocumentContainer(IRazorDocument document, ILoggerFactory loggerFactory) : IDynamicDocumentContainer
 {
-    private readonly IDocumentSnapshot _documentSnapshot = documentSnapshot ?? throw new ArgumentNullException(nameof(documentSnapshot));
+    private readonly IRazorDocument _document = document ?? throw new ArgumentNullException(nameof(document));
     private RazorDocumentExcerptService? _excerptService;
     private RazorSpanMappingService? _spanMappingService;
     private RazorMappingService? _mappingService;
 
-    public string FilePath => _documentSnapshot.FilePath;
+    public string FilePath => _document.FilePath;
 
     public bool SupportsDiagnostics => false;
 
@@ -33,15 +33,15 @@ internal sealed class DefaultDynamicDocumentContainer(IDocumentSnapshot document
     }
 
     public TextLoader GetTextLoader(string filePath)
-        => new GeneratedDocumentTextLoader(_documentSnapshot, filePath);
+        => new GeneratedDocumentTextLoader(_document, filePath);
 
     public IRazorDocumentExcerptServiceImplementation GetExcerptService()
         => _excerptService ?? InterlockedOperations.Initialize(ref _excerptService,
-            new RazorDocumentExcerptService(_documentSnapshot, GetSpanMappingService()));
+            new RazorDocumentExcerptService(_document, GetSpanMappingService()));
 
     public IRazorSpanMappingService GetSpanMappingService()
         => _spanMappingService ?? InterlockedOperations.Initialize(ref _spanMappingService,
-            new RazorSpanMappingService(_documentSnapshot));
+            new RazorSpanMappingService(_document));
 
     public IRazorDocumentPropertiesService GetDocumentPropertiesService()
     {
@@ -54,5 +54,5 @@ internal sealed class DefaultDynamicDocumentContainer(IDocumentSnapshot document
 
     public IRazorMappingService? GetMappingService()
         => _mappingService ?? InterlockedOperations.Initialize(ref _mappingService,
-            new RazorMappingService(_documentSnapshot, NoOpTelemetryReporter.Instance, loggerFactory));
+            new RazorMappingService(_document, NoOpTelemetryReporter.Instance, loggerFactory));
 }

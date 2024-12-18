@@ -54,7 +54,7 @@ public class HtmlCodeActionResolverTest(ITestOutputHelper testOutput) : Language
 
         var editMappingServiceMock = new StrictMock<IEditMappingService>();
         editMappingServiceMock
-            .Setup(x => x.RemapWorkspaceEditAsync(It.IsAny<IDocumentSnapshot>(), It.IsAny<WorkspaceEdit>(), It.IsAny<CancellationToken>()))
+            .Setup(x => x.RemapWorkspaceEditAsync(It.IsAny<IRazorDocument>(), It.IsAny<WorkspaceEdit>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(remappedEdit);
 
         var resolver = new HtmlCodeActionResolver(editMappingServiceMock.Object);

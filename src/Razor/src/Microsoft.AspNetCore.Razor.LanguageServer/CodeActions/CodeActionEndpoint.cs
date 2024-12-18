@@ -80,7 +80,7 @@ internal sealed class CodeActionEndpoint(
         }
 
         var languageKind = codeDocument.GetLanguageKind(absoluteIndex, rightAssociative: false);
-        var documentSnapshot = documentContext.Snapshot;
+        var documentSnapshot = documentContext.Document;
 
         var delegatedCodeActions = languageKind switch
         {
@@ -98,21 +98,21 @@ internal sealed class CodeActionEndpoint(
             cancellationToken).ConfigureAwait(false);
     }
 
-    private async Task<RazorVSInternalCodeAction[]> GetHtmlCodeActionsAsync(IDocumentSnapshot documentSnapshot, VSCodeActionParams request, Guid correlationId, CancellationToken cancellationToken)
+    private async Task<RazorVSInternalCodeAction[]> GetHtmlCodeActionsAsync(IRazorDocument document, VSCodeActionParams request, Guid correlationId, CancellationToken cancellationToken)
     {
-        var htmlCodeActions = await _delegatedCodeActionProvider.GetDelegatedCodeActionsAsync(RazorLanguageKind.Html, request, documentSnapshot.Version, correlationId, cancellationToken).ConfigureAwait(false);
+        var htmlCodeActions = await _delegatedCodeActionProvider.GetDelegatedCodeActionsAsync(RazorLanguageKind.Html, request, document.Version, correlationId, cancellationToken).ConfigureAwait(false);
         return htmlCodeActions ?? [];
     }
 
-    private async Task<RazorVSInternalCodeAction[]> GetCSharpCodeActionsAsync(IDocumentSnapshot documentSnapshot, VSCodeActionParams request, Guid correlationId, CancellationToken cancellationToken)
+    private async Task<RazorVSInternalCodeAction[]> GetCSharpCodeActionsAsync(IRazorDocument document, VSCodeActionParams request, Guid correlationId, CancellationToken cancellationToken)
     {
-        var csharpRequest = await _codeActionsService.GetCSharpCodeActionsRequestAsync(documentSnapshot, request, cancellationToken).ConfigureAwait(false);
+        var csharpRequest = await _codeActionsService.GetCSharpCodeActionsRequestAsync(document, request, cancellationToken).ConfigureAwait(false);
         if (csharpRequest is null)
         {
             return [];
         }
 
-        var csharpCodeActions = await _delegatedCodeActionProvider.GetDelegatedCodeActionsAsync(RazorLanguageKind.CSharp, csharpRequest, documentSnapshot.Version, correlationId, cancellationToken).ConfigureAwait(false);
+        var csharpCodeActions = await _delegatedCodeActionProvider.GetDelegatedCodeActionsAsync(RazorLanguageKind.CSharp, csharpRequest, document.Version, correlationId, cancellationToken).ConfigureAwait(false);
         return csharpCodeActions ?? [];
     }
 
@@ -125,7 +125,7 @@ internal sealed class CodeActionEndpoint(
             instance._supportsCodeActionResolve = value;
         }
 
-        public Task<RazorVSInternalCodeAction[]> GetCSharpCodeActionsAsync(IDocumentSnapshot documentSnapshot, VSCodeActionParams request, Guid correlationId, CancellationToken cancellationToken)
-            => instance.GetCSharpCodeActionsAsync(documentSnapshot, request, correlationId, cancellationToken);
+        public Task<RazorVSInternalCodeAction[]> GetCSharpCodeActionsAsync(IRazorDocument document, VSCodeActionParams request, Guid correlationId, CancellationToken cancellationToken)
+            => instance.GetCSharpCodeActionsAsync(document, request, correlationId, cancellationToken);
     }
 }

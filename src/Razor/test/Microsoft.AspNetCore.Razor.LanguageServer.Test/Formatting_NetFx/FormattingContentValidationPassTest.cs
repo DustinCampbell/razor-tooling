@@ -78,21 +78,17 @@ public class FormattingContentValidationPassTest(ITestOutputHelper testOutput) :
         var source = SourceText.From(input.Text);
         var path = "file:///path/to/document.razor";
         var uri = new Uri(path);
-        var (codeDocument, documentSnapshot) = CreateCodeDocumentAndSnapshot(source, uri.AbsolutePath, fileKind: fileKind);
+        var (document, codeDocument) = CreateDocument(source, uri.AbsolutePath, fileKind: fileKind);
         var options = new RazorFormattingOptions()
         {
             TabSize = tabSize,
             InsertSpaces = insertSpaces,
         };
 
-        var context = FormattingContext.Create(
-            documentSnapshot,
-            codeDocument,
-            options);
-        return context;
+        return FormattingContext.Create(document, codeDocument, options);
     }
 
-    private static (RazorCodeDocument, IDocumentSnapshot) CreateCodeDocumentAndSnapshot(SourceText text, string path, ImmutableArray<TagHelperDescriptor> tagHelpers = default, string? fileKind = null)
+    private static (IRazorDocument, RazorCodeDocument) CreateDocument(SourceText text, string path, ImmutableArray<TagHelperDescriptor> tagHelpers = default, string? fileKind = null)
     {
         fileKind ??= FileKinds.Component;
         tagHelpers = tagHelpers.NullToEmpty();
@@ -104,20 +100,20 @@ public class FormattingContentValidationPassTest(ITestOutputHelper testOutput) :
         });
         var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, fileKind, importSources: default, tagHelpers);
 
-        var documentSnapshot = new StrictMock<IDocumentSnapshot>();
-        documentSnapshot
+        var documentMock = new StrictMock<IRazorDocument>();
+        documentMock
             .Setup(d => d.GetGeneratedOutputAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(codeDocument);
-        documentSnapshot
+        documentMock
             .Setup(d => d.TargetPath)
             .Returns(path);
-        documentSnapshot
+        documentMock
             .Setup(d => d.Project.GetTagHelpersAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(tagHelpers);
-        documentSnapshot
+        documentMock
             .Setup(d => d.FileKind)
             .Returns(fileKind);
 
-        return (codeDocument, documentSnapshot.Object);
+        return (documentMock.Object, codeDocument);
     }
 }

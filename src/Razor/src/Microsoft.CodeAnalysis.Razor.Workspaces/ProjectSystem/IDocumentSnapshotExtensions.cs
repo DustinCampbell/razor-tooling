@@ -13,29 +13,29 @@ namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 internal static class IDocumentSnapshotExtensions
 {
     public static async Task<TagHelperDescriptor?> TryGetTagHelperDescriptorAsync(
-        this IDocumentSnapshot documentSnapshot,
+        this IRazorDocument document,
         CancellationToken cancellationToken)
     {
         // No point doing anything if its not a component
-        if (documentSnapshot.FileKind != FileKinds.Component)
+        if (document.FileKind != FileKinds.Component)
         {
             return null;
         }
 
-        var razorCodeDocument = await documentSnapshot.GetGeneratedOutputAsync(cancellationToken).ConfigureAwait(false);
+        var razorCodeDocument = await document.GetGeneratedOutputAsync(cancellationToken).ConfigureAwait(false);
         if (razorCodeDocument is null)
         {
             return null;
         }
 
-        var project = documentSnapshot.Project;
+        var project = document.Project;
 
         // If we got this far, we can check for tag helpers
         var tagHelpers = await project.GetTagHelpersAsync(cancellationToken).ConfigureAwait(false);
         foreach (var tagHelper in tagHelpers)
         {
             // Check the typename and namespace match
-            if (documentSnapshot.IsPathCandidateForComponent(tagHelper.GetTypeNameIdentifier().AsMemory()) &&
+            if (document.IsPathCandidateForComponent(tagHelper.GetTypeNameIdentifier().AsMemory()) &&
                 razorCodeDocument.ComponentNamespaceMatches(tagHelper.GetTypeNamespace()))
             {
                 return tagHelper;
@@ -45,14 +45,14 @@ internal static class IDocumentSnapshotExtensions
         return null;
     }
 
-    public static bool IsPathCandidateForComponent(this IDocumentSnapshot documentSnapshot, ReadOnlyMemory<char> path)
+    public static bool IsPathCandidateForComponent(this IRazorDocument document, ReadOnlyMemory<char> path)
     {
-        if (documentSnapshot.FileKind != FileKinds.Component)
+        if (document.FileKind != FileKinds.Component)
         {
             return false;
         }
 
-        var fileName = Path.GetFileNameWithoutExtension(documentSnapshot.FilePath);
+        var fileName = Path.GetFileNameWithoutExtension(document.FilePath);
         return fileName.AsSpan().Equals(path.Span, FilePathComparison.Instance);
     }
 }

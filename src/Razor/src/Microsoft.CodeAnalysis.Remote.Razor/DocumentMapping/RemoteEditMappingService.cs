@@ -22,9 +22,9 @@ internal sealed class RemoteEditMappingService(
 {
     private readonly RemoteSnapshotManager _snapshotManager = snapshotManager;
 
-    protected override bool TryGetDocumentContext(IDocumentSnapshot contextDocumentSnapshot, Uri razorDocumentUri, VSProjectContext? projectContext, [NotNullWhen(true)] out DocumentContext? documentContext)
+    protected override bool TryGetDocumentContext(IRazorDocument contextDocument, Uri razorDocumentUri, VSProjectContext? projectContext, [NotNullWhen(true)] out DocumentContext? documentContext)
     {
-        if (contextDocumentSnapshot is not RemoteDocumentSnapshot originSnapshot)
+        if (contextDocument is not RemoteDocumentSnapshot originSnapshot)
         {
             throw new InvalidOperationException("RemoteEditMappingService can only be used with RemoteDocumentSnapshot instances.");
         }

@@ -9,13 +9,13 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer;
 
-internal class DocumentSnapshotTextLoader(IDocumentSnapshot documentSnapshot) : TextLoader
+internal class DocumentTextLoader(IRazorDocument document) : TextLoader
 {
-    private readonly IDocumentSnapshot _documentSnapshot = documentSnapshot;
+    private readonly IRazorDocument _document = document;
 
     public override async Task<TextAndVersion> LoadTextAndVersionAsync(LoadTextOptions options, CancellationToken cancellationToken)
     {
-        var sourceText = await _documentSnapshot.GetTextAsync(cancellationToken).ConfigureAwait(false);
+        var sourceText = await _document.GetTextAsync(cancellationToken).ConfigureAwait(false);
         var textAndVersion = TextAndVersion.Create(sourceText, VersionStamp.Default);
 
         return textAndVersion;

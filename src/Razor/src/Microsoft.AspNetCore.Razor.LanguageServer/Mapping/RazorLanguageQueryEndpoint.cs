@@ -39,8 +39,8 @@ internal sealed class RazorLanguageQueryEndpoint(IDocumentMappingService documen
             return null;
         }
 
-        var documentSnapshot = documentContext.Snapshot;
-        var documentVersion = documentContext.Snapshot.Version;
+        var documentSnapshot = documentContext.Document;
+        var documentVersion = documentContext.Document.Version;
 
         var codeDocument = await documentSnapshot.GetGeneratedOutputAsync(cancellationToken).ConfigureAwait(false);
         var sourceText = codeDocument.Source.Text;

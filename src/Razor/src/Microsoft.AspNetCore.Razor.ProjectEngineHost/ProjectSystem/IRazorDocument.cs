@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.AspNetCore.Razor.ProjectSystem;
 
-internal interface IDocumentSnapshot
+internal interface IRazorDocument
 {
     string FileKind { get; }
     string FilePath { get; }
@@ -35,5 +35,5 @@ internal interface IDocumentSnapshot
     bool TryGetTextVersion(out VersionStamp result);
     bool TryGetGeneratedOutput([NotNullWhen(true)] out RazorCodeDocument? result);
 
-    IDocumentSnapshot WithText(SourceText text);
+    IRazorDocument WithText(SourceText text);
 }

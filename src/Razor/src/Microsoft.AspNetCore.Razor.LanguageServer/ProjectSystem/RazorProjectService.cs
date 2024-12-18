@@ -459,7 +459,7 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
             // it has received text change info from LSP. eg, if someone changes the TargetPath of the file while its open in the editor
             // with unsaved changes, we don't want to reload it from disk.
             var textLoader = FilePathComparer.Instance.Equals(currentHostDocument.FilePath, newHostDocument.FilePath)
-                ? new DocumentSnapshotTextLoader(document)
+                ? new DocumentTextLoader(document)
                 : _remoteTextLoaderFactory.Create(newFilePath);
 
             updater.RemoveDocument(currentProjectKey, currentHostDocument.FilePath);
@@ -512,7 +512,7 @@ internal partial class RazorProjectService : IRazorProjectService, IRazorProject
 
         var currentHostDocument = document.HostDocument;
 
-        var textLoader = new DocumentSnapshotTextLoader(document);
+        var textLoader = new DocumentTextLoader(document);
 
         // If we're moving from the misc files project to a real project, then target path will be the full path to the file
         // and the next update to the project will update it to be a relative path. To save a bunch of busy work if that is

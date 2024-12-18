@@ -56,13 +56,13 @@ internal partial class RazorMapToDocumentEditsEndpoint(IDocumentMappingService d
             return new RazorMapToDocumentEditsResponse()
             {
                 TextChanges = request.TextChanges,
-                HostDocumentVersion = documentContext.Snapshot.Version,
+                HostDocumentVersion = documentContext.Document.Version,
             };
         }
 
         var mappedEdits = await RazorEditHelper.MapCSharpEditsAsync(
             request.TextChanges.ToImmutableArray(),
-            documentContext.Snapshot,
+            documentContext.Document,
             _documentMappingService,
             _telemetryReporter,
             cancellationToken).ConfigureAwait(false);

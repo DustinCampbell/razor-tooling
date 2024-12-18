@@ -86,7 +86,7 @@ internal sealed class ProjectSnapshot(ProjectState state) : IProjectSnapshot, IL
         }
     }
 
-    bool IProjectSnapshot.TryGetDocument(string filePath, [NotNullWhen(true)] out IDocumentSnapshot? document)
+    bool IProjectSnapshot.TryGetDocument(string filePath, [NotNullWhen(true)] out IRazorDocument? document)
     {
         if (TryGetDocument(filePath, out var result))
         {

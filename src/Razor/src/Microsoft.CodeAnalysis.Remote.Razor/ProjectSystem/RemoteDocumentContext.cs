@@ -10,7 +10,7 @@ internal sealed class RemoteDocumentContext : DocumentContext
 {
     public TextDocument TextDocument => Snapshot.TextDocument;
 
-    public new RemoteDocumentSnapshot Snapshot => (RemoteDocumentSnapshot)base.Snapshot;
+    public RemoteDocumentSnapshot Snapshot => (RemoteDocumentSnapshot)base.Document;
 
     public ISolutionQueryOperations GetSolutionQueryOperations()
         => Snapshot.ProjectSnapshot.SolutionSnapshot;

@@ -59,7 +59,7 @@ public class RazorLanguageServerBenchmarkBase : ProjectSnapshotManagerBenchmarkB
 
     private protected ILogger Logger { get; }
 
-    internal async Task<IDocumentSnapshot> GetDocumentSnapshotAsync(string projectFilePath, string filePath, string targetPath)
+    internal async Task<IRazorDocument> GetDocumentAsync(string projectFilePath, string filePath, string targetPath)
     {
         var intermediateOutputPath = Path.Combine(Path.GetDirectoryName(projectFilePath), "obj");
         var hostProject = new HostProject(projectFilePath, intermediateOutputPath, RazorConfiguration.Default, rootNamespace: null);

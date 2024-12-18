@@ -10,7 +10,7 @@ namespace Microsoft.AspNetCore.Razor.LanguageServer;
 
 internal partial class OpenDocumentGenerator
 {
-    private sealed class Comparer : IEqualityComparer<IDocumentSnapshot>
+    private sealed class Comparer : IEqualityComparer<IRazorDocument>
     {
         public static readonly Comparer Instance = new();
 
@@ -18,7 +18,7 @@ internal partial class OpenDocumentGenerator
         {
         }
 
-        public bool Equals(IDocumentSnapshot? x, IDocumentSnapshot? y)
+        public bool Equals(IRazorDocument? x, IRazorDocument? y)
         {
             if (x is null)
             {
@@ -33,7 +33,7 @@ internal partial class OpenDocumentGenerator
                 FilePathComparer.Instance.Equals(x.FilePath, y.FilePath);
         }
 
-        public int GetHashCode(IDocumentSnapshot obj)
+        public int GetHashCode(IRazorDocument obj)
         {
             var hash = HashCodeCombiner.Start();
             hash.Add(obj.Project.Key.Id, FilePathComparer.Instance);

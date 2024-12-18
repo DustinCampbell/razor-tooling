@@ -39,7 +39,7 @@ public abstract class DocumentExcerptServiceTestBase(ITestOutputHelper testOutpu
     }
 
     // Adds the text to a ProjectSnapshot, generates code, and updates the workspace.
-    private (IDocumentSnapshot primary, Document secondary) InitializeDocument(SourceText sourceText)
+    private (IRazorDocument primary, Document secondary) InitializeDocument(SourceText sourceText)
     {
         var state = ProjectState
             .Create(_hostProject, LanguageServerFeatureOptions.ToCompilerOptions(), ProjectEngineFactoryProvider)
@@ -69,7 +69,7 @@ public abstract class DocumentExcerptServiceTestBase(ITestOutputHelper testOutpu
 
     // Maps a span in the primary buffer to the secondary buffer. This is only valid for C# code
     // that appears in the primary buffer.
-    private static async Task<TextSpan> GetSecondarySpanAsync(IDocumentSnapshot primary, TextSpan primarySpan, Document secondary, CancellationToken cancellationToken)
+    private static async Task<TextSpan> GetSecondarySpanAsync(IRazorDocument primary, TextSpan primarySpan, Document secondary, CancellationToken cancellationToken)
     {
         var output = await primary.GetGeneratedOutputAsync(cancellationToken);
 
@@ -98,7 +98,7 @@ public abstract class DocumentExcerptServiceTestBase(ITestOutputHelper testOutpu
         return (generatedDocument, razorSourceText, primarySpan, generatedSpan);
     }
 
-    internal async Task<(IDocumentSnapshot primary, Document generatedDocument, TextSpan generatedSpan)> InitializeWithSnapshotAsync(string razorSource, CancellationToken cancellationToken)
+    internal async Task<(IRazorDocument primary, Document generatedDocument, TextSpan generatedSpan)> InitializeWithSnapshotAsync(string razorSource, CancellationToken cancellationToken)
     {
         var (razorSourceText, primarySpan) = CreateText(razorSource);
         var (primary, generatedDocument) = InitializeDocument(razorSourceText);

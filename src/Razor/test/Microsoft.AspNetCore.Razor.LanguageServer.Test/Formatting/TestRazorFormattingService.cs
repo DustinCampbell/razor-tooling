@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Razor.LanguageServer.Hosting;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.Formatting;
 using Microsoft.CodeAnalysis.Razor.Logging;
-using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.Formatting;
 
@@ -21,7 +20,7 @@ internal static class TestRazorFormattingService
     public static Task<IRazorFormattingService> CreateWithFullSupportAsync(
         ILoggerFactory loggerFactory,
         RazorCodeDocument? codeDocument = null,
-        IDocumentSnapshot? documentSnapshot = null,
+        IRazorDocument? documentSnapshot = null,
         RazorLSPOptions? razorLSPOptions = null)
     {
         return Task.FromResult<IRazorFormattingService>(null!);

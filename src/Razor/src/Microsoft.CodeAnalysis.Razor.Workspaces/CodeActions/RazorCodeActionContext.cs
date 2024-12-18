@@ -11,7 +11,7 @@ namespace Microsoft.CodeAnalysis.Razor.CodeActions;
 
 internal sealed record class RazorCodeActionContext(
     VSCodeActionParams Request,
-    IDocumentSnapshot DocumentSnapshot,
+    IRazorDocument Document,
     RazorCodeDocument CodeDocument,
     Uri? DelegatedDocumentUri,
     int StartAbsoluteIndex,

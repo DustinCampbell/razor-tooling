@@ -76,21 +76,17 @@ public class FormattingDiagnosticValidationPassTest(ITestOutputHelper testOutput
         var source = SourceText.From(input.Text);
         var path = "file:///path/to/document.razor";
         var uri = new Uri(path);
-        var (codeDocument, documentSnapshot) = CreateCodeDocumentAndSnapshot(source, uri.AbsolutePath, fileKind: fileKind);
+        var (document, codeDocument) = CreateDocument(source, uri.AbsolutePath, fileKind: fileKind);
         var options = new RazorFormattingOptions()
         {
             TabSize = tabSize,
             InsertSpaces = insertSpaces,
         };
 
-        var context = FormattingContext.Create(
-            documentSnapshot,
-            codeDocument,
-            options);
-        return context;
+        return FormattingContext.Create(document, codeDocument, options);
     }
 
-    private static (RazorCodeDocument, IDocumentSnapshot) CreateCodeDocumentAndSnapshot(SourceText text, string path, ImmutableArray<TagHelperDescriptor> tagHelpers = default, string? fileKind = null)
+    private static (IRazorDocument, RazorCodeDocument) CreateDocument(SourceText text, string path, ImmutableArray<TagHelperDescriptor> tagHelpers = default, string? fileKind = null)
     {
         fileKind ??= FileKinds.Component;
         tagHelpers = tagHelpers.NullToEmpty();
@@ -102,9 +98,9 @@ public class FormattingDiagnosticValidationPassTest(ITestOutputHelper testOutput
         });
         var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, fileKind, importSources: default, tagHelpers);
 
-        var documentSnapshot = FormattingTestBase.CreateDocumentSnapshot(
+        var document = FormattingTestBase.CreateDocument(
             path, fileKind, codeDocument, projectEngine, imports: [], importDocuments: [], tagHelpers, inGlobalNamespace: false);
 
-        return (codeDocument, documentSnapshot);
+        return (document, codeDocument);
     }
 }

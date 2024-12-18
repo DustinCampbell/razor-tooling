@@ -22,7 +22,7 @@ public class RazorDocumentMappingBenchmark : RazorLanguageServerBenchmarkBase
 
     private IDocumentMappingService DocumentMappingService { get; set; }
 
-    private IDocumentSnapshot DocumentSnapshot { get; set; }
+    private IRazorDocument Document { get; set; }
 
     private RazorCSharpDocument CSharpDocument { get; set; }
 
@@ -49,9 +49,9 @@ public class RazorDocumentMappingBenchmark : RazorLanguageServerBenchmarkBase
 
         var targetPath = "/Components/Pages/Generated.razor";
 
-        DocumentSnapshot = await GetDocumentSnapshotAsync(projectFilePath, _filePath, targetPath);
+        Document = await GetDocumentAsync(projectFilePath, _filePath, targetPath);
 
-        var codeDocument = await DocumentSnapshot.GetGeneratedOutputAsync(CancellationToken.None);
+        var codeDocument = await Document.GetGeneratedOutputAsync(CancellationToken.None);
         CSharpDocument = codeDocument.GetCSharpDocument();
     }
 

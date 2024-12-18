@@ -12,7 +12,7 @@ namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 internal static class CompilationHelpers
 {
     internal static async Task<RazorCodeDocument> GenerateCodeDocumentAsync(
-        IDocumentSnapshot document,
+        IRazorDocument document,
         RazorProjectEngine projectEngine,
         RazorCompilerOptions compilerOptions,
         CancellationToken cancellationToken)
@@ -24,7 +24,7 @@ internal static class CompilationHelpers
     }
 
     internal static async Task<RazorCodeDocument> GenerateCodeDocumentAsync(
-        IDocumentSnapshot document,
+        IRazorDocument document,
         RazorProjectEngine projectEngine,
         ImmutableArray<ImportItem> imports,
         RazorCompilerOptions compilerOptions,
@@ -39,7 +39,7 @@ internal static class CompilationHelpers
     }
 
     internal static async Task<RazorCodeDocument> GenerateDesignTimeCodeDocumentAsync(
-        IDocumentSnapshot document,
+        IRazorDocument document,
         RazorProjectEngine projectEngine,
         ImmutableArray<ImportItem> imports,
         CancellationToken cancellationToken)
@@ -53,7 +53,7 @@ internal static class CompilationHelpers
     }
 
     internal static async Task<RazorCodeDocument> GenerateDesignTimeCodeDocumentAsync(
-        IDocumentSnapshot document,
+        IRazorDocument document,
         RazorProjectEngine projectEngine,
         CancellationToken cancellationToken)
     {

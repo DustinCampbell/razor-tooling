@@ -23,9 +23,9 @@ using Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.VisualStudio.Razor.DynamicFiles;
 
-internal class RazorMappingService(IDocumentSnapshot document, ITelemetryReporter telemetryReporter, ILoggerFactory loggerFactory) : IRazorMappingService
+internal class RazorMappingService(IRazorDocument document, ITelemetryReporter telemetryReporter, ILoggerFactory loggerFactory) : IRazorMappingService
 {
-    private readonly IDocumentSnapshot _document = document;
+    private readonly IRazorDocument _document = document;
     private readonly ITelemetryReporter _telemetryReporter = telemetryReporter;
     private readonly IDocumentMappingService _documentMappingService = new DocumentMappingService(loggerFactory);
     private readonly ILogger _logger = loggerFactory.GetOrCreateLogger<RazorMappingService>();

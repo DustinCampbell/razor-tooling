@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis.Razor.GoToDefinition;
 internal interface IRazorComponentDefinitionService
 {
     Task<LspLocation?> GetDefinitionAsync(
-        IDocumentSnapshot documentSnapshot,
+        IRazorDocument document,
         DocumentPositionInfo positionInfo,
         ISolutionQueryOperations solutionQueryOperations,
         bool ignoreAttributes,

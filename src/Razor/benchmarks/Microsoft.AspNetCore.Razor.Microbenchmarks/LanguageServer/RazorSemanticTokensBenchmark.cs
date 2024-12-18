@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using BenchmarkDotNet.Attributes;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.LanguageServer.Semantic;
-using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.DocumentMapping;
 using Microsoft.CodeAnalysis.Razor.Logging;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
@@ -27,10 +26,6 @@ namespace Microsoft.AspNetCore.Razor.Microbenchmarks.LanguageServer;
 public class RazorSemanticTokensBenchmark : RazorLanguageServerBenchmarkBase
 {
     private IRazorSemanticTokensInfoService RazorSemanticTokenService { get; set; }
-
-    private Uri DocumentUri => DocumentContext.Uri;
-
-    private IDocumentSnapshot DocumentSnapshot => DocumentContext.Snapshot;
 
     private DocumentContext DocumentContext { get; set; }
 
@@ -59,7 +54,7 @@ public class RazorSemanticTokensBenchmark : RazorLanguageServerBenchmarkBase
         TargetPath = $"/Components/Pages/{fileName}.razor";
 
         var documentUri = new Uri(filePath);
-        var documentSnapshot = await GetDocumentSnapshotAsync(ProjectFilePath, filePath, TargetPath);
+        var documentSnapshot = await GetDocumentAsync(ProjectFilePath, filePath, TargetPath);
         DocumentContext = new DocumentContext(documentUri, documentSnapshot, projectContext: null);
 
         var text = await DocumentContext.GetSourceTextAsync(CancellationToken.None).ConfigureAwait(false);

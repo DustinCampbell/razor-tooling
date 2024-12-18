@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
-internal sealed class DocumentSnapshot(ProjectSnapshot project, DocumentState state) : IDocumentSnapshot, IDesignTimeCodeGenerator, ILegacyDocumentSnapshot
+internal sealed class DocumentSnapshot(ProjectSnapshot project, DocumentState state) : IRazorDocument, IDesignTimeCodeGenerator, ILegacyDocumentSnapshot
 {
     public ProjectSnapshot Project { get; } = project;
 
@@ -24,7 +24,7 @@ internal sealed class DocumentSnapshot(ProjectSnapshot project, DocumentState st
     public string TargetPath => _state.HostDocument.TargetPath;
     public int Version => _state.Version;
 
-    IProjectSnapshot IDocumentSnapshot.Project => Project;
+    IProjectSnapshot IRazorDocument.Project => Project;
 
     public bool TryGetText([NotNullWhen(true)] out SourceText? result)
         => _state.TryGetText(out result);
@@ -44,7 +44,7 @@ internal sealed class DocumentSnapshot(ProjectSnapshot project, DocumentState st
     public ValueTask<RazorCodeDocument> GetGeneratedOutputAsync(CancellationToken cancellationToken)
         => _state.GetGeneratedOutputAsync(this, cancellationToken);
 
-    public IDocumentSnapshot WithText(SourceText text)
+    public IRazorDocument WithText(SourceText text)
     {
         return new DocumentSnapshot(Project, _state.WithText(text, VersionStamp.Create()));
     }

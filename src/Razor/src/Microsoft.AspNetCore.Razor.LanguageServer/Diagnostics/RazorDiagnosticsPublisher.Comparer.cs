@@ -9,7 +9,7 @@ namespace Microsoft.AspNetCore.Razor.LanguageServer.Diagnostics;
 
 internal partial class RazorDiagnosticsPublisher
 {
-    private sealed class Comparer : IEqualityComparer<IDocumentSnapshot>
+    private sealed class Comparer : IEqualityComparer<IRazorDocument>
     {
         public static readonly Comparer Instance = new();
 
@@ -17,7 +17,7 @@ internal partial class RazorDiagnosticsPublisher
         {
         }
 
-        public bool Equals(IDocumentSnapshot? x, IDocumentSnapshot? y)
+        public bool Equals(IRazorDocument? x, IRazorDocument? y)
         {
             var filePathX = x?.FilePath;
             var filePathY = y?.FilePath;
@@ -25,7 +25,7 @@ internal partial class RazorDiagnosticsPublisher
             return FilePathComparer.Instance.Equals(filePathX, filePathY);
         }
 
-        public int GetHashCode(IDocumentSnapshot obj)
+        public int GetHashCode(IRazorDocument obj)
             => FilePathComparer.Instance.GetHashCode(obj.FilePath);
     }
 }

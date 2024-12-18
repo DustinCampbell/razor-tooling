@@ -16,13 +16,12 @@ using Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.Formatting;
 
-internal sealed class HtmlFormatter(
-    IClientConnection clientConnection) : IHtmlFormatter
+internal sealed class HtmlFormatter(IClientConnection clientConnection) : IHtmlFormatter
 {
     private readonly IClientConnection _clientConnection = clientConnection;
 
     public async Task<ImmutableArray<TextChange>> GetDocumentFormattingEditsAsync(
-        IDocumentSnapshot documentSnapshot,
+        IRazorDocument document,
         Uri uri,
         FormattingOptions options,
         CancellationToken cancellationToken)
@@ -33,7 +32,7 @@ internal sealed class HtmlFormatter(
             {
                 Uri = uri,
             },
-            HostDocumentVersion = documentSnapshot.Version,
+            HostDocumentVersion = document.Version,
             Options = options
         };
 
@@ -47,12 +46,12 @@ internal sealed class HtmlFormatter(
             return [];
         }
 
-        var sourceText = await documentSnapshot.GetTextAsync(cancellationToken).ConfigureAwait(false);
+        var sourceText = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
         return result.Edits.SelectAsArray(sourceText.GetTextChange);
     }
 
     public async Task<ImmutableArray<TextChange>> GetOnTypeFormattingEditsAsync(
-        IDocumentSnapshot documentSnapshot,
+        IRazorDocument document,
         Uri uri,
         Position position,
         string triggerCharacter,
@@ -65,7 +64,7 @@ internal sealed class HtmlFormatter(
             Character = triggerCharacter.ToString(),
             TextDocument = new TextDocumentIdentifier { Uri = uri },
             Options = options,
-            HostDocumentVersion = documentSnapshot.Version,
+            HostDocumentVersion = document.Version,
         };
 
         var result = await _clientConnection.SendRequestAsync<RazorDocumentOnTypeFormattingParams, RazorDocumentFormattingResponse?>(
@@ -78,7 +77,7 @@ internal sealed class HtmlFormatter(
             return [];
         }
 
-        var sourceText = await documentSnapshot.GetTextAsync(cancellationToken).ConfigureAwait(false);
+        var sourceText = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
         return result.Edits.SelectAsArray(sourceText.GetTextChange);
     }
 }

@@ -79,7 +79,7 @@ public class DocumentContextFactoryTest : LanguageServerTestBase
 
         // Assert
         Assert.Equal(uri, documentContext.Uri);
-        Assert.Same(documentSnapshot, documentContext.Snapshot);
+        Assert.Same(documentSnapshot, documentContext.Document);
     }
 
     [Fact]
@@ -133,8 +133,8 @@ public class DocumentContextFactoryTest : LanguageServerTestBase
         Assert.True(factory.TryCreate(uri, out var documentContext));
 
         // Assert
-        Assert.Equal(1, documentContext.Snapshot.Version);
+        Assert.Equal(1, documentContext.Document.Version);
         Assert.Equal(uri, documentContext.Uri);
-        Assert.Same(documentSnapshot, documentContext.Snapshot);
+        Assert.Same(documentSnapshot, documentContext.Document);
     }
 }

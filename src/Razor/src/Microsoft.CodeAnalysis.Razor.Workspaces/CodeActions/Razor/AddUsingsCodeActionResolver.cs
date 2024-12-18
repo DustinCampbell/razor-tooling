@@ -27,7 +27,7 @@ internal class AddUsingsCodeActionResolver : IRazorCodeActionResolver
             return null;
         }
 
-        var documentSnapshot = documentContext.Snapshot;
+        var documentSnapshot = documentContext.Document;
 
         var codeDocument = await documentSnapshot.GetGeneratedOutputAsync(cancellationToken).ConfigureAwait(false);
         if (codeDocument.IsUnsupported())
