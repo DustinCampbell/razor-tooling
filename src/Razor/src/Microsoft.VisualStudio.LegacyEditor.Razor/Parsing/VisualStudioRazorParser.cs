@@ -223,7 +223,7 @@ internal class VisualStudioRazorParser : IVisualStudioRazorParser, IDisposable
 
         var projectSnapshot = _documentTracker.ProjectSnapshot.AssumeNotNull();
 
-        _projectEngine = _projectEngineFactoryProvider.Create(projectSnapshot, ConfigureProjectEngine).AssumeNotNull();
+        _projectEngine = _projectEngineFactoryProvider.Create(projectSnapshot, ConfigureProjectEngine);
 
         Debug.Assert(_projectEngine.Engine is not null);
         Debug.Assert(_projectEngine.FileSystem is not null);
