@@ -24,11 +24,11 @@ public static class RazorFileKinds
     public static bool IsLegacy(RazorFileKind fileKind)
         => fileKind is RazorFileKind.Legacy;
 
-    public static RazorFileKind ToRazorFileKind(this string? fileKind)
+    public static RazorFileKind ToRazorFileKind(this string? fileKind, string? filePath = null)
     {
-        if (fileKind == null)
+        if (fileKind is null)
         {
-            return RazorFileKind.None;
+            return GetFileKindFromFilePath(filePath);
         }
 
         if (Comparer.Equals(FileKinds.Component, fileKind))
@@ -74,9 +74,12 @@ public static class RazorFileKinds
         return RazorFileKind.Component;
     }
 
-    public static RazorFileKind GetFileKindFromFilePath(string filePath)
+    public static RazorFileKind GetFileKindFromFilePath(string? filePath)
     {
-        ArgHelper.ThrowIfNull(filePath);
+        if (filePath is null)
+        {
+            return RazorFileKind.None;
+        }
 
         Debug.Assert(RazorExtension.Length < ComponentImportsFileName.Length);
 

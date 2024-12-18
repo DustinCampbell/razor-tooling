@@ -9,8 +9,6 @@ namespace Microsoft.AspNetCore.Razor.Language;
 
 internal class DefaultRazorProjectItem : RazorProjectItem
 {
-    private readonly string _fileKind;
-
     /// <summary>
     /// Initializes a new instance of <see cref="DefaultRazorProjectItem"/>.
     /// </summary>
@@ -25,7 +23,7 @@ internal class DefaultRazorProjectItem : RazorProjectItem
         BasePath = basePath;
         FilePath = filePath;
         RelativePhysicalPath = relativePhysicalPath;
-        _fileKind = fileKind;
+        FileKind = fileKind.ToRazorFileKind(filePath);
         File = file;
         CssScope = cssScope;
     }
@@ -42,7 +40,7 @@ internal class DefaultRazorProjectItem : RazorProjectItem
 
     public override string RelativePhysicalPath { get; }
 
-    public override RazorFileKind FileKind => _fileKind is null ? base.FileKind : _fileKind.ToRazorFileKind();
+    public override RazorFileKind FileKind { get; }
 
     public override string CssScope { get; }
 

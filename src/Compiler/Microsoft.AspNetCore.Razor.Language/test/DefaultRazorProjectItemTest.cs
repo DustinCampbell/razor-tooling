@@ -81,7 +81,7 @@ public class DefaultRazorProjectItemTest
         var fileInfo = new FileInfo(Path.Combine(TestFolder, "Views", "FileDoesNotExist.cshtml"));
 
         // Act
-        var projectItem = new DefaultRazorProjectItem("/Views", "/FileDoesNotExist.cshtml", Path.Combine("Views", "FileDoesNotExist.cshtml"), "test", fileInfo, cssScope: null);
+        var projectItem = new DefaultRazorProjectItem("/Views", "/FileDoesNotExist.cshtml", Path.Combine("Views", "FileDoesNotExist.cshtml"), fileKind: null, fileInfo, cssScope: null);
 
         // Assert
         Assert.False(projectItem.Exists);
@@ -92,7 +92,7 @@ public class DefaultRazorProjectItemTest
     {
         // Arrange
         var fileInfo = new FileInfo(Path.Combine(TestFolder, "Home.cshtml"));
-        var projectItem = new DefaultRazorProjectItem("/", "/Home.cshtml", "Home.cshtml", "test", fileInfo, cssScope: null);
+        var projectItem = new DefaultRazorProjectItem("/", "/Home.cshtml", "Home.cshtml", fileKind: null, fileInfo, cssScope: null);
 
         // Act
         var stream = projectItem.Read();

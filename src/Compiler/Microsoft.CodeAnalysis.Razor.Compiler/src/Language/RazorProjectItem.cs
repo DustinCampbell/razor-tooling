@@ -49,7 +49,7 @@ public abstract class RazorProjectItem
     {
         get
         {
-            return FilePath == null ? RazorFileKind.None : RazorFileKinds.GetFileKindFromFilePath(FilePath);
+            return RazorFileKinds.GetFileKindFromFilePath(FilePath);
         }
     }
 

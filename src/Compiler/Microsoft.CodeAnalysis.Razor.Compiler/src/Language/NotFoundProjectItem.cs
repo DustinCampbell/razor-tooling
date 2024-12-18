@@ -23,7 +23,7 @@ internal class NotFoundProjectItem : RazorProjectItem
     {
         BasePath = basePath;
         FilePath = path;
-        FileKind = (fileKind ?? FileKinds.GetFileKindFromFilePath(path)).ToRazorFileKind();
+        FileKind = fileKind.ToRazorFileKind(path);
     }
 
     /// <inheritdoc />
