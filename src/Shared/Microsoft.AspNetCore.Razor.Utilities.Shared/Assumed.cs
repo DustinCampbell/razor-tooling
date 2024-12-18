@@ -37,32 +37,16 @@ internal static class Assumed
     /// </summary>
     /// <exception cref="InvalidOperationException"/>
     [DoesNotReturn]
-    public static void Unreachable([CallerFilePath] string? path = null, [CallerLineNumber] int line = 0)
-        => ThrowInvalidOperation(SR.This_program_location_is_thought_to_be_unreachable, path, line);
+    public static void Unreachable(string? message = null, [CallerFilePath] string? path = null, [CallerLineNumber] int line = 0)
+        => ThrowInvalidOperation(message ?? SR.This_program_location_is_thought_to_be_unreachable, path, line);
 
     /// <summary>
     ///  Can be called at points that are assumed to be unreachable at runtime.
     /// </summary>
     /// <exception cref="InvalidOperationException"/>
     [DoesNotReturn]
-    public static void Unreachable(string message, [CallerFilePath] string? path = null, [CallerLineNumber] int line = 0)
-        => ThrowInvalidOperation(message, path, line);
-
-    /// <summary>
-    ///  Can be called at points that are assumed to be unreachable at runtime.
-    /// </summary>
-    /// <exception cref="InvalidOperationException"/>
-    [DoesNotReturn]
-    public static T Unreachable<T>([CallerFilePath] string? path = null, [CallerLineNumber] int line = 0)
-        => ThrowInvalidOperation<T>(SR.This_program_location_is_thought_to_be_unreachable, path, line);
-
-    /// <summary>
-    ///  Can be called at points that are assumed to be unreachable at runtime.
-    /// </summary>
-    /// <exception cref="InvalidOperationException"/>
-    [DoesNotReturn]
-    public static T Unreachable<T>(string message, [CallerFilePath] string? path = null, [CallerLineNumber] int line = 0)
-        => ThrowInvalidOperation<T>(message, path, line);
+    public static T Unreachable<T>(string? message = null, [CallerFilePath] string? path = null, [CallerLineNumber] int line = 0)
+        => ThrowInvalidOperation<T>(message ?? SR.This_program_location_is_thought_to_be_unreachable, path, line);
 
     [DebuggerHidden]
     [DoesNotReturn]
