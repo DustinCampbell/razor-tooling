@@ -70,8 +70,7 @@ internal class RemoteRazorProjectFileSystem : RazorProjectFileSystem
             absolutePath = _root + path;
         }
 
-        absolutePath = FilePathNormalizer.Normalize(absolutePath);
-        return absolutePath;
+        return FilePathNormalizer.Normalize(absolutePath);
 
         static bool IsPathRootedForPlatform(string path)
         {
@@ -81,28 +80,20 @@ internal class RemoteRazorProjectFileSystem : RazorProjectFileSystem
                 return false;
             }
 
-            if (!Path.IsPathRooted(path))
-            {
-                return false;
-            }
-
-            return true;
+            return Path.IsPathRooted(path);
         }
     }
 
-    internal bool FilePathRootedBy(string path, string root)
+    internal static bool FilePathRootedBy(string path, string root)
     {
         if (path.Length < root.Length)
         {
             return false;
         }
 
-        var potentialRoot = path[..root.Length];
-        if (FilePathComparer.Instance.Equals(potentialRoot, root))
-        {
-            return true;
-        }
+        var pathSpan = path.AsSpan();
+        var rootSpan = root.AsSpan();
 
-        return false;
+        return rootSpan.Equals(pathSpan[..rootSpan.Length], FilePathComparison.Instance);
     }
 }
