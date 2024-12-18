@@ -16,10 +16,7 @@ internal class RemoteRazorProjectFileSystem : RazorProjectFileSystem
 
     public RemoteRazorProjectFileSystem(string root)
     {
-        if (root is null)
-        {
-            throw new ArgumentNullException(nameof(root));
-        }
+        ArgHelper.ThrowIfNull(root);
 
         _root = FilePathNormalizer.NormalizeDirectory(root);
     }
@@ -36,10 +33,7 @@ internal class RemoteRazorProjectFileSystem : RazorProjectFileSystem
 
     public override RazorProjectItem GetItem(string path, string? fileKind)
     {
-        if (path is null)
-        {
-            throw new ArgumentNullException(nameof(path));
-        }
+        ArgHelper.ThrowIfNull(path);
 
         var physicalPath = NormalizeAndEnsureValidPath(path);
         if (FilePathRootedBy(physicalPath, _root))
