@@ -9,7 +9,7 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 public class ComponentPreprocessorDirectiveTest(bool designTime = false)
         : RazorBaselineIntegrationTestBase(layer: TestProject.Layer.Compiler)
 {
-    internal override string FileKind => FileKinds.Component;
+    internal override RazorFileKind FileKind => RazorFileKind.Component;
 
     internal override bool UseTwoPhaseCompilation => true;
 

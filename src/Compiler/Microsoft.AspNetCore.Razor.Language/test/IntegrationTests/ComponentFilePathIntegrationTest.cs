@@ -11,7 +11,7 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 // Integration tests focused on file path handling for class/namespace names
 public class ComponentFilePathIntegrationTest : RazorIntegrationTestBase
 {
-    internal override string FileKind => FileKinds.Component;
+    internal override RazorFileKind FileKind => RazorFileKind.Component;
 
     [Fact]
     public void FileNameIsInvalidClassName_SanitizesInvalidClassName()

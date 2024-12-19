@@ -10,7 +10,7 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
 public class ComponentImportsIntegrationTest : RazorIntegrationTestBase
 {
-    internal override string FileKind => FileKinds.ComponentImport;
+    internal override RazorFileKind FileKind => RazorFileKind.ComponentImport;
 
     [Fact]
     public void NoErrorsForUsingStatements()

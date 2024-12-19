@@ -10,7 +10,7 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
 public class ComponentBindIntegrationTest : RazorIntegrationTestBase
 {
-    internal override string FileKind => FileKinds.Component;
+    internal override RazorFileKind FileKind => RazorFileKind.Component;
 
     internal override bool UseTwoPhaseCompilation => true;
 
