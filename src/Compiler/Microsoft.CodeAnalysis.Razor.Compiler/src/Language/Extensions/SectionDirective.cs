@@ -1,9 +1,6 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
-using System;
 using Microsoft.AspNetCore.Razor.Language.Legacy;
 
 namespace Microsoft.AspNetCore.Razor.Language.Extensions;
@@ -21,12 +18,9 @@ public static class SectionDirective
 
     public static void Register(RazorProjectEngineBuilder builder)
     {
-        if (builder == null)
-        {
-            throw new ArgumentNullException(nameof(builder));
-        }
+        ArgHelper.ThrowIfNull(builder);
 
-        builder.AddDirective(Directive, FileKinds.Legacy, FileKinds.Component);
+        builder.AddDirective(Directive, RazorFileKind.Legacy, RazorFileKind.Component);
         builder.Features.Add(new SectionDirectivePass());
         builder.AddTargetExtension(new SectionTargetExtension());
     }

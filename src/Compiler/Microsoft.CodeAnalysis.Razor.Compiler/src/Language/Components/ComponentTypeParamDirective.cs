@@ -1,10 +1,6 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
-using System;
-
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
 internal static class ComponentTypeParamDirective
@@ -21,12 +17,9 @@ internal static class ComponentTypeParamDirective
 
     public static RazorProjectEngineBuilder Register(RazorProjectEngineBuilder builder)
     {
-        if (builder == null)
-        {
-            throw new ArgumentNullException(nameof(builder));
-        }
+        ArgHelper.ThrowIfNull(builder);
 
-        builder.AddDirective(Directive, FileKinds.Component, FileKinds.ComponentImport);
+        builder.AddDirective(Directive, RazorFileKind.Component, RazorFileKind.ComponentImport);
         return builder;
     }
 }
