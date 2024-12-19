@@ -152,7 +152,7 @@ public class ComponentWhitespacePassTest
     private RazorCodeDocument CreateDocument(string content)
     {
         var source = RazorSourceDocument.Create(content, "test.cshtml");
-        return ProjectEngine.CreateCodeDocumentCore(source, FileKinds.Component);
+        return ProjectEngine.CreateCodeDocumentCore(source, RazorFileKind.Component);
     }
 
     private DocumentIntermediateNode Lower(RazorCodeDocument codeDocument)

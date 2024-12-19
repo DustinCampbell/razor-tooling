@@ -166,14 +166,14 @@ public class AddUsingsCodeActionResolverTest(ITestOutputHelper testOutput) : Lan
             @model IndexModel
             """;
 
-        var projectItem = new TestRazorProjectItem("c:/Test.cshtml", "c:/Test.cshtml", "Test.cshtml") { Content = contents };
+        var projectItem = new TestRazorProjectItem("c:/Test.cshtml", "c:/Test.cshtml", "Test.cshtml", fileKind: RazorFileKind.Legacy) { Content = contents };
         var projectEngine = RazorProjectEngine.Create(RazorConfiguration.Default, TestRazorProjectFileSystem.Empty, (builder) =>
         {
             PageDirective.Register(builder);
             ModelDirective.Register(builder);
         });
+
         var codeDocument = projectEngine.Process(projectItem);
-        codeDocument.SetFileKind(FileKinds.Legacy);
 
         var documentContext = CreateDocumentContext(documentPath, codeDocument);
         var resolver = new AddUsingsCodeActionResolver();
@@ -391,10 +391,9 @@ public class AddUsingsCodeActionResolverTest(ITestOutputHelper testOutput) : Lan
     {
         var fileName = "Test.razor";
         var filePath = "c:/{fileName}";
-        var projectItem = new TestRazorProjectItem(filePath, filePath, fileName) { Content = text };
+        var projectItem = new TestRazorProjectItem(filePath, filePath, fileName, fileKind: RazorFileKind.Component) { Content = text };
         var projectEngine = RazorProjectEngine.Create(RazorConfiguration.Default, TestRazorProjectFileSystem.Empty, (builder) => PageDirective.Register(builder));
-        var codeDocument = projectEngine.Process(projectItem);
-        codeDocument.SetFileKind(FileKinds.Component);
-        return codeDocument;
+
+        return projectEngine.Process(projectItem);
     }
 }

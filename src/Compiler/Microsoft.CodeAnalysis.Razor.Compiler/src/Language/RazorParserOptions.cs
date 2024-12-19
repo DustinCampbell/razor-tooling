@@ -14,29 +14,26 @@ public sealed class RazorParserOptions
     public static RazorParserOptions CreateDefault()
     {
         return new RazorParserOptions(
-            Array.Empty<DirectiveDescriptor>(),
+            directives: [],
             designTime: false,
             parseLeadingDirectives: false,
             useRoslynTokenizer: false,
             version: RazorLanguageVersion.Latest,
-            fileKind: FileKinds.Legacy,
+            fileKind: RazorFileKind.Legacy,
             enableSpanEditHandlers: false,
             csharpParseOptions: CSharpParseOptions.Default);
     }
 
     public static RazorParserOptions Create(Action<RazorParserOptionsBuilder> configure)
     {
-        return Create(configure, fileKind: FileKinds.Legacy);
+        return Create(configure, fileKind: RazorFileKind.Legacy);
     }
 
-    public static RazorParserOptions Create(Action<RazorParserOptionsBuilder> configure, string fileKind)
+    public static RazorParserOptions Create(Action<RazorParserOptionsBuilder> configure, RazorFileKind? fileKind)
     {
-        if (configure == null)
-        {
-            throw new ArgumentNullException(nameof(configure));
-        }
+        ArgHelper.ThrowIfNull(configure);
 
-        var builder = new RazorParserOptionsBuilder(designTime: false, version: RazorLanguageVersion.Latest, fileKind ?? FileKinds.Legacy);
+        var builder = new RazorParserOptionsBuilder(designTime: false, version: RazorLanguageVersion.Latest, fileKind ?? RazorFileKind.Legacy);
         configure(builder);
         var options = builder.Build();
 
@@ -48,26 +45,28 @@ public sealed class RazorParserOptions
         return CreateDesignTime(configure, fileKind: null);
     }
 
-    public static RazorParserOptions CreateDesignTime(Action<RazorParserOptionsBuilder> configure, string fileKind)
+    public static RazorParserOptions CreateDesignTime(Action<RazorParserOptionsBuilder> configure, RazorFileKind? fileKind)
     {
-        if (configure == null)
-        {
-            throw new ArgumentNullException(nameof(configure));
-        }
+        ArgHelper.ThrowIfNull(configure);
 
-        var builder = new RazorParserOptionsBuilder(designTime: true, version: RazorLanguageVersion.Latest, fileKind ?? FileKinds.Legacy);
+        var builder = new RazorParserOptionsBuilder(designTime: true, version: RazorLanguageVersion.Latest, fileKind ?? RazorFileKind.Legacy);
         configure(builder);
         var options = builder.Build();
 
         return options;
     }
 
-    internal RazorParserOptions(DirectiveDescriptor[] directives, bool designTime, bool parseLeadingDirectives, bool useRoslynTokenizer, RazorLanguageVersion version, string fileKind, bool enableSpanEditHandlers, CSharpParseOptions csharpParseOptions)
+    internal RazorParserOptions(
+        DirectiveDescriptor[] directives,
+        bool designTime,
+        bool parseLeadingDirectives,
+        bool useRoslynTokenizer,
+        RazorLanguageVersion version,
+        RazorFileKind fileKind,
+        bool enableSpanEditHandlers,
+        CSharpParseOptions csharpParseOptions)
     {
-        if (directives == null)
-        {
-            throw new ArgumentNullException(nameof(directives));
-        }
+        ArgHelper.ThrowIfNull(directives);
 
         if (parseLeadingDirectives && useRoslynTokenizer)
         {
@@ -105,7 +104,7 @@ public sealed class RazorParserOptions
 
     public RazorLanguageVersion Version { get; } = RazorLanguageVersion.Latest;
 
-    internal string FileKind { get; }
+    public RazorFileKind FileKind { get; }
 
     internal RazorParserFeatureFlags FeatureFlags { get; /* Testing Only */ init; }
 

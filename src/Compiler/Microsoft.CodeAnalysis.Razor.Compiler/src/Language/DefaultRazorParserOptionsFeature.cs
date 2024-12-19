@@ -12,14 +12,12 @@ internal class DefaultRazorParserOptionsFeature : RazorEngineFeatureBase, IRazor
 {
     private readonly bool _designTime;
     private readonly RazorLanguageVersion _version;
-    private readonly string _fileKind;
     private IConfigureRazorParserOptionsFeature[] _configureOptions;
 
-    public DefaultRazorParserOptionsFeature(bool designTime, RazorLanguageVersion version, string fileKind)
+    public DefaultRazorParserOptionsFeature(bool designTime, RazorLanguageVersion version)
     {
         _designTime = designTime;
         _version = version;
-        _fileKind = fileKind;
     }
 
     protected override void OnInitialized()
@@ -29,7 +27,7 @@ internal class DefaultRazorParserOptionsFeature : RazorEngineFeatureBase, IRazor
 
     public RazorParserOptions GetOptions()
     {
-        var builder = new RazorParserOptionsBuilder(_designTime, _version, _fileKind);
+        var builder = new RazorParserOptionsBuilder(_designTime, _version, fileKind: null);
         for (var i = 0; i < _configureOptions.Length; i++)
         {
             _configureOptions[i].Configure(builder);

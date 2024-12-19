@@ -161,11 +161,10 @@ public class DefaultRazorProjectEngineIntegrationTest
         var projectEngine = RazorProjectEngine.Create(RazorConfiguration.Default, TestRazorProjectFileSystem.Empty);
 
         // Act
-        var codeDocument = projectEngine.Process(RazorSourceDocument.ReadFrom(projectItem), RazorFileKind.Component.ToFileKindString(), importSources: default, tagHelpers: null);
+        var codeDocument = projectEngine.Process(RazorSourceDocument.ReadFrom(projectItem), RazorFileKind.Component, importSources: default, tagHelpers: null);
 
         // Assert
-        var actual = codeDocument.GetFileKind();
-        Assert.Equal(RazorFileKind.Component, actual.ToRazorFileKind());
+        Assert.Equal(RazorFileKind.Component, codeDocument.FileKind);
     }
 
     [Fact]
@@ -212,8 +211,7 @@ public class DefaultRazorProjectEngineIntegrationTest
         var codeDocument = projectEngine.Process(projectItem);
 
         // Assert
-        var actual = codeDocument.GetFileKind();
-        Assert.Same(FileKinds.Legacy, actual);
+        Assert.Equal(RazorFileKind.Legacy, codeDocument.FileKind);
     }
 
     [Fact]
@@ -228,8 +226,7 @@ public class DefaultRazorProjectEngineIntegrationTest
         var codeDocument = projectEngine.Process(projectItem);
 
         // Assert
-        var actual = codeDocument.GetFileKind();
-        Assert.Same(FileKinds.Component, actual);
+        Assert.Equal(RazorFileKind.Component, codeDocument.FileKind);
     }
 
     [Fact]
@@ -299,8 +296,7 @@ public class DefaultRazorProjectEngineIntegrationTest
         var codeDocument = projectEngine.ProcessDesignTime(projectItem);
 
         // Assert
-        var actual = codeDocument.GetFileKind();
-        Assert.Same(FileKinds.Legacy, actual);
+        Assert.Equal(RazorFileKind.Legacy, codeDocument.FileKind);
     }
 
     [Fact]
@@ -315,8 +311,7 @@ public class DefaultRazorProjectEngineIntegrationTest
         var codeDocument = projectEngine.ProcessDesignTime(projectItem);
 
         // Assert
-        var actual = codeDocument.GetFileKind();
-        Assert.Same(FileKinds.Component, actual);
+        Assert.Equal(RazorFileKind.Component, codeDocument.FileKind);
     }
 
     [Fact]

@@ -1,10 +1,6 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
-using System;
-
 namespace Microsoft.AspNetCore.Razor.Language;
 
 internal sealed class RazorParserFeatureFlags(
@@ -17,13 +13,8 @@ internal sealed class RazorParserFeatureFlags(
     bool allowCSharpInMarkupAttributeArea,
     bool allowNullableForgivenessOperator)
 {
-    public static RazorParserFeatureFlags Create(RazorLanguageVersion version, string fileKind)
+    public static RazorParserFeatureFlags Create(RazorLanguageVersion version, RazorFileKind fileKind)
     {
-        if (fileKind == null)
-        {
-            throw new ArgumentNullException(nameof(fileKind));
-        }
-
         var allowMinimizedBooleanTagHelperAttributes = false;
         var allowHtmlCommentsInTagHelpers = false;
         var allowComponentFileKind = false;
@@ -49,7 +40,7 @@ internal sealed class RazorParserFeatureFlags(
             allowNullableForgivenessOperator = true;
         }
 
-        if (FileKinds.IsComponent(fileKind))
+        if (RazorFileKinds.IsComponent(fileKind))
         {
             allowConditionalDataDashAttributes = true;
             allowCSharpInMarkupAttributeArea = false;

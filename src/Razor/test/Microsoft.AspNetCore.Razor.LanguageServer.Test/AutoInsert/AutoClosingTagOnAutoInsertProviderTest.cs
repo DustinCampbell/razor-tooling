@@ -1,7 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
-using System;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Test.Common;
 using Microsoft.CodeAnalysis.Razor.AutoInsert;
@@ -112,8 +111,8 @@ public class AutoClosingTagOnAutoInsertProviderTest(ITestOutputHelper testOutput
 
                 <test />
                 """,
-            fileKind: FileKinds.Legacy,
-            tagHelpers: new[] { WithoutEndTagTagHelper, CatchAllTagHelper });
+            fileKind: RazorFileKind.Legacy,
+            tagHelpers: [WithoutEndTagTagHelper, CatchAllTagHelper]);
     }
 
     [Fact]
@@ -131,8 +130,8 @@ public class AutoClosingTagOnAutoInsertProviderTest(ITestOutputHelper testOutput
 
                 <test><test></test></test>
                 """,
-            fileKind: FileKinds.Legacy,
-            tagHelpers: new[] { NormalOrSelfClosingTagHelper });
+            fileKind: RazorFileKind.Legacy,
+            tagHelpers: [NormalOrSelfClosingTagHelper]);
     }
 
     [Fact]
@@ -150,8 +149,8 @@ public class AutoClosingTagOnAutoInsertProviderTest(ITestOutputHelper testOutput
 
                 <input /><input></input></input>
                 """,
-            fileKind: FileKinds.Legacy,
-            tagHelpers: new[] { UnspecifiedInputTagHelper });
+            fileKind: RazorFileKind.Legacy,
+            tagHelpers: [UnspecifiedInputTagHelper]);
     }
 
     [Fact]
@@ -266,8 +265,8 @@ public class AutoClosingTagOnAutoInsertProviderTest(ITestOutputHelper testOutput
 
                 <Input>$0</Input>
                 """,
-            fileKind: FileKinds.Legacy,
-            tagHelpers: new[] { UnspecifiedInputMirroringTagHelper });
+            fileKind: RazorFileKind.Legacy,
+            tagHelpers: [UnspecifiedInputMirroringTagHelper]);
     }
 
     [Fact]
@@ -277,8 +276,8 @@ public class AutoClosingTagOnAutoInsertProviderTest(ITestOutputHelper testOutput
         RunAutoInsertTest(
             input: "<Input>$$",
             expected: "<Input />",
-            fileKind: FileKinds.Legacy,
-            tagHelpers: Array.Empty<TagHelperDescriptor>());
+            fileKind: RazorFileKind.Legacy,
+            tagHelpers: []);
     }
 
     [Fact]
@@ -295,8 +294,8 @@ public class AutoClosingTagOnAutoInsertProviderTest(ITestOutputHelper testOutput
 
                 <input>$0</input>
                 """,
-            fileKind: FileKinds.Legacy,
-            tagHelpers: new[] { NormalOrSelfclosingInputTagHelper });
+            fileKind: RazorFileKind.Legacy,
+            tagHelpers: [NormalOrSelfclosingInputTagHelper]);
     }
 
     [Fact]
@@ -313,8 +312,8 @@ public class AutoClosingTagOnAutoInsertProviderTest(ITestOutputHelper testOutput
 
                 <input />
                 """,
-            fileKind: FileKinds.Legacy,
-            tagHelpers: new[] { UnspecifiedInputTagHelper });
+            fileKind: RazorFileKind.Legacy,
+            tagHelpers: [UnspecifiedInputTagHelper]);
     }
 
     [Fact]
@@ -331,8 +330,8 @@ public class AutoClosingTagOnAutoInsertProviderTest(ITestOutputHelper testOutput
 
                 <test>$0</test>
                 """,
-            fileKind: FileKinds.Legacy,
-            tagHelpers: new[] { UnspecifiedTagHelper });
+            fileKind: RazorFileKind.Legacy,
+            tagHelpers: [UnspecifiedTagHelper]);
     }
 
     [Fact]
@@ -349,8 +348,8 @@ public class AutoClosingTagOnAutoInsertProviderTest(ITestOutputHelper testOutput
 
                 <test>$0</test>
                 """,
-            fileKind: FileKinds.Legacy,
-            tagHelpers: new[] { NormalOrSelfClosingTagHelper });
+            fileKind: RazorFileKind.Legacy,
+            tagHelpers: [NormalOrSelfClosingTagHelper]);
     }
 
     [Fact]
@@ -374,8 +373,8 @@ public class AutoClosingTagOnAutoInsertProviderTest(ITestOutputHelper testOutput
                 <div><test>$0</test></div>
                 }
                 """,
-            fileKind: FileKinds.Legacy,
-            tagHelpers: new[] { NormalOrSelfClosingTagHelper });
+            fileKind: RazorFileKind.Legacy,
+            tagHelpers: [NormalOrSelfClosingTagHelper]);
     }
 
     [Fact]
@@ -399,8 +398,8 @@ public class AutoClosingTagOnAutoInsertProviderTest(ITestOutputHelper testOutput
                 <div><a target=""_blank"">$0</a></div>
                 }
                 """,
-            fileKind: FileKinds.Legacy,
-            tagHelpers: new[] { NormalOrSelfClosingTagHelper });
+            fileKind: RazorFileKind.Legacy,
+            tagHelpers: [NormalOrSelfClosingTagHelper]);
     }
 
     [Fact]
@@ -424,8 +423,8 @@ public class AutoClosingTagOnAutoInsertProviderTest(ITestOutputHelper testOutput
                 <div><a target=""_blank"" >$0</a></div>
                 }
                 """,
-            fileKind: FileKinds.Legacy,
-            tagHelpers: new[] { NormalOrSelfClosingTagHelper });
+            fileKind: RazorFileKind.Legacy,
+            tagHelpers: [NormalOrSelfClosingTagHelper]);
     }
 
     [Fact]
@@ -449,8 +448,8 @@ public class AutoClosingTagOnAutoInsertProviderTest(ITestOutputHelper testOutput
                 <div><form novalidate>$0</form></div>
                 }
                 """,
-            fileKind: FileKinds.Legacy,
-            tagHelpers: new[] { NormalOrSelfClosingTagHelper });
+            fileKind: RazorFileKind.Legacy,
+            tagHelpers: [NormalOrSelfClosingTagHelper]);
     }
 
     [Fact]
@@ -474,8 +473,8 @@ public class AutoClosingTagOnAutoInsertProviderTest(ITestOutputHelper testOutput
                 <div><form novalidate >$0</form></div>
                 }
                 """,
-            fileKind: FileKinds.Legacy,
-            tagHelpers: new[] { NormalOrSelfClosingTagHelper });
+            fileKind: RazorFileKind.Legacy,
+            tagHelpers: [NormalOrSelfClosingTagHelper]);
     }
 
     [Fact]
@@ -499,8 +498,8 @@ public class AutoClosingTagOnAutoInsertProviderTest(ITestOutputHelper testOutput
                 <div><test attribute=""value"">$0</test></div>
                 }
                 """,
-            fileKind: FileKinds.Legacy,
-            tagHelpers: new[] { NormalOrSelfClosingTagHelper });
+            fileKind: RazorFileKind.Legacy,
+            tagHelpers: [NormalOrSelfClosingTagHelper]);
     }
 
     [Fact]
@@ -524,8 +523,8 @@ public class AutoClosingTagOnAutoInsertProviderTest(ITestOutputHelper testOutput
                 <div><test attribute=""value"" >$0</test></div>
                 }
                 """,
-            fileKind: FileKinds.Legacy,
-            tagHelpers: new[] { NormalOrSelfClosingTagHelper });
+            fileKind: RazorFileKind.Legacy,
+            tagHelpers: [NormalOrSelfClosingTagHelper]);
     }
 
     [Fact]
@@ -549,8 +548,8 @@ public class AutoClosingTagOnAutoInsertProviderTest(ITestOutputHelper testOutput
                 <div><test bool-val>$0</test></div>
                 }
                 """,
-            fileKind: FileKinds.Legacy,
-            tagHelpers: new[] { NormalOrSelfClosingTagHelper });
+            fileKind: RazorFileKind.Legacy,
+            tagHelpers: [NormalOrSelfClosingTagHelper]);
     }
 
     [Fact]
@@ -574,8 +573,8 @@ public class AutoClosingTagOnAutoInsertProviderTest(ITestOutputHelper testOutput
                 <div><test bool-val >$0</test></div>
                 }
                 """,
-            fileKind: FileKinds.Legacy,
-            tagHelpers: new[] { NormalOrSelfClosingTagHelper });
+            fileKind: RazorFileKind.Legacy,
+            tagHelpers: [NormalOrSelfClosingTagHelper]);
     }
 
     [Fact]
@@ -599,8 +598,8 @@ public class AutoClosingTagOnAutoInsertProviderTest(ITestOutputHelper testOutput
                 <test><input /></test>
                 }
                 """,
-            fileKind: FileKinds.Legacy,
-            tagHelpers: new[] { NormalOrSelfClosingTagHelper, UnspecifiedInputTagHelper });
+            fileKind: RazorFileKind.Legacy,
+            tagHelpers: [NormalOrSelfClosingTagHelper, UnspecifiedInputTagHelper]);
     }
 
     [Fact]
@@ -624,8 +623,8 @@ public class AutoClosingTagOnAutoInsertProviderTest(ITestOutputHelper testOutput
                 <test>$0</test><input />
                 }
                 """,
-            fileKind: FileKinds.Legacy,
-            tagHelpers: new[] { NormalOrSelfClosingTagHelper, UnspecifiedInputTagHelper });
+            fileKind: RazorFileKind.Legacy,
+            tagHelpers: [NormalOrSelfClosingTagHelper, UnspecifiedInputTagHelper]);
     }
 
     [Fact]
@@ -649,8 +648,8 @@ public class AutoClosingTagOnAutoInsertProviderTest(ITestOutputHelper testOutput
                 <test>$0</test><input></input>
                 }
                 """,
-            fileKind: FileKinds.Legacy,
-            tagHelpers: new[] { NormalOrSelfClosingTagHelper, NormalOrSelfclosingInputTagHelper });
+            fileKind: RazorFileKind.Legacy,
+            tagHelpers: [NormalOrSelfClosingTagHelper, NormalOrSelfclosingInputTagHelper]);
     }
 
     [Fact]
@@ -671,8 +670,8 @@ public class AutoClosingTagOnAutoInsertProviderTest(ITestOutputHelper testOutput
                     <test>$0</test>
                 }
                 """,
-            fileKind: FileKinds.Legacy,
-            tagHelpers: new[] { NormalOrSelfClosingTagHelper });
+            fileKind: RazorFileKind.Legacy,
+            tagHelpers: [NormalOrSelfClosingTagHelper]);
     }
 
     [Fact]
@@ -689,8 +688,8 @@ public class AutoClosingTagOnAutoInsertProviderTest(ITestOutputHelper testOutput
 
                 <test />
                 """,
-            fileKind: FileKinds.Legacy,
-            tagHelpers: new[] { WithoutEndTagTagHelper });
+            fileKind: RazorFileKind.Legacy,
+            tagHelpers: [WithoutEndTagTagHelper]);
     }
 
     [Fact]
@@ -714,8 +713,8 @@ public class AutoClosingTagOnAutoInsertProviderTest(ITestOutputHelper testOutput
                 <div><test /></div>
                 }
                 """,
-            fileKind: FileKinds.Legacy,
-            tagHelpers: new[] { WithoutEndTagTagHelper });
+            fileKind: RazorFileKind.Legacy,
+            tagHelpers: [WithoutEndTagTagHelper]);
     }
 
     [Fact]
@@ -732,8 +731,8 @@ public class AutoClosingTagOnAutoInsertProviderTest(ITestOutputHelper testOutput
 
                 <test />
                 """,
-            fileKind: FileKinds.Legacy,
-            tagHelpers: new[] { WithoutEndTagTagHelper });
+            fileKind: RazorFileKind.Legacy,
+            tagHelpers: [WithoutEndTagTagHelper]);
     }
 
     [Fact]
@@ -750,8 +749,8 @@ public class AutoClosingTagOnAutoInsertProviderTest(ITestOutputHelper testOutput
 
                 <test />
                 """,
-            fileKind: FileKinds.Legacy,
-            tagHelpers: new[] { WithoutEndTagTagHelper });
+            fileKind: RazorFileKind.Legacy,
+            tagHelpers: [WithoutEndTagTagHelper]);
     }
 
     [Fact]
@@ -772,8 +771,8 @@ public class AutoClosingTagOnAutoInsertProviderTest(ITestOutputHelper testOutput
                     <test />
                 }
                 """,
-            fileKind: FileKinds.Legacy,
-            tagHelpers: new[] { WithoutEndTagTagHelper });
+            fileKind: RazorFileKind.Legacy,
+            tagHelpers: [WithoutEndTagTagHelper]);
     }
 
     [Fact]
@@ -790,8 +789,8 @@ public class AutoClosingTagOnAutoInsertProviderTest(ITestOutputHelper testOutput
 
                 <test>$0</test>
                 """,
-            fileKind: FileKinds.Legacy,
-            tagHelpers: new[] { UnspecifiedTagHelper, NormalOrSelfClosingTagHelper, WithoutEndTagTagHelper });
+            fileKind: RazorFileKind.Legacy,
+            tagHelpers: [UnspecifiedTagHelper, NormalOrSelfClosingTagHelper, WithoutEndTagTagHelper]);
     }
 
     [Fact]
@@ -808,8 +807,8 @@ public class AutoClosingTagOnAutoInsertProviderTest(ITestOutputHelper testOutput
 
                 <!test>$0</!test>
                 """,
-            fileKind: FileKinds.Legacy,
-            tagHelpers: new[] { NormalOrSelfClosingTagHelper });
+            fileKind: RazorFileKind.Legacy,
+            tagHelpers: [NormalOrSelfClosingTagHelper]);
     }
 
     [Fact]

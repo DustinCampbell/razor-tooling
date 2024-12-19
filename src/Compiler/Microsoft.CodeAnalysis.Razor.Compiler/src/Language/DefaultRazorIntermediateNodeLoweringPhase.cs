@@ -50,7 +50,7 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
         // We need to decide up front if this document is a "component" file. This will affect how
         // lowering behaves.
         LoweringVisitor visitor;
-        if (FileKinds.IsComponentImport(codeDocument.GetFileKind()) &&
+        if (RazorFileKinds.IsComponentImport(codeDocument.FileKind) &&
             syntaxTree.Options.FeatureFlags.AllowComponentFileKind)
         {
             visitor = new ComponentImportFileKindVisitor(document, builder, syntaxTree.Options.FeatureFlags)
@@ -60,7 +60,7 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
 
             visitor.Visit(syntaxTree.Root);
         }
-        else if (FileKinds.IsComponent(codeDocument.GetFileKind()) &&
+        else if (RazorFileKinds.IsComponent(codeDocument.FileKind) &&
             syntaxTree.Options.FeatureFlags.AllowComponentFileKind)
         {
             visitor = new ComponentFileKindVisitor(document, builder, syntaxTree.Options.FeatureFlags)

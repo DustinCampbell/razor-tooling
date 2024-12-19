@@ -18,16 +18,11 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.AutoInsert;
 
-public abstract class RazorOnAutoInsertProviderTestBase : LanguageServerTestBase
+public abstract class RazorOnAutoInsertProviderTestBase(ITestOutputHelper testOutput) : LanguageServerTestBase(testOutput)
 {
-    protected RazorOnAutoInsertProviderTestBase(ITestOutputHelper testOutput)
-        : base(testOutput)
-    {
-    }
-
     internal abstract IOnAutoInsertProvider CreateProvider();
 
-    protected void RunAutoInsertTest(string input, string expected, int tabSize = 4, bool insertSpaces = true, bool enableAutoClosingTags = true, string fileKind = default, IReadOnlyList<TagHelperDescriptor> tagHelpers = default)
+    protected void RunAutoInsertTest(string input, string expected, bool enableAutoClosingTags = true, RazorFileKind? fileKind = null, IReadOnlyList<TagHelperDescriptor> tagHelpers = null)
     {
         // Arrange
         TestFileMarkupParser.GetPosition(input, out input, out var location);
@@ -56,16 +51,15 @@ public abstract class RazorOnAutoInsertProviderTestBase : LanguageServerTestBase
         return source.WithChanges(change);
     }
 
-    private static RazorCodeDocument CreateCodeDocument(SourceText text, string path, IReadOnlyList<TagHelperDescriptor> tagHelpers = null, string fileKind = default)
+    private static RazorCodeDocument CreateCodeDocument(SourceText text, string path, IReadOnlyList<TagHelperDescriptor> tagHelpers = null, RazorFileKind? fileKind = null)
     {
-        fileKind ??= FileKinds.Component;
-        tagHelpers ??= Array.Empty<TagHelperDescriptor>();
+        tagHelpers ??= [];
         var sourceDocument = RazorSourceDocument.Create(text, RazorSourceDocumentProperties.Create(path, path));
         var projectEngine = RazorProjectEngine.Create(builder =>
         {
             builder.Features.Add(new ConfigureRazorParserOptions(useRoslynTokenizer: true, CSharpParseOptions.Default));
         });
-        var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, fileKind, importSources: default, tagHelpers);
-        return codeDocument;
+
+        return projectEngine.ProcessDesignTime(sourceDocument, fileKind ?? RazorFileKind.Component, importSources: default, tagHelpers);
     }
 }

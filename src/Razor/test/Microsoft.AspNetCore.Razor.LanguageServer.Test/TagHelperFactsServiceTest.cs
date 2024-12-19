@@ -249,7 +249,7 @@ public class TagHelperFactsServiceTest(ITestOutputHelper testOutput) : TagHelper
         {
             builder.Features.Add(new ConfigureRazorParserOptions(useRoslynTokenizer: true, CSharpParseOptions.Default));
         });
-        var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, FileKinds.Component, importSources: default, tagHelpers);
-        return codeDocument;
+
+        return projectEngine.ProcessDesignTime(sourceDocument, RazorFileKind.Component, importSources: default, tagHelpers);
     }
 }

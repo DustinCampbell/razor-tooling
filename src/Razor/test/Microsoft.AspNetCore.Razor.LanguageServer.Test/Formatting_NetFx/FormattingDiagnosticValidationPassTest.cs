@@ -71,7 +71,7 @@ public class FormattingDiagnosticValidationPassTest(ITestOutputHelper testOutput
         return pass;
     }
 
-    private static FormattingContext CreateFormattingContext(TestCode input, int tabSize = 4, bool insertSpaces = true, string? fileKind = null)
+    private static FormattingContext CreateFormattingContext(TestCode input, int tabSize = 4, bool insertSpaces = true, RazorFileKind? fileKind = null)
     {
         var source = SourceText.From(input.Text);
         var path = "file:///path/to/document.razor";
@@ -90,9 +90,9 @@ public class FormattingDiagnosticValidationPassTest(ITestOutputHelper testOutput
         return context;
     }
 
-    private static (RazorCodeDocument, IDocumentSnapshot) CreateCodeDocumentAndSnapshot(SourceText text, string path, ImmutableArray<TagHelperDescriptor> tagHelpers = default, string? fileKind = null)
+    private static (RazorCodeDocument, IDocumentSnapshot) CreateCodeDocumentAndSnapshot(SourceText text, string path, ImmutableArray<TagHelperDescriptor> tagHelpers = default, RazorFileKind? fileKind = null)
     {
-        fileKind ??= FileKinds.Component;
+        var fileKindValue = fileKind ?? RazorFileKind.Component;
         tagHelpers = tagHelpers.NullToEmpty();
         var sourceDocument = RazorSourceDocument.Create(text, RazorSourceDocumentProperties.Create(path, path));
         var projectEngine = RazorProjectEngine.Create(builder =>
@@ -100,9 +100,9 @@ public class FormattingDiagnosticValidationPassTest(ITestOutputHelper testOutput
             builder.SetRootNamespace("Test");
             builder.Features.Add(new ConfigureRazorParserOptions(useRoslynTokenizer: true, CSharpParseOptions.Default));
         });
-        var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, fileKind, importSources: default, tagHelpers);
+        var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, fileKindValue, importSources: default, tagHelpers);
 
-        var documentSnapshot = FormattingTestBase.CreateDocumentSnapshot(path, tagHelpers, fileKind, importsDocuments: [], imports: [], projectEngine, codeDocument);
+        var documentSnapshot = FormattingTestBase.CreateDocumentSnapshot(path, tagHelpers, fileKindValue, importsDocuments: [], imports: [], projectEngine, codeDocument);
 
         return (codeDocument, documentSnapshot);
     }

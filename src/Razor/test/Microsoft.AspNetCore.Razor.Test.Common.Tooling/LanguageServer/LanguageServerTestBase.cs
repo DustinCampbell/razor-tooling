@@ -63,10 +63,10 @@ public abstract class LanguageServerTestBase : ToolingTestBase
     {
         filePath ??= "test.cshtml";
 
-        var fileKind = FileKinds.GetFileKindFromFilePath(filePath);
+        var fileKind = RazorFileKinds.GetFileKindFromFilePath(filePath);
         tagHelpers = tagHelpers.NullToEmpty();
 
-        if (fileKind == FileKinds.Component)
+        if (fileKind == RazorFileKind.Component)
         {
             tagHelpers = tagHelpers.AddRange(RazorTestResources.BlazorServerAppTagHelpers);
         }
@@ -82,7 +82,7 @@ public abstract class LanguageServerTestBase : ToolingTestBase
             RazorExtensions.Register(b);
             b.Features.Add(new ConfigureRazorParserOptions(useRoslynTokenizer: true, CSharpParseOptions.Default));
         });
-        var importDocumentName = fileKind == FileKinds.Legacy ? "_ViewImports.cshtml" : "_Imports.razor";
+        var importDocumentName = fileKind == RazorFileKind.Legacy ? "_ViewImports.cshtml" : "_Imports.razor";
         var defaultImportDocument = TestRazorSourceDocument.Create(
             """
                 @using BlazorApp1

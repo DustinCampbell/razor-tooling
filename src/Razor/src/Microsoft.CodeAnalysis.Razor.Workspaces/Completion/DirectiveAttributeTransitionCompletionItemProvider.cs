@@ -47,7 +47,7 @@ internal class DirectiveAttributeTransitionCompletionItemProvider : DirectiveAtt
             throw new ArgumentNullException(nameof(context));
         }
 
-        if (!FileKinds.IsComponent(context.SyntaxTree.Options.FileKind))
+        if (!RazorFileKinds.IsComponent(context.SyntaxTree.Options.FileKind))
         {
             // Directive attributes are only supported in components
             return ImmutableArray<RazorCompletionItem>.Empty;

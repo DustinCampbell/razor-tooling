@@ -40,10 +40,7 @@ public class RazorProjectEngine
 
     public RazorCodeDocument Process(RazorProjectItem projectItem)
     {
-        if (projectItem == null)
-        {
-            throw new ArgumentNullException(nameof(projectItem));
-        }
+        ArgHelper.ThrowIfNull(projectItem);
 
         var codeDocument = CreateCodeDocumentCore(projectItem);
         ProcessCore(codeDocument);
@@ -52,14 +49,11 @@ public class RazorProjectEngine
 
     public RazorCodeDocument Process(
         RazorSourceDocument source,
-        string? fileKind,
+        RazorFileKind? fileKind,
         ImmutableArray<RazorSourceDocument> importSources,
         IReadOnlyList<TagHelperDescriptor> tagHelpers)
     {
-        if (source == null)
-        {
-            throw new ArgumentNullException(nameof(source));
-        }
+        ArgHelper.ThrowIfNull(source);
 
         var codeDocument = CreateCodeDocumentCore(source, fileKind, importSources, tagHelpers, configureParser: null, configureCodeGeneration: null);
         ProcessCore(codeDocument);
@@ -68,10 +62,7 @@ public class RazorProjectEngine
 
     public RazorCodeDocument ProcessDeclarationOnly(RazorProjectItem projectItem)
     {
-        if (projectItem == null)
-        {
-            throw new ArgumentNullException(nameof(projectItem));
-        }
+        ArgHelper.ThrowIfNull(projectItem);
 
         var codeDocument = CreateCodeDocumentCore(projectItem, configureParser: null, configureCodeGeneration: (builder) =>
         {
@@ -84,14 +75,11 @@ public class RazorProjectEngine
 
     public RazorCodeDocument ProcessDeclarationOnly(
         RazorSourceDocument source,
-        string fileKind,
+        RazorFileKind? fileKind,
         ImmutableArray<RazorSourceDocument> importSources,
         IReadOnlyList<TagHelperDescriptor> tagHelpers)
     {
-        if (source == null)
-        {
-            throw new ArgumentNullException(nameof(source));
-        }
+        ArgHelper.ThrowIfNull(source);
 
         var codeDocument = CreateCodeDocumentCore(source, fileKind, importSources, tagHelpers, configureParser: null, configureCodeGeneration: (builder) =>
         {
@@ -116,14 +104,11 @@ public class RazorProjectEngine
 
     public RazorCodeDocument ProcessDesignTime(
         RazorSourceDocument source,
-        string? fileKind,
+        RazorFileKind? fileKind,
         ImmutableArray<RazorSourceDocument> importSources,
         IReadOnlyList<TagHelperDescriptor>? tagHelpers)
     {
-        if (source == null)
-        {
-            throw new ArgumentNullException(nameof(source));
-        }
+        ArgHelper.ThrowIfNull(source);
 
         var codeDocument = CreateCodeDocumentDesignTimeCore(source, fileKind, importSources, tagHelpers, configureParser: null, configureCodeGeneration: null);
         ProcessCore(codeDocument);
@@ -131,24 +116,14 @@ public class RazorProjectEngine
     }
 
     private protected RazorCodeDocument CreateCodeDocumentCore(RazorProjectItem projectItem)
-    {
-        if (projectItem == null)
-        {
-            throw new ArgumentNullException(nameof(projectItem));
-        }
-
-        return CreateCodeDocumentCore(projectItem, configureParser: null, configureCodeGeneration: null);
-    }
+        => CreateCodeDocumentCore(projectItem, configureParser: null, configureCodeGeneration: null);
 
     private RazorCodeDocument CreateCodeDocumentCore(
         RazorProjectItem projectItem,
         Action<RazorParserOptionsBuilder>? configureParser,
         Action<RazorCodeGenerationOptionsBuilder>? configureCodeGeneration)
     {
-        if (projectItem == null)
-        {
-            throw new ArgumentNullException(nameof(projectItem));
-        }
+        ArgHelper.ThrowIfNull(projectItem);
 
         var sourceDocument = RazorSourceDocument.ReadFrom(projectItem);
 
@@ -163,22 +138,19 @@ public class RazorProjectEngine
         }
 
         var importSourceDocuments = GetImportSourceDocuments(importItems.DrainToImmutable());
-        return CreateCodeDocumentCore(sourceDocument, projectItem.FileKind.ToFileKindString(), importSourceDocuments, tagHelpers: null, configureParser, configureCodeGeneration, cssScope: projectItem.CssScope);
+        return CreateCodeDocumentCore(sourceDocument, projectItem.FileKind, importSourceDocuments, tagHelpers: null, configureParser, configureCodeGeneration, cssScope: projectItem.CssScope);
     }
 
     internal RazorCodeDocument CreateCodeDocumentCore(
         RazorSourceDocument sourceDocument,
-        string? fileKind = null,
+        RazorFileKind? fileKind = null,
         ImmutableArray<RazorSourceDocument> importSourceDocuments = default,
         IReadOnlyList<TagHelperDescriptor>? tagHelpers = null,
         Action<RazorParserOptionsBuilder>? configureParser = null,
         Action<RazorCodeGenerationOptionsBuilder>? configureCodeGeneration = null,
         string? cssScope = null)
     {
-        if (sourceDocument == null)
-        {
-            throw new ArgumentNullException(nameof(sourceDocument));
-        }
+        ArgHelper.ThrowIfNull(sourceDocument);
 
         var parserOptions = GetRequiredFeature<IRazorParserOptionsFactoryProjectFeature>().Create(fileKind, builder =>
         {
@@ -194,11 +166,6 @@ public class RazorProjectEngine
         var codeDocument = RazorCodeDocument.Create(sourceDocument, importSourceDocuments, parserOptions, codeGenerationOptions);
         codeDocument.SetTagHelpers(tagHelpers);
 
-        if (fileKind != null)
-        {
-            codeDocument.SetFileKind(fileKind);
-        }
-
         if (cssScope != null)
         {
             codeDocument.SetCssScope(cssScope);
@@ -208,24 +175,14 @@ public class RazorProjectEngine
     }
 
     private protected RazorCodeDocument CreateCodeDocumentDesignTimeCore(RazorProjectItem projectItem)
-    {
-        if (projectItem == null)
-        {
-            throw new ArgumentNullException(nameof(projectItem));
-        }
-
-        return CreateCodeDocumentDesignTimeCore(projectItem, configureParser: null, configureCodeGeneration: null);
-    }
+        => CreateCodeDocumentDesignTimeCore(projectItem, configureParser: null, configureCodeGeneration: null);
 
     private RazorCodeDocument CreateCodeDocumentDesignTimeCore(
         RazorProjectItem projectItem,
         Action<RazorParserOptionsBuilder>? configureParser,
         Action<RazorCodeGenerationOptionsBuilder>? configureCodeGeneration)
     {
-        if (projectItem == null)
-        {
-            throw new ArgumentNullException(nameof(projectItem));
-        }
+        ArgHelper.ThrowIfNull(projectItem);
 
         var sourceDocument = RazorSourceDocument.ReadFrom(projectItem);
 
@@ -240,21 +197,18 @@ public class RazorProjectEngine
         }
 
         var importSourceDocuments = GetImportSourceDocuments(importItems.DrainToImmutable(), suppressExceptions: true);
-        return CreateCodeDocumentDesignTimeCore(sourceDocument, projectItem.FileKind.ToFileKindString(), importSourceDocuments, tagHelpers: null, configureParser, configureCodeGeneration);
+        return CreateCodeDocumentDesignTimeCore(sourceDocument, projectItem.FileKind, importSourceDocuments, tagHelpers: null, configureParser, configureCodeGeneration);
     }
 
     private RazorCodeDocument CreateCodeDocumentDesignTimeCore(
         RazorSourceDocument sourceDocument,
-        string? fileKind,
+        RazorFileKind? fileKind,
         ImmutableArray<RazorSourceDocument> importSourceDocuments,
         IReadOnlyList<TagHelperDescriptor>? tagHelpers,
         Action<RazorParserOptionsBuilder>? configureParser,
         Action<RazorCodeGenerationOptionsBuilder>? configureCodeGeneration)
     {
-        if (sourceDocument == null)
-        {
-            throw new ArgumentNullException(nameof(sourceDocument));
-        }
+        ArgHelper.ThrowIfNull(sourceDocument);
 
         var parserOptions = GetRequiredFeature<IRazorParserOptionsFactoryProjectFeature>().Create(fileKind, builder =>
         {
@@ -270,21 +224,11 @@ public class RazorProjectEngine
         var codeDocument = RazorCodeDocument.Create(sourceDocument, importSourceDocuments, parserOptions, codeGenerationOptions);
         codeDocument.SetTagHelpers(tagHelpers);
 
-        if (fileKind != null)
-        {
-            codeDocument.SetFileKind(fileKind);
-        }
-
         return codeDocument;
     }
 
     private void ProcessCore(RazorCodeDocument codeDocument)
     {
-        if (codeDocument == null)
-        {
-            throw new ArgumentNullException(nameof(codeDocument));
-        }
-
         Engine.Process(codeDocument);
     }
 
@@ -325,15 +269,8 @@ public class RazorProjectEngine
         RazorProjectFileSystem fileSystem,
         Action<RazorProjectEngineBuilder>? configure)
     {
-        if (fileSystem == null)
-        {
-            throw new ArgumentNullException(nameof(fileSystem));
-        }
-
-        if (configuration == null)
-        {
-            throw new ArgumentNullException(nameof(configuration));
-        }
+        ArgHelper.ThrowIfNull(fileSystem);
+        ArgHelper.ThrowIfNull(configuration);
 
         var builder = new RazorProjectEngineBuilder(configuration, fileSystem);
 
@@ -395,7 +332,7 @@ public class RazorProjectEngine
         // Legacy options features
         //
         // These features are obsolete as of 2.1. Our code will resolve this but not invoke them.
-        features.Add(new DefaultRazorParserOptionsFeature(designTime: false, version: RazorLanguageVersion.Version_2_0, fileKind: null));
+        features.Add(new DefaultRazorParserOptionsFeature(designTime: false, version: RazorLanguageVersion.Version_2_0));
         features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
 
         // Syntax Tree passes

@@ -311,7 +311,7 @@ public abstract class FormattingTestBase : RazorToolingIntegrationTestBase
                 RazorExtensions.Register(builder);
             });
 
-        var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, fileKindValue.ToFileKindString(), [importsDocument], tagHelpers);
+        var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, fileKindValue, [importsDocument], tagHelpers);
 
         if (!allowDiagnostics)
         {
@@ -320,12 +320,12 @@ public abstract class FormattingTestBase : RazorToolingIntegrationTestBase
 
         var imports = ImmutableArray.Create(importsSnapshot.Object);
         var importsDocuments = ImmutableArray.Create(importsDocument);
-        var documentSnapshot = CreateDocumentSnapshot(path, tagHelpers, fileKindValue.ToFileKindString(), importsDocuments, imports, projectEngine, codeDocument, inGlobalNamespace: inGlobalNamespace);
+        var documentSnapshot = CreateDocumentSnapshot(path, tagHelpers, fileKindValue, importsDocuments, imports, projectEngine, codeDocument, inGlobalNamespace: inGlobalNamespace);
 
         return (codeDocument, documentSnapshot);
     }
 
-    internal static IDocumentSnapshot CreateDocumentSnapshot(string path, ImmutableArray<TagHelperDescriptor> tagHelpers, string fileKind, ImmutableArray<RazorSourceDocument> importsDocuments, ImmutableArray<IDocumentSnapshot> imports, RazorProjectEngine projectEngine, RazorCodeDocument codeDocument, bool inGlobalNamespace = false)
+    internal static IDocumentSnapshot CreateDocumentSnapshot(string path, ImmutableArray<TagHelperDescriptor> tagHelpers, RazorFileKind fileKind, ImmutableArray<RazorSourceDocument> importsDocuments, ImmutableArray<IDocumentSnapshot> imports, RazorProjectEngine projectEngine, RazorCodeDocument codeDocument, bool inGlobalNamespace = false)
     {
         var documentSnapshot = new StrictMock<IDocumentSnapshot>();
         documentSnapshot
@@ -354,7 +354,7 @@ public abstract class FormattingTestBase : RazorToolingIntegrationTestBase
             .Returns(projectEngine);
         documentSnapshot
             .Setup(d => d.FileKind)
-            .Returns(fileKind);
+            .Returns(fileKind.ToFileKindString());
         documentSnapshot
             .Setup(d => d.Version)
             .Returns(1);

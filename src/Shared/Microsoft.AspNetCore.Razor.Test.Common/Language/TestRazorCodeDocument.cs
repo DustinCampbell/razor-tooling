@@ -19,8 +19,11 @@ public static class TestRazorCodeDocument
         return RazorCodeDocument.Create(source, imports: default);
     }
 
-    public static RazorCodeDocument Create(RazorSourceDocument source, ImmutableArray<RazorSourceDocument> imports)
+    public static RazorCodeDocument Create(
+        RazorSourceDocument source,
+        ImmutableArray<RazorSourceDocument> imports,
+        RazorFileKind? fileKind = null)
     {
-        return RazorCodeDocument.Create(source, imports);
+        return RazorCodeDocument.Create(source, imports, fileKind);
     }
 }

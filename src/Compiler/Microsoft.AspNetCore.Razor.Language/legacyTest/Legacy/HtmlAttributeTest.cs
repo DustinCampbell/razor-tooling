@@ -3,7 +3,6 @@
 
 #nullable disable
 
-using System;
 using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
@@ -305,12 +304,12 @@ public class HtmlAttributeTest() : ParserTestBase(layer: TestProject.Layer.Compi
     [Fact]
     public void ComponentFileKind_ParsesDirectiveAttributesAsMarkup()
     {
-        ParseDocumentTest("<span @class='@foo'></span>", fileKind: FileKinds.Component);
+        ParseDocumentTest("<span @class='@foo'></span>", RazorFileKind.Component);
     }
 
     [Fact]
     public void ComponentFileKind_ParsesDirectiveAttributesWithParameterAsMarkup()
     {
-        ParseDocumentTest("<span @class:param='@foo'></span>", fileKind: FileKinds.Component);
+        ParseDocumentTest("<span @class:param='@foo'></span>", RazorFileKind.Component);
     }
 }
