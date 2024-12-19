@@ -40,9 +40,10 @@ internal class DefaultRazorProjectFileSystem : RazorProjectFileSystem
             .Select(file =>
             {
                 var relativePhysicalPath = file.FullName.Substring(absoluteBasePath.Length + 1); // Include leading separator
-                    var filePath = "/" + relativePhysicalPath.Replace(Path.DirectorySeparatorChar, '/');
+                var filePath = "/" + relativePhysicalPath.Replace(Path.DirectorySeparatorChar, '/');
+                var fileKind = RazorFileKinds.GetFileKindFromFilePath(filePath);
 
-                return new DefaultRazorProjectItem(basePath, filePath, relativePhysicalPath, fileKind: null, file, cssScope: null);
+                return new DefaultRazorProjectItem(basePath, filePath, relativePhysicalPath, fileKind, file, cssScope: null);
             });
     }
 
@@ -60,7 +61,7 @@ internal class DefaultRazorProjectFileSystem : RazorProjectFileSystem
         var relativePhysicalPath = file.FullName.Substring(absoluteBasePath.Length + 1); // Include leading separator
         var filePath = "/" + relativePhysicalPath.Replace(Path.DirectorySeparatorChar, '/');
 
-        return new DefaultRazorProjectItem("/", filePath, relativePhysicalPath, fileKind, new FileInfo(absolutePath), cssScope: null);
+        return new DefaultRazorProjectItem("/", filePath, relativePhysicalPath, fileKind.ToRazorFileKind(filePath), new FileInfo(absolutePath), cssScope: null);
     }
 
 

@@ -24,6 +24,13 @@ public static class RazorFileKinds
     public static bool IsLegacy(RazorFileKind fileKind)
         => fileKind is RazorFileKind.Legacy;
 
+    public static RazorFileKind ToRazorFileKind(this RazorFileKind? fileKind, string? filePath = null)
+        => fileKind switch
+        {
+            null => GetFileKindFromFilePath(filePath),
+            RazorFileKind value => value
+        };
+
     public static RazorFileKind ToRazorFileKind(this string? fileKind, string? filePath = null)
     {
         if (fileKind is null)
