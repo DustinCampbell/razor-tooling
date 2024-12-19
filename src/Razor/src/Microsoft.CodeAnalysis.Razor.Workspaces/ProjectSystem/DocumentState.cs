@@ -234,7 +234,7 @@ internal partial class DocumentState
 
     private static async Task<ImmutableArray<ImportItem>> GetImportItemsAsync(IDocumentSnapshot document, RazorProjectEngine projectEngine, CancellationToken cancellationToken)
     {
-        var projectItem = projectEngine.FileSystem.GetItem(document.FilePath, document.FileKind);
+        var projectItem = projectEngine.FileSystem.GetItem(document.FilePath, document.FileKind.ToRazorFileKind());
 
         using var importProjectItems = new PooledArrayBuilder<RazorProjectItem>();
 
@@ -291,7 +291,7 @@ internal partial class DocumentState
         foreach (var importItem in importItems)
         {
             var importProjectItem = importItem is { FilePath: string filePath, FileKind: var fileKind }
-                ? projectEngine.FileSystem.GetItem(filePath, fileKind)
+                ? projectEngine.FileSystem.GetItem(filePath, fileKind.ToRazorFileKind())
                 : null;
 
             var properties = RazorSourceDocumentProperties.Create(importItem.FilePath, importProjectItem?.RelativePhysicalPath);
@@ -306,7 +306,7 @@ internal partial class DocumentState
     private static async Task<RazorSourceDocument> GetSourceAsync(IDocumentSnapshot document, RazorProjectEngine projectEngine, CancellationToken cancellationToken)
     {
         var projectItem = document is { FilePath: string filePath, FileKind: var fileKind }
-            ? projectEngine.FileSystem.GetItem(filePath, fileKind)
+            ? projectEngine.FileSystem.GetItem(filePath, fileKind.ToRazorFileKind())
             : null;
 
         var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);

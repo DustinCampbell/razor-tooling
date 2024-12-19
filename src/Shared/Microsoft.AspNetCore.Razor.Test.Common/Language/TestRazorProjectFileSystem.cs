@@ -1,28 +1,21 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-internal class TestRazorProjectFileSystem : DefaultRazorProjectFileSystem
+internal class TestRazorProjectFileSystem(params IEnumerable<RazorProjectItem> items) : DefaultRazorProjectFileSystem("/")
 {
     public static new RazorProjectFileSystem Empty = new TestRazorProjectFileSystem();
 
-    private readonly Dictionary<string, RazorProjectItem> _lookup;
+    private readonly Dictionary<string, RazorProjectItem> _lookup = items.ToDictionary(item => item.FilePath);
 
     public TestRazorProjectFileSystem()
-        : this(Array.Empty<RazorProjectItem>())
+        : this([])
     {
-    }
-
-    public TestRazorProjectFileSystem(IList<RazorProjectItem> items) : base("/")
-    {
-        _lookup = items.ToDictionary(item => item.FilePath);
     }
 
     public override IEnumerable<RazorProjectItem> EnumerateItems(string basePath)
@@ -30,18 +23,13 @@ internal class TestRazorProjectFileSystem : DefaultRazorProjectFileSystem
         throw new NotImplementedException();
     }
 
-    public override RazorProjectItem GetItem(string path)
+    public override RazorProjectItem GetItem(string path, RazorFileKind? fileKind = null)
     {
-        return GetItem(path, fileKind: null);
-    }
-
-    public override RazorProjectItem GetItem(string path, string fileKind)
-    {
-        if (!_lookup.TryGetValue(path, out var value))
+        if (_lookup.TryGetValue(path, out var projectItem))
         {
-            value = new NotFoundProjectItem("", path, fileKind.ToRazorFileKind(path));
+            return projectItem;
         }
 
-        return value;
+        return new NotFoundProjectItem("", path, fileKind.ToRazorFileKind(path));
     }
 }

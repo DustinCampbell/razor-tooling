@@ -250,7 +250,7 @@ public class DefaultRazorProjectFileSystemTest
         var fileSystem = new DefaultRazorProjectFileSystem(TestFolder);
 
         // Act
-        var item = fileSystem.GetItem(filePath, fileKind: null);
+        var item = fileSystem.GetItem(filePath);
 
         // Assert
         Assert.True(item.Exists);
@@ -270,7 +270,7 @@ public class DefaultRazorProjectFileSystemTest
         var fileSystem = new DefaultRazorProjectFileSystem(lowerCaseTestFolder);
 
         // Act
-        var item = fileSystem.GetItem(filePath, fileKind: null);
+        var item = fileSystem.GetItem(filePath);
 
         // Assert
         Assert.True(item.Exists);
@@ -288,7 +288,7 @@ public class DefaultRazorProjectFileSystemTest
         var fileSystem = new DefaultRazorProjectFileSystem(TestFolder);
 
         // Act
-        var item = fileSystem.GetItem(path, fileKind: null);
+        var item = fileSystem.GetItem(path);
 
         // Assert
         Assert.False(item.Exists);
@@ -304,7 +304,7 @@ public class DefaultRazorProjectFileSystemTest
 
         // Act & Assert
         var ex = Assert.Throws<InvalidOperationException>(
-            () => fileSystem.GetItem(path, fileKind: null));
+            () => fileSystem.GetItem(path));
         Assert.Equal(
             $"The file '{path.Replace('\\', '/')}' is not a descendent of the base path '{rootPath}'.",
             ex.Message);

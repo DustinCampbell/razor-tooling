@@ -429,7 +429,7 @@ internal class ProjectState
     internal static List<string> GetImportDocumentTargetPaths(string targetPath, string fileKind, RazorProjectEngine projectEngine)
     {
         var importFeatures = projectEngine.ProjectFeatures.OfType<IImportProjectFeature>();
-        var projectItem = projectEngine.FileSystem.GetItem(targetPath, fileKind);
+        var projectItem = projectEngine.FileSystem.GetItem(targetPath, fileKind.ToRazorFileKind());
         var importItems = importFeatures.SelectMany(f => f.GetImports(projectItem)).Where(i => i.FilePath != null);
 
         // Target path looks like `Foo\\Bar.cshtml`

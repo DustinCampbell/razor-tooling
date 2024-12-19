@@ -1,26 +1,19 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-public class TestRazorProject : RazorProject
+public class TestRazorProject(params IEnumerable<RazorProjectItem> items) : RazorProject
 {
-    private readonly Dictionary<string, RazorProjectItem> _lookup;
+    private readonly Dictionary<string, RazorProjectItem> _lookup = items.ToDictionary(item => item.FilePath);
 
     public TestRazorProject()
-        : this(new RazorProjectItem[0])
+        : this([])
     {
-    }
-
-    public TestRazorProject(IList<RazorProjectItem> items)
-    {
-        _lookup = items.ToDictionary(item => item.FilePath);
     }
 
     public override IEnumerable<RazorProjectItem> EnumerateItems(string basePath)
@@ -28,21 +21,16 @@ public class TestRazorProject : RazorProject
         throw new NotImplementedException();
     }
 
-
-    public override RazorProjectItem GetItem(string path)
+    public override RazorProjectItem GetItem(string path, RazorFileKind? fileKind = null)
     {
-        return GetItem(path, fileKind: null);
-    }
-
-    public override RazorProjectItem GetItem(string path, string fileKind)
-    {
-        if (!_lookup.TryGetValue(path, out var value))
+        if (_lookup.TryGetValue(path, out var projectItem))
         {
-            value = new NotFoundProjectItem("", path, fileKind.ToRazorFileKind(path));
+            return projectItem;
         }
 
-        return value;
+        return new NotFoundProjectItem("", path, fileKind.ToRazorFileKind(path));
     }
 
-    public new string NormalizeAndEnsureValidPath(string path) => base.NormalizeAndEnsureValidPath(path);
+    public new string NormalizeAndEnsureValidPath(string path)
+        => base.NormalizeAndEnsureValidPath(path);
 }

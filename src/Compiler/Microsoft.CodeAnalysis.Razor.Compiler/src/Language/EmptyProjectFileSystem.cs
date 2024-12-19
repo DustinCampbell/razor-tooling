@@ -16,13 +16,7 @@ internal class EmptyProjectFileSystem : RazorProjectFileSystem
         return Enumerable.Empty<RazorProjectItem>();
     }
 
-
-    public override RazorProjectItem GetItem(string path)
-    {
-        return GetItem(path, fileKind: null);
-    }
-
-    public override RazorProjectItem GetItem(string path, string fileKind)
+    public override RazorProjectItem GetItem(string path, RazorFileKind? fileKind = null)
     {
         NormalizeAndEnsureValidPath(path);
         return new NotFoundProjectItem(string.Empty, path, fileKind.ToRazorFileKind(path));

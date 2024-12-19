@@ -20,7 +20,7 @@ public class VirtualRazorProjectFileSystemTest
 
         // Act
         projectSystem.Add(new TestRazorProjectItem("/different-file.cshtml"));
-        var result = projectSystem.GetItem(path, fileKind: null);
+        var result = projectSystem.GetItem(path);
 
         // Assert
         Assert.False(result.Exists);
@@ -36,7 +36,7 @@ public class VirtualRazorProjectFileSystemTest
 
         // Act
         projectSystem.Add(projectItem);
-        var actual = projectSystem.GetItem(path, fileKind: null);
+        var actual = projectSystem.GetItem(path);
 
         // Assert
         Assert.Same(projectItem, actual);
@@ -54,7 +54,7 @@ public class VirtualRazorProjectFileSystemTest
 
         // Act
         projectSystem.Add(projectItem);
-        var actual = projectSystem.GetItem(path, fileKind: null);
+        var actual = projectSystem.GetItem(path);
 
         // Assert
         Assert.Same(projectItem, actual);
@@ -67,7 +67,7 @@ public class VirtualRazorProjectFileSystemTest
         var projectSystem = new VirtualRazorProjectFileSystem();
 
         // Act
-        var actual = projectSystem.GetItem("/subDirectory/dir3/file.cshtml", fileKind: null);
+        var actual = projectSystem.GetItem("/subDirectory/dir3/file.cshtml");
 
         // Assert
         Assert.False(actual.Exists);
@@ -82,7 +82,7 @@ public class VirtualRazorProjectFileSystemTest
 
         // Act
         projectSystem.Add(projectItem);
-        var actual = projectSystem.GetItem("/subDirectory/dir3/file.cshtml", fileKind: null);
+        var actual = projectSystem.GetItem("/subDirectory/dir3/file.cshtml");
 
         // Assert
         Assert.False(actual.Exists);
@@ -97,7 +97,7 @@ public class VirtualRazorProjectFileSystemTest
 
         // Act
         projectSystem.Add(projectItem);
-        var actual = projectSystem.GetItem("/subDirectory/dir2/file2.cshtml", fileKind: null);
+        var actual = projectSystem.GetItem("/subDirectory/dir2/file2.cshtml");
 
         // Assert
         Assert.False(actual.Exists);

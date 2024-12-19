@@ -25,7 +25,7 @@ public class RemoteRazorProjectFileSystemTest : ToolingTestBase
         var documentFilePath = "file.cshtml";
 
         // Act
-        var item = fileSystem.GetItem(documentFilePath, fileKind: null);
+        var item = fileSystem.GetItem(documentFilePath);
 
         // Assert
         Assert.Equal(documentFilePath, item.FilePath);
@@ -40,7 +40,7 @@ public class RemoteRazorProjectFileSystemTest : ToolingTestBase
         var documentFilePath = "C:/path/to/file.cshtml";
 
         // Act
-        var item = fileSystem.GetItem(documentFilePath, fileKind: null);
+        var item = fileSystem.GetItem(documentFilePath);
 
         // Assert
         Assert.Equal("file.cshtml", item.FilePath);
@@ -66,7 +66,7 @@ public class RemoteRazorProjectFileSystemTest : ToolingTestBase
         }
 
         // Act
-        var item = fileSystem.GetItem(documentFilePath, fileKind: null);
+        var item = fileSystem.GetItem(documentFilePath);
 
         // Assert
         Assert.Equal(documentFilePath, item.FilePath);

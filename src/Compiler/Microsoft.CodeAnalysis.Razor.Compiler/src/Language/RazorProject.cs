@@ -29,17 +29,9 @@ public abstract class RazorProject
     /// Gets a <see cref="RazorProjectItem"/> for the specified path.
     /// </summary>
     /// <param name="path">The path.</param>
-    /// <returns>The <see cref="RazorProjectItem"/>.</returns>
-
-    public abstract RazorProjectItem GetItem(string path);
-
-    /// <summary>
-    /// Gets a <see cref="RazorProjectItem"/> for the specified path.
-    /// </summary>
-    /// <param name="path">The path.</param>
     /// <param name="fileKind">The file kind</param>
     /// <returns>The <see cref="RazorProjectItem"/>.</returns>
-    public abstract RazorProjectItem GetItem(string path, string fileKind);
+    public abstract RazorProjectItem GetItem(string path, RazorFileKind? fileKind = null);
 
     /// <summary>
     /// Gets the sequence of files named <paramref name="fileName"/> that are applicable to the specified path.
@@ -124,7 +116,7 @@ public abstract class RazorProject
             builder.Append(fileName);
 
             var itemPath = builder.ToString();
-            yield return GetItem(itemPath, fileKind: null);
+            yield return GetItem(itemPath);
         }
     }
 
