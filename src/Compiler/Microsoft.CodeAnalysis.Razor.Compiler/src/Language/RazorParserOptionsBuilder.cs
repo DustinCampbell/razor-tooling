@@ -3,7 +3,6 @@
 
 #nullable disable
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis.CSharp;
@@ -16,10 +15,7 @@ public sealed class RazorParserOptionsBuilder
 
     internal RazorParserOptionsBuilder(RazorConfiguration configuration, string fileKind)
     {
-        if (configuration == null)
-        {
-            throw new ArgumentNullException(nameof(configuration));
-        }
+        ArgHelper.ThrowIfNull(configuration);
 
         Configuration = configuration;
         LanguageVersion = configuration.LanguageVersion;
