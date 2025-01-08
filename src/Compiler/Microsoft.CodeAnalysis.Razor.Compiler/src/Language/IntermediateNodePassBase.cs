@@ -24,6 +24,8 @@ public abstract class IntermediateNodePassBase : RazorEngineFeatureBase
 
     public void Execute(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
     {
+        Assumed.NotNull(codeDocument.GetParserOptions());
+
         if (codeDocument == null)
         {
             throw new ArgumentNullException(nameof(codeDocument));

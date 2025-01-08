@@ -356,9 +356,10 @@ public class RazorSyntaxTreePartialParserTest(ITestOutputHelper testOutput) : To
 
     private static void RunPartialParseRejectionTest(TestEdit edit, PartialParseResultInternal additionalFlags = 0)
     {
-        var templateEngine = CreateProjectEngine();
-        var document = TestRazorCodeDocument.Create(edit.OldSnapshot.GetText());
-        templateEngine.Engine.Process(document);
+        var projectEngine = CreateProjectEngine();
+        var source = TestRazorSourceDocument.Create(edit.OldSnapshot.GetText());
+        var document = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+        projectEngine.Engine.Process(document);
         var syntaxTree = document.GetSyntaxTree();
         var parser = new RazorSyntaxTreePartialParser(syntaxTree);
 
@@ -368,9 +369,10 @@ public class RazorSyntaxTreePartialParserTest(ITestOutputHelper testOutput) : To
 
     private void RunPartialParseTest(TestEdit edit, PartialParseResultInternal additionalFlags = 0)
     {
-        var templateEngine = CreateProjectEngine();
-        var document = TestRazorCodeDocument.Create(edit.OldSnapshot.GetText());
-        templateEngine.Engine.Process(document);
+        var projectEngine = CreateProjectEngine();
+        var source = TestRazorSourceDocument.Create(edit.OldSnapshot.GetText());
+        var document = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+        projectEngine.Engine.Process(document);
         var syntaxTree = document.GetSyntaxTree();
         var parser = new RazorSyntaxTreePartialParser(syntaxTree);
 

@@ -19,19 +19,21 @@ public class CreateNewOnMetadataUpdateAttributePassTest : RazorProjectEngineTest
     public void Execute_AddsAttributes()
     {
         // Arrange
-        var properties = RazorSourceDocumentProperties.Create(filePath: "ignored", relativePath: "Test.cshtml");
-        var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("Hello world", properties));
-
-        var engine = CreateProjectEngine(b =>
+        var projectEngine = CreateProjectEngine(b =>
         {
             PageDirective.Register(b);
-        }).Engine; ;
-        var irDocument = CreateIRDocument(engine, codeDocument);
+        });
+
+        var properties = RazorSourceDocumentProperties.Create(filePath: "ignored", relativePath: "Test.cshtml");
+        var source = RazorSourceDocument.Create("Hello world", properties);
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
+        var irDocument = CreateIRDocument(projectEngine.Engine, codeDocument);
         var pass = new CreateNewOnMetadataUpdateAttributePass
         {
-            Engine = engine
+            Engine = projectEngine.Engine
         };
-        var documentClassifier = new MvcViewDocumentClassifierPass { Engine = engine };
+        var documentClassifier = new MvcViewDocumentClassifierPass { Engine = projectEngine.Engine };
 
         // Act
         documentClassifier.Execute(codeDocument, irDocument);
@@ -58,20 +60,21 @@ public class CreateNewOnMetadataUpdateAttributePassTest : RazorProjectEngineTest
     public void Execute_NoOpsForBlazorComponents()
     {
         // Arrange
-        var properties = RazorSourceDocumentProperties.Create(filePath: "ignored", relativePath: "Test.razor");
-        var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("Hello world", properties));
-        codeDocument.SetFileKind(FileKinds.Component);
-
-        var engine = CreateProjectEngine(b =>
+        var projectEngine = CreateProjectEngine(b =>
         {
             PageDirective.Register(b);
-        }).Engine;
-        var irDocument = CreateIRDocument(engine, codeDocument);
+        });
+
+        var properties = RazorSourceDocumentProperties.Create(filePath: "ignored", relativePath: "Test.razor");
+        var source = RazorSourceDocument.Create("Hello world", properties);
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Component);
+
+        var irDocument = CreateIRDocument(projectEngine.Engine, codeDocument);
         var pass = new CreateNewOnMetadataUpdateAttributePass
         {
-            Engine = engine
+            Engine = projectEngine.Engine
         };
-        var documentClassifier = new DefaultDocumentClassifierPass { Engine = engine };
+        var documentClassifier = new DefaultDocumentClassifierPass { Engine = projectEngine.Engine };
 
         // Act
         documentClassifier.Execute(codeDocument, irDocument);

@@ -17,6 +17,11 @@ public class AssemblyAttributeInjectionPassTest : RazorProjectEngineTestBase
     public void Execute_NoOps_IfNamespaceNodeIsMissing()
     {
         // Arrange
+        var projectEngine = CreateProjectEngine();
+
+        var source = TestRazorSourceDocument.CreateEmpty();
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var irDocument = new DocumentIntermediateNode()
         {
             Options = RazorCodeGenerationOptions.Default,
@@ -24,11 +29,11 @@ public class AssemblyAttributeInjectionPassTest : RazorProjectEngineTestBase
 
         var pass = new AssemblyAttributeInjectionPass
         {
-            Engine = CreateProjectEngine().Engine,
+            Engine = projectEngine.Engine,
         };
 
         // Act
-        pass.Execute(TestRazorCodeDocument.CreateEmpty(), irDocument);
+        pass.Execute(codeDocument, irDocument);
 
         // Assert
         Assert.Empty(irDocument.Children);
@@ -38,10 +43,16 @@ public class AssemblyAttributeInjectionPassTest : RazorProjectEngineTestBase
     public void Execute_NoOps_IfNamespaceNodeHasEmptyContent()
     {
         // Arrange
+        var projectEngine = CreateProjectEngine();
+
+        var source = TestRazorSourceDocument.CreateEmpty();
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var irDocument = new DocumentIntermediateNode()
         {
             Options = RazorCodeGenerationOptions.Default,
         };
+
         var builder = IntermediateNodeBuilder.Create(irDocument);
         var @namespace = new NamespaceDeclarationIntermediateNode() { Content = string.Empty };
         @namespace.Annotations[CommonAnnotations.PrimaryNamespace] = CommonAnnotations.PrimaryNamespace;
@@ -49,11 +60,11 @@ public class AssemblyAttributeInjectionPassTest : RazorProjectEngineTestBase
 
         var pass = new AssemblyAttributeInjectionPass
         {
-            Engine = CreateProjectEngine().Engine,
+            Engine = projectEngine.Engine,
         };
 
         // Act
-        pass.Execute(TestRazorCodeDocument.CreateEmpty(), irDocument);
+        pass.Execute(codeDocument, irDocument);
 
         // Assert
         Assert.Collection(irDocument.Children,
@@ -64,6 +75,11 @@ public class AssemblyAttributeInjectionPassTest : RazorProjectEngineTestBase
     public void Execute_NoOps_IfClassNameNodeIsMissing()
     {
         // Arrange
+        var projectEngine = CreateProjectEngine();
+
+        var source = TestRazorSourceDocument.CreateEmpty();
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var irDocument = new DocumentIntermediateNode()
         {
             Options = RazorCodeGenerationOptions.Default,
@@ -75,11 +91,11 @@ public class AssemblyAttributeInjectionPassTest : RazorProjectEngineTestBase
 
         var pass = new AssemblyAttributeInjectionPass
         {
-            Engine = CreateProjectEngine().Engine,
+            Engine = projectEngine.Engine,
         };
 
         // Act
-        pass.Execute(TestRazorCodeDocument.CreateEmpty(), irDocument);
+        pass.Execute(codeDocument, irDocument);
 
         // Assert
         Assert.Collection(
@@ -91,10 +107,16 @@ public class AssemblyAttributeInjectionPassTest : RazorProjectEngineTestBase
     public void Execute_NoOps_IfClassNameIsEmpty()
     {
         // Arrange
+        var projectEngine = CreateProjectEngine();
+
+        var source = TestRazorSourceDocument.CreateEmpty();
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var irDocument = new DocumentIntermediateNode()
         {
             Options = RazorCodeGenerationOptions.Default,
         };
+
         var builder = IntermediateNodeBuilder.Create(irDocument);
         var @namespace = new NamespaceDeclarationIntermediateNode
         {
@@ -116,11 +138,11 @@ public class AssemblyAttributeInjectionPassTest : RazorProjectEngineTestBase
 
         var pass = new AssemblyAttributeInjectionPass
         {
-            Engine = CreateProjectEngine().Engine,
+            Engine = projectEngine.Engine,
         };
 
         // Act
-        pass.Execute(TestRazorCodeDocument.CreateEmpty(), irDocument);
+        pass.Execute(codeDocument, irDocument);
 
         // Assert
         Assert.Collection(irDocument.Children,
@@ -131,11 +153,17 @@ public class AssemblyAttributeInjectionPassTest : RazorProjectEngineTestBase
     public void Execute_NoOps_IfDocumentIsNotViewOrPage()
     {
         // Arrange
+        var projectEngine = CreateProjectEngine();
+
+        var source = TestRazorSourceDocument.CreateEmpty();
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var irDocument = new DocumentIntermediateNode
         {
             DocumentKind = "Default",
             Options = RazorCodeGenerationOptions.Default,
         };
+
         var builder = IntermediateNodeBuilder.Create(irDocument);
         var @namespace = new NamespaceDeclarationIntermediateNode() { Content = "SomeNamespace" };
         builder.Push(@namespace);
@@ -151,11 +179,11 @@ public class AssemblyAttributeInjectionPassTest : RazorProjectEngineTestBase
 
         var pass = new AssemblyAttributeInjectionPass
         {
-            Engine = CreateProjectEngine().Engine,
+            Engine = projectEngine.Engine,
         };
 
         // Act
-        pass.Execute(TestRazorCodeDocument.CreateEmpty(), irDocument);
+        pass.Execute(codeDocument, irDocument);
 
         // Assert
         Assert.Collection(
@@ -167,11 +195,17 @@ public class AssemblyAttributeInjectionPassTest : RazorProjectEngineTestBase
     public void Execute_NoOps_ForDesignTime()
     {
         // Arrange
+        var projectEngine = CreateProjectEngine();
+
+        var source = TestRazorSourceDocument.Create("test", RazorSourceDocumentProperties.Create(filePath: null, relativePath: "/Views/Index.cshtml"));
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var irDocument = new DocumentIntermediateNode
         {
             DocumentKind = MvcViewDocumentClassifierPass.MvcViewDocumentKind,
             Options = RazorCodeGenerationOptions.DesignTimeDefault,
         };
+
         var builder = IntermediateNodeBuilder.Create(irDocument);
         var @namespace = new NamespaceDeclarationIntermediateNode
         {
@@ -194,14 +228,11 @@ public class AssemblyAttributeInjectionPassTest : RazorProjectEngineTestBase
 
         var pass = new AssemblyAttributeInjectionPass
         {
-            Engine = CreateProjectEngine().Engine,
+            Engine = projectEngine.Engine,
         };
 
-        var source = TestRazorSourceDocument.Create("test", RazorSourceDocumentProperties.Create(filePath: null, relativePath: "/Views/Index.cshtml"));
-        var document = RazorCodeDocument.Create(source);
-
         // Act
-        pass.Execute(document, irDocument);
+        pass.Execute(codeDocument, irDocument);
 
         // Assert
         Assert.Collection(
@@ -213,12 +244,18 @@ public class AssemblyAttributeInjectionPassTest : RazorProjectEngineTestBase
     public void Execute_AddsRazorViewAttribute_ToViews()
     {
         // Arrange
+        var projectEngine = CreateProjectEngine();
+
+        var source = TestRazorSourceDocument.Create("test", RazorSourceDocumentProperties.Create(filePath: null, relativePath: "/Views/Index.cshtml"));
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var expectedAttribute = "[assembly:global::Microsoft.AspNetCore.Mvc.Razor.Compilation.RazorViewAttribute(@\"/Views/Index.cshtml\", typeof(SomeNamespace.SomeName))]";
         var irDocument = new DocumentIntermediateNode
         {
             DocumentKind = MvcViewDocumentClassifierPass.MvcViewDocumentKind,
             Options = RazorCodeGenerationOptions.Default,
         };
+
         var builder = IntermediateNodeBuilder.Create(irDocument);
         var @namespace = new NamespaceDeclarationIntermediateNode
         {
@@ -241,14 +278,11 @@ public class AssemblyAttributeInjectionPassTest : RazorProjectEngineTestBase
 
         var pass = new AssemblyAttributeInjectionPass
         {
-            Engine = CreateProjectEngine().Engine,
+            Engine = projectEngine.Engine,
         };
 
-        var source = TestRazorSourceDocument.Create("test", RazorSourceDocumentProperties.Create(filePath: null, relativePath: "/Views/Index.cshtml"));
-        var document = RazorCodeDocument.Create(source);
-
         // Act
-        pass.Execute(document, irDocument);
+        pass.Execute(codeDocument, irDocument);
 
         // Assert
         Assert.Collection(irDocument.Children,
@@ -266,12 +300,18 @@ public class AssemblyAttributeInjectionPassTest : RazorProjectEngineTestBase
     public void Execute_EscapesViewPathWhenAddingAttributeToViews()
     {
         // Arrange
+        var projectEngine = CreateProjectEngine();
+
+        var source = TestRazorSourceDocument.Create("test", RazorSourceDocumentProperties.Create(filePath: null, relativePath: "\\test\\\"Index.cshtml"));
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var expectedAttribute = "[assembly:global::Microsoft.AspNetCore.Mvc.Razor.Compilation.RazorViewAttribute(@\"/test/\"\"Index.cshtml\", typeof(SomeNamespace.SomeName))]";
         var irDocument = new DocumentIntermediateNode
         {
             DocumentKind = MvcViewDocumentClassifierPass.MvcViewDocumentKind,
             Options = RazorCodeGenerationOptions.Default,
         };
+
         var builder = IntermediateNodeBuilder.Create(irDocument);
         var @namespace = new NamespaceDeclarationIntermediateNode
         {
@@ -294,14 +334,11 @@ public class AssemblyAttributeInjectionPassTest : RazorProjectEngineTestBase
 
         var pass = new AssemblyAttributeInjectionPass
         {
-            Engine = CreateProjectEngine().Engine,
+            Engine = projectEngine.Engine,
         };
 
-        var source = TestRazorSourceDocument.Create("test", RazorSourceDocumentProperties.Create(filePath: null, relativePath: "\\test\\\"Index.cshtml"));
-        var document = RazorCodeDocument.Create(source);
-
         // Act
-        pass.Execute(document, irDocument);
+        pass.Execute(codeDocument, irDocument);
 
         // Assert
         Assert.Collection(irDocument.Children,
@@ -316,15 +353,21 @@ public class AssemblyAttributeInjectionPassTest : RazorProjectEngineTestBase
     }
 
     [Fact]
-    public void Execute_AddsRazorPagettribute_ToPage()
+    public void Execute_AddsRazorPageAttribute_ToPage()
     {
         // Arrange
+        var projectEngine = CreateProjectEngine();
+
+        var source = TestRazorSourceDocument.Create("test", RazorSourceDocumentProperties.Create(filePath: null, relativePath: "/Views/Index.cshtml"));
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var expectedAttribute = "[assembly:global::Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.RazorPageAttribute(@\"/Views/Index.cshtml\", typeof(SomeNamespace.SomeName), null)]";
         var irDocument = new DocumentIntermediateNode
         {
             DocumentKind = RazorPageDocumentClassifierPass.RazorPageDocumentKind,
             Options = RazorCodeGenerationOptions.Default,
         };
+
         var builder = IntermediateNodeBuilder.Create(irDocument);
         var pageDirective = new DirectiveIntermediateNode
         {
@@ -353,14 +396,11 @@ public class AssemblyAttributeInjectionPassTest : RazorProjectEngineTestBase
 
         var pass = new AssemblyAttributeInjectionPass
         {
-            Engine = CreateProjectEngine().Engine,
+            Engine = projectEngine.Engine,
         };
 
-        var source = TestRazorSourceDocument.Create("test", RazorSourceDocumentProperties.Create(filePath: null, relativePath: "/Views/Index.cshtml"));
-        var document = RazorCodeDocument.Create(source);
-
         // Act
-        pass.Execute(document, irDocument);
+        pass.Execute(codeDocument, irDocument);
 
         // Assert
         Assert.Collection(irDocument.Children,
@@ -379,12 +419,18 @@ public class AssemblyAttributeInjectionPassTest : RazorProjectEngineTestBase
     public void Execute_EscapesViewPathAndRouteWhenAddingAttributeToPage()
     {
         // Arrange
+        var projectEngine = CreateProjectEngine();
+
+        var source = TestRazorSourceDocument.Create("test", RazorSourceDocumentProperties.Create(filePath: null, relativePath: "test\\\"Index.cshtml"));
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var expectedAttribute = "[assembly:global::Microsoft.AspNetCore.Mvc.Razor.Compilation.RazorViewAttribute(@\"/test/\"\"Index.cshtml\", typeof(SomeNamespace.SomeName))]";
         var irDocument = new DocumentIntermediateNode
         {
             DocumentKind = MvcViewDocumentClassifierPass.MvcViewDocumentKind,
             Options = RazorCodeGenerationOptions.Default,
         };
+
         var builder = IntermediateNodeBuilder.Create(irDocument);
         var @namespace = new NamespaceDeclarationIntermediateNode
         {
@@ -408,14 +454,11 @@ public class AssemblyAttributeInjectionPassTest : RazorProjectEngineTestBase
 
         var pass = new AssemblyAttributeInjectionPass
         {
-            Engine = CreateProjectEngine().Engine,
+            Engine = projectEngine.Engine,
         };
 
-        var source = TestRazorSourceDocument.Create("test", RazorSourceDocumentProperties.Create(filePath: null, relativePath: "test\\\"Index.cshtml"));
-        var document = RazorCodeDocument.Create(source);
-
         // Act
-        pass.Execute(document, irDocument);
+        pass.Execute(codeDocument, irDocument);
 
         // Assert
         Assert.Collection(irDocument.Children,

@@ -3,7 +3,6 @@
 
 #nullable disable
 
-using System.Collections.Immutable;
 using Microsoft.AspNetCore.Razor.Language.Components;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 using Microsoft.CodeAnalysis.CSharp;
@@ -19,14 +18,15 @@ public class MetadataAttributePassTest
     public void Execute_NullCodeGenerationOptions_Noops()
     {
         // Arrange
-        var engine = CreateEngine();
-        var pass = new MetadataAttributePass()
-        {
-            Engine = engine,
-        };
+        var projectEngine = CreateProjectEngine();
 
         var sourceDocument = TestRazorSourceDocument.Create();
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = projectEngine.CreateCodeDocument(sourceDocument, FileKinds.Legacy);
+
+        var pass = new MetadataAttributePass()
+        {
+            Engine = projectEngine.Engine,
+        };
 
         var irDocument = new DocumentIntermediateNode();
 
@@ -41,14 +41,15 @@ public class MetadataAttributePassTest
     public void Execute_SuppressMetadataAttributes_Noops()
     {
         // Arrange
-        var engine = CreateEngine();
-        var pass = new MetadataAttributePass()
-        {
-            Engine = engine,
-        };
+        var projectEngine = CreateProjectEngine();
 
         var sourceDocument = TestRazorSourceDocument.Create();
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = projectEngine.CreateCodeDocument(sourceDocument, FileKinds.Legacy);
+
+        var pass = new MetadataAttributePass()
+        {
+            Engine = projectEngine.Engine,
+        };
 
         var irDocument = new DocumentIntermediateNode()
         {
@@ -69,14 +70,15 @@ public class MetadataAttributePassTest
     public void Execute_ComponentDocumentKind_Noops()
     {
         // Arrange
-        var engine = CreateEngine();
-        var pass = new MetadataAttributePass()
-        {
-            Engine = engine,
-        };
+        var projectEngine = CreateProjectEngine();
 
         var sourceDocument = TestRazorSourceDocument.Create();
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = projectEngine.CreateCodeDocument(sourceDocument, FileKinds.Legacy);
+
+        var pass = new MetadataAttributePass()
+        {
+            Engine = projectEngine.Engine,
+        };
 
         var irDocument = new DocumentIntermediateNode()
         {
@@ -98,14 +100,15 @@ public class MetadataAttributePassTest
     public void Execute_NoNamespaceSet_Noops()
     {
         // Arrange
-        var engine = CreateEngine();
-        var pass = new MetadataAttributePass()
-        {
-            Engine = engine,
-        };
+        var projectEngine = CreateProjectEngine();
 
         var sourceDocument = TestRazorSourceDocument.Create();
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = projectEngine.CreateCodeDocument(sourceDocument, FileKinds.Legacy);
+
+        var pass = new MetadataAttributePass()
+        {
+            Engine = projectEngine.Engine,
+        };
 
         var irDocument = new DocumentIntermediateNode()
         {
@@ -155,14 +158,15 @@ public class MetadataAttributePassTest
     public void Execute_NoClassNameSet_Noops()
     {
         // Arrange
-        var engine = CreateEngine();
-        var pass = new MetadataAttributePass()
-        {
-            Engine = engine,
-        };
+        var projectEngine = CreateProjectEngine();
 
         var sourceDocument = TestRazorSourceDocument.Create();
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = projectEngine.CreateCodeDocument(sourceDocument, FileKinds.Legacy);
+
+        var pass = new MetadataAttributePass()
+        {
+            Engine = projectEngine.Engine,
+        };
 
         var irDocument = new DocumentIntermediateNode()
         {
@@ -199,14 +203,15 @@ public class MetadataAttributePassTest
     public void Execute_NoDocumentKind_Noops()
     {
         // Arrange
-        var engine = CreateEngine();
-        var pass = new MetadataAttributePass()
-        {
-            Engine = engine,
-        };
+        var projectEngine = CreateProjectEngine();
 
         var sourceDocument = TestRazorSourceDocument.Create();
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = projectEngine.CreateCodeDocument(sourceDocument, FileKinds.Legacy);
+
+        var pass = new MetadataAttributePass()
+        {
+            Engine = projectEngine.Engine,
+        };
 
         var irDocument = new DocumentIntermediateNode();
         var builder = IntermediateNodeBuilder.Create(irDocument);
@@ -240,14 +245,15 @@ public class MetadataAttributePassTest
     public void Execute_NoIdentifier_Noops()
     {
         // Arrange
-        var engine = CreateEngine();
-        var pass = new MetadataAttributePass()
-        {
-            Engine = engine,
-        };
+        var projectEngine = CreateProjectEngine();
 
         var sourceDocument = TestRazorSourceDocument.Create("", RazorSourceDocumentProperties.Default);
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = projectEngine.CreateCodeDocument(sourceDocument, FileKinds.Legacy);
+
+        var pass = new MetadataAttributePass()
+        {
+            Engine = projectEngine.Engine,
+        };
 
         var irDocument = new DocumentIntermediateNode()
         {
@@ -285,14 +291,15 @@ public class MetadataAttributePassTest
     public void Execute_HasRequiredInfo_AddsItemAndSourceChecksum()
     {
         // Arrange
-        var engine = CreateEngine();
-        var pass = new MetadataAttributePass()
-        {
-            Engine = engine,
-        };
+        var projectEngine = CreateProjectEngine();
 
         var sourceDocument = TestRazorSourceDocument.Create("", RazorSourceDocumentProperties.Create(null, "Foo\\Bar.cshtml"));
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
+        var codeDocument = projectEngine.CreateCodeDocument(sourceDocument, FileKinds.Legacy);
+
+        var pass = new MetadataAttributePass()
+        {
+            Engine = projectEngine.Engine,
+        };
 
         var irDocument = new DocumentIntermediateNode()
         {
@@ -340,15 +347,16 @@ public class MetadataAttributePassTest
     public void Execute_HasRequiredInfo_AndImport_AddsItemAndSourceChecksum()
     {
         // Arrange
-        var engine = CreateEngine();
-        var pass = new MetadataAttributePass()
-        {
-            Engine = engine,
-        };
+        var projectEngine = CreateProjectEngine();
 
         var sourceDocument = TestRazorSourceDocument.Create("", RazorSourceDocumentProperties.Create(null, "Foo\\Bar.cshtml"));
         var import = TestRazorSourceDocument.Create("@using System", RazorSourceDocumentProperties.Create(null, "Foo\\Import.cshtml"));
-        var codeDocument = RazorCodeDocument.Create(sourceDocument, ImmutableArray.Create(import));
+        var codeDocument = projectEngine.CreateCodeDocument(sourceDocument, [import], FileKinds.Legacy);
+
+        var pass = new MetadataAttributePass()
+        {
+            Engine = projectEngine.Engine,
+        };
 
         var irDocument = new DocumentIntermediateNode()
         {
@@ -400,15 +408,16 @@ public class MetadataAttributePassTest
     public void Execute_SuppressMetadataSourceChecksumAttributes_DoesNotGenerateSourceChecksumAttributes()
     {
         // Arrange
-        var engine = CreateEngine();
-        var pass = new MetadataAttributePass()
-        {
-            Engine = engine,
-        };
+        var projectEngine = CreateProjectEngine();
 
         var sourceDocument = TestRazorSourceDocument.Create("", RazorSourceDocumentProperties.Create(null, "Foo\\Bar.cshtml"));
         var import = TestRazorSourceDocument.Create("@using System", RazorSourceDocumentProperties.Create(null, "Foo\\Import.cshtml"));
-        var codeDocument = RazorCodeDocument.Create(sourceDocument, ImmutableArray.Create(import));
+        var codeDocument = projectEngine.CreateCodeDocument(sourceDocument, [import], FileKinds.Legacy);
+
+        var pass = new MetadataAttributePass()
+        {
+            Engine = projectEngine.Engine,
+        };
 
         var irDocument = new DocumentIntermediateNode()
         {
@@ -450,12 +459,12 @@ public class MetadataAttributePassTest
         Assert.IsType<ClassDeclarationIntermediateNode>(child);
     }
 
-    private static RazorEngine CreateEngine()
+    private static RazorProjectEngine CreateProjectEngine()
     {
         return RazorProjectEngine.Create(b =>
         {
             b.Features.Add(new ConfigureRazorParserOptions(useRoslynTokenizer: true, CSharpParseOptions.Default));
             b.Features.Add(new DefaultMetadataIdentifierFeature());
-        }).Engine;
+        });
     }
 }

@@ -17,17 +17,20 @@ public class InjectDirectiveTest : RazorProjectEngineTestBase
     public void InjectDirectivePass_Execute_DefinesProperty()
     {
         // Arrange
-        var codeDocument = CreateDocument(@"
-@inject PropertyType PropertyName
-");
+        var projectEngine = CreateProjectEngine();
 
-        var engine = CreateEngine();
+        var source = RazorSourceDocument.Create(@"
+@inject PropertyType PropertyName
+", "test.cshtml");
+
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var pass = new InjectDirective.Pass()
         {
-            Engine = engine,
+            Engine = projectEngine.Engine,
         };
 
-        var irDocument = CreateIRDocument(engine, codeDocument);
+        var irDocument = CreateIRDocument(projectEngine.Engine, codeDocument);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -46,18 +49,21 @@ public class InjectDirectiveTest : RazorProjectEngineTestBase
     public void InjectDirectivePass_Execute_DedupesPropertiesByName()
     {
         // Arrange
-        var codeDocument = CreateDocument(@"
+        var projectEngine = CreateProjectEngine();
+
+        var source = RazorSourceDocument.Create(@"
 @inject PropertyType PropertyName
 @inject PropertyType2 PropertyName
-");
+", "test.cshtml");
 
-        var engine = CreateEngine();
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var pass = new InjectDirective.Pass()
         {
-            Engine = engine,
+            Engine = projectEngine.Engine,
         };
 
-        var irDocument = CreateIRDocument(engine, codeDocument);
+        var irDocument = CreateIRDocument(projectEngine.Engine, codeDocument);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -76,17 +82,20 @@ public class InjectDirectiveTest : RazorProjectEngineTestBase
     public void InjectDirectivePass_Execute_ExpandsTModel_WithDynamic()
     {
         // Arrange
-        var codeDocument = CreateDocument(@"
-@inject PropertyType<TModel> PropertyName
-");
+        var projectEngine = CreateProjectEngine();
 
-        var engine = CreateEngine();
+        var source = RazorSourceDocument.Create(@"
+@inject PropertyType<TModel> PropertyName
+", "test.cshtml");
+
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var pass = new InjectDirective.Pass()
         {
-            Engine = engine,
+            Engine = projectEngine.Engine,
         };
 
-        var irDocument = CreateIRDocument(engine, codeDocument);
+        var irDocument = CreateIRDocument(projectEngine.Engine, codeDocument);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -105,18 +114,21 @@ public class InjectDirectiveTest : RazorProjectEngineTestBase
     public void InjectDirectivePass_Execute_ExpandsTModel_WithModelTypeFirst()
     {
         // Arrange
-        var codeDocument = CreateDocument(@"
+        var projectEngine = CreateProjectEngine();
+
+        var source = RazorSourceDocument.Create(@"
 @model ModelType
 @inject PropertyType<TModel> PropertyName
-");
+", "test.cshtml");
 
-        var engine = CreateEngine();
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var pass = new InjectDirective.Pass()
         {
-            Engine = engine,
+            Engine = projectEngine.Engine,
         };
 
-        var irDocument = CreateIRDocument(engine, codeDocument);
+        var irDocument = CreateIRDocument(projectEngine.Engine, codeDocument);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -135,18 +147,21 @@ public class InjectDirectiveTest : RazorProjectEngineTestBase
     public void InjectDirectivePass_Execute_ExpandsTModel_WithModelType()
     {
         // Arrange
-        var codeDocument = CreateDocument(@"
+        var projectEngine = CreateProjectEngine();
+
+        var source = RazorSourceDocument.Create(@"
 @inject PropertyType<TModel> PropertyName
 @model ModelType
-");
+", "test.cshtml");
 
-        var engine = CreateEngine();
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var pass = new InjectDirective.Pass()
         {
-            Engine = engine,
+            Engine = projectEngine.Engine,
         };
 
-        var irDocument = CreateIRDocument(engine, codeDocument);
+        var irDocument = CreateIRDocument(projectEngine.Engine, codeDocument);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -161,13 +176,7 @@ public class InjectDirectiveTest : RazorProjectEngineTestBase
         Assert.Equal("PropertyName", node.MemberName);
     }
 
-    private RazorCodeDocument CreateDocument(string content)
-    {
-        var source = RazorSourceDocument.Create(content, "test.cshtml");
-        return RazorCodeDocument.Create(source);
-    }
-
-    private ClassDeclarationIntermediateNode FindClassNode(IntermediateNode node)
+    private static ClassDeclarationIntermediateNode FindClassNode(IntermediateNode node)
     {
         var visitor = new ClassNodeVisitor();
         visitor.Visit(node);
@@ -184,7 +193,7 @@ public class InjectDirectiveTest : RazorProjectEngineTestBase
         builder.Features.Add(new MvcViewDocumentClassifierPass());
     }
 
-    private DocumentIntermediateNode CreateIRDocument(RazorEngine engine, RazorCodeDocument codeDocument)
+    private static DocumentIntermediateNode CreateIRDocument(RazorEngine engine, RazorCodeDocument codeDocument)
     {
         foreach (var phase in engine.Phases)
         {

@@ -24,10 +24,10 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
     public void Lower_SetsOptions_Defaults()
     {
         // Arrange
-        var codeDocument = TestRazorCodeDocument.CreateEmpty();
+        var source = TestRazorSourceDocument.CreateEmpty();
 
         // Act
-        var documentNode = Lower(codeDocument);
+        var documentNode = Lower(source);
 
         // Assert
         Assert.NotNull(documentNode.Options);
@@ -40,7 +40,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
     public void Lower_SetsOptions_RunsConfigureCallbacks()
     {
         // Arrange
-        var codeDocument = TestRazorCodeDocument.CreateEmpty();
+        var source = TestRazorSourceDocument.CreateEmpty();
 
         var callback = new Mock<IConfigureRazorCodeGenerationOptionsFeature>();
         callback
@@ -54,7 +54,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
 
         // Act
         var documentNode = Lower(
-            codeDocument,
+            source,
             builder: b =>
             {
                 b.Features.Add(callback.Object);
@@ -73,10 +73,10 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
     public void Lower_HelloWorld()
     {
         // Arrange
-        var codeDocument = TestRazorCodeDocument.Create("Hello, World!");
+        var source = TestRazorSourceDocument.Create("Hello, World!");
 
         // Act
-        var documentNode = Lower(codeDocument);
+        var documentNode = Lower(source);
 
         // Assert
         Children(documentNode,
@@ -87,7 +87,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
     public void Lower_HtmlWithDataDashAttributes()
     {
         // Arrange
-        var codeDocument = TestRazorCodeDocument.Create(@"
+        var source = TestRazorSourceDocument.Create(@"
 <html>
     <body>
         <span data-val=""@Hello"" />
@@ -95,7 +95,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
 </html>");
 
         // Act
-        var documentNode = Lower(codeDocument);
+        var documentNode = Lower(source);
 
         // Assert
         Children(documentNode,
@@ -114,7 +114,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
     public void Lower_HtmlWithConditionalAttributes()
     {
         // Arrange
-        var codeDocument = TestRazorCodeDocument.Create(@"
+        var source = TestRazorSourceDocument.Create(@"
 <html>
     <body>
         <span val=""@Hello World"" />
@@ -122,7 +122,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
 </html>");
 
         // Act
-        var documentNode = Lower(codeDocument);
+        var documentNode = Lower(source);
 
         // Assert
         Children(documentNode,
@@ -137,11 +137,10 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
                 name: "val",
                 suffix: "\"",
                 node: n,
-                valueValidators: new Action<IntermediateNode>[]
-                {
-                        value => CSharpExpressionAttributeValue(string.Empty, "Hello", value),
-                        value => LiteralAttributeValue(" ",  "World", value)
-                }),
+                valueValidators: [
+                    value => CSharpExpressionAttributeValue(string.Empty, "Hello", value),
+                    value => LiteralAttributeValue(" ",  "World", value)
+                ]),
             n => Html(@" />
     </body>
 </html>", n));
@@ -151,10 +150,10 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
     public void Lower_WithFunctions()
     {
         // Arrange
-        var codeDocument = TestRazorCodeDocument.Create(@"@functions { public int Foo { get; set; }}");
+        var source = TestRazorSourceDocument.Create(@"@functions { public int Foo { get; set; }}");
 
         // Act
-        var documentNode = Lower(codeDocument);
+        var documentNode = Lower(source);
 
         // Assert
         Children(documentNode,
@@ -168,11 +167,11 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
     public void Lower_WithUsing()
     {
         // Arrange
-        var codeDocument = TestRazorCodeDocument.Create(@"@using System");
-        var expectedSourceLocation = new SourceSpan(codeDocument.Source.FilePath, 1, 0, 1, 12);
+        var source = TestRazorSourceDocument.Create(@"@using System");
+        var expectedSourceLocation = new SourceSpan(source.FilePath, 1, 0, 1, 12);
 
         // Act
-        var documentNode = Lower(codeDocument);
+        var documentNode = Lower(source);
 
         // Assert
         Children(documentNode,
@@ -187,18 +186,18 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
     public void Lower_TagHelpers()
     {
         // Arrange
-        var codeDocument = TestRazorCodeDocument.Create(@"@addTagHelper *, TestAssembly
+        var source = TestRazorSourceDocument.Create(@"@addTagHelper *, TestAssembly
 <span val=""@Hello World""></span>");
         var tagHelpers = new[]
         {
-                CreateTagHelperDescriptor(
-                    tagName: "span",
-                    typeName: "SpanTagHelper",
-                    assemblyName: "TestAssembly")
-            };
+            CreateTagHelperDescriptor(
+                tagName: "span",
+                typeName: "SpanTagHelper",
+                assemblyName: "TestAssembly")
+        };
 
         // Act
-        var documentNode = Lower(codeDocument, tagHelpers: tagHelpers);
+        var documentNode = Lower(source, tagHelpers: tagHelpers);
 
         // Assert
         Children(documentNode,
@@ -224,7 +223,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
     public void Lower_TagHelpers_WithPrefix()
     {
         // Arrange
-        var codeDocument = TestRazorCodeDocument.Create(@"@addTagHelper *, TestAssembly
+        var source = TestRazorSourceDocument.Create(@"@addTagHelper *, TestAssembly
 @tagHelperPrefix cool:
 <cool:span val=""@Hello World""></cool:span>");
         var tagHelpers = new[]
@@ -236,7 +235,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
             };
 
         // Act
-        var documentNode = Lower(codeDocument, tagHelpers: tagHelpers);
+        var documentNode = Lower(source, tagHelpers: tagHelpers);
 
         // Assert
         Children(documentNode,
@@ -266,20 +265,20 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
     public void Lower_TagHelper_InSection()
     {
         // Arrange
-        var codeDocument = TestRazorCodeDocument.Create(@"@addTagHelper *, TestAssembly
+        var source = TestRazorSourceDocument.Create(@"@addTagHelper *, TestAssembly
 @section test {
 <span val=""@Hello World""></span>
 }");
         var tagHelpers = new[]
         {
-                        CreateTagHelperDescriptor(
-                            tagName: "span",
-                            typeName: "SpanTagHelper",
-                            assemblyName: "TestAssembly")
-            };
+            CreateTagHelperDescriptor(
+                tagName: "span",
+                typeName: "SpanTagHelper",
+                assemblyName: "TestAssembly")
+        };
 
         // Act
-        var documentNode = Lower(codeDocument, tagHelpers: tagHelpers);
+        var documentNode = Lower(source, tagHelpers: tagHelpers);
 
         // Assert
         Children(
@@ -312,7 +311,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
     public void Lower_TagHelpersWithBoundAttribute()
     {
         // Arrange
-        var codeDocument = TestRazorCodeDocument.Create(@"@addTagHelper *, TestAssembly
+        var source = TestRazorSourceDocument.Create(@"@addTagHelper *, TestAssembly
 <input bound='foo' />");
         var tagHelpers = new[]
         {
@@ -330,7 +329,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
             };
 
         // Act
-        var documentNode = Lower(codeDocument, tagHelpers: tagHelpers);
+        var documentNode = Lower(source, tagHelpers: tagHelpers);
 
         // Assert
         Children(
@@ -359,14 +358,11 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
         // Arrange
         var source = TestRazorSourceDocument.Create(@"@using System.Threading.Tasks
 <p>Hi!</p>");
-        var imports = ImmutableArray.Create(
-            TestRazorSourceDocument.Create("@using System.Globalization"),
-            TestRazorSourceDocument.Create("@using System.Text"));
-
-        var codeDocument = TestRazorCodeDocument.Create(source, imports);
+        var importSource1 = TestRazorSourceDocument.Create("@using System.Globalization");
+        var importSource2 = TestRazorSourceDocument.Create("@using System.Text");
 
         // Act
-        var documentNode = Lower(codeDocument);
+        var documentNode = Lower(source, [importSource1, importSource2]);
 
         // Assert
         Children(
@@ -383,13 +379,10 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
         // Arrange
         var source = TestRazorSourceDocument.Create(@"@using System.Threading.Tasks
 @using System.Threading.Tasks");
-        var imports = ImmutableArray.Create(
-            TestRazorSourceDocument.Create("@using System.Threading.Tasks"));
-
-        var codeDocument = TestRazorCodeDocument.Create(source, imports);
+        var importSource = TestRazorSourceDocument.Create("@using System.Threading.Tasks");
 
         // Act
-        var documentNode = Lower(codeDocument);
+        var documentNode = Lower(source, [importSource]);
 
         // Assert
         Children(
@@ -403,14 +396,11 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
     {
         // Arrange
         var source = TestRazorSourceDocument.Create("<p>Hi!</p>");
-        var imports = ImmutableArray.Create(
-            TestRazorSourceDocument.Create("@test value1"),
-            TestRazorSourceDocument.Create("@test value2"));
-
-        var codeDocument = TestRazorCodeDocument.Create(source, imports);
+        var importSource1 = TestRazorSourceDocument.Create("@test value1");
+        var importSource2 = TestRazorSourceDocument.Create("@test value2");
 
         // Act
-        var documentNode = Lower(codeDocument, b =>
+        var documentNode = Lower(source, [importSource1, importSource2], b =>
         {
             b.AddDirective(DirectiveDescriptor.CreateDirective(
                 "test",
@@ -434,13 +424,10 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
     {
         // Arrange
         var source = TestRazorSourceDocument.Create("<p>Hi!</p>");
-        var imports = ImmutableArray.Create(
-            TestRazorSourceDocument.Create("@block token { }"));
-
-        var codeDocument = TestRazorCodeDocument.Create(source, imports);
+        var importSource = TestRazorSourceDocument.Create("@block token { }");
 
         // Act
-        var documentNode = Lower(codeDocument, b =>
+        var documentNode = Lower(source, [importSource], b =>
         {
             b.AddDirective(DirectiveDescriptor.CreateDirective("block", DirectiveKind.RazorBlock, d => d.AddMemberToken()));
         });
@@ -452,12 +439,13 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
     }
 
     private static DocumentIntermediateNode Lower(
-        RazorCodeDocument codeDocument,
+        RazorSourceDocument source,
+        ImmutableArray<RazorSourceDocument> importSources = default,
         Action<RazorProjectEngineBuilder> builder = null,
         IEnumerable<TagHelperDescriptor> tagHelpers = null,
         bool designTime = false)
     {
-        tagHelpers ??= Array.Empty<TagHelperDescriptor>();
+        tagHelpers ??= [];
 
         Action<RazorProjectEngineBuilder> configureEngine = b =>
         {
@@ -471,6 +459,8 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
         };
 
         var projectEngine = RazorProjectEngine.Create(configureEngine);
+
+        var codeDocument = projectEngine.CreateCodeDocument(source, importSources, FileKinds.Legacy);
 
         foreach (var phase in projectEngine.Phases)
         {
@@ -512,14 +502,9 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
         return descriptor;
     }
 
-    private class DesignTimeOptionsFeature : RazorEngineFeatureBase, IConfigureRazorParserOptionsFeature, IConfigureRazorCodeGenerationOptionsFeature
+    private class DesignTimeOptionsFeature(bool designTime) : RazorEngineFeatureBase, IConfigureRazorParserOptionsFeature, IConfigureRazorCodeGenerationOptionsFeature
     {
-        private readonly bool _designTime;
-
-        public DesignTimeOptionsFeature(bool designTime)
-        {
-            _designTime = designTime;
-        }
+        private readonly bool _designTime = designTime;
 
         public int Order { get; }
 

@@ -9,8 +9,10 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X;
 
-public class NamespaceDirectiveTest
+public class NamespaceDirectiveTest : RazorProjectEngineTestBase
 {
+    protected override RazorLanguageVersion Version => RazorLanguageVersion.Version_2_1;
+
     [Fact]
     public void GetNamespace_IncompleteDirective_UsesEmptyNamespace()
     {
@@ -112,6 +114,11 @@ public class NamespaceDirectiveTest
     public void Pass_SetsNamespace_ComputedFromImports()
     {
         // Arrange
+        var projectEngine = CreateProjectEngine();
+
+        var source = RazorSourceDocument.Create("ignored", "/Account/Manage/AddUser.cshtml");
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var document = new DocumentIntermediateNode();
         var builder = IntermediateNodeBuilder.Create(document);
 
@@ -131,11 +138,9 @@ public class NamespaceDirectiveTest
 
         document.DocumentKind = RazorPageDocumentClassifierPass.RazorPageDocumentKind;
 
-        var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("ignored", "/Account/Manage/AddUser.cshtml"));
-
         var pass = new NamespaceDirective.Pass()
         {
-            Engine = new RazorEngine(features: [], phases: [])
+            Engine = projectEngine.Engine
         };
 
         // Act
@@ -151,6 +156,11 @@ public class NamespaceDirectiveTest
     public void Pass_SetsNamespace_ComputedFromSource()
     {
         // Arrange
+        var projectEngine = CreateProjectEngine();
+
+        var source = RazorSourceDocument.Create("ignored", "/Account/Manage/AddUser.cshtml");
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var document = new DocumentIntermediateNode();
         var builder = IntermediateNodeBuilder.Create(document);
 
@@ -180,11 +190,9 @@ public class NamespaceDirectiveTest
 
         document.DocumentKind = RazorPageDocumentClassifierPass.RazorPageDocumentKind;
 
-        var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("ignored", "/Account/Manage/AddUser.cshtml"));
-
         var pass = new NamespaceDirective.Pass()
         {
-            Engine = new RazorEngine(features: [], phases: [])
+            Engine = projectEngine.Engine
         };
 
         // Act
@@ -201,6 +209,11 @@ public class NamespaceDirectiveTest
     public void Pass_SetsNamespace_SanitizesClassAndNamespace()
     {
         // Arrange
+        var projectEngine = CreateProjectEngine();
+
+        var source = RazorSourceDocument.Create("ignored", "/Account/Manage-Info/Add+User.cshtml");
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var document = new DocumentIntermediateNode();
         var builder = IntermediateNodeBuilder.Create(document);
 
@@ -220,11 +233,9 @@ public class NamespaceDirectiveTest
 
         document.DocumentKind = RazorPageDocumentClassifierPass.RazorPageDocumentKind;
 
-        var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("ignored", "/Account/Manage-Info/Add+User.cshtml"));
-
         var pass = new NamespaceDirective.Pass()
         {
-            Engine = new RazorEngine(features: [], phases: [])
+            Engine = projectEngine.Engine
         };
 
         // Act
@@ -240,6 +251,11 @@ public class NamespaceDirectiveTest
     public void Pass_SetsNamespace_ComputedFromSource_ForView()
     {
         // Arrange
+        var projectEngine = CreateProjectEngine();
+
+        var source = RazorSourceDocument.Create("ignored", "/Account/Manage/AddUser.cshtml");
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var document = new DocumentIntermediateNode();
         var builder = IntermediateNodeBuilder.Create(document);
 
@@ -269,11 +285,9 @@ public class NamespaceDirectiveTest
 
         document.DocumentKind = MvcViewDocumentClassifierPass.MvcViewDocumentKind;
 
-        var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("ignored", "/Account/Manage/AddUser.cshtml"));
-
         var pass = new NamespaceDirective.Pass()
         {
-            Engine = new RazorEngine(features: [], phases: [])
+            Engine = projectEngine.Engine
         };
 
         // Act
@@ -290,6 +304,11 @@ public class NamespaceDirectiveTest
     public void Pass_SetsNamespace_VerbatimFromImports()
     {
         // Arrange
+        var projectEngine = CreateProjectEngine();
+
+        var source = RazorSourceDocument.Create("ignored", "/Account/Manage/AddUser.cshtml");
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var document = new DocumentIntermediateNode();
         var builder = IntermediateNodeBuilder.Create(document);
 
@@ -309,11 +328,9 @@ public class NamespaceDirectiveTest
 
         document.DocumentKind = RazorPageDocumentClassifierPass.RazorPageDocumentKind;
 
-        var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("ignored", "/Account/Manage/AddUser.cshtml"));
-
         var pass = new NamespaceDirective.Pass()
         {
-            Engine = new RazorEngine(features: [], phases: [])
+            Engine = projectEngine.Engine
         };
 
         // Act
@@ -328,6 +345,11 @@ public class NamespaceDirectiveTest
     public void Pass_DoesNothing_ForUnknownDocumentKind()
     {
         // Arrange
+        var projectEngine = CreateProjectEngine();
+
+        var source = RazorSourceDocument.Create("ignored", "/Account/Manage/AddUser.cshtml");
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var document = new DocumentIntermediateNode();
         var builder = IntermediateNodeBuilder.Create(document);
 
@@ -347,11 +369,9 @@ public class NamespaceDirectiveTest
 
         document.DocumentKind = null;
 
-        var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("ignored", "/Account/Manage/AddUser.cshtml"));
-
         var pass = new NamespaceDirective.Pass()
         {
-            Engine = new RazorEngine(features: [], phases: [])
+            Engine = projectEngine.Engine
         };
 
         // Act

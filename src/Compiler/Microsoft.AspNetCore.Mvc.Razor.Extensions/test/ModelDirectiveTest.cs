@@ -18,15 +18,15 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
     public void ModelDirective_GetModelType_GetsTypeFromFirstWellFormedDirective()
     {
         // Arrange
-        var codeDocument = CreateDocument(@"
+        var projectEngine = CreateRuntimeEngine();
+        var source = RazorSourceDocument.Create(@"
 @model Type1
 @model Type2
 @model
-");
+", "test.cshtml");
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
 
-        var engine = CreateRuntimeEngine();
-
-        var irDocument = CreateIRDocument(engine, codeDocument);
+        var irDocument = CreateIRDocument(projectEngine.Engine, codeDocument);
 
         // Act
         var result = ModelDirective.GetModelType(irDocument);
@@ -39,11 +39,11 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
     public void ModelDirective_GetModelType_DefaultsToDynamic()
     {
         // Arrange
-        var codeDocument = CreateDocument(@" ");
+        var projectEngine = CreateRuntimeEngine();
+        var source = RazorSourceDocument.Create(@" ", "test.cshtml");
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
 
-        var engine = CreateRuntimeEngine();
-
-        var irDocument = CreateIRDocument(engine, codeDocument);
+        var irDocument = CreateIRDocument(projectEngine.Engine, codeDocument);
 
         // Act
         var result = ModelDirective.GetModelType(irDocument);
@@ -56,18 +56,19 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
     public void ModelDirectivePass_Execute_ReplacesTModelInBaseType()
     {
         // Arrange
-        var codeDocument = CreateDocument(@"
+        var projectEngine = CreateRuntimeEngine();
+        var source = RazorSourceDocument.Create(@"
 @inherits BaseType<TModel>
 @model Type1
-");
+", "test.cshtml");
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
 
-        var engine = CreateRuntimeEngine();
         var pass = new ModelDirective.Pass()
         {
-            Engine = engine,
+            Engine = projectEngine.Engine,
         };
 
-        var irDocument = CreateIRDocument(engine, codeDocument);
+        var irDocument = CreateIRDocument(projectEngine.Engine, codeDocument);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -87,19 +88,20 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
     public void ModelDirectivePass_Execute_ReplacesTModelInBaseType_DifferentOrdering()
     {
         // Arrange
-        var codeDocument = CreateDocument(@"
+        var projectEngine = CreateRuntimeEngine();
+        var source = RazorSourceDocument.Create(@"
 @model Type1
 @inherits BaseType<TModel>
 @model Type2
-");
+", "test.cshtml");
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
 
-        var engine = CreateRuntimeEngine();
         var pass = new ModelDirective.Pass()
         {
-            Engine = engine,
+            Engine = projectEngine.Engine,
         };
 
-        var irDocument = CreateIRDocument(engine, codeDocument);
+        var irDocument = CreateIRDocument(projectEngine.Engine, codeDocument);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -119,18 +121,19 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
     public void ModelDirectivePass_Execute_NoOpWithoutTModel()
     {
         // Arrange
-        var codeDocument = CreateDocument(@"
+        var projectEngine = CreateRuntimeEngine();
+        var source = RazorSourceDocument.Create(@"
 @inherits BaseType
 @model Type1
-");
+", "test.cshtml");
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
 
-        var engine = CreateRuntimeEngine();
         var pass = new ModelDirective.Pass()
         {
-            Engine = engine,
+            Engine = projectEngine.Engine,
         };
 
-        var irDocument = CreateIRDocument(engine, codeDocument);
+        var irDocument = CreateIRDocument(projectEngine.Engine, codeDocument);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -151,17 +154,18 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
     public void ModelDirectivePass_Execute_ReplacesTModelInBaseType_DefaultDynamic()
     {
         // Arrange
-        var codeDocument = CreateDocument(@"
+        var projectEngine = CreateRuntimeEngine();
+        var source = RazorSourceDocument.Create(@"
 @inherits BaseType<TModel>
-");
+", "test.cshtml");
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
 
-        var engine = CreateRuntimeEngine();
         var pass = new ModelDirective.Pass()
         {
-            Engine = engine,
+            Engine = projectEngine.Engine,
         };
 
-        var irDocument = CreateIRDocument(engine, codeDocument);
+        var irDocument = CreateIRDocument(projectEngine.Engine, codeDocument);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -182,17 +186,18 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
     public void ModelDirectivePass_DesignTime_AddsTModelUsingDirective()
     {
         // Arrange
-        var codeDocument = CreateDocument(@"
+        var projectEngine = CreateDesignTimeEngine();
+        var source = RazorSourceDocument.Create(@"
 @inherits BaseType<TModel>
-");
+", "test.cshtml");
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
 
-        var engine = CreateDesignTimeEngine();
         var pass = new ModelDirective.Pass()
         {
-            Engine = engine,
+            Engine = projectEngine.Engine,
         };
 
-        var irDocument = CreateIRDocument(engine, codeDocument);
+        var irDocument = CreateIRDocument(projectEngine.Engine, codeDocument);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -203,7 +208,7 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
         var baseType = @class.BaseType;
 
         Assert.Equal("BaseType", baseType.BaseType.Content);
-        Assert.NotNull(baseType.BaseType.Source);
+        Assert.Null(baseType.BaseType.Source);
 
         Assert.Equal("dynamic", baseType.ModelType.Content);
         Assert.Null(baseType.ModelType.Source);
@@ -217,18 +222,19 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
     public void ModelDirectivePass_DesignTime_WithModel_AddsTModelUsingDirective()
     {
         // Arrange
-        var codeDocument = CreateDocument(@"
+        var projectEngine = CreateDesignTimeEngine();
+        var source = RazorSourceDocument.Create(@"
 @inherits BaseType<TModel>
 @model SomeType
-");
+", "test.cshtml");
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
 
-        var engine = CreateDesignTimeEngine();
         var pass = new ModelDirective.Pass()
         {
-            Engine = engine,
+            Engine = projectEngine.Engine,
         };
 
-        var irDocument = CreateIRDocument(engine, codeDocument);
+        var irDocument = CreateIRDocument(projectEngine.Engine, codeDocument);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -239,7 +245,7 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
         var baseType = @class.BaseType;
 
         Assert.Equal("BaseType", baseType.BaseType.Content);
-        Assert.NotNull(baseType.BaseType.Source);
+        Assert.Null(baseType.BaseType.Source);
 
         Assert.Equal("SomeType", baseType.ModelType.Content);
         Assert.Null(baseType.ModelType.Source);
@@ -249,37 +255,31 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
         Assert.Equal($"TModel = global::System.Object", usingNode.Content);
     }
 
-    private RazorCodeDocument CreateDocument(string content)
-    {
-        var source = RazorSourceDocument.Create(content, "test.cshtml");
-        return RazorCodeDocument.Create(source);
-    }
-
-    private ClassDeclarationIntermediateNode FindClassNode(IntermediateNode node)
+    private static ClassDeclarationIntermediateNode FindClassNode(IntermediateNode node)
     {
         var visitor = new ClassNodeVisitor();
         visitor.Visit(node);
         return visitor.Node;
     }
 
-    private NamespaceDeclarationIntermediateNode FindNamespaceNode(IntermediateNode node)
+    private static NamespaceDeclarationIntermediateNode FindNamespaceNode(IntermediateNode node)
     {
         var visitor = new NamespaceNodeVisitor();
         visitor.Visit(node);
         return visitor.Node;
     }
 
-    private RazorEngine CreateRuntimeEngine()
+    private RazorProjectEngine CreateRuntimeEngine()
     {
         return CreateEngineCore(designTime: false);
     }
 
-    private RazorEngine CreateDesignTimeEngine()
+    private RazorProjectEngine CreateDesignTimeEngine()
     {
         return CreateEngineCore(designTime: true);
     }
 
-    private RazorEngine CreateEngineCore(bool designTime = false)
+    private RazorProjectEngine CreateEngineCore(bool designTime = false)
     {
         return CreateProjectEngine(b =>
         {
@@ -289,10 +289,10 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
             b.Features.Add(new RazorPageDocumentClassifierPass());
             b.Features.Add(new MvcViewDocumentClassifierPass());
             b.Features.Add(new DesignTimeOptionsFeature(designTime));
-        }).Engine;
+        });
     }
 
-    private DocumentIntermediateNode CreateIRDocument(RazorEngine engine, RazorCodeDocument codeDocument)
+    private static DocumentIntermediateNode CreateIRDocument(RazorEngine engine, RazorCodeDocument codeDocument)
     {
         foreach (var phase in engine.Phases)
         {
@@ -334,14 +334,9 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
         }
     }
 
-    private class DesignTimeOptionsFeature : RazorEngineFeatureBase, IConfigureRazorParserOptionsFeature, IConfigureRazorCodeGenerationOptionsFeature
+    private class DesignTimeOptionsFeature(bool designTime) : RazorEngineFeatureBase, IConfigureRazorParserOptionsFeature, IConfigureRazorCodeGenerationOptionsFeature
     {
-        private readonly bool _designTime;
-
-        public DesignTimeOptionsFeature(bool designTime)
-        {
-            _designTime = designTime;
-        }
+        private readonly bool _designTime = designTime;
 
         public int Order { get; }
 

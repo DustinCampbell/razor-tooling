@@ -18,13 +18,14 @@ public class SectionDirectivePassTest
     {
         // Arrange
         var projectEngine = CreateProjectEngine();
+
+        var sourceDocument = TestRazorSourceDocument.Create("@section Header { <p>Hello World</p> }");
+        var codeDocument = projectEngine.CreateCodeDocument(sourceDocument, FileKinds.Legacy);
+
         var pass = new SectionDirectivePass()
         {
             Engine = projectEngine.Engine,
         };
-
-        var sourceDocument = TestRazorSourceDocument.Create("@section Header { <p>Hello World</p> }");
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
 
         var irDocument = new DocumentIntermediateNode();
         irDocument.Children.Add(new DirectiveIntermediateNode() { Directive = SectionDirective.Directive, });
@@ -43,14 +44,15 @@ public class SectionDirectivePassTest
     {
         // Arrange
         var projectEngine = CreateProjectEngine();
+
+        var content = "@section Header { <p>Hello World</p> }";
+        var sourceDocument = TestRazorSourceDocument.Create(content);
+        var codeDocument = projectEngine.CreateCodeDocument(sourceDocument, FileKinds.Legacy);
+
         var pass = new SectionDirectivePass()
         {
             Engine = projectEngine.Engine,
         };
-
-        var content = "@section Header { <p>Hello World</p> }";
-        var sourceDocument = TestRazorSourceDocument.Create(content);
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
 
         var irDocument = Lower(codeDocument, projectEngine);
 

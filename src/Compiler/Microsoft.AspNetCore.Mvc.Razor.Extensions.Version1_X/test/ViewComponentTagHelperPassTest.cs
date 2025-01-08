@@ -20,10 +20,6 @@ public class ViewComponentTagHelperPassTest
     public void ViewComponentTagHelperPass_Execute_IgnoresRegularTagHelper()
     {
         // Arrange
-        var codeDocument = CreateDocument(@"
-@addTagHelper TestTagHelper, TestAssembly
-<p foo=""17"">");
-
         var tagHelpers = new[]
         {
             TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly")
@@ -35,13 +31,20 @@ public class ViewComponentTagHelperPassTest
                 .Build()
         };
 
-        var engine = CreateEngine(tagHelpers);
+        var projectEngine = CreateProjectEngine(tagHelpers);
+
+        var source = RazorSourceDocument.Create(@"
+@addTagHelper TestTagHelper, TestAssembly
+<p foo=""17"">",
+"test.cshtml");
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var pass = new ViewComponentTagHelperPass()
         {
-            Engine = engine,
+            Engine = projectEngine.Engine,
         };
 
-        var irDocument = CreateIRDocument(engine, codeDocument);
+        var irDocument = CreateIRDocument(projectEngine.Engine, codeDocument);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -59,10 +62,6 @@ public class ViewComponentTagHelperPassTest
     public void ViewComponentTagHelperPass_Execute_CreatesViewComponentTagHelper()
     {
         // Arrange
-        var codeDocument = CreateDocument(@"
-@addTagHelper TestTagHelper, TestAssembly
-<tagcloud foo=""17"">");
-
         var tagHelpers = new[]
         {
             TagHelperDescriptorBuilder.Create(ViewComponentTagHelperConventions.Kind, "TestTagHelper", "TestAssembly")
@@ -77,13 +76,20 @@ public class ViewComponentTagHelperPassTest
                 .Build()
         };
 
-        var engine = CreateEngine(tagHelpers);
+        var projectEngine = CreateProjectEngine(tagHelpers);
+
+        var source = RazorSourceDocument.Create(@"
+@addTagHelper TestTagHelper, TestAssembly
+<tagcloud foo=""17"">",
+"test.cshtml");
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var pass = new ViewComponentTagHelperPass()
         {
-            Engine = engine,
+            Engine = projectEngine.Engine,
         };
 
-        var irDocument = CreateIRDocument(engine, codeDocument);
+        var irDocument = CreateIRDocument(projectEngine.Engine, codeDocument);
 
         var vcthFullName = "AspNetCore.test.__Generated__TagCloudViewComponentTagHelper";
 
@@ -106,10 +112,6 @@ public class ViewComponentTagHelperPassTest
     public void ViewComponentTagHelperPass_Execute_CreatesViewComponentTagHelper_WithIndexer()
     {
         // Arrange
-        var codeDocument = CreateDocument(@"
-@addTagHelper TestTagHelper, TestAssembly
-<tagcloud tag-foo=""17"">");
-
         var tagHelpers = new[]
         {
             TagHelperDescriptorBuilder.Create(ViewComponentTagHelperConventions.Kind, "TestTagHelper", "TestAssembly")
@@ -125,13 +127,20 @@ public class ViewComponentTagHelperPassTest
                 .Build()
         };
 
-        var engine = CreateEngine(tagHelpers);
+        var projectEngine = CreateProjectEngine(tagHelpers);
+
+        var source = RazorSourceDocument.Create(@"
+@addTagHelper TestTagHelper, TestAssembly
+<tagcloud tag-foo=""17"">",
+"test.cshtml");
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var pass = new ViewComponentTagHelperPass()
         {
-            Engine = engine,
+            Engine = projectEngine.Engine,
         };
 
-        var irDocument = CreateIRDocument(engine, codeDocument);
+        var irDocument = CreateIRDocument(projectEngine.Engine, codeDocument);
 
         var vcthFullName = "AspNetCore.test.__Generated__TagCloudViewComponentTagHelper";
 
@@ -153,10 +162,6 @@ public class ViewComponentTagHelperPassTest
     public void ViewComponentTagHelperPass_Execute_CreatesViewComponentTagHelper_Nested()
     {
         // Arrange
-        var codeDocument = CreateDocument(@"
-@addTagHelper *, TestAssembly
-<p foo=""17""><tagcloud foo=""17""></p>");
-
         var tagHelpers = new[]
         {
             TagHelperDescriptorBuilder.Create("PTestTagHelper", "TestAssembly")
@@ -179,13 +184,20 @@ public class ViewComponentTagHelperPassTest
                 .Build()
         };
 
-        var engine = CreateEngine(tagHelpers);
+        var projectEngine = CreateProjectEngine(tagHelpers);
+
+        var source = RazorSourceDocument.Create(@"
+@addTagHelper *, TestAssembly
+<p foo=""17""><tagcloud foo=""17""></p>",
+"test.cshtml");
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var pass = new ViewComponentTagHelperPass()
         {
-            Engine = engine,
+            Engine = projectEngine.Engine,
         };
 
-        var irDocument = CreateIRDocument(engine, codeDocument);
+        var irDocument = CreateIRDocument(projectEngine.Engine, codeDocument);
 
         var vcthFullName = "AspNetCore.test.__Generated__TagCloudViewComponentTagHelper";
 
@@ -208,13 +220,7 @@ public class ViewComponentTagHelperPassTest
         Assert.IsType<ViewComponentTagHelperIntermediateNode>(@class.Children.Last());
     }
 
-    private static RazorCodeDocument CreateDocument(string content)
-    {
-        var source = RazorSourceDocument.Create(content, "test.cshtml");
-        return RazorCodeDocument.Create(source);
-    }
-
-    private static RazorEngine CreateEngine(params TagHelperDescriptor[] tagHelpers)
+    private static RazorProjectEngine CreateProjectEngine(params TagHelperDescriptor[] tagHelpers)
     {
         return RazorProjectEngine.Create(b =>
         {
@@ -222,7 +228,7 @@ public class ViewComponentTagHelperPassTest
 
             b.Features.Add(new TestTagHelperFeature(tagHelpers));
             b.Features.Add(new ConfigureRazorParserOptions(useRoslynTokenizer: true, CSharpParseOptions.Default));
-        }).Engine;
+        });
     }
 
     private static DocumentIntermediateNode CreateIRDocument(RazorEngine engine, RazorCodeDocument codeDocument)

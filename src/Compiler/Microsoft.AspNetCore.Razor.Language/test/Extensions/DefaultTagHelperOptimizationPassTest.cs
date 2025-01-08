@@ -18,10 +18,6 @@ public class DefaultTagHelperOptimizationPassTest
     public void DefaultTagHelperOptimizationPass_Execute_ReplacesChildren()
     {
         // Arrange
-        var codeDocument = CreateDocument(@"
-@addTagHelper TestTagHelper, TestAssembly
-<p foo=""17"" attr=""value"">");
-
         var tagHelpers = new[]
         {
             TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly")
@@ -34,13 +30,20 @@ public class DefaultTagHelperOptimizationPassTest
                 .Build()
         };
 
-        var engine = CreateEngine(tagHelpers);
+        var projectEngine = CreateProjectEngine(tagHelpers);
+
+        var source = RazorSourceDocument.Create(@"
+@addTagHelper TestTagHelper, TestAssembly
+<p foo=""17"" attr=""value"">",
+"test.cshtml");
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var pass = new DefaultTagHelperOptimizationPass()
         {
-            Engine = engine
+            Engine = projectEngine.Engine
         };
 
-        var irDocument = CreateIRDocument(engine, codeDocument);
+        var irDocument = CreateIRDocument(projectEngine.Engine, codeDocument);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -83,22 +86,16 @@ public class DefaultTagHelperOptimizationPassTest
         Assert.IsType<DefaultTagHelperExecuteIntermediateNode>(tagHelper.Children[4]);
     }
 
-    private RazorCodeDocument CreateDocument(string content)
-    {
-        var source = RazorSourceDocument.Create(content, "test.cshtml");
-        return RazorCodeDocument.Create(source);
-    }
-
-    private RazorEngine CreateEngine(params TagHelperDescriptor[] tagHelpers)
+    private static RazorProjectEngine CreateProjectEngine(params TagHelperDescriptor[] tagHelpers)
     {
         return RazorProjectEngine.Create(b =>
         {
             b.Features.Add(new TestTagHelperFeature(tagHelpers));
             b.Features.Add(new ConfigureRazorParserOptions(useRoslynTokenizer: true, CSharpParseOptions.Default));
-        }).Engine;
+        });
     }
 
-    private DocumentIntermediateNode CreateIRDocument(RazorEngine engine, RazorCodeDocument codeDocument)
+    private static DocumentIntermediateNode CreateIRDocument(RazorEngine engine, RazorCodeDocument codeDocument)
     {
         foreach (var phase in engine.Phases)
         {
@@ -113,7 +110,7 @@ public class DefaultTagHelperOptimizationPassTest
         return codeDocument.GetDocumentIntermediateNode();
     }
 
-    private TagHelperIntermediateNode FindTagHelperNode(IntermediateNode node)
+    private static TagHelperIntermediateNode FindTagHelperNode(IntermediateNode node)
     {
         var visitor = new TagHelperNodeVisitor();
         visitor.Visit(node);

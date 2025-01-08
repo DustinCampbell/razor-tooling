@@ -19,17 +19,21 @@ public class DirectiveRemovalOptimizationPassTest
     {
         // Arrange
         var content = "@custom \"Hello\"";
-        var sourceDocument = TestRazorSourceDocument.Create(content);
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
-        var defaultEngine = RazorProjectEngine.Create(b =>
+
+        var projectEngine = RazorProjectEngine.Create(b =>
         {
             b.AddDirective(DirectiveDescriptor.CreateDirective("custom", DirectiveKind.SingleLine, d => d.AddStringToken()));
             b.Features.Add(new ConfigureRazorParserOptions(useRoslynTokenizer: true, CSharpParseOptions.Default));
-        }).Engine;
-        var documentNode = Lower(codeDocument, defaultEngine);
+        });
+
+        var sourceDocument = TestRazorSourceDocument.Create(content);
+        var codeDocument = projectEngine.CreateCodeDocument(sourceDocument, FileKinds.Legacy);
+
+        var documentNode = Lower(codeDocument, projectEngine.Engine);
+
         var pass = new DirectiveRemovalOptimizationPass()
         {
-            Engine = defaultEngine,
+            Engine = projectEngine.Engine,
         };
 
         // Act
@@ -54,17 +58,20 @@ public class DirectiveRemovalOptimizationPassTest
             @custom "Hello"
             @custom "World"
             """;
-        var sourceDocument = TestRazorSourceDocument.Create(content);
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
-        var defaultEngine = RazorProjectEngine.Create(b =>
+        var projectEngine = RazorProjectEngine.Create(b =>
         {
             b.AddDirective(DirectiveDescriptor.CreateDirective("custom", DirectiveKind.SingleLine, d => d.AddStringToken()));
             b.Features.Add(new ConfigureRazorParserOptions(useRoslynTokenizer: true, CSharpParseOptions.Default));
-        }).Engine;
-        var documentNode = Lower(codeDocument, defaultEngine);
+        });
+
+        var sourceDocument = TestRazorSourceDocument.Create(content);
+        var codeDocument = projectEngine.CreateCodeDocument(sourceDocument, FileKinds.Legacy);
+
+        var documentNode = Lower(codeDocument, projectEngine.Engine);
+
         var pass = new DirectiveRemovalOptimizationPass()
         {
-            Engine = defaultEngine,
+            Engine = projectEngine.Engine,
         };
 
         // Act
@@ -87,14 +94,17 @@ public class DirectiveRemovalOptimizationPassTest
         // Arrange
         var content = "@custom \"Hello\"";
         var expectedDiagnostic = RazorDiagnostic.Create(new RazorDiagnosticDescriptor("RZ9999", "Some diagnostic message.", RazorDiagnosticSeverity.Error));
-        var sourceDocument = TestRazorSourceDocument.Create(content);
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
-        var defaultEngine = RazorProjectEngine.Create(b =>
+
+        var projectEngine = RazorProjectEngine.Create(b =>
         {
             b.Features.Add(new ConfigureRazorParserOptions(useRoslynTokenizer: true, CSharpParseOptions.Default));
             b.AddDirective(DirectiveDescriptor.CreateDirective("custom", DirectiveKind.SingleLine, d => d.AddStringToken()));
-        }).Engine;
-        var documentNode = Lower(codeDocument, defaultEngine);
+        });
+
+        var sourceDocument = TestRazorSourceDocument.Create(content);
+        var codeDocument = projectEngine.CreateCodeDocument(sourceDocument, FileKinds.Legacy);
+
+        var documentNode = Lower(codeDocument, projectEngine.Engine);
 
         // Add the diagnostic to the directive node.
         var directiveNode = documentNode.FindDescendantNodes<DirectiveIntermediateNode>().Single();
@@ -102,7 +112,7 @@ public class DirectiveRemovalOptimizationPassTest
 
         var pass = new DirectiveRemovalOptimizationPass()
         {
-            Engine = defaultEngine,
+            Engine = projectEngine.Engine,
         };
 
         // Act

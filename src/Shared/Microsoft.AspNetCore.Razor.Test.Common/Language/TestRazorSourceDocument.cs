@@ -77,6 +77,11 @@ public static class TestRazorSourceDocument
         return stream;
     }
 
+    public static RazorSourceDocument CreateEmpty()
+    {
+        return Create(content: string.Empty);
+    }
+
     public static RazorSourceDocument Create(
         string content = "Hello, world!",
         Encoding encoding = null,

@@ -3,7 +3,6 @@
 
 #nullable disable
 
-using System.Collections.Immutable;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 using Microsoft.CodeAnalysis.CSharp;
@@ -18,11 +17,12 @@ public class PageDirectiveTest
     public void TryGetPageDirective_ReturnsTrue_IfPageIsMalformed()
     {
         // Arrange
+        var projectEngine = CreateProjectEngine();
+
         var content = "@page \"some-route-template\" Invalid";
         var sourceDocument = RazorSourceDocument.Create(content, "file");
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
-        var engine = CreateEngine();
-        var irDocument = CreateIRDocument(engine, codeDocument);
+        var codeDocument = projectEngine.CreateCodeDocument(sourceDocument, FileKinds.Legacy);
+        var irDocument = CreateIRDocument(projectEngine.Engine, codeDocument);
 
         // Act
         var result = PageDirective.TryGetPageDirective(irDocument, out var pageDirective);
@@ -37,12 +37,13 @@ public class PageDirectiveTest
     public void TryGetPageDirective_ReturnsTrue_IfPageIsImported()
     {
         // Arrange
+        var projectEngine = CreateProjectEngine();
+
         var content = "Hello world";
         var sourceDocument = RazorSourceDocument.Create(content, "file");
         var importDocument = RazorSourceDocument.Create("@page", "imports.cshtml");
-        var codeDocument = RazorCodeDocument.Create(sourceDocument, ImmutableArray.Create(importDocument));
-        var engine = CreateEngine();
-        var irDocument = CreateIRDocument(engine, codeDocument);
+        var codeDocument = projectEngine.CreateCodeDocument(sourceDocument, [importDocument], FileKinds.Legacy);
+        var irDocument = CreateIRDocument(projectEngine.Engine, codeDocument);
 
         // Act
         var result = PageDirective.TryGetPageDirective(irDocument, out var pageDirective);
@@ -56,11 +57,12 @@ public class PageDirectiveTest
     public void TryGetPageDirective_ReturnsFalse_IfPageDoesNotHaveDirective()
     {
         // Arrange
+        var projectEngine = CreateProjectEngine();
+
         var content = "Hello world";
         var sourceDocument = RazorSourceDocument.Create(content, "file");
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
-        var engine = CreateEngine();
-        var irDocument = CreateIRDocument(engine, codeDocument);
+        var codeDocument = projectEngine.CreateCodeDocument(sourceDocument, FileKinds.Legacy);
+        var irDocument = CreateIRDocument(projectEngine.Engine, codeDocument);
 
         // Act
         var result = PageDirective.TryGetPageDirective(irDocument, out var pageDirective);
@@ -74,11 +76,12 @@ public class PageDirectiveTest
     public void TryGetPageDirective_ReturnsTrue_IfPageDoesStartWithDirective()
     {
         // Arrange
+        var projectEngine = CreateProjectEngine();
+
         var content = "Hello @page";
         var sourceDocument = RazorSourceDocument.Create(content, "file");
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
-        var engine = CreateEngine();
-        var irDocument = CreateIRDocument(engine, codeDocument);
+        var codeDocument = projectEngine.CreateCodeDocument(sourceDocument, FileKinds.Legacy);
+        var irDocument = CreateIRDocument(projectEngine.Engine, codeDocument);
 
         // Act
         var result = PageDirective.TryGetPageDirective(irDocument, out var pageDirective);
@@ -93,11 +96,12 @@ public class PageDirectiveTest
     public void TryGetPageDirective_ReturnsTrue_IfContentHasDirective()
     {
         // Arrange
+        var projectEngine = CreateProjectEngine();
+
         var content = "@page";
         var sourceDocument = RazorSourceDocument.Create(content, "file");
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
-        var engine = CreateEngine();
-        var irDocument = CreateIRDocument(engine, codeDocument);
+        var codeDocument = projectEngine.CreateCodeDocument(sourceDocument, FileKinds.Legacy);
+        var irDocument = CreateIRDocument(projectEngine.Engine, codeDocument);
 
         // Act
         var result = PageDirective.TryGetPageDirective(irDocument, out var pageDirective);
@@ -111,11 +115,12 @@ public class PageDirectiveTest
     public void TryGetPageDirective_ParsesRouteTemplate()
     {
         // Arrange
+        var projectEngine = CreateProjectEngine();
+
         var content = "@page \"some-route-template\"";
         var sourceDocument = RazorSourceDocument.Create(content, "file");
-        var codeDocument = RazorCodeDocument.Create(sourceDocument);
-        var engine = CreateEngine();
-        var irDocument = CreateIRDocument(engine, codeDocument);
+        var codeDocument = projectEngine.CreateCodeDocument(sourceDocument, FileKinds.Legacy);
+        var irDocument = CreateIRDocument(projectEngine.Engine, codeDocument);
 
         // Act
         var result = PageDirective.TryGetPageDirective(irDocument, out var pageDirective);
@@ -125,16 +130,16 @@ public class PageDirectiveTest
         Assert.Equal("some-route-template", pageDirective.RouteTemplate);
     }
 
-    private RazorEngine CreateEngine()
+    private static RazorProjectEngine CreateProjectEngine()
     {
         return RazorProjectEngine.Create(b =>
         {
             PageDirective.Register(b);
             b.Features.Add(new ConfigureRazorParserOptions(useRoslynTokenizer: true, CSharpParseOptions.Default));
-        }).Engine;
+        });
     }
 
-    private DocumentIntermediateNode CreateIRDocument(RazorEngine engine, RazorCodeDocument codeDocument)
+    private static DocumentIntermediateNode CreateIRDocument(RazorEngine engine, RazorCodeDocument codeDocument)
     {
         foreach (var phase in engine.Phases)
         {

@@ -19,29 +19,32 @@ public class ModelExpressionPassTest
     public void ModelExpressionPass_NonModelExpressionProperty_Ignored()
     {
         // Arrange
-        var codeDocument = CreateDocument(@"
-@addTagHelper TestTagHelper, TestAssembly
-<p foo=""17"">");
-
         var tagHelpers = new[]
         {
-                TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly")
-                    .BoundAttributeDescriptor(attribute =>
-                        attribute
-                            .Name("Foo")
-                            .TypeName("System.Int32"))
-                    .TagMatchingRuleDescriptor(rule =>
-                        rule.RequireTagName("p"))
-                    .Build()
-            };
-
-        var engine = CreateEngine(tagHelpers);
-        var pass = new ModelExpressionPass()
-        {
-            Engine = engine,
+            TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly")
+                .BoundAttributeDescriptor(attribute =>
+                    attribute
+                        .Name("Foo")
+                        .TypeName("System.Int32"))
+                .TagMatchingRuleDescriptor(rule =>
+                    rule.RequireTagName("p"))
+                .Build()
         };
 
-        var irDocument = CreateIRDocument(engine, codeDocument);
+        var projectEngine = CreateProjectEngine(tagHelpers);
+
+        var source = RazorSourceDocument.Create(@"
+@addTagHelper TestTagHelper, TestAssembly
+<p foo=""17"">",
+"test.cshtml");
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
+        var pass = new ModelExpressionPass()
+        {
+            Engine = projectEngine.Engine,
+        };
+
+        var irDocument = CreateIRDocument(projectEngine.Engine, codeDocument);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -59,30 +62,32 @@ public class ModelExpressionPassTest
     public void ModelExpressionPass_ModelExpressionProperty_SimpleExpression()
     {
         // Arrange
-
-        // Using \r\n here because we verify line mappings
-        var codeDocument = CreateDocument(
-            "@addTagHelper TestTagHelper, TestAssembly\r\n<p foo=\"Bar\">");
-
         var tagHelpers = new[]
         {
-                TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly")
-                    .BoundAttributeDescriptor(attribute =>
-                        attribute
-                            .Name("Foo")
-                            .TypeName("Microsoft.AspNetCore.Mvc.ViewFeatures.ModelExpression"))
-                    .TagMatchingRuleDescriptor(rule =>
-                        rule.RequireTagName("p"))
-                    .Build()
-            };
-
-        var engine = CreateEngine(tagHelpers);
-        var pass = new ModelExpressionPass()
-        {
-            Engine = engine,
+            TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly")
+                .BoundAttributeDescriptor(attribute =>
+                    attribute
+                        .Name("Foo")
+                        .TypeName("Microsoft.AspNetCore.Mvc.ViewFeatures.ModelExpression"))
+                .TagMatchingRuleDescriptor(rule =>
+                    rule.RequireTagName("p"))
+                .Build()
         };
 
-        var irDocument = CreateIRDocument(engine, codeDocument);
+        var projectEngine = CreateProjectEngine(tagHelpers);
+
+        // Using \r\n here because we verify line mappings
+        var source = RazorSourceDocument.Create(
+            "@addTagHelper TestTagHelper, TestAssembly\r\n<p foo=\"Bar\">",
+            "test.cshtml");
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
+        var pass = new ModelExpressionPass()
+        {
+            Engine = projectEngine.Engine,
+        };
+
+        var irDocument = CreateIRDocument(projectEngine.Engine, codeDocument);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -104,30 +109,32 @@ public class ModelExpressionPassTest
     public void ModelExpressionPass_ModelExpressionProperty_ComplexExpression()
     {
         // Arrange
-
-        // Using \r\n here because we verify line mappings
-        var codeDocument = CreateDocument(
-            "@addTagHelper TestTagHelper, TestAssembly\r\n<p foo=\"@Bar\">");
-
         var tagHelpers = new[]
         {
-                TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly")
-                    .BoundAttributeDescriptor(attribute =>
-                        attribute
-                            .Name("Foo")
-                            .TypeName("Microsoft.AspNetCore.Mvc.ViewFeatures.ModelExpression"))
-                    .TagMatchingRuleDescriptor(rule =>
-                        rule.RequireTagName("p"))
-                    .Build()
-            };
-
-        var engine = CreateEngine(tagHelpers);
-        var pass = new ModelExpressionPass()
-        {
-            Engine = engine,
+            TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly")
+                .BoundAttributeDescriptor(attribute =>
+                    attribute
+                        .Name("Foo")
+                        .TypeName("Microsoft.AspNetCore.Mvc.ViewFeatures.ModelExpression"))
+                .TagMatchingRuleDescriptor(rule =>
+                    rule.RequireTagName("p"))
+                .Build()
         };
 
-        var irDocument = CreateIRDocument(engine, codeDocument);
+        var projectEngine = CreateProjectEngine(tagHelpers);
+
+        // Using \r\n here because we verify line mappings
+        var source = RazorSourceDocument.Create(
+            "@addTagHelper TestTagHelper, TestAssembly\r\n<p foo=\"@Bar\">",
+            "test.cshtml");
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
+        var pass = new ModelExpressionPass()
+        {
+            Engine = projectEngine.Engine,
+        };
+
+        var irDocument = CreateIRDocument(projectEngine.Engine, codeDocument);
 
         // Act
         pass.Execute(codeDocument, irDocument);
@@ -145,13 +152,7 @@ public class ModelExpressionPassTest
         Assert.Equal(new SourceSpan("test.cshtml", 52, 1, 9, 3), originalNode.Source.Value);
     }
 
-    private RazorCodeDocument CreateDocument(string content)
-    {
-        var source = RazorSourceDocument.Create(content, "test.cshtml");
-        return RazorCodeDocument.Create(source);
-    }
-
-    private RazorEngine CreateEngine(params TagHelperDescriptor[] tagHelpers)
+    private static RazorProjectEngine CreateProjectEngine(params TagHelperDescriptor[] tagHelpers)
     {
         return RazorProjectEngine.Create(b =>
         {
@@ -159,10 +160,10 @@ public class ModelExpressionPassTest
             b.Features.Add(new ConfigureRazorParserOptions(useRoslynTokenizer: true, CSharpParseOptions.Default));
             b.Features.Add(new RazorPageDocumentClassifierPass());
             b.Features.Add(new MvcViewDocumentClassifierPass());
-        }).Engine;
+        });
     }
 
-    private DocumentIntermediateNode CreateIRDocument(RazorEngine engine, RazorCodeDocument codeDocument)
+    private static DocumentIntermediateNode CreateIRDocument(RazorEngine engine, RazorCodeDocument codeDocument)
     {
         foreach (var phase in engine.Phases)
         {
@@ -177,14 +178,14 @@ public class ModelExpressionPassTest
         return codeDocument.GetDocumentIntermediateNode();
     }
 
-    private TagHelperIntermediateNode FindTagHelperNode(IntermediateNode node)
+    private static TagHelperIntermediateNode FindTagHelperNode(IntermediateNode node)
     {
         var visitor = new TagHelperNodeVisitor();
         visitor.Visit(node);
         return visitor.Node;
     }
 
-    private string GetCSharpContent(IntermediateNode node)
+    private static string GetCSharpContent(IntermediateNode node)
     {
         var builder = new StringBuilder();
         for (var i = 0; i < node.Children.Count; i++)

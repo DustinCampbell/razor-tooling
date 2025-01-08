@@ -11,10 +11,20 @@ public sealed class RazorCodeDocument
     public ImmutableArray<RazorSourceDocument> Imports { get; }
     public ItemCollection Items { get; }
 
-    private RazorCodeDocument(RazorSourceDocument source, ImmutableArray<RazorSourceDocument> imports)
+    private readonly RazorParserOptions? _parserOptions;
+    private readonly RazorCodeGenerationOptions? _codeGenerationOptions;
+
+    private RazorCodeDocument(
+        RazorSourceDocument source,
+        ImmutableArray<RazorSourceDocument> imports,
+        RazorParserOptions? parserOptions = null,
+        RazorCodeGenerationOptions? codeGenerationOptions = null)
     {
         Source = source;
         Imports = imports.NullToEmpty();
+
+        _parserOptions = parserOptions;
+        _codeGenerationOptions = codeGenerationOptions;
 
         Items = new ItemCollection();
     }
@@ -38,14 +48,23 @@ public sealed class RazorCodeDocument
     public static RazorCodeDocument Create(
         RazorSourceDocument source,
         ImmutableArray<RazorSourceDocument> imports,
-        RazorParserOptions parserOptions,
-        RazorCodeGenerationOptions codeGenerationOptions)
+        RazorParserOptions? parserOptions,
+        RazorCodeGenerationOptions? codeGenerationOptions)
     {
         ArgHelper.ThrowIfNull(source);
 
-        var codeDocument = new RazorCodeDocument(source, imports);
-        codeDocument.SetParserOptions(parserOptions);
-        codeDocument.SetCodeGenerationOptions(codeGenerationOptions);
-        return codeDocument;
+        return new RazorCodeDocument(source, imports, parserOptions, codeGenerationOptions);
     }
+
+    public RazorParserOptions GetRequiredParserOptions()
+        => GetParserOptions().AssumeNotNull();
+
+    public RazorParserOptions? GetParserOptions()
+        => _parserOptions;
+
+    public RazorCodeGenerationOptions GetRequiredCodeGenerationOptions()
+        => GetCodeGenerationOptions().AssumeNotNull();
+
+    public RazorCodeGenerationOptions? GetCodeGenerationOptions()
+        => _codeGenerationOptions;
 }

@@ -4,7 +4,6 @@
 #nullable disable
 
 using System;
-using System.Linq;
 using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 using Xunit;
@@ -16,12 +15,12 @@ public class DocumentClassifierPassBaseTest : RazorProjectEngineTestBase
 {
     protected override RazorLanguageVersion Version => RazorLanguageVersion.Latest;
 
-    public RazorEngine Engine => CreateProjectEngine().Engine;
-
     [Fact]
     public void Execute_HasDocumentKind_IgnoresDocument()
     {
         // Arrange
+        var projectEngine = CreateProjectEngine();
+
         var documentNode = new DocumentIntermediateNode()
         {
             DocumentKind = "ignore",
@@ -30,11 +29,14 @@ public class DocumentClassifierPassBaseTest : RazorProjectEngineTestBase
 
         var pass = new TestDocumentClassifierPass()
         {
-            Engine = Engine
+            Engine = projectEngine.Engine
         };
 
+        var source = TestRazorSourceDocument.CreateEmpty();
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         // Act
-        pass.Execute(TestRazorCodeDocument.CreateEmpty(), documentNode);
+        pass.Execute(codeDocument, documentNode);
 
         // Assert
         Assert.Equal("ignore", documentNode.DocumentKind);
@@ -45,6 +47,8 @@ public class DocumentClassifierPassBaseTest : RazorProjectEngineTestBase
     public void Execute_NoMatch_IgnoresDocument()
     {
         // Arrange
+        var projectEngine = CreateProjectEngine();
+
         var documentNode = new DocumentIntermediateNode()
         {
             Options = RazorCodeGenerationOptions.Default,
@@ -52,12 +56,15 @@ public class DocumentClassifierPassBaseTest : RazorProjectEngineTestBase
 
         var pass = new TestDocumentClassifierPass()
         {
-            Engine = Engine,
+            Engine = projectEngine.Engine,
             ShouldMatch = false,
         };
 
+        var source = TestRazorSourceDocument.CreateEmpty();
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         // Act
-        pass.Execute(TestRazorCodeDocument.CreateEmpty(), documentNode);
+        pass.Execute(codeDocument, documentNode);
 
         // Assert
         Assert.Null(documentNode.DocumentKind);
@@ -68,33 +75,42 @@ public class DocumentClassifierPassBaseTest : RazorProjectEngineTestBase
     public void Execute_Match_AddsGlobalTargetExtensions()
     {
         // Arrange
+        var expected = new ICodeTargetExtension[]
+        {
+            new MyExtension1(),
+            new MyExtension2(),
+        };
+
+        var projectEngine = RazorProjectEngine.CreateEmpty(b =>
+        {
+            b.Features.Add(new DefaultRazorParserOptionsFactoryProjectFeature());
+            b.Features.Add(new DefaultRazorCodeGenerationOptionsFactoryProjectFeature());
+
+            foreach (var extension in expected)
+            {
+                b.AddTargetExtension(extension);
+            }
+        });
+
         var documentNode = new DocumentIntermediateNode()
         {
             Options = RazorCodeGenerationOptions.Default,
         };
 
-        var expected = new ICodeTargetExtension[]
-        {
-                new MyExtension1(),
-                new MyExtension2(),
-        };
-
         var pass = new TestDocumentClassifierPass()
         {
-            Engine = RazorProjectEngine.CreateEmpty(b =>
-            {
-                for (var i = 0; i < expected.Length; i++)
-                {
-                    b.AddTargetExtension(expected[i]);
-                }
-            }).Engine
+            Engine = projectEngine.Engine
         };
+
         ICodeTargetExtension[] extensions = null;
 
-        pass.CodeTargetCallback = (builder) => extensions = builder.TargetExtensions.ToArray();
+        pass.CodeTargetCallback = (builder) => extensions = [.. builder.TargetExtensions];
+
+        var source = TestRazorSourceDocument.CreateEmpty();
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
 
         // Act
-        pass.Execute(TestRazorCodeDocument.CreateEmpty(), documentNode);
+        pass.Execute(codeDocument, documentNode);
 
         // Assert
         Assert.Equal(expected, extensions);
@@ -104,6 +120,8 @@ public class DocumentClassifierPassBaseTest : RazorProjectEngineTestBase
     public void Execute_Match_SetsDocumentType_AndCreatesStructure()
     {
         // Arrange
+        var projectEngine = CreateProjectEngine();
+
         var documentNode = new DocumentIntermediateNode()
         {
             Options = RazorCodeGenerationOptions.Default,
@@ -111,11 +129,14 @@ public class DocumentClassifierPassBaseTest : RazorProjectEngineTestBase
 
         var pass = new TestDocumentClassifierPass()
         {
-            Engine = Engine
+            Engine = projectEngine.Engine
         };
 
+        var source = TestRazorSourceDocument.CreateEmpty();
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         // Act
-        pass.Execute(TestRazorCodeDocument.CreateEmpty(), documentNode);
+        pass.Execute(codeDocument, documentNode);
 
         // Assert
         Assert.Equal("test", documentNode.DocumentKind);
@@ -131,6 +152,8 @@ public class DocumentClassifierPassBaseTest : RazorProjectEngineTestBase
     public void Execute_AddsUsingsToNamespace()
     {
         // Arrange
+        var projectEngine = CreateProjectEngine();
+
         var documentNode = new DocumentIntermediateNode()
         {
             Options = RazorCodeGenerationOptions.Default,
@@ -141,11 +164,14 @@ public class DocumentClassifierPassBaseTest : RazorProjectEngineTestBase
 
         var pass = new TestDocumentClassifierPass()
         {
-            Engine = Engine
+            Engine = projectEngine.Engine
         };
 
+        var source = TestRazorSourceDocument.CreateEmpty();
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         // Act
-        pass.Execute(TestRazorCodeDocument.CreateEmpty(), documentNode);
+        pass.Execute(codeDocument, documentNode);
 
         // Assert
         var @namespace = SingleChild<NamespaceDeclarationIntermediateNode>(documentNode);
@@ -159,6 +185,8 @@ public class DocumentClassifierPassBaseTest : RazorProjectEngineTestBase
     public void Execute_AddsTheRestToMethod()
     {
         // Arrange
+        var projectEngine = CreateProjectEngine();
+
         var documentNode = new DocumentIntermediateNode()
         {
             Options = RazorCodeGenerationOptions.Default,
@@ -170,11 +198,14 @@ public class DocumentClassifierPassBaseTest : RazorProjectEngineTestBase
 
         var pass = new TestDocumentClassifierPass()
         {
-            Engine = Engine
+            Engine = projectEngine.Engine
         };
 
+        var source = TestRazorSourceDocument.CreateEmpty();
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         // Act
-        pass.Execute(TestRazorCodeDocument.CreateEmpty(), documentNode);
+        pass.Execute(codeDocument, documentNode);
 
         // Assert
         var @namespace = SingleChild<NamespaceDeclarationIntermediateNode>(documentNode);
@@ -190,6 +221,8 @@ public class DocumentClassifierPassBaseTest : RazorProjectEngineTestBase
     public void Execute_CanInitializeDefaults()
     {
         // Arrange
+        var projectEngine = CreateProjectEngine();
+
         var documentNode = new DocumentIntermediateNode()
         {
             Options = RazorCodeGenerationOptions.Default,
@@ -201,14 +234,17 @@ public class DocumentClassifierPassBaseTest : RazorProjectEngineTestBase
 
         var pass = new TestDocumentClassifierPass()
         {
-            Engine = Engine,
+            Engine = projectEngine.Engine,
             Namespace = "TestNamespace",
             Class = "TestClass",
             Method = "TestMethod",
         };
 
+        var source = TestRazorSourceDocument.CreateEmpty();
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         // Act
-        pass.Execute(TestRazorCodeDocument.CreateEmpty(), documentNode);
+        pass.Execute(codeDocument, documentNode);
 
         // Assert
         var @namespace = SingleChild<NamespaceDeclarationIntermediateNode>(documentNode);
@@ -225,6 +261,8 @@ public class DocumentClassifierPassBaseTest : RazorProjectEngineTestBase
     public void Execute_AddsPrimaryAnnotations()
     {
         // Arrange
+        var projectEngine = CreateProjectEngine();
+
         var documentNode = new DocumentIntermediateNode()
         {
             Options = RazorCodeGenerationOptions.Default,
@@ -236,14 +274,17 @@ public class DocumentClassifierPassBaseTest : RazorProjectEngineTestBase
 
         var pass = new TestDocumentClassifierPass()
         {
-            Engine = Engine,
+            Engine = projectEngine.Engine,
             Namespace = "TestNamespace",
             Class = "TestClass",
             Method = "TestMethod",
         };
 
+        var source = TestRazorSourceDocument.CreateEmpty();
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         // Act
-        pass.Execute(TestRazorCodeDocument.CreateEmpty(), documentNode);
+        pass.Execute(codeDocument, documentNode);
 
         // Assert
         var @namespace = SingleChild<NamespaceDeclarationIntermediateNode>(documentNode);

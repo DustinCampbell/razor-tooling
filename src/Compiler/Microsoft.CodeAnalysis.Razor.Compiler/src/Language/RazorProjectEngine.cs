@@ -142,6 +142,13 @@ public class RazorProjectEngine
         return CreateCodeDocumentCore(source, fileKind, importSources: default, tagHelpers: null, cssScope: null, configureParser: null, configureCodeGeneration: null);
     }
 
+    internal RazorCodeDocument CreateCodeDocument(RazorSourceDocument source, ImmutableArray<RazorSourceDocument> importSources, string fileKind)
+    {
+        ArgHelper.ThrowIfNull(source);
+
+        return CreateCodeDocumentCore(source, fileKind, importSources, tagHelpers: null, cssScope: null, configureParser: null, configureCodeGeneration: null);
+    }
+
     private RazorCodeDocument CreateCodeDocumentCore(
         RazorProjectItem projectItem,
         Action<RazorParserOptionsBuilder>? configureParser = null,

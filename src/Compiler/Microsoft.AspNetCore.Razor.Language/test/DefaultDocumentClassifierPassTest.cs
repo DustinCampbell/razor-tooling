@@ -19,6 +19,11 @@ public class DefaultDocumentClassifierPassTest : RazorProjectEngineTestBase
     public void Execute_IgnoresDocumentsWithDocumentKind()
     {
         // Arrange
+        var projectEngine = CreateProjectEngine();
+
+        var source = TestRazorSourceDocument.CreateEmpty();
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var documentNode = new DocumentIntermediateNode()
         {
             DocumentKind = "ignore",
@@ -27,11 +32,11 @@ public class DefaultDocumentClassifierPassTest : RazorProjectEngineTestBase
 
         var pass = new DefaultDocumentClassifierPass()
         {
-            Engine = CreateProjectEngine().Engine
+            Engine = projectEngine.Engine
         };
 
         // Act
-        pass.Execute(TestRazorCodeDocument.CreateEmpty(), documentNode);
+        pass.Execute(codeDocument, documentNode);
 
         // Assert
         Assert.Equal("ignore", documentNode.DocumentKind);
@@ -42,6 +47,11 @@ public class DefaultDocumentClassifierPassTest : RazorProjectEngineTestBase
     public void Execute_CreatesClassStructure()
     {
         // Arrange
+        var projectEngine = CreateProjectEngine();
+
+        var source = TestRazorSourceDocument.CreateEmpty();
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var documentNode = new DocumentIntermediateNode()
         {
             Options = RazorCodeGenerationOptions.Default,
@@ -49,11 +59,11 @@ public class DefaultDocumentClassifierPassTest : RazorProjectEngineTestBase
 
         var pass = new DefaultDocumentClassifierPass()
         {
-            Engine = CreateProjectEngine().Engine
+            Engine = projectEngine.Engine
         };
 
         // Act
-        pass.Execute(TestRazorCodeDocument.CreateEmpty(), documentNode);
+        pass.Execute(codeDocument, documentNode);
 
         // Assert
         Assert.Equal("default", documentNode.DocumentKind);

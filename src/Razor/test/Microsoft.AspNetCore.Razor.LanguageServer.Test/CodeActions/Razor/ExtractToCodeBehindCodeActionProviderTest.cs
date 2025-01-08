@@ -374,19 +374,22 @@ public class ExtractToCodeBehindCodeActionProviderTest(ITestOutputHelper testOut
     private static RazorCodeActionContext CreateRazorCodeActionContext(VSCodeActionParams request, int absoluteIndex, string filePath, string text, string? relativePath, bool supportsFileCreation = true)
     {
         var sourceDocument = RazorSourceDocument.Create(text, RazorSourceDocumentProperties.Create(filePath, relativePath));
-        var options = RazorParserOptions.Create(o =>
+        var parserOptions = RazorParserOptions.Create(o =>
         {
             o.Directives.Add(ComponentCodeDirective.Directive);
             o.Directives.Add(FunctionsDirective.Directive);
         });
-        var syntaxTree = RazorSyntaxTree.Parse(sourceDocument, options);
 
-        var codeDocument = TestRazorCodeDocument.Create(sourceDocument, imports: default);
+        var syntaxTree = RazorSyntaxTree.Parse(sourceDocument, parserOptions);
+
+        var codeDocument = TestRazorCodeDocument.Create(
+            sourceDocument,
+            configureCodeGenerationOptions: builder =>
+            {
+                builder.RootNamespace = "ExtractToCodeBehindTest";
+            });
+
         codeDocument.SetFileKind(FileKinds.Component);
-        codeDocument.SetCodeGenerationOptions(RazorCodeGenerationOptions.Create(o =>
-        {
-            o.RootNamespace = "ExtractToCodeBehindTest";
-        }));
         codeDocument.SetSyntaxTree(syntaxTree);
 
         var documentSnapshotMock = new StrictMock<IDocumentSnapshot>();

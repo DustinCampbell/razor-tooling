@@ -26,7 +26,7 @@ internal class GenerateMethodCodeActionProvider : IRazorCodeActionProvider
 {
     public Task<ImmutableArray<RazorVSInternalCodeAction>> ProvideAsync(RazorCodeActionContext context, CancellationToken cancellationToken)
     {
-        var nameNotExistDiagnostics = context.Request.Context.Diagnostics.Any(d => d.Code == "CS0103");
+        var nameNotExistDiagnostics = context.Request.Context.Diagnostics?.Any(d => d.Code == "CS0103") == false;
         if (!nameNotExistDiagnostics)
         {
             return SpecializedTasks.EmptyImmutableArray<RazorVSInternalCodeAction>();

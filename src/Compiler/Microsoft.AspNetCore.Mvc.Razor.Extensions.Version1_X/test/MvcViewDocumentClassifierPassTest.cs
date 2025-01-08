@@ -18,9 +18,11 @@ public class MvcViewDocumentClassifierPassTest : RazorProjectEngineTestBase
     public void MvcViewDocumentClassifierPass_SetsDocumentKind()
     {
         // Arrange
-        var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("some-content", "Test.cshtml"));
-
         var projectEngine = CreateProjectEngine();
+
+        var source = RazorSourceDocument.Create("some-content", "Test.cshtml");
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
         var pass = new MvcViewDocumentClassifierPass
         {
@@ -38,9 +40,11 @@ public class MvcViewDocumentClassifierPassTest : RazorProjectEngineTestBase
     public void MvcViewDocumentClassifierPass_NoOpsIfDocumentKindIsAlreadySet()
     {
         // Arrange
-        var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("some-content", "Test.cshtml"));
-
         var projectEngine = CreateProjectEngine();
+
+        var source = RazorSourceDocument.Create("some-content", "Test.cshtml");
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
         irDocument.DocumentKind = "some-value";
         var pass = new MvcViewDocumentClassifierPass
@@ -59,9 +63,11 @@ public class MvcViewDocumentClassifierPassTest : RazorProjectEngineTestBase
     public void MvcViewDocumentClassifierPass_SetsNamespace()
     {
         // Arrange
-        var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("some-content", "Test.cshtml"));
-
         var projectEngine = CreateProjectEngine();
+
+        var source = RazorSourceDocument.Create("some-content", "Test.cshtml");
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
         var pass = new MvcViewDocumentClassifierPass
         {
@@ -81,10 +87,12 @@ public class MvcViewDocumentClassifierPassTest : RazorProjectEngineTestBase
     public void MvcViewDocumentClassifierPass_SetsClass()
     {
         // Arrange
-        var properties = RazorSourceDocumentProperties.Create(filePath: "ignored", relativePath: "Test.cshtml");
-        var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("some-content", properties));
-
         var projectEngine = CreateProjectEngine();
+
+        var properties = RazorSourceDocumentProperties.Create(filePath: "ignored", relativePath: "Test.cshtml");
+        var source = RazorSourceDocument.Create("some-content", properties);
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
         var pass = new MvcViewDocumentClassifierPass
         {
@@ -100,7 +108,7 @@ public class MvcViewDocumentClassifierPassTest : RazorProjectEngineTestBase
         var baseNode = Assert.IsType<BaseTypeWithModel>(visitor.Class.BaseType);
         Assert.Equal("global::Microsoft.AspNetCore.Mvc.Razor.RazorPage", baseNode.BaseType.Content);
         Assert.Equal("TModel", baseNode.ModelType.Content);
-        Assert.Equal(new[] { "public" }, visitor.Class.Modifiers);
+        Assert.Equal<string>(["public"], visitor.Class.Modifiers);
         Assert.Equal("Test", visitor.Class.ClassName);
     }
 
@@ -108,10 +116,12 @@ public class MvcViewDocumentClassifierPassTest : RazorProjectEngineTestBase
     public void MvcViewDocumentClassifierPass_NullFilePath_SetsClass()
     {
         // Arrange
-        var properties = RazorSourceDocumentProperties.Create(filePath: null, relativePath: null);
-        var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("some-content", properties));
-
         var projectEngine = CreateProjectEngine();
+
+        var properties = RazorSourceDocumentProperties.Create(filePath: null, relativePath: null);
+        var source = RazorSourceDocument.Create("some-content", properties);
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
         var pass = new MvcViewDocumentClassifierPass
         {
@@ -127,7 +137,7 @@ public class MvcViewDocumentClassifierPassTest : RazorProjectEngineTestBase
         var baseNode = Assert.IsType<BaseTypeWithModel>(visitor.Class.BaseType);
         Assert.Equal("global::Microsoft.AspNetCore.Mvc.Razor.RazorPage", baseNode.BaseType.Content);
         Assert.Equal("TModel", baseNode.ModelType.Content);
-        Assert.Equal(new[] { "public" }, visitor.Class.Modifiers);
+        Assert.Equal<string>(["public"], visitor.Class.Modifiers);
         AssertEx.Equal("AspNetCore_ec563e63d931b806184cb02f79875e4f3b21d1ca043ad06699424459128b58c0", visitor.Class.ClassName);
     }
 
@@ -137,10 +147,12 @@ public class MvcViewDocumentClassifierPassTest : RazorProjectEngineTestBase
     public void MvcViewDocumentClassifierPass_UsesRelativePathToGenerateTypeName(string relativePath, string expected)
     {
         // Arrange
-        var properties = RazorSourceDocumentProperties.Create(filePath: "ignored", relativePath: relativePath);
-        var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("some-content", properties));
-
         var projectEngine = CreateProjectEngine();
+
+        var properties = RazorSourceDocumentProperties.Create(filePath: "ignored", relativePath: relativePath);
+        var source = RazorSourceDocument.Create("some-content", properties);
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
         var pass = new MvcViewDocumentClassifierPass
         {
@@ -160,10 +172,12 @@ public class MvcViewDocumentClassifierPassTest : RazorProjectEngineTestBase
     public void MvcViewDocumentClassifierPass_UsesAbsolutePath_IfRelativePathIsNotSet()
     {
         // Arrange
-        var properties = RazorSourceDocumentProperties.Create(filePath: @"x::\application\Views\Home\Index.cshtml", relativePath: null);
-        var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("some-content", properties));
-
         var projectEngine = CreateProjectEngine();
+
+        var properties = RazorSourceDocumentProperties.Create(filePath: @"x::\application\Views\Home\Index.cshtml", relativePath: null);
+        var source = RazorSourceDocument.Create("some-content", properties);
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
         var pass = new MvcViewDocumentClassifierPass
         {
@@ -183,10 +197,12 @@ public class MvcViewDocumentClassifierPassTest : RazorProjectEngineTestBase
     public void MvcViewDocumentClassifierPass_SanitizesClassName()
     {
         // Arrange
-        var properties = RazorSourceDocumentProperties.Create(filePath: @"x:\Test.cshtml", relativePath: "path.with+invalid-chars");
-        var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("@page", properties));
-
         var projectEngine = CreateProjectEngine();
+
+        var properties = RazorSourceDocumentProperties.Create(filePath: @"x:\Test.cshtml", relativePath: "path.with+invalid-chars");
+        var source = RazorSourceDocument.Create("@page", properties);
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
         var pass = new MvcViewDocumentClassifierPass
         {
@@ -206,9 +222,11 @@ public class MvcViewDocumentClassifierPassTest : RazorProjectEngineTestBase
     public void MvcViewDocumentClassifierPass_SetsUpExecuteAsyncMethod()
     {
         // Arrange
-        var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("some-content", "Test.cshtml"));
-
         var projectEngine = CreateProjectEngine();
+
+        var source = RazorSourceDocument.Create("some-content", "Test.cshtml");
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
         var pass = new MvcViewDocumentClassifierPass
         {
@@ -223,7 +241,7 @@ public class MvcViewDocumentClassifierPassTest : RazorProjectEngineTestBase
         // Assert
         Assert.Equal("ExecuteAsync", visitor.Method.MethodName);
         Assert.Equal("global::System.Threading.Tasks.Task", visitor.Method.ReturnType);
-        Assert.Equal(new[] { "public", "async", "override" }, visitor.Method.Modifiers);
+        Assert.Equal<string>(["public", "async", "override"], visitor.Method.Modifiers);
     }
 
     private static DocumentIntermediateNode CreateIRDocument(RazorProjectEngine engine, RazorCodeDocument codeDocument)

@@ -20,10 +20,6 @@ public class ViewComponentTagHelperPassTest
     public void ViewComponentTagHelperPass_Execute_IgnoresRegularTagHelper()
     {
         // Arrange
-        var codeDocument = CreateDocument(@"
-@addTagHelper TestTagHelper, TestAssembly
-<p foo=""17"">");
-
         var tagHelpers = new[]
         {
             TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly")
@@ -36,6 +32,13 @@ public class ViewComponentTagHelperPassTest
         };
 
         var projectEngine = CreateProjectEngine(tagHelpers);
+
+        var source = RazorSourceDocument.Create(@"
+@addTagHelper TestTagHelper, TestAssembly
+<p foo=""17"">",
+"test.cshtml");
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var pass = new ViewComponentTagHelperPass()
         {
             Engine = projectEngine.Engine,
@@ -59,10 +62,6 @@ public class ViewComponentTagHelperPassTest
     public void ViewComponentTagHelperPass_Execute_CreatesViewComponentTagHelper()
     {
         // Arrange
-        var codeDocument = CreateDocument(@"
-@addTagHelper TestTagHelper, TestAssembly
-<tagcloud foo=""17"">");
-
         var tagHelpers = new[]
         {
             TagHelperDescriptorBuilder.Create(ViewComponentTagHelperConventions.Kind, "TestTagHelper", "TestAssembly")
@@ -78,6 +77,13 @@ public class ViewComponentTagHelperPassTest
         };
 
         var projectEngine = CreateProjectEngine(tagHelpers);
+
+        var source = RazorSourceDocument.Create(@"
+@addTagHelper TestTagHelper, TestAssembly
+<tagcloud foo=""17"">",
+"test.cshtml");
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var pass = new ViewComponentTagHelperPass()
         {
             Engine = projectEngine.Engine,
@@ -106,10 +112,6 @@ public class ViewComponentTagHelperPassTest
     public void ViewComponentTagHelperPass_Execute_CreatesViewComponentTagHelper_WithIndexer()
     {
         // Arrange
-        var codeDocument = CreateDocument(@"
-@addTagHelper TestTagHelper, TestAssembly
-<tagcloud tag-foo=""17"">");
-
         var tagHelpers = new[]
         {
             TagHelperDescriptorBuilder.Create(ViewComponentTagHelperConventions.Kind, "TestTagHelper", "TestAssembly")
@@ -126,6 +128,13 @@ public class ViewComponentTagHelperPassTest
         };
 
         var projectEngine = CreateProjectEngine(tagHelpers);
+
+        var source = RazorSourceDocument.Create(@"
+@addTagHelper TestTagHelper, TestAssembly
+<tagcloud tag-foo=""17"">",
+"test.cshtml");
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var pass = new ViewComponentTagHelperPass()
         {
             Engine = projectEngine.Engine,
@@ -153,10 +162,6 @@ public class ViewComponentTagHelperPassTest
     public void ViewComponentTagHelperPass_Execute_CreatesViewComponentTagHelper_Nested()
     {
         // Arrange
-        var codeDocument = CreateDocument(@"
-@addTagHelper *, TestAssembly
-<p foo=""17""><tagcloud foo=""17""></p>");
-
         var tagHelpers = new[]
         {
             TagHelperDescriptorBuilder.Create("PTestTagHelper", "TestAssembly")
@@ -180,6 +185,13 @@ public class ViewComponentTagHelperPassTest
         };
 
         var projectEngine = CreateProjectEngine(tagHelpers);
+
+        var source = RazorSourceDocument.Create(@"
+@addTagHelper *, TestAssembly
+<p foo=""17""><tagcloud foo=""17""></p>",
+"test.cshtml");
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var pass = new ViewComponentTagHelperPass()
         {
             Engine = projectEngine.Engine,
@@ -200,7 +212,6 @@ public class ViewComponentTagHelperPassTest
         var vcth = FindTagHelperNode(outerTagHelper.Children[0]);
         Assert.Equal(vcthFullName, Assert.IsType<DefaultTagHelperCreateIntermediateNode>(vcth.Children[1]).TypeName);
         Assert.Equal("Foo", Assert.IsType<DefaultTagHelperPropertyIntermediateNode>(vcth.Children[2]).PropertyName);
-
 
         var @class = FindClassNode(irDocument);
         Assert.Equal(5, @class.Children.Count);

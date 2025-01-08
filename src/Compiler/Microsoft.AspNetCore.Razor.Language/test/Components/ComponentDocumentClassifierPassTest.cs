@@ -16,10 +16,11 @@ public class ComponentDocumentClassifierPassTest : RazorProjectEngineTestBase
     public void Execute_SetsDocumentKind()
     {
         // Arrange
-        var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("some-content", "Test.razor"));
-        codeDocument.SetFileKind(FileKinds.Component);
-
         var projectEngine = CreateProjectEngine();
+
+        var source = RazorSourceDocument.Create("some-content", "Test.razor");
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Component);
+
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
         var pass = new ComponentDocumentClassifierPass(Version)
         {
@@ -37,14 +38,14 @@ public class ComponentDocumentClassifierPassTest : RazorProjectEngineTestBase
     public void ComponentDocumentClassifierPass_SetsNamespace()
     {
         // Arrange
-        var properties = RazorSourceDocumentProperties.Create(filePath: "/MyApp/Test.razor", relativePath: "Test.razor");
-        var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("some-content", properties));
-        codeDocument.SetFileKind(FileKinds.Component);
-
         var projectEngine = CreateProjectEngine(b =>
         {
             b.SetRootNamespace("MyApp");
         });
+
+        var properties = RazorSourceDocumentProperties.Create(filePath: "/MyApp/Test.razor", relativePath: "Test.razor");
+        var source = RazorSourceDocument.Create("some-content", properties);
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Component);
 
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
         var pass = new ComponentDocumentClassifierPass(Version)
@@ -65,14 +66,14 @@ public class ComponentDocumentClassifierPassTest : RazorProjectEngineTestBase
     public void ComponentDocumentClassifierPass_SetsClass()
     {
         // Arrange
-        var properties = RazorSourceDocumentProperties.Create(filePath: "/MyApp/Test.razor", relativePath: "Test.razor");
-        var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("some-content", properties));
-        codeDocument.SetFileKind(FileKinds.Component);
-
         var projectEngine = CreateProjectEngine(b =>
         {
             b.SetRootNamespace("MyApp");
         });
+
+        var properties = RazorSourceDocumentProperties.Create(filePath: "/MyApp/Test.razor", relativePath: "Test.razor");
+        var source = RazorSourceDocument.Create("some-content", properties);
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Component);
 
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
         var pass = new ComponentDocumentClassifierPass(Version)
@@ -87,7 +88,7 @@ public class ComponentDocumentClassifierPassTest : RazorProjectEngineTestBase
 
         // Assert
         Assert.Equal($"global::{ComponentsApi.ComponentBase.FullTypeName}",visitor.Class.BaseType.BaseType.Content);
-        Assert.Equal(new[] { "public", "partial" }, visitor.Class.Modifiers);
+        Assert.Equal<string>(["public", "partial"], visitor.Class.Modifiers);
         Assert.Equal("Test", visitor.Class.ClassName);
     }
 
@@ -95,15 +96,15 @@ public class ComponentDocumentClassifierPassTest : RazorProjectEngineTestBase
     public void ComponentDocumentClassifierPass_UsesRelativePathToGenerateTypeNameAndNamespace()
     {
         // Arrange
-        var relativePath = "/Pages/Announcements/Banner.razor";
-        var properties = RazorSourceDocumentProperties.Create(filePath: $"/MyApp{relativePath}", relativePath: relativePath);
-        var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("some-content", properties));
-        codeDocument.SetFileKind(FileKinds.Component);
-
         var projectEngine = CreateProjectEngine(b =>
         {
             b.SetRootNamespace("MyApp");
         });
+
+        var relativePath = "/Pages/Announcements/Banner.razor";
+        var properties = RazorSourceDocumentProperties.Create(filePath: $"/MyApp{relativePath}", relativePath: relativePath);
+        var source = RazorSourceDocument.Create("some-content", properties);
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Component);
 
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
         var pass = new ComponentDocumentClassifierPass(Version)
@@ -125,14 +126,14 @@ public class ComponentDocumentClassifierPassTest : RazorProjectEngineTestBase
     public void ComponentDocumentClassifierPass_SanitizesClassName()
     {
         // Arrange
-        var properties = RazorSourceDocumentProperties.Create(filePath: @"x:\My.+App\path.with+invalid-chars.razor", relativePath: "path.with+invalid-chars.razor");
-        var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("some-content", properties));
-        codeDocument.SetFileKind(FileKinds.Component);
-
         var projectEngine = CreateProjectEngine(b =>
         {
             b.SetRootNamespace("My.+App");
         });
+
+        var properties = RazorSourceDocumentProperties.Create(filePath: @"x:\My.+App\path.with+invalid-chars.razor", relativePath: "path.with+invalid-chars.razor");
+        var source = RazorSourceDocument.Create("some-content", properties);
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Component);
 
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
         var pass = new ComponentDocumentClassifierPass(Version)
@@ -154,10 +155,11 @@ public class ComponentDocumentClassifierPassTest : RazorProjectEngineTestBase
     public void ComponentDocumentClassifierPass_SetsUpMainMethod()
     {
         // Arrange
-        var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("some-content", "Test.razor"));
-        codeDocument.SetFileKind(FileKinds.Component);
-
         var projectEngine = CreateProjectEngine();
+
+        var source = RazorSourceDocument.Create("some-content", "Test.razor");
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Component);
+
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
         var pass = new ComponentDocumentClassifierPass(Version)
         {
@@ -172,10 +174,10 @@ public class ComponentDocumentClassifierPassTest : RazorProjectEngineTestBase
         // Assert
         Assert.Equal(ComponentsApi.ComponentBase.BuildRenderTree, visitor.Method.MethodName);
         Assert.Equal("void", visitor.Method.ReturnType);
-        Assert.Equal(new[] { "protected", "override" }, visitor.Method.Modifiers);
+        Assert.Equal<string>(["protected", "override"], visitor.Method.Modifiers);
     }
 
-    private DocumentIntermediateNode CreateIRDocument(RazorProjectEngine projectEngine, RazorCodeDocument codeDocument)
+    private static DocumentIntermediateNode CreateIRDocument(RazorProjectEngine projectEngine, RazorCodeDocument codeDocument)
     {
         foreach (var phase in projectEngine.Phases)
         {

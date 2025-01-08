@@ -20,22 +20,25 @@ public class ViewComponentTagHelperPassTest
     public void ViewComponentTagHelperPass_Execute_IgnoresRegularTagHelper()
     {
         // Arrange
-        var codeDocument = CreateDocument(@"
-@addTagHelper TestTagHelper, TestAssembly
-<p foo=""17"">");
-
         var tagHelpers = new[]
         {
-                TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly")
-                    .Metadata(TypeName("TestTagHelper"))
-                    .BoundAttributeDescriptor(attribute => attribute
-                        .Name("Foo")
-                        .TypeName("System.Int32"))
-                    .TagMatchingRuleDescriptor(rule => rule.RequireTagName("p"))
-                    .Build()
-            };
+            TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly")
+                .Metadata(TypeName("TestTagHelper"))
+                .BoundAttributeDescriptor(attribute => attribute
+                    .Name("Foo")
+                    .TypeName("System.Int32"))
+                .TagMatchingRuleDescriptor(rule => rule.RequireTagName("p"))
+                .Build()
+        };
 
         var projectEngine = CreateProjectEngine(tagHelpers);
+
+        var source = RazorSourceDocument.Create(@"
+@addTagHelper TestTagHelper, TestAssembly
+<p foo=""17"">",
+"test.cshtml");
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var pass = new ViewComponentTagHelperPass()
         {
             Engine = projectEngine.Engine,
@@ -59,10 +62,6 @@ public class ViewComponentTagHelperPassTest
     public void ViewComponentTagHelperPass_Execute_CreatesViewComponentTagHelper()
     {
         // Arrange
-        var codeDocument = CreateDocument(@"
-@addTagHelper TestTagHelper, TestAssembly
-<tagcloud foo=""17"">");
-
         var tagHelpers = new[]
         {
             TagHelperDescriptorBuilder.Create(ViewComponentTagHelperConventions.Kind, "TestTagHelper", "TestAssembly")
@@ -78,6 +77,13 @@ public class ViewComponentTagHelperPassTest
         };
 
         var projectEngine = CreateProjectEngine(tagHelpers);
+
+        var source = RazorSourceDocument.Create(@"
+@addTagHelper TestTagHelper, TestAssembly
+<tagcloud foo=""17"">",
+"test.cshtml");
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var pass = new ViewComponentTagHelperPass()
         {
             Engine = projectEngine.Engine,
@@ -106,10 +112,6 @@ public class ViewComponentTagHelperPassTest
     public void ViewComponentTagHelperPass_Execute_CreatesViewComponentTagHelper_WithIndexer()
     {
         // Arrange
-        var codeDocument = CreateDocument(@"
-@addTagHelper TestTagHelper, TestAssembly
-<tagcloud tag-foo=""17"">");
-
         var tagHelpers = new[]
         {
             TagHelperDescriptorBuilder.Create(ViewComponentTagHelperConventions.Kind, "TestTagHelper", "TestAssembly")
@@ -126,6 +128,13 @@ public class ViewComponentTagHelperPassTest
         };
 
         var projectEngine = CreateProjectEngine(tagHelpers);
+
+        var source = RazorSourceDocument.Create(@"
+@addTagHelper TestTagHelper, TestAssembly
+<tagcloud tag-foo=""17"">",
+"test.cshtml");
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var pass = new ViewComponentTagHelperPass()
         {
             Engine = projectEngine.Engine,
@@ -153,10 +162,6 @@ public class ViewComponentTagHelperPassTest
     public void ViewComponentTagHelperPass_Execute_CreatesViewComponentTagHelper_Nested()
     {
         // Arrange
-        var codeDocument = CreateDocument(@"
-@addTagHelper *, TestAssembly
-<p foo=""17""><tagcloud foo=""17""></p>");
-
         var tagHelpers = new[]
         {
             TagHelperDescriptorBuilder.Create("PTestTagHelper", "TestAssembly")
@@ -180,6 +185,13 @@ public class ViewComponentTagHelperPassTest
         };
 
         var projectEngine = CreateProjectEngine(tagHelpers);
+
+        var source = RazorSourceDocument.Create(@"
+@addTagHelper *, TestAssembly
+<p foo=""17""><tagcloud foo=""17""></p>",
+"test.cshtml");
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
+
         var pass = new ViewComponentTagHelperPass()
         {
             Engine = projectEngine.Engine,
@@ -208,13 +220,7 @@ public class ViewComponentTagHelperPassTest
         Assert.IsType<ViewComponentTagHelperIntermediateNode>(@class.Children.Last());
     }
 
-    private RazorCodeDocument CreateDocument(string content)
-    {
-        var source = RazorSourceDocument.Create(content, "test.cshtml");
-        return RazorCodeDocument.Create(source);
-    }
-
-    private RazorProjectEngine CreateProjectEngine(params TagHelperDescriptor[] tagHelpers)
+    private static RazorProjectEngine CreateProjectEngine(params TagHelperDescriptor[] tagHelpers)
     {
         return RazorProjectEngine.Create(b =>
         {
@@ -224,7 +230,7 @@ public class ViewComponentTagHelperPassTest
         });
     }
 
-    private DocumentIntermediateNode CreateIRDocument(RazorProjectEngine projectEngine, RazorCodeDocument codeDocument)
+    private static DocumentIntermediateNode CreateIRDocument(RazorProjectEngine projectEngine, RazorCodeDocument codeDocument)
     {
         foreach (var phase in projectEngine.Phases)
         {
@@ -245,14 +251,14 @@ public class ViewComponentTagHelperPassTest
         return codeDocument.GetDocumentIntermediateNode();
     }
 
-    private ClassDeclarationIntermediateNode FindClassNode(IntermediateNode node)
+    private static ClassDeclarationIntermediateNode FindClassNode(IntermediateNode node)
     {
         var visitor = new ClassDeclarationNodeVisitor();
         visitor.Visit(node);
         return visitor.Node;
     }
 
-    private TagHelperIntermediateNode FindTagHelperNode(IntermediateNode node)
+    private static TagHelperIntermediateNode FindTagHelperNode(IntermediateNode node)
     {
         var visitor = new TagHelperNodeVisitor();
         visitor.Visit(node);

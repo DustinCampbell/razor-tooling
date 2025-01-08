@@ -13,13 +13,17 @@ public class DefaultRazorParsingPhaseTest
     {
         // Arrange
         var phase = new DefaultRazorParsingPhase();
-        var engine = RazorProjectEngine.CreateEmpty(builder =>
+
+        var projectEngine = RazorProjectEngine.CreateEmpty(builder =>
         {
             builder.Phases.Add(phase);
+            builder.Features.Add(new DefaultRazorParserOptionsFactoryProjectFeature());
+            builder.Features.Add(new DefaultRazorCodeGenerationOptionsFactoryProjectFeature());
             builder.Features.Add(new DefaultRazorParserOptionsFeature(designTime: false, version: RazorLanguageVersion.Latest, fileKind: null));
         });
 
-        var codeDocument = TestRazorCodeDocument.CreateEmpty();
+        var source = TestRazorSourceDocument.CreateEmpty();
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
 
         // Act
         phase.Execute(codeDocument);
@@ -33,14 +37,18 @@ public class DefaultRazorParsingPhaseTest
     {
         // Arrange
         var phase = new DefaultRazorParsingPhase();
-        var engine = RazorProjectEngine.CreateEmpty((builder) =>
+
+        var projectEngine = RazorProjectEngine.CreateEmpty((builder) =>
         {
             builder.Phases.Add(phase);
+            builder.Features.Add(new DefaultRazorParserOptionsFactoryProjectFeature());
+            builder.Features.Add(new DefaultRazorCodeGenerationOptionsFactoryProjectFeature());
             builder.Features.Add(new DefaultRazorParserOptionsFeature(designTime: false, version: RazorLanguageVersion.Latest, fileKind: null));
             builder.Features.Add(new MyParserOptionsFeature());
         });
 
-        var codeDocument = TestRazorCodeDocument.CreateEmpty();
+        var source = TestRazorSourceDocument.CreateEmpty();
+        var codeDocument = projectEngine.CreateCodeDocument(source, FileKinds.Legacy);
 
         // Act
         phase.Execute(codeDocument);
@@ -56,9 +64,12 @@ public class DefaultRazorParsingPhaseTest
     {
         // Arrange
         var phase = new DefaultRazorParsingPhase();
-        var engine = RazorProjectEngine.CreateEmpty((builder) =>
+
+        var projectEngine = RazorProjectEngine.CreateEmpty((builder) =>
         {
             builder.Phases.Add(phase);
+            builder.Features.Add(new DefaultRazorParserOptionsFactoryProjectFeature());
+            builder.Features.Add(new DefaultRazorCodeGenerationOptionsFactoryProjectFeature());
             builder.Features.Add(new DefaultRazorParserOptionsFeature(designTime: false, version: RazorLanguageVersion.Latest, fileKind: null));
             builder.Features.Add(new MyParserOptionsFeature());
         });
@@ -67,7 +78,7 @@ public class DefaultRazorParsingPhaseTest
             TestRazorSourceDocument.Create(),
             TestRazorSourceDocument.Create());
 
-        var codeDocument = TestRazorCodeDocument.Create(TestRazorSourceDocument.Create(), imports);
+        var codeDocument = projectEngine.CreateCodeDocument(TestRazorSourceDocument.Create(), imports, FileKinds.Legacy);
 
         // Act
         phase.Execute(codeDocument);
