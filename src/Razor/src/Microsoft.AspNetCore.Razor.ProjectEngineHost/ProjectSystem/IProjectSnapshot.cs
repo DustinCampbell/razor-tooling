@@ -13,6 +13,8 @@ namespace Microsoft.AspNetCore.Razor.ProjectSystem;
 
 internal interface IProjectSnapshot
 {
+    ISolutionSnapshot Solution { get; }
+
     ProjectKey Key { get; }
 
     IEnumerable<string> DocumentFilePaths { get; }

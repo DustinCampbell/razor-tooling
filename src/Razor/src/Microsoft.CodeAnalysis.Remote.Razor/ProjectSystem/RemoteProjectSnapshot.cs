@@ -27,6 +27,7 @@ namespace Microsoft.CodeAnalysis.Remote.Razor.ProjectSystem;
 internal sealed class RemoteProjectSnapshot : IProjectSnapshot
 {
     public RemoteSolutionSnapshot SolutionSnapshot { get; }
+    public ISolutionSnapshot Solution => SolutionSnapshot;
 
     public ProjectKey Key { get; }
 

@@ -1,6 +1,7 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
@@ -26,6 +27,7 @@ internal sealed class ProjectSnapshot(ProjectState state) : IProjectSnapshot, IL
     public HostProject HostProject => _state.HostProject;
     public RazorCompilerOptions CompilerOptions => _state.CompilerOptions;
 
+    public ISolutionSnapshot Solution => throw new NotSupportedException();
     public ProjectKey Key => _state.HostProject.Key;
     public RazorConfiguration Configuration => _state.HostProject.Configuration;
     public IEnumerable<string> DocumentFilePaths => _state.Documents.Keys;

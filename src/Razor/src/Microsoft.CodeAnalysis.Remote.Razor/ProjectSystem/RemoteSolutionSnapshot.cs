@@ -11,12 +11,14 @@ using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
 namespace Microsoft.CodeAnalysis.Remote.Razor.ProjectSystem;
 
-internal sealed class RemoteSolutionSnapshot(Solution solution, RemoteSnapshotManager snapshotManager) : ISolutionQueryOperations
+internal sealed class RemoteSolutionSnapshot(Solution solution, RemoteSnapshotManager snapshotManager) : ISolutionSnapshot, ISolutionQueryOperations
 {
     public RemoteSnapshotManager SnapshotManager { get; } = snapshotManager;
 
     private readonly Solution _solution = solution;
     private readonly Dictionary<Project, RemoteProjectSnapshot> _projectMap = [];
+
+    public IEnumerable<IProjectSnapshot> Projects => GetProjects();
 
     public RemoteProjectSnapshot GetProject(ProjectId projectId)
     {

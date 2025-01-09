@@ -1,6 +1,7 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
@@ -38,6 +39,7 @@ internal sealed class TestProjectSnapshot : IProjectSnapshot
 
     public HostProject HostProject => RealSnapshot.HostProject;
 
+    public ISolutionSnapshot Solution => throw new NotSupportedException();
     public ProjectKey Key => RealSnapshot.Key;
     public IEnumerable<string> DocumentFilePaths => RealSnapshot.DocumentFilePaths;
     public string FilePath => RealSnapshot.FilePath;
