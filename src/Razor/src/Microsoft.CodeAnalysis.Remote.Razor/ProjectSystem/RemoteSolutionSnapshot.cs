@@ -4,9 +4,11 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Microsoft.AspNetCore.Razor.PooledObjects;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
+using Microsoft.CodeAnalysis.Razor;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
 namespace Microsoft.CodeAnalysis.Remote.Razor.ProjectSystem;
@@ -19,6 +21,62 @@ internal sealed class RemoteSolutionSnapshot(Solution solution, RemoteSnapshotMa
     private readonly Dictionary<Project, RemoteProjectSnapshot> _projectMap = [];
 
     public IEnumerable<IProjectSnapshot> Projects => GetProjects();
+
+    public bool ContainsProject(ProjectKey projectKey)
+    {
+        foreach (var roslynProject in _solution.Projects)
+        {
+            if (projectKey.Matches(roslynProject))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public bool TryGetProject(ProjectKey projectKey, [NotNullWhen(true)] out RemoteProjectSnapshot? project)
+    {
+        foreach (var roslynProject in _solution.Projects)
+        {
+            if (projectKey.Matches(roslynProject))
+            {
+                project = GetProjectCore(roslynProject);
+                return true;
+            }
+        }
+
+        project = null;
+        return false;
+    }
+
+    bool ISolutionSnapshot.TryGetProject(ProjectKey projectKey, [NotNullWhen(true)] out IProjectSnapshot? project)
+    {
+        if (TryGetProject(projectKey, out var result))
+        {
+            project = result;
+            return true;
+        }
+
+        project = null;
+        return false;
+    }
+
+    public ImmutableArray<ProjectKey> GetProjectKeysWithFilePath(string filePath)
+    {
+        using var result = new PooledArrayBuilder<ProjectKey>();
+
+        foreach (var roslynProject in _solution.Projects)
+        {
+            if (FilePathComparer.Instance.Equals(roslynProject.FilePath, filePath))
+            {
+                var project = GetProject(roslynProject);
+                result.Add(project.Key);
+            }
+        }
+
+        return result.DrainToImmutable();
+    }
 
     public RemoteProjectSnapshot GetProject(ProjectId projectId)
     {

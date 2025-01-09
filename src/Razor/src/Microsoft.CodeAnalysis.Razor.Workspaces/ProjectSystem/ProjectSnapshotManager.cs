@@ -26,8 +26,6 @@ namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 // The implementation will create a ProjectSnapshot for each HostProject.
 internal partial class ProjectSnapshotManager : IDisposable
 {
-    private readonly IProjectEngineFactoryProvider _projectEngineFactoryProvider;
-    private readonly RazorCompilerOptions _compilerOptions;
     private readonly Dispatcher _dispatcher;
     private readonly ILogger _logger;
     private readonly bool _initialized;
@@ -39,11 +37,7 @@ internal partial class ProjectSnapshotManager : IDisposable
 
     #region protected by lock
 
-    /// <summary>
-    /// A map of <see cref="ProjectKey"/> to <see cref="Entry"/>, which wraps a <see cref="ProjectState"/>
-    /// and lazily creates a <see cref="ProjectSnapshot"/>.
-    /// </summary>
-    private readonly Dictionary<ProjectKey, Entry> _projectMap = [];
+    private SolutionState _currentState;
 
     /// <summary>
     /// The set of open documents.
@@ -93,8 +87,7 @@ internal partial class ProjectSnapshotManager : IDisposable
         ILoggerFactory loggerFactory,
         Action<Updater>? initializer = null)
     {
-        _projectEngineFactoryProvider = projectEngineFactoryProvider;
-        _compilerOptions = compilerOptions;
+        _currentState = SolutionState.Create(projectEngineFactoryProvider, compilerOptions);
         _dispatcher = new(loggerFactory);
         _logger = loggerFactory.GetOrCreateLogger(GetType());
 
@@ -170,17 +163,7 @@ internal partial class ProjectSnapshotManager : IDisposable
     {
         using (_readerWriterLock.DisposableRead())
         {
-            using var projects = new PooledArrayBuilder<ProjectKey>(capacity: _projectMap.Count);
-
-            foreach (var (key, entry) in _projectMap)
-            {
-                if (FilePathComparer.Instance.Equals(entry.State.HostProject.FilePath, filePath))
-                {
-                    projects.Add(key);
-                }
-            }
-
-            return projects.DrainToImmutable();
+            return _currentState.GetProjectKeysWithFilePath(filePath);
         }
     }
 
@@ -364,12 +347,23 @@ internal partial class ProjectSnapshotManager : IDisposable
 
         isSolutionClosing = _isSolutionClosing;
 
-        // If the solution is closing or the project already exists, don't add a new project.
+        // If the solution is closing, don't add a new project.
         if (isSolutionClosing || _projectMap.ContainsKey(hostProject.Key))
         {
             newProject = null;
             return false;
         }
+
+        var newState = _currentState.AddProject(hostProject);
+
+        // If the project already exists, don't a new project.
+        if (newState == _currentState)
+        {
+            newProject = null;
+            return false;
+        }
+
+        var newSolution = 
 
         var state = ProjectState.Create(hostProject, _compilerOptions, _projectEngineFactoryProvider);
 

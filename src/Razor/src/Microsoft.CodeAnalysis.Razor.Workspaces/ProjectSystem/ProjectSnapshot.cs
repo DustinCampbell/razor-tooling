@@ -1,7 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
@@ -17,7 +16,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
-internal sealed class ProjectSnapshot(ProjectState state) : IProjectSnapshot, ILegacyProjectSnapshot
+internal sealed class ProjectSnapshot(SolutionSnapshot solution, ProjectState state) : IProjectSnapshot, ILegacyProjectSnapshot
 {
     private readonly ProjectState _state = state;
 
@@ -27,7 +26,7 @@ internal sealed class ProjectSnapshot(ProjectState state) : IProjectSnapshot, IL
     public HostProject HostProject => _state.HostProject;
     public RazorCompilerOptions CompilerOptions => _state.CompilerOptions;
 
-    public ISolutionSnapshot Solution => throw new NotSupportedException();
+    public ISolutionSnapshot Solution => solution;
     public ProjectKey Key => _state.HostProject.Key;
     public RazorConfiguration Configuration => _state.HostProject.Configuration;
     public IEnumerable<string> DocumentFilePaths => _state.Documents.Keys;
@@ -72,7 +71,7 @@ internal sealed class ProjectSnapshot(ProjectState state) : IProjectSnapshot, IL
                 return true;
             }
 
-            // Do we have DocumentSate for this document? If not, we're done!
+            // Do we have DocumentState for this document? If not, we're done!
             if (!_state.Documents.TryGetValue(filePath, out var state))
             {
                 document = null;
