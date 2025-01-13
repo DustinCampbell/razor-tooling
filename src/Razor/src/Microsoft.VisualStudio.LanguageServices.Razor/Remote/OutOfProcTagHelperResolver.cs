@@ -37,15 +37,15 @@ internal class OutOfProcTagHelperResolver(
     private readonly TagHelperResultCache _resultCache = new();
 
     public async ValueTask<ImmutableArray<TagHelperDescriptor>> GetTagHelpersAsync(
-        Project project,
-        ProjectSnapshot projectSnapshot,
+        Project workspaceProject,
+        RazorProject project,
         CancellationToken cancellationToken)
     {
         // First, try to retrieve tag helpers out-of-proc. If that fails, try in-proc.
 
         try
         {
-            var result = await ResolveTagHelpersOutOfProcessAsync(project, projectSnapshot, cancellationToken).ConfigureAwait(false);
+            var result = await ResolveTagHelpersOutOfProcessAsync(workspaceProject, project, cancellationToken).ConfigureAwait(false);
 
             // We received tag helpers, so we're done.
             if (!result.IsDefault)
@@ -55,32 +55,32 @@ internal class OutOfProcTagHelperResolver(
         }
         catch (Exception ex) when (ex is not OperationCanceledException)
         {
-            _logger.LogError(ex, $"Error encountered from project '{projectSnapshot.FilePath}':{Environment.NewLine}{ex}");
+            _logger.LogError(ex, $"Error encountered from project '{project.FilePath}':{Environment.NewLine}{ex}");
             return default;
         }
 
         try
         {
-            return await ResolveTagHelpersInProcessAsync(project, projectSnapshot, cancellationToken).ConfigureAwait(false);
+            return await ResolveTagHelpersInProcessAsync(workspaceProject, project, cancellationToken).ConfigureAwait(false);
         }
         catch (Exception ex) when (ex is not OperationCanceledException)
         {
-            _logger.LogError(ex, $"Error encountered from project '{projectSnapshot.FilePath}':{Environment.NewLine}{ex}");
+            _logger.LogError(ex, $"Error encountered from project '{project.FilePath}':{Environment.NewLine}{ex}");
             return default;
         }
     }
 
-    protected virtual async ValueTask<ImmutableArray<TagHelperDescriptor>> ResolveTagHelpersOutOfProcessAsync(Project project, ProjectSnapshot projectSnapshot, CancellationToken cancellationToken)
+    protected virtual async ValueTask<ImmutableArray<TagHelperDescriptor>> ResolveTagHelpersOutOfProcessAsync(Project workspaceProject, RazorProject project, CancellationToken cancellationToken)
     {
-        if (!_resultCache.TryGetId(project.Id, out var lastResultId))
+        if (!_resultCache.TryGetId(workspaceProject.Id, out var lastResultId))
         {
             lastResultId = -1;
         }
 
-        var projectHandle = new ProjectSnapshotHandle(project.Id, projectSnapshot.Configuration, projectSnapshot.RootNamespace);
+        var projectHandle = new ProjectSnapshotHandle(workspaceProject.Id, project.Configuration, project.RootNamespace);
 
         var deltaResult = await _remoteServiceInvoker.TryInvokeAsync<IRemoteTagHelperProviderService, TagHelperDeltaResult>(
-            project.Solution,
+            workspaceProject.Solution,
             (service, solutionInfo, innerCancellationToken) =>
                 service.GetTagHelpersDeltaAsync(solutionInfo, projectHandle, lastResultId, innerCancellationToken),
             cancellationToken);
@@ -91,7 +91,7 @@ internal class OutOfProcTagHelperResolver(
         }
 
         // Apply the delta we received to any cached checksums for the current project.
-        var checksums = ProduceChecksumsFromDelta(project.Id, lastResultId, deltaResult);
+        var checksums = ProduceChecksumsFromDelta(workspaceProject.Id, lastResultId, deltaResult);
 
         using var tagHelpers = new PooledArrayBuilder<TagHelperDescriptor>(capacity: checksums.Length);
         using var checksumsToFetch = new PooledArrayBuilder<Checksum>(capacity: checksums.Length);
@@ -113,7 +113,7 @@ internal class OutOfProcTagHelperResolver(
         {
             // There are checksums that we don't have cached tag helpers for, so we need to fetch them from OOP.
             var fetchResult = await _remoteServiceInvoker.TryInvokeAsync<IRemoteTagHelperProviderService, FetchTagHelpersResult>(
-                project.Solution,
+                workspaceProject.Solution,
                 (service, solutionInfo, innerCancellationToken) =>
                     service.FetchTagHelpersAsync(solutionInfo, projectHandle, checksumsToFetch.DrainToImmutable(), innerCancellationToken),
                 cancellationToken);
@@ -175,8 +175,8 @@ internal class OutOfProcTagHelperResolver(
     }
 
     protected virtual ValueTask<ImmutableArray<TagHelperDescriptor>> ResolveTagHelpersInProcessAsync(
-        Project project,
-        ProjectSnapshot projectSnapshot,
+        Project workspaceProject,
+        RazorProject project,
         CancellationToken cancellationToken)
-        => project.GetTagHelpersAsync(projectSnapshot.ProjectEngine, _telemetryReporter, cancellationToken);
+        => workspaceProject.GetTagHelpersAsync(project.ProjectEngine, _telemetryReporter, cancellationToken);
 }

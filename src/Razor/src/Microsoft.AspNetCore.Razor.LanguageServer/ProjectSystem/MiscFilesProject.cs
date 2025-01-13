@@ -36,9 +36,9 @@ internal static class MiscFilesProject
             "Miscellaneous Files");
     }
 
-    public static ProjectSnapshot GetMiscellaneousProject(this ProjectSnapshotManager projectManager)
+    public static RazorProject GetMiscellaneousProject(this ProjectSnapshotManager projectManager)
         => projectManager.GetRequiredProject(Key);
 
-    public static bool IsMiscellaneousProject(this ProjectSnapshot project)
+    public static bool IsMiscellaneousProject(this RazorProject project)
         => project.Key == Key;
 }

@@ -14,9 +14,9 @@ internal class TestProjectWorkspaceStateGenerator : IProjectWorkspaceStateGenera
 
     public IReadOnlyList<TestUpdate> Updates => _updates;
 
-    public void EnqueueUpdate(Project? workspaceProject, ProjectSnapshot projectSnapshot)
+    public void EnqueueUpdate(Project? workspaceProject, RazorProject project)
     {
-        var update = new TestUpdate(workspaceProject, projectSnapshot);
+        var update = new TestUpdate(workspaceProject, project);
         _updates.Add(update);
     }
 
@@ -33,7 +33,7 @@ internal class TestProjectWorkspaceStateGenerator : IProjectWorkspaceStateGenera
         _updates.Clear();
     }
 
-    public record TestUpdate(Project? WorkspaceProject, ProjectSnapshot ProjectSnapshot)
+    public record TestUpdate(Project? WorkspaceProject, RazorProject Project)
     {
         public bool IsCancelled { get; set; }
 
@@ -52,7 +52,7 @@ internal class TestProjectWorkspaceStateGenerator : IProjectWorkspaceStateGenera
                 builder.Append(WorkspaceProject.Name);
             }
 
-            builder.Append($", {nameof(ProjectSnapshot)} = {ProjectSnapshot.DisplayName}}}");
+            builder.Append($", {nameof(Project)} = {Project.DisplayName}}}");
 
             return builder.ToString();
         }

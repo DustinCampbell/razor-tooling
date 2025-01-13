@@ -32,8 +32,8 @@ public class EditorDocumentManagerListenerTest(ITestOutputHelper testOutput) : V
         filePath: "/path/to/file1.razor",
         targetPath: "/path/to/file1.razor");
 
-    private static IFallbackProjectManager s_fallbackProjectManager = StrictMock.Of<IFallbackProjectManager>(x =>
-        x.IsFallbackProject(It.IsAny<ProjectSnapshot>()) == false);
+    private static readonly IFallbackProjectManager s_fallbackProjectManager = StrictMock.Of<IFallbackProjectManager>(x =>
+        x.IsFallbackProject(It.IsAny<RazorProject>()) == false);
 
     [UIFact]
     public async Task ProjectManager_Changed_RemoveDocument_RemovesDocument()

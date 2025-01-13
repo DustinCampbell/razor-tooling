@@ -30,7 +30,7 @@ public class RazorDynamicFileInfoProviderTest(ITestOutputHelper testOutput) : Vi
     private RazorDynamicFileInfoProvider _provider;
     private TestAccessor _testAccessor;
     private TestProjectSnapshotManager _projectManager;
-    private ProjectSnapshot _project;
+    private RazorProject _project;
     private RazorDocument _document1;
     private RazorDocument _document2;
     private IDynamicDocumentContainer _lspDocumentContainer;

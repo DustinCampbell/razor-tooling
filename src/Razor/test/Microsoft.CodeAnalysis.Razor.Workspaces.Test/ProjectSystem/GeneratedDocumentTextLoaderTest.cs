@@ -23,7 +23,7 @@ public class GeneratedDocumentTextLoaderTest(ITestOutputHelper testOutput) : Wor
             .Create(s_hostProject, CompilerOptions, ProjectEngineFactoryProvider)
             .AddEmptyDocument(s_hostDocument);
 
-        var project = new ProjectSnapshot(state);
+        var project = new RazorProject(state);
 
         var document = project.GetRequiredDocument(s_hostDocument.FilePath);
 

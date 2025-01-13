@@ -45,7 +45,7 @@ public abstract class DocumentExcerptServiceTestBase(ITestOutputHelper testOutpu
             .Create(_hostProject, LanguageServerFeatureOptions.ToCompilerOptions(), ProjectEngineFactoryProvider)
             .AddDocument(_hostDocument, sourceText);
 
-        var project = new ProjectSnapshot(state);
+        var project = new RazorProject(state);
 
         var primary = project.GetRequiredDocument(_hostDocument.FilePath);
 

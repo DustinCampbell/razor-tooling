@@ -20,7 +20,7 @@ internal sealed class TestDocumentSnapshot : IDocumentSnapshot
 
     private TestDocumentSnapshot(TestProjectSnapshot project, DocumentState state, RazorCodeDocument? codeDocument = null)
     {
-        RealDocument = new RazorDocument(project.RealSnapshot, state);
+        RealDocument = new RazorDocument(project.RealProject, state);
         _codeDocument = codeDocument;
     }
 

@@ -34,8 +34,8 @@ public class BackgroundDocumentGeneratorTest(ITestOutputHelper testOutput) : Vis
     private static readonly HostProject s_hostProject1 = TestProjectData.SomeProject with { Configuration = FallbackRazorConfiguration.MVC_1_0 };
     private static readonly HostProject s_hostProject2 = TestProjectData.AnotherProject with { Configuration = FallbackRazorConfiguration.MVC_1_0 };
 
-    private static IFallbackProjectManager s_fallbackProjectManager = StrictMock.Of<IFallbackProjectManager>(x =>
-        x.IsFallbackProject(It.IsAny<ProjectSnapshot>()) == false);
+    private static readonly IFallbackProjectManager s_fallbackProjectManager = StrictMock.Of<IFallbackProjectManager>(x =>
+        x.IsFallbackProject(It.IsAny<RazorProject>()) == false);
 
     private readonly TestDynamicFileInfoProvider _dynamicFileInfoProvider = new();
 
@@ -384,10 +384,10 @@ public class BackgroundDocumentGeneratorTest(ITestOutputHelper testOutput) : Vis
             _blockBatchProcessingSource.Set();
         }
 
-        private static DocumentKey GetKey(ProjectSnapshot project, RazorDocument document)
+        private static DocumentKey GetKey(RazorProject project, RazorDocument document)
             => new(project.Key, document.FilePath);
 
-        protected override async ValueTask ProcessBatchAsync(ImmutableArray<(ProjectSnapshot, RazorDocument)> items, CancellationToken token)
+        protected override async ValueTask ProcessBatchAsync(ImmutableArray<(RazorProject, RazorDocument)> items, CancellationToken token)
         {
             if (_blockBatchProcessingSource is { } blockEvent)
             {
@@ -403,14 +403,14 @@ public class BackgroundDocumentGeneratorTest(ITestOutputHelper testOutput) : Vis
             await base.ProcessBatchAsync(items, token);
         }
 
-        public override void Enqueue(ProjectSnapshot project, RazorDocument document)
+        public override void Enqueue(RazorProject project, RazorDocument document)
         {
             PendingWork.Add(GetKey(project, document));
 
             base.Enqueue(project, document);
         }
 
-        protected override Task ProcessDocumentAsync(ProjectSnapshot project, RazorDocument document, CancellationToken cancellationToken)
+        protected override Task ProcessDocumentAsync(RazorProject project, RazorDocument document, CancellationToken cancellationToken)
         {
             var key = GetKey(project, document);
             PendingWork.Remove(key);

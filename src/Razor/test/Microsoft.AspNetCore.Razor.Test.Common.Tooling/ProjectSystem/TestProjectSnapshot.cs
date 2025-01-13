@@ -16,11 +16,11 @@ namespace Microsoft.AspNetCore.Razor.Test.Common.ProjectSystem;
 
 internal sealed class TestProjectSnapshot : IProjectSnapshot
 {
-    public ProjectSnapshot RealSnapshot { get; }
+    public RazorProject RealProject { get; }
 
     private TestProjectSnapshot(ProjectState state)
     {
-        RealSnapshot = new ProjectSnapshot(state);
+        RealProject = new RazorProject(state);
     }
 
     public static TestProjectSnapshot Create(string filePath, ProjectWorkspaceState? projectWorkspaceState = null)
@@ -36,25 +36,25 @@ internal sealed class TestProjectSnapshot : IProjectSnapshot
         return new TestProjectSnapshot(state);
     }
 
-    public HostProject HostProject => RealSnapshot.HostProject;
+    public HostProject HostProject => RealProject.HostProject;
 
-    public ProjectKey Key => RealSnapshot.Key;
-    public IEnumerable<string> DocumentFilePaths => RealSnapshot.DocumentFilePaths;
-    public string FilePath => RealSnapshot.FilePath;
-    public string IntermediateOutputPath => RealSnapshot.IntermediateOutputPath;
-    public string? RootNamespace => RealSnapshot.RootNamespace;
-    public string DisplayName => RealSnapshot.DisplayName;
-    public LanguageVersion CSharpLanguageVersion => RealSnapshot.CSharpLanguageVersion;
+    public ProjectKey Key => RealProject.Key;
+    public IEnumerable<string> DocumentFilePaths => RealProject.DocumentFilePaths;
+    public string FilePath => RealProject.FilePath;
+    public string IntermediateOutputPath => RealProject.IntermediateOutputPath;
+    public string? RootNamespace => RealProject.RootNamespace;
+    public string DisplayName => RealProject.DisplayName;
+    public LanguageVersion CSharpLanguageVersion => RealProject.CSharpLanguageVersion;
 
     public ValueTask<ImmutableArray<TagHelperDescriptor>> GetTagHelpersAsync(CancellationToken cancellationToken)
-        => RealSnapshot.GetTagHelpersAsync(cancellationToken);
+        => RealProject.GetTagHelpersAsync(cancellationToken);
 
     public bool ContainsDocument(string filePath)
-        => RealSnapshot.ContainsDocument(filePath);
+        => RealProject.ContainsDocument(filePath);
 
     public bool TryGetDocument(string filePath, [NotNullWhen(true)] out IDocumentSnapshot? document)
     {
-        if (RealSnapshot.TryGetDocument(filePath, out var result))
+        if (RealProject.TryGetDocument(filePath, out var result))
         {
             document = result;
             return true;

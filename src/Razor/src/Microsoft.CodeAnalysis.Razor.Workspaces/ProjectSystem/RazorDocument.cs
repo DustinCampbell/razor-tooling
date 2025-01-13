@@ -11,12 +11,12 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
-internal sealed class RazorDocument(ProjectSnapshot project, DocumentState state) : IDocumentSnapshot, ILegacyDocumentSnapshot
+internal sealed class RazorDocument(RazorProject project, DocumentState state) : IDocumentSnapshot, ILegacyDocumentSnapshot
 #if !FORMAT_FUSE
     , IDesignTimeCodeGenerator
 #endif
 {
-    public ProjectSnapshot Project { get; } = project;
+    public RazorProject Project { get; } = project;
 
     private readonly DocumentState _state = state;
 

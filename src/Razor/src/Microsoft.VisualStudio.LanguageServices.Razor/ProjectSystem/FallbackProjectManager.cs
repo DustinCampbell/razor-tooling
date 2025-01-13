@@ -70,7 +70,7 @@ internal sealed class FallbackProjectManager : IFallbackProjectManager
         }
     }
 
-    public bool IsFallbackProject(ProjectSnapshot project)
+    public bool IsFallbackProject(RazorProject project)
         => _fallbackProjects.Contains(project.Key);
 
     internal void DynamicFileAdded(

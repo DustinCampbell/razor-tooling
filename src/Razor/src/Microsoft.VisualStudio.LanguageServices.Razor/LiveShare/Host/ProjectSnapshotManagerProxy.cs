@@ -66,7 +66,7 @@ internal class ProjectSnapshotManagerProxy : IProjectSnapshotManagerProxy, IColl
     }
 
     // Internal for testing
-    internal async Task<IReadOnlyList<ProjectSnapshot>> GetLatestProjectsAsync()
+    internal async Task<IReadOnlyList<RazorProject>> GetLatestProjectsAsync()
     {
         if (!_jtf.Context.IsOnMainThread)
         {
@@ -77,7 +77,7 @@ internal class ProjectSnapshotManagerProxy : IProjectSnapshotManagerProxy, IColl
     }
 
     // Internal for testing
-    internal async Task<ProjectSnapshotManagerProxyState> CalculateUpdatedStateAsync(IReadOnlyList<ProjectSnapshot> projects)
+    internal async Task<ProjectSnapshotManagerProxyState> CalculateUpdatedStateAsync(IReadOnlyList<RazorProject> projects)
     {
         using (await _latestStateSemaphore.EnterAsync().ConfigureAwait(false))
         {
@@ -93,7 +93,7 @@ internal class ProjectSnapshotManagerProxy : IProjectSnapshotManagerProxy, IColl
         }
     }
 
-    private Task<ProjectSnapshotHandleProxy?> ConvertToProxyAsync(ProjectSnapshot? project)
+    private Task<ProjectSnapshotHandleProxy?> ConvertToProxyAsync(RazorProject? project)
     {
         if (project is null)
         {

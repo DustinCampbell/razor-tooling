@@ -16,7 +16,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
-internal sealed class ProjectSnapshot(ProjectState state) : IProjectSnapshot, ILegacyProjectSnapshot
+internal sealed class RazorProject(ProjectState state) : IProjectSnapshot, ILegacyProjectSnapshot
 {
     private readonly ProjectState _state = state;
 

@@ -13,11 +13,11 @@ internal interface ITagHelperResolver
 {
     /// <summary>
     ///  Gets the available <see cref="TagHelperDescriptor">tag helpers</see> from the specified
-    ///  <see cref="Project"/> using the given <see cref="ProjectSnapshot"/> to provide a
+    ///  <see cref="Project"/> using the given <see cref="RazorProject"/> to provide a
     ///  <see cref="RazorProjectEngine"/>.
     /// </summary>
     ValueTask<ImmutableArray<TagHelperDescriptor>> GetTagHelpersAsync(
-        Project project,
-        ProjectSnapshot projectSnapshot,
+        Project workspaceProject,
+        RazorProject project,
         CancellationToken cancellationToken);
 }

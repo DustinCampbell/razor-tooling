@@ -15,13 +15,13 @@ internal partial class ProjectSnapshotManager
         public ImmutableArray<ProjectKey> GetProjectKeysWithFilePath(string filePath)
             => instance.GetProjectKeysWithFilePath(filePath);
 
-        public ImmutableArray<ProjectSnapshot> GetProjects()
+        public ImmutableArray<RazorProject> GetProjects()
             => instance.GetProjects();
 
         public bool ContainsProject(ProjectKey projectKey)
             => instance.ContainsProject(projectKey);
 
-        public bool TryGetProject(ProjectKey projectKey, [NotNullWhen(true)] out ProjectSnapshot? project)
+        public bool TryGetProject(ProjectKey projectKey, [NotNullWhen(true)] out RazorProject? project)
             => instance.TryGetProject(projectKey, out project);
 
         public bool IsDocumentOpen(string documentFilePath)

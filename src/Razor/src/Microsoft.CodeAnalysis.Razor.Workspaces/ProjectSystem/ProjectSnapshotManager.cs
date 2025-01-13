@@ -41,7 +41,7 @@ internal partial class ProjectSnapshotManager : IDisposable
 
     /// <summary>
     /// A map of <see cref="ProjectKey"/> to <see cref="Entry"/>, which wraps a <see cref="ProjectState"/>
-    /// and lazily creates a <see cref="ProjectSnapshot"/>.
+    /// and lazily creates a <see cref="RazorProject"/>.
     /// </summary>
     private readonly Dictionary<ProjectKey, Entry> _projectMap = [];
 
@@ -120,11 +120,11 @@ internal partial class ProjectSnapshotManager : IDisposable
         }
     }
 
-    public ImmutableArray<ProjectSnapshot> GetProjects()
+    public ImmutableArray<RazorProject> GetProjects()
     {
         using (_readerWriterLock.DisposableRead())
         {
-            using var builder = new PooledArrayBuilder<ProjectSnapshot>(_projectMap.Count);
+            using var builder = new PooledArrayBuilder<RazorProject>(_projectMap.Count);
 
             foreach (var (_, entry) in _projectMap)
             {
@@ -151,7 +151,7 @@ internal partial class ProjectSnapshotManager : IDisposable
         }
     }
 
-    public bool TryGetProject(ProjectKey projectKey, [NotNullWhen(true)] out ProjectSnapshot? project)
+    public bool TryGetProject(ProjectKey projectKey, [NotNullWhen(true)] out RazorProject? project)
     {
         using (_readerWriterLock.DisposableRead())
         {
@@ -353,7 +353,7 @@ internal partial class ProjectSnapshotManager : IDisposable
         }
     }
 
-    private bool TryAddProject(HostProject hostProject, [NotNullWhen(true)] out ProjectSnapshot? newProject, out bool isSolutionClosing)
+    private bool TryAddProject(HostProject hostProject, [NotNullWhen(true)] out RazorProject? newProject, out bool isSolutionClosing)
     {
         if (_initialized)
         {
@@ -382,7 +382,7 @@ internal partial class ProjectSnapshotManager : IDisposable
         return true;
     }
 
-    private bool TryRemoveProject(ProjectKey projectKey, [NotNullWhen(true)] out ProjectSnapshot? oldProject, out bool isSolutionClosing)
+    private bool TryRemoveProject(ProjectKey projectKey, [NotNullWhen(true)] out RazorProject? oldProject, out bool isSolutionClosing)
     {
         if (_initialized)
         {
@@ -410,8 +410,8 @@ internal partial class ProjectSnapshotManager : IDisposable
     private bool TryUpdateProject(
         ProjectKey projectKey,
         Func<ProjectState, ProjectState> transformer,
-        [NotNullWhen(true)] out ProjectSnapshot? oldProject,
-        [NotNullWhen(true)] out ProjectSnapshot? newProject,
+        [NotNullWhen(true)] out RazorProject? oldProject,
+        [NotNullWhen(true)] out RazorProject? newProject,
         out bool isSolutionClosing)
         => TryUpdateProject(projectKey, transformer, onAfterUpdate: null, out oldProject, out newProject, out isSolutionClosing);
 
@@ -419,8 +419,8 @@ internal partial class ProjectSnapshotManager : IDisposable
         ProjectKey projectKey,
         Func<ProjectState, ProjectState> transformer,
         Action? onAfterUpdate,
-        [NotNullWhen(true)] out ProjectSnapshot? oldProject,
-        [NotNullWhen(true)] out ProjectSnapshot? newProject,
+        [NotNullWhen(true)] out RazorProject? oldProject,
+        [NotNullWhen(true)] out RazorProject? newProject,
         out bool isSolutionClosing)
     {
         if (_initialized)

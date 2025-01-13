@@ -5,7 +5,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.PooledObjects;
 using Microsoft.AspNetCore.Razor.Threading;
-using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.Protocol;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
 using Microsoft.VisualStudio.Razor.DynamicFiles;
@@ -31,14 +30,13 @@ internal partial class RazorCustomMessageTarget
 
         foreach (var project in projects)
         {
-            if (project is ProjectSnapshot snapshot &&
-                project.ContainsDocument(documentFilePath))
+            if (project.ContainsDocument(documentFilePath))
             {
                 projectContexts.Add(new VSProjectContext
                 {
                     Id = project.Key.Id,
                     Kind = VSProjectKind.CSharp,
-                    Label = snapshot.HostProject.DisplayName
+                    Label = project.HostProject.DisplayName
                 });
             }
         }

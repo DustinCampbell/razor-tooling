@@ -21,12 +21,12 @@ namespace Microsoft.AspNetCore.Razor.ProjectEngineHost;
 public class ProjectEngineFactoryProviderTest : ToolingTestBase
 {
     private readonly ImmutableArray<IProjectEngineFactory> _customFactories;
-    private readonly ProjectSnapshot _snapshot_For_1_0;
-    private readonly ProjectSnapshot _snapshot_For_1_1;
-    private readonly ProjectSnapshot _snapshot_For_2_0;
-    private readonly ProjectSnapshot _snapshot_For_2_1;
-    private readonly ProjectSnapshot _snapshot_For_3_0;
-    private readonly ProjectSnapshot _snapshot_For_UnknownConfiguration;
+    private readonly RazorProject _project_For_1_0;
+    private readonly RazorProject _project_For_1_1;
+    private readonly RazorProject _project_For_2_0;
+    private readonly RazorProject _project_For_2_1;
+    private readonly RazorProject _project_For_3_0;
+    private readonly RazorProject _project_For_UnknownConfiguration;
 
     public ProjectEngineFactoryProviderTest(ITestOutputHelper testOutput)
         : base(testOutput)
@@ -49,12 +49,12 @@ public class ProjectEngineFactoryProviderTest : ToolingTestBase
             projectFilePath, intermediateOutputPath,
             new(RazorLanguageVersion.Version_2_1, "Random-0.1", Extensions: []), rootNamespace: null);
 
-        _snapshot_For_1_0 = new ProjectSnapshot(ProjectState.Create(hostProject_For_1_0, RazorCompilerOptions.None, ProjectEngineFactories.DefaultProvider));
-        _snapshot_For_1_1 = new ProjectSnapshot(ProjectState.Create(hostProject_For_1_1, RazorCompilerOptions.None, ProjectEngineFactories.DefaultProvider));
-        _snapshot_For_2_0 = new ProjectSnapshot(ProjectState.Create(hostProject_For_2_0, RazorCompilerOptions.None, ProjectEngineFactories.DefaultProvider));
-        _snapshot_For_2_1 = new ProjectSnapshot(ProjectState.Create(hostProject_For_2_1, RazorCompilerOptions.None, ProjectEngineFactories.DefaultProvider));
-        _snapshot_For_3_0 = new ProjectSnapshot(ProjectState.Create(hostProject_For_3_0, RazorCompilerOptions.None, ProjectEngineFactories.DefaultProvider));
-        _snapshot_For_UnknownConfiguration = new ProjectSnapshot(ProjectState.Create(hostProject_For_UnknownConfiguration, RazorCompilerOptions.None, ProjectEngineFactories.DefaultProvider));
+        _project_For_1_0 = new RazorProject(ProjectState.Create(hostProject_For_1_0, RazorCompilerOptions.None, ProjectEngineFactories.DefaultProvider));
+        _project_For_1_1 = new RazorProject(ProjectState.Create(hostProject_For_1_1, RazorCompilerOptions.None, ProjectEngineFactories.DefaultProvider));
+        _project_For_2_0 = new RazorProject(ProjectState.Create(hostProject_For_2_0, RazorCompilerOptions.None, ProjectEngineFactories.DefaultProvider));
+        _project_For_2_1 = new RazorProject(ProjectState.Create(hostProject_For_2_1, RazorCompilerOptions.None, ProjectEngineFactories.DefaultProvider));
+        _project_For_3_0 = new RazorProject(ProjectState.Create(hostProject_For_3_0, RazorCompilerOptions.None, ProjectEngineFactories.DefaultProvider));
+        _project_For_UnknownConfiguration = new RazorProject(ProjectState.Create(hostProject_For_UnknownConfiguration, RazorCompilerOptions.None, ProjectEngineFactories.DefaultProvider));
 
         _customFactories =
         [
@@ -70,7 +70,7 @@ public class ProjectEngineFactoryProviderTest : ToolingTestBase
     public void Create_CreatesDesignTimeTemplateEngine_ForVersion3_0()
     {
         // Arrange
-        var snapshot = _snapshot_For_3_0;
+        var snapshot = _project_For_3_0;
 
         var provider = new ProjectEngineFactoryProvider(_customFactories);
 
@@ -92,7 +92,7 @@ public class ProjectEngineFactoryProviderTest : ToolingTestBase
     public void Create_CreatesDesignTimeTemplateEngine_ForVersion2_1()
     {
         // Arrange
-        var snapshot = _snapshot_For_2_1;
+        var snapshot = _project_For_2_1;
 
         var provider = new ProjectEngineFactoryProvider(_customFactories);
 
@@ -116,7 +116,7 @@ public class ProjectEngineFactoryProviderTest : ToolingTestBase
     public void Create_CreatesDesignTimeTemplateEngine_ForVersion2_0()
     {
         // Arrange
-        var snapshot = _snapshot_For_2_0;
+        var snapshot = _project_For_2_0;
 
         var provider = new ProjectEngineFactoryProvider(_customFactories);
 
@@ -138,7 +138,7 @@ public class ProjectEngineFactoryProviderTest : ToolingTestBase
     public void Create_CreatesTemplateEngine_ForVersion1_1()
     {
         // Arrange
-        var snapshot = _snapshot_For_1_1;
+        var snapshot = _project_For_1_1;
 
         var provider = new ProjectEngineFactoryProvider(_customFactories);
 
@@ -160,7 +160,7 @@ public class ProjectEngineFactoryProviderTest : ToolingTestBase
     public void Create_DoesNotSupportViewComponentTagHelpers_ForVersion1_0()
     {
         // Arrange
-        var snapshot = _snapshot_For_1_0;
+        var snapshot = _project_For_1_0;
 
         var provider = new ProjectEngineFactoryProvider(_customFactories);
 
@@ -190,7 +190,7 @@ public class ProjectEngineFactoryProviderTest : ToolingTestBase
     [Fact]
     public void Create_ForUnknownConfiguration_UsesFallbackFactory()
     {
-        var snapshot = _snapshot_For_UnknownConfiguration;
+        var snapshot = _project_For_UnknownConfiguration;
 
         var provider = new ProjectEngineFactoryProvider(_customFactories);
 
