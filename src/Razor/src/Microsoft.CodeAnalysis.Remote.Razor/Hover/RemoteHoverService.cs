@@ -107,7 +107,7 @@ internal sealed class RemoteHoverService(in ServiceArgs args) : RazorDocumentSer
         // All of this will change when solution snapshots are available in the core Razor project model.
 
         // TODO: Remove this when solution snapshots are available in the core Razor project model.
-        var componentAvailabilityService = new ComponentAvailabilityService(context.Document.Project.SolutionSnapshot);
+        var componentAvailabilityService = new ComponentAvailabilityService(context.Document.Project.Solution);
 
         var razorHover = await HoverFactory
             .GetHoverAsync(codeDocument, hostDocumentIndex, options, componentAvailabilityService, cancellationToken)

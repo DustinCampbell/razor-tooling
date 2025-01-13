@@ -26,7 +26,7 @@ namespace Microsoft.CodeAnalysis.Remote.Razor.ProjectSystem;
 
 internal sealed class RemoteRazorProject : IRazorProject
 {
-    public RemoteSolutionSnapshot SolutionSnapshot { get; }
+    public RemoteRazorSolution Solution { get; }
 
     public ProjectKey Key { get; }
 
@@ -36,7 +36,7 @@ internal sealed class RemoteRazorProject : IRazorProject
     private readonly AsyncLazy<ImmutableArray<TagHelperDescriptor>> _lazyTagHelpers;
     private readonly Dictionary<TextDocument, RemoteRazorDocument> _documentMap = [];
 
-    public RemoteRazorProject(Project project, RemoteSolutionSnapshot solutionSnapshot)
+    public RemoteRazorProject(Project project, RemoteRazorSolution solution)
     {
         if (!project.ContainsRazorDocuments())
         {
@@ -44,7 +44,7 @@ internal sealed class RemoteRazorProject : IRazorProject
         }
 
         _project = project;
-        SolutionSnapshot = solutionSnapshot;
+        Solution = solution;
         Key = _project.ToProjectKey();
 
         _lazyConfiguration = AsyncLazy.Create(ComputeConfigurationAsync);
@@ -203,7 +203,7 @@ internal sealed class RemoteRazorProject : IRazorProject
     {
         var configuration = await _lazyConfiguration.GetValueAsync(cancellationToken).ConfigureAwait(false);
 
-        var useRoslynTokenizer = SolutionSnapshot.SnapshotManager.CompilerOptions.IsFlagSet(RazorCompilerOptions.UseRoslynTokenizer);
+        var useRoslynTokenizer = Solution.SnapshotManager.CompilerOptions.IsFlagSet(RazorCompilerOptions.UseRoslynTokenizer);
 
         return ProjectEngineFactories.DefaultProvider.Create(
             configuration,
@@ -220,7 +220,7 @@ internal sealed class RemoteRazorProject : IRazorProject
     private async Task<ImmutableArray<TagHelperDescriptor>> ComputeTagHelpersAsync(CancellationToken cancellationToken)
     {
         var projectEngine = await _lazyProjectEngine.GetValueAsync(cancellationToken).ConfigureAwait(false);
-        var telemetryReporter = SolutionSnapshot.SnapshotManager.TelemetryReporter;
+        var telemetryReporter = Solution.SnapshotManager.TelemetryReporter;
 
         return await _project.GetTagHelpersAsync(projectEngine, telemetryReporter, cancellationToken).ConfigureAwait(false);
     }

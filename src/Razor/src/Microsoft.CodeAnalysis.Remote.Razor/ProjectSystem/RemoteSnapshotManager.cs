@@ -14,24 +14,24 @@ namespace Microsoft.CodeAnalysis.Remote.Razor.ProjectSystem;
 [method: ImportingConstructor]
 internal sealed class RemoteSnapshotManager(LanguageServerFeatureOptions languageServerFeatureOptions, IFilePathService filePathService, ITelemetryReporter telemetryReporter)
 {
-    private static readonly ConditionalWeakTable<Solution, RemoteSolutionSnapshot> s_solutionToSnapshotMap = new();
+    private static readonly ConditionalWeakTable<Solution, RemoteRazorSolution> s_solutionMap = new();
 
     public RazorCompilerOptions CompilerOptions { get; } = languageServerFeatureOptions.ToCompilerOptions();
     public IFilePathService FilePathService { get; } = filePathService;
     public ITelemetryReporter TelemetryReporter { get; } = telemetryReporter;
 
-    public RemoteSolutionSnapshot GetSnapshot(Solution solution)
+    public RemoteRazorSolution GetSolution(Solution solution)
     {
-        return s_solutionToSnapshotMap.GetValue(solution, s => new RemoteSolutionSnapshot(s, this));
+        return s_solutionMap.GetValue(solution, s => new RemoteRazorSolution(s, this));
     }
 
-    public RemoteRazorProject GetSnapshot(Project project)
+    public RemoteRazorProject GetProject(Project project)
     {
-        return GetSnapshot(project.Solution).GetProject(project);
+        return GetSolution(project.Solution).GetProject(project);
     }
 
     public RemoteRazorDocument GetDocument(TextDocument textDocument)
     {
-        return GetSnapshot(textDocument.Project).GetDocument(textDocument);
+        return GetProject(textDocument.Project).GetDocument(textDocument);
     }
 }

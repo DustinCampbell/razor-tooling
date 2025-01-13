@@ -13,7 +13,7 @@ internal sealed class RemoteDocumentContext : DocumentContext
     public new RemoteRazorDocument Document => (RemoteRazorDocument)base.Document;
 
     public ISolutionQueryOperations GetSolutionQueryOperations()
-        => Document.Project.SolutionSnapshot;
+        => Document.Project.Solution;
 
     public RemoteDocumentContext(Uri uri, RemoteRazorDocument document)
         // HACK: Need to revisit projectContext here I guess

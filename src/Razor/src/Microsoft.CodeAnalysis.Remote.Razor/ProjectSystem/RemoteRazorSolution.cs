@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
 namespace Microsoft.CodeAnalysis.Remote.Razor.ProjectSystem;
 
-internal sealed class RemoteSolutionSnapshot(Solution solution, RemoteSnapshotManager snapshotManager) : ISolutionQueryOperations
+internal sealed class RemoteRazorSolution(Solution solution, RemoteSnapshotManager snapshotManager) : ISolutionQueryOperations
 {
     public RemoteSnapshotManager SnapshotManager { get; } = snapshotManager;
 

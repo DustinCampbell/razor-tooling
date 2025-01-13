@@ -76,7 +76,7 @@ public class RazorComponentDefinitionServiceTest(ITestOutputHelper testOutputHel
         var location = await service.GetDefinitionAsync(
             documentSnapshot,
             positionInfo,
-            solutionQueryOperations: documentSnapshot.Project.SolutionSnapshot,
+            solutionQueryOperations: documentSnapshot.Project.Solution,
             ignoreAttributes: false,
             DisposalToken);
 

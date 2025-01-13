@@ -85,7 +85,7 @@ internal sealed class RemoteRazorDocument : IRazorDocument
     private async Task<RazorCodeDocument> ComputeGeneratedOutputAsync(CancellationToken cancellationToken)
     {
         var projectEngine = await Project.GetProjectEngineAsync(cancellationToken).ConfigureAwait(false);
-        var compilerOptions = Project.SolutionSnapshot.SnapshotManager.CompilerOptions;
+        var compilerOptions = Project.Solution.SnapshotManager.CompilerOptions;
 
         return await CompilationHelpers
             .GenerateCodeDocumentAsync(this, projectEngine, compilerOptions, cancellationToken)
@@ -108,7 +108,7 @@ internal sealed class RemoteRazorDocument : IRazorDocument
         // TODO: A real implementation needs to get the SourceGeneratedDocument from the solution
 
         var solution = TextDocument.Project.Solution;
-        var filePathService = Project.SolutionSnapshot.SnapshotManager.FilePathService;
+        var filePathService = Project.Solution.SnapshotManager.FilePathService;
         var generatedFilePath = filePathService.GetRazorCSharpFilePath(Project.Key, FilePath);
         var generatedDocumentId = solution
             .GetDocumentIdsWithFilePath(generatedFilePath)
@@ -131,7 +131,7 @@ internal sealed class RemoteRazorDocument : IRazorDocument
             .GetAdditionalDocument(id)
             .AssumeNotNull();
 
-        var snapshotManager = Project.SolutionSnapshot.SnapshotManager;
+        var snapshotManager = Project.Solution.SnapshotManager;
         return snapshotManager.GetDocument(newDocument);
     }
 

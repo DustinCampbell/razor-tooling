@@ -8,10 +8,10 @@ using Microsoft.CodeAnalysis.Remote.Razor.ProjectSystem;
 
 namespace Microsoft.CodeAnalysis.Remote.Razor;
 
-internal sealed class ComponentAvailabilityService(RemoteSolutionSnapshot solutionSnapshot) : AbstractComponentAvailabilityService
+internal sealed class ComponentAvailabilityService(RemoteRazorSolution solution) : AbstractComponentAvailabilityService
 {
-    private readonly RemoteSolutionSnapshot _solutionSnapshot = solutionSnapshot;
+    private readonly RemoteRazorSolution _solution = solution;
 
     protected override ImmutableArray<IRazorProject> GetProjectsContainingDocument(string documentFilePath)
-        => _solutionSnapshot.GetProjectsContainingDocument(documentFilePath);
+        => _solution.GetProjectsContainingDocument(documentFilePath);
 }
