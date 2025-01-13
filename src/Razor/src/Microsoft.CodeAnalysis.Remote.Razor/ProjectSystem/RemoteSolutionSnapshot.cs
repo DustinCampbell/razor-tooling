@@ -16,15 +16,15 @@ internal sealed class RemoteSolutionSnapshot(Solution solution, RemoteSnapshotMa
     public RemoteSnapshotManager SnapshotManager { get; } = snapshotManager;
 
     private readonly Solution _solution = solution;
-    private readonly Dictionary<Project, RemoteProjectSnapshot> _projectMap = [];
+    private readonly Dictionary<Project, RemoteRazorProject> _projectMap = [];
 
-    public RemoteProjectSnapshot GetProject(ProjectId projectId)
+    public RemoteRazorProject GetProject(ProjectId projectId)
     {
         var project = _solution.GetRequiredProject(projectId);
         return GetProject(project);
     }
 
-    public RemoteProjectSnapshot GetProject(Project project)
+    public RemoteRazorProject GetProject(Project project)
     {
         if (project.Solution != _solution)
         {
@@ -39,13 +39,13 @@ internal sealed class RemoteSolutionSnapshot(Solution solution, RemoteSnapshotMa
         return GetProjectCore(project);
     }
 
-    private RemoteProjectSnapshot GetProjectCore(Project project)
+    private RemoteRazorProject GetProjectCore(Project project)
     {
         lock (_projectMap)
         {
             if (!_projectMap.TryGetValue(project, out var snapshot))
             {
-                snapshot = new RemoteProjectSnapshot(project, this);
+                snapshot = new RemoteRazorProject(project, this);
                 _projectMap.Add(project, snapshot);
             }
 

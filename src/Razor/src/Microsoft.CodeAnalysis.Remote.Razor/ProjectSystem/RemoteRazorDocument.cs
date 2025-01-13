@@ -21,13 +21,13 @@ internal sealed class RemoteRazorDocument : IRazorDocument
 #endif
 {
     public TextDocument TextDocument { get; }
-    public RemoteProjectSnapshot Project { get; }
+    public RemoteRazorProject Project { get; }
 
     // TODO: Delete this field when the source generator is hooked up
     private readonly AsyncLazy<Document> _lazyDocument;
     private readonly AsyncLazy<RazorCodeDocument> _lazyCodeDocument;
 
-    public RemoteRazorDocument(TextDocument textDocument, RemoteProjectSnapshot projectSnapshot)
+    public RemoteRazorDocument(TextDocument textDocument, RemoteRazorProject project)
     {
         if (!textDocument.IsRazorDocument())
         {
@@ -35,7 +35,7 @@ internal sealed class RemoteRazorDocument : IRazorDocument
         }
 
         TextDocument = textDocument;
-        Project = projectSnapshot;
+        Project = project;
 
         _lazyDocument = AsyncLazy.Create(HACK_ComputeDocumentAsync);
         _lazyCodeDocument = AsyncLazy.Create(ComputeGeneratedOutputAsync);

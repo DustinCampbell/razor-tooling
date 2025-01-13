@@ -25,7 +25,7 @@ internal sealed class RemoteSnapshotManager(LanguageServerFeatureOptions languag
         return s_solutionToSnapshotMap.GetValue(solution, s => new RemoteSolutionSnapshot(s, this));
     }
 
-    public RemoteProjectSnapshot GetSnapshot(Project project)
+    public RemoteRazorProject GetSnapshot(Project project)
     {
         return GetSnapshot(project.Solution).GetProject(project);
     }

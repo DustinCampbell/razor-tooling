@@ -24,7 +24,7 @@ using Microsoft.NET.Sdk.Razor.SourceGenerators;
 
 namespace Microsoft.CodeAnalysis.Remote.Razor.ProjectSystem;
 
-internal sealed class RemoteProjectSnapshot : IRazorProject
+internal sealed class RemoteRazorProject : IRazorProject
 {
     public RemoteSolutionSnapshot SolutionSnapshot { get; }
 
@@ -36,7 +36,7 @@ internal sealed class RemoteProjectSnapshot : IRazorProject
     private readonly AsyncLazy<ImmutableArray<TagHelperDescriptor>> _lazyTagHelpers;
     private readonly Dictionary<TextDocument, RemoteRazorDocument> _documentMap = [];
 
-    public RemoteProjectSnapshot(Project project, RemoteSolutionSnapshot solutionSnapshot)
+    public RemoteRazorProject(Project project, RemoteSolutionSnapshot solutionSnapshot)
     {
         if (!project.ContainsRazorDocuments())
         {

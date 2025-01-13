@@ -25,8 +25,8 @@ internal sealed class RoslynCodeActionHelpers : IRoslynCodeActionHelpers
 {
     public Task<string> GetFormattedNewFileContentsAsync(IRazorProject project, Uri csharpFileUri, string newFileContent, CancellationToken cancellationToken)
     {
-        Debug.Assert(project is RemoteProjectSnapshot);
-        var roslynProject = ((RemoteProjectSnapshot)project).Project;
+        Debug.Assert(project is RemoteRazorProject);
+        var roslynProject = ((RemoteRazorProject)project).Project;
 
         var document = roslynProject.AddDocument(RazorUri.GetDocumentFilePathFromUri(csharpFileUri), newFileContent);
 
