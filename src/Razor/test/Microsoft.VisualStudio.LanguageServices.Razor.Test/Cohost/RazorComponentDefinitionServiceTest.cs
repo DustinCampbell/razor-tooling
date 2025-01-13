@@ -69,14 +69,14 @@ public class RazorComponentDefinitionServiceTest(ITestOutputHelper testOutputHel
         var snapshotManager = OOPExportProvider.GetExportedValue<RemoteSnapshotManager>();
         var documentMappingService = OOPExportProvider.GetExportedValue<IDocumentMappingService>();
 
-        var documentSnapshot = snapshotManager.GetSnapshot(document);
+        var documentSnapshot = snapshotManager.GetDocument(document);
         var codeDocument = await documentSnapshot.GetGeneratedOutputAsync(DisposalToken);
         var positionInfo = documentMappingService.GetPositionInfo(codeDocument, input.Position);
 
         var location = await service.GetDefinitionAsync(
             documentSnapshot,
             positionInfo,
-            solutionQueryOperations: documentSnapshot.ProjectSnapshot.SolutionSnapshot,
+            solutionQueryOperations: documentSnapshot.Project.SolutionSnapshot,
             ignoreAttributes: false,
             DisposalToken);
 

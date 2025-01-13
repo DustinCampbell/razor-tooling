@@ -20,7 +20,7 @@ internal sealed class RemoteCSharpSpellCheckRangeProvider() : ICSharpSpellCheckR
     {
         // We have a razor document, lets find the generated C# document
         Debug.Assert(documentContext is RemoteDocumentContext, "This method only works on document snapshots created in the OOP process");
-        var document = (RemoteDocumentSnapshot)documentContext.Document;
+        var document = (RemoteRazorDocument)documentContext.Document;
         var generatedDocument = await document.GetGeneratedDocumentAsync(cancellationToken).ConfigureAwait(false);
 
         var csharpRanges = await ExternalAccess.Razor.Cohost.Handlers.SpellCheck.GetSpellCheckSpansAsync(generatedDocument, cancellationToken).ConfigureAwait(false);

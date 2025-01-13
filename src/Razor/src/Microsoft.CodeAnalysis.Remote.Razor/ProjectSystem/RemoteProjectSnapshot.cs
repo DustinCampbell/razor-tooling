@@ -34,7 +34,7 @@ internal sealed class RemoteProjectSnapshot : IRazorProject
     private readonly AsyncLazy<RazorConfiguration> _lazyConfiguration;
     private readonly AsyncLazy<RazorProjectEngine> _lazyProjectEngine;
     private readonly AsyncLazy<ImmutableArray<TagHelperDescriptor>> _lazyTagHelpers;
-    private readonly Dictionary<TextDocument, RemoteDocumentSnapshot> _documentMap = [];
+    private readonly Dictionary<TextDocument, RemoteRazorDocument> _documentMap = [];
 
     public RemoteProjectSnapshot(Project project, RemoteSolutionSnapshot solutionSnapshot)
     {
@@ -79,38 +79,38 @@ internal sealed class RemoteProjectSnapshot : IRazorProject
         return new(_lazyTagHelpers.GetValueAsync(cancellationToken));
     }
 
-    public RemoteDocumentSnapshot GetDocument(DocumentId documentId)
+    public RemoteRazorDocument GetDocument(DocumentId documentId)
     {
         var document = _project.GetRequiredDocument(documentId);
         return GetDocument(document);
     }
 
-    public RemoteDocumentSnapshot GetDocument(TextDocument document)
+    public RemoteRazorDocument GetDocument(TextDocument textDocument)
     {
-        if (document.Project != _project)
+        if (textDocument.Project != _project)
         {
-            throw new ArgumentException(SR.Document_does_not_belong_to_this_project, nameof(document));
+            throw new ArgumentException(SR.Document_does_not_belong_to_this_project, nameof(textDocument));
         }
 
-        if (!document.IsRazorDocument())
+        if (!textDocument.IsRazorDocument())
         {
             throw new ArgumentException(SR.Document_is_not_a_Razor_document);
         }
 
-        return GetDocumentCore(document);
+        return GetDocumentCore(textDocument);
     }
 
-    private RemoteDocumentSnapshot GetDocumentCore(TextDocument document)
+    private RemoteRazorDocument GetDocumentCore(TextDocument textDocument)
     {
         lock (_documentMap)
         {
-            if (!_documentMap.TryGetValue(document, out var snapshot))
+            if (!_documentMap.TryGetValue(textDocument, out var document))
             {
-                snapshot = new RemoteDocumentSnapshot(document, this);
-                _documentMap.Add(document, snapshot);
+                document = new RemoteRazorDocument(textDocument, this);
+                _documentMap.Add(textDocument, document);
             }
 
-            return snapshot;
+            return document;
         }
     }
 

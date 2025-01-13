@@ -22,7 +22,7 @@ internal static class IDocumentMappingServiceExtensions
     /// </summary>
     public static Task<(Uri MappedDocumentUri, LinePositionSpan MappedRange)> MapToHostDocumentUriAndRangeAsync(
         this IDocumentMappingService service,
-        RemoteDocumentSnapshot originDocument,
+        RemoteRazorDocument originDocument,
         Uri generatedDocumentUri,
         LinePositionSpan generatedDocumentRange,
         CancellationToken cancellationToken)
@@ -42,14 +42,14 @@ internal static class IDocumentMappingServiceExtensions
     /// </summary>
     public static async Task<(Uri MappedDocumentUri, RoslynRange MappedRange)> MapToHostDocumentUriAndRangeAsync(
         this IDocumentMappingService service,
-        RemoteDocumentSnapshot originSnapshot,
+        RemoteRazorDocument originDocument,
         Uri generatedDocumentUri,
         RoslynRange generatedDocumentRange,
         CancellationToken cancellationToken)
     {
         var (mappedDocumentUri, mappedRange) = await service
             .MapToHostDocumentUriAndRangeAsync(
-                originSnapshot,
+                originDocument,
                 generatedDocumentUri,
                 generatedDocumentRange.ToLinePositionSpan(),
                 cancellationToken)

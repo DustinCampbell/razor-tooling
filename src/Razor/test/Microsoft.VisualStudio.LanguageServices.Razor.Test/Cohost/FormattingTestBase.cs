@@ -54,7 +54,7 @@ public abstract class FormattingTestBase : CohostEndpointTestBase
             //      so we can't validate for diagnostics here until we make them the same. Since the test inputs are all
             //      shared this doesn't really matter while the language server tests are present.
             //var snapshotManager = OOPExportProvider.GetExportedValue<RemoteSnapshotManager>();
-            //var snapshot = snapshotManager.GetSnapshot(document);
+            //var snapshot = snapshotManager.GetDocument(document);
             //var codeDocument = await snapshot.GetGeneratedOutputAsync(DisposalToken);
             //var csharpDocument = codeDocument.GetCSharpDocument();
             //Assert.False(csharpDocument.Diagnostics.Any(), "Error creating document:" + Environment.NewLine + string.Join(Environment.NewLine, csharpDocument.Diagnostics));

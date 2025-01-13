@@ -285,7 +285,7 @@ public abstract class CohostEndpointTestBase(ITestOutputHelper testOutputHelper)
         {
             // We're cheating a bit here and using the remote export provider to get something to do the compilation
             var razorDocument = solution.GetAdditionalDocument(documentId).AssumeNotNull();
-            var snapshot = snapshotManager.GetSnapshot(razorDocument);
+            var snapshot = snapshotManager.GetDocument(razorDocument);
             // Compile the Razor file
             var codeDocument = await snapshot.GetGeneratedOutputAsync(cancellationToken);
             // Update the generated doc contents

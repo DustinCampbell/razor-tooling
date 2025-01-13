@@ -10,14 +10,14 @@ internal sealed class RemoteDocumentContext : DocumentContext
 {
     public TextDocument TextDocument => Document.TextDocument;
 
-    public new RemoteDocumentSnapshot Document => (RemoteDocumentSnapshot)base.Document;
+    public new RemoteRazorDocument Document => (RemoteRazorDocument)base.Document;
 
     public ISolutionQueryOperations GetSolutionQueryOperations()
-        => Document.ProjectSnapshot.SolutionSnapshot;
+        => Document.Project.SolutionSnapshot;
 
-    public RemoteDocumentContext(Uri uri, RemoteDocumentSnapshot snapshot)
+    public RemoteDocumentContext(Uri uri, RemoteRazorDocument document)
         // HACK: Need to revisit projectContext here I guess
-        : base(uri, snapshot, projectContext: null)
+        : base(uri, document, projectContext: null)
     {
     }
 }

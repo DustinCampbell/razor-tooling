@@ -24,19 +24,19 @@ internal sealed class RemoteEditMappingService(
 
     protected override bool TryGetDocumentContext(IRazorDocument contextDocument, Uri razorDocumentUri, VSProjectContext? projectContext, [NotNullWhen(true)] out DocumentContext? documentContext)
     {
-        if (contextDocument is not RemoteDocumentSnapshot originSnapshot)
+        if (contextDocument is not RemoteRazorDocument remoteDocument)
         {
-            throw new InvalidOperationException("RemoteEditMappingService can only be used with RemoteDocumentSnapshot instances.");
+            throw new InvalidOperationException("RemoteEditMappingService can only be used with RemoteRazorDocument instances.");
         }
 
-        var solution = originSnapshot.TextDocument.Project.Solution;
+        var solution = remoteDocument.TextDocument.Project.Solution;
         if (!solution.TryGetRazorDocument(razorDocumentUri, out var razorDocument))
         {
             documentContext = null;
             return false;
         }
 
-        var razorDocumentSnapshot = _snapshotManager.GetSnapshot(razorDocument);
+        var razorDocumentSnapshot = _snapshotManager.GetDocument(razorDocument);
 
         documentContext = new RemoteDocumentContext(razorDocumentUri, razorDocumentSnapshot);
         return true;

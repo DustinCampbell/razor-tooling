@@ -74,7 +74,7 @@ internal sealed partial class RemoteUriPresentationService(in ServiceArgs args) 
             return Response.CallHtml;
         }
 
-        var otherSnapshot = SnapshotManager.GetSnapshot(otherDocument);
+        var otherSnapshot = SnapshotManager.GetDocument(otherDocument);
         var descriptor = await otherSnapshot.TryGetTagHelperDescriptorAsync(cancellationToken).ConfigureAwait(false);
 
         if (descriptor is null)

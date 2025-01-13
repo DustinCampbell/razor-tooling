@@ -15,19 +15,19 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Remote.Razor.ProjectSystem;
 
-internal sealed class RemoteDocumentSnapshot : IRazorDocument
+internal sealed class RemoteRazorDocument : IRazorDocument
 #if !FORMAT_FUSE
     , IDesignTimeCodeGenerator
 #endif
 {
     public TextDocument TextDocument { get; }
-    public RemoteProjectSnapshot ProjectSnapshot { get; }
+    public RemoteProjectSnapshot Project { get; }
 
     // TODO: Delete this field when the source generator is hooked up
     private readonly AsyncLazy<Document> _lazyDocument;
     private readonly AsyncLazy<RazorCodeDocument> _lazyCodeDocument;
 
-    public RemoteDocumentSnapshot(TextDocument textDocument, RemoteProjectSnapshot projectSnapshot)
+    public RemoteRazorDocument(TextDocument textDocument, RemoteProjectSnapshot projectSnapshot)
     {
         if (!textDocument.IsRazorDocument())
         {
@@ -35,7 +35,7 @@ internal sealed class RemoteDocumentSnapshot : IRazorDocument
         }
 
         TextDocument = textDocument;
-        ProjectSnapshot = projectSnapshot;
+        Project = projectSnapshot;
 
         _lazyDocument = AsyncLazy.Create(HACK_ComputeDocumentAsync);
         _lazyCodeDocument = AsyncLazy.Create(ComputeGeneratedOutputAsync);
@@ -45,7 +45,7 @@ internal sealed class RemoteDocumentSnapshot : IRazorDocument
     public string FilePath => TextDocument.FilePath.AssumeNotNull();
     public string TargetPath => TextDocument.FilePath.AssumeNotNull();
 
-    public IRazorProject Project => ProjectSnapshot;
+    IRazorProject IRazorDocument.Project => Project;
 
     public int Version => -999; // We don't expect to use this in cohosting, but plenty of existing code logs it's value
 
@@ -84,8 +84,8 @@ internal sealed class RemoteDocumentSnapshot : IRazorDocument
 
     private async Task<RazorCodeDocument> ComputeGeneratedOutputAsync(CancellationToken cancellationToken)
     {
-        var projectEngine = await ProjectSnapshot.GetProjectEngineAsync(cancellationToken).ConfigureAwait(false);
-        var compilerOptions = ProjectSnapshot.SolutionSnapshot.SnapshotManager.CompilerOptions;
+        var projectEngine = await Project.GetProjectEngineAsync(cancellationToken).ConfigureAwait(false);
+        var compilerOptions = Project.SolutionSnapshot.SnapshotManager.CompilerOptions;
 
         return await CompilationHelpers
             .GenerateCodeDocumentAsync(this, projectEngine, compilerOptions, cancellationToken)
@@ -95,7 +95,7 @@ internal sealed class RemoteDocumentSnapshot : IRazorDocument
 #if !FORMAT_FUSE
     public async Task<RazorCodeDocument> GenerateDesignTimeOutputAsync(CancellationToken cancellationToken)
     {
-        var projectEngine = await ProjectSnapshot.GetProjectEngineAsync(cancellationToken).ConfigureAwait(false);
+        var projectEngine = await Project.GetProjectEngineAsync(cancellationToken).ConfigureAwait(false);
 
         return await CompilationHelpers
             .GenerateDesignTimeCodeDocumentAsync(this, projectEngine, cancellationToken)
@@ -108,7 +108,7 @@ internal sealed class RemoteDocumentSnapshot : IRazorDocument
         // TODO: A real implementation needs to get the SourceGeneratedDocument from the solution
 
         var solution = TextDocument.Project.Solution;
-        var filePathService = ProjectSnapshot.SolutionSnapshot.SnapshotManager.FilePathService;
+        var filePathService = Project.SolutionSnapshot.SnapshotManager.FilePathService;
         var generatedFilePath = filePathService.GetRazorCSharpFilePath(Project.Key, FilePath);
         var generatedDocumentId = solution
             .GetDocumentIdsWithFilePath(generatedFilePath)
@@ -131,8 +131,8 @@ internal sealed class RemoteDocumentSnapshot : IRazorDocument
             .GetAdditionalDocument(id)
             .AssumeNotNull();
 
-        var snapshotManager = ProjectSnapshot.SolutionSnapshot.SnapshotManager;
-        return snapshotManager.GetSnapshot(newDocument);
+        var snapshotManager = Project.SolutionSnapshot.SnapshotManager;
+        return snapshotManager.GetDocument(newDocument);
     }
 
     public bool TryGetGeneratedDocument([NotNullWhen(true)] out Document? result)

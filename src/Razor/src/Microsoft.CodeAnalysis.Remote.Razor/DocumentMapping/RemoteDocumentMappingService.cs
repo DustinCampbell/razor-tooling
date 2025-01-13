@@ -27,7 +27,7 @@ internal sealed class RemoteDocumentMappingService(
     private readonly RemoteSnapshotManager _snapshotManager = snapshotManager;
 
     public async Task<(Uri MappedDocumentUri, LinePositionSpan MappedRange)> MapToHostDocumentUriAndRangeAsync(
-        RemoteDocumentSnapshot originSnapshot,
+        RemoteRazorDocument originDocument,
         Uri generatedDocumentUri,
         LinePositionSpan generatedDocumentRange,
         CancellationToken cancellationToken)
@@ -46,13 +46,13 @@ internal sealed class RemoteDocumentMappingService(
             return (generatedDocumentUri, generatedDocumentRange);
         }
 
-        var solution = originSnapshot.TextDocument.Project.Solution;
+        var solution = originDocument.TextDocument.Project.Solution;
         if (!solution.TryGetRazorDocument(razorDocumentUri, out var razorDocument))
         {
             return (generatedDocumentUri, generatedDocumentRange);
         }
 
-        var razorDocumentSnapshot = _snapshotManager.GetSnapshot(razorDocument);
+        var razorDocumentSnapshot = _snapshotManager.GetDocument(razorDocument);
 
         var razorCodeDocument = await razorDocumentSnapshot
             .GetGeneratedOutputAsync(cancellationToken)

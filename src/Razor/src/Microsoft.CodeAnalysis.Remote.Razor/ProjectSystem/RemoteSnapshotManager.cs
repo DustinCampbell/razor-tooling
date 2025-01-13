@@ -30,8 +30,8 @@ internal sealed class RemoteSnapshotManager(LanguageServerFeatureOptions languag
         return GetSnapshot(project.Solution).GetProject(project);
     }
 
-    public RemoteDocumentSnapshot GetSnapshot(TextDocument document)
+    public RemoteRazorDocument GetDocument(TextDocument textDocument)
     {
-        return GetSnapshot(document.Project).GetDocument(document);
+        return GetSnapshot(textDocument.Project).GetDocument(textDocument);
     }
 }

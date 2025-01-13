@@ -107,7 +107,7 @@ internal abstract class RazorDocumentServiceBase(in ServiceArgs args) : RazorBro
             return null;
         }
 
-        var documentSnapshot = SnapshotManager.GetSnapshot(razorDocument);
+        var documentSnapshot = SnapshotManager.GetDocument(razorDocument);
 
         return new RemoteDocumentContext(razorDocument.CreateUri(), documentSnapshot);
     }
