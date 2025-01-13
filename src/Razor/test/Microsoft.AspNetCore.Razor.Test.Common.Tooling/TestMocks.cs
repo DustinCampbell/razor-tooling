@@ -89,9 +89,9 @@ internal static class TestMocks
     public static void VerifySendRequest<TParams, TResponse>(this Mock<IClientConnection> mock, string method, TParams @params, Func<Times> times)
         => mock.Verify(x => x.SendRequestAsync<TParams, TResponse>(method, @params, It.IsAny<CancellationToken>()), times);
 
-    public static IProjectSnapshot CreateProjectSnapshot(HostProject hostProject, ProjectWorkspaceState? projectWorkspaceState = null)
+    public static IRazorProject CreateProject(HostProject hostProject, ProjectWorkspaceState? projectWorkspaceState = null)
     {
-        var mock = new StrictMock<IProjectSnapshot>();
+        var mock = new StrictMock<IRazorProject>();
 
         mock.SetupGet(x => x.Key)
             .Returns(hostProject.Key);

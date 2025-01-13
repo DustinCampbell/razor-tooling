@@ -12,7 +12,7 @@ namespace Microsoft.CodeAnalysis.Razor.Tooltip;
 
 internal abstract class AbstractComponentAvailabilityService : IComponentAvailabilityService
 {
-    public async Task<ImmutableArray<(IProjectSnapshot Project, bool IsAvailable)>> GetComponentAvailabilityAsync(
+    public async Task<ImmutableArray<(IRazorProject Project, bool IsAvailable)>> GetComponentAvailabilityAsync(
         string documentFilePath,
         string typeName,
         CancellationToken cancellationToken)
@@ -23,7 +23,7 @@ internal abstract class AbstractComponentAvailabilityService : IComponentAvailab
             return [];
         }
 
-        using var result = new PooledArrayBuilder<(IProjectSnapshot, bool IsAvailable)>(capacity: projects.Length);
+        using var result = new PooledArrayBuilder<(IRazorProject, bool IsAvailable)>(capacity: projects.Length);
 
         foreach (var project in projects)
         {
@@ -35,14 +35,14 @@ internal abstract class AbstractComponentAvailabilityService : IComponentAvailab
         return result.DrainToImmutable();
     }
 
-    protected abstract ImmutableArray<IProjectSnapshot> GetProjectsContainingDocument(string documentFilePath);
+    protected abstract ImmutableArray<IRazorProject> GetProjectsContainingDocument(string documentFilePath);
 
     private static async Task<bool> ContainsTagHelperAsync(
-        IProjectSnapshot projectSnapshot,
+        IRazorProject project,
         string typeName,
         CancellationToken cancellationToken)
     {
-        var tagHelpers = await projectSnapshot.GetTagHelpersAsync(cancellationToken).ConfigureAwait(false);
+        var tagHelpers = await project.GetTagHelpersAsync(cancellationToken).ConfigureAwait(false);
 
         foreach (var tagHelper in tagHelpers)
         {

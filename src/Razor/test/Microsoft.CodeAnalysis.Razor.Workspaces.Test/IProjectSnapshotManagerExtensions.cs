@@ -20,14 +20,14 @@ file sealed class TestSolutionQueryOperations(ProjectSnapshotManager projectMana
 {
     private readonly ProjectSnapshotManager _projectManager = projectManager;
 
-    public IEnumerable<IProjectSnapshot> GetProjects()
+    public IEnumerable<IRazorProject> GetProjects()
     {
-        return _projectManager.GetProjects().Cast<IProjectSnapshot>();
+        return _projectManager.GetProjects().Cast<IRazorProject>();
     }
 
-    public ImmutableArray<IProjectSnapshot> GetProjectsContainingDocument(string documentFilePath)
+    public ImmutableArray<IRazorProject> GetProjectsContainingDocument(string documentFilePath)
     {
-        using var projects = new PooledArrayBuilder<IProjectSnapshot>();
+        using var projects = new PooledArrayBuilder<IRazorProject>();
 
         foreach (var project in _projectManager.GetProjects())
         {

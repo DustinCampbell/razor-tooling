@@ -86,7 +86,7 @@ public class RazorDocumentOptionsServiceTest(ITestOutputHelper testOutput) : Wor
         => new(FormattingOptions.IndentationSize, document.Project.Language);
 
     // Adapted from DocumentExcerptServiceTestBase's InitializeDocument.
-    // Adds the text to a ProjectSnapshot, generates code, and updates the workspace.
+    // Adds the text to a RazorProject, generates code, and updates the workspace.
     private Document InitializeDocument(SourceText sourceText)
     {
         var baseDirectory = PlatformInformation.IsWindows ? @"c:\users\example\src" : "/home/example";

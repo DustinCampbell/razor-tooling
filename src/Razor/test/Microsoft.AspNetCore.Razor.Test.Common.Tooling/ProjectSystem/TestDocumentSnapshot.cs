@@ -62,7 +62,7 @@ internal sealed class TestDocumentSnapshot : IRazorDocument
     public string FileKind => RealDocument.FileKind;
     public string FilePath => RealDocument.FilePath;
     public string TargetPath => RealDocument.TargetPath;
-    public IProjectSnapshot Project => RealDocument.Project;
+    public IRazorProject Project => RealDocument.Project;
     public int Version => RealDocument.Version;
 
     public ValueTask<RazorCodeDocument> GetGeneratedOutputAsync(CancellationToken cancellationToken)

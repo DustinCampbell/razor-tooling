@@ -12,6 +12,6 @@ internal sealed class ComponentAvailabilityService(RemoteSolutionSnapshot soluti
 {
     private readonly RemoteSolutionSnapshot _solutionSnapshot = solutionSnapshot;
 
-    protected override ImmutableArray<IProjectSnapshot> GetProjectsContainingDocument(string documentFilePath)
+    protected override ImmutableArray<IRazorProject> GetProjectsContainingDocument(string documentFilePath)
         => _solutionSnapshot.GetProjectsContainingDocument(documentFilePath);
 }

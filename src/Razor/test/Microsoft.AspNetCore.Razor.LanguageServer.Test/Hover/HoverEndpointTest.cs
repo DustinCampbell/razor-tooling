@@ -252,7 +252,7 @@ public class HoverEndpointTest(ITestOutputHelper testOutput) : TagHelperServiceT
         var projectWorkspaceState = ProjectWorkspaceState.Create(DefaultTagHelpers);
 
         var hostProject = TestHostProject.Create("C:/project.csproj");
-        var projectSnapshot = TestMocks.CreateProjectSnapshot(hostProject, projectWorkspaceState);
+        var project = TestMocks.CreateProject(hostProject, projectWorkspaceState);
 
         var documentMock = new StrictMock<IRazorDocument>();
         documentMock
@@ -272,7 +272,7 @@ public class HoverEndpointTest(ITestOutputHelper testOutput) : TagHelperServiceT
             .Returns(0);
         documentMock
             .SetupGet(x => x.Project)
-            .Returns(projectSnapshot);
+            .Returns(project);
 
         var documentContext = new DocumentContext(new Uri(path), documentMock.Object, projectContext: null);
         var position = codeDocument.Source.Text.GetPosition(code.Position);

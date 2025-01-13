@@ -27,7 +27,7 @@ internal sealed class RazorDocument(RazorProject project, DocumentState state) :
     public string TargetPath => _state.HostDocument.TargetPath;
     public int Version => _state.Version;
 
-    IProjectSnapshot IRazorDocument.Project => Project;
+    IRazorProject IRazorDocument.Project => Project;
 
     public bool TryGetText([NotNullWhen(true)] out SourceText? result)
         => _state.TryGetText(out result);

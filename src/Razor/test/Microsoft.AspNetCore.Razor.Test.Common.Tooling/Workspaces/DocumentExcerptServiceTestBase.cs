@@ -38,7 +38,7 @@ public abstract class DocumentExcerptServiceTestBase(ITestOutputHelper testOutpu
         return (SourceText.From(text), span);
     }
 
-    // Adds the text to a ProjectSnapshot, generates code, and updates the workspace.
+    // Adds the text to a RazorProject, generates code, and updates the workspace.
     private (IRazorDocument primary, Document secondary) InitializeDocument(SourceText sourceText)
     {
         var state = ProjectState

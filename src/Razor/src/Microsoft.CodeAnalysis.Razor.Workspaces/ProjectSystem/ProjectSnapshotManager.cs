@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 // The HostProject support all of the configuration that the Razor SDK exposes via the project system
 // (language version, extensions, named configuration).
 //
-// The implementation will create a ProjectSnapshot for each HostProject.
+// The implementation will create a RazorProject for each HostProject.
 internal partial class ProjectSnapshotManager : IDisposable
 {
     private readonly IProjectEngineFactoryProvider _projectEngineFactoryProvider;

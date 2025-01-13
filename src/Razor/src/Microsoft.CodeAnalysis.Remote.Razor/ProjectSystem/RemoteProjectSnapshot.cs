@@ -24,7 +24,7 @@ using Microsoft.NET.Sdk.Razor.SourceGenerators;
 
 namespace Microsoft.CodeAnalysis.Remote.Razor.ProjectSystem;
 
-internal sealed class RemoteProjectSnapshot : IProjectSnapshot
+internal sealed class RemoteProjectSnapshot : IRazorProject
 {
     public RemoteSolutionSnapshot SolutionSnapshot { get; }
 

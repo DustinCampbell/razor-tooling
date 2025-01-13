@@ -66,7 +66,7 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
         _workspace = workspaceProvider.GetWorkspace();
         _workspace.WorkspaceChanged += Workspace_WorkspaceChanged;
 
-        // This will usually no-op, in the case that another project snapshot change trigger
+        // This will usually no-op, in the case that another workspaceProject snapshot change trigger
         // immediately adds projects we want to be able to handle those projects.
         InitializeSolution(_workspace.CurrentSolution);
     }
@@ -122,11 +122,11 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
                     var projectId = e.ProjectId.AssumeNotNull();
                     var oldSolution = e.OldSolution;
 
-                    var project = oldSolution.GetRequiredProject(projectId);
+                    var workspaceProject = oldSolution.GetRequiredProject(projectId);
 
-                    if (TryGetRazorProject(project, out var projectSnapshot))
+                    if (TryGetRazorProject(workspaceProject, out var project))
                     {
-                        EnqueueUpdateOnProjectAndDependencies(projectId, workspaceProject: null, oldSolution, projectSnapshot);
+                        EnqueueUpdateOnProjectAndDependencies(projectId, workspaceProject: null, oldSolution, project);
                     }
                 }
 
@@ -243,11 +243,11 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
                     var oldSolution = e.OldSolution;
                     var newSolution = e.NewSolution;
 
-                    foreach (var project in oldSolution.Projects)
+                    foreach (var workspaceProject in oldSolution.Projects)
                     {
-                        if (TryGetRazorProject(project, out var projectSnapshot))
+                        if (TryGetRazorProject(workspaceProject, out var project))
                         {
-                            EnqueueUpdate(workspaceProject: null, projectSnapshot);
+                            EnqueueUpdate(workspaceProject: null, project);
                         }
                     }
 
@@ -324,11 +324,11 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
 
     private void InitializeSolution(Solution solution)
     {
-        foreach (var project in solution.Projects)
+        foreach (var workspaceProject in solution.Projects)
         {
-            if (TryGetRazorProject(project, out var projectSnapshot))
+            if (TryGetRazorProject(workspaceProject, out var project))
             {
-                EnqueueUpdate(project, projectSnapshot);
+                EnqueueUpdate(workspaceProject, project);
             }
         }
     }
@@ -353,27 +353,27 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
 
                 if (associatedWorkspaceProject is not null)
                 {
-                    var projectSnapshot = e.Newer.AssumeNotNull();
+                    var project = e.Newer.AssumeNotNull();
                     EnqueueUpdateOnProjectAndDependencies(
                         associatedWorkspaceProject.Id,
                         associatedWorkspaceProject,
                         associatedWorkspaceProject.Solution,
-                        projectSnapshot);
+                        project);
                 }
 
                 break;
 
             case ProjectChangeKind.ProjectRemoved:
-                // No-op. We don't need to recompute tag helpers if the project is being removed
+                // No-op. We don't need to recompute tag helpers if the workspaceProject is being removed
                 break;
         }
     }
 
-    private void EnqueueUpdateOnProjectAndDependencies(Project project, Solution solution)
+    private void EnqueueUpdateOnProjectAndDependencies(Project workspaceProject, Solution solution)
     {
-        if (TryGetRazorProject(project, out var projectSnapshot))
+        if (TryGetRazorProject(workspaceProject, out var project))
         {
-            EnqueueUpdateOnProjectAndDependencies(project.Id, project, solution, projectSnapshot);
+            EnqueueUpdateOnProjectAndDependencies(workspaceProject.Id, workspaceProject, solution, project);
         }
     }
 

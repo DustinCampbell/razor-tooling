@@ -42,9 +42,9 @@ internal class TestRazorProjectService(
         var document = new DocumentSnapshotHandle(
             textDocumentPath, textDocumentPath, FileKinds.GetFileKindFromFilePath(textDocumentPath));
 
-        foreach (var projectSnapshot in _projectManager.FindPotentialProjects(textDocumentPath))
+        foreach (var project in _projectManager.FindPotentialProjects(textDocumentPath))
         {
-            var projectInfo = projectSnapshot.ToRazorProjectInfo();
+            var projectInfo = project.ToRazorProjectInfo();
 
             projectInfo = projectInfo with
             {

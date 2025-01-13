@@ -15,7 +15,7 @@ internal interface IRazorDocument
     string FileKind { get; }
     string FilePath { get; }
     string TargetPath { get; }
-    IProjectSnapshot Project { get; }
+    IRazorProject Project { get; }
 
     int Version { get; }
 

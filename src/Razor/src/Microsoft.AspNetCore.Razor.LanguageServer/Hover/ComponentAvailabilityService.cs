@@ -14,9 +14,9 @@ internal sealed class ComponentAvailabilityService(ProjectSnapshotManager projec
 {
     private readonly ProjectSnapshotManager _projectManager = projectManager;
 
-    protected override ImmutableArray<IProjectSnapshot> GetProjectsContainingDocument(string documentFilePath)
+    protected override ImmutableArray<IRazorProject> GetProjectsContainingDocument(string documentFilePath)
     {
-        using var projects = new PooledArrayBuilder<IProjectSnapshot>();
+        using var projects = new PooledArrayBuilder<IRazorProject>();
 
         foreach (var project in _projectManager.GetProjects())
         {

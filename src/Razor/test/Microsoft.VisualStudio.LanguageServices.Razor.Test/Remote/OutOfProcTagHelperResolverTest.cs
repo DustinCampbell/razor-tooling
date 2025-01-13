@@ -81,7 +81,7 @@ public partial class OutOfProcTagHelperResolverTest : VisualStudioTestBase
             updater.AddProject(s_hostProject_For_2_0);
         });
 
-        var projectSnapshot = _projectManager.GetRequiredProject(s_hostProject_For_2_0.Key);
+        var project = _projectManager.GetRequiredProject(s_hostProject_For_2_0.Key);
 
         var calledOutOfProcess = false;
 
@@ -91,13 +91,13 @@ public partial class OutOfProcTagHelperResolverTest : VisualStudioTestBase
             {
                 calledOutOfProcess = true;
 
-                Assert.Same(projectSnapshot, p);
+                Assert.Same(project, p);
 
                 return new([]);
             },
         };
 
-        var result = await resolver.GetTagHelpersAsync(_workspaceProject, projectSnapshot, DisposalToken);
+        var result = await resolver.GetTagHelpersAsync(_workspaceProject, project, DisposalToken);
 
         // Assert
         Assert.True(calledOutOfProcess);
@@ -113,7 +113,7 @@ public partial class OutOfProcTagHelperResolverTest : VisualStudioTestBase
             updater.AddProject(s_hostProject_For_NonSerializableConfiguration);
         });
 
-        var projectSnapshot = _projectManager.GetRequiredProject(s_hostProject_For_2_0.Key);
+        var project = _projectManager.GetRequiredProject(s_hostProject_For_2_0.Key);
 
         var calledInProcess = false;
 
@@ -123,13 +123,13 @@ public partial class OutOfProcTagHelperResolverTest : VisualStudioTestBase
             {
                 calledInProcess = true;
 
-                Assert.Same(projectSnapshot, p);
+                Assert.Same(project, p);
 
                 return new([]);
             },
         };
 
-        var result = await resolver.GetTagHelpersAsync(_workspaceProject, projectSnapshot, DisposalToken);
+        var result = await resolver.GetTagHelpersAsync(_workspaceProject, project, DisposalToken);
 
         // Assert
         Assert.True(calledInProcess);
@@ -145,7 +145,7 @@ public partial class OutOfProcTagHelperResolverTest : VisualStudioTestBase
             updater.AddProject(s_hostProject_For_2_0);
         });
 
-        var projectSnapshot = _projectManager.GetRequiredProject(s_hostProject_For_2_0.Key);
+        var project = _projectManager.GetRequiredProject(s_hostProject_For_2_0.Key);
 
         var calledOutOfProcess = false;
         var calledInProcess = false;
@@ -156,20 +156,20 @@ public partial class OutOfProcTagHelperResolverTest : VisualStudioTestBase
             OnResolveInProcess = (p) =>
             {
                 calledInProcess = true;
-                Assert.Same(projectSnapshot, p);
+                Assert.Same(project, p);
 
                 return new([]);
             },
             OnResolveOutOfProcess = (p) =>
             {
                 calledOutOfProcess = true;
-                Assert.Same(projectSnapshot, p);
+                Assert.Same(project, p);
 
                 throw new OperationCanceledException();
             }
         };
 
-        await Assert.ThrowsAsync<OperationCanceledException>(async () => await resolver.GetTagHelpersAsync(_workspaceProject, projectSnapshot, cancellationToken));
+        await Assert.ThrowsAsync<OperationCanceledException>(async () => await resolver.GetTagHelpersAsync(_workspaceProject, project, cancellationToken));
 
         Assert.False(calledInProcess);
         Assert.True(calledOutOfProcess);
