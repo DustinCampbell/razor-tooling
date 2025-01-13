@@ -19,12 +19,10 @@ namespace Microsoft.CodeAnalysis.Remote.Razor.DocumentMapping;
 [method: ImportingConstructor]
 internal sealed class RemoteDocumentMappingService(
     IFilePathService filePathService,
-    RemoteSnapshotManager snapshotManager,
     ILoggerFactory loggerFactory)
     : AbstractDocumentMappingService(loggerFactory.GetOrCreateLogger<RemoteDocumentMappingService>())
 {
     private readonly IFilePathService _filePathService = filePathService;
-    private readonly RemoteSnapshotManager _snapshotManager = snapshotManager;
 
     public async Task<(Uri MappedDocumentUri, LinePositionSpan MappedRange)> MapToHostDocumentUriAndRangeAsync(
         RemoteRazorDocument originDocument,
@@ -46,24 +44,22 @@ internal sealed class RemoteDocumentMappingService(
             return (generatedDocumentUri, generatedDocumentRange);
         }
 
-        var solution = originDocument.TextDocument.Project.Solution;
-        if (!solution.TryGetRazorDocument(razorDocumentUri, out var razorDocument))
+        var solution = originDocument.Project.Solution;
+        if (!solution.TryGetDocument(razorDocumentUri, out var document))
         {
             return (generatedDocumentUri, generatedDocumentRange);
         }
 
-        var razorDocumentSnapshot = _snapshotManager.GetDocument(razorDocument);
-
-        var razorCodeDocument = await razorDocumentSnapshot
+        var codeDocument = await document
             .GetGeneratedOutputAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        if (razorCodeDocument is null)
+        if (codeDocument is null)
         {
             return (generatedDocumentUri, generatedDocumentRange);
         }
 
-        if (!razorCodeDocument.TryGetGeneratedDocument(generatedDocumentUri, _filePathService, out var generatedDocument))
+        if (!codeDocument.TryGetGeneratedDocument(generatedDocumentUri, _filePathService, out var generatedDocument))
         {
             return Assumed.Unreachable<(Uri, LinePositionSpan)>();
         }

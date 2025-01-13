@@ -26,11 +26,11 @@ namespace Microsoft.CodeAnalysis.Remote.Razor.ProjectSystem;
 
 internal sealed class RemoteRazorProject : IRazorProject
 {
+    public Project UnderlyingProject { get; }
     public RemoteRazorSolution Solution { get; }
 
     public ProjectKey Key { get; }
 
-    private readonly Project _project;
     private readonly AsyncLazy<RazorConfiguration> _lazyConfiguration;
     private readonly AsyncLazy<RazorProjectEngine> _lazyProjectEngine;
     private readonly AsyncLazy<ImmutableArray<TagHelperDescriptor>> _lazyTagHelpers;
@@ -43,9 +43,9 @@ internal sealed class RemoteRazorProject : IRazorProject
             throw new ArgumentException(SR.Project_does_not_contain_any_Razor_documents, nameof(project));
         }
 
-        _project = project;
+        UnderlyingProject = project;
         Solution = solution;
-        Key = _project.ToProjectKey();
+        Key = UnderlyingProject.ToProjectKey();
 
         _lazyConfiguration = AsyncLazy.Create(ComputeConfigurationAsync);
         _lazyProjectEngine = AsyncLazy.Create(ComputeProjectEngineAsync);
@@ -53,21 +53,19 @@ internal sealed class RemoteRazorProject : IRazorProject
     }
 
     public IEnumerable<string> DocumentFilePaths
-        => _project.AdditionalDocuments
+        => UnderlyingProject.AdditionalDocuments
             .Where(static d => d.IsRazorDocument())
             .Select(static d => d.FilePath.AssumeNotNull());
 
-    public string FilePath => _project.FilePath.AssumeNotNull();
+    public string FilePath => UnderlyingProject.FilePath.AssumeNotNull();
 
-    public string IntermediateOutputPath => FilePathNormalizer.GetNormalizedDirectoryName(_project.CompilationOutputInfo.AssemblyPath);
+    public string IntermediateOutputPath => FilePathNormalizer.GetNormalizedDirectoryName(UnderlyingProject.CompilationOutputInfo.AssemblyPath);
 
-    public string? RootNamespace => _project.DefaultNamespace ?? "ASP";
+    public string? RootNamespace => UnderlyingProject.DefaultNamespace ?? "ASP";
 
-    public string DisplayName => _project.Name;
+    public string DisplayName => UnderlyingProject.Name;
 
-    public Project Project => _project;
-
-    public LanguageVersion CSharpLanguageVersion => ((CSharpParseOptions)_project.ParseOptions.AssumeNotNull()).LanguageVersion;
+    public LanguageVersion CSharpLanguageVersion => ((CSharpParseOptions)UnderlyingProject.ParseOptions.AssumeNotNull()).LanguageVersion;
 
     public ValueTask<ImmutableArray<TagHelperDescriptor>> GetTagHelpersAsync(CancellationToken cancellationToken)
     {
@@ -79,15 +77,27 @@ internal sealed class RemoteRazorProject : IRazorProject
         return new(_lazyTagHelpers.GetValueAsync(cancellationToken));
     }
 
+    public bool TryGetDocument(DocumentId documentId, [NotNullWhen(true)] out RemoteRazorDocument? document)
+    {
+        if (UnderlyingProject.GetAdditionalDocument(documentId) is not { } underlyingTextDocument)
+        {
+            document = null;
+            return false;
+        }
+
+        document = GetDocument(underlyingTextDocument);
+        return true;
+    }
+
     public RemoteRazorDocument GetDocument(DocumentId documentId)
     {
-        var document = _project.GetRequiredDocument(documentId);
+        var document = UnderlyingProject.GetAdditionalDocument(documentId).AssumeNotNull();
         return GetDocument(document);
     }
 
     public RemoteRazorDocument GetDocument(TextDocument textDocument)
     {
-        if (textDocument.Project != _project)
+        if (textDocument.Project != UnderlyingProject)
         {
             throw new ArgumentException(SR.Document_does_not_belong_to_this_project, nameof(textDocument));
         }
@@ -121,12 +131,12 @@ internal sealed class RemoteRazorProject : IRazorProject
             throw new ArgumentException(SR.Format0_is_not_a_Razor_file_path(filePath), nameof(filePath));
         }
 
-        var documentIds = _project.Solution.GetDocumentIdsWithFilePath(filePath);
+        var documentIds = UnderlyingProject.Solution.GetDocumentIdsWithFilePath(filePath);
 
         foreach (var documentId in documentIds)
         {
-            if (_project.Id == documentId.ProjectId &&
-                _project.ContainsAdditionalDocument(documentId))
+            if (UnderlyingProject.Id == documentId.ProjectId &&
+                UnderlyingProject.ContainsAdditionalDocument(documentId))
             {
                 return true;
             }
@@ -142,12 +152,12 @@ internal sealed class RemoteRazorProject : IRazorProject
             throw new ArgumentException(SR.Format0_is_not_a_Razor_file_path(filePath), nameof(filePath));
         }
 
-        var documentIds = _project.Solution.GetDocumentIdsWithFilePath(filePath);
+        var documentIds = UnderlyingProject.Solution.GetDocumentIdsWithFilePath(filePath);
 
         foreach (var documentId in documentIds)
         {
-            if (_project.Id == documentId.ProjectId &&
-                _project.GetAdditionalDocument(documentId) is { } doc)
+            if (UnderlyingProject.Id == documentId.ProjectId &&
+                UnderlyingProject.GetAdditionalDocument(documentId) is { } doc)
             {
                 document = GetDocumentCore(doc);
                 return true;
@@ -175,7 +185,7 @@ internal sealed class RemoteRazorProject : IRazorProject
     {
         // See RazorSourceGenerator.RazorProviders.cs
 
-        var globalOptions = _project.AnalyzerOptions.AnalyzerConfigOptionsProvider.GlobalOptions;
+        var globalOptions = UnderlyingProject.AnalyzerOptions.AnalyzerConfigOptionsProvider.GlobalOptions;
 
         globalOptions.TryGetValue("build_property.RazorConfiguration", out var configurationName);
 
@@ -187,7 +197,7 @@ internal sealed class RemoteRazorProject : IRazorProject
             razorLanguageVersion = RazorLanguageVersion.Latest;
         }
 
-        var compilation = await _project.GetCompilationAsync(cancellationToken).ConfigureAwait(false);
+        var compilation = await UnderlyingProject.GetCompilationAsync(cancellationToken).ConfigureAwait(false);
 
         var suppressAddComponentParameter = compilation is not null && !compilation.HasAddComponentParameter();
 
@@ -222,6 +232,6 @@ internal sealed class RemoteRazorProject : IRazorProject
         var projectEngine = await _lazyProjectEngine.GetValueAsync(cancellationToken).ConfigureAwait(false);
         var telemetryReporter = Solution.SnapshotManager.TelemetryReporter;
 
-        return await _project.GetTagHelpersAsync(projectEngine, telemetryReporter, cancellationToken).ConfigureAwait(false);
+        return await UnderlyingProject.GetTagHelpersAsync(projectEngine, telemetryReporter, cancellationToken).ConfigureAwait(false);
     }
 }

@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Immutable;
 using System.Composition;
-using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Telemetry;
@@ -33,8 +32,7 @@ internal class RemoteCSharpSemanticTokensProvider(IFilePathService filePathServi
             correlationId);
 
         // We have a razor document, lets find the generated C# document
-        Debug.Assert(documentContext is RemoteDocumentContext, "This method only works on document snapshots created in the OOP process");
-        var document = (RemoteRazorDocument)documentContext.Document;
+        var document = documentContext.Document.ToRemoteRazorDocument();
         var generatedDocument = await document
             .GetGeneratedDocumentAsync(cancellationToken)
             .ConfigureAwait(false);

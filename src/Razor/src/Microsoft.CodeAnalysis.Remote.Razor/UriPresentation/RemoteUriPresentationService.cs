@@ -68,14 +68,13 @@ internal sealed partial class RemoteUriPresentationService(in ServiceArgs args) 
             return Response.CallHtml;
         }
 
-        var solution = context.TextDocument.Project.Solution;
-        if (!solution.TryGetRazorDocument(razorFileUri, out var otherDocument))
+        var solution = context.Document.Project.Solution;
+        if (!solution.TryGetDocument(razorFileUri, out var otherDocument))
         {
             return Response.CallHtml;
         }
 
-        var otherSnapshot = SnapshotManager.GetDocument(otherDocument);
-        var descriptor = await otherSnapshot.TryGetTagHelperDescriptorAsync(cancellationToken).ConfigureAwait(false);
+        var descriptor = await otherDocument.TryGetTagHelperDescriptorAsync(cancellationToken).ConfigureAwait(false);
 
         if (descriptor is null)
         {

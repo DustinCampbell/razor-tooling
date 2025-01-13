@@ -46,24 +46,24 @@ internal sealed class RemoteCompletionService(in ServiceArgs args) : RazorDocume
             cancellationToken);
 
     private async ValueTask<CompletionPositionInfo?> GetPositionInfoAsync(
-        RemoteDocumentContext remoteDocumentContext,
+        RemoteDocumentContext context,
         VSInternalCompletionContext completionContext,
         Position position,
         CancellationToken cancellationToken)
     {
-        var sourceText = await remoteDocumentContext.GetSourceTextAsync(cancellationToken).ConfigureAwait(false);
+        var sourceText = await context.GetSourceTextAsync(cancellationToken).ConfigureAwait(false);
         if (!sourceText.TryGetAbsoluteIndex(position, out var index))
         {
             return null;
         }
 
-        var codeDocument = await remoteDocumentContext.GetCodeDocumentAsync(cancellationToken).ConfigureAwait(false);
+        var codeDocument = await context.GetCodeDocumentAsync(cancellationToken).ConfigureAwait(false);
 
         var positionInfo = GetPositionInfo(codeDocument, index);
 
         if (positionInfo.LanguageKind != RazorLanguageKind.Razor
            && await DelegatedCompletionHelper.TryGetProvisionalCompletionInfoAsync(
-                remoteDocumentContext,
+                context,
                 completionContext,
                 positionInfo,
                 DocumentMappingService,
@@ -103,7 +103,7 @@ internal sealed class RemoteCompletionService(in ServiceArgs args) : RazorDocume
             cancellationToken);
 
     private async ValueTask<Response> GetCompletionAsync(
-        RemoteDocumentContext remoteDocumentContext,
+        RemoteDocumentContext context,
         CompletionPositionInfo positionInfo,
         VSInternalCompletionContext completionContext,
         RazorCompletionOptions razorCompletionOptions,
@@ -117,7 +117,7 @@ internal sealed class RemoteCompletionService(in ServiceArgs args) : RazorDocume
         {
             var mappedPosition = documentPositionInfo.Position;
             csharpCompletionList = await GetCSharpCompletionAsync(
-                remoteDocumentContext,
+                context,
                 documentPositionInfo.HostDocumentIndex,
                 mappedPosition,
                 positionInfo.ProvisionalTextEdit,
@@ -137,7 +137,7 @@ internal sealed class RemoteCompletionService(in ServiceArgs args) : RazorDocume
             ? await _razorCompletionListProvider.GetCompletionListAsync(
                 documentPositionInfo.HostDocumentIndex,
                 completionContext,
-                remoteDocumentContext,
+                context,
                 _clientCapabilitiesService.ClientCapabilities,
                 existingCompletions: existingDelegatedCompletions,
                 razorCompletionOptions,
@@ -156,7 +156,7 @@ internal sealed class RemoteCompletionService(in ServiceArgs args) : RazorDocume
     }
 
     private async ValueTask<VSInternalCompletionList?> GetCSharpCompletionAsync(
-        RemoteDocumentContext remoteDocumentContext,
+        RemoteDocumentContext context,
         int documentIndex,
         Position mappedPosition,
         TextEdit? provisionalTextEdit,
@@ -164,7 +164,7 @@ internal sealed class RemoteCompletionService(in ServiceArgs args) : RazorDocume
         RazorCompletionOptions razorCompletionOptions,
         CancellationToken cancellationToken)
     {
-        var generatedDocument = await remoteDocumentContext.Document
+        var generatedDocument = await context.Document
             .GetGeneratedDocumentAsync(cancellationToken).ConfigureAwait(false);
         if (provisionalTextEdit is not null)
         {
@@ -216,7 +216,7 @@ internal sealed class RemoteCompletionService(in ServiceArgs args) : RazorDocume
         var rewrittenResponse = await DelegatedCompletionHelper.RewriteCSharpResponseAsync(
             vsPlatformCompletionList,
             documentIndex,
-            remoteDocumentContext,
+            context,
             mappedPosition,
             razorCompletionOptions,
             cancellationToken)

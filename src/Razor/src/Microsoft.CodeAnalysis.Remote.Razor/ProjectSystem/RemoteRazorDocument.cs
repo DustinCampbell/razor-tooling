@@ -20,7 +20,7 @@ internal sealed class RemoteRazorDocument : IRazorDocument
     , IDesignTimeCodeGenerator
 #endif
 {
-    public TextDocument TextDocument { get; }
+    public TextDocument UnderlyingTextDocument { get; }
     public RemoteRazorProject Project { get; }
 
     // TODO: Delete this field when the source generator is hooked up
@@ -34,7 +34,7 @@ internal sealed class RemoteRazorDocument : IRazorDocument
             throw new ArgumentException(SR.Document_is_not_a_Razor_document);
         }
 
-        TextDocument = textDocument;
+        UnderlyingTextDocument = textDocument;
         Project = project;
 
         _lazyDocument = AsyncLazy.Create(HACK_ComputeDocumentAsync);
@@ -42,8 +42,8 @@ internal sealed class RemoteRazorDocument : IRazorDocument
     }
 
     public string FileKind => FileKinds.GetFileKindFromFilePath(FilePath);
-    public string FilePath => TextDocument.FilePath.AssumeNotNull();
-    public string TargetPath => TextDocument.FilePath.AssumeNotNull();
+    public string FilePath => UnderlyingTextDocument.FilePath.AssumeNotNull();
+    public string TargetPath => UnderlyingTextDocument.FilePath.AssumeNotNull();
 
     IRazorProject IRazorDocument.Project => Project;
 
@@ -53,21 +53,21 @@ internal sealed class RemoteRazorDocument : IRazorDocument
     {
         return TryGetText(out var result)
             ? new(result)
-            : new(TextDocument.GetTextAsync(cancellationToken));
+            : new(UnderlyingTextDocument.GetTextAsync(cancellationToken));
     }
 
     public ValueTask<VersionStamp> GetTextVersionAsync(CancellationToken cancellationToken)
     {
         return TryGetTextVersion(out var result)
             ? new(result)
-            : new(TextDocument.GetTextVersionAsync(cancellationToken));
+            : new(UnderlyingTextDocument.GetTextVersionAsync(cancellationToken));
     }
 
     public bool TryGetText([NotNullWhen(true)] out SourceText? result)
-        => TextDocument.TryGetText(out result);
+        => UnderlyingTextDocument.TryGetText(out result);
 
     public bool TryGetTextVersion(out VersionStamp result)
-        => TextDocument.TryGetTextVersion(out result);
+        => UnderlyingTextDocument.TryGetTextVersion(out result);
 
     public bool TryGetGeneratedOutput([NotNullWhen(true)] out RazorCodeDocument? result)
         => _lazyCodeDocument.TryGetValue(out result);
@@ -107,12 +107,12 @@ internal sealed class RemoteRazorDocument : IRazorDocument
     {
         // TODO: A real implementation needs to get the SourceGeneratedDocument from the solution
 
-        var solution = TextDocument.Project.Solution;
+        var solution = UnderlyingTextDocument.Project.Solution;
         var filePathService = Project.Solution.SnapshotManager.FilePathService;
         var generatedFilePath = filePathService.GetRazorCSharpFilePath(Project.Key, FilePath);
         var generatedDocumentId = solution
             .GetDocumentIdsWithFilePath(generatedFilePath)
-            .First(TextDocument.Project.Id, static (d, projectId) => d.ProjectId == projectId);
+            .First(UnderlyingTextDocument.Project.Id, static (d, projectId) => d.ProjectId == projectId);
 
         var generatedDocument = solution.GetRequiredDocument(generatedDocumentId);
 
@@ -125,8 +125,8 @@ internal sealed class RemoteRazorDocument : IRazorDocument
 
     public IRazorDocument WithText(SourceText text)
     {
-        var id = TextDocument.Id;
-        var newDocument = TextDocument.Project.Solution
+        var id = UnderlyingTextDocument.Id;
+        var newDocument = UnderlyingTextDocument.Project.Solution
             .WithAdditionalDocumentText(id, text)
             .GetAdditionalDocument(id)
             .AssumeNotNull();

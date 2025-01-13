@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.Composition;
-using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor;
@@ -25,36 +24,35 @@ internal sealed class RoslynCodeActionHelpers : IRoslynCodeActionHelpers
 {
     public Task<string> GetFormattedNewFileContentsAsync(IRazorProject project, Uri csharpFileUri, string newFileContent, CancellationToken cancellationToken)
     {
-        Debug.Assert(project is RemoteRazorProject);
-        var roslynProject = ((RemoteRazorProject)project).Project;
-
-        var document = roslynProject.AddDocument(RazorUri.GetDocumentFilePathFromUri(csharpFileUri), newFileContent);
+        var document = project.ToRemoteRazorProject()
+            .UnderlyingProject
+            .AddDocument(RazorUri.GetDocumentFilePathFromUri(csharpFileUri), newFileContent);
 
         return ExternalHandlers.CodeActions.GetFormattedNewFileContentAsync(document, cancellationToken);
     }
 
     public async Task<TextEdit[]?> GetSimplifiedTextEditsAsync(DocumentContext documentContext, Uri? codeBehindUri, TextEdit edit, CancellationToken cancellationToken)
     {
-        Debug.Assert(documentContext is RemoteDocumentContext);
-        var context = (RemoteDocumentContext)documentContext;
+        var remoteDocumentContext = documentContext.ToRemoteDocumentContext();
 
         Document document;
         if (codeBehindUri is null)
         {
             // Edit is for inserting into the generated document
-            document = await context.Document.GetGeneratedDocumentAsync(cancellationToken).ConfigureAwait(false);
+            document = await remoteDocumentContext.Document.GetGeneratedDocumentAsync(cancellationToken).ConfigureAwait(false);
         }
         else
         {
             // Edit is for inserting into a C# document
-            var solution = context.TextDocument.Project.Solution;
+            var project = remoteDocumentContext.Document.Project.UnderlyingProject;
+            var solution = project.Solution;
             var documentIds = solution.GetDocumentIdsWithUri(codeBehindUri);
             if (documentIds.Length == 0)
             {
                 return null;
             }
 
-            document = solution.GetRequiredDocument(documentIds.First(d => d.ProjectId == context.TextDocument.Project.Id));
+            document = solution.GetRequiredDocument(documentIds.First(d => d.ProjectId == project.Id));
         }
 
         var convertedEdit = JsonHelpers.ToRoslynLSP<RoslynTextEdit, TextEdit>(edit).AssumeNotNull();

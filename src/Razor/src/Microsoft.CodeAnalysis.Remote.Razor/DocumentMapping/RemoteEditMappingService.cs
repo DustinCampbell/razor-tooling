@@ -17,28 +17,18 @@ namespace Microsoft.CodeAnalysis.Remote.Razor.DocumentMapping;
 [method: ImportingConstructor]
 internal sealed class RemoteEditMappingService(
     IDocumentMappingService documentMappingService,
-    IFilePathService filePathService,
-    RemoteSnapshotManager snapshotManager) : AbstractEditMappingService(documentMappingService, filePathService)
+    IFilePathService filePathService) : AbstractEditMappingService(documentMappingService, filePathService)
 {
-    private readonly RemoteSnapshotManager _snapshotManager = snapshotManager;
-
     protected override bool TryGetDocumentContext(IRazorDocument contextDocument, Uri razorDocumentUri, VSProjectContext? projectContext, [NotNullWhen(true)] out DocumentContext? documentContext)
     {
-        if (contextDocument is not RemoteRazorDocument remoteDocument)
-        {
-            throw new InvalidOperationException("RemoteEditMappingService can only be used with RemoteRazorDocument instances.");
-        }
-
-        var solution = remoteDocument.TextDocument.Project.Solution;
-        if (!solution.TryGetRazorDocument(razorDocumentUri, out var razorDocument))
+        var solution = contextDocument.ToRemoteRazorDocument().Project.Solution;
+        if (!solution.TryGetDocument(razorDocumentUri, out var document))
         {
             documentContext = null;
             return false;
         }
 
-        var razorDocumentSnapshot = _snapshotManager.GetDocument(razorDocument);
-
-        documentContext = new RemoteDocumentContext(razorDocumentUri, razorDocumentSnapshot);
+        documentContext = new RemoteDocumentContext(razorDocumentUri, document);
         return true;
     }
 }

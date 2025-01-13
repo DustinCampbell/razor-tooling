@@ -6,18 +6,12 @@ using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
 namespace Microsoft.CodeAnalysis.Remote.Razor.ProjectSystem;
 
-internal sealed class RemoteDocumentContext : DocumentContext
+internal sealed class RemoteDocumentContext(Uri uri, RemoteRazorDocument document)
+    // HACK: Need to revisit projectContext here I guess
+    : DocumentContext(uri, document, projectContext: null)
 {
-    public TextDocument TextDocument => Document.TextDocument;
-
-    public new RemoteRazorDocument Document => (RemoteRazorDocument)base.Document;
+    public new RemoteRazorDocument Document => base.Document.ToRemoteRazorDocument();
 
     public ISolutionQueryOperations GetSolutionQueryOperations()
         => Document.Project.Solution;
-
-    public RemoteDocumentContext(Uri uri, RemoteRazorDocument document)
-        // HACK: Need to revisit projectContext here I guess
-        : base(uri, document, projectContext: null)
-    {
-    }
 }

@@ -55,19 +55,19 @@ internal sealed class RemoteAutoInsertService(in ServiceArgs args)
             cancellationToken);
 
     private async ValueTask<Response> TryResolveInsertionAsync(
-        RemoteDocumentContext remoteDocumentContext,
+        RemoteDocumentContext context,
         LinePosition linePosition,
         string character,
         RemoteAutoInsertOptions options,
         CancellationToken cancellationToken)
     {
-        var sourceText = await remoteDocumentContext.GetSourceTextAsync(cancellationToken).ConfigureAwait(false);
+        var sourceText = await context.GetSourceTextAsync(cancellationToken).ConfigureAwait(false);
         if (!sourceText.TryGetAbsoluteIndex(linePosition, out var index))
         {
             return Response.NoFurtherHandling;
         }
 
-        var codeDocument = await remoteDocumentContext.GetCodeDocumentAsync(cancellationToken).ConfigureAwait(false);
+        var codeDocument = await context.GetCodeDocumentAsync(cancellationToken).ConfigureAwait(false);
 
         // Always try our own service first, regardless of language
         // E.g. if ">" is typed for html tag, it's actually our auto-insert provider
@@ -97,7 +97,7 @@ internal sealed class RemoteAutoInsertService(in ServiceArgs args)
             case RazorLanguageKind.CSharp:
                 var mappedPosition = positionInfo.Position.ToLinePosition();
                 return await TryResolveInsertionInCSharpAsync(
-                        remoteDocumentContext,
+                        context,
                         mappedPosition,
                         character,
                         options,
@@ -109,7 +109,7 @@ internal sealed class RemoteAutoInsertService(in ServiceArgs args)
     }
 
     private async ValueTask<Response> TryResolveInsertionInCSharpAsync(
-        RemoteDocumentContext remoteDocumentContext,
+        RemoteDocumentContext context,
         LinePosition mappedPosition,
         string character,
         RemoteAutoInsertOptions options,
@@ -136,7 +136,7 @@ internal sealed class RemoteAutoInsertService(in ServiceArgs args)
             return Response.NoFurtherHandling;
         }
 
-        var generatedDocument = await remoteDocumentContext.Document
+        var generatedDocument = await context.Document
             .GetGeneratedDocumentAsync(cancellationToken)
             .ConfigureAwait(false);
 
@@ -155,17 +155,17 @@ internal sealed class RemoteAutoInsertService(in ServiceArgs args)
 
         var razorFormattingOptions = options.FormattingOptions;
 
-        var csharpSourceText = await remoteDocumentContext.GetCSharpSourceTextAsync(cancellationToken).ConfigureAwait(false);
+        var csharpSourceText = await context.GetCSharpSourceTextAsync(cancellationToken).ConfigureAwait(false);
         var csharpTextChange = new TextChange(csharpSourceText.GetTextSpan(autoInsertResponseItem.TextEdit.Range), autoInsertResponseItem.TextEdit.NewText);
         var mappedChange = autoInsertResponseItem.TextEditFormat == RoslynInsertTextFormat.Snippet
             ? await _razorFormattingService.TryGetCSharpSnippetFormattingEditAsync(
-                remoteDocumentContext,
+                context,
                 [csharpTextChange],
                 razorFormattingOptions,
                 cancellationToken)
             .ConfigureAwait(false)
             : await _razorFormattingService.TryGetSingleCSharpEditAsync(
-                remoteDocumentContext,
+                context,
                 csharpTextChange,
                 razorFormattingOptions,
                 cancellationToken)
@@ -176,7 +176,7 @@ internal sealed class RemoteAutoInsertService(in ServiceArgs args)
             return Response.NoFurtherHandling;
         }
 
-        var sourceText = await remoteDocumentContext.GetSourceTextAsync(cancellationToken).ConfigureAwait(false);
+        var sourceText = await context.GetSourceTextAsync(cancellationToken).ConfigureAwait(false);
         return Response.Results(
             new RemoteAutoInsertTextEdit(
                 sourceText.GetLinePositionSpan(change.Span),
