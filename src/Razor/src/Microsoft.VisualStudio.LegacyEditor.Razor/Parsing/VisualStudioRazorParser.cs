@@ -513,7 +513,7 @@ internal class VisualStudioRazorParser : IVisualStudioRazorParser, IDisposable
             if (_snapshot is not null && snapshot.Version.VersionNumber < _snapshot.Version.VersionNumber)
             {
                 // Changes flowed out of order due to the slight race condition at the beginning of this method. Our current
-                // CodeDocument and Snapshot are newer then the ones that made it into the lock.
+                // CodeDocument and Document are newer then the ones that made it into the lock.
                 return;
             }
 

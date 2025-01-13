@@ -459,20 +459,20 @@ public class TypeAccessibilityCodeActionProviderTest(ITestOutputHelper testOutpu
         var csharpDocumentWithDiagnostic = new RazorCSharpDocument(codeDocument, csharpDocument.GeneratedCode, csharpDocument.Options, [diagnostic]);
         codeDocument.SetCSharpDocument(csharpDocumentWithDiagnostic);
 
-        var documentSnapshotMock = new StrictMock<IDocumentSnapshot>();
-        documentSnapshotMock
+        var documentMock = new StrictMock<IRazorDocument>();
+        documentMock
             .Setup(x => x.GetGeneratedOutputAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(codeDocument);
-        documentSnapshotMock
+        documentMock
             .Setup(x => x.GetTextAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(codeDocument.Source.Text);
-        documentSnapshotMock
+        documentMock
             .Setup(x => x.Project.GetTagHelpersAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(tagHelpers);
 
         return new RazorCodeActionContext(
             request,
-            documentSnapshotMock.Object,
+            documentMock.Object,
             codeDocument,
             DelegatedDocumentUri: null,
             StartAbsoluteIndex: absoluteIndex,

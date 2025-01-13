@@ -63,7 +63,7 @@ internal sealed class RemoteFindAllReferencesService(in ServiceArgs args) : Razo
         }
 
         // Finally, call into C#.
-        var generatedDocument = await context.Snapshot
+        var generatedDocument = await context.Document
             .GetGeneratedDocumentAsync(cancellationToken)
             .ConfigureAwait(false);
 
@@ -94,7 +94,7 @@ internal sealed class RemoteFindAllReferencesService(in ServiceArgs args) : Razo
                 continue;
             }
 
-            var (mappedUri, mappedRange) = await DocumentMappingService.MapToHostDocumentUriAndRangeAsync(context.Snapshot, location.Uri, location.Range.ToLinePositionSpan(), cancellationToken).ConfigureAwait(false);
+            var (mappedUri, mappedRange) = await DocumentMappingService.MapToHostDocumentUriAndRangeAsync(context.Document, location.Uri, location.Range.ToLinePositionSpan(), cancellationToken).ConfigureAwait(false);
 
             if (referenceItem is not null)
             {

@@ -66,7 +66,7 @@ internal sealed class RemoteGoToImplementationService(in ServiceArgs args) : Raz
         }
 
         // Finally, call into C#.
-        var generatedDocument = await context.Snapshot
+        var generatedDocument = await context.Document
             .GetGeneratedDocumentAsync(cancellationToken)
             .ConfigureAwait(false);
 
@@ -92,7 +92,7 @@ internal sealed class RemoteGoToImplementationService(in ServiceArgs args) : Raz
             var (uri, range) = location;
 
             var (mappedDocumentUri, mappedRange) = await DocumentMappingService
-                .MapToHostDocumentUriAndRangeAsync(context.Snapshot, uri, range.ToLinePositionSpan(), cancellationToken)
+                .MapToHostDocumentUriAndRangeAsync(context.Document, uri, range.ToLinePositionSpan(), cancellationToken)
                 .ConfigureAwait(false);
 
             var mappedLocation = RoslynLspFactory.CreateLocation(mappedDocumentUri, mappedRange);

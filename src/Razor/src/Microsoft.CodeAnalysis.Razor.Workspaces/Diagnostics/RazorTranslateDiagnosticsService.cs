@@ -55,18 +55,18 @@ internal class RazorTranslateDiagnosticsService(IDocumentMappingService document
     /// <param name="diagnostics">
     ///  An array of <see cref="Diagnostic"/> objects to translate.
     /// </param>
-    /// <param name="documentSnapshot">
-    ///  The <see cref="IDocumentSnapshot"/> for the code document associated with the diagnostics.
+    /// <param name="document">
+    ///  The <see cref="IRazorDocument"/> for the code document associated with the diagnostics.
     /// </param>
     /// <param name="cancellationToken">A token that can be checked to cancel work.</param>
     /// <returns>An array of translated diagnostics</returns>
     internal async Task<LspDiagnostic[]> TranslateAsync(
         RazorLanguageKind diagnosticKind,
         LspDiagnostic[] diagnostics,
-        IDocumentSnapshot documentSnapshot,
+        IRazorDocument document,
         CancellationToken cancellationToken)
     {
-        var codeDocument = await documentSnapshot.GetGeneratedOutputAsync(cancellationToken).ConfigureAwait(false);
+        var codeDocument = await document.GetGeneratedOutputAsync(cancellationToken).ConfigureAwait(false);
         if (codeDocument.IsUnsupported() != false)
         {
             _logger.LogInformation($"Unsupported code document.");
@@ -87,7 +87,7 @@ internal class RazorTranslateDiagnosticsService(IDocumentMappingService document
         var mappedDiagnostics = MapDiagnostics(
             diagnosticKind,
             filteredDiagnostics,
-            documentSnapshot,
+            document,
             codeDocument);
 
         return mappedDiagnostics;
@@ -122,10 +122,10 @@ internal class RazorTranslateDiagnosticsService(IDocumentMappingService document
     private LspDiagnostic[] MapDiagnostics(
         RazorLanguageKind languageKind,
         LspDiagnostic[] diagnostics,
-        IDocumentSnapshot documentSnapshot,
+        IRazorDocument document,
         RazorCodeDocument codeDocument)
     {
-        var projects = RazorDiagnosticConverter.GetProjectInformation(documentSnapshot);
+        var projects = RazorDiagnosticConverter.GetProjectInformation(document);
         using var mappedDiagnostics = new PooledArrayBuilder<LspDiagnostic>();
 
         foreach (var diagnostic in diagnostics)

@@ -17,9 +17,9 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.VisualStudio.Razor.DynamicFiles;
 
-internal class RazorSpanMappingService(IDocumentSnapshot document) : IRazorSpanMappingService
+internal class RazorSpanMappingService(IRazorDocument document) : IRazorSpanMappingService
 {
-    private readonly IDocumentSnapshot _document = document;
+    private readonly IRazorDocument _document = document;
 
     public async Task<ImmutableArray<RazorMappedSpanResult>> MapSpansAsync(
         Document document,

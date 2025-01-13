@@ -55,7 +55,7 @@ internal sealed class FoldingRangeEndpoint(
 
         var requestParams = new RazorFoldingRangeRequestParam
         {
-            HostDocumentVersion = documentContext.Snapshot.Version,
+            HostDocumentVersion = documentContext.Document.Version,
             TextDocument = @params.TextDocument,
         };
 

@@ -41,7 +41,7 @@ internal sealed class RemoteDebugInfoService(in ServiceArgs args) : RazorDocumen
             return null;
         }
 
-        var generatedDocument = await context.Snapshot.GetGeneratedDocumentAsync(cancellationToken).ConfigureAwait(false);
+        var generatedDocument = await context.Document.GetGeneratedDocumentAsync(cancellationToken).ConfigureAwait(false);
 
         var result = await ExternalAccess.Razor.Cohost.Handlers.ValidateBreakableRange.GetBreakableRangeAsync(generatedDocument, mappedSpan, cancellationToken).ConfigureAwait(false);
         if (result is { } csharpSpan &&
@@ -69,7 +69,7 @@ internal sealed class RemoteDebugInfoService(in ServiceArgs args) : RazorDocumen
         }
 
         // Now ask Roslyn to adjust the breakpoint to a valid location in the code
-        var syntaxTree = await context.Snapshot.GetCSharpSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+        var syntaxTree = await context.Document.GetCSharpSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
         if (!RazorBreakpointSpans.TryGetBreakpointSpan(syntaxTree, projectedIndex, cancellationToken, out var csharpBreakpointSpan))
         {
             return null;
@@ -105,7 +105,7 @@ internal sealed class RemoteDebugInfoService(in ServiceArgs args) : RazorDocumen
         }
 
         // Now ask Roslyn to adjust the breakpoint to a valid location in the code
-        var syntaxTree = await context.Snapshot.GetCSharpSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+        var syntaxTree = await context.Document.GetCSharpSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
         var result = RazorCSharpProximityExpressionResolverService.GetProximityExpressions(syntaxTree, projectedIndex, cancellationToken);
 
         return result?.ToArray();

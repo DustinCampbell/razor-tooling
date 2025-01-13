@@ -183,14 +183,14 @@ public class OpenDocumentGeneratorTest(ITestOutputHelper testOutput) : LanguageS
 
     private class TestDocumentProcessedListener : IDocumentProcessedListener
     {
-        private TaskCompletionSource<IDocumentSnapshot> _tcs;
+        private TaskCompletionSource<IRazorDocument> _tcs;
 
         public TestDocumentProcessedListener()
         {
-            _tcs = new TaskCompletionSource<IDocumentSnapshot>();
+            _tcs = new TaskCompletionSource<IRazorDocument>();
         }
 
-        public Task<IDocumentSnapshot> GetProcessedDocumentAsync(TimeSpan cancelAfter)
+        public Task<IRazorDocument> GetProcessedDocumentAsync(TimeSpan cancelAfter)
         {
             var cts = new CancellationTokenSource(cancelAfter);
             var registration = cts.Token.Register(() => _tcs.SetCanceled());
@@ -212,7 +212,7 @@ public class OpenDocumentGeneratorTest(ITestOutputHelper testOutput) : LanguageS
 
         internal void Reset()
         {
-            _tcs = new TaskCompletionSource<IDocumentSnapshot>();
+            _tcs = new TaskCompletionSource<IRazorDocument>();
         }
     }
 }

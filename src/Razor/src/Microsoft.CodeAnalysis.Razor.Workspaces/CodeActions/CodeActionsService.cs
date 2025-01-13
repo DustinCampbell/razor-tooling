@@ -38,9 +38,9 @@ internal class CodeActionsService(
     private readonly IEnumerable<IHtmlCodeActionProvider> _htmlCodeActionProviders = htmlCodeActionProviders;
     private readonly LanguageServerFeatureOptions _languageServerFeatureOptions = languageServerFeatureOptions;
 
-    public async Task<SumType<Command, CodeAction>[]?> GetCodeActionsAsync(VSCodeActionParams request, IDocumentSnapshot documentSnapshot, RazorVSInternalCodeAction[] delegatedCodeActions, Uri? delegatedDocumentUri, bool supportsCodeActionResolve, CancellationToken cancellationToken)
+    public async Task<SumType<Command, CodeAction>[]?> GetCodeActionsAsync(VSCodeActionParams request, IRazorDocument document, RazorVSInternalCodeAction[] delegatedCodeActions, Uri? delegatedDocumentUri, bool supportsCodeActionResolve, CancellationToken cancellationToken)
     {
-        var razorCodeActionContext = await GenerateRazorCodeActionContextAsync(request, documentSnapshot, delegatedDocumentUri, supportsCodeActionResolve, cancellationToken).ConfigureAwait(false);
+        var razorCodeActionContext = await GenerateRazorCodeActionContextAsync(request, document, delegatedDocumentUri, supportsCodeActionResolve, cancellationToken).ConfigureAwait(false);
         if (razorCodeActionContext is null)
         {
             return null;
@@ -96,12 +96,12 @@ internal class CodeActionsService(
 
     private async Task<RazorCodeActionContext?> GenerateRazorCodeActionContextAsync(
         VSCodeActionParams request,
-        IDocumentSnapshot documentSnapshot,
+        IRazorDocument document,
         Uri? delegatedDocumentUri,
         bool supportsCodeActionResolve,
         CancellationToken cancellationToken)
     {
-        var codeDocument = await documentSnapshot.GetGeneratedOutputAsync(cancellationToken).ConfigureAwait(false);
+        var codeDocument = await document.GetGeneratedOutputAsync(cancellationToken).ConfigureAwait(false);
         if (codeDocument.IsUnsupported())
         {
             return null;
@@ -122,7 +122,7 @@ internal class CodeActionsService(
         var languageKind = codeDocument.GetLanguageKind(startLocation, rightAssociative: false);
         var context = new RazorCodeActionContext(
             request,
-            documentSnapshot,
+            document,
             codeDocument,
             delegatedDocumentUri,
             startLocation,
@@ -135,10 +135,10 @@ internal class CodeActionsService(
         return context;
     }
 
-    public async Task<VSCodeActionParams?> GetCSharpCodeActionsRequestAsync(IDocumentSnapshot documentSnapshot, VSCodeActionParams request, CancellationToken cancellationToken)
+    public async Task<VSCodeActionParams?> GetCSharpCodeActionsRequestAsync(IRazorDocument document, VSCodeActionParams request, CancellationToken cancellationToken)
     {
         // For C# we have to map the ranges to the generated document
-        var codeDocument = await documentSnapshot.GetGeneratedOutputAsync(cancellationToken).ConfigureAwait(false);
+        var codeDocument = await document.GetGeneratedOutputAsync(cancellationToken).ConfigureAwait(false);
         var csharpDocument = codeDocument.GetCSharpDocument();
         if (!_documentMappingService.TryMapToGeneratedDocumentRange(csharpDocument, request.Range, out var projectedRange))
         {

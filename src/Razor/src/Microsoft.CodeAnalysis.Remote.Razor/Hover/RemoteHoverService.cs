@@ -64,7 +64,7 @@ internal sealed class RemoteHoverService(in ServiceArgs args) : RazorDocumentSer
 
         if (positionInfo.LanguageKind == RazorLanguageKind.CSharp)
         {
-            var generatedDocument = await context.Snapshot
+            var generatedDocument = await context.Document
                 .GetGeneratedDocumentAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -107,7 +107,7 @@ internal sealed class RemoteHoverService(in ServiceArgs args) : RazorDocumentSer
         // All of this will change when solution snapshots are available in the core Razor project model.
 
         // TODO: Remove this when solution snapshots are available in the core Razor project model.
-        var componentAvailabilityService = new ComponentAvailabilityService(context.Snapshot.ProjectSnapshot.SolutionSnapshot);
+        var componentAvailabilityService = new ComponentAvailabilityService(context.Document.ProjectSnapshot.SolutionSnapshot);
 
         var razorHover = await HoverFactory
             .GetHoverAsync(codeDocument, hostDocumentIndex, options, componentAvailabilityService, cancellationToken)

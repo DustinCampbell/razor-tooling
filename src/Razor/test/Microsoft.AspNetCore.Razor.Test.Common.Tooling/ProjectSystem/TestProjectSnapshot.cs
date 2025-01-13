@@ -52,7 +52,7 @@ internal sealed class TestProjectSnapshot : IProjectSnapshot
     public bool ContainsDocument(string filePath)
         => RealProject.ContainsDocument(filePath);
 
-    public bool TryGetDocument(string filePath, [NotNullWhen(true)] out IDocumentSnapshot? document)
+    public bool TryGetDocument(string filePath, [NotNullWhen(true)] out IRazorDocument? document)
     {
         if (RealProject.TryGetDocument(filePath, out var result))
         {

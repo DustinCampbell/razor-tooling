@@ -15,11 +15,11 @@ internal interface ICodeActionsService
 {
     Task<SumType<Command, CodeAction>[]?> GetCodeActionsAsync(
         VSCodeActionParams request,
-        IDocumentSnapshot documentSnapshot,
+        IRazorDocument document,
         RazorVSInternalCodeAction[] delegatedCodeActions,
         Uri? delegatedDocumentUri,
         bool supportsCodeActionResolve,
         CancellationToken cancellationToken);
 
-    Task<VSCodeActionParams?> GetCSharpCodeActionsRequestAsync(IDocumentSnapshot documentSnapshot, VSCodeActionParams request, CancellationToken cancellationToken);
+    Task<VSCodeActionParams?> GetCSharpCodeActionsRequestAsync(IRazorDocument document, VSCodeActionParams request, CancellationToken cancellationToken);
 }

@@ -10,9 +10,9 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
-internal class GeneratedDocumentTextLoader(IDocumentSnapshot document, string filePath) : TextLoader
+internal class GeneratedDocumentTextLoader(IRazorDocument document, string filePath) : TextLoader
 {
-    private readonly IDocumentSnapshot _document = document;
+    private readonly IRazorDocument _document = document;
     private readonly string _filePath = filePath;
     private readonly VersionStamp _version = VersionStamp.Create();
 

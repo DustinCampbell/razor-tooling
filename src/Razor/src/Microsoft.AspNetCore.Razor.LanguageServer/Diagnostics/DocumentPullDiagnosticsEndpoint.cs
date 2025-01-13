@@ -79,9 +79,9 @@ internal class DocumentPullDiagnosticsEndpoint : IRazorRequestHandler<VSInternal
             return null;
         }
 
-        var documentSnapshot = documentContext.Snapshot;
+        var document = documentContext.Document;
 
-        var razorDiagnostics = await GetRazorDiagnosticsAsync(documentSnapshot, cancellationToken).ConfigureAwait(false);
+        var razorDiagnostics = await GetRazorDiagnosticsAsync(document, cancellationToken).ConfigureAwait(false);
 
         await ReportRZ10012TelemetryAsync(documentContext, razorDiagnostics, cancellationToken).ConfigureAwait(false);
 
@@ -108,7 +108,7 @@ internal class DocumentPullDiagnosticsEndpoint : IRazorRequestHandler<VSInternal
                 if (report.Diagnostics is not null)
                 {
                     var mappedDiagnostics = await _translateDiagnosticsService
-                        .TranslateAsync(RazorLanguageKind.CSharp, report.Diagnostics, documentSnapshot, cancellationToken)
+                        .TranslateAsync(RazorLanguageKind.CSharp, report.Diagnostics, document, cancellationToken)
                         .ConfigureAwait(false);
                     report.Diagnostics = mappedDiagnostics;
                 }
@@ -124,7 +124,7 @@ internal class DocumentPullDiagnosticsEndpoint : IRazorRequestHandler<VSInternal
                 if (report.Diagnostics is not null)
                 {
                     var mappedDiagnostics = await _translateDiagnosticsService
-                        .TranslateAsync(RazorLanguageKind.Html, report.Diagnostics, documentSnapshot, cancellationToken)
+                        .TranslateAsync(RazorLanguageKind.Html, report.Diagnostics, document, cancellationToken)
                         .ConfigureAwait(false);
                     report.Diagnostics = mappedDiagnostics;
                 }
@@ -136,9 +136,9 @@ internal class DocumentPullDiagnosticsEndpoint : IRazorRequestHandler<VSInternal
         return allDiagnostics.ToArray();
     }
 
-    private static async Task<VSInternalDiagnosticReport[]?> GetRazorDiagnosticsAsync(IDocumentSnapshot documentSnapshot, CancellationToken cancellationToken)
+    private static async Task<VSInternalDiagnosticReport[]?> GetRazorDiagnosticsAsync(IRazorDocument document, CancellationToken cancellationToken)
     {
-        var codeDocument = await documentSnapshot.GetGeneratedOutputAsync(cancellationToken).ConfigureAwait(false);
+        var codeDocument = await document.GetGeneratedOutputAsync(cancellationToken).ConfigureAwait(false);
         var sourceText = codeDocument.Source.Text;
         var csharpDocument = codeDocument.GetCSharpDocument();
         var diagnostics = csharpDocument.Diagnostics;
@@ -148,7 +148,7 @@ internal class DocumentPullDiagnosticsEndpoint : IRazorRequestHandler<VSInternal
             return null;
         }
 
-        var convertedDiagnostics = RazorDiagnosticConverter.Convert(diagnostics, sourceText, documentSnapshot);
+        var convertedDiagnostics = RazorDiagnosticConverter.Convert(diagnostics, sourceText, document);
 
         return
         [

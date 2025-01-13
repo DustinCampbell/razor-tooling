@@ -4,13 +4,14 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor;
+using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer;
 
 internal partial class OpenDocumentGenerator
 {
-    private sealed class Comparer : IEqualityComparer<IDocumentSnapshot>
+    private sealed class Comparer : IEqualityComparer<RazorDocument>
     {
         public static readonly Comparer Instance = new();
 
@@ -18,7 +19,7 @@ internal partial class OpenDocumentGenerator
         {
         }
 
-        public bool Equals(IDocumentSnapshot? x, IDocumentSnapshot? y)
+        public bool Equals(RazorDocument? x, RazorDocument? y)
         {
             if (x is null)
             {
@@ -33,7 +34,7 @@ internal partial class OpenDocumentGenerator
                 FilePathComparer.Instance.Equals(x.FilePath, y.FilePath);
         }
 
-        public int GetHashCode(IDocumentSnapshot obj)
+        public int GetHashCode(RazorDocument obj)
         {
             var hash = HashCodeCombiner.Start();
             hash.Add(obj.Project.Key.Id, FilePathComparer.Instance);

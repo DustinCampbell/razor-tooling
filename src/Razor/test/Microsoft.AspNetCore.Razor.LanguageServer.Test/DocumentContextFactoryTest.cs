@@ -68,7 +68,7 @@ public class DocumentContextFactoryTest : LanguageServerTestBase
             updater.AddDocument(MiscFilesProject.Key, hostDocument, EmptyTextLoader.Instance);
         });
 
-        var documentSnapshot = _projectManager
+        var document = _projectManager
             .GetMiscellaneousProject()
             .GetRequiredDocument(filePath);
 
@@ -79,7 +79,7 @@ public class DocumentContextFactoryTest : LanguageServerTestBase
 
         // Assert
         Assert.Equal(uri, documentContext.Uri);
-        Assert.Same(documentSnapshot, documentContext.Snapshot);
+        Assert.Same(document, documentContext.Document);
     }
 
     [Fact]
@@ -123,7 +123,7 @@ public class DocumentContextFactoryTest : LanguageServerTestBase
             updater.AddDocument(MiscFilesProject.Key, hostDocument, EmptyTextLoader.Instance);
         });
 
-        var documentSnapshot = _projectManager
+        var document = _projectManager
             .GetMiscellaneousProject()
             .GetRequiredDocument(filePath);
 
@@ -133,8 +133,8 @@ public class DocumentContextFactoryTest : LanguageServerTestBase
         Assert.True(factory.TryCreate(uri, out var documentContext));
 
         // Assert
-        Assert.Equal(1, documentContext.Snapshot.Version);
+        Assert.Equal(1, documentContext.Document.Version);
         Assert.Equal(uri, documentContext.Uri);
-        Assert.Same(documentSnapshot, documentContext.Snapshot);
+        Assert.Same(document, documentContext.Document);
     }
 }

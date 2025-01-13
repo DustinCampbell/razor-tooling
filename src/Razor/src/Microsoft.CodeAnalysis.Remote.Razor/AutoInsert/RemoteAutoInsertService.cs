@@ -136,7 +136,7 @@ internal sealed class RemoteAutoInsertService(in ServiceArgs args)
             return Response.NoFurtherHandling;
         }
 
-        var generatedDocument = await remoteDocumentContext.Snapshot
+        var generatedDocument = await remoteDocumentContext.Document
             .GetGeneratedDocumentAsync(cancellationToken)
             .ConfigureAwait(false);
 

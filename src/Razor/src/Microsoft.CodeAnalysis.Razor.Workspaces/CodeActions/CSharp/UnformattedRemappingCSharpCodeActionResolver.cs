@@ -56,7 +56,7 @@ internal class UnformattedRemappingCSharpCodeActionResolver(IDocumentMappingServ
             return codeAction;
         }
 
-        var codeDocument = await documentContext.Snapshot.GetGeneratedOutputAsync(cancellationToken).ConfigureAwait(false);
+        var codeDocument = await documentContext.Document.GetGeneratedOutputAsync(cancellationToken).ConfigureAwait(false);
         if (codeDocument.IsUnsupported())
         {
             return codeAction;

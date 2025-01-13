@@ -28,15 +28,15 @@ internal static partial class RazorEditHelper
     /// </remarks>
     internal static async Task<ImmutableArray<RazorTextChange>> MapCSharpEditsAsync(
         ImmutableArray<RazorTextChange> textChanges,
-        IDocumentSnapshot snapshot,
+        IRazorDocument document,
         IDocumentMappingService documentMappingService,
         ITelemetryReporter telemetryReporter,
         CancellationToken cancellationToken)
     {
-        var codeDocument = await snapshot.GetGeneratedOutputAsync(cancellationToken).ConfigureAwait(false);
+        var codeDocument = await document.GetGeneratedOutputAsync(cancellationToken).ConfigureAwait(false);
         using var textChangeBuilder = new TextChangeBuilder(documentMappingService);
 
-        var originalSyntaxTree = await snapshot.GetCSharpSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+        var originalSyntaxTree = await document.GetCSharpSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
         var csharpSourceText = await originalSyntaxTree.GetTextAsync(cancellationToken).ConfigureAwait(false);
 
         var newText = csharpSourceText.WithChanges(textChanges.Select(c => c.ToTextChange()));

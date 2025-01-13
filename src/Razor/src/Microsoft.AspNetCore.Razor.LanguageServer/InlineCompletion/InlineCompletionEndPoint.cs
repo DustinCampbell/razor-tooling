@@ -111,7 +111,7 @@ internal sealed class InlineCompletionEndpoint(
 
             var options = RazorFormattingOptions.From(request.Options, _optionsMonitor.CurrentValue.CodeBlockBraceOnNextLine);
             var formattingContext = FormattingContext.Create(
-                documentContext.Snapshot,
+                documentContext.Document,
                 codeDocument,
                 options);
             if (!SnippetFormatter.TryGetSnippetWithAdjustedIndentation(formattingContext, item.Text, hostDocumentIndex, out var newSnippetText))

@@ -16,10 +16,10 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.VisualStudio.Razor.DynamicFiles;
 
 internal class RazorDocumentExcerptService(
-    IDocumentSnapshot document,
+    IRazorDocument document,
     IRazorSpanMappingService mappingService) : DocumentExcerptService
 {
-    private readonly IDocumentSnapshot _document = document;
+    private readonly IRazorDocument _document = document;
     private readonly IRazorSpanMappingService _mappingService = mappingService;
 
     internal override async Task<ExcerptResultInternal?> TryGetExcerptInternalAsync(

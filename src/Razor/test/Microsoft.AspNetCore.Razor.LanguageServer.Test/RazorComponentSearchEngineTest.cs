@@ -138,11 +138,11 @@ public class RazorComponentSearchEngineTest(ITestOutputHelper testOutput) : Lang
         var searchEngine = new RazorComponentSearchEngine(LoggerFactory);
 
         // Act
-        var documentSnapshot = await searchEngine.TryLocateComponentAsync(tagHelperDescriptor, _projectManager.GetQueryOperations(), DisposalToken);
+        var document = await searchEngine.TryLocateComponentAsync(tagHelperDescriptor, _projectManager.GetQueryOperations(), DisposalToken);
 
         // Assert
-        Assert.NotNull(documentSnapshot);
-        PathUtilities.AssertEquivalent(s_componentFilePath2, documentSnapshot.FilePath);
+        Assert.NotNull(document);
+        PathUtilities.AssertEquivalent(s_componentFilePath2, document.FilePath);
     }
 
     [Fact]
@@ -153,10 +153,10 @@ public class RazorComponentSearchEngineTest(ITestOutputHelper testOutput) : Lang
         var searchEngine = new RazorComponentSearchEngine(LoggerFactory);
 
         // Act
-        var documentSnapshot = await searchEngine.TryLocateComponentAsync(tagHelperDescriptor, _projectManager.GetQueryOperations(), DisposalToken);
+        var document = await searchEngine.TryLocateComponentAsync(tagHelperDescriptor, _projectManager.GetQueryOperations(), DisposalToken);
 
         // Assert
-        Assert.Null(documentSnapshot);
+        Assert.Null(document);
     }
 
     [Fact]
@@ -167,10 +167,10 @@ public class RazorComponentSearchEngineTest(ITestOutputHelper testOutput) : Lang
         var searchEngine = new RazorComponentSearchEngine(LoggerFactory);
 
         // Act
-        var documentSnapshot = await searchEngine.TryLocateComponentAsync(tagHelperDescriptor, _projectManager.GetQueryOperations(), DisposalToken);
+        var document = await searchEngine.TryLocateComponentAsync(tagHelperDescriptor, _projectManager.GetQueryOperations(), DisposalToken);
 
         // Assert
-        Assert.Null(documentSnapshot);
+        Assert.Null(document);
     }
 
     [Fact]
@@ -181,10 +181,10 @@ public class RazorComponentSearchEngineTest(ITestOutputHelper testOutput) : Lang
         var searchEngine = new RazorComponentSearchEngine(LoggerFactory);
 
         // Act
-        var documentSnapshot = await searchEngine.TryLocateComponentAsync(tagHelperDescriptor, _projectManager.GetQueryOperations(), DisposalToken);
+        var document = await searchEngine.TryLocateComponentAsync(tagHelperDescriptor, _projectManager.GetQueryOperations(), DisposalToken);
 
         // Assert
-        Assert.Null(documentSnapshot);
+        Assert.Null(document);
     }
 
     [Fact]
@@ -195,11 +195,11 @@ public class RazorComponentSearchEngineTest(ITestOutputHelper testOutput) : Lang
         var searchEngine = new RazorComponentSearchEngine(LoggerFactory);
 
         // Act
-        var documentSnapshot = await searchEngine.TryLocateComponentAsync(tagHelperDescriptor, _projectManager.GetQueryOperations(), DisposalToken);
+        var document = await searchEngine.TryLocateComponentAsync(tagHelperDescriptor, _projectManager.GetQueryOperations(), DisposalToken);
 
         // Assert
-        Assert.NotNull(documentSnapshot);
-        PathUtilities.AssertEquivalent(s_componentFilePath2, documentSnapshot.FilePath);
+        Assert.NotNull(document);
+        PathUtilities.AssertEquivalent(s_componentFilePath2, document.FilePath);
     }
 
     internal static TagHelperDescriptor CreateRazorComponentTagHelperDescriptor(string assemblyName, string namespaceName, string tagName, string? typeName = null)

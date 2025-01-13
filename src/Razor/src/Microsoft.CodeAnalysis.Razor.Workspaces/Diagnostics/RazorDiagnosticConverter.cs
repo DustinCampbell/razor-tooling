@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis.Razor.Diagnostics;
 
 internal static class RazorDiagnosticConverter
 {
-    public static VSDiagnostic Convert(RazorDiagnostic razorDiagnostic, SourceText sourceText, IDocumentSnapshot? documentSnapshot)
+    public static VSDiagnostic Convert(RazorDiagnostic razorDiagnostic, SourceText sourceText, IRazorDocument? document)
     {
         var diagnostic = new VSDiagnostic()
         {
@@ -27,15 +27,15 @@ internal static class RazorDiagnosticConverter
             // This is annotated as not null, but we have tests that validate the behaviour when
             // we pass in null here
             Range = ConvertSpanToRange(razorDiagnostic.Span, sourceText)!,
-            Projects = GetProjectInformation(documentSnapshot)
+            Projects = GetProjectInformation(document)
         };
 
         return diagnostic;
     }
 
-    public static VSDiagnosticProjectInformation[] GetProjectInformation(IDocumentSnapshot? documentSnapshot)
+    public static VSDiagnosticProjectInformation[] GetProjectInformation(IRazorDocument? document)
     {
-        if (documentSnapshot is null)
+        if (document is null)
         {
             return [];
         }
@@ -43,19 +43,19 @@ internal static class RazorDiagnosticConverter
         return [new VSDiagnosticProjectInformation()
                 {
                     Context = null,
-                    ProjectIdentifier = documentSnapshot.Project.Key.Id,
-                    ProjectName = documentSnapshot.Project.DisplayName
+                    ProjectIdentifier = document.Project.Key.Id,
+                    ProjectName = document.Project.DisplayName
                 }];
     }
 
-    internal static LspDiagnostic[] Convert(ImmutableArray<RazorDiagnostic> diagnostics, SourceText sourceText, IDocumentSnapshot documentSnapshot)
+    internal static LspDiagnostic[] Convert(ImmutableArray<RazorDiagnostic> diagnostics, SourceText sourceText, IRazorDocument document)
     {
         var convertedDiagnostics = new LspDiagnostic[diagnostics.Length];
 
         var i = 0;
         foreach (var diagnostic in diagnostics)
         {
-            convertedDiagnostics[i++] = Convert(diagnostic, sourceText, documentSnapshot);
+            convertedDiagnostics[i++] = Convert(diagnostic, sourceText, document);
         }
 
         return convertedDiagnostics;

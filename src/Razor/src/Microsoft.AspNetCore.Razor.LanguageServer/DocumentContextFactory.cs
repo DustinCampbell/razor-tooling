@@ -27,14 +27,14 @@ internal sealed class DocumentContextFactory(
     {
         var filePath = documentUri.GetAbsoluteOrUNCPath();
 
-        if (!TryResolveDocument(filePath, projectContext, out var documentSnapshot))
+        if (!TryResolveDocument(filePath, projectContext, out var document))
         {
             // Stale request or misbehaving client, see above comment.
             context = null;
             return false;
         }
 
-        context = new DocumentContext(documentUri, documentSnapshot, projectContext);
+        context = new DocumentContext(documentUri, document, projectContext);
         return true;
     }
 

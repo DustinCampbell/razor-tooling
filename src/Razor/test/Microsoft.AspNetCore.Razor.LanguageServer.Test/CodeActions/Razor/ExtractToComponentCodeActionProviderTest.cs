@@ -631,16 +631,16 @@ public class ExtractToComponentCodeActionProviderTest(ITestOutputHelper testOutp
         }));
         codeDocument.SetSyntaxTree(syntaxTree);
 
-        var documentSnapshot = new StrictMock<IDocumentSnapshot>();
-        documentSnapshot
-            .Setup(document => document.GetTextAsync(It.IsAny<CancellationToken>()))
+        var documentMock = new StrictMock<IRazorDocument>();
+        documentMock
+            .Setup(d => d.GetTextAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(codeDocument.Source.Text);
 
         var sourceText = SourceText.From(text);
 
         var context = new RazorCodeActionContext(
             request,
-            documentSnapshot.Object,
+            documentMock.Object,
             codeDocument,
             DelegatedDocumentUri: null,
             selectionSpan.Start,

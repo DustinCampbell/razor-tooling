@@ -389,17 +389,17 @@ public class ExtractToCodeBehindCodeActionProviderTest(ITestOutputHelper testOut
         }));
         codeDocument.SetSyntaxTree(syntaxTree);
 
-        var documentSnapshotMock = new StrictMock<IDocumentSnapshot>();
-        documentSnapshotMock
+        var documentMock = new StrictMock<IRazorDocument>();
+        documentMock
             .Setup(x => x.GetGeneratedOutputAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(codeDocument);
-        documentSnapshotMock
+        documentMock
             .Setup(x => x.GetTextAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(codeDocument.Source.Text);
 
         return new RazorCodeActionContext(
             request,
-            documentSnapshotMock.Object,
+            documentMock.Object,
             codeDocument,
             DelegatedDocumentUri: null,
             StartAbsoluteIndex: absoluteIndex,

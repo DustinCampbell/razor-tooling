@@ -91,7 +91,7 @@ internal abstract class AbstractTextDocumentPresentationEndpointBase<TParams>(
 
         var requestParams = CreateRazorRequestParameters(request);
 
-        requestParams.HostDocumentVersion = documentContext.Snapshot.Version;
+        requestParams.HostDocumentVersion = documentContext.Document.Version;
         requestParams.Kind = languageKind;
 
         // For CSharp we need to map the range to the generated document
@@ -226,6 +226,4 @@ internal abstract class AbstractTextDocumentPresentationEndpointBase<TParams>(
 
         return workspaceEdit;
     }
-
-    protected record DocumentSnapshotAndVersion(IDocumentSnapshot Snapshot, int Version);
 }

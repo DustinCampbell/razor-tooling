@@ -45,7 +45,7 @@ internal sealed class RemoteInlineCompletionService(in ServiceArgs args) : Razor
             return null;
         }
 
-        var generatedDocument = await context.Snapshot.GetGeneratedDocumentAsync(cancellationToken).ConfigureAwait(false);
+        var generatedDocument = await context.Document.GetGeneratedDocumentAsync(cancellationToken).ConfigureAwait(false);
         return new InlineCompletionRequestInfo(
             GeneratedDocumentUri: generatedDocument.CreateUri(),
             Position: mappedPosition);
@@ -70,7 +70,7 @@ internal sealed class RemoteInlineCompletionService(in ServiceArgs args) : Razor
 
         var hostDocumentIndex = codeDocument.Source.Text.GetRequiredAbsoluteIndex(razorRange.End);
 
-        var formattingContext = FormattingContext.Create(context.Snapshot, codeDocument, options);
+        var formattingContext = FormattingContext.Create(context.Document, codeDocument, options);
         if (!SnippetFormatter.TryGetSnippetWithAdjustedIndentation(formattingContext, text, hostDocumentIndex, out var newSnippetText))
         {
             return null;

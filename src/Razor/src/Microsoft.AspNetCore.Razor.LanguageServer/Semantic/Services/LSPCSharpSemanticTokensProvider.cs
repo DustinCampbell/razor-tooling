@@ -31,7 +31,7 @@ internal class LSPCSharpSemanticTokensProvider(LanguageServerFeatureOptions lang
             Guid correlationId,
             CancellationToken cancellationToken)
     {
-        var documentVersion = documentContext.Snapshot.Version;
+        var documentVersion = documentContext.Document.Version;
 
         using var _ = ListPool<Range>.GetPooledObject(out var csharpRangeList);
         foreach (var span in csharpSpans)

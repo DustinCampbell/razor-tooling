@@ -13,7 +13,7 @@ internal class RazorFileSystemWatcher : FileSystemWatcher
     // returns with paths of the form   "workspaceDirectory/\\Pages\\Counter.razor"
     // which are normalized to          "workspaceDirectory//Pages/Counter.razor" (Invalid `//`)
     //
-    // This format doesn't match the directoryFilePaths we store as part of the Project Snapshot ->
+    // This format doesn't match the directoryFilePaths we store as part of the Project Document ->
     //                                  "workspaceDirectory/Pages/Counter.razor"
     // https://github.com/dotnet/aspnetcore-tooling/blob/488cf6e/src/Razor/src/Microsoft.AspNetCore.Razor.LanguageServer/ProjectSystem/DefaultRazorProjectService.cs#L328
     // Consequently, files are being discarded into the MISC project and subsequently re-generated

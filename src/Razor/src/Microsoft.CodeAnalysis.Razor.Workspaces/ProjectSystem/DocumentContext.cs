@@ -16,17 +16,17 @@ using RazorSyntaxNode = Microsoft.AspNetCore.Razor.Language.Syntax.SyntaxNode;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
-internal class DocumentContext(Uri uri, IDocumentSnapshot snapshot, VSProjectContext? projectContext)
+internal class DocumentContext(Uri uri, IRazorDocument document, VSProjectContext? projectContext)
 {
     private readonly VSProjectContext? _projectContext = projectContext;
     private RazorCodeDocument? _codeDocument;
     private SourceText? _sourceText;
 
     public Uri Uri { get; } = uri;
-    public IDocumentSnapshot Snapshot { get; } = snapshot;
-    public string FilePath => Snapshot.FilePath;
-    public string FileKind => Snapshot.FileKind;
-    public IProjectSnapshot Project => Snapshot.Project;
+    public IRazorDocument Document { get; } = document;
+    public string FilePath => Document.FilePath;
+    public string FileKind => Document.FileKind;
+    public IProjectSnapshot Project => Document.Project;
 
     public TextDocumentIdentifier GetTextDocumentIdentifier()
         => new VSTextDocumentIdentifier()
@@ -36,7 +36,7 @@ internal class DocumentContext(Uri uri, IDocumentSnapshot snapshot, VSProjectCon
         };
 
     public TextDocumentIdentifierAndVersion GetTextDocumentIdentifierAndVersion()
-       => new(GetTextDocumentIdentifier(), Snapshot.Version);
+       => new(GetTextDocumentIdentifier(), Document.Version);
 
     private bool TryGetCodeDocument([NotNullWhen(true)] out RazorCodeDocument? codeDocument)
     {
@@ -52,7 +52,7 @@ internal class DocumentContext(Uri uri, IDocumentSnapshot snapshot, VSProjectCon
 
         async ValueTask<RazorCodeDocument> GetCodeDocumentCoreAsync(CancellationToken cancellationToken)
         {
-            var codeDocument = await Snapshot
+            var codeDocument = await Document
                 .GetGeneratedOutputAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -71,7 +71,7 @@ internal class DocumentContext(Uri uri, IDocumentSnapshot snapshot, VSProjectCon
 
         async ValueTask<SourceText> GetSourceTextCoreAsync(CancellationToken cancellationToken)
         {
-            var sourceText = await Snapshot.GetTextAsync(cancellationToken).ConfigureAwait(false);
+            var sourceText = await Document.GetTextAsync(cancellationToken).ConfigureAwait(false);
 
             // Interlock to ensure that we only ever return one instance of RazorCodeDocument.
             // In race scenarios, when more than one RazorCodeDocument is produced, we want to

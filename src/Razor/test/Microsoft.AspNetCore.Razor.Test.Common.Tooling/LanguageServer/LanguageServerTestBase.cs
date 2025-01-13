@@ -124,9 +124,9 @@ public abstract class LanguageServerTestBase : ToolingTestBase
         return documentContextFactory;
     }
 
-    private protected static DocumentContext CreateDocumentContext(Uri uri, IDocumentSnapshot snapshot)
+    private protected static DocumentContext CreateDocumentContext(Uri uri, IRazorDocument document)
     {
-        return new DocumentContext(uri, snapshot, projectContext: null);
+        return new DocumentContext(uri, document, projectContext: null);
     }
 
     private protected static RazorLSPOptionsMonitor GetOptionsMonitor(

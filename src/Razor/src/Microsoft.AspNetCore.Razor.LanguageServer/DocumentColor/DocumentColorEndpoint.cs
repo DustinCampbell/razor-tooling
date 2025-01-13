@@ -38,7 +38,7 @@ internal sealed class DocumentColorEndpoint(IClientConnection clientConnection) 
 
         var delegatedRequest = new DelegatedDocumentColorParams()
         {
-            HostDocumentVersion = documentContext.Snapshot.Version,
+            HostDocumentVersion = documentContext.Document.Version,
             TextDocument = request.TextDocument
         };
 

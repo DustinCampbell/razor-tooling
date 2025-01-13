@@ -28,14 +28,14 @@ internal sealed class FormattingContext
     private IReadOnlyDictionary<int, IndentationContext>? _indentations;
 
     private FormattingContext(
-        IDocumentSnapshot originalSnapshot,
+        IRazorDocument originalDocument,
         RazorCodeDocument codeDocument,
         RazorFormattingOptions options,
         bool automaticallyAddUsings,
         int hostDocumentIndex,
         char triggerCharacter)
     {
-        OriginalSnapshot = originalSnapshot;
+        OriginalDocument = originalDocument;
         CodeDocument = codeDocument;
         Options = options;
         AutomaticallyAddUsings = automaticallyAddUsings;
@@ -45,7 +45,7 @@ internal sealed class FormattingContext
 
     public static bool SkipValidateComponents { get; set; }
 
-    public IDocumentSnapshot OriginalSnapshot { get; }
+    public IRazorDocument OriginalDocument { get; }
     public RazorCodeDocument CodeDocument { get; }
     public RazorFormattingOptions Options { get; }
     public bool AutomaticallyAddUsings { get; }
@@ -227,11 +227,11 @@ internal sealed class FormattingContext
 
     public async Task<FormattingContext> WithTextAsync(SourceText changedText, CancellationToken cancellationToken)
     {
-        var changedSnapshot = OriginalSnapshot.WithText(changedText);
+        var changedDocument = OriginalDocument.WithText(changedText);
 
 #if !FORMAT_FUSE
         // Formatting always uses design time document
-        var generator = (IDesignTimeCodeGenerator)changedSnapshot;
+        var generator = (IDesignTimeCodeGenerator)changedDocument;
         var codeDocument = await generator.GenerateDesignTimeOutputAsync(cancellationToken).ConfigureAwait(false);
 #else
         var codeDocument = await changedSnapshot.GetGeneratedOutputAsync(cancellationToken).ConfigureAwait(false);
@@ -240,7 +240,7 @@ internal sealed class FormattingContext
         DEBUG_ValidateComponents(CodeDocument, codeDocument);
 
         var newContext = new FormattingContext(
-            OriginalSnapshot,
+            OriginalDocument,
             codeDocument,
             Options,
             AutomaticallyAddUsings,
@@ -269,7 +269,7 @@ internal sealed class FormattingContext
     }
 
     public static FormattingContext CreateForOnTypeFormatting(
-        IDocumentSnapshot originalSnapshot,
+        IRazorDocument originalDocument,
         RazorCodeDocument codeDocument,
         RazorFormattingOptions options,
         bool automaticallyAddUsings,
@@ -277,7 +277,7 @@ internal sealed class FormattingContext
         char triggerCharacter)
     {
         return new FormattingContext(
-            originalSnapshot,
+            originalDocument,
             codeDocument,
             options,
             automaticallyAddUsings,
@@ -286,12 +286,12 @@ internal sealed class FormattingContext
     }
 
     public static FormattingContext Create(
-        IDocumentSnapshot originalSnapshot,
+        IRazorDocument originalDocument,
         RazorCodeDocument codeDocument,
         RazorFormattingOptions options)
     {
         return new FormattingContext(
-            originalSnapshot,
+            originalDocument,
             codeDocument,
             options,
             automaticallyAddUsings: false,

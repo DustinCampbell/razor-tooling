@@ -15,7 +15,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Remote.Razor.ProjectSystem;
 
-internal sealed class RemoteDocumentSnapshot : IDocumentSnapshot
+internal sealed class RemoteDocumentSnapshot : IRazorDocument
 #if !FORMAT_FUSE
     , IDesignTimeCodeGenerator
 #endif
@@ -123,7 +123,7 @@ internal sealed class RemoteDocumentSnapshot : IDocumentSnapshot
         return generatedDocument.WithText(csharpSourceText);
     }
 
-    public IDocumentSnapshot WithText(SourceText text)
+    public IRazorDocument WithText(SourceText text)
     {
         var id = TextDocument.Id;
         var newDocument = TextDocument.Project.Solution

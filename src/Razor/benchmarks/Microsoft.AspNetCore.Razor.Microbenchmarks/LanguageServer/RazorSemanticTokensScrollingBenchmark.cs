@@ -25,9 +25,7 @@ public class RazorSemanticTokensScrollingBenchmark : RazorLanguageServerBenchmar
 
     private DocumentContext DocumentContext { get; set; }
 
-    private Uri DocumentUri => DocumentContext.Uri;
-
-    private IDocumentSnapshot DocumentSnapshot => DocumentContext.Snapshot;
+    private IRazorDocument Document => DocumentContext.Document;
 
     private Range Range { get; set; }
 
@@ -49,10 +47,10 @@ public class RazorSemanticTokensScrollingBenchmark : RazorLanguageServerBenchmar
         TargetPath = "/Components/Pages/FormattingTest.razor";
 
         var documentUri = new Uri(filePath);
-        var documentSnapshot = await GetDocumentSnapshotAsync(ProjectFilePath, filePath, TargetPath);
-        DocumentContext = new DocumentContext(documentUri, documentSnapshot, projectContext: null);
+        var document = await GetDocumentAsync(ProjectFilePath, filePath, TargetPath);
+        DocumentContext = new DocumentContext(documentUri, document, projectContext: null);
 
-        var text = await DocumentSnapshot.GetTextAsync(CancellationToken.None).ConfigureAwait(false);
+        var text = await Document.GetTextAsync(CancellationToken.None).ConfigureAwait(false);
         Range = VsLspFactory.CreateRange(
             start: (0, 0),
             end: (text.Lines.Count - 1, 0));

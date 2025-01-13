@@ -95,7 +95,7 @@ internal sealed class MapCodeEndpoint(
             var fileKind = FileKinds.GetFileKindFromFilePath(documentContext.FilePath);
             var extension = Path.GetExtension(documentContext.FilePath);
 
-            var snapshot = documentContext.Snapshot;
+            var document = documentContext.Document;
 
             foreach (var content in mapping.Contents)
             {
@@ -105,8 +105,8 @@ internal sealed class MapCodeEndpoint(
                 }
 
                 // We create a new Razor file based on each content in each mapping order to get the syntax tree that we'll later use to map.
-                var newSnapshot = snapshot.WithText(SourceText.From(content));
-                var codeToMap = await newSnapshot.GetGeneratedOutputAsync(cancellationToken).ConfigureAwait(false);
+                var newDocument = document.WithText(SourceText.From(content));
+                var codeToMap = await newDocument.GetGeneratedOutputAsync(cancellationToken).ConfigureAwait(false);
 
                 var mappingSuccess = await TryMapCodeAsync(
                     codeToMap, mapping.FocusLocations, changes, mapCodeCorrelationId, documentContext, cancellationToken).ConfigureAwait(false);
@@ -229,7 +229,7 @@ internal sealed class MapCodeEndpoint(
                     razorNodesToMap.Add(nodeToMap);
                 }
 
-                var sourceText = await documentContext.Snapshot.GetTextAsync(cancellationToken).ConfigureAwait(false);
+                var sourceText = await documentContext.Document.GetTextAsync(cancellationToken).ConfigureAwait(false);
 
                 foreach (var nodeToMap in razorNodesToMap)
                 {

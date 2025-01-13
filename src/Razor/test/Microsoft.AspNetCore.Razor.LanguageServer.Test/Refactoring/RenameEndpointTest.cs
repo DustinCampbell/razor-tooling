@@ -558,7 +558,7 @@ public class RenameEndpointTest(ITestOutputHelper testOutput) : LanguageServerTe
 
         var editMappingServiceMock = new StrictMock<IEditMappingService>();
         editMappingServiceMock
-            .Setup(x => x.RemapWorkspaceEditAsync(It.IsAny<IDocumentSnapshot>(), It.IsAny<WorkspaceEdit>(), It.IsAny<CancellationToken>()))
+            .Setup(x => x.RemapWorkspaceEditAsync(It.IsAny<IRazorDocument>(), It.IsAny<WorkspaceEdit>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(delegatedEdit);
 
         var (endpoint, documentContextFactory) = await CreateEndpointAndDocumentContextFactoryAsync(

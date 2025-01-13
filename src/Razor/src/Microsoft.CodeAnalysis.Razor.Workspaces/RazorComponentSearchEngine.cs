@@ -28,7 +28,7 @@ internal class RazorComponentSearchEngine(ILoggerFactory loggerFactory) : IRazor
     ///  A token that is checked to cancel work.
     /// </param>
     /// <returns>
-    ///  The corresponding <see cref="IDocumentSnapshot"/> if found, <see langword="null"/> otherwise.
+    ///  The corresponding <see cref="IRazorDocument"/> if found, <see langword="null"/> otherwise.
     /// </returns>
     /// <remarks>
     ///  This method makes several assumptions about the nature of components. First,
@@ -40,7 +40,7 @@ internal class RazorComponentSearchEngine(ILoggerFactory loggerFactory) : IRazor
     /// <exception cref="ArgumentNullException">
     ///  Thrown if <paramref name="tagHelper"/> is <see langword="null"/>.
     /// </exception>
-    public async Task<IDocumentSnapshot?> TryLocateComponentAsync(
+    public async Task<IRazorDocument?> TryLocateComponentAsync(
         TagHelperDescriptor tagHelper,
         ISolutionQueryOperations solutionQueryOperations,
         CancellationToken cancellationToken)

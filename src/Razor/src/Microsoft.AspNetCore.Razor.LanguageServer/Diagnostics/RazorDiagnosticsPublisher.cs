@@ -159,7 +159,7 @@ internal partial class RazorDiagnosticsPublisher : IDocumentProcessedListener, I
 
         _logger.LogTrace($"Publishing diagnostics for document '{document.FilePath}': {string.Join(", ", razorDiagnostics.Select(diagnostic => diagnostic.Id))}");
 
-        async Task<Diagnostic[]?> GetCSharpDiagnosticsAsync(IDocumentSnapshot document, CancellationToken token)
+        async Task<Diagnostic[]?> GetCSharpDiagnosticsAsync(IRazorDocument document, CancellationToken token)
         {
             if (_options.DelegateToCSharpOnDiagnosticPublish)
             {
@@ -182,7 +182,7 @@ internal partial class RazorDiagnosticsPublisher : IDocumentProcessedListener, I
                     if (_documentContextFactory.Value.TryCreate(delegatedParams.TextDocument.Uri, projectContext: null, out var documentContext))
                     {
                         return await _translateDiagnosticsService.Value
-                            .TranslateAsync(RazorLanguageKind.CSharp, fullDiagnostics.Items, documentContext.Snapshot, cancellationToken)
+                            .TranslateAsync(RazorLanguageKind.CSharp, fullDiagnostics.Items, documentContext.Document, cancellationToken)
                             .ConfigureAwait(false);
                     }
                 }

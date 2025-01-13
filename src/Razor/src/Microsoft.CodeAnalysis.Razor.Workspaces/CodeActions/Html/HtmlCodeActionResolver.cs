@@ -21,7 +21,7 @@ internal class HtmlCodeActionResolver(IEditMappingService editMappingService) : 
         CodeAction codeAction,
         CancellationToken cancellationToken)
     {
-        await HtmlCodeActionProvider.RemapAndFixHtmlCodeActionEditAsync(_editMappingService, documentContext.Snapshot, codeAction, cancellationToken).ConfigureAwait(false);
+        await HtmlCodeActionProvider.RemapAndFixHtmlCodeActionEditAsync(_editMappingService, documentContext.Document, codeAction, cancellationToken).ConfigureAwait(false);
 
         return codeAction;
     }

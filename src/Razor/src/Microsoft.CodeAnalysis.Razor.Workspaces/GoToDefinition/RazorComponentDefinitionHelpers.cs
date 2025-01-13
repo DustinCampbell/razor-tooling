@@ -130,7 +130,7 @@ internal static class RazorComponentDefinitionHelpers
     }
 
     public static async Task<LspRange?> TryGetPropertyRangeAsync(
-        IDocumentSnapshot documentSnapshot,
+        IRazorDocument document,
         string propertyName,
         IDocumentMappingService documentMappingService,
         ILogger logger,
@@ -148,9 +148,9 @@ internal static class RazorComponentDefinitionHelpers
         //      will error, but allowing them to Go To Def on that property regardless, actually helps
         //      them fix the error.
 
-        var csharpSyntaxTree = await documentSnapshot.GetCSharpSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+        var csharpSyntaxTree = await document.GetCSharpSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
         var root = await csharpSyntaxTree.GetRootAsync(cancellationToken).ConfigureAwait(false);
-        var codeDocument = await documentSnapshot.GetGeneratedOutputAsync(cancellationToken).ConfigureAwait(false);
+        var codeDocument = await document.GetGeneratedOutputAsync(cancellationToken).ConfigureAwait(false);
 
         // Since we know how the compiler generates the C# source we can be a little specific here, and avoid
         // long tree walks. If the compiler ever changes how they generate their code, the tests for this will break

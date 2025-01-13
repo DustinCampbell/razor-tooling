@@ -52,7 +52,7 @@ internal sealed class RazorProject(ProjectState state) : IProjectSnapshot, ILega
             // enough to return the correct answer. This is because _filePathToDocumentMap is
             // a Dictionary<,>, which has O(1) lookup, and State.Documents is an
             // ImmutableDictionary<,>, which has O(log n) lookup. So, checking _filePathToDocumentMap
-            // first is faster if the DocumentSnapshot has already been created.
+            // first is faster if the RazorDocument has already been created.
 
             return _filePathToDocumentMap.ContainsKey(filePath) ||
                    _state.Documents.ContainsKey(filePath);
@@ -77,7 +77,7 @@ internal sealed class RazorProject(ProjectState state) : IProjectSnapshot, ILega
                 return false;
             }
 
-            // If we have DocumentState, go ahead and create a new DocumentSnapshot.
+            // If we have DocumentState, go ahead and create a new RazorDocument.
             snapshot = new RazorDocument(this, state);
             _filePathToDocumentMap.Add(filePath, snapshot);
 
@@ -86,7 +86,7 @@ internal sealed class RazorProject(ProjectState state) : IProjectSnapshot, ILega
         }
     }
 
-    bool IProjectSnapshot.TryGetDocument(string filePath, [NotNullWhen(true)] out IDocumentSnapshot? document)
+    bool IProjectSnapshot.TryGetDocument(string filePath, [NotNullWhen(true)] out IRazorDocument? document)
     {
         if (TryGetDocument(filePath, out var result))
         {

@@ -56,7 +56,7 @@ internal class DocumentFormattingEndpoint(
 
         var options = RazorFormattingOptions.From(request.Options, _optionsMonitor.CurrentValue.CodeBlockBraceOnNextLine);
 
-        var htmlChanges = await _htmlFormatter.GetDocumentFormattingEditsAsync(documentContext.Snapshot, documentContext.Uri, request.Options, cancellationToken).ConfigureAwait(false);
+        var htmlChanges = await _htmlFormatter.GetDocumentFormattingEditsAsync(documentContext.Document, documentContext.Uri, request.Options, cancellationToken).ConfigureAwait(false);
         var changes = await _razorFormattingService.GetDocumentFormattingChangesAsync(documentContext, htmlChanges, span: null, options, cancellationToken).ConfigureAwait(false);
 
         return [.. changes.Select(codeDocument.Source.Text.GetTextEdit)];

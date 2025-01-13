@@ -61,7 +61,7 @@ internal sealed class RemoteInlayHintService(in ServiceArgs args) : RazorDocumen
             return null;
         }
 
-        var generatedDocument = await context.Snapshot
+        var generatedDocument = await context.Document
             .GetGeneratedDocumentAsync(cancellationToken)
             .ConfigureAwait(false);
 
@@ -117,7 +117,7 @@ internal sealed class RemoteInlayHintService(in ServiceArgs args) : RazorDocumen
 
     private async ValueTask<InlayHint> ResolveInlayHintAsync(RemoteDocumentContext context, InlayHint inlayHint, CancellationToken cancellationToken)
     {
-        var generatedDocument = await context.Snapshot
+        var generatedDocument = await context.Document
             .GetGeneratedDocumentAsync(cancellationToken)
             .ConfigureAwait(false);
 

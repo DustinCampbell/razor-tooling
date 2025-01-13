@@ -42,7 +42,7 @@ internal sealed class RoslynCodeActionHelpers : IRoslynCodeActionHelpers
         if (codeBehindUri is null)
         {
             // Edit is for inserting into the generated document
-            document = await context.Snapshot.GetGeneratedDocumentAsync(cancellationToken).ConfigureAwait(false);
+            document = await context.Document.GetGeneratedDocumentAsync(cancellationToken).ConfigureAwait(false);
         }
         else
         {

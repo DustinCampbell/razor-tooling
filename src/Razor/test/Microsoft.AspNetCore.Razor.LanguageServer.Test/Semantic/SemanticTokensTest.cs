@@ -948,28 +948,28 @@ public partial class SemanticTokensTest(ITestOutputHelper testOutput) : TagHelpe
 
         var projectSnapshot = StrictMock.Of<IProjectSnapshot>();
 
-        var documentSnapshotMock = new StrictMock<IDocumentSnapshot>();
-        documentSnapshotMock
+        var documentMock = new StrictMock<IRazorDocument>();
+        documentMock
             .SetupGet(x => x.Project)
             .Returns(projectSnapshot);
-        documentSnapshotMock
+        documentMock
             .Setup(x => x.GetGeneratedOutputAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(document);
-        documentSnapshotMock
+        documentMock
             .Setup(x => x.GetTextAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(document.Source.Text);
-        documentSnapshotMock
+        documentMock
             .SetupGet(x => x.Version)
             .Returns(version);
 
         return new DocumentContext(
             uri: new Uri($@"c:\${GetFileName(isRazorFile)}"),
-            snapshot: documentSnapshotMock.Object,
+            document: documentMock.Object,
             projectContext: null);
     }
 
     private async Task<IRazorSemanticTokensInfoService> CreateServiceAsync(
-        DocumentContext documentSnapshot,
+        DocumentContext documentContext,
         ProvideSemanticTokensResponse? csharpTokens,
         bool withCSharpBackground,
         bool serverSupportsPreciseRanges,
@@ -991,7 +991,7 @@ public partial class SemanticTokensTest(ITestOutputHelper testOutput) : TagHelpe
                 ? csharpTokens
                 : It.Is<ProvideSemanticTokensResponse>(x => x.Tokens == null));
 
-        var documentContextFactory = new TestDocumentContextFactory(documentSnapshot);
+        var documentContextFactory = new TestDocumentContextFactory(documentContext);
         var documentMappingService = new LspDocumentMappingService(FilePathService, documentContextFactory, LoggerFactory);
 
         var configurationSyncService = new Mock<IConfigurationSyncService>(MockBehavior.Strict);

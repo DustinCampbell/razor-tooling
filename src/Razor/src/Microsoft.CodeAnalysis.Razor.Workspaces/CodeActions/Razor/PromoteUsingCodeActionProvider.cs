@@ -43,7 +43,7 @@ internal class PromoteUsingCodeActionProvider : IRazorCodeActionProvider
             return SpecializedTasks.EmptyImmutableArray<RazorVSInternalCodeAction>();
         }
 
-        var importFileName = GetImportsFileName(context.DocumentSnapshot.FileKind);
+        var importFileName = GetImportsFileName(context.Document.FileKind);
 
         var line = context.CodeDocument.Source.Text.Lines.GetLineFromPosition(context.StartAbsoluteIndex);
         var data = new PromoteToUsingCodeActionParams

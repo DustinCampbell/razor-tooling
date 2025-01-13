@@ -41,7 +41,7 @@ internal sealed class RemoteFoldingRangeService(in ServiceArgs args) : RazorDocu
         ImmutableArray<RemoteFoldingRange> htmlRanges,
         CancellationToken cancellationToken)
     {
-        var generatedDocument = await context.Snapshot
+        var generatedDocument = await context.Document
             .GetGeneratedDocumentAsync(cancellationToken)
             .ConfigureAwait(false);
 

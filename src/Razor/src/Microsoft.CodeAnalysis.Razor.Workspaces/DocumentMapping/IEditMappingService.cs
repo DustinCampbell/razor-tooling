@@ -10,5 +10,5 @@ namespace Microsoft.CodeAnalysis.Razor.DocumentMapping;
 
 internal interface IEditMappingService
 {
-    Task<WorkspaceEdit> RemapWorkspaceEditAsync(IDocumentSnapshot contextDocumentSnapshot, WorkspaceEdit workspaceEdit, CancellationToken cancellationToken);
+    Task<WorkspaceEdit> RemapWorkspaceEditAsync(IRazorDocument contextDocument, WorkspaceEdit workspaceEdit, CancellationToken cancellationToken);
 }

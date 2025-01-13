@@ -11,7 +11,7 @@ using Microsoft.VisualStudio.Threading;
 
 namespace Microsoft.VisualStudio.Razor.Documents;
 
-// Tracks the mutable state associated with a document - in contrast to DocumentSnapshot
+// Tracks the mutable state associated with a document - in contrast to RazorDocument
 // which tracks the state at a point in time.
 internal sealed class EditorDocument : IDisposable
 {

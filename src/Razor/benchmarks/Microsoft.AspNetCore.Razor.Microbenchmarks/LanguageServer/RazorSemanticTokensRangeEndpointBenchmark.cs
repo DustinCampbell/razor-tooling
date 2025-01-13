@@ -65,8 +65,8 @@ public class RazorSemanticTokensRangeEndpointBenchmark : RazorLanguageServerBenc
         TargetPath = "/Components/Pages/SemanticTokens.razor";
 
         var documentUri = new Uri(filePath);
-        var documentSnapshot = await GetDocumentSnapshotAsync(ProjectFilePath, filePath, TargetPath);
-        DocumentContext = new DocumentContext(documentUri, documentSnapshot, projectContext: null);
+        var document = await GetDocumentAsync(ProjectFilePath, filePath, TargetPath);
+        DocumentContext = new DocumentContext(documentUri, document, projectContext: null);
 
         var razorOptionsMonitor = RazorLanguageServerHost.GetRequiredService<RazorLSPOptionsMonitor>();
         var clientCapabilitiesService = new BenchmarkClientCapabilitiesService(new VSInternalClientCapabilities() { SupportsVisualStudioExtensions = true });

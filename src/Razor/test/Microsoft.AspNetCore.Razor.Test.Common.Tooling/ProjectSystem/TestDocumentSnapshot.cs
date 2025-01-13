@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.AspNetCore.Razor.Test.Common.ProjectSystem;
 
-internal sealed class TestDocumentSnapshot : IDocumentSnapshot
+internal sealed class TestDocumentSnapshot : IRazorDocument
 {
     public RazorDocument RealDocument { get; }
 
@@ -114,6 +114,6 @@ internal sealed class TestDocumentSnapshot : IDocumentSnapshot
     public bool TryGetTextVersion(out VersionStamp result)
         => RealDocument.TryGetTextVersion(out result);
 
-    public IDocumentSnapshot WithText(SourceText text)
+    public IRazorDocument WithText(SourceText text)
         => RealDocument.WithText(text);
 }

@@ -22,14 +22,14 @@ internal static class IDocumentMappingServiceExtensions
     /// </summary>
     public static Task<(Uri MappedDocumentUri, LinePositionSpan MappedRange)> MapToHostDocumentUriAndRangeAsync(
         this IDocumentMappingService service,
-        RemoteDocumentSnapshot originSnapshot,
+        RemoteDocumentSnapshot originDocument,
         Uri generatedDocumentUri,
         LinePositionSpan generatedDocumentRange,
         CancellationToken cancellationToken)
     {
         if (service is RemoteDocumentMappingService remoteService)
         {
-            return remoteService.MapToHostDocumentUriAndRangeAsync(originSnapshot, generatedDocumentUri, generatedDocumentRange, cancellationToken);
+            return remoteService.MapToHostDocumentUriAndRangeAsync(originDocument, generatedDocumentUri, generatedDocumentRange, cancellationToken);
         }
 
         return Assumed.Unreachable<Task<(Uri, LinePositionSpan)>>();

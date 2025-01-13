@@ -52,7 +52,7 @@ internal sealed class RemoteRenameService(in ServiceArgs args) : RazorDocumentSe
             return NoFurtherHandling;
         }
 
-        var generatedDocument = await context.Snapshot
+        var generatedDocument = await context.Document
             .GetGeneratedDocumentAsync(cancellationToken)
             .ConfigureAwait(false);
 
@@ -86,7 +86,7 @@ internal sealed class RemoteRenameService(in ServiceArgs args) : RazorDocumentSe
             return NoFurtherHandling;
         }
 
-        var mappedEdit = await _editMappingService.RemapWorkspaceEditAsync(context.Snapshot, vsEdit, cancellationToken).ConfigureAwait(false);
+        var mappedEdit = await _editMappingService.RemapWorkspaceEditAsync(context.Document, vsEdit, cancellationToken).ConfigureAwait(false);
         return Results(mappedEdit);
     }
 }

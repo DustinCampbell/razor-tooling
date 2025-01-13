@@ -159,8 +159,8 @@ public class VisualStudioRazorParserTest : VisualStudioTestBase
         var latestChange = new SourceChange(0, 0, string.Empty);
         var latestSnapshot = documentTracker.TextBuffer.CurrentSnapshot;
         parser._latestChangeReference = new BackgroundParser.ChangeReference(latestChange, latestSnapshot);
-        var snapshot1 = new StringTextSnapshot("Snapshot 1");
-        var snapshot2 = new StringTextSnapshot("Snapshot 2");
+        var snapshot1 = new StringTextSnapshot("Document 1");
+        var snapshot2 = new StringTextSnapshot("Document 2");
 
         // Act
         var getLatestCodeDocumentTask1 = parser.GetLatestCodeDocumentAsync(snapshot1);

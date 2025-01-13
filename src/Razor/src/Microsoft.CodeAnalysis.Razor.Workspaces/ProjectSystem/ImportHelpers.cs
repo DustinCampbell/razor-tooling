@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
 internal static class ImportHelpers
 {
-    public static async Task<ImmutableArray<ImportItem>> GetImportItemsAsync(IDocumentSnapshot document, RazorProjectEngine projectEngine, CancellationToken cancellationToken)
+    public static async Task<ImmutableArray<ImportItem>> GetImportItemsAsync(IRazorDocument document, RazorProjectEngine projectEngine, CancellationToken cancellationToken)
     {
         var projectItem = projectEngine.FileSystem.GetItem(document.FilePath, document.FileKind);
 
@@ -84,7 +84,7 @@ internal static class ImportHelpers
         return importSources.DrainToImmutable();
     }
 
-    public static async Task<RazorSourceDocument> GetSourceAsync(IDocumentSnapshot document, RazorProjectEngine projectEngine, CancellationToken cancellationToken)
+    public static async Task<RazorSourceDocument> GetSourceAsync(IRazorDocument document, RazorProjectEngine projectEngine, CancellationToken cancellationToken)
     {
         var projectItem = document is { FilePath: string filePath, FileKind: var fileKind }
             ? projectEngine.FileSystem.GetItem(filePath, fileKind)

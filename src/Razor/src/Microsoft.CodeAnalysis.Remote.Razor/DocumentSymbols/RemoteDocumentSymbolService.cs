@@ -35,7 +35,7 @@ internal sealed partial class RemoteDocumentSymbolService(in ServiceArgs args) :
 
     private async ValueTask<SumType<DocumentSymbol[], SymbolInformation[]>?> GetDocumentSymbolsAsync(RemoteDocumentContext context, bool useHierarchicalSymbols, CancellationToken cancellationToken)
     {
-        var generatedDocument = await context.Snapshot
+        var generatedDocument = await context.Document
             .GetGeneratedDocumentAsync(cancellationToken)
             .ConfigureAwait(false);
 

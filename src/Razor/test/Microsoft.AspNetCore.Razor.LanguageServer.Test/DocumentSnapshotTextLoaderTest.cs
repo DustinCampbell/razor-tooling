@@ -19,11 +19,11 @@ public class DocumentSnapshotTextLoaderTest(ITestOutputHelper testOutput) : Tool
     {
         // Arrange
         var expectedSourceText = SourceText.From("Hello World");
-        var snapshotMock = new StrictMock<IDocumentSnapshot>();
-        snapshotMock
+        var documentMock = new StrictMock<IRazorDocument>();
+        documentMock
             .Setup(x => x.GetTextAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(expectedSourceText);
-        var textLoader = new DocumentSnapshotTextLoader(snapshotMock.Object);
+        var textLoader = new RazorDocumentTextLoader(documentMock.Object);
 
         // Act
         var actual = await textLoader.LoadTextAndVersionAsync(options: default, DisposalToken);

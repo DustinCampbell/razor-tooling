@@ -29,7 +29,7 @@ internal class HtmlCodeActionProvider(IEditMappingService editMappingService) : 
         {
             if (codeAction.Edit is not null)
             {
-                await RemapAndFixHtmlCodeActionEditAsync(_editMappingService, context.DocumentSnapshot, codeAction, cancellationToken).ConfigureAwait(false);
+                await RemapAndFixHtmlCodeActionEditAsync(_editMappingService, context.Document, codeAction, cancellationToken).ConfigureAwait(false);
 
                 results.Add(codeAction);
             }
@@ -42,15 +42,15 @@ internal class HtmlCodeActionProvider(IEditMappingService editMappingService) : 
         return results.ToImmutable();
     }
 
-    public static async Task RemapAndFixHtmlCodeActionEditAsync(IEditMappingService editMappingService, IDocumentSnapshot documentSnapshot, CodeAction codeAction, CancellationToken cancellationToken)
+    public static async Task RemapAndFixHtmlCodeActionEditAsync(IEditMappingService editMappingService, IRazorDocument document, CodeAction codeAction, CancellationToken cancellationToken)
     {
         Assumes.NotNull(codeAction.Edit);
 
-        codeAction.Edit = await editMappingService.RemapWorkspaceEditAsync(documentSnapshot, codeAction.Edit, cancellationToken).ConfigureAwait(false);
+        codeAction.Edit = await editMappingService.RemapWorkspaceEditAsync(document, codeAction.Edit, cancellationToken).ConfigureAwait(false);
 
         if (codeAction.Edit.TryGetTextDocumentEdits(out var documentEdits))
         {
-            var codeDocument = await documentSnapshot.GetGeneratedOutputAsync(cancellationToken).ConfigureAwait(false);
+            var codeDocument = await document.GetGeneratedOutputAsync(cancellationToken).ConfigureAwait(false);
             var htmlSourceText = codeDocument.GetHtmlSourceText();
 
             foreach (var edit in documentEdits)

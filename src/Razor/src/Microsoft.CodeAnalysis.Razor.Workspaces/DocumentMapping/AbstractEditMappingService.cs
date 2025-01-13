@@ -22,12 +22,12 @@ internal abstract class AbstractEditMappingService(
     private readonly IDocumentMappingService _documentMappingService = documentMappingService;
     private readonly IFilePathService _filePathService = filePathService;
 
-    public async Task<WorkspaceEdit> RemapWorkspaceEditAsync(IDocumentSnapshot contextDocumentSnapshot, WorkspaceEdit workspaceEdit, CancellationToken cancellationToken)
+    public async Task<WorkspaceEdit> RemapWorkspaceEditAsync(IRazorDocument contextDocument, WorkspaceEdit workspaceEdit, CancellationToken cancellationToken)
     {
         if (workspaceEdit.TryGetTextDocumentEdits(out var documentEdits))
         {
             // The LSP spec says, we should prefer `DocumentChanges` property over `Changes` if available.
-            var remappedEdits = await RemapTextDocumentEditsAsync(contextDocumentSnapshot, documentEdits, cancellationToken).ConfigureAwait(false);
+            var remappedEdits = await RemapTextDocumentEditsAsync(contextDocument, documentEdits, cancellationToken).ConfigureAwait(false);
 
             return new WorkspaceEdit()
             {
@@ -37,7 +37,7 @@ internal abstract class AbstractEditMappingService(
 
         if (workspaceEdit.Changes is { } changeMap)
         {
-            var remappedEdits = await RemapDocumentEditsAsync(contextDocumentSnapshot, changeMap, cancellationToken).ConfigureAwait(false);
+            var remappedEdits = await RemapDocumentEditsAsync(contextDocument, changeMap, cancellationToken).ConfigureAwait(false);
 
             return new WorkspaceEdit()
             {
@@ -48,7 +48,7 @@ internal abstract class AbstractEditMappingService(
         return workspaceEdit;
     }
 
-    private async Task<Dictionary<string, TextEdit[]>> RemapDocumentEditsAsync(IDocumentSnapshot contextDocumentSnapshot, Dictionary<string, TextEdit[]> changes, CancellationToken cancellationToken)
+    private async Task<Dictionary<string, TextEdit[]>> RemapDocumentEditsAsync(IRazorDocument contextSnapshot, Dictionary<string, TextEdit[]> changes, CancellationToken cancellationToken)
     {
         var remappedChanges = new Dictionary<string, TextEdit[]>(capacity: changes.Count);
 
@@ -63,7 +63,7 @@ internal abstract class AbstractEditMappingService(
                 continue;
             }
 
-            if (!TryGetDocumentContext(contextDocumentSnapshot, uri, projectContext: null, out var documentContext))
+            if (!TryGetDocumentContext(contextSnapshot, uri, projectContext: null, out var documentContext))
             {
                 continue;
             }
@@ -108,7 +108,7 @@ internal abstract class AbstractEditMappingService(
         return remappedEdits.ToArray();
     }
 
-    private async Task<TextDocumentEdit[]> RemapTextDocumentEditsAsync(IDocumentSnapshot contextDocumentSnapshot, TextDocumentEdit[] documentEdits, CancellationToken cancellationToken)
+    private async Task<TextDocumentEdit[]> RemapTextDocumentEditsAsync(IRazorDocument contextDocument, TextDocumentEdit[] documentEdits, CancellationToken cancellationToken)
     {
         using var remappedDocumentEdits = new PooledArrayBuilder<TextDocumentEdit>(documentEdits.Length);
 
@@ -126,7 +126,7 @@ internal abstract class AbstractEditMappingService(
 
             var razorDocumentUri = _filePathService.GetRazorDocumentUri(generatedDocumentUri);
 
-            if (!TryGetDocumentContext(contextDocumentSnapshot, razorDocumentUri, entry.TextDocument.GetProjectContext(), out var documentContext))
+            if (!TryGetDocumentContext(contextDocument, razorDocumentUri, entry.TextDocument.GetProjectContext(), out var documentContext))
             {
                 continue;
             }
@@ -153,5 +153,5 @@ internal abstract class AbstractEditMappingService(
         return remappedDocumentEdits.ToArray();
     }
 
-    protected abstract bool TryGetDocumentContext(IDocumentSnapshot contextDocumentSnapshot, Uri razorDocumentUri, VSProjectContext? projectContext, [NotNullWhen(true)] out DocumentContext? documentContext);
+    protected abstract bool TryGetDocumentContext(IRazorDocument contextDocument, Uri razorDocumentUri, VSProjectContext? projectContext, [NotNullWhen(true)] out DocumentContext? documentContext);
 }

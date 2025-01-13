@@ -40,7 +40,7 @@ internal class RazorProximityExpressionsEndpoint(
             return null;
         }
 
-        if (documentContext.Snapshot.Version != request.HostDocumentSyncVersion)
+        if (documentContext.Document.Version != request.HostDocumentSyncVersion)
         {
             // Whether we are being asked about an old version of the C# document, or somehow a future one, we can't rely on the result.
             return null;

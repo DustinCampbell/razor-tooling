@@ -55,7 +55,7 @@ internal sealed class CodeActionResolveEndpoint(
 
         try
         {
-            var resolvedCodeAction = await _delegatedCodeActionResolver.ResolveCodeActionAsync(documentContext.GetTextDocumentIdentifier(), documentContext.Snapshot.Version, context.Language, request, cancellationToken).ConfigureAwait(false);
+            var resolvedCodeAction = await _delegatedCodeActionResolver.ResolveCodeActionAsync(documentContext.GetTextDocumentIdentifier(), documentContext.Document.Version, context.Language, request, cancellationToken).ConfigureAwait(false);
             return resolvedCodeAction ?? request;
         }
         finally

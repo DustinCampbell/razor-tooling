@@ -10,12 +10,12 @@ namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
 internal static class ProjectSnapshotExtensions
 {
-    public static IDocumentSnapshot? GetDocument(this IProjectSnapshot project, string filePath)
+    public static IRazorDocument? GetDocument(this IProjectSnapshot project, string filePath)
         => project.TryGetDocument(filePath, out var result)
             ? result
             : null;
 
-    public static IDocumentSnapshot GetRequiredDocument(this IProjectSnapshot project, string filePath)
+    public static IRazorDocument GetRequiredDocument(this IProjectSnapshot project, string filePath)
         => project.GetDocument(filePath).AssumeNotNull();
 
     public static RazorDocument? GetDocument(this RazorProject project, string filePath)

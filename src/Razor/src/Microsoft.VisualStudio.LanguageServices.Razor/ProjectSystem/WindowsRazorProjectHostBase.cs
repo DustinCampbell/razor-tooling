@@ -227,13 +227,9 @@ internal abstract partial class WindowsRazorProjectHostBase : OnceInitializedOnc
                     // This should no-op in the common case, just putting it here for insurance.
                     foreach (var documentFilePath in project.DocumentFilePaths)
                     {
-                        var documentSnapshot = project.GetRequiredDocument(documentFilePath);
+                        var document = project.GetRequiredDocument(documentFilePath);
 
-                        var hostDocument = new HostDocument(
-                            documentSnapshot.FilePath,
-                            documentSnapshot.TargetPath,
-                            documentSnapshot.FileKind);
-                        updater.AddDocument(projectKey, hostDocument, new FileTextLoader(hostDocument.FilePath, null));
+                        updater.AddDocument(projectKey, document.HostDocument, new FileTextLoader(document.FilePath, null));
                     }
                 }
             }

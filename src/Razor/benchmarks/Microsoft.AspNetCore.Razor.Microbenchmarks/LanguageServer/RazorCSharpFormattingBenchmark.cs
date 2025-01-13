@@ -31,7 +31,7 @@ public class RazorCSharpFormattingBenchmark : RazorLanguageServerBenchmarkBase
 
     private Uri DocumentUri { get; set; }
 
-    private IDocumentSnapshot DocumentSnapshot { get; set; }
+    private IRazorDocument Document { get; set; }
 
     private SourceText DocumentText { get; set; }
 
@@ -58,8 +58,8 @@ public class RazorCSharpFormattingBenchmark : RazorLanguageServerBenchmarkBase
         var targetPath = "/Components/Pages/Generated.razor";
 
         DocumentUri = new Uri(_filePath);
-        DocumentSnapshot = await GetDocumentSnapshotAsync(projectFilePath, _filePath, targetPath);
-        DocumentText = await DocumentSnapshot.GetTextAsync(CancellationToken.None);
+        Document = await GetDocumentAsync(projectFilePath, _filePath, targetPath);
+        DocumentText = await Document.GetTextAsync(CancellationToken.None);
     }
 
     private static void WriteSampleFormattingFile(string filePath, bool preformatted, int blocks)
@@ -109,7 +109,7 @@ public class RazorCSharpFormattingBenchmark : RazorLanguageServerBenchmarkBase
     [Benchmark(Description = "Formatting")]
     public async Task RazorCSharpFormattingAsync()
     {
-        var documentContext = new DocumentContext(DocumentUri, DocumentSnapshot, projectContext: null);
+        var documentContext = new DocumentContext(DocumentUri, Document, projectContext: null);
 
         var changes = await RazorFormattingService.GetDocumentFormattingChangesAsync(documentContext, htmlEdits: [], span: null, new RazorFormattingOptions(), CancellationToken.None);
 

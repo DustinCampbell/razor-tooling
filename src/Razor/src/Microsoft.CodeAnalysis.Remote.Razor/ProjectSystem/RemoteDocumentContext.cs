@@ -8,12 +8,12 @@ namespace Microsoft.CodeAnalysis.Remote.Razor.ProjectSystem;
 
 internal sealed class RemoteDocumentContext : DocumentContext
 {
-    public TextDocument TextDocument => Snapshot.TextDocument;
+    public TextDocument TextDocument => Document.TextDocument;
 
-    public new RemoteDocumentSnapshot Snapshot => (RemoteDocumentSnapshot)base.Snapshot;
+    public new RemoteDocumentSnapshot Document => (RemoteDocumentSnapshot)base.Document;
 
     public ISolutionQueryOperations GetSolutionQueryOperations()
-        => Snapshot.ProjectSnapshot.SolutionSnapshot;
+        => Document.ProjectSnapshot.SolutionSnapshot;
 
     public RemoteDocumentContext(Uri uri, RemoteDocumentSnapshot snapshot)
         // HACK: Need to revisit projectContext here I guess

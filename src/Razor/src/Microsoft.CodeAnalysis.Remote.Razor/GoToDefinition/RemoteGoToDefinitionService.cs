@@ -62,7 +62,7 @@ internal sealed class RemoteGoToDefinitionService(in ServiceArgs args) : RazorDo
         {
             // First, see if this is a Razor component. We ignore attributes here, because they're better served by the C# handler.
             var componentLocation = await _componentDefinitionService
-                .GetDefinitionAsync(context.Snapshot, positionInfo, context.GetSolutionQueryOperations(), ignoreAttributes: true, cancellationToken)
+                .GetDefinitionAsync(context.Document, positionInfo, context.GetSolutionQueryOperations(), ignoreAttributes: true, cancellationToken)
                 .ConfigureAwait(false);
 
             if (componentLocation is not null)
@@ -76,7 +76,7 @@ internal sealed class RemoteGoToDefinitionService(in ServiceArgs args) : RazorDo
         }
 
         // Finally, call into C#.
-        var generatedDocument = await context.Snapshot
+        var generatedDocument = await context.Document
             .GetGeneratedDocumentAsync(cancellationToken)
             .ConfigureAwait(false);
 
@@ -103,7 +103,7 @@ internal sealed class RemoteGoToDefinitionService(in ServiceArgs args) : RazorDo
             var (uri, range) = location;
 
             var (mappedDocumentUri, mappedRange) = await DocumentMappingService
-                .MapToHostDocumentUriAndRangeAsync(context.Snapshot, uri, range.ToLinePositionSpan(), cancellationToken)
+                .MapToHostDocumentUriAndRangeAsync(context.Document, uri, range.ToLinePositionSpan(), cancellationToken)
                 .ConfigureAwait(false);
 
             var mappedLocation = RoslynLspFactory.CreateLocation(mappedDocumentUri, mappedRange);

@@ -94,10 +94,10 @@ internal class TextDocumentUriPresentationEndpoint(
 
         cancellationToken.ThrowIfCancellationRequested();
 
-        var descriptor = await documentContext.Snapshot.TryGetTagHelperDescriptorAsync(cancellationToken).ConfigureAwait(false);
+        var descriptor = await documentContext.Document.TryGetTagHelperDescriptorAsync(cancellationToken).ConfigureAwait(false);
         if (descriptor is null)
         {
-            Logger.LogInformation($"Failed to find tag helper descriptor for {documentContext.Snapshot.FilePath}.");
+            Logger.LogInformation($"Failed to find tag helper descriptor for {documentContext.Document.FilePath}.");
             return null;
         }
 

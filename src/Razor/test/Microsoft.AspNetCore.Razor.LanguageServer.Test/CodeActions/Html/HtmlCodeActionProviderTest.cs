@@ -93,7 +93,7 @@ public class HtmlCodeActionProviderTest(ITestOutputHelper testOutput) : Language
 
         var editMappingServiceMock = new StrictMock<IEditMappingService>();
         editMappingServiceMock
-            .Setup(x => x.RemapWorkspaceEditAsync(It.IsAny<IDocumentSnapshot>(), It.IsAny<WorkspaceEdit>(), It.IsAny<CancellationToken>()))
+            .Setup(x => x.RemapWorkspaceEditAsync(It.IsAny<IRazorDocument>(), It.IsAny<WorkspaceEdit>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(remappedEdit);
 
         var provider = new HtmlCodeActionProvider(editMappingServiceMock.Object);
@@ -156,20 +156,20 @@ public class HtmlCodeActionProviderTest(ITestOutputHelper testOutput) : Language
         });
         var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, FileKinds.Component, importSources: default, tagHelpers);
 
-        var documentSnapshotMock = new StrictMock<IDocumentSnapshot>();
-        documentSnapshotMock
+        var documentMock = new StrictMock<IRazorDocument>();
+        documentMock
             .Setup(x => x.GetGeneratedOutputAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(codeDocument);
-        documentSnapshotMock
+        documentMock
             .Setup(x => x.GetTextAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(codeDocument.Source.Text);
-        documentSnapshotMock
+        documentMock
             .Setup(x => x.Project.GetTagHelpersAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(tagHelpers);
 
         return new RazorCodeActionContext(
             request,
-            documentSnapshotMock.Object,
+            documentMock.Object,
             codeDocument,
             DelegatedDocumentUri: null,
             StartAbsoluteIndex: absoluteIndex,
