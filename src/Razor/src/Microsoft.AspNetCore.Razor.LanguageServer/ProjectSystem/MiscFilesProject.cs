@@ -36,8 +36,8 @@ internal static class MiscFilesProject
             "Miscellaneous Files");
     }
 
-    public static RazorProject GetMiscellaneousProject(this ProjectSnapshotManager projectManager)
-        => projectManager.GetRequiredProject(Key);
+    public static RazorProject GetMiscellaneousProject(this RazorSolutionManager solutionManager)
+        => solutionManager.GetRequiredProject(Key);
 
     public static bool IsMiscellaneousProject(this RazorProject project)
         => project.Key == Key;

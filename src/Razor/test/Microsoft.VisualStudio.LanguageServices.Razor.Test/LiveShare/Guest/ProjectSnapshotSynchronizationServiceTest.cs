@@ -20,7 +20,7 @@ namespace Microsoft.VisualStudio.Razor.LiveShare.Guest;
 public class ProjectSnapshotSynchronizationServiceTest : VisualStudioWorkspaceTestBase
 {
     private readonly CollaborationSession _sessionContext;
-    private readonly TestProjectSnapshotManager _projectManager;
+    private readonly TestRazorSolutionManager _solutionManager;
     private readonly ProjectWorkspaceState _projectWorkspaceStateWithTagHelpers;
 
     public ProjectSnapshotSynchronizationServiceTest(ITestOutputHelper testOutput)
@@ -28,7 +28,7 @@ public class ProjectSnapshotSynchronizationServiceTest : VisualStudioWorkspaceTe
     {
         _sessionContext = new TestCollaborationSession(isHost: false);
 
-        _projectManager = CreateProjectSnapshotManager();
+        _solutionManager = CreateSolutionManager();
 
         _projectWorkspaceStateWithTagHelpers = ProjectWorkspaceState.Create(
             tagHelpers: [TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly").Build()]);
@@ -53,7 +53,7 @@ public class ProjectSnapshotSynchronizationServiceTest : VisualStudioWorkspaceTe
         var synchronizationService = new ProjectSnapshotSynchronizationService(
             _sessionContext,
             hostProjectManagerProxyMock.Object,
-            _projectManager,
+            _solutionManager,
             LoggerFactory,
             JoinableTaskFactory);
 
@@ -61,7 +61,7 @@ public class ProjectSnapshotSynchronizationServiceTest : VisualStudioWorkspaceTe
         await synchronizationService.InitializeAsync(DisposalToken);
 
         // Assert
-        var projects = _projectManager.GetProjects();
+        var projects = _solutionManager.GetProjects();
         var project = Assert.Single(projects);
         Assert.Equal("/guest/path/project.csproj", project.FilePath);
         Assert.Same(RazorConfiguration.Default, project.Configuration);
@@ -87,7 +87,7 @@ public class ProjectSnapshotSynchronizationServiceTest : VisualStudioWorkspaceTe
         var synchronizationService = new ProjectSnapshotSynchronizationService(
             _sessionContext,
             StrictMock.Of<IProjectSnapshotManagerProxy>(),
-            _projectManager,
+            _solutionManager,
             LoggerFactory,
             JoinableTaskFactory);
         var args = new ProjectChangeEventProxyArgs(older: null, newHandle, ProjectProxyChangeKind.ProjectAdded);
@@ -96,7 +96,7 @@ public class ProjectSnapshotSynchronizationServiceTest : VisualStudioWorkspaceTe
         await synchronizationService.UpdateGuestProjectManagerAsync(args);
 
         // Assert
-        var projects = _projectManager.GetProjects();
+        var projects = _solutionManager.GetProjects();
         var project = Assert.Single(projects);
         Assert.Equal("/guest/path/project.csproj", project.FilePath);
         Assert.Same(RazorConfiguration.Default, project.Configuration);
@@ -122,12 +122,12 @@ public class ProjectSnapshotSynchronizationServiceTest : VisualStudioWorkspaceTe
         var synchronizationService = new ProjectSnapshotSynchronizationService(
             _sessionContext,
             StrictMock.Of<IProjectSnapshotManagerProxy>(),
-            _projectManager,
+            _solutionManager,
             LoggerFactory,
             JoinableTaskFactory);
         var hostProject = new HostProject("/guest/path/project.csproj", "/guest/path/obj", RazorConfiguration.Default, "project");
 
-        await _projectManager.UpdateAsync(updater =>
+        await _solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(hostProject);
         });
@@ -138,7 +138,7 @@ public class ProjectSnapshotSynchronizationServiceTest : VisualStudioWorkspaceTe
         await synchronizationService.UpdateGuestProjectManagerAsync(args);
 
         // Assert
-        var projects = _projectManager.GetProjects();
+        var projects = _solutionManager.GetProjects();
         Assert.Empty(projects);
     }
 
@@ -162,12 +162,12 @@ public class ProjectSnapshotSynchronizationServiceTest : VisualStudioWorkspaceTe
         var synchronizationService = new ProjectSnapshotSynchronizationService(
             _sessionContext,
             StrictMock.Of<IProjectSnapshotManagerProxy>(),
-            _projectManager,
+            _solutionManager,
             LoggerFactory,
             JoinableTaskFactory);
         var hostProject = new HostProject("/guest/path/project.csproj", "/guest/path/obj", RazorConfiguration.Default, "project");
 
-        await _projectManager.UpdateAsync(updater =>
+        await _solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(hostProject);
             updater.UpdateProjectConfiguration(hostProject);
@@ -179,7 +179,7 @@ public class ProjectSnapshotSynchronizationServiceTest : VisualStudioWorkspaceTe
         await synchronizationService.UpdateGuestProjectManagerAsync(args);
 
         // Assert
-        var projects = _projectManager.GetProjects();
+        var projects = _solutionManager.GetProjects();
         var project = Assert.Single(projects);
         Assert.Equal("/guest/path/project.csproj", project.FilePath);
         Assert.Same(newConfiguration, project.Configuration);
@@ -206,12 +206,12 @@ public class ProjectSnapshotSynchronizationServiceTest : VisualStudioWorkspaceTe
         var synchronizationService = new ProjectSnapshotSynchronizationService(
             _sessionContext,
             StrictMock.Of<IProjectSnapshotManagerProxy>(),
-            _projectManager,
+            _solutionManager,
             LoggerFactory,
             JoinableTaskFactory);
         var hostProject = new HostProject("/guest/path/project.csproj", "/guest/path/obj", RazorConfiguration.Default, "project");
 
-        await _projectManager.UpdateAsync(updater =>
+        await _solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(hostProject);
             updater.UpdateProjectWorkspaceState(hostProject.Key, oldHandle.ProjectWorkspaceState);
@@ -223,7 +223,7 @@ public class ProjectSnapshotSynchronizationServiceTest : VisualStudioWorkspaceTe
         await synchronizationService.UpdateGuestProjectManagerAsync(args);
 
         // Assert
-        var projects = _projectManager.GetProjects();
+        var projects = _solutionManager.GetProjects();
         var project = Assert.Single(projects);
         Assert.Equal("/guest/path/project.csproj", project.FilePath);
         Assert.Same(RazorConfiguration.Default, project.Configuration);

@@ -8,9 +8,9 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
-internal partial class ProjectSnapshotManager
+internal partial class RazorSolutionManager
 {
-    public readonly struct Updater(ProjectSnapshotManager instance)
+    public readonly struct Updater(RazorSolutionManager instance)
     {
         public ImmutableArray<ProjectKey> GetProjectKeysWithFilePath(string filePath)
             => instance.GetProjectKeysWithFilePath(filePath);

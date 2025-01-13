@@ -27,7 +27,7 @@ internal sealed class VisualStudioDocumentTracker : IVisualStudioDocumentTracker
     private readonly JoinableTaskContext _joinableTaskContext;
     private readonly string _filePath;
     private readonly string _projectPath;
-    private readonly ProjectSnapshotManager _projectManager;
+    private readonly RazorSolutionManager _solutionManager;
     private readonly IWorkspaceEditorSettings _workspaceEditorSettings;
     private readonly ITextBuffer _textBuffer;
     private readonly IImportDocumentManager _importDocumentManager;
@@ -44,7 +44,7 @@ internal sealed class VisualStudioDocumentTracker : IVisualStudioDocumentTracker
         JoinableTaskContext joinableTaskContext,
         string filePath,
         string projectPath,
-        ProjectSnapshotManager projectManager,
+        RazorSolutionManager solutionManager,
         IWorkspaceEditorSettings workspaceEditorSettings,
         IProjectEngineFactoryProvider projectEngineFactoryProvider,
         ITextBuffer textBuffer,
@@ -58,7 +58,7 @@ internal sealed class VisualStudioDocumentTracker : IVisualStudioDocumentTracker
         _joinableTaskContext = joinableTaskContext;
         _filePath = filePath;
         _projectPath = projectPath;
-        _projectManager = projectManager;
+        _solutionManager = solutionManager;
         _workspaceEditorSettings = workspaceEditorSettings;
         _textBuffer = textBuffer;
         _importDocumentManager = importDocumentManager;
@@ -143,7 +143,7 @@ internal sealed class VisualStudioDocumentTracker : IVisualStudioDocumentTracker
         _projectSnapshot = GetOrCreateProject(_projectPath);
         _isSupportedProject = true;
 
-        _projectManager.Changed += ProjectManager_Changed;
+        _solutionManager.Changed += SolutionManager_Changed;
         _workspaceEditorSettings.Changed += EditorSettingsManager_Changed;
         _importDocumentManager.Changed += Import_Changed;
 
@@ -154,9 +154,9 @@ internal sealed class VisualStudioDocumentTracker : IVisualStudioDocumentTracker
 
     private ILegacyProjectSnapshot GetOrCreateProject(string projectFilePath)
     {
-        var projectKeys = _projectManager.GetProjectKeysWithFilePath(projectFilePath);
+        var projectKeys = _solutionManager.GetProjectKeysWithFilePath(projectFilePath);
 
-        if (projectKeys is [var projectKey, ..] && _projectManager.TryGetProject(projectKey, out var project))
+        if (projectKeys is [var projectKey, ..] && _solutionManager.TryGetProject(projectKey, out var project))
         {
             return (ILegacyProjectSnapshot)project;
         }
@@ -173,7 +173,7 @@ internal sealed class VisualStudioDocumentTracker : IVisualStudioDocumentTracker
 
         _importDocumentManager.OnUnsubscribed(this);
 
-        _projectManager.Changed -= ProjectManager_Changed;
+        _solutionManager.Changed -= SolutionManager_Changed;
         _workspaceEditorSettings.Changed -= EditorSettingsManager_Changed;
         _importDocumentManager.Changed -= Import_Changed;
 
@@ -191,7 +191,7 @@ internal sealed class VisualStudioDocumentTracker : IVisualStudioDocumentTracker
     }
 
     // Internal for testing
-    internal void ProjectManager_Changed(object sender, ProjectChangeEventArgs e)
+    internal void SolutionManager_Changed(object sender, ProjectChangeEventArgs e)
     {
         // Don't do any work if the solution is closing
         if (e.IsSolutionClosing)

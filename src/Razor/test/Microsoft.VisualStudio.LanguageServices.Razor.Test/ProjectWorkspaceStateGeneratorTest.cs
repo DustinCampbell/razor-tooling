@@ -24,7 +24,7 @@ public class ProjectWorkspaceStateGeneratorTest : VisualStudioWorkspaceTestBase
     private readonly Project _workspaceProject;
     private readonly RazorProject _project;
     private readonly ProjectWorkspaceState _projectWorkspaceStateWithTagHelpers;
-    private readonly TestProjectSnapshotManager _projectManager;
+    private readonly TestRazorSolutionManager _solutionManager;
 
     public ProjectWorkspaceStateGeneratorTest(ITestOutputHelper testOutput)
         : base(testOutput)
@@ -46,7 +46,7 @@ public class ProjectWorkspaceStateGeneratorTest : VisualStudioWorkspaceTestBase
         _projectWorkspaceStateWithTagHelpers = ProjectWorkspaceState.Create(
             [TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly").Build()]);
 
-        _projectManager = CreateProjectSnapshotManager();
+        _solutionManager = CreateSolutionManager();
     }
 
     [UIFact]
@@ -54,7 +54,7 @@ public class ProjectWorkspaceStateGeneratorTest : VisualStudioWorkspaceTestBase
     {
         // Arrange
         using var generator = new ProjectWorkspaceStateGenerator(
-            _projectManager, _tagHelperResolver, LoggerFactory, NoOpTelemetryReporter.Instance);
+            _solutionManager, _tagHelperResolver, LoggerFactory, NoOpTelemetryReporter.Instance);
 
         var generatorAccessor = generator.GetTestAccessor();
         generatorAccessor.BlockBackgroundWorkStart = new ManualResetEventSlim(initialState: false);
@@ -73,7 +73,7 @@ public class ProjectWorkspaceStateGeneratorTest : VisualStudioWorkspaceTestBase
     {
         // Arrange
         using var generator = new ProjectWorkspaceStateGenerator(
-            _projectManager, _tagHelperResolver, LoggerFactory, NoOpTelemetryReporter.Instance);
+            _solutionManager, _tagHelperResolver, LoggerFactory, NoOpTelemetryReporter.Instance);
 
         var generatorAccessor = generator.GetTestAccessor();
         generatorAccessor.BlockBackgroundWorkStart = new ManualResetEventSlim(initialState: false);
@@ -91,7 +91,7 @@ public class ProjectWorkspaceStateGeneratorTest : VisualStudioWorkspaceTestBase
     {
         // Arrange
         using var generator = new ProjectWorkspaceStateGenerator(
-            _projectManager, _tagHelperResolver, LoggerFactory, NoOpTelemetryReporter.Instance);
+            _solutionManager, _tagHelperResolver, LoggerFactory, NoOpTelemetryReporter.Instance);
 
         var generatorAccessor = generator.GetTestAccessor();
         generatorAccessor.BlockBackgroundWorkStart = new ManualResetEventSlim(initialState: false);
@@ -112,12 +112,12 @@ public class ProjectWorkspaceStateGeneratorTest : VisualStudioWorkspaceTestBase
     {
         // Arrange
         using var generator = new ProjectWorkspaceStateGenerator(
-            _projectManager, _tagHelperResolver, LoggerFactory, NoOpTelemetryReporter.Instance);
+            _solutionManager, _tagHelperResolver, LoggerFactory, NoOpTelemetryReporter.Instance);
 
         var generatorAccessor = generator.GetTestAccessor();
         generatorAccessor.NotifyBackgroundWorkCompleted = new ManualResetEventSlim(initialState: false);
 
-        await _projectManager.UpdateAsync(updater =>
+        await _solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(_project.HostProject);
             updater.UpdateProjectWorkspaceState(_project.Key, _projectWorkspaceStateWithTagHelpers);
@@ -130,7 +130,7 @@ public class ProjectWorkspaceStateGeneratorTest : VisualStudioWorkspaceTestBase
         await Task.Run(() => generatorAccessor.NotifyBackgroundWorkCompleted.Wait(TimeSpan.FromSeconds(3)));
 
         // Assert
-        var newProjectSnapshot = _projectManager.GetRequiredProject(_project.Key);
+        var newProjectSnapshot = _solutionManager.GetRequiredProject(_project.Key);
 
         Assert.Empty(await newProjectSnapshot.GetTagHelpersAsync(DisposalToken));
     }
@@ -140,12 +140,12 @@ public class ProjectWorkspaceStateGeneratorTest : VisualStudioWorkspaceTestBase
     {
         // Arrange
         using var generator = new ProjectWorkspaceStateGenerator(
-            _projectManager, _tagHelperResolver, LoggerFactory, NoOpTelemetryReporter.Instance);
+            _solutionManager, _tagHelperResolver, LoggerFactory, NoOpTelemetryReporter.Instance);
 
         var generatorAccessor = generator.GetTestAccessor();
         generatorAccessor.NotifyBackgroundWorkCompleted = new ManualResetEventSlim(initialState: false);
 
-        await _projectManager.UpdateAsync(updater =>
+        await _solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(_project.HostProject);
         });
@@ -157,7 +157,7 @@ public class ProjectWorkspaceStateGeneratorTest : VisualStudioWorkspaceTestBase
         await Task.Run(() => generatorAccessor.NotifyBackgroundWorkCompleted.Wait(TimeSpan.FromSeconds(3)));
 
         // Assert
-        var newProjectSnapshot = _projectManager.GetRequiredProject(_project.Key);
+        var newProjectSnapshot = _solutionManager.GetRequiredProject(_project.Key);
 
         Assert.Equal<TagHelperDescriptor>(_tagHelperResolver.TagHelpers, await newProjectSnapshot.GetTagHelpersAsync(DisposalToken));
     }

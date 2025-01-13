@@ -10,26 +10,26 @@ using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
 namespace Microsoft.CodeAnalysis.Razor.Workspaces.Test;
 
-internal static class IProjectSnapshotManagerExtensions
+internal static class RazorSolutionManagerExtensions
 {
-    public static ISolutionQueryOperations GetQueryOperations(this ProjectSnapshotManager projectManager)
-        => new TestSolutionQueryOperations(projectManager);
+    public static ISolutionQueryOperations GetQueryOperations(this RazorSolutionManager solutionManager)
+        => new TestSolutionQueryOperations(solutionManager);
 }
 
-file sealed class TestSolutionQueryOperations(ProjectSnapshotManager projectManager) : ISolutionQueryOperations
+file sealed class TestSolutionQueryOperations(RazorSolutionManager solutionManager) : ISolutionQueryOperations
 {
-    private readonly ProjectSnapshotManager _projectManager = projectManager;
+    private readonly RazorSolutionManager _solutionManager = solutionManager;
 
     public IEnumerable<IRazorProject> GetProjects()
     {
-        return _projectManager.GetProjects().Cast<IRazorProject>();
+        return _solutionManager.GetProjects().Cast<IRazorProject>();
     }
 
     public ImmutableArray<IRazorProject> GetProjectsContainingDocument(string documentFilePath)
     {
         using var projects = new PooledArrayBuilder<IRazorProject>();
 
-        foreach (var project in _projectManager.GetProjects())
+        foreach (var project in _solutionManager.GetProjects())
         {
             if (project.ContainsDocument(documentFilePath))
             {

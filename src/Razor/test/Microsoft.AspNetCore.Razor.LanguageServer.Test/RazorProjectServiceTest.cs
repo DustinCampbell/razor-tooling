@@ -29,7 +29,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
 
     // Each of these is initialized by InitializeAsync() below.
 #nullable disable
-    private TestProjectSnapshotManager _projectManager;
+    private TestRazorSolutionManager _solutionManager;
     private TestRazorProjectService _projectService;
     private IRazorProjectInfoListener _projectInfoListener;
 #nullable enable
@@ -38,7 +38,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
     {
         var optionsMonitor = TestRazorLSPOptionsMonitor.Create();
         var projectEngineFactoryProvider = new LspProjectEngineFactoryProvider(optionsMonitor);
-        _projectManager = CreateProjectSnapshotManager(projectEngineFactoryProvider);
+        _solutionManager = CreateSolutionManager(projectEngineFactoryProvider);
 
         var remoteTextLoaderFactoryMock = new StrictMock<RemoteTextLoaderFactory>();
         remoteTextLoaderFactoryMock
@@ -47,7 +47,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
 
         _projectService = new TestRazorProjectService(
             remoteTextLoaderFactoryMock.Object,
-            _projectManager,
+            _solutionManager,
             LoggerFactory);
 
         _projectInfoListener = _projectService;
@@ -61,7 +61,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         // Arrange
         var hostProject = new HostProject("C:/path/to/project.csproj", "C:/path/to/obj", RazorConfiguration.Default, "TestRootNamespace");
 
-        await _projectManager.UpdateAsync(updater =>
+        await _solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(hostProject);
         });
@@ -80,7 +80,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
             DisposalToken);
 
         // Assert
-        var project = _projectManager.GetRequiredProject(hostProject.Key);
+        var project = _solutionManager.GetRequiredProject(hostProject.Key);
         Assert.Same(projectWorkspaceState, project.ProjectWorkspaceState);
     }
 
@@ -91,7 +91,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         var hostProject = new HostProject("C:/path/to/project.csproj", "C:/path/to/obj", RazorConfiguration.Default, "TestRootNamespace");
         var hostDocument = new HostDocument("C:/path/to/file.cshtml", "file.cshtml", FileKinds.Legacy);
 
-        await _projectManager.UpdateAsync(updater =>
+        await _solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(hostProject);
             updater.AddDocument(hostProject.Key, hostDocument, StrictMock.Of<TextLoader>());
@@ -111,7 +111,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
             DisposalToken);
 
         // Assert
-        var document = _projectManager.GetRequiredDocument(hostProject.Key, hostDocument.FilePath);
+        var document = _solutionManager.GetRequiredDocument(hostProject.Key, hostDocument.FilePath);
 
         Assert.Equal(FileKinds.Component, document.FileKind);
     }
@@ -123,7 +123,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         var hostProject = new HostProject("C:/path/to/project.csproj", "C:/path/to/obj", RazorConfiguration.Default, "TestRootNamespace");
         var hostDocument = new HostDocument("C:/path/to/file.cshtml", "file.cshtml", FileKinds.Legacy);
 
-        await _projectManager.UpdateAsync(updater =>
+        await _solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(hostProject);
             updater.AddDocument(hostProject.Key, hostDocument, StrictMock.Of<TextLoader>());
@@ -144,7 +144,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
             DisposalToken);
 
         // Assert
-        var project = _projectManager.GetRequiredProject(hostProject.Key);
+        var project = _solutionManager.GetRequiredProject(hostProject.Key);
         var projectFilePaths = project.DocumentFilePaths.OrderBy(path => path);
         Assert.Equal(projectFilePaths, [oldDocument.FilePath, newDocument.FilePath]);
     }
@@ -156,7 +156,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         var hostProject = new HostProject("C:/path/to/project.csproj", "C:/path/to/obj", RazorConfiguration.Default, "TestRootNamespace");
         var hostDocument = new HostDocument("C:/path/to/file.cshtml", "file.cshtml", FileKinds.Legacy);
 
-        await _projectManager.UpdateAsync(updater =>
+        await _solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(hostProject);
             updater.AddDocument(MiscFilesProject.Key, hostDocument, StrictMock.Of<TextLoader>());
@@ -176,11 +176,11 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
             DisposalToken);
 
         // Assert
-        var project = _projectManager.GetRequiredProject(hostProject.Key);
+        var project = _solutionManager.GetRequiredProject(hostProject.Key);
         var projectFilePaths = project.DocumentFilePaths.OrderBy(path => path);
         Assert.Equal(projectFilePaths, [addedDocument.FilePath]);
 
-        var miscProject = _projectManager.GetMiscellaneousProject();
+        var miscProject = _solutionManager.GetMiscellaneousProject();
         Assert.Empty(miscProject.DocumentFilePaths);
     }
 
@@ -198,7 +198,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
 
         await _projectService.AddDocumentToMiscProjectAsync(DocumentFilePath, DisposalToken);
 
-        var project = _projectManager.GetRequiredProject(ownerProjectKey);
+        var project = _solutionManager.GetRequiredProject(ownerProjectKey);
 
         var addedDocument = new DocumentSnapshotHandle(DocumentFilePath, DocumentFilePath, FileKinds.Legacy);
 
@@ -214,11 +214,11 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
             DisposalToken);
 
         // Assert
-        project = _projectManager.GetRequiredProject(ownerProjectKey);
+        project = _solutionManager.GetRequiredProject(ownerProjectKey);
         var projectFilePaths = project.DocumentFilePaths.OrderBy(path => path);
         Assert.Equal(projectFilePaths, [addedDocument.FilePath]);
 
-        var miscProject = _projectManager.GetMiscellaneousProject();
+        var miscProject = _solutionManager.GetMiscellaneousProject();
         Assert.Empty(miscProject.DocumentFilePaths);
     }
 
@@ -229,7 +229,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         var hostProject = new HostProject("C:/path/to/project.csproj", "C:/path/to/obj", RazorConfiguration.Default, "TestRootNamespace");
         var hostDocument = new HostDocument("C:/path/to/file.cshtml", "file.cshtml", FileKinds.Legacy);
 
-        await _projectManager.UpdateAsync(updater =>
+        await _solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(hostProject);
             updater.AddDocument(MiscFilesProject.Key, hostDocument, StrictMock.Of<TextLoader>());
@@ -249,10 +249,10 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
             DisposalToken);
 
         // Assert
-        var project = _projectManager.GetRequiredProject(hostProject.Key);
+        var project = _solutionManager.GetRequiredProject(hostProject.Key);
         Assert.Equal(project.DocumentFilePaths, [newDocument.FilePath]);
 
-        var miscProject = _projectManager.GetMiscellaneousProject();
+        var miscProject = _solutionManager.GetMiscellaneousProject();
         Assert.Equal(miscProject.DocumentFilePaths, [hostDocument.FilePath]);
     }
 
@@ -263,7 +263,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         var hostProject = new HostProject("path/to/project.csproj", "path/to/obj", RazorConfiguration.Default, "TestRootNamespace");
         var document = new HostDocument("path/to/file.cshtml", "file.cshtml", FileKinds.Legacy);
 
-        await _projectManager.UpdateAsync(updater =>
+        await _solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(hostProject);
             updater.AddDocument(hostProject.Key, document, StrictMock.Of<TextLoader>());
@@ -271,7 +271,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
 
         var newDocument = new DocumentSnapshotHandle(document.FilePath, document.TargetPath, document.FileKind);
 
-        using var listener = _projectManager.ListenToNotifications();
+        using var listener = _solutionManager.ListenToNotifications();
 
         // Act & Assert
         await _projectInfoListener.UpdatedAsync(new RazorProjectInfo(
@@ -294,7 +294,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         var hostProject = new HostProject("C:/path/to/project.csproj", "C:/path/to/obj", RazorConfiguration.Default, "TestRootNamespace");
         var legacyDocument = new HostDocument("C:/path/to/file.cshtml", "file.cshtml", FileKinds.Legacy);
 
-        await _projectManager.UpdateAsync(updater =>
+        await _solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(hostProject);
             updater.AddDocument(hostProject.Key, legacyDocument, StrictMock.Of<TextLoader>());
@@ -314,7 +314,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
             DisposalToken);
 
         // Assert
-        var document = _projectManager.GetRequiredDocument(hostProject.Key, newDocument.FilePath);
+        var document = _solutionManager.GetRequiredDocument(hostProject.Key, newDocument.FilePath);
 
         Assert.Equal(FileKinds.Component, document.FileKind);
     }
@@ -330,9 +330,9 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         var ownerProjectKey = await _projectService.GetTestAccessor().AddProjectAsync(
             ProjectFilePath, IntermediateOutputPath, RazorConfiguration.Default, rootNamespace: null, displayName: null, DisposalToken);
 
-        var ownerProject = _projectManager.GetRequiredProject(ownerProjectKey);
+        var ownerProject = _solutionManager.GetRequiredProject(ownerProjectKey);
 
-        using var listener = _projectManager.ListenToNotifications();
+        using var listener = _solutionManager.ListenToNotifications();
 
         // Act
         await _projectInfoListener.UpdatedAsync(new RazorProjectInfo(
@@ -363,9 +363,9 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         var ownerProjectKey = await _projectService.GetTestAccessor().AddProjectAsync(
             ProjectFilePath, IntermediateOutputPath, RazorConfiguration.Default, RootNamespace, displayName: null, DisposalToken);
 
-        var ownerProject = _projectManager.GetRequiredProject(ownerProjectKey);
+        var ownerProject = _solutionManager.GetRequiredProject(ownerProjectKey);
 
-        using var listener = _projectManager.ListenToNotifications();
+        using var listener = _solutionManager.ListenToNotifications();
 
         // Act & Assert
         await _projectInfoListener.UpdatedAsync(new RazorProjectInfo(
@@ -392,9 +392,9 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         var ownerProjectKey = await _projectService.GetTestAccessor().AddProjectAsync(
             ProjectFilePath, IntermediateOutputPath, RazorConfiguration.Default, RootNamespace, displayName: null, DisposalToken);
 
-        var ownerProject = _projectManager.GetRequiredProject(ownerProjectKey);
+        var ownerProject = _solutionManager.GetRequiredProject(ownerProjectKey);
 
-        using var listener = _projectManager.ListenToNotifications();
+        using var listener = _solutionManager.ListenToNotifications();
 
         // Act
         await _projectInfoListener.UpdatedAsync(new RazorProjectInfo(
@@ -427,9 +427,9 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         await _projectService.AddDocumentToPotentialProjectsAsync(DocumentFilePath, DisposalToken);
         await _projectService.OpenDocumentAsync(DocumentFilePath, s_emptyText, DisposalToken);
 
-        Assert.True(_projectManager.IsDocumentOpen(DocumentFilePath));
+        Assert.True(_solutionManager.IsDocumentOpen(DocumentFilePath));
 
-        using var listener = _projectManager.ListenToNotifications();
+        using var listener = _solutionManager.ListenToNotifications();
 
         // Act
         await _projectService.CloseDocumentAsync(DocumentFilePath, DisposalToken);
@@ -438,7 +438,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         listener.AssertNotifications(
             x => x.DocumentChanged(DocumentFilePath, ownerProjectKey));
 
-        Assert.False(_projectManager.IsDocumentOpen(DocumentFilePath));
+        Assert.False(_solutionManager.IsDocumentOpen(DocumentFilePath));
     }
 
     [Fact]
@@ -458,9 +458,9 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         await _projectService.AddDocumentToPotentialProjectsAsync(DocumentFilePath, DisposalToken);
         await _projectService.OpenDocumentAsync(DocumentFilePath, s_emptyText, DisposalToken);
 
-        Assert.True(_projectManager.IsDocumentOpen(DocumentFilePath));
+        Assert.True(_solutionManager.IsDocumentOpen(DocumentFilePath));
 
-        using var listener = _projectManager.ListenToNotifications();
+        using var listener = _solutionManager.ListenToNotifications();
 
         // Act
         await _projectService.CloseDocumentAsync(DocumentFilePath, DisposalToken);
@@ -470,7 +470,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
             x => x.DocumentChanged(DocumentFilePath, ownerProjectKey1),
             x => x.DocumentChanged(DocumentFilePath, ownerProjectKey2));
 
-        Assert.False(_projectManager.IsDocumentOpen(DocumentFilePath));
+        Assert.False(_solutionManager.IsDocumentOpen(DocumentFilePath));
     }
 
     [Fact]
@@ -482,11 +482,11 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         await _projectService.AddDocumentToPotentialProjectsAsync(DocumentFilePath, DisposalToken);
         await _projectService.OpenDocumentAsync(DocumentFilePath, s_emptyText, DisposalToken);
 
-        var miscProject = _projectManager.GetMiscellaneousProject();
+        var miscProject = _solutionManager.GetMiscellaneousProject();
 
-        Assert.True(_projectManager.IsDocumentOpen(DocumentFilePath));
+        Assert.True(_solutionManager.IsDocumentOpen(DocumentFilePath));
 
-        using var listener = _projectManager.ListenToNotifications();
+        using var listener = _solutionManager.ListenToNotifications();
 
         // Act
         await _projectService.CloseDocumentAsync(DocumentFilePath, DisposalToken);
@@ -495,7 +495,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         listener.AssertNotifications(
             x => x.DocumentChanged(DocumentFilePath, miscProject.Key));
 
-        Assert.False(_projectManager.IsDocumentOpen(DocumentFilePath));
+        Assert.False(_solutionManager.IsDocumentOpen(DocumentFilePath));
     }
 
     [Fact]
@@ -511,9 +511,9 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
             ProjectFilePath, IntermediateOutputPath, RazorConfiguration.Default, RootNamespace, displayName: null, DisposalToken);
         await _projectService.AddDocumentToPotentialProjectsAsync(DocumentFilePath, DisposalToken);
 
-        Assert.False(_projectManager.IsDocumentOpen(DocumentFilePath));
+        Assert.False(_solutionManager.IsDocumentOpen(DocumentFilePath));
 
-        using var listener = _projectManager.ListenToNotifications();
+        using var listener = _solutionManager.ListenToNotifications();
 
         // Act
         await _projectService.OpenDocumentAsync(DocumentFilePath, SourceText.From("Hello World"), DisposalToken);
@@ -522,7 +522,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         listener.AssertNotifications(
             x => x.DocumentChanged(DocumentFilePath, ownerProjectKey));
 
-        Assert.True(_projectManager.IsDocumentOpen(DocumentFilePath));
+        Assert.True(_solutionManager.IsDocumentOpen(DocumentFilePath));
     }
 
     [Fact]
@@ -541,9 +541,9 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
             ProjectFilePath, IntermediateOutputPath2, RazorConfiguration.Default, RootNamespace, displayName: null, DisposalToken);
         await _projectService.AddDocumentToPotentialProjectsAsync(DocumentFilePath, DisposalToken);
 
-        Assert.False(_projectManager.IsDocumentOpen(DocumentFilePath));
+        Assert.False(_solutionManager.IsDocumentOpen(DocumentFilePath));
 
-        using var listener = _projectManager.ListenToNotifications();
+        using var listener = _solutionManager.ListenToNotifications();
 
         // Act
         await _projectService.OpenDocumentAsync(DocumentFilePath, SourceText.From("Hello World"), DisposalToken);
@@ -553,7 +553,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
             x => x.DocumentChanged(DocumentFilePath, ownerProjectKey1),
             x => x.DocumentChanged(DocumentFilePath, ownerProjectKey2));
 
-        Assert.True(_projectManager.IsDocumentOpen(DocumentFilePath));
+        Assert.True(_solutionManager.IsDocumentOpen(DocumentFilePath));
     }
 
     [Fact]
@@ -564,11 +564,11 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
 
         await _projectService.AddDocumentToMiscProjectAsync(DocumentFilePath, DisposalToken);
 
-        var miscProject = _projectManager.GetMiscellaneousProject();
+        var miscProject = _solutionManager.GetMiscellaneousProject();
 
-        Assert.False(_projectManager.IsDocumentOpen(DocumentFilePath));
+        Assert.False(_solutionManager.IsDocumentOpen(DocumentFilePath));
 
-        using var listener = _projectManager.ListenToNotifications();
+        using var listener = _solutionManager.ListenToNotifications();
 
         // Act
         await _projectService.OpenDocumentAsync(DocumentFilePath, s_emptyText, DisposalToken);
@@ -577,7 +577,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         listener.AssertNotifications(
             x => x.DocumentChanged(DocumentFilePath, miscProject.Key));
 
-        Assert.True(_projectManager.IsDocumentOpen(DocumentFilePath));
+        Assert.True(_solutionManager.IsDocumentOpen(DocumentFilePath));
     }
 
     [Fact]
@@ -592,9 +592,9 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         var ownerProjectKey = await _projectService.GetTestAccessor().AddProjectAsync(
             ProjectFilePath, IntermediateOutputPath, RazorConfiguration.Default, RootNamespace, displayName: null, DisposalToken);
 
-        var miscProject = _projectManager.GetMiscellaneousProject();
+        var miscProject = _solutionManager.GetMiscellaneousProject();
 
-        using var listener = _projectManager.ListenToNotifications();
+        using var listener = _solutionManager.ListenToNotifications();
 
         // Act
         await _projectService.OpenDocumentAsync(DocumentFilePath, SourceText.From("Hello World"), DisposalToken);
@@ -604,7 +604,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
             x => x.DocumentAdded(DocumentFilePath, miscProject.Key),
             x => x.DocumentChanged(DocumentFilePath, miscProject.Key));
 
-        Assert.True(_projectManager.IsDocumentOpen(DocumentFilePath));
+        Assert.True(_solutionManager.IsDocumentOpen(DocumentFilePath));
     }
 
     [Fact]
@@ -615,7 +615,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
 
         await _projectService.AddDocumentToPotentialProjectsAsync(DocumentFilePath, DisposalToken);
 
-        using var listener = _projectManager.ListenToNotifications();
+        using var listener = _solutionManager.ListenToNotifications();
 
         // Act
         await _projectService.AddDocumentToPotentialProjectsAsync(DocumentFilePath, DisposalToken);
@@ -636,9 +636,9 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         var ownerProjectKey = await _projectService.GetTestAccessor().AddProjectAsync(
             ProjectFilePath, IntermediateOutputPath, RazorConfiguration.Default, RootNamespace, displayName: null, DisposalToken);
 
-        var ownerProject = _projectManager.GetRequiredProject(ownerProjectKey);
+        var ownerProject = _solutionManager.GetRequiredProject(ownerProjectKey);
 
-        using var listener = _projectManager.ListenToNotifications();
+        using var listener = _solutionManager.ListenToNotifications();
 
         // Act
         await _projectService.AddDocumentToPotentialProjectsAsync(DocumentFilePath, DisposalToken);
@@ -647,7 +647,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         listener.AssertNotifications(
             x => x.DocumentAdded(DocumentFilePath, ownerProjectKey));
 
-        Assert.False(_projectManager.IsDocumentOpen(DocumentFilePath));
+        Assert.False(_solutionManager.IsDocumentOpen(DocumentFilePath));
     }
 
     [Fact]
@@ -656,9 +656,9 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         // Arrange
         const string DocumentFilePath = "document.cshtml";
 
-        var miscProject = _projectManager.GetMiscellaneousProject();
+        var miscProject = _solutionManager.GetMiscellaneousProject();
 
-        using var listener = _projectManager.ListenToNotifications();
+        using var listener = _solutionManager.ListenToNotifications();
 
         // Act
         await _projectService.AddDocumentToMiscProjectAsync(DocumentFilePath, DisposalToken);
@@ -667,7 +667,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         listener.AssertNotifications(
             x => x.DocumentAdded(DocumentFilePath, miscProject.Key));
 
-        Assert.False(_projectManager.IsDocumentOpen(DocumentFilePath));
+        Assert.False(_solutionManager.IsDocumentOpen(DocumentFilePath));
     }
 
     [Fact]
@@ -684,7 +684,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         await _projectService.AddDocumentToPotentialProjectsAsync(DocumentFilePath, DisposalToken);
 
         // Act
-        using var listener = _projectManager.ListenToNotifications();
+        using var listener = _solutionManager.ListenToNotifications();
 
         // Act
         await _projectService.AddDocumentToMiscProjectAsync(DocumentFilePath, DisposalToken);
@@ -702,7 +702,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         await _projectService.AddDocumentToMiscProjectAsync(DocumentFilePath, DisposalToken);
 
         // Act
-        using var listener = _projectManager.ListenToNotifications();
+        using var listener = _solutionManager.ListenToNotifications();
 
         // Act
         await _projectService.AddDocumentToMiscProjectAsync(DocumentFilePath, DisposalToken);
@@ -724,7 +724,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
             ProjectFilePath, IntermediateOutputPath, RazorConfiguration.Default, RootNamespace, displayName: null, DisposalToken);
         await _projectService.AddDocumentToPotentialProjectsAsync(DocumentFilePath, DisposalToken);
 
-        using var listener = _projectManager.ListenToNotifications();
+        using var listener = _solutionManager.ListenToNotifications();
 
         // Act
         await _projectService.RemoveDocumentAsync(DocumentFilePath, DisposalToken);
@@ -733,7 +733,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         listener.AssertNotifications(
             x => x.DocumentRemoved(DocumentFilePath, ownerProjectKey));
 
-        Assert.False(_projectManager.IsDocumentOpen(DocumentFilePath));
+        Assert.False(_solutionManager.IsDocumentOpen(DocumentFilePath));
     }
 
     [Fact]
@@ -752,7 +752,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
             ProjectFilePath, IntermediateOutputPath2, RazorConfiguration.Default, RootNamespace, displayName: null, DisposalToken);
         await _projectService.AddDocumentToPotentialProjectsAsync(DocumentFilePath, DisposalToken);
 
-        using var listener = _projectManager.ListenToNotifications();
+        using var listener = _solutionManager.ListenToNotifications();
 
         // Act
         await _projectService.RemoveDocumentAsync(DocumentFilePath, DisposalToken);
@@ -762,7 +762,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
             x => x.DocumentRemoved(DocumentFilePath, ownerProjectKey1),
             x => x.DocumentRemoved(DocumentFilePath, ownerProjectKey2));
 
-        Assert.False(_projectManager.IsDocumentOpen(DocumentFilePath));
+        Assert.False(_solutionManager.IsDocumentOpen(DocumentFilePath));
     }
 
     [Fact]
@@ -779,9 +779,9 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         await _projectService.AddDocumentToPotentialProjectsAsync(DocumentFilePath, DisposalToken);
         await _projectService.OpenDocumentAsync(DocumentFilePath, s_emptyText, DisposalToken);
 
-        Assert.True(_projectManager.IsDocumentOpen(DocumentFilePath));
+        Assert.True(_solutionManager.IsDocumentOpen(DocumentFilePath));
 
-        using var listener = _projectManager.ListenToNotifications();
+        using var listener = _solutionManager.ListenToNotifications();
 
         // Act
         await _projectService.RemoveDocumentAsync(DocumentFilePath, DisposalToken);
@@ -791,7 +791,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
             x => x.DocumentRemoved(DocumentFilePath, ownerProjectKey),
             x => x.DocumentAdded(DocumentFilePath, MiscFilesProject.Key));
 
-        Assert.True(_projectManager.IsDocumentOpen(DocumentFilePath));
+        Assert.True(_solutionManager.IsDocumentOpen(DocumentFilePath));
     }
 
     [Fact]
@@ -802,11 +802,11 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
 
         await _projectService.AddDocumentToMiscProjectAsync(DocumentFilePath, DisposalToken);
 
-        var miscProject = _projectManager.GetMiscellaneousProject();
+        var miscProject = _solutionManager.GetMiscellaneousProject();
 
-        Assert.False(_projectManager.IsDocumentOpen(DocumentFilePath));
+        Assert.False(_solutionManager.IsDocumentOpen(DocumentFilePath));
 
-        using var listener = _projectManager.ListenToNotifications();
+        using var listener = _solutionManager.ListenToNotifications();
 
         // Act
         await _projectService.RemoveDocumentAsync(DocumentFilePath, DisposalToken);
@@ -822,7 +822,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         // Arrange
         const string DocumentFilePath = "C:/path/to/document.cshtml";
 
-        using var listener = _projectManager.ListenToNotifications();
+        using var listener = _solutionManager.ListenToNotifications();
 
         // Act
         await _projectService.RemoveDocumentAsync(DocumentFilePath, DisposalToken);
@@ -837,9 +837,9 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         // Arrange
         const string DocumentFilePath = "document.cshtml";
 
-        Assert.False(_projectManager.IsDocumentOpen(DocumentFilePath));
+        Assert.False(_solutionManager.IsDocumentOpen(DocumentFilePath));
 
-        using var listener = _projectManager.ListenToNotifications();
+        using var listener = _solutionManager.ListenToNotifications();
 
         // Act
         await _projectService.RemoveDocumentAsync(DocumentFilePath, DisposalToken);
@@ -862,9 +862,9 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         await _projectService.AddDocumentToPotentialProjectsAsync(DocumentFilePath, DisposalToken);
         await _projectService.OpenDocumentAsync(DocumentFilePath, s_emptyText, DisposalToken);
 
-        Assert.True(_projectManager.IsDocumentOpen(DocumentFilePath));
+        Assert.True(_solutionManager.IsDocumentOpen(DocumentFilePath));
 
-        using var listener = _projectManager.ListenToNotifications();
+        using var listener = _solutionManager.ListenToNotifications();
 
         // Act
         await _projectService.UpdateDocumentAsync(DocumentFilePath, s_emptyText.Replace(0, 0, "Hello World"), DisposalToken);
@@ -873,7 +873,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         listener.AssertNotifications(
             x => x.DocumentChanged(DocumentFilePath, ownerProjectKey));
 
-        Assert.True(_projectManager.IsDocumentOpen(DocumentFilePath));
+        Assert.True(_solutionManager.IsDocumentOpen(DocumentFilePath));
     }
 
     [Fact]
@@ -893,9 +893,9 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         await _projectService.AddDocumentToPotentialProjectsAsync(DocumentFilePath, DisposalToken);
         await _projectService.OpenDocumentAsync(DocumentFilePath, s_emptyText, DisposalToken);
 
-        Assert.True(_projectManager.IsDocumentOpen(DocumentFilePath));
+        Assert.True(_solutionManager.IsDocumentOpen(DocumentFilePath));
 
-        using var listener = _projectManager.ListenToNotifications();
+        using var listener = _solutionManager.ListenToNotifications();
 
         // Act
         await _projectService.UpdateDocumentAsync(DocumentFilePath, s_emptyText.Replace(0, 0, "Hello World"), DisposalToken);
@@ -905,7 +905,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
             x => x.DocumentChanged(DocumentFilePath, ownerProjectKey1),
             x => x.DocumentChanged(DocumentFilePath, ownerProjectKey2));
 
-        Assert.True(_projectManager.IsDocumentOpen(DocumentFilePath));
+        Assert.True(_solutionManager.IsDocumentOpen(DocumentFilePath));
     }
 
     [Fact]
@@ -917,11 +917,11 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         await _projectService.AddDocumentToPotentialProjectsAsync(DocumentFilePath, DisposalToken);
         await _projectService.OpenDocumentAsync(DocumentFilePath, s_emptyText, DisposalToken);
 
-        var miscProject = _projectManager.GetMiscellaneousProject();
+        var miscProject = _solutionManager.GetMiscellaneousProject();
 
-        Assert.True(_projectManager.IsDocumentOpen(DocumentFilePath));
+        Assert.True(_solutionManager.IsDocumentOpen(DocumentFilePath));
 
-        using var listener = _projectManager.ListenToNotifications();
+        using var listener = _solutionManager.ListenToNotifications();
 
         // Act
         await _projectService.UpdateDocumentAsync(DocumentFilePath, s_emptyText.Replace(0, 0, "Hello World"), DisposalToken);
@@ -930,7 +930,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         listener.AssertNotifications(
             x => x.DocumentChanged(DocumentFilePath, miscProject.Key));
 
-        Assert.True(_projectManager.IsDocumentOpen(DocumentFilePath));
+        Assert.True(_solutionManager.IsDocumentOpen(DocumentFilePath));
     }
 
     [Fact]
@@ -946,7 +946,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
             ProjectFilePath, IntermediateOutputPath, RazorConfiguration.Default, RootNamespace, displayName: null, DisposalToken);
         await _projectService.AddDocumentToPotentialProjectsAsync(DocumentFilePath, DisposalToken);
 
-        using var listener = _projectManager.ListenToNotifications();
+        using var listener = _solutionManager.ListenToNotifications();
 
         // Act
         await _projectService.UpdateDocumentAsync(DocumentFilePath, s_emptyText.Replace(0, 0, "Hello World"), DisposalToken);
@@ -955,7 +955,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
         listener.AssertNotifications(
             x => x.DocumentChanged(DocumentFilePath, ownerProjectKey));
 
-        var latestVersion = _projectManager.GetRequiredDocument(ownerProjectKey, DocumentFilePath).Version;
+        var latestVersion = _solutionManager.GetRequiredDocument(ownerProjectKey, DocumentFilePath).Version;
 
         Assert.Equal(2, latestVersion);
     }
@@ -982,7 +982,7 @@ public class RazorProjectServiceTest(ITestOutputHelper testOutput) : LanguageSer
             documents: []),
             DisposalToken);
 
-        var project = _projectManager.GetRequiredProject(projectKey);
+        var project = _solutionManager.GetRequiredProject(projectKey);
 
         // Assert
         Assert.Equal(ProjectFilePath, project.FilePath);

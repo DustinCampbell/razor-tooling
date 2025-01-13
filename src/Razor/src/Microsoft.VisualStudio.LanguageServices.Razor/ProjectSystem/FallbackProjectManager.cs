@@ -28,7 +28,7 @@ namespace Microsoft.VisualStudio.Razor.ProjectSystem;
 internal sealed class FallbackProjectManager : IFallbackProjectManager
 {
     private readonly IServiceProvider _serviceProvider;
-    private readonly ProjectSnapshotManager _projectManager;
+    private readonly RazorSolutionManager _solutionManager;
     private readonly IWorkspaceProvider _workspaceProvider;
     private readonly ITelemetryReporter _telemetryReporter;
 
@@ -38,21 +38,21 @@ internal sealed class FallbackProjectManager : IFallbackProjectManager
     [ImportingConstructor]
     public FallbackProjectManager(
         [Import(typeof(SVsServiceProvider))] IServiceProvider serviceProvider,
-        ProjectSnapshotManager projectManager,
+        RazorSolutionManager solutionManager,
         IWorkspaceProvider workspaceProvider,
         ITelemetryReporter telemetryReporter)
     {
         _serviceProvider = serviceProvider;
-        _projectManager = projectManager;
+        _solutionManager = solutionManager;
         _workspaceProvider = workspaceProvider;
         _telemetryReporter = telemetryReporter;
 
         // Use PriorityChanged to ensure that project changes or removes update _fallbackProjects
         // before IProjectSnapshotManager.Changed listeners are notified.
-        _projectManager.PriorityChanged += ProjectManager_Changed;
+        _solutionManager.PriorityChanged += SolutionManager_Changed;
     }
 
-    private void ProjectManager_Changed(object sender, ProjectChangeEventArgs e)
+    private void SolutionManager_Changed(object sender, ProjectChangeEventArgs e)
     {
         // If a project is changed, we know that this is no longer a fallback project because
         // one of two things has happened:
@@ -82,7 +82,7 @@ internal sealed class FallbackProjectManager : IFallbackProjectManager
     {
         try
         {
-            if (_projectManager.TryGetProject(razorProjectKey, out var project))
+            if (_solutionManager.TryGetProject(razorProjectKey, out var project))
             {
                 if (IsFallbackProject(project))
                 {
@@ -114,7 +114,7 @@ internal sealed class FallbackProjectManager : IFallbackProjectManager
     {
         try
         {
-            if (_projectManager.TryGetProject(razorProjectKey, out var project) &&
+            if (_solutionManager.TryGetProject(razorProjectKey, out var project) &&
                 IsFallbackProject(project))
             {
                 // If this is a fallback project, then Roslyn may not track documents in the project, so these dynamic file notifications
@@ -213,9 +213,9 @@ internal sealed class FallbackProjectManager : IFallbackProjectManager
             cancellationToken);
     }
 
-    private void EnqueueProjectManagerUpdate(Action<ProjectSnapshotManager.Updater> action, CancellationToken cancellationToken)
+    private void EnqueueProjectManagerUpdate(Action<RazorSolutionManager.Updater> action, CancellationToken cancellationToken)
     {
-        _projectManager
+        _solutionManager
             .UpdateAsync(
                 static (updater, state) =>
                 {

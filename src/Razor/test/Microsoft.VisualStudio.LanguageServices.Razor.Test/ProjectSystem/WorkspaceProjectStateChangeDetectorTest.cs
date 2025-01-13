@@ -122,8 +122,8 @@ public class WorkspaceProjectStateChangeDetectorTest : VisualStudioWorkspaceTest
     {
         // Arrange
         var generator = new TestProjectWorkspaceStateGenerator();
-        var projectManager = CreateProjectSnapshotManager();
-        using var detector = CreateDetector(generator, projectManager);
+        var solutionManager = CreateSolutionManager();
+        using var detector = CreateDetector(generator, solutionManager);
         var detectorAccessor = detector.GetTestAccessor();
 
         var workspaceChangedTask = detectorAccessor.ListenForWorkspaceChangesAsync(
@@ -132,7 +132,7 @@ public class WorkspaceProjectStateChangeDetectorTest : VisualStudioWorkspaceTest
 
         Workspace.TryApplyChanges(_solutionWithTwoProjects);
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(_hostProjectOne);
         });
@@ -143,7 +143,7 @@ public class WorkspaceProjectStateChangeDetectorTest : VisualStudioWorkspaceTest
         generator.Clear();
 
         // Act
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.SolutionClosed();
 
@@ -164,11 +164,11 @@ public class WorkspaceProjectStateChangeDetectorTest : VisualStudioWorkspaceTest
     {
         // Arrange
         var generator = new TestProjectWorkspaceStateGenerator();
-        var projectManager = CreateProjectSnapshotManager();
-        using var detector = CreateDetector(generator, projectManager);
+        var solutionManager = CreateSolutionManager();
+        using var detector = CreateDetector(generator, solutionManager);
         var detectorAccessor = detector.GetTestAccessor();
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(_hostProjectOne);
             updater.AddProject(_hostProjectTwo);
@@ -205,11 +205,11 @@ public class WorkspaceProjectStateChangeDetectorTest : VisualStudioWorkspaceTest
     {
         // Arrange
         var generator = new TestProjectWorkspaceStateGenerator();
-        var projectManager = CreateProjectSnapshotManager();
-        using var detector = CreateDetector(generator, projectManager);
+        var solutionManager = CreateSolutionManager();
+        using var detector = CreateDetector(generator, solutionManager);
         var detectorAccessor = detector.GetTestAccessor();
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(_hostProjectOne);
             updater.AddProject(_hostProjectTwo);
@@ -248,11 +248,11 @@ public class WorkspaceProjectStateChangeDetectorTest : VisualStudioWorkspaceTest
     {
         // Arrange
         var generator = new TestProjectWorkspaceStateGenerator();
-        var projectManager = CreateProjectSnapshotManager();
-        using var detector = CreateDetector(generator, projectManager);
+        var solutionManager = CreateSolutionManager();
+        using var detector = CreateDetector(generator, solutionManager);
         var detectorAccessor = detector.GetTestAccessor();
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(_hostProjectOne);
             updater.AddProject(_hostProjectTwo);
@@ -282,11 +282,11 @@ public class WorkspaceProjectStateChangeDetectorTest : VisualStudioWorkspaceTest
     {
         // Arrange
         var generator = new TestProjectWorkspaceStateGenerator();
-        var projectManager = CreateProjectSnapshotManager();
-        using var detector = CreateDetector(generator, projectManager);
+        var solutionManager = CreateSolutionManager();
+        using var detector = CreateDetector(generator, solutionManager);
         var detectorAccessor = detector.GetTestAccessor();
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(_hostProjectOne);
             updater.AddProject(_hostProjectTwo);
@@ -322,11 +322,11 @@ public class WorkspaceProjectStateChangeDetectorTest : VisualStudioWorkspaceTest
     {
         // Arrange
         var generator = new TestProjectWorkspaceStateGenerator();
-        var projectManager = CreateProjectSnapshotManager();
-        using var detector = CreateDetector(generator, projectManager);
+        var solutionManager = CreateSolutionManager();
+        using var detector = CreateDetector(generator, solutionManager);
         var detectorAccessor = detector.GetTestAccessor();
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(_hostProjectOne);
         });
@@ -358,13 +358,13 @@ public class WorkspaceProjectStateChangeDetectorTest : VisualStudioWorkspaceTest
     {
         // Arrange
         var generator = new TestProjectWorkspaceStateGenerator();
-        var projectManager = CreateProjectSnapshotManager();
-        using var detector = CreateDetector(generator, projectManager);
+        var solutionManager = CreateSolutionManager();
+        using var detector = CreateDetector(generator, solutionManager);
         var detectorAccessor = detector.GetTestAccessor();
 
         Workspace.TryApplyChanges(_solutionWithTwoProjects);
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(_hostProjectOne);
         });
@@ -390,13 +390,13 @@ public class WorkspaceProjectStateChangeDetectorTest : VisualStudioWorkspaceTest
     {
         // Arrange
         var generator = new TestProjectWorkspaceStateGenerator();
-        var projectManager = CreateProjectSnapshotManager();
-        using var detector = CreateDetector(generator, projectManager);
+        var solutionManager = CreateSolutionManager();
+        using var detector = CreateDetector(generator, solutionManager);
         var detectorAccessor = detector.GetTestAccessor();
 
         Workspace.TryApplyChanges(_solutionWithTwoProjects);
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(_hostProjectOne);
         });
@@ -422,13 +422,13 @@ public class WorkspaceProjectStateChangeDetectorTest : VisualStudioWorkspaceTest
     {
         // Arrange
         var generator = new TestProjectWorkspaceStateGenerator();
-        var projectManager = CreateProjectSnapshotManager();
-        using var detector = CreateDetector(generator, projectManager);
+        var solutionManager = CreateSolutionManager();
+        using var detector = CreateDetector(generator, solutionManager);
         var detectorAccessor = detector.GetTestAccessor();
 
         Workspace.TryApplyChanges(_solutionWithTwoProjects);
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(_hostProjectOne);
         });
@@ -454,13 +454,13 @@ public class WorkspaceProjectStateChangeDetectorTest : VisualStudioWorkspaceTest
     {
         // Arrange
         var generator = new TestProjectWorkspaceStateGenerator();
-        var projectManager = CreateProjectSnapshotManager();
-        using var detector = CreateDetector(generator, projectManager);
+        var solutionManager = CreateSolutionManager();
+        using var detector = CreateDetector(generator, solutionManager);
         var detectorAccessor = detector.GetTestAccessor();
 
         Workspace.TryApplyChanges(_solutionWithTwoProjects);
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(_hostProjectOne);
         });
@@ -503,11 +503,11 @@ public class WorkspaceProjectStateChangeDetectorTest : VisualStudioWorkspaceTest
     {
         // Arrange
         var generator = new TestProjectWorkspaceStateGenerator();
-        var projectManager = CreateProjectSnapshotManager();
-        using var detector = CreateDetector(generator, projectManager);
+        var solutionManager = CreateSolutionManager();
+        using var detector = CreateDetector(generator, solutionManager);
         var detectorAccessor = detector.GetTestAccessor();
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(_hostProjectOne);
             updater.AddProject(_hostProjectTwo);
@@ -531,11 +531,11 @@ public class WorkspaceProjectStateChangeDetectorTest : VisualStudioWorkspaceTest
     {
         // Arrange
         var generator = new TestProjectWorkspaceStateGenerator();
-        var projectManager = CreateProjectSnapshotManager();
-        using var detector = CreateDetector(generator, projectManager);
+        var solutionManager = CreateSolutionManager();
+        using var detector = CreateDetector(generator, solutionManager);
         var detectorAccessor = detector.GetTestAccessor();
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(_hostProjectThree);
         });
@@ -742,6 +742,6 @@ public class WorkspaceProjectStateChangeDetectorTest : VisualStudioWorkspaceTest
         Assert.False(result);
     }
 
-    private WorkspaceProjectStateChangeDetector CreateDetector(IProjectWorkspaceStateGenerator generator, ProjectSnapshotManager projectManager)
-        => new(generator, projectManager, TestLanguageServerFeatureOptions.Instance, WorkspaceProvider, TimeSpan.FromMilliseconds(10));
+    private WorkspaceProjectStateChangeDetector CreateDetector(IProjectWorkspaceStateGenerator generator, RazorSolutionManager solutionManager)
+        => new(generator, solutionManager, TestLanguageServerFeatureOptions.Instance, WorkspaceProvider, TimeSpan.FromMilliseconds(10));
 }

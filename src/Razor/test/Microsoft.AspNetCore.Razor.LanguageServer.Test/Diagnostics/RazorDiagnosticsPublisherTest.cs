@@ -92,18 +92,18 @@ public class RazorDiagnosticsPublisherTest : LanguageServerTestBase
         }
     ];
 
-    private readonly TestProjectSnapshotManager _projectManager;
+    private readonly TestRazorSolutionManager _solutionManager;
     private readonly DocumentContextFactory _documentContextFactory;
 
     public RazorDiagnosticsPublisherTest(ITestOutputHelper testOutput) : base(testOutput)
     {
-        _projectManager = CreateProjectSnapshotManager();
-        _documentContextFactory = new DocumentContextFactory(_projectManager, LoggerFactory);
+        _solutionManager = CreateSolutionManager();
+        _documentContextFactory = new DocumentContextFactory(_solutionManager, LoggerFactory);
     }
 
     protected override async Task InitializeAsync()
     {
-        await _projectManager.UpdateAsync(updater =>
+        await _solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(s_hostProject);
             updater.AddDocument(s_hostProject.Key, s_openHostDocument, EmptyTextLoader.Instance);
@@ -122,7 +122,7 @@ public class RazorDiagnosticsPublisherTest : LanguageServerTestBase
 
     private Task UpdateWithErrorTextAsync()
     {
-        return _projectManager.UpdateAsync(updater =>
+        return _solutionManager.UpdateAsync(updater =>
         {
             updater.UpdateDocumentText(s_hostProject.Key, s_openHostDocument.FilePath, s_razorTextWithError);
         });
@@ -154,7 +154,7 @@ public class RazorDiagnosticsPublisherTest : LanguageServerTestBase
         var publisherAccessor = publisher.GetTestAccessor();
 
         // Act 1
-        var openDocument = _projectManager.GetRequiredDocument(s_hostProject.Key, s_openHostDocument.FilePath);
+        var openDocument = _solutionManager.GetRequiredDocument(s_hostProject.Key, s_openHostDocument.FilePath);
         var codeDocument = await openDocument.GetGeneratedOutputAsync(DisposalToken);
 
         publisher.DocumentProcessed(codeDocument, openDocument);
@@ -204,7 +204,7 @@ public class RazorDiagnosticsPublisherTest : LanguageServerTestBase
             }
         };
 
-        var openDocument = _projectManager.GetRequiredDocument(s_hostProject.Key, s_openHostDocument.FilePath);
+        var openDocument = _solutionManager.GetRequiredDocument(s_hostProject.Key, s_openHostDocument.FilePath);
 
         var clientConnectionMock = new StrictMock<IClientConnection>();
         var requestResult = new FullDocumentDiagnosticReport();
@@ -273,7 +273,7 @@ public class RazorDiagnosticsPublisherTest : LanguageServerTestBase
         // Arrange
         await UpdateWithErrorTextAsync();
 
-        var openDocument = _projectManager.GetRequiredDocument(s_hostProject.Key, s_openHostDocument.FilePath);
+        var openDocument = _solutionManager.GetRequiredDocument(s_hostProject.Key, s_openHostDocument.FilePath);
 
         var clientConnectionMock = new StrictMock<IClientConnection>();
         clientConnectionMock
@@ -325,7 +325,7 @@ public class RazorDiagnosticsPublisherTest : LanguageServerTestBase
     public async Task PublishDiagnosticsAsync_NewCSharpDiagnosticsGetPublished()
     {
         // Arrange
-        var openDocument = _projectManager.GetRequiredDocument(s_hostProject.Key, s_openHostDocument.FilePath);
+        var openDocument = _solutionManager.GetRequiredDocument(s_hostProject.Key, s_openHostDocument.FilePath);
 
         var arranging = true;
         var clientConnectionMock = new StrictMock<IClientConnection>();
@@ -382,7 +382,7 @@ public class RazorDiagnosticsPublisherTest : LanguageServerTestBase
         // Arrange
         await UpdateWithErrorTextAsync();
 
-        var openDocument = _projectManager.GetRequiredDocument(s_hostProject.Key, s_openHostDocument.FilePath);
+        var openDocument = _solutionManager.GetRequiredDocument(s_hostProject.Key, s_openHostDocument.FilePath);
 
         var clientConnectionMock = new StrictMock<IClientConnection>();
         clientConnectionMock
@@ -408,7 +408,7 @@ public class RazorDiagnosticsPublisherTest : LanguageServerTestBase
     public async Task PublishDiagnosticsAsync_NoopsIfCSharpDiagnosticsAreSameAsPreviousPublish()
     {
         // Arrange
-        var openDocument = _projectManager.GetRequiredDocument(s_hostProject.Key, s_openHostDocument.FilePath);
+        var openDocument = _solutionManager.GetRequiredDocument(s_hostProject.Key, s_openHostDocument.FilePath);
 
         var clientConnectionMock = new StrictMock<IClientConnection>();
         var arranging = true;
@@ -524,22 +524,22 @@ public class RazorDiagnosticsPublisherTest : LanguageServerTestBase
     {
         clientConnection ??= StrictMock.Of<IClientConnection>();
 
-        var documentContextFactory = new DocumentContextFactory(_projectManager, LoggerFactory);
+        var documentContextFactory = new DocumentContextFactory(_solutionManager, LoggerFactory);
         var filePathService = new LSPFilePathService(TestLanguageServerFeatureOptions.Instance);
         var documentMappingService = new LspDocumentMappingService(filePathService, documentContextFactory, LoggerFactory);
         var translateDiagnosticsService = new RazorTranslateDiagnosticsService(documentMappingService, LoggerFactory);
 
-        return new TestRazorDiagnosticsPublisher(_projectManager, clientConnection, TestLanguageServerFeatureOptions.Instance, translateDiagnosticsService, _documentContextFactory, LoggerFactory);
+        return new TestRazorDiagnosticsPublisher(_solutionManager, clientConnection, TestLanguageServerFeatureOptions.Instance, translateDiagnosticsService, _documentContextFactory, LoggerFactory);
     }
 
     private sealed class TestRazorDiagnosticsPublisher(
-        ProjectSnapshotManager projectManager,
+        RazorSolutionManager solutionManager,
         IClientConnection clientConnection,
         LanguageServerFeatureOptions options,
         RazorTranslateDiagnosticsService translateDiagnosticsService,
         IDocumentContextFactory documentContextFactory,
         ILoggerFactory loggerFactory) : RazorDiagnosticsPublisher(
-            projectManager,
+            solutionManager,
             clientConnection,
             options,
             translateDiagnosticsService: new Lazy<RazorTranslateDiagnosticsService>(() => translateDiagnosticsService),

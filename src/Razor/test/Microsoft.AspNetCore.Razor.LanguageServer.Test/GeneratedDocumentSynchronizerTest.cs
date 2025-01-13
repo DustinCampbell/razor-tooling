@@ -22,19 +22,19 @@ public class GeneratedDocumentSynchronizerTest : LanguageServerTestBase
 
     private readonly GeneratedDocumentSynchronizer _synchronizer;
     private readonly TestGeneratedDocumentPublisher _publisher;
-    private readonly TestProjectSnapshotManager _projectManager;
+    private readonly TestRazorSolutionManager _solutionManager;
 
     public GeneratedDocumentSynchronizerTest(ITestOutputHelper testOutput)
         : base(testOutput)
     {
         _publisher = new TestGeneratedDocumentPublisher();
-        _projectManager = CreateProjectSnapshotManager();
-        _synchronizer = new GeneratedDocumentSynchronizer(_publisher, TestLanguageServerFeatureOptions.Instance, _projectManager);
+        _solutionManager = CreateSolutionManager();
+        _synchronizer = new GeneratedDocumentSynchronizer(_publisher, TestLanguageServerFeatureOptions.Instance, _solutionManager);
     }
 
     protected override async Task InitializeAsync()
     {
-        await _projectManager.UpdateAsync(updater =>
+        await _solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(s_hostProject);
             updater.AddDocument(s_hostProject.Key, s_hostDocument, TestMocks.CreateTextLoader("<p>Hello World</p>"));
@@ -45,12 +45,12 @@ public class GeneratedDocumentSynchronizerTest : LanguageServerTestBase
     public async Task DocumentProcessed_OpenDocument_Publishes()
     {
         // Arrange
-        await _projectManager.UpdateAsync(updater =>
+        await _solutionManager.UpdateAsync(updater =>
         {
             updater.OpenDocument(s_hostProject.Key, s_hostDocument.FilePath, SourceText.From("<p>Hello World</p>"));
         });
 
-        var document = _projectManager.GetRequiredDocument(s_hostProject.Key, s_hostDocument.FilePath);
+        var document = _solutionManager.GetRequiredDocument(s_hostProject.Key, s_hostDocument.FilePath);
         var codeDocument = await document.GetGeneratedOutputAsync(DisposalToken);
 
         // Act
@@ -65,9 +65,9 @@ public class GeneratedDocumentSynchronizerTest : LanguageServerTestBase
     public async Task DocumentProcessed_CloseDocument_WithOption_Publishes()
     {
         var options = new TestLanguageServerFeatureOptions(updateBuffersForClosedDocuments: true);
-        var synchronizer = new GeneratedDocumentSynchronizer(_publisher, options, _projectManager);
+        var synchronizer = new GeneratedDocumentSynchronizer(_publisher, options, _solutionManager);
 
-        var document = _projectManager.GetRequiredDocument(s_hostProject.Key, s_hostDocument.FilePath);
+        var document = _solutionManager.GetRequiredDocument(s_hostProject.Key, s_hostDocument.FilePath);
         var codeDocument = await document.GetGeneratedOutputAsync(DisposalToken);
 
         // Act
@@ -81,7 +81,7 @@ public class GeneratedDocumentSynchronizerTest : LanguageServerTestBase
     [Fact]
     public async Task DocumentProcessed_CloseDocument_DoesntPublish()
     {
-        var document = _projectManager.GetRequiredDocument(s_hostProject.Key, s_hostDocument.FilePath);
+        var document = _solutionManager.GetRequiredDocument(s_hostProject.Key, s_hostDocument.FilePath);
         var codeDocument = await document.GetGeneratedOutputAsync(DisposalToken);
 
         // Act
@@ -95,7 +95,7 @@ public class GeneratedDocumentSynchronizerTest : LanguageServerTestBase
     [Fact]
     public async Task DocumentProcessed_RemovedDocument_DoesntPublish()
     {
-        var document = await _projectManager.UpdateAsync(updater =>
+        var document = await _solutionManager.UpdateAsync(updater =>
         {
             var removedDocument = updater.GetRequiredDocument(s_hostProject.Key, s_hostDocument.FilePath);
             updater.RemoveDocument(s_hostProject.Key, s_hostDocument.FilePath);

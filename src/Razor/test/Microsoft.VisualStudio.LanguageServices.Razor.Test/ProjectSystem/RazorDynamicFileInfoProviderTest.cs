@@ -29,7 +29,7 @@ public class RazorDynamicFileInfoProviderTest(ITestOutputHelper testOutput) : Vi
 #nullable disable
     private RazorDynamicFileInfoProvider _provider;
     private TestAccessor _testAccessor;
-    private TestProjectSnapshotManager _projectManager;
+    private TestRazorSolutionManager _solutionManager;
     private RazorProject _project;
     private RazorDocument _document1;
     private RazorDocument _document2;
@@ -41,20 +41,20 @@ public class RazorDynamicFileInfoProviderTest(ITestOutputHelper testOutput) : Vi
         var documentServiceFactory = new RazorDocumentServiceProviderFactory();
         var editorFeatureDetector = StrictMock.Of<ILspEditorFeatureDetector>();
 
-        _projectManager = CreateProjectSnapshotManager();
+        _solutionManager = CreateSolutionManager();
 
         var hostProject = new HostProject(@"C:\project.csproj", @"C:\obj", RazorConfiguration.Default, rootNamespace: "TestNamespace");
         var hostDocument1 = new HostDocument(@"C:\document1.razor", "document1.razor", FileKinds.Component);
         var hostDocument2 = new HostDocument(@"C:\document2.razor", "document2.razor", FileKinds.Component);
 
-        await _projectManager.UpdateAsync(updater =>
+        await _solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(hostProject);
             updater.AddDocument(hostProject.Key, hostDocument1, EmptyTextLoader.Instance);
             updater.AddDocument(hostProject.Key, hostDocument2, EmptyTextLoader.Instance);
         });
 
-        _project = _projectManager.GetRequiredProject(hostProject.Key);
+        _project = _solutionManager.GetRequiredProject(hostProject.Key);
         _document1 = _project.GetRequiredDocument(hostDocument1.FilePath);
         _document2 = _project.GetRequiredDocument(hostDocument2.FilePath);
 
@@ -70,12 +70,12 @@ public class RazorDynamicFileInfoProviderTest(ITestOutputHelper testOutput) : Vi
 
         var fallbackProjectManager = new FallbackProjectManager(
             serviceProvider,
-            _projectManager,
+            _solutionManager,
             WorkspaceProvider,
             NoOpTelemetryReporter.Instance);
 
         _provider = new RazorDynamicFileInfoProvider(
-            documentServiceFactory, editorFeatureDetector, filePathService, WorkspaceProvider, _projectManager, fallbackProjectManager);
+            documentServiceFactory, editorFeatureDetector, filePathService, WorkspaceProvider, _solutionManager, fallbackProjectManager);
         _testAccessor = _provider.GetTestAccessor();
 
         var lspDocumentContainerMock = new StrictMock<IDynamicDocumentContainer>();
@@ -139,7 +139,7 @@ public class RazorDynamicFileInfoProviderTest(ITestOutputHelper testOutput) : Vi
         var called = false;
         _provider.Updated += (sender, args) => called = true;
 
-        await _projectManager.UpdateAsync(updater =>
+        await _solutionManager.UpdateAsync(updater =>
         {
             updater.RemoveProject(_project.Key);
         });
@@ -159,7 +159,7 @@ public class RazorDynamicFileInfoProviderTest(ITestOutputHelper testOutput) : Vi
         await _testAccessor.GetDynamicFileInfoAsync(_projectId, _document2.FilePath, DisposalToken);
         _provider.Updated += (sender, documentFilePath) => throw new InvalidOperationException("Should not have been called!");
 
-        await _projectManager.UpdateAsync(updater =>
+        await _solutionManager.UpdateAsync(updater =>
         {
             updater.SolutionClosed();
             updater.CloseDocument(_project.Key, _document1.FilePath, EmptyTextLoader.Instance);

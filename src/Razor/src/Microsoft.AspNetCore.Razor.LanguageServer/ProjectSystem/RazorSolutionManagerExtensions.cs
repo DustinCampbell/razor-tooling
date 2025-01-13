@@ -12,18 +12,18 @@ using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.ProjectSystem;
 
-internal static partial class ProjectSnapshotManagerExtensions
+internal static partial class RazorSolutionManagerExtensions
 {
     /// <summary>
     /// Finds all the projects where the document path starts with the path of the folder that contains the project file.
     /// </summary>
-    public static ImmutableArray<RazorProject> FindPotentialProjects(this ProjectSnapshotManager projectManager, string documentFilePath)
+    public static ImmutableArray<RazorProject> FindPotentialProjects(this RazorSolutionManager solutionManager, string documentFilePath)
     {
         var normalizedDocumentPath = FilePathNormalizer.Normalize(documentFilePath);
 
         using var projects = new PooledArrayBuilder<RazorProject>();
 
-        foreach (var project in projectManager.GetProjects())
+        foreach (var project in solutionManager.GetProjects())
         {
             // Always exclude the miscellaneous project.
             if (project.FilePath == MiscFilesProject.FilePath)
@@ -42,11 +42,11 @@ internal static partial class ProjectSnapshotManagerExtensions
     }
 
     public static bool TryResolveAllProjects(
-        this ProjectSnapshotManager projectManager,
+        this RazorSolutionManager solutionManager,
         string documentFilePath,
         out ImmutableArray<RazorProject> projects)
     {
-        var potentialProjects = projectManager.FindPotentialProjects(documentFilePath);
+        var potentialProjects = solutionManager.FindPotentialProjects(documentFilePath);
 
         using var builder = new PooledArrayBuilder<RazorProject>(capacity: potentialProjects.Length);
 
@@ -59,7 +59,7 @@ internal static partial class ProjectSnapshotManagerExtensions
         }
 
         var normalizedDocumentPath = FilePathNormalizer.Normalize(documentFilePath);
-        var miscProject = projectManager.GetMiscellaneousProject();
+        var miscProject = solutionManager.GetMiscellaneousProject();
         if (miscProject.ContainsDocument(normalizedDocumentPath))
         {
             builder.Add(miscProject);
@@ -70,7 +70,7 @@ internal static partial class ProjectSnapshotManagerExtensions
     }
 
     public static bool TryResolveDocumentInAnyProject(
-        this ProjectSnapshotManager projectManager,
+        this RazorSolutionManager solutionManager,
         string documentFilePath,
         ILogger logger,
         [NotNullWhen(true)] out RazorDocument? document)
@@ -78,7 +78,7 @@ internal static partial class ProjectSnapshotManagerExtensions
         logger.LogTrace($"Looking for {documentFilePath}.");
 
         var normalizedDocumentPath = FilePathNormalizer.Normalize(documentFilePath);
-        var potentialProjects = projectManager.FindPotentialProjects(documentFilePath);
+        var potentialProjects = solutionManager.FindPotentialProjects(documentFilePath);
 
         foreach (var project in potentialProjects)
         {
@@ -90,7 +90,7 @@ internal static partial class ProjectSnapshotManagerExtensions
         }
 
         logger.LogTrace($"Looking for {documentFilePath} in miscellaneous project.");
-        var miscellaneousProject = projectManager.GetMiscellaneousProject();
+        var miscellaneousProject = solutionManager.GetMiscellaneousProject();
 
         if (miscellaneousProject.TryGetDocument(normalizedDocumentPath, out document))
         {
@@ -98,12 +98,12 @@ internal static partial class ProjectSnapshotManagerExtensions
             return true;
         }
 
-        logger.LogTrace($"{documentFilePath} not found in {string.Join(", ", projectManager.GetProjects().SelectMany(p => p.DocumentFilePaths))}");
+        logger.LogTrace($"{documentFilePath} not found in {string.Join(", ", solutionManager.GetProjects().SelectMany(p => p.DocumentFilePaths))}");
 
         document = null;
         return false;
     }
 
-    public static ISolutionQueryOperations GetQueryOperations(this ProjectSnapshotManager projectManager)
-        => new SolutionQueryOperations(projectManager);
+    public static ISolutionQueryOperations GetQueryOperations(this RazorSolutionManager solutionManager)
+        => new SolutionQueryOperations(solutionManager);
 }

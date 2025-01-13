@@ -10,15 +10,15 @@ using Microsoft.CodeAnalysis.Razor.Tooltip;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.Hover;
 
-internal sealed class ComponentAvailabilityService(ProjectSnapshotManager projectManager) : AbstractComponentAvailabilityService
+internal sealed class ComponentAvailabilityService(RazorSolutionManager solutionManager) : AbstractComponentAvailabilityService
 {
-    private readonly ProjectSnapshotManager _projectManager = projectManager;
+    private readonly RazorSolutionManager _solutionManager = solutionManager;
 
     protected override ImmutableArray<IRazorProject> GetProjectsContainingDocument(string documentFilePath)
     {
         using var projects = new PooledArrayBuilder<IRazorProject>();
 
-        foreach (var project in _projectManager.GetProjects())
+        foreach (var project in _solutionManager.GetProjects())
         {
             // Always exclude the miscellaneous project.
             if (project.Key == MiscFilesProject.Key)

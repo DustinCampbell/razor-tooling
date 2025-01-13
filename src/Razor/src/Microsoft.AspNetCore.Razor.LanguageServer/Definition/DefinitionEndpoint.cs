@@ -25,7 +25,7 @@ namespace Microsoft.AspNetCore.Razor.LanguageServer.Definition;
 internal sealed class DefinitionEndpoint(
     IRazorComponentDefinitionService componentDefinitionService,
     IDocumentMappingService documentMappingService,
-    ProjectSnapshotManager projectManager,
+    RazorSolutionManager solutionManager,
     LanguageServerFeatureOptions languageServerFeatureOptions,
     IClientConnection clientConnection,
     ILoggerFactory loggerFactory)
@@ -37,7 +37,7 @@ internal sealed class DefinitionEndpoint(
 {
     private readonly IRazorComponentDefinitionService _componentDefinitionService = componentDefinitionService;
     private readonly IDocumentMappingService _documentMappingService = documentMappingService;
-    private readonly ProjectSnapshotManager _projectManager = projectManager;
+    private readonly RazorSolutionManager _solutionManager = solutionManager;
 
     protected override bool PreferCSharpOverHtmlIfPossible => true;
 
@@ -66,7 +66,7 @@ internal sealed class DefinitionEndpoint(
 
         // If single server support is on, then we ignore attributes, as they are better handled by delegating to Roslyn
         return await _componentDefinitionService
-            .GetDefinitionAsync(documentContext.Document, positionInfo, _projectManager.GetQueryOperations(), ignoreAttributes: SingleServerSupport, cancellationToken)
+            .GetDefinitionAsync(documentContext.Document, positionInfo, _solutionManager.GetQueryOperations(), ignoreAttributes: SingleServerSupport, cancellationToken)
             .ConfigureAwait(false);
     }
 

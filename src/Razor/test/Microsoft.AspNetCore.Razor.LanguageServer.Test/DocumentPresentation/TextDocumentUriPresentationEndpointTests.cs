@@ -27,13 +27,13 @@ public class TextDocumentUriPresentationEndpointTests(ITestOutputHelper testOutp
     public async Task Handle_SimpleComponent_ReturnsResult()
     {
         // Arrange
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
         var hostProject = TestHostProject.Create("c:/path/project.csproj");
         var hostDocument1 = TestHostDocument.Create(hostProject, "c:/path/index.razor");
         var hostDocument2 = TestHostDocument.Create(hostProject, "c:/path/MyTagHelper.razor");
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(hostProject);
             updater.AddDocument(hostProject.Key, hostDocument1, EmptyTextLoader.Instance);
@@ -44,19 +44,19 @@ public class TextDocumentUriPresentationEndpointTests(ITestOutputHelper testOutp
         var builder = TagHelperDescriptorBuilder.Create("MyTagHelper", "MyAssembly");
         builder.SetMetadata(TypeNameIdentifier("MyTagHelper"), TypeNamespace("TestRootNamespace"));
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.UpdateProjectWorkspaceState(hostProject.Key, ProjectWorkspaceState.Create([builder.Build()]));
         });
 
         var uri = new Uri(hostDocument1.FilePath);
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.OpenDocument(hostProject.Key, hostDocument1.FilePath, SourceText.From("<div></div>"));
         });
 
-        var documentContextFactory = new DocumentContextFactory(projectManager, LoggerFactory);
+        var documentContextFactory = new DocumentContextFactory(solutionManager, LoggerFactory);
         Assert.True(documentContextFactory.TryCreate(uri, projectContext: null, out var documentContext));
 
         var endpoint = CreateEndpoint(documentContextFactory);
@@ -87,13 +87,13 @@ public class TextDocumentUriPresentationEndpointTests(ITestOutputHelper testOutp
     public async Task Handle_SimpleComponentWithChildFile_ReturnsResult()
     {
         // Arrange
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
         var hostProject = TestHostProject.Create("c:/path/project.csproj");
         var hostDocument1 = TestHostDocument.Create(hostProject, "c:/path/index.razor");
         var hostDocument2 = TestHostDocument.Create(hostProject, "c:/path/MyTagHelper.razor");
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(hostProject);
             updater.AddDocument(hostProject.Key, hostDocument1, EmptyTextLoader.Instance);
@@ -104,19 +104,19 @@ public class TextDocumentUriPresentationEndpointTests(ITestOutputHelper testOutp
         var builder = TagHelperDescriptorBuilder.Create("MyTagHelper", "MyAssembly");
         builder.SetMetadata(TypeNameIdentifier("MyTagHelper"), TypeNamespace("TestRootNamespace"));
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.UpdateProjectWorkspaceState(hostProject.Key, ProjectWorkspaceState.Create([builder.Build()]));
         });
 
         var uri = new Uri(hostDocument1.FilePath);
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.OpenDocument(hostProject.Key, hostDocument1.FilePath, SourceText.From("<div></div>"));
         });
 
-        var documentContextFactory = new DocumentContextFactory(projectManager, LoggerFactory);
+        var documentContextFactory = new DocumentContextFactory(solutionManager, LoggerFactory);
         Assert.True(documentContextFactory.TryCreate(uri, null, out var documentContext));
 
         var endpoint = CreateEndpoint(documentContextFactory);
@@ -152,13 +152,13 @@ public class TextDocumentUriPresentationEndpointTests(ITestOutputHelper testOutp
     public async Task Handle_ComponentWithRequiredAttribute_ReturnsResult()
     {
         // Arrange
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
         var hostProject = TestHostProject.Create("c:/path/project.csproj");
         var hostDocument1 = TestHostDocument.Create(hostProject, "c:/path/index.razor");
         var hostDocument2 = TestHostDocument.Create(hostProject, "c:/path/fetchdata.razor");
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(hostProject);
             updater.AddDocument(hostProject.Key, hostDocument1, EmptyTextLoader.Instance);
@@ -175,19 +175,19 @@ public class TextDocumentUriPresentationEndpointTests(ITestOutputHelper testOutp
         });
         builder.BindAttribute(b => b.Name = "MyNonRequiredAttribute");
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.UpdateProjectWorkspaceState(hostProject.Key, ProjectWorkspaceState.Create([builder.Build()]));
         });
 
         var uri = new Uri(hostDocument1.FilePath);
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.OpenDocument(hostProject.Key, hostDocument1.FilePath, SourceText.From("<div></div>"));
         });
 
-        var documentContextFactory = new DocumentContextFactory(projectManager, LoggerFactory);
+        var documentContextFactory = new DocumentContextFactory(solutionManager, LoggerFactory);
         Assert.True(documentContextFactory.TryCreate(uri, null, out var documentContext));
 
         var endpoint = CreateEndpoint(documentContextFactory);
@@ -312,13 +312,13 @@ public class TextDocumentUriPresentationEndpointTests(ITestOutputHelper testOutp
     public async Task Handle_ComponentWithNestedFiles_ReturnsResult()
     {
         // Arrange
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
         var hostProject = TestHostProject.Create("c:/path/project.csproj");
         var hostDocument1 = TestHostDocument.Create(hostProject, "c:/path/index.razor");
         var hostDocument2 = TestHostDocument.Create(hostProject, "c:/path/fetchdata.razor");
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(hostProject);
             updater.AddDocument(hostProject.Key, hostDocument1, EmptyTextLoader.Instance);
@@ -330,19 +330,19 @@ public class TextDocumentUriPresentationEndpointTests(ITestOutputHelper testOutp
         var builder = TagHelperDescriptorBuilder.Create("FetchData", "MyAssembly");
         builder.SetMetadata(TypeNameIdentifier("FetchData"), TypeNamespace("TestRootNamespace"));
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.UpdateProjectWorkspaceState(hostProject.Key, ProjectWorkspaceState.Create([builder.Build()]));
         });
 
         var uri = new Uri(hostDocument1.FilePath);
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.OpenDocument(hostProject.Key, hostDocument1.FilePath, SourceText.From("<div></div>"));
         });
 
-        var documentContextFactory = new DocumentContextFactory(projectManager, LoggerFactory);
+        var documentContextFactory = new DocumentContextFactory(solutionManager, LoggerFactory);
         Assert.True(documentContextFactory.TryCreate(uri, projectContext: null, out var documentContext));
 
         var endpoint = CreateEndpoint(documentContextFactory);

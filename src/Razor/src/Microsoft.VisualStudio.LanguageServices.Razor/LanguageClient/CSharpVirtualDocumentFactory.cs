@@ -34,7 +34,7 @@ internal class CSharpVirtualDocumentFactory : VirtualDocumentFactoryBase
     private static IContentType? s_csharpContentType;
     private readonly FileUriProvider _fileUriProvider;
     private readonly IFilePathService _filePathService;
-    private readonly ProjectSnapshotManager _projectManager;
+    private readonly RazorSolutionManager _solutionManager;
     private readonly LanguageServerFeatureOptions _languageServerFeatureOptions;
     private readonly ILogger _logger;
     private readonly ITelemetryReporter _telemetryReporter;
@@ -46,7 +46,7 @@ internal class CSharpVirtualDocumentFactory : VirtualDocumentFactoryBase
         ITextDocumentFactoryService textDocumentFactory,
         FileUriProvider fileUriProvider,
         IFilePathService filePathService,
-        ProjectSnapshotManager projectManager,
+        RazorSolutionManager solutionManager,
         LanguageServerFeatureOptions languageServerFeatureOptions,
         ILoggerFactory loggerFactory,
         ITelemetryReporter telemetryReporter)
@@ -54,7 +54,7 @@ internal class CSharpVirtualDocumentFactory : VirtualDocumentFactoryBase
     {
         _fileUriProvider = fileUriProvider;
         _filePathService = filePathService;
-        _projectManager = projectManager;
+        _solutionManager = solutionManager;
         _languageServerFeatureOptions = languageServerFeatureOptions;
         _logger = loggerFactory.GetOrCreateLogger<CSharpVirtualDocumentFactory>();
         _telemetryReporter = telemetryReporter;
@@ -193,7 +193,7 @@ internal class CSharpVirtualDocumentFactory : VirtualDocumentFactoryBase
             yield break;
         }
 
-        var projects = _projectManager.GetProjects();
+        var projects = _solutionManager.GetProjects();
 
         var inAny = false;
         var normalizedDocumentPath = RazorDynamicFileInfoProvider.GetProjectSystemFilePath(hostDocumentUri);

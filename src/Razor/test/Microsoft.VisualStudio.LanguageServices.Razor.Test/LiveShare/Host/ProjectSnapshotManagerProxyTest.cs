@@ -39,9 +39,9 @@ public class ProjectSnapshotManagerProxyTest(ITestOutputHelper testOutput) : Vis
     public async Task CalculateUpdatedStateAsync_ReturnsStateForAllProjects()
     {
         // Arrange
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(_hostProject1);
             updater.UpdateProjectWorkspaceState(_hostProject1.Key, _projectWorkspaceState1);
@@ -52,18 +52,18 @@ public class ProjectSnapshotManagerProxyTest(ITestOutputHelper testOutput) : Vis
 
         using var proxy = new ProjectSnapshotManagerProxy(
             new TestCollaborationSession(true),
-            projectManager,
+            solutionManager,
             JoinableTaskFactory);
 
         // Act
-        var state = await JoinableTaskFactory.RunAsync(() => proxy.CalculateUpdatedStateAsync(projectManager.GetProjects()));
+        var state = await JoinableTaskFactory.RunAsync(() => proxy.CalculateUpdatedStateAsync(solutionManager.GetProjects()));
 
         // Assert
-        var project1TagHelpers = await projectManager
+        var project1TagHelpers = await solutionManager
             .GetRequiredProject(_hostProject1.Key)
             .GetTagHelpersAsync(DisposalToken);
 
-        var project2TagHelpers = await projectManager
+        var project2TagHelpers = await solutionManager
             .GetRequiredProject(_hostProject2.Key)
             .GetTagHelpersAsync(DisposalToken);
 
@@ -77,9 +77,9 @@ public class ProjectSnapshotManagerProxyTest(ITestOutputHelper testOutput) : Vis
     public async Task Changed_TriggersOnSnapshotManagerChanged()
     {
         // Arrange
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(_hostProject1);
             updater.UpdateProjectWorkspaceState(_hostProject1.Key, _projectWorkspaceState1);
@@ -87,7 +87,7 @@ public class ProjectSnapshotManagerProxyTest(ITestOutputHelper testOutput) : Vis
 
         using var proxy = new ProjectSnapshotManagerProxy(
             new TestCollaborationSession(true),
-            projectManager,
+            solutionManager,
             JoinableTaskFactory);
 
         var proxyAccessor = proxy.GetTestAccessor();
@@ -103,7 +103,7 @@ public class ProjectSnapshotManagerProxyTest(ITestOutputHelper testOutput) : Vis
         };
 
         // Act
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             // Change the project's configuration to force a changed event to be raised.
             updater.UpdateProjectConfiguration(_hostProject1 with { Configuration = FallbackRazorConfiguration.MVC_1_0 });
@@ -119,9 +119,9 @@ public class ProjectSnapshotManagerProxyTest(ITestOutputHelper testOutput) : Vis
     public async Task Changed_DoesNotFireIfProxyIsDisposed()
     {
         // Arrange
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(_hostProject1);
             updater.UpdateProjectWorkspaceState(_hostProject1.Key, _projectWorkspaceState1);
@@ -129,7 +129,7 @@ public class ProjectSnapshotManagerProxyTest(ITestOutputHelper testOutput) : Vis
 
         var proxy = new ProjectSnapshotManagerProxy(
             new TestCollaborationSession(true),
-            projectManager,
+            solutionManager,
             JoinableTaskFactory);
 
         var proxyAccessor = proxy.GetTestAccessor();
@@ -138,7 +138,7 @@ public class ProjectSnapshotManagerProxyTest(ITestOutputHelper testOutput) : Vis
         proxy.Dispose();
 
         // Act
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             // Change the project's configuration to force a changed event to be raised.
             updater.UpdateProjectConfiguration(_hostProject1 with { Configuration = FallbackRazorConfiguration.MVC_1_0 });
@@ -152,9 +152,9 @@ public class ProjectSnapshotManagerProxyTest(ITestOutputHelper testOutput) : Vis
     public async Task GetLatestProjectsAsync_ReturnsSnapshotManagerProjects()
     {
         // Arrange
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(_hostProject1);
             updater.UpdateProjectWorkspaceState(_hostProject1.Key, _projectWorkspaceState1);
@@ -162,7 +162,7 @@ public class ProjectSnapshotManagerProxyTest(ITestOutputHelper testOutput) : Vis
 
         using var proxy = new ProjectSnapshotManagerProxy(
             new TestCollaborationSession(true),
-            projectManager,
+            solutionManager,
             JoinableTaskFactory);
 
         // Act
@@ -184,9 +184,9 @@ public class ProjectSnapshotManagerProxyTest(ITestOutputHelper testOutput) : Vis
     public async Task GetStateAsync_ReturnsProjectState()
     {
         // Arrange
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(_hostProject1);
             updater.UpdateProjectWorkspaceState(_hostProject1.Key, _projectWorkspaceState1);
@@ -197,18 +197,18 @@ public class ProjectSnapshotManagerProxyTest(ITestOutputHelper testOutput) : Vis
 
         using var proxy = new ProjectSnapshotManagerProxy(
             new TestCollaborationSession(true),
-            projectManager,
+            solutionManager,
             JoinableTaskFactory);
 
         // Act
         var state = await JoinableTaskFactory.RunAsync(() => proxy.GetProjectManagerStateAsync(DisposalToken));
 
         // Assert
-        var project1TagHelpers = await projectManager
+        var project1TagHelpers = await solutionManager
             .GetRequiredProject(_hostProject1.Key)
             .GetTagHelpersAsync(DisposalToken);
 
-        var project2TagHelpers = await projectManager
+        var project2TagHelpers = await solutionManager
             .GetRequiredProject(_hostProject2.Key)
             .GetTagHelpersAsync(DisposalToken);
 
@@ -222,9 +222,9 @@ public class ProjectSnapshotManagerProxyTest(ITestOutputHelper testOutput) : Vis
     public async Task GetStateAsync_CachesState()
     {
         // Arrange
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(_hostProject1);
             updater.UpdateProjectWorkspaceState(_hostProject1.Key, _projectWorkspaceState1);
@@ -232,7 +232,7 @@ public class ProjectSnapshotManagerProxyTest(ITestOutputHelper testOutput) : Vis
 
         using var proxy = new ProjectSnapshotManagerProxy(
             new TestCollaborationSession(true),
-            projectManager,
+            solutionManager,
             JoinableTaskFactory);
 
         // Act

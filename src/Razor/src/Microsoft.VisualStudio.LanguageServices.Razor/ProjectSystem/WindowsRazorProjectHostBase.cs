@@ -26,7 +26,7 @@ internal abstract partial class WindowsRazorProjectHostBase : OnceInitializedOnc
     private static readonly DataflowLinkOptions s_dataflowLinkOptions = new DataflowLinkOptions() { PropagateCompletion = true };
 
     private readonly IServiceProvider _serviceProvider;
-    private readonly ProjectSnapshotManager _projectManager;
+    private readonly RazorSolutionManager _solutionManager;
     private readonly AsyncSemaphore _lock;
 
     private readonly Dictionary<ProjectConfigurationSlice, IDisposable> _projectSubscriptions = new();
@@ -45,12 +45,12 @@ internal abstract partial class WindowsRazorProjectHostBase : OnceInitializedOnc
     protected WindowsRazorProjectHostBase(
         IUnconfiguredProjectCommonServices commonServices,
         IServiceProvider serviceProvider,
-        ProjectSnapshotManager projectManager)
+        RazorSolutionManager solutionManager)
         : base(commonServices.ThreadingService.JoinableTaskContext)
     {
         CommonServices = commonServices;
         _serviceProvider = serviceProvider;
-        _projectManager = projectManager;
+        _solutionManager = solutionManager;
 
         _lock = new AsyncSemaphore(initialCount: 1);
     }
@@ -176,7 +176,7 @@ internal abstract partial class WindowsRazorProjectHostBase : OnceInitializedOnc
             CommonServices.UnconfiguredProject.ProjectRenaming -= UnconfiguredProject_ProjectRenamingAsync;
 
             // If we haven't been initialized, lets not start now
-            if (_projectManager is not null)
+            if (_solutionManager is not null)
             {
                 await ExecuteWithLockAsync(
                     () => UpdateAsync(updater =>
@@ -237,11 +237,11 @@ internal abstract partial class WindowsRazorProjectHostBase : OnceInitializedOnc
     }
 
     protected ImmutableArray<ProjectKey> GetProjectKeysWithFilePath(string projectFilePath)
-        => _projectManager.GetProjectKeysWithFilePath(projectFilePath);
+        => _solutionManager.GetProjectKeysWithFilePath(projectFilePath);
 
-    protected Task UpdateAsync(Action<ProjectSnapshotManager.Updater> action, CancellationToken cancellationToken)
+    protected Task UpdateAsync(Action<RazorSolutionManager.Updater> action, CancellationToken cancellationToken)
     {
-        return _projectManager.UpdateAsync(
+        return _solutionManager.UpdateAsync(
             static (updater, state) =>
             {
                 var (action, serviceProvider) = state;
@@ -256,7 +256,7 @@ internal abstract partial class WindowsRazorProjectHostBase : OnceInitializedOnc
             cancellationToken);
     }
 
-    protected static void UpdateProject(ProjectSnapshotManager.Updater updater, HostProject project)
+    protected static void UpdateProject(RazorSolutionManager.Updater updater, HostProject project)
     {
         if (!updater.ContainsProject(project.Key))
         {
@@ -272,7 +272,7 @@ internal abstract partial class WindowsRazorProjectHostBase : OnceInitializedOnc
         }
     }
 
-    protected void RemoveProject(ProjectSnapshotManager.Updater updater, ProjectKey projectKey)
+    protected void RemoveProject(RazorSolutionManager.Updater updater, ProjectKey projectKey)
     {
         updater.RemoveProject(projectKey);
     }

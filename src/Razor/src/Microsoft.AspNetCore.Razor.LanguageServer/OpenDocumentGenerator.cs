@@ -28,7 +28,7 @@ internal partial class OpenDocumentGenerator : IRazorStartupService, IDisposable
     private static readonly TimeSpan s_delay = TimeSpan.FromMilliseconds(10);
 
     private readonly ImmutableArray<IDocumentProcessedListener> _listeners;
-    private readonly ProjectSnapshotManager _projectManager;
+    private readonly RazorSolutionManager _solutionManager;
     private readonly LanguageServerFeatureOptions _options;
     private readonly ILogger _logger;
 
@@ -37,12 +37,12 @@ internal partial class OpenDocumentGenerator : IRazorStartupService, IDisposable
 
     public OpenDocumentGenerator(
         IEnumerable<IDocumentProcessedListener> listeners,
-        ProjectSnapshotManager projectManager,
+        RazorSolutionManager solutionManager,
         LanguageServerFeatureOptions options,
         ILoggerFactory loggerFactory)
     {
         _listeners = listeners.ToImmutableArray();
-        _projectManager = projectManager;
+        _solutionManager = solutionManager;
         _options = options;
 
         _disposeTokenSource = new();
@@ -51,7 +51,7 @@ internal partial class OpenDocumentGenerator : IRazorStartupService, IDisposable
             ProcessBatchAsync,
             _disposeTokenSource.Token);
 
-        _projectManager.Changed += ProjectManager_Changed;
+        _solutionManager.Changed += SolutionManager_Changed;
         _logger = loggerFactory.GetOrCreateLogger<OpenDocumentGenerator>();
     }
 
@@ -89,7 +89,7 @@ internal partial class OpenDocumentGenerator : IRazorStartupService, IDisposable
         }
     }
 
-    private void ProjectManager_Changed(object? sender, ProjectChangeEventArgs args)
+    private void SolutionManager_Changed(object? sender, ProjectChangeEventArgs args)
     {
         // Don't do any work if the solution is closing
         if (args.IsSolutionClosing)
@@ -169,7 +169,7 @@ internal partial class OpenDocumentGenerator : IRazorStartupService, IDisposable
 
         void EnqueueIfNecessary(RazorDocument document)
         {
-            if (!_projectManager.IsDocumentOpen(document.FilePath) &&
+            if (!_solutionManager.IsDocumentOpen(document.FilePath) &&
                 !_options.UpdateBuffersForClosedDocuments)
             {
                 return;

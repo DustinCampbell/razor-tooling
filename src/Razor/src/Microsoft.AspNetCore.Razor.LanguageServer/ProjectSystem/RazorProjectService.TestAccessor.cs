@@ -31,7 +31,7 @@ internal partial class RazorProjectService
 
             await service.WaitForInitializationAsync().ConfigureAwait(false);
 
-            return await instance._projectManager
+            return await instance._solutionManager
                 .UpdateAsync(
                     updater => service.AddProjectCore(updater, filePath, intermediateOutputPath, configuration, rootNamespace, displayName),
                     cancellationToken)

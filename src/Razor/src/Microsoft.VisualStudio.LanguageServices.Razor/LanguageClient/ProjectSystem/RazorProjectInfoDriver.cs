@@ -12,14 +12,14 @@ namespace Microsoft.VisualStudio.Razor.LanguageClient.ProjectSystem;
 
 internal sealed partial class RazorProjectInfoDriver : AbstractRazorProjectInfoDriver
 {
-    private readonly ProjectSnapshotManager _projectManager;
+    private readonly RazorSolutionManager _solutionManager;
 
     public RazorProjectInfoDriver(
-        ProjectSnapshotManager projectManager,
+        RazorSolutionManager solutionManager,
         ILoggerFactory loggerFactory,
         TimeSpan? delay = null) : base(loggerFactory, delay)
     {
-        _projectManager = projectManager;
+        _solutionManager = solutionManager;
 
         StartInitialization();
     }
@@ -29,19 +29,19 @@ internal sealed partial class RazorProjectInfoDriver : AbstractRazorProjectInfoD
         // Even though we aren't mutating the project snapshot manager, we call UpdateAsync(...) here to ensure
         // that we run on its dispatcher. That ensures that no changes will code in while we are iterating the
         // current set of projects and connected to the Changed event.
-        return _projectManager.UpdateAsync(updater =>
+        return _solutionManager.UpdateAsync(updater =>
         {
             foreach (var project in updater.GetProjects())
             {
                 EnqueueUpdate(project.ToRazorProjectInfo());
             }
 
-            _projectManager.Changed += ProjectManager_Changed;
+            _solutionManager.Changed += SolutionManager_Changed;
         },
         cancellationToken);
     }
 
-    private void ProjectManager_Changed(object sender, ProjectChangeEventArgs e)
+    private void SolutionManager_Changed(object sender, ProjectChangeEventArgs e)
     {
         // Don't do any work if the solution is closing
         if (e.IsSolutionClosing)

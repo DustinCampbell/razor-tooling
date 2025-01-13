@@ -8,15 +8,15 @@ using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
 namespace Microsoft.CodeAnalysis.Razor.Tooltip;
 
-internal sealed class TestComponentAvailabilityService(ProjectSnapshotManager projectManager) : AbstractComponentAvailabilityService
+internal sealed class TestComponentAvailabilityService(RazorSolutionManager solutionManager) : AbstractComponentAvailabilityService
 {
-    private readonly ProjectSnapshotManager _projectManager = projectManager;
+    private readonly RazorSolutionManager _solutionManager = solutionManager;
 
     protected override ImmutableArray<IRazorProject> GetProjectsContainingDocument(string documentFilePath)
     {
         using var projects = new PooledArrayBuilder<IRazorProject>();
 
-        foreach (var project in _projectManager.GetProjects())
+        foreach (var project in _solutionManager.GetProjects())
         {
             if (project.ContainsDocument(documentFilePath))
             {

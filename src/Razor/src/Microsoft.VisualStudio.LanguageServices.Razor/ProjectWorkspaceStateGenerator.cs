@@ -20,7 +20,7 @@ namespace Microsoft.VisualStudio.Razor;
 [Export(typeof(IProjectWorkspaceStateGenerator))]
 [method: ImportingConstructor]
 internal sealed partial class ProjectWorkspaceStateGenerator(
-    ProjectSnapshotManager projectManager,
+    RazorSolutionManager solutionManager,
     ITagHelperResolver tagHelperResolver,
     ILoggerFactory loggerFactory,
     ITelemetryReporter telemetryReporter)
@@ -29,7 +29,7 @@ internal sealed partial class ProjectWorkspaceStateGenerator(
     // SemaphoreSlim is banned. See https://github.com/dotnet/razor/issues/10390 for more info.
 #pragma warning disable RS0030 // Do not use banned APIs
 
-    private readonly ProjectSnapshotManager _projectManager = projectManager;
+    private readonly RazorSolutionManager _solutionManager = solutionManager;
     private readonly ITagHelperResolver _tagHelperResolver = tagHelperResolver;
     private readonly ILogger _logger = loggerFactory.GetOrCreateLogger<ProjectWorkspaceStateGenerator>();
     private readonly ITelemetryReporter _telemetryReporter = telemetryReporter;
@@ -153,7 +153,7 @@ internal sealed partial class ProjectWorkspaceStateGenerator(
 
             _logger.LogTrace($"Received {nameof(ProjectWorkspaceState)} with {workspaceState.TagHelpers.Length} tag helper(s) for '{projectKey}'");
 
-            await _projectManager
+            await _solutionManager
                 .UpdateAsync(
                     static (updater, state) =>
                     {

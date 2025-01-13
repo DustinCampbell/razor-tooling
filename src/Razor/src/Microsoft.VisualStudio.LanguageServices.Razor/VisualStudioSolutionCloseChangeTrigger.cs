@@ -18,7 +18,7 @@ internal class VisualStudioSolutionCloseChangeTrigger : IRazorStartupService, IV
 {
     private IVsSolution? _solution;
     private readonly IServiceProvider _serviceProvider;
-    private readonly ProjectSnapshotManager _projectManager;
+    private readonly RazorSolutionManager _solutionManager;
     private readonly JoinableTaskContext _joinableTaskContext;
 
     private uint _cookie;
@@ -26,11 +26,11 @@ internal class VisualStudioSolutionCloseChangeTrigger : IRazorStartupService, IV
     [ImportingConstructor]
     public VisualStudioSolutionCloseChangeTrigger(
        [Import(typeof(SVsServiceProvider))] IServiceProvider serviceProvider,
-       ProjectSnapshotManager projectManager,
+       RazorSolutionManager solutionManager,
        JoinableTaskContext joinableTaskContext)
     {
         _serviceProvider = serviceProvider;
-        _projectManager = projectManager;
+        _solutionManager = solutionManager;
         _joinableTaskContext = joinableTaskContext;
 
         _ = _joinableTaskContext.Factory.RunAsync(async () =>
@@ -52,19 +52,19 @@ internal class VisualStudioSolutionCloseChangeTrigger : IRazorStartupService, IV
 
     public int OnAfterOpenSolution(object pUnkReserved, int fNewSolution)
     {
-        _projectManager.UpdateAsync(static updater => updater.SolutionOpened(), CancellationToken.None).Forget();
+        _solutionManager.UpdateAsync(static updater => updater.SolutionOpened(), CancellationToken.None).Forget();
         return VSConstants.S_OK;
     }
 
     public int OnBeforeCloseSolution(object pUnkReserved)
     {
-        _projectManager.UpdateAsync(static updater => updater.SolutionClosed(), CancellationToken.None).Forget();
+        _solutionManager.UpdateAsync(static updater => updater.SolutionClosed(), CancellationToken.None).Forget();
         return VSConstants.S_OK;
     }
 
     public int OnAfterCloseSolution(object pUnkReserved)
     {
-        _projectManager.UpdateAsync(static updater => updater.SolutionOpened(), CancellationToken.None).Forget();
+        _solutionManager.UpdateAsync(static updater => updater.SolutionOpened(), CancellationToken.None).Forget();
         return VSConstants.S_OK;
     }
 

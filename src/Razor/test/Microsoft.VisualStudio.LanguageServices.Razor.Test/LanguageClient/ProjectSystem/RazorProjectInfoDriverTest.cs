@@ -37,9 +37,9 @@ public class RazorProjectInfoDriverTest(ITestOutputHelper testOutput) : Language
     [UIFact]
     public async Task ProcessesExistingProjectsDuringInitialization()
     {
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
-        await projectManager.UpdateAsync(static updater =>
+        await solutionManager.UpdateAsync(static updater =>
         {
             updater.AddProject(s_hostProject1);
             updater.AddDocument(s_hostProject1.Key, s_hostDocument1, TestMocks.CreateTextLoader("<p>Hello World</p>"));
@@ -48,7 +48,7 @@ public class RazorProjectInfoDriverTest(ITestOutputHelper testOutput) : Language
             updater.AddDocument(s_hostProject2.Key, s_hostDocument2, TestMocks.CreateTextLoader("<p>Hello World</p>"));
         });
 
-        var (driver, testAccessor) = await CreateDriverAndInitializeAsync(projectManager);
+        var (driver, testAccessor) = await CreateDriverAndInitializeAsync(solutionManager);
 
         await testAccessor.WaitUntilCurrentBatchCompletesAsync();
 
@@ -78,9 +78,9 @@ public class RazorProjectInfoDriverTest(ITestOutputHelper testOutput) : Language
     [UIFact]
     public async Task ProcessesProjectsAddedAfterInitialization()
     {
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
-        var (driver, testAccessor) = await CreateDriverAndInitializeAsync(projectManager);
+        var (driver, testAccessor) = await CreateDriverAndInitializeAsync(solutionManager);
 
         // The misc files projects project should be present after initialization.
         await testAccessor.WaitUntilCurrentBatchCompletesAsync();
@@ -91,7 +91,7 @@ public class RazorProjectInfoDriverTest(ITestOutputHelper testOutput) : Language
         Assert.Equal(MiscFilesProject.Key, miscFilesProject.ProjectKey);
 
         // Now add some projects
-        await projectManager.UpdateAsync(static updater =>
+        await solutionManager.UpdateAsync(static updater =>
         {
             updater.AddProject(s_hostProject1);
             updater.AddDocument(s_hostProject1.Key, s_hostDocument1, TestMocks.CreateTextLoader("<p>Hello World</p>"));
@@ -124,16 +124,16 @@ public class RazorProjectInfoDriverTest(ITestOutputHelper testOutput) : Language
     [UIFact]
     public async Task ProcessesDocumentAddedAfterInitialization()
     {
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
-        await projectManager.UpdateAsync(static updater =>
+        await solutionManager.UpdateAsync(static updater =>
         {
             updater.AddProject(s_hostProject1);
         });
 
-        var (driver, testAccessor) = await CreateDriverAndInitializeAsync(projectManager);
+        var (driver, testAccessor) = await CreateDriverAndInitializeAsync(solutionManager);
 
-        await projectManager.UpdateAsync(static updater =>
+        await solutionManager.UpdateAsync(static updater =>
         {
             updater.AddDocument(s_hostProject1.Key, s_hostDocument1, TestMocks.CreateTextLoader("<p>Hello World</p>"));
         });
@@ -155,14 +155,14 @@ public class RazorProjectInfoDriverTest(ITestOutputHelper testOutput) : Language
     [UIFact]
     public async Task ProcessesProjectRemovedAfterInitialization()
     {
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
-        await projectManager.UpdateAsync(static updater =>
+        await solutionManager.UpdateAsync(static updater =>
         {
             updater.AddProject(s_hostProject1);
         });
 
-        var (driver, testAccessor) = await CreateDriverAndInitializeAsync(projectManager);
+        var (driver, testAccessor) = await CreateDriverAndInitializeAsync(solutionManager);
 
         await testAccessor.WaitUntilCurrentBatchCompletesAsync();
 
@@ -175,7 +175,7 @@ public class RazorProjectInfoDriverTest(ITestOutputHelper testOutput) : Language
         var projectInfo1 = Assert.Single(projects);
         Assert.Equal(s_hostProject1.Key, projectInfo1.ProjectKey);
 
-        await projectManager.UpdateAsync(static updater =>
+        await solutionManager.UpdateAsync(static updater =>
         {
             updater.RemoveProject(s_hostProject1.Key);
         });
@@ -189,21 +189,21 @@ public class RazorProjectInfoDriverTest(ITestOutputHelper testOutput) : Language
     [UIFact]
     public async Task ListenerNotifiedOfUpdates()
     {
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
-        await projectManager.UpdateAsync(static updater =>
+        await solutionManager.UpdateAsync(static updater =>
         {
             updater.AddProject(s_hostProject1);
         });
 
-        var (driver, testAccessor) = await CreateDriverAndInitializeAsync(projectManager);
+        var (driver, testAccessor) = await CreateDriverAndInitializeAsync(solutionManager);
 
         await testAccessor.WaitUntilCurrentBatchCompletesAsync();
 
         var listener = new TestListener();
         driver.AddListener(listener);
 
-        await projectManager.UpdateAsync(static updater =>
+        await solutionManager.UpdateAsync(static updater =>
         {
             updater.AddDocument(s_hostProject1.Key, s_hostDocument1, TestMocks.CreateTextLoader("<p>Hello World</p>"));
         });
@@ -221,21 +221,21 @@ public class RazorProjectInfoDriverTest(ITestOutputHelper testOutput) : Language
     [UIFact]
     public async Task ListenerNotifiedOfRemoves()
     {
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
-        await projectManager.UpdateAsync(static updater =>
+        await solutionManager.UpdateAsync(static updater =>
         {
             updater.AddProject(s_hostProject1);
         });
 
-        var (driver, testAccessor) = await CreateDriverAndInitializeAsync(projectManager);
+        var (driver, testAccessor) = await CreateDriverAndInitializeAsync(solutionManager);
 
         await testAccessor.WaitUntilCurrentBatchCompletesAsync();
 
         var listener = new TestListener();
         driver.AddListener(listener);
 
-        await projectManager.UpdateAsync(static updater =>
+        await solutionManager.UpdateAsync(static updater =>
         {
             updater.RemoveProject(s_hostProject1.Key);
         });
@@ -249,9 +249,9 @@ public class RazorProjectInfoDriverTest(ITestOutputHelper testOutput) : Language
     }
 
     private async Task<(RazorProjectInfoDriver, AbstractRazorProjectInfoDriver.TestAccessor)> CreateDriverAndInitializeAsync(
-        ProjectSnapshotManager projectManager)
+        RazorSolutionManager solutionManager)
     {
-        var driver = new RazorProjectInfoDriver(projectManager, LoggerFactory, delay: TimeSpan.FromMilliseconds(5));
+        var driver = new RazorProjectInfoDriver(solutionManager, LoggerFactory, delay: TimeSpan.FromMilliseconds(5));
         AddDisposable(driver);
 
         var testAccessor = driver.GetTestAccessor();

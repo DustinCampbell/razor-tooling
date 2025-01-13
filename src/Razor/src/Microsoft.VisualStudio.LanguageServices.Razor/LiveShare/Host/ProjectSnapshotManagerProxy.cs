@@ -19,7 +19,7 @@ internal class ProjectSnapshotManagerProxy : IProjectSnapshotManagerProxy, IColl
 #pragma warning disable RS0030 // Do not use banned APIs
 
     private readonly CollaborationSession _session;
-    private readonly ProjectSnapshotManager _projectSnapshotManager;
+    private readonly RazorSolutionManager _solutionManager;
     private readonly JoinableTaskFactory _jtf;
     private readonly AsyncSemaphore _latestStateSemaphore;
     private bool _disposed;
@@ -29,15 +29,15 @@ internal class ProjectSnapshotManagerProxy : IProjectSnapshotManagerProxy, IColl
 
     public ProjectSnapshotManagerProxy(
         CollaborationSession session,
-        ProjectSnapshotManager projectSnapshotManager,
+        RazorSolutionManager solutionManager,
         JoinableTaskFactory jtf)
     {
         _session = session;
-        _projectSnapshotManager = projectSnapshotManager;
+        _solutionManager = solutionManager;
         _jtf = jtf;
 
         _latestStateSemaphore = new AsyncSemaphore(initialCount: 1);
-        _projectSnapshotManager.Changed += ProjectSnapshotManager_Changed;
+        _solutionManager.Changed += SolutionManager_Changed;
     }
 
     public event EventHandler<ProjectChangeEventProxyArgs>? Changed;
@@ -60,7 +60,7 @@ internal class ProjectSnapshotManagerProxy : IProjectSnapshotManagerProxy, IColl
 
     public void Dispose()
     {
-        _projectSnapshotManager.Changed -= ProjectSnapshotManager_Changed;
+        _solutionManager.Changed -= SolutionManager_Changed;
         _latestStateSemaphore.Dispose();
         _disposed = true;
     }
@@ -73,7 +73,7 @@ internal class ProjectSnapshotManagerProxy : IProjectSnapshotManagerProxy, IColl
             await _jtf.SwitchToMainThreadAsync(CancellationToken.None);
         }
 
-        return _projectSnapshotManager.GetProjects();
+        return _solutionManager.GetProjects();
     }
 
     // Internal for testing
@@ -108,7 +108,7 @@ internal class ProjectSnapshotManagerProxy : IProjectSnapshotManagerProxy, IColl
         return Task.FromResult(projectHandleProxy).AsNullable();
     }
 
-    private void ProjectSnapshotManager_Changed(object sender, ProjectChangeEventArgs args)
+    private void SolutionManager_Changed(object sender, ProjectChangeEventArgs args)
     {
         if (_disposed)
         {

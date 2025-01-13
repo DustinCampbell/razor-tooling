@@ -48,9 +48,9 @@ public class BackgroundDocumentGeneratorTest(ITestOutputHelper testOutput) : Vis
     public async Task ProcessDocument_LongDocumentParse_DoesNotUpdateAfterSuppress()
     {
         // Arrange
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(s_hostProject1);
         });
@@ -63,8 +63,8 @@ public class BackgroundDocumentGeneratorTest(ITestOutputHelper testOutput) : Vis
             .Returns(tcs.Task);
         var hostDocument = s_documents[0];
 
-        var project = projectManager.GetRequiredProject(s_hostProject1.Key);
-        using var generator = new TestBackgroundDocumentGenerator(projectManager, s_fallbackProjectManager, _dynamicFileInfoProvider, LoggerFactory)
+        var project = solutionManager.GetRequiredProject(s_hostProject1.Key);
+        using var generator = new TestBackgroundDocumentGenerator(solutionManager, s_fallbackProjectManager, _dynamicFileInfoProvider, LoggerFactory)
         {
             NotifyBackgroundWorkStarting = new ManualResetEventSlim(initialState: false)
         };
@@ -72,14 +72,14 @@ public class BackgroundDocumentGeneratorTest(ITestOutputHelper testOutput) : Vis
         // We trigger enqueued notifications via adding/opening to the project manager
 
         // Act & Assert
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddDocument(s_hostProject1.Key, hostDocument, textLoader.Object);
         });
 
         generator.NotifyBackgroundWorkStarting.Wait();
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.OpenDocument(s_hostProject1.Key, hostDocument.FilePath, SourceText.From(string.Empty));
         });
@@ -100,9 +100,9 @@ public class BackgroundDocumentGeneratorTest(ITestOutputHelper testOutput) : Vis
     public async Task ProcessDocument_SwallowsIOExceptions()
     {
         // Arrange
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(s_hostProject1);
         });
@@ -122,14 +122,14 @@ public class BackgroundDocumentGeneratorTest(ITestOutputHelper testOutput) : Vis
             .Setup(loader => loader.LoadTextAndVersionAsync(It.IsAny<LoadTextOptions>(), It.IsAny<CancellationToken>()))
             .Throws<FileNotFoundException>();
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddDocument(s_hostProject1.Key, s_documents[0], textLoader.Object);
         });
 
-        var project = projectManager.GetRequiredProject(s_hostProject1.Key);
+        var project = solutionManager.GetRequiredProject(s_hostProject1.Key);
 
-        using var generator = new TestBackgroundDocumentGenerator(projectManager, s_fallbackProjectManager, _dynamicFileInfoProvider, loggerFactoryMock.Object);
+        using var generator = new TestBackgroundDocumentGenerator(solutionManager, s_fallbackProjectManager, _dynamicFileInfoProvider, loggerFactoryMock.Object);
 
         // Act & Assert
         generator.Enqueue(project, project.GetRequiredDocument(s_documents[0].FilePath));
@@ -141,9 +141,9 @@ public class BackgroundDocumentGeneratorTest(ITestOutputHelper testOutput) : Vis
     public async Task ProcessDocument_SwallowsUnauthorizedAccessExceptions()
     {
         // Arrange
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(s_hostProject1);
         });
@@ -163,14 +163,14 @@ public class BackgroundDocumentGeneratorTest(ITestOutputHelper testOutput) : Vis
             .Setup(loader => loader.LoadTextAndVersionAsync(It.IsAny<LoadTextOptions>(), It.IsAny<CancellationToken>()))
             .Throws<UnauthorizedAccessException>();
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddDocument(s_hostProject1.Key, s_documents[0], textLoaderMock.Object);
         });
 
-        var project = projectManager.GetRequiredProject(s_hostProject1.Key);
+        var project = solutionManager.GetRequiredProject(s_hostProject1.Key);
 
-        using var generator = new TestBackgroundDocumentGenerator(projectManager, s_fallbackProjectManager, _dynamicFileInfoProvider, loggerFactoryMock.Object);
+        using var generator = new TestBackgroundDocumentGenerator(solutionManager, s_fallbackProjectManager, _dynamicFileInfoProvider, loggerFactoryMock.Object);
 
         // Act & Assert
         generator.Enqueue(project, project.GetRequiredDocument(s_documents[0].FilePath));
@@ -182,9 +182,9 @@ public class BackgroundDocumentGeneratorTest(ITestOutputHelper testOutput) : Vis
     public async Task ProcessWorkAndGoBackToSleep()
     {
         // Arrange
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(s_hostProject1);
             updater.AddProject(s_hostProject2);
@@ -192,10 +192,10 @@ public class BackgroundDocumentGeneratorTest(ITestOutputHelper testOutput) : Vis
             updater.AddDocument(s_hostProject1.Key, s_documents[1], EmptyTextLoader.Instance);
         });
 
-        var project = projectManager.GetRequiredProject(s_hostProject1.Key);
+        var project = solutionManager.GetRequiredProject(s_hostProject1.Key);
         var documentKey1 = new DocumentKey(project.Key, s_documents[0].FilePath);
 
-        using var generator = new TestBackgroundDocumentGenerator(projectManager, s_fallbackProjectManager, _dynamicFileInfoProvider, LoggerFactory);
+        using var generator = new TestBackgroundDocumentGenerator(solutionManager, s_fallbackProjectManager, _dynamicFileInfoProvider, LoggerFactory);
 
         // Act & Assert
 
@@ -221,9 +221,9 @@ public class BackgroundDocumentGeneratorTest(ITestOutputHelper testOutput) : Vis
         var hostDocument2 = TestProjectData.SomeProjectFile2;
 
         // Arrange
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(hostProject1);
             updater.AddProject(hostProject2);
@@ -231,11 +231,11 @@ public class BackgroundDocumentGeneratorTest(ITestOutputHelper testOutput) : Vis
             updater.AddDocument(hostProject1.Key, hostDocument2, EmptyTextLoader.Instance);
         });
 
-        var project = projectManager.GetRequiredProject(hostProject1.Key);
+        var project = solutionManager.GetRequiredProject(hostProject1.Key);
         var documentKey1 = new DocumentKey(project.Key, hostDocument1.FilePath);
         var documentKey2 = new DocumentKey(project.Key, hostDocument2.FilePath);
 
-        using var generator = new TestBackgroundDocumentGenerator(projectManager, s_fallbackProjectManager, _dynamicFileInfoProvider, LoggerFactory);
+        using var generator = new TestBackgroundDocumentGenerator(solutionManager, s_fallbackProjectManager, _dynamicFileInfoProvider, LoggerFactory);
 
         // Act & Assert
 
@@ -263,7 +263,7 @@ public class BackgroundDocumentGeneratorTest(ITestOutputHelper testOutput) : Vis
     public async Task UpdateDocumentText_ReparsesRelatedFiles()
     {
         // Arrange
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
         var documents = new[]
         {
@@ -271,7 +271,7 @@ public class BackgroundDocumentGeneratorTest(ITestOutputHelper testOutput) : Vis
             TestProjectData.SomeProjectComponentFile1,
         };
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(s_hostProject1);
             for (var i = 0; i < documents.Length; i++)
@@ -280,7 +280,7 @@ public class BackgroundDocumentGeneratorTest(ITestOutputHelper testOutput) : Vis
             }
         });
 
-        using var generator = new TestBackgroundDocumentGenerator(projectManager, s_fallbackProjectManager, _dynamicFileInfoProvider, LoggerFactory)
+        using var generator = new TestBackgroundDocumentGenerator(solutionManager, s_fallbackProjectManager, _dynamicFileInfoProvider, LoggerFactory)
         {
             BlockBatchProcessing = true
         };
@@ -288,7 +288,7 @@ public class BackgroundDocumentGeneratorTest(ITestOutputHelper testOutput) : Vis
         var changedSourceText = SourceText.From("@inject DateTime Time");
 
         // Act & Assert
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.UpdateDocumentText(s_hostProject1.Key, TestProjectData.SomeProjectImportFile.FilePath, changedSourceText);
         });
@@ -315,22 +315,22 @@ public class BackgroundDocumentGeneratorTest(ITestOutputHelper testOutput) : Vis
     public async Task RemoveDocument_ReparsesRelatedFiles()
     {
         // Arrange
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(s_hostProject1);
             updater.AddDocument(s_hostProject1.Key, TestProjectData.SomeProjectComponentFile1, EmptyTextLoader.Instance);
             updater.AddDocument(s_hostProject1.Key, TestProjectData.SomeProjectImportFile, EmptyTextLoader.Instance);
         });
 
-        using var generator = new TestBackgroundDocumentGenerator(projectManager, s_fallbackProjectManager, _dynamicFileInfoProvider, LoggerFactory)
+        using var generator = new TestBackgroundDocumentGenerator(solutionManager, s_fallbackProjectManager, _dynamicFileInfoProvider, LoggerFactory)
         {
             BlockBatchProcessing = true
         };
 
         // Act & Assert
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.RemoveDocument(s_hostProject1.Key, TestProjectData.SomeProjectImportFile.FilePath);
         });
@@ -349,11 +349,11 @@ public class BackgroundDocumentGeneratorTest(ITestOutputHelper testOutput) : Vis
     }
 
     private class TestBackgroundDocumentGenerator(
-        ProjectSnapshotManager projectManager,
+        RazorSolutionManager solutionManager,
         IFallbackProjectManager fallbackProjectManager,
         IRazorDynamicFileInfoProviderInternal dynamicFileInfoProvider,
         ILoggerFactory loggerFactory)
-        : BackgroundDocumentGenerator(projectManager, fallbackProjectManager, dynamicFileInfoProvider, loggerFactory, delay: TimeSpan.FromMilliseconds(1))
+        : BackgroundDocumentGenerator(solutionManager, fallbackProjectManager, dynamicFileInfoProvider, loggerFactory, delay: TimeSpan.FromMilliseconds(1))
     {
         public readonly List<DocumentKey> PendingWork = [];
         public readonly List<DocumentKey> CompletedWork = [];

@@ -17,26 +17,26 @@ namespace Microsoft.AspNetCore.Razor.LanguageServer;
 internal sealed class WorkspaceDiagnosticsRefresher : IRazorStartupService, IDisposable
 {
     private readonly AsyncBatchingWorkQueue _queue;
-    private readonly ProjectSnapshotManager _projectSnapshotManager;
+    private readonly RazorSolutionManager _solutionManager;
     private readonly IClientCapabilitiesService _clientCapabilitiesService;
     private readonly IClientConnection _clientConnection;
     private bool? _supported;
     private CancellationTokenSource _disposeTokenSource = new();
 
     public WorkspaceDiagnosticsRefresher(
-        ProjectSnapshotManager projectSnapshotManager,
+        RazorSolutionManager solutionManager,
         IClientCapabilitiesService clientCapabilitiesService,
         IClientConnection clientConnection,
         TimeSpan? delay = null)
     {
         _clientConnection = clientConnection;
-        _projectSnapshotManager = projectSnapshotManager;
+        _solutionManager = solutionManager;
         _clientCapabilitiesService = clientCapabilitiesService;
         _queue = new(
             delay ?? TimeSpan.FromMilliseconds(200),
             ProcessBatchAsync,
             _disposeTokenSource.Token);
-        _projectSnapshotManager.Changed += ProjectSnapshotManager_Changed;
+        _solutionManager.Changed += SolutionManager_Changed;
     }
 
     public void Dispose()
@@ -46,7 +46,7 @@ internal sealed class WorkspaceDiagnosticsRefresher : IRazorStartupService, IDis
             return;
         }
 
-        _projectSnapshotManager.Changed -= ProjectSnapshotManager_Changed;
+        _solutionManager.Changed -= SolutionManager_Changed;
         _disposeTokenSource.Cancel();
         _disposeTokenSource.Dispose();
     }
@@ -60,7 +60,7 @@ internal sealed class WorkspaceDiagnosticsRefresher : IRazorStartupService, IDis
         return default;
     }
 
-    private void ProjectSnapshotManager_Changed(object? sender, ProjectChangeEventArgs e)
+    private void SolutionManager_Changed(object? sender, ProjectChangeEventArgs e)
     {
         if (e.IsSolutionClosing)
         {

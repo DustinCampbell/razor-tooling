@@ -10,22 +10,22 @@ using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.ProjectSystem;
 
-internal static partial class ProjectSnapshotManagerExtensions
+internal static partial class RazorSolutionManagerExtensions
 {
-    private sealed class SolutionQueryOperations(ProjectSnapshotManager projectManager) : ISolutionQueryOperations
+    private sealed class SolutionQueryOperations(RazorSolutionManager solutionManager) : ISolutionQueryOperations
     {
-        private readonly ProjectSnapshotManager _projectManager = projectManager;
+        private readonly RazorSolutionManager _solutionManager = solutionManager;
 
         public IEnumerable<IRazorProject> GetProjects()
         {
-            return _projectManager.GetProjects().Cast<IRazorProject>();
+            return _solutionManager.GetProjects().Cast<IRazorProject>();
         }
 
         public ImmutableArray<IRazorProject> GetProjectsContainingDocument(string documentFilePath)
         {
             using var projects = new PooledArrayBuilder<IRazorProject>();
 
-            foreach (var project in _projectManager.GetProjects())
+            foreach (var project in _solutionManager.GetProjects())
             {
                 // Always exclude the miscellaneous project.
                 if (project.Key == MiscFilesProject.Key)

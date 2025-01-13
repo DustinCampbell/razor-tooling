@@ -24,7 +24,7 @@ namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 // (language version, extensions, named configuration).
 //
 // The implementation will create a RazorProject for each HostProject.
-internal partial class ProjectSnapshotManager : IDisposable
+internal partial class RazorSolutionManager : IDisposable
 {
     private readonly IProjectEngineFactoryProvider _projectEngineFactoryProvider;
     private readonly RazorCompilerOptions _compilerOptions;
@@ -78,7 +78,7 @@ internal partial class ProjectSnapshotManager : IDisposable
     #endregion
 
     /// <summary>
-    /// Constructs an instance of <see cref="ProjectSnapshotManager"/>.
+    /// Constructs an instance of <see cref="RazorSolutionManager"/>.
     /// </summary>
     /// <param name="projectEngineFactoryProvider">The <see cref="IProjectEngineFactoryProvider"/> to
     /// use when creating <see cref="ProjectState"/>.</param>
@@ -87,7 +87,7 @@ internal partial class ProjectSnapshotManager : IDisposable
     /// <param name="initializer">An optional callback to set up the initial set of projects and documents.
     /// Note that this is called during construction, so it does not run on the dispatcher and notifications
     /// will not be sent.</param>
-    public ProjectSnapshotManager(
+    public RazorSolutionManager(
         IProjectEngineFactoryProvider projectEngineFactoryProvider,
         RazorCompilerOptions compilerOptions,
         ILoggerFactory loggerFactory,

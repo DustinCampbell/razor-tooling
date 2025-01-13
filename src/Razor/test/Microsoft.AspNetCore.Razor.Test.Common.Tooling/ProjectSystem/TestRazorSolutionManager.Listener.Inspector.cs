@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Test.Common.ProjectSystem;
 
-internal partial class TestProjectSnapshotManager
+internal partial class TestRazorSolutionManager
 {
     public partial class Listener
     {

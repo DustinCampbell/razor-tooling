@@ -21,7 +21,7 @@ namespace Microsoft.VisualStudio.Razor.ProjectSystem;
 public class FallbackProjectManagerTest : VisualStudioWorkspaceTestBase
 {
     private readonly FallbackProjectManager _fallbackProjectManger;
-    private readonly TestProjectSnapshotManager _projectManager;
+    private readonly TestRazorSolutionManager _solutionManager;
 
     public FallbackProjectManagerTest(ITestOutputHelper testOutputHelper)
         : base(testOutputHelper)
@@ -35,11 +35,11 @@ public class FallbackProjectManagerTest : VisualStudioWorkspaceTestBase
                 b.AddExport(startupInitializer);
             }));
 
-        _projectManager = CreateProjectSnapshotManager();
+        _solutionManager = CreateSolutionManager();
 
         _fallbackProjectManger = new FallbackProjectManager(
             serviceProvider,
-            _projectManager,
+            _solutionManager,
             WorkspaceProvider,
             NoOpTelemetryReporter.Instance);
     }
@@ -53,7 +53,7 @@ public class FallbackProjectManagerTest : VisualStudioWorkspaceTestBase
             RootNamespace = "RootNamespace"
         };
 
-        await _projectManager.UpdateAsync(updater =>
+        await _solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(hostProject);
         });
@@ -74,7 +74,7 @@ public class FallbackProjectManagerTest : VisualStudioWorkspaceTestBase
 
         await WaitForProjectManagerUpdatesAsync();
 
-        var project = Assert.Single(_projectManager.GetProjects());
+        var project = Assert.Single(_solutionManager.GetProjects());
         Assert.False(_fallbackProjectManger.IsFallbackProject(project));
     }
 
@@ -98,7 +98,7 @@ public class FallbackProjectManagerTest : VisualStudioWorkspaceTestBase
 
         await WaitForProjectManagerUpdatesAsync();
 
-        var project = Assert.Single(_projectManager.GetProjects());
+        var project = Assert.Single(_solutionManager.GetProjects());
         Assert.Equal("DisplayName", project.DisplayName);
         Assert.Equal("RootNamespace", project.RootNamespace);
 
@@ -129,7 +129,7 @@ public class FallbackProjectManagerTest : VisualStudioWorkspaceTestBase
 
         await WaitForProjectManagerUpdatesAsync();
 
-        var project = Assert.Single(_projectManager.GetProjects());
+        var project = Assert.Single(_solutionManager.GetProjects());
         Assert.True(_fallbackProjectManger.IsFallbackProject(project));
 
         var hostProject = SomeProject with
@@ -138,12 +138,12 @@ public class FallbackProjectManagerTest : VisualStudioWorkspaceTestBase
             RootNamespace = "RootNamespace"
         };
 
-        await _projectManager.UpdateAsync(updater =>
+        await _solutionManager.UpdateAsync(updater =>
         {
             updater.UpdateProjectConfiguration(hostProject);
         });
 
-        project = Assert.Single(_projectManager.GetProjects());
+        project = Assert.Single(_solutionManager.GetProjects());
         Assert.False(_fallbackProjectManger.IsFallbackProject(project));
     }
 
@@ -181,7 +181,7 @@ public class FallbackProjectManagerTest : VisualStudioWorkspaceTestBase
 
         await WaitForProjectManagerUpdatesAsync();
 
-        var project = Assert.Single(_projectManager.GetProjects());
+        var project = Assert.Single(_solutionManager.GetProjects());
 
         Assert.Collection(project.DocumentFilePaths.OrderBy(f => f), // DocumentFilePaths comes from a dictionary, so no sort guarantee
             f => Assert.Equal(SomeProjectFile1.FilePath, f),
@@ -231,7 +231,7 @@ public class FallbackProjectManagerTest : VisualStudioWorkspaceTestBase
 
         await WaitForProjectManagerUpdatesAsync();
 
-        var project = Assert.Single(_projectManager.GetProjects());
+        var project = Assert.Single(_solutionManager.GetProjects());
 
         Assert.Single(project.DocumentFilePaths,
             filePath => filePath == SomeProjectFile1.FilePath);
@@ -243,6 +243,6 @@ public class FallbackProjectManagerTest : VisualStudioWorkspaceTestBase
     {
         // The FallbackProjectManager fires and forgets any updates to the project manager.
         // We can perform a no-op update to wait until the FallbackProjectManager's work is done.
-        return _projectManager.UpdateAsync(x => { });
+        return _solutionManager.UpdateAsync(x => { });
     }
 }

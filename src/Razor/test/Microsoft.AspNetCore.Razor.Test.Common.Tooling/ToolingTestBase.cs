@@ -219,22 +219,22 @@ public abstract partial class ToolingTestBase : IAsyncLifetime
     protected void AddDisposables(params IAsyncDisposable[] disposables)
         => AddDisposables((IEnumerable<IAsyncDisposable>)disposables);
 
-    private protected virtual TestProjectSnapshotManager CreateProjectSnapshotManager()
-        => CreateProjectSnapshotManager(ProjectEngineFactories.DefaultProvider);
+    private protected virtual TestRazorSolutionManager CreateSolutionManager()
+        => CreateSolutionManager(ProjectEngineFactories.DefaultProvider);
 
-    private protected virtual TestProjectSnapshotManager CreateProjectSnapshotManager(IProjectEngineFactoryProvider projectEngineFactoryProvider)
-        => CreateProjectSnapshotManager(projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance);
+    private protected virtual TestRazorSolutionManager CreateSolutionManager(IProjectEngineFactoryProvider projectEngineFactoryProvider)
+        => CreateSolutionManager(projectEngineFactoryProvider, TestLanguageServerFeatureOptions.Instance);
 
-    private protected virtual TestProjectSnapshotManager CreateProjectSnapshotManager(IProjectEngineFactoryProvider projectEngineFactoryProvider, LanguageServerFeatureOptions languageServerFeatureOptions)
+    private protected virtual TestRazorSolutionManager CreateSolutionManager(IProjectEngineFactoryProvider projectEngineFactoryProvider, LanguageServerFeatureOptions languageServerFeatureOptions)
     {
-        var projectManager = new TestProjectSnapshotManager(
+        var solutionManager = new TestRazorSolutionManager(
             projectEngineFactoryProvider,
             languageServerFeatureOptions,
             LoggerFactory,
             DisposalToken);
 
-        AddDisposable(projectManager);
+        AddDisposable(solutionManager);
 
-        return projectManager;
+        return solutionManager;
     }
 }

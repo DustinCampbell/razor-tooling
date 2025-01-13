@@ -29,8 +29,8 @@ public class RazorCompletionResolveEndpointTest : LanguageServerTestBase
     {
         _completionListCache = new CompletionListCache();
 
-        var projectManager = CreateProjectSnapshotManager();
-        var componentAvailabilityService = new ComponentAvailabilityService(projectManager);
+        var solutionManager = CreateSolutionManager();
+        var componentAvailabilityService = new ComponentAvailabilityService(solutionManager);
 
         _endpoint = new RazorCompletionResolveEndpoint(
             new AggregateCompletionItemResolver(

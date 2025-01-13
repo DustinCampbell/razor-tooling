@@ -21,18 +21,18 @@ internal class RazorCodeDocumentProvidingSnapshotChangeTrigger : IRazorStartupSe
 {
     private readonly HashSet<string> _openDocuments = new(FilePathComparer.Instance);
     private readonly Dictionary<string, ProjectKey> _documentProjectMap = new(FilePathComparer.Instance);
-    private readonly ProjectSnapshotManager _projectManager;
+    private readonly RazorSolutionManager _solutionManager;
 
     public event EventHandler<string>? DocumentReady;
 
     [ImportingConstructor]
-    public RazorCodeDocumentProvidingSnapshotChangeTrigger(ProjectSnapshotManager projectManager)
+    public RazorCodeDocumentProvidingSnapshotChangeTrigger(RazorSolutionManager solutionManager)
     {
-        _projectManager = projectManager;
-        _projectManager.Changed += ProjectManager_Changed;
+        _solutionManager = solutionManager;
+        _solutionManager.Changed += SolutionManager_Changed;
     }
 
-    private void ProjectManager_Changed(object sender, ProjectChangeEventArgs e)
+    private void SolutionManager_Changed(object sender, ProjectChangeEventArgs e)
     {
         if (e.Kind == ProjectChangeKind.ProjectAdded)
         {
@@ -70,7 +70,7 @@ internal class RazorCodeDocumentProvidingSnapshotChangeTrigger : IRazorStartupSe
             return null;
         }
 
-        if (!_projectManager.TryGetProject(projectKey, out var project))
+        if (!_solutionManager.TryGetProject(projectKey, out var project))
         {
             return null;
         }

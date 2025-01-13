@@ -20,7 +20,7 @@ namespace Microsoft.VisualStudio.Razor;
 internal class VsSolutionUpdatesProjectSnapshotChangeTrigger : IRazorStartupService, IVsUpdateSolutionEvents2, IDisposable
 {
     private readonly IServiceProvider _serviceProvider;
-    private readonly ProjectSnapshotManager _projectManager;
+    private readonly RazorSolutionManager _solutionManager;
     private readonly IProjectWorkspaceStateGenerator _workspaceStateGenerator;
     private readonly IWorkspaceProvider _workspaceProvider;
     private readonly JoinableTaskFactory _jtf;
@@ -35,20 +35,20 @@ internal class VsSolutionUpdatesProjectSnapshotChangeTrigger : IRazorStartupServ
     [ImportingConstructor]
     public VsSolutionUpdatesProjectSnapshotChangeTrigger(
         [Import(typeof(SVsServiceProvider))] IServiceProvider serviceProvider,
-        ProjectSnapshotManager projectManager,
+        RazorSolutionManager solutionManager,
         IProjectWorkspaceStateGenerator workspaceStateGenerator,
         IWorkspaceProvider workspaceProvider,
         JoinableTaskContext joinableTaskContext)
     {
         _serviceProvider = serviceProvider;
-        _projectManager = projectManager;
+        _solutionManager = solutionManager;
         _workspaceStateGenerator = workspaceStateGenerator;
         _workspaceProvider = workspaceProvider;
         _jtf = joinableTaskContext.Factory;
 
         _disposeTokenSource = new();
 
-        _projectManager.Changed += ProjectManager_Changed;
+        _solutionManager.Changed += SolutionManager_Changed;
 
         _initializeTask = _jtf.RunAsync(async () =>
         {
@@ -105,7 +105,7 @@ internal class VsSolutionUpdatesProjectSnapshotChangeTrigger : IRazorStartupServ
         return VSConstants.S_OK;
     }
 
-    private void ProjectManager_Changed(object sender, ProjectChangeEventArgs args)
+    private void SolutionManager_Changed(object sender, ProjectChangeEventArgs args)
     {
         if (args.IsSolutionClosing)
         {
@@ -122,10 +122,10 @@ internal class VsSolutionUpdatesProjectSnapshotChangeTrigger : IRazorStartupServ
             return;
         }
 
-        var projectKeys = _projectManager.GetProjectKeysWithFilePath(projectFilePath);
+        var projectKeys = _solutionManager.GetProjectKeysWithFilePath(projectFilePath);
         foreach (var projectKey in projectKeys)
         {
-            if (_projectManager.TryGetProject(projectKey, out var project))
+            if (_solutionManager.TryGetProject(projectKey, out var project))
             {
                 var workspace = _workspaceProvider.GetWorkspace();
                 var workspaceProject = workspace.CurrentSolution.Projects.FirstOrDefault(wp => wp.ToProjectKey() == project.Key);

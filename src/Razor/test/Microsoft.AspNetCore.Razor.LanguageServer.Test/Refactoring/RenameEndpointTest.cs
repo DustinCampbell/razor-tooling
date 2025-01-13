@@ -631,9 +631,9 @@ public class RenameEndpointTest(ITestOutputHelper testOutput) : LanguageServerTe
         builder.AddRange(CreateRazorComponentTagHelperDescriptors("First", "Test.Components", "Directory2"));
         var tagHelpers = builder.ToImmutable();
 
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
-        var documentContextFactory = new DocumentContextFactory(projectManager, LoggerFactory);
+        var documentContextFactory = new DocumentContextFactory(solutionManager, LoggerFactory);
 
         var remoteTextLoaderFactoryMock = new StrictMock<RemoteTextLoaderFactory>();
         remoteTextLoaderFactoryMock
@@ -651,13 +651,13 @@ public class RenameEndpointTest(ITestOutputHelper testOutput) : LanguageServerTe
         var projectService = AddDisposable(
             new TestRazorProjectService(
                 remoteTextLoaderFactoryMock.Object,
-                projectManager,
+                solutionManager,
                 LoggerFactory));
 
         var projectKey1 = await projectService.GetTestAccessor().AddProjectAsync(
             s_projectFilePath1, s_intermediateOutputPath1, RazorConfiguration.Default, RootNamespace1, displayName: null, DisposalToken);
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.UpdateProjectWorkspaceState(projectKey1, ProjectWorkspaceState.Create(tagHelpers));
         });
@@ -679,7 +679,7 @@ public class RenameEndpointTest(ITestOutputHelper testOutput) : LanguageServerTe
         var projectKey2 = await projectService.GetTestAccessor().AddProjectAsync(
             s_projectFilePath2, s_intermediateOutputPath2, RazorConfiguration.Default, RootNamespace2, displayName: null, DisposalToken);
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.UpdateProjectWorkspaceState(projectKey2, ProjectWorkspaceState.Create(tagHelpers));
         });
@@ -720,7 +720,7 @@ public class RenameEndpointTest(ITestOutputHelper testOutput) : LanguageServerTe
             options,
             documentMappingService,
             editMappingService,
-            projectManager,
+            solutionManager,
             clientConnection,
             LoggerFactory);
 

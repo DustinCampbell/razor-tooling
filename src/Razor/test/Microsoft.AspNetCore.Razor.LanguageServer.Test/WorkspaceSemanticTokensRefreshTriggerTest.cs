@@ -17,17 +17,17 @@ public class WorkspaceSemanticTokensRefreshTriggerTest : LanguageServerTestBase
     private static readonly HostProject s_hostProject = new("/path/to/project.csproj", "/path/to/obj", RazorConfiguration.Default, "TestRootNamespace");
     private static readonly HostDocument s_hostDocument = new("/path/to/file.razor", "file.razor");
 
-    private readonly TestProjectSnapshotManager _projectManager;
+    private readonly TestRazorSolutionManager _solutionManager;
 
     public WorkspaceSemanticTokensRefreshTriggerTest(ITestOutputHelper testOutput)
         : base(testOutput)
     {
-        _projectManager = CreateProjectSnapshotManager();
+        _solutionManager = CreateSolutionManager();
     }
 
     protected override Task InitializeAsync()
     {
-        return _projectManager.UpdateAsync(updater =>
+        return _solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(s_hostProject);
             updater.AddDocument(s_hostProject.Key, s_hostDocument, EmptyTextLoader.Instance);
@@ -43,12 +43,12 @@ public class WorkspaceSemanticTokensRefreshTriggerTest : LanguageServerTestBase
             .Setup(w => w.NotifyWorkspaceSemanticTokensRefresh())
             .Verifiable();
 
-        var refreshTrigger = new TestWorkspaceSemanticTokensRefreshTrigger(publisher.Object, _projectManager);
+        var refreshTrigger = new TestWorkspaceSemanticTokensRefreshTrigger(publisher.Object, _solutionManager);
 
         // Act
         var newDocument = new HostDocument("/path/to/newFile.razor", "newFile.razor");
 
-        await _projectManager.UpdateAsync(updater =>
+        await _solutionManager.UpdateAsync(updater =>
         {
             updater.AddDocument(s_hostProject.Key, newDocument, EmptyTextLoader.Instance);
         });
@@ -59,6 +59,6 @@ public class WorkspaceSemanticTokensRefreshTriggerTest : LanguageServerTestBase
 
     private class TestWorkspaceSemanticTokensRefreshTrigger(
         IWorkspaceSemanticTokensRefreshNotifier publisher,
-        ProjectSnapshotManager projectManager)
-        : WorkspaceSemanticTokensRefreshTrigger(publisher, projectManager);
+        RazorSolutionManager solutionManager)
+        : WorkspaceSemanticTokensRefreshTrigger(publisher, solutionManager);
 }

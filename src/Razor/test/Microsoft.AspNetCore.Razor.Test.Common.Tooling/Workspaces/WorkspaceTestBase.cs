@@ -71,11 +71,11 @@ public abstract class WorkspaceTestBase(ITestOutputHelper testOutput) : ToolingT
     private protected RazorCompilerOptions CompilerOptions
         => LanguageServerFeatureOptions.ToCompilerOptions();
 
-    private protected override TestProjectSnapshotManager CreateProjectSnapshotManager()
-        => CreateProjectSnapshotManager(ProjectEngineFactoryProvider, LanguageServerFeatureOptions);
+    private protected override TestRazorSolutionManager CreateSolutionManager()
+        => CreateSolutionManager(ProjectEngineFactoryProvider, LanguageServerFeatureOptions);
 
-    private protected override TestProjectSnapshotManager CreateProjectSnapshotManager(IProjectEngineFactoryProvider projectEngineFactoryProvider)
-        => CreateProjectSnapshotManager(projectEngineFactoryProvider, LanguageServerFeatureOptions);
+    private protected override TestRazorSolutionManager CreateSolutionManager(IProjectEngineFactoryProvider projectEngineFactoryProvider)
+        => CreateSolutionManager(projectEngineFactoryProvider, LanguageServerFeatureOptions);
 
     protected virtual void ConfigureWorkspace(AdhocWorkspace workspace)
     {

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Razor.ProjectEngineHost;
 
 namespace Microsoft.AspNetCore.Razor.Microbenchmarks;
 
-public abstract partial class ProjectSnapshotManagerBenchmarkBase
+public abstract partial class RazorSolutionManagerBenchmarkBase
 {
     private class StaticProjectEngineFactoryProvider : IProjectEngineFactoryProvider
     {

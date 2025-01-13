@@ -40,13 +40,13 @@ internal partial class RazorProjectSystemInProcess
 
     public async Task WaitForProjectFileAsync(string projectFilePath, CancellationToken cancellationToken)
     {
-        var projectManager = await TestServices.Shell.GetComponentModelServiceAsync<ProjectSnapshotManager>(cancellationToken);
-        Assert.NotNull(projectManager);
+        var solutionManager = await TestServices.Shell.GetComponentModelServiceAsync<RazorSolutionManager>(cancellationToken);
+        Assert.NotNull(solutionManager);
         await Helper.RetryAsync(ct =>
         {
-            var projectKeys = projectManager.GetProjectKeysWithFilePath(projectFilePath);
+            var projectKeys = solutionManager.GetProjectKeysWithFilePath(projectFilePath);
 
-            return projectKeys is [var projectKey, ..] && projectManager.ContainsProject(projectKey)
+            return projectKeys is [var projectKey, ..] && solutionManager.ContainsProject(projectKey)
                 ? SpecializedTasks.True
                 : SpecializedTasks.False;
         }, TimeSpan.FromMilliseconds(100), cancellationToken);
@@ -55,13 +55,13 @@ internal partial class RazorProjectSystemInProcess
     public async Task WaitForComponentTagNameAsync(string projectName, string componentName, CancellationToken cancellationToken)
     {
         var projectFilePath = await TestServices.SolutionExplorer.GetProjectFileNameAsync(projectName, cancellationToken);
-        var projectManager = await TestServices.Shell.GetComponentModelServiceAsync<ProjectSnapshotManager>(cancellationToken);
-        Assert.NotNull(projectManager);
+        var solutionManager = await TestServices.Shell.GetComponentModelServiceAsync<RazorSolutionManager>(cancellationToken);
+        Assert.NotNull(solutionManager);
         await Helper.RetryAsync(async ct =>
         {
-            var projectKeys = projectManager.GetProjectKeysWithFilePath(projectFilePath);
+            var projectKeys = solutionManager.GetProjectKeysWithFilePath(projectFilePath);
 
-            if (projectKeys is [var projectKey, ..] && projectManager.TryGetProject(projectKey, out var project))
+            if (projectKeys is [var projectKey, ..] && solutionManager.TryGetProject(projectKey, out var project))
             {
                 var tagHelpers = await project.GetTagHelpersAsync(cancellationToken);
                 return tagHelpers.Any(tagHelper => tagHelper.TagMatchingRules.Any(r => r.TagName.Equals(componentName, StringComparison.Ordinal)));
@@ -73,14 +73,14 @@ internal partial class RazorProjectSystemInProcess
 
     public async Task WaitForRazorFileInProjectAsync(string projectFilePath, string filePath, CancellationToken cancellationToken)
     {
-        var projectManager = await TestServices.Shell.GetComponentModelServiceAsync<ProjectSnapshotManager>(cancellationToken);
-        Assert.NotNull(projectManager);
+        var solutionManager = await TestServices.Shell.GetComponentModelServiceAsync<RazorSolutionManager>(cancellationToken);
+        Assert.NotNull(solutionManager);
 
         await Helper.RetryAsync(ct =>
         {
-            var projectKeys = projectManager.GetProjectKeysWithFilePath(projectFilePath);
+            var projectKeys = solutionManager.GetProjectKeysWithFilePath(projectFilePath);
 
-            return projectKeys is [var projectKey, ..] && projectManager.ContainsDocument(projectKey, filePath)
+            return projectKeys is [var projectKey, ..] && solutionManager.ContainsDocument(projectKey, filePath)
                 ? SpecializedTasks.True
                 : SpecializedTasks.False;
         }, TimeSpan.FromMilliseconds(100), cancellationToken);
@@ -88,10 +88,10 @@ internal partial class RazorProjectSystemInProcess
 
     public async Task<ImmutableArray<string>> GetProjectKeyIdsForProjectAsync(string projectFilePath, CancellationToken cancellationToken)
     {
-        var projectManager = await TestServices.Shell.GetComponentModelServiceAsync<ProjectSnapshotManager>(cancellationToken);
-        Assert.NotNull(projectManager);
+        var solutionManager = await TestServices.Shell.GetComponentModelServiceAsync<RazorSolutionManager>(cancellationToken);
+        Assert.NotNull(solutionManager);
 
-        return projectManager.GetProjectKeysWithFilePath(projectFilePath).SelectAsArray(static key => key.Id);
+        return solutionManager.GetProjectKeysWithFilePath(projectFilePath).SelectAsArray(static key => key.Id);
     }
 
     public async Task WaitForCSharpVirtualDocumentAsync(string razorFilePath, CancellationToken cancellationToken)

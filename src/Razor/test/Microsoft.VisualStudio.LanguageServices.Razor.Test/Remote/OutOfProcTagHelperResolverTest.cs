@@ -38,7 +38,7 @@ public partial class OutOfProcTagHelperResolverTest : VisualStudioTestBase
         rootNamespace: null);
 
     private readonly Project _workspaceProject;
-    private readonly TestProjectSnapshotManager _projectManager;
+    private readonly TestRazorSolutionManager _solutionManager;
     private readonly IRemoteServiceInvoker _remoteServiceInvoker;
 
     public OutOfProcTagHelperResolverTest(ITestOutputHelper testOutput)
@@ -59,7 +59,7 @@ public partial class OutOfProcTagHelperResolverTest : VisualStudioTestBase
             CreateFactory("Test-2"));
 
         var projectEngineFactoryProvider = new ProjectEngineFactoryProvider(customFactories);
-        _projectManager = CreateProjectSnapshotManager(projectEngineFactoryProvider);
+        _solutionManager = CreateSolutionManager(projectEngineFactoryProvider);
 
         static IProjectEngineFactory CreateFactory(string configurationName)
         {
@@ -76,12 +76,12 @@ public partial class OutOfProcTagHelperResolverTest : VisualStudioTestBase
     public async Task GetTagHelpersAsync_WithSerializableCustomFactory_GoesOutOfProcess()
     {
         // Arrange
-        await _projectManager.UpdateAsync(updater =>
+        await _solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(s_hostProject_For_2_0);
         });
 
-        var project = _projectManager.GetRequiredProject(s_hostProject_For_2_0.Key);
+        var project = _solutionManager.GetRequiredProject(s_hostProject_For_2_0.Key);
 
         var calledOutOfProcess = false;
 
@@ -108,12 +108,12 @@ public partial class OutOfProcTagHelperResolverTest : VisualStudioTestBase
     public async Task GetTagHelpersAsync_WithNonSerializableCustomFactory_StaysInProcess()
     {
         // Arrange
-        await _projectManager.UpdateAsync(updater =>
+        await _solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(s_hostProject_For_NonSerializableConfiguration);
         });
 
-        var project = _projectManager.GetRequiredProject(s_hostProject_For_2_0.Key);
+        var project = _solutionManager.GetRequiredProject(s_hostProject_For_2_0.Key);
 
         var calledInProcess = false;
 
@@ -140,12 +140,12 @@ public partial class OutOfProcTagHelperResolverTest : VisualStudioTestBase
     public async Task GetTagHelpersAsync_OperationCanceledException_DoesNotGetWrapped()
     {
         // Arrange
-        await _projectManager.UpdateAsync(updater =>
+        await _solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(s_hostProject_For_2_0);
         });
 
-        var project = _projectManager.GetRequiredProject(s_hostProject_For_2_0.Key);
+        var project = _solutionManager.GetRequiredProject(s_hostProject_For_2_0.Key);
 
         var calledOutOfProcess = false;
         var calledInProcess = false;

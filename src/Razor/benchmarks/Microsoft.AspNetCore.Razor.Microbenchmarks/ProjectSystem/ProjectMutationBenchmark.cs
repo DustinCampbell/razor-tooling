@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
 namespace Microsoft.AspNetCore.Razor.Microbenchmarks;
 
-public class ProjectMutationBenchmark : ProjectSnapshotManagerBenchmarkBase
+public class ProjectMutationBenchmark : RazorSolutionManagerBenchmarkBase
 {
     public ProjectMutationBenchmark()
         : base(100000)
@@ -23,15 +23,15 @@ public class ProjectMutationBenchmark : ProjectSnapshotManagerBenchmarkBase
     [IterationSetup]
     public void Setup()
     {
-        ProjectManager = CreateProjectSnapshotManager();
+        SolutionManager = CreateSolutionManager();
     }
 
-    private ProjectSnapshotManager ProjectManager { get; set; }
+    private RazorSolutionManager SolutionManager { get; set; }
 
     [Benchmark(Description = "Does thread contention add/remove of documents", OperationsPerInvoke = 100)]
     public async Task ProjectMutation_Mutates100kFilesAsync()
     {
-        await ProjectManager.UpdateAsync(
+        await SolutionManager.UpdateAsync(
             updater => updater.AddProject(HostProject),
             CancellationToken.None);
 
@@ -44,9 +44,9 @@ public class ProjectMutationBenchmark : ProjectSnapshotManagerBenchmarkBase
             for (var i = 0; i < Documents.Length; i++)
             {
                 var document = Documents[i];
-                await ProjectManager.UpdateAsync(updater => updater.AddDocument(HostProject.Key, document, TextLoaders[i % 4]), CancellationToken.None).ConfigureAwait(false);
+                await SolutionManager.UpdateAsync(updater => updater.AddDocument(HostProject.Key, document, TextLoaders[i % 4]), CancellationToken.None).ConfigureAwait(false);
                 Thread.Sleep(0);
-                await ProjectManager.UpdateAsync(updater => updater.RemoveDocument(HostProject.Key, document.FilePath), CancellationToken.None).ConfigureAwait(false);
+                await SolutionManager.UpdateAsync(updater => updater.RemoveDocument(HostProject.Key, document.FilePath), CancellationToken.None).ConfigureAwait(false);
                 Thread.Sleep(0);
             }
 
@@ -63,9 +63,9 @@ public class ProjectMutationBenchmark : ProjectSnapshotManagerBenchmarkBase
                     return;
                 }
 
-                _ = ProjectManager.GetProjects();
+                _ = SolutionManager.GetProjects();
                 Thread.Sleep(0);
-                _ = ProjectManager.GetOpenDocuments();
+                _ = SolutionManager.GetOpenDocuments();
                 Thread.Sleep(0);
             }
         });

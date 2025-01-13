@@ -20,8 +20,8 @@ public class ProjectAvailabilityTests(ITestOutputHelper testOutput) : ToolingTes
     [Fact]
     public async Task GetProjectAvailabilityText_NoProjects_ReturnsNull()
     {
-        var projectManager = CreateProjectSnapshotManager();
-        var componentAvailabilityService = new TestComponentAvailabilityService(projectManager);
+        var solutionManager = CreateSolutionManager();
+        var componentAvailabilityService = new TestComponentAvailabilityService(solutionManager);
 
         var availability = await componentAvailabilityService.GetProjectAvailabilityTextAsync("file.razor", "MyTagHelper", DisposalToken);
 
@@ -50,16 +50,16 @@ public class ProjectAvailabilityTests(ITestOutputHelper testOutput) : ToolingTes
             "file.razor",
             FileKinds.Component);
 
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(hostProject);
             updater.UpdateProjectWorkspaceState(hostProject.Key, projectWorkspaceState);
             updater.AddDocument(hostProject.Key, hostDocument, EmptyTextLoader.Instance);
         });
 
-        var componentAvailabilityService = new TestComponentAvailabilityService(projectManager);
+        var componentAvailabilityService = new TestComponentAvailabilityService(solutionManager);
 
         var availability = await componentAvailabilityService.GetProjectAvailabilityTextAsync(hostDocument.FilePath, tagHelperTypeName, DisposalToken);
 
@@ -95,9 +95,9 @@ public class ProjectAvailabilityTests(ITestOutputHelper testOutput) : ToolingTes
             "file.razor",
             FileKinds.Component);
 
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(hostProject1);
             updater.UpdateProjectWorkspaceState(hostProject1.Key, projectWorkspaceState);
@@ -108,7 +108,7 @@ public class ProjectAvailabilityTests(ITestOutputHelper testOutput) : ToolingTes
             updater.AddDocument(hostProject2.Key, hostDocument, EmptyTextLoader.Instance);
         });
 
-        var componentAvailabilityService = new TestComponentAvailabilityService(projectManager);
+        var componentAvailabilityService = new TestComponentAvailabilityService(solutionManager);
 
         var availability = await componentAvailabilityService.GetProjectAvailabilityTextAsync(hostDocument.FilePath, tagHelperTypeName, DisposalToken);
 
@@ -144,9 +144,9 @@ public class ProjectAvailabilityTests(ITestOutputHelper testOutput) : ToolingTes
             "file.razor",
             FileKinds.Component);
 
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(hostProject1);
             updater.UpdateProjectWorkspaceState(hostProject1.Key, projectWorkspaceState);
@@ -156,7 +156,7 @@ public class ProjectAvailabilityTests(ITestOutputHelper testOutput) : ToolingTes
             updater.AddDocument(hostProject2.Key, hostDocument, EmptyTextLoader.Instance);
         });
 
-        var componentAvailabilityService = new TestComponentAvailabilityService(projectManager);
+        var componentAvailabilityService = new TestComponentAvailabilityService(solutionManager);
 
         var availability = await componentAvailabilityService.GetProjectAvailabilityTextAsync(hostDocument.FilePath, tagHelperTypeName, DisposalToken);
 
@@ -189,9 +189,9 @@ public class ProjectAvailabilityTests(ITestOutputHelper testOutput) : ToolingTes
             "file.razor",
             FileKinds.Component);
 
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(hostProject1);
             updater.AddDocument(hostProject1.Key, hostDocument, EmptyTextLoader.Instance);
@@ -200,7 +200,7 @@ public class ProjectAvailabilityTests(ITestOutputHelper testOutput) : ToolingTes
             updater.AddDocument(hostProject2.Key, hostDocument, EmptyTextLoader.Instance);
         });
 
-        var componentAvailabilityService = new TestComponentAvailabilityService(projectManager);
+        var componentAvailabilityService = new TestComponentAvailabilityService(solutionManager);
 
         var availability = await componentAvailabilityService.GetProjectAvailabilityTextAsync(hostDocument.FilePath, "MyTagHelper", DisposalToken);
 

@@ -25,7 +25,7 @@ using ResolvedCompilationReference = Microsoft.VisualStudio.Razor.ProjectSystem.
 
 namespace Microsoft.VisualStudio.Razor.ProjectSystem;
 
-// This class is responsible for initializing the Razor ProjectSnapshotManager for cases where
+// This class is responsible for initializing the Razor RazorSolutionManager for cases where
 // MSBuild does not provides configuration support (SDK < 2.1).
 [AppliesTo("(DotNetCoreRazor | DotNetCoreWeb) & !DotNetCoreRazorConfiguration")]
 [Export(ExportContractNames.Scopes.UnconfiguredProject, typeof(IProjectDynamicLoadComponent))]
@@ -44,8 +44,8 @@ internal class FallbackWindowsRazorProjectHost : WindowsRazorProjectHostBase
     public FallbackWindowsRazorProjectHost(
         IUnconfiguredProjectCommonServices commonServices,
         [Import(typeof(SVsServiceProvider))] IServiceProvider serviceProvider,
-        ProjectSnapshotManager projectManager)
-        : base(commonServices, serviceProvider, projectManager)
+        RazorSolutionManager solutionManager)
+        : base(commonServices, serviceProvider, solutionManager)
     {
     }
 

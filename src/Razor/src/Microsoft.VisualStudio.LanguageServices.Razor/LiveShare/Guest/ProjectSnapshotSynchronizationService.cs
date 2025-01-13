@@ -16,14 +16,14 @@ namespace Microsoft.VisualStudio.Razor.LiveShare.Guest;
 internal class ProjectSnapshotSynchronizationService(
     CollaborationSession sessionContext,
     IProjectSnapshotManagerProxy hostProjectManagerProxy,
-    ProjectSnapshotManager projectManager,
+    RazorSolutionManager solutionManager,
     ILoggerFactory loggerFactory,
     JoinableTaskFactory jtf) : ICollaborationService, IAsyncDisposable, System.IAsyncDisposable
 {
     private readonly JoinableTaskFactory _jtf = jtf;
     private readonly CollaborationSession _sessionContext = sessionContext;
     private readonly IProjectSnapshotManagerProxy _hostProjectManagerProxy = hostProjectManagerProxy;
-    private readonly ProjectSnapshotManager _projectManager = projectManager;
+    private readonly RazorSolutionManager _solutionManager = solutionManager;
     private readonly ILogger _logger = loggerFactory.GetOrCreateLogger<ProjectSnapshotSynchronizationService>();
 
     public async Task InitializeAsync(CancellationToken cancellationToken)
@@ -41,9 +41,9 @@ internal class ProjectSnapshotSynchronizationService(
     {
         _hostProjectManagerProxy.Changed -= HostProxyProjectManager_Changed;
 
-        var projects = _projectManager.GetProjects();
+        var projects = _solutionManager.GetProjects();
 
-        await _projectManager.UpdateAsync(
+        await _solutionManager.UpdateAsync(
             static (updater, state) =>
             {
                 var (projects, logger) = state;
@@ -78,7 +78,7 @@ internal class ProjectSnapshotSynchronizationService(
             var guestIntermediateOutputPath = ResolveGuestPath(args.IntermediateOutputPath);
             var hostProject = new HostProject(guestPath, guestIntermediateOutputPath, args.Newer!.Configuration, args.Newer.RootNamespace);
 
-            await _projectManager.UpdateAsync(
+            await _solutionManager.UpdateAsync(
                 static (updater, state) =>
                 {
                     updater.AddProject(state.hostProject);
@@ -94,7 +94,7 @@ internal class ProjectSnapshotSynchronizationService(
         else if (args.Kind == ProjectProxyChangeKind.ProjectRemoved)
         {
             var guestPath = ResolveGuestPath(args.ProjectFilePath);
-            await _projectManager.UpdateAsync(
+            await _solutionManager.UpdateAsync(
                 static (updater, guestPath) =>
                 {
                     var projectKeys = updater.GetProjectKeysWithFilePath(guestPath);
@@ -113,7 +113,7 @@ internal class ProjectSnapshotSynchronizationService(
                 var guestPath = ResolveGuestPath(args.Newer.FilePath);
                 var guestIntermediateOutputPath = ResolveGuestPath(args.Newer.IntermediateOutputPath);
                 var hostProject = new HostProject(guestPath, guestIntermediateOutputPath, args.Newer.Configuration, args.Newer.RootNamespace);
-                await _projectManager.UpdateAsync(
+                await _solutionManager.UpdateAsync(
                     static (updater, hostProject) => updater.UpdateProjectConfiguration(hostProject),
                     state: hostProject,
                     CancellationToken.None);
@@ -122,7 +122,7 @@ internal class ProjectSnapshotSynchronizationService(
                 args.Older.ProjectWorkspaceState?.Equals(args.Newer.ProjectWorkspaceState) == false)
             {
                 var guestPath = ResolveGuestPath(args.Newer.FilePath);
-                await _projectManager.UpdateAsync(
+                await _solutionManager.UpdateAsync(
                     static (updater, state) =>
                     {
                         var projectKeys = updater.GetProjectKeysWithFilePath(state.guestPath);
@@ -145,7 +145,7 @@ internal class ProjectSnapshotSynchronizationService(
             var guestPath = ResolveGuestPath(projectHandle.FilePath);
             var guestIntermediateOutputPath = ResolveGuestPath(projectHandle.IntermediateOutputPath);
             var hostProject = new HostProject(guestPath, guestIntermediateOutputPath, projectHandle.Configuration, projectHandle.RootNamespace);
-            await _projectManager.UpdateAsync(
+            await _solutionManager.UpdateAsync(
                 static (updater, state) =>
                 {
                     updater.AddProject(state.hostProject);

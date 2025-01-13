@@ -21,14 +21,14 @@ public class RazorDocumentManagerTest : VisualStudioTestBase
     private const string FilePath = "C:/Some/Path/TestDocumentTracker.cshtml";
     private const string ProjectPath = "C:/Some/Path/TestProject.csproj";
 
-    private readonly TestProjectSnapshotManager _projectManager;
+    private readonly TestRazorSolutionManager _solutionManager;
     private readonly IWorkspaceEditorSettings _workspaceEditorSettings;
     private readonly IImportDocumentManager _importDocumentManager;
 
     public RazorDocumentManagerTest(ITestOutputHelper testOutput)
         : base(testOutput)
     {
-        _projectManager = CreateProjectSnapshotManager();
+        _solutionManager = CreateSolutionManager();
 
         _workspaceEditorSettings = new WorkspaceEditorSettings(
             StrictMock.Of<IClientSettingsManager>());
@@ -67,7 +67,7 @@ public class RazorDocumentManagerTest : VisualStudioTestBase
             JoinableTaskContext,
             FilePath,
             ProjectPath,
-            _projectManager,
+            _solutionManager,
             _workspaceEditorSettings,
             ProjectEngineFactories.DefaultProvider,
             coreTextBuffer,
@@ -95,7 +95,7 @@ public class RazorDocumentManagerTest : VisualStudioTestBase
             JoinableTaskContext,
             FilePath,
             ProjectPath,
-            _projectManager,
+            _solutionManager,
             _workspaceEditorSettings,
             ProjectEngineFactories.DefaultProvider,
             coreTextBuffer,
@@ -143,7 +143,7 @@ public class RazorDocumentManagerTest : VisualStudioTestBase
             JoinableTaskContext,
             FilePath,
             ProjectPath,
-            _projectManager,
+            _solutionManager,
             _workspaceEditorSettings,
             ProjectEngineFactories.DefaultProvider,
             coreTextBuffer,
@@ -153,7 +153,7 @@ public class RazorDocumentManagerTest : VisualStudioTestBase
         coreTextBuffer.Properties.AddProperty(typeof(IVisualStudioDocumentTracker), documentTracker);
 
         documentTracker = new VisualStudioDocumentTracker(
-            JoinableTaskContext, FilePath, ProjectPath, _projectManager, _workspaceEditorSettings,
+            JoinableTaskContext, FilePath, ProjectPath, _solutionManager, _workspaceEditorSettings,
             ProjectEngineFactories.DefaultProvider, nonCoreTextBuffer, _importDocumentManager);
         documentTracker.AddTextView(textView1);
         documentTracker.AddTextView(textView2);
@@ -186,7 +186,7 @@ public class RazorDocumentManagerTest : VisualStudioTestBase
             JoinableTaskContext,
             FilePath,
             ProjectPath,
-            _projectManager,
+            _solutionManager,
             _workspaceEditorSettings,
             ProjectEngineFactories.DefaultProvider,
             coreTextBuffer,

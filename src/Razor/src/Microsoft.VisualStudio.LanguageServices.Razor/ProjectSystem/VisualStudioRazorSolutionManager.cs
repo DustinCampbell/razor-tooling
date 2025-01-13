@@ -9,12 +9,12 @@ using Microsoft.CodeAnalysis.Razor.Workspaces;
 
 namespace Microsoft.VisualStudio.Razor.ProjectSystem;
 
-[Export(typeof(ProjectSnapshotManager))]
+[Export(typeof(RazorSolutionManager))]
 [method: ImportingConstructor]
-internal sealed class VisualStudioProjectSnapshotManager(
+internal sealed class VisualStudioRazorSolutionManager(
     IProjectEngineFactoryProvider projectEngineFactoryProvider,
     LanguageServerFeatureOptions languageServerFeatureOptions,
     ILoggerFactory loggerFactory)
-    : ProjectSnapshotManager(projectEngineFactoryProvider, languageServerFeatureOptions.ToCompilerOptions(), loggerFactory)
+    : RazorSolutionManager(projectEngineFactoryProvider, languageServerFeatureOptions.ToCompilerOptions(), loggerFactory)
 {
 }

@@ -12,19 +12,19 @@ namespace Microsoft.AspNetCore.Razor.LanguageServer;
 internal class WorkspaceSemanticTokensRefreshTrigger : IRazorStartupService
 {
     private readonly IWorkspaceSemanticTokensRefreshNotifier _publisher;
-    private readonly ProjectSnapshotManager _projectManager;
+    private readonly RazorSolutionManager _solutionManager;
 
     public WorkspaceSemanticTokensRefreshTrigger(
         IWorkspaceSemanticTokensRefreshNotifier publisher,
-        ProjectSnapshotManager projectManager)
+        RazorSolutionManager solutionManager)
     {
         _publisher = publisher;
-        _projectManager = projectManager;
-        _projectManager.Changed += ProjectManager_Changed;
+        _solutionManager = solutionManager;
+        _solutionManager.Changed += SolutionManager_Changed;
     }
 
     // Does not handle C# files
-    private void ProjectManager_Changed(object? sender, ProjectChangeEventArgs args)
+    private void SolutionManager_Changed(object? sender, ProjectChangeEventArgs args)
     {
         // Don't send for a simple Document edit. The platform should re-request any range that
         // is edited and if a parameter or type change is made it should be reflected as a ProjectChanged.

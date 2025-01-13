@@ -64,8 +64,8 @@ World", cleanedSummary);
     public async Task TryCreateTooltip_Markup_NoAssociatedTagHelperDescriptions_ReturnsFalse()
     {
         // Arrange
-        var projectManager = CreateProjectSnapshotManager();
-        var componentAvailabilityService = new TestComponentAvailabilityService(projectManager);
+        var solutionManager = CreateSolutionManager();
+        var componentAvailabilityService = new TestComponentAvailabilityService(solutionManager);
         var elementDescription = AggregateBoundElementDescription.Empty;
 
         // Act
@@ -79,8 +79,8 @@ World", cleanedSummary);
     public async Task TryCreateTooltip_Markup_Element_SingleAssociatedTagHelper_ReturnsTrue()
     {
         // Arrange
-        var projectManager = CreateProjectSnapshotManager();
-        var componentAvailabilityService = new TestComponentAvailabilityService(projectManager);
+        var solutionManager = CreateSolutionManager();
+        var componentAvailabilityService = new TestComponentAvailabilityService(solutionManager);
 
         var associatedTagHelperInfos = new[]
         {
@@ -103,8 +103,8 @@ Uses `List<System.String>`s", markdown.Value);
     public async Task TryCreateTooltip_Markup_Element_PlainText_NoBold()
     {
         // Arrange
-        var projectManager = CreateProjectSnapshotManager();
-        var componentAvailabilityService = new TestComponentAvailabilityService(projectManager);
+        var solutionManager = CreateSolutionManager();
+        var componentAvailabilityService = new TestComponentAvailabilityService(solutionManager);
 
         var associatedTagHelperInfos = new[]
         {
@@ -154,8 +154,8 @@ Uses `List<System.String>`s", markdown.Value);
     public async Task TryCreateTooltip_Markup_Element_MultipleAssociatedTagHelpers_ReturnsTrue()
     {
         // Arrange
-        var projectManager = CreateProjectSnapshotManager();
-        var componentAvailabilityService = new TestComponentAvailabilityService(projectManager);
+        var solutionManager = CreateSolutionManager();
+        var componentAvailabilityService = new TestComponentAvailabilityService(solutionManager);
 
         var associatedTagHelperInfos = new[]
         {

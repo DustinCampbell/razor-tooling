@@ -200,8 +200,8 @@ public class HoverEndpointTest(ITestOutputHelper testOutput) : TagHelperServiceT
         var languageServer = new HoverLanguageServer(csharpServer, csharpDocumentUri, DisposalToken);
         var documentMappingService = new LspDocumentMappingService(FilePathService, documentContextFactory, LoggerFactory);
 
-        var projectManager = CreateProjectSnapshotManager();
-        var componentAvailabilityService = new ComponentAvailabilityService(projectManager);
+        var solutionManager = CreateSolutionManager();
+        var componentAvailabilityService = new ComponentAvailabilityService(solutionManager);
 
         var clientCapabilities = new VSInternalClientCapabilities()
         {
@@ -293,8 +293,8 @@ public class HoverEndpointTest(ITestOutputHelper testOutput) : TagHelperServiceT
 
         clientConnection ??= StrictMock.Of<IClientConnection>();
 
-        var projectManager = CreateProjectSnapshotManager();
-        var componentAvailabilityService = new ComponentAvailabilityService(projectManager);
+        var solutionManager = CreateSolutionManager();
+        var componentAvailabilityService = new ComponentAvailabilityService(solutionManager);
 
         var clientCapabilities = new VSInternalClientCapabilities()
         {

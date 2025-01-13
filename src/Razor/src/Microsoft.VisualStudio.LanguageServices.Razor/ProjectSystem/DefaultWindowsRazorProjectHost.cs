@@ -23,7 +23,7 @@ using Rules = Microsoft.CodeAnalysis.Razor.ProjectSystem.Rules;
 
 namespace Microsoft.VisualStudio.Razor.ProjectSystem;
 
-// This class is responsible for initializing the Razor ProjectSnapshotManager for cases where
+// This class is responsible for initializing the Razor RazorSolutionManager for cases where
 // MSBuild provides configuration support (>= 2.1).
 [AppliesTo("DotNetCoreRazor & DotNetCoreRazorConfiguration")]
 [Export(ExportContractNames.Scopes.UnconfiguredProject, typeof(IProjectDynamicLoadComponent))]
@@ -31,8 +31,8 @@ namespace Microsoft.VisualStudio.Razor.ProjectSystem;
 internal class DefaultWindowsRazorProjectHost(
     IUnconfiguredProjectCommonServices commonServices,
     [Import(typeof(SVsServiceProvider))] IServiceProvider serviceProvider,
-    ProjectSnapshotManager projectManager)
-    : WindowsRazorProjectHostBase(commonServices, serviceProvider, projectManager)
+    RazorSolutionManager solutionManager)
+    : WindowsRazorProjectHostBase(commonServices, serviceProvider, solutionManager)
 {
     private const string RootNamespaceProperty = "RootNamespace";
     private static readonly ImmutableHashSet<string> s_ruleNames = ImmutableHashSet.CreateRange(new string[]

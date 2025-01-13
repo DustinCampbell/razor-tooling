@@ -13,11 +13,11 @@ using Microsoft.VisualStudio.LanguageServer.Protocol;
 namespace Microsoft.AspNetCore.Razor.LanguageServer;
 
 internal sealed class DocumentContextFactory(
-    ProjectSnapshotManager projectManager,
+    RazorSolutionManager solutionManager,
     ILoggerFactory loggerFactory)
     : IDocumentContextFactory
 {
-    private readonly ProjectSnapshotManager _projectManager = projectManager;
+    private readonly RazorSolutionManager _solutionManager = solutionManager;
     private readonly ILogger _logger = loggerFactory.GetOrCreateLogger<DocumentContextFactory>();
 
     public bool TryCreate(
@@ -45,10 +45,10 @@ internal sealed class DocumentContextFactory(
     {
         if (projectContext is null)
         {
-            return _projectManager.TryResolveDocumentInAnyProject(filePath, _logger, out document);
+            return _solutionManager.TryResolveDocumentInAnyProject(filePath, _logger, out document);
         }
 
-        if (_projectManager.TryGetProject(projectContext.ToProjectKey(), out var project) &&
+        if (_solutionManager.TryGetProject(projectContext.ToProjectKey(), out var project) &&
             project.TryGetDocument(filePath, out document))
         {
             return true;
@@ -57,7 +57,7 @@ internal sealed class DocumentContextFactory(
         // Couldn't find the document in a real project. Maybe the language server doesn't yet know about the project
         // that the IDE is asking us about. In that case, we might have the document in our misc files project, and we'll
         // move it to the real project when/if we find out about it.
-        var miscellaneousProject = _projectManager.GetMiscellaneousProject();
+        var miscellaneousProject = _solutionManager.GetMiscellaneousProject();
         var normalizedDocumentPath = FilePathNormalizer.Normalize(filePath);
         if (miscellaneousProject.TryGetDocument(normalizedDocumentPath, out document))
         {

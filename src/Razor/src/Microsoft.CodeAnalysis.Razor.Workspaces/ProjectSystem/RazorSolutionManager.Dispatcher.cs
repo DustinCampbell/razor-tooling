@@ -12,7 +12,7 @@ using Microsoft.VisualStudio.Threading;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
-internal partial class ProjectSnapshotManager
+internal partial class RazorSolutionManager
 {
     private sealed class Dispatcher : IDisposable
     {

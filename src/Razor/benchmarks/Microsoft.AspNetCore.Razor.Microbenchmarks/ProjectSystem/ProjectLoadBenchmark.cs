@@ -10,20 +10,20 @@ using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
 namespace Microsoft.AspNetCore.Razor.Microbenchmarks;
 
-public class ProjectLoadBenchmark : ProjectSnapshotManagerBenchmarkBase
+public class ProjectLoadBenchmark : RazorSolutionManagerBenchmarkBase
 {
     [IterationSetup]
     public void Setup()
     {
-        ProjectManager = CreateProjectSnapshotManager();
+        SolutionManager = CreateSolutionManager();
     }
 
-    private ProjectSnapshotManager ProjectManager { get; set; }
+    private RazorSolutionManager SolutionManager { get; set; }
 
     [Benchmark(Description = "Initializes a project and 100 files", OperationsPerInvoke = 100)]
     public async Task ProjectLoad_AddProjectAnd100Files()
     {
-        await ProjectManager.UpdateAsync(
+        await SolutionManager.UpdateAsync(
             updater =>
             {
                 updater.AddProject(HostProject);

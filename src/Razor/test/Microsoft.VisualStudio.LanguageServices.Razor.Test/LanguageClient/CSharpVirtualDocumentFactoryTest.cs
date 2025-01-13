@@ -78,7 +78,7 @@ public class CSharpVirtualDocumentFactoryTest : VisualStudioTestBase
             _textDocumentFactoryService,
             uriProvider,
             _filePathService,
-            CreateProjectSnapshotManager(),
+            CreateSolutionManager(),
             TestLanguageServerFeatureOptions.Instance,
             LoggerFactory,
             telemetryReporter: null!);
@@ -105,7 +105,7 @@ public class CSharpVirtualDocumentFactoryTest : VisualStudioTestBase
             _textDocumentFactoryService,
             uriProvider,
             _filePathService,
-            CreateProjectSnapshotManager(),
+            CreateSolutionManager(),
             TestLanguageServerFeatureOptions.Instance,
             LoggerFactory,
             telemetryReporter: null!);
@@ -129,12 +129,12 @@ public class CSharpVirtualDocumentFactoryTest : VisualStudioTestBase
             .Setup(x => x.AddOrUpdate(It.IsAny<ITextBuffer>(), It.IsAny<Uri>()))
             .Verifiable();
 
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
         var hostProject = TestHostProject.Create(@"C:\path\to\project.csproj");
         var hostDocument = TestHostDocument.Create(hostProject, @"C:\path\to\file.razor");
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(hostProject);
             updater.AddDocument(hostProject.Key, hostDocument, EmptyTextLoader.Instance);
@@ -146,7 +146,7 @@ public class CSharpVirtualDocumentFactoryTest : VisualStudioTestBase
             _textDocumentFactoryService,
             uriProvider,
             _filePathService,
-            projectManager,
+            solutionManager,
             TestLanguageServerFeatureOptions.Instance,
             LoggerFactory,
             telemetryReporter: null!);
@@ -170,7 +170,7 @@ public class CSharpVirtualDocumentFactoryTest : VisualStudioTestBase
             .Setup(x => x.AddOrUpdate(It.IsAny<ITextBuffer>(), It.IsAny<Uri>()))
             .Verifiable();
 
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
         var hostProject1 = TestHostProject.Create(
             filePath: @"C:\path\to\project1.csproj",
@@ -184,7 +184,7 @@ public class CSharpVirtualDocumentFactoryTest : VisualStudioTestBase
 
         var hostDocument2 = TestHostDocument.Create(hostProject2, @"C:\path\to\file.razor");
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(hostProject1);
             updater.AddDocument(hostProject1.Key, hostDocument1, EmptyTextLoader.Instance);
@@ -201,7 +201,7 @@ public class CSharpVirtualDocumentFactoryTest : VisualStudioTestBase
             _textDocumentFactoryService,
             uriProvider,
             filePathService,
-            projectManager,
+            solutionManager,
             languageServerFeatureOptions,
             LoggerFactory,
             telemetryReporter: null!);

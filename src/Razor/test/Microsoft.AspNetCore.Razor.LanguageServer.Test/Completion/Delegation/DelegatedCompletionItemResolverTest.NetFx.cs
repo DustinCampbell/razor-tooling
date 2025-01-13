@@ -81,8 +81,8 @@ public class DelegatedCompletionItemResolverTest : LanguageServerTestBase
             AutoInsertAttributeQuotes: true,
             CommitElementsWithSpace: true);
 
-        var projectManager = CreateProjectSnapshotManager();
-        _componentAvailabilityService = new ComponentAvailabilityService(projectManager);
+        var solutionManager = CreateSolutionManager();
+        _componentAvailabilityService = new ComponentAvailabilityService(solutionManager);
     }
 
     [Fact]

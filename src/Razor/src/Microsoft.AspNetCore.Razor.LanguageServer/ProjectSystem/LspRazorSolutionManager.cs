@@ -8,11 +8,11 @@ using Microsoft.CodeAnalysis.Razor.Workspaces;
 
 namespace Microsoft.AspNetCore.Razor.LanguageServer.ProjectSystem;
 
-internal class LspProjectSnapshotManager(
+internal class LspRazorSolutionManager(
     IProjectEngineFactoryProvider projectEngineFactoryProvider,
     LanguageServerFeatureOptions languageServerFeatureOptions,
     ILoggerFactory loggerFactory)
-    : ProjectSnapshotManager(projectEngineFactoryProvider, languageServerFeatureOptions.ToCompilerOptions(), loggerFactory, initializer: AddMiscFilesProject)
+    : RazorSolutionManager(projectEngineFactoryProvider, languageServerFeatureOptions.ToCompilerOptions(), loggerFactory, initializer: AddMiscFilesProject)
 {
     private static void AddMiscFilesProject(Updater updater)
     {

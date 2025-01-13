@@ -33,7 +33,7 @@ internal partial class RazorCustomMessageTarget
     private readonly LSPRequestInvoker _requestInvoker;
     private readonly ITelemetryReporter _telemetryReporter;
     private readonly LanguageServerFeatureOptions _languageServerFeatureOptions;
-    private readonly ProjectSnapshotManager _projectManager;
+    private readonly RazorSolutionManager _solutionManager;
     private readonly SnippetCompletionItemProvider _snippetCompletionItemProvider;
     private readonly IWorkspaceProvider _workspaceProvider;
     private readonly IHtmlDocumentSynchronizer _htmlDocumentSynchronizer;
@@ -54,7 +54,7 @@ internal partial class RazorCustomMessageTarget
         CSharpVirtualDocumentAddListener csharpVirtualDocumentAddListener,
         ITelemetryReporter telemetryReporter,
         LanguageServerFeatureOptions languageServerFeatureOptions,
-        ProjectSnapshotManager projectManager,
+        RazorSolutionManager solutionManager,
         SnippetCompletionItemProvider snippetCompletionItemProvider,
         IWorkspaceProvider workspaceProvider,
         IHtmlDocumentSynchronizer htmlDocumentSynchronizer,
@@ -85,7 +85,7 @@ internal partial class RazorCustomMessageTarget
         _csharpVirtualDocumentAddListener = csharpVirtualDocumentAddListener ?? throw new ArgumentNullException(nameof(csharpVirtualDocumentAddListener));
         _telemetryReporter = telemetryReporter ?? throw new ArgumentNullException(nameof(telemetryReporter));
         _languageServerFeatureOptions = languageServerFeatureOptions ?? throw new ArgumentNullException(nameof(languageServerFeatureOptions));
-        _projectManager = projectManager ?? throw new ArgumentNullException(nameof(projectManager));
+        _solutionManager = solutionManager ?? throw new ArgumentNullException(nameof(solutionManager));
         _snippetCompletionItemProvider = snippetCompletionItemProvider ?? throw new ArgumentNullException(nameof(snippetCompletionItemProvider));
         _workspaceProvider = workspaceProvider;
         _htmlDocumentSynchronizer = htmlDocumentSynchronizer;

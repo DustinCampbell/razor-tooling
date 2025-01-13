@@ -25,18 +25,18 @@ internal sealed class GeneratedDocumentPublisher : IGeneratedDocumentPublisher, 
 {
     private readonly Dictionary<DocumentKey, PublishData> _publishedCSharpData;
     private readonly Dictionary<string, PublishData> _publishedHtmlData;
-    private readonly ProjectSnapshotManager _projectManager;
+    private readonly RazorSolutionManager _solutionManager;
     private readonly IClientConnection _clientConnection;
     private readonly LanguageServerFeatureOptions _options;
     private readonly ILogger _logger;
 
     public GeneratedDocumentPublisher(
-        ProjectSnapshotManager projectManager,
+        RazorSolutionManager solutionManager,
         IClientConnection clientConnection,
         LanguageServerFeatureOptions options,
         ILoggerFactory loggerFactory)
     {
-        _projectManager = projectManager;
+        _solutionManager = solutionManager;
         _clientConnection = clientConnection;
         _options = options;
         _logger = loggerFactory.GetOrCreateLogger<GeneratedDocumentPublisher>();
@@ -48,7 +48,7 @@ internal sealed class GeneratedDocumentPublisher : IGeneratedDocumentPublisher, 
         // get out of sync.
         _publishedHtmlData = new Dictionary<string, PublishData>(FilePathComparer.Instance);
 
-        _projectManager.Changed += ProjectManager_Changed;
+        _solutionManager.Changed += SolutionManager_Changed;
     }
 
     public void PublishCSharp(ProjectKey projectKey, string filePath, SourceText sourceText, int hostDocumentVersion)
@@ -156,7 +156,7 @@ internal sealed class GeneratedDocumentPublisher : IGeneratedDocumentPublisher, 
         _clientConnection.SendNotificationAsync(CustomMessageNames.RazorUpdateHtmlBufferEndpoint, request, CancellationToken.None).Forget();
     }
 
-    private void ProjectManager_Changed(object? sender, ProjectChangeEventArgs args)
+    private void SolutionManager_Changed(object? sender, ProjectChangeEventArgs args)
     {
         // Don't do any work if the solution is closing
         if (args.IsSolutionClosing)
@@ -190,7 +190,7 @@ internal sealed class GeneratedDocumentPublisher : IGeneratedDocumentPublisher, 
             case ProjectChangeKind.DocumentChanged:
                 var documentFilePath = args.DocumentFilePath.AssumeNotNull();
 
-                if (!_projectManager.IsDocumentOpen(documentFilePath))
+                if (!_solutionManager.IsDocumentOpen(documentFilePath))
                 {
                     // Document closed, evict published source text, unless the server doesn't want us to.
                     if (_options.UpdateBuffersForClosedDocuments)

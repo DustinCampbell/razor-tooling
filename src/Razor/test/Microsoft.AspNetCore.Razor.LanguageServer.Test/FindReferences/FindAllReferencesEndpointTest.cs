@@ -50,18 +50,18 @@ public class FindAllReferencesEndpointTest(ITestOutputHelper testOutput) : Singl
         var razorFilePath = "C:/path/to/file.razor";
 
         var languageServer = await CreateLanguageServerAsync(codeDocument, razorFilePath, multiTargetProject: false);
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
         var hostProject = TestHostProject.Create("C:/path/to/project.csproj");
         var hostDocument = TestHostDocument.Create(TestProjectData.SomeProject, razorFilePath);
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(hostProject);
             updater.AddDocument(hostProject.Key, hostDocument, codeDocument.Source.Text);
         });
 
         var endpoint = new FindAllReferencesEndpoint(
-            LanguageServerFeatureOptions, DocumentMappingService, languageServer, LoggerFactory, FilePathService, projectManager);
+            LanguageServerFeatureOptions, DocumentMappingService, languageServer, LoggerFactory, FilePathService, solutionManager);
 
         var sourceText = codeDocument.Source.Text;
 

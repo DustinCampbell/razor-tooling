@@ -19,7 +19,7 @@ namespace Microsoft.VisualStudio.Razor.LiveShare.Host;
     Role = ServiceRole.RemoteService)]
 [method: ImportingConstructor]
 internal class ProjectSnapshotManagerProxyFactory(
-    ProjectSnapshotManager projectManager,
+    RazorSolutionManager solutionManager,
     JoinableTaskContext joinableTaskContext) : ICollaborationServiceFactory
 {
     public Task<ICollaborationService> CreateServiceAsync(CollaborationSession session, CancellationToken cancellationToken)
@@ -28,7 +28,7 @@ internal class ProjectSnapshotManagerProxyFactory(
         serializer.Converters.RegisterRazorLiveShareConverters();
 
         var service = new ProjectSnapshotManagerProxy(
-            session, projectManager, joinableTaskContext.Factory);
+            session, solutionManager, joinableTaskContext.Factory);
         return Task.FromResult<ICollaborationService>(service);
     }
 }

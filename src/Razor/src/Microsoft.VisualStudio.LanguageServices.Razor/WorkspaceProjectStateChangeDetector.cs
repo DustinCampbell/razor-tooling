@@ -25,7 +25,7 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
     private static readonly TimeSpan s_delay = TimeSpan.FromSeconds(1);
 
     private readonly IProjectWorkspaceStateGenerator _generator;
-    private readonly ProjectSnapshotManager _projectManager;
+    private readonly RazorSolutionManager _solutionManager;
     private readonly LanguageServerFeatureOptions _options;
     private readonly CodeAnalysis.Workspace _workspace;
 
@@ -37,22 +37,22 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
     [ImportingConstructor]
     public WorkspaceProjectStateChangeDetector(
         IProjectWorkspaceStateGenerator generator,
-        ProjectSnapshotManager projectManager,
+        RazorSolutionManager solutionManager,
         LanguageServerFeatureOptions options,
         IWorkspaceProvider workspaceProvider)
-        : this(generator, projectManager, options, workspaceProvider, s_delay)
+        : this(generator, solutionManager, options, workspaceProvider, s_delay)
     {
     }
 
     public WorkspaceProjectStateChangeDetector(
         IProjectWorkspaceStateGenerator generator,
-        ProjectSnapshotManager projectManager,
+        RazorSolutionManager solutionManager,
         LanguageServerFeatureOptions options,
         IWorkspaceProvider workspaceProvider,
         TimeSpan delay)
     {
         _generator = generator;
-        _projectManager = projectManager;
+        _solutionManager = solutionManager;
         _options = options;
 
         _disposeTokenSource = new();
@@ -61,7 +61,7 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
             ProcessBatchAsync,
             _disposeTokenSource.Token);
 
-        _projectManager.Changed += ProjectManager_Changed;
+        _solutionManager.Changed += SolutionManager_Changed;
 
         _workspace = workspaceProvider.GetWorkspace();
         _workspace.WorkspaceChanged += Workspace_WorkspaceChanged;
@@ -78,7 +78,7 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
             return;
         }
 
-        _projectManager.Changed -= ProjectManager_Changed;
+        _solutionManager.Changed -= SolutionManager_Changed;
         _workspace.WorkspaceChanged -= Workspace_WorkspaceChanged;
 
         _disposeTokenSource.Cancel();
@@ -333,7 +333,7 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
         }
     }
 
-    private void ProjectManager_Changed(object? sender, ProjectChangeEventArgs e)
+    private void SolutionManager_Changed(object? sender, ProjectChangeEventArgs e)
     {
         // Don't do any work if the solution is closing. Any work in the queue will be cancelled on disposal
         if (e.IsSolutionClosing)
@@ -409,7 +409,7 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
 
         var projectKey = workspaceProject.ToProjectKey();
 
-        return _projectManager.TryGetProject(projectKey, out project);
+        return _solutionManager.TryGetProject(projectKey, out project);
     }
 
     internal TestAccessor GetTestAccessor() => new(this);

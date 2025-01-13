@@ -24,7 +24,7 @@ using Nerdbank.Streams;
 
 namespace Microsoft.AspNetCore.Razor.Microbenchmarks.LanguageServer;
 
-public class RazorLanguageServerBenchmarkBase : ProjectSnapshotManagerBenchmarkBase
+public class RazorLanguageServerBenchmarkBase : RazorSolutionManagerBenchmarkBase
 {
     public RazorLanguageServerBenchmarkBase()
     {
@@ -67,9 +67,9 @@ public class RazorLanguageServerBenchmarkBase : ProjectSnapshotManagerBenchmarkB
         var text = SourceText.From(fileStream);
         var hostDocument = new HostDocument(filePath, targetPath, FileKinds.Component);
 
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
-        await projectManager.UpdateAsync(
+        await solutionManager.UpdateAsync(
             updater =>
             {
                 updater.AddProject(hostProject);
@@ -80,7 +80,7 @@ public class RazorLanguageServerBenchmarkBase : ProjectSnapshotManagerBenchmarkB
             },
             CancellationToken.None);
 
-        return projectManager.GetRequiredDocument(hostProject.Key, filePath);
+        return solutionManager.GetRequiredDocument(hostProject.Key, filePath);
     }
 
     private sealed class NoOpClientNotifierService : IClientConnection, IOnInitialized

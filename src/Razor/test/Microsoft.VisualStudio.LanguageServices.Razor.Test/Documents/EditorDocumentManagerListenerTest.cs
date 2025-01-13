@@ -39,9 +39,9 @@ public class EditorDocumentManagerListenerTest(ITestOutputHelper testOutput) : V
     public async Task ProjectManager_Changed_RemoveDocument_RemovesDocument()
     {
         // Arrange
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(s_hostProject);
             updater.AddDocument(s_hostProject.Key, s_hostDocument, StrictMock.Of<TextLoader>());
@@ -58,12 +58,12 @@ public class EditorDocumentManagerListenerTest(ITestOutputHelper testOutput) : V
             .Verifiable();
 
         var listener = new EditorDocumentManagerListener(
-            editorDocumentMangerMock.Object, projectManager, s_fallbackProjectManager, JoinableTaskContext, NoOpTelemetryReporter.Instance);
+            editorDocumentMangerMock.Object, solutionManager, s_fallbackProjectManager, JoinableTaskContext, NoOpTelemetryReporter.Instance);
 
         var listenerAccessor = listener.GetTestAccessor();
 
         // Act
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.RemoveDocument(s_hostProject.Key, s_hostDocument.FilePath);
         });
@@ -78,9 +78,9 @@ public class EditorDocumentManagerListenerTest(ITestOutputHelper testOutput) : V
     public async Task ProjectManager_Changed_RemoveProject_RemovesAllDocuments()
     {
         // Arrange
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(s_hostProject);
             updater.AddDocument(s_hostProject.Key, s_hostDocument, StrictMock.Of<TextLoader>());
@@ -97,12 +97,12 @@ public class EditorDocumentManagerListenerTest(ITestOutputHelper testOutput) : V
             .Verifiable();
 
         var listener = new EditorDocumentManagerListener(
-            editorDocumentMangerMock.Object, projectManager, s_fallbackProjectManager, JoinableTaskContext, NoOpTelemetryReporter.Instance);
+            editorDocumentMangerMock.Object, solutionManager, s_fallbackProjectManager, JoinableTaskContext, NoOpTelemetryReporter.Instance);
 
         var listenerAccessor = listener.GetTestAccessor();
 
         // Act
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.RemoveProject(s_hostProject.Key);
         });
@@ -117,9 +117,9 @@ public class EditorDocumentManagerListenerTest(ITestOutputHelper testOutput) : V
     public async Task ProjectManager_Changed_AddDocument_InvokesGetOrCreateDocument()
     {
         // Arrange
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(s_hostProject);
         });
@@ -137,12 +137,12 @@ public class EditorDocumentManagerListenerTest(ITestOutputHelper testOutput) : V
             .Verifiable();
 
         var listener = new EditorDocumentManagerListener(
-            editorDocumentMangerMock.Object, projectManager, s_fallbackProjectManager, JoinableTaskContext, NoOpTelemetryReporter.Instance);
+            editorDocumentMangerMock.Object, solutionManager, s_fallbackProjectManager, JoinableTaskContext, NoOpTelemetryReporter.Instance);
 
         var listenerAccessor = listener.GetTestAccessor();
 
         // Act
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddDocument(s_hostProject.Key, s_hostDocument, StrictMock.Of<TextLoader>());
         });
@@ -157,9 +157,9 @@ public class EditorDocumentManagerListenerTest(ITestOutputHelper testOutput) : V
     public async Task ProjectManager_Changed_AddDocument_InvokesOnOpened()
     {
         // Arrange
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(s_hostProject);
         });
@@ -170,7 +170,7 @@ public class EditorDocumentManagerListenerTest(ITestOutputHelper testOutput) : V
             .Returns(GetEditorDocument(isOpen: true));
 
         var listener = new EditorDocumentManagerListener(
-            editorDocumentMangerMock.Object, projectManager, s_fallbackProjectManager, JoinableTaskContext, NoOpTelemetryReporter.Instance);
+            editorDocumentMangerMock.Object, solutionManager, s_fallbackProjectManager, JoinableTaskContext, NoOpTelemetryReporter.Instance);
 
         var listenerAccessor = listener.GetTestAccessor();
 
@@ -178,7 +178,7 @@ public class EditorDocumentManagerListenerTest(ITestOutputHelper testOutput) : V
         listenerAccessor.OnOpened += delegate { called = true; };
 
         // Act
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddDocument(s_hostProject.Key, s_hostDocument, StrictMock.Of<TextLoader>());
         });

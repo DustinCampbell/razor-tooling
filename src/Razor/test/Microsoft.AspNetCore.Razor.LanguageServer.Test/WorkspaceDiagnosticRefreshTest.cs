@@ -24,7 +24,7 @@ public class WorkspaceDiagnosticRefreshTest(ITestOutputHelper testOutputHelper) 
     [Fact]
     public async Task WorkspaceRefreshSent()
     {
-        var projectSnapshotManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
         var clientConnection = new StrictMock<IClientConnection>();
         clientConnection
             .Setup(c => c.SendNotificationAsync(Methods.WorkspaceDiagnosticRefreshName, It.IsAny<CancellationToken>()))
@@ -32,7 +32,7 @@ public class WorkspaceDiagnosticRefreshTest(ITestOutputHelper testOutputHelper) 
             .Verifiable();
 
         using var publisher = new WorkspaceDiagnosticsRefresher(
-            projectSnapshotManager,
+            solutionManager,
             new TestClientCapabilitiesService(new()
             {
                 Workspace = new()
@@ -48,7 +48,7 @@ public class WorkspaceDiagnosticRefreshTest(ITestOutputHelper testOutputHelper) 
 
         var testAccessor = publisher.GetTestAccessor();
 
-        await projectSnapshotManager.UpdateAsync(
+        await solutionManager.UpdateAsync(
             static updater =>
             {
                 var hostProject = TestHostProject.Create("C:/path/to/project.csproj");
@@ -63,14 +63,14 @@ public class WorkspaceDiagnosticRefreshTest(ITestOutputHelper testOutputHelper) 
     [Fact]
     public async Task WorkspaceRefreshSent_MultipleTimes()
     {
-        var projectSnapshotManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
         var clientConnection = new StrictMock<IClientConnection>();
         clientConnection
             .Setup(c => c.SendNotificationAsync(Methods.WorkspaceDiagnosticRefreshName, It.IsAny<CancellationToken>()))
             .Returns(Task.CompletedTask);
 
         using var publisher = new WorkspaceDiagnosticsRefresher(
-            projectSnapshotManager,
+            solutionManager,
             new TestClientCapabilitiesService(new()
             {
                 Workspace = new()
@@ -93,7 +93,7 @@ public class WorkspaceDiagnosticRefreshTest(ITestOutputHelper testOutputHelper) 
 
         var hostDocument = TestHostDocument.Create(hostProject, Path.Combine(directory, "directory.razor"));
 
-        await projectSnapshotManager.UpdateAsync(
+        await solutionManager.UpdateAsync(
             updater =>
             {
                 updater.AddProject(hostProject);
@@ -101,7 +101,7 @@ public class WorkspaceDiagnosticRefreshTest(ITestOutputHelper testOutputHelper) 
 
         await testAccessor.WaitForRefreshAsync();
 
-        await projectSnapshotManager.UpdateAsync(
+        await solutionManager.UpdateAsync(
             updater =>
             {
                 updater.AddDocument(hostProject.Key, hostDocument, EmptyTextLoader.Instance);
@@ -117,11 +117,11 @@ public class WorkspaceDiagnosticRefreshTest(ITestOutputHelper testOutputHelper) 
     [Fact]
     public async Task WorkspaceRefreshNotSent_ClientDoesNotSupport()
     {
-        var projectSnapshotManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
         var clientConnection = new StrictMock<IClientConnection>();
 
         using var publisher = new WorkspaceDiagnosticsRefresher(
-            projectSnapshotManager,
+            solutionManager,
             new TestClientCapabilitiesService(new()
             {
                 Workspace = new()
@@ -137,7 +137,7 @@ public class WorkspaceDiagnosticRefreshTest(ITestOutputHelper testOutputHelper) 
 
         var testAccessor = publisher.GetTestAccessor();
 
-        await projectSnapshotManager.UpdateAsync(
+        await solutionManager.UpdateAsync(
             updater =>
             {
                 var hostProject = TestHostProject.Create("C:/path/to/project.csproj");
@@ -154,11 +154,11 @@ public class WorkspaceDiagnosticRefreshTest(ITestOutputHelper testOutputHelper) 
     [Fact]
     public async Task WorkspaceRefreshNotSent_RefresherDisposed()
     {
-        var projectSnapshotManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
         var clientConnection = new StrictMock<IClientConnection>();
 
         var publisher = new WorkspaceDiagnosticsRefresher(
-            projectSnapshotManager,
+            solutionManager,
             new TestClientCapabilitiesService(new()
             {
                 Workspace = new()
@@ -176,7 +176,7 @@ public class WorkspaceDiagnosticRefreshTest(ITestOutputHelper testOutputHelper) 
 
         publisher.Dispose();
 
-        await projectSnapshotManager.UpdateAsync(
+        await solutionManager.UpdateAsync(
             static updater =>
             {
                 var hostProject = TestHostProject.Create("C:/path/to/project.csproj");

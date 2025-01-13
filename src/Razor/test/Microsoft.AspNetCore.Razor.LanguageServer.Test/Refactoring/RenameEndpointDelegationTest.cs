@@ -52,9 +52,9 @@ public class RenameEndpointDelegationTest(ITestOutputHelper testOutput) : Single
 
         var languageServer = await CreateLanguageServerAsync(codeDocument, razorFilePath);
 
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(new(
                 filePath: "C:/path/to/project.csproj",
@@ -72,7 +72,7 @@ public class RenameEndpointDelegationTest(ITestOutputHelper testOutput) : Single
             LanguageServerFeatureOptions,
             DocumentMappingService,
             EditMappingService,
-            projectManager,
+            solutionManager,
             languageServer,
             LoggerFactory);
 

@@ -27,7 +27,7 @@ namespace Microsoft.AspNetCore.Razor.LanguageServer.FindAllReferences;
 internal sealed class FindAllReferencesEndpoint : AbstractRazorDelegatingEndpoint<ReferenceParams, VSInternalReferenceItem[]?>, ICapabilitiesProvider
 {
     private readonly IFilePathService _filePathService;
-    private readonly ProjectSnapshotManager _projectSnapshotManager;
+    private readonly RazorSolutionManager _solutionManager;
     private readonly IDocumentMappingService _documentMappingService;
 
     public FindAllReferencesEndpoint(
@@ -36,12 +36,12 @@ internal sealed class FindAllReferencesEndpoint : AbstractRazorDelegatingEndpoin
         IClientConnection clientConnection,
         ILoggerFactory loggerFactory,
         IFilePathService filePathService,
-        ProjectSnapshotManager projectSnapshotManager)
+        RazorSolutionManager solutionManager)
         : base(languageServerFeatureOptions, documentMappingService, clientConnection, loggerFactory.GetOrCreateLogger<FindAllReferencesEndpoint>())
     {
-        _filePathService = filePathService ?? throw new ArgumentNullException(nameof(filePathService));
-        _projectSnapshotManager = projectSnapshotManager;
-        _documentMappingService = documentMappingService ?? throw new ArgumentNullException(nameof(documentMappingService));
+        _filePathService = filePathService;
+        _solutionManager = solutionManager;
+        _documentMappingService = documentMappingService;
     }
 
     public void ApplyCapabilities(VSInternalServerCapabilities serverCapabilities, VSInternalClientCapabilities clientCapabilities)
@@ -108,7 +108,7 @@ internal sealed class FindAllReferencesEndpoint : AbstractRazorDelegatingEndpoin
             {
                 // This location doesn't point to a virtual file. No need to remap, but we might still want to fix the text,
                 // because Roslyn may have done the remapping for us
-                var resultText = await FindAllReferencesHelper.GetResultTextAsync(_documentMappingService, _projectSnapshotManager.GetQueryOperations(), referenceItem.Location.Range.Start.Line, referenceItem.Location.Uri.GetAbsoluteOrUNCPath(), cancellationToken).ConfigureAwait(false);
+                var resultText = await FindAllReferencesHelper.GetResultTextAsync(_documentMappingService, _solutionManager.GetQueryOperations(), referenceItem.Location.Range.Start.Line, referenceItem.Location.Uri.GetAbsoluteOrUNCPath(), cancellationToken).ConfigureAwait(false);
                 referenceItem.Text = resultText ?? referenceItem.Text;
 
                 remappedLocations.Add(referenceItem);
@@ -121,7 +121,7 @@ internal sealed class FindAllReferencesEndpoint : AbstractRazorDelegatingEndpoin
             referenceItem.DisplayPath = itemUri.AbsolutePath;
             referenceItem.Location.Range = mappedRange;
 
-            var fixedResultText = await FindAllReferencesHelper.GetResultTextAsync(_documentMappingService, _projectSnapshotManager.GetQueryOperations(), mappedRange.Start.Line, itemUri.GetAbsoluteOrUNCPath(), cancellationToken).ConfigureAwait(false);
+            var fixedResultText = await FindAllReferencesHelper.GetResultTextAsync(_documentMappingService, _solutionManager.GetQueryOperations(), mappedRange.Start.Line, itemUri.GetAbsoluteOrUNCPath(), cancellationToken).ConfigureAwait(false);
             referenceItem.Text = fixedResultText ?? referenceItem.Text;
 
             remappedLocations.Add(referenceItem);

@@ -43,7 +43,7 @@ internal class RazorDynamicFileInfoProvider : IRazorDynamicFileInfoProviderInter
         ILspEditorFeatureDetector lspEditorFeatureDetector,
         IFilePathService filePathService,
         IWorkspaceProvider workspaceProvider,
-        ProjectSnapshotManager projectManager,
+        RazorSolutionManager solutionManager,
         FallbackProjectManager fallbackProjectManager)
     {
         _factory = factory;
@@ -54,7 +54,7 @@ internal class RazorDynamicFileInfoProvider : IRazorDynamicFileInfoProviderInter
         _entries = new ConcurrentDictionary<Key, Entry>();
         _createEmptyEntry = (key) => new Entry(CreateEmptyInfo(key));
 
-        projectManager.Changed += ProjectManager_Changed;
+        solutionManager.Changed += SolutionManager_Changed;
     }
 
     public event EventHandler<string>? Updated;
@@ -287,7 +287,7 @@ internal class RazorDynamicFileInfoProvider : IRazorDynamicFileInfoProviderInter
         // ---------------------------------------------------------- NOTE & CAUTION --------------------------------------------------------------
         //
         // For all intents and purposes this method should not exist. When projects get torn down we do not get told to remove any documents
-        // we've published. To workaround that issue this class hooks into ProjectSnapshotManager events to clear entry state on project / document
+        // we've published. To workaround that issue this class hooks into RazorSolutionManager events to clear entry state on project / document
         // removals and on solution closing events.
         //
         // Currently this method only ever gets called for deleted documents which we can detect in our ProjectManager_Changed event below.
@@ -318,7 +318,7 @@ internal class RazorDynamicFileInfoProvider : IRazorDynamicFileInfoProviderInter
 
     public TestAccessor GetTestAccessor() => new(this);
 
-    private void ProjectManager_Changed(object? sender, ProjectChangeEventArgs args)
+    private void SolutionManager_Changed(object? sender, ProjectChangeEventArgs args)
     {
         if (args.IsSolutionClosing)
         {

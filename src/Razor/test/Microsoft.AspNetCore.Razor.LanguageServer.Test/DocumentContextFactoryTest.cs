@@ -20,12 +20,12 @@ public class DocumentContextFactoryTest : LanguageServerTestBase
 {
     private static readonly string s_baseDirectory = PathUtilities.CreateRootedPath("path", "to");
 
-    private readonly TestProjectSnapshotManager _projectManager;
+    private readonly TestRazorSolutionManager _solutionManager;
 
     public DocumentContextFactoryTest(ITestOutputHelper testOutput)
         : base(testOutput)
     {
-        _projectManager = CreateProjectSnapshotManager();
+        _solutionManager = CreateSolutionManager();
     }
 
     [Fact]
@@ -35,7 +35,7 @@ public class DocumentContextFactoryTest : LanguageServerTestBase
         var filePath = FilePathNormalizer.Normalize(Path.Combine(s_baseDirectory, "file.cshtml"));
         var uri = new Uri(filePath);
 
-        var factory = new DocumentContextFactory(_projectManager, LoggerFactory);
+        var factory = new DocumentContextFactory(_solutionManager, LoggerFactory);
 
         // Act
         Assert.False(factory.TryCreate(uri, out _));
@@ -48,7 +48,7 @@ public class DocumentContextFactoryTest : LanguageServerTestBase
         var filePath = FilePathNormalizer.Normalize(Path.Combine(s_baseDirectory, "file.cshtml"));
         var uri = new Uri(filePath);
 
-        var factory = new DocumentContextFactory(_projectManager, LoggerFactory);
+        var factory = new DocumentContextFactory(_solutionManager, LoggerFactory);
 
         // Act
         Assert.False(factory.TryCreate(uri, out _));
@@ -63,16 +63,16 @@ public class DocumentContextFactoryTest : LanguageServerTestBase
 
         var hostDocument = new HostDocument(filePath, "file.cshtml");
 
-        await _projectManager.UpdateAsync(updater =>
+        await _solutionManager.UpdateAsync(updater =>
         {
             updater.AddDocument(MiscFilesProject.Key, hostDocument, EmptyTextLoader.Instance);
         });
 
-        var document = _projectManager
+        var document = _solutionManager
             .GetMiscellaneousProject()
             .GetRequiredDocument(filePath);
 
-        var factory = new DocumentContextFactory(_projectManager, LoggerFactory);
+        var factory = new DocumentContextFactory(_solutionManager, LoggerFactory);
 
         // Act
         Assert.True(factory.TryCreate(uri, out var documentContext));
@@ -91,12 +91,12 @@ public class DocumentContextFactoryTest : LanguageServerTestBase
         var projectFilePath = Path.Combine(s_baseDirectory, "project.csproj");
         var uri = new Uri(filePath);
 
-        var factory = new DocumentContextFactory(_projectManager, LoggerFactory);
+        var factory = new DocumentContextFactory(_solutionManager, LoggerFactory);
 
         var hostProject = new HostProject(projectFilePath, intermediateOutputPath, RazorConfiguration.Default, rootNamespace: null);
         var hostDocument = new HostDocument(filePath, "file.cshtml");
 
-        await _projectManager.UpdateAsync(updater =>
+        await _solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(hostProject);
             updater.AddDocument(hostProject.Key, hostDocument, EmptyTextLoader.Instance);
@@ -118,16 +118,16 @@ public class DocumentContextFactoryTest : LanguageServerTestBase
 
         var hostDocument = new HostDocument(filePath, "file.cshtml");
 
-        await _projectManager.UpdateAsync(updater =>
+        await _solutionManager.UpdateAsync(updater =>
         {
             updater.AddDocument(MiscFilesProject.Key, hostDocument, EmptyTextLoader.Instance);
         });
 
-        var document = _projectManager
+        var document = _solutionManager
             .GetMiscellaneousProject()
             .GetRequiredDocument(filePath);
 
-        var factory = new DocumentContextFactory(_projectManager, LoggerFactory);
+        var factory = new DocumentContextFactory(_solutionManager, LoggerFactory);
 
         // Act
         Assert.True(factory.TryCreate(uri, out var documentContext));

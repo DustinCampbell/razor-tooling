@@ -11,13 +11,13 @@ using Microsoft.CodeAnalysis.Razor.Workspaces;
 
 namespace Microsoft.AspNetCore.Razor.Test.Common.ProjectSystem;
 
-internal partial class TestProjectSnapshotManager(
+internal partial class TestRazorSolutionManager(
     IProjectEngineFactoryProvider projectEngineFactoryProvider,
     LanguageServerFeatureOptions languageServerFeatureOptions,
     ILoggerFactory loggerFactory,
     CancellationToken disposalToken,
-    Action<ProjectSnapshotManager.Updater>? initializer = null)
-    : ProjectSnapshotManager(projectEngineFactoryProvider, languageServerFeatureOptions.ToCompilerOptions(), loggerFactory, initializer)
+    Action<RazorSolutionManager.Updater>? initializer = null)
+    : RazorSolutionManager(projectEngineFactoryProvider, languageServerFeatureOptions.ToCompilerOptions(), loggerFactory, initializer)
 {
     private readonly CancellationToken _disposalToken = disposalToken;
 

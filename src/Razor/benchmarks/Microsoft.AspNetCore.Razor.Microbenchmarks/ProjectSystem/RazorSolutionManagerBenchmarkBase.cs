@@ -12,13 +12,13 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.AspNetCore.Razor.Microbenchmarks;
 
-public abstract partial class ProjectSnapshotManagerBenchmarkBase
+public abstract partial class RazorSolutionManagerBenchmarkBase
 {
     internal HostProject HostProject { get; }
     internal ImmutableArray<HostDocument> Documents { get; }
     internal ImmutableArray<TextLoader> TextLoaders { get; }
 
-    protected ProjectSnapshotManagerBenchmarkBase(int documentCount = 100)
+    protected RazorSolutionManagerBenchmarkBase(int documentCount = 100)
     {
         var projectRoot = Path.Combine(Helpers.GetTestAppsPath(), "LargeProject");
 
@@ -49,7 +49,7 @@ public abstract partial class ProjectSnapshotManagerBenchmarkBase
         Documents = documents.ToImmutable();
     }
 
-    internal static ProjectSnapshotManager CreateProjectSnapshotManager()
+    internal static RazorSolutionManager CreateSolutionManager()
         => new(
             projectEngineFactoryProvider: StaticProjectEngineFactoryProvider.Instance,
             compilerOptions: RazorCompilerOptions.None,

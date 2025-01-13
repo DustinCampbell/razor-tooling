@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Xunit;
-using static Microsoft.AspNetCore.Razor.Test.Common.ProjectSystem.TestProjectSnapshotManager.Listener;
+using static Microsoft.AspNetCore.Razor.Test.Common.ProjectSystem.TestRazorSolutionManager.Listener;
 
 namespace Microsoft.AspNetCore.Razor.Test.Common.ProjectSystem;
 

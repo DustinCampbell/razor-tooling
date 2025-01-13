@@ -229,6 +229,6 @@ internal static class IServiceCollectionExtensions
 
         // Add project snapshot manager
         services.AddSingleton<IProjectEngineFactoryProvider, LspProjectEngineFactoryProvider>();
-        services.AddSingleton<ProjectSnapshotManager, LspProjectSnapshotManager>();
+        services.AddSingleton<RazorSolutionManager, LspRazorSolutionManager>();
     }
 }

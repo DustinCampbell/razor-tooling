@@ -24,14 +24,14 @@ internal class CSharpVirtualDocumentManager : IRazorStartupService, IDisposable
     [ImportingConstructor]
     public CSharpVirtualDocumentManager(
         LSPDocumentManager lspDocumentManager,
-        ProjectSnapshotManager projectManager)
+        RazorSolutionManager solutionManager)
     {
         _lspDocumentManager = lspDocumentManager;
 
         _disposeTokenSource = new();
         _workQueue = new AsyncBatchingWorkQueue(s_defaultDelay, ProcessBatchAsync, _disposeTokenSource.Token);
 
-        projectManager.Changed += ProjectManager_Changed;
+        solutionManager.Changed += SolutionManager_Changed;
     }
 
     public void Dispose()
@@ -55,7 +55,7 @@ internal class CSharpVirtualDocumentManager : IRazorStartupService, IDisposable
         return default;
     }
 
-    private void ProjectManager_Changed(object sender, ProjectChangeEventArgs e)
+    private void SolutionManager_Changed(object sender, ProjectChangeEventArgs e)
     {
         if (e.IsSolutionClosing)
         {

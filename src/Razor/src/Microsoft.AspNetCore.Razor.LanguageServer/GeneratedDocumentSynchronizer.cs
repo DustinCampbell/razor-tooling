@@ -10,11 +10,11 @@ namespace Microsoft.AspNetCore.Razor.LanguageServer;
 internal class GeneratedDocumentSynchronizer(
     IGeneratedDocumentPublisher publisher,
     LanguageServerFeatureOptions languageServerFeatureOptions,
-    ProjectSnapshotManager projectManager) : IDocumentProcessedListener
+    RazorSolutionManager solutionManager) : IDocumentProcessedListener
 {
     private readonly IGeneratedDocumentPublisher _publisher = publisher;
     private readonly LanguageServerFeatureOptions _languageServerFeatureOptions = languageServerFeatureOptions;
-    private readonly ProjectSnapshotManager _projectManager = projectManager;
+    private readonly RazorSolutionManager _solutionManager = solutionManager;
 
     public void DocumentProcessed(RazorCodeDocument codeDocument, RazorDocument document)
     {
@@ -22,14 +22,14 @@ internal class GeneratedDocumentSynchronizer(
         var filePath = document.FilePath;
 
         // If the document isn't open, and we're not updating buffers for closed documents, then we don't need to do anything.
-        if (!_projectManager.IsDocumentOpen(filePath) &&
+        if (!_solutionManager.IsDocumentOpen(filePath) &&
             !_languageServerFeatureOptions.UpdateBuffersForClosedDocuments)
         {
             return;
         }
 
         // If the document has been removed from the project, then don't do anything, or version numbers will be thrown off
-        if (!_projectManager.ContainsDocument(document.Project.Key, filePath))
+        if (!_solutionManager.ContainsDocument(document.Project.Key, filePath))
         {
             return;
         }

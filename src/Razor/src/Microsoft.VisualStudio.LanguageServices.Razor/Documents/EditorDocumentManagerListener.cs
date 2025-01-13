@@ -40,7 +40,7 @@ internal partial class EditorDocumentManagerListener : IRazorStartupService, IDi
     private static readonly TimeSpan s_delay = TimeSpan.FromMilliseconds(10);
 
     private readonly IEditorDocumentManager _documentManager;
-    private readonly ProjectSnapshotManager _projectManager;
+    private readonly RazorSolutionManager _solutionManager;
     private readonly IFallbackProjectManager _fallbackProjectManager;
     private readonly JoinableTaskContext _joinableTaskContext;
     private readonly ITelemetryReporter _telemetryReporter;
@@ -56,13 +56,13 @@ internal partial class EditorDocumentManagerListener : IRazorStartupService, IDi
     [ImportingConstructor]
     public EditorDocumentManagerListener(
         IEditorDocumentManager documentManager,
-        ProjectSnapshotManager projectManager,
+        RazorSolutionManager solutionManager,
         IFallbackProjectManager fallbackProjectManager,
         JoinableTaskContext joinableTaskContext,
         ITelemetryReporter telemetryReporter)
     {
         _documentManager = documentManager;
-        _projectManager = projectManager;
+        _solutionManager = solutionManager;
         _fallbackProjectManager = fallbackProjectManager;
         _joinableTaskContext = joinableTaskContext;
         _telemetryReporter = telemetryReporter;
@@ -75,7 +75,7 @@ internal partial class EditorDocumentManagerListener : IRazorStartupService, IDi
         _onOpened = Document_Opened;
         _onClosed = Document_Closed;
 
-        _projectManager.PriorityChanged += ProjectManager_Changed;
+        _solutionManager.PriorityChanged += SolutionManager_Changed;
     }
 
     public void Dispose()
@@ -89,7 +89,7 @@ internal partial class EditorDocumentManagerListener : IRazorStartupService, IDi
         _disposeTokenSource.Dispose();
     }
 
-    private void ProjectManager_Changed(object? sender, ProjectChangeEventArgs e)
+    private void SolutionManager_Changed(object? sender, ProjectChangeEventArgs e)
     {
         Work? work = e.Kind switch
         {
@@ -186,7 +186,7 @@ internal partial class EditorDocumentManagerListener : IRazorStartupService, IDi
     {
         try
         {
-            return _projectManager.UpdateAsync(
+            return _solutionManager.UpdateAsync(
                 static (updater, document) => updater.UpdateDocumentText(document.ProjectKey, document.DocumentFilePath, document.TextLoader),
                 state: document,
                 cancellationToken);
@@ -216,7 +216,7 @@ internal partial class EditorDocumentManagerListener : IRazorStartupService, IDi
             // This event is called by the EditorDocumentManager, which runs on the UI thread.
             // However, due to accessing the project snapshot manager, we need to switch to
             // running on the project snapshot manager's specialized thread.
-            return _projectManager.UpdateAsync(
+            return _solutionManager.UpdateAsync(
                 static (updater, document) => updater.UpdateDocumentText(document.ProjectKey, document.DocumentFilePath, document.EditorTextContainer!.CurrentText),
                 state: (EditorDocument)sender,
                 cancellationToken);
@@ -243,7 +243,7 @@ internal partial class EditorDocumentManagerListener : IRazorStartupService, IDi
     {
         try
         {
-            return _projectManager.UpdateAsync(
+            return _solutionManager.UpdateAsync(
                 static (updater, state) =>
                 {
                     var (document, fallbackProjectManager, telemetryReporter, cancellationToken) = state;
@@ -288,7 +288,7 @@ internal partial class EditorDocumentManagerListener : IRazorStartupService, IDi
     {
         try
         {
-            return _projectManager.UpdateAsync(
+            return _solutionManager.UpdateAsync(
                 static (updater, document) => updater.CloseDocument(document.ProjectKey, document.DocumentFilePath, document.TextLoader),
                 state: (EditorDocument)sender,
                 cancellationToken);

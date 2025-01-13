@@ -32,7 +32,7 @@ namespace Microsoft.VisualStudio.Razor.LanguageClient;
 [method: ImportingConstructor]
 internal class RazorLanguageServerClient(
     RazorCustomMessageTarget customTarget,
-    ProjectSnapshotManager projectManager,
+    RazorSolutionManager solutionManager,
     ILoggerFactory loggerFactory,
     RazorLogHubTraceProvider traceProvider,
     LanguageServerFeatureOptions languageServerFeatureOptions,
@@ -50,7 +50,7 @@ internal class RazorLanguageServerClient(
     private readonly IClientSettingsManager _clientSettingsManager = clientSettingsManager;
     private readonly ILspServerActivationTracker _lspServerActivationTracker = lspServerActivationTracker;
     private readonly RazorCustomMessageTarget _customMessageTarget = customTarget;
-    private readonly ProjectSnapshotManager _projectManager = projectManager;
+    private readonly RazorSolutionManager _solutionManager = solutionManager;
     private readonly LanguageServerFeatureOptions _languageServerFeatureOptions = languageServerFeatureOptions;
     private readonly VisualStudioHostServicesProvider _vsHostServicesProvider = vsHostServicesProvider;
     private readonly ILoggerFactory _loggerFactory = loggerFactory;
@@ -127,7 +127,7 @@ internal class RazorLanguageServerClient(
         {
             services.AddSingleton<IHostServicesProvider>(new HostServicesProviderAdapter(_vsHostServicesProvider));
 
-            var projectInfoDriver = new RazorProjectInfoDriver(_projectManager, _loggerFactory);
+            var projectInfoDriver = new RazorProjectInfoDriver(_solutionManager, _loggerFactory);
             services.AddSingleton<IRazorProjectInfoDriver>(projectInfoDriver);
         }
     }

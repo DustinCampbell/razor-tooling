@@ -22,7 +22,7 @@ internal partial class BackgroundDocumentGenerator : IRazorStartupService, IDisp
 {
     private static readonly TimeSpan s_delay = TimeSpan.FromSeconds(2);
 
-    private readonly ProjectSnapshotManager _projectManager;
+    private readonly RazorSolutionManager _solutionManager;
     private readonly IFallbackProjectManager _fallbackProjectManager;
     private readonly IRazorDynamicFileInfoProviderInternal _infoProvider;
     private readonly ILoggerFactory _loggerFactory;
@@ -35,23 +35,23 @@ internal partial class BackgroundDocumentGenerator : IRazorStartupService, IDisp
 
     [ImportingConstructor]
     public BackgroundDocumentGenerator(
-        ProjectSnapshotManager projectManager,
+        RazorSolutionManager solutionManager,
         IFallbackProjectManager fallbackProjectManager,
         IRazorDynamicFileInfoProviderInternal infoProvider,
         ILoggerFactory loggerFactory)
-        : this(projectManager, fallbackProjectManager, infoProvider, loggerFactory, s_delay)
+        : this(solutionManager, fallbackProjectManager, infoProvider, loggerFactory, s_delay)
     {
     }
 
     // Provided for tests to be able to modify the timer delay
     protected BackgroundDocumentGenerator(
-        ProjectSnapshotManager projectManager,
+        RazorSolutionManager solutionManager,
         IFallbackProjectManager fallbackProjectManager,
         IRazorDynamicFileInfoProviderInternal infoProvider,
         ILoggerFactory loggerFactory,
         TimeSpan delay)
     {
-        _projectManager = projectManager;
+        _solutionManager = solutionManager;
         _fallbackProjectManager = fallbackProjectManager;
         _infoProvider = infoProvider;
         _loggerFactory = loggerFactory;
@@ -65,7 +65,7 @@ internal partial class BackgroundDocumentGenerator : IRazorStartupService, IDisp
             idleAction: RazorEventSource.Instance.BackgroundDocumentGeneratorIdle,
             _disposeTokenSource.Token);
         _suppressedDocuments = ImmutableHashSet<string>.Empty.WithComparer(FilePathComparer.Instance);
-        _projectManager.Changed += ProjectManager_Changed;
+        _solutionManager.Changed += SolutionManager_Changed;
     }
 
     public void Dispose()
@@ -149,7 +149,7 @@ internal partial class BackgroundDocumentGenerator : IRazorStartupService, IDisp
     {
         var filePath = document.FilePath;
 
-        if (_projectManager.IsDocumentOpen(filePath))
+        if (_solutionManager.IsDocumentOpen(filePath))
         {
             ImmutableInterlocked.Update(ref _suppressedDocuments, static (set, filePath) => set.Add(filePath), filePath);
             _infoProvider.SuppressDocument(project.Key, filePath);
@@ -171,7 +171,7 @@ internal partial class BackgroundDocumentGenerator : IRazorStartupService, IDisp
         }
     }
 
-    private void ProjectManager_Changed(object sender, ProjectChangeEventArgs args)
+    private void SolutionManager_Changed(object sender, ProjectChangeEventArgs args)
     {
         // We don't want to do any work on solution close
         if (args.IsSolutionClosing)

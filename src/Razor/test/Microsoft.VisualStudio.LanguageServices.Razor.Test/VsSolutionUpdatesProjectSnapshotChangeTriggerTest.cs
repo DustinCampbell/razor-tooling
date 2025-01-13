@@ -82,13 +82,13 @@ public class VsSolutionUpdatesProjectSnapshotChangeTriggerTest : VisualStudioTes
 
         var serviceProvider = VsMocks.CreateServiceProvider(b =>
             b.AddService<SVsSolutionBuildManager>(buildManagerMock.Object));
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
         // Note: We're careful to use a using statement with a block to allow
         // the call to UnadviseUpdateSolutionEvents() to be verified after disposal.
         using (var trigger = new VsSolutionUpdatesProjectSnapshotChangeTrigger(
             serviceProvider,
-            projectManager,
+            solutionManager,
             StrictMock.Of<IProjectWorkspaceStateGenerator>(),
             _workspaceProvider,
             JoinableTaskContext))
@@ -123,11 +123,11 @@ public class VsSolutionUpdatesProjectSnapshotChangeTriggerTest : VisualStudioTes
                 return buildManagerMock.Object;
             }));
 
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
         using var trigger = new VsSolutionUpdatesProjectSnapshotChangeTrigger(
             serviceProvider,
-            projectManager,
+            solutionManager,
             StrictMock.Of<IProjectWorkspaceStateGenerator>(),
             _workspaceProvider,
             JoinableTaskContext);
@@ -145,11 +145,11 @@ public class VsSolutionUpdatesProjectSnapshotChangeTriggerTest : VisualStudioTes
     [UIFact]
     public async Task SolutionClosing_CancelsActiveWork()
     {
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
         var expectedProjectPath = s_someProject.FilePath;
 
-        var expectedProjectSnapshot = await projectManager.UpdateAsync(updater =>
+        var expectedProjectSnapshot = await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(s_someProject);
             updater.AddProject(s_someOtherProject);
@@ -168,7 +168,7 @@ public class VsSolutionUpdatesProjectSnapshotChangeTriggerTest : VisualStudioTes
 
         using var trigger = new VsSolutionUpdatesProjectSnapshotChangeTrigger(
             serviceProvider,
-            projectManager,
+            solutionManager,
             workspaceStateGenerator,
             _workspaceProvider,
             JoinableTaskContext);
@@ -181,7 +181,7 @@ public class VsSolutionUpdatesProjectSnapshotChangeTriggerTest : VisualStudioTes
         // provides a task we can wait on.
         await testAccessor.OnProjectBuiltTask.AssumeNotNull();
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.SolutionClosed();
             updater.RemoveProject(s_someProject.Key);
@@ -198,11 +198,11 @@ public class VsSolutionUpdatesProjectSnapshotChangeTriggerTest : VisualStudioTes
     public async Task OnProjectBuiltAsync_KnownProject_EnqueuesProjectStateUpdate()
     {
         // Arrange
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
         var expectedProjectPath = s_someProject.FilePath;
 
-        var expectedProjectSnapshot = await projectManager.UpdateAsync(updater =>
+        var expectedProjectSnapshot = await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(s_someProject);
             updater.AddProject(s_someOtherProject);
@@ -215,7 +215,7 @@ public class VsSolutionUpdatesProjectSnapshotChangeTriggerTest : VisualStudioTes
 
         using var trigger = new VsSolutionUpdatesProjectSnapshotChangeTrigger(
             serviceProvider,
-            projectManager,
+            solutionManager,
             workspaceStateGenerator,
             _workspaceProvider,
             JoinableTaskContext);
@@ -254,9 +254,9 @@ public class VsSolutionUpdatesProjectSnapshotChangeTriggerTest : VisualStudioTes
         var serviceProvider = VsMocks.CreateServiceProvider(b =>
             b.AddService<SVsSolutionBuildManager>(buildManagerMock.Object));
 
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
-        await projectManager.UpdateAsync(updater =>
+        await solutionManager.UpdateAsync(updater =>
         {
             updater.AddProject(
                 new HostProject("/Some/Unknown/Path.csproj", "/Some/Unknown/obj", RazorConfiguration.Default, "Path"));
@@ -266,7 +266,7 @@ public class VsSolutionUpdatesProjectSnapshotChangeTriggerTest : VisualStudioTes
 
         using var trigger = new VsSolutionUpdatesProjectSnapshotChangeTrigger(
             serviceProvider,
-            projectManager,
+            solutionManager,
             workspaceStateGenerator,
             _workspaceProvider,
             JoinableTaskContext);
@@ -296,13 +296,13 @@ public class VsSolutionUpdatesProjectSnapshotChangeTriggerTest : VisualStudioTes
         var serviceProvider = VsMocks.CreateServiceProvider(b =>
             b.AddService<SVsSolutionBuildManager>(buildManagerMock.Object));
 
-        var projectManager = CreateProjectSnapshotManager();
+        var solutionManager = CreateSolutionManager();
 
         var workspaceStateGenerator = new TestProjectWorkspaceStateGenerator();
 
         using var trigger = new VsSolutionUpdatesProjectSnapshotChangeTrigger(
             serviceProvider,
-            projectManager,
+            solutionManager,
             workspaceStateGenerator,
             _workspaceProvider,
             JoinableTaskContext);

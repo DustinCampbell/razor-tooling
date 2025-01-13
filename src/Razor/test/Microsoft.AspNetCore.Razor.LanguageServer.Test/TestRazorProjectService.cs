@@ -15,15 +15,15 @@ namespace Microsoft.AspNetCore.Razor.LanguageServer.ProjectSystem;
 
 internal class TestRazorProjectService(
     RemoteTextLoaderFactory remoteTextLoaderFactory,
-    ProjectSnapshotManager projectManager,
+    RazorSolutionManager solutionManager,
     ILoggerFactory loggerFactory)
     : RazorProjectService(
-        projectManager,
+        solutionManager,
         CreateProjectInfoDriver(),
         remoteTextLoaderFactory,
         loggerFactory)
 {
-    private readonly ProjectSnapshotManager _projectManager = projectManager;
+    private readonly RazorSolutionManager _solutionManager = solutionManager;
 
     private static IRazorProjectInfoDriver CreateProjectInfoDriver()
     {
@@ -42,7 +42,7 @@ internal class TestRazorProjectService(
         var document = new DocumentSnapshotHandle(
             textDocumentPath, textDocumentPath, FileKinds.GetFileKindFromFilePath(textDocumentPath));
 
-        foreach (var project in _projectManager.FindPotentialProjects(textDocumentPath))
+        foreach (var project in _solutionManager.FindPotentialProjects(textDocumentPath))
         {
             var projectInfo = project.ToRazorProjectInfo();
 

@@ -23,7 +23,7 @@ internal sealed class RenameEndpoint(
     LanguageServerFeatureOptions languageServerFeatureOptions,
     IDocumentMappingService documentMappingService,
     IEditMappingService editMappingService,
-    ProjectSnapshotManager projectManager,
+    RazorSolutionManager solutionManager,
     IClientConnection clientConnection,
     ILoggerFactory loggerFactory)
     : AbstractRazorDelegatingEndpoint<RenameParams, WorkspaceEdit?>(
@@ -35,7 +35,7 @@ internal sealed class RenameEndpoint(
     private readonly IRenameService _renameService = renameService;
     private readonly LanguageServerFeatureOptions _languageServerFeatureOptions = languageServerFeatureOptions;
     private readonly IEditMappingService _editMappingService = editMappingService;
-    private readonly ProjectSnapshotManager _projectManager = projectManager;
+    private readonly RazorSolutionManager _solutionManager = solutionManager;
 
     public void ApplyCapabilities(VSInternalServerCapabilities serverCapabilities, VSInternalClientCapabilities clientCapabilities)
     {
@@ -57,7 +57,7 @@ internal sealed class RenameEndpoint(
             return SpecializedTasks.Null<WorkspaceEdit>();
         }
 
-        return _renameService.TryGetRazorRenameEditsAsync(documentContext, positionInfo, request.NewName, _projectManager.GetQueryOperations(), cancellationToken);
+        return _renameService.TryGetRazorRenameEditsAsync(documentContext, positionInfo, request.NewName, _solutionManager.GetQueryOperations(), cancellationToken);
     }
 
     protected override bool IsSupported()

@@ -34,7 +34,7 @@ internal partial class RazorDiagnosticsPublisher : IDocumentProcessedListener, I
     private static readonly TimeSpan s_publishDelay = TimeSpan.FromSeconds(2);
     private static readonly TimeSpan s_clearClosedDocumentsDelay = TimeSpan.FromSeconds(5);
 
-    private readonly ProjectSnapshotManager _projectManager;
+    private readonly RazorSolutionManager _solutionManager;
     private readonly IClientConnection _clientConnection;
     private readonly ILogger _logger;
     private readonly LanguageServerFeatureOptions _options;
@@ -48,13 +48,13 @@ internal partial class RazorDiagnosticsPublisher : IDocumentProcessedListener, I
     private Task _clearClosedDocumentsTask = Task.CompletedTask;
 
     public RazorDiagnosticsPublisher(
-        ProjectSnapshotManager projectManager,
+        RazorSolutionManager solutionManager,
         IClientConnection clientConnection,
         LanguageServerFeatureOptions options,
         Lazy<RazorTranslateDiagnosticsService> translateDiagnosticsService,
         Lazy<IDocumentContextFactory> documentContextFactory,
         ILoggerFactory loggerFactory)
-        : this(projectManager, clientConnection, options,
+        : this(solutionManager, clientConnection, options,
               translateDiagnosticsService, documentContextFactory,
                loggerFactory, s_publishDelay)
     {
@@ -62,7 +62,7 @@ internal partial class RazorDiagnosticsPublisher : IDocumentProcessedListener, I
 
     // Present for test to specify publish delay
     protected RazorDiagnosticsPublisher(
-        ProjectSnapshotManager projectManager,
+        RazorSolutionManager solutionManager,
         IClientConnection clientConnection,
         LanguageServerFeatureOptions options,
         Lazy<RazorTranslateDiagnosticsService> translateDiagnosticsService,
@@ -70,7 +70,7 @@ internal partial class RazorDiagnosticsPublisher : IDocumentProcessedListener, I
         ILoggerFactory loggerFactory,
         TimeSpan publishDelay)
     {
-        _projectManager = projectManager;
+        _solutionManager = solutionManager;
         _clientConnection = clientConnection;
         _options = options;
         _translateDiagnosticsService = translateDiagnosticsService;
@@ -217,7 +217,7 @@ internal partial class RazorDiagnosticsPublisher : IDocumentProcessedListener, I
 
             foreach (var (filePath, diagnostics) in _publishedDiagnostics)
             {
-                if (!_projectManager.IsDocumentOpen(filePath))
+                if (!_solutionManager.IsDocumentOpen(filePath))
                 {
                     // If there were previously published diagnostics for this document, take note so
                     // we can publish an empty set of diagnostics.
