@@ -21,7 +21,7 @@ internal sealed class GeneratedOutputSource
         return result is not null;
     }
 
-    public async ValueTask<RazorCodeDocument> GetValueAsync(DocumentSnapshot document, CancellationToken cancellationToken)
+    public async ValueTask<RazorCodeDocument> GetValueAsync(RazorDocument document, CancellationToken cancellationToken)
     {
         if (TryGetValue(out var result))
         {

@@ -14,13 +14,13 @@ namespace Microsoft.AspNetCore.Razor.Test.Common.ProjectSystem;
 
 internal sealed class TestDocumentSnapshot : IDocumentSnapshot
 {
-    public DocumentSnapshot RealSnapshot { get; }
+    public RazorDocument RealDocument { get; }
 
     private readonly RazorCodeDocument? _codeDocument;
 
     private TestDocumentSnapshot(TestProjectSnapshot project, DocumentState state, RazorCodeDocument? codeDocument = null)
     {
-        RealSnapshot = new DocumentSnapshot(project.RealSnapshot, state);
+        RealDocument = new RazorDocument(project.RealSnapshot, state);
         _codeDocument = codeDocument;
     }
 
@@ -57,35 +57,35 @@ internal sealed class TestDocumentSnapshot : IDocumentSnapshot
         return new TestDocumentSnapshot(project, documentState, codeDocument);
     }
 
-    public HostDocument HostDocument => RealSnapshot.HostDocument;
+    public HostDocument HostDocument => RealDocument.HostDocument;
 
-    public string FileKind => RealSnapshot.FileKind;
-    public string FilePath => RealSnapshot.FilePath;
-    public string TargetPath => RealSnapshot.TargetPath;
-    public IProjectSnapshot Project => RealSnapshot.Project;
-    public int Version => RealSnapshot.Version;
+    public string FileKind => RealDocument.FileKind;
+    public string FilePath => RealDocument.FilePath;
+    public string TargetPath => RealDocument.TargetPath;
+    public IProjectSnapshot Project => RealDocument.Project;
+    public int Version => RealDocument.Version;
 
     public ValueTask<RazorCodeDocument> GetGeneratedOutputAsync(CancellationToken cancellationToken)
     {
         return _codeDocument is null
-            ? RealSnapshot.GetGeneratedOutputAsync(cancellationToken)
+            ? RealDocument.GetGeneratedOutputAsync(cancellationToken)
             : new(_codeDocument);
     }
 
     public ValueTask<SourceText> GetTextAsync(CancellationToken cancellationToken)
     {
         return _codeDocument is null
-            ? RealSnapshot.GetTextAsync(cancellationToken)
+            ? RealDocument.GetTextAsync(cancellationToken)
             : new(_codeDocument.Source.Text);
     }
 
     public ValueTask<VersionStamp> GetTextVersionAsync(CancellationToken cancellationToken)
-        => RealSnapshot.GetTextVersionAsync(cancellationToken);
+        => RealDocument.GetTextVersionAsync(cancellationToken);
 
     public ValueTask<SyntaxTree> GetCSharpSyntaxTreeAsync(CancellationToken cancellationToken)
     {
         return _codeDocument is null
-            ? RealSnapshot.GetCSharpSyntaxTreeAsync(cancellationToken)
+            ? RealDocument.GetCSharpSyntaxTreeAsync(cancellationToken)
             : new(_codeDocument.GetOrParseCSharpSyntaxTree(cancellationToken));
     }
 
@@ -97,7 +97,7 @@ internal sealed class TestDocumentSnapshot : IDocumentSnapshot
             return true;
         }
 
-        return RealSnapshot.TryGetGeneratedOutput(out result);
+        return RealDocument.TryGetGeneratedOutput(out result);
     }
 
     public bool TryGetText([NotNullWhen(true)] out SourceText? result)
@@ -108,12 +108,12 @@ internal sealed class TestDocumentSnapshot : IDocumentSnapshot
             return true;
         }
 
-        return RealSnapshot.TryGetText(out result);
+        return RealDocument.TryGetText(out result);
     }
 
     public bool TryGetTextVersion(out VersionStamp result)
-        => RealSnapshot.TryGetTextVersion(out result);
+        => RealDocument.TryGetTextVersion(out result);
 
     public IDocumentSnapshot WithText(SourceText text)
-        => RealSnapshot.WithText(text);
+        => RealDocument.WithText(text);
 }

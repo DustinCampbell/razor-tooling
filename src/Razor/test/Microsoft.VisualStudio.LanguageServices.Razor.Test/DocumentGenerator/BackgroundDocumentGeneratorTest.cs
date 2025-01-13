@@ -384,10 +384,10 @@ public class BackgroundDocumentGeneratorTest(ITestOutputHelper testOutput) : Vis
             _blockBatchProcessingSource.Set();
         }
 
-        private static DocumentKey GetKey(ProjectSnapshot project, DocumentSnapshot document)
+        private static DocumentKey GetKey(ProjectSnapshot project, RazorDocument document)
             => new(project.Key, document.FilePath);
 
-        protected override async ValueTask ProcessBatchAsync(ImmutableArray<(ProjectSnapshot, DocumentSnapshot)> items, CancellationToken token)
+        protected override async ValueTask ProcessBatchAsync(ImmutableArray<(ProjectSnapshot, RazorDocument)> items, CancellationToken token)
         {
             if (_blockBatchProcessingSource is { } blockEvent)
             {
@@ -403,14 +403,14 @@ public class BackgroundDocumentGeneratorTest(ITestOutputHelper testOutput) : Vis
             await base.ProcessBatchAsync(items, token);
         }
 
-        public override void Enqueue(ProjectSnapshot project, DocumentSnapshot document)
+        public override void Enqueue(ProjectSnapshot project, RazorDocument document)
         {
             PendingWork.Add(GetKey(project, document));
 
             base.Enqueue(project, document);
         }
 
-        protected override Task ProcessDocumentAsync(ProjectSnapshot project, DocumentSnapshot document, CancellationToken cancellationToken)
+        protected override Task ProcessDocumentAsync(ProjectSnapshot project, RazorDocument document, CancellationToken cancellationToken)
         {
             var key = GetKey(project, document);
             PendingWork.Remove(key);

@@ -216,7 +216,7 @@ public class ProjectStateGeneratedOutputTest : WorkspaceTestBase
         var document = project.Documents[hostDocument.FilePath];
 
         var projectSnapshot = new ProjectSnapshot(project);
-        var documentSnapshot = new DocumentSnapshot(projectSnapshot, document);
+        var documentSnapshot = new RazorDocument(projectSnapshot, document);
 
         return documentSnapshot.GetGeneratedOutputAsync(DisposalToken);
     }

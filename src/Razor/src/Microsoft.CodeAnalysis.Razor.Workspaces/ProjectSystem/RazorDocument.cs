@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
-internal sealed class DocumentSnapshot(ProjectSnapshot project, DocumentState state) : IDocumentSnapshot, ILegacyDocumentSnapshot
+internal sealed class RazorDocument(ProjectSnapshot project, DocumentState state) : IDocumentSnapshot, ILegacyDocumentSnapshot
 #if !FORMAT_FUSE
     , IDesignTimeCodeGenerator
 #endif
@@ -49,7 +49,7 @@ internal sealed class DocumentSnapshot(ProjectSnapshot project, DocumentState st
 
     public IDocumentSnapshot WithText(SourceText text)
     {
-        return new DocumentSnapshot(Project, _state.WithText(text, VersionStamp.Create()));
+        return new RazorDocument(Project, _state.WithText(text, VersionStamp.Create()));
     }
 
     public ValueTask<SyntaxTree> GetCSharpSyntaxTreeAsync(CancellationToken cancellationToken)

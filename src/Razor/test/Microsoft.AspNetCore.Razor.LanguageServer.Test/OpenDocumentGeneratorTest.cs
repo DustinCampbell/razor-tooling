@@ -205,7 +205,7 @@ public class OpenDocumentGeneratorTest(ITestOutputHelper testOutput) : LanguageS
             return _tcs.Task;
         }
 
-        public void DocumentProcessed(RazorCodeDocument codeDocument, DocumentSnapshot document)
+        public void DocumentProcessed(RazorCodeDocument codeDocument, RazorDocument document)
         {
             _tcs.SetResult(document);
         }

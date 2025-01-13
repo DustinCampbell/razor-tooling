@@ -73,7 +73,7 @@ internal static partial class ProjectSnapshotManagerExtensions
         this ProjectSnapshotManager projectManager,
         string documentFilePath,
         ILogger logger,
-        [NotNullWhen(true)] out DocumentSnapshot? document)
+        [NotNullWhen(true)] out RazorDocument? document)
     {
         logger.LogTrace($"Looking for {documentFilePath}.");
 

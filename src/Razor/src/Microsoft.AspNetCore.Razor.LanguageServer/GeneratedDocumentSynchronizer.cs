@@ -16,7 +16,7 @@ internal class GeneratedDocumentSynchronizer(
     private readonly LanguageServerFeatureOptions _languageServerFeatureOptions = languageServerFeatureOptions;
     private readonly ProjectSnapshotManager _projectManager = projectManager;
 
-    public void DocumentProcessed(RazorCodeDocument codeDocument, DocumentSnapshot document)
+    public void DocumentProcessed(RazorCodeDocument codeDocument, RazorDocument document)
     {
         var hostDocumentVersion = document.Version;
         var filePath = document.FilePath;

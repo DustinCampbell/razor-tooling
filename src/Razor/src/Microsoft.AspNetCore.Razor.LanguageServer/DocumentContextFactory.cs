@@ -41,15 +41,15 @@ internal sealed class DocumentContextFactory(
     private bool TryResolveDocument(
         string filePath,
         VSProjectContext? projectContext,
-        [NotNullWhen(true)] out DocumentSnapshot? documentSnapshot)
+        [NotNullWhen(true)] out RazorDocument? document)
     {
         if (projectContext is null)
         {
-            return _projectManager.TryResolveDocumentInAnyProject(filePath, _logger, out documentSnapshot);
+            return _projectManager.TryResolveDocumentInAnyProject(filePath, _logger, out document);
         }
 
         if (_projectManager.TryGetProject(projectContext.ToProjectKey(), out var project) &&
-            project.TryGetDocument(filePath, out documentSnapshot))
+            project.TryGetDocument(filePath, out document))
         {
             return true;
         }
@@ -59,13 +59,13 @@ internal sealed class DocumentContextFactory(
         // move it to the real project when/if we find out about it.
         var miscellaneousProject = _projectManager.GetMiscellaneousProject();
         var normalizedDocumentPath = FilePathNormalizer.Normalize(filePath);
-        if (miscellaneousProject.TryGetDocument(normalizedDocumentPath, out documentSnapshot))
+        if (miscellaneousProject.TryGetDocument(normalizedDocumentPath, out document))
         {
             _logger.LogDebug($"Found document {filePath} in the misc files project, but was asked for project context {projectContext.Id}");
             return true;
         }
 
-        documentSnapshot = null;
+        document = null;
         return false;
     }
 }

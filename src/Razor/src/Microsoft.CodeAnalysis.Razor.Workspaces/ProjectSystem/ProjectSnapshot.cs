@@ -21,7 +21,7 @@ internal sealed class ProjectSnapshot(ProjectState state) : IProjectSnapshot, IL
     private readonly ProjectState _state = state;
 
     private readonly object _gate = new();
-    private readonly Dictionary<string, DocumentSnapshot> _filePathToDocumentMap = new(FilePathNormalizingComparer.Instance);
+    private readonly Dictionary<string, RazorDocument> _filePathToDocumentMap = new(FilePathNormalizingComparer.Instance);
 
     public HostProject HostProject => _state.HostProject;
     public RazorCompilerOptions CompilerOptions => _state.CompilerOptions;
@@ -59,7 +59,7 @@ internal sealed class ProjectSnapshot(ProjectState state) : IProjectSnapshot, IL
         }
     }
 
-    public bool TryGetDocument(string filePath, [NotNullWhen(true)] out DocumentSnapshot? document)
+    public bool TryGetDocument(string filePath, [NotNullWhen(true)] out RazorDocument? document)
     {
         lock (_gate)
         {
@@ -78,7 +78,7 @@ internal sealed class ProjectSnapshot(ProjectState state) : IProjectSnapshot, IL
             }
 
             // If we have DocumentState, go ahead and create a new DocumentSnapshot.
-            snapshot = new DocumentSnapshot(this, state);
+            snapshot = new RazorDocument(this, state);
             _filePathToDocumentMap.Add(filePath, snapshot);
 
             document = snapshot;
@@ -103,7 +103,7 @@ internal sealed class ProjectSnapshot(ProjectState state) : IProjectSnapshot, IL
     /// that include directives specified by the provided document. Otherwise returns an empty
     /// list.
     /// </summary>
-    public ImmutableArray<DocumentSnapshot> GetRelatedDocuments(DocumentSnapshot document)
+    public ImmutableArray<RazorDocument> GetRelatedDocuments(RazorDocument document)
     {
         var targetPath = document.TargetPath;
 
@@ -114,7 +114,7 @@ internal sealed class ProjectSnapshot(ProjectState state) : IProjectSnapshot, IL
 
         lock (_gate)
         {
-            using var builder = new PooledArrayBuilder<DocumentSnapshot>(capacity: relatedDocuments.Count);
+            using var builder = new PooledArrayBuilder<RazorDocument>(capacity: relatedDocuments.Count);
 
             foreach (var relatedDocumentFilePath in relatedDocuments)
             {
