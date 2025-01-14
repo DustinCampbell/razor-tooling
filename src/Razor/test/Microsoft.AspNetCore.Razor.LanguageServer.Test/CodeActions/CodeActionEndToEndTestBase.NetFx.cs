@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Razor.LanguageServer.Formatting;
 using Microsoft.AspNetCore.Razor.LanguageServer.Hosting;
 using Microsoft.AspNetCore.Razor.Telemetry;
 using Microsoft.AspNetCore.Razor.Test.Common;
-using Microsoft.AspNetCore.Razor.Test.Common.LanguageServer;
+using Microsoft.AspNetCore.Razor.Test.Common.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Test.Common.Workspaces;
 using Microsoft.AspNetCore.Razor.Utilities;
 using Microsoft.CodeAnalysis.Razor;
@@ -331,9 +331,9 @@ public abstract class CodeActionEndToEndTestBase(ITestOutputHelper testOutput) :
             =>
             [
                 new GenerateMethodCodeActionResolver(
-                        roslynCodeActionHelpers,
-                        new LspDocumentMappingService(FilePathService, new TestDocumentContextFactory(), LoggerFactory),
-                        razorFormattingService,
-                        new FileSystem())
+                    roslynCodeActionHelpers,
+                    new LspDocumentMappingService(FilePathService, new TestDocumentContextFactory(), LoggerFactory),
+                    razorFormattingService,
+                    new FileSystem())
             ];
 }

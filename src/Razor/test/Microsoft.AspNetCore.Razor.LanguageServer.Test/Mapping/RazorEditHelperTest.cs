@@ -743,11 +743,12 @@ public class RazorEditHelperTest : LanguageServerTestBase
             linePragmas: []);
 
         codeDocument.SetCSharpDocument(csharpDocument);
-        var snapshot = TestDocumentSnapshot.Create(razorPath, codeDocument);
+
+        var document = TestMocks.CreateDocument(razorPath, codeDocument);
 
         var mappedChanges = await RazorEditHelper.MapCSharpEditsAsync(
             changes.SelectAsArray(c => c.ToRazorTextChange()),
-            snapshot,
+            document,
             _documentMappingService,
             FailingTelemetryReporter.Instance,
             CancellationToken.None);

@@ -41,8 +41,7 @@ public class ProjectWorkspaceStateGeneratorTest : VisualStudioWorkspaceTestBase
             LanguageNames.CSharp,
             TestProjectData.SomeProject.FilePath));
         _workspaceProject = solution.GetProject(projectId).AssumeNotNull();
-        _project = new RazorProject(
-            ProjectState.Create(TestProjectData.SomeProject, CompilerOptions, ProjectEngineFactoryProvider));
+        _project = RazorProject.Create(TestProjectData.SomeProject, CompilerOptions, ProjectEngineFactoryProvider);
         _projectWorkspaceStateWithTagHelpers = ProjectWorkspaceState.Create(
             [TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly").Build()]);
 

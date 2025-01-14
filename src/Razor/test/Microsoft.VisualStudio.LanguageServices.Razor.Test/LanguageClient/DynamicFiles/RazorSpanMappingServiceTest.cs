@@ -27,12 +27,10 @@ public class RazorSpanMappingServiceTest(ITestOutputHelper testOutput) : Workspa
 @SomeProperty
 ");
 
-        var state = ProjectState
+        var document = RazorProject
             .Create(_hostProject, CompilerOptions, ProjectEngineFactoryProvider)
-            .AddDocument(_hostDocument, TestMocks.CreateTextLoader(sourceText));
-        var project = new RazorProject(state);
-
-        var document = project.GetRequiredDocument(_hostDocument.FilePath);
+            .AddDocument(_hostDocument, TestMocks.CreateTextLoader(sourceText))
+            .GetRequiredDocument(_hostDocument.FilePath);
 
         var output = await document.GetGeneratedOutputAsync(DisposalToken);
         var generated = output.GetCSharpDocument();
@@ -60,12 +58,10 @@ public class RazorSpanMappingServiceTest(ITestOutputHelper testOutput) : Workspa
 @SomeProperty
 ";
 
-        var state = ProjectState
+        var document = RazorProject
             .Create(_hostProject, CompilerOptions, ProjectEngineFactoryProvider)
-            .AddDocument(_hostDocument, TestMocks.CreateTextLoader(code));
-        var project = new RazorProject(state);
-
-        var document = project.GetRequiredDocument(_hostDocument.FilePath);
+            .AddDocument(_hostDocument, TestMocks.CreateTextLoader(code))
+            .GetRequiredDocument(_hostDocument.FilePath);
 
         var output = await document.GetGeneratedOutputAsync(DisposalToken);
         var generated = output.GetCSharpDocument();
@@ -94,12 +90,10 @@ public class RazorSpanMappingServiceTest(ITestOutputHelper testOutput) : Workspa
 }
 ";
 
-        var state = ProjectState
+        var document = RazorProject
             .Create(_hostProject, CompilerOptions, ProjectEngineFactoryProvider)
-            .AddDocument(_hostDocument, TestMocks.CreateTextLoader(code));
-        var project = new RazorProject(state);
-
-        var document = project.GetRequiredDocument(_hostDocument.FilePath);
+            .AddDocument(_hostDocument, TestMocks.CreateTextLoader(code))
+            .GetRequiredDocument(_hostDocument.FilePath);
 
         var output = await document.GetGeneratedOutputAsync(DisposalToken);
         var generated = output.GetCSharpDocument();
@@ -127,12 +121,10 @@ public class RazorSpanMappingServiceTest(ITestOutputHelper testOutput) : Workspa
 }
 ";
 
-        var state = ProjectState
+        var document = RazorProject
             .Create(_hostProject, CompilerOptions, ProjectEngineFactoryProvider)
-            .AddDocument(_hostDocument, TestMocks.CreateTextLoader(code));
-        var project = new RazorProject(state);
-
-        var document = project.GetRequiredDocument(_hostDocument.FilePath);
+            .AddDocument(_hostDocument, TestMocks.CreateTextLoader(code))
+            .GetRequiredDocument(_hostDocument.FilePath);
 
         var output = await document.GetGeneratedOutputAsync(DisposalToken);
         var generated = output.GetCSharpDocument();

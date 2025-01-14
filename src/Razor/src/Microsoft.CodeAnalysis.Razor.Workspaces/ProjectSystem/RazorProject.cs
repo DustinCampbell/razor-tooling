@@ -1,6 +1,7 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
@@ -8,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.PooledObjects;
+using Microsoft.AspNetCore.Razor.ProjectEngineHost;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Utilities;
 using Microsoft.CodeAnalysis.CSharp;
@@ -16,9 +18,9 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
-internal sealed class RazorProject(ProjectState state) : IRazorProject, ILegacyProjectSnapshot
+internal sealed class RazorProject : IRazorProject, ILegacyProjectSnapshot
 {
-    private readonly ProjectState _state = state;
+    private readonly ProjectState _state;
 
     private readonly object _gate = new();
     private readonly Dictionary<string, RazorDocument> _filePathToDocumentMap = new(FilePathNormalizingComparer.Instance);
@@ -39,6 +41,50 @@ internal sealed class RazorProject(ProjectState state) : IRazorProject, ILegacyP
     public int DocumentCount => _state.Documents.Count;
 
     public RazorProjectEngine ProjectEngine => _state.ProjectEngine;
+
+    private RazorProject(ProjectState state)
+    {
+        _state = state;
+    }
+
+    public static RazorProject Create(HostProject hostProject, RazorCompilerOptions compilerOptions, IProjectEngineFactoryProvider projectEngineFactoryProvider)
+        => new(ProjectState.Create(hostProject, compilerOptions, projectEngineFactoryProvider));
+
+    public RazorProject AddEmptyDocument(HostDocument hostDocument)
+        => AddDocument(hostDocument, EmptyTextLoader.Instance);
+
+    public RazorProject AddDocument(HostDocument hostDocument, SourceText text)
+        => Update(state => state.AddDocument(hostDocument, text));
+
+    public RazorProject AddDocument(HostDocument hostDocument, TextLoader textLoader)
+        => Update(state => state.AddDocument(hostDocument, textLoader));
+
+    public RazorProject RemoveDocument(string documentFilePath)
+        => Update(state => state.RemoveDocument(documentFilePath));
+
+    public RazorProject WithDocumentText(string documentFilePath, SourceText text)
+        => Update(state => state.WithDocumentText(documentFilePath, text));
+
+    public RazorProject WithDocumentText(string documentFilePath, TextLoader textLoader)
+        => Update(state => state.WithDocumentText(documentFilePath, textLoader));
+
+    public RazorProject WithHostProject(HostProject hostProject)
+        => Update(state => state.WithHostProject(hostProject));
+
+    public RazorProject WithProjectWorkspaceState(ProjectWorkspaceState projectWorkspaceState)
+        => Update(state => state.WithProjectWorkspaceState(projectWorkspaceState));
+
+    private RazorProject Update(Func<ProjectState, ProjectState> transformer)
+    {
+        var newState = transformer(_state);
+
+        if (ReferenceEquals(newState, _state))
+        {
+            return this;
+        }
+
+        return new(newState);
+    }
 
     public ValueTask<ImmutableArray<TagHelperDescriptor>> GetTagHelpersAsync(CancellationToken cancellationToken)
         => new(_state.TagHelpers);

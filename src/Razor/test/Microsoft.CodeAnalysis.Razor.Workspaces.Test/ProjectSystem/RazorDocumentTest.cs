@@ -12,7 +12,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
-public class DefaultDocumentSnapshotTest : WorkspaceTestBase
+public class RazorDocumentTest : WorkspaceTestBase
 {
     private static readonly HostDocument s_componentHostDocument = TestProjectData.SomeProjectComponentFile1;
     private static readonly HostDocument s_componentCshtmlHostDocument = TestProjectData.SomeProjectCshtmlComponentFile5;
@@ -25,27 +25,29 @@ public class DefaultDocumentSnapshotTest : WorkspaceTestBase
     private readonly RazorDocument _legacyDocument;
     private readonly RazorDocument _nestedComponentDocument;
 
-    public DefaultDocumentSnapshotTest(ITestOutputHelper testOutput)
+    public RazorDocumentTest(ITestOutputHelper testOutput)
         : base(testOutput)
     {
         _sourceText = SourceText.From("<p>Hello World</p>");
 
-        var projectState = ProjectState.Create(TestProjectData.SomeProject, CompilerOptions, ProjectEngineFactoryProvider);
-        var project = new RazorProject(projectState);
-
+        var project = RazorProject.Create(TestProjectData.SomeProject, CompilerOptions, ProjectEngineFactoryProvider);
         var textLoader = TestMocks.CreateTextLoader(_sourceText);
 
-        var documentState = DocumentState.Create(s_legacyHostDocument, textLoader);
-        _legacyDocument = new RazorDocument(project, documentState);
+        _legacyDocument = project
+            .AddDocument(s_legacyHostDocument, textLoader)
+            .GetRequiredDocument(s_legacyHostDocument.FilePath);
 
-        documentState = DocumentState.Create(s_componentHostDocument, textLoader);
-        _componentDocument = new RazorDocument(project, documentState);
+        _componentDocument = project
+            .AddDocument(s_componentHostDocument, textLoader)
+            .GetRequiredDocument(s_componentHostDocument.FilePath);
 
-        documentState = DocumentState.Create(s_componentCshtmlHostDocument, textLoader);
-        _componentCshtmlDocument = new RazorDocument(project, documentState);
+        _componentCshtmlDocument = project
+            .AddDocument(s_componentCshtmlHostDocument, textLoader)
+            .GetRequiredDocument(s_componentCshtmlHostDocument.FilePath);
 
-        documentState = DocumentState.Create(s_nestedComponentHostDocument, textLoader);
-        _nestedComponentDocument = new RazorDocument(project, documentState);
+        _nestedComponentDocument = project
+            .AddDocument(s_nestedComponentHostDocument, textLoader)
+            .GetRequiredDocument(s_nestedComponentHostDocument.FilePath);
     }
 
     [Fact(Skip = "Weak cache removed")]

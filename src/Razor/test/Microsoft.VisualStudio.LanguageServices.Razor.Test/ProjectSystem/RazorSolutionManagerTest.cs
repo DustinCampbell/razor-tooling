@@ -21,7 +21,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.VisualStudio.Razor.ProjectSystem;
 
-public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
+public class RazorSolutionManagerTest : VisualStudioWorkspaceTestBase
 {
     private static readonly HostDocument[] s_documents =
     [
@@ -49,7 +49,7 @@ public class ProjectSnapshotManagerTest : VisualStudioWorkspaceTestBase
     private readonly TestRazorSolutionManager _solutionManager;
     private readonly SourceText _sourceText;
 
-    public ProjectSnapshotManagerTest(ITestOutputHelper testOutput)
+    public RazorSolutionManagerTest(ITestOutputHelper testOutput)
         : base(testOutput)
     {
         var someTagHelpers = ImmutableArray.Create(

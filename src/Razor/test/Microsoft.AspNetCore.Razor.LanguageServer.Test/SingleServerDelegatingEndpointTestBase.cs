@@ -42,6 +42,8 @@ public abstract partial class SingleServerDelegatingEndpointTestBase(ITestOutput
             (csharpDocumentUri, csharpSourceText)
         };
 
+        var documentContextFactory = new TestDocumentContextFactory(razorFilePath, codeDocument);
+
         if (additionalRazorDocuments is not null)
         {
             foreach ((var filePath, var contents) in additionalRazorDocuments)
@@ -51,10 +53,12 @@ public abstract partial class SingleServerDelegatingEndpointTestBase(ITestOutput
                 var additionalDocumentUri = new Uri(FilePathService.GetRazorCSharpFilePath(projectKey, "C:/path/to/" + filePath));
 
                 csharpFiles.Add((additionalDocumentUri, additionalDocumentSourceText));
+
+                documentContextFactory.Add(filePath, additionalDocument);
             }
         }
 
-        DocumentContextFactory = new TestDocumentContextFactory(razorFilePath, codeDocument);
+        DocumentContextFactory = documentContextFactory;
 
         LanguageServerFeatureOptions = Mock.Of<LanguageServerFeatureOptions>(options =>
             options.SupportsFileManipulation == true &&

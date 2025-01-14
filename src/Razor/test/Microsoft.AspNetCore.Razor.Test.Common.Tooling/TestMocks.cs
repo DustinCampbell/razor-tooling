@@ -3,8 +3,11 @@
 
 using System;
 using System.Threading;
+using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.LanguageServer.Hosting;
+using Microsoft.AspNetCore.Razor.ProjectEngineHost;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
+using Microsoft.AspNetCore.Razor.Test.Common.ProjectSystem;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Text;
@@ -88,6 +91,68 @@ internal static class TestMocks
 
     public static void VerifySendRequest<TParams, TResponse>(this Mock<IClientConnection> mock, string method, TParams @params, Func<Times> times)
         => mock.Verify(x => x.SendRequestAsync<TParams, TResponse>(method, @params, It.IsAny<CancellationToken>()), times);
+
+    public static IRazorDocument CreateDocument(string filePath, RazorCodeDocument codeDocument)
+    {
+        var hostProject = TestHostProject.Create(filePath + ".csproj");
+        var hostDocument = TestHostDocument.Create(hostProject, filePath);
+
+        var documentMock = new StrictMock<IRazorDocument>();
+
+        documentMock
+            .SetupGet(x => x.FilePath)
+            .Returns(hostDocument.FilePath);
+        documentMock
+            .SetupGet(x => x.FileKind)
+            .Returns(hostDocument.FileKind);
+        documentMock
+            .SetupGet(x => x.TargetPath)
+            .Returns(hostDocument.TargetPath);
+        documentMock
+            .SetupGet(x => x.Version)
+            .Returns(1);
+
+        var text = codeDocument.Source.Text;
+        documentMock
+            .Setup(x => x.TryGetText(out text))
+            .Returns(true);
+        documentMock
+            .Setup(x => x.GetTextAsync(It.IsAny<CancellationToken>()))
+            .ReturnsAsync(text);
+
+        var generatedOutput = codeDocument;
+        documentMock
+            .Setup(x => x.TryGetGeneratedOutput(out generatedOutput))
+            .Returns(true);
+        documentMock
+            .Setup(x => x.GetGeneratedOutputAsync(It.IsAny<CancellationToken>()))
+            .ReturnsAsync(generatedOutput);
+
+        documentMock
+            .Setup(x => x.GetCSharpSyntaxTreeAsync(It.IsAny<CancellationToken>()))
+            .ReturnsAsync((CancellationToken cancellationToken) => codeDocument.GetOrParseCSharpSyntaxTree(cancellationToken));
+
+        var projectWorkspaceState = codeDocument.GetTagHelpers() is { } tagHelpers
+            ? ProjectWorkspaceState.Create([.. tagHelpers])
+            : ProjectWorkspaceState.Default;
+
+        var project = CreateProject(hostProject, projectWorkspaceState);
+        documentMock
+            .SetupGet(x => x.Project)
+            .Returns(project);
+
+        documentMock
+            .Setup(x => x.WithText(It.IsAny<SourceText>()))
+            .Returns((SourceText text) =>
+            {
+                return RazorProject
+                    .Create(hostProject, RazorCompilerOptions.None, ProjectEngineFactories.DefaultProvider)
+                    .AddDocument(hostDocument, text)
+                    .GetRequiredDocument(hostDocument.FilePath);
+            });
+
+        return documentMock.Object;
+    }
 
     public static IRazorProject CreateProject(HostProject hostProject, ProjectWorkspaceState? projectWorkspaceState = null)
     {

@@ -11,7 +11,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
-public class ProjectSnapshotTest(ITestOutputHelper testOutput) : WorkspaceTestBase(testOutput)
+public class RazorProjectTest(ITestOutputHelper testOutput) : WorkspaceTestBase(testOutput)
 {
     private static readonly HostProject s_hostProject = TestProjectData.SomeProject with { Configuration = FallbackRazorConfiguration.MVC_2_0 };
     private static readonly ProjectWorkspaceState s_projectWorkspaceState = ProjectWorkspaceState.Create([TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly").Build()]);
@@ -34,13 +34,12 @@ public class ProjectSnapshotTest(ITestOutputHelper testOutput) : WorkspaceTestBa
     public void ProjectSnapshot_CachesDocumentSnapshots()
     {
         // Arrange
-        var state = ProjectState.Create(s_hostProject, CompilerOptions, ProjectEngineFactoryProvider)
+        var project = RazorProject
+            .Create(s_hostProject, CompilerOptions, ProjectEngineFactoryProvider)
             .WithProjectWorkspaceState(s_projectWorkspaceState)
             .AddEmptyDocument(s_documents[0])
             .AddEmptyDocument(s_documents[1])
             .AddEmptyDocument(s_documents[2]);
-
-        var project = new RazorProject(state);
 
         // Act
         var documents = project.DocumentFilePaths.ToDictionary(f => f, project.GetRequiredDocument);
@@ -57,11 +56,10 @@ public class ProjectSnapshotTest(ITestOutputHelper testOutput) : WorkspaceTestBa
     public void GetRelatedDocuments_NonImportDocument_ReturnsEmpty()
     {
         // Arrange
-        var state = ProjectState.Create(s_hostProject, CompilerOptions, ProjectEngineFactoryProvider)
+        var project = RazorProject
+            .Create(s_hostProject, CompilerOptions, ProjectEngineFactoryProvider)
             .WithProjectWorkspaceState(s_projectWorkspaceState)
             .AddEmptyDocument(s_documents[0]);
-
-        var project = new RazorProject(state);
 
         var document = project.GetRequiredDocument(s_documents[0].FilePath);
 
@@ -76,13 +74,12 @@ public class ProjectSnapshotTest(ITestOutputHelper testOutput) : WorkspaceTestBa
     public void GetRelatedDocuments_ImportDocument_ReturnsRelated()
     {
         // Arrange
-        var state = ProjectState.Create(s_hostProject, CompilerOptions, ProjectEngineFactoryProvider)
+        var project = RazorProject
+            .Create(s_hostProject, CompilerOptions, ProjectEngineFactoryProvider)
             .WithProjectWorkspaceState(s_projectWorkspaceState)
             .AddEmptyDocument(s_documents[0])
             .AddEmptyDocument(s_documents[1])
             .AddEmptyDocument(TestProjectData.SomeProjectImportFile);
-
-        var project = new RazorProject(state);
 
         var document = project.GetRequiredDocument(TestProjectData.SomeProjectImportFile.FilePath);
 

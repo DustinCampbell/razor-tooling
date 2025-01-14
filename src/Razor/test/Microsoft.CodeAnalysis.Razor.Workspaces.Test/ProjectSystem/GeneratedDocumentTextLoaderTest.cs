@@ -19,13 +19,10 @@ public class GeneratedDocumentTextLoaderTest(ITestOutputHelper testOutput) : Wor
     public async Task LoadAsync_SpecifiesEncoding()
     {
         // Arrange
-        var state = ProjectState
+        var document = RazorProject
             .Create(s_hostProject, CompilerOptions, ProjectEngineFactoryProvider)
-            .AddEmptyDocument(s_hostDocument);
-
-        var project = new RazorProject(state);
-
-        var document = project.GetRequiredDocument(s_hostDocument.FilePath);
+            .AddEmptyDocument(s_hostDocument)
+            .GetRequiredDocument(s_hostDocument.FilePath);
 
         var loader = new GeneratedDocumentTextLoader(document, "file.cshtml");
 

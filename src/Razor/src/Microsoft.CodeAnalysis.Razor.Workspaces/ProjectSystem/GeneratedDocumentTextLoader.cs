@@ -5,14 +5,13 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
-using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
-internal class GeneratedDocumentTextLoader(IRazorDocument document, string filePath) : TextLoader
+internal class GeneratedDocumentTextLoader(RazorDocument document, string filePath) : TextLoader
 {
-    private readonly IRazorDocument _document = document;
+    private readonly RazorDocument _document = document;
     private readonly string _filePath = filePath;
     private readonly VersionStamp _version = VersionStamp.Create();
 

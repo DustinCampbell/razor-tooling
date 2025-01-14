@@ -40,10 +40,9 @@ internal partial class RazorSolutionManager : IDisposable
     #region protected by lock
 
     /// <summary>
-    /// A map of <see cref="ProjectKey"/> to <see cref="Entry"/>, which wraps a <see cref="ProjectState"/>
-    /// and lazily creates a <see cref="RazorProject"/>.
+    /// A map of <see cref="ProjectKey"/> to <see cref="RazorProject"/>.
     /// </summary>
-    private readonly Dictionary<ProjectKey, Entry> _projectMap = [];
+    private readonly Dictionary<ProjectKey, RazorProject> _projectMap = [];
 
     /// <summary>
     /// The set of open documents.
@@ -126,9 +125,9 @@ internal partial class RazorSolutionManager : IDisposable
         {
             using var builder = new PooledArrayBuilder<RazorProject>(_projectMap.Count);
 
-            foreach (var (_, entry) in _projectMap)
+            foreach (var (_, project) in _projectMap)
             {
-                builder.Add(entry.GetSnapshot());
+                builder.Add(project);
             }
 
             return builder.DrainToImmutable();
@@ -155,9 +154,8 @@ internal partial class RazorSolutionManager : IDisposable
     {
         using (_readerWriterLock.DisposableRead())
         {
-            if (_projectMap.TryGetValue(projectKey, out var entry))
+            if (_projectMap.TryGetValue(projectKey, out project))
             {
-                project = entry.GetSnapshot();
                 return true;
             }
         }
@@ -172,9 +170,9 @@ internal partial class RazorSolutionManager : IDisposable
         {
             using var projects = new PooledArrayBuilder<ProjectKey>(capacity: _projectMap.Count);
 
-            foreach (var (key, entry) in _projectMap)
+            foreach (var (key, project) in _projectMap)
             {
-                if (FilePathComparer.Instance.Equals(entry.State.HostProject.FilePath, filePath))
+                if (FilePathComparer.Instance.Equals(project.FilePath, filePath))
                 {
                     projects.Add(key);
                 }
@@ -371,14 +369,11 @@ internal partial class RazorSolutionManager : IDisposable
             return false;
         }
 
-        var state = ProjectState.Create(hostProject, _compilerOptions, _projectEngineFactoryProvider);
-
-        var newEntry = new Entry(state);
+        newProject = RazorProject.Create(hostProject, _compilerOptions, _projectEngineFactoryProvider);
 
         upgradeableLock.EnterWrite();
-        _projectMap.Add(hostProject.Key, newEntry);
+        _projectMap.Add(hostProject.Key, newProject);
 
-        newProject = newEntry.GetSnapshot();
         return true;
     }
 
@@ -393,13 +388,11 @@ internal partial class RazorSolutionManager : IDisposable
 
         isSolutionClosing = _isSolutionClosing;
 
-        if (!_projectMap.TryGetValue(projectKey, out var entry))
+        if (!_projectMap.TryGetValue(projectKey, out oldProject))
         {
             oldProject = null;
             return false;
         }
-
-        oldProject = entry.GetSnapshot();
 
         upgradeableLock.EnterWrite();
         _projectMap.Remove(projectKey);
@@ -409,7 +402,7 @@ internal partial class RazorSolutionManager : IDisposable
 
     private bool TryUpdateProject(
         ProjectKey projectKey,
-        Func<ProjectState, ProjectState> transformer,
+        Func<RazorProject, RazorProject> transformer,
         [NotNullWhen(true)] out RazorProject? oldProject,
         [NotNullWhen(true)] out RazorProject? newProject,
         out bool isSolutionClosing)
@@ -417,7 +410,7 @@ internal partial class RazorSolutionManager : IDisposable
 
     private bool TryUpdateProject(
         ProjectKey projectKey,
-        Func<ProjectState, ProjectState> transformer,
+        Func<RazorProject, RazorProject> transformer,
         Action? onAfterUpdate,
         [NotNullWhen(true)] out RazorProject? oldProject,
         [NotNullWhen(true)] out RazorProject? newProject,
@@ -432,7 +425,7 @@ internal partial class RazorSolutionManager : IDisposable
 
         isSolutionClosing = _isSolutionClosing;
 
-        if (!_projectMap.TryGetValue(projectKey, out var oldEntry))
+        if (!_projectMap.TryGetValue(projectKey, out var project))
         {
             oldProject = newProject = null;
             return false;
@@ -441,14 +434,14 @@ internal partial class RazorSolutionManager : IDisposable
         // If the solution is closing, we don't need to bother computing new state.
         if (isSolutionClosing)
         {
-            oldProject = newProject = oldEntry.GetSnapshot();
+            oldProject = newProject = project;
             return true;
         }
 
-        var oldState = oldEntry.State;
-        var newState = transformer(oldState);
+        oldProject = project;
+        newProject = transformer(project);
 
-        if (ReferenceEquals(oldState, newState))
+        if (ReferenceEquals(oldProject, newProject))
         {
             oldProject = newProject = null;
             return false;
@@ -456,13 +449,9 @@ internal partial class RazorSolutionManager : IDisposable
 
         upgradeableLock.EnterWrite();
 
-        var newEntry = new Entry(newState);
-        _projectMap[projectKey] = newEntry;
+        _projectMap[projectKey] = newProject;
 
         onAfterUpdate?.Invoke();
-
-        oldProject = oldEntry.GetSnapshot();
-        newProject = newEntry.GetSnapshot();
 
         return true;
     }

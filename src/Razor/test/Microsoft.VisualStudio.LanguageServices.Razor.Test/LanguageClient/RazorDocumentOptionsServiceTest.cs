@@ -95,11 +95,10 @@ public class RazorDocumentOptionsServiceTest(ITestOutputHelper testOutput) : Wor
         var hostDocument = new HostDocument(
             Path.Combine(baseDirectory, "SomeProject", "File1.cshtml"), "File1.cshtml", FileKinds.Legacy);
 
-        var project = new RazorProject(ProjectState
+        var document = RazorProject
             .Create(hostProject, CompilerOptions, ProjectEngineFactoryProvider)
-            .AddDocument(hostDocument, TestMocks.CreateTextLoader(sourceText)));
-
-        var document = project.GetRequiredDocument(hostDocument.FilePath);
+            .AddDocument(hostDocument, TestMocks.CreateTextLoader(sourceText))
+            .GetRequiredDocument(hostDocument.FilePath);
 
         var solution = Workspace.CurrentSolution.AddProject(ProjectInfo.Create(
             ProjectId.CreateNewId(Path.GetFileNameWithoutExtension(hostDocument.FilePath)),

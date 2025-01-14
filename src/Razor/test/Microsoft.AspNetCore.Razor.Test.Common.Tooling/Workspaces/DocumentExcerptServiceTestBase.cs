@@ -41,13 +41,10 @@ public abstract class DocumentExcerptServiceTestBase(ITestOutputHelper testOutpu
     // Adds the text to a RazorProject, generates code, and updates the workspace.
     private (IRazorDocument primary, Document secondary) InitializeDocument(SourceText sourceText)
     {
-        var state = ProjectState
+        var primary = RazorProject
             .Create(_hostProject, LanguageServerFeatureOptions.ToCompilerOptions(), ProjectEngineFactoryProvider)
-            .AddDocument(_hostDocument, sourceText);
-
-        var project = new RazorProject(state);
-
-        var primary = project.GetRequiredDocument(_hostDocument.FilePath);
+            .AddDocument(_hostDocument, sourceText)
+            .GetRequiredDocument(_hostDocument.FilePath);
 
         var solution = Workspace.CurrentSolution.AddProject(ProjectInfo.Create(
             ProjectId.CreateNewId(Path.GetFileNameWithoutExtension(_hostDocument.FilePath)),
