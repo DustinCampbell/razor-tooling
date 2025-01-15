@@ -3,8 +3,6 @@
 
 #nullable disable
 
-using System;
-
 namespace Microsoft.AspNetCore.Razor.Language;
 
 internal sealed class RazorParserFeatureFlags(
@@ -17,13 +15,8 @@ internal sealed class RazorParserFeatureFlags(
     bool allowCSharpInMarkupAttributeArea,
     bool allowNullableForgivenessOperator)
 {
-    public static RazorParserFeatureFlags Create(RazorLanguageVersion version, string fileKind)
+    public static RazorParserFeatureFlags Create(RazorLanguageVersion version, RazorFileKind fileKind)
     {
-        if (fileKind == null)
-        {
-            throw new ArgumentNullException(nameof(fileKind));
-        }
-
         var allowMinimizedBooleanTagHelperAttributes = false;
         var allowHtmlCommentsInTagHelpers = false;
         var allowComponentFileKind = false;
@@ -49,7 +42,7 @@ internal sealed class RazorParserFeatureFlags(
             allowNullableForgivenessOperator = true;
         }
 
-        if (FileKinds.IsComponent(fileKind))
+        if (fileKind.IsComponent())
         {
             allowConditionalDataDashAttributes = true;
             allowCSharpInMarkupAttributeArea = false;

@@ -25,7 +25,7 @@ internal static partial class ObjectWriters
     {
         writer.Write(nameof(value.FilePath), value.FilePath);
         writer.Write(nameof(value.TargetPath), value.TargetPath);
-        writer.Write(nameof(value.FileKind), value.FileKind);
+        writer.Write(nameof(value.FileKind), (int)value.FileKind);
     }
 
     public static void Write(JsonDataWriter writer, ProjectWorkspaceState? value)

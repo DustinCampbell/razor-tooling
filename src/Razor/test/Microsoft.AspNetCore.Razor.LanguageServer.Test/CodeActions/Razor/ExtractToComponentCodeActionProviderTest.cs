@@ -66,7 +66,6 @@ public class ExtractToComponentCodeActionProviderTest(ITestOutputHelper testOutp
         };
 
         var context = CreateRazorCodeActionContext(request, selectionSpan, documentPath, contents);
-        context.CodeDocument.SetFileKind(FileKinds.Legacy);
 
         var provider = new ExtractToComponentCodeActionProvider();
 
@@ -623,8 +622,7 @@ public class ExtractToComponentCodeActionProviderTest(ITestOutputHelper testOutp
         });
         var syntaxTree = RazorSyntaxTree.Parse(sourceDocument, options);
 
-        var codeDocument = TestRazorCodeDocument.Create(sourceDocument, imports: default);
-        codeDocument.SetFileKind(FileKinds.Component);
+        var codeDocument = TestRazorCodeDocument.Create(sourceDocument, imports: default, RazorFileKind.Component);
         codeDocument.SetCodeGenerationOptions(RazorCodeGenerationOptions.Create(o =>
         {
             o.RootNamespace = "ExtractToComponentTest";

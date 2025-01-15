@@ -153,7 +153,7 @@ public class CohostFoldingRangeEndpointTest(FuseTestContext context, ITestOutput
 
             <p>hello!</p>
             """,
-            fileKind: FileKinds.Legacy);
+            fileKind: RazorFileKind.Legacy);
 
     [FuseFact]
     public Task Section()
@@ -166,7 +166,7 @@ public class CohostFoldingRangeEndpointTest(FuseTestContext context, ITestOutput
 
             <p>hello!</p>
             """,
-            fileKind: FileKinds.Legacy);
+            fileKind: RazorFileKind.Legacy);
 
     [FuseFact]
     public Task Section_Invalid()
@@ -179,7 +179,7 @@ public class CohostFoldingRangeEndpointTest(FuseTestContext context, ITestOutput
 
             <p>hello!</p>
             """,
-            fileKind: FileKinds.Legacy);
+            fileKind: RazorFileKind.Legacy);
 
     [FuseFact]
     public Task CSharpCodeInCodeBlocks()
@@ -215,7 +215,7 @@ public class CohostFoldingRangeEndpointTest(FuseTestContext context, ITestOutput
             }|]
             """);
 
-    private async Task VerifyFoldingRangesAsync(string input, string? fileKind = null)
+    private async Task VerifyFoldingRangesAsync(string input, RazorFileKind fileKind = RazorFileKind.Component)
     {
         UpdateClientInitializationOptions(c => c with { ForceRuntimeCodeGeneration = context.ForceRuntimeCodeGeneration });
 

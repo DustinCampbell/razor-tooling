@@ -41,7 +41,7 @@ internal class DefaultRazorProjectFileSystem : RazorProjectFileSystem
             });
     }
 
-    public override RazorProjectItem GetItem(string path, string? fileKind)
+    public override RazorProjectItem GetItem(string path, RazorFileKind? fileKind)
     {
         var absoluteBasePath = NormalizeAndEnsureValidPath("/");
         var absolutePath = NormalizeAndEnsureValidPath(path);

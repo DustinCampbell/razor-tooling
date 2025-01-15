@@ -1057,7 +1057,7 @@ public class CohostCodeActionsEndpointTest(FuseTestContext context, ITestOutputH
                 </div>
                 """,
             codeActionName: LanguageServerConstants.CodeActions.PromoteUsingDirective,
-            fileKind: FileKinds.Legacy,
+            fileKind: RazorFileKind.Legacy,
             additionalExpectedFiles: [
                 (FileUri(@"..\_ViewImports.cshtml"), """
                     @using System
@@ -1159,7 +1159,13 @@ public class CohostCodeActionsEndpointTest(FuseTestContext context, ITestOutputH
                     """)]);
     }
 
-    private async Task VerifyCodeActionAsync(TestCode input, string? expected, string codeActionName, int childActionIndex = 0, string? fileKind = null, (string filePath, string contents)[]? additionalFiles = null, (Uri fileUri, string contents)[]? additionalExpectedFiles = null)
+    private async Task VerifyCodeActionAsync(
+        TestCode input,
+        string? expected,
+        string codeActionName,
+        int childActionIndex = 0,
+        RazorFileKind fileKind = RazorFileKind.Component,
+        (string filePath, string contents)[]? additionalFiles = null, (Uri fileUri, string contents)[]? additionalExpectedFiles = null)
     {
         UpdateClientInitializationOptions(c => c with { ForceRuntimeCodeGeneration = context.ForceRuntimeCodeGeneration });
 

@@ -15,7 +15,7 @@ internal class DefaultRazorParserOptionsFactoryProjectFeature : RazorProjectEngi
         _configureOptions = ProjectEngine.Engine.GetFeatures<IConfigureRazorParserOptionsFeature>();
     }
 
-    public RazorParserOptions Create(string fileKind, Action<RazorParserOptionsBuilder> configure)
+    public RazorParserOptions Create(RazorFileKind fileKind, Action<RazorParserOptionsBuilder> configure)
     {
         var builder = new RazorParserOptionsBuilder(ProjectEngine.Configuration, fileKind);
         configure?.Invoke(builder);

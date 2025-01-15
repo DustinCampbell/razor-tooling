@@ -65,7 +65,7 @@ public abstract class RazorOnAutoInsertProviderTestBase : LanguageServerTestBase
         {
             builder.Features.Add(new ConfigureRazorParserOptions(useRoslynTokenizer: true, CSharpParseOptions.Default));
         });
-        var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, fileKind, importSources: default, tagHelpers);
+        var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, RazorFileKinds.GetRazorFileKind(fileKind), importSources: default, tagHelpers);
         return codeDocument;
     }
 }

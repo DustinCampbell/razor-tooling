@@ -2,6 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Collections.Frozen;
+using System.Collections.Generic;
 using System.IO;
 using Microsoft.AspNetCore.Razor.Language.Components;
 
@@ -9,6 +11,13 @@ namespace Microsoft.AspNetCore.Razor.Language;
 
 public static class RazorFileKinds
 {
+    private static readonly FrozenDictionary<string, RazorFileKind> s_fileKindMap = new[]
+    {
+        KeyValuePair.Create(FileKinds.Component, RazorFileKind.Component),
+        KeyValuePair.Create(FileKinds.ComponentImport, RazorFileKind.ComponentImport),
+        KeyValuePair.Create(FileKinds.Legacy, RazorFileKind.Legacy)
+    }.ToFrozenDictionary(StringComparer.OrdinalIgnoreCase);
+
     public static bool IsComponent(this RazorFileKind fileKind)
         => fileKind is RazorFileKind.Component or RazorFileKind.ComponentImport;
 
@@ -17,6 +26,20 @@ public static class RazorFileKinds
 
     public static bool IsLegacy(this RazorFileKind fileKind)
         => fileKind is RazorFileKind.Legacy;
+
+    public static string ToLegacyFileKind(this RazorFileKind fileKind)
+        => fileKind switch
+        {
+            RazorFileKind.Component => FileKinds.Component,
+            RazorFileKind.ComponentImport => FileKinds.ComponentImport,
+            RazorFileKind.Legacy => FileKinds.Legacy,
+            _ => Assumed.Unreachable<string>()
+        };
+
+    public static RazorFileKind GetRazorFileKind(string fileKind)
+        => s_fileKindMap.TryGetValue(fileKind, out var result)
+            ? result
+            : ThrowHelper.ThrowInvalidOperationException<RazorFileKind>($"Unexpected file kind value: '{fileKind}'");
 
     public static RazorFileKind GetComponentFileKindFromFilePath(string filePath)
     {

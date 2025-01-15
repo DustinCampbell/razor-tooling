@@ -761,7 +761,7 @@ public class TagHelperParseTreeRewriterTest : TagHelperRewritingTestBase
         EvaluateData(
             descriptors,
             document,
-            featureFlags: RazorParserFeatureFlags.Create(RazorLanguageVersion.Version_2_0, FileKinds.Legacy));
+            featureFlags: RazorParserFeatureFlags.Create(RazorLanguageVersion.Version_2_0, RazorFileKind.Legacy));
     }
 
     [Fact]

@@ -25,7 +25,7 @@ internal sealed class RemoteRazorProjectFileSystem : RazorProjectFileSystem
     public override IEnumerable<RazorProjectItem> EnumerateItems(string basePath)
         => throw new NotSupportedException();
 
-    public override RazorProjectItem GetItem(string path, string? fileKind)
+    public override RazorProjectItem GetItem(string path, RazorFileKind? fileKind)
     {
         ArgHelper.ThrowIfNull(path);
 

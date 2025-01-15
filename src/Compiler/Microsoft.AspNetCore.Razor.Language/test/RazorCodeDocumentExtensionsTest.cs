@@ -405,8 +405,7 @@ public class RazorCodeDocumentExtensionsTest
             content: "@namespace My.Custom.NS",
             filePath: "C:\\Hello\\Components\\Test.cshtml",
             relativePath: "\\Components\\Test.cshtml");
-        var codeDocument = TestRazorCodeDocument.Create(sourceDocument, default);
-        codeDocument.SetFileKind(FileKinds.Component);
+        var codeDocument = TestRazorCodeDocument.Create(sourceDocument, imports: default, RazorFileKind.Component);
         codeDocument.SetSyntaxTree(RazorSyntaxTree.Parse(sourceDocument, RazorParserOptions.Create(options =>
         {
             options.Directives.Add(NamespaceDirective.Directive);
@@ -435,8 +434,7 @@ public class RazorCodeDocumentExtensionsTest
         var sourceDocument = TestRazorSourceDocument.Create(
             filePath: "C:\\Hello\\Components\\Test.cshtml",
             relativePath: "\\Components\\Test.cshtml");
-        var codeDocument = TestRazorCodeDocument.Create(sourceDocument, default);
-        codeDocument.SetFileKind(FileKinds.Component);
+        var codeDocument = TestRazorCodeDocument.Create(sourceDocument, imports: default, RazorFileKind.Component);
         codeDocument.SetSyntaxTree(RazorSyntaxTree.Parse(sourceDocument, RazorParserOptions.Create(options =>
         {
             options.Directives.Add(NamespaceDirective.Directive);
@@ -477,8 +475,7 @@ public class RazorCodeDocumentExtensionsTest
         var sourceDocument = TestRazorSourceDocument.Create(
             filePath: "C:\\Hello\\Components\\Test.cshtml",
             relativePath: "\\Components\\Test.cshtml");
-        var codeDocument = TestRazorCodeDocument.Create(sourceDocument, default);
-        codeDocument.SetFileKind(FileKinds.Component);
+        var codeDocument = TestRazorCodeDocument.Create(sourceDocument, imports: default, RazorFileKind.Component);
         codeDocument.SetSyntaxTree(RazorSyntaxTree.Parse(sourceDocument, RazorParserOptions.Create(options =>
         {
             options.Directives.Add(NamespaceDirective.Directive);
@@ -520,8 +517,7 @@ public class RazorCodeDocumentExtensionsTest
             content: "@namespace My.Custom.OverrideNS",
             filePath: "C:\\Hello\\Components\\Test.cshtml",
             relativePath: "\\Components\\Test.cshtml");
-        var codeDocument = TestRazorCodeDocument.Create(sourceDocument, default);
-        codeDocument.SetFileKind(FileKinds.Component);
+        var codeDocument = TestRazorCodeDocument.Create(sourceDocument, imports: default, RazorFileKind.Component);
         codeDocument.SetSyntaxTree(RazorSyntaxTree.Parse(sourceDocument, RazorParserOptions.Create(options =>
         {
             options.Directives.Add(NamespaceDirective.Directive);

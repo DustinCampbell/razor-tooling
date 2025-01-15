@@ -31,7 +31,7 @@ internal class ExtractToCodeBehindCodeActionProvider(ILoggerFactory loggerFactor
             return SpecializedTasks.EmptyImmutableArray<RazorVSInternalCodeAction>();
         }
 
-        if (!FileKinds.IsComponent(context.CodeDocument.GetFileKind()))
+        if (!context.CodeDocument.FileKind.IsComponent())
         {
             return SpecializedTasks.EmptyImmutableArray<RazorVSInternalCodeAction>();
         }

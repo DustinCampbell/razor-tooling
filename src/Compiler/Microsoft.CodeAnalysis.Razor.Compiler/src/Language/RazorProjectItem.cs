@@ -43,13 +43,15 @@ public abstract class RazorProjectItem
     public virtual string CssScope { get; }
 
     /// <summary>
-    /// Gets the document kind that should be used for the generated document. If possible this will be inferred from the file path. May be null.
+    /// Gets the document kind that should be used for the generated document. If possible this will be inferred from the file path.
     /// </summary>
-    public virtual string FileKind
+    public virtual RazorFileKind FileKind
     {
         get
         {
-            return FilePath == null ? null : FileKinds.GetFileKindFromFilePath(FilePath);
+            return FilePath is string filePath
+                ? RazorFileKinds.GetFileKindFromFilePath(filePath)
+                : RazorFileKind.Legacy;
         }
     }
 

@@ -14,7 +14,7 @@ public sealed class RazorParserOptionsBuilder
 {
     private bool _designTime;
 
-    internal RazorParserOptionsBuilder(RazorConfiguration configuration, string fileKind)
+    internal RazorParserOptionsBuilder(RazorConfiguration configuration, RazorFileKind? fileKind)
     {
         if (configuration == null)
         {
@@ -26,7 +26,7 @@ public sealed class RazorParserOptionsBuilder
         FileKind = fileKind;
     }
 
-    internal RazorParserOptionsBuilder(bool designTime, RazorLanguageVersion version, string fileKind)
+    internal RazorParserOptionsBuilder(bool designTime, RazorLanguageVersion version, RazorFileKind? fileKind)
     {
         _designTime = designTime;
         LanguageVersion = version;
@@ -39,7 +39,7 @@ public sealed class RazorParserOptionsBuilder
 
     public ICollection<DirectiveDescriptor> Directives { get; } = new List<DirectiveDescriptor>();
 
-    public string FileKind { get; }
+    public RazorFileKind? FileKind { get; }
 
     public bool ParseLeadingDirectives { get; set; }
 
@@ -53,7 +53,8 @@ public sealed class RazorParserOptionsBuilder
 
     public RazorParserOptions Build()
     {
-        return new RazorParserOptions(Directives.ToArray(), DesignTime, ParseLeadingDirectives, UseRoslynTokenizer, LanguageVersion, FileKind ?? FileKinds.Legacy, EnableSpanEditHandlers, CSharpParseOptions);
+        return new RazorParserOptions(
+            Directives.ToArray(), DesignTime, ParseLeadingDirectives, UseRoslynTokenizer, LanguageVersion, FileKind ?? RazorFileKind.Legacy, EnableSpanEditHandlers, CSharpParseOptions);
     }
 
     public void SetDesignTime(bool designTime)

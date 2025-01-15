@@ -5,7 +5,6 @@ namespace Microsoft.AspNetCore.Razor.Language;
 
 public enum RazorFileKind
 {
-    None = 0,
     Component,
     ComponentImport,
     Legacy

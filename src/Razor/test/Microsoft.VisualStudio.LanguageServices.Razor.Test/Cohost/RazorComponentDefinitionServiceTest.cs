@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Test.Common;
 using Microsoft.CodeAnalysis.Razor.DocumentMapping;
 using Microsoft.CodeAnalysis.Razor.GoToDefinition;
-using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Remote.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
@@ -63,7 +62,7 @@ public class RazorComponentDefinitionServiceTest(ITestOutputHelper testOutputHel
 
     private async Task VerifyDefinitionAsync(TestCode input, TestCode expectedDocument, params (string fileName, string contents)[]? additionalFiles)
     {
-        var document = await CreateProjectAndRazorDocumentAsync(input.Text, FileKinds.Component, additionalFiles);
+        var document = await CreateProjectAndRazorDocumentAsync(input.Text, RazorFileKind.Component, additionalFiles);
 
         var service = OOPExportProvider.GetExportedValue<IRazorComponentDefinitionService>();
         var snapshotManager = OOPExportProvider.GetExportedValue<RemoteSnapshotManager>();

@@ -23,4 +23,9 @@ public static class TestRazorCodeDocument
     {
         return RazorCodeDocument.Create(source, imports);
     }
+
+    public static RazorCodeDocument Create(RazorSourceDocument source, ImmutableArray<RazorSourceDocument> imports, RazorFileKind fileKind)
+    {
+        return RazorCodeDocument.Create(source, imports, fileKind);
+    }
 }

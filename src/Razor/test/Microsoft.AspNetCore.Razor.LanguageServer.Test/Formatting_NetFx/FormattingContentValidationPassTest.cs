@@ -73,7 +73,11 @@ public class FormattingContentValidationPassTest(ITestOutputHelper testOutput) :
         return pass;
     }
 
-    private static FormattingContext CreateFormattingContext(TestCode input, int tabSize = 4, bool insertSpaces = true, string? fileKind = null)
+    private static FormattingContext CreateFormattingContext(
+        TestCode input,
+        int tabSize = 4,
+        bool insertSpaces = true,
+        RazorFileKind fileKind = RazorFileKind.Component)
     {
         var source = SourceText.From(input.Text);
         var path = "file:///path/to/document.razor";
@@ -92,9 +96,12 @@ public class FormattingContentValidationPassTest(ITestOutputHelper testOutput) :
         return context;
     }
 
-    private static (RazorCodeDocument, IDocumentSnapshot) CreateCodeDocumentAndSnapshot(SourceText text, string path, ImmutableArray<TagHelperDescriptor> tagHelpers = default, string? fileKind = null)
+    private static (RazorCodeDocument, IDocumentSnapshot) CreateCodeDocumentAndSnapshot(
+        SourceText text,
+        string path,
+        ImmutableArray<TagHelperDescriptor> tagHelpers = default,
+        RazorFileKind fileKind = RazorFileKind.Component)
     {
-        fileKind ??= FileKinds.Component;
         tagHelpers = tagHelpers.NullToEmpty();
         var sourceDocument = RazorSourceDocument.Create(text, RazorSourceDocumentProperties.Create(path, path));
         var projectEngine = RazorProjectEngine.Create(builder =>

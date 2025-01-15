@@ -703,7 +703,7 @@ public class RazorDocumentMappingServiceTest(ITestOutputHelper testOutput) : Too
         {
             builder.Features.Add(new ConfigureRazorParserOptions(useRoslynTokenizer: true, CSharpParseOptions.Default));
         });
-        var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, "mvc", importSources: default, tagHelpers: []);
+        var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, RazorFileKind.Legacy, importSources: default, tagHelpers: []);
 
         var csharpDocument = new RazorCSharpDocument(
             codeDocument,

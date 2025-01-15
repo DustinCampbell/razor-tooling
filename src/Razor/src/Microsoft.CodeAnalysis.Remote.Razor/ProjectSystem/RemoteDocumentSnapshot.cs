@@ -41,7 +41,7 @@ internal sealed class RemoteDocumentSnapshot : IDocumentSnapshot
         _lazyCodeDocument = AsyncLazy.Create(ComputeGeneratedOutputAsync);
     }
 
-    public string FileKind => FileKinds.GetFileKindFromFilePath(FilePath);
+    public RazorFileKind FileKind => RazorFileKinds.GetFileKindFromFilePath(FilePath);
     public string FilePath => TextDocument.FilePath.AssumeNotNull();
     public string TargetPath => TextDocument.FilePath.AssumeNotNull();
 

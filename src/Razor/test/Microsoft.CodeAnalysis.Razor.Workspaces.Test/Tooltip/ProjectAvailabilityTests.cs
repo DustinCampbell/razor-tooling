@@ -48,7 +48,7 @@ public class ProjectAvailabilityTests(ITestOutputHelper testOutput) : ToolingTes
         var hostDocument = new HostDocument(
             "C:/path/to/file.razor",
             "file.razor",
-            FileKinds.Component);
+            RazorFileKind.Component);
 
         var projectManager = CreateProjectSnapshotManager();
 
@@ -93,7 +93,7 @@ public class ProjectAvailabilityTests(ITestOutputHelper testOutput) : ToolingTes
         var hostDocument = new HostDocument(
             "C:/path/to/file.razor",
             "file.razor",
-            FileKinds.Component);
+            RazorFileKind.Component);
 
         var projectManager = CreateProjectSnapshotManager();
 
@@ -142,7 +142,7 @@ public class ProjectAvailabilityTests(ITestOutputHelper testOutput) : ToolingTes
         var hostDocument = new HostDocument(
             "C:/path/to/file.razor",
             "file.razor",
-            FileKinds.Component);
+            RazorFileKind.Component);
 
         var projectManager = CreateProjectSnapshotManager();
 
@@ -187,7 +187,7 @@ public class ProjectAvailabilityTests(ITestOutputHelper testOutput) : ToolingTes
         var hostDocument = new HostDocument(
             "C:/path/to/file.razor",
             "file.razor",
-            FileKinds.Component);
+            RazorFileKind.Component);
 
         var projectManager = CreateProjectSnapshotManager();
 

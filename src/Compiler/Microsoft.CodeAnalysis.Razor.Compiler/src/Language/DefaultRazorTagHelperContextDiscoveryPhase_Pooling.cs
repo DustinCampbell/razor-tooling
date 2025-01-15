@@ -51,7 +51,7 @@ internal partial class DefaultRazorTagHelperContextDiscoveryPhase
         IReadOnlyList<TagHelperDescriptor> tagHelpers,
         out DirectiveVisitor visitor)
     {
-        var useComponentDirectiveVisitor = FileKinds.IsComponent(codeDocument.GetFileKind()) &&
+        var useComponentDirectiveVisitor = codeDocument.FileKind.IsComponent() &&
             (codeDocument.GetParserOptions() is null or { FeatureFlags.AllowComponentFileKind: true });
 
         if (useComponentDirectiveVisitor)

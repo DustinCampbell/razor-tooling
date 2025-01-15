@@ -226,7 +226,7 @@ public static class RazorProjectEngineBuilderExtensions
     /// <param name="directive">The <see cref="DirectiveDescriptor"/> to add.</param>
     /// <param name="fileKinds">The file kinds, for which to register the directive. See <see cref="FileKinds"/>.</param>
     /// <returns>The <see cref="RazorProjectEngineBuilder"/>.</returns>
-    public static RazorProjectEngineBuilder AddDirective(this RazorProjectEngineBuilder builder, DirectiveDescriptor directive, params string[] fileKinds)
+    public static RazorProjectEngineBuilder AddDirective(this RazorProjectEngineBuilder builder, DirectiveDescriptor directive, params RazorFileKind[] fileKinds)
     {
         if (builder == null)
         {

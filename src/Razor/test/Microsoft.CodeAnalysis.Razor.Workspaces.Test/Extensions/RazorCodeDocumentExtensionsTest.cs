@@ -335,6 +335,6 @@ public class RazorCodeDocumentExtensionsTest(ITestOutputHelper testOutput) : Too
             builder.Features.Add(new ConfigureRazorParserOptions(useRoslynTokenizer: true, CSharpParseOptions.Default));
         });
 
-        return projectEngine.ProcessDesignTime(sourceDocument, "mvc", importSources: default, tagHelpers);
+        return projectEngine.ProcessDesignTime(sourceDocument, RazorFileKind.Legacy, importSources: default, tagHelpers);
     }
 }

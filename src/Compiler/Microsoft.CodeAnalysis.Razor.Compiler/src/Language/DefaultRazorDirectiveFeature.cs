@@ -5,7 +5,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
@@ -17,17 +16,17 @@ internal class DefaultRazorDirectiveFeature : RazorEngineFeatureBase, IRazorDire
         get
         {
             ICollection<DirectiveDescriptor> result;
-            if (!DirectivesByFileKind.TryGetValue(FileKinds.Legacy, out result))
+            if (!DirectivesByFileKind.TryGetValue(RazorFileKind.Legacy, out result))
             {
                 result = new List<DirectiveDescriptor>();
-                DirectivesByFileKind.Add(FileKinds.Legacy, result);
+                DirectivesByFileKind.Add(RazorFileKind.Legacy, result);
             }
 
             return result;
         }
     }
 
-    public IDictionary<string, ICollection<DirectiveDescriptor>> DirectivesByFileKind { get; } = new Dictionary<string, ICollection<DirectiveDescriptor>>(StringComparer.OrdinalIgnoreCase);
+    public IDictionary<RazorFileKind, ICollection<DirectiveDescriptor>> DirectivesByFileKind { get; } = new Dictionary<RazorFileKind, ICollection<DirectiveDescriptor>>();
 
     public int Order => 100;
 
@@ -40,7 +39,7 @@ internal class DefaultRazorDirectiveFeature : RazorEngineFeatureBase, IRazorDire
 
         options.Directives.Clear();
 
-        var fileKind = options.FileKind ?? FileKinds.Legacy;
+        var fileKind = options.FileKind ?? RazorFileKind.Legacy;
         if (DirectivesByFileKind.TryGetValue(fileKind, out var directives))
         {
             foreach (var directive in directives)

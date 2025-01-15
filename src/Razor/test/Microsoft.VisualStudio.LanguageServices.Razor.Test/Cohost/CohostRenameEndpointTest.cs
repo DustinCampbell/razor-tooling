@@ -165,9 +165,15 @@ public class CohostRenameEndpointTest(FuseTestContext context, ITestOutputHelper
            ],
            newName: "DifferentName",
            expected: "",
-           fileKind: FileKinds.Legacy);
+           fileKind: RazorFileKind.Legacy);
 
-    private async Task VerifyRenamesAsync(string input, string newName, string expected, string? fileKind = null, (string fileName, string contents)[]? additionalFiles = null, (string oldName, string newName)[]? renames = null)
+    private async Task VerifyRenamesAsync(
+        string input,
+        string newName,
+        string expected,
+        RazorFileKind fileKind = RazorFileKind.Component,
+        (string fileName, string contents)[]? additionalFiles = null,
+        (string oldName, string newName)[]? renames = null)
     {
         UpdateClientInitializationOptions(c => c with { ForceRuntimeCodeGeneration = context.ForceRuntimeCodeGeneration });
 

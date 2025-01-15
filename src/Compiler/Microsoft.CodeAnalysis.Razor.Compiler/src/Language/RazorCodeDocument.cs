@@ -17,11 +17,10 @@ public sealed class RazorCodeDocument
         Source = source;
         Imports = imports.NullToEmpty();
 
-        FileKind = fileKind is RazorFileKind value
-            ? value
-            : source.FilePath is string filePath
+        FileKind = fileKind ??
+            (source.FilePath is string filePath
                 ? RazorFileKinds.GetFileKindFromFilePath(filePath)
-                : RazorFileKind.None;
+                : RazorFileKind.Legacy);
 
         Items = new ItemCollection();
     }

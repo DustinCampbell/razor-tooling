@@ -20,7 +20,7 @@ internal class MvcImportProjectFeature : RazorProjectEngineFeatureBase, IImportP
         ArgHelper.ThrowIfNull(projectItem);
 
         // Don't add MVC imports for a component - this shouldn't happen for v1, but just in case.
-        if (FileKinds.IsComponent(projectItem.FileKind))
+        if (projectItem.FileKind.IsComponent())
         {
             return [];
         }

@@ -729,14 +729,14 @@ public class DefaultWindowsRazorProjectHostTest : VisualStudioWorkspaceTestBase
                 var document = project.GetRequiredDocument(d);
                 Assert.Equal(TestProjectData.SomeProjectFile1.FilePath, document.FilePath);
                 Assert.Equal(TestProjectData.SomeProjectFile1.TargetPath, document.TargetPath);
-                Assert.Equal(FileKinds.Legacy, document.FileKind);
+                Assert.Equal(RazorFileKind.Legacy, document.FileKind);
             },
             d =>
             {
                 var document = project.GetRequiredDocument(d);
                 Assert.Equal(TestProjectData.SomeProjectComponentFile1.FilePath, document.FilePath);
                 Assert.Equal(TestProjectData.SomeProjectComponentFile1.TargetPath, document.TargetPath);
-                Assert.Equal(FileKinds.Component, document.FileKind);
+                Assert.Equal(RazorFileKind.Component, document.FileKind);
             });
 
         await Task.Run(async () => await host.DisposeAsync());
@@ -930,7 +930,7 @@ public class DefaultWindowsRazorProjectHostTest : VisualStudioWorkspaceTestBase
                 var document = project.GetRequiredDocument(d);
                 Assert.Equal(TestProjectData.SomeProjectComponentImportFile1.FilePath, document.FilePath);
                 Assert.Equal(TestProjectData.SomeProjectComponentImportFile1.TargetPath, document.TargetPath);
-                Assert.Equal(FileKinds.ComponentImport, document.FileKind);
+                Assert.Equal(RazorFileKind.ComponentImport, document.FileKind);
             },
             d =>
             {
@@ -943,7 +943,7 @@ public class DefaultWindowsRazorProjectHostTest : VisualStudioWorkspaceTestBase
                 var document = project.GetRequiredDocument(d);
                 Assert.Equal(TestProjectData.SomeProjectComponentFile1.FilePath, document.FilePath);
                 Assert.Equal(TestProjectData.SomeProjectComponentFile1.TargetPath, document.TargetPath);
-                Assert.Equal(FileKinds.Component, document.FileKind);
+                Assert.Equal(RazorFileKind.Component, document.FileKind);
             });
 
         // Act - 2
@@ -991,35 +991,35 @@ public class DefaultWindowsRazorProjectHostTest : VisualStudioWorkspaceTestBase
                 var document = project.GetRequiredDocument(d);
                 Assert.Equal(TestProjectData.AnotherProjectNestedFile3.FilePath, document.FilePath);
                 Assert.Equal(TestProjectData.AnotherProjectNestedFile3.TargetPath, document.TargetPath);
-                Assert.Equal(FileKinds.Legacy, document.FileKind);
+                Assert.Equal(RazorFileKind.Legacy, document.FileKind);
             },
             d =>
             {
                 var document = project.GetRequiredDocument(d);
                 Assert.Equal(TestProjectData.AnotherProjectNestedComponentFile3.FilePath, document.FilePath);
                 Assert.Equal(TestProjectData.AnotherProjectNestedComponentFile3.TargetPath, document.TargetPath);
-                Assert.Equal(FileKinds.Component, document.FileKind);
+                Assert.Equal(RazorFileKind.Component, document.FileKind);
             },
             d =>
             {
                 var document = project.GetRequiredDocument(d);
                 Assert.Equal(TestProjectData.SomeProjectComponentImportFile1.FilePath, document.FilePath);
                 Assert.Equal(TestProjectData.SomeProjectComponentImportFile1.TargetPath, document.TargetPath);
-                Assert.Equal(FileKinds.ComponentImport, document.FileKind);
+                Assert.Equal(RazorFileKind.ComponentImport, document.FileKind);
             },
             d =>
             {
                 var document = project.GetRequiredDocument(d);
                 Assert.Equal(TestProjectData.SomeProjectFile1.FilePath, document.FilePath);
                 Assert.Equal(TestProjectData.SomeProjectFile1.TargetPath, document.TargetPath);
-                Assert.Equal(FileKinds.Legacy, document.FileKind);
+                Assert.Equal(RazorFileKind.Legacy, document.FileKind);
             },
             d =>
             {
                 var document = project.GetRequiredDocument(d);
                 Assert.Equal(TestProjectData.SomeProjectComponentFile1.FilePath, document.FilePath);
                 Assert.Equal(TestProjectData.SomeProjectComponentFile1.TargetPath, document.TargetPath);
-                Assert.Equal(FileKinds.Component, document.FileKind);
+                Assert.Equal(RazorFileKind.Component, document.FileKind);
             });
 
         await Task.Run(async () => await host.DisposeAsync());
@@ -1235,14 +1235,14 @@ public class DefaultWindowsRazorProjectHostTest : VisualStudioWorkspaceTestBase
                var document = project.GetRequiredDocument(d);
                Assert.Equal(TestProjectData.SomeProjectFile1.FilePath, document.FilePath);
                Assert.Equal(TestProjectData.SomeProjectFile1.TargetPath, document.TargetPath);
-               Assert.Equal(FileKinds.Legacy, document.FileKind);
+               Assert.Equal(RazorFileKind.Legacy, document.FileKind);
            },
            d =>
            {
                var document = project.GetRequiredDocument(d);
                Assert.Equal(TestProjectData.SomeProjectComponentFile1.FilePath, document.FilePath);
                Assert.Equal(TestProjectData.SomeProjectComponentFile1.TargetPath, document.TargetPath);
-               Assert.Equal(FileKinds.Component, document.FileKind);
+               Assert.Equal(RazorFileKind.Component, document.FileKind);
            });
 
         // Act - 2
@@ -1261,14 +1261,14 @@ public class DefaultWindowsRazorProjectHostTest : VisualStudioWorkspaceTestBase
                var document = project.GetRequiredDocument(d);
                Assert.Equal(TestProjectData.SomeProjectFile1.FilePath, document.FilePath);
                Assert.Equal(TestProjectData.SomeProjectFile1.TargetPath, document.TargetPath);
-               Assert.Equal(FileKinds.Legacy, document.FileKind);
+               Assert.Equal(RazorFileKind.Legacy, document.FileKind);
            },
            d =>
            {
                var document = project.GetRequiredDocument(d);
                Assert.Equal(TestProjectData.SomeProjectComponentFile1.FilePath, document.FilePath);
                Assert.Equal(TestProjectData.SomeProjectComponentFile1.TargetPath, document.TargetPath);
-               Assert.Equal(FileKinds.Component, document.FileKind);
+               Assert.Equal(RazorFileKind.Component, document.FileKind);
            });
 
         await Task.Run(async () => await host.DisposeAsync());
@@ -1338,7 +1338,7 @@ public class DefaultWindowsRazorProjectHostTest : VisualStudioWorkspaceTestBase
                 var document = project.GetRequiredDocument(d);
                 Assert.Equal(TestProjectData.SomeProjectComponentImportFile1.FilePath, document.FilePath);
                 Assert.Equal(TestProjectData.SomeProjectComponentImportFile1.TargetPath, document.TargetPath);
-                Assert.Equal(FileKinds.ComponentImport, document.FileKind);
+                Assert.Equal(RazorFileKind.ComponentImport, document.FileKind);
             },
             d =>
             {
@@ -1351,7 +1351,7 @@ public class DefaultWindowsRazorProjectHostTest : VisualStudioWorkspaceTestBase
                 var document = project.GetRequiredDocument(d);
                 Assert.Equal(TestProjectData.SomeProjectComponentFile1.FilePath, document.FilePath);
                 Assert.Equal(TestProjectData.SomeProjectComponentFile1.TargetPath, document.TargetPath);
-                Assert.Equal(FileKinds.Component, document.FileKind);
+                Assert.Equal(RazorFileKind.Component, document.FileKind);
             });
 
         // Act - 2

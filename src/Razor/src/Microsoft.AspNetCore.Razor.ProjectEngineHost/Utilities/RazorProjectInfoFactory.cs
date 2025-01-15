@@ -190,22 +190,22 @@ internal static class RazorProjectInfoFactory
         return normalizedTargetFilePath;
     }
 
-    private static bool TryGetFileKind(string filePath, [NotNullWhen(true)] out string? fileKind)
+    private static bool TryGetFileKind(string filePath, [NotNullWhen(true)] out RazorFileKind fileKind)
     {
         var extension = Path.GetExtension(filePath);
 
         if (extension.Equals(".cshtml", s_stringComparison))
         {
-            fileKind = FileKinds.Legacy;
+            fileKind = RazorFileKind.Legacy;
             return true;
         }
         else if (extension.Equals(".razor", s_stringComparison))
         {
-            fileKind = FileKinds.GetComponentFileKindFromFilePath(filePath);
+            fileKind = RazorFileKinds.GetComponentFileKindFromFilePath(filePath);
             return true;
         }
 
-        fileKind = null;
+        fileKind = RazorFileKind.Legacy;
         return false;
     }
 

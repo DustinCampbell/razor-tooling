@@ -27,7 +27,7 @@ internal sealed class ComponentImportProjectFeature : RazorProjectEngineFeatureB
         ArgHelper.ThrowIfNull(projectItem);
 
         // Don't add Component imports for a non-component.
-        if (!FileKinds.IsComponent(projectItem.FileKind))
+        if (!projectItem.FileKind.IsComponent())
         {
             return [];
         }
@@ -69,7 +69,7 @@ internal sealed class ComponentImportProjectFeature : RazorProjectEngineFeatureB
 
         public override bool Exists => true;
 
-        public override string FileKind => FileKinds.ComponentImport;
+        public override RazorFileKind FileKind => RazorFileKind.ComponentImport;
 
         public override Stream Read() => s_fileContent.CreateStream();
     }

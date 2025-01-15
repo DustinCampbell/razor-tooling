@@ -97,7 +97,7 @@ public abstract class LanguageServerTestBase : ToolingTestBase
                 @using Microsoft.AspNetCore.Components.Web
                 """,
             RazorSourceDocumentProperties.Create(importDocumentName, importDocumentName));
-        var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, fileKind, [defaultImportDocument], tagHelpers);
+        var codeDocument = projectEngine.ProcessDesignTime(sourceDocument, RazorFileKinds.GetRazorFileKind(fileKind), [defaultImportDocument], tagHelpers);
         return codeDocument;
     }
 

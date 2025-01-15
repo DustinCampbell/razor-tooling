@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor;
+using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Test.Common;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.ExternalAccess.Razor;
@@ -38,7 +39,7 @@ public abstract class FormattingTestBase : CohostEndpointTestBase
     private protected async Task RunFormattingTestAsync(
         TestCode input,
         string expected,
-        string? fileKind = null,
+        RazorFileKind fileKind = RazorFileKind.Component,
         bool inGlobalNamespace = false,
         bool codeBlockBraceOnNextLine = false,
         bool insertSpaces = true,
@@ -97,7 +98,7 @@ public abstract class FormattingTestBase : CohostEndpointTestBase
         bool inGlobalNamespace = false,
         bool insertSpaces = true,
         int tabSize = 4,
-        string? fileKind = null,
+        RazorFileKind fileKind = RazorFileKind.Component,
         int? expectedChangedLines = null)
     {
         (input, expected) = ProcessFormattingContext(input, expected);

@@ -104,7 +104,7 @@ public class CohostGoToDefinitionEndpointTest(FuseTestContext context, ITestOutp
             }
             """;
 
-        await VerifyGoToDefinitionAsync(input, FileKinds.Component);
+        await VerifyGoToDefinitionAsync(input, RazorFileKind.Component);
     }
 
     [FuseFact]
@@ -123,7 +123,7 @@ public class CohostGoToDefinitionEndpointTest(FuseTestContext context, ITestOutp
             }
             """;
 
-        await VerifyGoToDefinitionAsync(input, FileKinds.Component);
+        await VerifyGoToDefinitionAsync(input, RazorFileKind.Component);
     }
 
     [FuseFact]
@@ -145,7 +145,7 @@ public class CohostGoToDefinitionEndpointTest(FuseTestContext context, ITestOutp
             }
             """;
 
-        var result = await GetGoToDefinitionResultAsync(input, FileKinds.Component,
+        var result = await GetGoToDefinitionResultAsync(input, RazorFileKind.Component,
             (FileName("SurveyPrompt.razor"), surveyPrompt.Text));
 
         Assert.NotNull(result.Value.Second);
@@ -191,7 +191,7 @@ public class CohostGoToDefinitionEndpointTest(FuseTestContext context, ITestOutp
             }
             """;
 
-        var result = await GetGoToDefinitionResultAsync(input, FileKinds.Component,
+        var result = await GetGoToDefinitionResultAsync(input, RazorFileKind.Component,
             (FileName("SurveyPrompt.razor"), surveyPrompt.Text));
 
         Assert.NotNull(result.Value.Second);
@@ -236,7 +236,10 @@ public class CohostGoToDefinitionEndpointTest(FuseTestContext context, ITestOutp
     private static string FileName(string projectRelativeFileName)
         => Path.Combine(TestProjectData.SomeProjectPath, projectRelativeFileName);
 
-    private async Task VerifyGoToDefinitionAsync(TestCode input, string? fileKind = null, SumType<Location, Location[], DocumentLink[]>? htmlResponse = null)
+    private async Task VerifyGoToDefinitionAsync(
+        TestCode input,
+        RazorFileKind fileKind = RazorFileKind.Component,
+        SumType<Location, Location[], DocumentLink[]>? htmlResponse = null)
     {
         UpdateClientInitializationOptions(c => c with { ForceRuntimeCodeGeneration = context.ForceRuntimeCodeGeneration });
 
@@ -257,7 +260,9 @@ public class CohostGoToDefinitionEndpointTest(FuseTestContext context, ITestOutp
     }
 
     private async Task<SumType<RoslynLocation, RoslynLocation[], RoslynDocumentLink[]>?> GetGoToDefinitionResultAsync(
-        TestCode input, string? fileKind = null, params (string fileName, string contents)[]? additionalFiles)
+        TestCode input,
+        RazorFileKind fileKind = RazorFileKind.Component,
+        params (string fileName, string contents)[]? additionalFiles)
     {
         UpdateClientInitializationOptions(c => c with { ForceRuntimeCodeGeneration = context.ForceRuntimeCodeGeneration });
 
