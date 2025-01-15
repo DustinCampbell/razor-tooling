@@ -8,13 +8,20 @@ namespace Microsoft.AspNetCore.Razor.Language;
 public sealed class RazorCodeDocument
 {
     public RazorSourceDocument Source { get; }
+    public RazorFileKind FileKind { get; }
     public ImmutableArray<RazorSourceDocument> Imports { get; }
     public ItemCollection Items { get; }
 
-    private RazorCodeDocument(RazorSourceDocument source, ImmutableArray<RazorSourceDocument> imports)
+    private RazorCodeDocument(RazorSourceDocument source, ImmutableArray<RazorSourceDocument> imports, RazorFileKind? fileKind = null)
     {
         Source = source;
         Imports = imports.NullToEmpty();
+
+        FileKind = fileKind is RazorFileKind value
+            ? value
+            : source.FilePath is string filePath
+                ? RazorFileKinds.GetFileKindFromFilePath(filePath)
+                : RazorFileKind.None;
 
         Items = new ItemCollection();
     }
@@ -23,16 +30,28 @@ public sealed class RazorCodeDocument
     {
         ArgHelper.ThrowIfNull(source);
 
-        return Create(source, imports: default);
+        return Create(source, imports: []);
     }
 
-    public static RazorCodeDocument Create(
-        RazorSourceDocument source,
-        ImmutableArray<RazorSourceDocument> imports)
+    public static RazorCodeDocument Create(RazorSourceDocument source, RazorFileKind fileKind)
+    {
+        ArgHelper.ThrowIfNull(source);
+
+        return Create(source, imports: [], fileKind);
+    }
+
+    public static RazorCodeDocument Create(RazorSourceDocument source, ImmutableArray<RazorSourceDocument> imports)
     {
         ArgHelper.ThrowIfNull(source);
 
         return new RazorCodeDocument(source, imports);
+    }
+
+    public static RazorCodeDocument Create(RazorSourceDocument source, ImmutableArray<RazorSourceDocument> imports, RazorFileKind fileKind)
+    {
+        ArgHelper.ThrowIfNull(source);
+
+        return new RazorCodeDocument(source, imports, fileKind);
     }
 
     public static RazorCodeDocument Create(
@@ -44,6 +63,21 @@ public sealed class RazorCodeDocument
         ArgHelper.ThrowIfNull(source);
 
         var codeDocument = new RazorCodeDocument(source, imports);
+        codeDocument.SetParserOptions(parserOptions);
+        codeDocument.SetCodeGenerationOptions(codeGenerationOptions);
+        return codeDocument;
+    }
+
+    public static RazorCodeDocument Create(
+        RazorSourceDocument source,
+        ImmutableArray<RazorSourceDocument> imports,
+        RazorParserOptions parserOptions,
+        RazorCodeGenerationOptions codeGenerationOptions,
+        RazorFileKind fileKind)
+    {
+        ArgHelper.ThrowIfNull(source);
+
+        var codeDocument = new RazorCodeDocument(source, imports, fileKind);
         codeDocument.SetParserOptions(parserOptions);
         codeDocument.SetCodeGenerationOptions(codeGenerationOptions);
         return codeDocument;
