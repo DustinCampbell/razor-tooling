@@ -3,8 +3,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using Microsoft.AspNetCore.Razor.PooledObjects;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
@@ -87,6 +89,11 @@ internal class DefaultRazorProjectFileSystem : RazorProjectFileSystem
 
         ArgHelper.ThrowIfNullOrEmpty(path);
 
+        using var _ = StopwatchPool.GetPooledObject(out var watch);
+        watch.Restart();
+
+        Debug.WriteLine($"{nameof(NormalizeAndEnsureValidPath)}: {path}");
+
         var absolutePath = path.Replace('\\', '/');
 
         // Check if the given path is an absolute path. It is absolute if,
@@ -108,6 +115,9 @@ internal class DefaultRazorProjectFileSystem : RazorProjectFileSystem
         }
 
         absolutePath = absolutePath.Replace('\\', '/');
+
+        watch.Stop();
+        Debug.WriteLine($"{nameof(NormalizeAndEnsureValidPath)} took {watch.ElapsedMilliseconds} ms.");
 
         return absolutePath;
     }

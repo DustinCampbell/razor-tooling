@@ -1,6 +1,7 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
@@ -111,13 +112,22 @@ internal sealed partial class DocumentState
     }
 
     public DocumentState WithConfigurationChange()
-        => new(this, _textAndVersionSource);
+    {
+        Debug.WriteLine($"Configuration changed for {HostDocument.TargetPath}");
+        return new(this, _textAndVersionSource);
+    }
 
     public DocumentState WithImportsChange()
-        => new(this, _textAndVersionSource);
+    {
+        Debug.WriteLine($"Imports changed for {HostDocument.TargetPath}");
+        return new(this, _textAndVersionSource);
+    }
 
     public DocumentState WithProjectWorkspaceStateChange()
-        => new(this, _textAndVersionSource);
+    {
+        Debug.WriteLine($"ProjectWorkspaceState changed for {HostDocument.TargetPath}");
+        return new(this, _textAndVersionSource);
+    }
 
     public DocumentState WithText(SourceText text, VersionStamp textVersion)
         => new(this, CreateTextAndVersionSource(text, textVersion));
