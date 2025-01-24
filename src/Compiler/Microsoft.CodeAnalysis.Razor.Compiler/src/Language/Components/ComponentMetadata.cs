@@ -49,6 +49,8 @@ internal static class ComponentMetadata
 
     public static class Bind
     {
+        public const TagHelperKind Kind = Language.TagHelperKind.Bind;
+
         public const RuntimeKind Runtime = RuntimeKind.Components_None;
 
         public const string TagHelperKind = "Components.Bind";
@@ -90,6 +92,8 @@ internal static class ComponentMetadata
 
     public static class ChildContent
     {
+        public const TagHelperKind Kind = Language.TagHelperKind.ChildContent;
+
         public const RuntimeKind Runtime = RuntimeKind.Components_None;
 
         public const string TagHelperKind = "Components.ChildContent";
@@ -120,6 +124,8 @@ internal static class ComponentMetadata
         public const string EventCallbackKey = "Components.EventCallback";
 
         public const string WeaklyTypedKey = "Components.IsWeaklyTyped";
+
+        public const TagHelperKind Kind = Language.TagHelperKind.Component;
 
         public const RuntimeKind Runtime = RuntimeKind.Components_IComponent;
 
@@ -156,6 +162,8 @@ internal static class ComponentMetadata
     {
         public const string EventArgsType = "Components.EventHandler.EventArgs";
 
+        public const TagHelperKind Kind = Language.TagHelperKind.EventHandler;
+
         public const RuntimeKind Runtime = RuntimeKind.Components_None;
 
         public const string TagHelperKind = "Components.EventHandler";
@@ -163,6 +171,8 @@ internal static class ComponentMetadata
 
     public static class FormName
     {
+        public const TagHelperKind Kind = Language.TagHelperKind.FormName;
+
         public const string TagHelperKind = "Components.FormName";
 
         public const RuntimeKind Runtime = RuntimeKind.Components_None;
@@ -170,6 +180,8 @@ internal static class ComponentMetadata
 
     public static class Key
     {
+        public const TagHelperKind Kind = Language.TagHelperKind.Key;
+
         public const string TagHelperKind = "Components.Key";
 
         public const RuntimeKind Runtime = RuntimeKind.Components_None;
@@ -177,6 +189,8 @@ internal static class ComponentMetadata
 
     public static class Splat
     {
+        public const TagHelperKind Kind = Language.TagHelperKind.Splat;
+
         public const string TagHelperKind = "Components.Splat";
 
         public const RuntimeKind Runtime = RuntimeKind.Components_None;
@@ -184,6 +198,8 @@ internal static class ComponentMetadata
 
     public static class Ref
     {
+        public const TagHelperKind Kind = Language.TagHelperKind.Ref;
+
         public const string TagHelperKind = "Components.Ref";
 
         public const RuntimeKind Runtime = RuntimeKind.Components_None;
@@ -191,6 +207,8 @@ internal static class ComponentMetadata
 
     public static class RenderMode
     {
+        public const TagHelperKind Kind = Language.TagHelperKind.RenderMode;
+
         public const string TagHelperKind = "Components.RenderMode";
 
         public const RuntimeKind Runtime = RuntimeKind.Components_None;

@@ -94,7 +94,7 @@ internal sealed class ComponentTagHelperDescriptorProvider : TagHelperDescriptor
             var assemblyName = type.ContainingAssembly.Identity.Name;
 
             using var _ = TagHelperDescriptorBuilder.GetPooledInstance(
-                ComponentMetadata.Component.TagHelperKind, typeName, assemblyName, out var builder);
+                ComponentMetadata.Component.Kind, typeName, assemblyName, out var builder);
 
             // This opts out this 'component' tag helper for any processing that's specific to the default
             // Razor ITagHelper runtime.
@@ -497,7 +497,7 @@ internal sealed class ComponentTagHelperDescriptorProvider : TagHelperDescriptor
             var assemblyName = component.AssemblyName;
 
             using var _ = TagHelperDescriptorBuilder.GetPooledInstance(
-                ComponentMetadata.ChildContent.TagHelperKind, typeName, assemblyName,
+                ComponentMetadata.ChildContent.Kind, typeName, assemblyName,
                 out var builder);
 
             // This opts out this 'component' tag helper for any processing that's specific to the default
@@ -511,9 +511,6 @@ internal sealed class ComponentTagHelperDescriptorProvider : TagHelperDescriptor
             metadata.Add(TypeNameIdentifier(component.GetTypeNameIdentifier()));
 
             builder.CaseSensitive = true;
-
-            // Opt out of processing as a component. We'll process this specially as part of the component's body.
-            metadata.Add(SpecialKind(ComponentMetadata.ChildContent.TagHelperKind));
 
             var xml = attribute.Documentation;
             if (!string.IsNullOrEmpty(xml))

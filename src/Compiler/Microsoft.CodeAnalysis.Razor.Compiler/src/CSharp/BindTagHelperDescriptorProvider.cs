@@ -121,7 +121,7 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
     private static TagHelperDescriptor CreateFallbackBindTagHelper()
     {
         using var _ = TagHelperDescriptorBuilder.GetPooledInstance(
-            ComponentMetadata.Bind.TagHelperKind, "Bind", ComponentsApi.AssemblyName,
+            ComponentMetadata.Bind.Kind, "Bind", ComponentsApi.AssemblyName,
             out var builder);
 
         builder.Runtime = ComponentMetadata.Bind.Runtime;
@@ -130,7 +130,6 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
         builder.SetDocumentation(DocumentationDescriptor.BindTagHelper_Fallback);
 
         builder.SetMetadata(
-            SpecialKind(ComponentMetadata.Bind.TagHelperKind),
             MakeTrue(TagHelperMetadata.Common.ClassifyAttributesOnly),
             MakeTrue(ComponentMetadata.Bind.FallbackKey),
             TypeName("Microsoft.AspNetCore.Components.Bind"),
@@ -365,7 +364,7 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
                 eventName = "Event_" + suffix;
             }
             using var _ = TagHelperDescriptorBuilder.GetPooledInstance(
-                ComponentMetadata.Bind.TagHelperKind, name, ComponentsApi.AssemblyName,
+                ComponentMetadata.Bind.Kind, name, ComponentsApi.AssemblyName,
                 out var builder);
 
             builder.Runtime = ComponentMetadata.Bind.Runtime;
@@ -379,7 +378,6 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
 
             using var metadata = new MetadataBuilder();
 
-            metadata.Add(SpecialKind(ComponentMetadata.Bind.TagHelperKind));
             metadata.Add(MakeTrue(TagHelperMetadata.Common.ClassifyAttributesOnly));
             metadata.Add(ComponentMetadata.Bind.ValueAttribute, valueAttribute);
             metadata.Add(ComponentMetadata.Bind.ChangeAttribute, changeAttribute);
@@ -606,7 +604,7 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
                 }
 
                 using var _ = TagHelperDescriptorBuilder.GetPooledInstance(
-                    ComponentMetadata.Bind.TagHelperKind, tagHelper.Name, tagHelper.AssemblyName,
+                    ComponentMetadata.Bind.Kind, tagHelper.Name, tagHelper.AssemblyName,
                     out var builder);
 
                 builder.Runtime = ComponentMetadata.Bind.Runtime;
@@ -621,7 +619,6 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
 
                 using var metadata = new MetadataBuilder();
 
-                metadata.Add(SpecialKind(ComponentMetadata.Bind.TagHelperKind));
                 metadata.Add(ComponentMetadata.Bind.ValueAttribute, valueAttribute.Name);
                 metadata.Add(ComponentMetadata.Bind.ChangeAttribute, changeAttribute.Name);
 

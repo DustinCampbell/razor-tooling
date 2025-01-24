@@ -1,11 +1,11 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
+using Microsoft.AspNetCore.Razor.Language;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions;
 
 public static class ViewComponentTagHelperConventions
 {
-    public static readonly string Kind = "MVC.ViewComponent";
+    public static readonly TagHelperKind Kind = TagHelperKind.ViewComponent;
 }

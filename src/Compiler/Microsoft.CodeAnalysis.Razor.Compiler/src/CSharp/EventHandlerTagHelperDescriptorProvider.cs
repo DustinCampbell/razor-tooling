@@ -155,7 +155,7 @@ internal sealed class EventHandlerTagHelperDescriptorProvider : TagHelperDescrip
             var attributeName = "@" + attribute;
             var eventArgType = eventArgsType.ToDisplayString();
             _ = TagHelperDescriptorBuilder.GetPooledInstance(
-                ComponentMetadata.EventHandler.TagHelperKind, attribute, ComponentsApi.AssemblyName,
+                ComponentMetadata.EventHandler.Kind, attribute, ComponentsApi.AssemblyName,
                 out var builder);
 
             builder.Runtime = ComponentMetadata.EventHandler.Runtime;
@@ -168,7 +168,6 @@ internal sealed class EventHandlerTagHelperDescriptorProvider : TagHelperDescrip
                     eventArgType));
 
             builder.SetMetadata(
-                SpecialKind(ComponentMetadata.EventHandler.TagHelperKind),
                 new(ComponentMetadata.EventHandler.EventArgsType, eventArgType),
                 MakeTrue(TagHelperMetadata.Common.ClassifyAttributesOnly),
                 TypeName(typeName),

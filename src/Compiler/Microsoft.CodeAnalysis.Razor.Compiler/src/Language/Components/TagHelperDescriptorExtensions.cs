@@ -5,7 +5,6 @@
 #nullable disable
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
@@ -15,14 +14,12 @@ internal static class TagHelperDescriptorExtensions
 {
     public static bool IsAnyComponentDocumentTagHelper(this TagHelperDescriptor tagHelper)
     {
-        return tagHelper.IsComponentTagHelper || tagHelper.Metadata.ContainsKey(ComponentMetadata.SpecialKindKey);
+        return tagHelper.Kind is >= TagHelperKind.FirstComponent and <= TagHelperKind.LastComponent;
     }
 
     public static bool IsBindTagHelper(this TagHelperDescriptor tagHelper)
     {
-        return
-            tagHelper.Metadata.TryGetValue(ComponentMetadata.SpecialKindKey, out var kind) &&
-            string.Equals(ComponentMetadata.Bind.TagHelperKind, kind);
+        return tagHelper.Kind == TagHelperKind.Bind;
     }
 
     public static bool IsFallbackBindTagHelper(this TagHelperDescriptor tagHelper)
@@ -35,9 +32,7 @@ internal static class TagHelperDescriptorExtensions
 
     public static bool IsFormNameTagHelper(this TagHelperDescriptor tagHelper)
     {
-        return
-            tagHelper.Metadata.TryGetValue(ComponentMetadata.SpecialKindKey, out var kind) &&
-            kind == ComponentMetadata.FormName.TagHelperKind;
+        return tagHelper.Kind == TagHelperKind.FormName;
     }
 
     public static bool IsGenericTypedComponent(this TagHelperDescriptor tagHelper)
@@ -162,37 +157,27 @@ internal static class TagHelperDescriptorExtensions
 
     public static bool IsEventHandlerTagHelper(this TagHelperDescriptor tagHelper)
     {
-        return
-            tagHelper.Metadata.TryGetValue(ComponentMetadata.SpecialKindKey, out var kind) &&
-            string.Equals(ComponentMetadata.EventHandler.TagHelperKind, kind);
+        return tagHelper.Kind == TagHelperKind.EventHandler;
     }
 
     public static bool IsKeyTagHelper(this TagHelperDescriptor tagHelper)
     {
-        return
-            tagHelper.Metadata.TryGetValue(ComponentMetadata.SpecialKindKey, out var kind) &&
-            string.Equals(ComponentMetadata.Key.TagHelperKind, kind);
+        return tagHelper.Kind == TagHelperKind.Key;
     }
 
     public static bool IsSplatTagHelper(this TagHelperDescriptor tagHelper)
     {
-        return
-            tagHelper.Metadata.TryGetValue(ComponentMetadata.SpecialKindKey, out var kind) &&
-            string.Equals(ComponentMetadata.Splat.TagHelperKind, kind);
+        return tagHelper.Kind == TagHelperKind.Splat;
     }
 
     public static bool IsRefTagHelper(this TagHelperDescriptor tagHelper)
     {
-        return
-            tagHelper.Metadata.TryGetValue(ComponentMetadata.SpecialKindKey, out var kind) &&
-            string.Equals(ComponentMetadata.Ref.TagHelperKind, kind);
+        return tagHelper.Kind == TagHelperKind.Ref;
     }
 
     public static bool IsRenderModeTagHelper(this TagHelperDescriptor tagHelper)
     {
-        return
-            tagHelper.Metadata.TryGetValue(ComponentMetadata.SpecialKindKey, out var kind) &&
-            string.Equals(ComponentMetadata.RenderMode.TagHelperKind, kind);
+        return tagHelper.Kind == TagHelperKind.RenderMode;
     }
 
     public static string GetEventArgsType(this TagHelperDescriptor tagHelper)

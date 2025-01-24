@@ -39,7 +39,7 @@ internal sealed class RefTagHelperDescriptorProvider() : TagHelperDescriptorProv
     private static TagHelperDescriptor CreateRefTagHelper()
     {
         using var _ = TagHelperDescriptorBuilder.GetPooledInstance(
-            ComponentMetadata.Ref.TagHelperKind, "Ref", ComponentsApi.AssemblyName,
+            ComponentMetadata.Ref.Kind, "Ref", ComponentsApi.AssemblyName,
             out var builder);
 
         builder.Runtime = ComponentMetadata.Ref.Runtime;
@@ -48,7 +48,6 @@ internal sealed class RefTagHelperDescriptorProvider() : TagHelperDescriptorProv
         builder.SetDocumentation(DocumentationDescriptor.RefTagHelper);
 
         builder.SetMetadata(
-            SpecialKind(ComponentMetadata.Ref.TagHelperKind),
             MakeTrue(TagHelperMetadata.Common.ClassifyAttributesOnly),
             TypeName("Microsoft.AspNetCore.Components.Ref"));
 

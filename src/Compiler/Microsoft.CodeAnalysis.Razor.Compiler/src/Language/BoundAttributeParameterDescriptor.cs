@@ -21,7 +21,7 @@ public sealed class BoundAttributeParameterDescriptor : TagHelperObject<BoundAtt
     private readonly BoundAttributeParameterFlags _flags;
     private readonly DocumentationObject _documentationObject;
 
-    public string Kind { get; }
+    public TagHelperKind Kind { get; }
     public string Name { get; }
     public string TypeName { get; }
     public string DisplayName { get; }
@@ -34,7 +34,7 @@ public sealed class BoundAttributeParameterDescriptor : TagHelperObject<BoundAtt
     public MetadataCollection Metadata { get; }
 
     internal BoundAttributeParameterDescriptor(
-        string kind,
+        TagHelperKind kind,
         string name,
         string typeName,
         bool isEnum,
@@ -79,7 +79,7 @@ public sealed class BoundAttributeParameterDescriptor : TagHelperObject<BoundAtt
 
     private protected override void BuildChecksum(in Checksum.Builder builder)
     {
-        builder.AppendData(Kind);
+        builder.AppendData((int)Kind);
         builder.AppendData(Name);
         builder.AppendData(TypeName);
         builder.AppendData(DisplayName);
