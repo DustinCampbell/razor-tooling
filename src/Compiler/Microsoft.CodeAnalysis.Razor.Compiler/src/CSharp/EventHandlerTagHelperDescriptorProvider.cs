@@ -157,6 +157,9 @@ internal sealed class EventHandlerTagHelperDescriptorProvider : TagHelperDescrip
             _ = TagHelperDescriptorBuilder.GetPooledInstance(
                 ComponentMetadata.EventHandler.TagHelperKind, attribute, ComponentsApi.AssemblyName,
                 out var builder);
+
+            builder.Runtime = ComponentMetadata.EventHandler.Runtime;
+
             builder.CaseSensitive = true;
             builder.SetDocumentation(
                 DocumentationDescriptor.From(
@@ -168,7 +171,6 @@ internal sealed class EventHandlerTagHelperDescriptorProvider : TagHelperDescrip
                 SpecialKind(ComponentMetadata.EventHandler.TagHelperKind),
                 new(ComponentMetadata.EventHandler.EventArgsType, eventArgType),
                 MakeTrue(TagHelperMetadata.Common.ClassifyAttributesOnly),
-                RuntimeName(ComponentMetadata.EventHandler.RuntimeName),
                 TypeName(typeName),
                 TypeNamespace(typeNamespace),
                 TypeNameIdentifier(typeNameIdentifier));

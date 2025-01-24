@@ -3,6 +3,9 @@
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-public partial class TagHelperDescriptorBuilder
+public enum RuntimeKind
 {
+    Default,
+    Components_IComponent,
+    Components_None
 }

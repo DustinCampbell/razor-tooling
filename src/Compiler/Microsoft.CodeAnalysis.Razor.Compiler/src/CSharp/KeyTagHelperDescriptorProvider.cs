@@ -42,13 +42,14 @@ internal sealed class KeyTagHelperDescriptorProvider() : TagHelperDescriptorProv
             ComponentMetadata.Key.TagHelperKind, "Key", ComponentsApi.AssemblyName,
             out var builder);
 
+        builder.Runtime = ComponentMetadata.Key.Runtime;
+
         builder.CaseSensitive = true;
         builder.SetDocumentation(DocumentationDescriptor.KeyTagHelper);
 
         builder.SetMetadata(
             SpecialKind(ComponentMetadata.Key.TagHelperKind),
             MakeTrue(TagHelperMetadata.Common.ClassifyAttributesOnly),
-            RuntimeName(ComponentMetadata.Key.RuntimeName),
             TypeName("Microsoft.AspNetCore.Components.Key"));
 
         builder.TagMatchingRule(rule =>

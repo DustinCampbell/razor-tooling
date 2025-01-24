@@ -21,9 +21,4 @@ public static class TagHelperMetadata
 
         public static readonly string ClassifyAttributesOnly = "Common.ClassifyAttributesOnly";
     }
-
-    public static class Runtime
-    {
-        public static readonly string Name = "Runtime.Name";
-    }
 }
