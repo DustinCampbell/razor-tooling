@@ -28,167 +28,167 @@ public class DefaultTagHelperDescriptorFactoryTest : TagHelperDescriptorProvider
         get
         {
             return new TheoryData<string, Action<RequiredAttributeDescriptorBuilder>[]>
+            {
                 {
+                    "name,",
+                    new Action<RequiredAttributeDescriptorBuilder>[]
                     {
-                        "name,",
-                        new Action<RequiredAttributeDescriptorBuilder>[]
-                        {
-                            builder => builder
-                                .Name("name")
-                                .AddDiagnostic(RazorDiagnosticFactory.CreateTagHelper_CouldNotFindMatchingEndBrace("name,")),
-                        }
-                    },
+                        builder => builder
+                            .Name("name")
+                            .AddDiagnostic(RazorDiagnosticFactory.CreateTagHelper_CouldNotFindMatchingEndBrace("name,")),
+                    }
+                },
+                {
+                    " ",
+                    new Action<RequiredAttributeDescriptorBuilder>[]
                     {
-                        " ",
-                        new Action<RequiredAttributeDescriptorBuilder>[]
-                        {
-                            builder => builder
-                                .Name(string.Empty)
-                                .AddDiagnostic(AspNetCore.Razor.Language.RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedAttributeNameNullOrWhitespace()),
-                        }
-                    },
+                        builder => builder
+                            .Name(string.Empty)
+                            .AddDiagnostic(AspNetCore.Razor.Language.RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedAttributeNameNullOrWhitespace()),
+                    }
+                },
+                {
+                    "n@me",
+                    new Action<RequiredAttributeDescriptorBuilder>[]
                     {
-                        "n@me",
-                        new Action<RequiredAttributeDescriptorBuilder>[]
-                        {
-                            builder => builder
-                                .Name("n@me")
-                                .AddDiagnostic(AspNetCore.Razor.Language.RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedAttributeName("n@me", '@')),
-                        }
-                    },
+                        builder => builder
+                            .Name("n@me")
+                            .AddDiagnostic(AspNetCore.Razor.Language.RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedAttributeName("n@me", '@')),
+                    }
+                },
+                {
+                    "name extra",
+                    new Action<RequiredAttributeDescriptorBuilder>[]
                     {
-                        "name extra",
-                        new Action<RequiredAttributeDescriptorBuilder>[]
-                        {
-                            builder => builder
-                                .Name("name")
-                                .AddDiagnostic(RazorDiagnosticFactory.CreateTagHelper_InvalidRequiredAttributeCharacter('e', "name extra")),
-                        }
-                    },
+                        builder => builder
+                            .Name("name")
+                            .AddDiagnostic(RazorDiagnosticFactory.CreateTagHelper_InvalidRequiredAttributeCharacter('e', "name extra")),
+                    }
+                },
+                {
+                    "[[ ",
+                    new Action<RequiredAttributeDescriptorBuilder>[]
                     {
-                        "[[ ",
-                        new Action<RequiredAttributeDescriptorBuilder>[]
-                        {
-                            builder => builder
-                                .Name("[")
-                                .AddDiagnostic(RazorDiagnosticFactory.CreateTagHelper_CouldNotFindMatchingEndBrace("[[ ")),
-                        }
-                    },
+                        builder => builder
+                            .Name("[")
+                            .AddDiagnostic(RazorDiagnosticFactory.CreateTagHelper_CouldNotFindMatchingEndBrace("[[ ")),
+                    }
+                },
+                {
+                    "[ ",
+                    new Action<RequiredAttributeDescriptorBuilder>[]
                     {
-                        "[ ",
-                        new Action<RequiredAttributeDescriptorBuilder>[]
-                        {
-                            builder => builder
-                                .Name("")
-                                .AddDiagnostic(RazorDiagnosticFactory.CreateTagHelper_CouldNotFindMatchingEndBrace("[ ")),
-                        }
-                    },
+                        builder => builder
+                            .Name("")
+                            .AddDiagnostic(RazorDiagnosticFactory.CreateTagHelper_CouldNotFindMatchingEndBrace("[ ")),
+                    }
+                },
+                {
+                    "[name='unended]",
+                    new Action<RequiredAttributeDescriptorBuilder>[]
                     {
-                        "[name='unended]",
-                        new Action<RequiredAttributeDescriptorBuilder>[]
-                        {
-                            builder => builder
-                                .Name("name")
-                                .ValueComparisonMode(RequiredAttributeDescriptor.ValueComparisonMode.FullMatch)
-                                .AddDiagnostic(RazorDiagnosticFactory.CreateTagHelper_InvalidRequiredAttributeMismatchedQuotes('\'', "[name='unended]")),
-                        }
-                    },
+                        builder => builder
+                            .Name("name")
+                            .ValueComparisonMode(RequiredAttributeDescriptor.ValueComparisonMode.FullMatch)
+                            .AddDiagnostic(RazorDiagnosticFactory.CreateTagHelper_InvalidRequiredAttributeMismatchedQuotes('\'', "[name='unended]")),
+                    }
+                },
+                {
+                    "[name='unended",
+                    new Action<RequiredAttributeDescriptorBuilder>[]
                     {
-                        "[name='unended",
-                        new Action<RequiredAttributeDescriptorBuilder>[]
-                        {
-                            builder => builder
-                                .Name("name")
-                                .ValueComparisonMode(RequiredAttributeDescriptor.ValueComparisonMode.FullMatch)
-                                .AddDiagnostic(RazorDiagnosticFactory.CreateTagHelper_InvalidRequiredAttributeMismatchedQuotes('\'', "[name='unended")),
-                        }
-                    },
+                        builder => builder
+                            .Name("name")
+                            .ValueComparisonMode(RequiredAttributeDescriptor.ValueComparisonMode.FullMatch)
+                            .AddDiagnostic(RazorDiagnosticFactory.CreateTagHelper_InvalidRequiredAttributeMismatchedQuotes('\'', "[name='unended")),
+                    }
+                },
+                {
+                    "[name",
+                    new Action<RequiredAttributeDescriptorBuilder>[]
                     {
-                        "[name",
-                        new Action<RequiredAttributeDescriptorBuilder>[]
-                        {
-                            builder => builder
-                                .Name("name")
-                                .AddDiagnostic(RazorDiagnosticFactory.CreateTagHelper_CouldNotFindMatchingEndBrace("[name")),
-                        }
-                    },
+                        builder => builder
+                            .Name("name")
+                            .AddDiagnostic(RazorDiagnosticFactory.CreateTagHelper_CouldNotFindMatchingEndBrace("[name")),
+                    }
+                },
+                {
+                    "[ ]",
+                    new Action<RequiredAttributeDescriptorBuilder>[]
                     {
-                        "[ ]",
-                        new Action<RequiredAttributeDescriptorBuilder>[]
-                        {
-                            builder => builder
-                                .Name(string.Empty)
-                                .AddDiagnostic(AspNetCore.Razor.Language.RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedAttributeNameNullOrWhitespace()),
-                        }
-                    },
+                        builder => builder
+                            .Name(string.Empty)
+                            .AddDiagnostic(AspNetCore.Razor.Language.RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedAttributeNameNullOrWhitespace()),
+                    }
+                },
+                {
+                    "[n@me]",
+                    new Action<RequiredAttributeDescriptorBuilder>[]
                     {
-                        "[n@me]",
-                        new Action<RequiredAttributeDescriptorBuilder>[]
-                        {
-                            builder => builder
-                                .Name("n@me")
-                                .AddDiagnostic(AspNetCore.Razor.Language.RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedAttributeName("n@me", '@')),
-                        }
-                    },
+                        builder => builder
+                            .Name("n@me")
+                            .AddDiagnostic(AspNetCore.Razor.Language.RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedAttributeName("n@me", '@')),
+                    }
+                },
+                {
+                    "[name@]",
+                    new Action<RequiredAttributeDescriptorBuilder>[]
                     {
-                        "[name@]",
-                        new Action<RequiredAttributeDescriptorBuilder>[]
-                        {
-                            builder => builder
-                                .Name("name@")
-                                .AddDiagnostic(AspNetCore.Razor.Language.RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedAttributeName("name@", '@')),
-                        }
-                    },
+                        builder => builder
+                            .Name("name@")
+                            .AddDiagnostic(AspNetCore.Razor.Language.RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedAttributeName("name@", '@')),
+                    }
+                },
+                {
+                    "[name^]",
+                    new Action<RequiredAttributeDescriptorBuilder>[]
                     {
-                        "[name^]",
-                        new Action<RequiredAttributeDescriptorBuilder>[]
-                        {
-                            builder => builder
-                                .Name("name")
-                                .AddDiagnostic(RazorDiagnosticFactory.CreateTagHelper_PartialRequiredAttributeOperator('^', "[name^]")),
-                        }
-                    },
+                        builder => builder
+                            .Name("name")
+                            .AddDiagnostic(RazorDiagnosticFactory.CreateTagHelper_PartialRequiredAttributeOperator('^', "[name^]")),
+                    }
+                },
+                {
+                    "[name='value'",
+                    new Action<RequiredAttributeDescriptorBuilder>[]
                     {
-                        "[name='value'",
-                        new Action<RequiredAttributeDescriptorBuilder>[]
-                        {
-                            builder => builder
-                                .Name("name")
-                                .Value("value")
-                                .ValueComparisonMode(RequiredAttributeDescriptor.ValueComparisonMode.FullMatch)
-                                .AddDiagnostic(RazorDiagnosticFactory.CreateTagHelper_CouldNotFindMatchingEndBrace("[name='value'")),
-                        }
-                    },
+                        builder => builder
+                            .Name("name")
+                            .Value("value")
+                            .ValueComparisonMode(RequiredAttributeDescriptor.ValueComparisonMode.FullMatch)
+                            .AddDiagnostic(RazorDiagnosticFactory.CreateTagHelper_CouldNotFindMatchingEndBrace("[name='value'")),
+                    }
+                },
+                {
+                    "[name ",
+                    new Action<RequiredAttributeDescriptorBuilder>[]
                     {
-                        "[name ",
-                        new Action<RequiredAttributeDescriptorBuilder>[]
-                        {
-                            builder => builder
-                                .Name("name")
-                                .AddDiagnostic(RazorDiagnosticFactory.CreateTagHelper_CouldNotFindMatchingEndBrace("[name ")),
-                        }
-                    },
+                        builder => builder
+                            .Name("name")
+                            .AddDiagnostic(RazorDiagnosticFactory.CreateTagHelper_CouldNotFindMatchingEndBrace("[name ")),
+                    }
+                },
+                {
+                    "[name extra]",
+                    new Action<RequiredAttributeDescriptorBuilder>[]
                     {
-                        "[name extra]",
-                        new Action<RequiredAttributeDescriptorBuilder>[]
-                        {
-                            builder => builder
-                                .Name("name")
-                                .AddDiagnostic(RazorDiagnosticFactory.CreateTagHelper_InvalidRequiredAttributeOperator('e', "[name extra]")),
-                        }
-                    },
+                        builder => builder
+                            .Name("name")
+                            .AddDiagnostic(RazorDiagnosticFactory.CreateTagHelper_InvalidRequiredAttributeOperator('e', "[name extra]")),
+                    }
+                },
+                {
+                    "[name=value ",
+                    new Action<RequiredAttributeDescriptorBuilder>[]
                     {
-                        "[name=value ",
-                        new Action<RequiredAttributeDescriptorBuilder>[]
-                        {
-                            builder => builder
-                                .Name("name")
-                                .Value("value")
-                                .ValueComparisonMode(RequiredAttributeDescriptor.ValueComparisonMode.FullMatch)
-                                .AddDiagnostic(RazorDiagnosticFactory.CreateTagHelper_CouldNotFindMatchingEndBrace("[name=value ")),
-                        }
-                    },
-                };
+                        builder => builder
+                            .Name("name")
+                            .Value("value")
+                            .ValueComparisonMode(RequiredAttributeDescriptor.ValueComparisonMode.FullMatch)
+                            .AddDiagnostic(RazorDiagnosticFactory.CreateTagHelper_CouldNotFindMatchingEndBrace("[name=value ")),
+                    }
+                },
+            };
         }
     }
 
@@ -199,7 +199,7 @@ public class DefaultTagHelperDescriptorFactoryTest : TagHelperDescriptorProvider
         IEnumerable<Action<RequiredAttributeDescriptorBuilder>> configureBuilders)
     {
         // Arrange
-        var tagHelperBuilder = new TagHelperDescriptorBuilder(TagHelperConventions.DefaultKind, "TestTagHelper", "Test");
+        var tagHelperBuilder = new TagHelperDescriptorBuilder(TagHelperKind.Default, "TestTagHelper", "Test");
         var ruleBuilder = new TagMatchingRuleDescriptorBuilder(tagHelperBuilder);
 
         var expectedRules = new List<RequiredAttributeDescriptor>();
@@ -294,7 +294,7 @@ public class DefaultTagHelperDescriptorFactoryTest : TagHelperDescriptorProvider
         IEnumerable<Action<RequiredAttributeDescriptorBuilder>> configureBuilders)
     {
         // Arrange
-        var tagHelperBuilder = new TagHelperDescriptorBuilder(TagHelperConventions.DefaultKind, "TestTagHelper", "Test");
+        var tagHelperBuilder = new TagHelperDescriptorBuilder(TagHelperKind.Default, "TestTagHelper", "Test");
         var ruleBuilder = new TagMatchingRuleDescriptorBuilder(tagHelperBuilder);
 
         var expectedRules = new List<RequiredAttributeDescriptor>();
@@ -1451,7 +1451,7 @@ public class DefaultTagHelperDescriptorFactoryTest : TagHelperDescriptorProvider
     {
         get
         {
-            var invalidBoundAttributeBuilder = new TagHelperDescriptorBuilder(TagHelperConventions.DefaultKind, "InvalidBoundAttribute", "Test");
+            var invalidBoundAttributeBuilder = new TagHelperDescriptorBuilder(TagHelperKind.Default, "InvalidBoundAttribute", "Test");
             invalidBoundAttributeBuilder.Metadata(TypeName("TestNamespace.InvalidBoundAttribute"));
 
             // type, expectedAttributeDescriptors
@@ -2430,10 +2430,10 @@ public class DefaultTagHelperDescriptorFactoryTest : TagHelperDescriptorProvider
 
     private static BoundAttributeDescriptor CreateAttributeFor(string tagHelperTypeFullName, Action<BoundAttributeDescriptorBuilder> configure)
     {
-        var tagHelperBuilder = new TagHelperDescriptorBuilder(TagHelperConventions.DefaultKind, tagHelperTypeFullName.Split('.')[^1], "Test");
+        var tagHelperBuilder = new TagHelperDescriptorBuilder(TagHelperKind.Default, tagHelperTypeFullName.Split('.')[^1], "Test");
         tagHelperBuilder.Metadata(TypeName(tagHelperTypeFullName));
 
-        var attributeBuilder = new BoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperConventions.DefaultKind);
+        var attributeBuilder = new BoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperKind.Default);
         configure(attributeBuilder);
         return attributeBuilder.Build();
     }

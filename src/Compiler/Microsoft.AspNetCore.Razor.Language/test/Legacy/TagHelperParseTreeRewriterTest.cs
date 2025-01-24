@@ -1,13 +1,10 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using Microsoft.AspNetCore.Razor.Language.Components;
 using Microsoft.AspNetCore.Razor.Language.Syntax;
 using Xunit;
 using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
@@ -158,7 +155,6 @@ public class TagHelperParseTreeRewriterTest : TagHelperRewritingTestBase
                 {
                     b.Name = "onclick";
                 }))
-            .Metadata(SpecialKind(ComponentMetadata.EventHandler.EventArgsType))
             .Build(),
     ];
 

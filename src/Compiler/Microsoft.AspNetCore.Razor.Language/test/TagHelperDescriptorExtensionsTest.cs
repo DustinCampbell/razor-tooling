@@ -1,8 +1,6 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
 using Xunit;
 using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
@@ -54,7 +52,7 @@ public class TagHelperDescriptorExtensionsTest
     public void IsDefaultKind_ReturnsFalse_IfKindIsNotDefault()
     {
         // Arrange
-        var descriptor = TagHelperDescriptorBuilder.Create("other-kind", "TestTagHelper", "TestAssembly").Build();
+        var descriptor = TagHelperDescriptorBuilder.Create(TagHelperKind.Ref, "TestTagHelper", "TestAssembly").Build();
 
         // Act
         var isDefault = descriptor.IsDefaultKind();

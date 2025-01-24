@@ -1,8 +1,6 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
 using System.Linq;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Components;
@@ -30,7 +28,7 @@ public class SplatTagHelperDescriptorProviderTest : TagHelperDescriptorProviderT
         Assert.Null(item.TagOutputHint);
         Assert.Empty(item.Diagnostics);
         Assert.False(item.HasErrors);
-        Assert.Equal(ComponentMetadata.Splat.TagHelperKind, item.Kind);
+        Assert.Equal(ComponentMetadata.Splat.Kind, item.Kind);
         Assert.Equal(bool.TrueString, item.Metadata[TagHelperMetadata.Common.ClassifyAttributesOnly]);
         Assert.Equal(ComponentMetadata.Splat.Runtime, item.Runtime);
         Assert.False(item.IsDefaultKind());
@@ -64,7 +62,7 @@ public class SplatTagHelperDescriptorProviderTest : TagHelperDescriptorProviderT
         var attribute = Assert.Single(item.BoundAttributes);
         Assert.Empty(attribute.Diagnostics);
         Assert.False(attribute.HasErrors);
-        Assert.Equal(ComponentMetadata.Splat.TagHelperKind, attribute.Kind);
+        Assert.Equal(ComponentMetadata.Splat.Kind, attribute.Kind);
         Assert.False(attribute.IsDefaultKind());
         Assert.False(attribute.HasIndexer);
         Assert.Null(attribute.IndexerNamePrefix);

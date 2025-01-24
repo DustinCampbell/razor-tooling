@@ -1,8 +1,6 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -254,7 +252,6 @@ public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
                             b.SetMetadata(Attributes.IsDirectiveAttribute);
                         });
                 })
-                .Metadata(SpecialKind(ComponentMetadata.EventHandler.TagHelperKind))
                 .Build(),
         ];
 
@@ -280,7 +277,6 @@ public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
                         });
 
                 })
-                .Metadata(SpecialKind(ComponentMetadata.EventHandler.TagHelperKind))
                 .Build(),
         ];
 
@@ -2444,10 +2440,9 @@ public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
         var document = @"<input @bind-value=""Message"" @bind-value:event=""onchange"" />";
         ImmutableArray<TagHelperDescriptor> descriptors =
         [
-            TagHelperDescriptorBuilder.Create(ComponentMetadata.Bind.TagHelperKind, "Bind", ComponentsApi.AssemblyName)
+            TagHelperDescriptorBuilder.Create(ComponentMetadata.Bind.Kind, "Bind", ComponentsApi.AssemblyName)
                 .Runtime(ComponentMetadata.Bind.Runtime)
                 .Metadata(
-                    SpecialKind(ComponentMetadata.Bind.TagHelperKind),
                     MakeTrue(TagHelperMetadata.Common.ClassifyAttributesOnly),
                     TypeName("Microsoft.AspNetCore.Components.Bind"),
                     MakeTrue(ComponentMetadata.Bind.FallbackKey))
@@ -2488,10 +2483,9 @@ public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
         var document = @"<input @bind-foo @bind-foo:param />";
         ImmutableArray<TagHelperDescriptor> descriptors =
         [
-            TagHelperDescriptorBuilder.Create(ComponentMetadata.Bind.TagHelperKind, "Bind", ComponentsApi.AssemblyName)
+            TagHelperDescriptorBuilder.Create(ComponentMetadata.Bind.Kind, "Bind", ComponentsApi.AssemblyName)
                 .Runtime(ComponentMetadata.Bind.Runtime)
                 .Metadata(
-                    SpecialKind(ComponentMetadata.Bind.TagHelperKind),
                     MakeTrue(TagHelperMetadata.Common.ClassifyAttributesOnly),
                     TypeName("Microsoft.AspNetCore.Components.Bind"),
                     MakeTrue(ComponentMetadata.Bind.FallbackKey))

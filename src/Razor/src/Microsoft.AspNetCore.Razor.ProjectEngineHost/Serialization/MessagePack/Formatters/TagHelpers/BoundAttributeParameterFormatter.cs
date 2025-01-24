@@ -19,7 +19,7 @@ internal sealed class BoundAttributeParameterFormatter : ValueFormatter<BoundAtt
     {
         reader.ReadArrayHeaderAndVerify(9);
 
-        var kind = CachedStringFormatter.Instance.Deserialize(ref reader, options).AssumeNotNull();
+        var kind = (TagHelperKind)reader.ReadInt32();
         var name = CachedStringFormatter.Instance.Deserialize(ref reader, options);
         var typeName = CachedStringFormatter.Instance.Deserialize(ref reader, options).AssumeNotNull();
         var isEnum = reader.ReadBoolean();
@@ -40,7 +40,7 @@ internal sealed class BoundAttributeParameterFormatter : ValueFormatter<BoundAtt
     {
         writer.WriteArrayHeader(9);
 
-        CachedStringFormatter.Instance.Serialize(ref writer, value.Kind, options);
+        writer.Write((int)value.Kind);
         CachedStringFormatter.Instance.Serialize(ref writer, value.Name, options);
         CachedStringFormatter.Instance.Serialize(ref writer, value.TypeName, options);
         writer.Write(value.IsEnum);

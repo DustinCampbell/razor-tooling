@@ -1,9 +1,8 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
 using System.Linq;
+using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Components;
 using Xunit;
@@ -61,7 +60,7 @@ namespace Test
         // here and then ignoring them.
         Assert.Empty(component.Diagnostics);
         Assert.False(component.HasErrors);
-        Assert.Equal(ComponentMetadata.Component.TagHelperKind, component.Kind);
+        Assert.Equal(ComponentMetadata.Component.Kind, component.Kind);
         Assert.False(component.IsDefaultKind());
         Assert.False(component.KindUsesDefaultTagHelperRuntime());
         Assert.True(component.IsComponentOrChildContentTagHelper);
@@ -102,7 +101,7 @@ namespace Test
         // Invariants
         Assert.Empty(attribute.Diagnostics);
         Assert.False(attribute.HasErrors);
-        Assert.Equal("Components.Component", attribute.Kind);
+        Assert.Equal(ComponentMetadata.Component.Kind, attribute.Kind);
         Assert.False(attribute.IsDefaultKind());
 
         // Related to dictionaries/indexers, not supported currently, not sure if we ever will
@@ -1619,8 +1618,8 @@ namespace Test
 
         Assert.Empty(compilation.GetDiagnostics());
 
-        var targetSymbol = (IAssemblySymbol)compilation.GetAssemblyOrModuleSymbol(
-            compilation.References.First(static r => r.Display.Contains("Microsoft.CodeAnalysis.Razor.Test")));
+        var targetSymbol = (IAssemblySymbol?)compilation.GetAssemblyOrModuleSymbol(
+            compilation.References.First(static r => r.Display.AssumeNotNull().Contains("Microsoft.CodeAnalysis.Razor.Test")));
 
         var context = new TagHelperDescriptorProviderContext(compilation, targetSymbol);
         var provider = new ComponentTagHelperDescriptorProvider();

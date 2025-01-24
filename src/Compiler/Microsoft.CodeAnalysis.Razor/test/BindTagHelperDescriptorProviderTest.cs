@@ -1,8 +1,6 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
 using System;
 using System.Linq;
 using Microsoft.AspNetCore.Razor.Language;
@@ -73,7 +71,7 @@ namespace Test
         // here and then ignoring them.
         Assert.Empty(bind.Diagnostics);
         Assert.False(bind.HasErrors);
-        Assert.Equal(ComponentMetadata.Bind.TagHelperKind, bind.Kind);
+        Assert.Equal(ComponentMetadata.Bind.Kind, bind.Kind);
         Assert.Equal(ComponentMetadata.Bind.Runtime, bind.Runtime);
         Assert.False(bind.IsDefaultKind());
         Assert.False(bind.KindUsesDefaultTagHelperRuntime());
@@ -146,7 +144,7 @@ namespace Test
         // Invariants
         Assert.Empty(attribute.Diagnostics);
         Assert.False(attribute.HasErrors);
-        Assert.Equal(ComponentMetadata.Bind.TagHelperKind, attribute.Kind);
+        Assert.Equal(ComponentMetadata.Bind.Kind, attribute.Kind);
         Assert.False(attribute.IsDefaultKind());
         Assert.False(attribute.HasIndexer);
         Assert.Null(attribute.IndexerNamePrefix);
@@ -207,6 +205,7 @@ namespace Test
         Assert.Empty(compilation.GetDiagnostics());
 
         var bindConverterSymbol = compilation.GetTypeByMetadataName(ComponentsApi.BindConverter.FullTypeName);
+        Assert.NotNull(bindConverterSymbol);
         var context = new TagHelperDescriptorProviderContext(compilation, bindConverterSymbol.ContainingAssembly);
 
         var bindTagHelperProvider = new BindTagHelperDescriptorProvider();
@@ -298,7 +297,7 @@ namespace Test
         // here and then ignoring them.
         Assert.Empty(bind.Diagnostics);
         Assert.False(bind.HasErrors);
-        Assert.Equal(ComponentMetadata.Bind.TagHelperKind, bind.Kind);
+        Assert.Equal(ComponentMetadata.Bind.Kind, bind.Kind);
         Assert.Equal(ComponentMetadata.Bind.Runtime, bind.Runtime);
         Assert.False(bind.IsDefaultKind());
         Assert.False(bind.KindUsesDefaultTagHelperRuntime());
@@ -370,7 +369,7 @@ namespace Test
         // Invariants
         Assert.Empty(attribute.Diagnostics);
         Assert.False(attribute.HasErrors);
-        Assert.Equal(ComponentMetadata.Bind.TagHelperKind, attribute.Kind);
+        Assert.Equal(ComponentMetadata.Bind.Kind, attribute.Kind);
         Assert.False(attribute.IsDefaultKind());
         Assert.False(attribute.HasIndexer);
         Assert.Null(attribute.IndexerNamePrefix);
@@ -478,7 +477,7 @@ namespace Test
         // here and then ignoring them.
         Assert.Empty(bind.Diagnostics);
         Assert.False(bind.HasErrors);
-        Assert.Equal(ComponentMetadata.Bind.TagHelperKind, bind.Kind);
+        Assert.Equal(ComponentMetadata.Bind.Kind, bind.Kind);
         Assert.Equal(bool.TrueString, bind.Metadata[TagHelperMetadata.Common.ClassifyAttributesOnly]);
         Assert.Equal(ComponentMetadata.Bind.Runtime, bind.Runtime);
         Assert.False(bind.IsDefaultKind());
@@ -563,7 +562,7 @@ namespace Test
             // Invariants
             Assert.Empty(attribute.Diagnostics);
             Assert.False(attribute.HasErrors);
-            Assert.Equal(ComponentMetadata.Bind.TagHelperKind, attribute.Kind);
+            Assert.Equal(ComponentMetadata.Bind.Kind, attribute.Kind);
             Assert.False(attribute.IsDefaultKind());
             Assert.False(attribute.HasIndexer);
             Assert.Null(attribute.IndexerNamePrefix);
@@ -591,7 +590,7 @@ namespace Test
             // Invariants
             Assert.Empty(parameter.Diagnostics);
             Assert.False(parameter.HasErrors);
-            Assert.Equal(ComponentMetadata.Bind.TagHelperKind, parameter.Kind);
+            Assert.Equal(ComponentMetadata.Bind.Kind, parameter.Kind);
             Assert.False(parameter.IsDefaultKind());
 
             Assert.Equal(
@@ -614,7 +613,7 @@ namespace Test
             // Invariants
             Assert.Empty(parameter.Diagnostics);
             Assert.False(parameter.HasErrors);
-            Assert.Equal(ComponentMetadata.Bind.TagHelperKind, parameter.Kind);
+            Assert.Equal(ComponentMetadata.Bind.Kind, parameter.Kind);
             Assert.False(parameter.IsDefaultKind());
 
             Assert.Equal(
@@ -636,7 +635,7 @@ namespace Test
             // Invariants
             Assert.Empty(parameter.Diagnostics);
             Assert.False(parameter.HasErrors);
-            Assert.Equal(ComponentMetadata.Bind.TagHelperKind, parameter.Kind);
+            Assert.Equal(ComponentMetadata.Bind.Kind, parameter.Kind);
             Assert.False(parameter.IsDefaultKind());
 
             Assert.Equal(
@@ -658,7 +657,7 @@ namespace Test
             // Invariants
             Assert.Empty(parameter.Diagnostics);
             Assert.False(parameter.HasErrors);
-            Assert.Equal(ComponentMetadata.Bind.TagHelperKind, parameter.Kind);
+            Assert.Equal(ComponentMetadata.Bind.Kind, parameter.Kind);
             Assert.False(parameter.IsDefaultKind());
 
             Assert.Equal(
@@ -680,7 +679,7 @@ namespace Test
             // Invariants
             Assert.Empty(parameter.Diagnostics);
             Assert.False(parameter.HasErrors);
-            Assert.Equal(ComponentMetadata.Bind.TagHelperKind, parameter.Kind);
+            Assert.Equal(ComponentMetadata.Bind.Kind, parameter.Kind);
             Assert.False(parameter.IsDefaultKind());
 
             Assert.Equal(
@@ -1111,7 +1110,7 @@ namespace Test
         // here and then ignoring them.
         Assert.Empty(bind.Diagnostics);
         Assert.False(bind.HasErrors);
-        Assert.Equal(ComponentMetadata.Bind.TagHelperKind, bind.Kind);
+        Assert.Equal(ComponentMetadata.Bind.Kind, bind.Kind);
         Assert.Equal(bool.TrueString, bind.Metadata[TagHelperMetadata.Common.ClassifyAttributesOnly]);
         Assert.Equal(ComponentMetadata.Bind.Runtime, bind.Runtime);
         Assert.False(bind.IsDefaultKind());
@@ -1157,7 +1156,7 @@ namespace Test
         // Invariants
         Assert.Empty(attribute.Diagnostics);
         Assert.False(attribute.HasErrors);
-        Assert.Equal(ComponentMetadata.Bind.TagHelperKind, attribute.Kind);
+        Assert.Equal(ComponentMetadata.Bind.Kind, attribute.Kind);
         Assert.False(attribute.IsDefaultKind());
         Assert.False(attribute.IsIndexerBooleanProperty);
         Assert.False(attribute.IsIndexerStringProperty);
@@ -1190,7 +1189,7 @@ namespace Test
         // Invariants
         Assert.Empty(parameter.Diagnostics);
         Assert.False(parameter.HasErrors);
-        Assert.Equal(ComponentMetadata.Bind.TagHelperKind, parameter.Kind);
+        Assert.Equal(ComponentMetadata.Bind.Kind, parameter.Kind);
         Assert.False(parameter.IsDefaultKind());
 
         Assert.Equal(
@@ -1215,7 +1214,7 @@ namespace Test
         // Invariants
         Assert.Empty(parameter.Diagnostics);
         Assert.False(parameter.HasErrors);
-        Assert.Equal(ComponentMetadata.Bind.TagHelperKind, parameter.Kind);
+        Assert.Equal(ComponentMetadata.Bind.Kind, parameter.Kind);
         Assert.False(parameter.IsDefaultKind());
 
         Assert.Equal(

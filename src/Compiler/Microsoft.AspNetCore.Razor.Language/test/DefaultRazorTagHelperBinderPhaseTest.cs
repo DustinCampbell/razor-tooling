@@ -1117,7 +1117,7 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
         IEnumerable<Action<BoundAttributeDescriptorBuilder>> attributes = null,
         IEnumerable<Action<TagMatchingRuleDescriptorBuilder>> ruleBuilders = null)
     {
-        return CreateDescriptor(TagHelperConventions.DefaultKind, tagName, typeName, assemblyName, typeNamespace, typeNameIdentifier, attributes, ruleBuilders);
+        return CreateDescriptor(TagHelperKind.Default, tagName, typeName, assemblyName, typeNamespace, typeNameIdentifier, attributes, ruleBuilders);
     }
     #endregion
 
@@ -1461,17 +1461,16 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
         string typeNameIdentifier = null,
         IEnumerable<Action<BoundAttributeDescriptorBuilder>> attributes = null,
         IEnumerable<Action<TagMatchingRuleDescriptorBuilder>> ruleBuilders = null,
-        string kind = null,
+        TagHelperKind kind = ComponentMetadata.Component.Kind,
         bool fullyQualified = false,
         bool childContent = false)
     {
-        kind ??= ComponentMetadata.Component.TagHelperKind;
         return CreateDescriptor(kind, tagName, typeName, assemblyName, typeNamespace, typeNameIdentifier, attributes, ruleBuilders, fullyQualified, childContent);
     }
     #endregion
 
     private static TagHelperDescriptor CreateDescriptor(
-        string kind,
+        TagHelperKind kind,
         string tagName,
         string typeName,
         string assemblyName,
@@ -1482,6 +1481,11 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
         bool componentFullyQualified = false,
         bool componentChildContent = false)
     {
+        if (componentChildContent)
+        {
+            kind = ComponentMetadata.ChildContent.Kind;
+        }
+
         var builder = TagHelperDescriptorBuilder.Create(kind, typeName, assemblyName);
 
         using var metadata = new MetadataBuilder();
@@ -1517,11 +1521,6 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
         if (componentFullyQualified)
         {
             metadata.Add(ComponentMetadata.Component.NameMatchKey, ComponentMetadata.Component.FullyQualifiedNameMatch);
-        }
-
-        if (componentChildContent)
-        {
-            metadata.Add(SpecialKind(ComponentMetadata.ChildContent.TagHelperKind));
         }
 
         builder.SetMetadata(metadata.Build());

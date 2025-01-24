@@ -55,7 +55,7 @@ public class TagHelperDeltaResultSerializationTest(ITestOutputHelper testOutput)
     {
         // Arrange
         var descriptor = CreateTagHelperDescriptor(
-            kind: TagHelperConventions.DefaultKind,
+            kind: TagHelperKind.Default,
             tagName: "tag-name",
             typeName: "type name",
             assemblyName: "assembly name",
@@ -155,7 +155,7 @@ public class TagHelperDeltaResultSerializationTest(ITestOutputHelper testOutput)
     {
         // Arrange
         var descriptor = CreateTagHelperDescriptor(
-            kind: TagHelperConventions.DefaultKind,
+            kind: TagHelperKind.Default,
             tagName: "tag-name",
             typeName: "type name",
             assemblyName: "assembly name",
@@ -203,7 +203,7 @@ public class TagHelperDeltaResultSerializationTest(ITestOutputHelper testOutput)
     {
         // Arrange
         var descriptor = CreateTagHelperDescriptor(
-            kind: TagHelperConventions.DefaultKind,
+            kind: TagHelperKind.Default,
             tagName: "tag-name",
             typeName: "type name",
             assemblyName: "assembly name",
@@ -248,7 +248,7 @@ public class TagHelperDeltaResultSerializationTest(ITestOutputHelper testOutput)
     }
 
     private static TagHelperDescriptor CreateTagHelperDescriptor(
-        string kind,
+        TagHelperKind kind,
         string tagName,
         string typeName,
         string assemblyName,
@@ -271,7 +271,8 @@ public class TagHelperDeltaResultSerializationTest(ITestOutputHelper testOutput)
         {
             foreach (var ruleBuilder in ruleBuilders)
             {
-                builder.TagMatchingRuleDescriptor(innerRuleBuilder => {
+                builder.TagMatchingRuleDescriptor(innerRuleBuilder =>
+                {
                     innerRuleBuilder.RequireTagName(tagName);
                     ruleBuilder(innerRuleBuilder);
                 });

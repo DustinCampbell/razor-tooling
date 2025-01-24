@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
 using System.Text;
+using Microsoft.AspNetCore.Mvc.Razor.Extensions;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Test.Common;
 using Xunit;
@@ -51,7 +52,7 @@ public class TagHelperDescriptorSerializationTest(ITestOutputHelper testOutput) 
     {
         // Arrange
         var expectedDescriptor = CreateTagHelperDescriptor(
-            kind: TagHelperConventions.DefaultKind,
+            kind: TagHelperKind.Default,
             tagName: "tag-name",
             typeName: "type name",
             assemblyName: "assembly name",
@@ -95,7 +96,7 @@ public class TagHelperDescriptorSerializationTest(ITestOutputHelper testOutput) 
     {
         // Arrange
         var expectedDescriptor = CreateTagHelperDescriptor(
-            kind: "MVC.ViewComponent",
+            kind: ViewComponentTagHelperConventions.Kind,
             tagName: "tag-name",
             typeName: "type name",
             assemblyName: "assembly name",
@@ -139,7 +140,7 @@ public class TagHelperDescriptorSerializationTest(ITestOutputHelper testOutput) 
     {
         // Arrange
         var expectedDescriptor = CreateTagHelperDescriptor(
-            kind: TagHelperConventions.DefaultKind,
+            kind: TagHelperKind.Default,
             tagName: "tag-name",
             typeName: "type name",
             assemblyName: "assembly name",
@@ -182,7 +183,7 @@ public class TagHelperDescriptorSerializationTest(ITestOutputHelper testOutput) 
     {
         // Arrange
         var expectedDescriptor = CreateTagHelperDescriptor(
-            kind: TagHelperConventions.DefaultKind,
+            kind: TagHelperKind.Default,
             tagName: "tag-name",
             typeName: "type name",
             assemblyName: "assembly name",
@@ -225,7 +226,7 @@ public class TagHelperDescriptorSerializationTest(ITestOutputHelper testOutput) 
     {
         // Arrange
         var expectedDescriptor = CreateTagHelperDescriptor(
-            kind: TagHelperConventions.DefaultKind,
+            kind: TagHelperKind.Default,
             tagName: "tag-name2",
             typeName: "type name",
             assemblyName: "assembly name",
@@ -257,7 +258,7 @@ public class TagHelperDescriptorSerializationTest(ITestOutputHelper testOutput) 
     {
         // Arrange
         var expectedDescriptor = CreateTagHelperDescriptor(
-            kind: TagHelperConventions.DefaultKind,
+            kind: TagHelperKind.Default,
             tagName: "tag-name3",
             typeName: "type name",
             assemblyName: "assembly name",
@@ -287,7 +288,7 @@ public class TagHelperDescriptorSerializationTest(ITestOutputHelper testOutput) 
     }
 
     private static TagHelperDescriptor CreateTagHelperDescriptor(
-        string kind,
+        TagHelperKind kind,
         string tagName,
         string typeName,
         string assemblyName,
@@ -310,7 +311,8 @@ public class TagHelperDescriptorSerializationTest(ITestOutputHelper testOutput) 
         {
             foreach (var ruleBuilder in ruleBuilders)
             {
-                builder.TagMatchingRuleDescriptor(innerRuleBuilder => {
+                builder.TagMatchingRuleDescriptor(innerRuleBuilder =>
+                {
                     innerRuleBuilder.RequireTagName(tagName);
                     ruleBuilder(innerRuleBuilder);
                 });
