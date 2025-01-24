@@ -70,9 +70,11 @@ internal static partial class ObjectReaders
         }
 #endif
 
-        var kind = reader.ReadNonNullString(nameof(TagHelperDescriptor.Kind));
+        var kind = (TagHelperKind)reader.ReadInt32(nameof(TagHelperDescriptor.Kind));
         var name = reader.ReadNonNullString(nameof(TagHelperDescriptor.Name));
         var assemblyName = reader.ReadNonNullString(nameof(TagHelperDescriptor.AssemblyName));
+
+        var runtime = (RuntimeKind)reader.ReadInt32(nameof(TagHelperDescriptor.Runtime));
 
         var displayName = reader.ReadStringOrNull(nameof(TagHelperDescriptor.DisplayName));
         var documentationObject = ReadDocumentationObject(reader, nameof(TagHelperDescriptor.Documentation));
@@ -87,7 +89,7 @@ internal static partial class ObjectReaders
         var diagnostics = reader.ReadImmutableArrayOrEmpty(nameof(TagHelperDescriptor.Diagnostics), ReadDiagnostic);
 
         tagHelper = new TagHelperDescriptor(
-            Cached(kind), Cached(name), Cached(assemblyName),
+            kind, Cached(name), Cached(assemblyName), runtime,
             Cached(displayName)!, documentationObject,
             Cached(tagOutputHint), caseSensitive,
             tagMatchingRules, boundAttributes, allowedChildTags,
@@ -153,7 +155,7 @@ internal static partial class ObjectReaders
 
             static BoundAttributeDescriptor ReadFromProperties(JsonDataReader reader)
             {
-                var kind = reader.ReadNonNullString(nameof(BoundAttributeDescriptor.Kind));
+                var kind = (TagHelperKind)reader.ReadInt32(nameof(TagHelperDescriptor.Kind));
                 var name = reader.ReadString(nameof(BoundAttributeDescriptor.Name));
                 var typeName = reader.ReadNonNullString(nameof(BoundAttributeDescriptor.TypeName));
                 var isEnum = reader.ReadBooleanOrFalse(nameof(BoundAttributeDescriptor.IsEnum));
@@ -171,7 +173,7 @@ internal static partial class ObjectReaders
                 var diagnostics = reader.ReadImmutableArrayOrEmpty(nameof(BoundAttributeDescriptor.Diagnostics), ReadDiagnostic);
 
                 return new BoundAttributeDescriptor(
-                    Cached(kind), Cached(name)!, Cached(typeName), isEnum,
+                    kind, Cached(name)!, Cached(typeName), isEnum,
                     hasIndexer, Cached(indexerNamePrefix), Cached(indexerTypeName),
                     documentationObject, Cached(displayName), Cached(containingType),
                     caseSensitive, isEditorRequired, parameters, metadata, diagnostics);
@@ -184,7 +186,7 @@ internal static partial class ObjectReaders
 
             static BoundAttributeParameterDescriptor ReadFromProperties(JsonDataReader reader)
             {
-                var kind = reader.ReadNonNullString(nameof(BoundAttributeParameterDescriptor.Kind));
+                var kind = (TagHelperKind)reader.ReadInt32(nameof(TagHelperDescriptor.Kind));
                 var name = reader.ReadString(nameof(BoundAttributeParameterDescriptor.Name));
                 var typeName = reader.ReadNonNullString(nameof(BoundAttributeParameterDescriptor.TypeName));
                 var isEnum = reader.ReadBooleanOrFalse(nameof(BoundAttributeParameterDescriptor.IsEnum));
@@ -196,7 +198,7 @@ internal static partial class ObjectReaders
                 var diagnostics = reader.ReadImmutableArrayOrEmpty(nameof(BoundAttributeParameterDescriptor.Diagnostics), ReadDiagnostic);
 
                 return new BoundAttributeParameterDescriptor(
-                    Cached(kind), Cached(name)!, Cached(typeName),
+                    kind, Cached(name)!, Cached(typeName),
                     isEnum, documentationObject, Cached(displayName), caseSensitive,
                     metadata, diagnostics);
             }

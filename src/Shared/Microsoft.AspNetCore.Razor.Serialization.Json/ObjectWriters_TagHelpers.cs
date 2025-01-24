@@ -17,9 +17,10 @@ internal static partial class ObjectWriters
     public static void WriteProperties(JsonDataWriter writer, TagHelperDescriptor value)
     {
         writer.WriteObject(WellKnownPropertyNames.Checksum, value.Checksum, WriteProperties);
-        writer.Write(nameof(value.Kind), value.Kind);
+        writer.Write(nameof(value.Kind), (int)value.Kind);
         writer.Write(nameof(value.Name), value.Name);
         writer.Write(nameof(value.AssemblyName), value.AssemblyName);
+        writer.Write(nameof(value.Runtime), (int)value.Runtime);
         writer.WriteIfNotNull(nameof(value.DisplayName), value.DisplayName);
         WriteDocumentationObject(writer, nameof(value.Documentation), value.DocumentationObject);
         writer.WriteIfNotNull(nameof(value.TagOutputHint), value.TagOutputHint);
@@ -93,7 +94,7 @@ internal static partial class ObjectWriters
         {
             writer.WriteObject(value, static (writer, value) =>
             {
-                writer.Write(nameof(value.Kind), value.Kind);
+                writer.Write(nameof(value.Kind), (int)value.Kind);
                 writer.Write(nameof(value.Name), value.Name);
                 writer.Write(nameof(value.TypeName), value.TypeName);
                 writer.WriteIfNotFalse(nameof(value.IsEnum), value.IsEnum);
@@ -116,7 +117,7 @@ internal static partial class ObjectWriters
         {
             writer.WriteObject(value, static (writer, value) =>
             {
-                writer.Write(nameof(value.Kind), value.Kind);
+                writer.Write(nameof(value.Kind), (int)value.Kind);
                 writer.Write(nameof(value.Name), value.Name);
                 writer.Write(nameof(value.TypeName), value.TypeName);
                 writer.WriteIfNotFalse(nameof(value.IsEnum), value.IsEnum);
