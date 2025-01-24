@@ -47,7 +47,6 @@ public class TagHelperDescriptorBuilderTest
         var builder2 = TagHelperDescriptorBuilder.Create("TestTagHelper1", "TestAssembly1");
 
         var metadata = MetadataCollection.Create(
-            RuntimeName("TestRuntime"),
             TypeName("TestTagHelper1"),
             TypeNameIdentifier("TestTagHelper1"));
 
@@ -72,13 +71,10 @@ public class TagHelperDescriptorBuilderTest
         var builder1 = TagHelperDescriptorBuilder.Create("TestTagHelper1", "TestAssembly1");
         var builder2 = TagHelperDescriptorBuilder.Create("TestTagHelper1", "TestAssembly1");
 
-        var runtimeName = RuntimeName("TestRuntime");
 
-        builder1.Metadata[runtimeName.Key] = runtimeName.Value;
         builder1.Metadata.Add(TypeName("TestTagHelper1"));
         builder1.Metadata.Add(TypeNameIdentifier("TestTagHelper1"));
 
-        builder2.Metadata[runtimeName.Key] = runtimeName.Value;
         builder2.Metadata.Add(TypeName("TestTagHelper1"));
         builder2.Metadata.Add(TypeNameIdentifier("TestTagHelper1"));
 

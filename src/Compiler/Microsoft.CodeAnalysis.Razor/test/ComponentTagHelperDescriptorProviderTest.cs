@@ -66,6 +66,7 @@ namespace Test
         Assert.False(component.KindUsesDefaultTagHelperRuntime());
         Assert.True(component.IsComponentOrChildContentTagHelper);
         Assert.True(component.CaseSensitive);
+        Assert.Equal(ComponentMetadata.Component.Runtime, component.Runtime);
 
         // No documentation in this test
         Assert.Null(component.Documentation);
@@ -92,8 +93,7 @@ namespace Test
             component.Metadata.OrderBy(kvp => kvp.Key),
             kvp => { Assert.Equal(TagHelperMetadata.Common.TypeName, kvp.Key); Assert.Equal("Test.MyComponent", kvp.Value); },
             kvp => { Assert.Equal(TagHelperMetadata.Common.TypeNameIdentifier, kvp.Key); Assert.Equal("MyComponent", kvp.Value); },
-            kvp => { Assert.Equal(TagHelperMetadata.Common.TypeNamespace, kvp.Key); Assert.Equal("Test", kvp.Value); },
-            kvp => { Assert.Equal(TagHelperMetadata.Runtime.Name, kvp.Key); Assert.Equal("Components.IComponent", kvp.Value); });
+            kvp => { Assert.Equal(TagHelperMetadata.Common.TypeNamespace, kvp.Key); Assert.Equal("Test", kvp.Value); });
 
         // Our use of bound attributes is what tests will focus on. As you might expect right now, this test
         // is going to cover a lot of trivial stuff that will be true for all components/component-properties.
