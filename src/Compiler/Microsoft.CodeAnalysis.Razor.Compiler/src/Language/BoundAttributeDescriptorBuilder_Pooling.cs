@@ -34,6 +34,7 @@ public partial class BoundAttributeDescriptorBuilder
         IsEditorRequired = false;
         IndexerAttributeNamePrefix = null;
         IndexerValueTypeName = null;
+        IsDirectiveAttribute = false;
         DisplayName = null;
         ContainingType = null;
         Parameters.Clear();

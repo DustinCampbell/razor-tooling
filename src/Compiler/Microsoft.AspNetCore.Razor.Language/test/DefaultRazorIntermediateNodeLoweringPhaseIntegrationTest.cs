@@ -316,18 +316,18 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
 <input bound='foo' />");
         var tagHelpers = new[]
         {
-                CreateTagHelperDescriptor(
-                    tagName: "input",
-                    typeName: "InputTagHelper",
-                    assemblyName: "TestAssembly",
-                    attributes: new Action<BoundAttributeDescriptorBuilder>[]
-                    {
-                        builder => builder
-                            .Name("bound")
-                            .Metadata(PropertyName("FooProp"))
-                            .TypeName("System.String"),
-                            })
-            };
+            CreateTagHelperDescriptor(
+                tagName: "input",
+                typeName: "InputTagHelper",
+                assemblyName: "TestAssembly",
+                attributes: new Action<BoundAttributeDescriptorBuilder>[]
+                {
+                    builder => builder
+                        .Name("bound")
+                        .Metadata(PropertyName("FooProp"))
+                        .TypeName("System.String"),
+                })
+        };
 
         // Act
         var documentNode = Lower(codeDocument, tagHelpers: tagHelpers);

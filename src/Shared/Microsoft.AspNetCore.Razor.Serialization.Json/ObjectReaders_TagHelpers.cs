@@ -156,25 +156,22 @@ internal static partial class ObjectReaders
                 var kind = reader.ReadNonNullString(nameof(BoundAttributeDescriptor.Kind));
                 var name = reader.ReadString(nameof(BoundAttributeDescriptor.Name));
                 var typeName = reader.ReadNonNullString(nameof(BoundAttributeDescriptor.TypeName));
-                var isEnum = reader.ReadBooleanOrFalse(nameof(BoundAttributeDescriptor.IsEnum));
-                var hasIndexer = reader.ReadBooleanOrFalse(nameof(BoundAttributeDescriptor.HasIndexer));
+                var flags = (BoundAttributeFlags)reader.ReadInt32OrDefault(nameof(BoundAttributeDescriptor.Flags), (int)BoundAttributeFlags.Default);
                 var indexerNamePrefix = reader.ReadStringOrNull(nameof(BoundAttributeDescriptor.IndexerNamePrefix));
                 var indexerTypeName = reader.ReadStringOrNull(nameof(BoundAttributeDescriptor.IndexerTypeName));
                 var displayName = reader.ReadNonNullString(nameof(BoundAttributeDescriptor.DisplayName));
                 var containingType = reader.ReadStringOrNull(nameof(BoundAttributeDescriptor.ContainingType));
                 var documentationObject = ReadDocumentationObject(reader, nameof(BoundAttributeDescriptor.Documentation));
-                var caseSensitive = reader.ReadBooleanOrTrue(nameof(BoundAttributeDescriptor.CaseSensitive));
-                var isEditorRequired = reader.ReadBooleanOrFalse(nameof(BoundAttributeDescriptor.IsEditorRequired));
                 var parameters = reader.ReadImmutableArrayOrEmpty("BoundAttributeParameters", ReadBoundAttributeParameter);
 
                 var metadata = ReadMetadata(reader, nameof(BoundAttributeDescriptor.Metadata));
                 var diagnostics = reader.ReadImmutableArrayOrEmpty(nameof(BoundAttributeDescriptor.Diagnostics), ReadDiagnostic);
 
                 return new BoundAttributeDescriptor(
-                    Cached(kind), Cached(name)!, Cached(typeName), isEnum,
-                    hasIndexer, Cached(indexerNamePrefix), Cached(indexerTypeName),
+                    Cached(kind), Cached(name)!, Cached(typeName), flags,
+                    Cached(indexerNamePrefix), Cached(indexerTypeName),
                     documentationObject, Cached(displayName), Cached(containingType),
-                    caseSensitive, isEditorRequired, parameters, metadata, diagnostics);
+                    parameters, metadata, diagnostics);
             }
         }
 

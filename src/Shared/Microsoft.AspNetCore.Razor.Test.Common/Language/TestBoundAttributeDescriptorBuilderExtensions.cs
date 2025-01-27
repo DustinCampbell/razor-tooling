@@ -104,6 +104,15 @@ public static class TestBoundAttributeDescriptorBuilderExtensions
         return builder;
     }
 
+    public static BoundAttributeDescriptorBuilder IsDirectiveAttribute(this BoundAttributeDescriptorBuilder builder)
+    {
+        ArgHelper.ThrowIfNull(builder);
+
+        builder.IsDirectiveAttribute = true;
+
+        return builder;
+    }
+
     public static BoundAttributeDescriptorBuilder Documentation(this BoundAttributeDescriptorBuilder builder, string documentation)
     {
         if (builder == null)

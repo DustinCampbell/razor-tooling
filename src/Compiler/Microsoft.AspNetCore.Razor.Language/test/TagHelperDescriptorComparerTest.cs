@@ -17,27 +17,27 @@ public class TagHelperDescriptorComparerTest
     {
         // Arrange
         var descriptor1 = CreateTagHelperDescriptor(
-                tagName: "input",
-                typeName: "InputTagHelper",
-                assemblyName: "TestAssembly",
-                attributes: new Action<BoundAttributeDescriptorBuilder>[]
-                {
-                    builder => builder
-                        .Name("value")
-                        .Metadata(PropertyName("FooProp"))
-                        .TypeName("System.String"),
-                });
+            tagName: "input",
+            typeName: "InputTagHelper",
+            assemblyName: "TestAssembly",
+            attributes: new Action<BoundAttributeDescriptorBuilder>[]
+            {
+                builder => builder
+                    .Name("value")
+                    .Metadata(PropertyName("FooProp"))
+                    .TypeName("System.String"),
+            });
         var descriptor2 = CreateTagHelperDescriptor(
-                tagName: "input",
-                typeName: "InputTagHelper",
-                assemblyName: "TestAssembly",
-                attributes: new Action<BoundAttributeDescriptorBuilder>[]
-                {
-                    builder => builder
-                        .Name("value")
-                        .Metadata(PropertyName("FooProp"))
-                        .TypeName("System.String"),
-                });
+            tagName: "input",
+            typeName: "InputTagHelper",
+            assemblyName: "TestAssembly",
+            attributes: new Action<BoundAttributeDescriptorBuilder>[]
+            {
+                builder => builder
+                    .Name("value")
+                    .Metadata(PropertyName("FooProp"))
+                    .TypeName("System.String"),
+            });
 
         // Act
         var hashCode1 = descriptor1.GetHashCode();
