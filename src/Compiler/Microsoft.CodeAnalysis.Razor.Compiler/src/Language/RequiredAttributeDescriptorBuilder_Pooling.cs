@@ -27,6 +27,7 @@ public partial class RequiredAttributeDescriptorBuilder
         NameComparisonMode = default;
         Value = null;
         ValueComparisonMode = default;
+        IsDirectiveAttribute = false;
 
         _metadata.Clear();
     }
