@@ -1,12 +1,10 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
-using Microsoft.AspNetCore.Razor.Language.Components;
 using Microsoft.AspNetCore.Razor.PooledObjects;
 using Microsoft.AspNetCore.Razor.Utilities;
 using Microsoft.CodeAnalysis;
@@ -16,15 +14,6 @@ namespace Microsoft.AspNetCore.Razor.Language;
 [DebuggerDisplay($"{{{nameof(GetDebuggerDisplay)}(),nq}}")]
 public sealed class TagHelperDescriptor : TagHelperObject<TagHelperDescriptor>
 {
-    [Flags]
-    private enum TagHelperFlags
-    {
-        CaseSensitive = 1 << 0,
-        IsComponent = 1 << 1,
-        IsComponentFullyQualifiedNameMatch = 1 << 2,
-        IsChildContent = 1 << 3
-    }
-
     private readonly TagHelperFlags _flags;
     private readonly DocumentationObject _documentationObject;
 
@@ -40,6 +29,7 @@ public sealed class TagHelperDescriptor : TagHelperObject<TagHelperDescriptor>
     public string DisplayName { get; }
     public string? TagOutputHint { get; }
 
+    internal TagHelperFlags Flags => _flags;
     public bool CaseSensitive => (_flags & TagHelperFlags.CaseSensitive) != 0;
 
     public ImmutableArray<AllowedChildTagDescriptor> AllowedChildTags { get; }
@@ -61,10 +51,10 @@ public sealed class TagHelperDescriptor : TagHelperObject<TagHelperDescriptor>
         string kind,
         string name,
         string assemblyName,
+        TagHelperFlags flags,
         string displayName,
         DocumentationObject documentationObject,
         string? tagOutputHint,
-        bool caseSensitive,
         ImmutableArray<TagMatchingRuleDescriptor> tagMatchingRules,
         ImmutableArray<BoundAttributeDescriptor> attributeDescriptors,
         ImmutableArray<AllowedChildTagDescriptor> allowedChildTags,
@@ -75,6 +65,7 @@ public sealed class TagHelperDescriptor : TagHelperObject<TagHelperDescriptor>
         Kind = kind;
         Name = name;
         AssemblyName = assemblyName;
+        _flags = flags;
         DisplayName = displayName;
         _documentationObject = documentationObject;
         TagOutputHint = tagOutputHint;
@@ -82,31 +73,6 @@ public sealed class TagHelperDescriptor : TagHelperObject<TagHelperDescriptor>
         BoundAttributes = attributeDescriptors.NullToEmpty();
         AllowedChildTags = allowedChildTags.NullToEmpty();
         Metadata = metadata ?? MetadataCollection.Empty;
-
-        TagHelperFlags flags = 0;
-
-        if (caseSensitive)
-        {
-            flags |= TagHelperFlags.CaseSensitive;
-        }
-
-        if (kind == ComponentMetadata.Component.TagHelperKind &&
-            !Metadata.ContainsKey(ComponentMetadata.SpecialKindKey))
-        {
-            flags |= TagHelperFlags.IsComponent;
-        }
-
-        if (Metadata.Contains(ComponentMetadata.Component.NameMatchKey, ComponentMetadata.Component.FullyQualifiedNameMatch))
-        {
-            flags |= TagHelperFlags.IsComponentFullyQualifiedNameMatch;
-        }
-
-        if (Metadata.Contains(ComponentMetadata.SpecialKindKey, ComponentMetadata.ChildContent.TagHelperKind))
-        {
-            flags |= TagHelperFlags.IsChildContent;
-        }
-
-        _flags = flags;
     }
 
     private protected override void BuildChecksum(in Checksum.Builder builder)
@@ -114,12 +80,11 @@ public sealed class TagHelperDescriptor : TagHelperObject<TagHelperDescriptor>
         builder.AppendData(Kind);
         builder.AppendData(Name);
         builder.AppendData(AssemblyName);
+        builder.AppendData((int)Flags);
         builder.AppendData(DisplayName);
         builder.AppendData(TagOutputHint);
 
         DocumentationObject.AppendToChecksum(in builder);
-
-        builder.AppendData(CaseSensitive);
 
         foreach (var descriptor in AllowedChildTags)
         {
@@ -217,8 +182,8 @@ public sealed class TagHelperDescriptor : TagHelperObject<TagHelperDescriptor>
     internal TagHelperDescriptor WithName(string name)
     {
         return new(
-            Kind, name, AssemblyName, DisplayName,
-            DocumentationObject, TagOutputHint, CaseSensitive,
+            Kind, name, AssemblyName, Flags, DisplayName,
+            DocumentationObject, TagOutputHint,
             TagMatchingRules, BoundAttributes, AllowedChildTags,
             Metadata, Diagnostics);
     }
