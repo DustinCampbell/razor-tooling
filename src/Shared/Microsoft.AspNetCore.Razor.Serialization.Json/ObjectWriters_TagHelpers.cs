@@ -20,10 +20,10 @@ internal static partial class ObjectWriters
         writer.Write(nameof(value.Kind), value.Kind);
         writer.Write(nameof(value.Name), value.Name);
         writer.Write(nameof(value.AssemblyName), value.AssemblyName);
+        writer.WriteIfNotDefault(nameof(value.Flags), (int)value.Flags, (int)TagHelperFlags.Default);
         writer.WriteIfNotNull(nameof(value.DisplayName), value.DisplayName);
         WriteDocumentationObject(writer, nameof(value.Documentation), value.DocumentationObject);
         writer.WriteIfNotNull(nameof(value.TagOutputHint), value.TagOutputHint);
-        writer.Write(nameof(value.CaseSensitive), value.CaseSensitive);
         writer.WriteArrayIfNotDefaultOrEmpty(nameof(value.TagMatchingRules), value.TagMatchingRules, WriteTagMatchingRule);
         writer.WriteArrayIfNotDefaultOrEmpty(nameof(value.BoundAttributes), value.BoundAttributes, WriteBoundAttribute);
         writer.WriteArrayIfNotDefaultOrEmpty(nameof(value.AllowedChildTags), value.AllowedChildTags, WriteAllowedChildTag);
