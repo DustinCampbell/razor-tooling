@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
-using Microsoft.AspNetCore.Razor.Language.Components;
 using Microsoft.AspNetCore.Razor.PooledObjects;
 using static Microsoft.AspNetCore.Razor.Language.RequiredAttributeDescriptor;
 
@@ -32,6 +31,7 @@ public sealed partial class RequiredAttributeDescriptorBuilder : TagHelperObject
     public ValueComparisonMode ValueComparisonMode { get; set; }
 
     internal bool CaseSensitive => _parent.CaseSensitive;
+    internal bool IsDirectiveAttribute { get; set; }
 
     public IDictionary<string, string?> Metadata => _metadata.MetadataDictionary;
 
@@ -42,28 +42,40 @@ public sealed partial class RequiredAttributeDescriptorBuilder : TagHelperObject
 
     private protected override RequiredAttributeDescriptor BuildCore(ImmutableArray<RazorDiagnostic> diagnostics)
     {
-        var displayName = GetDisplayName();
-        var metadata = _metadata.GetMetadataCollection();
 
         return new RequiredAttributeDescriptor(
             Name ?? string.Empty,
-            NameComparisonMode,
-            CaseSensitive,
             Value,
-            ValueComparisonMode,
-            displayName,
+            ComputeFlags(),
+            GetDisplayName(),
             diagnostics,
-            metadata);
+            _metadata.GetMetadataCollection());
+    }
+
+    private RequiredAttributeFlags ComputeFlags()
+    {
+        RequiredAttributeFlags flags = 0;
+
+        if (CaseSensitive)
+        {
+            flags |= RequiredAttributeFlags.CaseSensitive;
+        }
+
+        if (IsDirectiveAttribute)
+        {
+            flags |= RequiredAttributeFlags.IsDirectiveAttribute;
+        }
+
+        flags.SetNameComparison(NameComparisonMode);
+        flags.SetValueComparison(ValueComparisonMode);
+
+        return flags;
     }
 
     private string GetDisplayName()
     {
         return (NameComparisonMode == NameComparisonMode.PrefixMatch ? string.Concat(Name, "...") : Name) ?? string.Empty;
     }
-
-    private bool IsDirectiveAttribute()
-        => TryGetMetadataValue(ComponentMetadata.Common.DirectiveAttribute, out var value) &&
-           value == bool.TrueString;
 
     private protected override void CollectDiagnostics(ref PooledHashSet<RazorDiagnostic> diagnostics)
     {
@@ -76,7 +88,7 @@ public sealed partial class RequiredAttributeDescriptorBuilder : TagHelperObject
         else
         {
             var name = Name.AsSpan();
-            var isDirectiveAttribute = IsDirectiveAttribute();
+            var isDirectiveAttribute = IsDirectiveAttribute;
             if (isDirectiveAttribute && name[0] == '@')
             {
                 name = name[1..];

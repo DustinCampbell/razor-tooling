@@ -250,7 +250,7 @@ public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
                         .RequireAttributeDescriptor(b =>
                         {
                             b.Name = "@onclick";
-                            b.SetMetadata(Attributes.IsDirectiveAttribute);
+                            b.IsDirectiveAttribute = true;
                         });
                 })
                 .Metadata(SpecialKind(ComponentMetadata.EventHandler.TagHelperKind))
@@ -275,7 +275,7 @@ public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
                         .RequireAttributeDescriptor(b =>
                         {
                             b.Name = "@onclick";
-                            b.SetMetadata(Attributes.IsDirectiveAttribute);
+                            b.IsDirectiveAttribute = true;
                         });
 
                 })
@@ -2235,7 +2235,7 @@ public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
                         {
                             r.Name = "@bind-";
                             r.NameComparisonMode = RequiredAttributeDescriptor.NameComparisonMode.PrefixMatch;
-                            r.SetMetadata(Attributes.IsDirectiveAttribute);
+                            r.IsDirectiveAttribute = true;
                         }))
                 .BoundAttributeDescriptor(attribute =>
                     attribute
@@ -2280,7 +2280,7 @@ public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
                         {
                             r.Name = "@bind-";
                             r.NameComparisonMode = RequiredAttributeDescriptor.NameComparisonMode.PrefixMatch;
-                            r.SetMetadata(Attributes.IsDirectiveAttribute);
+                            r.IsDirectiveAttribute = true;
                         }))
                 .BoundAttributeDescriptor(attribute =>
                     attribute

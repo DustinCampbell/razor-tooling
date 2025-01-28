@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Razor.Language;
 #if JSONSERIALIZATION_ENABLETAGHELPERCACHE
 using Microsoft.AspNetCore.Razor.Utilities;
 #endif
-using static Microsoft.AspNetCore.Razor.Language.RequiredAttributeDescriptor;
 
 namespace Microsoft.AspNetCore.Razor.Serialization.Json;
 
@@ -130,19 +129,15 @@ internal static partial class ObjectReaders
             static RequiredAttributeDescriptor ReadFromProperties(JsonDataReader reader)
             {
                 var name = reader.ReadString(nameof(RequiredAttributeDescriptor.Name));
-                var nameComparison = (NameComparisonMode)reader.ReadInt32OrZero(nameof(RequiredAttributeDescriptor.NameComparison));
-                var caseSensitive = reader.ReadBooleanOrTrue(nameof(RequiredAttributeDescriptor.CaseSensitive));
                 var value = reader.ReadStringOrNull(nameof(RequiredAttributeDescriptor.Value));
-                var valueComparison = (ValueComparisonMode)reader.ReadInt32OrZero(nameof(RequiredAttributeDescriptor.ValueComparison));
+                var flags = (RequiredAttributeFlags)reader.ReadInt32OrDefault(nameof(RequiredAttributeDescriptor.Flags), (int)RequiredAttributeFlags.Default);
                 var displayName = reader.ReadNonNullString(nameof(RequiredAttributeDescriptor.DisplayName));
 
                 var metadata = ReadMetadata(reader, nameof(RequiredAttributeDescriptor.Metadata));
                 var diagnostics = reader.ReadImmutableArrayOrEmpty(nameof(RequiredAttributeDescriptor.Diagnostics), ReadDiagnostic);
 
                 return new RequiredAttributeDescriptor(
-                    Cached(name)!, nameComparison,
-                    caseSensitive,
-                    Cached(value), valueComparison,
+                    Cached(name)!, Cached(value), flags,
                     Cached(displayName), diagnostics, metadata);
             }
         }

@@ -179,7 +179,7 @@ internal static class SimpleTagHelpers
             rule.RequireAttributeDescriptor(b =>
             {
                 b.Name = "@onclick";
-                b.SetMetadata(MetadataCollection.Create(IsDirectiveAttribute));
+                b.IsDirectiveAttribute = true;
                 b.NameComparisonMode = RequiredAttributeDescriptor.NameComparisonMode.FullMatch;
             });
         });
@@ -189,7 +189,7 @@ internal static class SimpleTagHelpers
             rule.RequireAttributeDescriptor(b =>
             {
                 b.Name = "@onclick";
-                b.SetMetadata(MetadataCollection.Create(IsDirectiveAttribute));
+                b.IsDirectiveAttribute = true;
                 b.NameComparisonMode = RequiredAttributeDescriptor.NameComparisonMode.PrefixMatch;
             });
         });

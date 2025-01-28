@@ -8,31 +8,33 @@ namespace Microsoft.AspNetCore.Razor.Language;
 
 public sealed class RequiredAttributeDescriptor : TagHelperObject<RequiredAttributeDescriptor>
 {
+    private readonly RequiredAttributeFlags _flags;
+
     public string Name { get; }
-    public NameComparisonMode NameComparison { get; }
     public string? Value { get; }
-    public ValueComparisonMode ValueComparison { get; }
     public string DisplayName { get; }
-    public bool CaseSensitive { get; }
+
+    internal RequiredAttributeFlags Flags => _flags;
+    public bool CaseSensitive => (_flags & RequiredAttributeFlags.CaseSensitive) != 0;
+    public bool IsDirectiveAttribute => (_flags & RequiredAttributeFlags.IsDirectiveAttribute) != 0;
+
+    public NameComparisonMode NameComparison => _flags.GetNameComparison();
+    public ValueComparisonMode ValueComparison => _flags.GetValueComparison();
 
     public MetadataCollection Metadata { get; }
 
     internal RequiredAttributeDescriptor(
         string name,
-        NameComparisonMode nameComparison,
-        bool caseSensitive,
         string? value,
-        ValueComparisonMode valueComparison,
+        RequiredAttributeFlags flags,
         string displayName,
         ImmutableArray<RazorDiagnostic> diagnostics,
         MetadataCollection metadata)
         : base(diagnostics)
     {
         Name = name;
-        NameComparison = nameComparison;
-        CaseSensitive = caseSensitive;
         Value = value;
-        ValueComparison = valueComparison;
+        _flags = flags;
         DisplayName = displayName;
         Metadata = metadata ?? MetadataCollection.Empty;
     }
@@ -40,9 +42,8 @@ public sealed class RequiredAttributeDescriptor : TagHelperObject<RequiredAttrib
     private protected override void BuildChecksum(in Checksum.Builder builder)
     {
         builder.AppendData(Name);
-        builder.AppendData((int)NameComparison);
         builder.AppendData(Value);
-        builder.AppendData((int)ValueComparison);
+        builder.AppendData((int)Flags);
         builder.AppendData(DisplayName);
         builder.AppendData(CaseSensitive);
         builder.AppendData(Metadata.Checksum);
@@ -56,7 +57,7 @@ public sealed class RequiredAttributeDescriptor : TagHelperObject<RequiredAttrib
     /// <summary>
     /// Acceptable <see cref="Name"/> comparison modes.
     /// </summary>
-    public enum NameComparisonMode
+    public enum NameComparisonMode : byte
     {
         /// <summary>
         /// HTML attribute name case insensitively matches <see cref="Name"/>.
@@ -72,7 +73,7 @@ public sealed class RequiredAttributeDescriptor : TagHelperObject<RequiredAttrib
     /// <summary>
     /// Acceptable <see cref="Value"/> comparison modes.
     /// </summary>
-    public enum ValueComparisonMode
+    public enum ValueComparisonMode : byte
     {
         /// <summary>
         /// HTML attribute value always matches <see cref="Value"/>.
