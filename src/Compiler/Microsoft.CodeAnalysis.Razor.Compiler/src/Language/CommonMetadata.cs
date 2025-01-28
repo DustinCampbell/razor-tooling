@@ -10,8 +10,6 @@ public static class CommonMetadata
 {
     internal static readonly KeyValuePair<string, string?> BindAttributeGetSet
         = MakeTrue(ComponentMetadata.Bind.BindAttributeGetSet);
-    internal static readonly KeyValuePair<string, string?> IsDirectiveAttribute
-        = MakeTrue(ComponentMetadata.Common.DirectiveAttribute);
     internal static readonly KeyValuePair<string, string?> IsWeaklyTyped
         = MakeTrue(ComponentMetadata.Component.WeaklyTypedKey);
 
@@ -31,11 +29,6 @@ public static class CommonMetadata
         => new(TagHelperMetadata.Common.TypeNamespace, value);
     internal static KeyValuePair<string, string?> TypeNameIdentifier(string value)
         => new(TagHelperMetadata.Common.TypeNameIdentifier, value);
-
-    internal static class Attributes
-    {
-        public static readonly MetadataCollection IsDirectiveAttribute = MetadataCollection.Create(CommonMetadata.IsDirectiveAttribute);
-    }
 
     internal static class Parameters
     {
