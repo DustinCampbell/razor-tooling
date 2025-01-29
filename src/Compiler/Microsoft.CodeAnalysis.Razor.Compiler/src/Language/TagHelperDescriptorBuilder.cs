@@ -116,52 +116,48 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
     private protected override TagHelperDescriptor BuildCore(ImmutableArray<RazorDiagnostic> diagnostics)
     {
         _metadata.AddIfMissing(TagHelperMetadata.Runtime.Name, TagHelperConventions.DefaultKind);
-        var metadata = _metadata.GetMetadataCollection();
-        var flags = ComputeFlags(Kind, CaseSensitive, ClassifyAttributesOnly, UseFullyQualifiedNameMatch, metadata);
 
         return new TagHelperDescriptor(
             Kind,
             Name,
             AssemblyName,
-            flags,
+            ComputeFlags(),
             GetDisplayName(),
             _documentationObject,
             TagOutputHint,
             TagMatchingRules.ToImmutable(),
             BoundAttributes.ToImmutable(),
             AllowedChildTags.ToImmutable(),
-            metadata,
+            _metadata.GetMetadataCollection(),
             diagnostics);
     }
 
-    internal static TagHelperFlags ComputeFlags(string kind, bool caseSensitive, bool classifyAttributesOnly, bool useFullyQualifiedNameMatch, MetadataCollection metadata)
+    private TagHelperFlags ComputeFlags()
     {
         TagHelperFlags flags = 0;
 
-        if (caseSensitive)
+        if (CaseSensitive)
         {
             flags |= TagHelperFlags.CaseSensitive;
         }
 
-        if (classifyAttributesOnly)
+        if (ClassifyAttributesOnly)
         {
             flags |= TagHelperFlags.ClassifyAttributesOnly;
         }
 
-        if (kind == ComponentMetadata.Component.TagHelperKind &&
-            !metadata.ContainsKey(ComponentMetadata.SpecialKindKey))
+        if (Kind == ComponentMetadata.Component.TagHelperKind)
         {
             flags |= TagHelperFlags.IsComponent;
         }
-
-        if (useFullyQualifiedNameMatch)
-        {
-            flags |= TagHelperFlags.UseFullyQualifiedNameMatch;
-        }
-
-        if (metadata.Contains(ComponentMetadata.SpecialKindKey, ComponentMetadata.ChildContent.TagHelperKind))
+        else if (Kind == ComponentMetadata.ChildContent.TagHelperKind)
         {
             flags |= TagHelperFlags.IsChildContent;
+        }
+
+        if (UseFullyQualifiedNameMatch)
+        {
+            flags |= TagHelperFlags.UseFullyQualifiedNameMatch;
         }
 
         return flags;

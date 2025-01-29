@@ -47,7 +47,6 @@ internal sealed class RenderModeTagHelperDescriptorProvider() : TagHelperDescrip
         builder.SetDocumentation(DocumentationDescriptor.RenderModeTagHelper);
 
         builder.SetMetadata(
-            SpecialKind(ComponentMetadata.RenderMode.TagHelperKind),
             RuntimeName(ComponentMetadata.RenderMode.RuntimeName),
             TypeName("Microsoft.AspNetCore.Components.RenderMode"));
 
