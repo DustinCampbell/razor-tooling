@@ -296,29 +296,24 @@ public abstract class CodeActionEndToEndTestBase(ITestOutputHelper testOutput) :
 
         static IEnumerable<TagHelperDescriptor> BuildTagHelpers()
         {
-            var builder = TagHelperDescriptorBuilder.Create("oncontextmenu", "Microsoft.AspNetCore.Components");
+            var builder = TagHelperDescriptorBuilder.Create(ComponentMetadata.EventHandler.TagHelperKind, "oncontextmenu", "Microsoft.AspNetCore.Components");
             builder.SetMetadata(
-                new KeyValuePair<string, string>(ComponentMetadata.EventHandler.EventArgsType, "Microsoft.AspNetCore.Components.Web.MouseEventArgs"),
-                new KeyValuePair<string, string>(ComponentMetadata.SpecialKindKey, ComponentMetadata.EventHandler.TagHelperKind));
+                new KeyValuePair<string, string>(ComponentMetadata.EventHandler.EventArgsType, "Microsoft.AspNetCore.Components.Web.MouseEventArgs"));
             yield return builder.Build();
 
-            builder = TagHelperDescriptorBuilder.Create("onclick", "Microsoft.AspNetCore.Components");
+            builder = TagHelperDescriptorBuilder.Create(ComponentMetadata.EventHandler.TagHelperKind, "onclick", "Microsoft.AspNetCore.Components");
             builder.SetMetadata(
-                new KeyValuePair<string, string>(ComponentMetadata.EventHandler.EventArgsType, "Microsoft.AspNetCore.Components.Web.MouseEventArgs"),
-                new KeyValuePair<string, string>(ComponentMetadata.SpecialKindKey, ComponentMetadata.EventHandler.TagHelperKind));
-
-            yield return builder.Build();
-
-            builder = TagHelperDescriptorBuilder.Create("oncopy", "Microsoft.AspNetCore.Components");
-            builder.SetMetadata(
-                new KeyValuePair<string, string>(ComponentMetadata.EventHandler.EventArgsType, "Microsoft.AspNetCore.Components.Web.ClipboardEventArgs"),
-                new KeyValuePair<string, string>(ComponentMetadata.SpecialKindKey, ComponentMetadata.EventHandler.TagHelperKind));
+                new KeyValuePair<string, string>(ComponentMetadata.EventHandler.EventArgsType, "Microsoft.AspNetCore.Components.Web.MouseEventArgs"));
 
             yield return builder.Build();
 
-            builder = TagHelperDescriptorBuilder.Create("ref", "Microsoft.AspNetCore.Components");
+            builder = TagHelperDescriptorBuilder.Create(ComponentMetadata.EventHandler.TagHelperKind, "oncopy", "Microsoft.AspNetCore.Components");
             builder.SetMetadata(
-                new KeyValuePair<string, string>(ComponentMetadata.SpecialKindKey, ComponentMetadata.Ref.TagHelperKind));
+                new KeyValuePair<string, string>(ComponentMetadata.EventHandler.EventArgsType, "Microsoft.AspNetCore.Components.Web.ClipboardEventArgs"));
+
+            yield return builder.Build();
+
+            builder = TagHelperDescriptorBuilder.Create(ComponentMetadata.Ref.TagHelperKind, "ref", "Microsoft.AspNetCore.Components");
 
             yield return builder.Build();
 

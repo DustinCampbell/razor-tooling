@@ -508,9 +508,6 @@ internal sealed class ComponentTagHelperDescriptorProvider : TagHelperDescriptor
 
             builder.CaseSensitive = true;
 
-            // Opt out of processing as a component. We'll process this specially as part of the component's body.
-            metadata.Add(SpecialKind(ComponentMetadata.ChildContent.TagHelperKind));
-
             var xml = attribute.Documentation;
             if (!string.IsNullOrEmpty(xml))
             {

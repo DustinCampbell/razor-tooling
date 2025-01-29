@@ -47,7 +47,6 @@ internal sealed class KeyTagHelperDescriptorProvider() : TagHelperDescriptorProv
         builder.SetDocumentation(DocumentationDescriptor.KeyTagHelper);
 
         builder.SetMetadata(
-            SpecialKind(ComponentMetadata.Key.TagHelperKind),
             RuntimeName(ComponentMetadata.Key.RuntimeName),
             TypeName("Microsoft.AspNetCore.Components.Key"));
 

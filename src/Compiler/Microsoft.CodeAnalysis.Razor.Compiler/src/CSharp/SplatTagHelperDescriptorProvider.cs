@@ -46,7 +46,6 @@ internal sealed class SplatTagHelperDescriptorProvider : TagHelperDescriptorProv
         builder.SetDocumentation(DocumentationDescriptor.SplatTagHelper);
 
         builder.SetMetadata(
-            SpecialKind(ComponentMetadata.Splat.TagHelperKind),
             RuntimeName(ComponentMetadata.Splat.RuntimeName),
             TypeName("Microsoft.AspNetCore.Components.Attributes"));
 
