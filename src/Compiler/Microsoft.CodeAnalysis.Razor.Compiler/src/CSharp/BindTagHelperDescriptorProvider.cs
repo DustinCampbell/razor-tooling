@@ -125,11 +125,11 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
             out var builder);
 
         builder.CaseSensitive = true;
+        builder.ClassifyAttributesOnly = true;
         builder.SetDocumentation(DocumentationDescriptor.BindTagHelper_Fallback);
 
         builder.SetMetadata(
             SpecialKind(ComponentMetadata.Bind.TagHelperKind),
-            MakeTrue(TagHelperMetadata.Common.ClassifyAttributesOnly),
             RuntimeName(ComponentMetadata.Bind.RuntimeName),
             MakeTrue(ComponentMetadata.Bind.FallbackKey),
             TypeName("Microsoft.AspNetCore.Components.Bind"),
@@ -368,6 +368,7 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
                 out var builder);
             using var metadata = builder.GetMetadataBuilder(ComponentMetadata.Bind.RuntimeName);
             builder.CaseSensitive = true;
+            builder.ClassifyAttributesOnly = true;
             builder.SetDocumentation(
                 DocumentationDescriptor.From(
                     DocumentationId.BindTagHelper_Element,
@@ -375,7 +376,6 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
                     changeAttribute));
 
             metadata.Add(SpecialKind(ComponentMetadata.Bind.TagHelperKind));
-            metadata.Add(MakeTrue(TagHelperMetadata.Common.ClassifyAttributesOnly));
             metadata.Add(ComponentMetadata.Bind.ValueAttribute, valueAttribute);
             metadata.Add(ComponentMetadata.Bind.ChangeAttribute, changeAttribute);
             metadata.Add(ComponentMetadata.Bind.IsInvariantCulture, isInvariantCulture ? bool.TrueString : bool.FalseString);

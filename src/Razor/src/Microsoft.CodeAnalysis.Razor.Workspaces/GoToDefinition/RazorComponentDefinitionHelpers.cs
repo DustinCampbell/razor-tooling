@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Razor.DocumentMapping;
 using Microsoft.CodeAnalysis.Razor.Logging;
-using Microsoft.CodeAnalysis.Razor.Workspaces;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
 using LspRange = Microsoft.VisualStudio.LanguageServer.Protocol.Range;
 using RazorSyntaxKind = Microsoft.AspNetCore.Razor.Language.SyntaxKind;
@@ -98,7 +97,7 @@ internal static class RazorComponentDefinitionHelpers
             return false;
         }
 
-        boundTagHelper = binding.Descriptors.FirstOrDefault(static d => !d.IsAttributeDescriptor());
+        boundTagHelper = binding.Descriptors.FirstOrDefault(static d => !d.ClassifyAttributesOnly);
         if (boundTagHelper is null)
         {
             logger.LogInformation($"Could not locate bound TagHelperDescriptor.");

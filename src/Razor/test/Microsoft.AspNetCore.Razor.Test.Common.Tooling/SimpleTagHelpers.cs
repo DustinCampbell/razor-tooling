@@ -128,8 +128,8 @@ internal static class SimpleTagHelpers
                 parameter.SetMetadata(PropertyName("Something"));
             });
         });
+        directiveAttribute1.ClassifyAttributesOnly = true;
         directiveAttribute1.SetMetadata(
-            MakeTrue(TagHelperMetadata.Common.ClassifyAttributesOnly),
             new(ComponentMetadata.Component.NameMatchKey, ComponentMetadata.Component.FullyQualifiedNameMatch),
             TypeName("TestDirectiveAttribute"));
 
@@ -167,8 +167,8 @@ internal static class SimpleTagHelpers
                 parameter.SetMetadata(PropertyName("Something"));
             });
         });
+        directiveAttribute2.ClassifyAttributesOnly = true;
         directiveAttribute2.SetMetadata(
-            MakeTrue(TagHelperMetadata.Common.ClassifyAttributesOnly),
             new(ComponentMetadata.Component.NameMatchKey, ComponentMetadata.Component.FullyQualifiedNameMatch),
             TypeName("TestDirectiveAttribute"));
 
@@ -200,12 +200,12 @@ internal static class SimpleTagHelpers
             attribute.SetMetadata(PropertyName("onclick"), IsWeaklyTyped);
             attribute.TypeName = "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.MouseEventArgs>";
         });
+        directiveAttribute3.ClassifyAttributesOnly = true;
         directiveAttribute3.SetMetadata(
             RuntimeName(ComponentMetadata.EventHandler.RuntimeName),
             SpecialKind(ComponentMetadata.EventHandler.TagHelperKind),
             new(ComponentMetadata.EventHandler.EventArgsType, "Microsoft.AspNetCore.Components.Web.MouseEventArgs"),
             new(ComponentMetadata.Component.NameMatchKey, ComponentMetadata.Component.FullyQualifiedNameMatch),
-            MakeTrue(TagHelperMetadata.Common.ClassifyAttributesOnly),
             TypeName("OnClickDirectiveAttribute"),
             TypeNamespace("Microsoft.AspNetCore.Components.Web"),
             TypeNameIdentifier("EventHandlers"));

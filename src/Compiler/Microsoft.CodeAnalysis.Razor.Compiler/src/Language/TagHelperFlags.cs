@@ -12,6 +12,7 @@ internal enum TagHelperFlags
     IsComponent = 1 << 1,
     IsComponentFullyQualifiedNameMatch = 1 << 2,
     IsChildContent = 1 << 3,
+    ClassifyAttributesOnly = 1 << 4,
 
     Default = CaseSensitive
 }

@@ -14,7 +14,6 @@ using Microsoft.AspNetCore.Razor.Language.Legacy;
 using Microsoft.AspNetCore.Razor.Language.Syntax;
 using Microsoft.AspNetCore.Razor.Threading;
 using Microsoft.CodeAnalysis.Razor.Tooltip;
-using Microsoft.CodeAnalysis.Razor.Workspaces;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.Editor.Razor;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
@@ -227,7 +226,7 @@ internal static class HoverFactory
         // Filter out attribute descriptors since we're creating an element hover
         var keepAttributeInfo = FileKinds.GetFileKindFromFilePath(documentFilePath) == FileKinds.Legacy;
         var descriptionInfos = descriptors
-            .Where(d => keepAttributeInfo || !d.IsAttributeDescriptor())
+            .Where(d => keepAttributeInfo || !d.ClassifyAttributesOnly)
             .SelectAsArray(BoundElementDescriptionInfo.From);
         var elementDescriptionInfo = new AggregateBoundElementDescription(descriptionInfos);
 

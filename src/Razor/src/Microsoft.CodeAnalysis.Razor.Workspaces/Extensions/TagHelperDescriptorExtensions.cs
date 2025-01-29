@@ -1,7 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
-using System;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.PooledObjects;
 
@@ -9,12 +8,6 @@ namespace Microsoft.CodeAnalysis.Razor.Workspaces;
 
 internal static class TagHelperDescriptorExtensions
 {
-    public static bool IsAttributeDescriptor(this TagHelperDescriptor descriptor)
-    {
-        return descriptor.Metadata.TryGetValue(TagHelperMetadata.Common.ClassifyAttributesOnly, out var value) ||
-               string.Equals(value, bool.TrueString, StringComparison.OrdinalIgnoreCase);
-    }
-
     public static string? TryGetComponentTag(this TagHelperDescriptor descriptor)
     {
         var typeName = descriptor.GetTypeNameIdentifier();
