@@ -4007,10 +4007,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 8425730897587668921,
-          "Data2": 3170356288274118555,
-          "Data3": 6714153423732491393,
-          "Data4": 3528671542764289073
+          "Data1": -5789568330542147839,
+          "Data2": 828238658589964318,
+          "Data3": -5310267901391084090,
+          "Data4": 8151057138124457147
         },
         "Kind": "Components.EventHandler",
         "Name": "onabort",
@@ -4063,6 +4063,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onabort' event.",
                 "Metadata": {
@@ -4073,6 +4074,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onabort' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -4095,10 +4097,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 3023058440962738590,
-          "Data2": 8423074181374412077,
-          "Data3": 2087108926404613720,
-          "Data4": -714429673614679332
+          "Data1": -5516746007876193948,
+          "Data2": 310388108411094537,
+          "Data3": -4671920365710328544,
+          "Data4": 4932291326127901266
         },
         "Kind": "Components.EventHandler",
         "Name": "onactivate",
@@ -4151,6 +4153,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onactivate' event.",
                 "Metadata": {
@@ -4161,6 +4164,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onactivate' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -4183,10 +4187,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 3408654760730162895,
-          "Data2": -4497938147495111793,
-          "Data3": 8047148063208395389,
-          "Data4": 5988239599594291918
+          "Data1": 8004573530634771699,
+          "Data2": -5722841425961434349,
+          "Data3": -8597403747591135616,
+          "Data4": 64005317995297920
         },
         "Kind": "Components.EventHandler",
         "Name": "onbeforeactivate",
@@ -4239,6 +4243,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onbeforeactivate' event.",
                 "Metadata": {
@@ -4249,6 +4254,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onbeforeactivate' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -4271,10 +4277,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -200261657292035247,
-          "Data2": -7422313570146828727,
-          "Data3": 9203365682721997935,
-          "Data4": 5750945533970797941
+          "Data1": 9191978359827285941,
+          "Data2": -7502503645714812522,
+          "Data3": 7806552643239605106,
+          "Data4": 6409307153098794456
         },
         "Kind": "Components.EventHandler",
         "Name": "onbeforecopy",
@@ -4327,6 +4333,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onbeforecopy' event.",
                 "Metadata": {
@@ -4337,6 +4344,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onbeforecopy' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -4359,10 +4367,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -7653353053903159449,
-          "Data2": 7767781519421726811,
-          "Data3": -5688611840308633815,
-          "Data4": 3064087073692522149
+          "Data1": -2239254626413213645,
+          "Data2": -7362157919247491015,
+          "Data3": 7340368659403105762,
+          "Data4": 943495576616205523
         },
         "Kind": "Components.EventHandler",
         "Name": "onbeforecut",
@@ -4415,6 +4423,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onbeforecut' event.",
                 "Metadata": {
@@ -4425,6 +4434,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onbeforecut' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -4447,10 +4457,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 2443826254171355694,
-          "Data2": 2336999728915815872,
-          "Data3": 4929575232104146317,
-          "Data4": 5536580605415436445
+          "Data1": -4301025436089433930,
+          "Data2": 4094337945564790374,
+          "Data3": 382150275201886331,
+          "Data4": -3487599838510325139
         },
         "Kind": "Components.EventHandler",
         "Name": "onbeforedeactivate",
@@ -4503,6 +4513,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onbeforedeactivate' event.",
                 "Metadata": {
@@ -4513,6 +4524,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onbeforedeactivate' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -4535,10 +4547,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -4998295179651678922,
-          "Data2": 7803622740737164149,
-          "Data3": 4619240622667165274,
-          "Data4": -6738795698340001451
+          "Data1": -8154428109710862940,
+          "Data2": -3821888132262792553,
+          "Data3": -3996585638331998700,
+          "Data4": 7121746347000381567
         },
         "Kind": "Components.EventHandler",
         "Name": "onbeforepaste",
@@ -4591,6 +4603,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onbeforepaste' event.",
                 "Metadata": {
@@ -4601,6 +4614,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onbeforepaste' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -4623,10 +4637,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 6704268035076837730,
-          "Data2": -2428932209026429825,
-          "Data3": 5611862979513886570,
-          "Data4": 2075444002821412215
+          "Data1": 5521917550625403037,
+          "Data2": 6339784335817934280,
+          "Data3": 5857860548593751133,
+          "Data4": 1380034072613554382
         },
         "Kind": "Components.EventHandler",
         "Name": "onblur",
@@ -4679,6 +4693,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onblur' event.",
                 "Metadata": {
@@ -4689,6 +4704,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onblur' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -4711,10 +4727,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -711183225907530639,
-          "Data2": 143712089196015706,
-          "Data3": 5441308635256966605,
-          "Data4": -7036919321658947886
+          "Data1": -336392073389124241,
+          "Data2": -6716149184310986424,
+          "Data3": 6344372088496240870,
+          "Data4": -2643825658731308634
         },
         "Kind": "Components.EventHandler",
         "Name": "oncanplay",
@@ -4767,6 +4783,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@oncanplay' event.",
                 "Metadata": {
@@ -4777,6 +4794,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@oncanplay' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -4799,10 +4817,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -7077240158903367996,
-          "Data2": 5217626755130225008,
-          "Data3": -328265525144105506,
-          "Data4": 33361407942410402
+          "Data1": -3808341398698134233,
+          "Data2": -9099950730225201164,
+          "Data3": 8381261541248843184,
+          "Data4": -2062340275548382249
         },
         "Kind": "Components.EventHandler",
         "Name": "oncanplaythrough",
@@ -4855,6 +4873,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@oncanplaythrough' event.",
                 "Metadata": {
@@ -4865,6 +4884,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@oncanplaythrough' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -4887,10 +4907,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -7407479186213867434,
-          "Data2": 4900458588501029098,
-          "Data3": 8605169877130241010,
-          "Data4": -5201456675744025822
+          "Data1": 1188178788876768899,
+          "Data2": -5496702374268855030,
+          "Data3": -3970418244841283415,
+          "Data4": -1558268688240210269
         },
         "Kind": "Components.EventHandler",
         "Name": "onchange",
@@ -4943,6 +4963,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onchange' event.",
                 "Metadata": {
@@ -4953,6 +4974,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onchange' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -4975,10 +4997,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -5876013195794377715,
-          "Data2": 6442542044753152250,
-          "Data3": 6446826347648699446,
-          "Data4": 3655095121035096543
+          "Data1": 7864706200597738448,
+          "Data2": 8351374488577428741,
+          "Data3": 3201382590356105590,
+          "Data4": 2286047732922483720
         },
         "Kind": "Components.EventHandler",
         "Name": "onclick",
@@ -5031,6 +5053,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onclick' event.",
                 "Metadata": {
@@ -5041,6 +5064,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onclick' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -5063,10 +5087,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 2025933880667450064,
-          "Data2": -571023152633679927,
-          "Data3": 8090131267797594795,
-          "Data4": 713630787907493995
+          "Data1": -5336059092358956782,
+          "Data2": -8094199756053488622,
+          "Data3": -7306555670315711119,
+          "Data4": -1411909902020204629
         },
         "Kind": "Components.EventHandler",
         "Name": "oncontextmenu",
@@ -5119,6 +5143,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@oncontextmenu' event.",
                 "Metadata": {
@@ -5129,6 +5154,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@oncontextmenu' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -5151,10 +5177,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 3114483292183545459,
-          "Data2": -5721524132747887725,
-          "Data3": -2882469117585547303,
-          "Data4": -3848979684614805251
+          "Data1": 3745860232108571150,
+          "Data2": 7948942624484928109,
+          "Data3": 5063516026104493905,
+          "Data4": -6995007719536553543
         },
         "Kind": "Components.EventHandler",
         "Name": "oncopy",
@@ -5207,6 +5233,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@oncopy' event.",
                 "Metadata": {
@@ -5217,6 +5244,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@oncopy' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -5239,10 +5267,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 49385834132466209,
-          "Data2": 1871368146143859857,
-          "Data3": -7979747818744559226,
-          "Data4": -5844741053411373769
+          "Data1": -8146751678988568258,
+          "Data2": 2445001884709251552,
+          "Data3": 8885026561209584723,
+          "Data4": 7527781859833596514
         },
         "Kind": "Components.EventHandler",
         "Name": "oncuechange",
@@ -5295,6 +5323,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@oncuechange' event.",
                 "Metadata": {
@@ -5305,6 +5334,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@oncuechange' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -5327,10 +5357,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 4395649525990314376,
-          "Data2": -3415502618064623006,
-          "Data3": 5290019521246024163,
-          "Data4": 2348906516228069193
+          "Data1": 4265832014584417109,
+          "Data2": -1450368650321402928,
+          "Data3": 6602418854656962690,
+          "Data4": 6779150670962458212
         },
         "Kind": "Components.EventHandler",
         "Name": "oncut",
@@ -5383,6 +5413,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@oncut' event.",
                 "Metadata": {
@@ -5393,6 +5424,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@oncut' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -5415,10 +5447,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -945323347008697186,
-          "Data2": -4019344277605522147,
-          "Data3": -5152627248147834868,
-          "Data4": -6490935833448362689
+          "Data1": -3101387827474550199,
+          "Data2": 7551975506790965421,
+          "Data3": -3288697609331685646,
+          "Data4": -2643525876387467562
         },
         "Kind": "Components.EventHandler",
         "Name": "ondblclick",
@@ -5471,6 +5503,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@ondblclick' event.",
                 "Metadata": {
@@ -5481,6 +5514,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ondblclick' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -5503,10 +5537,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -2126976237438152078,
-          "Data2": -3228304707979785679,
-          "Data3": -3900416103539290004,
-          "Data4": 6444025176158127177
+          "Data1": 2310081357195879031,
+          "Data2": -6203843771979762450,
+          "Data3": -519630226311988253,
+          "Data4": -1256860943956070561
         },
         "Kind": "Components.EventHandler",
         "Name": "ondeactivate",
@@ -5559,6 +5593,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@ondeactivate' event.",
                 "Metadata": {
@@ -5569,6 +5604,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ondeactivate' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -5591,10 +5627,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -3599547181774386203,
-          "Data2": -192828130622148651,
-          "Data3": -6060605021071064275,
-          "Data4": -8981872063978799663
+          "Data1": -2305495965491083293,
+          "Data2": -46064519902643503,
+          "Data3": 948898886278883265,
+          "Data4": 6418629421586980749
         },
         "Kind": "Components.EventHandler",
         "Name": "ondrag",
@@ -5647,6 +5683,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@ondrag' event.",
                 "Metadata": {
@@ -5657,6 +5694,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ondrag' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -5679,10 +5717,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 5766533100293480016,
-          "Data2": -7153174463684717105,
-          "Data3": 6638699063037301276,
-          "Data4": 4894855749780582454
+          "Data1": 2902123780750015618,
+          "Data2": 5321345783841706746,
+          "Data3": 6297901743126205455,
+          "Data4": 2251692895945283393
         },
         "Kind": "Components.EventHandler",
         "Name": "ondragend",
@@ -5735,6 +5773,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@ondragend' event.",
                 "Metadata": {
@@ -5745,6 +5784,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ondragend' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -5767,10 +5807,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -8537732915519260977,
-          "Data2": 6900066131845811850,
-          "Data3": -2340174902793755306,
-          "Data4": 1586024325479601715
+          "Data1": 3412374931286314678,
+          "Data2": 7301408637826194359,
+          "Data3": 2167439853770243069,
+          "Data4": 3965411740161450411
         },
         "Kind": "Components.EventHandler",
         "Name": "ondragenter",
@@ -5823,6 +5863,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@ondragenter' event.",
                 "Metadata": {
@@ -5833,6 +5874,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ondragenter' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -5855,10 +5897,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 2505570391562076962,
-          "Data2": -3744360027299412360,
-          "Data3": 6863802431755887057,
-          "Data4": -744901601944397642
+          "Data1": 7754120008227896923,
+          "Data2": 4839982414117148699,
+          "Data3": -922337676593978699,
+          "Data4": -3803241313638319199
         },
         "Kind": "Components.EventHandler",
         "Name": "ondragleave",
@@ -5911,6 +5953,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@ondragleave' event.",
                 "Metadata": {
@@ -5921,6 +5964,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ondragleave' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -5943,10 +5987,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -2333231148381147313,
-          "Data2": -2536351438020016110,
-          "Data3": 5738501419293267268,
-          "Data4": 5832434321358883592
+          "Data1": -5521741242498425624,
+          "Data2": 3404624236450484435,
+          "Data3": 237259097128583858,
+          "Data4": 2442059609614118801
         },
         "Kind": "Components.EventHandler",
         "Name": "ondragover",
@@ -5999,6 +6043,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@ondragover' event.",
                 "Metadata": {
@@ -6009,6 +6054,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ondragover' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -6031,10 +6077,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -4069925255170791830,
-          "Data2": -7143669248925377728,
-          "Data3": 5004336340701729599,
-          "Data4": -9012746332903920685
+          "Data1": 1297201967145678496,
+          "Data2": -4686816547005645763,
+          "Data3": -375175512616142748,
+          "Data4": -2036253272677511881
         },
         "Kind": "Components.EventHandler",
         "Name": "ondragstart",
@@ -6087,6 +6133,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@ondragstart' event.",
                 "Metadata": {
@@ -6097,6 +6144,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ondragstart' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -6119,10 +6167,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -1006799920960819890,
-          "Data2": 3575691470216304964,
-          "Data3": -1711642602934885423,
-          "Data4": -6941815597235863465
+          "Data1": 152168721661827039,
+          "Data2": 8639308011251907316,
+          "Data3": -4189749772549929027,
+          "Data4": -2329517614569214434
         },
         "Kind": "Components.EventHandler",
         "Name": "ondrop",
@@ -6175,6 +6223,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@ondrop' event.",
                 "Metadata": {
@@ -6185,6 +6234,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ondrop' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -6207,10 +6257,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -6255998808187348330,
-          "Data2": 124657947645719822,
-          "Data3": -7334348978550515706,
-          "Data4": -1740894047215576498
+          "Data1": -3538402226715595639,
+          "Data2": -1992408459307709776,
+          "Data3": 6103415752730132023,
+          "Data4": 6643931724529632963
         },
         "Kind": "Components.EventHandler",
         "Name": "ondurationchange",
@@ -6263,6 +6313,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@ondurationchange' event.",
                 "Metadata": {
@@ -6273,6 +6324,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ondurationchange' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -6295,10 +6347,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -3500450660714122886,
-          "Data2": 8730211201128580426,
-          "Data3": -8652415740930547742,
-          "Data4": 2000433123180638891
+          "Data1": 546432475078480178,
+          "Data2": -6694485394108226105,
+          "Data3": -2166577535179568255,
+          "Data4": 8461946577030330771
         },
         "Kind": "Components.EventHandler",
         "Name": "onemptied",
@@ -6351,6 +6403,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onemptied' event.",
                 "Metadata": {
@@ -6361,6 +6414,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onemptied' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -6383,10 +6437,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 8070682215775216915,
-          "Data2": 1193815170421439859,
-          "Data3": -7873598743233470235,
-          "Data4": -7392312584162876174
+          "Data1": -3973303994779922693,
+          "Data2": -1056459742248759266,
+          "Data3": -6491262001367629198,
+          "Data4": -3649446797591329993
         },
         "Kind": "Components.EventHandler",
         "Name": "onended",
@@ -6439,6 +6493,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onended' event.",
                 "Metadata": {
@@ -6449,6 +6504,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onended' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -6471,10 +6527,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -8915516950703238364,
-          "Data2": -5984368984542918921,
-          "Data3": 5908963351956942750,
-          "Data4": 4784483456609776960
+          "Data1": -1498302156120590211,
+          "Data2": 8886475974333026895,
+          "Data3": 1580865515584197008,
+          "Data4": -3942521009997903289
         },
         "Kind": "Components.EventHandler",
         "Name": "onerror",
@@ -6527,6 +6583,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onerror' event.",
                 "Metadata": {
@@ -6537,6 +6594,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onerror' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -6559,10 +6617,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 4045987406220699988,
-          "Data2": -355764755000381091,
-          "Data3": 4297291687548932566,
-          "Data4": 8062781352112872693
+          "Data1": -6928400189967527633,
+          "Data2": 2789988140132196727,
+          "Data3": 9132120737183115996,
+          "Data4": 3480849232469928322
         },
         "Kind": "Components.EventHandler",
         "Name": "onfocus",
@@ -6615,6 +6673,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onfocus' event.",
                 "Metadata": {
@@ -6625,6 +6684,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onfocus' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -6647,10 +6707,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 2664220868662721450,
-          "Data2": -4095788485341852333,
-          "Data3": -8754517341723283915,
-          "Data4": 7582703838275988664
+          "Data1": 4319028042491328045,
+          "Data2": -1979658558688947659,
+          "Data3": -7894645520559427804,
+          "Data4": -741939031131897106
         },
         "Kind": "Components.EventHandler",
         "Name": "onfocusin",
@@ -6703,6 +6763,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onfocusin' event.",
                 "Metadata": {
@@ -6713,6 +6774,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onfocusin' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -6735,10 +6797,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -6889398954318822636,
-          "Data2": -7873191570429890646,
-          "Data3": -9138642349765244303,
-          "Data4": 5610672577937630295
+          "Data1": 5487212548338540619,
+          "Data2": -7081983801572211283,
+          "Data3": 190973170642169371,
+          "Data4": -4328732127875538072
         },
         "Kind": "Components.EventHandler",
         "Name": "onfocusout",
@@ -6791,6 +6853,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onfocusout' event.",
                 "Metadata": {
@@ -6801,6 +6864,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onfocusout' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -6823,10 +6887,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -7510510350357259829,
-          "Data2": 2388908195790142937,
-          "Data3": 5453203367067359704,
-          "Data4": 3653778986434336595
+          "Data1": 5457132993664918254,
+          "Data2": 1045231635193170164,
+          "Data3": -3107088051601989075,
+          "Data4": -5591344771866875148
         },
         "Kind": "Components.EventHandler",
         "Name": "onfullscreenchange",
@@ -6879,6 +6943,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onfullscreenchange' event.",
                 "Metadata": {
@@ -6889,6 +6954,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onfullscreenchange' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -6911,10 +6977,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -4282662551446600873,
-          "Data2": 6709681492208013927,
-          "Data3": 3219313611728009885,
-          "Data4": 6637308498532418625
+          "Data1": -6672388994676513070,
+          "Data2": 8188542442630138963,
+          "Data3": 8384342079122372505,
+          "Data4": -6738860295144364324
         },
         "Kind": "Components.EventHandler",
         "Name": "onfullscreenerror",
@@ -6967,6 +7033,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onfullscreenerror' event.",
                 "Metadata": {
@@ -6977,6 +7044,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onfullscreenerror' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -6999,10 +7067,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -2477950970858292549,
-          "Data2": 1710340149140338284,
-          "Data3": -7898649254230811124,
-          "Data4": 6941118375465974817
+          "Data1": -5104534726962636911,
+          "Data2": -5149756466718471601,
+          "Data3": 1029590094873980115,
+          "Data4": -5083209702365005129
         },
         "Kind": "Components.EventHandler",
         "Name": "ongotpointercapture",
@@ -7055,6 +7123,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@ongotpointercapture' event.",
                 "Metadata": {
@@ -7065,6 +7134,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ongotpointercapture' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -7087,10 +7157,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 6034167363339459274,
-          "Data2": -757183502391731929,
-          "Data3": 3199346927176103088,
-          "Data4": -562540560116152124
+          "Data1": 5379106529223461487,
+          "Data2": -6492586633235773322,
+          "Data3": -5543967080743774184,
+          "Data4": -3484493342578067653
         },
         "Kind": "Components.EventHandler",
         "Name": "oninput",
@@ -7143,6 +7213,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@oninput' event.",
                 "Metadata": {
@@ -7153,6 +7224,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@oninput' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -7175,10 +7247,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 1183249566223087879,
-          "Data2": -286494581140933826,
-          "Data3": 6448748303532292875,
-          "Data4": -8413265248523888589
+          "Data1": 247712227726185243,
+          "Data2": -4749606820635956794,
+          "Data3": -1805453471126943490,
+          "Data4": 9177039970758668137
         },
         "Kind": "Components.EventHandler",
         "Name": "oninvalid",
@@ -7231,6 +7303,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@oninvalid' event.",
                 "Metadata": {
@@ -7241,6 +7314,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@oninvalid' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -7263,10 +7337,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -3755314240810402243,
-          "Data2": 3039871237362429267,
-          "Data3": 7588341001922043082,
-          "Data4": -4296937518326006414
+          "Data1": -4287759261322495802,
+          "Data2": -4907209732072838902,
+          "Data3": 7436097744948640141,
+          "Data4": 6197503003967915531
         },
         "Kind": "Components.EventHandler",
         "Name": "onkeydown",
@@ -7319,6 +7393,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onkeydown' event.",
                 "Metadata": {
@@ -7329,6 +7404,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onkeydown' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -7351,10 +7427,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -8724049438022236366,
-          "Data2": -7494530647724695818,
-          "Data3": -2493819153571096101,
-          "Data4": 7252514465196821805
+          "Data1": -1077965659468161791,
+          "Data2": 6223746381119027992,
+          "Data3": 7372186401114781088,
+          "Data4": -4979937518017685847
         },
         "Kind": "Components.EventHandler",
         "Name": "onkeypress",
@@ -7407,6 +7483,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onkeypress' event.",
                 "Metadata": {
@@ -7417,6 +7494,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onkeypress' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -7439,10 +7517,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -7178338310687560263,
-          "Data2": 5069843887361876132,
-          "Data3": 6364839277227819893,
-          "Data4": -3088417961795239177
+          "Data1": 2642203795030101089,
+          "Data2": -1885066393813200181,
+          "Data3": -2269472114173339001,
+          "Data4": 3300304565539504676
         },
         "Kind": "Components.EventHandler",
         "Name": "onkeyup",
@@ -7495,6 +7573,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onkeyup' event.",
                 "Metadata": {
@@ -7505,6 +7584,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onkeyup' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -7527,10 +7607,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 8843000875335855191,
-          "Data2": -1514988612199533422,
-          "Data3": 7365791763432106467,
-          "Data4": 5715620989394417202
+          "Data1": 1847865040335648853,
+          "Data2": -2607084281346419147,
+          "Data3": -1140088135668769963,
+          "Data4": 6078606073142856759
         },
         "Kind": "Components.EventHandler",
         "Name": "onload",
@@ -7583,6 +7663,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onload' event.",
                 "Metadata": {
@@ -7593,6 +7674,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onload' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -7615,10 +7697,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 1570022258318828824,
-          "Data2": -388392271397236094,
-          "Data3": -6366939792201870889,
-          "Data4": 7976882477657701086
+          "Data1": -2961916332126474679,
+          "Data2": 2265550747121352207,
+          "Data3": 6702239265380933288,
+          "Data4": 1988495725039563279
         },
         "Kind": "Components.EventHandler",
         "Name": "onloadeddata",
@@ -7671,6 +7753,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onloadeddata' event.",
                 "Metadata": {
@@ -7681,6 +7764,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onloadeddata' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -7703,10 +7787,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 9076460336362972139,
-          "Data2": 6126996487953346974,
-          "Data3": 6463597819478207097,
-          "Data4": 7206620117998067045
+          "Data1": -6367716486560177520,
+          "Data2": 8104387348220213691,
+          "Data3": -7687362412541255629,
+          "Data4": -7156619965012472351
         },
         "Kind": "Components.EventHandler",
         "Name": "onloadedmetadata",
@@ -7759,6 +7843,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onloadedmetadata' event.",
                 "Metadata": {
@@ -7769,6 +7854,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onloadedmetadata' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -7791,10 +7877,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 4583406709679793015,
-          "Data2": 8294701303168224928,
-          "Data3": -4051769451678948212,
-          "Data4": -751585125952288049
+          "Data1": -1244256587669736869,
+          "Data2": -1610563900688186162,
+          "Data3": 6360850627631304209,
+          "Data4": -8399789679273152879
         },
         "Kind": "Components.EventHandler",
         "Name": "onloadend",
@@ -7847,6 +7933,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onloadend' event.",
                 "Metadata": {
@@ -7857,6 +7944,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onloadend' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -7879,10 +7967,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 1033678651966922152,
-          "Data2": -4344296503362456294,
-          "Data3": -45451287513833479,
-          "Data4": -227139161895250446
+          "Data1": 8922028309871885420,
+          "Data2": 2226472633321454833,
+          "Data3": 6181471022288102757,
+          "Data4": -6347509970856890899
         },
         "Kind": "Components.EventHandler",
         "Name": "onloadstart",
@@ -7935,6 +8023,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onloadstart' event.",
                 "Metadata": {
@@ -7945,6 +8034,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onloadstart' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -7967,10 +8057,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -935804356603613928,
-          "Data2": -2917881224384171015,
-          "Data3": 4776542719844856623,
-          "Data4": 962511781503023948
+          "Data1": 3028918649827661896,
+          "Data2": -1736058426802197776,
+          "Data3": -8961843120738254539,
+          "Data4": -3795221379642630558
         },
         "Kind": "Components.EventHandler",
         "Name": "onlostpointercapture",
@@ -8023,6 +8113,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onlostpointercapture' event.",
                 "Metadata": {
@@ -8033,6 +8124,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onlostpointercapture' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -8055,10 +8147,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -857337812057393757,
-          "Data2": -6764425954616239478,
-          "Data3": -5479795839777454515,
-          "Data4": -678696028503416695
+          "Data1": 8692645062772651566,
+          "Data2": 3973956007185559020,
+          "Data3": -219081518769700341,
+          "Data4": 9116995808961406828
         },
         "Kind": "Components.EventHandler",
         "Name": "onmousedown",
@@ -8111,6 +8203,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onmousedown' event.",
                 "Metadata": {
@@ -8121,6 +8214,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onmousedown' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -8143,10 +8237,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -4727072060376757334,
-          "Data2": 5461343352028663351,
-          "Data3": -5315560160143527880,
-          "Data4": -5257744282824779138
+          "Data1": -4116209907909971191,
+          "Data2": 4794109114255446211,
+          "Data3": -7749527283882669310,
+          "Data4": 7984242513192621054
         },
         "Kind": "Components.EventHandler",
         "Name": "onmousemove",
@@ -8199,6 +8293,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onmousemove' event.",
                 "Metadata": {
@@ -8209,6 +8304,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onmousemove' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -8231,10 +8327,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 4943721086757330349,
-          "Data2": 6235474151107053036,
-          "Data3": -5268966392277019453,
-          "Data4": -2259218272496988646
+          "Data1": 6641979740720006190,
+          "Data2": -7319383916463090547,
+          "Data3": 6126375605358139083,
+          "Data4": -1919723893645881737
         },
         "Kind": "Components.EventHandler",
         "Name": "onmouseout",
@@ -8287,6 +8383,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onmouseout' event.",
                 "Metadata": {
@@ -8297,6 +8394,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onmouseout' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -8319,10 +8417,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -141792255939118923,
-          "Data2": -1606101748438921000,
-          "Data3": 6455413330426024410,
-          "Data4": 881629836472124046
+          "Data1": -2480853097093125925,
+          "Data2": -1099966083708099639,
+          "Data3": -6053889172647727997,
+          "Data4": -177667521062250229
         },
         "Kind": "Components.EventHandler",
         "Name": "onmouseover",
@@ -8375,6 +8473,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onmouseover' event.",
                 "Metadata": {
@@ -8385,6 +8484,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onmouseover' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -8407,10 +8507,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -7171929263593824413,
-          "Data2": 5541708947849315583,
-          "Data3": 1951654139796087066,
-          "Data4": 4726788183306114500
+          "Data1": -6085875516268586423,
+          "Data2": 2097815001941427554,
+          "Data3": 7199466231448084508,
+          "Data4": -6342045830255393384
         },
         "Kind": "Components.EventHandler",
         "Name": "onmouseup",
@@ -8463,6 +8563,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onmouseup' event.",
                 "Metadata": {
@@ -8473,6 +8574,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onmouseup' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -8495,10 +8597,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 4483391389588797426,
-          "Data2": 2783043849078136821,
-          "Data3": -1928972703466818526,
-          "Data4": -2646977036980475712
+          "Data1": 1549964828115319459,
+          "Data2": -9220778818586790956,
+          "Data3": -4336030997881712379,
+          "Data4": -7234328640699342324
         },
         "Kind": "Components.EventHandler",
         "Name": "onmousewheel",
@@ -8551,6 +8653,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onmousewheel' event.",
                 "Metadata": {
@@ -8561,6 +8664,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onmousewheel' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -8583,10 +8687,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 4055211859843522447,
-          "Data2": 573633802701650998,
-          "Data3": 8169357236256922799,
-          "Data4": 551042451594233330
+          "Data1": -3408118362769509216,
+          "Data2": 1447408148571291035,
+          "Data3": 1648473707991088356,
+          "Data4": -8578886852791915356
         },
         "Kind": "Components.EventHandler",
         "Name": "onpaste",
@@ -8639,6 +8743,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onpaste' event.",
                 "Metadata": {
@@ -8649,6 +8754,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onpaste' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -8671,10 +8777,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -3172190289716444577,
-          "Data2": 1463069136700468420,
-          "Data3": 1377038202009141390,
-          "Data4": 4538919975733598854
+          "Data1": -7894171751636163151,
+          "Data2": 3394740127310082550,
+          "Data3": -4099402713543155904,
+          "Data4": 5211694059209299947
         },
         "Kind": "Components.EventHandler",
         "Name": "onpause",
@@ -8727,6 +8833,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onpause' event.",
                 "Metadata": {
@@ -8737,6 +8844,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onpause' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -8759,10 +8867,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -9022262227571743282,
-          "Data2": -6926195615353301796,
-          "Data3": -6097086570640356884,
-          "Data4": 6717243741558233404
+          "Data1": -2127560648158163412,
+          "Data2": -4505916605047036657,
+          "Data3": -1356960235799049742,
+          "Data4": 2813256280217060633
         },
         "Kind": "Components.EventHandler",
         "Name": "onplay",
@@ -8815,6 +8923,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onplay' event.",
                 "Metadata": {
@@ -8825,6 +8934,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onplay' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -8847,10 +8957,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -6164876080986771531,
-          "Data2": 7011644555770039548,
-          "Data3": -8178863755247267261,
-          "Data4": -1036153036539022838
+          "Data1": -6312012993589217119,
+          "Data2": -5405202061463057191,
+          "Data3": 6384900252519495331,
+          "Data4": 6120607092369153864
         },
         "Kind": "Components.EventHandler",
         "Name": "onplaying",
@@ -8903,6 +9013,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onplaying' event.",
                 "Metadata": {
@@ -8913,6 +9024,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onplaying' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -8935,10 +9047,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 4457601485374982995,
-          "Data2": 1264193188336451161,
-          "Data3": -1268956057842505768,
-          "Data4": 3354972830543412754
+          "Data1": -4096262049440468680,
+          "Data2": -2867413578031139105,
+          "Data3": 7049982372662448663,
+          "Data4": 3505468664898235254
         },
         "Kind": "Components.EventHandler",
         "Name": "onpointercancel",
@@ -8991,6 +9103,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onpointercancel' event.",
                 "Metadata": {
@@ -9001,6 +9114,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onpointercancel' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -9023,10 +9137,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -2313811704484154364,
-          "Data2": -5107016014915055357,
-          "Data3": -6533577935702176984,
-          "Data4": 4479790964810117504
+          "Data1": 2852532913829340052,
+          "Data2": 7526900599448894486,
+          "Data3": -685555659746979530,
+          "Data4": 4150366829787527796
         },
         "Kind": "Components.EventHandler",
         "Name": "onpointerdown",
@@ -9079,6 +9193,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onpointerdown' event.",
                 "Metadata": {
@@ -9089,6 +9204,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onpointerdown' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -9111,10 +9227,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 5311339323345497896,
-          "Data2": -1878303354535652216,
-          "Data3": 7751106964661984050,
-          "Data4": 3606156474983269020
+          "Data1": -2201667645727438802,
+          "Data2": 2371203341313750113,
+          "Data3": -7723527300256977598,
+          "Data4": 8428948864822156990
         },
         "Kind": "Components.EventHandler",
         "Name": "onpointerenter",
@@ -9167,6 +9283,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onpointerenter' event.",
                 "Metadata": {
@@ -9177,6 +9294,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onpointerenter' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -9199,10 +9317,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -9164237929291845006,
-          "Data2": -4603576448045490707,
-          "Data3": -6028878480741913006,
-          "Data4": 5436304798441707620
+          "Data1": -2337492005041526690,
+          "Data2": -6229872603752908416,
+          "Data3": 3129051116453826616,
+          "Data4": -3171000516781989772
         },
         "Kind": "Components.EventHandler",
         "Name": "onpointerleave",
@@ -9255,6 +9373,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onpointerleave' event.",
                 "Metadata": {
@@ -9265,6 +9384,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onpointerleave' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -9287,10 +9407,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 3195519582197481087,
-          "Data2": 8820096968313349698,
-          "Data3": -6754278436897313011,
-          "Data4": -6223014309820141548
+          "Data1": -992959616539021408,
+          "Data2": 3797418828963303200,
+          "Data3": -8622436536288297953,
+          "Data4": -9039511011748590186
         },
         "Kind": "Components.EventHandler",
         "Name": "onpointerlockchange",
@@ -9343,6 +9463,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onpointerlockchange' event.",
                 "Metadata": {
@@ -9353,6 +9474,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onpointerlockchange' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -9375,10 +9497,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 7405282754664755047,
-          "Data2": 5989008772240129114,
-          "Data3": -2010815137521155068,
-          "Data4": -8494528239859790866
+          "Data1": 3847325924867782814,
+          "Data2": -3291829893488192966,
+          "Data3": 4807309115478659729,
+          "Data4": -6351469896546374628
         },
         "Kind": "Components.EventHandler",
         "Name": "onpointerlockerror",
@@ -9431,6 +9553,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onpointerlockerror' event.",
                 "Metadata": {
@@ -9441,6 +9564,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onpointerlockerror' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -9463,10 +9587,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -2240166372056544237,
-          "Data2": -3706210041337153843,
-          "Data3": -5760953819859211674,
-          "Data4": 3325533443397521295
+          "Data1": 5975783273957543605,
+          "Data2": -3322225305671361736,
+          "Data3": 3590821364937486402,
+          "Data4": -2321040519580132838
         },
         "Kind": "Components.EventHandler",
         "Name": "onpointermove",
@@ -9519,6 +9643,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onpointermove' event.",
                 "Metadata": {
@@ -9529,6 +9654,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onpointermove' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -9551,10 +9677,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 8333018374499539202,
-          "Data2": 8792552545546461619,
-          "Data3": 768165838741491467,
-          "Data4": 472615436411451570
+          "Data1": 497892141455938347,
+          "Data2": 1721443827156278907,
+          "Data3": 299600471083768244,
+          "Data4": -3183144156112834518
         },
         "Kind": "Components.EventHandler",
         "Name": "onpointerout",
@@ -9607,6 +9733,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onpointerout' event.",
                 "Metadata": {
@@ -9617,6 +9744,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onpointerout' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -9639,10 +9767,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 568753711375859536,
-          "Data2": -2237431096642336577,
-          "Data3": -3724417042449672698,
-          "Data4": 8042689738191312756
+          "Data1": 2044083178400788140,
+          "Data2": 8642909760803133547,
+          "Data3": -4712302356217370758,
+          "Data4": -7952169957740487735
         },
         "Kind": "Components.EventHandler",
         "Name": "onpointerover",
@@ -9695,6 +9823,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onpointerover' event.",
                 "Metadata": {
@@ -9705,6 +9834,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onpointerover' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -9727,10 +9857,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 9038462862900680851,
-          "Data2": -4803974904972693439,
-          "Data3": 2870912521335952619,
-          "Data4": -701553990394259587
+          "Data1": -3996375638829557114,
+          "Data2": -8763621610995075159,
+          "Data3": -7059354961569872954,
+          "Data4": -2017333548905034545
         },
         "Kind": "Components.EventHandler",
         "Name": "onpointerup",
@@ -9783,6 +9913,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onpointerup' event.",
                 "Metadata": {
@@ -9793,6 +9924,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onpointerup' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -9815,10 +9947,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 3500018292550814402,
-          "Data2": -8675308621403650228,
-          "Data3": -8377597686083018627,
-          "Data4": 7135820267129934138
+          "Data1": 8555813928717382392,
+          "Data2": -4167344499216038109,
+          "Data3": -2368027572631108748,
+          "Data4": 3482428578530799102
         },
         "Kind": "Components.EventHandler",
         "Name": "onprogress",
@@ -9871,6 +10003,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onprogress' event.",
                 "Metadata": {
@@ -9881,6 +10014,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onprogress' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -9903,10 +10037,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 3744451204423641711,
-          "Data2": -1679113643916892207,
-          "Data3": -7920620875359195656,
-          "Data4": 8028091916251937718
+          "Data1": 9193635798435853025,
+          "Data2": 9011062807845024793,
+          "Data3": -5273853737755824454,
+          "Data4": -1183443924709178983
         },
         "Kind": "Components.EventHandler",
         "Name": "onratechange",
@@ -9959,6 +10093,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onratechange' event.",
                 "Metadata": {
@@ -9969,6 +10104,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onratechange' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -9991,10 +10127,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 9148428712236549094,
-          "Data2": -585223076128303147,
-          "Data3": -1395978567914249577,
-          "Data4": 1408803186649539921
+          "Data1": 6957732211665443115,
+          "Data2": 3800037892385268945,
+          "Data3": -5786031733923430317,
+          "Data4": 746531705358796218
         },
         "Kind": "Components.EventHandler",
         "Name": "onreadystatechange",
@@ -10047,6 +10183,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onreadystatechange' event.",
                 "Metadata": {
@@ -10057,6 +10194,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onreadystatechange' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -10079,10 +10217,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 4830844958816867642,
-          "Data2": -2003118674251292452,
-          "Data3": 6924528488839540011,
-          "Data4": -5783721653703966383
+          "Data1": 692702517045599314,
+          "Data2": 5108283866775755843,
+          "Data3": 1638091673687115689,
+          "Data4": -7042889223913543424
         },
         "Kind": "Components.EventHandler",
         "Name": "onreset",
@@ -10135,6 +10273,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onreset' event.",
                 "Metadata": {
@@ -10145,6 +10284,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onreset' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -10167,10 +10307,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -6707593629607127015,
-          "Data2": 8735902887869411404,
-          "Data3": -8633991356990930122,
-          "Data4": -4200366704715723610
+          "Data1": -6086045191703217711,
+          "Data2": -7592481029300024581,
+          "Data3": 5934265164473033340,
+          "Data4": -7294630586470328258
         },
         "Kind": "Components.EventHandler",
         "Name": "onscroll",
@@ -10223,6 +10363,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onscroll' event.",
                 "Metadata": {
@@ -10233,6 +10374,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onscroll' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -10255,10 +10397,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -3326592706436819613,
-          "Data2": -6945456265074867789,
-          "Data3": 2507551406581072057,
-          "Data4": -378198235926267374
+          "Data1": -5805817034142108608,
+          "Data2": 3232901503212733396,
+          "Data3": -8991014572456593828,
+          "Data4": -7061503922272434906
         },
         "Kind": "Components.EventHandler",
         "Name": "onseeked",
@@ -10311,6 +10453,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onseeked' event.",
                 "Metadata": {
@@ -10321,6 +10464,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onseeked' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -10343,10 +10487,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -7849806254963793161,
-          "Data2": -7188060554609292133,
-          "Data3": 8245611978859375471,
-          "Data4": 327974456773186423
+          "Data1": 406894361097269849,
+          "Data2": 8804319782748790202,
+          "Data3": 4634710613218890076,
+          "Data4": 3760205967478463872
         },
         "Kind": "Components.EventHandler",
         "Name": "onseeking",
@@ -10399,6 +10543,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onseeking' event.",
                 "Metadata": {
@@ -10409,6 +10554,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onseeking' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -10431,10 +10577,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 407531349809748463,
-          "Data2": 8524823052384906695,
-          "Data3": -2141271957922851761,
-          "Data4": 7500705971840846873
+          "Data1": -8575512656766003295,
+          "Data2": -6394637687264321349,
+          "Data3": 3761447292457893821,
+          "Data4": 6091707682399047490
         },
         "Kind": "Components.EventHandler",
         "Name": "onselect",
@@ -10487,6 +10633,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onselect' event.",
                 "Metadata": {
@@ -10497,6 +10644,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onselect' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -10519,10 +10667,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 8135536423089531359,
-          "Data2": -1969134929414011003,
-          "Data3": 7144511781743952475,
-          "Data4": -5969759090058636731
+          "Data1": -4155461423212424237,
+          "Data2": -4854536667596072546,
+          "Data3": -6081188581169453153,
+          "Data4": -3721148232537585519
         },
         "Kind": "Components.EventHandler",
         "Name": "onselectionchange",
@@ -10575,6 +10723,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onselectionchange' event.",
                 "Metadata": {
@@ -10585,6 +10734,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onselectionchange' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -10607,10 +10757,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -3761164868379092865,
-          "Data2": -7537113723334424878,
-          "Data3": -9157535472646131793,
-          "Data4": 7154080132106305506
+          "Data1": 1168147320640414054,
+          "Data2": -9221537356897967423,
+          "Data3": -709260110062885909,
+          "Data4": 1622145137810762693
         },
         "Kind": "Components.EventHandler",
         "Name": "onselectstart",
@@ -10663,6 +10813,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onselectstart' event.",
                 "Metadata": {
@@ -10673,6 +10824,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onselectstart' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -10695,10 +10847,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 4570113076892061178,
-          "Data2": -1953523251606315569,
-          "Data3": 178196066172967125,
-          "Data4": -1818425325528621796
+          "Data1": -3113268360823710189,
+          "Data2": 4025879571666287582,
+          "Data3": -5130717986848424817,
+          "Data4": 4838499769840622717
         },
         "Kind": "Components.EventHandler",
         "Name": "onstalled",
@@ -10751,6 +10903,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onstalled' event.",
                 "Metadata": {
@@ -10761,6 +10914,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onstalled' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -10783,10 +10937,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 4497944333660067612,
-          "Data2": -6053014293910184483,
-          "Data3": -150682023801826336,
-          "Data4": -7330127195050317567
+          "Data1": 749686555555587219,
+          "Data2": 7313049727512567590,
+          "Data3": 3592984457306721267,
+          "Data4": 8315889326585676032
         },
         "Kind": "Components.EventHandler",
         "Name": "onstop",
@@ -10839,6 +10993,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onstop' event.",
                 "Metadata": {
@@ -10849,6 +11004,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onstop' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -10871,10 +11027,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -55319977240795150,
-          "Data2": 5826760188893312961,
-          "Data3": -3960801232645154086,
-          "Data4": -7138213754325226204
+          "Data1": 1143019628730173409,
+          "Data2": 5931158150504582973,
+          "Data3": 3259913732164533559,
+          "Data4": 7471140779847712253
         },
         "Kind": "Components.EventHandler",
         "Name": "onsubmit",
@@ -10927,6 +11083,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onsubmit' event.",
                 "Metadata": {
@@ -10937,6 +11094,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onsubmit' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -10959,10 +11117,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 8555791214649058406,
-          "Data2": 3267056548356811046,
-          "Data3": -195030566179524903,
-          "Data4": -7344200351252725953
+          "Data1": 6742182673354798555,
+          "Data2": -1271311494660873963,
+          "Data3": 5261444514161074808,
+          "Data4": 413738281761673015
         },
         "Kind": "Components.EventHandler",
         "Name": "onsuspend",
@@ -11015,6 +11173,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onsuspend' event.",
                 "Metadata": {
@@ -11025,6 +11184,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onsuspend' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -11047,10 +11207,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -7638127916217198941,
-          "Data2": -6598533596547891522,
-          "Data3": 564840633492106367,
-          "Data4": 654218129243923483
+          "Data1": -6458497742380447395,
+          "Data2": -1329879478843840890,
+          "Data3": -6966332069904430571,
+          "Data4": -28263913221145959
         },
         "Kind": "Components.EventHandler",
         "Name": "ontimeout",
@@ -11103,6 +11263,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@ontimeout' event.",
                 "Metadata": {
@@ -11113,6 +11274,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ontimeout' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -11135,10 +11297,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 5704531375447652745,
-          "Data2": 2849874296087867439,
-          "Data3": 5290647166078742734,
-          "Data4": -2473399943908379042
+          "Data1": -1644104187022647663,
+          "Data2": -2341251953959550413,
+          "Data3": -3544229574944526846,
+          "Data4": -6722157805594412245
         },
         "Kind": "Components.EventHandler",
         "Name": "ontimeupdate",
@@ -11191,6 +11353,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@ontimeupdate' event.",
                 "Metadata": {
@@ -11201,6 +11364,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ontimeupdate' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -11223,10 +11387,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 4994874293781833810,
-          "Data2": -4791451800069225213,
-          "Data3": 6909710482209872059,
-          "Data4": -4970598040198069978
+          "Data1": 1411842250677033026,
+          "Data2": 2777370824877754472,
+          "Data3": -2990784706263029464,
+          "Data4": 1074482894047789252
         },
         "Kind": "Components.EventHandler",
         "Name": "ontouchcancel",
@@ -11279,6 +11443,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@ontouchcancel' event.",
                 "Metadata": {
@@ -11289,6 +11454,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ontouchcancel' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -11311,10 +11477,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 1384671633076546551,
-          "Data2": -9118251173018928965,
-          "Data3": -3023596855693504104,
-          "Data4": -778946793728450083
+          "Data1": -5953660239247026040,
+          "Data2": -2995738695862898880,
+          "Data3": 6877353957749161772,
+          "Data4": 3989931584940844719
         },
         "Kind": "Components.EventHandler",
         "Name": "ontouchend",
@@ -11367,6 +11533,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@ontouchend' event.",
                 "Metadata": {
@@ -11377,6 +11544,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ontouchend' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -11399,10 +11567,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 7147462906107964590,
-          "Data2": -2983909275980088407,
-          "Data3": 4848761148841825311,
-          "Data4": -8023465066964865094
+          "Data1": 1620430291769005070,
+          "Data2": -3432575765962180097,
+          "Data3": 1469076683531222369,
+          "Data4": -1745241396429208669
         },
         "Kind": "Components.EventHandler",
         "Name": "ontouchenter",
@@ -11455,6 +11623,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@ontouchenter' event.",
                 "Metadata": {
@@ -11465,6 +11634,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ontouchenter' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -11487,10 +11657,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 7868094807783130621,
-          "Data2": -6891425649316515577,
-          "Data3": -4951853390109139368,
-          "Data4": 1423778343287484531
+          "Data1": -5020822278284131844,
+          "Data2": 2842155500308972762,
+          "Data3": 802317855791819193,
+          "Data4": -1275527122571758354
         },
         "Kind": "Components.EventHandler",
         "Name": "ontouchleave",
@@ -11543,6 +11713,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@ontouchleave' event.",
                 "Metadata": {
@@ -11553,6 +11724,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ontouchleave' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -11575,10 +11747,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 7391523120556264261,
-          "Data2": 1200284496945607197,
-          "Data3": -1942636649077360059,
-          "Data4": 4282465744950159173
+          "Data1": 5459295222800676394,
+          "Data2": -4176367313827753800,
+          "Data3": 5790812542043045647,
+          "Data4": -3409471965888506473
         },
         "Kind": "Components.EventHandler",
         "Name": "ontouchmove",
@@ -11631,6 +11803,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@ontouchmove' event.",
                 "Metadata": {
@@ -11641,6 +11814,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ontouchmove' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -11663,10 +11837,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 6028052905872344876,
-          "Data2": 3463067888999926790,
-          "Data3": 3587010053095489470,
-          "Data4": 8287299164572457147
+          "Data1": -1447082794147605781,
+          "Data2": 5457604094802362976,
+          "Data3": -4169075793829996550,
+          "Data4": -7595375952366614523
         },
         "Kind": "Components.EventHandler",
         "Name": "ontouchstart",
@@ -11719,6 +11893,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@ontouchstart' event.",
                 "Metadata": {
@@ -11729,6 +11904,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@ontouchstart' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -11751,10 +11927,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 6812880029073261240,
-          "Data2": -4808496273102738414,
-          "Data3": -8661764757805676059,
-          "Data4": 1668774657325224138
+          "Data1": 1628227508241635303,
+          "Data2": -8428749328568142970,
+          "Data3": -5824596985668994024,
+          "Data4": 3566642149938773713
         },
         "Kind": "Components.EventHandler",
         "Name": "onvolumechange",
@@ -11807,6 +11983,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onvolumechange' event.",
                 "Metadata": {
@@ -11817,6 +11994,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onvolumechange' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -11839,10 +12017,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -3338075856920773696,
-          "Data2": -8686852118760642636,
-          "Data3": -3455326608115012234,
-          "Data4": 6675417113220062341
+          "Data1": 2342418343528780942,
+          "Data2": -466922368307509762,
+          "Data3": 6114953720817251941,
+          "Data4": 4484779588675763459
         },
         "Kind": "Components.EventHandler",
         "Name": "onwaiting",
@@ -11895,6 +12073,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onwaiting' event.",
                 "Metadata": {
@@ -11905,6 +12084,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onwaiting' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -11927,10 +12107,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 3436499165702834858,
-          "Data2": -5563589463079197169,
-          "Data3": -1250321432456464715,
-          "Data4": -3294800248834097394
+          "Data1": 4833961904217760236,
+          "Data2": 4789074876504120581,
+          "Data3": 8212630920479762058,
+          "Data4": -8550080254618704391
         },
         "Kind": "Components.EventHandler",
         "Name": "onwheel",
@@ -11983,6 +12163,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "preventDefault",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":preventDefault",
                 "Documentation": "Specifies whether to cancel (if cancelable) the default action that belongs to the '@onwheel' event.",
                 "Metadata": {
@@ -11993,6 +12174,7 @@
                 "Kind": "Components.EventHandler",
                 "Name": "stopPropagation",
                 "TypeName": "System.Boolean",
+                "Flags": 9,
                 "DisplayName": ":stopPropagation",
                 "Documentation": "Specifies whether to prevent further propagation of the '@onwheel' event in the capturing and bubbling phases.",
                 "Metadata": {
@@ -14808,10 +14990,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -813106751303076660,
-          "Data2": 2618754215500759495,
-          "Data3": 3287559554464703956,
-          "Data4": 107368669419673734
+          "Data1": 1640964634023857938,
+          "Data2": -8491216748428326244,
+          "Data3": 6477177143260430096,
+          "Data4": 838921754362851622
         },
         "Kind": "Components.Bind",
         "Name": "Bind",
@@ -14846,6 +15028,7 @@
                 "Kind": "Components.Bind",
                 "Name": "format",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":format",
                 "Documentation": "Specifies a format to convert the value specified by the corresponding bind attribute. For example: <code>@bind-value:format=\"...\"</code> will apply a format string to the value specified in <code>@bind-value=\"...\"</code>. The format string can currently only be used with expressions of type <code>DateTime</code>.",
                 "Metadata": {
@@ -14856,6 +15039,7 @@
                 "Kind": "Components.Bind",
                 "Name": "event",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":event",
                 "Documentation": "Specifies the event handler name to attach for change notifications for the value provided by the '@bind-...' attribute.",
                 "Metadata": {
@@ -14887,10 +15071,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 3258384344978150598,
-          "Data2": 3424297353361524947,
-          "Data3": 6418835579661887673,
-          "Data4": 4758592740074629219
+          "Data1": 6436941518631156195,
+          "Data2": -6018521781010550252,
+          "Data3": 5893079549172125291,
+          "Data4": -3363773535088963841
         },
         "Kind": "Components.Bind",
         "Name": "Bind",
@@ -14923,6 +15107,7 @@
                 "Kind": "Components.Bind",
                 "Name": "format",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":format",
                 "Documentation": "Specifies a format to convert the value specified by the '@bind' attribute. The format string can currently only be used with expressions of type <code>DateTime</code>.",
                 "Metadata": {
@@ -14933,6 +15118,7 @@
                 "Kind": "Components.Bind",
                 "Name": "event",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":event",
                 "Documentation": "Specifies the event handler name to attach for change notifications for the value provided by the '@bind' attribute.",
                 "Metadata": {
@@ -14978,10 +15164,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -6300949908437247248,
-          "Data2": -4125362191643322242,
-          "Data3": 6078134069683031280,
-          "Data4": 7919549632791961908
+          "Data1": -3653157322634779713,
+          "Data2": -7338046674235368886,
+          "Data3": -5246261333045449925,
+          "Data4": 4961003819612616805
         },
         "Kind": "Components.Bind",
         "Name": "Bind",
@@ -15014,6 +15200,7 @@
                 "Kind": "Components.Bind",
                 "Name": "format",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":format",
                 "Documentation": "Specifies a format to convert the value specified by the '@bind' attribute. The format string can currently only be used with expressions of type <code>DateTime</code>.",
                 "Metadata": {
@@ -15024,6 +15211,7 @@
                 "Kind": "Components.Bind",
                 "Name": "event",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":event",
                 "Documentation": "Specifies the event handler name to attach for change notifications for the value provided by the '@bind' attribute.",
                 "Metadata": {
@@ -15069,10 +15257,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -8208353009682097739,
-          "Data2": -1707127994467300383,
-          "Data3": -6094082798642077960,
-          "Data4": -7167738609826352979
+          "Data1": 158596023571400593,
+          "Data2": -4481498988015885492,
+          "Data3": 3257761159561417344,
+          "Data4": 587241927591815002
         },
         "Kind": "Components.Bind",
         "Name": "Bind",
@@ -15111,6 +15299,7 @@
                 "Kind": "Components.Bind",
                 "Name": "format",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":format",
                 "Documentation": "Specifies a format to convert the value specified by the '@bind' attribute. The format string can currently only be used with expressions of type <code>DateTime</code>.",
                 "Metadata": {
@@ -15121,6 +15310,7 @@
                 "Kind": "Components.Bind",
                 "Name": "event",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":event",
                 "Documentation": "Specifies the event handler name to attach for change notifications for the value provided by the '@bind' attribute.",
                 "Metadata": {
@@ -15167,10 +15357,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -9094857960671713862,
-          "Data2": -6404934787373538373,
-          "Data3": 7335990201512460314,
-          "Data4": 7361133921075441140
+          "Data1": -2886114453409956270,
+          "Data2": -5203096932313524774,
+          "Data3": -6811090314192563572,
+          "Data4": 4016838470663197327
         },
         "Kind": "Components.Bind",
         "Name": "Bind_value",
@@ -15209,6 +15399,7 @@
                 "Kind": "Components.Bind",
                 "Name": "format",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":format",
                 "Documentation": "Specifies a format to convert the value specified by the '@bind-value' attribute. The format string can currently only be used with expressions of type <code>DateTime</code>.",
                 "Metadata": {
@@ -15219,6 +15410,7 @@
                 "Kind": "Components.Bind",
                 "Name": "event",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":event",
                 "Documentation": "Specifies the event handler name to attach for change notifications for the value provided by the '@bind-value' attribute.",
                 "Metadata": {
@@ -15265,10 +15457,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 4732099573724570969,
-          "Data2": 1777711593506188812,
-          "Data3": 7990922822613264576,
-          "Data4": 7589307261558857305
+          "Data1": 2197713842231216626,
+          "Data2": -6024997742809223554,
+          "Data3": 7365414954580592464,
+          "Data4": 3597449459543551963
         },
         "Kind": "Components.Bind",
         "Name": "Bind",
@@ -15307,6 +15499,7 @@
                 "Kind": "Components.Bind",
                 "Name": "format",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":format",
                 "Documentation": "Specifies a format to convert the value specified by the '@bind' attribute. The format string can currently only be used with expressions of type <code>DateTime</code>.",
                 "Metadata": {
@@ -15317,6 +15510,7 @@
                 "Kind": "Components.Bind",
                 "Name": "event",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":event",
                 "Documentation": "Specifies the event handler name to attach for change notifications for the value provided by the '@bind' attribute.",
                 "Metadata": {
@@ -15363,10 +15557,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 4678354188865455457,
-          "Data2": 2679271773900193731,
-          "Data3": 3730250467113924938,
-          "Data4": 3058512933482416236
+          "Data1": -7005336841679967941,
+          "Data2": -6157142528009135548,
+          "Data3": 6867550385907939515,
+          "Data4": 9044073940417270243
         },
         "Kind": "Components.Bind",
         "Name": "Bind_value",
@@ -15405,6 +15599,7 @@
                 "Kind": "Components.Bind",
                 "Name": "format",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":format",
                 "Documentation": "Specifies a format to convert the value specified by the '@bind-value' attribute. The format string can currently only be used with expressions of type <code>DateTime</code>.",
                 "Metadata": {
@@ -15415,6 +15610,7 @@
                 "Kind": "Components.Bind",
                 "Name": "event",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":event",
                 "Documentation": "Specifies the event handler name to attach for change notifications for the value provided by the '@bind-value' attribute.",
                 "Metadata": {
@@ -15461,10 +15657,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -1265986264691777973,
-          "Data2": -8785540826468145385,
-          "Data3": 1277477051893083856,
-          "Data4": -4969747536227716843
+          "Data1": 3035219534429914834,
+          "Data2": 5598368345892988800,
+          "Data3": -2824576306838445289,
+          "Data4": 8800949849088343370
         },
         "Kind": "Components.Bind",
         "Name": "Bind",
@@ -15503,6 +15699,7 @@
                 "Kind": "Components.Bind",
                 "Name": "format",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":format",
                 "Documentation": "Specifies a format to convert the value specified by the '@bind' attribute. The format string can currently only be used with expressions of type <code>DateTime</code>.",
                 "Metadata": {
@@ -15513,6 +15710,7 @@
                 "Kind": "Components.Bind",
                 "Name": "event",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":event",
                 "Documentation": "Specifies the event handler name to attach for change notifications for the value provided by the '@bind' attribute.",
                 "Metadata": {
@@ -15559,10 +15757,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 8651728649580253822,
-          "Data2": 5747478111569887054,
-          "Data3": 6516648261582206768,
-          "Data4": 7480743744297007869
+          "Data1": -7496153274803181783,
+          "Data2": -1641773446050731795,
+          "Data3": 4204540833852005820,
+          "Data4": 8442755340733154255
         },
         "Kind": "Components.Bind",
         "Name": "Bind_value",
@@ -15601,6 +15799,7 @@
                 "Kind": "Components.Bind",
                 "Name": "format",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":format",
                 "Documentation": "Specifies a format to convert the value specified by the '@bind-value' attribute. The format string can currently only be used with expressions of type <code>DateTime</code>.",
                 "Metadata": {
@@ -15611,6 +15810,7 @@
                 "Kind": "Components.Bind",
                 "Name": "event",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":event",
                 "Documentation": "Specifies the event handler name to attach for change notifications for the value provided by the '@bind-value' attribute.",
                 "Metadata": {
@@ -15657,10 +15857,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -2433090077820385000,
-          "Data2": -1995307190318241120,
-          "Data3": -1859617545216097039,
-          "Data4": -2524667818445925679
+          "Data1": 3935298724765495173,
+          "Data2": 1375796447142837140,
+          "Data3": -5991737335669447586,
+          "Data4": 8409556436907943258
         },
         "Kind": "Components.Bind",
         "Name": "Bind",
@@ -15699,6 +15899,7 @@
                 "Kind": "Components.Bind",
                 "Name": "format",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":format",
                 "Documentation": "Specifies a format to convert the value specified by the '@bind' attribute. The format string can currently only be used with expressions of type <code>DateTime</code>.",
                 "Metadata": {
@@ -15709,6 +15910,7 @@
                 "Kind": "Components.Bind",
                 "Name": "event",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":event",
                 "Documentation": "Specifies the event handler name to attach for change notifications for the value provided by the '@bind' attribute.",
                 "Metadata": {
@@ -15755,10 +15957,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -5251389023678343122,
-          "Data2": 7829116064940732229,
-          "Data3": -8227747747229800826,
-          "Data4": 8102689759249667269
+          "Data1": -5693753975601626108,
+          "Data2": -4631206671834483783,
+          "Data3": -786900231462918053,
+          "Data4": 5671686957433021035
         },
         "Kind": "Components.Bind",
         "Name": "Bind_value",
@@ -15797,6 +15999,7 @@
                 "Kind": "Components.Bind",
                 "Name": "format",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":format",
                 "Documentation": "Specifies a format to convert the value specified by the '@bind-value' attribute. The format string can currently only be used with expressions of type <code>DateTime</code>.",
                 "Metadata": {
@@ -15807,6 +16010,7 @@
                 "Kind": "Components.Bind",
                 "Name": "event",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":event",
                 "Documentation": "Specifies the event handler name to attach for change notifications for the value provided by the '@bind-value' attribute.",
                 "Metadata": {
@@ -15853,10 +16057,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -449880472314173550,
-          "Data2": -47517036999921692,
-          "Data3": -1592604138356096553,
-          "Data4": -1126240383163495963
+          "Data1": -5454889134564591464,
+          "Data2": 2194508133059721697,
+          "Data3": 4263420662008749289,
+          "Data4": -1760514873889476229
         },
         "Kind": "Components.Bind",
         "Name": "Bind",
@@ -15895,6 +16099,7 @@
                 "Kind": "Components.Bind",
                 "Name": "format",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":format",
                 "Documentation": "Specifies a format to convert the value specified by the '@bind' attribute. The format string can currently only be used with expressions of type <code>DateTime</code>.",
                 "Metadata": {
@@ -15905,6 +16110,7 @@
                 "Kind": "Components.Bind",
                 "Name": "event",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":event",
                 "Documentation": "Specifies the event handler name to attach for change notifications for the value provided by the '@bind' attribute.",
                 "Metadata": {
@@ -15951,10 +16157,10 @@
       },
       {
         "__Checksum": {
-          "Data1": -4333748423327866003,
-          "Data2": -7656701453460428717,
-          "Data3": 4223555686223172862,
-          "Data4": 6940765248125382797
+          "Data1": -5170772320209909502,
+          "Data2": 7508543825758860751,
+          "Data3": 2376736164060122921,
+          "Data4": 2700765619266911367
         },
         "Kind": "Components.Bind",
         "Name": "Bind",
@@ -15993,6 +16199,7 @@
                 "Kind": "Components.Bind",
                 "Name": "format",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":format",
                 "Documentation": "Specifies a format to convert the value specified by the '@bind' attribute. The format string can currently only be used with expressions of type <code>DateTime</code>.",
                 "Metadata": {
@@ -16003,6 +16210,7 @@
                 "Kind": "Components.Bind",
                 "Name": "event",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":event",
                 "Documentation": "Specifies the event handler name to attach for change notifications for the value provided by the '@bind' attribute.",
                 "Metadata": {
@@ -16049,10 +16257,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 667745596067665839,
-          "Data2": -742308665050340033,
-          "Data3": -5844848079319806042,
-          "Data4": -5717562480768652285
+          "Data1": 3065808889761609528,
+          "Data2": -5381083346101051143,
+          "Data3": 4073376327485742280,
+          "Data4": 8966641606834873424
         },
         "Kind": "Components.Bind",
         "Name": "Bind_value",
@@ -16091,6 +16299,7 @@
                 "Kind": "Components.Bind",
                 "Name": "format",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":format",
                 "Documentation": "Specifies a format to convert the value specified by the '@bind-value' attribute. The format string can currently only be used with expressions of type <code>DateTime</code>.",
                 "Metadata": {
@@ -16101,6 +16310,7 @@
                 "Kind": "Components.Bind",
                 "Name": "event",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":event",
                 "Documentation": "Specifies the event handler name to attach for change notifications for the value provided by the '@bind-value' attribute.",
                 "Metadata": {
@@ -16147,10 +16357,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 6411499453829902266,
-          "Data2": 7378455829768999487,
-          "Data3": 5201591731800320931,
-          "Data4": 4252904908932869108
+          "Data1": 1609852710614935144,
+          "Data2": -2122675622663337073,
+          "Data3": -3864128446486456071,
+          "Data4": 706119741703693082
         },
         "Kind": "Components.Bind",
         "Name": "Bind",
@@ -16189,6 +16399,7 @@
                 "Kind": "Components.Bind",
                 "Name": "format",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":format",
                 "Documentation": "Specifies a format to convert the value specified by the '@bind' attribute. The format string can currently only be used with expressions of type <code>DateTime</code>.",
                 "Metadata": {
@@ -16199,6 +16410,7 @@
                 "Kind": "Components.Bind",
                 "Name": "event",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":event",
                 "Documentation": "Specifies the event handler name to attach for change notifications for the value provided by the '@bind' attribute.",
                 "Metadata": {
@@ -16245,10 +16457,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 3914574121664012431,
-          "Data2": 1562049122598505850,
-          "Data3": -3165987629298610551,
-          "Data4": 1447642572210014249
+          "Data1": -6247189116539527137,
+          "Data2": -3954116125970441272,
+          "Data3": -785319236081585305,
+          "Data4": -2658834696531414127
         },
         "Kind": "Components.Bind",
         "Name": "Bind_value",
@@ -16281,6 +16493,7 @@
                 "Kind": "Components.Bind",
                 "Name": "format",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":format",
                 "Documentation": "Specifies a format to convert the value specified by the '@bind-value' attribute. The format string can currently only be used with expressions of type <code>DateTime</code>.",
                 "Metadata": {
@@ -16291,6 +16504,7 @@
                 "Kind": "Components.Bind",
                 "Name": "event",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":event",
                 "Documentation": "Specifies the event handler name to attach for change notifications for the value provided by the '@bind-value' attribute.",
                 "Metadata": {
@@ -16336,10 +16550,10 @@
       },
       {
         "__Checksum": {
-          "Data1": 5860565885129911576,
-          "Data2": 8898252304380152241,
-          "Data3": 9115586994115060999,
-          "Data4": 8696210689445968468
+          "Data1": 3453158719998650137,
+          "Data2": -3936602249742226449,
+          "Data3": -3829995840750628024,
+          "Data4": 2167685795719497486
         },
         "Kind": "Components.Bind",
         "Name": "Bind",
@@ -16372,6 +16586,7 @@
                 "Kind": "Components.Bind",
                 "Name": "format",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":format",
                 "Documentation": "Specifies a format to convert the value specified by the '@bind' attribute. The format string can currently only be used with expressions of type <code>DateTime</code>.",
                 "Metadata": {
@@ -16382,6 +16597,7 @@
                 "Kind": "Components.Bind",
                 "Name": "event",
                 "TypeName": "System.String",
+                "Flags": 5,
                 "DisplayName": ":event",
                 "Documentation": "Specifies the event handler name to attach for change notifications for the value provided by the '@bind' attribute.",
                 "Metadata": {
