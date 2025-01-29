@@ -25,10 +25,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 171589509527894483,
-      "Data2": 9189561921649831258,
-      "Data3": 1696293750535829374,
-      "Data4": -4954285203721220949
+      "Data1": -5587562291523971427,
+      "Data2": 6860111499123963596,
+      "Data3": -7999730604619481003,
+      "Data4": -3163315924813594709
     },
     "Kind": "Components.Component",
     "Name": "BlazorApp1.Pages.Counter",
@@ -44,7 +44,6 @@
       "Common.TypeName": "BlazorApp1.Pages.Counter",
       "Common.TypeNameIdentifier": "Counter",
       "Common.TypeNamespace": "BlazorApp1.Pages",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.IComponent"
     }
   },
@@ -88,10 +87,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -3637307033699086578,
-      "Data2": 3809545408622060797,
-      "Data3": -3180195957056860571,
-      "Data4": -2130952983685174322
+      "Data1": -8123434263856138799,
+      "Data2": 617097513575074022,
+      "Data3": -5432693843895724315,
+      "Data4": -4888181540024424555
     },
     "Kind": "Components.Component",
     "Name": "BlazorApp1.Shared.MainLayout",
@@ -121,7 +120,6 @@
       "Common.TypeName": "BlazorApp1.Shared.MainLayout",
       "Common.TypeNameIdentifier": "MainLayout",
       "Common.TypeNamespace": "BlazorApp1.Shared",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.IComponent"
     }
   },
@@ -154,10 +152,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -5564905538566879760,
-      "Data2": -6128029452017204252,
-      "Data3": 2678574287877241091,
-      "Data4": -8767131675981096987
+      "Data1": -3923533772192242001,
+      "Data2": 6369655541486711218,
+      "Data3": -3953497821342995384,
+      "Data4": -2426919053441402726
     },
     "Kind": "Components.ChildContent",
     "Name": "BlazorApp1.Shared.MainLayout.Body",
@@ -176,7 +174,6 @@
       "Common.TypeNameIdentifier": "MainLayout",
       "Common.TypeNamespace": "BlazorApp1.Shared",
       "Components.IsSpecialKind": "Components.ChildContent",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.None"
     }
   },
@@ -206,10 +203,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -8162408700748429441,
-      "Data2": -3261423485540015859,
-      "Data3": -5831060761751179721,
-      "Data4": 1536748986628735540
+      "Data1": 7948851759771624656,
+      "Data2": 1779647592311778472,
+      "Data3": -8865344229242525648,
+      "Data4": 766186308628278862
     },
     "Kind": "Components.Component",
     "Name": "BlazorApp1.Shared.NavMenu",
@@ -225,7 +222,6 @@
       "Common.TypeName": "BlazorApp1.Shared.NavMenu",
       "Common.TypeNameIdentifier": "NavMenu",
       "Common.TypeNamespace": "BlazorApp1.Shared",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.IComponent"
     }
   },
@@ -268,10 +264,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 4232885730647468121,
-      "Data2": 3961708032008075350,
-      "Data3": 8560034177191466681,
-      "Data4": 3318467147451449031
+      "Data1": -5126141038451410282,
+      "Data2": 3214216990824851880,
+      "Data3": 5580246671111841221,
+      "Data4": 5389001140255584203
     },
     "Kind": "Components.Component",
     "Name": "BlazorApp1.Shared.SurveyPrompt",
@@ -300,7 +296,6 @@
       "Common.TypeName": "BlazorApp1.Shared.SurveyPrompt",
       "Common.TypeNameIdentifier": "SurveyPrompt",
       "Common.TypeNamespace": "BlazorApp1.Shared",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.IComponent"
     }
   },
@@ -330,10 +325,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 4161713238832045321,
-      "Data2": 1064779290218672668,
-      "Data3": -2437710342613213637,
-      "Data4": -7265653001518854280
+      "Data1": 1264223445987220200,
+      "Data2": 999251744170676591,
+      "Data3": -8359294579933270435,
+      "Data4": 3252960481497474603
     },
     "Kind": "Components.Component",
     "Name": "BlazorApp1.Pages.Index",
@@ -349,7 +344,6 @@
       "Common.TypeName": "BlazorApp1.Pages.Index",
       "Common.TypeNameIdentifier": "Index",
       "Common.TypeNamespace": "BlazorApp1.Pages",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.IComponent"
     }
   },
@@ -379,10 +373,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 2335815053783271788,
-      "Data2": 8124827780154594848,
-      "Data3": 7891166294582698348,
-      "Data4": -5826063243315862835
+      "Data1": 3287094810733162062,
+      "Data2": 6260908203455101702,
+      "Data3": -7769963598339313617,
+      "Data4": -983391184130237753
     },
     "Kind": "Components.Component",
     "Name": "BlazorApp1.Pages.FetchData",
@@ -398,7 +392,6 @@
       "Common.TypeName": "BlazorApp1.Pages.FetchData",
       "Common.TypeNameIdentifier": "FetchData",
       "Common.TypeNamespace": "BlazorApp1.Pages",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.IComponent"
     }
   },
@@ -428,10 +421,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 6665544797753017292,
-      "Data2": -3832425986691884916,
-      "Data3": 5796440921637725940,
-      "Data4": 5423542199918029529
+      "Data1": 4203101314585488448,
+      "Data2": -2776233979196193589,
+      "Data3": -3210153265548344759,
+      "Data4": 4895004399749508460
     },
     "Kind": "Components.Component",
     "Name": "BlazorApp1.App",
@@ -447,7 +440,6 @@
       "Common.TypeName": "BlazorApp1.App",
       "Common.TypeNameIdentifier": "App",
       "Common.TypeNamespace": "BlazorApp1",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.IComponent"
     }
   },
@@ -552,10 +544,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -5670375050512775378,
-      "Data2": -874739901724768718,
-      "Data3": 54886148509239318,
-      "Data4": -4504264523733718648
+      "Data1": 5760104752890912571,
+      "Data2": -1001510153969275353,
+      "Data3": -5717380579491566873,
+      "Data4": -2167871492180816540
     },
     "Kind": "Components.Component",
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView",
@@ -646,7 +638,6 @@
       "Common.TypeName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView",
       "Common.TypeNameIdentifier": "AuthorizeRouteView",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Authorization",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.IComponent"
     }
   },
@@ -698,10 +689,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 6032257583108181540,
-      "Data2": -2274118501462265968,
-      "Data3": -6468486029270976083,
-      "Data4": -6154901157949509510
+      "Data1": -6764306256049100972,
+      "Data2": 6388023111889204568,
+      "Data3": -3156086122554941845,
+      "Data4": -3243493552254792043
     },
     "Kind": "Components.ChildContent",
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized",
@@ -739,7 +730,6 @@
       "Common.TypeNameIdentifier": "AuthorizeRouteView",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Authorization",
       "Components.IsSpecialKind": "Components.ChildContent",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.None"
     }
   },
@@ -772,10 +762,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 5870895896729090558,
-      "Data2": 4514664260399280895,
-      "Data3": -5789909945961656008,
-      "Data4": 5283826182951665697
+      "Data1": 234959419338634243,
+      "Data2": 7753948220201315695,
+      "Data3": -8903940606689982141,
+      "Data4": 1585999533573333638
     },
     "Kind": "Components.ChildContent",
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing",
@@ -794,7 +784,6 @@
       "Common.TypeNameIdentifier": "AuthorizeRouteView",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Authorization",
       "Components.IsSpecialKind": "Components.ChildContent",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.None"
     }
   },
@@ -924,10 +913,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 4308722424487225589,
-      "Data2": -3939837567355794531,
-      "Data3": 2931152514055267993,
-      "Data4": -6339065357187762983
+      "Data1": -1199781016801134112,
+      "Data2": -4550030347350335323,
+      "Data3": 6606936611303811055,
+      "Data4": -3373823346012896507
     },
     "Kind": "Components.Component",
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView",
@@ -1043,7 +1032,6 @@
       "Common.TypeName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView",
       "Common.TypeNameIdentifier": "AuthorizeView",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Authorization",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.IComponent"
     }
   },
@@ -1095,10 +1083,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 2865309816272479192,
-      "Data2": 7895996858022407454,
-      "Data3": -2477511913031344481,
-      "Data4": -1255569459213813046
+      "Data1": 7217370201140386658,
+      "Data2": -8827865216640511808,
+      "Data3": 5830120956169220272,
+      "Data4": 3209480008818662785
     },
     "Kind": "Components.ChildContent",
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.ChildContent",
@@ -1136,7 +1124,6 @@
       "Common.TypeNameIdentifier": "AuthorizeView",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Authorization",
       "Components.IsSpecialKind": "Components.ChildContent",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.None"
     }
   },
@@ -1188,10 +1175,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -7232084476653595691,
-      "Data2": 3729872871043780397,
-      "Data3": -3951356247168253324,
-      "Data4": 4043114514578026524
+      "Data1": 8326031855383001153,
+      "Data2": -8945315741746159328,
+      "Data3": -8938834208575752719,
+      "Data4": 2169292867057086826
     },
     "Kind": "Components.ChildContent",
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.NotAuthorized",
@@ -1229,7 +1216,6 @@
       "Common.TypeNameIdentifier": "AuthorizeView",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Authorization",
       "Components.IsSpecialKind": "Components.ChildContent",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.None"
     }
   },
@@ -1281,10 +1267,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -4829609061090451748,
-      "Data2": 8672371776661525709,
-      "Data3": -5987949036734689204,
-      "Data4": -337909885280277222
+      "Data1": 5579115326774604853,
+      "Data2": -8243634886415719951,
+      "Data3": -4681272408493494767,
+      "Data4": 1391046538786055421
     },
     "Kind": "Components.ChildContent",
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorized",
@@ -1322,7 +1308,6 @@
       "Common.TypeNameIdentifier": "AuthorizeView",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Authorization",
       "Components.IsSpecialKind": "Components.ChildContent",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.None"
     }
   },
@@ -1355,10 +1340,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -8965251399400657753,
-      "Data2": 4700405948463537638,
-      "Data3": -1650141506615218318,
-      "Data4": 4365753977901049869
+      "Data1": 6280716295262958703,
+      "Data2": 6115841548498184980,
+      "Data3": 222497994503948530,
+      "Data4": -3982090020320805682
     },
     "Kind": "Components.ChildContent",
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorizing",
@@ -1377,7 +1362,6 @@
       "Common.TypeNameIdentifier": "AuthorizeView",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Authorization",
       "Components.IsSpecialKind": "Components.ChildContent",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.None"
     }
   },
@@ -1421,10 +1405,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -8508702271408202454,
-      "Data2": -9027225538017576089,
-      "Data3": -1440848541134469846,
-      "Data4": -7758211553450764794
+      "Data1": -8804691650799632679,
+      "Data2": 6456601040016488111,
+      "Data3": -7522193827008924673,
+      "Data4": -5440458016160417703
     },
     "Kind": "Components.Component",
     "Name": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState",
@@ -1454,7 +1438,6 @@
       "Common.TypeName": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState",
       "Common.TypeNameIdentifier": "CascadingAuthenticationState",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Authorization",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.IComponent"
     }
   },
@@ -1487,10 +1470,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 496720374064225291,
-      "Data2": -616032355525408666,
-      "Data3": -133569599448626781,
-      "Data4": 4296110130746945672
+      "Data1": 6507714941657652138,
+      "Data2": -6177042993772790802,
+      "Data3": 7534190791666759952,
+      "Data4": -1045070473957886346
     },
     "Kind": "Components.ChildContent",
     "Name": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState.ChildContent",
@@ -1509,7 +1492,6 @@
       "Common.TypeNameIdentifier": "CascadingAuthenticationState",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Authorization",
       "Components.IsSpecialKind": "Components.ChildContent",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.None"
     }
   },
@@ -1609,10 +1591,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 6711238537283888929,
-      "Data2": 5873374135862383415,
-      "Data3": 8509456994242368617,
-      "Data4": 4376587008477570436
+      "Data1": -5780154051763187457,
+      "Data2": -4579128249465004669,
+      "Data3": 5482201562703426864,
+      "Data4": 3889946100911124772
     },
     "Kind": "Components.Component",
     "Name": "Microsoft.AspNetCore.Components.CascadingValue<TValue>",
@@ -1698,7 +1680,6 @@
       "Common.TypeNameIdentifier": "CascadingValue",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components",
       "Components.GenericTyped": "True",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.IComponent"
     }
   },
@@ -1731,10 +1712,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -980138179177310213,
-      "Data2": 6296153525626759020,
-      "Data3": 2398511385560927215,
-      "Data4": -2612951529057931151
+      "Data1": -9113644844142134366,
+      "Data2": -5013885249219070919,
+      "Data3": 3561203638974102992,
+      "Data4": 8894805166842392162
     },
     "Kind": "Components.ChildContent",
     "Name": "Microsoft.AspNetCore.Components.CascadingValue<TValue>.ChildContent",
@@ -1753,7 +1734,6 @@
       "Common.TypeNameIdentifier": "CascadingValue",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components",
       "Components.IsSpecialKind": "Components.ChildContent",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.None"
     }
   },
@@ -1809,10 +1789,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -2481222183098693657,
-      "Data2": -167203505208021026,
-      "Data3": 6567953564554883430,
-      "Data4": -6347737004148621052
+      "Data1": -8754083526064089763,
+      "Data2": -328872675230120437,
+      "Data3": 7288599714645933297,
+      "Data4": 2083221117463709642
     },
     "Kind": "Components.Component",
     "Name": "Microsoft.AspNetCore.Components.DynamicComponent",
@@ -1854,7 +1834,6 @@
       "Common.TypeName": "Microsoft.AspNetCore.Components.DynamicComponent",
       "Common.TypeNameIdentifier": "DynamicComponent",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.IComponent"
     }
   },
@@ -1910,10 +1889,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -8682016147758950829,
-      "Data2": 709094247551334867,
-      "Data3": 913985963374560315,
-      "Data4": 2566404759215070590
+      "Data1": 3127123477171973516,
+      "Data2": 7018917575927608987,
+      "Data3": -8949830639233492543,
+      "Data4": 3482079452231588794
     },
     "Kind": "Components.Component",
     "Name": "Microsoft.AspNetCore.Components.LayoutView",
@@ -1955,7 +1934,6 @@
       "Common.TypeName": "Microsoft.AspNetCore.Components.LayoutView",
       "Common.TypeNameIdentifier": "LayoutView",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.IComponent"
     }
   },
@@ -1988,10 +1966,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 6011236899735796120,
-      "Data2": -3219807748281208042,
-      "Data3": -8192681746522000783,
-      "Data4": -8680821360922036093
+      "Data1": 8192343076438388857,
+      "Data2": -3201505868895701801,
+      "Data3": 7045092159852415059,
+      "Data4": -3726326443419491246
     },
     "Kind": "Components.ChildContent",
     "Name": "Microsoft.AspNetCore.Components.LayoutView.ChildContent",
@@ -2010,7 +1988,6 @@
       "Common.TypeNameIdentifier": "LayoutView",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components",
       "Components.IsSpecialKind": "Components.ChildContent",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.None"
     }
   },
@@ -2066,10 +2043,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -1182296053219756303,
-      "Data2": -788475892789530684,
-      "Data3": -3730773442334431517,
-      "Data4": -6922908039399134127
+      "Data1": 2987506395069234252,
+      "Data2": 456663136787722158,
+      "Data3": 6741166573341337722,
+      "Data4": -4096331048294172369
     },
     "Kind": "Components.Component",
     "Name": "Microsoft.AspNetCore.Components.RouteView",
@@ -2111,7 +2088,6 @@
       "Common.TypeName": "Microsoft.AspNetCore.Components.RouteView",
       "Common.TypeNameIdentifier": "RouteView",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.IComponent"
     }
   },
@@ -2243,10 +2219,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -358385581017941564,
-      "Data2": -5642558663812616708,
-      "Data3": 8170606511599423278,
-      "Data4": 6835717651993856626
+      "Data1": -815467356132597314,
+      "Data2": 1136892762727562378,
+      "Data3": 1528253873659373361,
+      "Data4": 3455510228031477657
     },
     "Kind": "Components.Component",
     "Name": "Microsoft.AspNetCore.Components.Routing.Router",
@@ -2364,7 +2340,6 @@
       "Common.TypeName": "Microsoft.AspNetCore.Components.Routing.Router",
       "Common.TypeNameIdentifier": "Router",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Routing",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.IComponent"
     }
   },
@@ -2397,10 +2372,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 6544015375274626525,
-      "Data2": -6850638450593843624,
-      "Data3": -2097615455033681445,
-      "Data4": -1832543398698509237
+      "Data1": 3724292203216811862,
+      "Data2": -8951695176769425308,
+      "Data3": -3182830530812925565,
+      "Data4": -2409930008095761790
     },
     "Kind": "Components.ChildContent",
     "Name": "Microsoft.AspNetCore.Components.Routing.Router.NotFound",
@@ -2419,7 +2394,6 @@
       "Common.TypeNameIdentifier": "Router",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Routing",
       "Components.IsSpecialKind": "Components.ChildContent",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.None"
     }
   },
@@ -2471,10 +2445,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -4489287158297045070,
-      "Data2": -6479290157716789979,
-      "Data3": 6911593585115576577,
-      "Data4": 8817323542663146919
+      "Data1": -7720409244363706259,
+      "Data2": -8697030997365889519,
+      "Data3": 101870013169018119,
+      "Data4": 8725086031164637128
     },
     "Kind": "Components.ChildContent",
     "Name": "Microsoft.AspNetCore.Components.Routing.Router.Found",
@@ -2512,7 +2486,6 @@
       "Common.TypeNameIdentifier": "Router",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Routing",
       "Components.IsSpecialKind": "Components.ChildContent",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.None"
     }
   },
@@ -2545,10 +2518,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -5338592908823743502,
-      "Data2": 6960118818027699725,
-      "Data3": -1552402976561403419,
-      "Data4": -7040223963143792508
+      "Data1": 7840791331382284418,
+      "Data2": -122134079321057149,
+      "Data3": 6801000894352834388,
+      "Data4": 8801789394843203340
     },
     "Kind": "Components.ChildContent",
     "Name": "Microsoft.AspNetCore.Components.Routing.Router.Navigating",
@@ -2567,7 +2540,6 @@
       "Common.TypeNameIdentifier": "Router",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Routing",
       "Components.IsSpecialKind": "Components.ChildContent",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.None"
     }
   },
@@ -2695,10 +2667,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 9178469908467611053,
-      "Data2": -2223514015292277347,
-      "Data3": -981602445909443982,
-      "Data4": 9178131007905786299
+      "Data1": 8484518061477577775,
+      "Data2": -8877589650866648569,
+      "Data3": -7345628486512106087,
+      "Data4": -6892933644780532811
     },
     "Kind": "Components.Component",
     "Name": "Microsoft.AspNetCore.Components.Forms.EditForm",
@@ -2812,7 +2784,6 @@
       "Common.TypeName": "Microsoft.AspNetCore.Components.Forms.EditForm",
       "Common.TypeNameIdentifier": "EditForm",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Forms",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.IComponent"
     }
   },
@@ -2864,10 +2835,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 4250196747891628273,
-      "Data2": -7552327060812399065,
-      "Data3": -1770436295091363119,
-      "Data4": -5665248308182812082
+      "Data1": -6145296839293040906,
+      "Data2": -7541607434038188274,
+      "Data3": 5100930087972919649,
+      "Data4": -4050010252850228660
     },
     "Kind": "Components.ChildContent",
     "Name": "Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent",
@@ -2905,7 +2876,6 @@
       "Common.TypeNameIdentifier": "EditForm",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Forms",
       "Components.IsSpecialKind": "Components.ChildContent",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.None"
     }
   },
@@ -2996,10 +2966,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 4750421850163896488,
-      "Data2": 4329965066213668098,
-      "Data3": 4385222279916794939,
-      "Data4": -6861355534220034345
+      "Data1": 3017197265379791385,
+      "Data2": -8173505545438979420,
+      "Data3": -5382596389912228386,
+      "Data4": 4161590464008908080
     },
     "Kind": "Components.Component",
     "Name": "Microsoft.AspNetCore.Components.Forms.InputCheckbox",
@@ -3076,7 +3046,6 @@
       "Common.TypeName": "Microsoft.AspNetCore.Components.Forms.InputCheckbox",
       "Common.TypeNameIdentifier": "InputCheckbox",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Forms",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.IComponent"
     }
   },
@@ -3212,10 +3181,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -3524891584041310129,
-      "Data2": 8358520120333001374,
-      "Data3": 1033374910838824393,
-      "Data4": -2396988811446122115
+      "Data1": 1177043961579693087,
+      "Data2": 6669223078956406618,
+      "Data3": -7670526460241762954,
+      "Data4": -784822838286995957
     },
     "Kind": "Components.Component",
     "Name": "Microsoft.AspNetCore.Components.Forms.InputDate<TValue>",
@@ -3337,7 +3306,6 @@
       "Common.TypeNameIdentifier": "InputDate",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Forms",
       "Components.GenericTyped": "True",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.IComponent"
     }
   },
@@ -3393,10 +3361,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 4360080955352965347,
-      "Data2": -1560812258552034600,
-      "Data3": -7332556034140519606,
-      "Data4": 4463876415717236162
+      "Data1": 6644188333657202433,
+      "Data2": 8175917536663621898,
+      "Data3": -5949445081949311376,
+      "Data4": 6778313306376039624
     },
     "Kind": "Components.Component",
     "Name": "Microsoft.AspNetCore.Components.Forms.InputFile",
@@ -3438,7 +3406,6 @@
       "Common.TypeName": "Microsoft.AspNetCore.Components.Forms.InputFile",
       "Common.TypeNameIdentifier": "InputFile",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Forms",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.IComponent"
     }
   },
@@ -3562,10 +3529,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 5377833217085567187,
-      "Data2": -7212539917937451057,
-      "Data3": 6686521353627943800,
-      "Data4": 4240432656974289911
+      "Data1": -3950371594984235757,
+      "Data2": -4533542172569843468,
+      "Data3": -6841679457617830642,
+      "Data4": -359538276994028534
     },
     "Kind": "Components.Component",
     "Name": "Microsoft.AspNetCore.Components.Forms.InputNumber<TValue>",
@@ -3675,7 +3642,6 @@
       "Common.TypeNameIdentifier": "InputNumber",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Forms",
       "Components.GenericTyped": "True",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.IComponent"
     }
   },
@@ -3762,10 +3728,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -2422091041532209709,
-      "Data2": 670149011050780970,
-      "Data3": -5810341311900384453,
-      "Data4": 8617762403693705723
+      "Data1": 9193622429176775942,
+      "Data2": -7398291593864389202,
+      "Data3": 7339214493439428368,
+      "Data4": 8212268252495006014
     },
     "Kind": "Components.Component",
     "Name": "Microsoft.AspNetCore.Components.Forms.InputRadio<TValue>",
@@ -3838,7 +3804,6 @@
       "Common.TypeNameIdentifier": "InputRadio",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Forms",
       "Components.GenericTyped": "True",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.IComponent"
     }
   },
@@ -3974,10 +3939,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 5227466124975466613,
-      "Data2": 893270132337158121,
-      "Data3": 2449731890324692307,
-      "Data4": -468672724867528477
+      "Data1": 1974438350854226349,
+      "Data2": -1584043556792402235,
+      "Data3": 1088685982402540909,
+      "Data4": -329374341858713757
     },
     "Kind": "Components.Component",
     "Name": "Microsoft.AspNetCore.Components.Forms.InputRadioGroup<TValue>",
@@ -4099,7 +4064,6 @@
       "Common.TypeNameIdentifier": "InputRadioGroup",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Forms",
       "Components.GenericTyped": "True",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.IComponent"
     }
   },
@@ -4132,10 +4096,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 8151153109291837047,
-      "Data2": 3259416881899310552,
-      "Data3": 8226720807427950518,
-      "Data4": 7443423745417956596
+      "Data1": -6969267294912626240,
+      "Data2": 7956684413714031549,
+      "Data3": -8128170952940534285,
+      "Data4": 5995910357895306868
     },
     "Kind": "Components.ChildContent",
     "Name": "Microsoft.AspNetCore.Components.Forms.InputRadioGroup<TValue>.ChildContent",
@@ -4154,7 +4118,6 @@
       "Common.TypeNameIdentifier": "InputRadioGroup",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Forms",
       "Components.IsSpecialKind": "Components.ChildContent",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.None"
     }
   },
@@ -4278,10 +4241,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 5285059320950511254,
-      "Data2": -8877820564124798396,
-      "Data3": 6141676408202979630,
-      "Data4": -2809816531495359115
+      "Data1": -1064302894541972262,
+      "Data2": 421085719772820154,
+      "Data3": -4888482159574060936,
+      "Data4": -7352344116981227983
     },
     "Kind": "Components.Component",
     "Name": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>",
@@ -4391,7 +4354,6 @@
       "Common.TypeNameIdentifier": "InputSelect",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Forms",
       "Components.GenericTyped": "True",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.IComponent"
     }
   },
@@ -4424,10 +4386,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 5188468170756859366,
-      "Data2": -9002416727794667330,
-      "Data3": -8047079321643737862,
-      "Data4": -834397743012373062
+      "Data1": 193347620882682498,
+      "Data2": -916482334739026733,
+      "Data3": -3021079938193895029,
+      "Data4": 8751397190167415535
     },
     "Kind": "Components.ChildContent",
     "Name": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>.ChildContent",
@@ -4446,7 +4408,6 @@
       "Common.TypeNameIdentifier": "InputSelect",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Forms",
       "Components.IsSpecialKind": "Components.ChildContent",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.None"
     }
   },
@@ -4537,10 +4498,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -561016604922687058,
-      "Data2": 6757843522352544402,
-      "Data3": 7853093584507652004,
-      "Data4": 1025170462022457807
+      "Data1": 6106984198825236079,
+      "Data2": -3953162821931563681,
+      "Data3": 7730234268356247744,
+      "Data4": 2274780905316388315
     },
     "Kind": "Components.Component",
     "Name": "Microsoft.AspNetCore.Components.Forms.InputText",
@@ -4617,7 +4578,6 @@
       "Common.TypeName": "Microsoft.AspNetCore.Components.Forms.InputText",
       "Common.TypeNameIdentifier": "InputText",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Forms",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.IComponent"
     }
   },
@@ -4708,10 +4668,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -9098506850753353318,
-      "Data2": 7881283158335309438,
-      "Data3": 6513560790940349950,
-      "Data4": -109931512219186610
+      "Data1": -9092974655753182189,
+      "Data2": 7115068458342394525,
+      "Data3": -8422713987511919664,
+      "Data4": -7309275731665601968
     },
     "Kind": "Components.Component",
     "Name": "Microsoft.AspNetCore.Components.Forms.InputTextArea",
@@ -4788,7 +4748,6 @@
       "Common.TypeName": "Microsoft.AspNetCore.Components.Forms.InputTextArea",
       "Common.TypeNameIdentifier": "InputTextArea",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Forms",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.IComponent"
     }
   },
@@ -4863,10 +4822,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -5842893276268146764,
-      "Data2": -3878438063973182210,
-      "Data3": 6251448128794824739,
-      "Data4": 8043598992453267021
+      "Data1": 3788209657176121915,
+      "Data2": 4584330152074781678,
+      "Data3": -3066569748530293658,
+      "Data4": -8187461622971503890
     },
     "Kind": "Components.Component",
     "Name": "Microsoft.AspNetCore.Components.Forms.ValidationMessage<TValue>",
@@ -4927,7 +4886,6 @@
       "Common.TypeNameIdentifier": "ValidationMessage",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Forms",
       "Components.GenericTyped": "True",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.IComponent"
     }
   },
@@ -4982,10 +4940,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -8963638243621009150,
-      "Data2": 4241946231707520695,
-      "Data3": 5328083633133358647,
-      "Data4": 1858097617013407913
+      "Data1": -9150640975297950719,
+      "Data2": -4707074701590302690,
+      "Data3": -5319374323507873398,
+      "Data4": 7154210231509090645
     },
     "Kind": "Components.Component",
     "Name": "Microsoft.AspNetCore.Components.Forms.ValidationSummary",
@@ -5026,7 +4984,6 @@
       "Common.TypeName": "Microsoft.AspNetCore.Components.Forms.ValidationSummary",
       "Common.TypeNameIdentifier": "ValidationSummary",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Forms",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.IComponent"
     }
   },
@@ -5082,10 +5039,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 2941059300231714285,
-      "Data2": 2924351095107030924,
-      "Data3": -4110504170700228467,
-      "Data4": -9009400231045426031
+      "Data1": 5018678141502667721,
+      "Data2": 7566455779883533335,
+      "Data3": 5694278983120331571,
+      "Data4": 2236006767422701578
     },
     "Kind": "Components.Component",
     "Name": "Microsoft.AspNetCore.Components.Routing.FocusOnNavigate",
@@ -5127,7 +5084,6 @@
       "Common.TypeName": "Microsoft.AspNetCore.Components.Routing.FocusOnNavigate",
       "Common.TypeNameIdentifier": "FocusOnNavigate",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Routing",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.IComponent"
     }
   },
@@ -5207,10 +5163,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 8837019408200200318,
-      "Data2": -7747068003615231198,
-      "Data3": -4669749263179573359,
-      "Data4": 378331924209414801
+      "Data1": -6455859872525263941,
+      "Data2": -3630630987819167005,
+      "Data3": -4319230668053038917,
+      "Data4": 7083930638814063082
     },
     "Kind": "Components.Component",
     "Name": "Microsoft.AspNetCore.Components.Routing.NavLink",
@@ -5276,7 +5232,6 @@
       "Common.TypeName": "Microsoft.AspNetCore.Components.Routing.NavLink",
       "Common.TypeNameIdentifier": "NavLink",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Routing",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.IComponent"
     }
   },
@@ -5309,10 +5264,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -6653630508996641168,
-      "Data2": -7142405199632297609,
-      "Data3": -1546285481457342350,
-      "Data4": -3981275491069538857
+      "Data1": -6651414903706520168,
+      "Data2": 6354463737339325749,
+      "Data3": 7835287783414307544,
+      "Data4": -4734463458993589681
     },
     "Kind": "Components.ChildContent",
     "Name": "Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent",
@@ -5331,7 +5286,6 @@
       "Common.TypeNameIdentifier": "NavLink",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Routing",
       "Components.IsSpecialKind": "Components.ChildContent",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.None"
     }
   },
@@ -5376,10 +5330,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 7549638084929379033,
-      "Data2": -8746884955177662434,
-      "Data3": -1227843554501487119,
-      "Data4": -8572732601137861189
+      "Data1": 970387423356264902,
+      "Data2": -710910237072333680,
+      "Data3": 5017569163855066560,
+      "Data4": 2209525659400847938
     },
     "Kind": "Components.Component",
     "Name": "Microsoft.AspNetCore.Components.Web.HeadContent",
@@ -5410,7 +5364,6 @@
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.HeadContent",
       "Common.TypeNameIdentifier": "HeadContent",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.IComponent"
     }
   },
@@ -5443,10 +5396,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -7631742097556367185,
-      "Data2": -4364200766249926072,
-      "Data3": -1159256415782753555,
-      "Data4": -7890694060331801304
+      "Data1": -5608944242188970885,
+      "Data2": 5872500261023599338,
+      "Data3": 1985925943101944618,
+      "Data4": 1812691709915821389
     },
     "Kind": "Components.ChildContent",
     "Name": "Microsoft.AspNetCore.Components.Web.HeadContent.ChildContent",
@@ -5465,7 +5418,6 @@
       "Common.TypeNameIdentifier": "HeadContent",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
       "Components.IsSpecialKind": "Components.ChildContent",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.None"
     }
   },
@@ -5496,10 +5448,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -1240995983121362648,
-      "Data2": 8522956505834539136,
-      "Data3": -3421828020978119343,
-      "Data4": 8857738717411134954
+      "Data1": -8469008007768482172,
+      "Data2": 206078808350057328,
+      "Data3": 7684012625817093176,
+      "Data4": 8965256477445888275
     },
     "Kind": "Components.Component",
     "Name": "Microsoft.AspNetCore.Components.Web.HeadOutlet",
@@ -5516,7 +5468,6 @@
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.HeadOutlet",
       "Common.TypeNameIdentifier": "HeadOutlet",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.IComponent"
     }
   },
@@ -5561,10 +5512,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 6544597506672757997,
-      "Data2": 1516252694881860404,
-      "Data3": -5238697416558366729,
-      "Data4": -8838917562540386797
+      "Data1": -3501356789479105831,
+      "Data2": 3648779073057791137,
+      "Data3": -845355926670671951,
+      "Data4": -6896899553588363951
     },
     "Kind": "Components.Component",
     "Name": "Microsoft.AspNetCore.Components.Web.PageTitle",
@@ -5595,7 +5546,6 @@
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.PageTitle",
       "Common.TypeNameIdentifier": "PageTitle",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.IComponent"
     }
   },
@@ -5628,10 +5578,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 635709010441109706,
-      "Data2": 229457377021242752,
-      "Data3": 7050657910339652885,
-      "Data4": 8692965205491505161
+      "Data1": -1942747241815777437,
+      "Data2": 3271237315667402483,
+      "Data3": -1366207485443719224,
+      "Data4": -807268392765513735
     },
     "Kind": "Components.ChildContent",
     "Name": "Microsoft.AspNetCore.Components.Web.PageTitle.ChildContent",
@@ -5650,7 +5600,6 @@
       "Common.TypeNameIdentifier": "PageTitle",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
       "Components.IsSpecialKind": "Components.ChildContent",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.None"
     }
   },
@@ -5732,10 +5681,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 517947926487828776,
-      "Data2": 1065444556355738948,
-      "Data3": 2183399278050925900,
-      "Data4": 5470821601898547187
+      "Data1": -5690454258784207586,
+      "Data2": 2293795129792307445,
+      "Data3": -8752270892873853856,
+      "Data4": 5404253089038233462
     },
     "Kind": "Components.Component",
     "Name": "Microsoft.AspNetCore.Components.Web.ErrorBoundary",
@@ -5803,7 +5752,6 @@
       "Common.TypeName": "Microsoft.AspNetCore.Components.Web.ErrorBoundary",
       "Common.TypeNameIdentifier": "ErrorBoundary",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.IComponent"
     }
   },
@@ -5836,10 +5784,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 1541244804032903747,
-      "Data2": 1095337878320964595,
-      "Data3": 4284241300337326579,
-      "Data4": 7864754689987225854
+      "Data1": -6237513229704433930,
+      "Data2": -3157929609789842441,
+      "Data3": 5029341716566776708,
+      "Data4": -4012972157425202486
     },
     "Kind": "Components.ChildContent",
     "Name": "Microsoft.AspNetCore.Components.Web.ErrorBoundary.ChildContent",
@@ -5858,7 +5806,6 @@
       "Common.TypeNameIdentifier": "ErrorBoundary",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
       "Components.IsSpecialKind": "Components.ChildContent",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.None"
     }
   },
@@ -5910,10 +5857,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 2705431218752461206,
-      "Data2": 3156200919052859651,
-      "Data3": -3482509489174410340,
-      "Data4": 8131291818567517846
+      "Data1": -9046819164632021,
+      "Data2": -2748003522763055019,
+      "Data3": -5229998499568183455,
+      "Data4": 4434126631540189652
     },
     "Kind": "Components.ChildContent",
     "Name": "Microsoft.AspNetCore.Components.Web.ErrorBoundary.ErrorContent",
@@ -5951,7 +5898,6 @@
       "Common.TypeNameIdentifier": "ErrorBoundary",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web",
       "Components.IsSpecialKind": "Components.ChildContent",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.None"
     }
   },
@@ -6103,10 +6049,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -6169636567933108382,
-      "Data2": 3618414658626254554,
-      "Data3": -979813400628325999,
-      "Data4": -3622973108833261576
+      "Data1": 490126074282816604,
+      "Data2": -1716541277560864118,
+      "Data3": 2065636995043367587,
+      "Data4": -8765261248116687644
     },
     "Kind": "Components.Component",
     "Name": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>",
@@ -6244,7 +6190,6 @@
       "Common.TypeNameIdentifier": "Virtualize",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web.Virtualization",
       "Components.GenericTyped": "True",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.IComponent"
     }
   },
@@ -6296,10 +6241,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -2924155974961894157,
-      "Data2": -4395370090010572778,
-      "Data3": -497520554943119926,
-      "Data4": 3121234387604839591
+      "Data1": -8773900880838221755,
+      "Data2": -6051393415016981125,
+      "Data3": 7976590216181217443,
+      "Data4": 7957559782837859203
     },
     "Kind": "Components.ChildContent",
     "Name": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.ChildContent",
@@ -6337,7 +6282,6 @@
       "Common.TypeNameIdentifier": "Virtualize",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web.Virtualization",
       "Components.IsSpecialKind": "Components.ChildContent",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.None"
     }
   },
@@ -6389,10 +6333,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -6544322411117505895,
-      "Data2": 6106732037502824961,
-      "Data3": 8290347033812061832,
-      "Data4": -6029957337016873452
+      "Data1": -4384809704887098712,
+      "Data2": -5774717244431908817,
+      "Data3": -3265422969536583346,
+      "Data4": -442459221498760607
     },
     "Kind": "Components.ChildContent",
     "Name": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.ItemContent",
@@ -6430,7 +6374,6 @@
       "Common.TypeNameIdentifier": "Virtualize",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web.Virtualization",
       "Components.IsSpecialKind": "Components.ChildContent",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.None"
     }
   },
@@ -6482,10 +6425,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 6874903202987211619,
-      "Data2": -7276752143564566840,
-      "Data3": -8259279404597304826,
-      "Data4": -6526813457546964286
+      "Data1": 5345274520272575055,
+      "Data2": 1645292341464526591,
+      "Data3": -9081830471558740496,
+      "Data4": -994125101893503247
     },
     "Kind": "Components.ChildContent",
     "Name": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.Placeholder",
@@ -6523,7 +6466,6 @@
       "Common.TypeNameIdentifier": "Virtualize",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Web.Virtualization",
       "Components.IsSpecialKind": "Components.ChildContent",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.None"
     }
   },
@@ -6554,10 +6496,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -1046740976957226503,
-      "Data2": 3040034035021860120,
-      "Data3": -4231070485534185672,
-      "Data4": -8083818713383345635
+      "Data1": -3165558529031923121,
+      "Data2": 1171987003155472759,
+      "Data3": 5888949767262489274,
+      "Data4": -1046487775842738235
     },
     "Kind": "Components.Component",
     "Name": "Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator",
@@ -6574,7 +6516,6 @@
       "Common.TypeName": "Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator",
       "Common.TypeNameIdentifier": "DataAnnotationsValidator",
       "Common.TypeNamespace": "Microsoft.AspNetCore.Components.Forms",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.IComponent"
     }
   },
@@ -23162,10 +23103,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 2420745703554031998,
-      "Data2": -2722674289697014877,
-      "Data3": -5978103384708942339,
-      "Data4": 8745382551114051797
+      "Data1": -9209279919763381333,
+      "Data2": -6711696020756561534,
+      "Data3": -8289685394915062457,
+      "Data4": -2011061766582740739
     },
     "Kind": "Components.Bind",
     "Name": "Microsoft.AspNetCore.Components.Forms.InputCheckbox",
@@ -23272,7 +23213,6 @@
       "Components.Bind.ExpressionAttribute": "ValueExpression",
       "Components.Bind.ValueAttribute": "Value",
       "Components.IsSpecialKind": "Components.Bind",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.None"
     }
   },
@@ -23392,10 +23332,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 4792890847368995576,
-      "Data2": 5439747658804233673,
-      "Data3": -5725184623943902336,
-      "Data4": -6639155256439104099
+      "Data1": -4209006776333942938,
+      "Data2": 8312127041257377061,
+      "Data3": -5578436464438688853,
+      "Data4": 1029023445595248057
     },
     "Kind": "Components.Bind",
     "Name": "Microsoft.AspNetCore.Components.Forms.InputDate<TValue>",
@@ -23502,7 +23442,6 @@
       "Components.Bind.ExpressionAttribute": "ValueExpression",
       "Components.Bind.ValueAttribute": "Value",
       "Components.IsSpecialKind": "Components.Bind",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.None"
     }
   },
@@ -23622,10 +23561,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 6465650549189303668,
-      "Data2": 1748541660363536605,
-      "Data3": -10370286834008972,
-      "Data4": 5315229910156974324
+      "Data1": 8338783823181188882,
+      "Data2": -7183875632819489932,
+      "Data3": 836575581998904498,
+      "Data4": 6684936355685517434
     },
     "Kind": "Components.Bind",
     "Name": "Microsoft.AspNetCore.Components.Forms.InputNumber<TValue>",
@@ -23732,7 +23671,6 @@
       "Components.Bind.ExpressionAttribute": "ValueExpression",
       "Components.Bind.ValueAttribute": "Value",
       "Components.IsSpecialKind": "Components.Bind",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.None"
     }
   },
@@ -23852,10 +23790,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 5454571538254468164,
-      "Data2": 7238151072517015029,
-      "Data3": 4381534358341762912,
-      "Data4": 637135800206523022
+      "Data1": -2699402303009839891,
+      "Data2": 3158536910913273539,
+      "Data3": -3060120417472120390,
+      "Data4": 4309951212858745297
     },
     "Kind": "Components.Bind",
     "Name": "Microsoft.AspNetCore.Components.Forms.InputRadioGroup<TValue>",
@@ -23962,7 +23900,6 @@
       "Components.Bind.ExpressionAttribute": "ValueExpression",
       "Components.Bind.ValueAttribute": "Value",
       "Components.IsSpecialKind": "Components.Bind",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.None"
     }
   },
@@ -24082,10 +24019,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -7142518057301554555,
-      "Data2": 333020842639550534,
-      "Data3": -2131804686908703588,
-      "Data4": -1771248801433296838
+      "Data1": -4714092883071430480,
+      "Data2": 5977705479266251807,
+      "Data3": -7813911408136856123,
+      "Data4": 4093040514758558421
     },
     "Kind": "Components.Bind",
     "Name": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>",
@@ -24192,7 +24129,6 @@
       "Components.Bind.ExpressionAttribute": "ValueExpression",
       "Components.Bind.ValueAttribute": "Value",
       "Components.IsSpecialKind": "Components.Bind",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.None"
     }
   },
@@ -24312,10 +24248,10 @@
   },
   {
     "__Checksum": {
-      "Data1": 608676681223140338,
-      "Data2": -8732791810526840297,
-      "Data3": 3593688064016366147,
-      "Data4": 4421603716232578866
+      "Data1": 8761342826731664020,
+      "Data2": 1744717638667053890,
+      "Data3": -6147164175810361227,
+      "Data4": 5083436678437291692
     },
     "Kind": "Components.Bind",
     "Name": "Microsoft.AspNetCore.Components.Forms.InputText",
@@ -24422,7 +24358,6 @@
       "Components.Bind.ExpressionAttribute": "ValueExpression",
       "Components.Bind.ValueAttribute": "Value",
       "Components.IsSpecialKind": "Components.Bind",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.None"
     }
   },
@@ -24542,10 +24477,10 @@
   },
   {
     "__Checksum": {
-      "Data1": -9172384752605956628,
-      "Data2": 250161307762296481,
-      "Data3": 402798167201537558,
-      "Data4": -8269259537837421775
+      "Data1": 1898702117658436368,
+      "Data2": -2495346646811203976,
+      "Data3": -2099608844810023740,
+      "Data4": 8588755052109587309
     },
     "Kind": "Components.Bind",
     "Name": "Microsoft.AspNetCore.Components.Forms.InputTextArea",
@@ -24652,7 +24587,6 @@
       "Components.Bind.ExpressionAttribute": "ValueExpression",
       "Components.Bind.ValueAttribute": "Value",
       "Components.IsSpecialKind": "Components.Bind",
-      "Components.NameMatch": "Components.FullyQualifiedNameMatch",
       "Runtime.Name": "Components.None"
     }
   },

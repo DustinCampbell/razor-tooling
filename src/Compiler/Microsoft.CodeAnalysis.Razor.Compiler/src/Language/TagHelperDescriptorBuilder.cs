@@ -43,6 +43,7 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
     public string? TagOutputHint { get; set; }
     public bool CaseSensitive { get; set; }
     public bool ClassifyAttributesOnly { get; set; }
+    public bool UseFullyQualifiedNameMatch { get; set; }
 
     public string? Documentation
     {
@@ -116,7 +117,7 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
     {
         _metadata.AddIfMissing(TagHelperMetadata.Runtime.Name, TagHelperConventions.DefaultKind);
         var metadata = _metadata.GetMetadataCollection();
-        var flags = ComputeFlags(Kind, CaseSensitive, ClassifyAttributesOnly, metadata);
+        var flags = ComputeFlags(Kind, CaseSensitive, ClassifyAttributesOnly, UseFullyQualifiedNameMatch, metadata);
 
         return new TagHelperDescriptor(
             Kind,
@@ -133,7 +134,7 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
             diagnostics);
     }
 
-    internal static TagHelperFlags ComputeFlags(string kind, bool caseSensitive, bool classifyAttributesOnly, MetadataCollection metadata)
+    internal static TagHelperFlags ComputeFlags(string kind, bool caseSensitive, bool classifyAttributesOnly, bool useFullyQualifiedNameMatch, MetadataCollection metadata)
     {
         TagHelperFlags flags = 0;
 
@@ -153,9 +154,9 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
             flags |= TagHelperFlags.IsComponent;
         }
 
-        if (metadata.Contains(ComponentMetadata.Component.NameMatchKey, ComponentMetadata.Component.FullyQualifiedNameMatch))
+        if (useFullyQualifiedNameMatch)
         {
-            flags |= TagHelperFlags.IsComponentFullyQualifiedNameMatch;
+            flags |= TagHelperFlags.UseFullyQualifiedNameMatch;
         }
 
         if (metadata.Contains(ComponentMetadata.SpecialKindKey, ComponentMetadata.ChildContent.TagHelperKind))

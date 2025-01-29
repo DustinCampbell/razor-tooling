@@ -102,6 +102,15 @@ public static class TestTagHelperDescriptorBuilderExtensions
         return builder;
     }
 
+    public static TagHelperDescriptorBuilder UseFullyQualifiedNameMatch(this TagHelperDescriptorBuilder builder)
+    {
+        ArgHelper.ThrowIfNull(builder);
+
+        builder.UseFullyQualifiedNameMatch = true;
+
+        return builder;
+    }
+
     public static TagHelperDescriptorBuilder Documentation(this TagHelperDescriptorBuilder builder, string documentation)
     {
         if (builder == null)
