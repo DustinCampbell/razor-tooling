@@ -31,6 +31,7 @@ public sealed class TagHelperDescriptor : TagHelperObject<TagHelperDescriptor>
 
     internal TagHelperFlags Flags => _flags;
     public bool CaseSensitive => (_flags & TagHelperFlags.CaseSensitive) != 0;
+    public bool ClassifyAttributesOnly => (_flags & TagHelperFlags.ClassifyAttributesOnly) != 0;
 
     public ImmutableArray<AllowedChildTagDescriptor> AllowedChildTags { get; }
     public ImmutableArray<BoundAttributeDescriptor> BoundAttributes { get; }

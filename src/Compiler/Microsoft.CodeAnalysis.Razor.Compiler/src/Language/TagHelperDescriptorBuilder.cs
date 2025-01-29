@@ -42,6 +42,7 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
     public string? DisplayName { get; set; }
     public string? TagOutputHint { get; set; }
     public bool CaseSensitive { get; set; }
+    public bool ClassifyAttributesOnly { get; set; }
 
     public string? Documentation
     {
@@ -115,7 +116,7 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
     {
         _metadata.AddIfMissing(TagHelperMetadata.Runtime.Name, TagHelperConventions.DefaultKind);
         var metadata = _metadata.GetMetadataCollection();
-        var flags = ComputeFlags(CaseSensitive, Kind, metadata);
+        var flags = ComputeFlags(Kind, CaseSensitive, ClassifyAttributesOnly, metadata);
 
         return new TagHelperDescriptor(
             Kind,
@@ -132,13 +133,18 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
             diagnostics);
     }
 
-    internal static TagHelperFlags ComputeFlags(bool caseSensitive, string kind, MetadataCollection metadata)
+    internal static TagHelperFlags ComputeFlags(string kind, bool caseSensitive, bool classifyAttributesOnly, MetadataCollection metadata)
     {
         TagHelperFlags flags = 0;
 
         if (caseSensitive)
         {
             flags |= TagHelperFlags.CaseSensitive;
+        }
+
+        if (classifyAttributesOnly)
+        {
+            flags |= TagHelperFlags.ClassifyAttributesOnly;
         }
 
         if (kind == ComponentMetadata.Component.TagHelperKind &&

@@ -158,6 +158,7 @@ internal sealed class EventHandlerTagHelperDescriptorProvider : TagHelperDescrip
                 ComponentMetadata.EventHandler.TagHelperKind, attribute, ComponentsApi.AssemblyName,
                 out var builder);
             builder.CaseSensitive = true;
+            builder.ClassifyAttributesOnly = true;
             builder.SetDocumentation(
                 DocumentationDescriptor.From(
                     DocumentationId.EventHandlerTagHelper,
@@ -167,7 +168,6 @@ internal sealed class EventHandlerTagHelperDescriptorProvider : TagHelperDescrip
             builder.SetMetadata(
                 SpecialKind(ComponentMetadata.EventHandler.TagHelperKind),
                 new(ComponentMetadata.EventHandler.EventArgsType, eventArgType),
-                MakeTrue(TagHelperMetadata.Common.ClassifyAttributesOnly),
                 RuntimeName(ComponentMetadata.EventHandler.RuntimeName),
                 TypeName(typeName),
                 TypeNamespace(typeNamespace),
