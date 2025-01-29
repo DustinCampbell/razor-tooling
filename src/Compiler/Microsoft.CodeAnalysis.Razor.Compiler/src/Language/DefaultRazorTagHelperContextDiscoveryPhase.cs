@@ -356,7 +356,7 @@ internal sealed partial class DefaultRazorTagHelperContextDiscoveryPhase : Razor
                     continue;
                 }
 
-                if (tagHelper.IsComponentFullyQualifiedNameMatch)
+                if (tagHelper.UseFullyQualifiedNameMatch)
                 {
                     // If the component descriptor matches for a fully qualified name, using directives shouldn't matter.
                     AddMatch(tagHelper);
@@ -457,7 +457,7 @@ internal sealed partial class DefaultRazorTagHelperContextDiscoveryPhase : Razor
 
                         foreach (var tagHelper in _nonFullyQualifiedComponents)
                         {
-                            Debug.Assert(!tagHelper.IsComponentFullyQualifiedNameMatch, "We've already processed these.");
+                            Debug.Assert(!tagHelper.UseFullyQualifiedNameMatch, "We've already processed these.");
 
                             if (tagHelper.IsChildContentTagHelper)
                             {

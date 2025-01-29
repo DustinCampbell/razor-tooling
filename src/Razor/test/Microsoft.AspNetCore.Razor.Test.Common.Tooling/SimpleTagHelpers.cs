@@ -62,11 +62,11 @@ internal static class SimpleTagHelpers
 
         var builder3 = TagHelperDescriptorBuilder.Create(ComponentMetadata.Component.TagHelperKind, "Component1TagHelper", "TestAssembly");
         builder3.TagMatchingRule(rule => rule.TagName = "Component1");
+        builder3.UseFullyQualifiedNameMatch = true;
         builder3.SetMetadata(
             TypeName("Component1"),
             TypeNamespace("System"), // Just so we can reasonably assume a using directive is in place
-            TypeNameIdentifier("Component1"),
-            new(ComponentMetadata.Component.NameMatchKey, ComponentMetadata.Component.FullyQualifiedNameMatch));
+            TypeNameIdentifier("Component1"));
         builder3.BindAttribute(attribute =>
         {
             attribute.Name = "bool-val";
@@ -88,11 +88,11 @@ internal static class SimpleTagHelpers
 
         var textComponent = TagHelperDescriptorBuilder.Create(ComponentMetadata.Component.TagHelperKind, "TextTagHelper", "TestAssembly");
         textComponent.TagMatchingRule(rule => rule.TagName = "Text");
+        textComponent.UseFullyQualifiedNameMatch = true;
         textComponent.SetMetadata(
             TypeName("Text"),
             TypeNamespace("System"),
-            TypeNameIdentifier("Text"),
-            new(ComponentMetadata.Component.NameMatchKey, ComponentMetadata.Component.FullyQualifiedNameMatch));
+            TypeNameIdentifier("Text"));
 
         var directiveAttribute1 = TagHelperDescriptorBuilder.Create(ComponentMetadata.Component.TagHelperKind, "TestDirectiveAttribute", "TestAssembly");
         directiveAttribute1.TagMatchingRule(rule =>
@@ -129,8 +129,8 @@ internal static class SimpleTagHelpers
             });
         });
         directiveAttribute1.ClassifyAttributesOnly = true;
+        directiveAttribute1.UseFullyQualifiedNameMatch = true;
         directiveAttribute1.SetMetadata(
-            new(ComponentMetadata.Component.NameMatchKey, ComponentMetadata.Component.FullyQualifiedNameMatch),
             TypeName("TestDirectiveAttribute"));
 
         var directiveAttribute2 = TagHelperDescriptorBuilder.Create(ComponentMetadata.Component.TagHelperKind, "MinimizedDirectiveAttribute", "TestAssembly");
@@ -168,8 +168,8 @@ internal static class SimpleTagHelpers
             });
         });
         directiveAttribute2.ClassifyAttributesOnly = true;
+        directiveAttribute2.UseFullyQualifiedNameMatch = true;
         directiveAttribute2.SetMetadata(
-            new(ComponentMetadata.Component.NameMatchKey, ComponentMetadata.Component.FullyQualifiedNameMatch),
             TypeName("TestDirectiveAttribute"));
 
         var directiveAttribute3 = TagHelperDescriptorBuilder.Create(ComponentMetadata.EventHandler.TagHelperKind, "OnClickDirectiveAttribute", "TestAssembly");
@@ -201,11 +201,11 @@ internal static class SimpleTagHelpers
             attribute.TypeName = "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.MouseEventArgs>";
         });
         directiveAttribute3.ClassifyAttributesOnly = true;
+        directiveAttribute3.UseFullyQualifiedNameMatch = true;
         directiveAttribute3.SetMetadata(
             RuntimeName(ComponentMetadata.EventHandler.RuntimeName),
             SpecialKind(ComponentMetadata.EventHandler.TagHelperKind),
             new(ComponentMetadata.EventHandler.EventArgsType, "Microsoft.AspNetCore.Components.Web.MouseEventArgs"),
-            new(ComponentMetadata.Component.NameMatchKey, ComponentMetadata.Component.FullyQualifiedNameMatch),
             TypeName("OnClickDirectiveAttribute"),
             TypeNamespace("Microsoft.AspNetCore.Components.Web"),
             TypeNameIdentifier("EventHandlers"));

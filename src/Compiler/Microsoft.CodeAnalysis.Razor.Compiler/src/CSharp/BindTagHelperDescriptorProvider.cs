@@ -701,9 +701,9 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
                     });
                 });
 
-                if (tagHelper.IsComponentFullyQualifiedNameMatch)
+                if (tagHelper.UseFullyQualifiedNameMatch)
                 {
-                    metadata.Add(ComponentMetadata.Component.NameMatchKey, ComponentMetadata.Component.FullyQualifiedNameMatch);
+                    builder.UseFullyQualifiedNameMatch = true;
                 }
 
                 builder.SetMetadata(metadata.Build());
