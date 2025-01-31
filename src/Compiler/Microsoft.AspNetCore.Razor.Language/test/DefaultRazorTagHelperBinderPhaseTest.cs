@@ -1482,11 +1482,11 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
         bool componentFullyQualified = false)
     {
         var builder = TagHelperDescriptorBuilder.Create(kind, typeName, assemblyName);
-        using var metadata = builder.GetMetadataBuilder();
 
-        metadata.Add(TypeName(typeName));
-        metadata.Add(TypeNamespace(typeNamespace ?? (typeName.LastIndexOf('.') == -1 ? "" : typeName[..typeName.LastIndexOf('.')])));
-        metadata.Add(TypeNameIdentifier(typeNameIdentifier ?? (typeName.LastIndexOf('.') == -1 ? typeName : typeName[(typeName.LastIndexOf('.') + 1)..])));
+        builder.SetMetadata(
+            TypeName(typeName),
+            TypeNamespace(typeNamespace ?? (typeName.LastIndexOf('.') == -1 ? "" : typeName[..typeName.LastIndexOf('.')])),
+            TypeNameIdentifier(typeNameIdentifier ?? (typeName.LastIndexOf('.') == -1 ? typeName : typeName[(typeName.LastIndexOf('.') + 1)..])));
 
         if (attributes != null)
         {
@@ -1517,10 +1517,6 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
             builder.UseFullyQualifiedNameMatch = true;
         }
 
-        builder.SetMetadata(metadata.Build());
-
-        var descriptor = builder.Build();
-
-        return descriptor;
+        return builder.Build();
     }
 }
