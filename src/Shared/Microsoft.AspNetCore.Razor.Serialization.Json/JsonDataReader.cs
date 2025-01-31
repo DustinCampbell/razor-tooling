@@ -264,6 +264,9 @@ internal partial class JsonDataReader
         return ReadNonNullString();
     }
 
+    public string ReadNonNullStringOrDefault(string propertyName, string defaultValue)
+        => TryReadPropertyName(propertyName) ? ReadNonNullString() : defaultValue;
+
     public object? ReadValue()
     {
         return _reader.TokenType switch

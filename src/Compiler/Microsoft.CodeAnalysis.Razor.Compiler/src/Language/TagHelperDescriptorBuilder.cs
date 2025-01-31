@@ -31,7 +31,7 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
     }
 
     public static TagHelperDescriptorBuilder Create(string name, string assemblyName)
-        => new(TagHelperConventions.DefaultKind, name, assemblyName);
+        => new( TagHelperConventions.DefaultKind, name, assemblyName);
 
     public static TagHelperDescriptorBuilder Create(string kind, string name, string assemblyName)
         => new(kind, name, assemblyName);
@@ -39,6 +39,7 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
     public string Kind => _kind.AssumeNotNull();
     public string Name => _name.AssumeNotNull();
     public string AssemblyName => _assemblyName.AssumeNotNull();
+    public string? Runtime { get; set; }
     public string? DisplayName { get; set; }
     public string? TagOutputHint { get; set; }
     public bool CaseSensitive { get; set; }
@@ -115,13 +116,12 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
 
     private protected override TagHelperDescriptor BuildCore(ImmutableArray<RazorDiagnostic> diagnostics)
     {
-        _metadata.AddIfMissing(TagHelperMetadata.Runtime.Name, TagHelperConventions.DefaultKind);
-
         return new TagHelperDescriptor(
             Kind,
             Name,
             AssemblyName,
             ComputeFlags(),
+            Runtime ?? TagHelperConventions.DefaultKind,
             GetDisplayName(),
             _documentationObject,
             TagOutputHint,
@@ -173,14 +173,5 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
                 ? value
                 : null;
         }
-    }
-
-    internal MetadataBuilder GetMetadataBuilder(string? runtimeName = null)
-    {
-        var metadataBuilder = new MetadataBuilder();
-
-        metadataBuilder.Add(TagHelperMetadata.Runtime.Name, runtimeName ?? TagHelperConventions.DefaultKind);
-
-        return metadataBuilder;
     }
 }

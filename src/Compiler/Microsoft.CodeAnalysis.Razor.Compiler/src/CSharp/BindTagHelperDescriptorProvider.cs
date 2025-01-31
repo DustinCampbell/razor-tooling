@@ -124,12 +124,12 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
             ComponentMetadata.Bind.TagHelperKind, "Bind", ComponentsApi.AssemblyName,
             out var builder);
 
+        builder.Runtime = ComponentMetadata.Bind.RuntimeName;
         builder.CaseSensitive = true;
         builder.ClassifyAttributesOnly = true;
         builder.SetDocumentation(DocumentationDescriptor.BindTagHelper_Fallback);
 
         builder.SetMetadata(
-            RuntimeName(ComponentMetadata.Bind.RuntimeName),
             MakeTrue(ComponentMetadata.Bind.FallbackKey),
             TypeName("Microsoft.AspNetCore.Components.Bind"),
             TypeNamespace("Microsoft.AspNetCore.Components"),
@@ -365,7 +365,7 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
             using var _ = TagHelperDescriptorBuilder.GetPooledInstance(
                 ComponentMetadata.Bind.TagHelperKind, name, ComponentsApi.AssemblyName,
                 out var builder);
-            using var metadata = builder.GetMetadataBuilder(ComponentMetadata.Bind.RuntimeName);
+            builder.Runtime = ComponentMetadata.Bind.RuntimeName;
             builder.CaseSensitive = true;
             builder.ClassifyAttributesOnly = true;
             builder.SetDocumentation(
@@ -374,6 +374,7 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
                     valueAttribute,
                     changeAttribute));
 
+            using var metadata = new MetadataBuilder();
             metadata.Add(ComponentMetadata.Bind.ValueAttribute, valueAttribute);
             metadata.Add(ComponentMetadata.Bind.ChangeAttribute, changeAttribute);
             metadata.Add(ComponentMetadata.Bind.IsInvariantCulture, isInvariantCulture ? bool.TrueString : bool.FalseString);
@@ -602,8 +603,7 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
                     ComponentMetadata.Bind.TagHelperKind, tagHelper.Name, tagHelper.AssemblyName,
                     out var builder);
 
-                using var metadata = builder.GetMetadataBuilder(ComponentMetadata.Bind.RuntimeName);
-
+                builder.Runtime = ComponentMetadata.Bind.RuntimeName;
                 builder.DisplayName = tagHelper.DisplayName;
                 builder.CaseSensitive = true;
                 builder.SetDocumentation(
@@ -612,6 +612,7 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
                         valueAttribute.Name,
                         changeAttribute.Name));
 
+                using var metadata = new MetadataBuilder();
                 metadata.Add(ComponentMetadata.Bind.ValueAttribute, valueAttribute.Name);
                 metadata.Add(ComponentMetadata.Bind.ChangeAttribute, changeAttribute.Name);
 
