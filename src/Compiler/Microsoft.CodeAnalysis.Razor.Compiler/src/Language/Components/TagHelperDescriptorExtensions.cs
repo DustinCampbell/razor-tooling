@@ -16,7 +16,7 @@ internal static class TagHelperDescriptorExtensions
     {
         return tagHelper.Kind == TagHelperKind.Component ||
                tagHelper.IsBindTagHelper() ||
-               tagHelper.IsChildContentTagHelper ||
+               tagHelper.Kind == TagHelperKind.ChildContent ||
                tagHelper.IsEventHandlerTagHelper() ||
                tagHelper.IsFormNameTagHelper() ||
                tagHelper.IsKeyTagHelper() ||

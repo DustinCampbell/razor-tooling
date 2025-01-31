@@ -123,15 +123,14 @@
   },
   {
     "__Checksum": {
-      "Data1": 5751768137928384612,
-      "Data2": 5484943799600079400,
-      "Data3": -1885728260743693505,
-      "Data4": 355027299600920459
+      "Data1": -4449653596367821592,
+      "Data2": -924341813623860639,
+      "Data3": 242633211553524226,
+      "Data4": 228968512679867137
     },
     "Kind": 2,
     "Name": "BlazorApp1.Shared.MainLayout.Body",
     "AssemblyName": "BlazorApp1",
-    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "BlazorApp1.Shared.MainLayout.Body",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.LayoutComponentBase.Body\">\r\n            <summary>\r\n            Gets the content to be rendered inside the layout.\r\n            </summary>\r\n        </member>",
@@ -149,15 +148,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -5413263032219870353,
-      "Data2": -5838878364837512479,
-      "Data3": -5461315260710579448,
-      "Data4": -4360454996338060033
+      "Data1": -2539573774571897593,
+      "Data2": 1343642428659497476,
+      "Data3": 539249846481902827,
+      "Data4": 338462129624943721
     },
     "Kind": 2,
     "Name": "BlazorApp1.Shared.MainLayout.Body",
     "AssemblyName": "BlazorApp1",
-    "Flags": 7,
+    "Flags": 3,
     "Runtime": 0,
     "DisplayName": "BlazorApp1.Shared.MainLayout.Body",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.LayoutComponentBase.Body\">\r\n            <summary>\r\n            Gets the content to be rendered inside the layout.\r\n            </summary>\r\n        </member>",
@@ -633,15 +632,14 @@
   },
   {
     "__Checksum": {
-      "Data1": 2790794412982814224,
-      "Data2": -8557613192763541911,
-      "Data3": -2640046200302367020,
-      "Data4": 3860867713554098066
+      "Data1": -7927163427829130884,
+      "Data2": -6394091942570458660,
+      "Data3": 5077670175418457547,
+      "Data4": 6436725307394235436
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized\">\r\n            <summary>\r\n            The content that will be displayed if the user is not authorized.\r\n            </summary>\r\n        </member>",
@@ -678,15 +676,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 5632080910265388739,
-      "Data2": -3817398806215479573,
-      "Data3": -688641175998545048,
-      "Data4": -3497494800743866788
+      "Data1": -5815957398318662923,
+      "Data2": 3050942783219619588,
+      "Data3": 1232872232881495560,
+      "Data4": -4383312473287058600
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-    "Flags": 7,
+    "Flags": 3,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized\">\r\n            <summary>\r\n            The content that will be displayed if the user is not authorized.\r\n            </summary>\r\n        </member>",
@@ -723,15 +721,14 @@
   },
   {
     "__Checksum": {
-      "Data1": 4904437762751452657,
-      "Data2": 3863826808325277615,
-      "Data3": -1703225325556513414,
-      "Data4": -7467998003462111260
+      "Data1": 7241306033180065579,
+      "Data2": 6518734880709243685,
+      "Data3": 5295282602369942066,
+      "Data4": 5958451249548643764
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing\">\r\n            <summary>\r\n            The content that will be displayed while asynchronous authorization is in progress.\r\n            </summary>\r\n        </member>",
@@ -749,15 +746,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 3671323426785218761,
-      "Data2": -7300170854521421703,
-      "Data3": 4786316469869186017,
-      "Data4": -477488745051296612
+      "Data1": -2058812065554983255,
+      "Data2": -3275190939509316643,
+      "Data3": -4695358244549408824,
+      "Data4": 6296625627369835225
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-    "Flags": 7,
+    "Flags": 3,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing\">\r\n            <summary>\r\n            The content that will be displayed while asynchronous authorization is in progress.\r\n            </summary>\r\n        </member>",
@@ -1022,15 +1019,14 @@
   },
   {
     "__Checksum": {
-      "Data1": -4112757892120352588,
-      "Data2": -8292633144347940939,
-      "Data3": 5450423268313642807,
-      "Data4": -1807965490764959375
+      "Data1": 4631611844180464090,
+      "Data2": -2685928307156813847,
+      "Data3": 3941704884785497489,
+      "Data4": -3453664676812389935
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.ChildContent",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.ChildContent\">\r\n            <summary>\r\n            The content that will be displayed if the user is authorized.\r\n            </summary>\r\n        </member>",
@@ -1067,15 +1063,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 7499114027676105373,
-      "Data2": -5743779540807407480,
-      "Data3": 8481791473622943196,
-      "Data4": -6751568061229401413
+      "Data1": 5745390181839052872,
+      "Data2": 7391020216868178704,
+      "Data3": -749050999470324813,
+      "Data4": -7296666907554059492
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-    "Flags": 7,
+    "Flags": 3,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.ChildContent",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.ChildContent\">\r\n            <summary>\r\n            The content that will be displayed if the user is authorized.\r\n            </summary>\r\n        </member>",
@@ -1112,15 +1108,14 @@
   },
   {
     "__Checksum": {
-      "Data1": -8670253822504497195,
-      "Data2": 5242804401650255524,
-      "Data3": -8631367940069921140,
-      "Data4": 8266669835951908687
+      "Data1": 1546743344052670096,
+      "Data2": -2055430052582712686,
+      "Data3": -2828375954997264839,
+      "Data4": -7797454908980296117
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.NotAuthorized",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.NotAuthorized",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.NotAuthorized\">\r\n            <summary>\r\n            The content that will be displayed if the user is not authorized.\r\n            </summary>\r\n        </member>",
@@ -1157,15 +1152,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 4509713979480880470,
-      "Data2": -6171961158562169924,
-      "Data3": -7348593075943205531,
-      "Data4": -3598912967525028703
+      "Data1": -2541045751543874490,
+      "Data2": 3428102359362359266,
+      "Data3": -5322927921869978614,
+      "Data4": 2241636336309699013
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.NotAuthorized",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-    "Flags": 7,
+    "Flags": 3,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.NotAuthorized",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.NotAuthorized\">\r\n            <summary>\r\n            The content that will be displayed if the user is not authorized.\r\n            </summary>\r\n        </member>",
@@ -1202,15 +1197,14 @@
   },
   {
     "__Checksum": {
-      "Data1": 8235755942430370371,
-      "Data2": -2198583718888974258,
-      "Data3": -9140160026568036220,
-      "Data4": -8148774220759497431
+      "Data1": 6628594604065754808,
+      "Data2": -2474539338979868415,
+      "Data3": -8473536795304943221,
+      "Data4": -8957609674844597588
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorized",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorized",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.Authorized\">\r\n            <summary>\r\n            The content that will be displayed if the user is authorized.\r\n            If you specify a value for this parameter, do not also specify a value for <see cref=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.ChildContent\" />.\r\n            </summary>\r\n        </member>",
@@ -1247,15 +1241,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -5140840523252289641,
-      "Data2": 6518920525236401380,
-      "Data3": 6868880010656725357,
-      "Data4": 3579287383393129897
+      "Data1": -103670334321352833,
+      "Data2": 2517058935193836012,
+      "Data3": 2208118433452913897,
+      "Data4": 3431390422024383128
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorized",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-    "Flags": 7,
+    "Flags": 3,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorized",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.Authorized\">\r\n            <summary>\r\n            The content that will be displayed if the user is authorized.\r\n            If you specify a value for this parameter, do not also specify a value for <see cref=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.ChildContent\" />.\r\n            </summary>\r\n        </member>",
@@ -1292,15 +1286,14 @@
   },
   {
     "__Checksum": {
-      "Data1": 37641803360323840,
-      "Data2": 339497561690561699,
-      "Data3": -5991206503381811228,
-      "Data4": -2358983735454291914
+      "Data1": 2258809619953477984,
+      "Data2": -1443837268903881740,
+      "Data3": 5503317293404943041,
+      "Data4": 2393835763197871783
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorizing",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorizing",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.Authorizing\">\r\n            <summary>\r\n            The content that will be displayed while asynchronous authorization is in progress.\r\n            </summary>\r\n        </member>",
@@ -1318,15 +1311,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 2399825533781845071,
-      "Data2": -1291578893681594567,
-      "Data3": 3679790072558255532,
-      "Data4": 2667175741749715118
+      "Data1": -6425630169124705332,
+      "Data2": 8940477544783377879,
+      "Data3": 4896514188075143987,
+      "Data4": -6562594981615428047
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorizing",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-    "Flags": 7,
+    "Flags": 3,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorizing",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.Authorizing\">\r\n            <summary>\r\n            The content that will be displayed while asynchronous authorization is in progress.\r\n            </summary>\r\n        </member>",
@@ -1419,15 +1412,14 @@
   },
   {
     "__Checksum": {
-      "Data1": 8829649657414515588,
-      "Data2": -7019724425116738595,
-      "Data3": -1664240233470929483,
-      "Data4": 5988158143732880824
+      "Data1": 1138019325907720206,
+      "Data2": 7289836656856564458,
+      "Data3": -3883323256955081397,
+      "Data4": -3205775691895393034
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState.ChildContent",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState.ChildContent\">\r\n            <summary>\r\n            The content to which the authentication state should be provided.\r\n            </summary>\r\n        </member>",
@@ -1445,15 +1437,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -7632582343947981910,
-      "Data2": -4707642270069826317,
-      "Data3": -8313351610356640406,
-      "Data4": 5688741801210052220
+      "Data1": -1714230959316753314,
+      "Data2": -779528075944631484,
+      "Data3": 4763151302640717086,
+      "Data4": 9221161566624975188
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-    "Flags": 7,
+    "Flags": 3,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState.ChildContent",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState.ChildContent\">\r\n            <summary>\r\n            The content to which the authentication state should be provided.\r\n            </summary>\r\n        </member>",
@@ -1658,15 +1650,14 @@
   },
   {
     "__Checksum": {
-      "Data1": -8496829375884740739,
-      "Data2": -4517198408170196368,
-      "Data3": 251374970811740066,
-      "Data4": -5798536924244976110
+      "Data1": 6354328990353172150,
+      "Data2": -7768413367452136841,
+      "Data3": -4139949994738028680,
+      "Data4": 5937109347966718343
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.CascadingValue<TValue>.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.CascadingValue<TValue>.ChildContent",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.CascadingValue`1.ChildContent\">\r\n            <summary>\r\n            The content to which the value should be provided.\r\n            </summary>\r\n        </member>",
@@ -1684,15 +1675,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 1281555559444911896,
-      "Data2": -228741577370160275,
-      "Data3": 7689886463148422865,
-      "Data4": 3334705443875558805
+      "Data1": 8149427531478916831,
+      "Data2": 5557761823751987762,
+      "Data3": 2987083020717478241,
+      "Data4": -8172039769578855116
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.CascadingValue<TValue>.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 7,
+    "Flags": 3,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.CascadingValue<TValue>.ChildContent",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.CascadingValue`1.ChildContent\">\r\n            <summary>\r\n            The content to which the value should be provided.\r\n            </summary>\r\n        </member>",
@@ -1908,15 +1899,14 @@
   },
   {
     "__Checksum": {
-      "Data1": -4600410883491598717,
-      "Data2": 7867315332162329252,
-      "Data3": -4556604942278106112,
-      "Data4": -2002530502538586800
+      "Data1": -7549664556298953832,
+      "Data2": 957905410815436314,
+      "Data3": 4191708353428298589,
+      "Data4": 1126062418279365975
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.LayoutView.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.LayoutView.ChildContent",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.LayoutView.ChildContent\">\r\n            <summary>\r\n            Gets or sets the content to display.\r\n            </summary>\r\n        </member>",
@@ -1934,15 +1924,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -3375842638365212673,
-      "Data2": -2664962246992515715,
-      "Data3": 5303887756058888236,
-      "Data4": -1430657850881914318
+      "Data1": -8831577081815580136,
+      "Data2": -8689966048021370524,
+      "Data3": 3305003883376482396,
+      "Data4": -4074108998848846927
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.LayoutView.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 7,
+    "Flags": 3,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.LayoutView.ChildContent",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.LayoutView.ChildContent\">\r\n            <summary>\r\n            Gets or sets the content to display.\r\n            </summary>\r\n        </member>",
@@ -2310,15 +2300,14 @@
   },
   {
     "__Checksum": {
-      "Data1": 7621132289786836936,
-      "Data2": -6904601191298577696,
-      "Data3": 3678961613094723676,
-      "Data4": -4798098898674436010
+      "Data1": -7056704622705015573,
+      "Data2": 6472611008900843292,
+      "Data3": -8334986274249137229,
+      "Data4": 7239725669951101478
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Routing.Router.NotFound",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.Router.NotFound",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Routing.Router.NotFound\">\r\n            <summary>\r\n            Gets or sets the content to display when no match is found for the requested route.\r\n            </summary>\r\n        </member>",
@@ -2336,15 +2325,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -8460904421194766207,
-      "Data2": -5796794537486542736,
-      "Data3": 4505840215266470200,
-      "Data4": -1669477569930045805
+      "Data1": 6198961016181434450,
+      "Data2": -5634949512634378145,
+      "Data3": -5487174241230495617,
+      "Data4": 2944525503321286411
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Routing.Router.NotFound",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 7,
+    "Flags": 3,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.Router.NotFound",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Routing.Router.NotFound\">\r\n            <summary>\r\n            Gets or sets the content to display when no match is found for the requested route.\r\n            </summary>\r\n        </member>",
@@ -2362,15 +2351,14 @@
   },
   {
     "__Checksum": {
-      "Data1": -5976732351140827375,
-      "Data2": 2321795011257569339,
-      "Data3": 8437077178340832655,
-      "Data4": -577414026408441255
+      "Data1": -5332826756329940826,
+      "Data2": 3073157234489708960,
+      "Data3": 5278186501516893024,
+      "Data4": 1766762647794876883
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Routing.Router.Found",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.Router.Found",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Routing.Router.Found\">\r\n            <summary>\r\n            Gets or sets the content to display when a match is found for the requested route.\r\n            </summary>\r\n        </member>",
@@ -2407,15 +2395,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 5056925551308038791,
-      "Data2": -8561635075881758036,
-      "Data3": 4862740650764046516,
-      "Data4": 1673679089697279322
+      "Data1": 4664048251405878031,
+      "Data2": -5011153961318443497,
+      "Data3": 2203950951714153144,
+      "Data4": 216640430890145972
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Routing.Router.Found",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 7,
+    "Flags": 3,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.Router.Found",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Routing.Router.Found\">\r\n            <summary>\r\n            Gets or sets the content to display when a match is found for the requested route.\r\n            </summary>\r\n        </member>",
@@ -2452,15 +2440,14 @@
   },
   {
     "__Checksum": {
-      "Data1": 232600441175648289,
-      "Data2": 1078459334319496115,
-      "Data3": -4658187482598420618,
-      "Data4": -2461735583654180512
+      "Data1": 3208408092494380211,
+      "Data2": 2546584573746846949,
+      "Data3": 4952866740430292956,
+      "Data4": 1913599556204684870
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Routing.Router.Navigating",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.Router.Navigating",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Routing.Router.Navigating\">\r\n            <summary>\r\n            Get or sets the content to display when asynchronous navigation is in progress.\r\n            </summary>\r\n        </member>",
@@ -2478,15 +2465,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 1936530491599095832,
-      "Data2": 36096359088186694,
-      "Data3": 6587710975174004559,
-      "Data4": 4071326318154725117
+      "Data1": 6604268560885243301,
+      "Data2": -2253827002030512619,
+      "Data3": -5419458621506631394,
+      "Data4": 3007512020654533005
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Routing.Router.Navigating",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 7,
+    "Flags": 3,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.Router.Navigating",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Routing.Router.Navigating\">\r\n            <summary>\r\n            Get or sets the content to display when asynchronous navigation is in progress.\r\n            </summary>\r\n        </member>",
@@ -2747,15 +2734,14 @@
   },
   {
     "__Checksum": {
-      "Data1": 2298559981271379425,
-      "Data2": 7754398230273317033,
-      "Data3": 7660355893832789570,
-      "Data4": 8597960137789735228
+      "Data1": -3028839567851689668,
+      "Data2": 6408481043464312495,
+      "Data3": -7688092565009838832,
+      "Data4": 4554157133681370661
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent\">\r\n            <summary>\r\n            Specifies the content to be rendered inside this <see cref=\"T:Microsoft.AspNetCore.Components.Forms.EditForm\" />.\r\n            </summary>\r\n        </member>",
@@ -2792,15 +2778,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 3354469857435110798,
-      "Data2": -1968505747991585165,
-      "Data3": 710511239575317543,
-      "Data4": -4652471651939980986
+      "Data1": -6994742625632174648,
+      "Data2": 2303724122894428507,
+      "Data3": 6730197083596391975,
+      "Data4": 6759503650906127848
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-    "Flags": 7,
+    "Flags": 3,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent\">\r\n            <summary>\r\n            Specifies the content to be rendered inside this <see cref=\"T:Microsoft.AspNetCore.Components.Forms.EditForm\" />.\r\n            </summary>\r\n        </member>",
@@ -4019,15 +4005,14 @@
   },
   {
     "__Checksum": {
-      "Data1": -7004527986412881335,
-      "Data2": -5954949962824942211,
-      "Data3": -1383483023656980513,
-      "Data4": 5536797379243252255
+      "Data1": 7989077536434422625,
+      "Data2": -99668244318400894,
+      "Data3": -7457583854530646948,
+      "Data4": -8799823474176821790
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputRadioGroup<TValue>.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputRadioGroup<TValue>.ChildContent",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Forms.InputRadioGroup`1.ChildContent\">\r\n            <summary>\r\n            Gets or sets the child content to be rendering inside the <see cref=\"T:Microsoft.AspNetCore.Components.Forms.InputRadioGroup`1\" />.\r\n            </summary>\r\n        </member>",
@@ -4045,15 +4030,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -2280989238289750758,
-      "Data2": -4463329877225294808,
-      "Data3": -3329869795048265765,
-      "Data4": 6398476649207375901
+      "Data1": 6256436216553258733,
+      "Data2": -1644555643129379026,
+      "Data3": 1651580396505292197,
+      "Data4": -4428122547760223849
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputRadioGroup<TValue>.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-    "Flags": 7,
+    "Flags": 3,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputRadioGroup<TValue>.ChildContent",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Forms.InputRadioGroup`1.ChildContent\">\r\n            <summary>\r\n            Gets or sets the child content to be rendering inside the <see cref=\"T:Microsoft.AspNetCore.Components.Forms.InputRadioGroup`1\" />.\r\n            </summary>\r\n        </member>",
@@ -4306,15 +4291,14 @@
   },
   {
     "__Checksum": {
-      "Data1": 5767374880531176281,
-      "Data2": -4310955689907004742,
-      "Data3": 6940513681305652243,
-      "Data4": 25378263158818327
+      "Data1": 2932517850831414834,
+      "Data2": 3656531000343529451,
+      "Data3": -4518163499442893057,
+      "Data4": 7939407072701740625
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>.ChildContent",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Forms.InputSelect`1.ChildContent\">\r\n            <summary>\r\n            Gets or sets the child content to be rendering inside the select element.\r\n            </summary>\r\n        </member>",
@@ -4332,15 +4316,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 1094104754922682575,
-      "Data2": 3159323029715819226,
-      "Data3": -8223958899926159634,
-      "Data4": 4797671072489204755
+      "Data1": 5146430600824589218,
+      "Data2": 9086351671098268038,
+      "Data3": -8986243610480815449,
+      "Data4": -2320239321497028471
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-    "Flags": 7,
+    "Flags": 3,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>.ChildContent",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Forms.InputSelect`1.ChildContent\">\r\n            <summary>\r\n            Gets or sets the child content to be rendering inside the select element.\r\n            </summary>\r\n        </member>",
@@ -5176,15 +5160,14 @@
   },
   {
     "__Checksum": {
-      "Data1": 1928178519171847136,
-      "Data2": 5066513113766712063,
-      "Data3": 7546547981723604620,
-      "Data4": -1650166272662381447
+      "Data1": 6882306109030261096,
+      "Data2": 6861515790694621348,
+      "Data3": -8548096430667962625,
+      "Data4": -2599627990802030602
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent\">\r\n            <summary>\r\n            Gets or sets the child content of the component.\r\n            </summary>\r\n        </member>",
@@ -5202,15 +5185,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 4125808637798406833,
-      "Data2": -1896806797597575776,
-      "Data3": 2220416351350924752,
-      "Data4": -8956837965106657140
+      "Data1": 1065016463059532479,
+      "Data2": 8253838282849957162,
+      "Data3": -2660117402815533507,
+      "Data4": 6443374074242462448
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-    "Flags": 7,
+    "Flags": 3,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent\">\r\n            <summary>\r\n            Gets or sets the child content of the component.\r\n            </summary>\r\n        </member>",
@@ -5305,15 +5288,14 @@
   },
   {
     "__Checksum": {
-      "Data1": 397116889919142250,
-      "Data2": 3360665117964376320,
-      "Data3": -3435391869255459245,
-      "Data4": -7286589193438080167
+      "Data1": 3866644630952041653,
+      "Data2": -7947515354459183987,
+      "Data3": 6619528872344586192,
+      "Data4": -4113126180637482995
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Web.HeadContent.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.HeadContent.ChildContent",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Web.HeadContent.ChildContent\">\r\n            <summary>\r\n            Gets or sets the content to be rendered in <see cref=\"T:Microsoft.AspNetCore.Components.Web.HeadOutlet\" /> instances.\r\n            </summary>\r\n        </member>",
@@ -5331,15 +5313,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 2442248316604194358,
-      "Data2": -1383721906014484242,
-      "Data3": -3420453403186998140,
-      "Data4": -9055262657108032463
+      "Data1": -4061845461307551925,
+      "Data2": -7574479360287433731,
+      "Data3": -5075461590774481334,
+      "Data4": 5534696051594288431
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Web.HeadContent.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-    "Flags": 7,
+    "Flags": 3,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.HeadContent.ChildContent",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Web.HeadContent.ChildContent\">\r\n            <summary>\r\n            Gets or sets the content to be rendered in <see cref=\"T:Microsoft.AspNetCore.Components.Web.HeadOutlet\" /> instances.\r\n            </summary>\r\n        </member>",
@@ -5483,15 +5465,14 @@
   },
   {
     "__Checksum": {
-      "Data1": 7686479382668387524,
-      "Data2": 4050744810393218966,
-      "Data3": 7451045364816541154,
-      "Data4": -4526041305068524763
+      "Data1": 1011392428667453751,
+      "Data2": -3737268816785823099,
+      "Data3": -4415927058106694393,
+      "Data4": 5279549503612564821
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Web.PageTitle.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.PageTitle.ChildContent",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Web.PageTitle.ChildContent\">\r\n            <summary>\r\n            Gets or sets the content to be rendered as the document title.\r\n            </summary>\r\n        </member>",
@@ -5509,15 +5490,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 1433947694525154027,
-      "Data2": 8683103852932622884,
-      "Data3": -4474171876813472242,
-      "Data4": 2302357496674143724
+      "Data1": -4854216268556487287,
+      "Data2": -5940497965227621521,
+      "Data3": -1491272141760101703,
+      "Data4": 110223617272526213
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Web.PageTitle.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-    "Flags": 7,
+    "Flags": 3,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.PageTitle.ChildContent",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Web.PageTitle.ChildContent\">\r\n            <summary>\r\n            Gets or sets the content to be rendered as the document title.\r\n            </summary>\r\n        </member>",
@@ -5686,15 +5667,14 @@
   },
   {
     "__Checksum": {
-      "Data1": -4260066699458946440,
-      "Data2": -5296573245944038540,
-      "Data3": 6104682482728817227,
-      "Data4": -2876204444406163678
+      "Data1": 4635654568953385816,
+      "Data2": -3960909954946807723,
+      "Data3": 704279137872285041,
+      "Data4": -434223834513748051
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Web.ErrorBoundary.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.ErrorBoundary.ChildContent",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.ErrorBoundaryBase.ChildContent\">\r\n            <summary>\r\n            The content to be displayed when there is no error.\r\n            </summary>\r\n        </member>",
@@ -5712,15 +5692,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -5240777128558252983,
-      "Data2": -9087074877478497415,
-      "Data3": -2880967140762463897,
-      "Data4": 8121009630408757866
+      "Data1": -277449550891357170,
+      "Data2": 8302996261528654360,
+      "Data3": 569224622950893165,
+      "Data4": -3289376029778327208
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Web.ErrorBoundary.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-    "Flags": 7,
+    "Flags": 3,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.ErrorBoundary.ChildContent",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.ErrorBoundaryBase.ChildContent\">\r\n            <summary>\r\n            The content to be displayed when there is no error.\r\n            </summary>\r\n        </member>",
@@ -5738,15 +5718,14 @@
   },
   {
     "__Checksum": {
-      "Data1": 6260005615001217940,
-      "Data2": 7250191943067926473,
-      "Data3": 8421380156725998532,
-      "Data4": 3288826253194592713
+      "Data1": 188647860860265716,
+      "Data2": 1050805316674168434,
+      "Data3": -8056073009245023407,
+      "Data4": 916287811384863287
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Web.ErrorBoundary.ErrorContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.ErrorBoundary.ErrorContent",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.ErrorBoundaryBase.ErrorContent\">\r\n            <summary>\r\n            The content to be displayed when there is an error.\r\n            </summary>\r\n        </member>",
@@ -5783,15 +5762,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 2819739295879388416,
-      "Data2": -6790551284885814587,
-      "Data3": 4418432404046685508,
-      "Data4": -3226922318987150786
+      "Data1": -5009734545054687208,
+      "Data2": 4525881422241514683,
+      "Data3": -4997714399477793764,
+      "Data4": 8343771716620888429
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Web.ErrorBoundary.ErrorContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-    "Flags": 7,
+    "Flags": 3,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.ErrorBoundary.ErrorContent",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.ErrorBoundaryBase.ErrorContent\">\r\n            <summary>\r\n            The content to be displayed when there is an error.\r\n            </summary>\r\n        </member>",
@@ -6119,15 +6098,14 @@
   },
   {
     "__Checksum": {
-      "Data1": -6559290562468524989,
-      "Data2": -5609538310404151420,
-      "Data3": -4320834778687889558,
-      "Data4": 4076098934110284354
+      "Data1": 6116719617229711211,
+      "Data2": 397954463144955830,
+      "Data3": 6443558410209366806,
+      "Data4": 6306669654068647717
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.ChildContent",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize`1.ChildContent\">\r\n            <summary>\r\n            Gets or sets the item template for the list.\r\n            </summary>\r\n        </member>",
@@ -6164,15 +6142,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -3263642841072060057,
-      "Data2": 2494902750385898564,
-      "Data3": -7805599771000661403,
-      "Data4": -6389750061344382340
+      "Data1": -3416276461551721881,
+      "Data2": -4004799162628925291,
+      "Data3": 1101123327816920861,
+      "Data4": -7211231113901670472
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-    "Flags": 7,
+    "Flags": 3,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.ChildContent",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize`1.ChildContent\">\r\n            <summary>\r\n            Gets or sets the item template for the list.\r\n            </summary>\r\n        </member>",
@@ -6209,15 +6187,14 @@
   },
   {
     "__Checksum": {
-      "Data1": 555252119839963820,
-      "Data2": -1035474445596212188,
-      "Data3": -7291888903022490598,
-      "Data4": 3763898276711381808
+      "Data1": -111307007557521746,
+      "Data2": -6497934894620300639,
+      "Data3": 2045999940103601704,
+      "Data4": -7006235389726270794
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.ItemContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.ItemContent",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize`1.ItemContent\">\r\n            <summary>\r\n            Gets or sets the item template for the list.\r\n            </summary>\r\n        </member>",
@@ -6254,15 +6231,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 6828552776706231365,
-      "Data2": -634241911498596781,
-      "Data3": -3293937645200121537,
-      "Data4": 7076447162617716547
+      "Data1": 9067871008163530114,
+      "Data2": -2888454076838367532,
+      "Data3": 6172590752131037590,
+      "Data4": 2823646071129608790
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.ItemContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-    "Flags": 7,
+    "Flags": 3,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.ItemContent",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize`1.ItemContent\">\r\n            <summary>\r\n            Gets or sets the item template for the list.\r\n            </summary>\r\n        </member>",
@@ -6299,15 +6276,14 @@
   },
   {
     "__Checksum": {
-      "Data1": 7381038829183985062,
-      "Data2": -2918279747282552766,
-      "Data3": 7292809960924477883,
-      "Data4": 6139924913031474262
+      "Data1": -1790674337546475356,
+      "Data2": 1767954119644762491,
+      "Data3": -2856752009094272079,
+      "Data4": 2905612200990752022
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.Placeholder",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.Placeholder",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize`1.Placeholder\">\r\n            <summary>\r\n            Gets or sets the template for items that have not yet been loaded in memory.\r\n            </summary>\r\n        </member>",
@@ -6344,15 +6320,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 1040318391141486445,
-      "Data2": -832356386708867049,
-      "Data3": -541976593685509827,
-      "Data4": 945971686157602555
+      "Data1": -6975013485751577996,
+      "Data2": -374481958811973123,
+      "Data3": -9162848177280104117,
+      "Data4": -7719476214073074520
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.Placeholder",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-    "Flags": 7,
+    "Flags": 3,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize<TItem>.Placeholder",
     "Documentation": "<member name=\"P:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize`1.Placeholder\">\r\n            <summary>\r\n            Gets or sets the template for items that have not yet been loaded in memory.\r\n            </summary>\r\n        </member>",
@@ -6438,15 +6414,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 5030139586069937518,
-      "Data2": 3613604801937093509,
-      "Data3": 1664182894220885790,
-      "Data4": 3134368250590942787
+      "Data1": -4109847239492771580,
+      "Data2": 6644105665137703598,
+      "Data3": -3430167369313774383,
+      "Data4": 5103976286072644970
     },
     "Kind": 4,
     "Name": "onfocus",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -6551,15 +6527,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -179943457241210919,
-      "Data2": 4689308861257295736,
-      "Data3": 3763906496482127545,
-      "Data4": -8097318774217303723
+      "Data1": 7970810947207240160,
+      "Data2": -3656260729268533392,
+      "Data3": 2432470306844089004,
+      "Data4": 2827683514170216567
     },
     "Kind": 4,
     "Name": "onblur",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -6664,15 +6640,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 7373466642240342845,
-      "Data2": 5288065156488163134,
-      "Data3": 7657357206894985199,
-      "Data4": 8606399525541380883
+      "Data1": -3038576499966988938,
+      "Data2": -8897375425352632292,
+      "Data3": 6890989668860720139,
+      "Data4": 952443012887977545
     },
     "Kind": 4,
     "Name": "onfocusin",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -6777,15 +6753,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 8417257994537269438,
-      "Data2": -7948720966278710714,
-      "Data3": 1519627991758810416,
-      "Data4": -856720808455390151
+      "Data1": 4342892403641106260,
+      "Data2": 8026467539187483105,
+      "Data3": -9002307507103727880,
+      "Data4": 4211932614700355588
     },
     "Kind": 4,
     "Name": "onfocusout",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -6890,15 +6866,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 7016212030212569549,
-      "Data2": -4976384216560475226,
-      "Data3": 4759847505204994989,
-      "Data4": 8786523063679303818
+      "Data1": 1385975435653696320,
+      "Data2": -7341289466353051918,
+      "Data3": 2128600796569765192,
+      "Data4": -5295450570346733184
     },
     "Kind": 4,
     "Name": "onmouseover",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -7003,15 +6979,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 744482531742438024,
-      "Data2": 1861213763987218287,
-      "Data3": -7218627976909955650,
-      "Data4": -4895105795867705923
+      "Data1": -2183959907788705149,
+      "Data2": 3261355621443024295,
+      "Data3": -1817192341508213277,
+      "Data4": 815072381676084794
     },
     "Kind": 4,
     "Name": "onmouseout",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -7116,15 +7092,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 821044889841437633,
-      "Data2": -3364790534903900850,
-      "Data3": 4628276991733425505,
-      "Data4": 2957564841790411525
+      "Data1": 4947841948310943087,
+      "Data2": 4104137127682615429,
+      "Data3": 5880219054860596099,
+      "Data4": -5315951259751068459
     },
     "Kind": 4,
     "Name": "onmousemove",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -7229,15 +7205,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 7358744775646418532,
-      "Data2": 1571749536814740772,
-      "Data3": 1039072414312208533,
-      "Data4": -8427785477053601931
+      "Data1": -6599752593681442963,
+      "Data2": 8199645761797729478,
+      "Data3": -3508888521419418059,
+      "Data4": -7649567904174664860
     },
     "Kind": 4,
     "Name": "onmousedown",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -7342,15 +7318,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 7878088841425354178,
-      "Data2": -3421612462778169345,
-      "Data3": 5808155977219372506,
-      "Data4": 9221904419692075312
+      "Data1": -9059996134177364789,
+      "Data2": 3972343515666173599,
+      "Data3": -8897317297315984354,
+      "Data4": -103402224778217333
     },
     "Kind": 4,
     "Name": "onmouseup",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -7455,15 +7431,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -4656106610495126227,
-      "Data2": 7450161355327179322,
-      "Data3": -5356740364300835657,
-      "Data4": -3644716092098892611
+      "Data1": 5710564843736311899,
+      "Data2": -2330338123356025296,
+      "Data3": -8762946662521126693,
+      "Data4": -9178072198352789257
     },
     "Kind": 4,
     "Name": "onclick",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -7568,15 +7544,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 6669282033109189604,
-      "Data2": 5774920994706998615,
-      "Data3": -2163027996701130124,
-      "Data4": -9106452313322463446
+      "Data1": -4034187395785655817,
+      "Data2": 3787739380375065991,
+      "Data3": -954359880003340291,
+      "Data4": 8221526468862837063
     },
     "Kind": 4,
     "Name": "ondblclick",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -7681,15 +7657,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -5755488464438778121,
-      "Data2": 8335701038758111086,
-      "Data3": -1193233290965489553,
-      "Data4": 55910581618215836
+      "Data1": 6176538879395172845,
+      "Data2": -2239555442848839832,
+      "Data3": 5371053259668900085,
+      "Data4": 7213643058451944838
     },
     "Kind": 4,
     "Name": "onwheel",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -7794,15 +7770,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 7367978348708228987,
-      "Data2": 6341994854441056531,
-      "Data3": 5953048744007418796,
-      "Data4": -3402649916162502317
+      "Data1": -376985001865884256,
+      "Data2": 7666080553453253916,
+      "Data3": 2816868965911401597,
+      "Data4": 8792998304349658286
     },
     "Kind": 4,
     "Name": "onmousewheel",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -7907,15 +7883,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 2775768555439931339,
-      "Data2": -7911431257139919433,
-      "Data3": -6922530977938184230,
-      "Data4": 2568690353969863996
+      "Data1": -320560018992380109,
+      "Data2": 6280561216665892327,
+      "Data3": -8762557016347879977,
+      "Data4": 5405546870783720218
     },
     "Kind": 4,
     "Name": "oncontextmenu",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -8020,15 +7996,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -471501544255987968,
-      "Data2": -6169216575742822057,
-      "Data3": -4643139411715669624,
-      "Data4": -6168315641245243089
+      "Data1": -3797838717198269355,
+      "Data2": -9182142674357261256,
+      "Data3": -7085708833843910244,
+      "Data4": 1176031663351943677
     },
     "Kind": 4,
     "Name": "ondrag",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -8133,15 +8109,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 6179572002354127372,
-      "Data2": -3298620464680977107,
-      "Data3": -690602131657695736,
-      "Data4": -7569813234677293570
+      "Data1": -1176006303040796418,
+      "Data2": 8632099636304876970,
+      "Data3": -218551791398430757,
+      "Data4": 5456788234187140287
     },
     "Kind": 4,
     "Name": "ondragend",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -8246,15 +8222,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -368905955767502916,
-      "Data2": -6246083241737703195,
-      "Data3": -8310315537607773287,
-      "Data4": 8428365281683154737
+      "Data1": -6348086510998670627,
+      "Data2": 2487734689273102854,
+      "Data3": 4528647687903815092,
+      "Data4": 2677594615038486832
     },
     "Kind": 4,
     "Name": "ondragenter",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -8359,15 +8335,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 3174796139339636486,
-      "Data2": -2973085807752919442,
-      "Data3": 3360480217968462310,
-      "Data4": 4188834900795823969
+      "Data1": 4283096711438082591,
+      "Data2": -3486744457630171165,
+      "Data3": 7071467260228162653,
+      "Data4": -8378499550856552059
     },
     "Kind": 4,
     "Name": "ondragleave",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -8472,15 +8448,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 5450045328309399214,
-      "Data2": 6041894120835871704,
-      "Data3": -1250257082680878040,
-      "Data4": -3454248031424123947
+      "Data1": -4887719733928726625,
+      "Data2": -3930270609908478142,
+      "Data3": 1233338229709448854,
+      "Data4": -383592765964687289
     },
     "Kind": 4,
     "Name": "ondragover",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -8585,15 +8561,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 7559720239719847529,
-      "Data2": 8944061862411105054,
-      "Data3": 7521386859819377933,
-      "Data4": 6512909515174577225
+      "Data1": -6849264510983901388,
+      "Data2": 1784171185348828874,
+      "Data3": -3170352310486337286,
+      "Data4": -7461855861015012268
     },
     "Kind": 4,
     "Name": "ondragstart",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -8698,15 +8674,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -870096383257993523,
-      "Data2": 5561590568749130901,
-      "Data3": -7314521111088709121,
-      "Data4": 4685688520110203133
+      "Data1": 4320894431887932067,
+      "Data2": -2369121194665444750,
+      "Data3": -3348750393785497770,
+      "Data4": -8985553944818143482
     },
     "Kind": 4,
     "Name": "ondrop",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -8811,15 +8787,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -4752290591915351634,
-      "Data2": -5104217484537465531,
-      "Data3": -6670262741521831899,
-      "Data4": -5110337391438961221
+      "Data1": -500077762664212563,
+      "Data2": -5957186439230562502,
+      "Data3": 7619925652226586850,
+      "Data4": -7143852243010445362
     },
     "Kind": 4,
     "Name": "onkeydown",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -8924,15 +8900,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -5061874862746733975,
-      "Data2": 2162297673720503757,
-      "Data3": 450877530783781949,
-      "Data4": 8083330503038635173
+      "Data1": -2180673969644011348,
+      "Data2": 5489295694395068649,
+      "Data3": 2327755581369583692,
+      "Data4": 1919832081133089549
     },
     "Kind": 4,
     "Name": "onkeyup",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -9037,15 +9013,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 6739746773426957803,
-      "Data2": -8636175226571034726,
-      "Data3": -711845430934233421,
-      "Data4": 102120726104070747
+      "Data1": -7211383276126308490,
+      "Data2": 5446304736069904186,
+      "Data3": 3272394385382936817,
+      "Data4": -8069369753727366698
     },
     "Kind": 4,
     "Name": "onkeypress",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -9150,15 +9126,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 7035220663681017453,
-      "Data2": -5152896691851509304,
-      "Data3": -6042861111231057432,
-      "Data4": 1990856175762491352
+      "Data1": -6140216919129077893,
+      "Data2": 5434970187524587586,
+      "Data3": 2794636625140469261,
+      "Data4": 2699473938430682025
     },
     "Kind": 4,
     "Name": "onchange",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -9263,15 +9239,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -7932418555973260450,
-      "Data2": 8061346284293110277,
-      "Data3": -1680035640977975058,
-      "Data4": 5756003724302714668
+      "Data1": -5769356922246680688,
+      "Data2": 5118653226905933954,
+      "Data3": -4356936031136252364,
+      "Data4": 5525892016938465212
     },
     "Kind": 4,
     "Name": "oninput",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -9376,15 +9352,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -7351254500693241135,
-      "Data2": 117031266699539257,
-      "Data3": -6029565823617357631,
-      "Data4": -2734814310471588667
+      "Data1": 5907699070368600321,
+      "Data2": -6588702219501956221,
+      "Data3": 7198139195026842695,
+      "Data4": 8710022527341860433
     },
     "Kind": 4,
     "Name": "oninvalid",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -9489,15 +9465,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 5940772563055300503,
-      "Data2": 4816205148037723322,
-      "Data3": 425973811014318933,
-      "Data4": 2523050722825033815
+      "Data1": 1685590646638845920,
+      "Data2": -4568305590419023266,
+      "Data3": -7464360618952905375,
+      "Data4": -430485008555028404
     },
     "Kind": 4,
     "Name": "onreset",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -9602,15 +9578,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 3136524315696289552,
-      "Data2": 7966029988519802040,
-      "Data3": -8139657507361350245,
-      "Data4": -4917429078655240477
+      "Data1": 5217835158134480783,
+      "Data2": 3633891643243896686,
+      "Data3": -9092150948213522537,
+      "Data4": 2120391329370094658
     },
     "Kind": 4,
     "Name": "onselect",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -9715,15 +9691,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -3046042665492074854,
-      "Data2": 7074475139006459706,
-      "Data3": -1495488569893862199,
-      "Data4": 9114472941936717951
+      "Data1": -4385490251322295313,
+      "Data2": 4057546068754616962,
+      "Data3": -5899108477802054101,
+      "Data4": -7719023961906909236
     },
     "Kind": 4,
     "Name": "onselectstart",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -9828,15 +9804,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -8186318152628694661,
-      "Data2": -6180835094259336260,
-      "Data3": -5756468100619036179,
-      "Data4": 3561162827198676957
+      "Data1": -4241638918206595878,
+      "Data2": -8391529900859046504,
+      "Data3": 1784767732751386822,
+      "Data4": -8711768472957079613
     },
     "Kind": 4,
     "Name": "onselectionchange",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -9941,15 +9917,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 1706219090394028208,
-      "Data2": -3365598990425573154,
-      "Data3": 2822438115208339564,
-      "Data4": -5213831263332104852
+      "Data1": 7707792086297911925,
+      "Data2": -9086950671542611756,
+      "Data3": -2281656714166119607,
+      "Data4": 98718911419408183
     },
     "Kind": 4,
     "Name": "onsubmit",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -10054,15 +10030,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 7188226771984164283,
-      "Data2": 7214593039478155660,
-      "Data3": 4989665064396303811,
-      "Data4": -2571363008420101776
+      "Data1": 3599659754485786872,
+      "Data2": 961848153535112626,
+      "Data3": 3942354768302221186,
+      "Data4": 8702139297042263729
     },
     "Kind": 4,
     "Name": "onbeforecopy",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -10167,15 +10143,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 7515768005471896223,
-      "Data2": 5715269595438927642,
-      "Data3": -4188075327050922099,
-      "Data4": -1864504464515829286
+      "Data1": -4034457072445090195,
+      "Data2": -8724914737710557181,
+      "Data3": -8831618963672795801,
+      "Data4": 5018932095305594684
     },
     "Kind": 4,
     "Name": "onbeforecut",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -10280,15 +10256,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 956905292217960801,
-      "Data2": 5285081706535828352,
-      "Data3": -2768337962341037072,
-      "Data4": 1320983485222626736
+      "Data1": -751203710545253876,
+      "Data2": -7637114865448791994,
+      "Data3": 3897708316286921608,
+      "Data4": -869408310571115133
     },
     "Kind": 4,
     "Name": "onbeforepaste",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -10393,15 +10369,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 4650178144168131682,
-      "Data2": -1726644917846139782,
-      "Data3": -6923040824210577842,
-      "Data4": 5197960155081412396
+      "Data1": 1399739813494111032,
+      "Data2": 7761458341931406181,
+      "Data3": 5798199740710093351,
+      "Data4": 7024731932267729345
     },
     "Kind": 4,
     "Name": "oncopy",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -10506,15 +10482,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -1749756420619164700,
-      "Data2": 2142638348830659435,
-      "Data3": 6491483973460042969,
-      "Data4": -9136079607180191475
+      "Data1": -842528133056273104,
+      "Data2": 3210913245333202914,
+      "Data3": 8922724315624888343,
+      "Data4": -1950639767183302170
     },
     "Kind": 4,
     "Name": "oncut",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -10619,15 +10595,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 4288618464819474539,
-      "Data2": 5861568308080783337,
-      "Data3": -6557952811045468532,
-      "Data4": 1001275834453537979
+      "Data1": 8696885341841070883,
+      "Data2": 4344984424404122053,
+      "Data3": 6704273219259054287,
+      "Data4": -3914553788803689621
     },
     "Kind": 4,
     "Name": "onpaste",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -10732,15 +10708,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 6447090408225086515,
-      "Data2": -5055709008869642688,
-      "Data3": 8339120234743452600,
-      "Data4": -9165973313987466048
+      "Data1": -7641361741507223645,
+      "Data2": 6938775260517254633,
+      "Data3": -5917821703396205045,
+      "Data4": 8015416208020659356
     },
     "Kind": 4,
     "Name": "ontouchcancel",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -10845,15 +10821,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -392608598136276490,
-      "Data2": 366956177564567200,
-      "Data3": -2387431027039542717,
-      "Data4": 5965139742999856211
+      "Data1": 1778057418183934188,
+      "Data2": -8866980800998774870,
+      "Data3": -3343599408720013813,
+      "Data4": 649824340003217196
     },
     "Kind": 4,
     "Name": "ontouchend",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -10958,15 +10934,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 4158848598539282520,
-      "Data2": -6154830841920226696,
-      "Data3": 5586474790375290168,
-      "Data4": -2139970855025524960
+      "Data1": -6208717547554397466,
+      "Data2": 4633153441688759992,
+      "Data3": 8981105706414625560,
+      "Data4": 9130248724309079615
     },
     "Kind": 4,
     "Name": "ontouchmove",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -11071,15 +11047,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -7579779813139815089,
-      "Data2": -7214535456362685763,
-      "Data3": 8538371513682051857,
-      "Data4": -839681641119322193
+      "Data1": -7408826542160312231,
+      "Data2": -8231605171045984883,
+      "Data3": 2237975217223861600,
+      "Data4": 1116575302572007333
     },
     "Kind": 4,
     "Name": "ontouchstart",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -11184,15 +11160,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -3608416979682433863,
-      "Data2": -227365904856738252,
-      "Data3": -5956023406914510211,
-      "Data4": -2069905858882600564
+      "Data1": 156229552404451932,
+      "Data2": 460430790132173313,
+      "Data3": -6730972241366391450,
+      "Data4": 1033115883225869710
     },
     "Kind": 4,
     "Name": "ontouchenter",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -11297,15 +11273,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 3857792226479681954,
-      "Data2": -2170979333003001795,
-      "Data3": -5617340777444876222,
-      "Data4": 6585627187699564574
+      "Data1": 3671158624008158182,
+      "Data2": 3234799965076328557,
+      "Data3": 2879499203722870402,
+      "Data4": 3395763464208229150
     },
     "Kind": 4,
     "Name": "ontouchleave",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -11410,15 +11386,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -4742114311726662149,
-      "Data2": 1508800065053013613,
-      "Data3": -3976040896316681676,
-      "Data4": -2795478466898094508
+      "Data1": -6508354592818524391,
+      "Data2": -6420407094835663347,
+      "Data3": 2016069034219445275,
+      "Data4": -2774043777128944708
     },
     "Kind": 4,
     "Name": "ongotpointercapture",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -11523,15 +11499,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -2121011891385346908,
-      "Data2": -615795428857074741,
-      "Data3": -6113962429718951682,
-      "Data4": 1607446415669308582
+      "Data1": -6462468828947722953,
+      "Data2": -1821396779445781868,
+      "Data3": 7722343661041126886,
+      "Data4": 3493134996129886598
     },
     "Kind": 4,
     "Name": "onlostpointercapture",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -11636,15 +11612,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 6296795495086863430,
-      "Data2": 2636264163459757821,
-      "Data3": 3364691063461491497,
-      "Data4": 2215873900920730580
+      "Data1": 4369777761906178834,
+      "Data2": -4539066469529341136,
+      "Data3": 7235780647325733214,
+      "Data4": -1049478131742178204
     },
     "Kind": 4,
     "Name": "onpointercancel",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -11749,15 +11725,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 6826641934952214296,
-      "Data2": 8924245771536632061,
-      "Data3": -3684514990125033243,
-      "Data4": -8887161705773993289
+      "Data1": -4712056096421571733,
+      "Data2": 2942716677159840756,
+      "Data3": 6598654642956301058,
+      "Data4": -7830919704930346097
     },
     "Kind": 4,
     "Name": "onpointerdown",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -11862,15 +11838,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 3117812416625725429,
-      "Data2": -2914228506248407650,
-      "Data3": 8524763404232438536,
-      "Data4": -4605838175808179112
+      "Data1": 3086894636908966799,
+      "Data2": 747095244223239035,
+      "Data3": 1154981584488217081,
+      "Data4": -4785773360997978311
     },
     "Kind": 4,
     "Name": "onpointerenter",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -11975,15 +11951,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -6725967855449700689,
-      "Data2": -2052421176948607048,
-      "Data3": -2063846457482776806,
-      "Data4": 3842616698956992
+      "Data1": 7370908719562048821,
+      "Data2": -1340690992812536697,
+      "Data3": -9123369200754905756,
+      "Data4": 6493109876016966380
     },
     "Kind": 4,
     "Name": "onpointerleave",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -12088,15 +12064,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 4327462402130284026,
-      "Data2": 5611681559984998328,
-      "Data3": 2735034167917681753,
-      "Data4": -8035229171045578057
+      "Data1": -5464441723234575078,
+      "Data2": -4132445849957158667,
+      "Data3": -3175049524410086822,
+      "Data4": -5127345959858272698
     },
     "Kind": 4,
     "Name": "onpointermove",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -12201,15 +12177,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 7545090725340805747,
-      "Data2": -7784382154916113949,
-      "Data3": -7949096468625762546,
-      "Data4": 2616303466526818892
+      "Data1": 1544329531110560114,
+      "Data2": 499726411559120641,
+      "Data3": -2016580183388446408,
+      "Data4": 3154570884254894876
     },
     "Kind": 4,
     "Name": "onpointerout",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -12314,15 +12290,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 7303965596151729718,
-      "Data2": 7059816447559843660,
-      "Data3": 2701487396863603110,
-      "Data4": 4809255117050528464
+      "Data1": -3269810576490748405,
+      "Data2": -1554504305736301181,
+      "Data3": -632664948742674035,
+      "Data4": 1940870181603538498
     },
     "Kind": 4,
     "Name": "onpointerover",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -12427,15 +12403,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -473889691706457331,
-      "Data2": -8268728209486930955,
-      "Data3": -98357661920405960,
-      "Data4": 2510148638761930558
+      "Data1": 7580916794550306526,
+      "Data2": -357267277600699032,
+      "Data3": -5425254254274986809,
+      "Data4": -7707563651391381106
     },
     "Kind": 4,
     "Name": "onpointerup",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -12540,15 +12516,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 6362715359791802342,
-      "Data2": 3877251262043752162,
-      "Data3": -7049814517946366918,
-      "Data4": 1982401941995901928
+      "Data1": 9221422377367848721,
+      "Data2": 3096528835507679680,
+      "Data3": -908836916704089222,
+      "Data4": 7994340138984881591
     },
     "Kind": 4,
     "Name": "oncanplay",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -12653,15 +12629,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 7338798158620634261,
-      "Data2": -2427761976661756986,
-      "Data3": 239802885372796608,
-      "Data4": -7398878386136331367
+      "Data1": -7940043256863830993,
+      "Data2": -1346606909601976431,
+      "Data3": 8125090302699430507,
+      "Data4": 3947867168084629964
     },
     "Kind": 4,
     "Name": "oncanplaythrough",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -12766,15 +12742,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -6458486996293623743,
-      "Data2": -271108317923893371,
-      "Data3": -2061536562256885018,
-      "Data4": 6652619028959544346
+      "Data1": -2779779500279891816,
+      "Data2": -4705462898618188533,
+      "Data3": -376752386570371894,
+      "Data4": -922033592465775700
     },
     "Kind": 4,
     "Name": "oncuechange",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -12879,15 +12855,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -3068107562356910951,
-      "Data2": 743436810385732838,
-      "Data3": 4656935918845229449,
-      "Data4": -1582165405199017258
+      "Data1": 816829254104949988,
+      "Data2": 4097125996681812956,
+      "Data3": 1683127559140201988,
+      "Data4": 6448240415303388932
     },
     "Kind": 4,
     "Name": "ondurationchange",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -12992,15 +12968,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 1122910228997852419,
-      "Data2": -4693602415110869197,
-      "Data3": -4234945867082470334,
-      "Data4": 7797387168303125850
+      "Data1": -1723783330563182972,
+      "Data2": 7893542887361229711,
+      "Data3": -349538399271847811,
+      "Data4": -5198336539630167824
     },
     "Kind": 4,
     "Name": "onemptied",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -13105,15 +13081,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 854005742926778007,
-      "Data2": -6310996579486389353,
-      "Data3": -7720199769088010114,
-      "Data4": 5262668694927096712
+      "Data1": -2932114349366822878,
+      "Data2": 5491686352481969723,
+      "Data3": 8831604783402956453,
+      "Data4": -8108197888502059293
     },
     "Kind": 4,
     "Name": "onpause",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -13218,15 +13194,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -5623612339748945954,
-      "Data2": 667173684410095139,
-      "Data3": 1288702027368410325,
-      "Data4": -8277431079747745259
+      "Data1": -479944044082199110,
+      "Data2": 7918621139305911747,
+      "Data3": -8586222665783933370,
+      "Data4": 77922667039253082
     },
     "Kind": 4,
     "Name": "onplay",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -13331,15 +13307,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -5032429250679287094,
-      "Data2": 7549058094164486093,
-      "Data3": 2468170509114301601,
-      "Data4": 148372088364798644
+      "Data1": -1513564854629656182,
+      "Data2": 5920515105562079439,
+      "Data3": -7695337947352573138,
+      "Data4": 2775604001458232963
     },
     "Kind": 4,
     "Name": "onplaying",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -13444,15 +13420,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -4690610670186307506,
-      "Data2": -4549119298453436401,
-      "Data3": 5507325930621540260,
-      "Data4": 7118660848514610504
+      "Data1": -1772625947315211368,
+      "Data2": -5384143090051103005,
+      "Data3": 1648344152931374112,
+      "Data4": -3461291434022116519
     },
     "Kind": 4,
     "Name": "onratechange",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -13557,15 +13533,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 1429852631071956917,
-      "Data2": -6621753458145041436,
-      "Data3": 5436510717225738025,
-      "Data4": 5114702141488380412
+      "Data1": 6457013119979172720,
+      "Data2": -8069193582131380169,
+      "Data3": 7408836859459807568,
+      "Data4": -6510863848399009004
     },
     "Kind": 4,
     "Name": "onseeked",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -13670,15 +13646,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -6676328807048421426,
-      "Data2": -2775603901838469435,
-      "Data3": 7465244002869088902,
-      "Data4": 2030273597367586880
+      "Data1": 4331671058098134840,
+      "Data2": 4861550285387504222,
+      "Data3": 6845591510733388608,
+      "Data4": 4787623021170906790
     },
     "Kind": 4,
     "Name": "onseeking",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -13783,15 +13759,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 4604457777832016750,
-      "Data2": 8004291149003846605,
-      "Data3": 3544757006282440293,
-      "Data4": 5220764969865379833
+      "Data1": -8682978484747630626,
+      "Data2": 8057842773505503791,
+      "Data3": -3617102055568896377,
+      "Data4": 7177409127380408518
     },
     "Kind": 4,
     "Name": "onstalled",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -13896,15 +13872,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -8951661509988167523,
-      "Data2": -7439806566279377586,
-      "Data3": 2132765507019164550,
-      "Data4": -5664842402759342425
+      "Data1": 1271411283187761136,
+      "Data2": -8628342645658732958,
+      "Data3": 5584350544687878642,
+      "Data4": 1010112829587529787
     },
     "Kind": 4,
     "Name": "onstop",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -14009,15 +13985,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -3044452566784329466,
-      "Data2": 2596541343167836370,
-      "Data3": -3971785086603273722,
-      "Data4": -8161297180224361075
+      "Data1": 1110911899170723748,
+      "Data2": -5640912442998625776,
+      "Data3": -3318207250287822162,
+      "Data4": -5942247124969950329
     },
     "Kind": 4,
     "Name": "onsuspend",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -14122,15 +14098,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 6887068767714614450,
-      "Data2": -7111599475647939186,
-      "Data3": -4668073111543848192,
-      "Data4": -5036986612822006421
+      "Data1": -1174511196101249130,
+      "Data2": -6180654857100947929,
+      "Data3": -8063063342298512132,
+      "Data4": 8334646013533132968
     },
     "Kind": 4,
     "Name": "ontimeupdate",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -14235,15 +14211,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -2788162859297682268,
-      "Data2": -3368121125418161255,
-      "Data3": -658358092428169069,
-      "Data4": 2406988700358049406
+      "Data1": 3746704686637617552,
+      "Data2": 4312570721736486758,
+      "Data3": -930845321679420166,
+      "Data4": 5676184084262696809
     },
     "Kind": 4,
     "Name": "onvolumechange",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -14348,15 +14324,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -3038805845591690782,
-      "Data2": 2256562637423075768,
-      "Data3": 1202511074769660227,
-      "Data4": 9118105090359389872
+      "Data1": -616335470167753096,
+      "Data2": -6675984078783465193,
+      "Data3": 5047348241623533226,
+      "Data4": -8868256905778682575
     },
     "Kind": 4,
     "Name": "onwaiting",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -14461,15 +14437,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -1464317498374188128,
-      "Data2": 4661001266663572571,
-      "Data3": -6523705234943109853,
-      "Data4": -71740624914950227
+      "Data1": 3940995068942107573,
+      "Data2": 7474638236335543814,
+      "Data3": 5615126573946494360,
+      "Data4": -4875060960776570193
     },
     "Kind": 4,
     "Name": "onloadstart",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -14574,15 +14550,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 2545540555272103702,
-      "Data2": 5190823324138084997,
-      "Data3": -914026238922625326,
-      "Data4": 6384548693688802208
+      "Data1": -3663309265072542542,
+      "Data2": 6418713399315663499,
+      "Data3": 2141165246476695331,
+      "Data4": -5059139405425066094
     },
     "Kind": 4,
     "Name": "ontimeout",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -14687,15 +14663,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -6241865293237469947,
-      "Data2": -7312281997754098474,
-      "Data3": -6820195384158389586,
-      "Data4": -1554830628762618574
+      "Data1": 8827742231968529640,
+      "Data2": -7035840191941562612,
+      "Data3": -5802171098038540897,
+      "Data4": 4860273961781020643
     },
     "Kind": 4,
     "Name": "onabort",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -14800,15 +14776,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 6491917422233277897,
-      "Data2": -3789837944787870082,
-      "Data3": -5375637863352967439,
-      "Data4": 4606758154185998873
+      "Data1": -2756221946720017511,
+      "Data2": -5989792907051581316,
+      "Data3": -6605690674393686210,
+      "Data4": 5037515834359094024
     },
     "Kind": 4,
     "Name": "onload",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -14913,15 +14889,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 4891136710764440315,
-      "Data2": 846408823372840369,
-      "Data3": -1984722675159089409,
-      "Data4": 3088953848075553833
+      "Data1": 7679154778293244600,
+      "Data2": 1829164290148194319,
+      "Data3": 3535067063443433231,
+      "Data4": -7252037346836706096
     },
     "Kind": 4,
     "Name": "onloadend",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -15026,15 +15002,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -8897530883823811734,
-      "Data2": -5909988964692238606,
-      "Data3": 6486608744662094252,
-      "Data4": 6343719658728363573
+      "Data1": -5615712375661083547,
+      "Data2": 3259354514807144728,
+      "Data3": -295424781762106631,
+      "Data4": 8040187530087747634
     },
     "Kind": 4,
     "Name": "onprogress",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -15139,15 +15115,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 6045296413306866714,
-      "Data2": 4788430297253832795,
-      "Data3": -901869626272381754,
-      "Data4": -4688088935906885297
+      "Data1": 865652720055956365,
+      "Data2": 7820884551776546565,
+      "Data3": 6788672572608713495,
+      "Data4": -1460797004990707690
     },
     "Kind": 4,
     "Name": "onerror",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -15252,15 +15228,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -5626294037951479851,
-      "Data2": -98117610878726461,
-      "Data3": 5398118404764738996,
-      "Data4": 6417121839545149920
+      "Data1": -8629285290916570599,
+      "Data2": -8751006207834059570,
+      "Data3": -8179345038584819118,
+      "Data4": 6921336627940868885
     },
     "Kind": 4,
     "Name": "onactivate",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -15365,15 +15341,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -5625662323666822285,
-      "Data2": 7855224121750871383,
-      "Data3": -6635532633832471328,
-      "Data4": 2717102521957113586
+      "Data1": 9068270603227920188,
+      "Data2": -8966526057449432888,
+      "Data3": 6775056959034429204,
+      "Data4": 5352418981624573678
     },
     "Kind": 4,
     "Name": "onbeforeactivate",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -15478,15 +15454,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -4795541297352867328,
-      "Data2": -725900909535869431,
-      "Data3": -612238266962533867,
-      "Data4": 58718050433465411
+      "Data1": -4285671701514697267,
+      "Data2": -4555611551742505542,
+      "Data3": -8541640756644929023,
+      "Data4": -5461756547681307808
     },
     "Kind": 4,
     "Name": "onbeforedeactivate",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -15591,15 +15567,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 3405472023398696495,
-      "Data2": -6075584215415156787,
-      "Data3": 257858056873959006,
-      "Data4": 5453825863079816434
+      "Data1": 2346117462451247457,
+      "Data2": -534567458434709485,
+      "Data3": 6760176779960149317,
+      "Data4": 4722897122965116067
     },
     "Kind": 4,
     "Name": "ondeactivate",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -15704,15 +15680,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -7443872863273164394,
-      "Data2": 7500932945267479059,
-      "Data3": -2447913127022323455,
-      "Data4": -7076981926869875369
+      "Data1": 3288164866627448796,
+      "Data2": -6452186433431061176,
+      "Data3": 8885350169330430255,
+      "Data4": -1224895073073763916
     },
     "Kind": 4,
     "Name": "onended",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -15817,15 +15793,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -2065384122207224251,
-      "Data2": 457000187564171116,
-      "Data3": -2940011020233248046,
-      "Data4": -391638791646152025
+      "Data1": -4791272112690727283,
+      "Data2": 8605208160600115523,
+      "Data3": -5572068345697426297,
+      "Data4": 6262146661307521498
     },
     "Kind": 4,
     "Name": "onfullscreenchange",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -15930,15 +15906,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 5239367978501746171,
-      "Data2": -626039312424806745,
-      "Data3": -5545532778842267560,
-      "Data4": 6027125847617893071
+      "Data1": 2517208466702453289,
+      "Data2": 8816829220106244005,
+      "Data3": -5510371773716947879,
+      "Data4": 1048402772376499855
     },
     "Kind": 4,
     "Name": "onfullscreenerror",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -16043,15 +16019,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -5743654525336175937,
-      "Data2": 4596235975225125951,
-      "Data3": 515784837436868118,
-      "Data4": -2431252171355138839
+      "Data1": -5362871293194046004,
+      "Data2": -6440925668052347608,
+      "Data3": 1528725788162326719,
+      "Data4": 4868769488086411246
     },
     "Kind": 4,
     "Name": "onloadeddata",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -16156,15 +16132,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -4203329567640083795,
-      "Data2": -1357872986894799105,
-      "Data3": 7468641922870974833,
-      "Data4": 6579276910279066029
+      "Data1": -3885168807135620115,
+      "Data2": 8764298339142388528,
+      "Data3": -4385427220579478054,
+      "Data4": -1412194150977413835
     },
     "Kind": 4,
     "Name": "onloadedmetadata",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -16269,15 +16245,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 3925535558556442037,
-      "Data2": 1288315586651017002,
-      "Data3": -3030424281805605230,
-      "Data4": -4309106585734822265
+      "Data1": 1941765792452277013,
+      "Data2": -2446264840459948739,
+      "Data3": -658936225765904797,
+      "Data4": 3165075364272183113
     },
     "Kind": 4,
     "Name": "onpointerlockchange",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -16382,15 +16358,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 1909516679801017864,
-      "Data2": 8924822449684340766,
-      "Data3": -7244601618646657559,
-      "Data4": -7949761914296107440
+      "Data1": -1340306423379127749,
+      "Data2": 8330470995496882547,
+      "Data3": 2838643281850401166,
+      "Data4": 7292400072456068269
     },
     "Kind": 4,
     "Name": "onpointerlockerror",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -16495,15 +16471,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -877773837237958877,
-      "Data2": 4917523223034851950,
-      "Data3": 8820460994665577937,
-      "Data4": 3148837443189768446
+      "Data1": 3302705687208718993,
+      "Data2": 6775853010211886500,
+      "Data3": 3679163276179624540,
+      "Data4": -4675151637962364698
     },
     "Kind": 4,
     "Name": "onreadystatechange",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -16608,15 +16584,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -2416144763909278005,
-      "Data2": -2626372451961557982,
-      "Data3": -3241739784463396732,
-      "Data4": -1801080401750402536
+      "Data1": 1299940087453228706,
+      "Data2": 3691326750694127141,
+      "Data3": 2117749482020244533,
+      "Data4": -8355848441283534967
     },
     "Kind": 4,
     "Name": "onscroll",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -16721,15 +16697,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -4750173913738555673,
-      "Data2": 1179465317480428621,
-      "Data3": -5001831207792578742,
-      "Data4": -8135404898192241301
+      "Data1": -4816300234674309180,
+      "Data2": -1163330238504963837,
+      "Data3": 6109230504226906582,
+      "Data4": 4423146365843804326
     },
     "Kind": 4,
     "Name": "ontoggle",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
     "Documentation": {
@@ -16834,15 +16810,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -4463960690107595163,
-      "Data2": 9131134429237962946,
-      "Data3": -4560301351441686956,
-      "Data4": 4014289207888262555
+      "Data1": 7541727012548645904,
+      "Data2": 5713803218413193333,
+      "Data3": -2349923781402676247,
+      "Data4": -6606542504231988383
     },
     "Kind": 9,
     "Name": "Attributes",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Attributes",
     "Documentation": {
@@ -19568,15 +19544,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 2965313307486302001,
-      "Data2": 6803738912644273319,
-      "Data3": -3787165564686870401,
-      "Data4": -3674150343535753120
+      "Data1": -2084867334482091619,
+      "Data2": 777503992335418429,
+      "Data3": -2490488815556569314,
+      "Data4": 2433934562192799556
     },
     "Kind": 1,
     "Name": "Bind",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Bind",
     "Documentation": {
@@ -19700,15 +19676,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -5490960973483233629,
-      "Data2": 4409954620963892331,
-      "Data3": 212480229593945337,
-      "Data4": 4959359419789554759
+      "Data1": -558548776956464121,
+      "Data2": 3014965822059620133,
+      "Data3": -3642112395390055507,
+      "Data4": 167374640951756018
     },
     "Kind": 1,
     "Name": "Bind",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
     "Documentation": {
@@ -19875,15 +19851,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -1862924841056067437,
-      "Data2": -3491832949022205604,
-      "Data3": -5514160529283754328,
-      "Data4": 2095731608904058379
+      "Data1": 8532138958740796233,
+      "Data2": -3307653984078578620,
+      "Data3": -4749849710178960997,
+      "Data4": 1027089385967923026
     },
     "Kind": 1,
     "Name": "Bind_value",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
     "Documentation": {
@@ -20050,15 +20026,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -3757767671017435703,
-      "Data2": -1011825729271247878,
-      "Data3": 4846883808469470606,
-      "Data4": -5462370688101957230
+      "Data1": 8072961878264963638,
+      "Data2": 56856272987745587,
+      "Data3": -4787114821751362564,
+      "Data4": 1504141544804012290
     },
     "Kind": 1,
     "Name": "Bind",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
     "Documentation": {
@@ -20238,15 +20214,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 640452199118747395,
-      "Data2": 6615771475980915791,
-      "Data3": -5869138843967175045,
-      "Data4": -8278653806978400007
+      "Data1": 2607987616462599465,
+      "Data2": -4612298503266868912,
+      "Data3": 2373379725646451840,
+      "Data4": -1741228662902205435
     },
     "Kind": 1,
     "Name": "Bind",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
     "Documentation": {
@@ -20426,15 +20402,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -6849789885165889660,
-      "Data2": -3132673572922235595,
-      "Data3": 826898281488691764,
-      "Data4": -1369069241987243561
+      "Data1": 6964641505920589121,
+      "Data2": 9080062531182258719,
+      "Data3": 2853911876504667612,
+      "Data4": -7426264811888987184
     },
     "Kind": 1,
     "Name": "Bind",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
     "Documentation": {
@@ -20614,15 +20590,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 1543891944634181361,
-      "Data2": 4399217894360153804,
-      "Data3": 619583916093550838,
-      "Data4": 8300780481299611601
+      "Data1": 1219797799160648173,
+      "Data2": 5505511551635684279,
+      "Data3": -6338714074050373986,
+      "Data4": -2285975716765929172
     },
     "Kind": 1,
     "Name": "Bind_value",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
     "Documentation": {
@@ -20802,15 +20778,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -3222973330117105726,
-      "Data2": 3354627220459926067,
-      "Data3": -5386095855889266293,
-      "Data4": 41311003946641463
+      "Data1": 5388143189254118606,
+      "Data2": 1523384565889604716,
+      "Data3": 4410772830758497623,
+      "Data4": -4075897914424164726
     },
     "Kind": 1,
     "Name": "Bind",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
     "Documentation": {
@@ -20990,15 +20966,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -7502027447980909731,
-      "Data2": 8884607277195156695,
-      "Data3": 3780513177505456193,
-      "Data4": -6056763899523452082
+      "Data1": 6818375249565685316,
+      "Data2": 3309100166988176669,
+      "Data3": 1589981762987240945,
+      "Data4": -6444862247817470684
     },
     "Kind": 1,
     "Name": "Bind_value",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
     "Documentation": {
@@ -21178,15 +21154,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -6186395376562111742,
-      "Data2": -3925419190809108750,
-      "Data3": 3140704088593729794,
-      "Data4": -7472279696551155455
+      "Data1": -888855639403143938,
+      "Data2": -2381476504055572361,
+      "Data3": 3104260531063191568,
+      "Data4": -3709094559056113475
     },
     "Kind": 1,
     "Name": "Bind",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
     "Documentation": {
@@ -21366,15 +21342,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 7192186518283489654,
-      "Data2": -311833892711291724,
-      "Data3": -210179515373667895,
-      "Data4": 8151860209587061895
+      "Data1": -9202167702939670611,
+      "Data2": 4072713029082925683,
+      "Data3": 7184507063178196082,
+      "Data4": 5900941122278265799
     },
     "Kind": 1,
     "Name": "Bind_value",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
     "Documentation": {
@@ -21554,15 +21530,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -2016734337368868292,
-      "Data2": -6502385396751287374,
-      "Data3": 2374210399886741271,
-      "Data4": 237108719906039187
+      "Data1": 5677786663788855884,
+      "Data2": 9218969372988252989,
+      "Data3": -5496608875473561612,
+      "Data4": 4727804562439756849
     },
     "Kind": 1,
     "Name": "Bind",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
     "Documentation": {
@@ -21742,15 +21718,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -2292482689335303868,
-      "Data2": -7987485251911511195,
-      "Data3": 5619713365172019827,
-      "Data4": 2962955472161807908
+      "Data1": 237847113354107062,
+      "Data2": -4037798909859124600,
+      "Data3": 3541786379511083163,
+      "Data4": 4065696104579995132
     },
     "Kind": 1,
     "Name": "Bind_value",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
     "Documentation": {
@@ -21930,15 +21906,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -2932257407011177636,
-      "Data2": -5137989880054661068,
-      "Data3": -2000927749616858051,
-      "Data4": 9077728434543055484
+      "Data1": 8543359812239768350,
+      "Data2": 8337406727523433137,
+      "Data3": 5879778004285805991,
+      "Data4": 7264754416591039100
     },
     "Kind": 1,
     "Name": "Bind",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
     "Documentation": {
@@ -22118,15 +22094,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -7068532179130470751,
-      "Data2": 2711746585789398742,
-      "Data3": 7466643602744088983,
-      "Data4": 1948972356113836420
+      "Data1": -5704834884043111819,
+      "Data2": -8569666504048230743,
+      "Data3": -1681058613237288076,
+      "Data4": 7994690369823653710
     },
     "Kind": 1,
     "Name": "Bind_value",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
     "Documentation": {
@@ -22306,15 +22282,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 2836902630041206117,
-      "Data2": -5869938774502814104,
-      "Data3": -1441032421521223089,
-      "Data4": 1800646105032130053
+      "Data1": 5342428901734433826,
+      "Data2": -3701616889983969299,
+      "Data3": -308558188939143303,
+      "Data4": -3019578055229276318
     },
     "Kind": 1,
     "Name": "Bind",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
     "Documentation": {
@@ -22481,15 +22457,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -7121064758817019488,
-      "Data2": 6954255052873302311,
-      "Data3": 8943570699549469871,
-      "Data4": 4195835600160764724
+      "Data1": -5508916637515091230,
+      "Data2": 7680977991295615447,
+      "Data3": 8314868861363751984,
+      "Data4": -6130252992246644357
     },
     "Kind": 1,
     "Name": "Bind",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
     "Documentation": {
@@ -24245,15 +24221,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 8301924263423987877,
-      "Data2": 4832317616734101357,
-      "Data3": 185547643879694674,
-      "Data4": 4582463132828583510
+      "Data1": -7899657242236471478,
+      "Data2": 3040163433050608768,
+      "Data3": -2520114101804535210,
+      "Data4": -6949348061939888392
     },
     "Kind": 7,
     "Name": "Ref",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Ref",
     "Documentation": {
@@ -24292,15 +24268,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -3152913800834609921,
-      "Data2": 5538831657512525612,
-      "Data3": 4880521488135405518,
-      "Data4": -7306259655294579576
+      "Data1": -7653107857257050374,
+      "Data2": -2140554974544685846,
+      "Data3": -3737334371265844166,
+      "Data4": -8402117588645437469
     },
     "Kind": 6,
     "Name": "Key",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 9,
+    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Key",
     "Documentation": {

@@ -494,15 +494,14 @@
   },
   {
     "__Checksum": {
-      "Data1": -2122457654934997517,
-      "Data2": -6710470615748133300,
-      "Data3": 8198093242218632871,
-      "Data4": 9022422106234133808
+      "Data1": -6677774325400399765,
+      "Data2": -3177687001822360324,
+      "Data3": -4196810224656786932,
+      "Data4": -8568945039052835766
     },
     "Kind": 2,
     "Name": "BlazorServer_31.Shared.MainLayout.Body",
     "AssemblyName": "BlazorServer_31",
-    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "BlazorServer_31.Shared.MainLayout.Body",
     "Documentation": "\n<summary>\nGetsthecontenttoberenderedinsidethelayout.\n</summary>\n",
@@ -518,15 +517,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 4695228823214091593,
-      "Data2": -307849626929560300,
-      "Data3": -6626520437725290650,
-      "Data4": 6112652039966561306
+      "Data1": -1255209989876134382,
+      "Data2": -2746337731311519400,
+      "Data3": -7064578489273163596,
+      "Data4": 1688326124809134908
     },
     "Kind": 2,
     "Name": "BlazorServer_31.Shared.MainLayout.Body",
     "AssemblyName": "BlazorServer_31",
-    "Flags": 7,
+    "Flags": 3,
     "Runtime": 0,
     "DisplayName": "BlazorServer_31.Shared.MainLayout.Body",
     "Documentation": "\n<summary>\nGetsthecontenttoberenderedinsidethelayout.\n</summary>\n",
@@ -746,15 +745,14 @@
   },
   {
     "__Checksum": {
-      "Data1": 3175302962338078425,
-      "Data2": 740385693841781865,
-      "Data3": 5059208897458982088,
-      "Data4": -5770673072265121089
+      "Data1": -5671967463282054981,
+      "Data2": 6314063536853449876,
+      "Data3": 6253336070401729418,
+      "Data4": 5888595031234180714
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.CascadingValue<TValue>.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.CascadingValue<TValue>.ChildContent",
     "Documentation": "\n<summary>\nThecontenttowhichthevalueshouldbeprovided.\n</summary>\n",
@@ -770,15 +768,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -7131257961023541064,
-      "Data2": -8984203645030588434,
-      "Data3": 4054859277018953598,
-      "Data4": -2379533018260945166
+      "Data1": 7642880194733125142,
+      "Data2": -375211766525239466,
+      "Data3": 1741295974137186390,
+      "Data4": -3305412884066558779
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.CascadingValue<TValue>.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 7,
+    "Flags": 3,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.CascadingValue<TValue>.ChildContent",
     "Documentation": "\n<summary>\nThecontenttowhichthevalueshouldbeprovided.\n</summary>\n",
@@ -885,15 +883,14 @@
   },
   {
     "__Checksum": {
-      "Data1": 3722911818806628210,
-      "Data2": 9003822294202079085,
-      "Data3": -2309980144496882183,
-      "Data4": -6511574097593236206
+      "Data1": -7023428508295089637,
+      "Data2": 6059549826772470805,
+      "Data3": -2881032708555294422,
+      "Data4": -8038333488819513972
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.LayoutView.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.LayoutView.ChildContent",
     "Documentation": "\n<summary>\nGetsorsetsthecontenttodisplay.\n</summary>\n",
@@ -909,15 +906,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 5866661920968461982,
-      "Data2": -3593959588499596816,
-      "Data3": -2953031591333043465,
-      "Data4": -7834540006563672163
+      "Data1": -4232485664299252359,
+      "Data2": 5966248240551832024,
+      "Data3": -275890558749684199,
+      "Data4": 9198615264253395186
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.LayoutView.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 7,
+    "Flags": 3,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.LayoutView.ChildContent",
     "Documentation": "\n<summary>\nGetsorsetsthecontenttodisplay.\n</summary>\n",
@@ -1179,15 +1176,14 @@
   },
   {
     "__Checksum": {
-      "Data1": 5480675384639413106,
-      "Data2": 1569977092148870217,
-      "Data3": -3038828440136391809,
-      "Data4": -4378647440346903620
+      "Data1": 6216311169267092237,
+      "Data2": -7103307729806748824,
+      "Data3": -1754661463404594151,
+      "Data4": 7009095941920044313
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Routing.Router.Found",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.Router.Found",
     "Documentation": "\n<summary>\nGetsorsetsthecontenttodisplaywhenamatchisfoundfortherequestedroute.\n</summary>\n",
@@ -1217,15 +1213,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -5745723329066947541,
-      "Data2": -6228620848832108323,
-      "Data3": 2643301650200022761,
-      "Data4": -2457373328066633346
+      "Data1": -6502645966062108367,
+      "Data2": -6428756356119541807,
+      "Data3": 4287748543879485275,
+      "Data4": -5780010510898407707
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Routing.Router.Found",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 7,
+    "Flags": 3,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.Router.Found",
     "Documentation": "\n<summary>\nGetsorsetsthecontenttodisplaywhenamatchisfoundfortherequestedroute.\n</summary>\n",
@@ -1255,15 +1251,14 @@
   },
   {
     "__Checksum": {
-      "Data1": -4342997206862130672,
-      "Data2": -1235085884990695729,
-      "Data3": 8134701297713180927,
-      "Data4": 959766156188941000
+      "Data1": -3027106307595493312,
+      "Data2": 7378755004635762328,
+      "Data3": 4601944290428556115,
+      "Data4": 1313880803281757528
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Routing.Router.NotFound",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.Router.NotFound",
     "Documentation": "\n<summary>\nGetsorsetsthecontenttodisplaywhennomatchisfoundfortherequestedroute.\n</summary>\n",
@@ -1279,15 +1274,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 1613476616058132338,
-      "Data2": 966773816614626078,
-      "Data3": 2426107921031810203,
-      "Data4": 5610735736583504614
+      "Data1": 6178177912323570646,
+      "Data2": -2908660927836431873,
+      "Data3": -3971549612473257810,
+      "Data4": 3937768878660808063
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Routing.Router.NotFound",
     "AssemblyName": "Microsoft.AspNetCore.Components",
-    "Flags": 7,
+    "Flags": 3,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.Router.NotFound",
     "Documentation": "\n<summary>\nGetsorsetsthecontenttodisplaywhennomatchisfoundfortherequestedroute.\n</summary>\n",
@@ -1505,15 +1500,14 @@
   },
   {
     "__Checksum": {
-      "Data1": -8648348016149579507,
-      "Data2": 4930871671967314787,
-      "Data3": 2334156031389022319,
-      "Data4": 227723405930881022
+      "Data1": 3819048494559800855,
+      "Data2": 6711629746833482479,
+      "Data3": -2227410423521032325,
+      "Data4": 2158415909389689018
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing",
     "Documentation": "\n<summary>\nThecontentthatwillbedisplayedwhileasynchronousauthorizationisinprogress.\n</summary>\n",
@@ -1529,15 +1523,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 4103977684314357377,
-      "Data2": 6558466892223803913,
-      "Data3": -3461806959402379508,
-      "Data4": -3225019177396061406
+      "Data1": 1526989735130037839,
+      "Data2": -5296276663427191220,
+      "Data3": -3745245005864979020,
+      "Data4": -5781595641410703363
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-    "Flags": 7,
+    "Flags": 3,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing",
     "Documentation": "\n<summary>\nThecontentthatwillbedisplayedwhileasynchronousauthorizationisinprogress.\n</summary>\n",
@@ -1553,15 +1547,14 @@
   },
   {
     "__Checksum": {
-      "Data1": -4519419338486551675,
-      "Data2": -8867736889254096535,
-      "Data3": -2568529658202791735,
-      "Data4": -2424350861792582857
+      "Data1": -930944419188866711,
+      "Data2": -2297716784944627538,
+      "Data3": -8574037732200266174,
+      "Data4": 3487119203663246433
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized",
     "Documentation": "\n<summary>\nThecontentthatwillbedisplayediftheuserisnotauthorized.\n</summary>\n",
@@ -1591,15 +1584,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 6523969900080555254,
-      "Data2": 3910362699397766820,
-      "Data3": -5013502437353747057,
-      "Data4": -644798746229796755
+      "Data1": -6608594190359357627,
+      "Data2": 7537632120948496248,
+      "Data3": 2088431684700096972,
+      "Data4": -9195382991273704163
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-    "Flags": 7,
+    "Flags": 3,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized",
     "Documentation": "\n<summary>\nThecontentthatwillbedisplayediftheuserisnotauthorized.\n</summary>\n",
@@ -1854,15 +1847,14 @@
   },
   {
     "__Checksum": {
-      "Data1": 7967781193679163089,
-      "Data2": -8348216285761785486,
-      "Data3": 3013986297330264106,
-      "Data4": 7911898254213723246
+      "Data1": -3683404951838841520,
+      "Data2": 3538251122996487674,
+      "Data3": -6177999231493969373,
+      "Data4": 2926597753207628879
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorized",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorized",
     "Documentation": "\n<summary>\nThecontentthatwillbedisplayediftheuserisauthorized.\nIfyouspecifyavalueforthisparameter,donotalsospecifyavaluefor<seecref=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.ChildContent\"/>.\n</summary>\n",
@@ -1892,15 +1884,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -8539687916468172285,
-      "Data2": 8279524544503740324,
-      "Data3": -2037690526279443357,
-      "Data4": 3581005763485600493
+      "Data1": 8830377595609306624,
+      "Data2": -3265908563268365564,
+      "Data3": 9106574981502944110,
+      "Data4": 5690587424570473777
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorized",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-    "Flags": 7,
+    "Flags": 3,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorized",
     "Documentation": "\n<summary>\nThecontentthatwillbedisplayediftheuserisauthorized.\nIfyouspecifyavalueforthisparameter,donotalsospecifyavaluefor<seecref=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.ChildContent\"/>.\n</summary>\n",
@@ -1930,15 +1922,14 @@
   },
   {
     "__Checksum": {
-      "Data1": -7439865276961497316,
-      "Data2": 9048096053196713197,
-      "Data3": -734783760045104640,
-      "Data4": 7150245007485757281
+      "Data1": -8462244342469941648,
+      "Data2": 435565325550544246,
+      "Data3": 6955979058550247666,
+      "Data4": -2099488085142501804
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorizing",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorizing",
     "Documentation": "\n<summary>\nThecontentthatwillbedisplayedwhileasynchronousauthorizationisinprogress.\n</summary>\n",
@@ -1954,15 +1945,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -7500211952519651286,
-      "Data2": -6232837824262572421,
-      "Data3": -898435071839772309,
-      "Data4": 6584428453933279049
+      "Data1": -4647528797159494122,
+      "Data2": -3449853393898593627,
+      "Data3": 1912152927133012591,
+      "Data4": 5069087240821964731
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorizing",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-    "Flags": 7,
+    "Flags": 3,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorizing",
     "Documentation": "\n<summary>\nThecontentthatwillbedisplayedwhileasynchronousauthorizationisinprogress.\n</summary>\n",
@@ -1978,15 +1969,14 @@
   },
   {
     "__Checksum": {
-      "Data1": -4611333729957723971,
-      "Data2": -3903563338907838167,
-      "Data3": 222631414383179016,
-      "Data4": 6652816167549860083
+      "Data1": -6347956227399535548,
+      "Data2": 1286014490417149656,
+      "Data3": -587014774192696629,
+      "Data4": -5402517804510787405
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.ChildContent",
     "Documentation": "\n<summary>\nThecontentthatwillbedisplayediftheuserisauthorized.\n</summary>\n",
@@ -2016,15 +2006,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 5208797636710279263,
-      "Data2": -628132960583236801,
-      "Data3": -1190034001480847329,
-      "Data4": -439924820049348911
+      "Data1": 4902915980590178614,
+      "Data2": -4812778132632199360,
+      "Data3": 5735286587346052496,
+      "Data4": -2643696312588338251
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-    "Flags": 7,
+    "Flags": 3,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.ChildContent",
     "Documentation": "\n<summary>\nThecontentthatwillbedisplayediftheuserisauthorized.\n</summary>\n",
@@ -2054,15 +2044,14 @@
   },
   {
     "__Checksum": {
-      "Data1": -4161012427749958555,
-      "Data2": -1910321172329704706,
-      "Data3": 8538360024316681123,
-      "Data4": -7018633692169420954
+      "Data1": 2874148892045326822,
+      "Data2": 5885130281668333973,
+      "Data3": 1927977556205569020,
+      "Data4": 2718398529667905371
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.NotAuthorized",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.NotAuthorized",
     "Documentation": "\n<summary>\nThecontentthatwillbedisplayediftheuserisnotauthorized.\n</summary>\n",
@@ -2092,15 +2081,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -5821349933545557628,
-      "Data2": 5988535742866449908,
-      "Data3": 2922085604943684949,
-      "Data4": -4547786555630241055
+      "Data1": -9121558061645024242,
+      "Data2": 94043179915294197,
+      "Data3": 5485235875020791159,
+      "Data4": 8469624796594459429
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.NotAuthorized",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-    "Flags": 7,
+    "Flags": 3,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.NotAuthorized",
     "Documentation": "\n<summary>\nThecontentthatwillbedisplayediftheuserisnotauthorized.\n</summary>\n",
@@ -2199,15 +2188,14 @@
   },
   {
     "__Checksum": {
-      "Data1": 162879039082781643,
-      "Data2": 1882554738794450979,
-      "Data3": -8970427462209785113,
-      "Data4": -1103640680867794756
+      "Data1": 7287960975412303994,
+      "Data2": -9003189598985634423,
+      "Data3": -1244798723764505859,
+      "Data4": 4202759840699678894
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState.ChildContent",
     "Documentation": "\n<summary>\nThecontenttowhichtheauthenticationstateshouldbeprovided.\n</summary>\n",
@@ -2223,15 +2211,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 4854726110912317304,
-      "Data2": -8567451907476777346,
-      "Data3": 80843767945355701,
-      "Data4": 1599164378899246612
+      "Data1": -8115563224067788354,
+      "Data2": 5540288799618016089,
+      "Data3": -8277598693868868928,
+      "Data4": -1822898289532836345
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-    "Flags": 7,
+    "Flags": 3,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState.ChildContent",
     "Documentation": "\n<summary>\nThecontenttowhichtheauthenticationstateshouldbeprovided.\n</summary>\n",
@@ -2468,15 +2456,14 @@
   },
   {
     "__Checksum": {
-      "Data1": -4601196272177451941,
-      "Data2": -64754741743301781,
-      "Data3": 8150595706659590034,
-      "Data4": 2137629749761309586
+      "Data1": -3264498951204982299,
+      "Data2": 5780551175615980124,
+      "Data3": 3106134711760289702,
+      "Data4": 8000867960991512083
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent",
     "Documentation": "\n<summary>\nSpecifiesthecontenttoberenderedinsidethis<seecref=\"T:Microsoft.AspNetCore.Components.Forms.EditForm\"/>.\n</summary>\n",
@@ -2506,15 +2493,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -4534382529492265713,
-      "Data2": 3726597241897450937,
-      "Data3": -5018514469931118294,
-      "Data4": -6968024750254992727
+      "Data1": 1264419253298659288,
+      "Data2": -3674996232819587819,
+      "Data3": 7383295558672800963,
+      "Data4": -2370275887689925910
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-    "Flags": 7,
+    "Flags": 3,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent",
     "Documentation": "\n<summary>\nSpecifiesthecontenttoberenderedinsidethis<seecref=\"T:Microsoft.AspNetCore.Components.Forms.EditForm\"/>.\n</summary>\n",
@@ -3226,15 +3213,14 @@
   },
   {
     "__Checksum": {
-      "Data1": 127078663631918208,
-      "Data2": -6839823479289018914,
-      "Data3": 1385895208034154207,
-      "Data4": -8026309045322659067
+      "Data1": -498747361695065822,
+      "Data2": -8938011787685089713,
+      "Data3": -3010713245294010374,
+      "Data4": -3704994873182198786
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>.ChildContent",
     "Documentation": "\n<summary>\nGetsorsetsthechildcontenttoberenderinginsidetheselectelement.\n</summary>\n",
@@ -3250,15 +3236,15 @@
   },
   {
     "__Checksum": {
-      "Data1": 7337194784758012864,
-      "Data2": 8902168770431581024,
-      "Data3": 7731191339257044092,
-      "Data4": -1311564473750410661
+      "Data1": 1004364289844479373,
+      "Data2": 6147309943199994603,
+      "Data3": -3254272124124522075,
+      "Data4": 7234922987419689244
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-    "Flags": 7,
+    "Flags": 3,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>.ChildContent",
     "Documentation": "\n<summary>\nGetsorsetsthechildcontenttoberenderinginsidetheselectelement.\n</summary>\n",
@@ -3879,15 +3865,14 @@
   },
   {
     "__Checksum": {
-      "Data1": 7725126905174695519,
-      "Data2": -1668412624128926339,
-      "Data3": -3364171983256084221,
-      "Data4": -4761291458353764504
+      "Data1": -4482403933367037560,
+      "Data2": -6708392009600109029,
+      "Data3": 1075007940486772559,
+      "Data4": -8479668387210554928
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-    "Flags": 5,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent",
     "Documentation": "\n<summary>\nGetsorsetsthechildcontentofthecomponent.\n</summary>\n",
@@ -3903,15 +3888,15 @@
   },
   {
     "__Checksum": {
-      "Data1": -1257406606243623520,
-      "Data2": -1269078762029094259,
-      "Data3": 5553504180488525488,
-      "Data4": 7195257077012310798
+      "Data1": -4456118742726625232,
+      "Data2": 7971963180261865571,
+      "Data3": -9104151230586668753,
+      "Data4": 583354139746308041
     },
     "Kind": 2,
     "Name": "Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent",
     "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-    "Flags": 7,
+    "Flags": 3,
     "Runtime": 0,
     "DisplayName": "Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent",
     "Documentation": "\n<summary>\nGetsorsetsthechildcontentofthecomponent.\n</summary>\n",

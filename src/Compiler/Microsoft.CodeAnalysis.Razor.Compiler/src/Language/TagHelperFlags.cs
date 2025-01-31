@@ -10,8 +10,7 @@ internal enum TagHelperFlags
 {
     CaseSensitive = 1 << 0,
     UseFullyQualifiedNameMatch = 1 << 1,
-    IsChildContent = 1 << 2,
-    ClassifyAttributesOnly = 1 << 3,
+    ClassifyAttributesOnly = 1 << 2,
 
     Default = CaseSensitive
 }
