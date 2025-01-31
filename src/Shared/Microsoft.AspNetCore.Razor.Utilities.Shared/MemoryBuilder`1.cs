@@ -62,7 +62,7 @@ internal ref struct MemoryBuilder<T>
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void Append(ReadOnlySpan<T> source)
+    public void Append(scoped ReadOnlySpan<T> source)
     {
         var index = _length;
         var memory = _memory;
@@ -89,7 +89,7 @@ internal ref struct MemoryBuilder<T>
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private void AppendWithResize(ReadOnlySpan<T> source)
+    private void AppendWithResize(scoped ReadOnlySpan<T> source)
     {
         if ((uint)(_length + source.Length) > (uint)_memory.Length)
         {

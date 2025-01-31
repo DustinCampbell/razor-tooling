@@ -29,7 +29,7 @@ public partial class RequiredAttributeDescriptorBuilder
         ValueComparisonMode = default;
         IsDirectiveAttribute = false;
 
-        _metadata.Clear();
+        _metadata = null;
     }
 
     private sealed class Policy : PooledBuilderPolicy<RequiredAttributeDescriptorBuilder>

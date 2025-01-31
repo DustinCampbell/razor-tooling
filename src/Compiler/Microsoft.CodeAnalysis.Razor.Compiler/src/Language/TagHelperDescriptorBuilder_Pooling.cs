@@ -43,7 +43,7 @@ public partial class TagHelperDescriptorBuilder
         BoundAttributes.Clear();
         TagMatchingRules.Clear();
 
-        _metadata.Clear();
+        _metadata = null;
     }
 
     private sealed class Policy : PooledBuilderPolicy<TagHelperDescriptorBuilder>

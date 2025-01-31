@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Razor.PooledObjects;
@@ -14,7 +13,7 @@ public sealed partial class RequiredAttributeDescriptorBuilder : TagHelperObject
 {
     [AllowNull]
     private TagMatchingRuleDescriptorBuilder _parent;
-    private MetadataHolder _metadata;
+    private MetadataCollection? _metadata;
 
     private RequiredAttributeDescriptorBuilder()
     {
@@ -33,12 +32,21 @@ public sealed partial class RequiredAttributeDescriptorBuilder : TagHelperObject
     internal bool CaseSensitive => _parent.CaseSensitive;
     internal bool IsDirectiveAttribute { get; set; }
 
-    public IDictionary<string, string?> Metadata => _metadata.MetadataDictionary;
-
-    public void SetMetadata(MetadataCollection metadata) => _metadata.SetMetadataCollection(metadata);
+    public void SetMetadata(MetadataCollection metadata)
+    {
+        _metadata = metadata ?? MetadataCollection.Empty;
+    }
 
     public bool TryGetMetadataValue(string key, [NotNullWhen(true)] out string? value)
-        => _metadata.TryGetMetadataValue(key, out value);
+    {
+        if (_metadata is { } metadata)
+        {
+            return metadata.TryGetValue(key, out value);
+        }
+
+        value = null;
+        return false;
+    }
 
     private protected override RequiredAttributeDescriptor BuildCore(ImmutableArray<RazorDiagnostic> diagnostics)
     {
@@ -49,7 +57,7 @@ public sealed partial class RequiredAttributeDescriptorBuilder : TagHelperObject
             ComputeFlags(),
             GetDisplayName(),
             diagnostics,
-            _metadata.GetMetadataCollection());
+            _metadata ?? MetadataCollection.Empty);
     }
 
     private RequiredAttributeFlags ComputeFlags()

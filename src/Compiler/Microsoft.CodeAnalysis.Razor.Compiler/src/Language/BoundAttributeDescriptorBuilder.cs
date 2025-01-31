@@ -37,7 +37,7 @@ public sealed partial class BoundAttributeDescriptorBuilder : TagHelperObjectBui
     [AllowNull]
     private string _kind;
     private DocumentationObject _documentationObject;
-    private MetadataHolder _metadata;
+    private MetadataCollection? _metadata;
     private bool? _caseSensitive;
 
     private BoundAttributeDescriptorBuilder()
@@ -69,12 +69,21 @@ public sealed partial class BoundAttributeDescriptorBuilder : TagHelperObjectBui
 
     public string? ContainingType { get; set; }
 
-    public IDictionary<string, string?> Metadata => _metadata.MetadataDictionary;
-
-    public void SetMetadata(MetadataCollection metadata) => _metadata.SetMetadataCollection(metadata);
+    public void SetMetadata(MetadataCollection metadata)
+    {
+        _metadata = metadata ?? MetadataCollection.Empty;
+    }
 
     public bool TryGetMetadataValue(string key, [NotNullWhen(true)] out string? value)
-        => _metadata.TryGetMetadataValue(key, out value);
+    {
+        if (_metadata is { } metadata)
+        {
+            return metadata.TryGetValue(key, out value);
+        }
+
+        value = null;
+        return false;
+    }
 
     internal bool CaseSensitive
     {
@@ -111,7 +120,6 @@ public sealed partial class BoundAttributeDescriptorBuilder : TagHelperObjectBui
 
     private protected override BoundAttributeDescriptor BuildCore(ImmutableArray<RazorDiagnostic> diagnostics)
     {
-
         return new BoundAttributeDescriptor(
             _kind,
             Name ?? string.Empty,
@@ -123,7 +131,7 @@ public sealed partial class BoundAttributeDescriptorBuilder : TagHelperObjectBui
             GetDisplayName(),
             ContainingType,
             Parameters.ToImmutable(),
-            _metadata.GetMetadataCollection(),
+            _metadata ?? MetadataCollection.Empty,
             diagnostics);
     }
 
