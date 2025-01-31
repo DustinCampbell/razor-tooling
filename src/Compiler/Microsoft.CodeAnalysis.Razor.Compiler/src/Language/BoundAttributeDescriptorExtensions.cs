@@ -60,13 +60,6 @@ public static class BoundAttributeDescriptorExtensions
         return isIndexerNameMatch && attribute.IsIndexerBooleanProperty;
     }
 
-    public static bool IsDefaultKind(this BoundAttributeParameterDescriptor parameter)
-    {
-        ArgHelper.ThrowIfNull(parameter);
-
-        return parameter.Kind == TagHelperKind.Default;
-    }
-
     public static string GetPropertyName(this BoundAttributeParameterDescriptor parameter)
     {
         if (parameter == null)
