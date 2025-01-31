@@ -73,6 +73,21 @@ public sealed class TagHelperDescriptor : TagHelperObject<TagHelperDescriptor>
         BoundAttributes = attributeDescriptors.NullToEmpty();
         AllowedChildTags = allowedChildTags.NullToEmpty();
         Metadata = metadata ?? MetadataCollection.Empty;
+
+        foreach (var rule in TagMatchingRules)
+        {
+            rule.SetParent(this);
+        }
+
+        foreach (var attribute in BoundAttributes)
+        {
+            attribute.SetParent(this);
+        }
+
+        foreach (var allowedChildTag in AllowedChildTags)
+        {
+            allowedChildTag.SetParent(this);
+        }
     }
 
     private protected override void BuildChecksum(in Checksum.Builder builder)

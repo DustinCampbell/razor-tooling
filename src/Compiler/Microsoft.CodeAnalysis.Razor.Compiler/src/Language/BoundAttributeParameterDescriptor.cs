@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Immutable;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Razor.Utilities;
 
 namespace Microsoft.AspNetCore.Razor.Language;
@@ -11,9 +12,13 @@ public sealed class BoundAttributeParameterDescriptor : TagHelperObject<BoundAtt
     private readonly BoundAttributeParameterFlags _flags;
     private readonly DocumentationObject _documentationObject;
 
+    private BoundAttributeDescriptor? _parent;
+
     public string Name { get; }
     public string TypeName { get; }
     public string DisplayName { get; }
+
+    public BoundAttributeDescriptor Parent => _parent.AssumeNotNull();
 
     internal BoundAttributeParameterFlags Flags => _flags;
     public bool CaseSensitive => (_flags & BoundAttributeParameterFlags.CaseSensitive) != 0;
@@ -51,6 +56,14 @@ public sealed class BoundAttributeParameterDescriptor : TagHelperObject<BoundAtt
         DocumentationObject.AppendToChecksum(in builder);
 
         builder.AppendData(Metadata.Checksum);
+    }
+
+    internal void SetParent(BoundAttributeDescriptor parent)
+    {
+        Debug.Assert(_parent is null);
+        Debug.Assert(parent.Parameters.Contains(this));
+
+        _parent = parent;
     }
 
     public string? Documentation => _documentationObject.GetText();
