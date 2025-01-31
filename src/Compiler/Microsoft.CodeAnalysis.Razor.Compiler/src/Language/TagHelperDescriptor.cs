@@ -44,7 +44,6 @@ public sealed class TagHelperDescriptor : TagHelperObject<TagHelperDescriptor>
     /// Gets whether the component matches a tag with a fully qualified name.
     /// </summary>
     internal bool UseFullyQualifiedNameMatch => (_flags & TagHelperFlags.UseFullyQualifiedNameMatch) != 0;
-    internal bool IsComponentOrChildContentTagHelper => Kind is TagHelperKind.Component or TagHelperKind.ChildContent;
 
     internal TagHelperDescriptor(
         TagHelperKind kind,
