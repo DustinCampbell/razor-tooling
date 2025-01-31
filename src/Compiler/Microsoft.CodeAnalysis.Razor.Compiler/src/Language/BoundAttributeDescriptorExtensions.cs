@@ -31,13 +31,6 @@ public static class BoundAttributeDescriptorExtensions
         return propertyName;
     }
 
-    public static bool IsDefaultKind(this BoundAttributeDescriptor attribute)
-    {
-        ArgHelper.ThrowIfNull(attribute);
-
-        return attribute.Kind == TagHelperKind.Default;
-    }
-
     internal static bool ExpectsStringValue(this BoundAttributeDescriptor attribute, string name)
     {
         if (attribute.IsStringProperty)

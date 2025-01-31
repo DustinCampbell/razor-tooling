@@ -102,7 +102,6 @@ namespace Test
         Assert.Empty(attribute.Diagnostics);
         Assert.False(attribute.HasErrors);
         Assert.Equal(TagHelperKind.Component, attribute.Kind);
-        Assert.False(attribute.IsDefaultKind());
 
         // Related to dictionaries/indexers, not supported currently, not sure if we ever will
         Assert.False(attribute.HasIndexer);

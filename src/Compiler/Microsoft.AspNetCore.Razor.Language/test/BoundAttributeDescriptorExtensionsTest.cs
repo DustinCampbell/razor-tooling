@@ -56,50 +56,6 @@ public class BoundAttributeDescriptorExtensionsTest
     }
 
     [Fact]
-    public void IsDefaultKind_ReturnsTrue_IfKindIsDefault()
-    {
-        // Arrange
-        var tagHelperBuilder = new TagHelperDescriptorBuilder(TagHelperKind.Default, "TestTagHelper", "Test");
-        tagHelperBuilder.Metadata(TypeName("TestTagHelper"));
-
-        var builder = new BoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperKind.Default);
-        builder
-            .Name("test")
-            .Metadata(PropertyName("IntProperty"))
-            .TypeName(typeof(int).FullName);
-
-        var descriptor = builder.Build();
-
-        // Act
-        var isDefault = descriptor.IsDefaultKind();
-
-        // Assert
-        Assert.True(isDefault);
-    }
-
-    [Fact]
-    public void IsDefaultKind_ReturnsFalse_IfKindIsNotDefault()
-    {
-        // Arrange
-        var tagHelperBuilder = new TagHelperDescriptorBuilder(TagHelperKind.Component, "TestTagHelper", "Test");
-        tagHelperBuilder.Metadata(TypeName("TestTagHelper"));
-
-        var builder = new BoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperKind.Component);
-        builder
-            .Name("test")
-            .Metadata(PropertyName("IntProperty"))
-            .TypeName(typeof(int).FullName);
-
-        var descriptor = builder.Build();
-
-        // Act
-        var isDefault = descriptor.IsDefaultKind();
-
-        // Assert
-        Assert.False(isDefault);
-    }
-
-    [Fact]
     public void ExpectsStringValue_ReturnsTrue_ForStringProperty()
     {
         // Arrange
