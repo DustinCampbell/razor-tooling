@@ -148,7 +148,6 @@ internal static partial class ObjectReaders
 
             static BoundAttributeDescriptor ReadFromProperties(JsonDataReader reader)
             {
-                var kind = (TagHelperKind)reader.ReadInt32OrDefault(nameof(BoundAttributeDescriptor.Kind), (int)TagHelperKind.Default);
                 var name = reader.ReadString(nameof(BoundAttributeDescriptor.Name));
                 var typeName = reader.ReadNonNullString(nameof(BoundAttributeDescriptor.TypeName));
                 var flags = (BoundAttributeFlags)reader.ReadInt32OrDefault(nameof(BoundAttributeDescriptor.Flags), (int)BoundAttributeFlags.Default);
@@ -163,7 +162,7 @@ internal static partial class ObjectReaders
                 var diagnostics = reader.ReadImmutableArrayOrEmpty(nameof(BoundAttributeDescriptor.Diagnostics), ReadDiagnostic);
 
                 return new BoundAttributeDescriptor(
-                    kind, Cached(name)!, Cached(typeName), flags,
+                    Cached(name)!, Cached(typeName), flags,
                     Cached(indexerNamePrefix), Cached(indexerTypeName),
                     documentationObject, Cached(displayName), Cached(containingType),
                     parameters, metadata, diagnostics);
@@ -176,7 +175,6 @@ internal static partial class ObjectReaders
 
             static BoundAttributeParameterDescriptor ReadFromProperties(JsonDataReader reader)
             {
-                var kind = (TagHelperKind)reader.ReadInt32OrDefault(nameof(BoundAttributeParameterDescriptor.Kind), (int)TagHelperKind.Default);
                 var name = reader.ReadString(nameof(BoundAttributeParameterDescriptor.Name));
                 var typeName = reader.ReadNonNullString(nameof(BoundAttributeParameterDescriptor.TypeName));
                 var flags = (BoundAttributeParameterFlags)reader.ReadInt32OrDefault(nameof(BoundAttributeParameterDescriptor.Flags), (int)BoundAttributeParameterFlags.Default);
@@ -187,7 +185,7 @@ internal static partial class ObjectReaders
                 var diagnostics = reader.ReadImmutableArrayOrEmpty(nameof(BoundAttributeParameterDescriptor.Diagnostics), ReadDiagnostic);
 
                 return new BoundAttributeParameterDescriptor(
-                    kind, Cached(name)!, Cached(typeName), flags,
+                    Cached(name)!, Cached(typeName), flags,
                     documentationObject, Cached(displayName),
                     metadata, diagnostics);
             }

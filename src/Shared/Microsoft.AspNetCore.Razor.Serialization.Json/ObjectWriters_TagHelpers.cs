@@ -92,7 +92,6 @@ internal static partial class ObjectWriters
         {
             writer.WriteObject(value, static (writer, value) =>
             {
-                writer.WriteIfNotDefault(nameof(value.Kind), (int)value.Kind, (int)TagHelperKind.Default);
                 writer.Write(nameof(value.Name), value.Name);
                 writer.Write(nameof(value.TypeName), value.TypeName);
                 writer.WriteIfNotDefault(nameof(value.Flags), (int)value.Flags, (int)BoundAttributeFlags.Default);
@@ -112,7 +111,6 @@ internal static partial class ObjectWriters
         {
             writer.WriteObject(value, static (writer, value) =>
             {
-                writer.WriteIfNotDefault(nameof(value.Kind), (int)value.Kind, (int)TagHelperKind.Default);
                 writer.Write(nameof(value.Name), value.Name);
                 writer.Write(nameof(value.TypeName), value.TypeName);
                 writer.WriteIfNotDefault(nameof(value.Flags), (int)value.Flags, (int)BoundAttributeParameterFlags.Default);

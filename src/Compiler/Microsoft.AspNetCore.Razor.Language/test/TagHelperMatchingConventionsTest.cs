@@ -163,7 +163,7 @@ public class TagHelperMatchingConventionsTest
     {
         // Arrange
         var tagHelperBuilder = new TagHelperDescriptorBuilder(TagHelperKind.Default, "TestTagHelper", "Test");
-        var builder = new BoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperKind.Default);
+        var builder = new BoundAttributeDescriptorBuilder(tagHelperBuilder);
         builder.AsDictionary("asp-", typeof(Dictionary<string, string>).FullName);
 
         var boundAttribute = builder.Build();
@@ -180,7 +180,7 @@ public class TagHelperMatchingConventionsTest
     {
         // Arrange
         var tagHelperBuilder = new TagHelperDescriptorBuilder(TagHelperKind.Default, "TestTagHelper", "Test");
-        var builder = new BoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperKind.Default);
+        var builder = new BoundAttributeDescriptorBuilder(tagHelperBuilder);
         builder.AsDictionary("asp-", typeof(Dictionary<string, string>).FullName);
 
         var boundAttribute = builder.Build();

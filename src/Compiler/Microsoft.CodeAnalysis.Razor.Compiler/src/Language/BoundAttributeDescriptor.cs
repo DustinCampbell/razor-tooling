@@ -15,7 +15,6 @@ public sealed class BoundAttributeDescriptor : TagHelperObject<BoundAttributeDes
     private readonly BoundAttributeFlags _flags;
     private readonly DocumentationObject _documentationObject;
 
-    public TagHelperKind Kind { get; }
     public string Name { get; }
     public string TypeName { get; }
     public string DisplayName { get; }
@@ -39,7 +38,6 @@ public sealed class BoundAttributeDescriptor : TagHelperObject<BoundAttributeDes
     public MetadataCollection Metadata { get; }
 
     internal BoundAttributeDescriptor(
-        TagHelperKind kind,
         string name,
         string typeName,
         BoundAttributeFlags flags,
@@ -53,7 +51,6 @@ public sealed class BoundAttributeDescriptor : TagHelperObject<BoundAttributeDes
         ImmutableArray<RazorDiagnostic> diagnostics)
         : base(diagnostics)
     {
-        Kind = kind;
         Name = name;
         TypeName = typeName;
         _flags = flags;
@@ -68,7 +65,6 @@ public sealed class BoundAttributeDescriptor : TagHelperObject<BoundAttributeDes
 
     private protected override void BuildChecksum(in Checksum.Builder builder)
     {
-        builder.AppendData((byte)Kind);
         builder.AppendData(Name);
         builder.AppendData(TypeName);
         builder.AppendData((int)_flags);
