@@ -51,11 +51,4 @@ public static class TagHelperDescriptorExtensions
 
         return string.Equals(tagHelper.Kind, TagHelperConventions.DefaultKind, StringComparison.Ordinal);
     }
-
-    public static bool KindUsesDefaultTagHelperRuntime(this TagHelperDescriptor tagHelper)
-    {
-        ArgHelper.ThrowIfNull(tagHelper);
-
-        return tagHelper.Runtime == RuntimeKind.Default;
-    }
 }
