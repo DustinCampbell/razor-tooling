@@ -48,7 +48,7 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
             var count = 0;
             for (var j = 0; j < node.TagHelpers.Count; j++)
             {
-                if (node.TagHelpers[j].IsComponentTagHelper)
+                if (node.TagHelpers[j].Kind == TagHelperKind.Component)
                 {
                     // Only allow a single component tag helper per element. If there are multiple, we'll just consider
                     // the first one and ignore the others.
@@ -62,7 +62,7 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
 
             if (count == 1)
             {
-                reference.Replace(RewriteAsComponent(node, node.TagHelpers.Single(n => n.IsComponentTagHelper)));
+                reference.Replace(RewriteAsComponent(node, node.TagHelpers.Single(static n => n.Kind == TagHelperKind.Component)));
             }
             else if (count > 1)
             {
@@ -92,7 +92,7 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
             for (var i = 0; i < node.TagHelpers.Count; i++)
             {
                 var tagHelper = node.TagHelpers[i];
-                if (!tagHelper.IsComponentTagHelper)
+                if (tagHelper.Kind != TagHelperKind.Component)
                 {
                     continue;
                 }
@@ -497,7 +497,7 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
             // Each 'tag helper property' belongs to a specific tag helper. We want to handle
             // the cases for components, but leave others alone. This allows our other passes
             // to handle those cases.
-            if (!node.TagHelper.IsComponentTagHelper)
+            if (node.TagHelper.Kind != TagHelperKind.Component)
             {
                 _children.Add(node);
                 return;
@@ -642,7 +642,7 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
             // Each 'tag helper property' belongs to a specific tag helper. We want to handle
             // the cases for components, but leave others alone. This allows our other passes
             // to handle those cases.
-            _children.Add(node.TagHelper.IsComponentTagHelper ? (IntermediateNode)new ComponentAttributeIntermediateNode(node) : node);
+            _children.Add(node.TagHelper.Kind == TagHelperKind.Component ? (IntermediateNode)new ComponentAttributeIntermediateNode(node) : node);
         }
 
         public override void VisitTagHelperDirectiveAttribute(TagHelperDirectiveAttributeIntermediateNode node)

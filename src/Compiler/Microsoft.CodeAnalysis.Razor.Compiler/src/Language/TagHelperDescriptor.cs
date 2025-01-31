@@ -40,14 +40,12 @@ public sealed class TagHelperDescriptor : TagHelperObject<TagHelperDescriptor>
 
     public MetadataCollection Metadata { get; }
 
-    internal bool IsComponentTagHelper => (_flags & TagHelperFlags.IsComponent) != 0;
-
     /// <summary>
     /// Gets whether the component matches a tag with a fully qualified name.
     /// </summary>
     internal bool UseFullyQualifiedNameMatch => (_flags & TagHelperFlags.UseFullyQualifiedNameMatch) != 0;
     internal bool IsChildContentTagHelper => (_flags & TagHelperFlags.IsChildContent) != 0;
-    internal bool IsComponentOrChildContentTagHelper => IsComponentTagHelper || IsChildContentTagHelper;
+    internal bool IsComponentOrChildContentTagHelper => Kind == TagHelperKind.Component || IsChildContentTagHelper;
 
     internal TagHelperDescriptor(
         TagHelperKind kind,

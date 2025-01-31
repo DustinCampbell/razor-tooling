@@ -545,7 +545,7 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
 
         private static void AddComponentBindTagHelpers(TagHelperDescriptor tagHelper, ref PooledArrayBuilder<TagHelperDescriptor> results)
         {
-            if (!tagHelper.IsComponentTagHelper)
+            if (tagHelper.Kind != TagHelperKind.Component)
             {
                 return;
             }
