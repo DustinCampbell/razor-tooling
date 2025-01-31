@@ -75,7 +75,6 @@ namespace Test
         Assert.False(bind.HasErrors);
         Assert.Equal(TagHelperKind.Bind, bind.Kind);
         Assert.Equal(RuntimeKind.None, bind.Runtime);
-        Assert.False(bind.IsDefaultKind());
         Assert.False(bind.IsComponentOrChildContentTagHelper);
         Assert.True(bind.CaseSensitive);
 
@@ -298,7 +297,6 @@ namespace Test
         Assert.False(bind.HasErrors);
         Assert.Equal(TagHelperKind.Bind, bind.Kind);
         Assert.Equal(RuntimeKind.None, bind.Runtime);
-        Assert.False(bind.IsDefaultKind());
         Assert.False(bind.IsComponentOrChildContentTagHelper);
         Assert.True(bind.CaseSensitive);
 
@@ -477,7 +475,6 @@ namespace Test
         Assert.Equal(TagHelperKind.Bind, bind.Kind);
         Assert.True(bind.ClassifyAttributesOnly);
         Assert.Equal(RuntimeKind.None, bind.Runtime);
-        Assert.False(bind.IsDefaultKind());
         Assert.False(bind.IsComponentOrChildContentTagHelper);
         Assert.True(bind.CaseSensitive);
 
@@ -1103,7 +1100,6 @@ namespace Test
         Assert.Equal(TagHelperKind.Bind, bind.Kind);
         Assert.True(bind.ClassifyAttributesOnly);
         Assert.Equal(RuntimeKind.None, bind.Runtime);
-        Assert.False(bind.IsDefaultKind());
         Assert.False(bind.IsComponentOrChildContentTagHelper);
         Assert.True(bind.CaseSensitive);
 

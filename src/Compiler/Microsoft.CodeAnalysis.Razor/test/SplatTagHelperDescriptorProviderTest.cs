@@ -33,7 +33,6 @@ public class SplatTagHelperDescriptorProviderTest : TagHelperDescriptorProviderT
         Assert.Equal(TagHelperKind.Splat, item.Kind);
         Assert.True(item.ClassifyAttributesOnly);
         Assert.Equal(RuntimeKind.None, item.Runtime);
-        Assert.False(item.IsDefaultKind());
         Assert.True(item.CaseSensitive);
 
         Assert.Equal(
