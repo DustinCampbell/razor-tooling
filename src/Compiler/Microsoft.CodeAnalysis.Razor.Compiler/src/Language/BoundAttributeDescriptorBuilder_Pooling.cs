@@ -38,7 +38,7 @@ public partial class BoundAttributeDescriptorBuilder
         DisplayName = null;
         ContainingType = null;
         Parameters.Clear();
-        _metadata.Clear();
+        _metadata = null;
     }
 
     private sealed class Policy : PooledBuilderPolicy<BoundAttributeDescriptorBuilder>

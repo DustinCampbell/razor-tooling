@@ -398,16 +398,16 @@ internal sealed class ComponentTagHelperDescriptorProvider : TagHelperDescriptor
                 pb.Name = typeParameter.Name;
                 pb.TypeName = typeof(Type).FullName;
 
-                using var _ = ListPool<KeyValuePair<string, string?>>.GetPooledObject(out var metadataPairs);
-                metadataPairs.Add(PropertyName(typeParameter.Name));
-                metadataPairs.Add(MakeTrue(ComponentMetadata.Component.TypeParameterKey));
-                metadataPairs.Add(new(ComponentMetadata.Component.TypeParameterIsCascadingKey, cascade.ToString()));
+                using var metadata = new MetadataBuilder();
+                metadata.Add(PropertyName(typeParameter.Name));
+                metadata.Add(MakeTrue(ComponentMetadata.Component.TypeParameterKey));
+                metadata.Add(ComponentMetadata.Component.TypeParameterIsCascadingKey, cascade.ToString());
 
                 // Type constraints (like "Image" or "Foo") are stored independently of
                 // things like constructor constraints and not null constraints in the
                 // type parameter so we create a single string representation of all the constraints
                 // here.
-                using var constraints = new PooledList<string>();
+                using var constraints = new PooledArrayBuilder<string>();
 
                 // CS0449: The 'class', 'struct', 'unmanaged', 'notnull', and 'default' constraints
                 // cannot be combined or duplicated, and must be specified first in the constraints list.
@@ -442,12 +442,12 @@ internal sealed class ComponentTagHelperDescriptorProvider : TagHelperDescriptor
                     constraints.Add("new()");
                 }
 
-                if (TryGetWhereClauseText(typeParameter, constraints, out var whereClauseText))
+                if (TryGetWhereClauseText(typeParameter, in constraints, out var whereClauseText))
                 {
-                    metadataPairs.Add(new(ComponentMetadata.Component.TypeParameterConstraintsKey, whereClauseText));
+                    metadata.Add(ComponentMetadata.Component.TypeParameterConstraintsKey, whereClauseText);
                 }
 
-                pb.SetMetadata(MetadataCollection.Create(metadataPairs));
+                pb.SetMetadata(metadata.Build());
 
                 pb.SetDocumentation(
                     DocumentationDescriptor.From(
@@ -456,7 +456,7 @@ internal sealed class ComponentTagHelperDescriptorProvider : TagHelperDescriptor
                         builder.Name));
             });
 
-            static bool TryGetWhereClauseText(ITypeParameterSymbol typeParameter, PooledList<string> constraints, [NotNullWhen(true)] out string? constraintsText)
+            static bool TryGetWhereClauseText(ITypeParameterSymbol typeParameter, ref readonly PooledArrayBuilder<string> constraints, [NotNullWhen(true)] out string? constraintsText)
             {
                 if (constraints.Count == 0)
                 {

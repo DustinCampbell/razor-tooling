@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Razor.Language.Components;
@@ -16,7 +15,7 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
     private string? _assemblyName;
 
     private DocumentationObject _documentationObject;
-    private MetadataHolder _metadata;
+    private MetadataCollection? _metadata;
 
     private TagHelperDescriptorBuilder()
     {
@@ -52,12 +51,21 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
         set => _documentationObject = new(value);
     }
 
-    public IDictionary<string, string?> Metadata => _metadata.MetadataDictionary;
-
-    public void SetMetadata(MetadataCollection metadata) => _metadata.SetMetadataCollection(metadata);
+    public void SetMetadata(MetadataCollection metadata)
+    {
+        _metadata = metadata ?? MetadataCollection.Empty;
+    }
 
     public bool TryGetMetadataValue(string key, [NotNullWhen(true)] out string? value)
-        => _metadata.TryGetMetadataValue(key, out value);
+    {
+        if (_metadata is { } metadata)
+        {
+            return metadata.TryGetValue(key, out value);
+        }
+
+        value = null;
+        return false;
+    }
 
     public TagHelperObjectBuilderCollection<AllowedChildTagDescriptor, AllowedChildTagDescriptorBuilder> AllowedChildTags { get; }
         = new(AllowedChildTagDescriptorBuilder.Pool);
@@ -128,7 +136,7 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
             TagMatchingRules.ToImmutable(),
             BoundAttributes.ToImmutable(),
             AllowedChildTags.ToImmutable(),
-            _metadata.GetMetadataCollection(),
+            _metadata ?? MetadataCollection.Empty,
             diagnostics);
     }
 

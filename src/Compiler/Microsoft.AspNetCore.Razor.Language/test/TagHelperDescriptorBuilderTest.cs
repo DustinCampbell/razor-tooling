@@ -60,28 +60,4 @@ public class TagHelperDescriptorBuilderTest
         // Assert
         Assert.Same(descriptor1.Metadata, descriptor2.Metadata);
     }
-
-    [Fact]
-    public void Metadata_NotSame()
-    {
-        // When Metadata is accessed on multiple builders with the same metadata,
-        // they do not share the instance.
-
-        // Arrange
-        var builder1 = TagHelperDescriptorBuilder.Create("TestTagHelper1", "TestAssembly1");
-        var builder2 = TagHelperDescriptorBuilder.Create("TestTagHelper1", "TestAssembly1");
-
-        builder1.Metadata.Add(TypeName("TestTagHelper1"));
-        builder1.Metadata.Add(TypeNameIdentifier("TestTagHelper1"));
-
-        builder2.Metadata.Add(TypeName("TestTagHelper1"));
-        builder2.Metadata.Add(TypeNameIdentifier("TestTagHelper1"));
-
-        // Act
-        var descriptor1 = builder1.Build();
-        var descriptor2 = builder2.Build();
-
-        // Assert
-        Assert.NotSame(descriptor1.Metadata, descriptor2.Metadata);
-    }
 }

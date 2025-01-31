@@ -31,7 +31,7 @@ public partial class BoundAttributeParameterDescriptorBuilder
         IsEnum = false;
         DisplayName = null;
 
-        _metadata.Clear();
+        _metadata = null;
     }
 
     private sealed class Policy : PooledBuilderPolicy<BoundAttributeParameterDescriptorBuilder>

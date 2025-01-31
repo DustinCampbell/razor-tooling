@@ -6,8 +6,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using Microsoft.AspNetCore.Razor.PooledObjects;
 using Microsoft.AspNetCore.Razor.Utilities;
 
 namespace Microsoft.AspNetCore.Razor.Language;
@@ -86,7 +84,7 @@ public abstract partial class MetadataCollection : IReadOnlyDictionary<string, s
     public static MetadataCollection Create(KeyValuePair<string, string?> pair1, KeyValuePair<string, string?> pair2, KeyValuePair<string, string?> pair3)
         => new OneToThreeItems(pair1.Key, pair1.Value, pair2.Key, pair2.Value, pair3.Key, pair3.Value);
 
-    public static MetadataCollection Create(params KeyValuePair<string, string?>[] pairs)
+    public static MetadataCollection Create(params ReadOnlySpan<KeyValuePair<string, string?>> pairs)
         => pairs switch
         {
             [] => Empty,
@@ -95,108 +93,6 @@ public abstract partial class MetadataCollection : IReadOnlyDictionary<string, s
             [var pair1, var pair2, var pair3] => new OneToThreeItems(pair1.Key, pair1.Value, pair2.Key, pair2.Value, pair3.Key, pair3.Value),
             _ => new FourOrMoreItems(pairs),
         };
-
-    public static MetadataCollection Create<T>(T pairs)
-        where T : IReadOnlyList<KeyValuePair<string, string?>>
-        => pairs switch
-        {
-            [] => Empty,
-            [var pair] => new OneToThreeItems(pair.Key, pair.Value),
-            [var pair1, var pair2] => new OneToThreeItems(pair1.Key, pair1.Value, pair2.Key, pair2.Value),
-            [var pair1, var pair2, var pair3] => new OneToThreeItems(pair1.Key, pair1.Value, pair2.Key, pair2.Value, pair3.Key, pair3.Value),
-            _ => new FourOrMoreItems(pairs),
-        };
-
-    public static MetadataCollection Create(Dictionary<string, string?> map)
-    {
-        var count = map.Count;
-
-        if (count == 0)
-        {
-            return Empty;
-        }
-
-        if (count < 4)
-        {
-            // Optimize for the 1-3 case. On this path, we use the enumerator
-            // to acquire key/value pairs.
-
-            // Get the first pair.
-            using var enumerator = map.GetEnumerator();
-
-            if (!enumerator.MoveNext())
-            {
-                Assumed.Unreachable();
-            }
-
-            var pair1 = enumerator.Current;
-
-            if (count == 1)
-            {
-                return new OneToThreeItems(pair1.Key, pair1.Value);
-            }
-
-            // We know there are at least two pairs, so get the second one.
-            if (!enumerator.MoveNext())
-            {
-                Assumed.Unreachable();
-            }
-
-            var pair2 = enumerator.Current;
-
-            if (count == 2)
-            {
-                return new OneToThreeItems(pair1.Key, pair1.Value, pair2.Key, pair2.Value);
-            }
-
-            // We know that there are three pairs, so get the final one.
-            if (!enumerator.MoveNext())
-            {
-                Assumed.Unreachable();
-            }
-
-            var pair3 = enumerator.Current;
-
-            return new OneToThreeItems(pair1.Key, pair1.Value, pair2.Key, pair2.Value, pair3.Key, pair3.Value);
-        }
-
-        // Finally, if there are four or more items, add the pairs to a list in order to construct
-        // a FourOrMoreItems instance. Note that the constructor will copy the key-value pairs and won't
-        // hold onto the list we're passing, so it's safe to use a pooled list.
-        using var _ = ListPool<KeyValuePair<string, string?>>.GetPooledObject(out var list);
-        list.SetCapacityIfLarger(count);
-
-        foreach (var pair in map)
-        {
-            list.Add(pair);
-        }
-
-        return Create(list);
-    }
-
-    public static MetadataCollection Create(IReadOnlyDictionary<string, string?> map)
-    {
-        // Take a faster path if Dictionary<string, string?> is passed to us. This ensures that
-        // we use Dictionary's struct-based enumerator rather than going through
-        // IEnumerable<KeyValuePair<string, string>>.ToArray() below.
-
-        if (map is Dictionary<string, string?> dictionary)
-        {
-            return Create(dictionary);
-        }
-
-        return Create(map.ToArray());
-    }
-
-    public static MetadataCollection CreateOrEmpty<T>(T? pairs)
-        where T : IReadOnlyList<KeyValuePair<string, string?>>
-        => pairs is { } realPairs ? Create(realPairs) : Empty;
-
-    public static MetadataCollection CreateOrEmpty(Dictionary<string, string?>? map)
-        => map is not null ? Create(map) : Empty;
-
-    public static MetadataCollection CreateOrEmpty(IReadOnlyDictionary<string, string?>? map)
-        => map is not null ? Create(map) : Empty;
 
     /// <summary>
     ///  This implementation represents an empty MetadataCollection.
@@ -533,14 +429,9 @@ public abstract partial class MetadataCollection : IReadOnlyDictionary<string, s
 
         private readonly int _count;
 
-        public FourOrMoreItems(IReadOnlyList<KeyValuePair<string, string?>> pairs)
+        public FourOrMoreItems(ReadOnlySpan<KeyValuePair<string, string?>> pairs)
         {
-            if (pairs is null)
-            {
-                throw new ArgumentNullException(nameof(pairs));
-            }
-
-            var count = pairs.Count;
+            var count = pairs.Length;
 
             // Create a sorted array of keys.
             var keys = new string[count];

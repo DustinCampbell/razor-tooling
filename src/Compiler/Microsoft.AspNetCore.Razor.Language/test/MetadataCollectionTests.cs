@@ -34,9 +34,9 @@ public class MetadataCollectionTests
             pairs.Add(new(key, value));
         }
 
-        var collection1 = MetadataCollection.Create(pairs.ToArray());
+        var collection1 = MetadataCollection.Create([.. pairs]);
         var reversed = Enumerable.Reverse(pairs.ToArray());
-        var collection2 = MetadataCollection.Create(reversed.ToArray());
+        var collection2 = MetadataCollection.Create([.. reversed]);
 
         Assert.Equal(collection1, collection2);
 
@@ -62,7 +62,7 @@ public class MetadataCollectionTests
     [InlineData(64)]
     public void EnumeratorReturnsAllItemsInCollection(int size)
     {
-        var pairs = new List<KeyValuePair<string, string?>>();
+        using var metadata = new MetadataBuilder();
         var map = new Dictionary<string, bool>();
 
         for (var i = 0; i < size; i++)
@@ -70,13 +70,13 @@ public class MetadataCollectionTests
             var key = i.ToString(CultureInfo.InvariantCulture);
             var value = (int.MaxValue - i).ToString(CultureInfo.InvariantCulture);
 
-            pairs.Add(new(key, value));
+            metadata.Add(key, value);
             map.Add(key, false);
         }
 
         Assert.True(map.All(kvp => kvp.Value == false));
 
-        var collection = MetadataCollection.Create(pairs);
+        var collection = metadata.Build();
 
         foreach (var (key, _) in collection)
         {
@@ -116,27 +116,27 @@ public class MetadataCollectionTests
         var four = new KeyValuePair<string, string?>("Key4", "Value4");
 
         Assert.Throws<ArgumentException>(() => MetadataCollection.Create(one, one));
-        Assert.Throws<ArgumentException>(() => MetadataCollection.Create(new[] { one, one }));
+        Assert.Throws<ArgumentException>(() => MetadataCollection.Create([one, one]));
 
         Assert.Throws<ArgumentException>(() => MetadataCollection.Create(one, one, three));
-        Assert.Throws<ArgumentException>(() => MetadataCollection.Create(new[] { one, one, three }));
+        Assert.Throws<ArgumentException>(() => MetadataCollection.Create([one, one, three]));
         Assert.Throws<ArgumentException>(() => MetadataCollection.Create(one, three, three));
-        Assert.Throws<ArgumentException>(() => MetadataCollection.Create(new[] { one, three, three }));
+        Assert.Throws<ArgumentException>(() => MetadataCollection.Create([one, three, three]));
         Assert.Throws<ArgumentException>(() => MetadataCollection.Create(one, two, one));
-        Assert.Throws<ArgumentException>(() => MetadataCollection.Create(new[] { one, two, one }));
+        Assert.Throws<ArgumentException>(() => MetadataCollection.Create([one, two, one]));
 
         Assert.Throws<ArgumentException>(() => MetadataCollection.Create(one, one, three, four));
-        Assert.Throws<ArgumentException>(() => MetadataCollection.Create(new[] { one, one, three, four }));
+        Assert.Throws<ArgumentException>(() => MetadataCollection.Create([one, one, three, four]));
         Assert.Throws<ArgumentException>(() => MetadataCollection.Create(one, two, one, four));
-        Assert.Throws<ArgumentException>(() => MetadataCollection.Create(new[] { one, two, one, four }));
+        Assert.Throws<ArgumentException>(() => MetadataCollection.Create([one, two, one, four]));
         Assert.Throws<ArgumentException>(() => MetadataCollection.Create(one, two, three, one));
-        Assert.Throws<ArgumentException>(() => MetadataCollection.Create(new[] { one, two, three, one }));
+        Assert.Throws<ArgumentException>(() => MetadataCollection.Create([one, two, three, one]));
         Assert.Throws<ArgumentException>(() => MetadataCollection.Create(one, two, two, four));
-        Assert.Throws<ArgumentException>(() => MetadataCollection.Create(new[] { one, two, two, four }));
+        Assert.Throws<ArgumentException>(() => MetadataCollection.Create([one, two, two, four]));
         Assert.Throws<ArgumentException>(() => MetadataCollection.Create(one, two, three, two));
-        Assert.Throws<ArgumentException>(() => MetadataCollection.Create(new[] { one, one, three, two }));
+        Assert.Throws<ArgumentException>(() => MetadataCollection.Create([one, one, three, two]));
         Assert.Throws<ArgumentException>(() => MetadataCollection.Create(one, two, three, three));
-        Assert.Throws<ArgumentException>(() => MetadataCollection.Create(new[] { one, one, three, three }));
+        Assert.Throws<ArgumentException>(() => MetadataCollection.Create([one, one, three, three]));
     }
 
     private static TheoryData<ImmutableArray<KeyValuePair<string, string?>>, ImmutableArray<KeyValuePair<string, string?>>> GetPairPermutations(int count)
@@ -196,8 +196,8 @@ public class MetadataCollectionTests
     [MemberData(nameof(TwoPairs))]
     public void TestEquality_TwoItems(ImmutableArray<KeyValuePair<string, string?>> pairs1, ImmutableArray<KeyValuePair<string, string?>> pairs2)
     {
-        var collection1 = MetadataCollection.Create(pairs1);
-        var collection2 = MetadataCollection.Create(pairs2);
+        var collection1 = MetadataCollection.Create(pairs1.AsSpan());
+        var collection2 = MetadataCollection.Create(pairs2.AsSpan());
 
         Assert.Equal(collection1, collection2);
         Assert.Equal(collection1.GetHashCode(), collection2.GetHashCode());
@@ -207,8 +207,8 @@ public class MetadataCollectionTests
     [MemberData(nameof(ThreePairs))]
     public void TestEquality_ThreeItems(ImmutableArray<KeyValuePair<string, string?>> pairs1, ImmutableArray<KeyValuePair<string, string?>> pairs2)
     {
-        var collection1 = MetadataCollection.Create(pairs1);
-        var collection2 = MetadataCollection.Create(pairs2);
+        var collection1 = MetadataCollection.Create(pairs1.AsSpan());
+        var collection2 = MetadataCollection.Create(pairs2.AsSpan());
 
         Assert.Equal(collection1, collection2);
         Assert.Equal(collection1.GetHashCode(), collection2.GetHashCode());
@@ -218,8 +218,8 @@ public class MetadataCollectionTests
     [MemberData(nameof(FourPairs))]
     public void TestEquality_FourItems(ImmutableArray<KeyValuePair<string, string?>> pairs1, ImmutableArray<KeyValuePair<string, string?>> pairs2)
     {
-        var collection1 = MetadataCollection.Create(pairs1);
-        var collection2 = MetadataCollection.Create(pairs2);
+        var collection1 = MetadataCollection.Create(pairs1.AsSpan());
+        var collection2 = MetadataCollection.Create(pairs2.AsSpan());
 
         Assert.Equal(collection1, collection2);
         Assert.Equal(collection1.GetHashCode(), collection2.GetHashCode());
