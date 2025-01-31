@@ -158,7 +158,7 @@ internal sealed class EventHandlerTagHelperDescriptorProvider : TagHelperDescrip
                 ComponentMetadata.EventHandler.TagHelperKind, attribute, ComponentsApi.AssemblyName,
                 out var builder);
 
-            builder.Runtime = ComponentMetadata.EventHandler.RuntimeName;
+            builder.Runtime = RuntimeKind.None;
             builder.CaseSensitive = true;
             builder.ClassifyAttributesOnly = true;
             builder.SetDocumentation(

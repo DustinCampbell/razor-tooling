@@ -24,7 +24,7 @@ internal sealed class TagHelperFormatter : ValueFormatter<TagHelperDescriptor>
         var assemblyName = CachedStringFormatter.Instance.Deserialize(ref reader, options).AssumeNotNull();
         var flags = (TagHelperFlags)reader.ReadInt32();
 
-        var runtime = CachedStringFormatter.Instance.Deserialize(ref reader, options).AssumeNotNull();
+        var runtime = (RuntimeKind)reader.ReadByte();
         var displayName = CachedStringFormatter.Instance.Deserialize(ref reader, options).AssumeNotNull();
         var documentationObject = reader.Deserialize<DocumentationObject>(options);
         var tagOutputHint = CachedStringFormatter.Instance.Deserialize(ref reader, options);
@@ -52,7 +52,7 @@ internal sealed class TagHelperFormatter : ValueFormatter<TagHelperDescriptor>
         CachedStringFormatter.Instance.Serialize(ref writer, value.AssemblyName, options);
         writer.Write((int)value.Flags);
 
-        CachedStringFormatter.Instance.Serialize(ref writer, value.Runtime, options);
+        writer.Write((byte)value.Runtime);
         CachedStringFormatter.Instance.Serialize(ref writer, value.DisplayName, options);
         writer.Serialize(value.DocumentationObject, options);
         CachedStringFormatter.Instance.Serialize(ref writer, value.TagOutputHint, options);
@@ -74,7 +74,7 @@ internal sealed class TagHelperFormatter : ValueFormatter<TagHelperDescriptor>
         CachedStringFormatter.Instance.Skim(ref reader, options); // AssemblyName
         reader.Skip(); // Flags
 
-        CachedStringFormatter.Instance.Skim(ref reader, options); // Runtime
+        reader.Skip(); // Runtime
         CachedStringFormatter.Instance.Skim(ref reader, options); // DisplayName
         DocumentationObjectFormatter.Instance.Skim(ref reader, options); // DocumentationObject
         CachedStringFormatter.Instance.Skim(ref reader, options); // TagOutputHint

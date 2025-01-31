@@ -42,7 +42,7 @@ internal sealed class RefTagHelperDescriptorProvider() : TagHelperDescriptorProv
             ComponentMetadata.Ref.TagHelperKind, "Ref", ComponentsApi.AssemblyName,
             out var builder);
 
-        builder.Runtime = ComponentMetadata.Ref.RuntimeName;
+        builder.Runtime = RuntimeKind.None;
         builder.CaseSensitive = true;
         builder.ClassifyAttributesOnly = true;
         builder.SetDocumentation(DocumentationDescriptor.RefTagHelper);

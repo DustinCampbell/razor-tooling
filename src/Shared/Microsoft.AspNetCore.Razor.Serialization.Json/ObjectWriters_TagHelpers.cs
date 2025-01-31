@@ -21,7 +21,7 @@ internal static partial class ObjectWriters
         writer.Write(nameof(value.Name), value.Name);
         writer.Write(nameof(value.AssemblyName), value.AssemblyName);
         writer.WriteIfNotDefault(nameof(value.Flags), (int)value.Flags, (int)TagHelperFlags.Default);
-        writer.WriteIfNotDefault(nameof(value.Runtime), value.Runtime, TagHelperConventions.DefaultKind);
+        writer.WriteIfNotDefault(nameof(value.Runtime), (int)value.Runtime, (int)RuntimeKind.Default);
         writer.WriteIfNotNull(nameof(value.DisplayName), value.DisplayName);
         WriteDocumentationObject(writer, nameof(value.Documentation), value.DocumentationObject);
         writer.WriteIfNotNull(nameof(value.TagOutputHint), value.TagOutputHint);

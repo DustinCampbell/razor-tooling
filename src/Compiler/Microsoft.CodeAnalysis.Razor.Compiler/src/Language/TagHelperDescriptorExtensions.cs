@@ -56,6 +56,6 @@ public static class TagHelperDescriptorExtensions
     {
         ArgHelper.ThrowIfNull(tagHelper);
 
-        return tagHelper.Runtime == TagHelperConventions.DefaultKind;
+        return tagHelper.Runtime == RuntimeKind.Default;
     }
 }

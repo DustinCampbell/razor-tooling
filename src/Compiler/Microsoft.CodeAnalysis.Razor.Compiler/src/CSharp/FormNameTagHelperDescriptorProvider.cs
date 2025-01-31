@@ -46,7 +46,7 @@ internal sealed class FormNameTagHelperDescriptorProvider() : TagHelperDescripto
             assemblyName: ComponentsApi.AssemblyName,
             builder: out var builder);
 
-        builder.Runtime = ComponentMetadata.FormName.RuntimeName;
+        builder.Runtime = RuntimeKind.None;
         builder.CaseSensitive = true;
         builder.ClassifyAttributesOnly = true;
         builder.SetDocumentation(DocumentationDescriptor.FormNameTagHelper);

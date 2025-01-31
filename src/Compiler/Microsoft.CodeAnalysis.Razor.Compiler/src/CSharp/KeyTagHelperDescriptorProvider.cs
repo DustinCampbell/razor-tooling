@@ -42,7 +42,7 @@ internal sealed class KeyTagHelperDescriptorProvider() : TagHelperDescriptorProv
             ComponentMetadata.Key.TagHelperKind, "Key", ComponentsApi.AssemblyName,
             out var builder);
 
-        builder.Runtime = ComponentMetadata.Key.RuntimeName;
+        builder.Runtime = RuntimeKind.None;
         builder.CaseSensitive = true;
         builder.ClassifyAttributesOnly = true;
         builder.SetDocumentation(DocumentationDescriptor.KeyTagHelper);

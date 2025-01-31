@@ -26,7 +26,7 @@ public sealed class TagHelperDescriptor : TagHelperObject<TagHelperDescriptor>
     public string? Documentation => _documentationObject.GetText();
     internal DocumentationObject DocumentationObject => _documentationObject;
 
-    public string Runtime { get; }
+    public RuntimeKind Runtime { get; }
     public string DisplayName { get; }
     public string? TagOutputHint { get; }
 
@@ -54,7 +54,7 @@ public sealed class TagHelperDescriptor : TagHelperObject<TagHelperDescriptor>
         string name,
         string assemblyName,
         TagHelperFlags flags,
-        string runtime,
+        RuntimeKind runtime,
         string displayName,
         DocumentationObject documentationObject,
         string? tagOutputHint,
@@ -85,7 +85,7 @@ public sealed class TagHelperDescriptor : TagHelperObject<TagHelperDescriptor>
         builder.AppendData(Name);
         builder.AppendData(AssemblyName);
         builder.AppendData((int)Flags);
-        builder.AppendData(Runtime);
+        builder.AppendData((byte)Runtime);
         builder.AppendData(DisplayName);
         builder.AppendData(TagOutputHint);
 

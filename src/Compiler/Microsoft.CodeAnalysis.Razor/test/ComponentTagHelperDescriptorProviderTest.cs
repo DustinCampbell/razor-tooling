@@ -66,7 +66,7 @@ namespace Test
         Assert.False(component.KindUsesDefaultTagHelperRuntime());
         Assert.True(component.IsComponentOrChildContentTagHelper);
         Assert.True(component.CaseSensitive);
-        Assert.Equal("Components.IComponent", component.Runtime);
+        Assert.Equal(RuntimeKind.IComponent, component.Runtime);
 
         // No documentation in this test
         Assert.Null(component.Documentation);

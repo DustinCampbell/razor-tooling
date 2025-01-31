@@ -42,7 +42,7 @@ internal sealed class RenderModeTagHelperDescriptorProvider() : TagHelperDescrip
             ComponentMetadata.RenderMode.TagHelperKind, "RenderMode", ComponentsApi.AssemblyName,
             out var builder);
 
-        builder.Runtime = ComponentMetadata.RenderMode.RuntimeName;
+        builder.Runtime = RuntimeKind.None;
         builder.CaseSensitive = true;
         builder.ClassifyAttributesOnly = true;
         builder.SetDocumentation(DocumentationDescriptor.RenderModeTagHelper);

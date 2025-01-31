@@ -124,7 +124,7 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
             ComponentMetadata.Bind.TagHelperKind, "Bind", ComponentsApi.AssemblyName,
             out var builder);
 
-        builder.Runtime = ComponentMetadata.Bind.RuntimeName;
+        builder.Runtime = RuntimeKind.None;
         builder.CaseSensitive = true;
         builder.ClassifyAttributesOnly = true;
         builder.SetDocumentation(DocumentationDescriptor.BindTagHelper_Fallback);
@@ -365,7 +365,7 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
             using var _ = TagHelperDescriptorBuilder.GetPooledInstance(
                 ComponentMetadata.Bind.TagHelperKind, name, ComponentsApi.AssemblyName,
                 out var builder);
-            builder.Runtime = ComponentMetadata.Bind.RuntimeName;
+            builder.Runtime = RuntimeKind.None;
             builder.CaseSensitive = true;
             builder.ClassifyAttributesOnly = true;
             builder.SetDocumentation(
@@ -603,7 +603,7 @@ internal sealed class BindTagHelperDescriptorProvider() : TagHelperDescriptorPro
                     ComponentMetadata.Bind.TagHelperKind, tagHelper.Name, tagHelper.AssemblyName,
                     out var builder);
 
-                builder.Runtime = ComponentMetadata.Bind.RuntimeName;
+                builder.Runtime = RuntimeKind.None;
                 builder.DisplayName = tagHelper.DisplayName;
                 builder.CaseSensitive = true;
                 builder.SetDocumentation(
