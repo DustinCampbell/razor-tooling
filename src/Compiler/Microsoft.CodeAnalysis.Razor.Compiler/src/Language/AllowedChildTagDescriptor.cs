@@ -2,14 +2,19 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Immutable;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Razor.Utilities;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
 public sealed class AllowedChildTagDescriptor : TagHelperObject<AllowedChildTagDescriptor>
 {
+    private TagHelperDescriptor? _parent;
+
     public string Name { get; }
     public string DisplayName { get; }
+
+    public TagHelperDescriptor Parent => _parent.AssumeNotNull();
 
     internal AllowedChildTagDescriptor(string name, string displayName, ImmutableArray<RazorDiagnostic> diagnostics)
         : base(diagnostics)
@@ -22,6 +27,14 @@ public sealed class AllowedChildTagDescriptor : TagHelperObject<AllowedChildTagD
     {
         builder.AppendData(Name);
         builder.AppendData(DisplayName);
+    }
+
+    internal void SetParent(TagHelperDescriptor parent)
+    {
+        Debug.Assert(_parent is null);
+        Debug.Assert(parent.AllowedChildTags.Contains(this));
+
+        _parent = parent;
     }
 
     public override string ToString()
