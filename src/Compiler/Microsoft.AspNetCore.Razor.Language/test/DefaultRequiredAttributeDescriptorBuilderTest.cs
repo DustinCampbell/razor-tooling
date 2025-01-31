@@ -12,7 +12,7 @@ public class DefaultRequiredAttributeDescriptorBuilderTest
     public void Build_DisplayNameIsName_NameComparisonFullMatch()
     {
         // Arrange
-        var tagHelperBuilder = new TagHelperDescriptorBuilder(TagHelperConventions.DefaultKind, "TestTagHelper", "Test");
+        var tagHelperBuilder = new TagHelperDescriptorBuilder(TagHelperKind.Default, "TestTagHelper", "Test");
         var tagMatchingRuleBuilder = new TagMatchingRuleDescriptorBuilder(tagHelperBuilder);
         var builder = new RequiredAttributeDescriptorBuilder(tagMatchingRuleBuilder);
 
@@ -31,7 +31,7 @@ public class DefaultRequiredAttributeDescriptorBuilderTest
     public void Build_DisplayNameIsNameWithDots_NameComparisonPrefixMatch()
     {
         // Arrange
-        var tagHelperBuilder = new TagHelperDescriptorBuilder(TagHelperConventions.DefaultKind, "TestTagHelper", "Test");
+        var tagHelperBuilder = new TagHelperDescriptorBuilder(TagHelperKind.Default, "TestTagHelper", "Test");
         var tagMatchingRuleBuilder = new TagMatchingRuleDescriptorBuilder(tagHelperBuilder);
         var builder = new RequiredAttributeDescriptorBuilder(tagMatchingRuleBuilder);
 
@@ -53,7 +53,7 @@ public class DefaultRequiredAttributeDescriptorBuilderTest
         // they should share the instance.
 
         // Arrange
-        var tagHelperBuilder = new TagHelperDescriptorBuilder(TagHelperConventions.DefaultKind, "TestTagHelper", "Test");
+        var tagHelperBuilder = new TagHelperDescriptorBuilder(TagHelperKind.Default, "TestTagHelper", "Test");
         var tagMatchingRuleBuilder = new TagMatchingRuleDescriptorBuilder(tagHelperBuilder);
 
         var metadata = MetadataCollection.Create(PropertyName("SomeProperty"));

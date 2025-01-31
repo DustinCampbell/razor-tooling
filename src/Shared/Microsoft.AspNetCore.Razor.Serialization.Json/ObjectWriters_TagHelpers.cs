@@ -17,7 +17,7 @@ internal static partial class ObjectWriters
     public static void WriteProperties(JsonDataWriter writer, TagHelperDescriptor value)
     {
         writer.WriteObject(WellKnownPropertyNames.Checksum, value.Checksum, WriteProperties);
-        writer.Write(nameof(value.Kind), value.Kind);
+        writer.WriteIfNotDefault(nameof(value.Kind), (int)value.Kind, (int)TagHelperKind.Default);
         writer.Write(nameof(value.Name), value.Name);
         writer.Write(nameof(value.AssemblyName), value.AssemblyName);
         writer.WriteIfNotDefault(nameof(value.Flags), (int)value.Flags, (int)TagHelperFlags.Default);
@@ -92,7 +92,7 @@ internal static partial class ObjectWriters
         {
             writer.WriteObject(value, static (writer, value) =>
             {
-                writer.Write(nameof(value.Kind), value.Kind);
+                writer.WriteIfNotDefault(nameof(value.Kind), (int)value.Kind, (int)TagHelperKind.Default);
                 writer.Write(nameof(value.Name), value.Name);
                 writer.Write(nameof(value.TypeName), value.TypeName);
                 writer.WriteIfNotDefault(nameof(value.Flags), (int)value.Flags, (int)BoundAttributeFlags.Default);
@@ -112,7 +112,7 @@ internal static partial class ObjectWriters
         {
             writer.WriteObject(value, static (writer, value) =>
             {
-                writer.Write(nameof(value.Kind), value.Kind);
+                writer.WriteIfNotDefault(nameof(value.Kind), (int)value.Kind, (int)TagHelperKind.Default);
                 writer.Write(nameof(value.Name), value.Name);
                 writer.Write(nameof(value.TypeName), value.TypeName);
                 writer.WriteIfNotDefault(nameof(value.Flags), (int)value.Flags, (int)BoundAttributeParameterFlags.Default);

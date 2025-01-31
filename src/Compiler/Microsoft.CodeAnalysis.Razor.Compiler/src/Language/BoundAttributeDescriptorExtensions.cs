@@ -33,12 +33,9 @@ public static class BoundAttributeDescriptorExtensions
 
     public static bool IsDefaultKind(this BoundAttributeDescriptor attribute)
     {
-        if (attribute == null)
-        {
-            throw new ArgumentNullException(nameof(attribute));
-        }
+        ArgHelper.ThrowIfNull(attribute);
 
-        return attribute.Kind == TagHelperConventions.DefaultKind;
+        return attribute.Kind == TagHelperKind.Default;
     }
 
     internal static bool ExpectsStringValue(this BoundAttributeDescriptor attribute, string name)
@@ -65,12 +62,9 @@ public static class BoundAttributeDescriptorExtensions
 
     public static bool IsDefaultKind(this BoundAttributeParameterDescriptor parameter)
     {
-        if (parameter == null)
-        {
-            throw new ArgumentNullException(nameof(parameter));
-        }
+        ArgHelper.ThrowIfNull(parameter);
 
-        return parameter.Kind == TagHelperConventions.DefaultKind;
+        return parameter.Kind == TagHelperKind.Default;
     }
 
     public static string GetPropertyName(this BoundAttributeParameterDescriptor parameter)

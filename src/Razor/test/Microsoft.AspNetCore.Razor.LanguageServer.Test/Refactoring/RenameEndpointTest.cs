@@ -9,7 +9,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
-using Microsoft.AspNetCore.Razor.Language.Components;
 using Microsoft.AspNetCore.Razor.LanguageServer.Common;
 using Microsoft.AspNetCore.Razor.LanguageServer.Hosting;
 using Microsoft.AspNetCore.Razor.LanguageServer.ProjectSystem;
@@ -730,7 +729,7 @@ public class RenameEndpointTest(ITestOutputHelper testOutput) : LanguageServerTe
     private static IEnumerable<TagHelperDescriptor> CreateRazorComponentTagHelperDescriptors(string assemblyName, string namespaceName, string tagName)
     {
         var fullyQualifiedName = $"{namespaceName}.{tagName}";
-        var builder = TagHelperDescriptorBuilder.Create(ComponentMetadata.Component.TagHelperKind, fullyQualifiedName, assemblyName);
+        var builder = TagHelperDescriptorBuilder.Create(TagHelperKind.Component, fullyQualifiedName, assemblyName);
         builder.TagMatchingRule(rule => rule.TagName = tagName);
         builder.SetMetadata(
             TypeName(fullyQualifiedName),
@@ -739,7 +738,7 @@ public class RenameEndpointTest(ITestOutputHelper testOutput) : LanguageServerTe
 
         yield return builder.Build();
 
-        var fullyQualifiedBuilder = TagHelperDescriptorBuilder.Create(ComponentMetadata.Component.TagHelperKind, fullyQualifiedName, assemblyName);
+        var fullyQualifiedBuilder = TagHelperDescriptorBuilder.Create(TagHelperKind.Component, fullyQualifiedName, assemblyName);
         fullyQualifiedBuilder.TagMatchingRule(rule => rule.TagName = fullyQualifiedName);
         fullyQualifiedBuilder.UseFullyQualifiedNameMatch = true;
         fullyQualifiedBuilder.SetMetadata(

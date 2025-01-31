@@ -42,8 +42,6 @@ internal static class ComponentMetadata
 
     public static class Bind
     {
-        public const string TagHelperKind = "Components.Bind";
-
         public const string BindAttributeGetSet = "Components.Bind.AlternativeNotation";
 
         public const string FallbackKey = "Components.Bind.Fallback";
@@ -81,8 +79,6 @@ internal static class ComponentMetadata
 
     public static class ChildContent
     {
-        public const string TagHelperKind = "Components.ChildContent";
-
         public const string ParameterNameBoundAttributeKind = "Components.ChildContentParameterName";
 
         /// <summary>
@@ -110,8 +106,6 @@ internal static class ComponentMetadata
 
         public const string WeaklyTypedKey = "Components.IsWeaklyTyped";
 
-        public const string TagHelperKind = "Components.Component";
-
         public const string GenericTypedKey = "Components.GenericTyped";
 
         public const string ExplicitTypeNameKey = "Components.ExplicitTypeName";
@@ -138,32 +132,5 @@ internal static class ComponentMetadata
     public static class EventHandler
     {
         public const string EventArgsType = "Components.EventHandler.EventArgs";
-
-        public const string TagHelperKind = "Components.EventHandler";
-    }
-
-    public static class FormName
-    {
-        public const string TagHelperKind = "Components.FormName";
-    }
-
-    public static class Key
-    {
-        public const string TagHelperKind = "Components.Key";
-    }
-
-    public static class Splat
-    {
-        public const string TagHelperKind = "Components.Splat";
-    }
-
-    public static class Ref
-    {
-        public const string TagHelperKind = "Components.Ref";
-    }
-
-    public static class RenderMode
-    {
-        public const string TagHelperKind = "Components.RenderMode";
     }
 }

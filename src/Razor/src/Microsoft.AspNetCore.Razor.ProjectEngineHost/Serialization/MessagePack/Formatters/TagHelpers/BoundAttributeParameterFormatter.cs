@@ -19,7 +19,7 @@ internal sealed class BoundAttributeParameterFormatter : ValueFormatter<BoundAtt
     {
         reader.ReadArrayHeaderAndVerify(8);
 
-        var kind = CachedStringFormatter.Instance.Deserialize(ref reader, options).AssumeNotNull();
+        var kind = (TagHelperKind)reader.ReadByte();
         var name = CachedStringFormatter.Instance.Deserialize(ref reader, options);
         var typeName = CachedStringFormatter.Instance.Deserialize(ref reader, options).AssumeNotNull();
         var flags = (BoundAttributeParameterFlags)reader.ReadInt32();
@@ -39,7 +39,7 @@ internal sealed class BoundAttributeParameterFormatter : ValueFormatter<BoundAtt
     {
         writer.WriteArrayHeader(8);
 
-        CachedStringFormatter.Instance.Serialize(ref writer, value.Kind, options);
+        writer.Write((byte)value.Kind);
         CachedStringFormatter.Instance.Serialize(ref writer, value.Name, options);
         CachedStringFormatter.Instance.Serialize(ref writer, value.TypeName, options);
         writer.Write((int)value.Flags);
@@ -54,7 +54,7 @@ internal sealed class BoundAttributeParameterFormatter : ValueFormatter<BoundAtt
     {
         reader.ReadArrayHeaderAndVerify(8);
 
-        CachedStringFormatter.Instance.Skim(ref reader, options); // Kind
+        reader.Skip(); // Kind
         CachedStringFormatter.Instance.Skim(ref reader, options); // Name
         CachedStringFormatter.Instance.Skim(ref reader, options); // TypeName
         reader.Skip(); // Flags

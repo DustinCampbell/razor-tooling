@@ -19,7 +19,7 @@ public sealed class TagHelperDescriptor : TagHelperObject<TagHelperDescriptor>
 
     private ImmutableArray<BoundAttributeDescriptor> _editorRequiredAttributes;
 
-    public string Kind { get; }
+    public TagHelperKind Kind { get; }
     public string Name { get; }
     public string AssemblyName { get; }
 
@@ -50,7 +50,7 @@ public sealed class TagHelperDescriptor : TagHelperObject<TagHelperDescriptor>
     internal bool IsComponentOrChildContentTagHelper => IsComponentTagHelper || IsChildContentTagHelper;
 
     internal TagHelperDescriptor(
-        string kind,
+        TagHelperKind kind,
         string name,
         string assemblyName,
         TagHelperFlags flags,
@@ -81,7 +81,7 @@ public sealed class TagHelperDescriptor : TagHelperObject<TagHelperDescriptor>
 
     private protected override void BuildChecksum(in Checksum.Builder builder)
     {
-        builder.AppendData(Kind);
+        builder.AppendData((byte)Kind);
         builder.AppendData(Name);
         builder.AppendData(AssemblyName);
         builder.AppendData((int)Flags);

@@ -4,13 +4,12 @@
 using System;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
-using Microsoft.AspNetCore.Razor.Language.Components;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
 public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<TagHelperDescriptor>
 {
-    private string? _kind;
+    private TagHelperKind _kind;
     private string? _name;
     private string? _assemblyName;
 
@@ -21,10 +20,10 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
     {
     }
 
-    internal TagHelperDescriptorBuilder(string kind, string name, string assemblyName)
+    internal TagHelperDescriptorBuilder(TagHelperKind kind, string name, string assemblyName)
         : this()
     {
-        _kind = kind ?? throw new ArgumentNullException(nameof(kind));
+        _kind = kind;
         _name = name ?? throw new ArgumentNullException(nameof(name));
         _assemblyName = assemblyName ?? throw new ArgumentNullException(nameof(assemblyName));
 
@@ -32,12 +31,12 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
     }
 
     public static TagHelperDescriptorBuilder Create(string name, string assemblyName)
-        => new(TagHelperConventions.DefaultKind, name, assemblyName);
+        => new(TagHelperKind.Default, name, assemblyName);
 
-    public static TagHelperDescriptorBuilder Create(string kind, string name, string assemblyName)
+    public static TagHelperDescriptorBuilder Create(TagHelperKind kind, string name, string assemblyName)
         => new(kind, name, assemblyName);
 
-    public string Kind => _kind.AssumeNotNull();
+    public TagHelperKind Kind => _kind;
     public string Name => _name.AssumeNotNull();
     public string AssemblyName => _assemblyName.AssumeNotNull();
     public RuntimeKind Runtime { get; set; }
@@ -156,11 +155,11 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
             flags |= TagHelperFlags.ClassifyAttributesOnly;
         }
 
-        if (Kind == ComponentMetadata.Component.TagHelperKind)
+        if (Kind == TagHelperKind.Component)
         {
             flags |= TagHelperFlags.IsComponent;
         }
-        else if (Kind == ComponentMetadata.ChildContent.TagHelperKind)
+        else if (Kind == TagHelperKind.ChildContent)
         {
             flags |= TagHelperFlags.IsChildContent;
         }

@@ -296,24 +296,24 @@ public abstract class CodeActionEndToEndTestBase(ITestOutputHelper testOutput) :
 
         static IEnumerable<TagHelperDescriptor> BuildTagHelpers()
         {
-            var builder = TagHelperDescriptorBuilder.Create(ComponentMetadata.EventHandler.TagHelperKind, "oncontextmenu", "Microsoft.AspNetCore.Components");
+            var builder = TagHelperDescriptorBuilder.Create(TagHelperKind.EventHandler, "oncontextmenu", "Microsoft.AspNetCore.Components");
             builder.SetMetadata(
                 new KeyValuePair<string, string>(ComponentMetadata.EventHandler.EventArgsType, "Microsoft.AspNetCore.Components.Web.MouseEventArgs"));
             yield return builder.Build();
 
-            builder = TagHelperDescriptorBuilder.Create(ComponentMetadata.EventHandler.TagHelperKind, "onclick", "Microsoft.AspNetCore.Components");
+            builder = TagHelperDescriptorBuilder.Create(TagHelperKind.EventHandler, "onclick", "Microsoft.AspNetCore.Components");
             builder.SetMetadata(
                 new KeyValuePair<string, string>(ComponentMetadata.EventHandler.EventArgsType, "Microsoft.AspNetCore.Components.Web.MouseEventArgs"));
 
             yield return builder.Build();
 
-            builder = TagHelperDescriptorBuilder.Create(ComponentMetadata.EventHandler.TagHelperKind, "oncopy", "Microsoft.AspNetCore.Components");
+            builder = TagHelperDescriptorBuilder.Create(TagHelperKind.EventHandler, "oncopy", "Microsoft.AspNetCore.Components");
             builder.SetMetadata(
                 new KeyValuePair<string, string>(ComponentMetadata.EventHandler.EventArgsType, "Microsoft.AspNetCore.Components.Web.ClipboardEventArgs"));
 
             yield return builder.Build();
 
-            builder = TagHelperDescriptorBuilder.Create(ComponentMetadata.Ref.TagHelperKind, "ref", "Microsoft.AspNetCore.Components");
+            builder = TagHelperDescriptorBuilder.Create(TagHelperKind.Ref, "ref", "Microsoft.AspNetCore.Components");
 
             yield return builder.Build();
 
@@ -327,7 +327,7 @@ public abstract class CodeActionEndToEndTestBase(ITestOutputHelper testOutput) :
             // {
             //     void OnDragStart(<Microsoft.AspNetCore.Components.Web.DragEventArgs<string> args) {}
             // }
-            builder = TagHelperDescriptorBuilder.Create(ComponentMetadata.Component.TagHelperKind, "TestGenericComponent", "Microsoft.AspNetCore.Components");
+            builder = TagHelperDescriptorBuilder.Create(TagHelperKind.Component, "TestGenericComponent", "Microsoft.AspNetCore.Components");
             builder.BoundAttributeDescriptor(configure => configure
                 .Name("OnDragStart")
                 .TypeName("System.Action<Microsoft.AspNetCore.Components.Web.DragEventArgs<TItem>>")
@@ -351,7 +351,7 @@ public abstract class CodeActionEndToEndTestBase(ITestOutputHelper testOutput) :
             // {
             //     void OnDragStart(<Microsoft.AspNetCore.Components.Web.DragEventArgs args) {}
             // }
-            builder = TagHelperDescriptorBuilder.Create(ComponentMetadata.Component.TagHelperKind, "TestComponent", "Microsoft.AspNetCore.Components");
+            builder = TagHelperDescriptorBuilder.Create(TagHelperKind.Component, "TestComponent", "Microsoft.AspNetCore.Components");
             builder.BoundAttributeDescriptor(configure => configure
                 .Name("OnDragStart")
                 .TypeName("System.Action<Microsoft.AspNetCore.Components.Web.DragEventArgs>")
