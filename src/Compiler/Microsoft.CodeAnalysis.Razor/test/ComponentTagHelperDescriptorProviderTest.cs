@@ -914,7 +914,7 @@ namespace Test
         Assert.True(attribute.IsChildContentProperty());
         Assert.False(attribute.IsParameterizedChildContentProperty());
 
-        var childContent = Assert.Single(components, c => c.IsChildContentTagHelper);
+        var childContent = Assert.Single(components, c => c.Kind == TagHelperKind.ChildContent);
 
         Assert.Equal("TestAssembly", childContent.AssemblyName);
         Assert.Equal("Test.MyComponent.ChildContent2", childContent.Name);
@@ -979,7 +979,7 @@ namespace Test
                 Assert.True(a.IsChildContentParameterNameProperty());
             });
 
-        var childContent = Assert.Single(components, c => c.IsChildContentTagHelper);
+        var childContent = Assert.Single(components, c => c.Kind == TagHelperKind.ChildContent);
 
         Assert.Equal("TestAssembly", childContent.AssemblyName);
         Assert.Equal("Test.MyComponent.ChildContent2", childContent.Name);
@@ -1052,7 +1052,7 @@ namespace Test
                 Assert.False(a.IsChildContentParameterNameProperty());
             });
 
-        var childContent = Assert.Single(components, c => c.IsChildContentTagHelper);
+        var childContent = Assert.Single(components, c => c.Kind == TagHelperKind.ChildContent);
 
         Assert.Equal("TestAssembly", childContent.AssemblyName);
         Assert.Equal("Test.MyComponent.ChildContent2", childContent.Name);
@@ -1131,7 +1131,7 @@ namespace Test
                 Assert.True(a.IsTypeParameterProperty());
             });
 
-        var childContent = Assert.Single(components, c => c.IsChildContentTagHelper);
+        var childContent = Assert.Single(components, c => c.Kind == TagHelperKind.ChildContent);
 
         Assert.Equal("TestAssembly", childContent.AssemblyName);
         Assert.Equal("Test.MyComponent<T>.ChildContent2", childContent.Name);
@@ -1211,7 +1211,7 @@ namespace Test
                 Assert.True(a.IsTypeParameterProperty());
             });
 
-        var childContent = Assert.Single(components, c => c.IsChildContentTagHelper);
+        var childContent = Assert.Single(components, c => c.Kind == TagHelperKind.ChildContent);
 
         Assert.Equal("TestAssembly", childContent.AssemblyName);
         Assert.Equal("Test.MyComponent<T>.ChildContent2", childContent.Name);
@@ -1291,7 +1291,7 @@ namespace Test
                 Assert.True(a.IsTypeParameterProperty());
             });
 
-        var childContent = Assert.Single(components, c => c.IsChildContentTagHelper);
+        var childContent = Assert.Single(components, c => c.Kind == TagHelperKind.ChildContent);
 
         Assert.Equal("TestAssembly", childContent.AssemblyName);
         Assert.Equal("Test.MyComponent<T>.ChildContent2", childContent.Name);
@@ -1375,7 +1375,7 @@ namespace Test
                 Assert.True(a.IsTypeParameterProperty());
             });
 
-        var childContent = Assert.Single(components, c => c.IsChildContentTagHelper);
+        var childContent = Assert.Single(components, c => c.Kind == TagHelperKind.ChildContent);
 
         Assert.Equal("TestAssembly", childContent.AssemblyName);
         Assert.Equal("Test.MyComponent<T>.ChildContent2", childContent.Name);
@@ -1455,7 +1455,7 @@ namespace Test
             });
 
 
-        var childContents = components.Where(c => c.IsChildContentTagHelper).OrderBy(c => c.Name);
+        var childContents = components.Where(c => c.Kind == TagHelperKind.ChildContent).OrderBy(c => c.Name);
         Assert.Collection(
             childContents,
             c => Assert.Equal("Test.MyComponent.ChildContent", c.Name),

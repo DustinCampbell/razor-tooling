@@ -370,7 +370,7 @@ internal sealed partial class DefaultRazorTagHelperContextDiscoveryPhase : Razor
                     continue;
                 }
 
-                if (tagHelper.IsChildContentTagHelper)
+                if (tagHelper.Kind == TagHelperKind.ChildContent)
                 {
                     // If this is a child content tag helper, we want to add it if it's original type is in scope.
                     // E.g, if the type name is `Test.MyComponent.ChildContent`, we want to add it if `Test.MyComponent` is in scope.
@@ -459,7 +459,7 @@ internal sealed partial class DefaultRazorTagHelperContextDiscoveryPhase : Razor
                         {
                             Debug.Assert(!tagHelper.UseFullyQualifiedNameMatch, "We've already processed these.");
 
-                            if (tagHelper.IsChildContentTagHelper)
+                            if (tagHelper.Kind == TagHelperKind.ChildContent)
                             {
                                 // If this is a child content tag helper, we want to add it if it's original type is in scope of the given namespace.
                                 // E.g, if the type name is `Test.MyComponent.ChildContent`, we want to add it if `Test.MyComponent` is in this namespace.
