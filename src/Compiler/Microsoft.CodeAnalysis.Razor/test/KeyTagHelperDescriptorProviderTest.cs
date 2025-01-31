@@ -33,7 +33,6 @@ public class KeyTagHelperDescriptorProviderTest : TagHelperDescriptorProviderTes
         Assert.Equal(TagHelperKind.Key, item.Kind);
         Assert.True(item.ClassifyAttributesOnly);
         Assert.Equal(RuntimeKind.None, item.Runtime);
-        Assert.False(item.IsComponentOrChildContentTagHelper);
         Assert.True(item.CaseSensitive);
 
         Assert.Equal(

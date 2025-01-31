@@ -75,7 +75,6 @@ namespace Test
         Assert.False(bind.HasErrors);
         Assert.Equal(TagHelperKind.Bind, bind.Kind);
         Assert.Equal(RuntimeKind.None, bind.Runtime);
-        Assert.False(bind.IsComponentOrChildContentTagHelper);
         Assert.True(bind.CaseSensitive);
 
         Assert.Equal("MyProperty", bind.Metadata[ComponentMetadata.Bind.ValueAttribute]);
@@ -297,7 +296,6 @@ namespace Test
         Assert.False(bind.HasErrors);
         Assert.Equal(TagHelperKind.Bind, bind.Kind);
         Assert.Equal(RuntimeKind.None, bind.Runtime);
-        Assert.False(bind.IsComponentOrChildContentTagHelper);
         Assert.True(bind.CaseSensitive);
 
         Assert.Equal("MyProperty", bind.Metadata[ComponentMetadata.Bind.ValueAttribute]);
@@ -475,7 +473,6 @@ namespace Test
         Assert.Equal(TagHelperKind.Bind, bind.Kind);
         Assert.True(bind.ClassifyAttributesOnly);
         Assert.Equal(RuntimeKind.None, bind.Runtime);
-        Assert.False(bind.IsComponentOrChildContentTagHelper);
         Assert.True(bind.CaseSensitive);
 
         Assert.Equal("myprop", bind.Metadata[ComponentMetadata.Bind.ValueAttribute]);
@@ -1100,7 +1097,6 @@ namespace Test
         Assert.Equal(TagHelperKind.Bind, bind.Kind);
         Assert.True(bind.ClassifyAttributesOnly);
         Assert.Equal(RuntimeKind.None, bind.Runtime);
-        Assert.False(bind.IsComponentOrChildContentTagHelper);
         Assert.True(bind.CaseSensitive);
 
         Assert.False(bind.Metadata.ContainsKey(ComponentMetadata.Bind.ValueAttribute));
