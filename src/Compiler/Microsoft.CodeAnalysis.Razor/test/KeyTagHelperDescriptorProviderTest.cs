@@ -66,7 +66,6 @@ public class KeyTagHelperDescriptorProviderTest : TagHelperDescriptorProviderTes
         Assert.Empty(attribute.Diagnostics);
         Assert.False(attribute.HasErrors);
         Assert.Equal(TagHelperKind.Key, attribute.Kind);
-        Assert.False(attribute.IsDefaultKind());
         Assert.False(attribute.HasIndexer);
         Assert.Null(attribute.IndexerNamePrefix);
         Assert.Null(attribute.IndexerTypeName);

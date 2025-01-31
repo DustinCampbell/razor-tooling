@@ -146,7 +146,6 @@ namespace Test
         Assert.Empty(attribute.Diagnostics);
         Assert.False(attribute.HasErrors);
         Assert.Equal(TagHelperKind.Bind, attribute.Kind);
-        Assert.False(attribute.IsDefaultKind());
         Assert.False(attribute.HasIndexer);
         Assert.Null(attribute.IndexerNamePrefix);
         Assert.Null(attribute.IndexerTypeName);
@@ -369,7 +368,6 @@ namespace Test
         Assert.Empty(attribute.Diagnostics);
         Assert.False(attribute.HasErrors);
         Assert.Equal(TagHelperKind.Bind, attribute.Kind);
-        Assert.False(attribute.IsDefaultKind());
         Assert.False(attribute.HasIndexer);
         Assert.Null(attribute.IndexerNamePrefix);
         Assert.Null(attribute.IndexerTypeName);
@@ -561,7 +559,6 @@ namespace Test
             Assert.Empty(attribute.Diagnostics);
             Assert.False(attribute.HasErrors);
             Assert.Equal(TagHelperKind.Bind, attribute.Kind);
-            Assert.False(attribute.IsDefaultKind());
             Assert.False(attribute.HasIndexer);
             Assert.Null(attribute.IndexerNamePrefix);
             Assert.Null(attribute.IndexerTypeName);
@@ -1149,7 +1146,6 @@ namespace Test
         Assert.Empty(attribute.Diagnostics);
         Assert.False(attribute.HasErrors);
         Assert.Equal(TagHelperKind.Bind, attribute.Kind);
-        Assert.False(attribute.IsDefaultKind());
         Assert.False(attribute.IsIndexerBooleanProperty);
         Assert.False(attribute.IsIndexerStringProperty);
 
