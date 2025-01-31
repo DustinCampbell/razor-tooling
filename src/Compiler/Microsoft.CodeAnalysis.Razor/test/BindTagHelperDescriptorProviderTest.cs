@@ -143,7 +143,6 @@ namespace Test
         // Invariants
         Assert.Empty(attribute.Diagnostics);
         Assert.False(attribute.HasErrors);
-        Assert.Equal(TagHelperKind.Bind, attribute.Kind);
         Assert.False(attribute.HasIndexer);
         Assert.Null(attribute.IndexerNamePrefix);
         Assert.Null(attribute.IndexerTypeName);
@@ -363,7 +362,6 @@ namespace Test
         // Invariants
         Assert.Empty(attribute.Diagnostics);
         Assert.False(attribute.HasErrors);
-        Assert.Equal(TagHelperKind.Bind, attribute.Kind);
         Assert.False(attribute.HasIndexer);
         Assert.Null(attribute.IndexerNamePrefix);
         Assert.Null(attribute.IndexerTypeName);
@@ -552,7 +550,6 @@ namespace Test
             // Invariants
             Assert.Empty(attribute.Diagnostics);
             Assert.False(attribute.HasErrors);
-            Assert.Equal(TagHelperKind.Bind, attribute.Kind);
             Assert.False(attribute.HasIndexer);
             Assert.Null(attribute.IndexerNamePrefix);
             Assert.Null(attribute.IndexerTypeName);
@@ -579,7 +576,6 @@ namespace Test
             // Invariants
             Assert.Empty(parameter.Diagnostics);
             Assert.False(parameter.HasErrors);
-            Assert.Equal(TagHelperKind.Bind, parameter.Kind);
 
             Assert.Equal(
                 "Specifies a format to convert the value specified by the '@bind' attribute. " +
@@ -601,7 +597,6 @@ namespace Test
             // Invariants
             Assert.Empty(parameter.Diagnostics);
             Assert.False(parameter.HasErrors);
-            Assert.Equal(TagHelperKind.Bind, parameter.Kind);
 
             Assert.Equal(
                 "Specifies the culture to use for conversions.",
@@ -622,7 +617,6 @@ namespace Test
             // Invariants
             Assert.Empty(parameter.Diagnostics);
             Assert.False(parameter.HasErrors);
-            Assert.Equal(TagHelperKind.Bind, parameter.Kind);
 
             Assert.Equal(
                 "Specifies the expression to use for binding the value to the attribute.",
@@ -643,7 +637,6 @@ namespace Test
             // Invariants
             Assert.Empty(parameter.Diagnostics);
             Assert.False(parameter.HasErrors);
-            Assert.Equal(TagHelperKind.Bind, parameter.Kind);
 
             Assert.Equal(
                 "Specifies the expression to use for updating the bound value when a new value is available.",
@@ -664,7 +657,6 @@ namespace Test
             // Invariants
             Assert.Empty(parameter.Diagnostics);
             Assert.False(parameter.HasErrors);
-            Assert.Equal(TagHelperKind.Bind, parameter.Kind);
 
             Assert.Equal(
                 "Specifies an action to run after the new value has been set.",
@@ -1137,7 +1129,6 @@ namespace Test
         // Invariants
         Assert.Empty(attribute.Diagnostics);
         Assert.False(attribute.HasErrors);
-        Assert.Equal(TagHelperKind.Bind, attribute.Kind);
         Assert.False(attribute.IsIndexerBooleanProperty);
         Assert.False(attribute.IsIndexerStringProperty);
 
@@ -1169,7 +1160,6 @@ namespace Test
         // Invariants
         Assert.Empty(parameter.Diagnostics);
         Assert.False(parameter.HasErrors);
-        Assert.Equal(TagHelperKind.Bind, parameter.Kind);
 
         Assert.Equal(
             "Specifies a format to convert the value specified by the corresponding bind attribute. " +
@@ -1193,7 +1183,6 @@ namespace Test
         // Invariants
         Assert.Empty(parameter.Diagnostics);
         Assert.False(parameter.HasErrors);
-        Assert.Equal(TagHelperKind.Bind, parameter.Kind);
 
         Assert.Equal(
             "Specifies the culture to use for conversions.",

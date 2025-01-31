@@ -12,7 +12,6 @@ public sealed partial class BoundAttributeParameterDescriptorBuilder : TagHelper
 {
     [AllowNull]
     private BoundAttributeDescriptorBuilder _parent;
-    private TagHelperKind _kind;
     private DocumentationObject _documentationObject;
     private MetadataCollection? _metadata;
 
@@ -20,10 +19,9 @@ public sealed partial class BoundAttributeParameterDescriptorBuilder : TagHelper
     {
     }
 
-    internal BoundAttributeParameterDescriptorBuilder(BoundAttributeDescriptorBuilder parent, TagHelperKind kind)
+    internal BoundAttributeParameterDescriptorBuilder(BoundAttributeDescriptorBuilder parent)
     {
         _parent = parent;
-        _kind = kind;
     }
 
     public string? Name { get; set; }
@@ -71,7 +69,6 @@ public sealed partial class BoundAttributeParameterDescriptorBuilder : TagHelper
         var flags = ComputeFlags(IsEnum, CaseSensitive, TypeName);
 
         return new BoundAttributeParameterDescriptor(
-            _kind,
             Name ?? string.Empty,
             TypeName ?? string.Empty,
             flags,

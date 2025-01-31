@@ -2431,7 +2431,7 @@ public class DefaultTagHelperDescriptorFactoryTest : TagHelperDescriptorProvider
         var tagHelperBuilder = new TagHelperDescriptorBuilder(TagHelperKind.Default, tagHelperTypeFullName.Split('.')[^1], "Test");
         tagHelperBuilder.Metadata(TypeName(tagHelperTypeFullName));
 
-        var attributeBuilder = new BoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperKind.Default);
+        var attributeBuilder = new BoundAttributeDescriptorBuilder(tagHelperBuilder);
         configure(attributeBuilder);
         return attributeBuilder.Build();
     }

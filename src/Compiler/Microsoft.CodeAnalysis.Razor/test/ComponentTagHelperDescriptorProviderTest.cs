@@ -99,7 +99,6 @@ namespace Test
         // Invariants
         Assert.Empty(attribute.Diagnostics);
         Assert.False(attribute.HasErrors);
-        Assert.Equal(TagHelperKind.Component, attribute.Kind);
 
         // Related to dictionaries/indexers, not supported currently, not sure if we ever will
         Assert.False(attribute.HasIndexer);
