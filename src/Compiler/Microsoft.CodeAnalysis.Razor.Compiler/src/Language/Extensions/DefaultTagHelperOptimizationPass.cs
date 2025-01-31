@@ -120,7 +120,7 @@ internal class DefaultTagHelperOptimizationPass : IntermediateNodePassBase, IRaz
 
     private void RewriteUsage(Context context, TagHelperIntermediateNode node, TagHelperDescriptor tagHelper)
     {
-        if (!tagHelper.IsDefaultKind())
+        if (tagHelper.Kind != TagHelperKind.Default)
         {
             return;
         }

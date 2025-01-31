@@ -41,11 +41,4 @@ public static class TagHelperDescriptorExtensions
         tagHelper.Metadata.TryGetValue(TagHelperMetadata.Common.TypeNameIdentifier, out var typeNameIdentifier);
         return typeNameIdentifier;
     }
-
-    public static bool IsDefaultKind(this TagHelperDescriptor tagHelper)
-    {
-        ArgHelper.ThrowIfNull(tagHelper);
-
-        return tagHelper.Kind == TagHelperKind.Default;
-    }
 }

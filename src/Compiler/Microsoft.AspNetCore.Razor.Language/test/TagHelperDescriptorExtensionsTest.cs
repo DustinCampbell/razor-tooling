@@ -36,30 +36,4 @@ public class TagHelperDescriptorExtensionsTest
         // Assert
         Assert.Null(typeName);
     }
-
-    [Fact]
-    public void IsDefaultKind_ReturnsTrue_IfKindIsDefault()
-    {
-        // Arrange
-        var descriptor = TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly").Build();
-
-        // Act
-        var isDefault = descriptor.IsDefaultKind();
-
-        // Assert
-        Assert.True(isDefault);
-    }
-
-    [Fact]
-    public void IsDefaultKind_ReturnsFalse_IfKindIsNotDefault()
-    {
-        // Arrange
-        var descriptor = TagHelperDescriptorBuilder.Create(TagHelperKind.Key, "TestTagHelper", "TestAssembly").Build();
-
-        // Act
-        var isDefault = descriptor.IsDefaultKind();
-
-        // Assert
-        Assert.False(isDefault);
-    }
 }
