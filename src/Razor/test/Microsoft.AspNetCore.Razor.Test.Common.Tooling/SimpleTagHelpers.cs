@@ -60,7 +60,7 @@ internal static class SimpleTagHelpers
             attribute.TypeName = typeof(int).FullName;
         });
 
-        var builder3 = TagHelperDescriptorBuilder.Create(ComponentMetadata.Component.TagHelperKind, "Component1TagHelper", "TestAssembly");
+        var builder3 = TagHelperDescriptorBuilder.Create(TagHelperKind.Component, "Component1TagHelper", "TestAssembly");
         builder3.TagMatchingRule(rule => rule.TagName = "Component1");
         builder3.UseFullyQualifiedNameMatch = true;
         builder3.SetMetadata(
@@ -86,7 +86,7 @@ internal static class SimpleTagHelpers
             attribute.TypeName = typeof(string).FullName;
         });
 
-        var textComponent = TagHelperDescriptorBuilder.Create(ComponentMetadata.Component.TagHelperKind, "TextTagHelper", "TestAssembly");
+        var textComponent = TagHelperDescriptorBuilder.Create(TagHelperKind.Component, "TextTagHelper", "TestAssembly");
         textComponent.TagMatchingRule(rule => rule.TagName = "Text");
         textComponent.UseFullyQualifiedNameMatch = true;
         textComponent.SetMetadata(
@@ -94,7 +94,7 @@ internal static class SimpleTagHelpers
             TypeNamespace("System"),
             TypeNameIdentifier("Text"));
 
-        var directiveAttribute1 = TagHelperDescriptorBuilder.Create(ComponentMetadata.Component.TagHelperKind, "TestDirectiveAttribute", "TestAssembly");
+        var directiveAttribute1 = TagHelperDescriptorBuilder.Create(TagHelperKind.Component, "TestDirectiveAttribute", "TestAssembly");
         directiveAttribute1.TagMatchingRule(rule =>
         {
             rule.TagName = "*";
@@ -133,7 +133,7 @@ internal static class SimpleTagHelpers
         directiveAttribute1.SetMetadata(
             TypeName("TestDirectiveAttribute"));
 
-        var directiveAttribute2 = TagHelperDescriptorBuilder.Create(ComponentMetadata.Component.TagHelperKind, "MinimizedDirectiveAttribute", "TestAssembly");
+        var directiveAttribute2 = TagHelperDescriptorBuilder.Create(TagHelperKind.Component, "MinimizedDirectiveAttribute", "TestAssembly");
         directiveAttribute2.TagMatchingRule(rule =>
         {
             rule.TagName = "*";
@@ -172,7 +172,7 @@ internal static class SimpleTagHelpers
         directiveAttribute2.SetMetadata(
             TypeName("TestDirectiveAttribute"));
 
-        var directiveAttribute3 = TagHelperDescriptorBuilder.Create(ComponentMetadata.EventHandler.TagHelperKind, "OnClickDirectiveAttribute", "TestAssembly");
+        var directiveAttribute3 = TagHelperDescriptorBuilder.Create(TagHelperKind.EventHandler, "OnClickDirectiveAttribute", "TestAssembly");
         directiveAttribute3.TagMatchingRule(rule =>
         {
             rule.TagName = "*";

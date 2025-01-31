@@ -61,7 +61,7 @@ namespace Test
         // here and then ignoring them.
         Assert.Empty(component.Diagnostics);
         Assert.False(component.HasErrors);
-        Assert.Equal(ComponentMetadata.Component.TagHelperKind, component.Kind);
+        Assert.Equal(TagHelperKind.Component, component.Kind);
         Assert.False(component.IsDefaultKind());
         Assert.True(component.IsComponentOrChildContentTagHelper);
         Assert.True(component.CaseSensitive);
@@ -101,7 +101,7 @@ namespace Test
         // Invariants
         Assert.Empty(attribute.Diagnostics);
         Assert.False(attribute.HasErrors);
-        Assert.Equal("Components.Component", attribute.Kind);
+        Assert.Equal(TagHelperKind.Component, attribute.Kind);
         Assert.False(attribute.IsDefaultKind());
 
         // Related to dictionaries/indexers, not supported currently, not sure if we ever will

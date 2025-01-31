@@ -41,7 +41,7 @@ internal sealed class FormNameTagHelperDescriptorProvider() : TagHelperDescripto
     private static TagHelperDescriptor CreateFormNameTagHelper()
     {
         using var _ = TagHelperDescriptorBuilder.GetPooledInstance(
-            kind: ComponentMetadata.FormName.TagHelperKind,
+            kind: TagHelperKind.FormName,
             name: "FormName",
             assemblyName: ComponentsApi.AssemblyName,
             builder: out var builder);

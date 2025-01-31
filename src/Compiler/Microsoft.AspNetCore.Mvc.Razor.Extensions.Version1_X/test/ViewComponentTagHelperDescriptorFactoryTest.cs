@@ -26,7 +26,7 @@ public class ViewComponentTagHelperDescriptorFactoryTest
         var factory = new ViewComponentTagHelperDescriptorFactory(testCompilation);
 
         var expectedDescriptor = TagHelperDescriptorBuilder.Create(
-            ViewComponentTagHelperConventions.Kind,
+            TagHelperKind.ViewComponent,
             "__Generated__StringParameterViewComponentTagHelper",
             typeof(StringParameterViewComponent).GetTypeInfo().Assembly.GetName().Name)
             .Metadata(
@@ -68,7 +68,7 @@ public class ViewComponentTagHelperDescriptorFactoryTest
         var factory = new ViewComponentTagHelperDescriptorFactory(testCompilation);
 
         var expectedDescriptor = TagHelperDescriptorBuilder.Create(
-            ViewComponentTagHelperConventions.Kind,
+            TagHelperKind.ViewComponent,
             "__Generated__VariousParameterViewComponentTagHelper",
             typeof(VariousParameterViewComponent).GetTypeInfo().Assembly.GetName().Name)
             .Metadata(
@@ -118,7 +118,7 @@ public class ViewComponentTagHelperDescriptorFactoryTest
         var factory = new ViewComponentTagHelperDescriptorFactory(testCompilation);
 
         var expectedDescriptor = TagHelperDescriptorBuilder.Create(
-            ViewComponentTagHelperConventions.Kind,
+            TagHelperKind.ViewComponent,
             "__Generated__GenericParameterViewComponentTagHelper",
             typeof(GenericParameterViewComponent).GetTypeInfo().Assembly.GetName().Name)
             .Metadata(

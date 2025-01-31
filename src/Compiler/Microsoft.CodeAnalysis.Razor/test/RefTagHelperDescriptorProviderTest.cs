@@ -30,7 +30,7 @@ public class RefTagHelperDescriptorProviderTest : TagHelperDescriptorProviderTes
         Assert.Null(item.TagOutputHint);
         Assert.Empty(item.Diagnostics);
         Assert.False(item.HasErrors);
-        Assert.Equal(ComponentMetadata.Ref.TagHelperKind, item.Kind);
+        Assert.Equal(TagHelperKind.Ref, item.Kind);
         Assert.True(item.ClassifyAttributesOnly);
         Assert.Equal(RuntimeKind.None, item.Runtime);
         Assert.False(item.IsDefaultKind());
@@ -65,7 +65,7 @@ public class RefTagHelperDescriptorProviderTest : TagHelperDescriptorProviderTes
         var attribute = Assert.Single(item.BoundAttributes);
         Assert.Empty(attribute.Diagnostics);
         Assert.False(attribute.HasErrors);
-        Assert.Equal(ComponentMetadata.Ref.TagHelperKind, attribute.Kind);
+        Assert.Equal(TagHelperKind.Ref, attribute.Kind);
         Assert.False(attribute.IsDefaultKind());
         Assert.False(attribute.HasIndexer);
         Assert.Null(attribute.IndexerNamePrefix);

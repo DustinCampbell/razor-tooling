@@ -243,7 +243,7 @@ public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
         // Arrange
         ImmutableArray<TagHelperDescriptor> descriptors =
         [
-            TagHelperDescriptorBuilder.Create(ComponentMetadata.EventHandler.TagHelperKind, "InputTagHelper1", "SomeAssembly")
+            TagHelperDescriptorBuilder.Create(TagHelperKind.EventHandler, "InputTagHelper1", "SomeAssembly")
                 .TagMatchingRuleDescriptor(rule =>
                 {
                     rule
@@ -267,7 +267,7 @@ public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
         // Arrange
         ImmutableArray<TagHelperDescriptor> descriptors =
         [
-            TagHelperDescriptorBuilder.Create(ComponentMetadata.EventHandler.TagHelperKind, "InputTagHelper1", "SomeAssembly")
+            TagHelperDescriptorBuilder.Create(TagHelperKind.EventHandler, "InputTagHelper1", "SomeAssembly")
                 .TagMatchingRuleDescriptor(rule =>
                 {
                     rule
@@ -2442,7 +2442,7 @@ public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
         var document = @"<input @bind-value=""Message"" @bind-value:event=""onchange"" />";
         ImmutableArray<TagHelperDescriptor> descriptors =
         [
-            TagHelperDescriptorBuilder.Create(ComponentMetadata.Bind.TagHelperKind, "Bind", ComponentsApi.AssemblyName)
+            TagHelperDescriptorBuilder.Create(TagHelperKind.Bind, "Bind", ComponentsApi.AssemblyName)
                 .ClassifyAttributesOnly()
                 .Runtime(RuntimeKind.None)
                 .Metadata(
@@ -2486,7 +2486,7 @@ public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
         var document = @"<input @bind-foo @bind-foo:param />";
         ImmutableArray<TagHelperDescriptor> descriptors =
         [
-            TagHelperDescriptorBuilder.Create(ComponentMetadata.Bind.TagHelperKind, "Bind", ComponentsApi.AssemblyName)
+            TagHelperDescriptorBuilder.Create(TagHelperKind.Bind, "Bind", ComponentsApi.AssemblyName)
                 .ClassifyAttributesOnly()
                 .Runtime(RuntimeKind.None)
                 .Metadata(

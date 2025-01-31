@@ -69,7 +69,7 @@ internal static partial class ObjectReaders
         }
 #endif
 
-        var kind = reader.ReadNonNullString(nameof(TagHelperDescriptor.Kind));
+        var kind = (TagHelperKind)reader.ReadInt32OrDefault(nameof(TagHelperDescriptor.Kind), (int)TagHelperKind.Default);
         var name = reader.ReadNonNullString(nameof(TagHelperDescriptor.Name));
         var assemblyName = reader.ReadNonNullString(nameof(TagHelperDescriptor.AssemblyName));
         var flags = (TagHelperFlags)reader.ReadInt32OrDefault(nameof(TagHelperDescriptor.Flags), (int)TagHelperFlags.Default);
@@ -87,7 +87,7 @@ internal static partial class ObjectReaders
         var diagnostics = reader.ReadImmutableArrayOrEmpty(nameof(TagHelperDescriptor.Diagnostics), ReadDiagnostic);
 
         tagHelper = new TagHelperDescriptor(
-            Cached(kind), Cached(name), Cached(assemblyName), flags, runtime,
+            kind, Cached(name), Cached(assemblyName), flags, runtime,
             Cached(displayName)!, documentationObject, Cached(tagOutputHint),
             tagMatchingRules, boundAttributes, allowedChildTags,
             metadata, diagnostics);
@@ -148,7 +148,7 @@ internal static partial class ObjectReaders
 
             static BoundAttributeDescriptor ReadFromProperties(JsonDataReader reader)
             {
-                var kind = reader.ReadNonNullString(nameof(BoundAttributeDescriptor.Kind));
+                var kind = (TagHelperKind)reader.ReadInt32OrDefault(nameof(BoundAttributeDescriptor.Kind), (int)TagHelperKind.Default);
                 var name = reader.ReadString(nameof(BoundAttributeDescriptor.Name));
                 var typeName = reader.ReadNonNullString(nameof(BoundAttributeDescriptor.TypeName));
                 var flags = (BoundAttributeFlags)reader.ReadInt32OrDefault(nameof(BoundAttributeDescriptor.Flags), (int)BoundAttributeFlags.Default);
@@ -163,7 +163,7 @@ internal static partial class ObjectReaders
                 var diagnostics = reader.ReadImmutableArrayOrEmpty(nameof(BoundAttributeDescriptor.Diagnostics), ReadDiagnostic);
 
                 return new BoundAttributeDescriptor(
-                    Cached(kind), Cached(name)!, Cached(typeName), flags,
+                    kind, Cached(name)!, Cached(typeName), flags,
                     Cached(indexerNamePrefix), Cached(indexerTypeName),
                     documentationObject, Cached(displayName), Cached(containingType),
                     parameters, metadata, diagnostics);
@@ -176,7 +176,7 @@ internal static partial class ObjectReaders
 
             static BoundAttributeParameterDescriptor ReadFromProperties(JsonDataReader reader)
             {
-                var kind = reader.ReadNonNullString(nameof(BoundAttributeParameterDescriptor.Kind));
+                var kind = (TagHelperKind)reader.ReadInt32OrDefault(nameof(BoundAttributeParameterDescriptor.Kind), (int)TagHelperKind.Default);
                 var name = reader.ReadString(nameof(BoundAttributeParameterDescriptor.Name));
                 var typeName = reader.ReadNonNullString(nameof(BoundAttributeParameterDescriptor.TypeName));
                 var flags = (BoundAttributeParameterFlags)reader.ReadInt32OrDefault(nameof(BoundAttributeParameterDescriptor.Flags), (int)BoundAttributeParameterFlags.Default);
@@ -187,7 +187,7 @@ internal static partial class ObjectReaders
                 var diagnostics = reader.ReadImmutableArrayOrEmpty(nameof(BoundAttributeParameterDescriptor.Diagnostics), ReadDiagnostic);
 
                 return new BoundAttributeParameterDescriptor(
-                    Cached(kind), Cached(name)!, Cached(typeName), flags,
+                    kind, Cached(name)!, Cached(typeName), flags,
                     documentationObject, Cached(displayName),
                     metadata, diagnostics);
             }

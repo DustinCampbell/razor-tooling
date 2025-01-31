@@ -27,7 +27,7 @@ internal static class TagHelperDescriptorExtensions
 
     public static bool IsBindTagHelper(this TagHelperDescriptor tagHelper)
     {
-        return tagHelper.Kind == ComponentMetadata.Bind.TagHelperKind;
+        return tagHelper.Kind == TagHelperKind.Bind;
     }
 
     public static bool IsFallbackBindTagHelper(this TagHelperDescriptor tagHelper)
@@ -40,7 +40,7 @@ internal static class TagHelperDescriptorExtensions
 
     public static bool IsFormNameTagHelper(this TagHelperDescriptor tagHelper)
     {
-        return tagHelper.Kind == ComponentMetadata.FormName.TagHelperKind;
+        return tagHelper.Kind == TagHelperKind.FormName;
     }
 
     public static bool IsGenericTypedComponent(this TagHelperDescriptor tagHelper)
@@ -165,27 +165,27 @@ internal static class TagHelperDescriptorExtensions
 
     public static bool IsEventHandlerTagHelper(this TagHelperDescriptor tagHelper)
     {
-        return tagHelper.Kind == ComponentMetadata.EventHandler.TagHelperKind;
+        return tagHelper.Kind == TagHelperKind.EventHandler;
     }
 
     public static bool IsKeyTagHelper(this TagHelperDescriptor tagHelper)
     {
-        return tagHelper.Kind == ComponentMetadata.Key.TagHelperKind;
+        return tagHelper.Kind == TagHelperKind.Key;
     }
 
     public static bool IsSplatTagHelper(this TagHelperDescriptor tagHelper)
     {
-        return tagHelper.Kind == ComponentMetadata.Splat.TagHelperKind;
+        return tagHelper.Kind == TagHelperKind.Splat;
     }
 
     public static bool IsRefTagHelper(this TagHelperDescriptor tagHelper)
     {
-        return tagHelper.Kind == ComponentMetadata.Ref.TagHelperKind;
+        return tagHelper.Kind == TagHelperKind.Ref;
     }
 
     public static bool IsRenderModeTagHelper(this TagHelperDescriptor tagHelper)
     {
-        return tagHelper.Kind == ComponentMetadata.RenderMode.TagHelperKind;
+        return tagHelper.Kind == TagHelperKind.RenderMode;
     }
 
     public static string GetEventArgsType(this TagHelperDescriptor tagHelper)

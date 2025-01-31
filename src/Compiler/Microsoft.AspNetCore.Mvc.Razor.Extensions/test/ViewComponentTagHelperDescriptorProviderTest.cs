@@ -35,7 +35,7 @@ public class ViewComponentTagHelperDescriptorProviderTest
         };
 
         var expectedDescriptor = TagHelperDescriptorBuilder.Create(
-            ViewComponentTagHelperConventions.Kind,
+            TagHelperKind.ViewComponent,
             "__Generated__StringParameterViewComponentTagHelper",
             TestCompilation.AssemblyName)
             .Metadata(
