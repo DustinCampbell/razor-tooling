@@ -92,7 +92,7 @@ public static class TestTagHelperDescriptorBuilderExtensions
         return builder;
     }
 
-    public static TagHelperDescriptorBuilder Runtime(this TagHelperDescriptorBuilder builder, string runtime)
+    public static TagHelperDescriptorBuilder Runtime(this TagHelperDescriptorBuilder builder, RuntimeKind runtime)
     {
         ArgHelper.ThrowIfNull(builder);
 

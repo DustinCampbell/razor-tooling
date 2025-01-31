@@ -2221,7 +2221,7 @@ public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
         [
             TagHelperDescriptorBuilder.Create(ComponentMetadata.Bind.TagHelperKind, "Bind", ComponentsApi.AssemblyName)
                 .ClassifyAttributesOnly()
-                .Runtime(ComponentMetadata.Bind.RuntimeName)
+                .Runtime(RuntimeKind.None)
                 .Metadata(
                     TypeName("Microsoft.AspNetCore.Components.Bind"),
                     MakeTrue(ComponentMetadata.Bind.FallbackKey))
@@ -2265,7 +2265,7 @@ public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
         [
             TagHelperDescriptorBuilder.Create(ComponentMetadata.Bind.TagHelperKind, "Bind", ComponentsApi.AssemblyName)
                 .ClassifyAttributesOnly()
-                .Runtime(ComponentMetadata.Bind.RuntimeName)
+                .Runtime(RuntimeKind.None)
                 .Metadata(
                     TypeName("Microsoft.AspNetCore.Components.Bind"),
                     MakeTrue(ComponentMetadata.Bind.FallbackKey))

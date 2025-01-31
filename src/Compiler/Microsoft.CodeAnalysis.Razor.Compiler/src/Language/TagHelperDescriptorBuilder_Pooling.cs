@@ -21,6 +21,7 @@ public partial class TagHelperDescriptorBuilder
         builder._kind = kind ?? throw new ArgumentNullException(nameof(kind));
         builder._name = name ?? throw new ArgumentNullException(nameof(name));
         builder._assemblyName = assemblyName ?? throw new ArgumentNullException(nameof(assemblyName));
+        builder.Runtime = RuntimeKind.Default;
 
         return builder;
     }
@@ -33,7 +34,7 @@ public partial class TagHelperDescriptorBuilder
         _documentationObject = default;
 
         DisplayName = null;
-        Runtime = null;
+        Runtime = RuntimeKind.Default;
         TagOutputHint = null;
         CaseSensitive = false;
         ClassifyAttributesOnly = false;

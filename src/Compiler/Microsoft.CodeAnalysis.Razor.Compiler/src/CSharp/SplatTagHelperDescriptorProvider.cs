@@ -41,7 +41,7 @@ internal sealed class SplatTagHelperDescriptorProvider : TagHelperDescriptorProv
             ComponentMetadata.Splat.TagHelperKind, "Attributes", ComponentsApi.AssemblyName,
             out var builder);
 
-        builder.Runtime = ComponentMetadata.Splat.RuntimeName;
+        builder.Runtime = RuntimeKind.None;
         builder.CaseSensitive = true;
         builder.ClassifyAttributesOnly = true;
         builder.SetDocumentation(DocumentationDescriptor.SplatTagHelper);

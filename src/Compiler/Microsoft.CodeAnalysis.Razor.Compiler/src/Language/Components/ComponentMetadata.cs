@@ -42,8 +42,6 @@ internal static class ComponentMetadata
 
     public static class Bind
     {
-        public const string RuntimeName = "Components.None";
-
         public const string TagHelperKind = "Components.Bind";
 
         public const string BindAttributeGetSet = "Components.Bind.AlternativeNotation";
@@ -83,8 +81,6 @@ internal static class ComponentMetadata
 
     public static class ChildContent
     {
-        public const string RuntimeName = "Components.None";
-
         public const string TagHelperKind = "Components.ChildContent";
 
         public const string ParameterNameBoundAttributeKind = "Components.ChildContentParameterName";
@@ -113,8 +109,6 @@ internal static class ComponentMetadata
         public const string EventCallbackKey = "Components.EventCallback";
 
         public const string WeaklyTypedKey = "Components.IsWeaklyTyped";
-
-        public const string RuntimeName = "Components.IComponent";
 
         public const string TagHelperKind = "Components.Component";
 
@@ -145,42 +139,31 @@ internal static class ComponentMetadata
     {
         public const string EventArgsType = "Components.EventHandler.EventArgs";
 
-        public const string RuntimeName = "Components.None";
-
         public const string TagHelperKind = "Components.EventHandler";
     }
 
     public static class FormName
     {
         public const string TagHelperKind = "Components.FormName";
-        public const string RuntimeName = "Components.None";
     }
 
     public static class Key
     {
         public const string TagHelperKind = "Components.Key";
-
-        public const string RuntimeName = "Components.None";
     }
 
     public static class Splat
     {
         public const string TagHelperKind = "Components.Splat";
-
-        public const string RuntimeName = "Components.None";
     }
 
     public static class Ref
     {
         public const string TagHelperKind = "Components.Ref";
-
-        public const string RuntimeName = "Components.None";
     }
 
     public static class RenderMode
     {
         public const string TagHelperKind = "Components.RenderMode";
-
-        public const string RuntimeName = "Components.None";
     }
 }

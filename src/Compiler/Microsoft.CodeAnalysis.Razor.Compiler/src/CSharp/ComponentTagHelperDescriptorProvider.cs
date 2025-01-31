@@ -98,7 +98,7 @@ internal sealed class ComponentTagHelperDescriptorProvider : TagHelperDescriptor
 
             // This opts out this 'component' tag helper for any processing that's specific to the default
             // Razor ITagHelper runtime.
-            builder.Runtime = ComponentMetadata.Component.RuntimeName;
+            builder.Runtime = RuntimeKind.IComponent;
 
             using var metadata = new MetadataBuilder();
 
@@ -502,7 +502,7 @@ internal sealed class ComponentTagHelperDescriptorProvider : TagHelperDescriptor
 
             // This opts out this 'component' tag helper for any processing that's specific to the default
             // Razor ITagHelper runtime.
-            builder.Runtime = ComponentMetadata.ChildContent.RuntimeName;
+            builder.Runtime = RuntimeKind.None;
 
             using var metadata = new MetadataBuilder();
 

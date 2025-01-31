@@ -27,10 +27,12 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
         _kind = kind ?? throw new ArgumentNullException(nameof(kind));
         _name = name ?? throw new ArgumentNullException(nameof(name));
         _assemblyName = assemblyName ?? throw new ArgumentNullException(nameof(assemblyName));
+
+        Runtime = RuntimeKind.Default;
     }
 
     public static TagHelperDescriptorBuilder Create(string name, string assemblyName)
-        => new( TagHelperConventions.DefaultKind, name, assemblyName);
+        => new(TagHelperConventions.DefaultKind, name, assemblyName);
 
     public static TagHelperDescriptorBuilder Create(string kind, string name, string assemblyName)
         => new(kind, name, assemblyName);
@@ -38,7 +40,7 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
     public string Kind => _kind.AssumeNotNull();
     public string Name => _name.AssumeNotNull();
     public string AssemblyName => _assemblyName.AssumeNotNull();
-    public string? Runtime { get; set; }
+    public RuntimeKind Runtime { get; set; }
     public string? DisplayName { get; set; }
     public string? TagOutputHint { get; set; }
     public bool CaseSensitive { get; set; }
@@ -129,7 +131,7 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
             Name,
             AssemblyName,
             ComputeFlags(),
-            Runtime ?? TagHelperConventions.DefaultKind,
+            Runtime,
             GetDisplayName(),
             _documentationObject,
             TagOutputHint,

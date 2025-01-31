@@ -74,7 +74,7 @@ namespace Test
         Assert.Empty(bind.Diagnostics);
         Assert.False(bind.HasErrors);
         Assert.Equal(ComponentMetadata.Bind.TagHelperKind, bind.Kind);
-        Assert.Equal(ComponentMetadata.Bind.RuntimeName, bind.Runtime);
+        Assert.Equal(RuntimeKind.None, bind.Runtime);
         Assert.False(bind.IsDefaultKind());
         Assert.False(bind.KindUsesDefaultTagHelperRuntime());
         Assert.False(bind.IsComponentOrChildContentTagHelper);
@@ -299,7 +299,7 @@ namespace Test
         Assert.Empty(bind.Diagnostics);
         Assert.False(bind.HasErrors);
         Assert.Equal(ComponentMetadata.Bind.TagHelperKind, bind.Kind);
-        Assert.Equal(ComponentMetadata.Bind.RuntimeName, bind.Runtime);
+        Assert.Equal(RuntimeKind.None, bind.Runtime);
         Assert.False(bind.IsDefaultKind());
         Assert.False(bind.KindUsesDefaultTagHelperRuntime());
         Assert.False(bind.IsComponentOrChildContentTagHelper);
@@ -480,7 +480,7 @@ namespace Test
         Assert.False(bind.HasErrors);
         Assert.Equal(ComponentMetadata.Bind.TagHelperKind, bind.Kind);
         Assert.True(bind.ClassifyAttributesOnly);
-        Assert.Equal(ComponentMetadata.Bind.RuntimeName, bind.Runtime);
+        Assert.Equal(RuntimeKind.None, bind.Runtime);
         Assert.False(bind.IsDefaultKind());
         Assert.False(bind.KindUsesDefaultTagHelperRuntime());
         Assert.False(bind.IsComponentOrChildContentTagHelper);
@@ -1113,7 +1113,7 @@ namespace Test
         Assert.False(bind.HasErrors);
         Assert.Equal(ComponentMetadata.Bind.TagHelperKind, bind.Kind);
         Assert.True(bind.ClassifyAttributesOnly);
-        Assert.Equal(ComponentMetadata.Bind.RuntimeName, bind.Runtime);
+        Assert.Equal(RuntimeKind.None, bind.Runtime);
         Assert.False(bind.IsDefaultKind());
         Assert.False(bind.KindUsesDefaultTagHelperRuntime());
         Assert.False(bind.IsComponentOrChildContentTagHelper);

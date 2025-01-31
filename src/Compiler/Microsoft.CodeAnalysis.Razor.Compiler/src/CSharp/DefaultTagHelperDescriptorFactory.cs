@@ -48,7 +48,6 @@ internal class DefaultTagHelperDescriptorFactory
             typeName, assemblyName,
             out var descriptorBuilder);
 
-        descriptorBuilder.Runtime = TagHelperConventions.DefaultKind;
         descriptorBuilder.SetMetadata(
             TypeName(typeName),
             TypeNamespace(type.ContainingNamespace.ToDisplayString(SymbolExtensions.FullNameTypeDisplayFormat)),
