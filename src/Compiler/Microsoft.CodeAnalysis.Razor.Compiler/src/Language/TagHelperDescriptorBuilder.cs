@@ -155,11 +155,7 @@ public sealed partial class TagHelperDescriptorBuilder : TagHelperObjectBuilder<
             flags |= TagHelperFlags.ClassifyAttributesOnly;
         }
 
-        if (Kind == TagHelperKind.Component)
-        {
-            flags |= TagHelperFlags.IsComponent;
-        }
-        else if (Kind == TagHelperKind.ChildContent)
+        if (Kind == TagHelperKind.ChildContent)
         {
             flags |= TagHelperFlags.IsChildContent;
         }

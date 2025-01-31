@@ -14,15 +14,14 @@
     "TagHelpers": [
       {
         "__Checksum": {
-          "Data1": -5636900265901652861,
-          "Data2": 909250655029828351,
-          "Data3": -8995001620726393178,
-          "Data4": -4993591772527527536
+          "Data1": 5034809575259563490,
+          "Data2": -7301534214508950487,
+          "Data3": 1220746401563559805,
+          "Data4": -2780583661504771025
         },
         "Kind": 3,
         "Name": "blazorserver.Shared.SurveyPrompt",
         "AssemblyName": "blazorserver",
-        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "blazorserver.Shared.SurveyPrompt",
         "TagMatchingRules": [
@@ -48,15 +47,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -7113161346882588486,
-          "Data2": -7244114458717351546,
-          "Data3": 7213188232791965793,
-          "Data4": -3857970651015365531
+          "Data1": 1413323008512985259,
+          "Data2": 8796312427723544491,
+          "Data3": -184002722851113501,
+          "Data4": -1331992160680486319
         },
         "Kind": 3,
         "Name": "blazorserver.Shared.SurveyPrompt",
         "AssemblyName": "blazorserver",
-        "Flags": 7,
+        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "blazorserver.Shared.SurveyPrompt",
         "TagMatchingRules": [
@@ -82,15 +81,14 @@
       },
       {
         "__Checksum": {
-          "Data1": 5351966374178100114,
-          "Data2": 988644032113141075,
-          "Data3": -1593716900034435479,
-          "Data4": -3951872433261692869
+          "Data1": -7208521504041913509,
+          "Data2": 1511293734946756251,
+          "Data3": 8143624475242037826,
+          "Data4": 3388482096018628627
         },
         "Kind": 3,
         "Name": "blazorserver.Shared.MainLayout",
         "AssemblyName": "blazorserver",
-        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "blazorserver.Shared.MainLayout",
         "TagMatchingRules": [
@@ -117,15 +115,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -3715724298967986706,
-          "Data2": -8853239786794974581,
-          "Data3": 4177009505644921344,
-          "Data4": -517664482392726475
+          "Data1": 6542594356175483288,
+          "Data2": 6602664643960146775,
+          "Data3": 4384531042128356669,
+          "Data4": 4921082931593625843
         },
         "Kind": 3,
         "Name": "blazorserver.Shared.MainLayout",
         "AssemblyName": "blazorserver",
-        "Flags": 7,
+        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "blazorserver.Shared.MainLayout",
         "TagMatchingRules": [
@@ -152,15 +150,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 7284762274545349915,
-          "Data2": -6050317777280764101,
-          "Data3": -7511153119847905160,
-          "Data4": -4955444526312545432
+          "Data1": -972387155739988360,
+          "Data2": -5118139695018873534,
+          "Data3": 4007640589072944149,
+          "Data4": -2809914174676582250
         },
         "Kind": 2,
         "Name": "blazorserver.Shared.MainLayout.Body",
         "AssemblyName": "blazorserver",
-        "Flags": 9,
+        "Flags": 5,
         "Runtime": 0,
         "DisplayName": "blazorserver.Shared.MainLayout.Body",
         "Documentation": "\n            <summary>\n            Gets the content to be rendered inside the layout.\n            </summary>\n        ",
@@ -176,15 +174,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -926117566571702673,
-          "Data2": -5483933087099292997,
-          "Data3": 2420134521959218944,
-          "Data4": -7197473768083751744
+          "Data1": -4373014429668091565,
+          "Data2": 2653485769876922491,
+          "Data3": 5514362444547448200,
+          "Data4": 2193613357615477154
         },
         "Kind": 2,
         "Name": "blazorserver.Shared.MainLayout.Body",
         "AssemblyName": "blazorserver",
-        "Flags": 13,
+        "Flags": 7,
         "Runtime": 0,
         "DisplayName": "blazorserver.Shared.MainLayout.Body",
         "Documentation": "\n            <summary>\n            Gets the content to be rendered inside the layout.\n            </summary>\n        ",
@@ -200,15 +198,14 @@
       },
       {
         "__Checksum": {
-          "Data1": 2452727196491675668,
-          "Data2": 2699170824139294252,
-          "Data3": 7732253142029769946,
-          "Data4": -2021192682959474354
+          "Data1": 2768189661821597126,
+          "Data2": 395632021806221104,
+          "Data3": 1720320343018776487,
+          "Data4": 5264323938184505445
         },
         "Kind": 3,
         "Name": "blazorserver.Shared.NavMenu",
         "AssemblyName": "blazorserver",
-        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "blazorserver.Shared.NavMenu",
         "TagMatchingRules": [
@@ -222,15 +219,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 612440056633682650,
-          "Data2": -463570292099122259,
-          "Data3": -6476204178472791195,
-          "Data4": 1788268544582369618
+          "Data1": -214317226052391497,
+          "Data2": 3309390602047658348,
+          "Data3": 4131600745635944602,
+          "Data4": 1703221226653971433
         },
         "Kind": 3,
         "Name": "blazorserver.Shared.NavMenu",
         "AssemblyName": "blazorserver",
-        "Flags": 7,
+        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "blazorserver.Shared.NavMenu",
         "TagMatchingRules": [
@@ -244,15 +241,14 @@
       },
       {
         "__Checksum": {
-          "Data1": 4139036628478270811,
-          "Data2": -4349110227659523068,
-          "Data3": -1967463091617011556,
-          "Data4": -5965334953150073820
+          "Data1": 2130463070824817720,
+          "Data2": -419147122446504371,
+          "Data3": -7897658623011217580,
+          "Data4": -3298540042770018929
         },
         "Kind": 3,
         "Name": "blazorserver.Pages.Index",
         "AssemblyName": "blazorserver",
-        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "blazorserver.Pages.Index",
         "TagMatchingRules": [
@@ -266,15 +262,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -6863731866397723601,
-          "Data2": 7670422034267577589,
-          "Data3": -1466517421415422715,
-          "Data4": -1660831451107967464
+          "Data1": -8231877723254515183,
+          "Data2": -1346352706991225286,
+          "Data3": 3878714337214692398,
+          "Data4": 4699603033635510660
         },
         "Kind": 3,
         "Name": "blazorserver.Pages.Index",
         "AssemblyName": "blazorserver",
-        "Flags": 7,
+        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "blazorserver.Pages.Index",
         "TagMatchingRules": [
@@ -288,15 +284,14 @@
       },
       {
         "__Checksum": {
-          "Data1": 1492800095025105102,
-          "Data2": -3441587739522517752,
-          "Data3": 7211286826585616981,
-          "Data4": -8272496433737554478
+          "Data1": 7754128492909264285,
+          "Data2": 8892790650964369745,
+          "Data3": -4710984689897270440,
+          "Data4": -2621543026957713638
         },
         "Kind": 3,
         "Name": "blazorserver.Pages.Counter",
         "AssemblyName": "blazorserver",
-        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "blazorserver.Pages.Counter",
         "TagMatchingRules": [
@@ -321,15 +316,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -3148089982733777852,
-          "Data2": -2588589211086605910,
-          "Data3": -7910301632310822966,
-          "Data4": 8636809916186511681
+          "Data1": -2352822379184664665,
+          "Data2": -7666528136204024222,
+          "Data3": -5405601057265828965,
+          "Data4": -8368588062449537067
         },
         "Kind": 3,
         "Name": "blazorserver.Pages.Counter",
         "AssemblyName": "blazorserver",
-        "Flags": 7,
+        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "blazorserver.Pages.Counter",
         "TagMatchingRules": [
@@ -354,15 +349,14 @@
       },
       {
         "__Checksum": {
-          "Data1": 6779038410173324988,
-          "Data2": 1123468283236725134,
-          "Data3": 4562653328046971719,
-          "Data4": -4028750422780000115
+          "Data1": -4308728281246563890,
+          "Data2": 8884738146435258193,
+          "Data3": 261831895455556036,
+          "Data4": 5698669476391055756
         },
         "Kind": 3,
         "Name": "blazorserver.Pages.Component",
         "AssemblyName": "blazorserver",
-        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "blazorserver.Pages.Component",
         "TagMatchingRules": [
@@ -376,15 +370,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -6039676167258421712,
-          "Data2": -4136511849712008430,
-          "Data3": -3956003203548043076,
-          "Data4": 857162276953602052
+          "Data1": -2196944136537781947,
+          "Data2": 736604277423196881,
+          "Data3": -1773160647101071742,
+          "Data4": 6418547643690512435
         },
         "Kind": 3,
         "Name": "blazorserver.Pages.Component",
         "AssemblyName": "blazorserver",
-        "Flags": 7,
+        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "blazorserver.Pages.Component",
         "TagMatchingRules": [
@@ -398,15 +392,14 @@
       },
       {
         "__Checksum": {
-          "Data1": -8660233500460132377,
-          "Data2": 3752495211749455055,
-          "Data3": -1184459338841071069,
-          "Data4": 827966871550483687
+          "Data1": 3025923071886229941,
+          "Data2": -4109339029386484859,
+          "Data3": 7055813145728873610,
+          "Data4": -1592189510766373190
         },
         "Kind": 3,
         "Name": "blazorserver.Pages.Error",
         "AssemblyName": "blazorserver",
-        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "blazorserver.Pages.Error",
         "TagMatchingRules": [
@@ -420,15 +413,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -6948884699151970157,
-          "Data2": 7585665684242359873,
-          "Data3": -2470355973072682812,
-          "Data4": -5073024420752385928
+          "Data1": -3568100637148169312,
+          "Data2": 7143395864723825028,
+          "Data3": -7504589423595285937,
+          "Data4": 4614152730040929766
         },
         "Kind": 3,
         "Name": "blazorserver.Pages.Error",
         "AssemblyName": "blazorserver",
-        "Flags": 7,
+        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "blazorserver.Pages.Error",
         "TagMatchingRules": [
@@ -442,15 +435,14 @@
       },
       {
         "__Checksum": {
-          "Data1": -3623041282196965399,
-          "Data2": -5892809605809472163,
-          "Data3": 6127621305343422937,
-          "Data4": 7816886942150198761
+          "Data1": -9133180640329012412,
+          "Data2": 9041068267888557831,
+          "Data3": -3120941341258455710,
+          "Data4": 3292801327008190408
         },
         "Kind": 3,
         "Name": "blazorserver.Pages.Component1",
         "AssemblyName": "blazorserver",
-        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "blazorserver.Pages.Component1",
         "TagMatchingRules": [
@@ -464,15 +456,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -69159658674155666,
-          "Data2": -8800913099449196609,
-          "Data3": 5205399720609268011,
-          "Data4": 4081733878323870201
+          "Data1": -1994850146585275466,
+          "Data2": -6574995254985060519,
+          "Data3": 8876954984917300865,
+          "Data4": -9111656024844695641
         },
         "Kind": 3,
         "Name": "blazorserver.Pages.Component1",
         "AssemblyName": "blazorserver",
-        "Flags": 7,
+        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "blazorserver.Pages.Component1",
         "TagMatchingRules": [
@@ -486,15 +478,14 @@
       },
       {
         "__Checksum": {
-          "Data1": 1617388330890485276,
-          "Data2": 3623277982935372392,
-          "Data3": -2432012788584164703,
-          "Data4": -6431656947454599784
+          "Data1": 2023985032849499572,
+          "Data2": -4128226589087254927,
+          "Data3": 4968557651224988507,
+          "Data4": -5012244554808268772
         },
         "Kind": 3,
         "Name": "blazorserver.Pages.FetchData",
         "AssemblyName": "blazorserver",
-        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "blazorserver.Pages.FetchData",
         "TagMatchingRules": [
@@ -508,15 +499,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 2916968176507627455,
-          "Data2": -2985227362357943781,
-          "Data3": -3785712433949844624,
-          "Data4": -4107636440833654882
+          "Data1": -1419914900147956845,
+          "Data2": 6470410672585936843,
+          "Data3": 6533079292551584082,
+          "Data4": 1032037398876392475
         },
         "Kind": 3,
         "Name": "blazorserver.Pages.FetchData",
         "AssemblyName": "blazorserver",
-        "Flags": 7,
+        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "blazorserver.Pages.FetchData",
         "TagMatchingRules": [
@@ -530,15 +521,14 @@
       },
       {
         "__Checksum": {
-          "Data1": -3704234182775435879,
-          "Data2": 7472343696219317251,
-          "Data3": 1864713573189384218,
-          "Data4": 1279293854338825606
+          "Data1": -2025753596791712312,
+          "Data2": 6747714736121551852,
+          "Data3": -2472106368916373952,
+          "Data4": 5988686680572219901
         },
         "Kind": 3,
         "Name": "blazorserver.App",
         "AssemblyName": "blazorserver",
-        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "blazorserver.App",
         "TagMatchingRules": [
@@ -552,15 +542,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -4678357679738437106,
-          "Data2": -8620590903517777459,
-          "Data3": -7901812663688393769,
-          "Data4": -1559794002962227127
+          "Data1": -6607723145916588523,
+          "Data2": -1913393567335112996,
+          "Data3": 583212276096601786,
+          "Data4": -8781819257627770582
         },
         "Kind": 3,
         "Name": "blazorserver.App",
         "AssemblyName": "blazorserver",
-        "Flags": 7,
+        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "blazorserver.App",
         "TagMatchingRules": [
@@ -574,15 +564,14 @@
       },
       {
         "__Checksum": {
-          "Data1": 3869792511110589426,
-          "Data2": -9193392492292359923,
-          "Data3": 4016308486206460680,
-          "Data4": 8047491649248376159
+          "Data1": 7466863137155932010,
+          "Data2": 119214979922865557,
+          "Data3": 4529249058363297058,
+          "Data4": 7848229614635012514
         },
         "Kind": 3,
         "Name": "Microsoft.AspNetCore.Components.CascadingValue<TValue>",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "Microsoft.AspNetCore.Components.CascadingValue<TValue>",
         "Documentation": "\n            <summary>\n            A component that provides a cascading value to all descendant components.\n            </summary>\n        ",
@@ -655,15 +644,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -430673779090886695,
-          "Data2": -1883941529583370814,
-          "Data3": -245293861702468779,
-          "Data4": 1410793758749440185
+          "Data1": -9009238256680192681,
+          "Data2": -2751404174064475596,
+          "Data3": 6691928953528317339,
+          "Data4": -8033956973250430608
         },
         "Kind": 3,
         "Name": "Microsoft.AspNetCore.Components.CascadingValue<TValue>",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 7,
+        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "Microsoft.AspNetCore.Components.CascadingValue<TValue>",
         "Documentation": "\n            <summary>\n            A component that provides a cascading value to all descendant components.\n            </summary>\n        ",
@@ -736,15 +725,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -2298980259562861487,
-          "Data2": 5491899608470036845,
-          "Data3": 7412608381418360633,
-          "Data4": 9179861445202701198
+          "Data1": 2247349248434960451,
+          "Data2": 2929044753791467732,
+          "Data3": -68150588315063544,
+          "Data4": -8985470596061988313
         },
         "Kind": 2,
         "Name": "Microsoft.AspNetCore.Components.CascadingValue<TValue>.ChildContent",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 9,
+        "Flags": 5,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.CascadingValue<TValue>.ChildContent",
         "Documentation": "\n            <summary>\n            The content to which the value should be provided.\n            </summary>\n        ",
@@ -760,15 +749,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -1180796549525544855,
-          "Data2": 3009509191582546528,
-          "Data3": -6502011531937465976,
-          "Data4": 5675746103160767756
+          "Data1": -4818771279962369215,
+          "Data2": -9087868148917129034,
+          "Data3": 7128478068063564718,
+          "Data4": 3120806330993073354
         },
         "Kind": 2,
         "Name": "Microsoft.AspNetCore.Components.CascadingValue<TValue>.ChildContent",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 13,
+        "Flags": 7,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.CascadingValue<TValue>.ChildContent",
         "Documentation": "\n            <summary>\n            The content to which the value should be provided.\n            </summary>\n        ",
@@ -784,15 +773,14 @@
       },
       {
         "__Checksum": {
-          "Data1": 1991950854389229264,
-          "Data2": 2129843432903177251,
-          "Data3": 3154765327274001831,
-          "Data4": 8613090873034010984
+          "Data1": -3548705142172542828,
+          "Data2": 1863649311052341784,
+          "Data3": 6049696413345262354,
+          "Data4": 2597536135784899087
         },
         "Kind": 3,
         "Name": "Microsoft.AspNetCore.Components.LayoutView",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "Microsoft.AspNetCore.Components.LayoutView",
         "Documentation": "\n            <summary>\n            Displays the specified content inside the specified layout and any further\n            nested layouts.\n            </summary>\n        ",
@@ -830,15 +818,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -1421162902977641488,
-          "Data2": -632030405275825050,
-          "Data3": -1954308393538560111,
-          "Data4": -5711518611661170795
+          "Data1": 2425299517869192668,
+          "Data2": 6920293557350195288,
+          "Data3": 2547627003355829535,
+          "Data4": 1973144987538246178
         },
         "Kind": 3,
         "Name": "Microsoft.AspNetCore.Components.LayoutView",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 7,
+        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "Microsoft.AspNetCore.Components.LayoutView",
         "Documentation": "\n            <summary>\n            Displays the specified content inside the specified layout and any further\n            nested layouts.\n            </summary>\n        ",
@@ -876,15 +864,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 7515021465995020376,
-          "Data2": 7649095444997142191,
-          "Data3": -4617439919230097261,
-          "Data4": -7658769604686064589
+          "Data1": -8361393023841484804,
+          "Data2": -3140350360244313611,
+          "Data3": -8465322899531677699,
+          "Data4": 2010646010717472183
         },
         "Kind": 2,
         "Name": "Microsoft.AspNetCore.Components.LayoutView.ChildContent",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 9,
+        "Flags": 5,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.LayoutView.ChildContent",
         "Documentation": "\n            <summary>\n            Gets or sets the content to display.\n            </summary>\n        ",
@@ -900,15 +888,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 8795370387335063392,
-          "Data2": 6588717537327611096,
-          "Data3": 4250762655155334465,
-          "Data4": 7542201738258314275
+          "Data1": -5954745833568363949,
+          "Data2": 3476013175572975151,
+          "Data3": -2795247460687629989,
+          "Data4": 8171243840046964660
         },
         "Kind": 2,
         "Name": "Microsoft.AspNetCore.Components.LayoutView.ChildContent",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 13,
+        "Flags": 7,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.LayoutView.ChildContent",
         "Documentation": "\n            <summary>\n            Gets or sets the content to display.\n            </summary>\n        ",
@@ -924,15 +912,14 @@
       },
       {
         "__Checksum": {
-          "Data1": 8408142620620531886,
-          "Data2": -9089662801094729774,
-          "Data3": 4858856314490603447,
-          "Data4": 2956845818770105860
+          "Data1": 613162299541498121,
+          "Data2": 1586454282902511154,
+          "Data3": -4400981441487647299,
+          "Data4": -5766770236602076267
         },
         "Kind": 3,
         "Name": "Microsoft.AspNetCore.Components.RouteView",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "Microsoft.AspNetCore.Components.RouteView",
         "Documentation": "\n            <summary>\n            Displays the specified page component, rendering it inside its layout\n            and any further nested layouts.\n            </summary>\n        ",
@@ -969,15 +956,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -3715341663552465714,
-          "Data2": -4345162954780093915,
-          "Data3": 8101493415735238705,
-          "Data4": 904121104774759864
+          "Data1": 2592775748712544337,
+          "Data2": -6928993139958603408,
+          "Data3": -3089188877160629221,
+          "Data4": 7647539430992527728
         },
         "Kind": 3,
         "Name": "Microsoft.AspNetCore.Components.RouteView",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 7,
+        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "Microsoft.AspNetCore.Components.RouteView",
         "Documentation": "\n            <summary>\n            Displays the specified page component, rendering it inside its layout\n            and any further nested layouts.\n            </summary>\n        ",
@@ -1014,15 +1001,14 @@
       },
       {
         "__Checksum": {
-          "Data1": -7256447062192379076,
-          "Data2": -6324584421581744619,
-          "Data3": 6964882459651719493,
-          "Data4": 7204625255548713528
+          "Data1": 8344202714824502136,
+          "Data2": -4727514366141594302,
+          "Data3": 8749775512556780977,
+          "Data4": 4631263230986699801
         },
         "Kind": 3,
         "Name": "Microsoft.AspNetCore.Components.Routing.Router",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "Microsoft.AspNetCore.Components.Routing.Router",
         "Documentation": "\n            <summary>\n            A component that supplies route data corresponding to the current navigation state.\n            </summary>\n        ",
@@ -1093,15 +1079,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -2114831017669637468,
-          "Data2": 1974522476998918502,
-          "Data3": -1944196527451384326,
-          "Data4": 2101888311178574687
+          "Data1": 1782055874781991522,
+          "Data2": 1085378718147052028,
+          "Data3": 1795009559055943342,
+          "Data4": -3595724914482275369
         },
         "Kind": 3,
         "Name": "Microsoft.AspNetCore.Components.Routing.Router",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 7,
+        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "Microsoft.AspNetCore.Components.Routing.Router",
         "Documentation": "\n            <summary>\n            A component that supplies route data corresponding to the current navigation state.\n            </summary>\n        ",
@@ -1172,15 +1158,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -8461117162065591718,
-          "Data2": -7998275192481763675,
-          "Data3": -1819134046298195639,
-          "Data4": -9013844293846955398
+          "Data1": -4141244003466353102,
+          "Data2": -6675155622230154520,
+          "Data3": 433886237166220624,
+          "Data4": 1824031694642045767
         },
         "Kind": 2,
         "Name": "Microsoft.AspNetCore.Components.Routing.Router.Found",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 9,
+        "Flags": 5,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Routing.Router.Found",
         "Documentation": "\n            <summary>\n            Gets or sets the content to display when a match is found for the requested route.\n            </summary>\n        ",
@@ -1210,15 +1196,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 59063997182778990,
-          "Data2": -4293580510490453127,
-          "Data3": -4609060522409708271,
-          "Data4": 7905746083228564951
+          "Data1": -551841019461734164,
+          "Data2": 3649636943859595089,
+          "Data3": 3596598171688620128,
+          "Data4": -7268472764939148796
         },
         "Kind": 2,
         "Name": "Microsoft.AspNetCore.Components.Routing.Router.Found",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 13,
+        "Flags": 7,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Routing.Router.Found",
         "Documentation": "\n            <summary>\n            Gets or sets the content to display when a match is found for the requested route.\n            </summary>\n        ",
@@ -1248,15 +1234,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -4628148157320326989,
-          "Data2": -1972573915508126656,
-          "Data3": 1675325776851234165,
-          "Data4": -1131141634943507267
+          "Data1": 591681274573821554,
+          "Data2": -8802456233585265572,
+          "Data3": -2924709369267673521,
+          "Data4": 2994688192717926941
         },
         "Kind": 2,
         "Name": "Microsoft.AspNetCore.Components.Routing.Router.NotFound",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 9,
+        "Flags": 5,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Routing.Router.NotFound",
         "Documentation": "\n            <summary>\n            Gets or sets the content to display when no match is found for the requested route.\n            </summary>\n        ",
@@ -1272,15 +1258,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 1821048670544966448,
-          "Data2": -385876337905757284,
-          "Data3": 5637199010986085286,
-          "Data4": -3859864456578352564
+          "Data1": -7094283191700021463,
+          "Data2": 751001568700382737,
+          "Data3": -964882663884841129,
+          "Data4": -6751218079574695217
         },
         "Kind": 2,
         "Name": "Microsoft.AspNetCore.Components.Routing.Router.NotFound",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 13,
+        "Flags": 7,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Routing.Router.NotFound",
         "Documentation": "\n            <summary>\n            Gets or sets the content to display when no match is found for the requested route.\n            </summary>\n        ",
@@ -1296,15 +1282,14 @@
       },
       {
         "__Checksum": {
-          "Data1": -5734028033434207394,
-          "Data2": 2943298444672739524,
-          "Data3": -2567069643381585871,
-          "Data4": -7127128584185707445
+          "Data1": -220181903377603099,
+          "Data2": 4405829422201827613,
+          "Data3": -8721836944101411658,
+          "Data4": 68435524884548866
         },
         "Kind": 3,
         "Name": "Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator",
         "AssemblyName": "Microsoft.AspNetCore.Components.Forms",
-        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator",
         "Documentation": "\n            <summary>\n            Adds Data Annotations validation support to an <see cref=\"T:Microsoft.AspNetCore.Components.Forms.EditContext\" />.\n            </summary>\n        ",
@@ -1319,15 +1304,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 8464281734059847204,
-          "Data2": 4252778106773314798,
-          "Data3": 5438007278962042702,
-          "Data4": 1897187278105828172
+          "Data1": -6540191424060636140,
+          "Data2": 7873134021029905663,
+          "Data3": 5822195441958217024,
+          "Data4": 6289937007419663630
         },
         "Kind": 3,
         "Name": "Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator",
         "AssemblyName": "Microsoft.AspNetCore.Components.Forms",
-        "Flags": 7,
+        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator",
         "Documentation": "\n            <summary>\n            Adds Data Annotations validation support to an <see cref=\"T:Microsoft.AspNetCore.Components.Forms.EditContext\" />.\n            </summary>\n        ",
@@ -1342,15 +1327,14 @@
       },
       {
         "__Checksum": {
-          "Data1": 7069098657142605176,
-          "Data2": -881702648261362636,
-          "Data3": 5875317974417365981,
-          "Data4": -34338856523543509
+          "Data1": -2551986951503866919,
+          "Data2": 1515553997931176792,
+          "Data3": 2435441210720515856,
+          "Data4": -6716624043714980781
         },
         "Kind": 3,
         "Name": "Microsoft.AspNetCore.Components.Forms.EditForm",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "Microsoft.AspNetCore.Components.Forms.EditForm",
         "Documentation": "\n            <summary>\n            Renders a form element that cascades an <see cref=\"P:Microsoft.AspNetCore.Components.Forms.EditForm.EditContext\" /> to descendants.\n            </summary>\n        ",
@@ -1453,15 +1437,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -7324599724782149075,
-          "Data2": 103891164181222445,
-          "Data3": -2281160377171143123,
-          "Data4": 8020783137264401221
+          "Data1": -4795957407911526596,
+          "Data2": -203441680293783913,
+          "Data3": -8044833209130997917,
+          "Data4": -6389105756749025378
         },
         "Kind": 3,
         "Name": "Microsoft.AspNetCore.Components.Forms.EditForm",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Flags": 7,
+        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "Microsoft.AspNetCore.Components.Forms.EditForm",
         "Documentation": "\n            <summary>\n            Renders a form element that cascades an <see cref=\"P:Microsoft.AspNetCore.Components.Forms.EditForm.EditContext\" /> to descendants.\n            </summary>\n        ",
@@ -1564,15 +1548,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -5035957696840947720,
-          "Data2": -7672266124281798880,
-          "Data3": -618809750032007843,
-          "Data4": 8187410304552745499
+          "Data1": 283010868912931185,
+          "Data2": 5772409928452360886,
+          "Data3": -6383723349262271238,
+          "Data4": 3831935956455550978
         },
         "Kind": 2,
         "Name": "Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Flags": 9,
+        "Flags": 5,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent",
         "Documentation": "\n            <summary>\n            Specifies the content to be rendered inside this <see cref=\"T:Microsoft.AspNetCore.Components.Forms.EditForm\" />.\n            </summary>\n        ",
@@ -1602,15 +1586,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -6084619445727475968,
-          "Data2": 7446970165856447089,
-          "Data3": -6775594243787850908,
-          "Data4": 5655962168066303269
+          "Data1": -2263947853883383827,
+          "Data2": 7391390076108847412,
+          "Data3": -9027733031558410049,
+          "Data4": -8020788699439903067
         },
         "Kind": 2,
         "Name": "Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Flags": 13,
+        "Flags": 7,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Forms.EditForm.ChildContent",
         "Documentation": "\n            <summary>\n            Specifies the content to be rendered inside this <see cref=\"T:Microsoft.AspNetCore.Components.Forms.EditForm\" />.\n            </summary>\n        ",
@@ -1640,15 +1624,14 @@
       },
       {
         "__Checksum": {
-          "Data1": 1823919409722729951,
-          "Data2": 3949048984660251079,
-          "Data3": 7405666133511293881,
-          "Data4": -9141434285971972274
+          "Data1": -1672582063418626073,
+          "Data2": 6143128195868864219,
+          "Data3": 7599866765562392604,
+          "Data4": 7501998895933870185
         },
         "Kind": 3,
         "Name": "Microsoft.AspNetCore.Components.Forms.InputCheckbox",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputCheckbox",
         "Documentation": "\n            <summary>\n            An input component for editing <see cref=\"T:System.Boolean\" /> values.\n            </summary>\n        ",
@@ -1707,15 +1690,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -6456237726243783176,
-          "Data2": 3718421346088253825,
-          "Data3": 3909047879438881569,
-          "Data4": -3774251866520629209
+          "Data1": 1274959858110521292,
+          "Data2": -6566976574580337157,
+          "Data3": -3485556661222981501,
+          "Data4": 5876729636446292556
         },
         "Kind": 3,
         "Name": "Microsoft.AspNetCore.Components.Forms.InputCheckbox",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Flags": 7,
+        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputCheckbox",
         "Documentation": "\n            <summary>\n            An input component for editing <see cref=\"T:System.Boolean\" /> values.\n            </summary>\n        ",
@@ -1774,15 +1757,14 @@
       },
       {
         "__Checksum": {
-          "Data1": 9083794345417846900,
-          "Data2": 6701663965423368259,
-          "Data3": -3113295402948311006,
-          "Data4": 4786900874993120587
+          "Data1": -227397117684423189,
+          "Data2": 4157855826794217223,
+          "Data3": -6813935741069384113,
+          "Data4": -8557242195082156013
         },
         "Kind": 3,
         "Name": "Microsoft.AspNetCore.Components.Forms.InputDate<TValue>",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputDate<TValue>",
         "Documentation": "\n            <summary>\n            An input component for editing date values.\n            Supported types are <see cref=\"T:System.DateTime\" /> and <see cref=\"T:System.DateTimeOffset\" />.\n            </summary>\n        ",
@@ -1866,15 +1848,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -436295244770007180,
-          "Data2": -7248813207016943841,
-          "Data3": 1593190081262975857,
-          "Data4": -1266061185662734358
+          "Data1": 1005510160815506190,
+          "Data2": -1520424700386075444,
+          "Data3": 281878016277489817,
+          "Data4": 6855700351346121371
         },
         "Kind": 3,
         "Name": "Microsoft.AspNetCore.Components.Forms.InputDate<TValue>",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Flags": 7,
+        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputDate<TValue>",
         "Documentation": "\n            <summary>\n            An input component for editing date values.\n            Supported types are <see cref=\"T:System.DateTime\" /> and <see cref=\"T:System.DateTimeOffset\" />.\n            </summary>\n        ",
@@ -1958,15 +1940,14 @@
       },
       {
         "__Checksum": {
-          "Data1": -2002302950491372046,
-          "Data2": -2944675290131411308,
-          "Data3": -3391140718830314540,
-          "Data4": -7187538754603067626
+          "Data1": 5427711602981230819,
+          "Data2": 7587390859722712638,
+          "Data3": 2568507335275787456,
+          "Data4": 4984565111927697704
         },
         "Kind": 3,
         "Name": "Microsoft.AspNetCore.Components.Forms.InputNumber<TValue>",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputNumber<TValue>",
         "Documentation": "\n            <summary>\n            An input component for editing numeric values.\n            Supported numeric types are <see cref=\"T:System.Int32\" />, <see cref=\"T:System.Int64\" />, <see cref=\"T:System.Single\" />, <see cref=\"T:System.Double\" />, <see cref=\"T:System.Decimal\" />.\n            </summary>\n        ",
@@ -2050,15 +2031,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -3431780797864579938,
-          "Data2": -4572300466305956030,
-          "Data3": 8921127412935564265,
-          "Data4": 7288993747198963517
+          "Data1": -7832018220638508387,
+          "Data2": -7780193730850246637,
+          "Data3": 8485442901463498930,
+          "Data4": 3627793277126010273
         },
         "Kind": 3,
         "Name": "Microsoft.AspNetCore.Components.Forms.InputNumber<TValue>",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Flags": 7,
+        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputNumber<TValue>",
         "Documentation": "\n            <summary>\n            An input component for editing numeric values.\n            Supported numeric types are <see cref=\"T:System.Int32\" />, <see cref=\"T:System.Int64\" />, <see cref=\"T:System.Single\" />, <see cref=\"T:System.Double\" />, <see cref=\"T:System.Decimal\" />.\n            </summary>\n        ",
@@ -2142,15 +2123,14 @@
       },
       {
         "__Checksum": {
-          "Data1": 177513241769869144,
-          "Data2": 6807219681482701937,
-          "Data3": -7616859928976640482,
-          "Data4": 9053089743709200099
+          "Data1": -6433610181074749150,
+          "Data2": 2478911470393667430,
+          "Data3": 5037095462067608678,
+          "Data4": -4674233013143377894
         },
         "Kind": 3,
         "Name": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>",
         "Documentation": "\n            <summary>\n            A dropdown selection component.\n            </summary>\n        ",
@@ -2234,15 +2214,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -1361323007982984865,
-          "Data2": -4760176213920164277,
-          "Data3": 1457375854526765542,
-          "Data4": -2584150691243738077
+          "Data1": -8692668361520282793,
+          "Data2": -459657652432503145,
+          "Data3": -5953839793878851656,
+          "Data4": -3225673529358717672
         },
         "Kind": 3,
         "Name": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Flags": 7,
+        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>",
         "Documentation": "\n            <summary>\n            A dropdown selection component.\n            </summary>\n        ",
@@ -2326,15 +2306,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -7425745020714205039,
-          "Data2": -9041955203929618519,
-          "Data3": 3585956138467767918,
-          "Data4": -9182345491146355828
+          "Data1": 2496795330901319777,
+          "Data2": -1135742541192107374,
+          "Data3": -4182674164076190821,
+          "Data4": 7317108232205295637
         },
         "Kind": 2,
         "Name": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>.ChildContent",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Flags": 9,
+        "Flags": 5,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>.ChildContent",
         "Documentation": "\n            <summary>\n            Gets or sets the child content to be rendering inside the select element.\n            </summary>\n        ",
@@ -2350,15 +2330,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -8843907555058952819,
-          "Data2": 574263977248220178,
-          "Data3": -6517345871613948656,
-          "Data4": 9085592468774197779
+          "Data1": -9060469677104544348,
+          "Data2": -7190495100349317565,
+          "Data3": 570203733193080644,
+          "Data4": -8267068387023771064
         },
         "Kind": 2,
         "Name": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>.ChildContent",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Flags": 13,
+        "Flags": 7,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>.ChildContent",
         "Documentation": "\n            <summary>\n            Gets or sets the child content to be rendering inside the select element.\n            </summary>\n        ",
@@ -2374,15 +2354,14 @@
       },
       {
         "__Checksum": {
-          "Data1": 1965939489501271010,
-          "Data2": 3816519293096927973,
-          "Data3": 1258718140215521290,
-          "Data4": 3609478837306567959
+          "Data1": -35633047848300125,
+          "Data2": -5757649619095308559,
+          "Data3": -8558008221663946702,
+          "Data4": -2338597479127337856
         },
         "Kind": 3,
         "Name": "Microsoft.AspNetCore.Components.Forms.InputText",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputText",
         "Documentation": "\n            <summary>\n            An input component for editing <see cref=\"T:System.String\" /> values.\n            </summary>\n        ",
@@ -2441,15 +2420,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -2624740912312167882,
-          "Data2": 3849038312980994861,
-          "Data3": -1939170101828405287,
-          "Data4": 8287595008651049078
+          "Data1": 3469232452947012477,
+          "Data2": 2603006008813006518,
+          "Data3": 1865263876156073583,
+          "Data4": -5074142658796401586
         },
         "Kind": 3,
         "Name": "Microsoft.AspNetCore.Components.Forms.InputText",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Flags": 7,
+        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputText",
         "Documentation": "\n            <summary>\n            An input component for editing <see cref=\"T:System.String\" /> values.\n            </summary>\n        ",
@@ -2508,15 +2487,14 @@
       },
       {
         "__Checksum": {
-          "Data1": 7143086403778473783,
-          "Data2": -2174638789688753468,
-          "Data3": 7084177709151797495,
-          "Data4": 3494559368772486387
+          "Data1": 1355565283494552672,
+          "Data2": -3151877195707166111,
+          "Data3": 1391238956385690541,
+          "Data4": -1402033061975119156
         },
         "Kind": 3,
         "Name": "Microsoft.AspNetCore.Components.Forms.InputTextArea",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputTextArea",
         "Documentation": "\n            <summary>\n            A multiline input component for editing <see cref=\"T:System.String\" /> values.\n            </summary>\n        ",
@@ -2575,15 +2553,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -4198493197870068187,
-          "Data2": 4622860179019351701,
-          "Data3": -8760064487671234070,
-          "Data4": -2341293729160623377
+          "Data1": 5609985487767100623,
+          "Data2": -5848134579584846720,
+          "Data3": 6185634883841335433,
+          "Data4": 5523801260510146990
         },
         "Kind": 3,
         "Name": "Microsoft.AspNetCore.Components.Forms.InputTextArea",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Flags": 7,
+        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputTextArea",
         "Documentation": "\n            <summary>\n            A multiline input component for editing <see cref=\"T:System.String\" /> values.\n            </summary>\n        ",
@@ -2642,15 +2620,14 @@
       },
       {
         "__Checksum": {
-          "Data1": 3728659889608957813,
-          "Data2": 6000572227638390785,
-          "Data3": -6536666937927447913,
-          "Data4": -4980809388792039971
+          "Data1": 665914858775744879,
+          "Data2": -892573356899993207,
+          "Data3": -6263661517992757173,
+          "Data4": 5456208818482054589
         },
         "Kind": 3,
         "Name": "Microsoft.AspNetCore.Components.Forms.ValidationMessage<TValue>",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "Microsoft.AspNetCore.Components.Forms.ValidationMessage<TValue>",
         "Documentation": "\n            <summary>\n            Displays a list of validation messages for a specified field within a cascaded <see cref=\"T:Microsoft.AspNetCore.Components.Forms.EditContext\" />.\n            </summary>\n        ",
@@ -2700,15 +2677,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -1864500824103389218,
-          "Data2": -2686697212308865892,
-          "Data3": 309924451999627066,
-          "Data4": -4168984867103821547
+          "Data1": -5582820036308126077,
+          "Data2": 635147691112536979,
+          "Data3": 8221081363227383330,
+          "Data4": 3684350101339691858
         },
         "Kind": 3,
         "Name": "Microsoft.AspNetCore.Components.Forms.ValidationMessage<TValue>",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Flags": 7,
+        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "Microsoft.AspNetCore.Components.Forms.ValidationMessage<TValue>",
         "Documentation": "\n            <summary>\n            Displays a list of validation messages for a specified field within a cascaded <see cref=\"T:Microsoft.AspNetCore.Components.Forms.EditContext\" />.\n            </summary>\n        ",
@@ -2758,15 +2735,14 @@
       },
       {
         "__Checksum": {
-          "Data1": 6871983870772251106,
-          "Data2": 3517117963366510085,
-          "Data3": 3635911121351194903,
-          "Data4": -3218813361440170213
+          "Data1": -4564918226409132881,
+          "Data2": -5650003345126736561,
+          "Data3": -5201339616297929992,
+          "Data4": 7427185241254123042
         },
         "Kind": 3,
         "Name": "Microsoft.AspNetCore.Components.Forms.ValidationSummary",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "Microsoft.AspNetCore.Components.Forms.ValidationSummary",
         "Documentation": "\n            <summary>\n            Displays a list of validation messages from a cascaded <see cref=\"T:Microsoft.AspNetCore.Components.Forms.EditContext\" />.\n            </summary>\n        ",
@@ -2803,15 +2779,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 2865967517849746113,
-          "Data2": -8812166784794117635,
-          "Data3": -7621206267414904729,
-          "Data4": -7825235007190740930
+          "Data1": -3290649103964086321,
+          "Data2": -7802619056174110869,
+          "Data3": 828726946843483031,
+          "Data4": 3414282624234455198
         },
         "Kind": 3,
         "Name": "Microsoft.AspNetCore.Components.Forms.ValidationSummary",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Flags": 7,
+        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "Microsoft.AspNetCore.Components.Forms.ValidationSummary",
         "Documentation": "\n            <summary>\n            Displays a list of validation messages from a cascaded <see cref=\"T:Microsoft.AspNetCore.Components.Forms.EditContext\" />.\n            </summary>\n        ",
@@ -2848,15 +2824,14 @@
       },
       {
         "__Checksum": {
-          "Data1": 6229566893840285219,
-          "Data2": 3604120954932648183,
-          "Data3": 3697322826635758031,
-          "Data4": -108745086776237467
+          "Data1": 6438340113754469009,
+          "Data2": 7256016505339745202,
+          "Data3": -3300054044591540460,
+          "Data4": 191467410549596283
         },
         "Kind": 3,
         "Name": "Microsoft.AspNetCore.Components.Routing.NavLink",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "Microsoft.AspNetCore.Components.Routing.NavLink",
         "Documentation": "\n            <summary>\n            A component that renders an anchor tag, automatically toggling its 'active'\n            class based on whether its 'href' matches the current URI.\n            </summary>\n        ",
@@ -2916,15 +2891,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -2046643824857686233,
-          "Data2": -5252421401271635101,
-          "Data3": 3115029639843496430,
-          "Data4": -2302535448863948060
+          "Data1": 7498888710050984195,
+          "Data2": 465818167810052058,
+          "Data3": 4274303403944665809,
+          "Data4": 3021212342949417285
         },
         "Kind": 3,
         "Name": "Microsoft.AspNetCore.Components.Routing.NavLink",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Flags": 7,
+        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "Microsoft.AspNetCore.Components.Routing.NavLink",
         "Documentation": "\n            <summary>\n            A component that renders an anchor tag, automatically toggling its 'active'\n            class based on whether its 'href' matches the current URI.\n            </summary>\n        ",
@@ -2984,15 +2959,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -5324203483639421766,
-          "Data2": 2704211000546868742,
-          "Data3": -4270580096861130148,
-          "Data4": -4973446703506514835
+          "Data1": -4382337547865069591,
+          "Data2": 7637742973033850673,
+          "Data3": 3635853377623015788,
+          "Data4": -6257502838349349180
         },
         "Kind": 2,
         "Name": "Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Flags": 9,
+        "Flags": 5,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent",
         "Documentation": "\n            <summary>\n            Gets or sets the child content of the component.\n            </summary>\n        ",
@@ -3008,15 +2983,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -431021979588690423,
-          "Data2": -6203886346526529359,
-          "Data3": -5799292366696351462,
-          "Data4": -7696727910873587878
+          "Data1": -3577028612921923154,
+          "Data2": -4667406913680913166,
+          "Data3": 1727537062856835380,
+          "Data4": 3511553665600953092
         },
         "Kind": 2,
         "Name": "Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Flags": 13,
+        "Flags": 7,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent",
         "Documentation": "\n            <summary>\n            Gets or sets the child content of the component.\n            </summary>\n        ",
@@ -3032,15 +3007,14 @@
       },
       {
         "__Checksum": {
-          "Data1": -4591692172552532156,
-          "Data2": 7118255239359396844,
-          "Data3": 8094362029674409943,
-          "Data4": 573159066431672893
+          "Data1": -3483108705587378118,
+          "Data2": -7309402309893724735,
+          "Data3": 6696530164856531307,
+          "Data4": -538603920729470227
         },
         "Kind": 3,
         "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView",
         "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView",
         "Documentation": "\n             <summary>\n             Combines the behaviors of <see cref=\"T:Microsoft.AspNetCore.Components.Authorization.AuthorizeView\" /> and <see cref=\"T:Microsoft.AspNetCore.Components.RouteView\" />,\n             so that it displays the page matching the specified route but only if the user\n             is authorized to see it.\n            \n             Additionally, this component supplies a cascading parameter of type <see cref=\"T:System.Threading.Tasks.Task`1\" />,\n             which makes the user's current authentication state available to descendants.\n             </summary>\n        ",
@@ -3111,15 +3085,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -5866771934061388725,
-          "Data2": -1527477431388065933,
-          "Data3": -8822487048307022652,
-          "Data4": 5929342931202326701
+          "Data1": -7496785888542585358,
+          "Data2": -4886004892945564008,
+          "Data3": -225098613534842486,
+          "Data4": 192364198688480664
         },
         "Kind": 3,
         "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView",
         "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-        "Flags": 7,
+        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView",
         "Documentation": "\n             <summary>\n             Combines the behaviors of <see cref=\"T:Microsoft.AspNetCore.Components.Authorization.AuthorizeView\" /> and <see cref=\"T:Microsoft.AspNetCore.Components.RouteView\" />,\n             so that it displays the page matching the specified route but only if the user\n             is authorized to see it.\n            \n             Additionally, this component supplies a cascading parameter of type <see cref=\"T:System.Threading.Tasks.Task`1\" />,\n             which makes the user's current authentication state available to descendants.\n             </summary>\n        ",
@@ -3190,15 +3164,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -8602835905440081717,
-          "Data2": -88672343823689956,
-          "Data3": 4164472475295554407,
-          "Data4": -9062138719233444269
+          "Data1": -6561152503383953375,
+          "Data2": -2811658695300486616,
+          "Data3": 532572305930093181,
+          "Data4": -8308900855947437978
         },
         "Kind": 2,
         "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing",
         "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-        "Flags": 9,
+        "Flags": 5,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing",
         "Documentation": "\n            <summary>\n            The content that will be displayed while asynchronous authorization is in progress.\n            </summary>\n        ",
@@ -3214,15 +3188,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -7702905369848710031,
-          "Data2": 4197842227592141246,
-          "Data3": 6947357661614724843,
-          "Data4": -6020197434307224588
+          "Data1": -4840722216630959661,
+          "Data2": 129413375712037766,
+          "Data3": -719379416848712030,
+          "Data4": 502338209350967363
         },
         "Kind": 2,
         "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing",
         "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-        "Flags": 13,
+        "Flags": 7,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing",
         "Documentation": "\n            <summary>\n            The content that will be displayed while asynchronous authorization is in progress.\n            </summary>\n        ",
@@ -3238,15 +3212,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 6635216892886071103,
-          "Data2": -5586160327126088159,
-          "Data3": -8835318974879593725,
-          "Data4": 4376699204500149964
+          "Data1": -4300180213846211910,
+          "Data2": -4872284600802592926,
+          "Data3": 7412930944342020176,
+          "Data4": 2622676749722034197
         },
         "Kind": 2,
         "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized",
         "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-        "Flags": 9,
+        "Flags": 5,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized",
         "Documentation": "\n            <summary>\n            The content that will be displayed if the user is not authorized.\n            </summary>\n        ",
@@ -3276,15 +3250,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -7526453516728155109,
-          "Data2": 2722811719686542425,
-          "Data3": -148124177213720303,
-          "Data4": 3703036113671341829
+          "Data1": 5583923363060505646,
+          "Data2": 5022685948874270412,
+          "Data3": -7542725840313917206,
+          "Data4": -4449250978592409116
         },
         "Kind": 2,
         "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized",
         "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-        "Flags": 13,
+        "Flags": 7,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized",
         "Documentation": "\n            <summary>\n            The content that will be displayed if the user is not authorized.\n            </summary>\n        ",
@@ -3314,15 +3288,14 @@
       },
       {
         "__Checksum": {
-          "Data1": -6400462582081358947,
-          "Data2": -9186454568886393017,
-          "Data3": -2076764260620063540,
-          "Data4": -3248652658646808248
+          "Data1": -7236988679151083924,
+          "Data2": -362879320111928416,
+          "Data3": -2059940690274829129,
+          "Data4": 8519508256783784596
         },
         "Kind": 3,
         "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView",
         "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView",
         "Documentation": "\n            <summary>\n            Displays differing content depending on the user's authorization status.\n            </summary>\n        ",
@@ -3427,15 +3400,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 786878359658757367,
-          "Data2": -3296961727520718953,
-          "Data3": -7824966312090245117,
-          "Data4": -8327844509542458400
+          "Data1": 7710828316336787750,
+          "Data2": 4900580900739691631,
+          "Data3": 669017311746853571,
+          "Data4": 702693639135579028
         },
         "Kind": 3,
         "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView",
         "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-        "Flags": 7,
+        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView",
         "Documentation": "\n            <summary>\n            Displays differing content depending on the user's authorization status.\n            </summary>\n        ",
@@ -3540,15 +3513,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -5603590067413776716,
-          "Data2": 5617839481746711029,
-          "Data3": -3962552639651559589,
-          "Data4": 6228144437913672193
+          "Data1": 7201245940412081028,
+          "Data2": -5535849222525393747,
+          "Data3": 7887218099099177312,
+          "Data4": 8527389881669195434
         },
         "Kind": 2,
         "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorized",
         "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-        "Flags": 9,
+        "Flags": 5,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorized",
         "Documentation": "\n            <summary>\n            The content that will be displayed if the user is authorized.\n            If you specify a value for this parameter, do not also specify a value for <see cref=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.ChildContent\" />.\n            </summary>\n        ",
@@ -3578,15 +3551,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 1046347636402158673,
-          "Data2": -6540593478957852834,
-          "Data3": -5268252115496880924,
-          "Data4": -6068273034144149474
+          "Data1": -1605514009936705160,
+          "Data2": -4071599202021213644,
+          "Data3": 3674601688037220823,
+          "Data4": 3111077245045478806
         },
         "Kind": 2,
         "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorized",
         "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-        "Flags": 13,
+        "Flags": 7,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorized",
         "Documentation": "\n            <summary>\n            The content that will be displayed if the user is authorized.\n            If you specify a value for this parameter, do not also specify a value for <see cref=\"P:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.ChildContent\" />.\n            </summary>\n        ",
@@ -3616,15 +3589,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 2692133274873092149,
-          "Data2": 1390049536827003436,
-          "Data3": -534504974046570730,
-          "Data4": -7985250232915484811
+          "Data1": -7999385198400207826,
+          "Data2": -1348347449904097930,
+          "Data3": 989039548935386478,
+          "Data4": -1689898731000600474
         },
         "Kind": 2,
         "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorizing",
         "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-        "Flags": 9,
+        "Flags": 5,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorizing",
         "Documentation": "\n            <summary>\n            The content that will be displayed while asynchronous authorization is in progress.\n            </summary>\n        ",
@@ -3640,15 +3613,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 916659263327176584,
-          "Data2": -2646358793443410946,
-          "Data3": 9069296003499532948,
-          "Data4": -7052543508160429778
+          "Data1": -3386892310009384637,
+          "Data2": 6258067434989807243,
+          "Data3": 2764086957456697854,
+          "Data4": -8288643754273854439
         },
         "Kind": 2,
         "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorizing",
         "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-        "Flags": 13,
+        "Flags": 7,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorizing",
         "Documentation": "\n            <summary>\n            The content that will be displayed while asynchronous authorization is in progress.\n            </summary>\n        ",
@@ -3664,15 +3637,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 3415204521082850390,
-          "Data2": 8129981066913501015,
-          "Data3": -3851518091054144439,
-          "Data4": 2739005915101501034
+          "Data1": -7490250920442360686,
+          "Data2": 7961493953559131462,
+          "Data3": 2095674549673406998,
+          "Data4": 5442445873145437952
         },
         "Kind": 2,
         "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.ChildContent",
         "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-        "Flags": 9,
+        "Flags": 5,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.ChildContent",
         "Documentation": "\n            <summary>\n            The content that will be displayed if the user is authorized.\n            </summary>\n        ",
@@ -3702,15 +3675,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 5165028786222256021,
-          "Data2": -2329149370666867123,
-          "Data3": -2048974591028590743,
-          "Data4": 5760429714636514991
+          "Data1": -4773453848562869871,
+          "Data2": -3050622695253831337,
+          "Data3": -8666317091160904030,
+          "Data4": -4761247166881022939
         },
         "Kind": 2,
         "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.ChildContent",
         "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-        "Flags": 13,
+        "Flags": 7,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.ChildContent",
         "Documentation": "\n            <summary>\n            The content that will be displayed if the user is authorized.\n            </summary>\n        ",
@@ -3740,15 +3713,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -9157078659471004002,
-          "Data2": -7243488229768185624,
-          "Data3": -8839410019728354531,
-          "Data4": 3038622395725897417
+          "Data1": -4707632845016828433,
+          "Data2": -8255073838857164773,
+          "Data3": 6426117907955610003,
+          "Data4": 1827657417355296588
         },
         "Kind": 2,
         "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.NotAuthorized",
         "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-        "Flags": 9,
+        "Flags": 5,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.NotAuthorized",
         "Documentation": "\n            <summary>\n            The content that will be displayed if the user is not authorized.\n            </summary>\n        ",
@@ -3778,15 +3751,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 6604793262595162679,
-          "Data2": 630824915148146670,
-          "Data3": 5470071748453681783,
-          "Data4": -3804953580092627600
+          "Data1": -3871841869259691018,
+          "Data2": -8339076758536333900,
+          "Data3": -7997679322254455317,
+          "Data4": 3043535731190413096
         },
         "Kind": 2,
         "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.NotAuthorized",
         "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-        "Flags": 13,
+        "Flags": 7,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Authorization.AuthorizeView.NotAuthorized",
         "Documentation": "\n            <summary>\n            The content that will be displayed if the user is not authorized.\n            </summary>\n        ",
@@ -3816,15 +3789,14 @@
       },
       {
         "__Checksum": {
-          "Data1": -992592219761042340,
-          "Data2": -6864706460970326506,
-          "Data3": -6990028022219450941,
-          "Data4": 733512732028795988
+          "Data1": 6315676846889785904,
+          "Data2": -3616825211135331823,
+          "Data3": 1152958733997408704,
+          "Data4": 7165842866214362225
         },
         "Kind": 3,
         "Name": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState",
         "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState",
         "TagMatchingRules": [
@@ -3851,15 +3823,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -8646905467734505727,
-          "Data2": 2077835782806685272,
-          "Data3": -7390471277439373745,
-          "Data4": 7595085730872052905
+          "Data1": 2887291323041774048,
+          "Data2": 935642286558095781,
+          "Data3": 3757975021028908677,
+          "Data4": -7038566570130453579
         },
         "Kind": 3,
         "Name": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState",
         "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-        "Flags": 7,
+        "Flags": 3,
         "Runtime": 2,
         "DisplayName": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState",
         "TagMatchingRules": [
@@ -3886,15 +3858,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 2125792307669147636,
-          "Data2": 7276724110440367969,
-          "Data3": -5074555817709183299,
-          "Data4": -1441325590569263025
+          "Data1": -5073477149095456984,
+          "Data2": 6683851797375875797,
+          "Data3": -4348353794492676290,
+          "Data4": -5820084909507752502
         },
         "Kind": 2,
         "Name": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState.ChildContent",
         "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-        "Flags": 9,
+        "Flags": 5,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState.ChildContent",
         "Documentation": "\n            <summary>\n            The content to which the authentication state should be provided.\n            </summary>\n        ",
@@ -3910,15 +3882,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -797964501840951994,
-          "Data2": 7953794557964829442,
-          "Data3": 1758674920319736862,
-          "Data4": 7986771505305023040
+          "Data1": -8909104111815513162,
+          "Data2": -9197894675918773080,
+          "Data3": 7751367726445306547,
+          "Data4": -7191068882594407962
         },
         "Kind": 2,
         "Name": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState.ChildContent",
         "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-        "Flags": 13,
+        "Flags": 7,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState.ChildContent",
         "Documentation": "\n            <summary>\n            The content to which the authentication state should be provided.\n            </summary>\n        ",
@@ -3934,15 +3906,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -7009075496787428894,
-          "Data2": -6184713422555743963,
-          "Data3": 4279097689734423569,
-          "Data4": 8374856146871173851
+          "Data1": 2418304607131471305,
+          "Data2": 503443706339894617,
+          "Data3": 1257521922141722851,
+          "Data4": -289291594646869853
         },
         "Kind": 4,
         "Name": "onabort",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onabort' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.ProgressEventArgs'.",
@@ -4023,15 +3995,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -5451892596959716516,
-          "Data2": -1683022379919079513,
-          "Data3": -1363503721886658838,
-          "Data4": -1975083679844882913
+          "Data1": -1915639348014779579,
+          "Data2": -5885086647351266132,
+          "Data3": -7656437463950037825,
+          "Data4": -3156649124079961753
         },
         "Kind": 4,
         "Name": "onactivate",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onactivate' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
@@ -4112,15 +4084,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 5071451501299142158,
-          "Data2": 5369195782660241691,
-          "Data3": -1124839238288580541,
-          "Data4": -2554366726505200486
+          "Data1": 3676739480418740064,
+          "Data2": -7226073256605613341,
+          "Data3": -6128647796144104562,
+          "Data4": -4850183317555072615
         },
         "Kind": 4,
         "Name": "onbeforeactivate",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onbeforeactivate' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
@@ -4201,15 +4173,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -4572233758150828814,
-          "Data2": 1964084043422294426,
-          "Data3": 1592718440671958493,
-          "Data4": 3444406019903731184
+          "Data1": -9004109431458917928,
+          "Data2": -7580125450432407394,
+          "Data3": 3187414181456095684,
+          "Data4": -3941919389950262965
         },
         "Kind": 4,
         "Name": "onbeforecopy",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onbeforecopy' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
@@ -4290,15 +4262,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -7673661483357583815,
-          "Data2": -7547965561649590197,
-          "Data3": -369091256119189954,
-          "Data4": -7528218944820223017
+          "Data1": -7250503030010489685,
+          "Data2": 5776830551147967363,
+          "Data3": -670645616185928410,
+          "Data4": -6013818663307520040
         },
         "Kind": 4,
         "Name": "onbeforecut",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onbeforecut' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
@@ -4379,15 +4351,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -5139088560846036111,
-          "Data2": -7548586595740181987,
-          "Data3": 5714410092836770636,
-          "Data4": 2443643326164699965
+          "Data1": -5355888127022904800,
+          "Data2": -1161092438119998450,
+          "Data3": 556474620225491210,
+          "Data4": -8478653483880873365
         },
         "Kind": 4,
         "Name": "onbeforedeactivate",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onbeforedeactivate' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
@@ -4468,15 +4440,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 1646845269243351056,
-          "Data2": -7171874720905377886,
-          "Data3": -823762736695194883,
-          "Data4": 8922462981389825639
+          "Data1": 2125576809948615601,
+          "Data2": -7421129509996312954,
+          "Data3": 7897341079232530324,
+          "Data4": 2243009995760832067
         },
         "Kind": 4,
         "Name": "onbeforepaste",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onbeforepaste' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
@@ -4557,15 +4529,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -2633327809431451049,
-          "Data2": -4140752833913680708,
-          "Data3": -8013243658135246368,
-          "Data4": 6337430760335127042
+          "Data1": 8004055298622498615,
+          "Data2": -2405932939408014346,
+          "Data3": 8955142480449862881,
+          "Data4": -1339493748272498489
         },
         "Kind": 4,
         "Name": "onblur",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onblur' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.FocusEventArgs'.",
@@ -4646,15 +4618,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -2492329855435701369,
-          "Data2": 5146059805800162936,
-          "Data3": 1062330289519541709,
-          "Data4": 5262617507639807212
+          "Data1": 2640318548502001978,
+          "Data2": 8297118744108613386,
+          "Data3": -7946190804357483236,
+          "Data4": 1596106522580965584
         },
         "Kind": 4,
         "Name": "oncanplay",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@oncanplay' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
@@ -4735,15 +4707,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -6620879917617680920,
-          "Data2": -4294163131102606320,
-          "Data3": -2406606389712542690,
-          "Data4": 4727955217526677196
+          "Data1": -8407962678593776454,
+          "Data2": -3723021769701344997,
+          "Data3": -2760580337310942595,
+          "Data4": -8502472178910700062
         },
         "Kind": 4,
         "Name": "oncanplaythrough",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@oncanplaythrough' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
@@ -4824,15 +4796,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -1249886570058449868,
-          "Data2": 8662239438602706354,
-          "Data3": 7444708390064678296,
-          "Data4": 8433279760866034837
+          "Data1": -2077093497376055337,
+          "Data2": -7204979837486394356,
+          "Data3": -1943301509485751199,
+          "Data4": 8735438296368589745
         },
         "Kind": 4,
         "Name": "onchange",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onchange' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.ChangeEventArgs'.",
@@ -4913,15 +4885,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -7530087949940051087,
-          "Data2": -1265683267379487458,
-          "Data3": 2498198082586626058,
-          "Data4": 5672202306323944010
+          "Data1": 1877518267417226626,
+          "Data2": -1455417717444564332,
+          "Data3": -6376186750682698161,
+          "Data4": -2957579247649060761
         },
         "Kind": 4,
         "Name": "onclick",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onclick' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.MouseEventArgs'.",
@@ -5002,15 +4974,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 3480293848829362850,
-          "Data2": 7718183311614353237,
-          "Data3": 6118470842680189770,
-          "Data4": 7547047532298097451
+          "Data1": -38147633982967612,
+          "Data2": -4969489723420027061,
+          "Data3": -1976930879170015081,
+          "Data4": 3001596340078292652
         },
         "Kind": 4,
         "Name": "oncontextmenu",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@oncontextmenu' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.MouseEventArgs'.",
@@ -5091,15 +5063,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -6326591880838113525,
-          "Data2": 1596976363364605840,
-          "Data3": 416461181404267491,
-          "Data4": 6545281282693287994
+          "Data1": 4868622401052858059,
+          "Data2": -765625510549463070,
+          "Data3": 7452561028820683453,
+          "Data4": 2799730223016743229
         },
         "Kind": 4,
         "Name": "oncopy",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@oncopy' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.ClipboardEventArgs'.",
@@ -5180,15 +5152,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 9155649124592983623,
-          "Data2": 7395658646879974414,
-          "Data3": 5349608485325626614,
-          "Data4": 8385069319627949454
+          "Data1": 7249593674996960219,
+          "Data2": -2643259117174722826,
+          "Data3": 782798846119117962,
+          "Data4": 5608658897593564099
         },
         "Kind": 4,
         "Name": "oncuechange",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@oncuechange' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
@@ -5269,15 +5241,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 2208589211245973141,
-          "Data2": -6930103017786530222,
-          "Data3": 8329874829668415831,
-          "Data4": -1467384219541741496
+          "Data1": -1523275842432402336,
+          "Data2": 3137657319644171893,
+          "Data3": -2958240702774319200,
+          "Data4": 1810088108395708767
         },
         "Kind": 4,
         "Name": "oncut",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@oncut' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.ClipboardEventArgs'.",
@@ -5358,15 +5330,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -8722916682908425949,
-          "Data2": 5822233767458663048,
-          "Data3": 4681350385951515355,
-          "Data4": -6645884906094488464
+          "Data1": -2171639951532865259,
+          "Data2": 4780347012999622499,
+          "Data3": -7475971528249341703,
+          "Data4": -4790164838982863987
         },
         "Kind": 4,
         "Name": "ondblclick",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@ondblclick' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.MouseEventArgs'.",
@@ -5447,15 +5419,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -3123498849522060179,
-          "Data2": -1817067312114408069,
-          "Data3": 1509388511141718411,
-          "Data4": 3316071754097358612
+          "Data1": 8312431106691021267,
+          "Data2": -8782469676650919653,
+          "Data3": 5380824086782790169,
+          "Data4": -406968468612730971
         },
         "Kind": 4,
         "Name": "ondeactivate",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@ondeactivate' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
@@ -5536,15 +5508,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 5569561941716207120,
-          "Data2": -6908621562743851743,
-          "Data3": -8691900415504082741,
-          "Data4": -1088130821317896559
+          "Data1": 8583854005136334272,
+          "Data2": 8828225855474660696,
+          "Data3": -7983381847360081664,
+          "Data4": -6862576441602808344
         },
         "Kind": 4,
         "Name": "ondrag",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@ondrag' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.DragEventArgs'.",
@@ -5625,15 +5597,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 7031563757666691189,
-          "Data2": 7170896301949310132,
-          "Data3": 8642728972148004849,
-          "Data4": 4479482841789755040
+          "Data1": 4503086625587164287,
+          "Data2": -4353912643970264875,
+          "Data3": 7144347982566640462,
+          "Data4": 8437735882720264073
         },
         "Kind": 4,
         "Name": "ondragend",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@ondragend' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.DragEventArgs'.",
@@ -5714,15 +5686,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -5537442675670104122,
-          "Data2": 8803286381740600177,
-          "Data3": -5484225985117696269,
-          "Data4": 6929586906172497751
+          "Data1": 2150636807434278396,
+          "Data2": 1943506244648467626,
+          "Data3": 3332904600919417449,
+          "Data4": -6488883823486326340
         },
         "Kind": 4,
         "Name": "ondragenter",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@ondragenter' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.DragEventArgs'.",
@@ -5803,15 +5775,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 493064804431491814,
-          "Data2": -3307562971253458996,
-          "Data3": -8893017702304726290,
-          "Data4": 2836418280212043210
+          "Data1": 6970434415542702345,
+          "Data2": 7734097766395518385,
+          "Data3": -8701800959678543925,
+          "Data4": -4214831141185797061
         },
         "Kind": 4,
         "Name": "ondragleave",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@ondragleave' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.DragEventArgs'.",
@@ -5892,15 +5864,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -7189010093278055623,
-          "Data2": 2789024584278649206,
-          "Data3": -6799615354376889366,
-          "Data4": -9149052576159944155
+          "Data1": -8318393536192917404,
+          "Data2": -2108038828469585368,
+          "Data3": 2485280549612559840,
+          "Data4": -2887260614558626182
         },
         "Kind": 4,
         "Name": "ondragover",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@ondragover' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.DragEventArgs'.",
@@ -5981,15 +5953,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -1410281950861106134,
-          "Data2": 8920995481086247595,
-          "Data3": 9075112183912312567,
-          "Data4": -395190789247813298
+          "Data1": -5149413752098412980,
+          "Data2": 8266124161807931368,
+          "Data3": 1189621351425317069,
+          "Data4": 2272778800507716313
         },
         "Kind": 4,
         "Name": "ondragstart",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@ondragstart' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.DragEventArgs'.",
@@ -6070,15 +6042,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 6627357718841742760,
-          "Data2": -5786834012809104659,
-          "Data3": 258169503837196210,
-          "Data4": -183388425490587758
+          "Data1": -2465183624463962124,
+          "Data2": -2608777231483766948,
+          "Data3": -8188769284224525615,
+          "Data4": 301301760640607794
         },
         "Kind": 4,
         "Name": "ondrop",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@ondrop' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.DragEventArgs'.",
@@ -6159,15 +6131,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -264618600074650380,
-          "Data2": 431877096050275948,
-          "Data3": 1257626120606583941,
-          "Data4": -3216129531633969245
+          "Data1": 2181278968114879223,
+          "Data2": -4947148674869986959,
+          "Data3": -7585805169603510540,
+          "Data4": -8535732747738061134
         },
         "Kind": 4,
         "Name": "ondurationchange",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@ondurationchange' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
@@ -6248,15 +6220,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -7159359344569599752,
-          "Data2": 1055209869217289579,
-          "Data3": 3106231772795068409,
-          "Data4": 8586643954151175539
+          "Data1": -8062659112393144867,
+          "Data2": 5618180859253107898,
+          "Data3": 6564612496364895685,
+          "Data4": 4758071808162108269
         },
         "Kind": 4,
         "Name": "onemptied",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onemptied' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
@@ -6337,15 +6309,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 2703706922929778446,
-          "Data2": 7936661803157683234,
-          "Data3": 123759858799415525,
-          "Data4": -8754788997057699454
+          "Data1": -4013303002164073125,
+          "Data2": -6883619174298359872,
+          "Data3": -3404781081223023169,
+          "Data4": 2869973276722455336
         },
         "Kind": 4,
         "Name": "onended",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onended' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
@@ -6426,15 +6398,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 6514937971333442904,
-          "Data2": 1605339939990553367,
-          "Data3": 8649377269181611360,
-          "Data4": -815548220103041373
+          "Data1": -7176609266928120457,
+          "Data2": 4349732703759424320,
+          "Data3": -4163249461474639411,
+          "Data4": 5701976940116885641
         },
         "Kind": 4,
         "Name": "onerror",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onerror' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.ErrorEventArgs'.",
@@ -6515,15 +6487,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 5264681173096263623,
-          "Data2": 3413293996421449054,
-          "Data3": -4915639029146791321,
-          "Data4": 2276766245380844262
+          "Data1": -5928536162637392816,
+          "Data2": 6142100344807683104,
+          "Data3": -3596811590863565719,
+          "Data4": -7534480372568569125
         },
         "Kind": 4,
         "Name": "onfocus",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onfocus' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.FocusEventArgs'.",
@@ -6604,15 +6576,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -3204011649038275673,
-          "Data2": -3450025519573967156,
-          "Data3": -5996463708255276791,
-          "Data4": 9076427456527470978
+          "Data1": -1987011932008812887,
+          "Data2": 178801863933697152,
+          "Data3": 2563428185614648208,
+          "Data4": 4196995614701634175
         },
         "Kind": 4,
         "Name": "onfocusin",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onfocusin' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.FocusEventArgs'.",
@@ -6693,15 +6665,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 3359256265860233175,
-          "Data2": 8378472641426025026,
-          "Data3": 4588523503332848510,
-          "Data4": 6229518987924426220
+          "Data1": -2884573570708819815,
+          "Data2": 1497721854793199321,
+          "Data3": 362733338291644162,
+          "Data4": -7549142667218665670
         },
         "Kind": 4,
         "Name": "onfocusout",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onfocusout' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.FocusEventArgs'.",
@@ -6782,15 +6754,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -906139775606799676,
-          "Data2": 7113469978807265369,
-          "Data3": 1424476482720758269,
-          "Data4": 6455260591951807746
+          "Data1": 3673650180024295599,
+          "Data2": -1658413210373613596,
+          "Data3": 2395032103032597737,
+          "Data4": -580023989401313397
         },
         "Kind": 4,
         "Name": "onfullscreenchange",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onfullscreenchange' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
@@ -6871,15 +6843,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -3553362850513099910,
-          "Data2": 8293239892428152637,
-          "Data3": -1659792604292423544,
-          "Data4": 2426376512769859442
+          "Data1": -8232939163915440324,
+          "Data2": -8138940292503893993,
+          "Data3": 254429885119085130,
+          "Data4": -3127414563563022836
         },
         "Kind": 4,
         "Name": "onfullscreenerror",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onfullscreenerror' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
@@ -6960,15 +6932,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 5763472179121763256,
-          "Data2": -8647438070383205468,
-          "Data3": 7800357263108244827,
-          "Data4": 1080241736219532685
+          "Data1": -1333570960405192264,
+          "Data2": -350885750566246410,
+          "Data3": 8413605960066937595,
+          "Data4": 5025135258623134270
         },
         "Kind": 4,
         "Name": "ongotpointercapture",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@ongotpointercapture' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.PointerEventArgs'.",
@@ -7049,15 +7021,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 166309003537245786,
-          "Data2": -6280189075238959422,
-          "Data3": -1459821723930846435,
-          "Data4": 8690100068566433664
+          "Data1": 3443765570721849212,
+          "Data2": 6812791517595485618,
+          "Data3": 1598913551642619156,
+          "Data4": 7595821153635025075
         },
         "Kind": 4,
         "Name": "oninput",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@oninput' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.ChangeEventArgs'.",
@@ -7138,15 +7110,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 4773901158770852200,
-          "Data2": 9165328699152355713,
-          "Data3": 8345477066343218097,
-          "Data4": 1320458200716804014
+          "Data1": -5441170686659860627,
+          "Data2": -3537498249137606298,
+          "Data3": -2879153093285670960,
+          "Data4": -5909459688556041023
         },
         "Kind": 4,
         "Name": "oninvalid",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@oninvalid' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
@@ -7227,15 +7199,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -4067320592188883696,
-          "Data2": -4069816667756324951,
-          "Data3": 8833603275105095447,
-          "Data4": 1870613769319544393
+          "Data1": -5191367568344265391,
+          "Data2": 6108128345055404952,
+          "Data3": 3859754279309525517,
+          "Data4": -6150014233616239398
         },
         "Kind": 4,
         "Name": "onkeydown",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onkeydown' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.KeyboardEventArgs'.",
@@ -7316,15 +7288,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -193582352830607028,
-          "Data2": -8983005146030074536,
-          "Data3": -5600426441743465437,
-          "Data4": -642755518529714111
+          "Data1": 4761031054078587624,
+          "Data2": 9024310272945927136,
+          "Data3": 8479268033464717989,
+          "Data4": 3554114784277796438
         },
         "Kind": 4,
         "Name": "onkeypress",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onkeypress' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.KeyboardEventArgs'.",
@@ -7405,15 +7377,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 8725080141161962108,
-          "Data2": 1781692053180903219,
-          "Data3": -2515053946644187092,
-          "Data4": -1855580681328879275
+          "Data1": 3356700849772305665,
+          "Data2": 7475116016933221871,
+          "Data3": 3216583742133438791,
+          "Data4": -2474046246331235091
         },
         "Kind": 4,
         "Name": "onkeyup",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onkeyup' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.KeyboardEventArgs'.",
@@ -7494,15 +7466,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 7046287758325401472,
-          "Data2": -2818839229450225109,
-          "Data3": 4269470710282533328,
-          "Data4": -4074135123920981038
+          "Data1": -6956934916734457786,
+          "Data2": -370922690795758353,
+          "Data3": -7680374338797699668,
+          "Data4": -6715904136122985394
         },
         "Kind": 4,
         "Name": "onload",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onload' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.ProgressEventArgs'.",
@@ -7583,15 +7555,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 6408769420689896937,
-          "Data2": -5406811089613418187,
-          "Data3": -1709359706424932768,
-          "Data4": -3369392326902603968
+          "Data1": 4429812648369083250,
+          "Data2": -4971635973073649670,
+          "Data3": -1130405376879713794,
+          "Data4": 8221707998042664676
         },
         "Kind": 4,
         "Name": "onloadeddata",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onloadeddata' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
@@ -7672,15 +7644,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 5019750602393770422,
-          "Data2": -3168553685200462370,
-          "Data3": 2767472874627142648,
-          "Data4": -3311571319927516205
+          "Data1": -3255802097203871715,
+          "Data2": -3784571676005977644,
+          "Data3": 6507788657101135465,
+          "Data4": -626527398578208459
         },
         "Kind": 4,
         "Name": "onloadedmetadata",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onloadedmetadata' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
@@ -7761,15 +7733,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 3639163023928074582,
-          "Data2": 7380106978459236696,
-          "Data3": -2568296084305174258,
-          "Data4": 4307747361881063939
+          "Data1": 2316766701184944164,
+          "Data2": -8210086658783347414,
+          "Data3": 1701989772482615621,
+          "Data4": -4195669294838604892
         },
         "Kind": 4,
         "Name": "onloadend",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onloadend' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.ProgressEventArgs'.",
@@ -7850,15 +7822,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -1982617884769259022,
-          "Data2": -697909659869088509,
-          "Data3": 1640078240972952740,
-          "Data4": 5012753559588160834
+          "Data1": -1450967189211746503,
+          "Data2": 1480796055779803723,
+          "Data3": -3097847916619989160,
+          "Data4": -7757449312721873380
         },
         "Kind": 4,
         "Name": "onloadstart",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onloadstart' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.ProgressEventArgs'.",
@@ -7939,15 +7911,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -4287693242012095877,
-          "Data2": -7991432921661308584,
-          "Data3": -1869186933390540292,
-          "Data4": -8988462513358722205
+          "Data1": -4294640258763623502,
+          "Data2": -5205096791794726917,
+          "Data3": -5520352721357109228,
+          "Data4": 8915433473592869278
         },
         "Kind": 4,
         "Name": "onlostpointercapture",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onlostpointercapture' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.PointerEventArgs'.",
@@ -8028,15 +8000,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 3226136787579616840,
-          "Data2": -5405166488902960088,
-          "Data3": -3600753380024806424,
-          "Data4": -3434367382032165099
+          "Data1": 8783086871164207317,
+          "Data2": -3600457557296966212,
+          "Data3": 7546772318602821555,
+          "Data4": -2278686881914193258
         },
         "Kind": 4,
         "Name": "onmousedown",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onmousedown' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.MouseEventArgs'.",
@@ -8117,15 +8089,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 5530200062498510997,
-          "Data2": -5817534481878673151,
-          "Data3": -8333094559109931499,
-          "Data4": 763964856598981603
+          "Data1": -6130677335106514105,
+          "Data2": -7496625048124956973,
+          "Data3": -4827682050527277364,
+          "Data4": -4824205802127551177
         },
         "Kind": 4,
         "Name": "onmousemove",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onmousemove' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.MouseEventArgs'.",
@@ -8206,15 +8178,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 2062120098766652447,
-          "Data2": 1624238508881083528,
-          "Data3": -5468813989952936661,
-          "Data4": 3906780472248694880
+          "Data1": -4479221145803770720,
+          "Data2": 8037785508221768220,
+          "Data3": -5158052243198611716,
+          "Data4": 3324474884051449935
         },
         "Kind": 4,
         "Name": "onmouseout",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onmouseout' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.MouseEventArgs'.",
@@ -8295,15 +8267,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 516369545031323830,
-          "Data2": 8547743051807977121,
-          "Data3": -6376241083542973717,
-          "Data4": -1752716287734910727
+          "Data1": -1745239368511971013,
+          "Data2": 1921465519574207867,
+          "Data3": 1384888980466673793,
+          "Data4": 3714877011860238593
         },
         "Kind": 4,
         "Name": "onmouseover",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onmouseover' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.MouseEventArgs'.",
@@ -8384,15 +8356,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -4997679945010528923,
-          "Data2": -6767702631246233512,
-          "Data3": 8166596117378845977,
-          "Data4": 5033885843761825787
+          "Data1": -8551592485814338292,
+          "Data2": -7265879536664016813,
+          "Data3": 7931825376776660144,
+          "Data4": 4146504587744384862
         },
         "Kind": 4,
         "Name": "onmouseup",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onmouseup' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.MouseEventArgs'.",
@@ -8473,15 +8445,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -7413495106814327617,
-          "Data2": -3328678152789820307,
-          "Data3": 7270590530389988318,
-          "Data4": 3967383471439883318
+          "Data1": 7802975935785078921,
+          "Data2": -730509572580564129,
+          "Data3": 4767858486481031418,
+          "Data4": 4185302020687101041
         },
         "Kind": 4,
         "Name": "onmousewheel",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onmousewheel' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.WheelEventArgs'.",
@@ -8562,15 +8534,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -8932850103176805002,
-          "Data2": 1308494819172653129,
-          "Data3": 3272078616232510515,
-          "Data4": 9115531653189290577
+          "Data1": 580887540963863840,
+          "Data2": 7856148916020812982,
+          "Data3": -1558241796254915792,
+          "Data4": -8749775044159052480
         },
         "Kind": 4,
         "Name": "onpaste",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onpaste' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.ClipboardEventArgs'.",
@@ -8651,15 +8623,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -5688619962346895560,
-          "Data2": 5091421932328996369,
-          "Data3": -5207359522265286927,
-          "Data4": -524076614856697275
+          "Data1": 7498913248862605380,
+          "Data2": -2904249713691370675,
+          "Data3": 5950312700139659946,
+          "Data4": -114353164639902538
         },
         "Kind": 4,
         "Name": "onpause",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onpause' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
@@ -8740,15 +8712,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -3859724360869969102,
-          "Data2": -6362298892218723319,
-          "Data3": 8439531411469273176,
-          "Data4": 1080749540643242340
+          "Data1": 8617130099247453359,
+          "Data2": 3113472767804411945,
+          "Data3": -1800912323909352585,
+          "Data4": -1181466608454550169
         },
         "Kind": 4,
         "Name": "onplay",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onplay' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
@@ -8829,15 +8801,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -6461224031194417423,
-          "Data2": -662352559372586472,
-          "Data3": 5506935218093639304,
-          "Data4": -7385898558664943047
+          "Data1": -8847022082592044444,
+          "Data2": 2960395607537147368,
+          "Data3": -2668391952608251020,
+          "Data4": 1873158473908531685
         },
         "Kind": 4,
         "Name": "onplaying",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onplaying' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
@@ -8918,15 +8890,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 1207225278709108122,
-          "Data2": -365227332019059919,
-          "Data3": -3366745947117175630,
-          "Data4": 844328457128657643
+          "Data1": -5602968333095885843,
+          "Data2": -1423906046093438658,
+          "Data3": 3671518220053975763,
+          "Data4": 1061475555527291716
         },
         "Kind": 4,
         "Name": "onpointercancel",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onpointercancel' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.PointerEventArgs'.",
@@ -9007,15 +8979,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 1561973085677904168,
-          "Data2": 1702939948541417564,
-          "Data3": 8220586725934887283,
-          "Data4": -5994551599821248277
+          "Data1": -7891892308189248607,
+          "Data2": 5384580087226315077,
+          "Data3": -1209728618953688077,
+          "Data4": 1880570027920826800
         },
         "Kind": 4,
         "Name": "onpointerdown",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onpointerdown' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.PointerEventArgs'.",
@@ -9096,15 +9068,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -5279490247902023596,
-          "Data2": -2118097762687744294,
-          "Data3": -732091031640842434,
-          "Data4": -109681017045434690
+          "Data1": 8903254458801451795,
+          "Data2": 1859894788179887146,
+          "Data3": -8996966282619133838,
+          "Data4": 534636448479668184
         },
         "Kind": 4,
         "Name": "onpointerenter",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onpointerenter' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.PointerEventArgs'.",
@@ -9185,15 +9157,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 1906863734938331426,
-          "Data2": 6447757199965748006,
-          "Data3": 587012941139741102,
-          "Data4": -5317246306075443799
+          "Data1": -7475063992891163635,
+          "Data2": 1220302420999232810,
+          "Data3": 7614233539302615893,
+          "Data4": 4084005243758745282
         },
         "Kind": 4,
         "Name": "onpointerleave",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onpointerleave' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.PointerEventArgs'.",
@@ -9274,15 +9246,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -532776791638492030,
-          "Data2": -5592441320084346358,
-          "Data3": -2884651376559579640,
-          "Data4": -3817549243268393166
+          "Data1": -8595667723930662933,
+          "Data2": -7602473956622330855,
+          "Data3": -4890615689204664786,
+          "Data4": -6802879770707011977
         },
         "Kind": 4,
         "Name": "onpointerlockchange",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onpointerlockchange' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
@@ -9363,15 +9335,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -517521079015279885,
-          "Data2": 4610881633303704077,
-          "Data3": -6336438047253282763,
-          "Data4": 82850920907217629
+          "Data1": -3798342977873575858,
+          "Data2": -1330547941589452878,
+          "Data3": -8788433392220964754,
+          "Data4": -285242778745148497
         },
         "Kind": 4,
         "Name": "onpointerlockerror",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onpointerlockerror' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
@@ -9452,15 +9424,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 4811354440478396091,
-          "Data2": -5272393707337596793,
-          "Data3": 7424155893357470095,
-          "Data4": 3322844638719152115
+          "Data1": -1002961875872903933,
+          "Data2": -8501056536725695347,
+          "Data3": 7346502066694828811,
+          "Data4": -8290112874376605008
         },
         "Kind": 4,
         "Name": "onpointermove",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onpointermove' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.PointerEventArgs'.",
@@ -9541,15 +9513,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -2850983604595072768,
-          "Data2": 5000439081803907883,
-          "Data3": -7802505902655508381,
-          "Data4": -2077945758250239717
+          "Data1": -8494812698373509728,
+          "Data2": 1357143371543655905,
+          "Data3": 6446037079486841099,
+          "Data4": 9083633462493827569
         },
         "Kind": 4,
         "Name": "onpointerout",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onpointerout' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.PointerEventArgs'.",
@@ -9630,15 +9602,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -8980098538242534566,
-          "Data2": -898287357789930478,
-          "Data3": 4203386504916828588,
-          "Data4": -670822678274050204
+          "Data1": 4001054494114899517,
+          "Data2": 3945277356350631941,
+          "Data3": -6466621206264929688,
+          "Data4": 8240311686972442516
         },
         "Kind": 4,
         "Name": "onpointerover",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onpointerover' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.PointerEventArgs'.",
@@ -9719,15 +9691,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 8279144726782354765,
-          "Data2": -6472564107410352880,
-          "Data3": -7403469033462374148,
-          "Data4": 963270821022843006
+          "Data1": 2598061651190805076,
+          "Data2": 5863988748131685044,
+          "Data3": -6100355665246168850,
+          "Data4": -2727749455799076953
         },
         "Kind": 4,
         "Name": "onpointerup",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onpointerup' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.PointerEventArgs'.",
@@ -9808,15 +9780,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 658449460329369566,
-          "Data2": -2799396537299101735,
-          "Data3": 293558085727245303,
-          "Data4": -3790609375946992883
+          "Data1": -8237768863401008635,
+          "Data2": -6392181784194699688,
+          "Data3": 8062070575045792493,
+          "Data4": 8303223697486494931
         },
         "Kind": 4,
         "Name": "onprogress",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onprogress' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.ProgressEventArgs'.",
@@ -9897,15 +9869,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -2679765850869693075,
-          "Data2": 2862582468382265847,
-          "Data3": -821492865669843315,
-          "Data4": 2790112669367256534
+          "Data1": -4936768073952717182,
+          "Data2": 4309440371574007156,
+          "Data3": -5713805962347819893,
+          "Data4": -3396063152642351635
         },
         "Kind": 4,
         "Name": "onratechange",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onratechange' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
@@ -9986,15 +9958,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 8985279445250997276,
-          "Data2": 540975110689250877,
-          "Data3": 3639627812854283856,
-          "Data4": 1852144302883317312
+          "Data1": -2501262965830092085,
+          "Data2": 5215336273336450128,
+          "Data3": -1562528893292134093,
+          "Data4": 5198879099927273842
         },
         "Kind": 4,
         "Name": "onreadystatechange",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onreadystatechange' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
@@ -10075,15 +10047,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -2583473174198958313,
-          "Data2": -7522842022706921702,
-          "Data3": 5894730954907589199,
-          "Data4": -8303419597208926713
+          "Data1": -1838428452110883689,
+          "Data2": 7553854227126636507,
+          "Data3": 8084456009163330638,
+          "Data4": 7881477918415225108
         },
         "Kind": 4,
         "Name": "onreset",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onreset' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
@@ -10164,15 +10136,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 3556463846214841789,
-          "Data2": 8889889027171204391,
-          "Data3": 2526593150731929201,
-          "Data4": -448888922473925603
+          "Data1": 5005498981636718901,
+          "Data2": -7651711331380481962,
+          "Data3": 385197200463370335,
+          "Data4": 3827726029108760085
         },
         "Kind": 4,
         "Name": "onscroll",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onscroll' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
@@ -10253,15 +10225,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 1643865637019148150,
-          "Data2": -1717877034982430976,
-          "Data3": 1926099290068258219,
-          "Data4": 7595098054005347810
+          "Data1": 7647600262225572677,
+          "Data2": -5278257120026301025,
+          "Data3": -3189883374600097830,
+          "Data4": -6084432756261645612
         },
         "Kind": 4,
         "Name": "onseeked",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onseeked' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
@@ -10342,15 +10314,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -3408736269014130133,
-          "Data2": -3979393694190908014,
-          "Data3": -635048190326042007,
-          "Data4": -2778404740415936985
+          "Data1": -952370614936767923,
+          "Data2": 1184530290023076382,
+          "Data3": -2584672852055278154,
+          "Data4": -7256258114102714337
         },
         "Kind": 4,
         "Name": "onseeking",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onseeking' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
@@ -10431,15 +10403,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 2722889492781113082,
-          "Data2": -6491970099718428533,
-          "Data3": -7703846565188653755,
-          "Data4": 4824502882046729776
+          "Data1": 7346522459193365907,
+          "Data2": 8686815897024434764,
+          "Data3": -4904490844593213993,
+          "Data4": -6362743257253693817
         },
         "Kind": 4,
         "Name": "onselect",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onselect' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
@@ -10520,15 +10492,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 8197124592163125619,
-          "Data2": -5355346364958398803,
-          "Data3": 8454415251185329154,
-          "Data4": 6300871219604162902
+          "Data1": 332197739848835815,
+          "Data2": -1492462531666503768,
+          "Data3": -3590234227700456672,
+          "Data4": -5497035487648793951
         },
         "Kind": 4,
         "Name": "onselectionchange",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onselectionchange' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
@@ -10609,15 +10581,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -1027693847460120206,
-          "Data2": 2444680321294347794,
-          "Data3": -5507817362390484195,
-          "Data4": -98940435707133438
+          "Data1": 6309359827168025404,
+          "Data2": -3514346089510394690,
+          "Data3": 1419367193117041269,
+          "Data4": 6932914192311292866
         },
         "Kind": 4,
         "Name": "onselectstart",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onselectstart' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
@@ -10698,15 +10670,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -3825512555875928550,
-          "Data2": 6753348705500088037,
-          "Data3": -6706119968680880327,
-          "Data4": 7175204041878118073
+          "Data1": 1688410633549583160,
+          "Data2": 327192506461719442,
+          "Data3": 5547686859149077910,
+          "Data4": 2933764085652521306
         },
         "Kind": 4,
         "Name": "onstalled",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onstalled' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
@@ -10787,15 +10759,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 942437265761734027,
-          "Data2": -2111440795787306518,
-          "Data3": -1814082313528629712,
-          "Data4": 2494252359197419591
+          "Data1": 3661620865377102549,
+          "Data2": -681902683440892680,
+          "Data3": 4541993409614448514,
+          "Data4": 2609107363981919388
         },
         "Kind": 4,
         "Name": "onstop",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onstop' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
@@ -10876,15 +10848,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -1024442175853194666,
-          "Data2": -5205204041897679136,
-          "Data3": -3361606575560482536,
-          "Data4": -1921725522255271874
+          "Data1": 1939096169862940989,
+          "Data2": -7373527022432280140,
+          "Data3": -4975591400187540781,
+          "Data4": -8570466409610331640
         },
         "Kind": 4,
         "Name": "onsubmit",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onsubmit' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
@@ -10965,15 +10937,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 4506054541655736535,
-          "Data2": -7743987553545856630,
-          "Data3": -6533155683488585063,
-          "Data4": -7951505895889218922
+          "Data1": 7535722093361150456,
+          "Data2": 5740167801558093779,
+          "Data3": -6052372986119315635,
+          "Data4": 6652726066617004679
         },
         "Kind": 4,
         "Name": "onsuspend",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onsuspend' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
@@ -11054,15 +11026,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 1801073014681156224,
-          "Data2": -5867361931937073426,
-          "Data3": 3030705253197157473,
-          "Data4": 1927540311875038556
+          "Data1": -3909518133204276335,
+          "Data2": 8868889773558877181,
+          "Data3": 2675603191129626679,
+          "Data4": 2623918354430098905
         },
         "Kind": 4,
         "Name": "ontimeout",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@ontimeout' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.ProgressEventArgs'.",
@@ -11143,15 +11115,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 1585987975468545902,
-          "Data2": 886091750321390467,
-          "Data3": 1257446518497528107,
-          "Data4": 8011703156656178995
+          "Data1": 466951245571178513,
+          "Data2": 7141459389790772355,
+          "Data3": 6698923353830486979,
+          "Data4": -7252200469685426111
         },
         "Kind": 4,
         "Name": "ontimeupdate",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@ontimeupdate' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
@@ -11232,15 +11204,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 291035363695729091,
-          "Data2": 6893541063739574207,
-          "Data3": -5144998657411793967,
-          "Data4": -9115086874812061231
+          "Data1": -4386347586904684680,
+          "Data2": 7252143553104847600,
+          "Data3": -4474752866488309541,
+          "Data4": 3983314518673848984
         },
         "Kind": 4,
         "Name": "ontouchcancel",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@ontouchcancel' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.TouchEventArgs'.",
@@ -11321,15 +11293,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -5531089661319775264,
-          "Data2": 7865079514654769418,
-          "Data3": -7857962113040901178,
-          "Data4": -9129342296398318399
+          "Data1": -132712729906153394,
+          "Data2": -1244787653057345236,
+          "Data3": 7253987029776113907,
+          "Data4": -7674402524479119695
         },
         "Kind": 4,
         "Name": "ontouchend",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@ontouchend' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.TouchEventArgs'.",
@@ -11410,15 +11382,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -284396234438941911,
-          "Data2": -8963429455709704649,
-          "Data3": -2400320431405474354,
-          "Data4": 1082991907523153070
+          "Data1": 8236878446291261568,
+          "Data2": 320407979455912933,
+          "Data3": -7287949838730636577,
+          "Data4": 7737372515904070860
         },
         "Kind": 4,
         "Name": "ontouchenter",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@ontouchenter' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.TouchEventArgs'.",
@@ -11499,15 +11471,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 8155000251380845582,
-          "Data2": -2031789637269928151,
-          "Data3": 8597335639344149469,
-          "Data4": -3683112501308654325
+          "Data1": -4630864051799513008,
+          "Data2": 403967221173561651,
+          "Data3": 7422479236734260629,
+          "Data4": -2391525966893860059
         },
         "Kind": 4,
         "Name": "ontouchleave",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@ontouchleave' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.TouchEventArgs'.",
@@ -11588,15 +11560,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 2130808782316424776,
-          "Data2": -7334381716518818691,
-          "Data3": -1918239275759093748,
-          "Data4": 880534925642289924
+          "Data1": -1024967327966135122,
+          "Data2": -6757500918734423829,
+          "Data3": 2461498897994767501,
+          "Data4": 6048070243565864363
         },
         "Kind": 4,
         "Name": "ontouchmove",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@ontouchmove' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.TouchEventArgs'.",
@@ -11677,15 +11649,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -4574951883656726389,
-          "Data2": -6698187581312714933,
-          "Data3": -1160290242250126904,
-          "Data4": -342664152163104969
+          "Data1": -7990604265497049556,
+          "Data2": 8053648384998921738,
+          "Data3": -2635032494613256229,
+          "Data4": 4527998916871532983
         },
         "Kind": 4,
         "Name": "ontouchstart",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@ontouchstart' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.TouchEventArgs'.",
@@ -11766,15 +11738,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 7500875846908138332,
-          "Data2": 8969803573568683044,
-          "Data3": 2438233827844995915,
-          "Data4": -8525928062139338169
+          "Data1": -6677586859535400603,
+          "Data2": -7681340546059666583,
+          "Data3": 4717743000940783948,
+          "Data4": 6501577260659061074
         },
         "Kind": 4,
         "Name": "onvolumechange",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onvolumechange' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
@@ -11855,15 +11827,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -5851579031471341454,
-          "Data2": 4198909629235827160,
-          "Data3": -650499395763029330,
-          "Data4": 3626933763798813080
+          "Data1": 7738224960219049365,
+          "Data2": -8727634495710852724,
+          "Data3": -5137637194961559489,
+          "Data4": 6635215261071905529
         },
         "Kind": 4,
         "Name": "onwaiting",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onwaiting' attribute to the provided string or delegate value. A delegate value should be of type 'System.EventArgs'.",
@@ -11944,15 +11916,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 3566268670100309907,
-          "Data2": 6942177304039296315,
-          "Data3": -671834640180152526,
-          "Data4": -1075754356475277385
+          "Data1": 1859739731295629435,
+          "Data2": -6915267231644324749,
+          "Data3": 6893125846302671190,
+          "Data4": -6452619227411586839
         },
         "Kind": 4,
         "Name": "onwheel",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.EventHandlers",
         "Documentation": "Sets the '@onwheel' attribute to the provided string or delegate value. A delegate value should be of type 'Microsoft.AspNetCore.Components.Web.WheelEventArgs'.",
@@ -12033,15 +12005,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -9112122142522199983,
-          "Data2": -8465175693300246826,
-          "Data3": -1754848942647641190,
-          "Data4": 5623474339613485754
+          "Data1": 8463175257538048563,
+          "Data2": -4231739786926954164,
+          "Data3": 1743841746805675090,
+          "Data4": -14881606391606902
         },
         "Kind": 9,
         "Name": "Attributes",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Attributes",
         "Documentation": "Merges a collection of attributes into the current element or component.",
@@ -14688,15 +14660,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 4391561875534801815,
-          "Data2": -956511176715928478,
-          "Data3": -8468770100382181635,
-          "Data4": -5145693172718756780
+          "Data1": -2714455111096947881,
+          "Data2": -4854645335853029670,
+          "Data3": 6223752911072183392,
+          "Data4": -204392762754581363
         },
         "Kind": 1,
         "Name": "Bind",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Bind",
         "Documentation": "Binds the provided expression to an attribute and a change event, based on the naming of the bind attribute. For example: <code>@bind-value=\"...\"</code> and <code>@bind-value:event=\"onchange\"</code> will assign the current value of the expression to the 'value' attribute, and assign a delegate that attempts to set the value to the 'onchange' attribute.",
@@ -14768,15 +14740,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 5950451187695188189,
-          "Data2": -1955530527899960017,
-          "Data3": 5367559730566177959,
-          "Data4": 2596754125623041338
+          "Data1": -5660849645649795105,
+          "Data2": 5400561608302150694,
+          "Data3": -7117579241877107503,
+          "Data4": 21215395254754346
         },
         "Kind": 1,
         "Name": "Bind",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
         "Documentation": "Binds the provided expression to the 'value' attribute and a change event delegate to the 'onchange' attribute.",
@@ -14860,15 +14832,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 7654084497568398338,
-          "Data2": 4771687216927676646,
-          "Data3": -8353501808707104811,
-          "Data4": 5314158051545336851
+          "Data1": -8894363933659322560,
+          "Data2": 5115449923822174960,
+          "Data3": 3494355840192470136,
+          "Data4": 2464051820804380450
         },
         "Kind": 1,
         "Name": "Bind",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
         "Documentation": "Binds the provided expression to the 'value' attribute and a change event delegate to the 'onchange' attribute.",
@@ -14952,15 +14924,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -4481132790603321250,
-          "Data2": -7732788133652387192,
-          "Data3": -5288167401435027097,
-          "Data4": 9008311733860009344
+          "Data1": -6866188060055994284,
+          "Data2": 8372087747087196583,
+          "Data3": 369635543166793914,
+          "Data4": 557281029549374482
         },
         "Kind": 1,
         "Name": "Bind",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
         "Documentation": "Binds the provided expression to the 'checked' attribute and a change event delegate to the 'onchange' attribute.",
@@ -15051,15 +15023,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -1211063966907930387,
-          "Data2": 1898372886137318655,
-          "Data3": -4810190917985036120,
-          "Data4": 2410489127815436434
+          "Data1": 5020256439571540851,
+          "Data2": 4470987939487230408,
+          "Data3": -6460437924937080268,
+          "Data4": 6213413788929326267
         },
         "Kind": 1,
         "Name": "Bind_value",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
         "Documentation": "Binds the provided expression to the 'value' attribute and a change event delegate to the 'onchange' attribute.",
@@ -15150,15 +15122,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 365628434018860227,
-          "Data2": 5724196871853609086,
-          "Data3": -4706619473448892742,
-          "Data4": 8604207016608491044
+          "Data1": -623685708387519184,
+          "Data2": 7825913448081020206,
+          "Data3": 5254161722201452749,
+          "Data4": -2881208119272059656
         },
         "Kind": 1,
         "Name": "Bind",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
         "Documentation": "Binds the provided expression to the 'value' attribute and a change event delegate to the 'onchange' attribute.",
@@ -15249,15 +15221,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -7484615519939574131,
-          "Data2": -227729822893027875,
-          "Data3": 6966616636887933445,
-          "Data4": -1341253244439296559
+          "Data1": -7511011947137336048,
+          "Data2": -7435634305292577282,
+          "Data3": -1604439952434412222,
+          "Data4": -59819981520713072
         },
         "Kind": 1,
         "Name": "Bind_value",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
         "Documentation": "Binds the provided expression to the 'value' attribute and a change event delegate to the 'onchange' attribute.",
@@ -15348,15 +15320,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -8423321996691540803,
-          "Data2": 7930182019931676402,
-          "Data3": -1536098927211582673,
-          "Data4": 5875889038439086760
+          "Data1": -3082548999784966401,
+          "Data2": -8479076948659531523,
+          "Data3": -673841950695010211,
+          "Data4": -394569740049919679
         },
         "Kind": 1,
         "Name": "Bind",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
         "Documentation": "Binds the provided expression to the 'value' attribute and a change event delegate to the 'onchange' attribute.",
@@ -15447,15 +15419,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -6038519268935939291,
-          "Data2": -5730177329024628763,
-          "Data3": 3430138326632327725,
-          "Data4": 5121365313080396404
+          "Data1": -1973401818762920585,
+          "Data2": -6759379325321836160,
+          "Data3": -8157536610978672926,
+          "Data4": 3763892566399779908
         },
         "Kind": 1,
         "Name": "Bind_value",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
         "Documentation": "Binds the provided expression to the 'value' attribute and a change event delegate to the 'onchange' attribute.",
@@ -15546,15 +15518,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 3026091489472733273,
-          "Data2": 5854779358136562028,
-          "Data3": 5172372333471825380,
-          "Data4": -3051801575575010913
+          "Data1": 4530697200866975828,
+          "Data2": 8655420300960832967,
+          "Data3": -6057087910276778641,
+          "Data4": -9178335944844890333
         },
         "Kind": 1,
         "Name": "Bind",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
         "Documentation": "Binds the provided expression to the 'value' attribute and a change event delegate to the 'onchange' attribute.",
@@ -15645,15 +15617,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -1057555474399414348,
-          "Data2": 6492963781369625556,
-          "Data3": -3642724862637042241,
-          "Data4": 647736185443893234
+          "Data1": -1617707371995664838,
+          "Data2": 1604488100475726103,
+          "Data3": -6660121274585854358,
+          "Data4": 494250725497993421
         },
         "Kind": 1,
         "Name": "Bind_value",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
         "Documentation": "Binds the provided expression to the 'value' attribute and a change event delegate to the 'onchange' attribute.",
@@ -15744,15 +15716,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -8367003685856593911,
-          "Data2": -7109594633213870040,
-          "Data3": 8232012655553097073,
-          "Data4": -5045215758687817276
+          "Data1": -792269961061875969,
+          "Data2": 6534014721075550489,
+          "Data3": -4579917854700423381,
+          "Data4": 9025989253463767216
         },
         "Kind": 1,
         "Name": "Bind",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
         "Documentation": "Binds the provided expression to the 'value' attribute and a change event delegate to the 'onchange' attribute.",
@@ -15843,15 +15815,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -6929154632423431093,
-          "Data2": -8716374242634241693,
-          "Data3": 4077838595498686137,
-          "Data4": 4230756375127699752
+          "Data1": 5995540140739025433,
+          "Data2": -3987241789529184008,
+          "Data3": 6639165135971642493,
+          "Data4": 7659882061029683273
         },
         "Kind": 1,
         "Name": "Bind",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
         "Documentation": "Binds the provided expression to the 'value' attribute and a change event delegate to the 'onchange' attribute.",
@@ -15942,15 +15914,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 6453544181857330170,
-          "Data2": 6444005637358770145,
-          "Data3": 3986041199228290001,
-          "Data4": -8706032932100597446
+          "Data1": -6261636131741185557,
+          "Data2": 2872669915545827475,
+          "Data3": 2268563508957978115,
+          "Data4": -3649432903428295279
         },
         "Kind": 1,
         "Name": "Bind_value",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
         "Documentation": "Binds the provided expression to the 'value' attribute and a change event delegate to the 'onchange' attribute.",
@@ -16041,15 +16013,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -4382895735328459299,
-          "Data2": -6403685452972441973,
-          "Data3": 6922906277367844981,
-          "Data4": -7489982844139790759
+          "Data1": 8242228234053108228,
+          "Data2": 5358921407555310373,
+          "Data3": 6617299012411251835,
+          "Data4": -556937113770025084
         },
         "Kind": 1,
         "Name": "Bind",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
         "Documentation": "Binds the provided expression to the 'value' attribute and a change event delegate to the 'onchange' attribute.",
@@ -16140,15 +16112,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 4039907783440482065,
-          "Data2": -746156312197479074,
-          "Data3": 3324274790218347965,
-          "Data4": -7004575601401635161
+          "Data1": 4331974651905388039,
+          "Data2": 5186299138218590159,
+          "Data3": 3626308575477586574,
+          "Data4": 6266325093170665878
         },
         "Kind": 1,
         "Name": "Bind_value",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
         "Documentation": "Binds the provided expression to the 'value' attribute and a change event delegate to the 'onchange' attribute.",
@@ -16232,15 +16204,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 8000635063691497294,
-          "Data2": 7988276544015174535,
-          "Data3": -7633548029012387752,
-          "Data4": 5107496643092722797
+          "Data1": -224783421023125553,
+          "Data2": -1824893304790330651,
+          "Data3": 1742398614858146626,
+          "Data4": -3830370731541489779
         },
         "Kind": 1,
         "Name": "Bind",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Web.BindAttributes",
         "Documentation": "Binds the provided expression to the 'value' attribute and a change event delegate to the 'onchange' attribute.",
@@ -16369,15 +16341,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -8250041567269237118,
-          "Data2": 6188457755216680615,
-          "Data3": -1019921176710986368,
-          "Data4": -1783854275305292852
+          "Data1": -3898525114664836389,
+          "Data2": -7380923922459543342,
+          "Data3": 6556864818384045614,
+          "Data4": -8494577977420650399
         },
         "Kind": 1,
         "Name": "Microsoft.AspNetCore.Components.Forms.InputCheckbox",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Flags": 5,
+        "Flags": 3,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputCheckbox",
         "Documentation": "Binds the provided expression to the 'Value' property and a change event delegate to the 'ValueChanged' property of the component.",
@@ -16460,15 +16432,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -6399488234095379308,
-          "Data2": -6155420397849048215,
-          "Data3": -7174538044449801279,
-          "Data4": 2689027084461765290
+          "Data1": -7542015568697440048,
+          "Data2": 1643821024537907881,
+          "Data3": 5210671853718469363,
+          "Data4": 567632986812030419
         },
         "Kind": 1,
         "Name": "Microsoft.AspNetCore.Components.Forms.InputDate<TValue>",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Flags": 5,
+        "Flags": 3,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputDate<TValue>",
         "Documentation": "Binds the provided expression to the 'Value' property and a change event delegate to the 'ValueChanged' property of the component.",
@@ -16551,15 +16523,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -5070560445255616256,
-          "Data2": 6208394044454052347,
-          "Data3": 5963542843077751686,
-          "Data4": 366883425979988733
+          "Data1": -5435983289579385098,
+          "Data2": 7758805843327377320,
+          "Data3": 8161604199684222199,
+          "Data4": 5021397079890051415
         },
         "Kind": 1,
         "Name": "Microsoft.AspNetCore.Components.Forms.InputNumber<TValue>",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Flags": 5,
+        "Flags": 3,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputNumber<TValue>",
         "Documentation": "Binds the provided expression to the 'Value' property and a change event delegate to the 'ValueChanged' property of the component.",
@@ -16642,15 +16614,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 2232175774133318960,
-          "Data2": 717458839186121271,
-          "Data3": -4463789814034383238,
-          "Data4": -790839237175645029
+          "Data1": -2041146974024111238,
+          "Data2": 6334694256986847031,
+          "Data3": -3390224087718166858,
+          "Data4": -7718698448317607352
         },
         "Kind": 1,
         "Name": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Flags": 5,
+        "Flags": 3,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputSelect<TValue>",
         "Documentation": "Binds the provided expression to the 'Value' property and a change event delegate to the 'ValueChanged' property of the component.",
@@ -16733,15 +16705,15 @@
       },
       {
         "__Checksum": {
-          "Data1": 9053411864242703417,
-          "Data2": -3534015950205397373,
-          "Data3": 2781420632308639022,
-          "Data4": -2639377777095137267
+          "Data1": 8573228023414241920,
+          "Data2": -9118219802177626079,
+          "Data3": -200288128946425320,
+          "Data4": 5512836672050316697
         },
         "Kind": 1,
         "Name": "Microsoft.AspNetCore.Components.Forms.InputText",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Flags": 5,
+        "Flags": 3,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputText",
         "Documentation": "Binds the provided expression to the 'Value' property and a change event delegate to the 'ValueChanged' property of the component.",
@@ -16824,15 +16796,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -1187322938453338183,
-          "Data2": 7337565515429811535,
-          "Data3": 3107630398269616839,
-          "Data4": 4270467777839881653
+          "Data1": -470190776330200511,
+          "Data2": -5647775161556861075,
+          "Data3": -3529086093853060486,
+          "Data4": 227953970275847026
         },
         "Kind": 1,
         "Name": "Microsoft.AspNetCore.Components.Forms.InputTextArea",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Flags": 5,
+        "Flags": 3,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Forms.InputTextArea",
         "Documentation": "Binds the provided expression to the 'Value' property and a change event delegate to the 'ValueChanged' property of the component.",
@@ -16870,15 +16842,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -2226479883383994886,
-          "Data2": -4770875525310991467,
-          "Data3": 4818626703383668031,
-          "Data4": -7551959541192864800
+          "Data1": 4028273042285928419,
+          "Data2": 4824466181009052671,
+          "Data3": -5060066855000146294,
+          "Data4": -5069824833426401346
         },
         "Kind": 7,
         "Name": "Ref",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Ref",
         "Documentation": "Populates the specified field or property with a reference to the element or component.",
@@ -16913,15 +16885,15 @@
       },
       {
         "__Checksum": {
-          "Data1": -5043090425951915092,
-          "Data2": 6789285822338195324,
-          "Data3": 3796092400903520835,
-          "Data4": -2391131352617391318
+          "Data1": -4946168835527868802,
+          "Data2": -1734447575616518157,
+          "Data3": 5823136327011871537,
+          "Data4": 6670934080194898359
         },
         "Kind": 6,
         "Name": "Key",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Flags": 17,
+        "Flags": 9,
         "Runtime": 0,
         "DisplayName": "Microsoft.AspNetCore.Components.Key",
         "Documentation": "Ensures that the component or element will be preserved across renders if (and only if) the supplied key value matches.",

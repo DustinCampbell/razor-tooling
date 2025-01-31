@@ -14,7 +14,7 @@ internal static class TagHelperDescriptorExtensions
 {
     public static bool IsAnyComponentDocumentTagHelper(this TagHelperDescriptor tagHelper)
     {
-        return tagHelper.IsComponentTagHelper ||
+        return tagHelper.Kind == TagHelperKind.Component ||
                tagHelper.IsBindTagHelper() ||
                tagHelper.IsChildContentTagHelper ||
                tagHelper.IsEventHandlerTagHelper() ||
@@ -46,7 +46,7 @@ internal static class TagHelperDescriptorExtensions
     public static bool IsGenericTypedComponent(this TagHelperDescriptor tagHelper)
     {
         return
-            tagHelper.IsComponentTagHelper &&
+            tagHelper.Kind == TagHelperKind.Component &&
             tagHelper.Metadata.TryGetValue(ComponentMetadata.Component.GenericTypedKey, out var value) &&
             string.Equals(bool.TrueString, value);
     }
@@ -71,7 +71,7 @@ internal static class TagHelperDescriptorExtensions
     {
         typeName = null;
 
-        if (!tagHelper.IsComponentTagHelper)
+        if (tagHelper.Kind != TagHelperKind.Component)
         {
             return false;
         }
