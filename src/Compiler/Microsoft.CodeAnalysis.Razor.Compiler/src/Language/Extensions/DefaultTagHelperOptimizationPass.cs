@@ -212,7 +212,7 @@ internal class DefaultTagHelperOptimizationPass : IntermediateNodePassBase, IRaz
     {
         foreach (var tagHelper in node.TagHelpers)
         {
-            if (tagHelper.KindUsesDefaultTagHelperRuntime())
+            if (tagHelper.Runtime == RuntimeKind.Default)
             {
                 return true;
             }
