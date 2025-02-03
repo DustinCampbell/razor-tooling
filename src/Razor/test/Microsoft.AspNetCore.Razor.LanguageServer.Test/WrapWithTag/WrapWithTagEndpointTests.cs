@@ -24,7 +24,7 @@ public class WrapWithTagEndpointTest(ITestOutputHelper testOutput) : LanguageSer
     {
         // Arrange
         var codeDocument = CreateCodeDocument("<div></div>");
-        var uri = new Uri("file://path/test.razor");
+        var uri = new Uri("file://path/to/test.razor");
         var documentContext = CreateDocumentContext(uri, codeDocument);
 
         var clientConnection = TestMocks.CreateClientConnection(builder =>
@@ -54,7 +54,7 @@ public class WrapWithTagEndpointTest(ITestOutputHelper testOutput) : LanguageSer
     {
         // Arrange
         var codeDocument = CreateCodeDocument("@(counter)");
-        var uri = new Uri("file://path/test.razor");
+        var uri = new Uri("file://path/to/test.razor");
         var documentContext = CreateDocumentContext(uri, codeDocument);
 
         var clientConnection = TestMocks.CreateClientConnection(builder =>
@@ -85,7 +85,7 @@ public class WrapWithTagEndpointTest(ITestOutputHelper testOutput) : LanguageSer
     {
         // Arrange
         var codeDocument = CreateCodeDocument("@counter");
-        var uri = new Uri("file://path/test.razor");
+        var uri = new Uri("file://path/to/test.razor");
         var documentContext = CreateDocumentContext(uri, codeDocument);
 
         var clientConnection = TestMocks.CreateClientConnection(builder =>
@@ -120,7 +120,7 @@ public class WrapWithTagEndpointTest(ITestOutputHelper testOutput) : LanguageSer
             </div>|]
             """);
         var codeDocument = CreateCodeDocument(input.Text);
-        var uri = new Uri("file://path/test.razor");
+        var uri = new Uri("file://path/to/test.razor");
         var documentContext = CreateDocumentContext(uri, codeDocument);
         var response = new WrapWithTagResponse();
 
@@ -151,7 +151,7 @@ public class WrapWithTagEndpointTest(ITestOutputHelper testOutput) : LanguageSer
     {
         // Arrange
         var codeDocument = CreateCodeDocument("@counter");
-        var uri = new Uri("file://path/test.razor");
+        var uri = new Uri("file://path/to/test.razor");
         var documentContext = CreateDocumentContext(uri, codeDocument);
 
         var clientConnection = TestMocks.CreateClientConnection(builder =>
@@ -182,7 +182,7 @@ public class WrapWithTagEndpointTest(ITestOutputHelper testOutput) : LanguageSer
     {
         // Arrange
         var codeDocument = CreateCodeDocument("@counter");
-        var uri = new Uri("file://path/test.razor");
+        var uri = new Uri("file://path/to/test.razor");
         var documentContext = CreateDocumentContext(uri, codeDocument);
 
         var clientConnection = TestMocks.CreateClientConnection(builder =>
@@ -211,7 +211,7 @@ public class WrapWithTagEndpointTest(ITestOutputHelper testOutput) : LanguageSer
     public async Task Handle_DocumentNotFound_ReturnsNull()
     {
         // Arrange
-        var missingUri = new Uri("file://path/nottest.razor");
+        var missingUri = new Uri("file://path/to/nottest.razor");
 
         var clientConnection = TestMocks.CreateClientConnection(builder =>
         {
@@ -242,7 +242,7 @@ public class WrapWithTagEndpointTest(ITestOutputHelper testOutput) : LanguageSer
         // Arrange
         var codeDocument = CreateCodeDocument("<div></div>");
         codeDocument.SetUnsupported();
-        var uri = new Uri("file://path/test.razor");
+        var uri = new Uri("file://path/to/test.razor");
         var documentContext = CreateDocumentContext(uri, codeDocument);
 
         var clientConnection = TestMocks.CreateClientConnection(builder =>
@@ -285,7 +285,7 @@ public class WrapWithTagEndpointTest(ITestOutputHelper testOutput) : LanguageSer
             </div>
             """;
 
-        var uri = new Uri("file://path.razor");
+        var uri = new Uri("file://path/to/test.razor");
         var factory = CreateDocumentContextFactory(uri, input);
         Assert.True(factory.TryCreate(uri, out var context));
         var inputSourceText = await context.GetSourceTextAsync(DisposalToken);
@@ -324,7 +324,7 @@ public class WrapWithTagEndpointTest(ITestOutputHelper testOutput) : LanguageSer
             </div>
             """;
 
-        var uri = new Uri("file://path.razor");
+        var uri = new Uri("file://path/to/test.razor");
         var factory = CreateDocumentContextFactory(uri, input);
         Assert.True(factory.TryCreate(uri, out var context));
         var inputSourceText = await context.GetSourceTextAsync(DisposalToken);
@@ -364,7 +364,7 @@ public class WrapWithTagEndpointTest(ITestOutputHelper testOutput) : LanguageSer
             </div>
             """;
 
-        var uri = new Uri("file://path.razor");
+        var uri = new Uri("file://path/to/test.razor");
         var factory = CreateDocumentContextFactory(uri, input);
         Assert.True(factory.TryCreate(uri, out var context));
         var inputSourceText = await context.GetSourceTextAsync(DisposalToken);

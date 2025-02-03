@@ -390,7 +390,8 @@ public class RazorComponentDefinitionHelpersTest(ITestOutputHelper testOutput) :
 
         var codeDocument = CreateCodeDocument(content);
         var expectedRange = codeDocument.Source.Text.GetRange(selection);
-        var snapshot = TestDocumentSnapshot.Create("test.razor", codeDocument);
+        var filePath = PathUtilities.CreateRootedPath("path", "to", "test.razor");
+        var snapshot = TestDocumentSnapshot.Create(filePath, codeDocument);
 
         var documentMappingService = new LspDocumentMappingService(FilePathService, new TestDocumentContextFactory(), LoggerFactory);
 

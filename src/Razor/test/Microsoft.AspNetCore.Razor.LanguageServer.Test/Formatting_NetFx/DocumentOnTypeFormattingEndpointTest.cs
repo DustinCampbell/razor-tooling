@@ -20,7 +20,7 @@ public class DocumentOnTypeFormattingEndpointTest(ITestOutputHelper testOutput) 
     public async Task Handle_OnTypeFormatting_FormattingDisabled_ReturnsNull()
     {
         // Arrange
-        var uri = new Uri("file://path/test.razor");
+        var uri = new Uri("file://path/to/test.razor");
         var formattingService = new DummyRazorFormattingService();
 
         var optionsMonitor = GetOptionsMonitor(enableFormatting: false);
@@ -46,9 +46,9 @@ public class DocumentOnTypeFormattingEndpointTest(ITestOutputHelper testOutput) 
  if(true){}
 }";
         var codeDocument = CreateCodeDocument(content, sourceMappings: [new SourceMapping(new SourceSpan(17, 0), new SourceSpan(17, 0))]);
-        var uri = new Uri("file://path/test.razor");
+        var uri = new Uri("file://path/to/test.razor");
 
-        var documentContext = CreateDocumentContext(new Uri("file://path/testDifferentFile.razor"), codeDocument);
+        var documentContext = CreateDocumentContext(new Uri("file://path/to/testDifferentFile.razor"), codeDocument);
         var formattingService = new DummyRazorFormattingService();
 
         var optionsMonitor = GetOptionsMonitor(enableFormatting: true);
@@ -80,7 +80,7 @@ public class DocumentOnTypeFormattingEndpointTest(ITestOutputHelper testOutput) 
  if(true){}
 }";
         var codeDocument = CreateCodeDocument(content, sourceMappings: []);
-        var uri = new Uri("file://path/test.razor");
+        var uri = new Uri("file://path/to/test.razor");
 
         var documentContext = CreateDocumentContext(uri, codeDocument);
         var formattingService = new DummyRazorFormattingService(RazorLanguageKind.CSharp);
@@ -114,7 +114,7 @@ public class DocumentOnTypeFormattingEndpointTest(ITestOutputHelper testOutput) 
  if(true){}
 }";
         var codeDocument = CreateCodeDocument(content, sourceMappings: [new SourceMapping(new SourceSpan(17, 0), new SourceSpan(17, 0))]);
-        var uri = new Uri("file://path/test.razor");
+        var uri = new Uri("file://path/to/test.razor");
 
         var documentContext = CreateDocumentContext(uri, codeDocument);
         var formattingService = new DummyRazorFormattingService(RazorLanguageKind.Html);
@@ -148,7 +148,7 @@ public class DocumentOnTypeFormattingEndpointTest(ITestOutputHelper testOutput) 
  if(true){}
 }";
         var codeDocument = CreateCodeDocument(content, sourceMappings: [new SourceMapping(new SourceSpan(17, 0), new SourceSpan(17, 0))]);
-        var uri = new Uri("file://path/test.razor");
+        var uri = new Uri("file://path/to/test.razor");
 
         var documentContext = CreateDocumentContext(uri, codeDocument);
         var formattingService = new DummyRazorFormattingService(RazorLanguageKind.Razor);
@@ -182,7 +182,7 @@ public class DocumentOnTypeFormattingEndpointTest(ITestOutputHelper testOutput) 
  if(true){}
 }";
         var codeDocument = CreateCodeDocument(content, [new SourceMapping(new SourceSpan(17, 0), new SourceSpan(17, 0))]);
-        var uri = new Uri("file://path/test.razor");
+        var uri = new Uri("file://path/to/test.razor");
 
         var documentContextFactory = CreateDocumentContextFactory(uri, codeDocument);
         var formattingService = new DummyRazorFormattingService(RazorLanguageKind.CSharp);
@@ -219,7 +219,7 @@ public class DocumentOnTypeFormattingEndpointTest(ITestOutputHelper testOutput) 
             """;
         var codeDocument = CreateCodeDocument(content.Text, [new SourceMapping(new SourceSpan(17, 0), new SourceSpan(17, 0))]);
         var sourceText = SourceText.From(content.Text);
-        var uri = new Uri("file://path/test.razor");
+        var uri = new Uri("file://path/to/test.razor");
 
         var documentContextFactory = CreateDocumentContextFactory(uri, codeDocument);
         var formattingService = new DummyRazorFormattingService(RazorLanguageKind.CSharp);

@@ -27,7 +27,7 @@ public class TextDocumentTextPresentationEndpointTests(ITestOutputHelper testOut
 
         var codeDocument = CreateCodeDocument(code.Text);
 
-        var uri = new Uri("file://path/test.razor");
+        var uri = new Uri("file://path/to/test.razor");
         var documentContext = CreateDocumentContext(uri, codeDocument);
 
         var clientConnection = CreateClientConnection(response: null, verifiable: true);
@@ -57,7 +57,7 @@ public class TextDocumentTextPresentationEndpointTests(ITestOutputHelper testOut
 
         var codeDocument = CreateCodeDocument(code.Text);
 
-        var uri = new Uri("file://path/test.razor");
+        var uri = new Uri("file://path/to/test.razor");
         var documentContext = CreateDocumentContext(uri, codeDocument);
 
         var clientConnection = StrictMock.Of<IClientConnection>();
@@ -87,7 +87,7 @@ public class TextDocumentTextPresentationEndpointTests(ITestOutputHelper testOut
         TestCode code = "<[|d|]iv></div>";
 
         var codeDocument = CreateCodeDocument(code.Text);
-        var uri = new Uri("file://path/test.razor");
+        var uri = new Uri("file://path/to/test.razor");
         var documentContext = CreateDocumentContext(uri, codeDocument);
 
         var clientConnection = CreateClientConnection(response: null);
@@ -118,7 +118,7 @@ public class TextDocumentTextPresentationEndpointTests(ITestOutputHelper testOut
         var codeDocument = CreateCodeDocument(code.Text);
         codeDocument.SetUnsupported();
 
-        var uri = new Uri("file://path/test.razor");
+        var uri = new Uri("file://path/to/test.razor");
         var documentContext = CreateDocumentContext(uri, codeDocument);
 
         var clientConnection = CreateClientConnection(response: new WorkspaceEdit());

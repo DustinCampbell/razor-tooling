@@ -19,7 +19,7 @@ public partial class OnAutoInsertEndpointTest(ITestOutputHelper testOutput) : Si
     {
         // Arrange
         var codeDocument = CreateCodeDocument();
-        var razorFilePath = "file://path/test.razor";
+        var razorFilePath = "file://path/to/test.razor";
         var uri = new Uri(razorFilePath);
         var languageServer = await CreateLanguageServerAsync(codeDocument, razorFilePath);
         var documentContext = CreateDocumentContext(uri, codeDocument);
@@ -63,7 +63,7 @@ public partial class OnAutoInsertEndpointTest(ITestOutputHelper testOutput) : Si
     {
         // Arrange
         var codeDocument = CreateCodeDocument();
-        var razorFilePath = "file://path/test.razor";
+        var razorFilePath = "file://path/to/test.razor";
         var languageServer = await CreateLanguageServerAsync(codeDocument, razorFilePath);
 
         var optionsMonitor = GetOptionsMonitor();
@@ -76,7 +76,7 @@ public partial class OnAutoInsertEndpointTest(ITestOutputHelper testOutput) : Si
             optionsMonitor,
             null!,
             LoggerFactory);
-        var uri = new Uri("file://path/test.razor");
+        var uri = new Uri("file://path/to/test.razor");
         var @params = new VSInternalDocumentOnAutoInsertParams()
         {
             TextDocument = new TextDocumentIdentifier { Uri = uri, },
@@ -105,7 +105,7 @@ public partial class OnAutoInsertEndpointTest(ITestOutputHelper testOutput) : Si
         // Arrange
         var codeDocument = CreateCodeDocument();
         codeDocument.SetUnsupported();
-        var razorFilePath = "file://path/test.razor";
+        var razorFilePath = "file://path/to/test.razor";
         var uri = new Uri(razorFilePath);
         var languageServer = await CreateLanguageServerAsync(codeDocument, razorFilePath);
         var documentContext = CreateDocumentContext(uri, codeDocument);
@@ -146,7 +146,7 @@ public partial class OnAutoInsertEndpointTest(ITestOutputHelper testOutput) : Si
     {
         // Arrange
         var codeDocument = CreateCodeDocument();
-        var razorFilePath = "file://path/test.razor";
+        var razorFilePath = "file://path/to/test.razor";
         var uri = new Uri(razorFilePath);
         var languageServer = await CreateLanguageServerAsync(codeDocument, razorFilePath);
         var documentContext = CreateDocumentContext(uri, codeDocument);

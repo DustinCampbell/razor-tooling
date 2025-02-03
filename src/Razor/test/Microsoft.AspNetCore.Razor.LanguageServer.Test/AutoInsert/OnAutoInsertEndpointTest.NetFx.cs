@@ -20,7 +20,7 @@ public partial class OnAutoInsertEndpointTest
     {
         // Arrange
         var codeDocument = CreateCodeDocument();
-        var razorFilePath = "file://path/test.razor";
+        var razorFilePath = "file://path/to/test.razor";
         var uri = new Uri(razorFilePath);
         var languageServer = await CreateLanguageServerAsync(codeDocument, razorFilePath);
         var documentContext = CreateDocumentContext(uri, codeDocument);
@@ -62,7 +62,7 @@ public partial class OnAutoInsertEndpointTest
     {
         // Arrange
         var codeDocument = CreateCodeDocument();
-        var razorFilePath = "file://path/test.razor";
+        var razorFilePath = "file://path/to/test.razor";
         var uri = new Uri(razorFilePath);
         var languageServer = await CreateLanguageServerAsync(codeDocument, razorFilePath);
         var documentContext = CreateDocumentContext(uri, codeDocument);
@@ -114,7 +114,7 @@ public partial class OnAutoInsertEndpointTest
     {
         // Arrange
         var codeDocument = CreateCodeDocument();
-        var razorFilePath = "file://path/test.razor";
+        var razorFilePath = "file://path/to/test.razor";
         var uri = new Uri(razorFilePath);
         var languageServer = await CreateLanguageServerAsync(codeDocument, razorFilePath);
         var documentContext = CreateDocumentContext(uri, codeDocument);
@@ -165,7 +165,7 @@ public partial class OnAutoInsertEndpointTest
     {
         // Arrange
         var codeDocument = CreateCodeDocument();
-        var razorFilePath = "file://path/test.razor";
+        var razorFilePath = "file://path/to/test.razor";
         var uri = new Uri(razorFilePath);
         var languageServer = await CreateLanguageServerAsync(codeDocument, razorFilePath);
         var documentContext = CreateDocumentContext(uri, codeDocument);
@@ -207,7 +207,7 @@ public partial class OnAutoInsertEndpointTest
     {
         // Arrange
         var codeDocument = CreateCodeDocument();
-        var razorFilePath = "file://path/test.razor";
+        var razorFilePath = "file://path/to/test.razor";
         var uri = new Uri(razorFilePath);
         var languageServer = await CreateLanguageServerAsync(codeDocument, razorFilePath);
         var documentContext = CreateDocumentContext(uri, codeDocument);
@@ -247,7 +247,7 @@ public partial class OnAutoInsertEndpointTest
     {
         // Arrange
         var codeDocument = CreateCodeDocument();
-        var razorFilePath = "file://path/test.razor";
+        var razorFilePath = "file://path/to/test.razor";
         var uri = new Uri(razorFilePath);
         var languageServer = await CreateLanguageServerAsync(codeDocument, razorFilePath);
         var documentContext = CreateDocumentContext(uri, codeDocument);

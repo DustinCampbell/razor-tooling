@@ -219,8 +219,8 @@ public class TextDocumentUriPresentationEndpointTests(ITestOutputHelper testOutp
     {
         // Arrange
         var codeDocument = CreateCodeDocument("<div></div>");
-        var uri = new Uri("file://path/test.razor");
-        var droppedUri = new Uri("file:///c:/path/MyTagHelper.razor");
+        var uri = new Uri("file://path/to/test.razor");
+        var droppedUri = new Uri("file:///c:/path/to/MyTagHelper.razor");
 
         var documentContextFactory = CreateDocumentContextFactory(uri, codeDocument);
         var documentContext = CreateDocumentContext(uri, codeDocument);
@@ -250,7 +250,7 @@ public class TextDocumentUriPresentationEndpointTests(ITestOutputHelper testOutp
         // Arrange
         var codeDocument = CreateCodeDocument("<div></div>");
 
-        var uri = new Uri("file://path/test.razor");
+        var uri = new Uri("file://path/to/test.razor");
         var documentContextFactory = CreateDocumentContextFactory(uri, codeDocument);
         var documentContext = CreateDocumentContext(uri, codeDocument);
 
@@ -284,8 +284,8 @@ public class TextDocumentUriPresentationEndpointTests(ITestOutputHelper testOutp
         // Arrange
         var codeDocument = CreateCodeDocument("<div></div>");
 
-        var droppedUri = new Uri("file:///c:/path/MyTagHelper.cshtml");
-        var uri = new Uri("file://path/test.razor");
+        var droppedUri = new Uri("file:///c:/path/to/MyTagHelper.cshtml");
+        var uri = new Uri("file://path/to/test.razor");
         var documentContextFactory = CreateDocumentContextFactory(uri, codeDocument);
         var documentContext = CreateDocumentContext(uri, codeDocument);
 
@@ -374,7 +374,7 @@ public class TextDocumentUriPresentationEndpointTests(ITestOutputHelper testOutp
     {
         // Arrange
         var codeDocument = CreateCodeDocument("@counter");
-        var uri = new Uri("file://path/test.razor");
+        var uri = new Uri("file://path/to/test.razor");
         var documentContext = CreateDocumentContext(uri, codeDocument);
         var documentContextFactory = CreateDocumentContextFactory(uri, codeDocument);
 
@@ -401,7 +401,7 @@ public class TextDocumentUriPresentationEndpointTests(ITestOutputHelper testOutp
     {
         // Arrange
         var codeDocument = CreateCodeDocument("<div></div>");
-        var uri = new Uri("file://path/test.razor");
+        var uri = new Uri("file://path/to/test.razor");
         var documentContext = CreateDocumentContext(uri, codeDocument);
 
         var documentContextFactory = CreateDocumentContextFactory(uri, codeDocument);
@@ -430,7 +430,7 @@ public class TextDocumentUriPresentationEndpointTests(ITestOutputHelper testOutp
         // Arrange
         var codeDocument = CreateCodeDocument("<div></div>");
         codeDocument.SetUnsupported();
-        var uri = new Uri("file://path/test.razor");
+        var uri = new Uri("file://path/to/test.razor");
         var documentContext = CreateDocumentContext(uri, codeDocument);
 
         var documentContextFactory = CreateDocumentContextFactory(uri, codeDocument);
@@ -458,7 +458,7 @@ public class TextDocumentUriPresentationEndpointTests(ITestOutputHelper testOutp
     {
         // Arrange
         var codeDocument = CreateCodeDocument("<div></div>");
-        var uri = new Uri("file://path/test.razor");
+        var uri = new Uri("file://path/to/test.razor");
         var documentContext = CreateDocumentContext(uri, codeDocument);
 
         var documentContextFactory = CreateDocumentContextFactory(uri, codeDocument);

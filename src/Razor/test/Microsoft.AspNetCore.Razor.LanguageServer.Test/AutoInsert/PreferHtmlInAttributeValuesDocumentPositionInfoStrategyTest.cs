@@ -41,7 +41,7 @@ public class PreferHtmlInAttributeValuesDocumentPositionInfoStrategyTest(ITestOu
     {
         // Arrange
         TestFileMarkupParser.GetPosition(documentText, out documentText, out var cursorPosition);
-        var razorFilePath = "file://path/test.razor";
+        var razorFilePath = "file://path/to/test.razor";
         var codeDocument = CreateCodeDocument(documentText, filePath: razorFilePath);
         var position = codeDocument.Source.Text.GetPosition(cursorPosition);
         var uri = new Uri(razorFilePath);
