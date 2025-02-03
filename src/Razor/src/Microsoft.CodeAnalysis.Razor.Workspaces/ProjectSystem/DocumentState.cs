@@ -37,17 +37,11 @@ internal sealed partial class DocumentState
         _generatedOutputSource = new();
     }
 
-    public static DocumentState Create(HostDocument hostDocument, RazorProjectItem projectItem, SourceText text)
-    {
-        var properties = RazorSourceDocumentProperties.Create(projectItem.FilePath, projectItem.RelativePhysicalPath);
-        return new(hostDocument, properties, CreateSourceAndVersionSource(text, properties));
-    }
+    public static DocumentState Create(HostDocument hostDocument, RazorSourceDocumentProperties properties, SourceText text)
+        => new(hostDocument, properties, CreateSourceAndVersionSource(text, properties));
 
-    public static DocumentState Create(HostDocument hostDocument, RazorProjectItem projectItem, TextLoader textLoader)
-    {
-        var properties = RazorSourceDocumentProperties.Create(projectItem.FilePath, projectItem.RelativePhysicalPath);
-        return new(hostDocument, properties, CreateSourceAndVersionSource(textLoader, properties));
-    }
+    public static DocumentState Create(HostDocument hostDocument, RazorSourceDocumentProperties properties, TextLoader textLoader)
+        => new(hostDocument, properties, CreateSourceAndVersionSource(textLoader, properties));
 
     private static ConstantSourceAndVersionSource CreateSourceAndVersionSource(
         SourceText text,
@@ -59,18 +53,6 @@ internal sealed partial class DocumentState
         TextLoader textLoader,
         RazorSourceDocumentProperties properties)
         => new(textLoader, properties);
-
-    public static DocumentState Create(HostDocument hostDocument, SourceText text)
-    {
-        var properties = RazorSourceDocumentProperties.Create(hostDocument.FilePath, hostDocument.TargetPath);
-        return new(hostDocument, properties, CreateSourceAndVersionSource(text, properties));
-    }
-
-    public static DocumentState Create(HostDocument hostDocument, TextLoader textLoader)
-    {
-        var properties = RazorSourceDocumentProperties.Create(hostDocument.FilePath, hostDocument.TargetPath);
-        return new(hostDocument, properties, CreateSourceAndVersionSource(textLoader, properties));
-    }
 
     public bool TryGetGeneratedOutput([NotNullWhen(true)] out RazorCodeDocument? result)
         => _generatedOutputSource.TryGetValue(out result);
