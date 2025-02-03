@@ -135,7 +135,7 @@ internal sealed class ProjectState
 
         var projectEngine = ProjectEngine;
         var projectItem = projectEngine.FileSystem.GetItem(hostDocument.TargetPath);
-        var properties = RazorSourceDocumentProperties.Create(projectItem.FilePath, projectItem.RelativePhysicalPath);
+        var properties = RazorSourceDocumentProperties.Create(hostDocument.FilePath, projectItem.RelativePhysicalPath);
 
         var state = DocumentState.Create(hostDocument, properties, text);
 
@@ -156,7 +156,7 @@ internal sealed class ProjectState
 
         var projectEngine = ProjectEngine;
         var projectItem = projectEngine.FileSystem.GetItem(hostDocument.TargetPath);
-        var properties = RazorSourceDocumentProperties.Create(projectItem.FilePath, projectItem.RelativePhysicalPath);
+        var properties = RazorSourceDocumentProperties.Create(hostDocument.FilePath, projectItem.RelativePhysicalPath);
 
         var state = DocumentState.Create(hostDocument, properties, textLoader);
 
