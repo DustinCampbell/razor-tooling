@@ -295,8 +295,11 @@ public abstract class FormattingTestBase : RazorToolingIntegrationTestBase
         var importSource = RazorSourceDocument.Create(importText, RazorSourceDocumentProperties.Create(importPath, importPath));
         var importSnapshotMock = new StrictMock<IDocumentSnapshot>();
         importSnapshotMock
-            .Setup(d => d.GetTextAsync(It.IsAny<CancellationToken>()))
-            .ReturnsAsync(importText);
+            .Setup(d => d.TryGetSource(out importSource))
+            .Returns(true);
+        importSnapshotMock
+            .Setup(d => d.GetSourceAsync(It.IsAny<CancellationToken>()))
+            .ReturnsAsync(importSource);
         importSnapshotMock
             .Setup(d => d.FilePath)
             .Returns(importPath);
@@ -342,33 +345,38 @@ public abstract class FormattingTestBase : RazorToolingIntegrationTestBase
         ImmutableArray<TagHelperDescriptor> tagHelpers,
         bool inGlobalNamespace)
     {
-        var snapshotMock = new StrictMock<IDocumentSnapshot>();
+        var documentSnapshotMock = new StrictMock<IDocumentSnapshot>();
 
-        snapshotMock
+        var sourceDocument = codeDocument.Source;
+
+        documentSnapshotMock
             .Setup(d => d.GetGeneratedOutputAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(codeDocument);
-        snapshotMock
+        documentSnapshotMock
             .Setup(d => d.FilePath)
             .Returns(path);
-        snapshotMock
+        documentSnapshotMock
             .Setup(d => d.Project.Key)
             .Returns(TestProjectKey.Create("/obj"));
-        snapshotMock
+        documentSnapshotMock
             .Setup(d => d.TargetPath)
             .Returns(path);
-        snapshotMock
-            .Setup(d => d.GetTextAsync(It.IsAny<CancellationToken>()))
-            .ReturnsAsync(codeDocument.Source.Text);
-        snapshotMock
+        documentSnapshotMock
+            .Setup(d => d.TryGetSource(out sourceDocument))
+            .Returns(true);
+        documentSnapshotMock
+            .Setup(d => d.GetSourceAsync(It.IsAny<CancellationToken>()))
+            .ReturnsAsync(sourceDocument);
+        documentSnapshotMock
             .Setup(d => d.Project.GetTagHelpersAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(tagHelpers);
-        snapshotMock
+        documentSnapshotMock
             .Setup(d => d.FileKind)
             .Returns(fileKind);
-        snapshotMock
+        documentSnapshotMock
             .Setup(d => d.Version)
             .Returns(1);
-        snapshotMock
+        documentSnapshotMock
             .Setup(d => d.WithText(It.IsAny<SourceText>()))
             .Returns<SourceText>(text =>
             {
@@ -383,12 +391,12 @@ public abstract class FormattingTestBase : RazorToolingIntegrationTestBase
             });
 
 #if !FORMAT_FUSE
-        var generatorMock = snapshotMock.As<IDesignTimeCodeGenerator>();
+        var generatorMock = documentSnapshotMock.As<IDesignTimeCodeGenerator>();
         generatorMock
             .Setup(x => x.GenerateDesignTimeOutputAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(codeDocument);
 #endif
 
-        return snapshotMock.Object;
+        return documentSnapshotMock.Object;
     }
 }

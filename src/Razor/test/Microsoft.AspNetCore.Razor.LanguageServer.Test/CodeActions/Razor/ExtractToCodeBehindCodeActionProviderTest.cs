@@ -394,8 +394,11 @@ public class ExtractToCodeBehindCodeActionProviderTest(ITestOutputHelper testOut
             .Setup(x => x.GetGeneratedOutputAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(codeDocument);
         documentSnapshotMock
-            .Setup(x => x.GetTextAsync(It.IsAny<CancellationToken>()))
-            .ReturnsAsync(codeDocument.Source.Text);
+            .Setup(x => x.TryGetSource(out sourceDocument))
+            .Returns(true);
+        documentSnapshotMock
+            .Setup(x => x.GetSourceAsync(It.IsAny<CancellationToken>()))
+            .ReturnsAsync(sourceDocument);
 
         return new RazorCodeActionContext(
             request,

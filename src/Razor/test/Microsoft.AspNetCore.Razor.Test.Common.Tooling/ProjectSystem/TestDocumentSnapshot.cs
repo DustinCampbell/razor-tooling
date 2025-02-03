@@ -72,11 +72,11 @@ internal sealed class TestDocumentSnapshot : IDocumentSnapshot
             : new(_codeDocument);
     }
 
-    public ValueTask<SourceText> GetTextAsync(CancellationToken cancellationToken)
+    public ValueTask<RazorSourceDocument> GetSourceAsync(CancellationToken cancellationToken)
     {
         return _codeDocument is null
-            ? RealSnapshot.GetTextAsync(cancellationToken)
-            : new(_codeDocument.Source.Text);
+            ? RealSnapshot.GetSourceAsync(cancellationToken)
+            : new(_codeDocument.Source);
     }
 
     public ValueTask<VersionStamp> GetTextVersionAsync(CancellationToken cancellationToken)
@@ -100,15 +100,15 @@ internal sealed class TestDocumentSnapshot : IDocumentSnapshot
         return RealSnapshot.TryGetGeneratedOutput(out result);
     }
 
-    public bool TryGetText([NotNullWhen(true)] out SourceText? result)
+    public bool TryGetSource([NotNullWhen(true)] out RazorSourceDocument? result)
     {
         if (_codeDocument is { } codeDocument)
         {
-            result = codeDocument.Source.Text;
+            result = codeDocument.Source;
             return true;
         }
 
-        return RealSnapshot.TryGetText(out result);
+        return RealSnapshot.TryGetSource(out result);
     }
 
     public bool TryGetTextVersion(out VersionStamp result)

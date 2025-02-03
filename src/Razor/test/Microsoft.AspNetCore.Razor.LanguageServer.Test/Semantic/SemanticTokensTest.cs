@@ -944,7 +944,8 @@ public partial class SemanticTokensTest(ITestOutputHelper testOutput) : TagHelpe
         ImmutableArray<TagHelperDescriptor> tagHelpers,
         int version)
     {
-        var document = CreateCodeDocument(documentText, isRazorFile, tagHelpers);
+        var codeDocument = CreateCodeDocument(documentText, isRazorFile, tagHelpers);
+        var sourceDocument = codeDocument.Source;
 
         var projectSnapshot = StrictMock.Of<IProjectSnapshot>();
 
@@ -954,10 +955,13 @@ public partial class SemanticTokensTest(ITestOutputHelper testOutput) : TagHelpe
             .Returns(projectSnapshot);
         documentSnapshotMock
             .Setup(x => x.GetGeneratedOutputAsync(It.IsAny<CancellationToken>()))
-            .ReturnsAsync(document);
+            .ReturnsAsync(codeDocument);
         documentSnapshotMock
-            .Setup(x => x.GetTextAsync(It.IsAny<CancellationToken>()))
-            .ReturnsAsync(document.Source.Text);
+            .Setup(x => x.TryGetSource(out sourceDocument))
+            .Returns(true);
+        documentSnapshotMock
+            .Setup(x => x.GetSourceAsync(It.IsAny<CancellationToken>()))
+            .ReturnsAsync(sourceDocument);
         documentSnapshotMock
             .SetupGet(x => x.Version)
             .Returns(version);

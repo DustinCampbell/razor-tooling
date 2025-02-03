@@ -29,11 +29,11 @@ internal sealed class DocumentSnapshot(ProjectSnapshot project, DocumentState st
 
     IProjectSnapshot IDocumentSnapshot.Project => Project;
 
-    public bool TryGetText([NotNullWhen(true)] out SourceText? result)
-        => _state.TryGetText(out result);
+    public bool TryGetSource([NotNullWhen(true)] out RazorSourceDocument? result)
+        => _state.TryGetSource(out result);
 
-    public ValueTask<SourceText> GetTextAsync(CancellationToken cancellationToken)
-        => _state.GetTextAsync(cancellationToken);
+    public ValueTask<RazorSourceDocument> GetSourceAsync(CancellationToken cancellationToken)
+        => _state.GetSourceAsync(cancellationToken);
 
     public bool TryGetTextVersion(out VersionStamp result)
         => _state.TryGetTextVersion(out result);

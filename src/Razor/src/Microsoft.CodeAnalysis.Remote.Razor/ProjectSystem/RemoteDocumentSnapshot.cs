@@ -25,6 +25,7 @@ internal sealed class RemoteDocumentSnapshot : IDocumentSnapshot
 
     // TODO: Delete this field when the source generator is hooked up
     private readonly AsyncLazy<Document> _lazyDocument;
+    private readonly AsyncLazy<RazorSourceDocument> _lazySourceDocument;
     private readonly AsyncLazy<RazorCodeDocument> _lazyCodeDocument;
 
     public RemoteDocumentSnapshot(TextDocument textDocument, RemoteProjectSnapshot projectSnapshot)
@@ -38,6 +39,7 @@ internal sealed class RemoteDocumentSnapshot : IDocumentSnapshot
         ProjectSnapshot = projectSnapshot;
 
         _lazyDocument = AsyncLazy.Create(HACK_ComputeDocumentAsync);
+        _lazySourceDocument = AsyncLazy.Create(ComputeSourceDocumentAsync);
         _lazyCodeDocument = AsyncLazy.Create(ComputeGeneratedOutputAsync);
     }
 
@@ -49,11 +51,11 @@ internal sealed class RemoteDocumentSnapshot : IDocumentSnapshot
 
     public int Version => -999; // We don't expect to use this in cohosting, but plenty of existing code logs it's value
 
-    public ValueTask<SourceText> GetTextAsync(CancellationToken cancellationToken)
+    public ValueTask<RazorSourceDocument> GetSourceAsync(CancellationToken cancellationToken)
     {
-        return TryGetText(out var result)
+        return TryGetSource(out var result)
             ? new(result)
-            : new(TextDocument.GetTextAsync(cancellationToken));
+            : new(_lazySourceDocument.GetValueAsync(cancellationToken));
     }
 
     public ValueTask<VersionStamp> GetTextVersionAsync(CancellationToken cancellationToken)
@@ -63,8 +65,8 @@ internal sealed class RemoteDocumentSnapshot : IDocumentSnapshot
             : new(TextDocument.GetTextVersionAsync(cancellationToken));
     }
 
-    public bool TryGetText([NotNullWhen(true)] out SourceText? result)
-        => TextDocument.TryGetText(out result);
+    public bool TryGetSource([NotNullWhen(true)] out RazorSourceDocument? result)
+        => _lazySourceDocument.TryGetValue(out result);
 
     public bool TryGetTextVersion(out VersionStamp result)
         => TextDocument.TryGetTextVersion(out result);
@@ -80,6 +82,17 @@ internal sealed class RemoteDocumentSnapshot : IDocumentSnapshot
         }
 
         return new(_lazyCodeDocument.GetValueAsync(cancellationToken));
+    }
+
+    private async Task<RazorSourceDocument> ComputeSourceDocumentAsync(CancellationToken token)
+    {
+        var projectEngine = await ProjectSnapshot.GetProjectEngineAsync(token).ConfigureAwait(false);
+        var projectItem = projectEngine.FileSystem.GetItem(FilePath);
+        var properties = RazorSourceDocumentProperties.Create(projectItem.FilePath, projectItem.RelativePhysicalPath);
+
+        var text = await TextDocument.GetTextAsync(token).ConfigureAwait(false);
+
+        return RazorSourceDocument.Create(text, properties);
     }
 
     private async Task<RazorCodeDocument> ComputeGeneratedOutputAsync(CancellationToken cancellationToken)

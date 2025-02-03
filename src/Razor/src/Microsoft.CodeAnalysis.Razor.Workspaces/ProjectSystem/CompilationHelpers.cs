@@ -72,9 +72,7 @@ internal static class CompilationHelpers
             }
             else if (project.TryGetDocument(importProjectItem.PhysicalPath, out var importDocument))
             {
-                var text = await importDocument.GetTextAsync(cancellationToken).ConfigureAwait(false);
-                var properties = RazorSourceDocumentProperties.Create(importProjectItem.FilePath, importProjectItem.RelativePhysicalPath);
-                var importSource = RazorSourceDocument.Create(text, properties);
+                var importSource = await importDocument.GetSourceAsync(cancellationToken).ConfigureAwait(false);
 
                 importSources.Add(importSource);
             }

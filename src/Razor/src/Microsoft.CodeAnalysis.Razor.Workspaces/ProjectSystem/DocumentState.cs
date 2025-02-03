@@ -84,11 +84,37 @@ internal sealed partial class DocumentState
     public ValueTask<SourceAndVersion> GetSourceAndVersionAsync(CancellationToken cancellationToken)
         => _sourceAndVersionSource.GetValueAsync(cancellationToken);
 
-    public bool TryGetText([NotNullWhen(true)] out SourceText? result)
+    public bool TryGetSource([NotNullWhen(true)] out RazorSourceDocument? result)
     {
         if (TryGetSourceAndVersion(out var sourceAndVersion))
         {
-            result = sourceAndVersion.Source.Text;
+            result = sourceAndVersion.Source;
+            return true;
+        }
+
+        result = null;
+        return false;
+    }
+
+    public ValueTask<RazorSourceDocument> GetSourceAsync(CancellationToken cancellationToken)
+    {
+        return TryGetSource(out var result)
+            ? new(result)
+            : GetSourceCoreAsync(cancellationToken);
+
+        async ValueTask<RazorSourceDocument> GetSourceCoreAsync(CancellationToken cancellationToken)
+        {
+            var sourceAsVersion = await GetSourceAndVersionAsync(cancellationToken).ConfigureAwait(false);
+
+            return sourceAsVersion.Source;
+        }
+    }
+
+    public bool TryGetText([NotNullWhen(true)] out SourceText? result)
+    {
+        if (TryGetSource(out var source))
+        {
+            result = source.Text;
             return true;
         }
 
@@ -104,17 +130,17 @@ internal sealed partial class DocumentState
 
         async ValueTask<SourceText> GetTextCoreAsync(CancellationToken cancellationToken)
         {
-            var sourceAsVersion = await GetSourceAndVersionAsync(cancellationToken).ConfigureAwait(false);
+            var source = await GetSourceAsync(cancellationToken).ConfigureAwait(false);
 
-            return sourceAsVersion.Source.Text;
+            return source.Text;
         }
     }
 
     public bool TryGetTextVersion(out VersionStamp result)
     {
-        if (TryGetSourceAndVersion(out var textAndVersion))
+        if (TryGetSourceAndVersion(out var sourceAndVersion))
         {
-            result = textAndVersion.Version;
+            result = sourceAndVersion.Version;
             return true;
         }
 

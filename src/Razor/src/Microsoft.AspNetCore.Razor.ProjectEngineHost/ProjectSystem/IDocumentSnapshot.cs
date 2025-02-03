@@ -19,7 +19,7 @@ internal interface IDocumentSnapshot
 
     int Version { get; }
 
-    ValueTask<SourceText> GetTextAsync(CancellationToken cancellationToken);
+    ValueTask<RazorSourceDocument> GetSourceAsync(CancellationToken cancellationToken);
     ValueTask<VersionStamp> GetTextVersionAsync(CancellationToken cancellationToken);
     ValueTask<RazorCodeDocument> GetGeneratedOutputAsync(CancellationToken cancellationToken);
 
@@ -31,7 +31,7 @@ internal interface IDocumentSnapshot
     /// </remarks>
     ValueTask<SyntaxTree> GetCSharpSyntaxTreeAsync(CancellationToken cancellationToken);
 
-    bool TryGetText([NotNullWhen(true)] out SourceText? result);
+    bool TryGetSource([NotNullWhen(true)] out RazorSourceDocument? result);
     bool TryGetTextVersion(out VersionStamp result);
     bool TryGetGeneratedOutput([NotNullWhen(true)] out RazorCodeDocument? result);
 

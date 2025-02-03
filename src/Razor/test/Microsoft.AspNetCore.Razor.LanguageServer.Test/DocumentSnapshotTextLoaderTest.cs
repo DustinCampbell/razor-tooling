@@ -3,6 +3,7 @@
 
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Test.Common;
 using Microsoft.CodeAnalysis.Text;
@@ -19,10 +20,14 @@ public class DocumentSnapshotTextLoaderTest(ITestOutputHelper testOutput) : Tool
     {
         // Arrange
         var expectedSourceText = SourceText.From("Hello World");
+        var source = RazorSourceDocument.Create(expectedSourceText, RazorSourceDocumentProperties.Create("TestFile.cshtml", relativePath: null));
         var snapshotMock = new StrictMock<IDocumentSnapshot>();
         snapshotMock
-            .Setup(x => x.GetTextAsync(It.IsAny<CancellationToken>()))
-            .ReturnsAsync(expectedSourceText);
+            .Setup(x => x.TryGetSource(out source))
+            .Returns(true);
+        snapshotMock
+            .Setup(x => x.GetSourceAsync(It.IsAny<CancellationToken>()))
+            .ReturnsAsync(source);
         var textLoader = new DocumentSnapshotTextLoader(snapshotMock.Object);
 
         // Act

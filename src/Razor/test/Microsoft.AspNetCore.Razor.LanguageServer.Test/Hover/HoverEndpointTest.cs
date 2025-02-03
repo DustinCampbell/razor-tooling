@@ -249,6 +249,7 @@ public class HoverEndpointTest(ITestOutputHelper testOutput) : TagHelperServiceT
 
         var path = "C:/text.razor";
         var codeDocument = CreateCodeDocument(code.Text, path, DefaultTagHelpers);
+        var sourceDocument = codeDocument.Source;
         var projectWorkspaceState = ProjectWorkspaceState.Create(DefaultTagHelpers);
 
         var hostProject = TestHostProject.Create("C:/project.csproj");
@@ -259,8 +260,11 @@ public class HoverEndpointTest(ITestOutputHelper testOutput) : TagHelperServiceT
             .Setup(x => x.GetGeneratedOutputAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(codeDocument);
         documentSnapshotMock
-            .Setup(x => x.GetTextAsync(It.IsAny<CancellationToken>()))
-            .ReturnsAsync(codeDocument.Source.Text);
+            .Setup(x => x.TryGetSource(out sourceDocument))
+            .Returns(true);
+        documentSnapshotMock
+            .Setup(x => x.GetSourceAsync(It.IsAny<CancellationToken>()))
+            .ReturnsAsync(sourceDocument);
         documentSnapshotMock
             .SetupGet(x => x.FilePath)
             .Returns(path);
