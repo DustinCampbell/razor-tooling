@@ -48,9 +48,9 @@ internal sealed class DocumentSnapshot(ProjectSnapshot project, DocumentState st
         => _state.GetGeneratedOutputAsync(this, cancellationToken);
 
     public IDocumentSnapshot WithText(SourceText text)
-    {
-        return new DocumentSnapshot(Project, _state.WithText(text, VersionStamp.Create()));
-    }
+        => Project
+            .WithDocumentText(FilePath, text)
+            .GetRequiredDocument(FilePath);
 
     public ValueTask<SyntaxTree> GetCSharpSyntaxTreeAsync(CancellationToken cancellationToken)
     {

@@ -171,11 +171,36 @@ internal sealed partial class DocumentState
     public DocumentState WithProjectWorkspaceStateChange()
         => new(this, _sourceAndVersionSource);
 
-    public DocumentState WithText(SourceText text, VersionStamp textVersion)
-        => new(this, CreateSourceAndVersionSource(text, _properties, textVersion));
+    public DocumentState WithText(SourceText text)
+    {
+        // First, see if the RazorSourceDocument has already been created.
+        if (TryGetSourceAndVersion(out var oldSourceAndVersion))
+        {
+            // If the text is the same, we don't need to do anything.
+            if (text.ContentEquals(oldSourceAndVersion.Source.Text))
+            {
+                return this;
+            }
+
+            // If the text is different, acquire a newer version and create new DocumentState.
+            var newVersion = oldSourceAndVersion.Version.GetNewerVersion();
+
+            return new(this, CreateSourceAndVersionSource(text, _properties, newVersion));
+        }
+
+        // If the RazorSourceDocument hasn't been created yet, we can create it with the
+        // SourceText that was passed in and a new version.
+        return new(this, CreateSourceAndVersionSource(text, _properties, VersionStamp.Create()));
+    }
 
     public DocumentState WithTextLoader(TextLoader textLoader)
-        => ReferenceEquals(textLoader, _sourceAndVersionSource.TextLoader)
-            ? this
-            : new(this, CreateSourceAndVersionSource(textLoader, _properties));
+    {
+        // If the ISourceAndVersionSource is using the same text loader, we don't need to do anything.
+        if (ReferenceEquals(textLoader, _sourceAndVersionSource.TextLoader))
+        {
+            return this;
+        }
+
+        return new(this, CreateSourceAndVersionSource(textLoader, _properties));
+    }
 }

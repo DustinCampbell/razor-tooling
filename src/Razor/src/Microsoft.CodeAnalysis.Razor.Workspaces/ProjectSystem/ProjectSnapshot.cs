@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Utilities;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem.Legacy;
+using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
@@ -125,6 +126,18 @@ internal sealed class ProjectSnapshot(ProjectState state) : IProjectSnapshot, IL
 
             return builder.DrainToImmutable();
         }
+    }
+
+    public ProjectSnapshot WithDocumentText(string documentFilePath, SourceText text)
+    {
+        var newState = _state.WithDocumentText(documentFilePath, text);
+
+        if (ReferenceEquals(_state, newState))
+        {
+            return this;
+        }
+
+        return new ProjectSnapshot(newState);
     }
 
     #region ILegacyProjectSnapshot support

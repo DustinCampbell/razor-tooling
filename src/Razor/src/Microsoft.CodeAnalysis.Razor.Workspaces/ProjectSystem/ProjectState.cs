@@ -6,8 +6,6 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.PooledObjects;
@@ -209,16 +207,7 @@ internal sealed class ProjectState
             return this;
         }
 
-        if (oldState.TryGetSourceAndVersion(out var oldSourceAndVersion))
-        {
-            var newVersion = text.ContentEquals(oldSourceAndVersion.Source.Text)
-                ? oldSourceAndVersion.Version
-                : oldSourceAndVersion.Version.GetNewerVersion();
-
-            return WithDocumentText(oldState, state => state.WithText(text, newVersion));
-        }
-
-        return WithDocumentText(oldState, state => state.WithTextLoader(new UpdatedTextLoader(state, text)));
+        return WithDocumentText(oldState, state => state.WithText(text));
     }
 
     public ProjectState WithDocumentText(string documentFilePath, TextLoader textLoader)
@@ -451,20 +440,6 @@ internal sealed class ProjectState
             var itemTargetPath = filePath.Replace('/', '\\').TrimStart('\\');
 
             targetPaths.Add(itemTargetPath);
-        }
-    }
-
-    private sealed class UpdatedTextLoader(DocumentState oldState, SourceText text) : TextLoader
-    {
-        public override async Task<TextAndVersion> LoadTextAndVersionAsync(LoadTextOptions options, CancellationToken cancellationToken)
-        {
-            var oldSourceAndVersion = await oldState.GetSourceAndVersionAsync(cancellationToken).ConfigureAwait(false);
-
-            var newVersion = text.ContentEquals(oldSourceAndVersion.Source.Text)
-                ? oldSourceAndVersion.Version
-                : oldSourceAndVersion.Version.GetNewerVersion();
-
-            return TextAndVersion.Create(text, newVersion);
         }
     }
 }

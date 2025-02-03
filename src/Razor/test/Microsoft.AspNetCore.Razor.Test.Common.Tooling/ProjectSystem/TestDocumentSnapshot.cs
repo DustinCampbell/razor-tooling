@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
+using Microsoft.AspNetCore.Razor.ProjectEngineHost;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
@@ -18,9 +19,9 @@ internal sealed class TestDocumentSnapshot : IDocumentSnapshot
 
     private readonly RazorCodeDocument? _codeDocument;
 
-    private TestDocumentSnapshot(TestProjectSnapshot project, DocumentState state, RazorCodeDocument? codeDocument = null)
+    private TestDocumentSnapshot(DocumentSnapshot document, RazorCodeDocument? codeDocument = null)
     {
-        RealSnapshot = new DocumentSnapshot(project.RealSnapshot, state);
+        RealSnapshot = document;
         _codeDocument = codeDocument;
     }
 
@@ -32,14 +33,9 @@ internal sealed class TestDocumentSnapshot : IDocumentSnapshot
 
     public static TestDocumentSnapshot Create(string filePath, string text, ProjectWorkspaceState projectWorkspaceState)
     {
-        var project = TestProjectSnapshot.Create(filePath + ".csproj", projectWorkspaceState);
-        var hostDocument = TestHostDocument.Create(project.HostProject, filePath);
+        var document = CreateRealDocument(filePath, SourceText.From(text), projectWorkspaceState);
 
-        var sourceText = SourceText.From(text);
-
-        var documentState = DocumentState.Create(hostDocument, sourceText);
-
-        return new TestDocumentSnapshot(project, documentState);
+        return new TestDocumentSnapshot(document);
     }
 
     public static TestDocumentSnapshot Create(string filePath, RazorCodeDocument codeDocument)
@@ -47,14 +43,24 @@ internal sealed class TestDocumentSnapshot : IDocumentSnapshot
 
     public static TestDocumentSnapshot Create(string filePath, RazorCodeDocument codeDocument, ProjectWorkspaceState projectWorkspaceState)
     {
-        var project = TestProjectSnapshot.Create(filePath + ".csproj", projectWorkspaceState);
-        var hostDocument = TestHostDocument.Create(project.HostProject, filePath);
+        var document = CreateRealDocument(filePath, codeDocument.Source.Text, projectWorkspaceState);
 
-        var sourceText = codeDocument.Source.Text;
+        return new TestDocumentSnapshot(document, codeDocument);
+    }
 
-        var documentState = DocumentState.Create(hostDocument, sourceText);
+    private static DocumentSnapshot CreateRealDocument(string filePath, SourceText text, ProjectWorkspaceState projectWorkspaceState)
+    {
+        var hostProject = TestHostProject.Create(filePath + ".csproj");
+        var hostDocument = TestHostDocument.Create(hostProject, filePath);
 
-        return new TestDocumentSnapshot(project, documentState, codeDocument);
+        var projectState = ProjectState
+            .Create(hostProject, RazorCompilerOptions.None, ProjectEngineFactories.DefaultProvider)
+            .WithProjectWorkspaceState(projectWorkspaceState)
+            .AddDocument(hostDocument, text);
+
+        var project = new ProjectSnapshot(projectState);
+
+        return project.GetRequiredDocument(filePath);
     }
 
     public HostDocument HostDocument => RealSnapshot.HostDocument;

@@ -41,7 +41,7 @@ public class DocumentStateTest : ToolingTestBase
         var original = DocumentState.Create(_hostDocument, EmptyTextLoader.Instance);
 
         // Act
-        var state = original.WithText(_text, VersionStamp.Create());
+        var state = original.WithText(_text);
 
         // Assert
         var text = await state.GetTextAsync(DisposalToken);
@@ -67,7 +67,7 @@ public class DocumentStateTest : ToolingTestBase
     {
         // Arrange
         var original = DocumentState.Create(_hostDocument, EmptyTextLoader.Instance)
-            .WithText(_text, VersionStamp.Create());
+            .WithText(_text);
 
         // Act
         var state = original.WithConfigurationChange();
@@ -99,7 +99,7 @@ public class DocumentStateTest : ToolingTestBase
     {
         // Arrange
         var original = DocumentState.Create(_hostDocument, EmptyTextLoader.Instance)
-            .WithText(_text, VersionStamp.Create());
+            .WithText(_text);
 
         // Act
         var state = original.WithImportsChange();
@@ -131,7 +131,7 @@ public class DocumentStateTest : ToolingTestBase
     {
         // Arrange
         var original = DocumentState.Create(_hostDocument, EmptyTextLoader.Instance)
-            .WithText(_text, VersionStamp.Create());
+            .WithText(_text);
 
         // Act
         var state = original.WithProjectWorkspaceStateChange();
