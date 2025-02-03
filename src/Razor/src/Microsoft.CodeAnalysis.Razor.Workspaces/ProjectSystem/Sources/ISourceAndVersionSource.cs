@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem.Sources;
 
-internal interface ITextAndVersionSource
+internal interface ISourceAndVersionSource
 {
     TextLoader? TextLoader { get; }
 
-    bool TryGetValue([NotNullWhen(true)] out TextAndVersion? result);
-    ValueTask<TextAndVersion> GetValueAsync(CancellationToken cancellationToken);
+    bool TryGetValue([NotNullWhen(true)] out SourceAndVersion? result);
+    ValueTask<SourceAndVersion> GetValueAsync(CancellationToken cancellationToken);
 }

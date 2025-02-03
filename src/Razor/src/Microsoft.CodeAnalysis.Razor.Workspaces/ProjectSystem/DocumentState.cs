@@ -15,36 +15,62 @@ internal sealed partial class DocumentState
     public HostDocument HostDocument { get; }
     public int Version { get; }
 
-    private readonly ITextAndVersionSource _textAndVersionSource;
+    private readonly RazorSourceDocumentProperties _properties;
+    private readonly ISourceAndVersionSource _sourceAndVersionSource;
     private readonly GeneratedOutputSource _generatedOutputSource;
 
-    private DocumentState(HostDocument hostDocument, ITextAndVersionSource textAndVersionSource)
+    private DocumentState(HostDocument hostDocument, RazorSourceDocumentProperties properties, ISourceAndVersionSource sourceAndVersionSource)
     {
         HostDocument = hostDocument;
         Version = 1;
-        _textAndVersionSource = textAndVersionSource;
+        _properties = properties;
+        _sourceAndVersionSource = sourceAndVersionSource;
         _generatedOutputSource = new();
     }
 
-    private DocumentState(DocumentState oldState, ITextAndVersionSource textAndVersionSource)
+    private DocumentState(DocumentState oldState, ISourceAndVersionSource sourceAndVersionSource)
     {
         HostDocument = oldState.HostDocument;
         Version = oldState.Version + 1;
-        _textAndVersionSource = textAndVersionSource;
+        _properties = oldState._properties;
+        _sourceAndVersionSource = sourceAndVersionSource;
         _generatedOutputSource = new();
     }
 
+    public static DocumentState Create(HostDocument hostDocument, RazorProjectItem projectItem, SourceText text)
+    {
+        var properties = RazorSourceDocumentProperties.Create(projectItem.FilePath, projectItem.RelativePhysicalPath);
+        return new(hostDocument, properties, CreateSourceAndVersionSource(text, properties));
+    }
+
+    public static DocumentState Create(HostDocument hostDocument, RazorProjectItem projectItem, TextLoader textLoader)
+    {
+        var properties = RazorSourceDocumentProperties.Create(projectItem.FilePath, projectItem.RelativePhysicalPath);
+        return new(hostDocument, properties, CreateSourceAndVersionSource(textLoader, properties));
+    }
+
+    private static ConstantSourceAndVersionSource CreateSourceAndVersionSource(
+        SourceText text,
+        RazorSourceDocumentProperties properties,
+        VersionStamp? version = null)
+        => new(RazorSourceDocument.Create(text, properties), version ?? VersionStamp.Create());
+
+    private static LoadableSourceAndVersionSource CreateSourceAndVersionSource(
+        TextLoader textLoader,
+        RazorSourceDocumentProperties properties)
+        => new(textLoader, properties);
+
     public static DocumentState Create(HostDocument hostDocument, SourceText text)
-        => new(hostDocument, CreateTextAndVersionSource(text));
+    {
+        var properties = RazorSourceDocumentProperties.Create(hostDocument.FilePath, hostDocument.TargetPath);
+        return new(hostDocument, properties, CreateSourceAndVersionSource(text, properties));
+    }
 
     public static DocumentState Create(HostDocument hostDocument, TextLoader textLoader)
-        => new(hostDocument, CreateTextAndVersionSource(textLoader));
-
-    private static ConstantTextAndVersionSource CreateTextAndVersionSource(SourceText text, VersionStamp? version = null)
-        => new(text, version ?? VersionStamp.Create());
-
-    private static LoadableTextAndVersionSource CreateTextAndVersionSource(TextLoader textLoader)
-        => new(textLoader);
+    {
+        var properties = RazorSourceDocumentProperties.Create(hostDocument.FilePath, hostDocument.TargetPath);
+        return new(hostDocument, properties, CreateSourceAndVersionSource(textLoader, properties));
+    }
 
     public bool TryGetGeneratedOutput([NotNullWhen(true)] out RazorCodeDocument? result)
         => _generatedOutputSource.TryGetValue(out result);
@@ -52,17 +78,17 @@ internal sealed partial class DocumentState
     public ValueTask<RazorCodeDocument> GetGeneratedOutputAsync(DocumentSnapshot document, CancellationToken cancellationToken)
         => _generatedOutputSource.GetValueAsync(document, cancellationToken);
 
-    public bool TryGetTextAndVersion([NotNullWhen(true)] out TextAndVersion? result)
-        => _textAndVersionSource.TryGetValue(out result);
+    public bool TryGetSourceAndVersion([NotNullWhen(true)] out SourceAndVersion? result)
+        => _sourceAndVersionSource.TryGetValue(out result);
 
-    public ValueTask<TextAndVersion> GetTextAndVersionAsync(CancellationToken cancellationToken)
-        => _textAndVersionSource.GetValueAsync(cancellationToken);
+    public ValueTask<SourceAndVersion> GetSourceAndVersionAsync(CancellationToken cancellationToken)
+        => _sourceAndVersionSource.GetValueAsync(cancellationToken);
 
     public bool TryGetText([NotNullWhen(true)] out SourceText? result)
     {
-        if (TryGetTextAndVersion(out var textAndVersion))
+        if (TryGetSourceAndVersion(out var sourceAndVersion))
         {
-            result = textAndVersion.Text;
+            result = sourceAndVersion.Source.Text;
             return true;
         }
 
@@ -78,15 +104,15 @@ internal sealed partial class DocumentState
 
         async ValueTask<SourceText> GetTextCoreAsync(CancellationToken cancellationToken)
         {
-            var textAsVersion = await GetTextAndVersionAsync(cancellationToken).ConfigureAwait(false);
+            var sourceAsVersion = await GetSourceAndVersionAsync(cancellationToken).ConfigureAwait(false);
 
-            return textAsVersion.Text;
+            return sourceAsVersion.Source.Text;
         }
     }
 
     public bool TryGetTextVersion(out VersionStamp result)
     {
-        if (TryGetTextAndVersion(out var textAndVersion))
+        if (TryGetSourceAndVersion(out var textAndVersion))
         {
             result = textAndVersion.Version;
             return true;
@@ -104,26 +130,26 @@ internal sealed partial class DocumentState
 
         async ValueTask<VersionStamp> GetTextVersionCoreAsync(CancellationToken cancellationToken)
         {
-            var textAsVersion = await GetTextAndVersionAsync(cancellationToken).ConfigureAwait(false);
+            var sourceAndVersion = await GetSourceAndVersionAsync(cancellationToken).ConfigureAwait(false);
 
-            return textAsVersion.Version;
+            return sourceAndVersion.Version;
         }
     }
 
     public DocumentState WithConfigurationChange()
-        => new(this, _textAndVersionSource);
+        => new(this, _sourceAndVersionSource);
 
     public DocumentState WithImportsChange()
-        => new(this, _textAndVersionSource);
+        => new(this, _sourceAndVersionSource);
 
     public DocumentState WithProjectWorkspaceStateChange()
-        => new(this, _textAndVersionSource);
+        => new(this, _sourceAndVersionSource);
 
     public DocumentState WithText(SourceText text, VersionStamp textVersion)
-        => new(this, CreateTextAndVersionSource(text, textVersion));
+        => new(this, CreateSourceAndVersionSource(text, _properties, textVersion));
 
     public DocumentState WithTextLoader(TextLoader textLoader)
-        => ReferenceEquals(textLoader, _textAndVersionSource.TextLoader)
+        => ReferenceEquals(textLoader, _sourceAndVersionSource.TextLoader)
             ? this
-            : new(this, CreateTextAndVersionSource(textLoader));
+            : new(this, CreateSourceAndVersionSource(textLoader, _properties));
 }

@@ -135,7 +135,10 @@ internal sealed class ProjectState
             return this;
         }
 
-        var state = DocumentState.Create(hostDocument, text);
+        var projectEngine = ProjectEngine;
+        var projectItem = projectEngine.FileSystem.GetItem(hostDocument.TargetPath);
+
+        var state = DocumentState.Create(hostDocument, projectItem, text);
 
         return AddDocument(state);
     }
@@ -152,7 +155,10 @@ internal sealed class ProjectState
             return this;
         }
 
-        var state = DocumentState.Create(hostDocument, textLoader);
+        var projectEngine = ProjectEngine;
+        var projectItem = projectEngine.FileSystem.GetItem(hostDocument.TargetPath);
+
+        var state = DocumentState.Create(hostDocument, projectItem, textLoader);
 
         return AddDocument(state);
     }
@@ -203,11 +209,11 @@ internal sealed class ProjectState
             return this;
         }
 
-        if (oldState.TryGetTextAndVersion(out var oldTextAndVersion))
+        if (oldState.TryGetSourceAndVersion(out var oldSourceAndVersion))
         {
-            var newVersion = text.ContentEquals(oldTextAndVersion.Text)
-                ? oldTextAndVersion.Version
-                : oldTextAndVersion.Version.GetNewerVersion();
+            var newVersion = text.ContentEquals(oldSourceAndVersion.Source.Text)
+                ? oldSourceAndVersion.Version
+                : oldSourceAndVersion.Version.GetNewerVersion();
 
             return WithDocumentText(oldState, state => state.WithText(text, newVersion));
         }
@@ -452,11 +458,11 @@ internal sealed class ProjectState
     {
         public override async Task<TextAndVersion> LoadTextAndVersionAsync(LoadTextOptions options, CancellationToken cancellationToken)
         {
-            var oldTextAndVersion = await oldState.GetTextAndVersionAsync(cancellationToken).ConfigureAwait(false);
+            var oldSourceAndVersion = await oldState.GetSourceAndVersionAsync(cancellationToken).ConfigureAwait(false);
 
-            var newVersion = text.ContentEquals(oldTextAndVersion.Text)
-                ? oldTextAndVersion.Version
-                : oldTextAndVersion.Version.GetNewerVersion();
+            var newVersion = text.ContentEquals(oldSourceAndVersion.Source.Text)
+                ? oldSourceAndVersion.Version
+                : oldSourceAndVersion.Version.GetNewerVersion();
 
             return TextAndVersion.Create(text, newVersion);
         }
