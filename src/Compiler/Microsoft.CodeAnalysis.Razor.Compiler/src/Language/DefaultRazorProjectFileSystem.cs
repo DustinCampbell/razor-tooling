@@ -109,7 +109,7 @@ internal class DefaultRazorProjectFileSystem : RazorProjectFileSystem
         var needsSlash = Root[^1] is not '/' && normalizedPath[0] is not '/';
         var length = Root.Length + normalizedPath.Length + (needsSlash ? 1 : 0);
 
-        return StringExtensions.CreateString(
+        return StringFactory.Create(
             length,
             state: (Root, normalizedPath, needsSlash),
             static (span, state) =>
