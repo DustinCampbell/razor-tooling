@@ -31,11 +31,13 @@ public abstract class RazorProjectItem
     /// </summary>
     public abstract string PhysicalPath { get; }
 
+#nullable enable
     /// <summary>
     /// The relative physical (file system) path to the file, including the file name. Relative to the
     /// physical path of the <see cref="BasePath"/>.
     /// </summary>
-    public virtual string RelativePhysicalPath => null;
+    public virtual string? RelativePhysicalPath => null;
+#nullable disable
 
     /// <summary>
     /// A scope identifier that will be used on elements in the generated class, or null.

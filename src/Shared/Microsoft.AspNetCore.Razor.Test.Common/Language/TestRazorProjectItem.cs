@@ -22,7 +22,7 @@ public class TestRazorProjectItem(
     public override string FileKind => _fileKind ?? base.FileKind;
     public override string FilePath => filePath;
     public override string PhysicalPath => physicalPath!;
-    public override string RelativePhysicalPath => relativePhysicalPath!;
+    public override string? RelativePhysicalPath => relativePhysicalPath;
     public override string CssScope => cssScope!;
     public override bool Exists => true;
 
