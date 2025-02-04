@@ -409,7 +409,14 @@ internal sealed class ProjectState
             .ToImmutableDictionary(FilePathNormalizingComparer.Instance);
     }
 
-    private static void CollectImportDocumentTargetPaths(HostDocument hostDocument, RazorProjectEngine projectEngine, ref PooledArrayBuilder<string> targetPaths)
+    /// <summary>
+    ///  Collects the applicable import document target paths for the given <see cref="HostDocument"/>
+    ///  in <paramref name="importTargetPaths"/>
+    /// </summary>
+    private static void CollectImportDocumentTargetPaths(
+        HostDocument hostDocument,
+        RazorProjectEngine projectEngine,
+        ref PooledArrayBuilder<string> importTargetPaths)
     {
         var targetPath = hostDocument.TargetPath;
         var projectItem = projectEngine.FileSystem.GetItem(targetPath, hostDocument.FileKind);
@@ -422,26 +429,41 @@ internal sealed class ProjectState
             return;
         }
 
-        // Target path looks like `Foo\\Bar.cshtml`
+        // Razor's "target path" takes the form of 'Components\Views\Error.razor' in Visual Studio.
 
         foreach (var importProjectItem in importProjectItems)
         {
-            if (importProjectItem.FilePath is not string filePath)
+            // RazorProjectItem.FilePath is defined as relative to the project root with a leading '/'
+            // and all other slashes normalized to '/'.
+            //
+            // Given that, we prefer RazorProjectItem.RelativePhysicalPath, which should be equivalent
+            // to Razor's target path.
+
+            var importTargetPath = importProjectItem.RelativePhysicalPath;
+
+            if (importTargetPath.IsNullOrEmpty())
             {
+                // If RazorProjectItem.RelativePhysicalPath wasn't provided, we can construct one from
+                // RazorProjectItem.FilePath.
+                importTargetPath = importProjectItem.GetTargetPathFromFilePath();
+
+                if (importTargetPath.IsNullOrEmpty())
+                {
+                    // If we couldn't compute the target path, this likely a default import.
+                    // We skip default imports since they can't change and never manifest on disk.
+                    continue;
+                }
+            }
+
+            if (FilePathNormalizer.AreFilePathsEquivalent(importTargetPath, targetPath))
+            {
+                // The purpose of this method is to get the associated import document
+                // paths (i.e. _Imports.razor / _ViewImports.cshtml) for a given document.
+                // Therefore, we can skip the document itself if it *is* an import.
                 continue;
             }
 
-            if (FilePathNormalizer.AreFilePathsEquivalent(filePath, targetPath))
-            {
-                // We've normalized the original importItem.FilePath into the HostDocument.TargetPath. For instance, if the HostDocument.TargetPath
-                // was '/_Imports.razor' it'd be normalized down into '_Imports.razor'. The purpose of this method is to get the associated document
-                // paths for a given import file (_Imports.razor / _ViewImports.cshtml); therefore, an import importing itself doesn't make sense.
-                continue;
-            }
-
-            var itemTargetPath = filePath.Replace('/', '\\').TrimStart('\\');
-
-            targetPaths.Add(itemTargetPath);
+            importTargetPaths.Add(importTargetPath);
         }
     }
 }
