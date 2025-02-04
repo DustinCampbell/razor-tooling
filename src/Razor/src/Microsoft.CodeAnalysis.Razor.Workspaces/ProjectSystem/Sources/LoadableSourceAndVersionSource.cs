@@ -27,7 +27,7 @@ internal sealed class LoadableSourceAndVersionSource(
     {
         var textAndVersion = await arg.textLoader.LoadTextAndVersionAsync(s_loadTextOptions, cancellationToken).ConfigureAwait(false);
 
-        return SourceAndVersion.Create(
+        return new(
             RazorSourceDocument.Create(textAndVersion.Text, arg.properties),
             textAndVersion.Version);
     }

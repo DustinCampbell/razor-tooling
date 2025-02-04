@@ -1,12 +1,7 @@
 {
   "profiles": {
     "Razor (managed)": {
-      "commandName": "Project",
-      "environmentVariables": {
-        "CPS_DiagnosticRuntime": "1",
-        "CPS_MetricsCollection": "1",
-        "ServiceHubTraceLevel": "All"
-      }
+      "commandName": "Project"
     },
     "Razor w/ ServiceHub (managed)": {
       "commandName": "Project",

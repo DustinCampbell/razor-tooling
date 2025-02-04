@@ -3,8 +3,8 @@
 
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Razor.PooledObjects;
+using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 
 namespace Microsoft.VisualStudio.Razor.ProjectSystem;
 
@@ -14,9 +14,9 @@ internal class TestProjectWorkspaceStateGenerator : IProjectWorkspaceStateGenera
 
     public IReadOnlyList<TestUpdate> Updates => _updates;
 
-    public void EnqueueUpdate(Project? workspaceProject, ProjectSnapshot projectSnapshot)
+    public void EnqueueUpdate(ProjectId? projectId, ProjectKey projectKey)
     {
-        var update = new TestUpdate(workspaceProject, projectSnapshot);
+        var update = new TestUpdate(projectId, projectKey);
         _updates.Add(update);
     }
 
@@ -33,7 +33,7 @@ internal class TestProjectWorkspaceStateGenerator : IProjectWorkspaceStateGenera
         _updates.Clear();
     }
 
-    public record TestUpdate(Project? WorkspaceProject, ProjectSnapshot ProjectSnapshot)
+    public record TestUpdate(ProjectId? ProjectId, ProjectKey ProjectKey)
     {
         public bool IsCancelled { get; set; }
 
@@ -41,18 +41,18 @@ internal class TestProjectWorkspaceStateGenerator : IProjectWorkspaceStateGenera
         {
             using var _ = StringBuilderPool.GetPooledObject(out var builder);
 
-            builder.Append($"{{{nameof(WorkspaceProject)} = ");
+            builder.Append($"{{{nameof(ProjectId)} = ");
 
-            if (WorkspaceProject is null)
+            if (ProjectId is null)
             {
                 builder.Append("<null>");
             }
             else
             {
-                builder.Append(WorkspaceProject.Name);
+                builder.Append(ProjectId);
             }
 
-            builder.Append($", {nameof(ProjectSnapshot)} = {ProjectSnapshot.DisplayName}}}");
+            builder.Append($", {nameof(ProjectKey)} = {ProjectKey}}}");
 
             return builder.ToString();
         }

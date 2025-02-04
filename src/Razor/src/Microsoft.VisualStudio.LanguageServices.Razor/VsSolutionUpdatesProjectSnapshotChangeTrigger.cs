@@ -133,7 +133,7 @@ internal class VsSolutionUpdatesProjectSnapshotChangeTrigger : IRazorStartupServ
                 {
                     // Trigger a tag helper update by forcing the project manager to see the workspace Project
                     // from the current solution.
-                    _workspaceStateGenerator.EnqueueUpdate(workspaceProject, project);
+                    _workspaceStateGenerator.EnqueueUpdate(workspaceProject.Id, project.Key);
                 }
             }
         }

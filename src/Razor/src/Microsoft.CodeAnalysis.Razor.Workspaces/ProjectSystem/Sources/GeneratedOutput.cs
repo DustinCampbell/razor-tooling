@@ -5,4 +5,4 @@ using Microsoft.AspNetCore.Razor.Language;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem.Sources;
 
-internal sealed record class SourceAndVersion(RazorSourceDocument Source, VersionStamp Version);
+internal sealed record class GeneratedOutput(RazorCodeDocument CodeDocument, VersionStamp ImportsVersion);

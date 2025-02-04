@@ -88,7 +88,7 @@ internal sealed class RemoteDocumentSnapshot : IDocumentSnapshot
     {
         var projectEngine = await ProjectSnapshot.GetProjectEngineAsync(token).ConfigureAwait(false);
         var projectItem = projectEngine.FileSystem.GetItem(FilePath);
-        var properties = RazorSourceDocumentProperties.Create(projectItem.FilePath, projectItem.RelativePhysicalPath);
+        var properties = RazorSourceDocumentProperties.Create(TextDocument.FilePath, projectItem.RelativePhysicalPath);
 
         var text = await TextDocument.GetTextAsync(token).ConfigureAwait(false);
 

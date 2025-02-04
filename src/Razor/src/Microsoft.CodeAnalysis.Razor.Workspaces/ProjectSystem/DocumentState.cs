@@ -1,10 +1,12 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
+using Microsoft.CodeAnalysis.Razor.Logging;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem.Sources;
 using Microsoft.CodeAnalysis.Text;
 
@@ -18,14 +20,20 @@ internal sealed partial class DocumentState
     private readonly RazorSourceDocumentProperties _properties;
     private readonly ISourceAndVersionSource _sourceAndVersionSource;
     private readonly GeneratedOutputSource _generatedOutputSource;
+    private readonly ILogger _logger;
 
-    private DocumentState(HostDocument hostDocument, RazorSourceDocumentProperties properties, ISourceAndVersionSource sourceAndVersionSource)
+    private DocumentState(
+        HostDocument hostDocument,
+        RazorSourceDocumentProperties properties,
+        ISourceAndVersionSource sourceAndVersionSource,
+        ILogger logger)
     {
         HostDocument = hostDocument;
         Version = 1;
         _properties = properties;
         _sourceAndVersionSource = sourceAndVersionSource;
-        _generatedOutputSource = new();
+        _generatedOutputSource = new(logger);
+        _logger = logger;
     }
 
     private DocumentState(DocumentState oldState, ISourceAndVersionSource sourceAndVersionSource)
@@ -34,14 +42,31 @@ internal sealed partial class DocumentState
         Version = oldState.Version + 1;
         _properties = oldState._properties;
         _sourceAndVersionSource = sourceAndVersionSource;
-        _generatedOutputSource = new();
+        _generatedOutputSource = new(oldState._logger);
+        _logger = oldState._logger;
     }
 
-    public static DocumentState Create(HostDocument hostDocument, RazorSourceDocumentProperties properties, SourceText text)
-        => new(hostDocument, properties, CreateSourceAndVersionSource(text, properties));
+    public static DocumentState Create(
+        HostDocument hostDocument,
+        RazorSourceDocumentProperties properties,
+        SourceText text,
+        ILogger? logger = null)
+        => new(
+            hostDocument,
+            properties,
+            CreateSourceAndVersionSource(text, properties),
+            logger ?? EmptyLoggerFactory.Instance.GetOrCreateLogger("DocumentState"));
 
-    public static DocumentState Create(HostDocument hostDocument, RazorSourceDocumentProperties properties, TextLoader textLoader)
-        => new(hostDocument, properties, CreateSourceAndVersionSource(textLoader, properties));
+    public static DocumentState Create(
+        HostDocument hostDocument,
+        RazorSourceDocumentProperties properties,
+        TextLoader textLoader,
+        ILogger? logger = null)
+        => new(
+            hostDocument,
+            properties,
+            CreateSourceAndVersionSource(textLoader, properties),
+            logger ?? EmptyLoggerFactory.Instance.GetOrCreateLogger("DocumentState"));
 
     private static ConstantSourceAndVersionSource CreateSourceAndVersionSource(
         SourceText text,
@@ -55,10 +80,29 @@ internal sealed partial class DocumentState
         => new(textLoader, properties);
 
     public bool TryGetGeneratedOutput([NotNullWhen(true)] out RazorCodeDocument? result)
-        => _generatedOutputSource.TryGetValue(out result);
+    {
+        result = _generatedOutputSource.TryGetValue(out var generatedOutput)
+            ? generatedOutput.CodeDocument
+            : null;
+
+        return result is not null;
+    }
 
     public ValueTask<RazorCodeDocument> GetGeneratedOutputAsync(DocumentSnapshot document, CancellationToken cancellationToken)
-        => _generatedOutputSource.GetValueAsync(document, cancellationToken);
+    {
+        return TryGetGeneratedOutput(out var result)
+            ? new(result)
+            : GetGeneratedOutputCoreAsync(document, cancellationToken);
+
+        async ValueTask<RazorCodeDocument> GetGeneratedOutputCoreAsync(DocumentSnapshot document, CancellationToken cancellationToken)
+        {
+            var output = await _generatedOutputSource
+                .GetValueAsync(document, cancellationToken)
+                .ConfigureAwait(false);
+
+            return output.CodeDocument;
+        }
+    }
 
     public bool TryGetSourceAndVersion([NotNullWhen(true)] out SourceAndVersion? result)
         => _sourceAndVersionSource.TryGetValue(out result);
@@ -68,14 +112,11 @@ internal sealed partial class DocumentState
 
     public bool TryGetSource([NotNullWhen(true)] out RazorSourceDocument? result)
     {
-        if (TryGetSourceAndVersion(out var sourceAndVersion))
-        {
-            result = sourceAndVersion.Source;
-            return true;
-        }
+        result = TryGetSourceAndVersion(out var sourceAndVersion)
+            ? sourceAndVersion.Source
+            : null;
 
-        result = null;
-        return false;
+        return result is not null;
     }
 
     public ValueTask<RazorSourceDocument> GetSourceAsync(CancellationToken cancellationToken)
@@ -147,8 +188,20 @@ internal sealed partial class DocumentState
     public DocumentState WithConfigurationChange()
         => new(this, _sourceAndVersionSource);
 
-    public DocumentState WithImportsChange()
-        => new(this, _sourceAndVersionSource);
+    public DocumentState WithImportsChange(VersionStamp? importsVersion)
+    {
+        // If we've already generated output for this document and the imports version matches,
+        // we don't need to do anything.
+        if (importsVersion.HasValue &&
+            _generatedOutputSource.TryGetValue(out var generatedOutput) &&
+            generatedOutput.ImportsVersion == importsVersion.GetValueOrDefault())
+        {
+            Debug.WriteLine($"[DocumentState] Skipping imports change - {HostDocument.FilePath}.");
+            return this;
+        }
+
+        return new(this, _sourceAndVersionSource);
+    }
 
     public DocumentState WithProjectWorkspaceStateChange()
         => new(this, _sourceAndVersionSource);

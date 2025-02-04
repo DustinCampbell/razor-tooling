@@ -192,9 +192,9 @@ public class WorkspaceProjectStateChangeDetectorTest : VisualStudioWorkspaceTest
 
         // Assert
         Assert.Equal(3, generator.Updates.Count);
-        Assert.Contains(generator.Updates, u => u.ProjectSnapshot.Key == _projectNumberOne.ToProjectKey());
-        Assert.Contains(generator.Updates, u => u.ProjectSnapshot.Key == _projectNumberTwo.ToProjectKey());
-        Assert.Contains(generator.Updates, u => u.ProjectSnapshot.Key == _projectNumberThree.ToProjectKey());
+        Assert.Contains(generator.Updates, u => u.ProjectKey == _projectNumberOne.ToProjectKey());
+        Assert.Contains(generator.Updates, u => u.ProjectKey == _projectNumberTwo.ToProjectKey());
+        Assert.Contains(generator.Updates, u => u.ProjectKey == _projectNumberThree.ToProjectKey());
     }
 
     [UITheory]
@@ -233,9 +233,9 @@ public class WorkspaceProjectStateChangeDetectorTest : VisualStudioWorkspaceTest
 
         // Assert
         Assert.Equal(3, generator.Updates.Count);
-        Assert.Contains(generator.Updates, u => u.ProjectSnapshot.Key == _projectNumberOne.ToProjectKey());
-        Assert.Contains(generator.Updates, u => u.ProjectSnapshot.Key == _projectNumberTwo.ToProjectKey());
-        Assert.Contains(generator.Updates, u => u.ProjectSnapshot.Key == _projectNumberThree.ToProjectKey());
+        Assert.Contains(generator.Updates, u => u.ProjectKey == _projectNumberOne.ToProjectKey());
+        Assert.Contains(generator.Updates, u => u.ProjectKey == _projectNumberTwo.ToProjectKey());
+        Assert.Contains(generator.Updates, u => u.ProjectKey == _projectNumberThree.ToProjectKey());
     }
 
     [UITheory]
@@ -268,8 +268,8 @@ public class WorkspaceProjectStateChangeDetectorTest : VisualStudioWorkspaceTest
         // Assert
         Assert.Collection(
             generator.Updates,
-            p => Assert.Equal(_projectNumberOne.Id, p.WorkspaceProject?.Id),
-            p => Assert.Equal(_projectNumberTwo.Id, p.WorkspaceProject?.Id));
+            p => Assert.Equal(_projectNumberOne.Id, p.ProjectId),
+            p => Assert.Equal(_projectNumberTwo.Id, p.ProjectId));
     }
 
     [UITheory]
@@ -309,10 +309,10 @@ public class WorkspaceProjectStateChangeDetectorTest : VisualStudioWorkspaceTest
         // Assert
         Assert.Collection(
             generator.Updates,
-            p => Assert.Equal(_projectNumberThree.Id, p.WorkspaceProject?.Id),
-            p => Assert.Null(p.WorkspaceProject),
-            p => Assert.Equal(_projectNumberOne.Id, p.WorkspaceProject?.Id),
-            p => Assert.Equal(_projectNumberTwo.Id, p.WorkspaceProject?.Id));
+            p => Assert.Equal(_projectNumberThree.Id, p.ProjectId),
+            p => Assert.Null(p.ProjectId),
+            p => Assert.Equal(_projectNumberOne.Id, p.ProjectId),
+            p => Assert.Equal(_projectNumberTwo.Id, p.ProjectId));
     }
 
     [UITheory]
@@ -349,8 +349,8 @@ public class WorkspaceProjectStateChangeDetectorTest : VisualStudioWorkspaceTest
 
         // Assert
         var update = Assert.Single(generator.Updates);
-        Assert.Equal(_projectNumberOne.Id, update.WorkspaceProject?.Id);
-        Assert.Equal(_hostProjectOne.FilePath, update.ProjectSnapshot.FilePath);
+        Assert.Equal(_projectNumberOne.Id, update.ProjectId);
+        Assert.Equal(_hostProjectOne.Key, update.ProjectKey);
     }
 
     [UIFact]
@@ -381,8 +381,8 @@ public class WorkspaceProjectStateChangeDetectorTest : VisualStudioWorkspaceTest
 
         // Assert
         var update = Assert.Single(generator.Updates);
-        Assert.Equal(_projectNumberOne.Id, update.WorkspaceProject?.Id);
-        Assert.Equal(_hostProjectOne.FilePath, update.ProjectSnapshot.FilePath);
+        Assert.Equal(_projectNumberOne.Id, update.ProjectId);
+        Assert.Equal(_hostProjectOne.Key, update.ProjectKey);
     }
 
     [UIFact]
@@ -413,8 +413,8 @@ public class WorkspaceProjectStateChangeDetectorTest : VisualStudioWorkspaceTest
 
         // Assert
         var update = Assert.Single(generator.Updates);
-        Assert.Equal(_projectNumberOne.Id, update.WorkspaceProject?.Id);
-        Assert.Equal(_hostProjectOne.FilePath, update.ProjectSnapshot.FilePath);
+        Assert.Equal(_projectNumberOne.Id, update.ProjectId);
+        Assert.Equal(_hostProjectOne.Key, update.ProjectKey);
     }
 
     [UIFact]
@@ -445,8 +445,8 @@ public class WorkspaceProjectStateChangeDetectorTest : VisualStudioWorkspaceTest
 
         // Assert
         var update = Assert.Single(generator.Updates);
-        Assert.Equal(_projectNumberOne.Id, update.WorkspaceProject?.Id);
-        Assert.Equal(_hostProjectOne.FilePath, update.ProjectSnapshot.FilePath);
+        Assert.Equal(_projectNumberOne.Id, update.ProjectId);
+        Assert.Equal(_hostProjectOne.Key, update.ProjectKey);
     }
 
     [UIFact]
@@ -494,8 +494,8 @@ public class WorkspaceProjectStateChangeDetectorTest : VisualStudioWorkspaceTest
 
         // Assert
         var update = Assert.Single(generator.Updates);
-        Assert.Equal(_projectNumberOne.Id, update.WorkspaceProject?.Id);
-        Assert.Equal(_hostProjectOne.FilePath, update.ProjectSnapshot.FilePath);
+        Assert.Equal(_projectNumberOne.Id, update.ProjectId);
+        Assert.Equal(_hostProjectOne.Key, update.ProjectKey);
     }
 
     [UIFact]
@@ -523,7 +523,7 @@ public class WorkspaceProjectStateChangeDetectorTest : VisualStudioWorkspaceTest
         // Assert
         Assert.Single(
             generator.Updates,
-            p => p.WorkspaceProject is null);
+            p => p.ProjectId is null);
     }
 
     [UIFact]
@@ -552,7 +552,7 @@ public class WorkspaceProjectStateChangeDetectorTest : VisualStudioWorkspaceTest
         // Assert
         Assert.Single(
             generator.Updates,
-            p => p.WorkspaceProject?.Id == _projectNumberThree.Id);
+            p => p.ProjectId == _projectNumberThree.Id);
     }
 
     [Fact]
@@ -743,5 +743,5 @@ public class WorkspaceProjectStateChangeDetectorTest : VisualStudioWorkspaceTest
     }
 
     private WorkspaceProjectStateChangeDetector CreateDetector(IProjectWorkspaceStateGenerator generator, ProjectSnapshotManager projectManager)
-        => new(generator, projectManager, TestLanguageServerFeatureOptions.Instance, WorkspaceProvider, TimeSpan.FromMilliseconds(10));
+        => new(generator, projectManager, TestLanguageServerFeatureOptions.Instance, WorkspaceProvider, LoggerFactory, TimeSpan.FromMilliseconds(10));
 }

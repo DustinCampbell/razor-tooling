@@ -105,7 +105,7 @@ public class DocumentStateTest : ToolingTestBase
             .WithText(_text);
 
         // Act
-        var state = original.WithImportsChange();
+        var state = original.WithImportsChange(importsVersion: null);
 
         // Assert
         Assert.True(state.TryGetText(out _));
@@ -122,7 +122,7 @@ public class DocumentStateTest : ToolingTestBase
         await original.GetTextAsync(DisposalToken);
 
         // Act
-        var state = original.WithImportsChange();
+        var state = original.WithImportsChange(importsVersion: null);
 
         // Assert
         Assert.True(state.TryGetText(out _));

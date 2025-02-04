@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Razor.Telemetry;
 using Microsoft.AspNetCore.Razor.Utilities;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Razor;
+using Microsoft.CodeAnalysis.Razor.Logging;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.Workspaces;
 using Microsoft.VisualStudio.Shell;
@@ -30,6 +31,7 @@ internal sealed class FallbackProjectManager : IFallbackProjectManager
     private readonly IServiceProvider _serviceProvider;
     private readonly ProjectSnapshotManager _projectManager;
     private readonly IWorkspaceProvider _workspaceProvider;
+    private readonly ILogger _logger;
     private readonly ITelemetryReporter _telemetryReporter;
 
     // Tracks project keys that are known to be fallback projects.
@@ -40,12 +42,14 @@ internal sealed class FallbackProjectManager : IFallbackProjectManager
         [Import(typeof(SVsServiceProvider))] IServiceProvider serviceProvider,
         ProjectSnapshotManager projectManager,
         IWorkspaceProvider workspaceProvider,
+        ILoggerFactory loggerFactory,
         ITelemetryReporter telemetryReporter)
     {
         _serviceProvider = serviceProvider;
         _projectManager = projectManager;
         _workspaceProvider = workspaceProvider;
         _telemetryReporter = telemetryReporter;
+        _logger = loggerFactory.GetOrCreateLogger<FallbackProjectManager>();
 
         // Use PriorityChanged to ensure that project changes or removes update _fallbackProjects
         // before IProjectSnapshotManager.Changed listeners are notified.
@@ -152,6 +156,8 @@ internal sealed class FallbackProjectManager : IFallbackProjectManager
         // the IProjectSnapshotManager and remove this project's key from the_fallbackProjects set.
         var hostProject = new HostProject(project.FilePath, intermediateOutputPath, configuration, rootNamespace, project.Name);
 
+        _logger.LogInformation($"Adding fallback project {hostProject.FilePath} ({hostProject.DisplayName})");
+
         ImmutableInterlocked.Update(ref _fallbackProjects, set => set.Add(hostProject.Key));
 
         EnqueueProjectManagerUpdate(
@@ -168,6 +174,8 @@ internal sealed class FallbackProjectManager : IFallbackProjectManager
         {
             return;
         }
+
+        _logger.LogInformation($"Adding fallback document {hostDocument.FilePath} to project {projectKey}");
 
         var textLoader = new FileTextLoader(filePath, defaultEncoding: null);
 

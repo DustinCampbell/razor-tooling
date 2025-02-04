@@ -25,6 +25,7 @@ namespace Microsoft.VisualStudio.Razor;
 internal sealed partial class ProjectWorkspaceStateGenerator(
     ProjectSnapshotManager projectManager,
     ITagHelperResolver tagHelperResolver,
+    IWorkspaceProvider workspaceProvider,
     ILoggerFactory loggerFactory,
     ITelemetryReporter telemetryReporter)
     : IProjectWorkspaceStateGenerator, IDisposable
@@ -34,6 +35,7 @@ internal sealed partial class ProjectWorkspaceStateGenerator(
 
     private readonly ProjectSnapshotManager _projectManager = projectManager;
     private readonly ITagHelperResolver _tagHelperResolver = tagHelperResolver;
+    private readonly CodeAnalysis.Workspace _workspace = workspaceProvider.GetWorkspace();
     private readonly ILogger _logger = loggerFactory.GetOrCreateLogger<ProjectWorkspaceStateGenerator>();
     private readonly ITelemetryReporter _telemetryReporter = telemetryReporter;
 
@@ -68,7 +70,7 @@ internal sealed partial class ProjectWorkspaceStateGenerator(
         _blockBackgroundWorkStart?.Set();
     }
 
-    public void EnqueueUpdate(Project? workspaceProject, ProjectSnapshot projectSnapshot)
+    public void EnqueueUpdate(ProjectId? projectId, ProjectKey projectKey)
     {
         if (_disposed)
         {
@@ -77,8 +79,6 @@ internal sealed partial class ProjectWorkspaceStateGenerator(
 
         lock (_updates)
         {
-            var projectKey = projectSnapshot.Key;
-
             if (_updates.TryGetValue(projectKey, out var updateItem))
             {
                 if (updateItem.IsRunning)
@@ -92,7 +92,7 @@ internal sealed partial class ProjectWorkspaceStateGenerator(
             _logger.LogTrace($"Enqueuing update for '{projectKey}'");
 
             _updates[projectKey] = UpdateItem.CreateAndStartWork(
-                token => UpdateWorkspaceStateAsync(workspaceProject, projectSnapshot, token));
+                token => UpdateWorkspaceStateAsync(projectId, projectKey, token));
         }
     }
 
@@ -116,9 +116,16 @@ internal sealed partial class ProjectWorkspaceStateGenerator(
         }
     }
 
-    private async Task UpdateWorkspaceStateAsync(Project? workspaceProject, ProjectSnapshot projectSnapshot, CancellationToken cancellationToken)
+    private async Task UpdateWorkspaceStateAsync(ProjectId? projectId, ProjectKey projectKey, CancellationToken cancellationToken)
     {
-        var projectKey = projectSnapshot.Key;
+        var workspaceProject = projectId is not null
+            ? _workspace.CurrentSolution.GetProject(projectId)
+            : null;
+
+        if (!_projectManager.TryGetProject(projectKey, out var projectSnapshot))
+        {
+            return;
+        }
 
         // Only allow a single TagHelper resolver request to process at a time in order to reduce
         // Visual Studio memory pressure. Typically a TagHelper resolution result can be upwards of 10mb+.

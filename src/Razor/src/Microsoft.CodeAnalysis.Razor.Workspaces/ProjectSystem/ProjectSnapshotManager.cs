@@ -220,9 +220,10 @@ internal partial class ProjectSnapshotManager : IDisposable
 
     private void AddProject(HostProject hostProject)
     {
-        if (TryAddProject(hostProject, out var newSnapshot, out var isSolutionClosing))
+        if (TryAddProject(hostProject, out var newProject, out var isSolutionClosing))
         {
-            NotifyListeners(ProjectChangeEventArgs.ProjectAdded(newSnapshot, isSolutionClosing));
+            _logger.LogInformation($"AddProject: {newProject.DisplayName}: {hostProject}.");
+            NotifyListeners(ProjectChangeEventArgs.ProjectAdded(newProject, isSolutionClosing));
         }
     }
 
@@ -230,6 +231,7 @@ internal partial class ProjectSnapshotManager : IDisposable
     {
         if (TryRemoveProject(projectKey, out var oldProject, out var isSolutionClosing))
         {
+            _logger.LogInformation($"RemoveProject: {oldProject.DisplayName}.");
             NotifyListeners(ProjectChangeEventArgs.ProjectRemoved(oldProject, isSolutionClosing));
         }
     }
@@ -243,6 +245,7 @@ internal partial class ProjectSnapshotManager : IDisposable
             out var newProject,
             out var isSolutionClosing))
         {
+            _logger.LogInformation($"UpdateProjectConfiguration: {newProject.DisplayName}: {hostProject}.");
             NotifyListeners(ProjectChangeEventArgs.ProjectChanged(oldProject, newProject, isSolutionClosing));
         }
     }
@@ -256,6 +259,7 @@ internal partial class ProjectSnapshotManager : IDisposable
             out var newProject,
             out var isSolutionClosing))
         {
+            _logger.LogInformation($"UpdateProjectWorkspaceState: {newProject.DisplayName}: {projectWorkspaceState.TagHelpers.Length} tag helper(s).");
             NotifyListeners(ProjectChangeEventArgs.ProjectChanged(oldProject, newProject, isSolutionClosing));
         }
     }
@@ -266,10 +270,11 @@ internal partial class ProjectSnapshotManager : IDisposable
             projectKey,
             transformer: state => state.AddDocument(hostDocument, text),
             out var oldProject,
-            out var newSnapshot,
+            out var newProject,
             out var isSolutionClosing))
         {
-            NotifyListeners(ProjectChangeEventArgs.DocumentAdded(oldProject, newSnapshot, hostDocument.FilePath, isSolutionClosing));
+            _logger.LogInformation($"AddDocument: {newProject.DisplayName}:{hostDocument.TargetPath}.");
+            NotifyListeners(ProjectChangeEventArgs.DocumentAdded(oldProject, newProject, hostDocument.FilePath, isSolutionClosing));
         }
     }
 
@@ -282,6 +287,7 @@ internal partial class ProjectSnapshotManager : IDisposable
             out var newProject,
             out var isSolutionClosing))
         {
+            _logger.LogInformation($"AddDocument: {newProject.DisplayName}:{hostDocument.TargetPath}.");
             NotifyListeners(ProjectChangeEventArgs.DocumentAdded(oldProject, newProject, hostDocument.FilePath, isSolutionClosing));
         }
     }
@@ -295,6 +301,7 @@ internal partial class ProjectSnapshotManager : IDisposable
             out var newProject,
             out var isSolutionClosing))
         {
+            _logger.LogInformation($"RemoveDocument: {newProject.DisplayName}:{documentFilePath}.");
             NotifyListeners(ProjectChangeEventArgs.DocumentRemoved(oldProject, newProject, documentFilePath, isSolutionClosing));
         }
     }
@@ -309,6 +316,7 @@ internal partial class ProjectSnapshotManager : IDisposable
             out var newProject,
             out var isSolutionClosing))
         {
+            _logger.LogInformation($"OpenDocument: {newProject.DisplayName}:{documentFilePath}.");
             NotifyListeners(ProjectChangeEventArgs.DocumentChanged(oldProject, newProject, documentFilePath, isSolutionClosing));
         }
     }
@@ -323,6 +331,7 @@ internal partial class ProjectSnapshotManager : IDisposable
             out var newProject,
             out var isSolutionClosing))
         {
+            _logger.LogInformation($"CloseDocument: {newProject.DisplayName}:{documentFilePath}.");
             NotifyListeners(ProjectChangeEventArgs.DocumentChanged(oldProject, newProject, documentFilePath, isSolutionClosing));
         }
     }
@@ -336,6 +345,7 @@ internal partial class ProjectSnapshotManager : IDisposable
             out var newProject,
             out var isSolutionClosing))
         {
+            _logger.LogInformation($"UpdateDocumentText: {newProject.DisplayName}:{documentFilePath}.");
             NotifyListeners(ProjectChangeEventArgs.DocumentChanged(oldProject, newProject, documentFilePath, isSolutionClosing));
         }
     }
@@ -349,6 +359,7 @@ internal partial class ProjectSnapshotManager : IDisposable
             out var newProject,
             out var isSolutionClosing))
         {
+            _logger.LogInformation($"UpdateDocumentText: {newProject.DisplayName}:{documentFilePath}.");
             NotifyListeners(ProjectChangeEventArgs.DocumentChanged(oldProject, newProject, documentFilePath, isSolutionClosing));
         }
     }
@@ -371,7 +382,7 @@ internal partial class ProjectSnapshotManager : IDisposable
             return false;
         }
 
-        var state = ProjectState.Create(hostProject, _compilerOptions, _projectEngineFactoryProvider);
+        var state = ProjectState.Create(hostProject, _compilerOptions, _projectEngineFactoryProvider, _logger);
 
         var newEntry = new Entry(state);
 

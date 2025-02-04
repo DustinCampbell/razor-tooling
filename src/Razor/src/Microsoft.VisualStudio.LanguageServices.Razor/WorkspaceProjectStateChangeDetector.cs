@@ -10,10 +10,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.Language.Components;
+using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Utilities;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Razor;
+using Microsoft.CodeAnalysis.Razor.Logging;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.Workspaces;
 
@@ -30,7 +32,9 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
     private readonly CodeAnalysis.Workspace _workspace;
 
     private readonly CancellationTokenSource _disposeTokenSource;
-    private readonly AsyncBatchingWorkQueue<(Project?, ProjectSnapshot)> _workQueue;
+    private readonly AsyncBatchingWorkQueue<(ProjectId?, ProjectKey)> _workQueue;
+
+    private readonly ILogger _logger;
 
     private WorkspaceChangedListener? _workspaceChangedListener;
 
@@ -39,8 +43,9 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
         IProjectWorkspaceStateGenerator generator,
         ProjectSnapshotManager projectManager,
         LanguageServerFeatureOptions options,
-        IWorkspaceProvider workspaceProvider)
-        : this(generator, projectManager, options, workspaceProvider, s_delay)
+        IWorkspaceProvider workspaceProvider,
+        ILoggerFactory loggerFactory)
+        : this(generator, projectManager, options, workspaceProvider, loggerFactory, s_delay)
     {
     }
 
@@ -49,6 +54,7 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
         ProjectSnapshotManager projectManager,
         LanguageServerFeatureOptions options,
         IWorkspaceProvider workspaceProvider,
+        ILoggerFactory loggerFactory,
         TimeSpan delay)
     {
         _generator = generator;
@@ -56,10 +62,12 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
         _options = options;
 
         _disposeTokenSource = new();
-        _workQueue = new AsyncBatchingWorkQueue<(Project?, ProjectSnapshot)>(
+        _workQueue = new AsyncBatchingWorkQueue<(ProjectId?, ProjectKey)>(
             delay,
             ProcessBatchAsync,
             _disposeTokenSource.Token);
+
+        _logger = loggerFactory.GetOrCreateLogger<WorkspaceProjectStateChangeDetector>();
 
         _projectManager.Changed += ProjectManager_Changed;
 
@@ -85,16 +93,16 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
         _disposeTokenSource.Dispose();
     }
 
-    private ValueTask ProcessBatchAsync(ImmutableArray<(Project? Project, ProjectSnapshot ProjectSnapshot)> items, CancellationToken token)
+    private ValueTask ProcessBatchAsync(ImmutableArray<(ProjectId?, ProjectKey)> items, CancellationToken token)
     {
-        foreach (var (project, projectSnapshot) in items.GetMostRecentUniqueItems(Comparer.Instance))
+        foreach (var (projectId, projectKey) in items.GetMostRecentUniqueItems(Comparer.Instance))
         {
             if (token.IsCancellationRequested)
             {
                 return default;
             }
 
-            _generator.EnqueueUpdate(project, projectSnapshot);
+            _generator.EnqueueUpdate(projectId, projectKey);
         }
 
         return default;
@@ -112,6 +120,9 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
                     var newSolution = e.NewSolution;
 
                     var project = newSolution.GetRequiredProject(projectId);
+
+                    _logger.LogInformation($"{e.Kind}: {project.Name}");
+
                     EnqueueUpdateOnProjectAndDependencies(project, newSolution);
                 }
 
@@ -123,6 +134,8 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
                     var oldSolution = e.OldSolution;
 
                     var project = oldSolution.GetRequiredProject(projectId);
+
+                    _logger.LogInformation($"{e.Kind}: {project.Name}");
 
                     if (TryGetProjectSnapshot(project, out var projectSnapshot))
                     {
@@ -151,6 +164,8 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
 
                     if (IsRazorFileOrRazorVirtual(newDocument))
                     {
+                        _logger.LogInformation($"{e.Kind}: {newDocument.Name}");
+
                         EnqueueUpdateOnProjectAndDependencies(project, newSolution);
                         return;
                     }
@@ -159,6 +174,8 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
                     // is operating on a partial class that is associated with a Razor file.
                     if (IsPartialComponentClass(newDocument))
                     {
+                        _logger.LogInformation($"{e.Kind}: {newDocument.Name}");
+
                         EnqueueUpdateOnProjectAndDependencies(project, newSolution);
                     }
                 }
@@ -182,6 +199,8 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
 
                     if (IsRazorFileOrRazorVirtual(removedDocument))
                     {
+                        _logger.LogInformation($"{e.Kind}: {removedDocument.Name}");
+
                         EnqueueUpdateOnProjectAndDependencies(project, newSolution);
                         return;
                     }
@@ -191,6 +210,8 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
 
                     if (IsPartialComponentClass(removedDocument))
                     {
+                        _logger.LogInformation($"{e.Kind}: {removedDocument.Name}");
+
                         EnqueueUpdateOnProjectAndDependencies(project, newSolution);
                     }
                 }
@@ -218,6 +239,8 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
 
                     if (IsRazorFileOrRazorVirtual(document))
                     {
+                        _logger.LogInformation($"{e.Kind}: {document.Name}");
+
                         var newProject = newSolution.GetRequiredProject(projectId);
                         EnqueueUpdateOnProjectAndDependencies(newProject, newSolution);
                         return;
@@ -227,6 +250,8 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
                     // is operating on a partial class that is associated with a Razor file.
                     if (IsPartialComponentClass(document))
                     {
+                        _logger.LogInformation($"{e.Kind}: {document.Name}");
+
                         var newProject = newSolution.GetRequiredProject(projectId);
                         EnqueueUpdateOnProjectAndDependencies(newProject, newSolution);
                     }
@@ -242,6 +267,8 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
                 {
                     var oldSolution = e.OldSolution;
                     var newSolution = e.NewSolution;
+
+                    _logger.LogInformation($"{e.Kind}");
 
                     foreach (var project in oldSolution.Projects)
                     {
@@ -396,7 +423,7 @@ internal partial class WorkspaceProjectStateChangeDetector : IRazorStartupServic
 
     private void EnqueueUpdate(Project? project, ProjectSnapshot projectSnapshot)
     {
-        _workQueue.AddWork((project, projectSnapshot));
+        _workQueue.AddWork((project?.Id, projectSnapshot.Key));
     }
 
     private bool TryGetProjectSnapshot(Project? project, [NotNullWhen(true)] out ProjectSnapshot? projectSnapshot)

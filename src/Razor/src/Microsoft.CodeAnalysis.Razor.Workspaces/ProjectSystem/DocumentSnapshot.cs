@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.CodeAnalysis.Razor.ProjectSystem.Legacy;
+using Microsoft.CodeAnalysis.Razor.ProjectSystem.Sources;
 using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Razor.ProjectSystem;
@@ -28,6 +29,12 @@ internal sealed class DocumentSnapshot(ProjectSnapshot project, DocumentState st
     public int Version => _state.Version;
 
     IProjectSnapshot IDocumentSnapshot.Project => Project;
+
+    public bool TryGetSourceAndVersion([NotNullWhen(true)] out SourceAndVersion? result)
+        => _state.TryGetSourceAndVersion(out result);
+
+    public ValueTask<SourceAndVersion> GetSourceAndVersionAsync(CancellationToken cancellationToken)
+        => _state.GetSourceAndVersionAsync(cancellationToken);
 
     public bool TryGetSource([NotNullWhen(true)] out RazorSourceDocument? result)
         => _state.TryGetSource(out result);

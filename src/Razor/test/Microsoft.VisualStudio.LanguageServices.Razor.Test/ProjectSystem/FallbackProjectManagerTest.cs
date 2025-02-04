@@ -41,6 +41,7 @@ public class FallbackProjectManagerTest : VisualStudioWorkspaceTestBase
             serviceProvider,
             _projectManager,
             WorkspaceProvider,
+            LoggerFactory,
             NoOpTelemetryReporter.Instance);
     }
 

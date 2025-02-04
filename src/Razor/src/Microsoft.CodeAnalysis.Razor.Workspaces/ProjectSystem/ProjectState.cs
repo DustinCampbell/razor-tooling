@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Razor.ProjectEngineHost;
 using Microsoft.AspNetCore.Razor.ProjectSystem;
 using Microsoft.AspNetCore.Razor.Utilities;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.Razor.Logging;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.Extensions.ObjectPool;
 using Microsoft.NET.Sdk.Razor.SourceGenerators;
@@ -41,17 +42,20 @@ internal sealed class ProjectState
     public ImmutableDictionary<string, ImmutableHashSet<string>> ImportsToRelatedDocuments { get; }
 
     private readonly IProjectEngineFactoryProvider _projectEngineFactoryProvider;
+    private readonly ILogger _logger;
     private RazorProjectEngine? _projectEngine;
 
     private ProjectState(
         HostProject hostProject,
         RazorCompilerOptions compilerOptions,
-        IProjectEngineFactoryProvider projectEngineFactoryProvider)
+        IProjectEngineFactoryProvider projectEngineFactoryProvider,
+        ILogger logger)
     {
         HostProject = hostProject;
         ProjectWorkspaceState = ProjectWorkspaceState.Default;
         CompilerOptions = compilerOptions;
         _projectEngineFactoryProvider = projectEngineFactoryProvider;
+        _logger = logger;
 
         Documents = s_emptyDocuments;
         ImportsToRelatedDocuments = s_emptyImportsToRelatedDocuments;
@@ -68,6 +72,7 @@ internal sealed class ProjectState
         HostProject = hostProject;
         CompilerOptions = older.CompilerOptions;
         _projectEngineFactoryProvider = older._projectEngineFactoryProvider;
+        _logger = older._logger;
         ProjectWorkspaceState = projectWorkspaceState;
 
         Documents = documents;
@@ -82,8 +87,9 @@ internal sealed class ProjectState
     public static ProjectState Create(
         HostProject hostProject,
         RazorCompilerOptions compilerOptions,
-        IProjectEngineFactoryProvider projectEngineFactoryProvider)
-        => new(hostProject, compilerOptions, projectEngineFactoryProvider);
+        IProjectEngineFactoryProvider projectEngineFactoryProvider,
+        ILogger? logger = null)
+        => new(hostProject, compilerOptions, projectEngineFactoryProvider, logger ?? EmptyLoggerFactory.Instance.GetOrCreateLogger("ProjectState"));
 
     public ImmutableArray<TagHelperDescriptor> TagHelpers => ProjectWorkspaceState.TagHelpers;
 
@@ -252,6 +258,37 @@ internal sealed class ProjectState
             return this;
         }
 
+        using var _ = StringBuilderPool.GetPooledObject(out var builder);
+
+        builder.AppendLine($"{HostProject.DisplayName}: Invalidating {Documents.Count} document(s).");
+
+        if (HostProject.FilePath != hostProject.FilePath)
+        {
+            builder.AppendLine("- FilePath changed.");
+        }
+
+        if (HostProject.IntermediateOutputPath != hostProject.IntermediateOutputPath)
+        {
+            builder.AppendLine("- IntermediateOutputPath changed.");
+        }
+
+        if (HostProject.Configuration != hostProject.Configuration)
+        {
+            builder.AppendLine("- Configuration changed.");
+        }
+
+        if (HostProject.RootNamespace != hostProject.RootNamespace)
+        {
+            builder.AppendLine("- RootNamespace changed.");
+        }
+
+        if (HostProject.DisplayName != hostProject.DisplayName)
+        {
+            builder.AppendLine("- DisplayName changed.");
+        }
+
+        _logger.LogInformation(builder.ToString());
+
         var documents = UpdateDocuments(static x => x.WithConfigurationChange());
 
         // If the host project has changed then we need to recompute the imports map
@@ -269,6 +306,13 @@ internal sealed class ProjectState
         {
             return this;
         }
+
+        using var _ = StringBuilderPool.GetPooledObject(out var builder);
+
+        builder.AppendLine($"{HostProject.DisplayName}: Invalidating {Documents.Count} document(s).");
+        builder.AppendLine($"- ProjectWorkspaceState.TagHelpers changed from {ProjectWorkspaceState.TagHelpers.Length} to {projectWorkspaceState.TagHelpers.Length} tag helper(s).");
+
+        _logger.LogInformation(builder.ToString());
 
         var documents = UpdateDocuments(static x => x.WithProjectWorkspaceStateChange());
 
@@ -371,7 +415,17 @@ internal sealed class ProjectState
             return documents;
         }
 
-        var updates = relatedDocuments.Select(x => KeyValuePair.Create(x, documents[x].WithImportsChange()));
+        var updates = relatedDocuments.Select(documentFilePath =>
+        {
+            var document = documents[documentFilePath];
+
+            VersionStamp? importVersion = TryComputeLatestImportsVersion(document.HostDocument, out var version)
+                ? version
+                : null;
+
+            return KeyValuePair.Create(documentFilePath, document.WithImportsChange(importVersion));
+        });
+
         return documents.SetItems(updates);
     }
 
@@ -410,6 +464,49 @@ internal sealed class ProjectState
     }
 
     /// <summary>
+    ///  Computes the latest version of the applicable imports for the given <see cref="HostDocument"/>.
+    /// </summary>
+    public bool TryComputeLatestImportsVersion(HostDocument hostDocument, out VersionStamp version)
+    {
+        version = default;
+
+        var targetPath = hostDocument.TargetPath;
+        var projectEngine = ProjectEngine;
+
+        var projectItem = projectEngine.FileSystem.GetItem(targetPath, hostDocument.FileKind);
+
+        using var importProjectItems = new PooledArrayBuilder<RazorProjectItem>();
+        projectEngine.CollectImports(projectItem, ref importProjectItems.AsRef());
+
+        if (importProjectItems.Count == 0)
+        {
+            return false;
+        }
+
+        foreach (var importProjectItem in importProjectItems)
+        {
+            if (importProjectItem is NotFoundProjectItem or DefaultImportProjectItem)
+            {
+                continue;
+            }
+
+            if (Documents.TryGetValue(importProjectItem.PhysicalPath, out var document))
+            {
+                // If an import document's source hasn't been loaded yet, we can't compute the version.
+                if (!document.TryGetTextVersion(out var importVersion))
+                {
+                    version = default;
+                    return false;
+                }
+
+                version = version.GetNewerVersion(importVersion);
+            }
+        }
+
+        return version != default;
+    }
+
+    /// <summary>
     ///  Collects the applicable import document target paths for the given <see cref="HostDocument"/>
     ///  in <paramref name="importTargetPaths"/>
     /// </summary>
@@ -433,6 +530,12 @@ internal sealed class ProjectState
 
         foreach (var importProjectItem in importProjectItems)
         {
+            // Note: We skip default imports because they can't change and never manifest on disk.
+            if (importProjectItem is NotFoundProjectItem or DefaultImportProjectItem)
+            {
+                continue;
+            }
+
             // RazorProjectItem.FilePath is defined as relative to the project root with a leading '/'
             // and all other slashes normalized to '/'.
             //
@@ -449,8 +552,6 @@ internal sealed class ProjectState
 
                 if (importTargetPath.IsNullOrEmpty())
                 {
-                    // If we couldn't compute the target path, this likely a default import.
-                    // We skip default imports since they can't change and never manifest on disk.
                     continue;
                 }
             }

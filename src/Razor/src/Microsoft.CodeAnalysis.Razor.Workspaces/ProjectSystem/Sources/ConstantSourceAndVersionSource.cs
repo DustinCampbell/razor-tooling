@@ -10,7 +10,7 @@ namespace Microsoft.CodeAnalysis.Razor.ProjectSystem.Sources;
 
 internal sealed class ConstantSourceAndVersionSource(RazorSourceDocument source, VersionStamp version) : ISourceAndVersionSource
 {
-    private readonly SourceAndVersion _sourceAndVersion = SourceAndVersion.Create(source, version);
+    private readonly SourceAndVersion _sourceAndVersion = new(source, version);
 
     public TextLoader? TextLoader => null;
 

@@ -72,6 +72,7 @@ public class RazorDynamicFileInfoProviderTest(ITestOutputHelper testOutput) : Vi
             serviceProvider,
             _projectManager,
             WorkspaceProvider,
+            LoggerFactory,
             NoOpTelemetryReporter.Instance);
 
         _provider = new RazorDynamicFileInfoProvider(
