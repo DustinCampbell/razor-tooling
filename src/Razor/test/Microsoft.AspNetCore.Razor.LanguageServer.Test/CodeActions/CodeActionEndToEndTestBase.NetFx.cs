@@ -334,7 +334,8 @@ public abstract class CodeActionEndToEndTestBase(ITestOutputHelper testOutput) :
                 .Metadata(new(ComponentMetadata.Component.DelegateSignatureKey, bool.TrueString), new(ComponentMetadata.Component.GenericTypedKey, bool.TrueString)));
             builder.BoundAttributeDescriptor(configure => configure
                 .Name("TItem")
-                .Metadata(new(ComponentMetadata.Component.TypeParameterKey, bool.TrueString), new(TagHelperMetadata.Common.PropertyName, "TItem")));
+                .PropertyName("TItem")
+                .Metadata(new(ComponentMetadata.Component.TypeParameterKey, bool.TrueString)));
             builder.TagMatchingRule(rule => rule.RequireTagName("TestGenericComponent"));
             builder.Metadata(
                 new(TagHelperMetadata.Common.TypeName, "Microsoft.AspNetCore.Components.TestGenericComponent"),

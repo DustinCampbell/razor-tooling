@@ -26,15 +26,15 @@ public class ModelExpressionPassTest
 
         var tagHelpers = new[]
         {
-                TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly")
-                    .BoundAttributeDescriptor(attribute =>
-                        attribute
-                            .Name("Foo")
-                            .TypeName("System.Int32"))
-                    .TagMatchingRuleDescriptor(rule =>
-                        rule.RequireTagName("p"))
-                    .Build()
-            };
+            TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly")
+                .BoundAttributeDescriptor(attribute =>
+                    attribute
+                        .Name("Foo")
+                        .TypeName("System.Int32"))
+                .TagMatchingRuleDescriptor(rule =>
+                    rule.RequireTagName("p"))
+                .Build()
+        };
 
         var engine = CreateEngine(tagHelpers);
         var pass = new ModelExpressionPass()
@@ -67,15 +67,15 @@ public class ModelExpressionPassTest
 
         var tagHelpers = new[]
         {
-                TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly")
-                    .BoundAttributeDescriptor(attribute =>
-                        attribute
-                            .Name("Foo")
-                            .TypeName("Microsoft.AspNetCore.Mvc.ViewFeatures.ModelExpression"))
-                    .TagMatchingRuleDescriptor(rule =>
-                        rule.RequireTagName("p"))
-                    .Build()
-            };
+            TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly")
+                .BoundAttributeDescriptor(attribute =>
+                    attribute
+                        .Name("Foo")
+                        .TypeName("Microsoft.AspNetCore.Mvc.ViewFeatures.ModelExpression"))
+                .TagMatchingRuleDescriptor(rule =>
+                    rule.RequireTagName("p"))
+                .Build()
+        };
 
         var engine = CreateEngine(tagHelpers);
         var pass = new ModelExpressionPass()
@@ -112,15 +112,15 @@ public class ModelExpressionPassTest
 
         var tagHelpers = new[]
         {
-                TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly")
-                    .BoundAttributeDescriptor(attribute =>
-                        attribute
-                            .Name("Foo")
-                            .TypeName("Microsoft.AspNetCore.Mvc.ViewFeatures.ModelExpression"))
-                    .TagMatchingRuleDescriptor(rule =>
-                        rule.RequireTagName("p"))
-                    .Build()
-            };
+            TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly")
+                .BoundAttributeDescriptor(attribute =>
+                    attribute
+                        .Name("Foo")
+                        .TypeName("Microsoft.AspNetCore.Mvc.ViewFeatures.ModelExpression"))
+                .TagMatchingRuleDescriptor(rule =>
+                    rule.RequireTagName("p"))
+                .Build()
+        };
 
         var engine = CreateEngine(tagHelpers);
         var pass = new ModelExpressionPass()

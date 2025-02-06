@@ -2,7 +2,6 @@
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
 using System.Text;
@@ -55,15 +54,13 @@ public class TagHelperDescriptorSerializationTest(ITestOutputHelper testOutput) 
             tagName: "tag-name",
             typeName: "type name",
             assemblyName: "assembly name",
-            attributes:
-            [
+            attributes: [
                 builder => builder
                     .Name("test-attribute")
-                    .Metadata(PropertyName("TestAttribute"))
+                    .PropertyName("TestAttribute")
                     .TypeName("string"),
             ],
-            ruleBuilders:
-            [
+            ruleBuilders: [
                 builder => builder
                     .RequireAttributeDescriptor(attribute => attribute
                         .Name("required-attribute-one")
@@ -99,15 +96,13 @@ public class TagHelperDescriptorSerializationTest(ITestOutputHelper testOutput) 
             tagName: "tag-name",
             typeName: "type name",
             assemblyName: "assembly name",
-            attributes:
-            [
+            attributes: [
                 builder => builder
                     .Name("test-attribute")
-                    .Metadata(PropertyName("TestAttribute"))
+                    .PropertyName("TestAttribute")
                     .TypeName("string"),
             ],
-            ruleBuilders:
-            [
+            ruleBuilders: [
                 builder => builder
                     .RequireAttributeDescriptor(attribute => attribute
                         .Name("required-attribute-one")
@@ -143,15 +138,13 @@ public class TagHelperDescriptorSerializationTest(ITestOutputHelper testOutput) 
             tagName: "tag-name",
             typeName: "type name",
             assemblyName: "assembly name",
-            attributes:
-            [
+            attributes: [
                 builder => builder
                     .Name("test-attribute")
-                    .Metadata(PropertyName("TestAttribute"))
+                    .PropertyName("TestAttribute")
                     .TypeName("string"),
             ],
-            ruleBuilders:
-            [
+            ruleBuilders: [
                 builder => builder
                     .RequireAttributeDescriptor(attribute => attribute
                         .Name("required-attribute-one")
@@ -186,22 +179,20 @@ public class TagHelperDescriptorSerializationTest(ITestOutputHelper testOutput) 
             tagName: "tag-name",
             typeName: "type name",
             assemblyName: "assembly name",
-            attributes:
-            [
+            attributes: [
                 builder => builder
                     .Name("test-attribute")
-                    .Metadata(PropertyName("TestAttribute"))
+                    .PropertyName("TestAttribute")
                     .TypeName("SomeEnum")
                     .AsEnum()
                     .Documentation("Summary"),
                 builder => builder
                     .Name("test-attribute2")
-                    .Metadata(PropertyName("TestAttribute2"))
+                    .PropertyName("TestAttribute2")
                     .TypeName("SomeDictionary")
                     .AsDictionaryAttribute("dict-prefix-", "string"),
             ],
-            ruleBuilders:
-            [
+            ruleBuilders: [
                 builder => builder
                     .RequireAttributeDescriptor(attribute => attribute
                         .Name("required-attribute-one")
@@ -229,15 +220,11 @@ public class TagHelperDescriptorSerializationTest(ITestOutputHelper testOutput) 
             tagName: "tag-name2",
             typeName: "type name",
             assemblyName: "assembly name",
-            attributes:
-            [
-                builder =>
-                {
-                    builder
+            attributes: [
+                builder => builder
                     .Name("test-attribute")
-                    .Metadata(PropertyName("TestAttribute"))
-                    .TypeName("string");
-                },
+                    .PropertyName("TestAttribute")
+                    .TypeName("string")
             ]);
 
         // Act
@@ -261,13 +248,12 @@ public class TagHelperDescriptorSerializationTest(ITestOutputHelper testOutput) 
             tagName: "tag-name3",
             typeName: "type name",
             assemblyName: "assembly name",
-            attributes:
-            [
+            attributes: [
                 builder =>
                 {
                     builder
                         .Name("test-attribute")
-                        .Metadata(PropertyName("TestAttribute"))
+                        .PropertyName("TestAttribute")
                         .TypeName("string");
 
                     builder.IsEditorRequired = true;
@@ -291,26 +277,24 @@ public class TagHelperDescriptorSerializationTest(ITestOutputHelper testOutput) 
         string tagName,
         string typeName,
         string assemblyName,
-        IEnumerable<Action<BoundAttributeDescriptorBuilder>>? attributes = null,
-        IEnumerable<Action<TagMatchingRuleDescriptorBuilder>>? ruleBuilders = null,
+        ReadOnlySpan<Action<BoundAttributeDescriptorBuilder>> attributes = default,
+        ReadOnlySpan<Action<TagMatchingRuleDescriptorBuilder>> ruleBuilders = default,
         Action<TagHelperDescriptorBuilder>? configureAction = null)
     {
         var builder = TagHelperDescriptorBuilder.Create(kind, typeName, assemblyName);
         builder.Metadata(TypeName(typeName));
 
-        if (attributes != null)
+        foreach (var attributeBuilder in attributes)
         {
-            foreach (var attributeBuilder in attributes)
-            {
-                builder.BoundAttributeDescriptor(attributeBuilder);
-            }
+            builder.BoundAttributeDescriptor(attributeBuilder);
         }
 
-        if (ruleBuilders != null)
+        if (!ruleBuilders.IsEmpty)
         {
             foreach (var ruleBuilder in ruleBuilders)
             {
-                builder.TagMatchingRuleDescriptor(innerRuleBuilder => {
+                builder.TagMatchingRuleDescriptor(innerRuleBuilder =>
+                {
                     innerRuleBuilder.RequireTagName(tagName);
                     ruleBuilder(innerRuleBuilder);
                 });

@@ -69,7 +69,7 @@ public class RazorCodeDocumentExtensionsTest(ITestOutputHelper testOutput) : Too
         {
             builder.Name = "asp-int";
             builder.TypeName = typeof(int).FullName;
-            builder.SetMetadata(PropertyName("AspInt"));
+            builder.PropertyName("AspInt");
         });
         descriptor.SetMetadata(TypeName("TestTagHelper"));
 

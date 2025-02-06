@@ -20,6 +20,7 @@ public sealed class BoundAttributeDescriptor : TagHelperObject<BoundAttributeDes
 
     public string Name { get; }
     public string TypeName { get; }
+    public string PropertyName { get; }
     public string DisplayName { get; }
     public string? ContainingType { get; }
 
@@ -45,6 +46,7 @@ public sealed class BoundAttributeDescriptor : TagHelperObject<BoundAttributeDes
     internal BoundAttributeDescriptor(
         string name,
         string typeName,
+        string propertyName,
         BoundAttributeFlags flags,
         string? indexerNamePrefix,
         string? indexerTypeName,
@@ -58,6 +60,7 @@ public sealed class BoundAttributeDescriptor : TagHelperObject<BoundAttributeDes
     {
         Name = name;
         TypeName = typeName;
+        PropertyName = propertyName;
         _flags = flags;
         IndexerNamePrefix = indexerNamePrefix;
         IndexerTypeName = indexerTypeName;
@@ -77,6 +80,7 @@ public sealed class BoundAttributeDescriptor : TagHelperObject<BoundAttributeDes
     {
         builder.AppendData(Name);
         builder.AppendData(TypeName);
+        builder.AppendData(PropertyName);
         builder.AppendData((int)_flags);
         builder.AppendData(IndexerNamePrefix);
         builder.AppendData(IndexerTypeName);

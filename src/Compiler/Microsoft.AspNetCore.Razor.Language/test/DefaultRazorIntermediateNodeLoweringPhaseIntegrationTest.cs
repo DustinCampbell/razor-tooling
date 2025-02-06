@@ -1,8 +1,6 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -137,11 +135,10 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
                 name: "val",
                 suffix: "\"",
                 node: n,
-                valueValidators: new Action<IntermediateNode>[]
-                {
-                        value => CSharpExpressionAttributeValue(string.Empty, "Hello", value),
-                        value => LiteralAttributeValue(" ",  "World", value)
-                }),
+                valueValidators: [
+                    value => CSharpExpressionAttributeValue(string.Empty, "Hello", value),
+                    value => LiteralAttributeValue(" ",  "World", value)
+                ]),
             n => Html(@" />
     </body>
 </html>", n));
@@ -191,11 +188,11 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
 <span val=""@Hello World""></span>");
         var tagHelpers = new[]
         {
-                CreateTagHelperDescriptor(
-                    tagName: "span",
-                    typeName: "SpanTagHelper",
-                    assemblyName: "TestAssembly")
-            };
+            CreateTagHelperDescriptor(
+                tagName: "span",
+                typeName: "SpanTagHelper",
+                assemblyName: "TestAssembly")
+        };
 
         // Act
         var documentNode = Lower(codeDocument, tagHelpers: tagHelpers);
@@ -229,11 +226,11 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
 <cool:span val=""@Hello World""></cool:span>");
         var tagHelpers = new[]
         {
-                CreateTagHelperDescriptor(
-                    tagName: "span",
-                    typeName: "SpanTagHelper",
-                    assemblyName: "TestAssembly")
-            };
+            CreateTagHelperDescriptor(
+                tagName: "span",
+                typeName: "SpanTagHelper",
+                assemblyName: "TestAssembly")
+        };
 
         // Act
         var documentNode = Lower(codeDocument, tagHelpers: tagHelpers);
@@ -272,11 +269,11 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
 }");
         var tagHelpers = new[]
         {
-                        CreateTagHelperDescriptor(
-                            tagName: "span",
-                            typeName: "SpanTagHelper",
-                            assemblyName: "TestAssembly")
-            };
+            CreateTagHelperDescriptor(
+                tagName: "span",
+                typeName: "SpanTagHelper",
+                assemblyName: "TestAssembly")
+        };
 
         // Act
         var documentNode = Lower(codeDocument, tagHelpers: tagHelpers);
@@ -320,13 +317,12 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
                 tagName: "input",
                 typeName: "InputTagHelper",
                 assemblyName: "TestAssembly",
-                attributes: new Action<BoundAttributeDescriptorBuilder>[]
-                {
-                    builder => builder
+                attributes: [
+                    attribute => attribute
                         .Name("bound")
-                        .Metadata(PropertyName("FooProp"))
-                        .TypeName("System.String"),
-                })
+                        .PropertyName("FooProp")
+                        .TypeName("System.String")
+                ])
         };
 
         // Act
@@ -453,13 +449,13 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
 
     private static DocumentIntermediateNode Lower(
         RazorCodeDocument codeDocument,
-        Action<RazorProjectEngineBuilder> builder = null,
-        IEnumerable<TagHelperDescriptor> tagHelpers = null,
+        Action<RazorProjectEngineBuilder>? builder = null,
+        IEnumerable<TagHelperDescriptor>? tagHelpers = null,
         bool designTime = false)
     {
-        tagHelpers ??= Array.Empty<TagHelperDescriptor>();
+        tagHelpers ??= [];
 
-        Action<RazorProjectEngineBuilder> configureEngine = b =>
+        void configureEngine(RazorProjectEngineBuilder b)
         {
             builder?.Invoke(b);
 
@@ -468,7 +464,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
 
             b.Features.Add(new DesignTimeOptionsFeature(designTime));
             b.Features.Add(new ConfigureRazorParserOptions(useRoslynTokenizer: true, CSharpParseOptions.Default));
-        };
+        }
 
         var projectEngine = RazorProjectEngine.Create(configureEngine);
 
@@ -492,17 +488,14 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
         string tagName,
         string typeName,
         string assemblyName,
-        IEnumerable<Action<BoundAttributeDescriptorBuilder>> attributes = null)
+        ReadOnlySpan<Action<BoundAttributeDescriptorBuilder>> attributes = default)
     {
         var builder = TagHelperDescriptorBuilder.Create(typeName, assemblyName);
         builder.Metadata(TypeName(typeName));
 
-        if (attributes != null)
+        foreach (var attributeBuilder in attributes)
         {
-            foreach (var attributeBuilder in attributes)
-            {
-                builder.BoundAttributeDescriptor(attributeBuilder);
-            }
+            builder.BoundAttributeDescriptor(attributeBuilder);
         }
 
         builder.TagMatchingRuleDescriptor(ruleBuilder => ruleBuilder.RequireTagName(tagName));

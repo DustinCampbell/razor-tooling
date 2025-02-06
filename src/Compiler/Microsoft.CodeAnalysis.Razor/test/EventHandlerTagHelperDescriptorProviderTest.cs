@@ -96,7 +96,6 @@ public class EventHandlerTagHelperDescriptorProviderTest : TagHelperDescriptorPr
 
         Assert.Collection(
             attribute.Metadata.OrderBy(kvp => kvp.Key),
-            kvp => Assert.Equal(kvp, new KeyValuePair<string, string?>("Common.PropertyName", "onclick")),
             kvp => Assert.Equal(kvp, new KeyValuePair<string, string?>(ComponentMetadata.Component.WeaklyTypedKey, bool.TrueString)));
 
         Assert.Equal(
@@ -105,7 +104,7 @@ public class EventHandlerTagHelperDescriptorProviderTest : TagHelperDescriptorPr
             attribute.Documentation);
 
         Assert.Equal("@onclick", attribute.Name);
-        Assert.Equal("onclick", attribute.GetPropertyName());
+        Assert.Equal("onclick", attribute.PropertyName);
         Assert.Equal("Microsoft.AspNetCore.Components.EventCallback<System.Action<Microsoft.AspNetCore.Components.Web.MouseEventArgs>> Test.EventHandlers.onclick", attribute.DisplayName);
 
         // Defined from the property type
@@ -231,7 +230,6 @@ public class EventHandlerTagHelperDescriptorProviderTest : TagHelperDescriptorPr
 
         Assert.Collection(
             attribute.Metadata.OrderBy(kvp => kvp.Key),
-            kvp => Assert.Equal(kvp, new KeyValuePair<string, string?>("Common.PropertyName", "onclick")),
             kvp => Assert.Equal(kvp, new KeyValuePair<string, string?>(ComponentMetadata.Component.WeaklyTypedKey, bool.TrueString)));
 
         Assert.Equal(
@@ -240,7 +238,7 @@ public class EventHandlerTagHelperDescriptorProviderTest : TagHelperDescriptorPr
             attribute.Documentation);
 
         Assert.Equal("@onclick", attribute.Name);
-        Assert.Equal("onclick", attribute.GetPropertyName());
+        Assert.Equal("onclick", attribute.PropertyName);
         Assert.Equal("Microsoft.AspNetCore.Components.EventCallback<System.Action<Microsoft.AspNetCore.Components.Web.MouseEventArgs>> Test.EventHandlers.onclick", attribute.DisplayName);
 
         // Defined from the property type

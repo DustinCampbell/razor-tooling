@@ -5,7 +5,6 @@
 
 using System;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Razor.Language.Components;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
@@ -40,10 +39,7 @@ public static class BoundAttributeDescriptorBuilderExtensions
         string attributeNamePrefix,
         string valueTypeName)
     {
-        if (builder == null)
-        {
-            throw new ArgumentNullException(nameof(builder));
-        }
+        ArgHelper.ThrowIfNull(builder);
 
         builder.IsDictionary = true;
         builder.IndexerAttributeNamePrefix = attributeNamePrefix;

@@ -4,6 +4,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
@@ -12,9 +13,18 @@ namespace Microsoft.AspNetCore.Razor.Language;
 
 public static class RazorProjectEngineBuilderExtensions
 {
-    public static RazorProjectEngineBuilder AddTagHelpers(this RazorProjectEngineBuilder builder, params TagHelperDescriptor[] tagHelpers)
+    public static RazorProjectEngineBuilder AddTagHelpers(this RazorProjectEngineBuilder builder, params ImmutableArray<TagHelperDescriptor> tagHelpers)
     {
-        return AddTagHelpers(builder, (IEnumerable<TagHelperDescriptor>)tagHelpers);
+        var feature = (TestTagHelperFeature)builder.Features.OfType<ITagHelperFeature>().FirstOrDefault();
+        if (feature == null)
+        {
+            feature = new TestTagHelperFeature();
+            builder.Features.Add(feature);
+        }
+
+        feature.TagHelpers.AddRange(tagHelpers);
+
+        return builder;
     }
 
     public static RazorProjectEngineBuilder AddTagHelpers(this RazorProjectEngineBuilder builder, IEnumerable<TagHelperDescriptor> tagHelpers)
@@ -27,6 +37,7 @@ public static class RazorProjectEngineBuilderExtensions
         }
 
         feature.TagHelpers.AddRange(tagHelpers);
+
         return builder;
     }
 

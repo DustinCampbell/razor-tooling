@@ -224,6 +224,7 @@ internal sealed class EventHandlerTagHelperDescriptorProvider : TagHelperDescrip
                         eventArgType));
 
                 a.Name = attributeName;
+                a.PropertyName = attribute;
 
                 // We want event handler directive attributes to default to C# context.
                 a.TypeName = $"Microsoft.AspNetCore.Components.EventCallback<{eventArgType}>";
@@ -233,8 +234,7 @@ internal sealed class EventHandlerTagHelperDescriptorProvider : TagHelperDescrip
                 a.SetMetadata(
                     // Make this weakly typed (don't type check) - delegates have their own type-checking
                     // logic that we don't want to interfere with.
-                    IsWeaklyTyped,
-                    PropertyName(attribute));
+                    IsWeaklyTyped);
 
                 if (enablePreventDefault)
                 {

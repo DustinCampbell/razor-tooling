@@ -1,10 +1,7 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
 using System;
-using System.Collections.Generic;
 using Xunit;
 using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
@@ -20,24 +17,22 @@ public class TagHelperDescriptorComparerTest
             tagName: "input",
             typeName: "InputTagHelper",
             assemblyName: "TestAssembly",
-            attributes: new Action<BoundAttributeDescriptorBuilder>[]
-            {
-                builder => builder
+            attributes: [
+                attribute => attribute
                     .Name("value")
-                    .Metadata(PropertyName("FooProp"))
-                    .TypeName("System.String"),
-            });
+                    .PropertyName("FooProp")
+                    .TypeName("System.String")
+            ]);
         var descriptor2 = CreateTagHelperDescriptor(
             tagName: "input",
             typeName: "InputTagHelper",
             assemblyName: "TestAssembly",
-            attributes: new Action<BoundAttributeDescriptorBuilder>[]
-            {
-                builder => builder
+            attributes: [
+                attribute => attribute
                     .Name("value")
-                    .Metadata(PropertyName("FooProp"))
-                    .TypeName("System.String"),
-            });
+                    .PropertyName("FooProp")
+                    .TypeName("System.String")
+            ]);
 
         // Act
         var hashCode1 = descriptor1.GetHashCode();
@@ -56,26 +51,24 @@ public class TagHelperDescriptorComparerTest
             typeName: "CounterTagHelper",
             assemblyName: "Components.Component",
             tagMatchingRuleName: "Input",
-            attributes: new Action<BoundAttributeDescriptorBuilder>[]
-            {
-                builder => builder
+            attributes: [
+                attribute => attribute
                     .Name("IncrementBy")
-                    .Metadata(PropertyName("IncrementBy"))
-                    .TypeName("System.Int32"),
-            });
+                    .PropertyName("IncrementBy")
+                    .TypeName("System.Int32")
+            ]);
 
         var inputTagHelper = CreateTagHelperDescriptor(
             tagName: "input",
             typeName: "InputTagHelper",
             assemblyName: "TestAssembly",
             tagMatchingRuleName: "Microsoft.AspNetCore.Components.Forms.Input",
-            attributes: new Action<BoundAttributeDescriptorBuilder>[]
-            {
-                builder => builder
+            attributes: [
+                attribute => attribute
                     .Name("value")
-                    .Metadata(PropertyName("FooProp"))
-                    .TypeName("System.String"),
-            });
+                    .PropertyName("FooProp")
+                    .TypeName("System.String")
+            ]);
 
         // Act
         var hashCodeCounter = counterTagHelper.GetHashCode();
@@ -89,18 +82,15 @@ public class TagHelperDescriptorComparerTest
         string tagName,
         string typeName,
         string assemblyName,
-        string tagMatchingRuleName = null,
-        IEnumerable<Action<BoundAttributeDescriptorBuilder>> attributes = null)
+        string? tagMatchingRuleName = null,
+        ReadOnlySpan<Action<BoundAttributeDescriptorBuilder>> attributes = default)
     {
         var builder = TagHelperDescriptorBuilder.Create(typeName, assemblyName);
         builder.Metadata(TypeName(typeName));
 
-        if (attributes != null)
+        foreach (var attributeBuilder in attributes)
         {
-            foreach (var attributeBuilder in attributes)
-            {
-                builder.BoundAttributeDescriptor(attributeBuilder);
-            }
+            builder.BoundAttributeDescriptor(attributeBuilder);
         }
 
         builder.TagMatchingRuleDescriptor(ruleBuilder => ruleBuilder.RequireTagName(tagMatchingRuleName ?? tagName));

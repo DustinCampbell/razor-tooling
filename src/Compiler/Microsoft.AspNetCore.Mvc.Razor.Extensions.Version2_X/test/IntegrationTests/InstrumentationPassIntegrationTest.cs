@@ -4,7 +4,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Extensions;
 using Microsoft.AspNetCore.Razor.Language.IntegrationTests;
@@ -46,17 +45,16 @@ public class InstrumentationPassIntegrationTest : IntegrationTestBase
                     tagName: "input",
                     typeName: "InputTagHelper",
                     assemblyName: "TestAssembly",
-                    attributes: new Action<BoundAttributeDescriptorBuilder>[]
-                    {
-                        builder => builder
+                    attributes: [
+                        attribute => attribute
                             .Name("value")
-                            .Metadata(PropertyName("FooProp"))
+                            .PropertyName("FooProp")
                             .TypeName("System.String"),      // Gets preallocated
-                        builder => builder
+                        attribute => attribute
                             .Name("date")
-                            .Metadata(PropertyName("BarProp"))
-                            .TypeName("System.DateTime"),    // Doesn't get preallocated
-                    })
+                            .PropertyName("BarProp")
+                            .TypeName("System.DateTime")    // Doesn't get preallocated
+                    ])
             };
 
         var engine = CreateProjectEngine(b =>
@@ -64,8 +62,8 @@ public class InstrumentationPassIntegrationTest : IntegrationTestBase
             b.AddTagHelpers(descriptors);
             b.Features.Add(new InstrumentationPass());
 
-                // This test includes templates
-                b.AddTargetExtension(new TemplateTargetExtension());
+            // This test includes templates
+            b.AddTargetExtension(new TemplateTargetExtension());
         });
 
         var projectItem = CreateProjectItemFromFile();
@@ -85,17 +83,14 @@ public class InstrumentationPassIntegrationTest : IntegrationTestBase
         string tagName,
         string typeName,
         string assemblyName,
-        IEnumerable<Action<BoundAttributeDescriptorBuilder>> attributes = null)
+        ReadOnlySpan<Action<BoundAttributeDescriptorBuilder>> attributes = default)
     {
         var builder = TagHelperDescriptorBuilder.Create(typeName, assemblyName);
         builder.Metadata(TypeName(typeName));
 
-        if (attributes != null)
+        foreach (var attributeBuilder in attributes)
         {
-            foreach (var attributeBuilder in attributes)
-            {
-                builder.BoundAttributeDescriptor(attributeBuilder);
-            }
+            builder.BoundAttributeDescriptor(attributeBuilder);
         }
 
         builder.TagMatchingRuleDescriptor(ruleBuilder => ruleBuilder.RequireTagName(tagName));

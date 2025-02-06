@@ -1,8 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
-#nullable disable
-
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Razor.Extensions;
 using Microsoft.AspNetCore.Razor.Language;
@@ -20,18 +18,17 @@ public class RazorSyntaxTreePartialParserTest(ITestOutputHelper testOutput) : To
 
     protected override bool EnableSpanEditHandlers => true;
 
-    public static TheoryData TagHelperPartialParseRejectData
+    public static TheoryData<TestEdit> TagHelperPartialParseRejectData
     {
         get
         {
-            return new TheoryData<TestEdit>
-            {
+            return [
                 CreateInsertionChange("<p></p>", 2, " "),
                 CreateInsertionChange("<p></p>", 6, " "),
                 CreateInsertionChange("<p some-attr></p>", 12, " "),
                 CreateInsertionChange("<p some-attr></p>", 12, "ibute"),
                 CreateInsertionChange("<p some-attr></p>", 2, " before"),
-            };
+            ];
         }
     }
 
@@ -109,13 +106,13 @@ public class RazorSyntaxTreePartialParserTest(ITestOutputHelper testOutput) : To
         {
             attribute.Name = "obj-attr";
             attribute.TypeName = typeof(object).FullName;
-            attribute.SetMetadata(PropertyName("ObjectAttribute"));
+            attribute.PropertyName("ObjectAttribute");
         });
         builder.BindAttribute(attribute =>
         {
             attribute.Name = "str-attr";
             attribute.TypeName = typeof(string).FullName;
-            attribute.SetMetadata(PropertyName("StringAttribute"));
+            attribute.PropertyName("StringAttribute");
         });
         var descriptors = new[] { builder.Build() };
         var projectEngine = CreateProjectEngine(tagHelpers: descriptors);
@@ -391,8 +388,7 @@ public class RazorSyntaxTreePartialParserTest(ITestOutputHelper testOutput) : To
         return new TestEdit(sourceChange, oldSnapshot, changedSnapshot);
     }
 
-    private static RazorProjectEngine CreateProjectEngine(
-        IEnumerable<TagHelperDescriptor> tagHelpers = null)
+    private static RazorProjectEngine CreateProjectEngine(IEnumerable<TagHelperDescriptor>? tagHelpers = null)
     {
         var fileSystem = new TestRazorProjectFileSystem();
         var projectEngine = RazorProjectEngine.Create(RazorConfiguration.Default, fileSystem, builder =>

@@ -112,7 +112,7 @@ public class TagHelperFactsServiceTest(ITestOutputHelper testOutput) : TagHelper
         tagHelper.BindAttribute(attribute =>
         {
             attribute.Name = "bound";
-            attribute.SetMetadata(PropertyName("Bound"));
+            attribute.PropertyName = "Bound";
             attribute.TypeName = typeof(bool).FullName;
         });
         tagHelper.SetMetadata(TypeName("WithBoundAttribute"));
@@ -145,7 +145,7 @@ public class TagHelperFactsServiceTest(ITestOutputHelper testOutput) : TagHelper
         tagHelper.BindAttribute(attribute =>
         {
             attribute.Name = "bound";
-            attribute.SetMetadata(PropertyName("Bound"));
+            attribute.PropertyName = "Bound";
             attribute.TypeName = typeof(bool).FullName;
         });
         tagHelper.SetMetadata(TypeName("WithBoundAttribute"));

@@ -1,8 +1,6 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,38 +19,35 @@ public class DefaultTagHelperTargetExtensionTest : RazorProjectEngineTestBase
         tagName: "input",
         typeName: "InputTagHelper",
         assemblyName: "TestAssembly",
-        attributes: new Action<BoundAttributeDescriptorBuilder>[]
-        {
-            builder => builder
+        attributes: [
+            attribute => attribute
                 .Name("bound")
-                .Metadata(PropertyName("StringProp"))
-                .TypeName("System.String"),
-        });
+                .PropertyName("StringProp")
+                .TypeName("System.String")
+        ]);
 
     private static readonly TagHelperDescriptor IntPropertyTagHelper = CreateTagHelperDescriptor(
         tagName: "input",
         typeName: "InputTagHelper",
         assemblyName: "TestAssembly",
-        attributes: new Action<BoundAttributeDescriptorBuilder>[]
-        {
-            builder => builder
+        attributes: [
+            attribute => attribute
                 .Name("bound")
-                .Metadata(PropertyName("IntProp"))
-                .TypeName("System.Int32"),
-        });
+                .PropertyName("IntProp")
+                .TypeName("System.Int32")
+        ]);
 
     private static readonly TagHelperDescriptor IntIndexerTagHelper = CreateTagHelperDescriptor(
         tagName: "input",
         typeName: "InputTagHelper",
         assemblyName: "TestAssembly",
-        attributes: new Action<BoundAttributeDescriptorBuilder>[]
-        {
-            builder => builder
+        attributes: [
+            attribute => attribute
                 .Name("bound")
-                .Metadata(PropertyName("IntIndexer"))
+                .PropertyName("IntIndexer")
                 .TypeName("System.Collections.Generic.Dictionary<System.String, System.Int32>")
-                .AsDictionary("foo-", "System.Int32"),
-        });
+                .AsDictionaryAttribute("foo-", "System.Int32")
+        ]);
 
     private static readonly SourceSpan Span = new SourceSpan("test.cshtml", 15, 2, 5, 2);
 
@@ -1155,17 +1150,14 @@ private global::Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperScopeMana
         string tagName,
         string typeName,
         string assemblyName,
-        IEnumerable<Action<BoundAttributeDescriptorBuilder>> attributes = null)
+        ReadOnlySpan<Action<BoundAttributeDescriptorBuilder>> attributes = default)
     {
         var builder = TagHelperDescriptorBuilder.Create(typeName, assemblyName);
         builder.Metadata(TypeName(typeName));
 
-        if (attributes != null)
+        foreach (var attributeBuilder in attributes)
         {
-            foreach (var attributeBuilder in attributes)
-            {
-                builder.BindAttribute(attributeBuilder);
-            }
+            builder.BindAttribute(attributeBuilder);
         }
 
         builder.TagMatchingRule(ruleBuilder => ruleBuilder.RequireTagName(tagName));

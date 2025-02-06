@@ -117,11 +117,11 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
         };
         var expectedDiagnostics = new[]
         {
-                RazorDiagnosticFactory.CreateParsing_UnterminatedStringLiteral(
-                    new SourceSpan(new SourceLocation(17 + Environment.NewLine.Length, 1, 17), contentLength: 1)),
-                RazorDiagnosticFactory.CreateParsing_InvalidTagHelperPrefixValue(
-                    new SourceSpan(new SourceLocation(17 + Environment.NewLine.Length, 1, 17), contentLength: 1), "tagHelperPrefix", '\"', "\""),
-            };
+            RazorDiagnosticFactory.CreateParsing_UnterminatedStringLiteral(
+                new SourceSpan(new SourceLocation(17 + Environment.NewLine.Length, 1, 17), contentLength: 1)),
+            RazorDiagnosticFactory.CreateParsing_InvalidTagHelperPrefixValue(
+                new SourceSpan(new SourceLocation(17 + Environment.NewLine.Length, 1, 17), contentLength: 1), "tagHelperPrefix", '\"', "\""),
+        };
 
         var content =
         @"
@@ -149,7 +149,6 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
         {
             builder.Features.Add(new ConfigureRazorParserOptions(useRoslynTokenizer: true, CSharpParseOptions.Default));
             builder.AddTagHelpers(
-            [
                 CreateTagHelperDescriptor(
                     tagName: "form",
                     typeName: "TestFormTagHelper",
@@ -157,8 +156,7 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
                 CreateTagHelperDescriptor(
                     tagName: "input",
                     typeName: "TestInputTagHelper",
-                    assemblyName: "TestAssembly"),
-            ]);
+                    assemblyName: "TestAssembly"));
         });
 
         var discoveryPhase = new DefaultRazorTagHelperContextDiscoveryPhase()
@@ -686,54 +684,54 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
         {
             // source, expected prefix
             return new TheoryData<string, string>
+            {
                 {
-                    {
-                        $@"
+                    $@"
 @tagHelperPrefix """"
 @addTagHelper Microsoft.AspNetCore.Razor.TagHelpers.ValidPlain*, TestAssembly",
-                        null
-                    },
-                    {
-                        $@"
+                    null
+                },
+                {
+                    $@"
 @tagHelperPrefix th:
 @addTagHelper Microsoft.AspNetCore.Razor.TagHelpers.ValidPlain*, {AssemblyA}",
-                        "th:"
-                    },
-                    {
-                        $@"
+                    "th:"
+                },
+                {
+                    $@"
 @addTagHelper *, {AssemblyA}
 @tagHelperPrefix th:",
-                        "th:"
-                    },
-                    {
-                        $@"
+                    "th:"
+                },
+                {
+                    $@"
 @tagHelperPrefix th-
 @addTagHelper Microsoft.AspNetCore.Razor.TagHelpers.ValidPlain*, {AssemblyA}
 @addTagHelper Microsoft.AspNetCore.Razor.TagHelpers.ValidInherited*, {AssemblyA}",
-                        "th-"
-                    },
-                    {
-                        $@"
+                    "th-"
+                },
+                {
+                    $@"
 @tagHelperPrefix
 @addTagHelper Microsoft.AspNetCore.Razor.TagHelpers.ValidPlain*, {AssemblyA}
 @addTagHelper Microsoft.AspNetCore.Razor.TagHelpers.ValidInherited*, {AssemblyA}",
-                        null
-                    },
-                    {
-                        $@"
+                    null
+                },
+                {
+                    $@"
 @tagHelperPrefix ""th""
 @addTagHelper *, {AssemblyA}
 @addTagHelper *, {AssemblyB}",
-                        "th"
-                    },
-                    {
-                        $@"
+                    "th"
+                },
+                {
+                    $@"
 @addTagHelper *, {AssemblyA}
 @tagHelperPrefix th:-
 @addTagHelper *, {AssemblyB}",
-                        "th:-"
-                    },
-                };
+                    "th:-"
+                },
+            };
         }
     }
 
@@ -763,142 +761,142 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
         {
             // source, taghelpers, expected descriptors
             return new TheoryData<string, TagHelperDescriptor[], TagHelperDescriptor[]>
+            {
                 {
-                    {
-                        $@"
+                    $@"
 @addTagHelper *, {AssemblyA}",
-                        new [] { Valid_PlainTagHelperDescriptor, },
-                        new [] { Valid_PlainTagHelperDescriptor }
-                    },
-                    {
-                        $@"
+                    new [] { Valid_PlainTagHelperDescriptor, },
+                    new [] { Valid_PlainTagHelperDescriptor }
+                },
+                {
+                    $@"
 @addTagHelper *, {AssemblyA}
 @addTagHelper *, {AssemblyB}",
-                        new [] { Valid_PlainTagHelperDescriptor, String_TagHelperDescriptor },
-                        new [] { Valid_PlainTagHelperDescriptor, String_TagHelperDescriptor }
-                    },
-                    {
-                        $@"
+                    new [] { Valid_PlainTagHelperDescriptor, String_TagHelperDescriptor },
+                    new [] { Valid_PlainTagHelperDescriptor, String_TagHelperDescriptor }
+                },
+                {
+                    $@"
 @addTagHelper *, {AssemblyA}
 @removeTagHelper *, {AssemblyB}",
-                        new [] { Valid_PlainTagHelperDescriptor, String_TagHelperDescriptor },
-                        new [] { Valid_PlainTagHelperDescriptor }
-                    },
-                    {
-                        $@"
+                    new [] { Valid_PlainTagHelperDescriptor, String_TagHelperDescriptor },
+                    new [] { Valid_PlainTagHelperDescriptor }
+                },
+                {
+                    $@"
 @addTagHelper *, {AssemblyA}
 @addTagHelper *, {AssemblyB}
 @removeTagHelper *, {AssemblyA}",
-                        new [] { Valid_PlainTagHelperDescriptor, Valid_InheritedTagHelperDescriptor, String_TagHelperDescriptor },
-                        new [] { String_TagHelperDescriptor }
-                    },
-                    {
-                        $@"
+                    new [] { Valid_PlainTagHelperDescriptor, Valid_InheritedTagHelperDescriptor, String_TagHelperDescriptor },
+                    new [] { String_TagHelperDescriptor }
+                },
+                {
+                    $@"
 @addTagHelper {Valid_PlainTagHelperDescriptor.Name}, {AssemblyA}
 @addTagHelper *, {AssemblyA}",
-                        new [] { Valid_PlainTagHelperDescriptor, Valid_InheritedTagHelperDescriptor, },
-                        new [] { Valid_PlainTagHelperDescriptor, Valid_InheritedTagHelperDescriptor }
-                    },
-                    {
-                        $@"
+                    new [] { Valid_PlainTagHelperDescriptor, Valid_InheritedTagHelperDescriptor, },
+                    new [] { Valid_PlainTagHelperDescriptor, Valid_InheritedTagHelperDescriptor }
+                },
+                {
+                    $@"
 @addTagHelper *, {AssemblyA}
 @removeTagHelper {Valid_PlainTagHelperDescriptor.Name}, {AssemblyA}",
-                        new [] { Valid_PlainTagHelperDescriptor, Valid_InheritedTagHelperDescriptor, },
-                        new [] { Valid_InheritedTagHelperDescriptor }
-                    },
-                    {
-                        $@"
+                    new [] { Valid_PlainTagHelperDescriptor, Valid_InheritedTagHelperDescriptor, },
+                    new [] { Valid_InheritedTagHelperDescriptor }
+                },
+                {
+                    $@"
 @addTagHelper *, {AssemblyA}
 @removeTagHelper *, {AssemblyA}
 @addTagHelper *, {AssemblyA}",
-                        new [] { Valid_PlainTagHelperDescriptor, Valid_InheritedTagHelperDescriptor, },
-                        new [] { Valid_InheritedTagHelperDescriptor, Valid_PlainTagHelperDescriptor }
-                    },
-                    {
-                        $@"
+                    new [] { Valid_PlainTagHelperDescriptor, Valid_InheritedTagHelperDescriptor, },
+                    new [] { Valid_InheritedTagHelperDescriptor, Valid_PlainTagHelperDescriptor }
+                },
+                {
+                    $@"
 @addTagHelper *, {AssemblyA}
 @addTagHelper *, {AssemblyA}",
-                        new [] { Valid_PlainTagHelperDescriptor, Valid_InheritedTagHelperDescriptor, },
-                        new [] { Valid_InheritedTagHelperDescriptor, Valid_PlainTagHelperDescriptor }
-                    },
-                    {
-                        $@"
+                    new [] { Valid_PlainTagHelperDescriptor, Valid_InheritedTagHelperDescriptor, },
+                    new [] { Valid_InheritedTagHelperDescriptor, Valid_PlainTagHelperDescriptor }
+                },
+                {
+                    $@"
 @addTagHelper Microsoft.AspNetCore.Razor.TagHelpers.ValidPlain*, {AssemblyA}",
-                        new [] { Valid_PlainTagHelperDescriptor, Valid_InheritedTagHelperDescriptor, },
-                        new [] { Valid_PlainTagHelperDescriptor }
-                    },
-                    {
-                        $@"
+                    new [] { Valid_PlainTagHelperDescriptor, Valid_InheritedTagHelperDescriptor, },
+                    new [] { Valid_PlainTagHelperDescriptor }
+                },
+                {
+                    $@"
 @addTagHelper Microsoft.AspNetCore.Razor.TagHelpers.*, {AssemblyA}",
-                        new [] { Valid_PlainTagHelperDescriptor, Valid_InheritedTagHelperDescriptor, },
-                        new [] { Valid_PlainTagHelperDescriptor, Valid_PlainTagHelperDescriptor }
-                    },
-                    {
-                        $@"
+                    new [] { Valid_PlainTagHelperDescriptor, Valid_InheritedTagHelperDescriptor, },
+                    new [] { Valid_PlainTagHelperDescriptor, Valid_PlainTagHelperDescriptor }
+                },
+                {
+                    $@"
 @addTagHelper *, {AssemblyA}
 @removeTagHelper Microsoft.AspNetCore.Razor.TagHelpers.ValidP*, {AssemblyA}
 @addTagHelper *, {AssemblyA}",
-                        new [] { Valid_PlainTagHelperDescriptor, Valid_InheritedTagHelperDescriptor, },
-                        new [] { Valid_InheritedTagHelperDescriptor, Valid_PlainTagHelperDescriptor }
-                    },
-                    {
-                        $@"
+                    new [] { Valid_PlainTagHelperDescriptor, Valid_InheritedTagHelperDescriptor, },
+                    new [] { Valid_InheritedTagHelperDescriptor, Valid_PlainTagHelperDescriptor }
+                },
+                {
+                    $@"
 @addTagHelper *, {AssemblyA}
 @removeTagHelper Str*, {AssemblyB}",
-                        new [] { Valid_PlainTagHelperDescriptor, String_TagHelperDescriptor, },
-                        new [] { Valid_PlainTagHelperDescriptor }
-                    },
-                    {
-                        $@"
+                    new [] { Valid_PlainTagHelperDescriptor, String_TagHelperDescriptor, },
+                    new [] { Valid_PlainTagHelperDescriptor }
+                },
+                {
+                    $@"
 @addTagHelper *, {AssemblyA}
 @removeTagHelper *, {AssemblyB}",
-                        new [] { Valid_PlainTagHelperDescriptor, String_TagHelperDescriptor, },
-                        new [] { Valid_PlainTagHelperDescriptor }
-                    },
-                    {
-                        $@"
+                    new [] { Valid_PlainTagHelperDescriptor, String_TagHelperDescriptor, },
+                    new [] { Valid_PlainTagHelperDescriptor }
+                },
+                {
+                    $@"
 @addTagHelper *, {AssemblyA}
 @addTagHelper System.{String_TagHelperDescriptor.Name}, {AssemblyB}",
-                        new [] { Valid_PlainTagHelperDescriptor, String_TagHelperDescriptor, },
-                        new [] { Valid_PlainTagHelperDescriptor }
-                    },
-                    {
-                        $@"
+                    new [] { Valid_PlainTagHelperDescriptor, String_TagHelperDescriptor, },
+                    new [] { Valid_PlainTagHelperDescriptor }
+                },
+                {
+                    $@"
 @addTagHelper *, {AssemblyA}
 @addTagHelper *, {AssemblyB}
 @removeTagHelper Microsoft.*, {AssemblyA}",
-                        new [] { Valid_PlainTagHelperDescriptor, Valid_InheritedTagHelperDescriptor, String_TagHelperDescriptor },
-                        new [] { String_TagHelperDescriptor }
-                    },
-                    {
-                        $@"
+                    new [] { Valid_PlainTagHelperDescriptor, Valid_InheritedTagHelperDescriptor, String_TagHelperDescriptor },
+                    new [] { String_TagHelperDescriptor }
+                },
+                {
+                    $@"
 @addTagHelper *, {AssemblyA}
 @addTagHelper *, {AssemblyB}
 @removeTagHelper ?Microsoft*, {AssemblyA}
 @removeTagHelper System.{String_TagHelperDescriptor.Name}, {AssemblyB}",
-                        new [] { Valid_PlainTagHelperDescriptor, Valid_InheritedTagHelperDescriptor, String_TagHelperDescriptor },
-                        new []
-                        {
-                            Valid_InheritedTagHelperDescriptor,
-                            Valid_PlainTagHelperDescriptor,
-                            String_TagHelperDescriptor
-                        }
-                    },
+                    new [] { Valid_PlainTagHelperDescriptor, Valid_InheritedTagHelperDescriptor, String_TagHelperDescriptor },
+                    new []
                     {
-                        $@"
+                        Valid_InheritedTagHelperDescriptor,
+                        Valid_PlainTagHelperDescriptor,
+                        String_TagHelperDescriptor
+                    }
+                },
+                {
+                    $@"
 @addTagHelper *, {AssemblyA}
 @addTagHelper *, {AssemblyB}
 @removeTagHelper TagHelper*, {AssemblyA}
 @removeTagHelper System.{String_TagHelperDescriptor.Name}, {AssemblyB}",
-                        new [] { Valid_PlainTagHelperDescriptor, Valid_InheritedTagHelperDescriptor, String_TagHelperDescriptor },
-                        new []
-                        {
-                            Valid_InheritedTagHelperDescriptor,
-                            Valid_PlainTagHelperDescriptor,
-                            String_TagHelperDescriptor
-                        }
-                    },
-                };
+                    new [] { Valid_PlainTagHelperDescriptor, Valid_InheritedTagHelperDescriptor, String_TagHelperDescriptor },
+                    new []
+                    {
+                        Valid_InheritedTagHelperDescriptor,
+                        Valid_PlainTagHelperDescriptor,
+                        String_TagHelperDescriptor
+                    }
+                },
+            };
         }
     }
 
@@ -935,117 +933,117 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
         {
             // source, taghelpers
             return new TheoryData<string, IEnumerable<TagHelperDescriptor>>
+            {
                 {
-                    {
-                        $@"
+                    $@"
 @addTagHelper *, {AssemblyA}
 @removeTagHelper *, {AssemblyA}",
-                        new TagHelperDescriptor[]
-                        {
-                            Valid_PlainTagHelperDescriptor,
-                        }
-                    },
+                    new TagHelperDescriptor[]
                     {
-                        $@"
+                        Valid_PlainTagHelperDescriptor,
+                    }
+                },
+                {
+                    $@"
 @addTagHelper *, {AssemblyA}
 @removeTagHelper {Valid_PlainTagHelperDescriptor.Name}, {AssemblyA}
 @removeTagHelper {Valid_InheritedTagHelperDescriptor.Name}, {AssemblyA}",
-                        new TagHelperDescriptor[]
-                        {
-                            Valid_PlainTagHelperDescriptor,
-                            Valid_InheritedTagHelperDescriptor,
-                        }
-                    },
+                    new TagHelperDescriptor[]
                     {
-                        $@"
+                        Valid_PlainTagHelperDescriptor,
+                        Valid_InheritedTagHelperDescriptor,
+                    }
+                },
+                {
+                    $@"
 @addTagHelper *, {AssemblyA}
 @addTagHelper *, {AssemblyB}
 @removeTagHelper *, {AssemblyA}
 @removeTagHelper *, {AssemblyB}",
-                        new TagHelperDescriptor[]
-                        {
-                            Valid_PlainTagHelperDescriptor,
-                            Valid_InheritedTagHelperDescriptor,
-                            String_TagHelperDescriptor,
-                        }
-                    },
+                    new TagHelperDescriptor[]
                     {
-                        $@"
+                        Valid_PlainTagHelperDescriptor,
+                        Valid_InheritedTagHelperDescriptor,
+                        String_TagHelperDescriptor,
+                    }
+                },
+                {
+                    $@"
 @addTagHelper *, {AssemblyA}
 @addTagHelper *, {AssemblyB}
 @removeTagHelper {Valid_PlainTagHelperDescriptor.Name}, {AssemblyA}
 @removeTagHelper {Valid_InheritedTagHelperDescriptor.Name}, {AssemblyA}
 @removeTagHelper {String_TagHelperDescriptor.Name}, {AssemblyB}",
-                        new TagHelperDescriptor[]
-                        {
-                            Valid_PlainTagHelperDescriptor,
-                            Valid_InheritedTagHelperDescriptor,
-                            String_TagHelperDescriptor,
-                        }
-                    },
+                    new TagHelperDescriptor[]
                     {
-                        $@"
+                        Valid_PlainTagHelperDescriptor,
+                        Valid_InheritedTagHelperDescriptor,
+                        String_TagHelperDescriptor,
+                    }
+                },
+                {
+                    $@"
 @removeTagHelper *, {AssemblyA}
 @removeTagHelper {Valid_PlainTagHelperDescriptor.Name}, {AssemblyA}",
-                        new TagHelperDescriptor[0]
-                    },
-                    {
-                        $@"
+                    new TagHelperDescriptor[0]
+                },
+                {
+                    $@"
 @addTagHelper *, {AssemblyA}
 @removeTagHelper Mic*, {AssemblyA}",
-                        new TagHelperDescriptor[]
-                        {
-                            Valid_PlainTagHelperDescriptor,
-                        }
-                    },
+                    new TagHelperDescriptor[]
                     {
-                        $@"
+                        Valid_PlainTagHelperDescriptor,
+                    }
+                },
+                {
+                    $@"
 @addTagHelper Mic*, {AssemblyA}
 @removeTagHelper {Valid_PlainTagHelperDescriptor.Name}, {AssemblyA}
 @removeTagHelper {Valid_InheritedTagHelperDescriptor.Name}, {AssemblyA}",
-                        new TagHelperDescriptor[]
-                        {
-                            Valid_PlainTagHelperDescriptor, Valid_InheritedTagHelperDescriptor
-                        }
-                    },
+                    new TagHelperDescriptor[]
                     {
-                        $@"
+                        Valid_PlainTagHelperDescriptor, Valid_InheritedTagHelperDescriptor
+                    }
+                },
+                {
+                    $@"
 @addTagHelper Microsoft.*, {AssemblyA}
 @addTagHelper System.*, {AssemblyB}
 @removeTagHelper Microsoft.AspNetCore.Razor.TagHelpers*, {AssemblyA}
 @removeTagHelper System.*, {AssemblyB}",
-                        new TagHelperDescriptor[]
-                        {
-                            Valid_PlainTagHelperDescriptor,
-                            Valid_InheritedTagHelperDescriptor,
-                            String_TagHelperDescriptor,
-                        }
-                    },
+                    new TagHelperDescriptor[]
                     {
-                        $@"
+                        Valid_PlainTagHelperDescriptor,
+                        Valid_InheritedTagHelperDescriptor,
+                        String_TagHelperDescriptor,
+                    }
+                },
+                {
+                    $@"
 @addTagHelper ?icrosoft.*, {AssemblyA}
 @addTagHelper ?ystem.*, {AssemblyB}
 @removeTagHelper *?????r, {AssemblyA}
 @removeTagHelper Sy??em.*, {AssemblyB}",
-                        new TagHelperDescriptor[]
-                        {
-                            Valid_PlainTagHelperDescriptor,
-                            Valid_InheritedTagHelperDescriptor,
-                            String_TagHelperDescriptor,
-                        }
-                    },
+                    new TagHelperDescriptor[]
                     {
-                        $@"
+                        Valid_PlainTagHelperDescriptor,
+                        Valid_InheritedTagHelperDescriptor,
+                        String_TagHelperDescriptor,
+                    }
+                },
+                {
+                    $@"
 @addTagHelper ?i?crosoft.*, {AssemblyA}
 @addTagHelper ??ystem.*, {AssemblyB}",
-                        new TagHelperDescriptor[]
-                        {
-                            Valid_PlainTagHelperDescriptor,
-                            Valid_InheritedTagHelperDescriptor,
-                            String_TagHelperDescriptor,
-                        }
-                    },
-                };
+                    new TagHelperDescriptor[]
+                    {
+                        Valid_PlainTagHelperDescriptor,
+                        Valid_InheritedTagHelperDescriptor,
+                        String_TagHelperDescriptor,
+                    }
+                },
+            };
         }
     }
 
@@ -1114,8 +1112,8 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
         string assemblyName,
         string typeNamespace = null,
         string typeNameIdentifier = null,
-        IEnumerable<Action<BoundAttributeDescriptorBuilder>> attributes = null,
-        IEnumerable<Action<TagMatchingRuleDescriptorBuilder>> ruleBuilders = null)
+        ReadOnlySpan<Action<BoundAttributeDescriptorBuilder>> attributes = default,
+        ReadOnlySpan<Action<TagMatchingRuleDescriptorBuilder>> ruleBuilders = default)
     {
         return CreateDescriptor(TagHelperKind.Default, tagName, typeName, assemblyName, typeNamespace, typeNameIdentifier, attributes, ruleBuilders);
     }
@@ -1369,9 +1367,9 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
            AssemblyA);
         var descriptors = new[]
         {
-                componentDescriptor,
-                anotherComponentDescriptor,
-            };
+            componentDescriptor,
+            anotherComponentDescriptor,
+        };
         var filePath = "C:\\SomeFolder\\SomeProject\\Counter.cshtml";
         var content = @"
 @using Bar = SomeProject.SomeOtherFolder
@@ -1459,8 +1457,8 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
         string assemblyName,
         string typeNamespace = null,
         string typeNameIdentifier = null,
-        IEnumerable<Action<BoundAttributeDescriptorBuilder>> attributes = null,
-        IEnumerable<Action<TagMatchingRuleDescriptorBuilder>> ruleBuilders = null,
+        ReadOnlySpan<Action<BoundAttributeDescriptorBuilder>> attributes = default,
+        ReadOnlySpan<Action<TagMatchingRuleDescriptorBuilder>> ruleBuilders = default,
         bool fullyQualified = false,
         bool childContent = false)
     {
@@ -1476,8 +1474,8 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
         string assemblyName,
         string typeNamespace,
         string typeNameIdentifier,
-        IEnumerable<Action<BoundAttributeDescriptorBuilder>> attributes = null,
-        IEnumerable<Action<TagMatchingRuleDescriptorBuilder>> ruleBuilders = null,
+        ReadOnlySpan<Action<BoundAttributeDescriptorBuilder>> attributes = default,
+        ReadOnlySpan<Action<TagMatchingRuleDescriptorBuilder>> ruleBuilders = default,
         bool componentFullyQualified = false)
     {
         var builder = TagHelperDescriptorBuilder.Create(kind, typeName, assemblyName);
@@ -1487,15 +1485,12 @@ public class DefaultRazorTagHelperContextDiscoveryPhaseTest : RazorProjectEngine
             TypeNamespace(typeNamespace ?? (typeName.LastIndexOf('.') == -1 ? "" : typeName[..typeName.LastIndexOf('.')])),
             TypeNameIdentifier(typeNameIdentifier ?? (typeName.LastIndexOf('.') == -1 ? typeName : typeName[(typeName.LastIndexOf('.') + 1)..])));
 
-        if (attributes != null)
+        foreach (var attributeBuilder in attributes)
         {
-            foreach (var attributeBuilder in attributes)
-            {
-                builder.BoundAttributeDescriptor(attributeBuilder);
-            }
+            builder.BoundAttributeDescriptor(attributeBuilder);
         }
 
-        if (ruleBuilders != null)
+        if (!ruleBuilders.IsEmpty)
         {
             foreach (var ruleBuilder in ruleBuilders)
             {

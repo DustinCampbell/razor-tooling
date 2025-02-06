@@ -1,8 +1,6 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
 using System.Linq;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 using Microsoft.CodeAnalysis.CSharp;
@@ -29,7 +27,7 @@ public class DefaultTagHelperOptimizationPassTest
                 .BoundAttributeDescriptor(attribute => attribute
                     .Name("Foo")
                     .TypeName("System.Int32")
-                    .Metadata(PropertyName("FooProp")))
+                    .PropertyName("FooProp"))
                 .TagMatchingRuleDescriptor(rule => rule.RequireTagName("p"))
                 .Build()
         };
@@ -83,13 +81,13 @@ public class DefaultTagHelperOptimizationPassTest
         Assert.IsType<DefaultTagHelperExecuteIntermediateNode>(tagHelper.Children[4]);
     }
 
-    private RazorCodeDocument CreateDocument(string content)
+    private static RazorCodeDocument CreateDocument(string content)
     {
         var source = RazorSourceDocument.Create(content, "test.cshtml");
         return RazorCodeDocument.Create(source);
     }
 
-    private RazorEngine CreateEngine(params TagHelperDescriptor[] tagHelpers)
+    private static RazorEngine CreateEngine(params TagHelperDescriptor[] tagHelpers)
     {
         return RazorProjectEngine.Create(b =>
         {
@@ -98,7 +96,7 @@ public class DefaultTagHelperOptimizationPassTest
         }).Engine;
     }
 
-    private DocumentIntermediateNode CreateIRDocument(RazorEngine engine, RazorCodeDocument codeDocument)
+    private static DocumentIntermediateNode CreateIRDocument(RazorEngine engine, RazorCodeDocument codeDocument)
     {
         foreach (var phase in engine.Phases)
         {
@@ -113,16 +111,20 @@ public class DefaultTagHelperOptimizationPassTest
         return codeDocument.GetDocumentIntermediateNode();
     }
 
-    private TagHelperIntermediateNode FindTagHelperNode(IntermediateNode node)
+    private static TagHelperIntermediateNode FindTagHelperNode(IntermediateNode node)
     {
         var visitor = new TagHelperNodeVisitor();
         visitor.Visit(node);
-        return visitor.Node;
+
+        var result = visitor.Node;
+        Assert.NotNull(result);
+
+        return result;
     }
 
     private class TagHelperNodeVisitor : IntermediateNodeWalker
     {
-        public TagHelperIntermediateNode Node { get; set; }
+        public TagHelperIntermediateNode? Node { get; set; }
 
         public override void VisitTagHelper(TagHelperIntermediateNode node)
         {

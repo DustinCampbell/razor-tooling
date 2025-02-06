@@ -54,7 +54,7 @@ public sealed class ComponentAttributeIntermediateNode : IntermediateNode
         AttributeName = attributeName;
         AttributeStructure = propertyNode.AttributeStructure;
         BoundAttribute = propertyNode.BoundAttribute;
-        PropertyName = propertyNode.BoundAttribute.GetPropertyName();
+        PropertyName = propertyNode.BoundAttribute.PropertyName;
         Source = propertyNode.Source;
         TagHelper = propertyNode.TagHelper;
         TypeName = propertyNode.BoundAttribute.IsWeaklyTyped() ? null : propertyNode.BoundAttribute.TypeName;
@@ -85,7 +85,7 @@ public sealed class ComponentAttributeIntermediateNode : IntermediateNode
         AttributeName = directiveAttributeNode.AttributeName;
         AttributeStructure = directiveAttributeNode.AttributeStructure;
         BoundAttribute = directiveAttributeNode.BoundAttribute;
-        PropertyName = directiveAttributeNode.BoundAttribute.GetPropertyName();
+        PropertyName = directiveAttributeNode.BoundAttribute.PropertyName;
         Source = directiveAttributeNode.Source;
         TagHelper = directiveAttributeNode.TagHelper;
         TypeName = directiveAttributeNode.BoundAttribute.IsWeaklyTyped() ? null : directiveAttributeNode.BoundAttribute.TypeName;

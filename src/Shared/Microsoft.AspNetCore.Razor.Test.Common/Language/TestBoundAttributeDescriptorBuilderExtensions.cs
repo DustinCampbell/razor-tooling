@@ -34,6 +34,15 @@ public static class TestBoundAttributeDescriptorBuilderExtensions
         return builder;
     }
 
+    public static BoundAttributeDescriptorBuilder PropertyName(this BoundAttributeDescriptorBuilder builder, string propertyName)
+    {
+        ArgHelper.ThrowIfNull(builder);
+
+        builder.PropertyName = propertyName;
+
+        return builder;
+    }
+
     public static BoundAttributeDescriptorBuilder Metadata(
         this BoundAttributeDescriptorBuilder builder,
         KeyValuePair<string, string> pair)
@@ -92,10 +101,7 @@ public static class TestBoundAttributeDescriptorBuilderExtensions
         string attributeNamePrefix,
         string valueTypeName)
     {
-        if (builder == null)
-        {
-            throw new ArgumentNullException(nameof(builder));
-        }
+        ArgHelper.ThrowIfNull(builder);
 
         builder.IsDictionary = true;
         builder.IndexerAttributeNamePrefix = attributeNamePrefix;

@@ -72,7 +72,7 @@ public class ViewComponentTagHelperPassTest
                 .BoundAttributeDescriptor(attribute => attribute
                     .Name("Foo")
                     .TypeName("System.Int32")
-                    .Metadata(PropertyName("Foo")))
+                    .PropertyName("Foo"))
                 .TagMatchingRuleDescriptor(rule => rule.RequireTagName("tagcloud"))
                 .Build()
         };
@@ -119,7 +119,7 @@ public class ViewComponentTagHelperPassTest
                 .BoundAttributeDescriptor(attribute => attribute
                     .Name("Foo")
                     .TypeName("System.Collections.Generic.Dictionary<System.String, System.Int32>")
-                    .Metadata(PropertyName("Tags"))
+                    .PropertyName("Tags")
                     .AsDictionaryAttribute("foo-", "System.Int32"))
                 .TagMatchingRuleDescriptor(rule => rule.RequireTagName("tagcloud"))
                 .Build()
@@ -162,7 +162,7 @@ public class ViewComponentTagHelperPassTest
             TagHelperDescriptorBuilder.Create("PTestTagHelper", "TestAssembly")
                 .Metadata(TypeName("PTestTagHelper"))
                 .BoundAttributeDescriptor(attribute => attribute
-                    .Metadata(PropertyName("Foo"))
+                    .PropertyName("Foo")
                     .Name("Foo")
                     .TypeName("System.Int32"))
                 .TagMatchingRuleDescriptor(rule => rule.RequireTagName("p"))
@@ -172,7 +172,7 @@ public class ViewComponentTagHelperPassTest
                     TypeName("__Generated__TagCloudViewComponentTagHelper"),
                     new(ViewComponentTagHelperMetadata.Name, "TagCloud"))
                 .BoundAttributeDescriptor(attribute => attribute
-                    .Metadata(PropertyName("Foo"))
+                    .PropertyName("Foo")
                     .Name("Foo")
                     .TypeName("System.Int32"))
                 .TagMatchingRuleDescriptor(rule => rule.RequireTagName("tagcloud"))

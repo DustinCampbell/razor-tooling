@@ -94,6 +94,7 @@ internal static partial class ObjectWriters
             {
                 writer.Write(nameof(value.Name), value.Name);
                 writer.Write(nameof(value.TypeName), value.TypeName);
+                writer.Write(nameof(value.PropertyName), value.PropertyName);
                 writer.WriteIfNotDefault(nameof(value.Flags), (int)value.Flags, (int)BoundAttributeFlags.Default);
                 writer.WriteIfNotNull(nameof(value.IndexerNamePrefix), value.IndexerNamePrefix);
                 writer.WriteIfNotNull(nameof(value.IndexerTypeName), value.IndexerTypeName);

@@ -1,8 +1,6 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
 using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 using Xunit;
@@ -130,11 +128,10 @@ public class PreallocatedAttributeTargetExtensionTest
         var tagHelperBuilder = new TagHelperDescriptorBuilder(TagHelperKind.Default, "FooTagHelper", "Test");
         tagHelperBuilder.Metadata(TypeName("FooTagHelper"));
 
-        var builder = new BoundAttributeDescriptorBuilder(tagHelperBuilder);
-        builder
+        var builder = new BoundAttributeDescriptorBuilder(tagHelperBuilder)
             .Name("Foo")
             .TypeName("System.String")
-            .Metadata(PropertyName("FooProp"));
+            .PropertyName("FooProp");
 
         var descriptor = builder.Build();
 
@@ -173,12 +170,11 @@ __tagHelperExecutionContext.AddTagHelperAttribute(_tagHelper1);
         var tagHelperBuilder = new TagHelperDescriptorBuilder(TagHelperKind.Default, "FooTagHelper", "Test");
         tagHelperBuilder.Metadata(TypeName("FooTagHelper"));
 
-        var builder = new BoundAttributeDescriptorBuilder(tagHelperBuilder);
-        builder
+        var builder = new BoundAttributeDescriptorBuilder(tagHelperBuilder)
             .Name("Foo")
             .TypeName("System.Collections.Generic.Dictionary<System.String, System.String>")
             .AsDictionaryAttribute("pre-", "System.String")
-            .Metadata(PropertyName("FooProp"));
+            .PropertyName("FooProp");
 
         var descriptor = builder.Build();
 
@@ -223,12 +219,11 @@ __tagHelperExecutionContext.AddTagHelperAttribute(_tagHelper1);
         var tagHelperBuilder = new TagHelperDescriptorBuilder(TagHelperKind.Default, "FooTagHelper", "Test");
         tagHelperBuilder.Metadata(TypeName("FooTagHelper"));
 
-        var builder = new BoundAttributeDescriptorBuilder(tagHelperBuilder);
-        builder
+        var builder = new BoundAttributeDescriptorBuilder(tagHelperBuilder)
             .Name("Foo")
             .TypeName("System.Collections.Generic.Dictionary<System.String, System.String>")
             .AsDictionaryAttribute("pre-", "System.String")
-            .Metadata(PropertyName("FooProp"));
+            .PropertyName("FooProp");
 
         var boundAttribute = builder.Build();
         var tagHelper = tagHelperBuilder.Build();

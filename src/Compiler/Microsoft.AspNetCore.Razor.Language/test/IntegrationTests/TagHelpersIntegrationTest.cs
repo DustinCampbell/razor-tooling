@@ -1,10 +1,7 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
 using System;
-using System.Collections.Generic;
 using Xunit;
 using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
@@ -18,11 +15,11 @@ public class TagHelpersIntegrationTest() : IntegrationTestBase(layer: TestProjec
         // Arrange
         var descriptors = new[]
         {
-                CreateTagHelperDescriptor(
-                    tagName: "input",
-                    typeName: "InputTagHelper",
-                    assemblyName: "TestAssembly")
-            };
+            CreateTagHelperDescriptor(
+                tagName: "input",
+                typeName: "InputTagHelper",
+                assemblyName: "TestAssembly")
+        };
 
         var projectEngine = CreateProjectEngine(builder => builder.AddTagHelpers(descriptors));
         var projectItem = CreateProjectItemFromFile();
@@ -40,18 +37,17 @@ public class TagHelpersIntegrationTest() : IntegrationTestBase(layer: TestProjec
         // Arrange
         var descriptors = new[]
         {
-                CreateTagHelperDescriptor(
-                    tagName: "input",
-                    typeName: "InputTagHelper",
-                    assemblyName: "TestAssembly",
-                    attributes: new Action<BoundAttributeDescriptorBuilder>[]
-                    {
-                        builder => builder
-                            .Name("bound")
-                            .Metadata(PropertyName("FooProp"))
-                            .TypeName("System.String"),
-                    })
-            };
+            CreateTagHelperDescriptor(
+                tagName: "input",
+                typeName: "InputTagHelper",
+                assemblyName: "TestAssembly",
+                attributes: [
+                    attribute => attribute
+                        .Name("bound")
+                        .PropertyName("FooProp")
+                        .TypeName("System.String")
+                ])
+        };
 
         var projectEngine = CreateProjectEngine(builder => builder.AddTagHelpers(descriptors));
         var projectItem = CreateProjectItemFromFile();
@@ -69,26 +65,25 @@ public class TagHelpersIntegrationTest() : IntegrationTestBase(layer: TestProjec
         // Arrange
         var descriptors = new[]
         {
-                CreateTagHelperDescriptor(
-                    tagName: "p",
-                    typeName: "PTagHelper",
-                    assemblyName: "TestAssembly"),
-                CreateTagHelperDescriptor(
-                    tagName: "form",
-                    typeName: "FormTagHelper",
-                    assemblyName: "TestAssembly"),
-                CreateTagHelperDescriptor(
-                    tagName: "input",
-                    typeName: "InputTagHelper",
-                    assemblyName: "TestAssembly",
-                    attributes: new Action<BoundAttributeDescriptorBuilder>[]
-                    {
-                        builder => builder
-                            .Name("value")
-                            .Metadata(PropertyName("FooProp"))
-                            .TypeName("System.String"),
-                    })
-            };
+            CreateTagHelperDescriptor(
+                tagName: "p",
+                typeName: "PTagHelper",
+                assemblyName: "TestAssembly"),
+            CreateTagHelperDescriptor(
+                tagName: "form",
+                typeName: "FormTagHelper",
+                assemblyName: "TestAssembly"),
+            CreateTagHelperDescriptor(
+                tagName: "input",
+                typeName: "InputTagHelper",
+                assemblyName: "TestAssembly",
+                attributes: [
+                    attribute => attribute
+                        .Name("value")
+                        .PropertyName("FooProp")
+                        .TypeName("System.String")
+                ])
+        };
 
         var projectEngine = CreateProjectEngine(builder => builder.AddTagHelpers(descriptors));
         var projectItem = CreateProjectItemFromFile();
@@ -106,17 +101,14 @@ public class TagHelpersIntegrationTest() : IntegrationTestBase(layer: TestProjec
         string tagName,
         string typeName,
         string assemblyName,
-        IEnumerable<Action<BoundAttributeDescriptorBuilder>> attributes = null)
+        ReadOnlySpan<Action<BoundAttributeDescriptorBuilder>> attributes = default)
     {
         var builder = TagHelperDescriptorBuilder.Create(typeName, assemblyName);
         builder.Metadata(TypeName(typeName));
 
-        if (attributes != null)
+        foreach (var attributeBuilder in attributes)
         {
-            foreach (var attributeBuilder in attributes)
-            {
-                builder.BoundAttributeDescriptor(attributeBuilder);
-            }
+            builder.BoundAttributeDescriptor(attributeBuilder);
         }
 
         builder.TagMatchingRuleDescriptor(ruleBuilder => ruleBuilder.RequireTagName(tagName));

@@ -1,8 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
-#nullable disable
-
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -10,7 +8,6 @@ using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Test.Common;
 using Xunit;
 using Xunit.Abstractions;
-using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
 
 namespace Microsoft.VisualStudio.Editor.Razor;
 
@@ -29,7 +26,7 @@ public class TagHelperFactsTest(ITestOutputHelper testOutput) : ToolingTestBase(
         var documentContext = TagHelperDocumentContext.Create(string.Empty, documentDescriptors);
 
         // Act
-        var binding = TagHelperFacts.GetTagHelperBinding(documentContext, "!a", ImmutableArray<KeyValuePair<string, string>>.Empty, parentTag: null, parentIsTagHelper: false);
+        var binding = TagHelperFacts.GetTagHelperBinding(documentContext, "!a", attributes: [], parentTag: null, parentIsTagHelper: false);
 
         // Assert
         Assert.Null(binding);
@@ -42,29 +39,25 @@ public class TagHelperFactsTest(ITestOutputHelper testOutput) : ToolingTestBase(
         ImmutableArray<TagHelperDescriptor> documentDescriptors =
         [
             TagHelperDescriptorBuilder.Create("TestType", "TestAssembly")
-                .TagMatchingRuleDescriptor(rule =>
-                    rule
-                        .RequireTagName("a")
-                        .RequireAttributeDescriptor(attribute => attribute.Name("asp-for")))
-                .BoundAttributeDescriptor(attribute =>
-                    attribute
-                        .Name("asp-for")
-                        .TypeName(typeof(string).FullName)
-                        .Metadata(PropertyName("AspFor")))
-                .BoundAttributeDescriptor(attribute =>
-                    attribute
-                        .Name("asp-route")
-                        .TypeName(typeof(IDictionary<string, string>).Namespace + "IDictionary<string, string>")
-                        .Metadata(PropertyName("AspRoute"))
-                        .AsDictionaryAttribute("asp-route-", typeof(string).FullName))
+                .TagMatchingRuleDescriptor(rule => rule
+                    .RequireTagName("a")
+                    .RequireAttributeDescriptor(attribute => attribute.Name("asp-for")))
+                .BoundAttributeDescriptor(attribute => attribute
+                    .Name("asp-for")
+                    .TypeName(typeof(string).FullName)
+                    .PropertyName("AspFor"))
+                .BoundAttributeDescriptor(attribute => attribute
+                    .Name("asp-route")
+                    .TypeName(typeof(IDictionary<string, string>).Namespace + "IDictionary<string, string>")
+                    .PropertyName("AspRoute")
+                    .AsDictionaryAttribute("asp-route-", typeof(string).FullName))
                 .Build(),
             TagHelperDescriptorBuilder.Create("TestType", "TestAssembly")
                 .TagMatchingRuleDescriptor(rule => rule.RequireTagName("input"))
-                .BoundAttributeDescriptor(attribute =>
-                    attribute
-                        .Name("asp-for")
-                        .TypeName(typeof(string).FullName)
-                        .Metadata(PropertyName("AspFor")))
+                .BoundAttributeDescriptor(attribute => attribute
+                    .Name("asp-for")
+                    .TypeName(typeof(string).FullName)
+                    .PropertyName("AspFor"))
                 .Build(),
         ];
         var documentContext = TagHelperDocumentContext.Create(string.Empty, documentDescriptors);
@@ -75,6 +68,7 @@ public class TagHelperFactsTest(ITestOutputHelper testOutput) : ToolingTestBase(
         var binding = TagHelperFacts.GetTagHelperBinding(documentContext, "a", attributes, parentTag: "p", parentIsTagHelper: false);
 
         // Assert
+        Assert.NotNull(binding);
         var descriptor = Assert.Single(binding.Descriptors);
         Assert.Equal(documentDescriptors[0], descriptor);
         var boundRule = Assert.Single(binding.Mappings[descriptor]);
@@ -89,17 +83,15 @@ public class TagHelperFactsTest(ITestOutputHelper testOutput) : ToolingTestBase(
         [
             TagHelperDescriptorBuilder.Create("TestType", "TestAssembly")
                 .TagMatchingRuleDescriptor(rule => rule.RequireTagName("a"))
-                .BoundAttributeDescriptor(attribute =>
-                    attribute
-                        .Name("asp-for")
-                        .TypeName(typeof(string).FullName)
-                        .Metadata(PropertyName("AspFor")))
-                .BoundAttributeDescriptor(attribute =>
-                    attribute
-                        .Name("asp-route")
-                        .TypeName(typeof(IDictionary<string, string>).Namespace + "IDictionary<string, string>")
-                        .Metadata(PropertyName("AspRoute"))
-                        .AsDictionaryAttribute("asp-route-", typeof(string).FullName))
+                .BoundAttributeDescriptor(attribute => attribute
+                    .Name("asp-for")
+                    .TypeName(typeof(string).FullName)
+                    .PropertyName("AspFor"))
+                .BoundAttributeDescriptor(attribute => attribute
+                    .Name("asp-route")
+                    .TypeName(typeof(IDictionary<string, string>).Namespace + "IDictionary<string, string>")
+                    .PropertyName("AspRoute")
+                    .AsDictionaryAttribute("asp-route-", typeof(string).FullName))
                 .Build()
         ];
         var expectedAttributeDescriptors = new[]
@@ -107,7 +99,8 @@ public class TagHelperFactsTest(ITestOutputHelper testOutput) : ToolingTestBase(
             documentDescriptors[0].BoundAttributes.Last()
         };
         var documentContext = TagHelperDocumentContext.Create(string.Empty, documentDescriptors);
-        var binding = TagHelperFacts.GetTagHelperBinding(documentContext, "a", ImmutableArray<KeyValuePair<string, string>>.Empty, parentTag: null, parentIsTagHelper: false);
+        var binding = TagHelperFacts.GetTagHelperBinding(documentContext, "a", attributes: [], parentTag: null, parentIsTagHelper: false);
+        Assert.NotNull(binding);
 
         // Act
         var tagHelperAttributes = TagHelperFacts.GetBoundTagHelperAttributes(documentContext, "asp-route-something", binding);
@@ -124,16 +117,14 @@ public class TagHelperFactsTest(ITestOutputHelper testOutput) : ToolingTestBase(
         [
             TagHelperDescriptorBuilder.Create("TestType", "TestAssembly")
                 .TagMatchingRuleDescriptor(rule => rule.RequireTagName("input"))
-                .BoundAttributeDescriptor(attribute =>
-                    attribute
-                        .Name("asp-for")
-                        .TypeName(typeof(string).FullName)
-                        .Metadata(PropertyName("AspFor")))
-                .BoundAttributeDescriptor(attribute =>
-                    attribute
-                        .Name("asp-extra")
-                        .TypeName(typeof(string).FullName)
-                        .Metadata(PropertyName("AspExtra")))
+                .BoundAttributeDescriptor(attribute => attribute
+                    .Name("asp-for")
+                    .TypeName(typeof(string).FullName)
+                    .PropertyName("AspFor"))
+                .BoundAttributeDescriptor(attribute => attribute
+                    .Name("asp-extra")
+                    .TypeName(typeof(string).FullName)
+                    .PropertyName("AspExtra"))
                 .Build()
         ];
         var expectedAttributeDescriptors = new[]
@@ -141,7 +132,8 @@ public class TagHelperFactsTest(ITestOutputHelper testOutput) : ToolingTestBase(
             documentDescriptors[0].BoundAttributes.First()
         };
         var documentContext = TagHelperDocumentContext.Create(string.Empty, documentDescriptors);
-        var binding = TagHelperFacts.GetTagHelperBinding(documentContext, "input", ImmutableArray<KeyValuePair<string, string>>.Empty, parentTag: null, parentIsTagHelper: false);
+        var binding = TagHelperFacts.GetTagHelperBinding(documentContext, "input", attributes: [], parentTag: null, parentIsTagHelper: false);
+        Assert.NotNull(binding);
 
         // Act
         var tagHelperAttributes = TagHelperFacts.GetBoundTagHelperAttributes(documentContext, "asp-for", binding);
@@ -195,20 +187,18 @@ public class TagHelperFactsTest(ITestOutputHelper testOutput) : ToolingTestBase(
         ImmutableArray<TagHelperDescriptor> expectedDescriptors =
         [
             TagHelperDescriptorBuilder.Create("TestType", "TestAssembly")
-                .TagMatchingRuleDescriptor(
-                    rule => rule
-                        .RequireTagName("a")
-                        .RequireParentTag("div"))
+                .TagMatchingRuleDescriptor(rule => rule
+                    .RequireTagName("a")
+                    .RequireParentTag("div"))
                 .Build()
         ];
         ImmutableArray<TagHelperDescriptor> documentDescriptors =
         [
             expectedDescriptors[0],
             TagHelperDescriptorBuilder.Create("TestType2", "TestAssembly")
-                .TagMatchingRuleDescriptor(
-                    rule => rule
-                        .RequireTagName("strong")
-                        .RequireParentTag("div"))
+                .TagMatchingRuleDescriptor(rule => rule
+                    .RequireTagName("strong")
+                    .RequireParentTag("div"))
                 .Build()
         ];
         var documentContext = TagHelperDocumentContext.Create(string.Empty, documentDescriptors);
@@ -253,10 +243,9 @@ public class TagHelperFactsTest(ITestOutputHelper testOutput) : ToolingTestBase(
         ImmutableArray<TagHelperDescriptor> expectedDescriptors =
         [
             TagHelperDescriptorBuilder.Create("TestType", "TestAssembly")
-                .TagMatchingRuleDescriptor(
-                    rule => rule
-                        .RequireTagName("strong")
-                        .RequireParentTag("div"))
+                .TagMatchingRuleDescriptor(rule => rule
+                    .RequireTagName("strong")
+                    .RequireParentTag("div"))
                 .Build()
         ];
         ImmutableArray<TagHelperDescriptor> documentDescriptors =
@@ -348,20 +337,18 @@ public class TagHelperFactsTest(ITestOutputHelper testOutput) : ToolingTestBase(
         ImmutableArray<TagHelperDescriptor> expectedDescriptors =
         [
             TagHelperDescriptorBuilder.Create("TestType", "TestAssembly")
-                .TagMatchingRuleDescriptor(
-                    rule => rule
-                        .RequireTagName("p")
-                        .RequireParentTag("div"))
+                .TagMatchingRuleDescriptor(rule => rule
+                    .RequireTagName("p")
+                    .RequireParentTag("div"))
                 .Build()
         ];
         ImmutableArray<TagHelperDescriptor> documentDescriptors =
         [
             expectedDescriptors[0],
             TagHelperDescriptorBuilder.Create("TestType2", "TestAssembly")
-                .TagMatchingRuleDescriptor(
-                    rule => rule
-                        .RequireTagName("strong")
-                        .RequireParentTag("p"))
+                .TagMatchingRuleDescriptor(rule => rule
+                    .RequireTagName("strong")
+                    .RequireParentTag("p"))
                 .Build()
         ];
         var documentContext = TagHelperDocumentContext.Create(string.Empty, documentDescriptors);

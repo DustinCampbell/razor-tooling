@@ -67,11 +67,10 @@ internal sealed class FormNameTagHelperDescriptorProvider() : TagHelperDescripto
         {
             attribute.SetDocumentation(DocumentationDescriptor.FormNameTagHelper);
             attribute.Name = "@formname";
+            attribute.PropertyName = "FormName";
 
             attribute.TypeName = typeof(string).FullName;
             attribute.IsDirectiveAttribute = true;
-            attribute.SetMetadata(
-                PropertyName("FormName"));
         });
 
         return builder.Build();

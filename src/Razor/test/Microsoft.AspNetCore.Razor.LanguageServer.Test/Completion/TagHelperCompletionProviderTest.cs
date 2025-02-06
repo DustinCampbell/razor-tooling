@@ -1,12 +1,8 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
-#nullable disable
-
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Syntax;
 using Microsoft.AspNetCore.Razor.Test.Common;
@@ -37,7 +33,10 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
                 <p><$$strong></strong></p>
                 """,
             isRazorFile: false);
+
+        Assert.NotNull(context.Owner);
         var element = context.Owner.FirstAncestorOrSelf<MarkupElementSyntax>();
+        Assert.NotNull(element);
 
         // Act
         var (ancestorName, ancestorIsTagHelper) = TagHelperFacts.GetNearestAncestorTagInfo(element.Ancestors());
@@ -58,7 +57,10 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
                 """,
             isRazorFile: false,
             tagHelpers: DefaultTagHelpers);
+
+        Assert.NotNull(context.Owner);
         var element = context.Owner.FirstAncestorOrSelf<MarkupTagHelperElementSyntax>();
+        Assert.NotNull(element);
 
         // Act
         var (ancestorName, ancestorIsTagHelper) = TagHelperFacts.GetNearestAncestorTagInfo(element.Ancestors());
@@ -553,7 +555,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
         tagHelper.BindAttribute(attribute =>
         {
             attribute.Name = "bool-val";
-            attribute.SetMetadata(PropertyName("BoolVal"));
+            attribute.PropertyName = "BoolVal";
             attribute.TypeName = "System.Collections.Generic.IDictionary<System.String, System.Boolean>";
             attribute.AsDictionary("bool-val-", typeof(bool).FullName);
         });
@@ -564,7 +566,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
                 <test $$/>
                 """,
             isRazorFile: false,
-            tagHelpers: ImmutableArray.Create(tagHelper.Build()));
+            tagHelpers: [tagHelper.Build()]);
 
         // Act
         var completions = service.GetCompletionItems(context);
@@ -596,7 +598,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
         tagHelper.BindAttribute(attribute =>
         {
             attribute.Name = "int-val";
-            attribute.SetMetadata(PropertyName("IntVal"));
+            attribute.PropertyName = "IntVal";
             attribute.TypeName = "System.Collections.Generic.IDictionary<System.String, System.Int32>";
             attribute.AsDictionary("int-val-", typeof(int).FullName);
         });
@@ -607,7 +609,7 @@ public class TagHelperCompletionProviderTest(ITestOutputHelper testOutput) : Tag
                 <test $$/>
                 """,
             isRazorFile: false,
-            tagHelpers: ImmutableArray.Create(tagHelper.Build()));
+            tagHelpers: [tagHelper.Build()]);
 
         // Act
         var completions = service.GetCompletionItems(context);
