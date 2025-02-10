@@ -8,37 +8,69 @@ namespace Microsoft.AspNetCore.Razor.Language;
 
 public sealed class RazorParserOptionsBuilder
 {
-    private bool _designTime;
-    private ImmutableArray<DirectiveDescriptor> _directives;
+    private RazorParserOptionsFlags _flags;
 
-    public bool DesignTime => _designTime;
+    private ImmutableArray<DirectiveDescriptor> _directives;
+    private RazorParserFeatureFlags? _featureFlags;
+
+    public bool DesignTime => _flags.IsFlagSet(RazorParserOptionsFlags.DesignTime);
     public string FileKind { get; }
     public RazorLanguageVersion LanguageVersion { get; }
-
-    public bool ParseLeadingDirectives { get; set; }
-    public bool UseRoslynTokenizer { get; set; }
     public CSharpParseOptions CSharpParseOptions { get; set; }
 
-    internal bool EnableSpanEditHandlers { get; set; }
+    public bool ParseLeadingDirectives
+    {
+        get => _flags.IsFlagSet(RazorParserOptionsFlags.ParseLeadingDirectives);
+        set => _flags.UpdateFlag(RazorParserOptionsFlags.ParseLeadingDirectives, value);
+    }
+
+    public bool UseRoslynTokenizer
+    {
+        get => _flags.IsFlagSet(RazorParserOptionsFlags.UseRoslynTokenizer);
+        set => _flags.UpdateFlag(RazorParserOptionsFlags.UseRoslynTokenizer, value);
+    }
+
+    internal bool EnableSpanEditHandlers
+    {
+        get => _flags.IsFlagSet(RazorParserOptionsFlags.EnableSpanEditHandlers);
+        set => _flags.UpdateFlag(RazorParserOptionsFlags.EnableSpanEditHandlers, value);
+    }
 
     internal RazorParserOptionsBuilder(string? fileKind, RazorLanguageVersion version, bool designTime)
     {
         FileKind = fileKind ?? FileKinds.Legacy;
         LanguageVersion = version ?? RazorLanguageVersion.Latest;
-        _designTime = designTime;
         CSharpParseOptions = CSharpParseOptions.Default;
+
+        if (designTime)
+        {
+            _flags = RazorParserOptionsFlags.DesignTime;
+        }
     }
 
     public RazorParserOptions Build()
-        => new(_directives, DesignTime, ParseLeadingDirectives, UseRoslynTokenizer, LanguageVersion, FileKind, EnableSpanEditHandlers, CSharpParseOptions);
+        => new(
+            _flags,
+            _directives,
+            LanguageVersion,
+            FileKind,
+            CSharpParseOptions)
+        {
+            FeatureFlags = _featureFlags ?? RazorParserFeatureFlags.Create(LanguageVersion, FileKind)
+        };
 
-    public void SetDesignTime(bool designTime)
+    public void SetDesignTime(bool value)
     {
-        _designTime = designTime;
+        _flags.UpdateFlag(RazorParserOptionsFlags.DesignTime, value);
     }
 
     public void SetDirectives(ImmutableArray<DirectiveDescriptor> directives)
     {
         _directives = directives.NullToEmpty();
+    }
+
+    internal void SetFeatureFlags(RazorParserFeatureFlags featureFlags)
+    {
+        _featureFlags = featureFlags;
     }
 }

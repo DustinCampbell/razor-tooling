@@ -1,8 +1,6 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
 using System;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis.CSharp;
@@ -11,16 +9,66 @@ namespace Microsoft.AspNetCore.Razor.Language;
 
 public sealed class RazorParserOptions
 {
+    private readonly RazorParserOptionsFlags _flags;
+
+    public ImmutableArray<DirectiveDescriptor> Directives { get; }
+    internal string FileKind { get; }
+    public CSharpParseOptions CSharpParseOptions { get; }
+    public RazorLanguageVersion Version { get; } = RazorLanguageVersion.Latest;
+
+    internal RazorParserFeatureFlags FeatureFlags { get; /* Testing Only */ init; }
+
+    public bool DesignTime
+        => _flags.IsFlagSet(RazorParserOptionsFlags.DesignTime);
+
+    /// <summary>
+    /// Gets a value which indicates whether the parser will parse only the leading directives. If <c>true</c>
+    /// the parser will halt at the first HTML content or C# code block. If <c>false</c> the whole document is parsed.
+    /// </summary>
+    /// <remarks>
+    /// Currently setting this option to <c>true</c> will result in only the first line of directives being parsed.
+    /// In a future release this may be updated to include all leading directive content.
+    /// </remarks>
+    public bool ParseLeadingDirectives
+        => _flags.IsFlagSet(RazorParserOptionsFlags.ParseLeadingDirectives);
+
+    public bool UseRoslynTokenizer
+        => _flags.IsFlagSet(RazorParserOptionsFlags.UseRoslynTokenizer);
+
+    internal bool EnableSpanEditHandlers
+        => _flags.IsFlagSet(RazorParserOptionsFlags.EnableSpanEditHandlers);
+
+    internal RazorParserOptions(
+        RazorParserOptionsFlags flags,
+        ImmutableArray<DirectiveDescriptor> directives,
+        RazorLanguageVersion version,
+        string fileKind,
+        CSharpParseOptions csharpParseOptions)
+    {
+        _flags = flags;
+
+        if (flags.IsFlagSet(RazorParserOptionsFlags.ParseLeadingDirectives) &&
+            flags.IsFlagSet(RazorParserOptionsFlags.UseRoslynTokenizer))
+        {
+            ThrowHelper.ThrowInvalidOperationException($"Cannot set {nameof(RazorParserOptionsFlags.ParseLeadingDirectives)} and {nameof(RazorParserOptionsFlags.UseRoslynTokenizer)} to true simultaneously.");
+        }
+
+        fileKind ??= FileKinds.Legacy;
+
+        Directives = directives.NullToEmpty();
+        Version = version;
+        FeatureFlags = RazorParserFeatureFlags.Create(Version, fileKind);
+        FileKind = fileKind;
+        CSharpParseOptions = csharpParseOptions;
+    }
+
     public static RazorParserOptions CreateDefault()
     {
         return new RazorParserOptions(
+            flags: RazorParserOptionsFlags.DefaultFlags,
             directives: [],
-            designTime: false,
-            parseLeadingDirectives: false,
-            useRoslynTokenizer: false,
             version: RazorLanguageVersion.Latest,
             fileKind: FileKinds.Legacy,
-            enableSpanEditHandlers: false,
             csharpParseOptions: CSharpParseOptions.Default);
     }
 
@@ -31,10 +79,7 @@ public sealed class RazorParserOptions
 
     public static RazorParserOptions Create(Action<RazorParserOptionsBuilder> configure, string fileKind)
     {
-        if (configure == null)
-        {
-            throw new ArgumentNullException(nameof(configure));
-        }
+        ArgHelper.ThrowIfNull(configure);
 
         var builder = new RazorParserOptionsBuilder(fileKind, version: RazorLanguageVersion.Latest, designTime: false);
         configure(builder);
@@ -45,15 +90,12 @@ public sealed class RazorParserOptions
 
     public static RazorParserOptions CreateDesignTime(Action<RazorParserOptionsBuilder> configure)
     {
-        return CreateDesignTime(configure, fileKind: null);
+        return CreateDesignTime(configure, fileKind: FileKinds.Legacy);
     }
 
     public static RazorParserOptions CreateDesignTime(Action<RazorParserOptionsBuilder> configure, string fileKind)
     {
-        if (configure == null)
-        {
-            throw new ArgumentNullException(nameof(configure));
-        }
+        ArgHelper.ThrowIfNull(configure);
 
         var builder = new RazorParserOptionsBuilder(fileKind, version: RazorLanguageVersion.Latest, designTime: true);
         configure(builder);
@@ -61,58 +103,4 @@ public sealed class RazorParserOptions
 
         return options;
     }
-
-    internal RazorParserOptions(
-        ImmutableArray<DirectiveDescriptor> directives,
-        bool designTime,
-        bool parseLeadingDirectives,
-        bool useRoslynTokenizer,
-        RazorLanguageVersion version,
-        string fileKind,
-        bool enableSpanEditHandlers,
-        CSharpParseOptions csharpParseOptions)
-    {
-        if (parseLeadingDirectives && useRoslynTokenizer)
-        {
-            throw new ArgumentException($"Cannot set {nameof(parseLeadingDirectives)} and {nameof(useRoslynTokenizer)} to true simultaneously.");
-        }
-
-        fileKind ??= FileKinds.Legacy;
-
-        Directives = directives.NullToEmpty();
-        DesignTime = designTime;
-        ParseLeadingDirectives = parseLeadingDirectives;
-        UseRoslynTokenizer = useRoslynTokenizer;
-        Version = version;
-        FeatureFlags = RazorParserFeatureFlags.Create(Version, fileKind);
-        FileKind = fileKind;
-        EnableSpanEditHandlers = enableSpanEditHandlers;
-        CSharpParseOptions = csharpParseOptions;
-    }
-
-    public bool DesignTime { get; }
-
-    public ImmutableArray<DirectiveDescriptor> Directives { get; }
-
-    /// <summary>
-    /// Gets a value which indicates whether the parser will parse only the leading directives. If <c>true</c>
-    /// the parser will halt at the first HTML content or C# code block. If <c>false</c> the whole document is parsed.
-    /// </summary>
-    /// <remarks>
-    /// Currently setting this option to <c>true</c> will result in only the first line of directives being parsed.
-    /// In a future release this may be updated to include all leading directive content.
-    /// </remarks>
-    public bool ParseLeadingDirectives { get; }
-
-    public bool UseRoslynTokenizer { get; }
-
-    public CSharpParseOptions CSharpParseOptions { get; }
-
-    public RazorLanguageVersion Version { get; } = RazorLanguageVersion.Latest;
-
-    internal string FileKind { get; }
-
-    internal RazorParserFeatureFlags FeatureFlags { get; /* Testing Only */ init; }
-
-    internal bool EnableSpanEditHandlers { get; }
 }
