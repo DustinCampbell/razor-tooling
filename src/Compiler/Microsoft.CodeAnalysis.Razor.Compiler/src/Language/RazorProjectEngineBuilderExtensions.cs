@@ -5,13 +5,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.IO;
 using System.Linq;
 using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
-using Microsoft.AspNetCore.Razor.PooledObjects;
-using Microsoft.CodeAnalysis.Razor.Language;
 using RazorExtensionsV1_X = Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X.RazorExtensions;
 using RazorExtensionsV2_X = Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X.RazorExtensions;
 using RazorExtensionsV3 = Microsoft.AspNetCore.Mvc.Razor.Extensions.RazorExtensions;
@@ -239,25 +235,6 @@ public static class RazorProjectEngineBuilderExtensions
         return builder;
     }
 
-    /// <summary>
-    /// Adds the provided <see cref="RazorProjectItem" />s as imports to all project items processed
-    /// by the <see cref="RazorProjectEngine"/>.
-    /// </summary>
-    /// <param name="builder">The <see cref="RazorProjectEngineBuilder"/>.</param>
-    /// <param name="imports">The collection of imports.</param>
-    /// <returns>The <see cref="RazorProjectEngineBuilder"/>.</returns>
-    public static RazorProjectEngineBuilder AddDefaultImports(this RazorProjectEngineBuilder builder, params string[] imports)
-    {
-        if (builder == null)
-        {
-            throw new ArgumentNullException(nameof(builder));
-        }
-
-        builder.Features.Add(new AdditionalImportsProjectFeature(imports));
-
-        return builder;
-    }
-
     private static DefaultRazorDirectiveFeature GetDirectiveFeature(RazorProjectEngineBuilder builder)
     {
         var directiveFeature = builder.Features.OfType<DefaultRazorDirectiveFeature>().FirstOrDefault();
@@ -292,17 +269,6 @@ public static class RazorProjectEngineBuilderExtensions
         }
 
         return configurationFeature;
-    }
-
-    private sealed class AdditionalImportsProjectFeature(string[] imports) : RazorProjectEngineFeatureBase, IImportProjectFeature
-    {
-        private readonly ImmutableArray<RazorProjectItem> _imports = imports.SelectAsArray(
-            static import => (RazorProjectItem)new DefaultImportProjectItem("Additional default imports", import));
-
-        public void CollectImports(RazorProjectItem projectItem, ref PooledArrayBuilder<RazorProjectItem> imports)
-        {
-            imports.AddRange(_imports);
-        }
     }
 
     private class SetSupportLocalizedComponentNamesFeature : RazorEngineFeatureBase, IConfigureRazorCodeGenerationOptionsFeature

@@ -1,12 +1,13 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
+using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
+using Microsoft.AspNetCore.Razor.PooledObjects;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
@@ -19,14 +20,14 @@ public static class RazorProjectEngineBuilderExtensions
 
     public static RazorProjectEngineBuilder AddTagHelpers(this RazorProjectEngineBuilder builder, IEnumerable<TagHelperDescriptor> tagHelpers)
     {
-        var feature = (TestTagHelperFeature)builder.Features.OfType<ITagHelperFeature>().FirstOrDefault();
-        if (feature == null)
+        if (builder.Features.OfType<ITagHelperFeature>().FirstOrDefault() is not TestTagHelperFeature feature)
         {
             feature = new TestTagHelperFeature();
             builder.Features.Add(feature);
         }
 
         feature.TagHelpers.AddRange(tagHelpers);
+
         return builder;
     }
 
@@ -67,12 +68,28 @@ public static class RazorProjectEngineBuilderExtensions
         return builder;
     }
 
+    /// <summary>
+    /// Adds the provided <see cref="RazorProjectItem" />s as imports to all project items processed
+    /// by the <see cref="RazorProjectEngine"/>.
+    /// </summary>
+    /// <param name="builder">The <see cref="RazorProjectEngineBuilder"/>.</param>
+    /// <param name="imports">The collection of imports.</param>
+    /// <returns>The <see cref="RazorProjectEngineBuilder"/>.</returns>
+    public static RazorProjectEngineBuilder AddDefaultImports(this RazorProjectEngineBuilder builder, params ReadOnlySpan<string> imports)
+    {
+        ArgHelper.ThrowIfNull(builder);
+
+        builder.Features.Add(new AdditionalImportsProjectFeature(imports));
+
+        return builder;
+    }
+
     internal static void SetImportFeature(this RazorProjectEngineBuilder builder, IImportProjectFeature feature)
     {
         ArgHelper.ThrowIfNull(builder);
         ArgHelper.ThrowIfNull(feature);
 
-        // Remove any existing import features in favor of the new one we're given.
+        // Remove any existing import features in favor of the new one we're given.N
 
         var existingFeatures = builder.Features.OfType<IImportProjectFeature>().ToArray();
         foreach (var existingFeature in existingFeatures)
@@ -81,5 +98,16 @@ public static class RazorProjectEngineBuilderExtensions
         }
 
         builder.Features.Add(feature);
+    }
+
+    private sealed class AdditionalImportsProjectFeature(ReadOnlySpan<string> imports) : RazorProjectEngineFeatureBase, IImportProjectFeature
+    {
+        private readonly ImmutableArray<RazorProjectItem> _imports = imports.SelectAsArray(
+            static import => (RazorProjectItem)new DefaultImportProjectItem("Additional default imports", import));
+
+        public void CollectImports(RazorProjectItem projectItem, ref PooledArrayBuilder<RazorProjectItem> imports)
+        {
+            imports.AddRange(_imports);
+        }
     }
 }
