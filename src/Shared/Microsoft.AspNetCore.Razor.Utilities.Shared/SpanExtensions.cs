@@ -6,6 +6,9 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 #endif
 
+using System.Collections.Immutable;
+using Microsoft.AspNetCore.Razor.PooledObjects;
+
 namespace System;
 
 internal static class SpanExtensions
@@ -60,5 +63,55 @@ internal static class SpanExtensions
             }
         }
 #endif
+    }
+
+    public static ImmutableArray<TResult> SelectAsArray<T, TResult>(this ReadOnlySpan<T> source, Func<T, TResult> selector)
+    {
+        return source switch
+        {
+            [] => [],
+            [var item] => [selector(item)],
+            [var item1, var item2] => [selector(item1), selector(item2)],
+            [var item1, var item2, var item3] => [selector(item1), selector(item2), selector(item3)],
+            [var item1, var item2, var item3, var item4] => [selector(item1), selector(item2), selector(item3), selector(item4)],
+            var items => BuildResult(items, selector)
+        };
+
+        static ImmutableArray<TResult> BuildResult(ReadOnlySpan<T> items, Func<T, TResult> selector)
+        {
+            using var results = new PooledArrayBuilder<TResult>(capacity: items.Length);
+
+            foreach (var item in items)
+            {
+                results.Add(selector(item));
+            }
+
+            return results.DrainToImmutable();
+        }
+    }
+
+    public static ImmutableArray<TResult> SelectAsArray<T, TArg, TResult>(this ReadOnlySpan<T> source, TArg arg, Func<T, TArg, TResult> selector)
+    {
+        return source switch
+        {
+            [] => [],
+            [var item] => [selector(item, arg)],
+            [var item1, var item2] => [selector(item1, arg), selector(item2, arg)],
+            [var item1, var item2, var item3] => [selector(item1, arg), selector(item2, arg), selector(item3, arg)],
+            [var item1, var item2, var item3, var item4] => [selector(item1, arg), selector(item2, arg), selector(item3, arg), selector(item4, arg)],
+            var items => BuildResult(items, arg, selector)
+        };
+
+        static ImmutableArray<TResult> BuildResult(ReadOnlySpan<T> items, TArg arg, Func<T, TArg, TResult> selector)
+        {
+            using var results = new PooledArrayBuilder<TResult>(capacity: items.Length);
+
+            foreach (var item in items)
+            {
+                results.Add(selector(item, arg));
+            }
+
+            return results.DrainToImmutable();
+        }
     }
 }

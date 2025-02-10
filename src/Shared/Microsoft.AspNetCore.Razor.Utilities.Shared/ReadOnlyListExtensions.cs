@@ -36,6 +36,31 @@ internal static class ReadOnlyListExtensions
         }
     }
 
+    public static ImmutableArray<TResult> SelectAsArray<T, TArg, TResult>(this IReadOnlyList<T> source, TArg arg, Func<T, TArg, TResult> selector)
+    {
+        return source switch
+        {
+            [] => [],
+            [var item] => [selector(item, arg)],
+            [var item1, var item2] => [selector(item1, arg), selector(item2, arg)],
+            [var item1, var item2, var item3] => [selector(item1, arg), selector(item2, arg), selector(item3, arg)],
+            [var item1, var item2, var item3, var item4] => [selector(item1, arg), selector(item2, arg), selector(item3, arg), selector(item4, arg)],
+            var items => BuildResult(items, arg, selector)
+        };
+
+        static ImmutableArray<TResult> BuildResult(IReadOnlyList<T> items, TArg arg, Func<T, TArg, TResult> selector)
+        {
+            using var results = new PooledArrayBuilder<TResult>(capacity: items.Count);
+
+            for (var i = 0; i < items.Count; i++)
+            {
+                results.Add(selector(items[i], arg));
+            }
+
+            return results.DrainToImmutable();
+        }
+    }
+
     public static T[] ToArray<T>(this IReadOnlyList<T> list)
     {
         return list switch

@@ -38,6 +38,33 @@ internal static class EnumerableExtensions
         }
     }
 
+    public static ImmutableArray<TResult> SelectAsArray<T, TArg, TResult>(this IEnumerable<T> source, TArg arg, Func<T, TArg, TResult> selector)
+    {
+        if (source is ImmutableArray<T> array)
+        {
+            return ImmutableArrayExtensions.SelectAsArray(array, arg, selector);
+        }
+
+        if (source is IReadOnlyList<T> list)
+        {
+            return list.SelectAsArray(arg, selector);
+        }
+
+        return BuildResult(source, arg, selector);
+
+        static ImmutableArray<TResult> BuildResult(IEnumerable<T> items, TArg arg, Func<T, TArg, TResult> selector)
+        {
+            using var results = new PooledArrayBuilder<TResult>();
+
+            foreach (var item in items)
+            {
+                results.Add(selector(item, arg));
+            }
+
+            return results.DrainToImmutable();
+        }
+    }
+
     public static bool TryGetCount<T>(this IEnumerable<T> sequence, out int count)
     {
 #if NET6_0_OR_GREATER

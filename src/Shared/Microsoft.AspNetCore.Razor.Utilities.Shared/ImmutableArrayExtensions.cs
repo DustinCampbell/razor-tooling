@@ -54,6 +54,31 @@ internal static partial class ImmutableArrayExtensions
         }
     }
 
+    public static ImmutableArray<TResult> SelectAsArray<T, TArg, TResult>(this ImmutableArray<T> source, TArg arg, Func<T, TArg, TResult> selector)
+    {
+        return source switch
+        {
+            [] => [],
+            [var item] => [selector(item, arg)],
+            [var item1, var item2] => [selector(item1, arg), selector(item2, arg)],
+            [var item1, var item2, var item3] => [selector(item1, arg), selector(item2, arg), selector(item3, arg)],
+            [var item1, var item2, var item3, var item4] => [selector(item1, arg), selector(item2, arg), selector(item3, arg), selector(item4, arg)],
+            var items => BuildResult(items, arg, selector)
+        };
+
+        static ImmutableArray<TResult> BuildResult(ImmutableArray<T> items, TArg arg, Func<T, TArg, TResult> selector)
+        {
+            using var results = new PooledArrayBuilder<TResult>(capacity: items.Length);
+
+            foreach (var item in items)
+            {
+                results.Add(selector(item, arg));
+            }
+
+            return results.DrainToImmutable();
+        }
+    }
+
     public static ImmutableArray<TResult> SelectManyAsArray<TSource, TResult>(this IReadOnlyCollection<TSource>? source, Func<TSource, ImmutableArray<TResult>> selector)
     {
         if (source is null || source.Count == 0)
