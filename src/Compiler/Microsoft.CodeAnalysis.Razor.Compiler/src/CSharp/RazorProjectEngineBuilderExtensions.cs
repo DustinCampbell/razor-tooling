@@ -60,7 +60,7 @@ public static class RazorProjectEngineBuilderExtensions
                 throw new ArgumentNullException(nameof(options));
             }
 
-            if (options.Configuration != null && options.Configuration.LanguageVersion.Major < 3)
+            if (options.LanguageVersion is { Major: < 3 })
             {
                 // Prior to 3.0 there were no C# version specific controlled features. Suppress nullability enforcement.
                 options.SuppressNullabilityEnforcement = true;
@@ -84,7 +84,7 @@ public static class RazorProjectEngineBuilderExtensions
                 options.SuppressNullabilityEnforcement = false;
             }
 
-            if (options.Configuration?.LanguageVersion.Major >= 5)
+            if (options.LanguageVersion is { Major: >= 5 })
             {
                 // This is a useful optimization but isn't supported by older framework versions
                 options.OmitMinimizedComponentAttributeValues = true;

@@ -10,7 +10,7 @@ public sealed class RazorCodeGenerationOptionsBuilder
     private RazorCodeGenerationOptionsFlags _flags;
     private string _newLine = Environment.NewLine;
 
-    public RazorConfiguration? Configuration { get; }
+    public RazorLanguageVersion? LanguageVersion { get; }
 
     public bool DesignTime => _flags.IsFlagSet(RazorCodeGenerationOptionsFlags.DesignTime);
 
@@ -154,15 +154,11 @@ public sealed class RazorCodeGenerationOptionsBuilder
         set => _flags.UpdateFlag(RazorCodeGenerationOptionsFlags.RemapLinePragmaPathsOnWindows, value);
     }
 
-    public RazorCodeGenerationOptionsBuilder(RazorConfiguration configuration)
+    public RazorCodeGenerationOptionsBuilder(RazorLanguageVersion languageVersion)
     {
-        ArgHelper.ThrowIfNull(configuration);
+        ArgHelper.ThrowIfNull(languageVersion);
 
-        Configuration = configuration;
-        if (configuration.SuppressAddComponentParameter)
-        {
-            _flags.SetFlag(RazorCodeGenerationOptionsFlags.SuppressAddComponentParameter);
-        }
+        LanguageVersion = languageVersion;
     }
 
     public RazorCodeGenerationOptionsBuilder(RazorCodeGenerationOptionsFlags flags)
