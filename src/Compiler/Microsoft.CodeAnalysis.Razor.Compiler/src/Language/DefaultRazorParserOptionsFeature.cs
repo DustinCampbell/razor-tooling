@@ -6,20 +6,11 @@ using System.Collections.Immutable;
 namespace Microsoft.AspNetCore.Razor.Language;
 
 #pragma warning disable CS0618 // Type or member is obsolete
-internal class DefaultRazorParserOptionsFeature : RazorEngineFeatureBase, IRazorParserOptionsFeature
+internal class DefaultRazorParserOptionsFeature(RazorLanguageVersion version) : RazorEngineFeatureBase, IRazorParserOptionsFeature
 #pragma warning restore CS0618 // Type or member is obsolete
 {
-    private readonly bool _designTime;
-    private readonly RazorLanguageVersion _version;
-    private readonly string? _fileKind;
+    private readonly RazorLanguageVersion _version = version;
     private ImmutableArray<IConfigureRazorParserOptionsFeature> _configureOptions;
-
-    public DefaultRazorParserOptionsFeature(bool designTime, RazorLanguageVersion version, string? fileKind)
-    {
-        _designTime = designTime;
-        _version = version;
-        _fileKind = fileKind;
-    }
 
     protected override void OnInitialized()
     {
@@ -28,7 +19,7 @@ internal class DefaultRazorParserOptionsFeature : RazorEngineFeatureBase, IRazor
 
     public RazorParserOptions GetOptions()
     {
-        var builder = new RazorParserOptionsBuilder(_fileKind, _version, _designTime);
+        var builder = new RazorParserOptionsBuilder(fileKind: null, _version, designTime: false);
 
         foreach (var options in _configureOptions)
         {
