@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
-using Microsoft.AspNetCore.Razor.Language.Intermediate;
 using RazorExtensionsV1_X = Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X.RazorExtensions;
 using RazorExtensionsV2_X = Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X.RazorExtensions;
 using RazorExtensionsV3 = Microsoft.AspNetCore.Mvc.Razor.Extensions.RazorExtensions;
@@ -49,69 +48,6 @@ public static class RazorProjectEngineBuilderExtensions
                 RazorExtensionsV3.Register(builder);
                 break;
         }
-    }
-
-
-    /// <summary>
-    /// Registers a class configuration delegate that gets invoked during code generation.
-    /// </summary>
-    /// <param name="builder">The <see cref="RazorProjectEngineBuilder"/>.</param>
-    /// <param name="configureClass"><see cref="Action"/> invoked to configure
-    /// <see cref="ClassDeclarationIntermediateNode"/> during code generation.</param>
-    /// <returns>The <see cref="RazorProjectEngineBuilder"/>.</returns>
-    public static RazorProjectEngineBuilder ConfigureClass(
-        this RazorProjectEngineBuilder builder,
-        Action<RazorCodeDocument, ClassDeclarationIntermediateNode> configureClass)
-    {
-        if (builder == null)
-        {
-            throw new ArgumentNullException(nameof(builder));
-        }
-
-        if (configureClass == null)
-        {
-            throw new ArgumentNullException(nameof(configureClass));
-        }
-
-        var configurationFeature = GetDefaultDocumentClassifierPassFeature(builder);
-        configurationFeature.ConfigureClass.Add(configureClass);
-        return builder;
-    }
-
-    /// <summary>
-    /// Sets the base type for generated types.
-    /// </summary>
-    /// <param name="builder">The <see cref="RazorProjectEngineBuilder"/>.</param>
-    /// <param name="baseType">The name of the base type.</param>
-    /// <returns>The <see cref="RazorProjectEngineBuilder"/>.</returns>
-    public static RazorProjectEngineBuilder SetBaseType(this RazorProjectEngineBuilder builder, string baseType)
-    {
-        if (builder == null)
-        {
-            throw new ArgumentNullException(nameof(builder));
-        }
-
-        var configurationFeature = GetDefaultDocumentClassifierPassFeature(builder);
-        configurationFeature.ConfigureClass.Add((document, @class) => @class.BaseType = new BaseTypeWithModel(baseType));
-        return builder;
-    }
-
-    /// <summary>
-    /// Sets the namespace for generated types.
-    /// </summary>
-    /// <param name="builder">The <see cref="RazorProjectEngineBuilder"/>.</param>
-    /// <param name="namespaceName">The name of the namespace.</param>
-    /// <returns>The <see cref="RazorProjectEngineBuilder"/>.</returns>
-    public static RazorProjectEngineBuilder SetNamespace(this RazorProjectEngineBuilder builder, string namespaceName)
-    {
-        if (builder == null)
-        {
-            throw new ArgumentNullException(nameof(builder));
-        }
-
-        var configurationFeature = GetDefaultDocumentClassifierPassFeature(builder);
-        configurationFeature.ConfigureNamespace.Add((document, @namespace) => @namespace.Content = namespaceName);
-        return builder;
     }
 
     /// <summary>
@@ -257,18 +193,6 @@ public static class RazorProjectEngineBuilderExtensions
         }
 
         return targetExtensionFeature;
-    }
-
-    private static DefaultDocumentClassifierPassFeature GetDefaultDocumentClassifierPassFeature(RazorProjectEngineBuilder builder)
-    {
-        var configurationFeature = builder.Features.OfType<DefaultDocumentClassifierPassFeature>().FirstOrDefault();
-        if (configurationFeature == null)
-        {
-            configurationFeature = new DefaultDocumentClassifierPassFeature();
-            builder.Features.Add(configurationFeature);
-        }
-
-        return configurationFeature;
     }
 
     private class SetSupportLocalizedComponentNamesFeature : RazorEngineFeatureBase, IConfigureRazorCodeGenerationOptionsFeature
