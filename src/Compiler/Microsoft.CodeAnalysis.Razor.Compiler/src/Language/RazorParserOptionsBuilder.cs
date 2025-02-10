@@ -3,7 +3,6 @@
 
 #nullable disable
 
-using System;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis.CSharp;
 
@@ -14,26 +13,12 @@ public sealed class RazorParserOptionsBuilder
     private bool _designTime;
     private ImmutableArray<DirectiveDescriptor> _directives;
 
-    internal RazorParserOptionsBuilder(RazorConfiguration configuration, string fileKind)
-    {
-        if (configuration == null)
-        {
-            throw new ArgumentNullException(nameof(configuration));
-        }
-
-        Configuration = configuration;
-        LanguageVersion = configuration.LanguageVersion;
-        FileKind = fileKind;
-    }
-
     internal RazorParserOptionsBuilder(bool designTime, RazorLanguageVersion version, string fileKind)
     {
         _designTime = designTime;
         LanguageVersion = version;
         FileKind = fileKind;
     }
-
-    public RazorConfiguration Configuration { get; }
 
     public bool DesignTime => _designTime;
 
