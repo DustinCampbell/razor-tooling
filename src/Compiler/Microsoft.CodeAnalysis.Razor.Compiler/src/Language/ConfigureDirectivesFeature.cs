@@ -45,8 +45,7 @@ internal sealed class ConfigureDirectivesFeature : RazorEngineFeatureBase, IConf
 
     void IConfigureRazorParserOptionsFeature.Configure(RazorParserOptionsBuilder options)
     {
-        var fileKind = options.FileKind ?? FileKinds.Legacy;
-        var directives = GetDirectives(fileKind);
+        var directives = GetDirectives(options.FileKind);
 
         options.SetDirectives(directives);
     }

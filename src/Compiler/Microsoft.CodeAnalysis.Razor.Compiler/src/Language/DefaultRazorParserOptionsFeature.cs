@@ -28,7 +28,7 @@ internal class DefaultRazorParserOptionsFeature : RazorEngineFeatureBase, IRazor
 
     public RazorParserOptions GetOptions()
     {
-        var builder = new RazorParserOptionsBuilder(_designTime, _version, _fileKind);
+        var builder = new RazorParserOptionsBuilder(_fileKind, _version, _designTime);
 
         foreach (var options in _configureOptions)
         {

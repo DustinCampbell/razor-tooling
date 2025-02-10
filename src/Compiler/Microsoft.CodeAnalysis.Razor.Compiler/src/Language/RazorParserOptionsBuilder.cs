@@ -1,8 +1,6 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis.CSharp;
 
@@ -13,26 +11,23 @@ public sealed class RazorParserOptionsBuilder
     private bool _designTime;
     private ImmutableArray<DirectiveDescriptor> _directives;
 
-    internal RazorParserOptionsBuilder(bool designTime, RazorLanguageVersion version, string fileKind)
-    {
-        _designTime = designTime;
-        LanguageVersion = version;
-        FileKind = fileKind;
-    }
-
     public bool DesignTime => _designTime;
-
     public string FileKind { get; }
-
-    public bool ParseLeadingDirectives { get; set; }
-
-    public bool UseRoslynTokenizer { get; set; }
-
-    public CSharpParseOptions CSharpParseOptions { get; set; }
-
     public RazorLanguageVersion LanguageVersion { get; }
 
+    public bool ParseLeadingDirectives { get; set; }
+    public bool UseRoslynTokenizer { get; set; }
+    public CSharpParseOptions CSharpParseOptions { get; set; }
+
     internal bool EnableSpanEditHandlers { get; set; }
+
+    internal RazorParserOptionsBuilder(string? fileKind, RazorLanguageVersion version, bool designTime)
+    {
+        FileKind = fileKind ?? FileKinds.Legacy;
+        LanguageVersion = version ?? RazorLanguageVersion.Latest;
+        _designTime = designTime;
+        CSharpParseOptions = CSharpParseOptions.Default;
+    }
 
     public RazorParserOptions Build()
         => new(_directives, DesignTime, ParseLeadingDirectives, UseRoslynTokenizer, LanguageVersion, FileKind, EnableSpanEditHandlers, CSharpParseOptions);

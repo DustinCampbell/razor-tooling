@@ -17,8 +17,8 @@ internal class DefaultRazorParserOptionsFactoryProjectFeature : RazorProjectEngi
 
     public RazorParserOptions Create(string fileKind, Action<RazorParserOptionsBuilder> configure)
     {
-        var languageVersion = ProjectEngine.Configuration.LanguageVersion;
-        var builder = new RazorParserOptionsBuilder(designTime: false, languageVersion, fileKind);
+        var builder = new RazorParserOptionsBuilder(fileKind, ProjectEngine.Configuration.LanguageVersion, designTime: false);
+
         configure?.Invoke(builder);
 
         foreach (var options in _configureOptions)

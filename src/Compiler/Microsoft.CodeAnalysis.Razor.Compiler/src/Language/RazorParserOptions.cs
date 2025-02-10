@@ -36,7 +36,7 @@ public sealed class RazorParserOptions
             throw new ArgumentNullException(nameof(configure));
         }
 
-        var builder = new RazorParserOptionsBuilder(designTime: false, version: RazorLanguageVersion.Latest, fileKind ?? FileKinds.Legacy);
+        var builder = new RazorParserOptionsBuilder(fileKind, version: RazorLanguageVersion.Latest, designTime: false);
         configure(builder);
         var options = builder.Build();
 
@@ -55,7 +55,7 @@ public sealed class RazorParserOptions
             throw new ArgumentNullException(nameof(configure));
         }
 
-        var builder = new RazorParserOptionsBuilder(designTime: true, version: RazorLanguageVersion.Latest, fileKind ?? FileKinds.Legacy);
+        var builder = new RazorParserOptionsBuilder(fileKind, version: RazorLanguageVersion.Latest, designTime: true);
         configure(builder);
         var options = builder.Build();
 
