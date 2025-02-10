@@ -163,9 +163,8 @@ public class RazorProjectEngine
         Action<RazorParserOptionsBuilder>? configureParser,
         Action<RazorCodeGenerationOptionsBuilder>? configureCodeGeneration)
     {
-        var parserOptions = GetRequiredFeature<IRazorParserOptionsFactoryProjectFeature>().Create(fileKind, builder =>
+        var parserOptions = GetParserOptions(fileKind, builder =>
         {
-            ConfigureParserOptions(builder);
             configureParser?.Invoke(builder);
         });
 
@@ -209,9 +208,10 @@ public class RazorProjectEngine
     {
         ArgHelper.ThrowIfNull(sourceDocument);
 
-        var parserOptions = GetRequiredFeature<IRazorParserOptionsFactoryProjectFeature>().Create(fileKind, builder =>
+        var parserOptions = GetParserOptions(fileKind, builder =>
         {
-            ConfigureDesignTimeParserOptions(builder);
+            builder.SetDesignTime(true);
+
             configureParser?.Invoke(builder);
         });
 
@@ -227,6 +227,21 @@ public class RazorProjectEngine
         codeDocument.SetFileKind(fileKind);
 
         return codeDocument;
+    }
+
+    private RazorParserOptions GetParserOptions(string fileKind, Action<RazorParserOptionsBuilder> configure)
+    {
+        var features = Engine.GetFeatures<IConfigureRazorParserOptionsFeature>();
+        var builder = new RazorParserOptionsBuilder(fileKind, Configuration.LanguageVersion, designTime: false);
+
+        configure.Invoke(builder);
+
+        foreach (var feature in features)
+        {
+            feature.Configure(builder);
+        }
+
+        return builder.Build();
     }
 
     private void ProcessCore(RazorCodeDocument codeDocument, CancellationToken cancellationToken)
@@ -327,7 +342,6 @@ public class RazorProjectEngine
         features.Add(new DefaultMetadataIdentifierFeature());
 
         // Options features
-        features.Add(new DefaultRazorParserOptionsFactoryProjectFeature());
         features.Add(new DefaultRazorCodeGenerationOptionsFactoryProjectFeature());
 
         // Legacy options features
@@ -516,15 +530,6 @@ public class RazorProjectEngine
         }
 
         return imports.DrainToImmutable();
-    }
-
-    private static void ConfigureParserOptions(RazorParserOptionsBuilder builder)
-    {
-    }
-
-    private static void ConfigureDesignTimeParserOptions(RazorParserOptionsBuilder builder)
-    {
-        builder.SetDesignTime(true);
     }
 
     private static void ConfigureCodeGenerationOptions(RazorCodeGenerationOptionsBuilder builder)
