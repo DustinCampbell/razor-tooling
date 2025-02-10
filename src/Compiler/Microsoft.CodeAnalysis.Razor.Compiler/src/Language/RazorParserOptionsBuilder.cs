@@ -4,8 +4,7 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Collections.Immutable;
 using Microsoft.CodeAnalysis.CSharp;
 
 namespace Microsoft.AspNetCore.Razor.Language;
@@ -13,6 +12,7 @@ namespace Microsoft.AspNetCore.Razor.Language;
 public sealed class RazorParserOptionsBuilder
 {
     private bool _designTime;
+    private ImmutableArray<DirectiveDescriptor> _directives;
 
     internal RazorParserOptionsBuilder(RazorConfiguration configuration, string fileKind)
     {
@@ -37,8 +37,6 @@ public sealed class RazorParserOptionsBuilder
 
     public bool DesignTime => _designTime;
 
-    public ICollection<DirectiveDescriptor> Directives { get; } = new List<DirectiveDescriptor>();
-
     public string FileKind { get; }
 
     public bool ParseLeadingDirectives { get; set; }
@@ -53,11 +51,16 @@ public sealed class RazorParserOptionsBuilder
 
     public RazorParserOptions Build()
     {
-        return new RazorParserOptions(Directives.ToArray(), DesignTime, ParseLeadingDirectives, UseRoslynTokenizer, LanguageVersion, FileKind ?? FileKinds.Legacy, EnableSpanEditHandlers, CSharpParseOptions);
+        return new RazorParserOptions([.. _directives.NullToEmpty()], DesignTime, ParseLeadingDirectives, UseRoslynTokenizer, LanguageVersion, FileKind ?? FileKinds.Legacy, EnableSpanEditHandlers, CSharpParseOptions);
     }
 
     public void SetDesignTime(bool designTime)
     {
         _designTime = designTime;
+    }
+
+    public void SetDirectives(ImmutableArray<DirectiveDescriptor> directives)
+    {
+        _directives = directives.NullToEmpty();
     }
 }

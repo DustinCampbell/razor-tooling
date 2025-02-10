@@ -461,20 +461,17 @@ public class DirectiveCompletionItemProviderTest(ITestOutputHelper testOutput) :
     private static void AssertRazorCompletionItem(DirectiveDescriptor directive, RazorCompletionItem item, bool isSnippet = false) =>
         AssertRazorCompletionItem(directive.Directive + (isSnippet ? " directive ..." : string.Empty), directive, item, isSnippet: isSnippet);
 
-    private static RazorSyntaxTree CreateSyntaxTree(string text, params DirectiveDescriptor[] directives)
+    private static RazorSyntaxTree CreateSyntaxTree(string text, params ImmutableArray<DirectiveDescriptor> directives)
     {
         return CreateSyntaxTree(text, FileKinds.Legacy, directives);
     }
 
-    private static RazorSyntaxTree CreateSyntaxTree(string text, string fileKind, params DirectiveDescriptor[] directives)
+    private static RazorSyntaxTree CreateSyntaxTree(string text, string fileKind, params ImmutableArray<DirectiveDescriptor> directives)
     {
         var sourceDocument = TestRazorSourceDocument.Create(text);
         var options = RazorParserOptions.Create(builder =>
         {
-            foreach (var directive in directives)
-            {
-                builder.Directives.Add(directive);
-            }
+            builder.SetDirectives(directives);
         }, fileKind);
         var syntaxTree = RazorSyntaxTree.Parse(sourceDocument, options);
         return syntaxTree;

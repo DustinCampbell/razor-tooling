@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Immutable;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Extensions;
 using Microsoft.AspNetCore.Razor.Language.Legacy;
@@ -333,20 +334,17 @@ public class MarkupTransitionCompletionItemProviderTest(ITestOutputHelper testOu
         return new RazorCompletionContext(absoluteIndex, owner, syntaxTree, tagHelperDocumentContext);
     }
 
-    private static RazorSyntaxTree CreateSyntaxTree(string text, params DirectiveDescriptor[] directives)
+    private static RazorSyntaxTree CreateSyntaxTree(string text, params ImmutableArray<DirectiveDescriptor> directives)
     {
         return CreateSyntaxTree(text, FileKinds.Legacy, directives);
     }
 
-    private static RazorSyntaxTree CreateSyntaxTree(string text, string fileKind, params DirectiveDescriptor[] directives)
+    private static RazorSyntaxTree CreateSyntaxTree(string text, string fileKind, params ImmutableArray<DirectiveDescriptor> directives)
     {
         var sourceDocument = TestRazorSourceDocument.Create(text);
         var options = RazorParserOptions.Create(builder =>
         {
-            foreach (var directive in directives)
-            {
-                builder.Directives.Add(directive);
-            }
+            builder.SetDirectives(directives);
         }, fileKind);
         var syntaxTree = RazorSyntaxTree.Parse(sourceDocument, options);
         return syntaxTree;

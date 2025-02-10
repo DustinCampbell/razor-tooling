@@ -32,7 +32,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
         });
         var options = RazorParserOptions.Create(builder =>
         {
-            builder.Directives.Add(directive);
+            builder.SetDirectives([directive]);
             builder.UseRoslynTokenizer = true;
         });
         var importSource = TestRazorSourceDocument.Create("@custom \"hello\"", filePath: "import.cshtml");
@@ -71,7 +71,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
         });
         var options = RazorParserOptions.Create(builder =>
         {
-            builder.Directives.Add(directive);
+            builder.SetDirectives([directive]);
             builder.UseRoslynTokenizer = true;
         });
         var importSource = TestRazorSourceDocument.Create("@custom \"hello\"", filePath: "import.cshtml");
@@ -110,7 +110,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
         });
         var options = RazorParserOptions.Create(builder =>
         {
-            builder.Directives.Add(directive);
+            builder.SetDirectives([directive]);
             builder.UseRoslynTokenizer = true;
         });
         var importSource1 = TestRazorSourceDocument.Create("@custom \"hello\"", filePath: "import1.cshtml");
@@ -146,8 +146,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
         });
         var options = RazorParserOptions.Create(builder =>
         {
-            builder.Directives.Add(codeBlockDirective);
-            builder.Directives.Add(razorBlockDirective);
+            builder.SetDirectives([codeBlockDirective, razorBlockDirective]);
             builder.UseRoslynTokenizer = true;
         });
         var importSource = TestRazorSourceDocument.Create(
@@ -181,7 +180,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
         });
         var options = RazorParserOptions.Create(builder =>
         {
-            builder.Directives.Add(directive);
+            builder.SetDirectives([directive]);
             builder.UseRoslynTokenizer = true;
         });
         var importSource = TestRazorSourceDocument.Create("@custom { }", filePath: "import.cshtml");
@@ -215,7 +214,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
         });
         var options = RazorParserOptions.Create(builder =>
         {
-            builder.Directives.Add(directive);
+            builder.SetDirectives([directive]);
             builder.UseRoslynTokenizer = true;
         });
         var importSource = TestRazorSourceDocument.Create("@custom { }", filePath: "import.cshtml");

@@ -46,10 +46,7 @@ public class SyntaxTreeGenerationBenchmark
     {
         var options = RazorParserOptions.CreateDesignTime(o =>
         {
-            foreach (var directive in Directives)
-            {
-                o.Directives.Add(directive);
-            }
+            o.SetDirectives(Directives);
         });
         var syntaxTree = RazorSyntaxTree.Parse(MSN, options);
 
@@ -64,10 +61,7 @@ public class SyntaxTreeGenerationBenchmark
     {
         var options = RazorParserOptions.Create(o =>
         {
-            foreach (var directive in Directives)
-            {
-                o.Directives.Add(directive);
-            }
+            o.SetDirectives(Directives);
         });
         var syntaxTree = RazorSyntaxTree.Parse(MSN, options);
 

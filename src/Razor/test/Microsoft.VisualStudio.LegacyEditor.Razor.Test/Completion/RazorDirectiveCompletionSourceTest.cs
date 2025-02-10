@@ -201,7 +201,7 @@ public class RazorDirectiveCompletionSourceTest(ITestOutputHelper testOutput) : 
         Assert.Empty(item.AttributeIcons);
     }
 
-    private static IVisualStudioRazorParser CreateParser(string text, params DirectiveDescriptor[] directives)
+    private static IVisualStudioRazorParser CreateParser(string text, params ImmutableArray<DirectiveDescriptor> directives)
     {
         var syntaxTree = CreateSyntaxTree(text, directives);
         var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create(text, RazorSourceDocumentProperties.Default));
@@ -215,15 +215,12 @@ public class RazorDirectiveCompletionSourceTest(ITestOutputHelper testOutput) : 
         return parserMock.Object;
     }
 
-    private static RazorSyntaxTree CreateSyntaxTree(string text, params DirectiveDescriptor[] directives)
+    private static RazorSyntaxTree CreateSyntaxTree(string text, params ImmutableArray<DirectiveDescriptor> directives)
     {
         var sourceDocument = TestRazorSourceDocument.Create(text);
         var options = RazorParserOptions.Create(builder =>
         {
-            foreach (var directive in directives)
-            {
-                builder.Directives.Add(directive);
-            }
+            builder.SetDirectives(directives);
         });
         var syntaxTree = RazorSyntaxTree.Parse(sourceDocument, options);
         return syntaxTree;
