@@ -78,8 +78,8 @@ public class RazorProjectEngineBuilderExtensionsTest
 
         // Assert
         var feature = Assert.Single(builder.Features);
-        var directiveFeature = Assert.IsAssignableFrom<IRazorDirectiveFeature>(feature);
-        var directive = Assert.Single(directiveFeature.Directives);
+        var directiveFeature = Assert.IsAssignableFrom<ConfigureDirectivesFeature>(feature);
+        var directive = Assert.Single(directiveFeature.GetDirectives());
         Assert.Same(expectedDirective, directive);
     }
 
@@ -88,7 +88,7 @@ public class RazorProjectEngineBuilderExtensionsTest
     {
         // Arrange
         var builder = new RazorProjectEngineBuilder(RazorConfiguration.Default, Mock.Of<RazorProjectFileSystem>());
-        var directiveFeature = new DefaultRazorDirectiveFeature();
+        var directiveFeature = new ConfigureDirectivesFeature();
         builder.Features.Add(directiveFeature);
         var expecteDirective = Mock.Of<DirectiveDescriptor>();
 
@@ -98,7 +98,7 @@ public class RazorProjectEngineBuilderExtensionsTest
         // Assert
         var feature = Assert.Single(builder.Features);
         Assert.Same(directiveFeature, feature);
-        var directive = Assert.Single(directiveFeature.Directives);
+        var directive = Assert.Single(directiveFeature.GetDirectives());
         Assert.Same(expecteDirective, directive);
     }
 }

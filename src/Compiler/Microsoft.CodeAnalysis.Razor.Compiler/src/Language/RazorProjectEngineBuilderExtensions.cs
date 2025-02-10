@@ -86,7 +86,7 @@ public static class RazorProjectEngineBuilderExtensions
         ArgHelper.ThrowIfNull(builder);
         ArgHelper.ThrowIfNull(extension);
 
-        var targetExtensionFeature = GetTargetExtensionFeature(builder);
+        var targetExtensionFeature = GetOrCreateFeature<IRazorTargetExtensionFeature, DefaultRazorTargetExtensionFeature>(builder);
         targetExtensionFeature.TargetExtensions.Add(extension);
 
         return builder;
@@ -103,8 +103,8 @@ public static class RazorProjectEngineBuilderExtensions
         ArgHelper.ThrowIfNull(builder);
         ArgHelper.ThrowIfNull(directive);
 
-        var directiveFeature = GetOrCreateDirectiveFeature(builder);
-        directiveFeature.Directives.Add(directive);
+        var directiveFeature = GetOrCreateFeature<ConfigureDirectivesFeature>(builder);
+        directiveFeature.AddDirective(directive);
 
         return builder;
     }
@@ -121,44 +121,36 @@ public static class RazorProjectEngineBuilderExtensions
         ArgHelper.ThrowIfNull(builder);
         ArgHelper.ThrowIfNull(directive);
 
-        var directiveFeature = GetOrCreateDirectiveFeature(builder);
+        var feature = GetOrCreateFeature<ConfigureDirectivesFeature>(builder);
 
-        foreach (var fileKind in fileKinds)
-        {
-            if (!directiveFeature.DirectivesByFileKind.TryGetValue(fileKind, out var directives))
-            {
-                directives = [];
-                directiveFeature.DirectivesByFileKind.Add(fileKind, directives);
-            }
-
-            directives.Add(directive);
-        }
+        feature.AddDirective(directive, fileKinds);
 
         return builder;
     }
 
-    private static DefaultRazorDirectiveFeature GetOrCreateDirectiveFeature(RazorProjectEngineBuilder builder)
+    private static TFeature GetOrCreateFeature<TFeature>(RazorProjectEngineBuilder builder)
+        where TFeature : IRazorFeature, new()
     {
-        var directiveFeature = builder.Features.OfType<DefaultRazorDirectiveFeature>().FirstOrDefault();
-        if (directiveFeature == null)
+        if (builder.Features.OfType<TFeature>().FirstOrDefault() is not TFeature feature)
         {
-            directiveFeature = new DefaultRazorDirectiveFeature();
-            builder.Features.Add(directiveFeature);
+            feature = new TFeature();
+            builder.Features.Add(feature);
         }
 
-        return directiveFeature;
+        return feature;
     }
 
-    private static IRazorTargetExtensionFeature GetTargetExtensionFeature(RazorProjectEngineBuilder builder)
+    private static TInterface GetOrCreateFeature<TInterface, TFeature>(RazorProjectEngineBuilder builder)
+        where TInterface : IRazorFeature
+        where TFeature : TInterface, new()
     {
-        var targetExtensionFeature = builder.Features.OfType<IRazorTargetExtensionFeature>().FirstOrDefault();
-        if (targetExtensionFeature == null)
+        if (builder.Features.OfType<TInterface>().FirstOrDefault() is not TInterface feature)
         {
-            targetExtensionFeature = new DefaultRazorTargetExtensionFeature();
-            builder.Features.Add(targetExtensionFeature);
+            feature = new TFeature();
+            builder.Features.Add(feature);
         }
 
-        return targetExtensionFeature;
+        return feature;
     }
 
     private sealed class ConfigureSupportLocalizedComponentNamesFeature(bool value) : RazorEngineFeatureBase, IConfigureRazorCodeGenerationOptionsFeature

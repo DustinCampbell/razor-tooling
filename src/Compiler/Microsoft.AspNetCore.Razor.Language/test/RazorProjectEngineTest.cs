@@ -79,7 +79,7 @@ public class RazorProjectEngineTest
             feature => Assert.IsType<DefaultDocumentClassifierPassFeature>(feature),
             feature => Assert.IsType<DefaultMetadataIdentifierFeature>(feature),
             feature => Assert.IsType<DefaultRazorCodeGenerationOptionsFeature>(feature),
-            feature => Assert.IsType<DefaultRazorDirectiveFeature>(feature),
+            feature => Assert.IsType<ConfigureDirectivesFeature>(feature),
             feature => Assert.IsType<DefaultRazorParserOptionsFeature>(feature),
             feature => Assert.IsType<DefaultRazorTargetExtensionFeature>(feature),
             feature => Assert.IsType<DefaultTagHelperOptimizationPass>(feature),
@@ -97,10 +97,10 @@ public class RazorProjectEngineTest
 
     private static void AssertDefaultDirectives(RazorProjectEngine engine)
     {
-        var feature = engine.Engine.GetFeatures<IRazorDirectiveFeature>().FirstOrDefault();
+        var feature = engine.Engine.GetFeatures<ConfigureDirectivesFeature>().FirstOrDefault();
         Assert.NotNull(feature);
         Assert.Collection(
-            feature.Directives,
+            feature.GetDirectives(),
             directive => Assert.Same(FunctionsDirective.Directive, directive),
             directive => Assert.Same(ImplementsDirective.Directive, directive),
             directive => Assert.Same(InheritsDirective.Directive, directive),
