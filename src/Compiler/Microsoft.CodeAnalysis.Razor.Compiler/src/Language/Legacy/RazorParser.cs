@@ -24,7 +24,7 @@ internal class RazorParser
         ArgHelper.ThrowIfNull(source);
 
         using var context = new ParserContext(source, Options);
-        using var codeParser = new CSharpCodeParser(Options.Directives, context);
+        using var codeParser = new CSharpCodeParser(context);
         using var markupParser = new HtmlMarkupParser(context);
 
         codeParser.HtmlParser = markupParser;

@@ -85,18 +85,12 @@ internal class CSharpCodeParser : TokenizerBackedParser<CSharpTokenizer>
     private readonly ImmutableDictionary<string, Action<SyntaxListBuilder<RazorSyntaxNode>, CSharpTransitionSyntax>> _directiveParserMap;
 
     public CSharpCodeParser(ParserContext context)
-        : this(directives: [], context)
-    {
-    }
-
-    public CSharpCodeParser(IEnumerable<DirectiveDescriptor> directives, ParserContext context)
         : base(context.ParseLeadingDirectives
             ? FirstDirectiveCSharpLanguageCharacteristics.Instance
             : context.UseRoslynTokenizer
                 ? new RoslynCSharpLanguageCharacteristics(context.CSharpParseOptions)
                 : NativeCSharpLanguageCharacteristics.Instance, context)
     {
-        ArgHelper.ThrowIfNull(directives);
         ArgHelper.ThrowIfNull(context);
 
         var keywordsBuilder = ImmutableHashSet<string>.Empty.ToBuilder();
@@ -106,7 +100,7 @@ internal class CSharpCodeParser : TokenizerBackedParser<CSharpTokenizer>
 
         SetupKeywordParsers();
         SetupExpressionParsers();
-        SetupDirectiveParsers(directives);
+        SetupDirectiveParsers(context.Directives);
 
         Keywords = keywordsBuilder.ToImmutable();
         CurrentKeywords = currentKeywordsBuilder.ToImmutable();

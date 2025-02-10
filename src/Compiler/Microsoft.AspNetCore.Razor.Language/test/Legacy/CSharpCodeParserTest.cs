@@ -229,6 +229,6 @@ public class CSharpCodeParserTest
         using var context = new ParserContext(source, options);
 
         // Act & Assert (Does not throw)
-        _ = new CSharpCodeParser(directives, context);
+        _ = new CSharpCodeParser(context);
     }
 }

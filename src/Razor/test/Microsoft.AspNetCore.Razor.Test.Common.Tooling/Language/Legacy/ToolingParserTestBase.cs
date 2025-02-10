@@ -193,14 +193,12 @@ public abstract class ToolingParserTestBase : ToolingTestBase, IParserTest
         RazorParserFeatureFlags featureFlags = null,
         string fileKind = null)
     {
-        directives = directives.NullToEmpty();
-
         var source = TestRazorSourceDocument.Create(document, filePath: null, relativePath: null, normalizeNewLines: true);
 
         var options = CreateParserOptions(version, directives, designTime, EnableSpanEditHandlers, featureFlags, fileKind);
 
         using var context = new ParserContext(source, options);
-        using var codeParser = new CSharpCodeParser(directives, context);
+        using var codeParser = new CSharpCodeParser(context);
         using var markupParser = new HtmlMarkupParser(context);
 
         codeParser.HtmlParser = markupParser;

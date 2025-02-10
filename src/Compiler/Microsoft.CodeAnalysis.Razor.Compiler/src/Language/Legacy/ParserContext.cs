@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Razor.PooledObjects;
 using Microsoft.CodeAnalysis.CSharp;
@@ -58,6 +59,8 @@ internal sealed partial class ParserContext : IDisposable
     public RazorParserFeatureFlags FeatureFlags => _options.FeatureFlags;
 
     public HashSet<string> SeenDirectives => _seenDirectivesSet;
+
+    public ImmutableArray<DirectiveDescriptor> Directives => _options.Directives;
 
     public bool DesignTimeMode => _options.DesignTime;
 

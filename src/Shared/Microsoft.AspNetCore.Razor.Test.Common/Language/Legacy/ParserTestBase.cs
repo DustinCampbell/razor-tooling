@@ -210,14 +210,12 @@ public abstract class ParserTestBase : IParserTest
         string fileKind = null,
         CSharpParseOptions csharpParseOptions = null)
     {
-        directives = directives.NullToEmpty();
-
         var source = TestRazorSourceDocument.Create(document, filePath: null, relativePath: null, normalizeNewLines: true);
 
         var options = CreateParserOptions(version, directives, designTime, _validateSpanEditHandlers, _useLegacyTokenizer, featureFlags, fileKind, csharpParseOptions);
 
         using var context = new ParserContext(source, options);
-        using var codeParser = new CSharpCodeParser(directives, context);
+        using var codeParser = new CSharpCodeParser(context);
         using var markupParser = new HtmlMarkupParser(context);
 
         codeParser.HtmlParser = markupParser;
