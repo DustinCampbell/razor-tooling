@@ -168,9 +168,8 @@ public class RazorProjectEngine
             configureParser?.Invoke(builder);
         });
 
-        var codeGenerationOptions = GetRequiredFeature<IRazorCodeGenerationOptionsFactoryProjectFeature>().Create(builder =>
+        var codeGenerationOptions = GetCodeGenerationOptions(builder =>
         {
-            ConfigureCodeGenerationOptions(builder);
             configureCodeGeneration?.Invoke(builder);
         });
 
@@ -215,9 +214,12 @@ public class RazorProjectEngine
             configureParser?.Invoke(builder);
         });
 
-        var codeGenerationOptions = GetRequiredFeature<IRazorCodeGenerationOptionsFactoryProjectFeature>().Create(builder =>
+        var codeGenerationOptions = GetCodeGenerationOptions(builder =>
         {
-            ConfigureDesignTimeCodeGenerationOptions(builder);
+            builder.SetDesignTime(true);
+            builder.SuppressChecksum = true;
+            builder.SuppressMetadataAttributes = true;
+
             configureCodeGeneration?.Invoke(builder);
         });
 
@@ -244,25 +246,26 @@ public class RazorProjectEngine
         return builder.Build();
     }
 
+    private RazorCodeGenerationOptions GetCodeGenerationOptions(Action<RazorCodeGenerationOptionsBuilder> configure)
+    {
+        var features = Engine.GetFeatures<IConfigureRazorCodeGenerationOptionsFeature>();
+        var builder = new RazorCodeGenerationOptionsBuilder(Configuration);
+
+        configure.Invoke(builder);
+
+        foreach (var feature in features)
+        {
+            feature.Configure(builder);
+        }
+
+        return builder.Build();
+    }
+
     private void ProcessCore(RazorCodeDocument codeDocument, CancellationToken cancellationToken)
     {
         ArgHelper.ThrowIfNull(codeDocument);
 
         Engine.Process(codeDocument, cancellationToken);
-    }
-
-    private TFeature GetRequiredFeature<TFeature>()
-        where TFeature : class, IRazorProjectEngineFeature
-    {
-        if (GetFeatures<TFeature>() is [var feature, ..])
-        {
-            return feature;
-        }
-
-        throw new InvalidOperationException(
-            Resources.FormatRazorProjectEngineMissingFeatureDependency(
-                typeof(RazorProjectEngine).FullName,
-                typeof(TFeature).FullName));
     }
 
     internal static RazorProjectEngine CreateEmpty(Action<RazorProjectEngineBuilder>? configure = null)
@@ -340,9 +343,6 @@ public class RazorProjectEngine
         // General extensibility
         features.Add(new ConfigureDirectivesFeature());
         features.Add(new DefaultMetadataIdentifierFeature());
-
-        // Options features
-        features.Add(new DefaultRazorCodeGenerationOptionsFactoryProjectFeature());
 
         // Legacy options features
         //
@@ -530,16 +530,5 @@ public class RazorProjectEngine
         }
 
         return imports.DrainToImmutable();
-    }
-
-    private static void ConfigureCodeGenerationOptions(RazorCodeGenerationOptionsBuilder builder)
-    {
-    }
-
-    private static void ConfigureDesignTimeCodeGenerationOptions(RazorCodeGenerationOptionsBuilder builder)
-    {
-        builder.SetDesignTime(true);
-        builder.SuppressChecksum = true;
-        builder.SuppressMetadataAttributes = true;
     }
 }
