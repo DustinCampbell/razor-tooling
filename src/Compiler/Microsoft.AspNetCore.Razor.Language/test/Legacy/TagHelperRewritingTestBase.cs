@@ -1,8 +1,6 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using Xunit;
@@ -36,8 +34,8 @@ public class TagHelperRewritingTestBase() : ParserTestBase(layer: TestProject.La
     internal void EvaluateData(
         ImmutableArray<TagHelperDescriptor> descriptors,
         string documentContent,
-        string tagHelperPrefix = null,
-        RazorParserFeatureFlags featureFlags = null)
+        string? tagHelperPrefix = null,
+        RazorParserFeatureFlags? featureFlags = null)
     {
         var syntaxTree = ParseDocument(documentContent, featureFlags: featureFlags);
 

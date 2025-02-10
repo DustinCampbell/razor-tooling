@@ -4,7 +4,7 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
+using System.Collections.Immutable;
 using Microsoft.CodeAnalysis.CSharp;
 
 namespace Microsoft.AspNetCore.Razor.Language;
@@ -14,7 +14,7 @@ public sealed class RazorParserOptions
     public static RazorParserOptions CreateDefault()
     {
         return new RazorParserOptions(
-            Array.Empty<DirectiveDescriptor>(),
+            directives: [],
             designTime: false,
             parseLeadingDirectives: false,
             useRoslynTokenizer: false,
@@ -62,19 +62,24 @@ public sealed class RazorParserOptions
         return options;
     }
 
-    internal RazorParserOptions(DirectiveDescriptor[] directives, bool designTime, bool parseLeadingDirectives, bool useRoslynTokenizer, RazorLanguageVersion version, string fileKind, bool enableSpanEditHandlers, CSharpParseOptions csharpParseOptions)
+    internal RazorParserOptions(
+        ImmutableArray<DirectiveDescriptor> directives,
+        bool designTime,
+        bool parseLeadingDirectives,
+        bool useRoslynTokenizer,
+        RazorLanguageVersion version,
+        string fileKind,
+        bool enableSpanEditHandlers,
+        CSharpParseOptions csharpParseOptions)
     {
-        if (directives == null)
-        {
-            throw new ArgumentNullException(nameof(directives));
-        }
-
         if (parseLeadingDirectives && useRoslynTokenizer)
         {
             throw new ArgumentException($"Cannot set {nameof(parseLeadingDirectives)} and {nameof(useRoslynTokenizer)} to true simultaneously.");
         }
 
-        Directives = directives;
+        fileKind ??= FileKinds.Legacy;
+
+        Directives = directives.NullToEmpty();
         DesignTime = designTime;
         ParseLeadingDirectives = parseLeadingDirectives;
         UseRoslynTokenizer = useRoslynTokenizer;
@@ -87,7 +92,7 @@ public sealed class RazorParserOptions
 
     public bool DesignTime { get; }
 
-    public IReadOnlyCollection<DirectiveDescriptor> Directives { get; }
+    public ImmutableArray<DirectiveDescriptor> Directives { get; }
 
     /// <summary>
     /// Gets a value which indicates whether the parser will parse only the leading directives. If <c>true</c>

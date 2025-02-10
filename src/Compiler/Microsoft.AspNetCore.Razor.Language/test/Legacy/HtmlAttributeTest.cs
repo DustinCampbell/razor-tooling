@@ -1,10 +1,6 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
-using System;
-using System.Linq;
 using Roslyn.Test.Utilities;
 using Xunit;
 
@@ -273,7 +269,7 @@ public class HtmlAttributeTest() : ParserTestBase(layer: TestProject.Layer.Compi
     [Fact]
     public void ConditionalAttributesAreEnabledForDataAttributesWithExperimentalFlag()
     {
-        ParseDocumentTest(RazorLanguageVersion.Experimental, "@{<span data-foo='@foo'></span>}", directives: null, designTime: false);
+        ParseDocumentTest(RazorLanguageVersion.Experimental, "@{<span data-foo='@foo'></span>}", directives: default, designTime: false);
     }
 
     [Fact]

@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -174,14 +175,25 @@ public abstract class ToolingParserTestBase : ToolingTestBase, IParserTest
         AssertSyntaxTreeNodeMatchesBaseline(syntaxTree);
     }
 
-    internal RazorSyntaxTree ParseDocument(string document, bool designTime = false, IEnumerable<DirectiveDescriptor> directives = null, RazorParserFeatureFlags featureFlags = null, string fileKind = null)
+    internal RazorSyntaxTree ParseDocument(
+        string document,
+        bool designTime = false,
+        ImmutableArray<DirectiveDescriptor> directives = default,
+        RazorParserFeatureFlags featureFlags = null,
+        string fileKind = null)
     {
         return ParseDocument(RazorLanguageVersion.Latest, document, directives, designTime, featureFlags, fileKind);
     }
 
-    internal virtual RazorSyntaxTree ParseDocument(RazorLanguageVersion version, string document, IEnumerable<DirectiveDescriptor> directives, bool designTime = false, RazorParserFeatureFlags featureFlags = null, string fileKind = null)
+    internal virtual RazorSyntaxTree ParseDocument(
+        RazorLanguageVersion version,
+        string document,
+        ImmutableArray<DirectiveDescriptor> directives,
+        bool designTime = false,
+        RazorParserFeatureFlags featureFlags = null,
+        string fileKind = null)
     {
-        directives ??= [];
+        directives = directives.NullToEmpty();
 
         var source = TestRazorSourceDocument.Create(document, filePath: null, relativePath: null, normalizeNewLines: true);
 
@@ -211,39 +223,44 @@ public abstract class ToolingParserTestBase : ToolingTestBase, IParserTest
 
     internal virtual void ParseDocumentTest(string document)
     {
-        ParseDocumentTest(document, null, false);
+        ParseDocumentTest(document, directives: default, designTime: false);
     }
 
     internal virtual void ParseDocumentTest(string document, string fileKind)
     {
-        ParseDocumentTest(document, null, false, fileKind);
+        ParseDocumentTest(document, directives: default, designTime: false, fileKind);
     }
 
-    internal virtual void ParseDocumentTest(string document, IEnumerable<DirectiveDescriptor> directives)
+    internal virtual void ParseDocumentTest(string document, ImmutableArray<DirectiveDescriptor> directives)
     {
-        ParseDocumentTest(document, directives, false);
+        ParseDocumentTest(document, directives, designTime: false);
     }
 
     internal virtual void ParseDocumentTest(string document, bool designTime)
     {
-        ParseDocumentTest(document, null, designTime);
+        ParseDocumentTest(document, directives: default, designTime);
     }
 
-    internal virtual void ParseDocumentTest(string document, IEnumerable<DirectiveDescriptor> directives, bool designTime, string fileKind = null)
+    internal virtual void ParseDocumentTest(string document, ImmutableArray<DirectiveDescriptor> directives, bool designTime, string fileKind = null)
     {
         ParseDocumentTest(RazorLanguageVersion.Latest, document, directives, designTime, fileKind);
     }
 
-    internal virtual void ParseDocumentTest(RazorLanguageVersion version, string document, IEnumerable<DirectiveDescriptor> directives, bool designTime, string fileKind = null)
+    internal virtual void ParseDocumentTest(
+        RazorLanguageVersion version,
+        string document,
+        ImmutableArray<DirectiveDescriptor> directives,
+        bool designTime,
+        string fileKind = null)
     {
         var result = ParseDocument(version, document, directives, designTime, fileKind: fileKind);
 
         BaselineTest(result);
     }
 
-    internal static RazorParserOptions CreateParserOptions(
+    private static RazorParserOptions CreateParserOptions(
         RazorLanguageVersion version,
-        IEnumerable<DirectiveDescriptor> directives,
+        ImmutableArray<DirectiveDescriptor> directives,
         bool designTime,
         bool enableSpanEditHandlers,
         RazorParserFeatureFlags featureFlags = null,
@@ -251,7 +268,7 @@ public abstract class ToolingParserTestBase : ToolingTestBase, IParserTest
     {
         fileKind ??= FileKinds.Legacy;
         return new RazorParserOptions(
-            directives.ToArray(),
+            directives,
             designTime,
             parseLeadingDirectives: false,
             useRoslynTokenizer: true,
@@ -259,8 +276,8 @@ public abstract class ToolingParserTestBase : ToolingTestBase, IParserTest
             fileKind: fileKind,
             enableSpanEditHandlers,
             csharpParseOptions: CSharpParseOptions.Default)
-            {
-                FeatureFlags = featureFlags ?? RazorParserFeatureFlags.Create(version, fileKind)
-            };
+        {
+            FeatureFlags = featureFlags ?? RazorParserFeatureFlags.Create(version, fileKind)
+        };
     }
 }

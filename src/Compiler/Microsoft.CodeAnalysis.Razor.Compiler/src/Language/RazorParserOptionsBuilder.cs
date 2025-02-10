@@ -50,9 +50,7 @@ public sealed class RazorParserOptionsBuilder
     internal bool EnableSpanEditHandlers { get; set; }
 
     public RazorParserOptions Build()
-    {
-        return new RazorParserOptions([.. _directives.NullToEmpty()], DesignTime, ParseLeadingDirectives, UseRoslynTokenizer, LanguageVersion, FileKind ?? FileKinds.Legacy, EnableSpanEditHandlers, CSharpParseOptions);
-    }
+        => new(_directives, DesignTime, ParseLeadingDirectives, UseRoslynTokenizer, LanguageVersion, FileKind, EnableSpanEditHandlers, CSharpParseOptions);
 
     public void SetDesignTime(bool designTime)
     {
