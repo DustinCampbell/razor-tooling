@@ -14,12 +14,13 @@ internal static class DocumentWriter
         RazorCodeDocument codeDocument,
         DocumentIntermediateNode documentNode,
         CodeTarget codeTarget,
-        RazorCodeGenerationOptions options)
+        RazorCodeGenerationOptions options,
+        ICodeRenderingContextFactoryFeature contextFactory)
     {
         ArgHelper.ThrowIfNull(codeDocument);
         ArgHelper.ThrowIfNull(documentNode);
 
-        using var context = new CodeRenderingContext(
+        using var context = contextFactory.Create(
             codeTarget.CreateNodeWriter(),
             codeDocument.Source,
             documentNode,

@@ -27,8 +27,12 @@ internal class DefaultRazorCSharpLoweringPhase : RazorEnginePhaseBase, IRazorCSh
             throw new InvalidOperationException(message);
         }
 
-        var writer = new DefaultDocumentWriter(documentNode.Target, documentNode.Options);
-        var csharpDocument = writer.WriteDocument(codeDocument, documentNode);
+        if (!Engine.TryGetFeature<ICodeRenderingContextFactoryFeature>(out var contextFactory))
+        {
+            contextFactory = new DefaultCodeRenderingContextFactoryFeature();
+        }
+
+        var csharpDocument = DocumentWriter.WriteDocument(codeDocument, documentNode, documentNode.Target, documentNode.Options);
         codeDocument.SetCSharpDocument(csharpDocument);
     }
 }
