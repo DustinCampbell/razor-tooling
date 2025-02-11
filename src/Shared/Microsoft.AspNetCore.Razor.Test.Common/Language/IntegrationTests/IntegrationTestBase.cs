@@ -794,9 +794,9 @@ public abstract class IntegrationTestBase
     {
         public int Order { get; }
 
-        public void Configure(RazorCodeGenerationOptionsBuilder options)
+        public void Configure(RazorCodeGenerationOptions.Builder builder)
         {
-            options.NewLine = lineEnding;
+            builder.NewLine = lineEnding;
         }
     }
 

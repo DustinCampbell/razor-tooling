@@ -49,14 +49,14 @@ internal sealed class LspProjectEngineFactoryProvider(RazorLSPOptionsMonitor opt
         {
             public int Order { get; set; }
 
-            public void Configure(RazorCodeGenerationOptionsBuilder options)
+            public void Configure(RazorCodeGenerationOptions.Builder builder)
             {
                 // We don't need to explicitly subscribe to options changing because this method will be run on every parse.
                 var currentOptions = optionsMonitor.CurrentValue;
 
-                options.IndentSize = currentOptions.TabSize;
-                options.IndentWithTabs = !currentOptions.InsertSpaces;
-                options.RemapLinePragmaPathsOnWindows = true;
+                builder.IndentSize = currentOptions.TabSize;
+                builder.IndentWithTabs = !currentOptions.InsertSpaces;
+                builder.RemapLinePragmaPathsOnWindows = true;
             }
         }
     }

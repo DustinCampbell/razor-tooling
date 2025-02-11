@@ -146,7 +146,7 @@ public class RazorProjectEngine
     private RazorCodeDocument CreateCodeDocumentCore(
         RazorProjectItem projectItem,
         Action<RazorParserOptions.Builder>? configureParser = null,
-        Action<RazorCodeGenerationOptionsBuilder>? configureCodeGeneration = null)
+        Action<RazorCodeGenerationOptions.Builder>? configureCodeGeneration = null)
     {
         var source = projectItem.GetSource();
         var importSources = GetImportSources(projectItem, designTime: false);
@@ -162,7 +162,7 @@ public class RazorProjectEngine
         IReadOnlyList<TagHelperDescriptor>? tagHelpers,
         string? cssScope,
         Action<RazorParserOptions.Builder>? configureParser,
-        Action<RazorCodeGenerationOptionsBuilder>? configureCodeGeneration)
+        Action<RazorCodeGenerationOptions.Builder>? configureCodeGeneration)
     {
         var parserOptions = GetParserOptions(fileKind, builder =>
         {
@@ -190,7 +190,7 @@ public class RazorProjectEngine
     private RazorCodeDocument CreateCodeDocumentDesignTimeCore(
         RazorProjectItem projectItem,
         Action<RazorParserOptions.Builder>? configureParser = null,
-        Action<RazorCodeGenerationOptionsBuilder>? configureCodeGeneration = null)
+        Action<RazorCodeGenerationOptions.Builder>? configureCodeGeneration = null)
     {
         var source = projectItem.GetSource();
         var importSources = GetImportSources(projectItem, designTime: true);
@@ -204,7 +204,7 @@ public class RazorProjectEngine
         ImmutableArray<RazorSourceDocument> importSources,
         IReadOnlyList<TagHelperDescriptor>? tagHelpers,
         Action<RazorParserOptions.Builder>? configureParser,
-        Action<RazorCodeGenerationOptionsBuilder>? configureCodeGeneration)
+        Action<RazorCodeGenerationOptions.Builder>? configureCodeGeneration)
     {
         ArgHelper.ThrowIfNull(sourceDocument);
 
@@ -247,10 +247,10 @@ public class RazorProjectEngine
         return builder.ToOptions();
     }
 
-    private RazorCodeGenerationOptions GetCodeGenerationOptions(Action<RazorCodeGenerationOptionsBuilder> configure)
+    private RazorCodeGenerationOptions GetCodeGenerationOptions(Action<RazorCodeGenerationOptions.Builder> configure)
     {
         var features = Engine.GetFeatures<IConfigureRazorCodeGenerationOptionsFeature>();
-        var builder = new RazorCodeGenerationOptionsBuilder(Configuration.LanguageVersion)
+        var builder = new RazorCodeGenerationOptions.Builder(Configuration.LanguageVersion)
         {
             SuppressAddComponentParameter = Configuration.SuppressAddComponentParameter
         };

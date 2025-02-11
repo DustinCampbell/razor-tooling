@@ -42,8 +42,8 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
 
         var callback = new Mock<IConfigureRazorCodeGenerationOptionsFeature>();
         callback
-            .Setup(c => c.Configure(It.IsAny<RazorCodeGenerationOptionsBuilder>()))
-            .Callback<RazorCodeGenerationOptionsBuilder>(o =>
+            .Setup(c => c.Configure(It.IsAny<RazorCodeGenerationOptions.Builder>()))
+            .Callback<RazorCodeGenerationOptions.Builder>(o =>
             {
                 o.IndentSize = 17;
                 o.IndentWithTabs = true;
@@ -526,9 +526,9 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
 
         public int Order { get; }
 
-        public void Configure(RazorCodeGenerationOptionsBuilder options)
+        public void Configure(RazorCodeGenerationOptions.Builder builder)
         {
-            options.DesignTime = _designTime;
+            builder.DesignTime = _designTime;
         }
     }
 }

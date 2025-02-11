@@ -53,22 +53,17 @@ public static class RazorProjectEngineBuilderExtensions
 
         public int Order { get; set; }
 
-        public void Configure(RazorCodeGenerationOptionsBuilder options)
+        public void Configure(RazorCodeGenerationOptions.Builder builder)
         {
-            if (options == null)
-            {
-                throw new ArgumentNullException(nameof(options));
-            }
-
-            if (options.LanguageVersion is { Major: < 3 })
+            if (builder.LanguageVersion is { Major: < 3 })
             {
                 // Prior to 3.0 there were no C# version specific controlled features. Suppress nullability enforcement.
-                options.SuppressNullabilityEnforcement = true;
+                builder.SuppressNullabilityEnforcement = true;
             }
             else if (CSharpLanguageVersion < LanguageVersion.CSharp8)
             {
                 // Having nullable flags < C# 8.0 would cause compile errors.
-                options.SuppressNullabilityEnforcement = true;
+                builder.SuppressNullabilityEnforcement = true;
             }
             else
             {
@@ -81,18 +76,18 @@ public static class RazorProjectEngineBuilderExtensions
                 // Once the project finishes configuration the C# language version will be updated to reflect the effective
                 // language version for the project by our workspace change detectors. That mechanism extracts the correlated
                 // Roslyn project and acquires the effective C# version at that point.
-                options.SuppressNullabilityEnforcement = false;
+                builder.SuppressNullabilityEnforcement = false;
             }
 
-            if (options.LanguageVersion is { Major: >= 5 })
+            if (builder.LanguageVersion is { Major: >= 5 })
             {
                 // This is a useful optimization but isn't supported by older framework versions
-                options.OmitMinimizedComponentAttributeValues = true;
+                builder.OmitMinimizedComponentAttributeValues = true;
             }
 
             if (CSharpLanguageVersion >= LanguageVersion.CSharp10)
             {
-                options.UseEnhancedLinePragma = true;
+                builder.UseEnhancedLinePragma = true;
             }
         }
     }

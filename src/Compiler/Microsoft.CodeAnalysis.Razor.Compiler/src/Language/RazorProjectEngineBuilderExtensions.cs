@@ -174,9 +174,9 @@ public static class RazorProjectEngineBuilderExtensions
     {
         public int Order { get; set; }
 
-        public void Configure(RazorCodeGenerationOptionsBuilder options)
+        public void Configure(RazorCodeGenerationOptions.Builder builder)
         {
-            options.SupportLocalizedComponentNames = value;
+            builder.SupportLocalizedComponentNames = value;
         }
     }
 
@@ -184,9 +184,9 @@ public static class RazorProjectEngineBuilderExtensions
     {
         public int Order { get; set; }
 
-        public void Configure(RazorCodeGenerationOptionsBuilder options)
+        public void Configure(RazorCodeGenerationOptions.Builder builder)
         {
-            options.RootNamespace = rootNamespace;
+            builder.RootNamespace = rootNamespace;
         }
     }
 }

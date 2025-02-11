@@ -406,9 +406,9 @@ public class RazorToolingIntegrationTestBase : ToolingTestBase
     {
         public int Order => 0;
 
-        public void Configure(RazorCodeGenerationOptionsBuilder options)
+        public void Configure(RazorCodeGenerationOptions.Builder builder)
         {
-            options.SuppressChecksum = true;
+            builder.SuppressChecksum = true;
         }
     }
 
@@ -416,9 +416,9 @@ public class RazorToolingIntegrationTestBase : ToolingTestBase
     {
         public int Order { get; }
 
-        public void Configure(RazorCodeGenerationOptionsBuilder options)
+        public void Configure(RazorCodeGenerationOptions.Builder builder)
         {
-            options.NewLine = newLine;
+            builder.NewLine = newLine;
         }
     }
 }

@@ -592,11 +592,11 @@ internal class VisualStudioRazorParser : IVisualStudioRazorParser, IDisposable
 
         public int Order { get; set; }
 
-        public void Configure(RazorCodeGenerationOptionsBuilder options)
+        public void Configure(RazorCodeGenerationOptions.Builder builder)
         {
-            options.IndentSize = _settings.IndentSize;
-            options.IndentWithTabs = _settings.IndentWithTabs;
-            options.RemapLinePragmaPathsOnWindows = true;
+            builder.IndentSize = _settings.IndentSize;
+            builder.IndentWithTabs = _settings.IndentWithTabs;
+            builder.RemapLinePragmaPathsOnWindows = true;
         }
     }
 

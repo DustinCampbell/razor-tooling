@@ -6,17 +6,10 @@ using Microsoft.AspNetCore.Razor.Language;
 
 namespace Microsoft.NET.Sdk.Razor.SourceGenerators
 {
-    internal class ConfigureRazorCodeGenerationOptions : RazorEngineFeatureBase, IConfigureRazorCodeGenerationOptionsFeature
+    internal class ConfigureRazorCodeGenerationOptions(Action<RazorCodeGenerationOptions.Builder> action) : RazorEngineFeatureBase, IConfigureRazorCodeGenerationOptionsFeature
     {
-        private readonly Action<RazorCodeGenerationOptionsBuilder> _action;
-
-        public ConfigureRazorCodeGenerationOptions(Action<RazorCodeGenerationOptionsBuilder> action)
-        {
-            _action = action;
-        }
-
         public int Order { get; set; }
 
-        public void Configure(RazorCodeGenerationOptionsBuilder options) => _action(options);
+        public void Configure(RazorCodeGenerationOptions.Builder builder) => action(builder);
     }
 }

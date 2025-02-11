@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-public sealed class RazorCodeGenerationOptions
+public sealed partial record class RazorCodeGenerationOptions
 {
     public static RazorCodeGenerationOptions Default { get; } = new RazorCodeGenerationOptions(
         indentSize: 4,
@@ -30,7 +30,7 @@ public sealed class RazorCodeGenerationOptions
     /// </summary>
     public string? RootNamespace { get; }
 
-    public RazorCodeGenerationOptions(
+    private RazorCodeGenerationOptions(
         int indentSize,
         string newLine,
         string? rootNamespace,
@@ -243,22 +243,22 @@ public sealed class RazorCodeGenerationOptions
         return new(IndentSize, NewLine, RootNamespace, flags);
     }
 
-    public static RazorCodeGenerationOptions Create(Action<RazorCodeGenerationOptionsBuilder> configure)
+    public static RazorCodeGenerationOptions Create(Action<Builder> configure)
     {
         ArgHelper.ThrowIfNull(configure);
 
-        var builder = new RazorCodeGenerationOptionsBuilder();
+        var builder = new Builder(RazorLanguageVersion.Latest);
         configure(builder);
         var options = builder.ToOptions();
 
         return options;
     }
 
-    public static RazorCodeGenerationOptions CreateDesignTime(Action<RazorCodeGenerationOptionsBuilder> configure)
+    public static RazorCodeGenerationOptions CreateDesignTime(Action<Builder> configure)
     {
         ArgHelper.ThrowIfNull(configure);
 
-        var builder = new RazorCodeGenerationOptionsBuilder()
+        var builder = new Builder(RazorLanguageVersion.Latest)
         {
             DesignTime = true,
             SuppressMetadataAttributes = true

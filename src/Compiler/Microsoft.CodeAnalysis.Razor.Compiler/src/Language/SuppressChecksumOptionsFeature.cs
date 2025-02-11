@@ -1,23 +1,14 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-
-using System;
-
 namespace Microsoft.AspNetCore.Razor.Language;
 
 internal class SuppressChecksumOptionsFeature : RazorEngineFeatureBase, IConfigureRazorCodeGenerationOptionsFeature
 {
     public int Order { get; set; }
 
-    public void Configure(RazorCodeGenerationOptionsBuilder options)
+    public void Configure(RazorCodeGenerationOptions.Builder builder)
     {
-        if (options == null)
-        {
-            throw new ArgumentNullException(nameof(options));
-        }
-
-        options.SuppressChecksum = true;
+        builder.SuppressChecksum = true;
     }
 }

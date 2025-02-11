@@ -496,9 +496,9 @@ public class RazorIntegrationTestBase
     {
         public int Order => 0;
 
-        public void Configure(RazorCodeGenerationOptionsBuilder options)
+        public void Configure(RazorCodeGenerationOptions.Builder builder)
         {
-            options.SuppressChecksum = true;
+            builder.SuppressChecksum = true;
         }
     }
 
@@ -506,9 +506,9 @@ public class RazorIntegrationTestBase
     {
         public int Order => 0;
 
-        public void Configure(RazorCodeGenerationOptionsBuilder options)
+        public void Configure(RazorCodeGenerationOptions.Builder builder)
         {
-            options.SupportLocalizedComponentNames = true;
+            builder.SupportLocalizedComponentNames = true;
         }
     }
 
@@ -516,9 +516,9 @@ public class RazorIntegrationTestBase
     {
         public int Order { get; }
 
-        public void Configure(RazorCodeGenerationOptionsBuilder options)
+        public void Configure(RazorCodeGenerationOptions.Builder builder)
         {
-            options.NewLine = newLine;
+            builder.NewLine = newLine;
         }
     }
 }

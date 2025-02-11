@@ -27,7 +27,7 @@ internal class DefaultRazorCodeGenerationOptionsFeature : RazorEngineFeatureBase
         return _designTime ? RazorCodeGenerationOptions.CreateDesignTime(ConfigureOptions) : RazorCodeGenerationOptions.Create(ConfigureOptions);
     }
 
-    private void ConfigureOptions(RazorCodeGenerationOptionsBuilder builder)
+    private void ConfigureOptions(RazorCodeGenerationOptions.Builder builder)
     {
         foreach (var options in _configureOptions)
         {
