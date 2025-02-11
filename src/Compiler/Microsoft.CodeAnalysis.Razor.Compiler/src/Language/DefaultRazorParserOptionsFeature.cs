@@ -6,10 +6,10 @@ using System.Collections.Immutable;
 namespace Microsoft.AspNetCore.Razor.Language;
 
 #pragma warning disable CS0618 // Type or member is obsolete
-internal class DefaultRazorParserOptionsFeature(RazorLanguageVersion version) : RazorEngineFeatureBase, IRazorParserOptionsFeature
+internal class DefaultRazorParserOptionsFeature(RazorLanguageVersion languageVersion) : RazorEngineFeatureBase, IRazorParserOptionsFeature
 #pragma warning restore CS0618 // Type or member is obsolete
 {
-    private readonly RazorLanguageVersion _version = version;
+    private readonly RazorLanguageVersion _languageVersion = languageVersion;
     private ImmutableArray<IConfigureParserOptionsFeature> _features;
 
     protected override void OnInitialized()
@@ -19,7 +19,7 @@ internal class DefaultRazorParserOptionsFeature(RazorLanguageVersion version) : 
 
     public RazorParserOptions GetOptions()
     {
-        var builder = new RazorParserOptions.Builder(_version, FileKinds.Legacy);
+        var builder = new RazorParserOptions.Builder(_languageVersion, FileKinds.Legacy);
 
         foreach (var feature in _features)
         {

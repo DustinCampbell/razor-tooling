@@ -242,30 +242,4 @@ public sealed partial record class RazorCodeGenerationOptions
 
         return new(IndentSize, NewLine, RootNamespace, flags);
     }
-
-    public static RazorCodeGenerationOptions Create(Action<Builder> configure)
-    {
-        ArgHelper.ThrowIfNull(configure);
-
-        var builder = new Builder(RazorLanguageVersion.Latest);
-        configure(builder);
-        var options = builder.ToOptions();
-
-        return options;
-    }
-
-    public static RazorCodeGenerationOptions CreateDesignTime(Action<Builder> configure)
-    {
-        ArgHelper.ThrowIfNull(configure);
-
-        var builder = new Builder(RazorLanguageVersion.Latest)
-        {
-            DesignTime = true,
-            SuppressMetadataAttributes = true
-        };
-
-        configure(builder);
-
-        return builder.ToOptions();
-    }
 }

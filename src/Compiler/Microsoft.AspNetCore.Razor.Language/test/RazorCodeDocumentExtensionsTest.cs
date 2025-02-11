@@ -292,10 +292,7 @@ public class RazorCodeDocumentExtensionsTest
         // Arrange
         var sourceDocument = TestRazorSourceDocument.Create(filePath: "C:\\Hello\\Components\\Test.cshtml", relativePath: "\\Components\\Test.cshtml");
         var codeDocument = TestRazorCodeDocument.Create(sourceDocument, default);
-        codeDocument.SetCodeGenerationOptions(RazorCodeGenerationOptions.Create(c =>
-        {
-            c.RootNamespace = "Hello";
-        }));
+        codeDocument.SetCodeGenerationOptions(RazorCodeGenerationOptions.Default.WithRootNamespace("Hello"));
 
         // Act
         codeDocument.TryComputeNamespace(fallbackToRootNamespace: true, out var @namespace);
@@ -312,10 +309,7 @@ public class RazorCodeDocumentExtensionsTest
         var codeDocument = TestRazorCodeDocument.Create(sourceDocument, default);
         var documentNode = new DocumentIntermediateNode()
         {
-            Options = RazorCodeGenerationOptions.Create(c =>
-            {
-                c.RootNamespace = "Hello";
-            })
+            Options = RazorCodeGenerationOptions.Default.WithRootNamespace("Hello")
         };
         codeDocument.SetDocumentIntermediateNode(documentNode);
 
@@ -334,10 +328,7 @@ public class RazorCodeDocumentExtensionsTest
         var codeDocument = TestRazorCodeDocument.Create(sourceDocument, default);
         var documentNode = new DocumentIntermediateNode()
         {
-            Options = RazorCodeGenerationOptions.Create(c =>
-            {
-                c.RootNamespace = "Hello";
-            })
+            Options = RazorCodeGenerationOptions.Default.WithRootNamespace("Hello")
         };
         codeDocument.SetDocumentIntermediateNode(documentNode);
 
@@ -354,16 +345,10 @@ public class RazorCodeDocumentExtensionsTest
         // Arrange
         var sourceDocument = TestRazorSourceDocument.Create(filePath: "C:\\Hello\\Components\\Test.cshtml", relativePath: "\\Components\\Test.cshtml");
         var codeDocument = TestRazorCodeDocument.Create(sourceDocument, default);
-        codeDocument.SetCodeGenerationOptions(RazorCodeGenerationOptions.Create(c =>
-        {
-            c.RootNamespace = "World";
-        }));
+        codeDocument.SetCodeGenerationOptions(RazorCodeGenerationOptions.Default.WithRootNamespace("World"));
         var documentNode = new DocumentIntermediateNode()
         {
-            Options = RazorCodeGenerationOptions.Create(c =>
-            {
-                c.RootNamespace = "Hello";
-            })
+            Options = RazorCodeGenerationOptions.Default.WithRootNamespace("Hello")
         };
         codeDocument.SetDocumentIntermediateNode(documentNode);
 
@@ -382,10 +367,7 @@ public class RazorCodeDocumentExtensionsTest
         var codeDocument = TestRazorCodeDocument.Create(sourceDocument, default);
         var documentNode = new DocumentIntermediateNode()
         {
-            Options = RazorCodeGenerationOptions.Create(c =>
-            {
-                c.RootNamespace = "Hel?o.World";
-            })
+            Options = RazorCodeGenerationOptions.Default.WithRootNamespace("Hel?o.World")
         };
         codeDocument.SetDocumentIntermediateNode(documentNode);
 
@@ -410,10 +392,7 @@ public class RazorCodeDocumentExtensionsTest
 
         var documentNode = new DocumentIntermediateNode()
         {
-            Options = RazorCodeGenerationOptions.Create(c =>
-            {
-                c.RootNamespace = "Hello.World";
-            })
+            Options = RazorCodeGenerationOptions.Default.WithRootNamespace("Hello.World")
         };
         codeDocument.SetDocumentIntermediateNode(documentNode);
 
@@ -446,10 +425,7 @@ public class RazorCodeDocumentExtensionsTest
 
         var documentNode = new DocumentIntermediateNode()
         {
-            Options = RazorCodeGenerationOptions.Create(c =>
-            {
-                c.RootNamespace = "Hello.World";
-            })
+            Options = RazorCodeGenerationOptions.Default.WithRootNamespace("Hello.World")
         };
         codeDocument.SetDocumentIntermediateNode(documentNode);
 
@@ -482,10 +458,7 @@ public class RazorCodeDocumentExtensionsTest
 
         var documentNode = new DocumentIntermediateNode()
         {
-            Options = RazorCodeGenerationOptions.Create(c =>
-            {
-                c.RootNamespace = "Hello.World";
-            })
+            Options = RazorCodeGenerationOptions.Default.WithRootNamespace("Hello.World")
         };
         codeDocument.SetDocumentIntermediateNode(documentNode);
 
@@ -519,10 +492,7 @@ public class RazorCodeDocumentExtensionsTest
 
         var documentNode = new DocumentIntermediateNode()
         {
-            Options = RazorCodeGenerationOptions.Create(c =>
-            {
-                c.RootNamespace = "Hello.World";
-            })
+            Options = RazorCodeGenerationOptions.Default.WithRootNamespace("Hello.World")
         };
         codeDocument.SetDocumentIntermediateNode(documentNode);
 

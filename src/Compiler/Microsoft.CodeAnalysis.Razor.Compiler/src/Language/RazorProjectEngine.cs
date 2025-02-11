@@ -249,7 +249,7 @@ public class RazorProjectEngine
 
     private RazorCodeGenerationOptions GetCodeGenerationOptions(Action<RazorCodeGenerationOptions.Builder> configure)
     {
-        var features = Engine.GetFeatures<IConfigureRazorCodeGenerationOptionsFeature>();
+        var features = Engine.GetFeatures<IConfigureRazorCodeGenerationOptionsFeature>().OrderByAsArray(static x => x.Order);
         var builder = new RazorCodeGenerationOptions.Builder(Configuration.LanguageVersion)
         {
             SuppressAddComponentParameter = Configuration.SuppressAddComponentParameter
@@ -352,8 +352,8 @@ public class RazorProjectEngine
         // Legacy options features
         //
         // These features are obsolete as of 2.1. Our code will resolve this but not invoke them.
-        features.Add(new DefaultRazorParserOptionsFeature(version: RazorLanguageVersion.Version_2_0));
-        features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
+        features.Add(new DefaultRazorParserOptionsFeature(RazorLanguageVersion.Version_2_0));
+        features.Add(new DefaultRazorCodeGenerationOptionsFeature(RazorLanguageVersion.Version_2_0));
 
         // Syntax Tree passes
         features.Add(new DefaultDirectiveSyntaxTreePass());

@@ -16,7 +16,7 @@ public class DefaultRazorParsingPhaseTest
         var engine = RazorProjectEngine.CreateEmpty(builder =>
         {
             builder.Phases.Add(phase);
-            builder.Features.Add(new DefaultRazorParserOptionsFeature(version: RazorLanguageVersion.Latest));
+            builder.Features.Add(new DefaultRazorParserOptionsFeature(RazorLanguageVersion.Latest));
         });
 
         var codeDocument = TestRazorCodeDocument.CreateEmpty();
@@ -36,7 +36,7 @@ public class DefaultRazorParsingPhaseTest
         var engine = RazorProjectEngine.CreateEmpty((builder) =>
         {
             builder.Phases.Add(phase);
-            builder.Features.Add(new DefaultRazorParserOptionsFeature(version: RazorLanguageVersion.Latest));
+            builder.Features.Add(new DefaultRazorParserOptionsFeature(RazorLanguageVersion.Latest));
 
             builder.ConfigureParserOptions(builder =>
             {
@@ -63,7 +63,7 @@ public class DefaultRazorParsingPhaseTest
         var engine = RazorProjectEngine.CreateEmpty((builder) =>
         {
             builder.Phases.Add(phase);
-            builder.Features.Add(new DefaultRazorParserOptionsFeature(version: RazorLanguageVersion.Latest));
+            builder.Features.Add(new DefaultRazorParserOptionsFeature(languageVersion: RazorLanguageVersion.Latest));
 
             builder.ConfigureParserOptions(builder =>
             {

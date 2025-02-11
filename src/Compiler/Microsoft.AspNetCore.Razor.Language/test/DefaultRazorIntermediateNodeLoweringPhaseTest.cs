@@ -27,7 +27,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
         var engine = RazorProjectEngine.CreateEmpty(b =>
         {
             b.Phases.Add(phase);
-            b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
+            b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(RazorLanguageVersion.Latest));
             b.AddDirective(directive);
         });
 
@@ -66,7 +66,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
         var engine = RazorProjectEngine.CreateEmpty(b =>
         {
             b.Phases.Add(phase);
-            b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
+            b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(RazorLanguageVersion.Latest));
             b.AddDirective(directive);
         });
 
@@ -105,7 +105,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
         var engine = RazorProjectEngine.CreateEmpty(b =>
         {
             b.Phases.Add(phase);
-            b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
+            b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(RazorLanguageVersion.Latest));
             b.AddDirective(directive);
         });
 
@@ -140,7 +140,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
         var engine = RazorProjectEngine.CreateEmpty(b =>
         {
             b.Phases.Add(phase);
-            b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
+            b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(RazorLanguageVersion.Latest));
             b.AddDirective(codeBlockDirective);
             b.AddDirective(razorBlockDirective);
         });
@@ -175,7 +175,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
         var engine = RazorProjectEngine.CreateEmpty(b =>
         {
             b.Phases.Add(phase);
-            b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
+            b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(RazorLanguageVersion.Latest));
             b.AddDirective(directive);
         });
 
@@ -209,7 +209,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
         var engine = RazorProjectEngine.CreateEmpty(b =>
         {
             b.Phases.Add(phase);
-            b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
+            b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(RazorLanguageVersion.Latest));
             b.AddDirective(directive);
         });
 
@@ -243,7 +243,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
         var engine = RazorProjectEngine.CreateEmpty(b =>
         {
             b.Phases.Add(phase);
-            b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
+            b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(RazorLanguageVersion.Latest));
         });
 
         var codeDocument = TestRazorCodeDocument.CreateEmpty();
@@ -265,7 +265,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
         var engine = RazorProjectEngine.CreateEmpty(b =>
         {
             b.Phases.Add(phase);
-            b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
+            b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(RazorLanguageVersion.Latest));
         });
 
         var options = RazorParserOptions.Default
@@ -292,7 +292,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
         var engine = RazorProjectEngine.CreateEmpty(b =>
         {
             b.Phases.Add(phase);
-            b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
+            b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(RazorLanguageVersion.Latest));
         });
 
         var parseOptions = RazorParserOptions.Default
