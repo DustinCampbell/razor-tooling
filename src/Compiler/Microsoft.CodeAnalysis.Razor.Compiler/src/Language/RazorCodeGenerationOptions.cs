@@ -12,15 +12,15 @@ public sealed partial record class RazorCodeGenerationOptions
         indentSize: 4,
         newLine: Environment.NewLine,
         rootNamespace: null,
-        flags: RazorCodeGenerationOptionsFlags.DefaultFlags);
+        flags: Flags.DefaultFlags);
 
     public static RazorCodeGenerationOptions DesignTimeDefault { get; } = new RazorCodeGenerationOptions(
         indentSize: 4,
         newLine: Environment.NewLine,
         rootNamespace: null,
-        flags: RazorCodeGenerationOptionsFlags.DefaultDesignTimeFlags);
+        flags: Flags.DefaultDesignTimeFlags);
 
-    private readonly RazorCodeGenerationOptionsFlags _flags;
+    private readonly Flags _flags;
 
     public int IndentSize { get; }
     public string NewLine { get; }
@@ -34,7 +34,7 @@ public sealed partial record class RazorCodeGenerationOptions
         int indentSize,
         string newLine,
         string? rootNamespace,
-        RazorCodeGenerationOptionsFlags flags)
+        Flags flags)
     {
         _flags = flags;
         IndentSize = indentSize;
@@ -43,10 +43,10 @@ public sealed partial record class RazorCodeGenerationOptions
     }
 
     public bool DesignTime
-        => _flags.IsFlagSet(RazorCodeGenerationOptionsFlags.DesignTime);
+        => _flags.IsFlagSet(Flags.DesignTime);
 
     public bool IndentWithTabs
-        => _flags.IsFlagSet(RazorCodeGenerationOptionsFlags.IndentWithTabs);
+        => _flags.IsFlagSet(Flags.IndentWithTabs);
 
     /// <summary>
     /// Gets a value that indicates whether to suppress the default <c>#pragma checksum</c> directive in the
@@ -58,7 +58,7 @@ public sealed partial record class RazorCodeGenerationOptions
     /// purposes.
     /// </remarks>
     public bool SuppressChecksum
-        => _flags.IsFlagSet(RazorCodeGenerationOptionsFlags.SuppressChecksum);
+        => _flags.IsFlagSet(Flags.SuppressChecksum);
 
     /// <summary>
     /// Gets a value that indicates whether to suppress the default metadata attributes in the generated
@@ -77,7 +77,7 @@ public sealed partial record class RazorCodeGenerationOptions
     /// </para>
     /// </remarks>
     public bool SuppressMetadataAttributes
-        => _flags.IsFlagSet(RazorCodeGenerationOptionsFlags.SuppressMetadataAttributes);
+        => _flags.IsFlagSet(Flags.SuppressMetadataAttributes);
 
     /// <summary>
     /// Gets a value that indicates whether to suppress the <c>RazorSourceChecksumAttribute</c>.
@@ -87,49 +87,49 @@ public sealed partial record class RazorCodeGenerationOptions
     /// </para>
     /// </summary>
     public bool SuppressMetadataSourceChecksumAttributes
-        => _flags.IsFlagSet(RazorCodeGenerationOptionsFlags.SuppressMetadataSourceChecksumAttributes);
+        => _flags.IsFlagSet(Flags.SuppressMetadataSourceChecksumAttributes);
 
     /// <summary>
     /// Gets or sets a value that determines if an empty body is generated for the primary method.
     /// </summary>
     public bool SuppressPrimaryMethodBody
-        => _flags.IsFlagSet(RazorCodeGenerationOptionsFlags.SuppressPrimaryMethodBody);
+        => _flags.IsFlagSet(Flags.SuppressPrimaryMethodBody);
 
     /// <summary>
     /// Gets a value that determines if nullability type enforcement should be suppressed for user code.
     /// </summary>
     public bool SuppressNullabilityEnforcement
-        => _flags.IsFlagSet(RazorCodeGenerationOptionsFlags.SuppressNullabilityEnforcement);
+        => _flags.IsFlagSet(Flags.SuppressNullabilityEnforcement);
 
     /// <summary>
     /// Gets a value that determines if the components code writer may omit values for minimized attributes.
     /// </summary>
     public bool OmitMinimizedComponentAttributeValues
-        => _flags.HasFlag(RazorCodeGenerationOptionsFlags.OmitMinimizedComponentAttributeValues);
+        => _flags.HasFlag(Flags.OmitMinimizedComponentAttributeValues);
 
     /// <summary>
     /// Gets a value that determines if localized component names are to be supported.
     /// </summary>
     public bool SupportLocalizedComponentNames
-        => _flags.IsFlagSet(RazorCodeGenerationOptionsFlags.SupportLocalizedComponentNames);
+        => _flags.IsFlagSet(Flags.SupportLocalizedComponentNames);
 
     /// <summary>
     /// Gets a value that determines if enhanced line pragmas are to be utilized.
     /// </summary>
     public bool UseEnhancedLinePragma
-        => _flags.IsFlagSet(RazorCodeGenerationOptionsFlags.UseEnhancedLinePragma);
+        => _flags.IsFlagSet(Flags.UseEnhancedLinePragma);
 
     /// <summary>
     /// Determines whether RenderTreeBuilder.AddComponentParameter should not be used.
     /// </summary>
     public bool SuppressAddComponentParameter
-        => _flags.IsFlagSet(RazorCodeGenerationOptionsFlags.SuppressAddComponentParameter);
+        => _flags.IsFlagSet(Flags.SuppressAddComponentParameter);
 
     /// <summary>
     /// Determines if the file paths emitted as part of line pragmas should be mapped back to a valid path on windows.
     /// </summary>
     public bool RemapLinePragmaPathsOnWindows
-        => _flags.IsFlagSet(RazorCodeGenerationOptionsFlags.RemapLinePragmaPathsOnWindows);
+        => _flags.IsFlagSet(Flags.RemapLinePragmaPathsOnWindows);
 
     internal RazorCodeGenerationOptions WithIndentSize(int indentSize)
     {
@@ -177,62 +177,62 @@ public sealed partial record class RazorCodeGenerationOptions
 
         if (designTime.HasValue)
         {
-            flags.UpdateFlag(RazorCodeGenerationOptionsFlags.DesignTime, designTime.Value);
+            flags.UpdateFlag(Flags.DesignTime, designTime.Value);
         }
 
         if (indentWithTabs.HasValue)
         {
-            flags.UpdateFlag(RazorCodeGenerationOptionsFlags.IndentWithTabs, indentWithTabs.Value);
+            flags.UpdateFlag(Flags.IndentWithTabs, indentWithTabs.Value);
         }
 
         if (suppressChecksum.HasValue)
         {
-            flags.UpdateFlag(RazorCodeGenerationOptionsFlags.SuppressChecksum, suppressChecksum.Value);
+            flags.UpdateFlag(Flags.SuppressChecksum, suppressChecksum.Value);
         }
 
         if (suppressMetadataAttributes.HasValue)
         {
-            flags.UpdateFlag(RazorCodeGenerationOptionsFlags.SuppressMetadataAttributes, suppressMetadataAttributes.Value);
+            flags.UpdateFlag(Flags.SuppressMetadataAttributes, suppressMetadataAttributes.Value);
         }
 
         if (suppressMetadataSourceChecksumAttributes.HasValue)
         {
-            flags.UpdateFlag(RazorCodeGenerationOptionsFlags.SuppressMetadataSourceChecksumAttributes, suppressMetadataSourceChecksumAttributes.Value);
+            flags.UpdateFlag(Flags.SuppressMetadataSourceChecksumAttributes, suppressMetadataSourceChecksumAttributes.Value);
         }
 
         if (suppressPrimaryMethodBody.HasValue)
         {
-            flags.UpdateFlag(RazorCodeGenerationOptionsFlags.SuppressPrimaryMethodBody, suppressPrimaryMethodBody.Value);
+            flags.UpdateFlag(Flags.SuppressPrimaryMethodBody, suppressPrimaryMethodBody.Value);
         }
 
         if (suppressNullabilityEnforcement.HasValue)
         {
-            flags.UpdateFlag(RazorCodeGenerationOptionsFlags.SuppressNullabilityEnforcement, suppressNullabilityEnforcement.Value);
+            flags.UpdateFlag(Flags.SuppressNullabilityEnforcement, suppressNullabilityEnforcement.Value);
         }
 
         if (omitMinimizedComponentAttributeValues.HasValue)
         {
-            flags.UpdateFlag(RazorCodeGenerationOptionsFlags.OmitMinimizedComponentAttributeValues, omitMinimizedComponentAttributeValues.Value);
+            flags.UpdateFlag(Flags.OmitMinimizedComponentAttributeValues, omitMinimizedComponentAttributeValues.Value);
         }
 
         if (supportLocalizedComponentNames.HasValue)
         {
-            flags.UpdateFlag(RazorCodeGenerationOptionsFlags.SupportLocalizedComponentNames, supportLocalizedComponentNames.Value);
+            flags.UpdateFlag(Flags.SupportLocalizedComponentNames, supportLocalizedComponentNames.Value);
         }
 
         if (useEnhancedLinePragma.HasValue)
         {
-            flags.UpdateFlag(RazorCodeGenerationOptionsFlags.UseEnhancedLinePragma, useEnhancedLinePragma.Value);
+            flags.UpdateFlag(Flags.UseEnhancedLinePragma, useEnhancedLinePragma.Value);
         }
 
         if (suppressAddComponentParameter.HasValue)
         {
-            flags.UpdateFlag(RazorCodeGenerationOptionsFlags.SuppressAddComponentParameter, suppressAddComponentParameter.Value);
+            flags.UpdateFlag(Flags.SuppressAddComponentParameter, suppressAddComponentParameter.Value);
         }
 
         if (remapLinePragmaPathsOnWindows.HasValue)
         {
-            flags.UpdateFlag(RazorCodeGenerationOptionsFlags.RemapLinePragmaPathsOnWindows, remapLinePragmaPathsOnWindows.Value);
+            flags.UpdateFlag(Flags.RemapLinePragmaPathsOnWindows, remapLinePragmaPathsOnWindows.Value);
         }
 
         if (_flags == flags)

@@ -9,7 +9,7 @@ public sealed partial record class RazorCodeGenerationOptions
 {
     public sealed class Builder
     {
-        private RazorCodeGenerationOptionsFlags _flags;
+        private Flags _flags;
         private string _newLine = Environment.NewLine;
 
         public RazorLanguageVersion LanguageVersion { get; }
@@ -34,14 +34,14 @@ public sealed partial record class RazorCodeGenerationOptions
 
         public bool DesignTime
         {
-            get => _flags.IsFlagSet(RazorCodeGenerationOptionsFlags.DesignTime);
-            set => _flags.UpdateFlag(RazorCodeGenerationOptionsFlags.DesignTime, value);
+            get => _flags.IsFlagSet(Flags.DesignTime);
+            set => _flags.UpdateFlag(Flags.DesignTime, value);
         }
 
         public bool IndentWithTabs
         {
-            get => _flags.IsFlagSet(RazorCodeGenerationOptionsFlags.IndentWithTabs);
-            set => _flags.UpdateFlag(RazorCodeGenerationOptionsFlags.IndentWithTabs, value);
+            get => _flags.IsFlagSet(Flags.IndentWithTabs);
+            set => _flags.UpdateFlag(Flags.IndentWithTabs, value);
         }
 
         /// <summary>
@@ -55,8 +55,8 @@ public sealed partial record class RazorCodeGenerationOptions
         /// </remarks>
         public bool SuppressChecksum
         {
-            get => _flags.IsFlagSet(RazorCodeGenerationOptionsFlags.SuppressChecksum);
-            set => _flags.UpdateFlag(RazorCodeGenerationOptionsFlags.SuppressChecksum, value);
+            get => _flags.IsFlagSet(Flags.SuppressChecksum);
+            set => _flags.UpdateFlag(Flags.SuppressChecksum, value);
         }
 
         /// <summary>
@@ -77,8 +77,8 @@ public sealed partial record class RazorCodeGenerationOptions
         /// </remarks>
         public bool SuppressMetadataAttributes
         {
-            get => _flags.IsFlagSet(RazorCodeGenerationOptionsFlags.SuppressMetadataAttributes);
-            set => _flags.UpdateFlag(RazorCodeGenerationOptionsFlags.SuppressMetadataAttributes, value);
+            get => _flags.IsFlagSet(Flags.SuppressMetadataAttributes);
+            set => _flags.UpdateFlag(Flags.SuppressMetadataAttributes, value);
         }
 
         /// <summary>
@@ -90,8 +90,8 @@ public sealed partial record class RazorCodeGenerationOptions
         /// </summary>
         public bool SuppressMetadataSourceChecksumAttributes
         {
-            get => _flags.IsFlagSet(RazorCodeGenerationOptionsFlags.SuppressMetadataSourceChecksumAttributes);
-            set => _flags.UpdateFlag(RazorCodeGenerationOptionsFlags.SuppressMetadataSourceChecksumAttributes, value);
+            get => _flags.IsFlagSet(Flags.SuppressMetadataSourceChecksumAttributes);
+            set => _flags.UpdateFlag(Flags.SuppressMetadataSourceChecksumAttributes, value);
         }
 
         /// <summary>
@@ -99,8 +99,8 @@ public sealed partial record class RazorCodeGenerationOptions
         /// </summary>
         public bool SuppressPrimaryMethodBody
         {
-            get => _flags.IsFlagSet(RazorCodeGenerationOptionsFlags.SuppressPrimaryMethodBody);
-            set => _flags.UpdateFlag(RazorCodeGenerationOptionsFlags.SuppressPrimaryMethodBody, value);
+            get => _flags.IsFlagSet(Flags.SuppressPrimaryMethodBody);
+            set => _flags.UpdateFlag(Flags.SuppressPrimaryMethodBody, value);
         }
 
         /// <summary>
@@ -108,8 +108,8 @@ public sealed partial record class RazorCodeGenerationOptions
         /// </summary>
         public bool SuppressNullabilityEnforcement
         {
-            get => _flags.IsFlagSet(RazorCodeGenerationOptionsFlags.SuppressNullabilityEnforcement);
-            set => _flags.UpdateFlag(RazorCodeGenerationOptionsFlags.SuppressNullabilityEnforcement, value);
+            get => _flags.IsFlagSet(Flags.SuppressNullabilityEnforcement);
+            set => _flags.UpdateFlag(Flags.SuppressNullabilityEnforcement, value);
         }
 
         /// <summary>
@@ -117,8 +117,8 @@ public sealed partial record class RazorCodeGenerationOptions
         /// </summary>
         public bool OmitMinimizedComponentAttributeValues
         {
-            get => _flags.IsFlagSet(RazorCodeGenerationOptionsFlags.OmitMinimizedComponentAttributeValues);
-            set => _flags.UpdateFlag(RazorCodeGenerationOptionsFlags.OmitMinimizedComponentAttributeValues, value);
+            get => _flags.IsFlagSet(Flags.OmitMinimizedComponentAttributeValues);
+            set => _flags.UpdateFlag(Flags.OmitMinimizedComponentAttributeValues, value);
         }
 
         /// <summary>
@@ -126,8 +126,8 @@ public sealed partial record class RazorCodeGenerationOptions
         /// </summary>
         public bool SupportLocalizedComponentNames
         {
-            get => _flags.IsFlagSet(RazorCodeGenerationOptionsFlags.SupportLocalizedComponentNames);
-            set => _flags.UpdateFlag(RazorCodeGenerationOptionsFlags.SupportLocalizedComponentNames, value);
+            get => _flags.IsFlagSet(Flags.SupportLocalizedComponentNames);
+            set => _flags.UpdateFlag(Flags.SupportLocalizedComponentNames, value);
         }
 
         /// <summary>
@@ -135,8 +135,8 @@ public sealed partial record class RazorCodeGenerationOptions
         /// </summary>
         public bool UseEnhancedLinePragma
         {
-            get => _flags.IsFlagSet(RazorCodeGenerationOptionsFlags.UseEnhancedLinePragma);
-            set => _flags.UpdateFlag(RazorCodeGenerationOptionsFlags.UseEnhancedLinePragma, value);
+            get => _flags.IsFlagSet(Flags.UseEnhancedLinePragma);
+            set => _flags.UpdateFlag(Flags.UseEnhancedLinePragma, value);
         }
 
         /// <summary>
@@ -144,8 +144,8 @@ public sealed partial record class RazorCodeGenerationOptions
         /// </summary>
         public bool SuppressAddComponentParameter
         {
-            get => _flags.IsFlagSet(RazorCodeGenerationOptionsFlags.SuppressAddComponentParameter);
-            set => _flags.UpdateFlag(RazorCodeGenerationOptionsFlags.SuppressAddComponentParameter, value);
+            get => _flags.IsFlagSet(Flags.SuppressAddComponentParameter);
+            set => _flags.UpdateFlag(Flags.SuppressAddComponentParameter, value);
         }
 
         /// <summary>
@@ -153,8 +153,8 @@ public sealed partial record class RazorCodeGenerationOptions
         /// </summary>
         public bool RemapLinePragmaPathsOnWindows
         {
-            get => _flags.IsFlagSet(RazorCodeGenerationOptionsFlags.RemapLinePragmaPathsOnWindows);
-            set => _flags.UpdateFlag(RazorCodeGenerationOptionsFlags.RemapLinePragmaPathsOnWindows, value);
+            get => _flags.IsFlagSet(Flags.RemapLinePragmaPathsOnWindows);
+            set => _flags.UpdateFlag(Flags.RemapLinePragmaPathsOnWindows, value);
         }
 
         public RazorCodeGenerationOptions ToOptions()
