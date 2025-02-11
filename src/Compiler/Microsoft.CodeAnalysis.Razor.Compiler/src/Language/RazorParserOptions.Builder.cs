@@ -11,7 +11,7 @@ public sealed partial record class RazorParserOptions
 {
     public sealed class Builder
     {
-        private RazorParserOptionsFlags _flags;
+        private Flags _flags;
         private ImmutableArray<DirectiveDescriptor> _directives;
 
         public RazorLanguageVersion LanguageVersion { get; }
@@ -35,74 +35,74 @@ public sealed partial record class RazorParserOptions
 
         public bool DesignTime
         {
-            get => _flags.IsFlagSet(RazorParserOptionsFlags.DesignTime);
-            set => _flags.UpdateFlag(RazorParserOptionsFlags.DesignTime, value);
+            get => _flags.IsFlagSet(Flags.DesignTime);
+            set => _flags.UpdateFlag(Flags.DesignTime, value);
         }
 
         public bool ParseLeadingDirectives
         {
-            get => _flags.IsFlagSet(RazorParserOptionsFlags.ParseLeadingDirectives);
-            set => _flags.UpdateFlag(RazorParserOptionsFlags.ParseLeadingDirectives, value);
+            get => _flags.IsFlagSet(Flags.ParseLeadingDirectives);
+            set => _flags.UpdateFlag(Flags.ParseLeadingDirectives, value);
         }
 
         public bool UseRoslynTokenizer
         {
-            get => _flags.IsFlagSet(RazorParserOptionsFlags.UseRoslynTokenizer);
-            set => _flags.UpdateFlag(RazorParserOptionsFlags.UseRoslynTokenizer, value);
+            get => _flags.IsFlagSet(Flags.UseRoslynTokenizer);
+            set => _flags.UpdateFlag(Flags.UseRoslynTokenizer, value);
         }
 
         internal bool EnableSpanEditHandlers
         {
-            get => _flags.IsFlagSet(RazorParserOptionsFlags.EnableSpanEditHandlers);
-            set => _flags.UpdateFlag(RazorParserOptionsFlags.EnableSpanEditHandlers, value);
+            get => _flags.IsFlagSet(Flags.EnableSpanEditHandlers);
+            set => _flags.UpdateFlag(Flags.EnableSpanEditHandlers, value);
         }
 
         internal bool AllowMinimizedBooleanTagHelperAttributes
         {
-            get => _flags.IsFlagSet(RazorParserOptionsFlags.AllowMinimizedBooleanTagHelperAttributes);
-            set => _flags.UpdateFlag(RazorParserOptionsFlags.AllowMinimizedBooleanTagHelperAttributes, value);
+            get => _flags.IsFlagSet(Flags.AllowMinimizedBooleanTagHelperAttributes);
+            set => _flags.UpdateFlag(Flags.AllowMinimizedBooleanTagHelperAttributes, value);
         }
 
         internal bool AllowHtmlCommentsInTagHelpers
         {
-            get => _flags.IsFlagSet(RazorParserOptionsFlags.AllowHtmlCommentsInTagHelpers);
-            set => _flags.UpdateFlag(RazorParserOptionsFlags.AllowHtmlCommentsInTagHelpers, value);
+            get => _flags.IsFlagSet(Flags.AllowHtmlCommentsInTagHelpers);
+            set => _flags.UpdateFlag(Flags.AllowHtmlCommentsInTagHelpers, value);
         }
 
         internal bool AllowComponentFileKind
         {
-            get => _flags.IsFlagSet(RazorParserOptionsFlags.AllowComponentFileKind);
-            set => _flags.UpdateFlag(RazorParserOptionsFlags.AllowComponentFileKind, value);
+            get => _flags.IsFlagSet(Flags.AllowComponentFileKind);
+            set => _flags.UpdateFlag(Flags.AllowComponentFileKind, value);
         }
 
         internal bool AllowRazorInAllCodeBlocks
         {
-            get => _flags.IsFlagSet(RazorParserOptionsFlags.AllowRazorInAllCodeBlocks);
-            set => _flags.UpdateFlag(RazorParserOptionsFlags.AllowRazorInAllCodeBlocks, value);
+            get => _flags.IsFlagSet(Flags.AllowRazorInAllCodeBlocks);
+            set => _flags.UpdateFlag(Flags.AllowRazorInAllCodeBlocks, value);
         }
 
         internal bool AllowUsingVariableDeclarations
         {
-            get => _flags.IsFlagSet(RazorParserOptionsFlags.AllowUsingVariableDeclarations);
-            set => _flags.UpdateFlag(RazorParserOptionsFlags.AllowUsingVariableDeclarations, value);
+            get => _flags.IsFlagSet(Flags.AllowUsingVariableDeclarations);
+            set => _flags.UpdateFlag(Flags.AllowUsingVariableDeclarations, value);
         }
 
         internal bool AllowConditionalDataDashAttributes
         {
-            get => _flags.IsFlagSet(RazorParserOptionsFlags.AllowConditionalDataDashAttributes);
-            set => _flags.UpdateFlag(RazorParserOptionsFlags.AllowConditionalDataDashAttributes, value);
+            get => _flags.IsFlagSet(Flags.AllowConditionalDataDashAttributes);
+            set => _flags.UpdateFlag(Flags.AllowConditionalDataDashAttributes, value);
         }
 
         internal bool AllowCSharpInMarkupAttributeArea
         {
-            get => _flags.IsFlagSet(RazorParserOptionsFlags.AllowCSharpInMarkupAttributeArea);
-            set => _flags.UpdateFlag(RazorParserOptionsFlags.AllowCSharpInMarkupAttributeArea, value);
+            get => _flags.IsFlagSet(Flags.AllowCSharpInMarkupAttributeArea);
+            set => _flags.UpdateFlag(Flags.AllowCSharpInMarkupAttributeArea, value);
         }
 
         internal bool AllowNullableForgivenessOperator
         {
-            get => _flags.IsFlagSet(RazorParserOptionsFlags.AllowNullableForgivenessOperator);
-            set => _flags.UpdateFlag(RazorParserOptionsFlags.AllowNullableForgivenessOperator, value);
+            get => _flags.IsFlagSet(Flags.AllowNullableForgivenessOperator);
+            set => _flags.UpdateFlag(Flags.AllowNullableForgivenessOperator, value);
         }
 
         public RazorParserOptions ToOptions()

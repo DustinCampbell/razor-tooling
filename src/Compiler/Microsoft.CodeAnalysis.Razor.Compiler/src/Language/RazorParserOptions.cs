@@ -23,24 +23,24 @@ public sealed partial record class RazorParserOptions
         csharpParseOptions: DefaultCSharpParseOptions,
         flags: GetDefaultFlags(DefaultLanguageVersion, DefaultFileKind));
 
-    private readonly RazorParserOptionsFlags _flags;
+    private readonly Flags _flags;
 
     public RazorLanguageVersion LanguageVersion { get; }
     public string FileKind { get; }
     public ImmutableArray<DirectiveDescriptor> Directives { get; }
     public CSharpParseOptions CSharpParseOptions { get; }
 
-    internal RazorParserOptions(
+    private RazorParserOptions(
         RazorLanguageVersion languageVersion,
         string fileKind,
         ImmutableArray<DirectiveDescriptor> directives,
         CSharpParseOptions csharpParseOptions,
-        RazorParserOptionsFlags flags)
+        Flags flags)
     {
-        if (flags.IsFlagSet(RazorParserOptionsFlags.ParseLeadingDirectives) &&
-            flags.IsFlagSet(RazorParserOptionsFlags.UseRoslynTokenizer))
+        if (flags.IsFlagSet(Flags.ParseLeadingDirectives) &&
+            flags.IsFlagSet(Flags.UseRoslynTokenizer))
         {
-            ThrowHelper.ThrowInvalidOperationException($"{nameof(RazorParserOptionsFlags.ParseLeadingDirectives)} and {nameof(RazorParserOptionsFlags.UseRoslynTokenizer)} can't both be true.");
+            ThrowHelper.ThrowInvalidOperationException($"{nameof(Flags.ParseLeadingDirectives)} and {nameof(Flags.UseRoslynTokenizer)} can't both be true.");
         }
 
         Directives = directives.NullToEmpty();
@@ -100,7 +100,7 @@ public sealed partial record class RazorParserOptions
     }
 
     public bool DesignTime
-        => _flags.IsFlagSet(RazorParserOptionsFlags.DesignTime);
+        => _flags.IsFlagSet(Flags.DesignTime);
 
     /// <summary>
     ///  Gets a value which indicates whether the parser will parse only the leading directives. If <see langword="true"/>
@@ -111,37 +111,37 @@ public sealed partial record class RazorParserOptions
     ///  In a future release this may be updated to include all leading directive content.
     /// </remarks>
     public bool ParseLeadingDirectives
-        => _flags.IsFlagSet(RazorParserOptionsFlags.ParseLeadingDirectives);
+        => _flags.IsFlagSet(Flags.ParseLeadingDirectives);
 
     public bool UseRoslynTokenizer
-        => _flags.IsFlagSet(RazorParserOptionsFlags.UseRoslynTokenizer);
+        => _flags.IsFlagSet(Flags.UseRoslynTokenizer);
 
     internal bool EnableSpanEditHandlers
-        => _flags.IsFlagSet(RazorParserOptionsFlags.EnableSpanEditHandlers);
+        => _flags.IsFlagSet(Flags.EnableSpanEditHandlers);
 
     internal bool AllowMinimizedBooleanTagHelperAttributes
-        => _flags.IsFlagSet(RazorParserOptionsFlags.AllowMinimizedBooleanTagHelperAttributes);
+        => _flags.IsFlagSet(Flags.AllowMinimizedBooleanTagHelperAttributes);
 
     internal bool AllowHtmlCommentsInTagHelpers
-        => _flags.IsFlagSet(RazorParserOptionsFlags.AllowHtmlCommentsInTagHelpers);
+        => _flags.IsFlagSet(Flags.AllowHtmlCommentsInTagHelpers);
 
     internal bool AllowComponentFileKind
-        => _flags.IsFlagSet(RazorParserOptionsFlags.AllowComponentFileKind);
+        => _flags.IsFlagSet(Flags.AllowComponentFileKind);
 
     internal bool AllowRazorInAllCodeBlocks
-        => _flags.IsFlagSet(RazorParserOptionsFlags.AllowRazorInAllCodeBlocks);
+        => _flags.IsFlagSet(Flags.AllowRazorInAllCodeBlocks);
 
     internal bool AllowUsingVariableDeclarations
-        => _flags.IsFlagSet(RazorParserOptionsFlags.AllowUsingVariableDeclarations);
+        => _flags.IsFlagSet(Flags.AllowUsingVariableDeclarations);
 
     internal bool AllowConditionalDataDashAttributes
-        => _flags.IsFlagSet(RazorParserOptionsFlags.AllowConditionalDataDashAttributes);
+        => _flags.IsFlagSet(Flags.AllowConditionalDataDashAttributes);
 
     internal bool AllowCSharpInMarkupAttributeArea
-        => _flags.IsFlagSet(RazorParserOptionsFlags.AllowCSharpInMarkupAttributeArea);
+        => _flags.IsFlagSet(Flags.AllowCSharpInMarkupAttributeArea);
 
     internal bool AllowNullableForgivenessOperator
-        => _flags.IsFlagSet(RazorParserOptionsFlags.AllowNullableForgivenessOperator);
+        => _flags.IsFlagSet(Flags.AllowNullableForgivenessOperator);
 
     /// <summary>
     ///  Creates a new options instance with the specified Razor directives.
@@ -181,62 +181,62 @@ public sealed partial record class RazorParserOptions
 
         if (designTime.HasValue)
         {
-            flags.UpdateFlag(RazorParserOptionsFlags.DesignTime, designTime.Value);
+            flags.UpdateFlag(Flags.DesignTime, designTime.Value);
         }
 
         if (parseLeadingDirectives.HasValue)
         {
-            flags.UpdateFlag(RazorParserOptionsFlags.ParseLeadingDirectives, parseLeadingDirectives.Value);
+            flags.UpdateFlag(Flags.ParseLeadingDirectives, parseLeadingDirectives.Value);
         }
 
         if (useRoslynTokenizer.HasValue)
         {
-            flags.UpdateFlag(RazorParserOptionsFlags.UseRoslynTokenizer, useRoslynTokenizer.Value);
+            flags.UpdateFlag(Flags.UseRoslynTokenizer, useRoslynTokenizer.Value);
         }
 
         if (enableSpanEditHandler.HasValue)
         {
-            flags.UpdateFlag(RazorParserOptionsFlags.EnableSpanEditHandlers, enableSpanEditHandler.Value);
+            flags.UpdateFlag(Flags.EnableSpanEditHandlers, enableSpanEditHandler.Value);
         }
 
         if (allowMinimizedBooleanTagHelperAttributes.HasValue)
         {
-            flags.UpdateFlag(RazorParserOptionsFlags.AllowMinimizedBooleanTagHelperAttributes, allowMinimizedBooleanTagHelperAttributes.Value);
+            flags.UpdateFlag(Flags.AllowMinimizedBooleanTagHelperAttributes, allowMinimizedBooleanTagHelperAttributes.Value);
         }
 
         if (allowHtmlCommentsInTagHelpers.HasValue)
         {
-            flags.UpdateFlag(RazorParserOptionsFlags.AllowHtmlCommentsInTagHelpers, allowHtmlCommentsInTagHelpers.Value);
+            flags.UpdateFlag(Flags.AllowHtmlCommentsInTagHelpers, allowHtmlCommentsInTagHelpers.Value);
         }
 
         if (allowComponentFileKind.HasValue)
         {
-            flags.UpdateFlag(RazorParserOptionsFlags.AllowComponentFileKind, allowComponentFileKind.Value);
+            flags.UpdateFlag(Flags.AllowComponentFileKind, allowComponentFileKind.Value);
         }
 
         if (allowRazorInAllCodeBlocks.HasValue)
         {
-            flags.UpdateFlag(RazorParserOptionsFlags.AllowRazorInAllCodeBlocks, allowRazorInAllCodeBlocks.Value);
+            flags.UpdateFlag(Flags.AllowRazorInAllCodeBlocks, allowRazorInAllCodeBlocks.Value);
         }
 
         if (allowUsingVariableDeclarations.HasValue)
         {
-            flags.UpdateFlag(RazorParserOptionsFlags.AllowUsingVariableDeclarations, allowUsingVariableDeclarations.Value);
+            flags.UpdateFlag(Flags.AllowUsingVariableDeclarations, allowUsingVariableDeclarations.Value);
         }
 
         if (allowConditionalDataDashAttributes.HasValue)
         {
-            flags.UpdateFlag(RazorParserOptionsFlags.AllowConditionalDataDashAttributes, allowConditionalDataDashAttributes.Value);
+            flags.UpdateFlag(Flags.AllowConditionalDataDashAttributes, allowConditionalDataDashAttributes.Value);
         }
 
         if (allowCSharpInMarkupAttributeArea.HasValue)
         {
-            flags.UpdateFlag(RazorParserOptionsFlags.AllowCSharpInMarkupAttributeArea, allowCSharpInMarkupAttributeArea.Value);
+            flags.UpdateFlag(Flags.AllowCSharpInMarkupAttributeArea, allowCSharpInMarkupAttributeArea.Value);
         }
 
         if (allowNullableForgivenessOperator.HasValue)
         {
-            flags.UpdateFlag(RazorParserOptionsFlags.AllowNullableForgivenessOperator, allowNullableForgivenessOperator.Value);
+            flags.UpdateFlag(Flags.AllowNullableForgivenessOperator, allowNullableForgivenessOperator.Value);
         }
 
         if (_flags == flags)
@@ -245,41 +245,5 @@ public sealed partial record class RazorParserOptions
         }
 
         return new(LanguageVersion, FileKind, Directives, CSharpParseOptions, flags);
-    }
-
-    private static RazorParserOptionsFlags GetDefaultFlags(RazorLanguageVersion languageVersion, string fileKind)
-    {
-        RazorParserOptionsFlags flags = 0;
-
-        flags.SetFlag(RazorParserOptionsFlags.AllowCSharpInMarkupAttributeArea);
-
-        if (languageVersion >= RazorLanguageVersion.Version_2_1)
-        {
-            // Added in 2.1
-            flags.SetFlag(RazorParserOptionsFlags.AllowMinimizedBooleanTagHelperAttributes);
-            flags.SetFlag(RazorParserOptionsFlags.AllowHtmlCommentsInTagHelpers);
-        }
-
-        if (languageVersion >= RazorLanguageVersion.Version_3_0)
-        {
-            // Added in 3.0
-            flags.SetFlag(RazorParserOptionsFlags.AllowComponentFileKind);
-            flags.SetFlag(RazorParserOptionsFlags.AllowRazorInAllCodeBlocks);
-            flags.SetFlag(RazorParserOptionsFlags.AllowUsingVariableDeclarations);
-            flags.SetFlag(RazorParserOptionsFlags.AllowNullableForgivenessOperator);
-        }
-
-        if (FileKinds.IsComponent(fileKind))
-        {
-            flags.SetFlag(RazorParserOptionsFlags.AllowConditionalDataDashAttributes);
-            flags.ClearFlag(RazorParserOptionsFlags.AllowCSharpInMarkupAttributeArea);
-        }
-
-        if (languageVersion >= RazorLanguageVersion.Experimental)
-        {
-            flags.SetFlag(RazorParserOptionsFlags.AllowConditionalDataDashAttributes);
-        }
-
-        return flags;
     }
 }
