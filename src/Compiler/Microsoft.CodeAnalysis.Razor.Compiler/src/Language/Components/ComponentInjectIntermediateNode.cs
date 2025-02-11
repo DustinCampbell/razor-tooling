@@ -6,7 +6,6 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
-using Microsoft.AspNetCore.Razor.Language.Extensions;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
@@ -69,7 +68,7 @@ internal class ComponentInjectIntermediateNode : ExtensionIntermediateNode
         }
         else
         {
-            var memberName = MemberName ?? "Member_" + DefaultTagHelperTargetExtension.GetDeterministicId(context);
+            var memberName = MemberName ?? "Member_" + context.GetDeterministicId();
 
             if (!context.Options.DesignTime || !IsMalformed)
             {

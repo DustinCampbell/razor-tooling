@@ -86,6 +86,20 @@ public sealed class CodeRenderingContext : IDisposable
     public IntermediateNode? Parent
         => _ancestorStack.Count == 0 ? null : _ancestorStack.Peek();
 
+    public string GetDeterministicId()
+    {
+        var uniqueId = Options.SuppressUniqueIds;
+
+        if (uniqueId is null)
+        {
+            // Use the file checksum along with the absolute position in the generated code to create a unique id for each tag helper call site.
+            var checksum = ChecksumUtilities.BytesToString(SourceDocument.Text.GetChecksum());
+            uniqueId = checksum + CodeWriter.Location.AbsoluteIndex;
+        }
+
+        return uniqueId;
+    }
+
     public void AddDiagnostic(RazorDiagnostic diagnostic)
     {
         _diagnostics.Add(diagnostic);

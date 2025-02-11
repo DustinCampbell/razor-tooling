@@ -5,7 +5,6 @@
 
 using System;
 using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
-using Microsoft.AspNetCore.Razor.Language.Extensions;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions;
 
@@ -35,7 +34,7 @@ public class InjectTargetExtension(bool considerNullabilityEnforcement) : IInjec
             else
             {
                 context.CodeWriter.WriteLine(RazorInjectAttribute);
-                var memberName = node.MemberName ?? "Member_" + DefaultTagHelperTargetExtension.GetDeterministicId(context);
+                var memberName = node.MemberName ?? "Member_" + context.GetDeterministicId();
                 context.CodeWriter.WriteAutoPropertyDeclaration(["public"], node.TypeName, memberName, node.TypeSource, node.MemberSource, context, privateSetter: true, defaultValue: true);
             }
         }

@@ -101,7 +101,7 @@ internal sealed class DefaultTagHelperTargetExtension : IDefaultTagHelperTargetE
 
             // Assign a unique ID for this instance of the source HTML tag. This must be unique
             // per call site, e.g. if the tag is on the view twice, there should be two IDs.
-            var uniqueId = GetDeterministicId(context);
+            var uniqueId = context.GetDeterministicId();
             
             context.CodeWriter.WriteStringLiteral(node.TagName)
                 .WriteParameterSeparator()
@@ -641,19 +641,6 @@ internal sealed class DefaultTagHelperTargetExtension : IDefaultTagHelperTargetE
         }
 
         return builder.ToString();
-    }
-
-    // Internal for testing
-    internal static string GetDeterministicId(CodeRenderingContext context)
-    {
-        var uniqueId = context.Options.SuppressUniqueIds;
-        if (uniqueId is null)
-        {
-            // Use the file checksum along with the absolute position in the generated code to create a unique id for each tag helper call site.
-            var checksum = ChecksumUtilities.BytesToString(context.SourceDocument.Text.GetChecksum());
-            uniqueId = checksum + context.CodeWriter.Location.AbsoluteIndex;
-        }
-        return uniqueId;
     }
 
     private static string GetPropertyAccessor(DefaultTagHelperPropertyIntermediateNode node)

@@ -1139,8 +1139,8 @@ private global::Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperScopeMana
         using var context = TestCodeRenderingContext.CreateRuntime(suppressUniqueIds: null);
 
         // Act
-        var firstId = DefaultTagHelperTargetExtension.GetDeterministicId(context);
-        var secondId = DefaultTagHelperTargetExtension.GetDeterministicId(context);
+        var firstId = context.GetDeterministicId();
+        var secondId = context.GetDeterministicId();
 
         // Assert
         Assert.Equal(firstId, secondId);
