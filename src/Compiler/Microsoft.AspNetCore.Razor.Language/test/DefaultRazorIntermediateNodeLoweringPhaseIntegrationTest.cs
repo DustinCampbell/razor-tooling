@@ -528,7 +528,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
 
         public void Configure(RazorCodeGenerationOptionsBuilder options)
         {
-            options.SetDesignTime(_designTime);
+            options.DesignTime = _designTime;
         }
     }
 }

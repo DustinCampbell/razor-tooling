@@ -216,7 +216,7 @@ public class RazorProjectEngine
 
         var codeGenerationOptions = GetCodeGenerationOptions(builder =>
         {
-            builder.SetDesignTime(true);
+            builder.DesignTime = true;
             builder.SuppressChecksum = true;
             builder.SuppressMetadataAttributes = true;
 
@@ -261,7 +261,7 @@ public class RazorProjectEngine
             feature.Configure(builder);
         }
 
-        return builder.Build();
+        return builder.ToOptions();
     }
 
     private void ProcessCore(RazorCodeDocument codeDocument, CancellationToken cancellationToken)

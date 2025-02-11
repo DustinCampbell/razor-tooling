@@ -12,17 +12,28 @@ public sealed class RazorCodeGenerationOptionsBuilder
 
     public RazorLanguageVersion? LanguageVersion { get; }
 
-    public bool DesignTime => _flags.IsFlagSet(RazorCodeGenerationOptionsFlags.DesignTime);
-
     public int IndentSize { get; set; } = 4;
+
+    /// <summary>
+    /// Gets or sets the root namespace of the generated code.
+    /// </summary>
+    public string? RootNamespace { get; set; }
+
+    /// <summary>
+    /// Gets or sets a value that determines if unique ids are suppressed for testing.
+    /// </summary>
+    public string? SuppressUniqueIds { get; set; }
 
     public string NewLine
     {
         get => _newLine;
-        set
-        {
-            _newLine = value ?? Environment.NewLine;
-        }
+        set => _newLine = value ?? Environment.NewLine;
+    }
+
+    public bool DesignTime
+    {
+        get => _flags.IsFlagSet(RazorCodeGenerationOptionsFlags.DesignTime);
+        set => _flags.UpdateFlag(RazorCodeGenerationOptionsFlags.DesignTime, value);
     }
 
     public bool IndentWithTabs
@@ -30,11 +41,6 @@ public sealed class RazorCodeGenerationOptionsBuilder
         get => _flags.IsFlagSet(RazorCodeGenerationOptionsFlags.IndentWithTabs);
         set => _flags.UpdateFlag(RazorCodeGenerationOptionsFlags.IndentWithTabs, value);
     }
-
-    /// <summary>
-    /// Gets or sets the root namespace of the generated code.
-    /// </summary>
-    public string? RootNamespace { get; set; }
 
     /// <summary>
     /// Gets or sets a value that indicates whether to suppress the default <c>#pragma checksum</c> directive in the
@@ -132,11 +138,6 @@ public sealed class RazorCodeGenerationOptionsBuilder
     }
 
     /// <summary>
-    /// Gets or sets a value that determines if unique ids are suppressed for testing.
-    /// </summary>
-    public string? SuppressUniqueIds { get; set; }
-
-    /// <summary>
     /// Determines whether RenderTreeBuilder.AddComponentParameter should not be used.
     /// </summary>
     public bool SuppressAddComponentParameter
@@ -166,24 +167,15 @@ public sealed class RazorCodeGenerationOptionsBuilder
         _flags = flags;
     }
 
-    public RazorCodeGenerationOptionsBuilder(bool designTime)
+    public RazorCodeGenerationOptionsBuilder() : this(0)
     {
-        if (designTime)
-        {
-            _flags = RazorCodeGenerationOptionsFlags.DesignTime;
-        }
     }
 
-    public RazorCodeGenerationOptions Build()
+    public RazorCodeGenerationOptions ToOptions()
         => new(
-            _flags,
             IndentSize,
             NewLine,
             RootNamespace,
-            SuppressUniqueIds);
-
-    public void SetDesignTime(bool value)
-    {
-        _flags.UpdateFlag(RazorCodeGenerationOptionsFlags.DesignTime, value);
-    }
+            SuppressUniqueIds,
+            _flags);
 }
