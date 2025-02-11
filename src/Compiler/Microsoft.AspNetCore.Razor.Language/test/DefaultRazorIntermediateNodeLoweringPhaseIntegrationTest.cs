@@ -9,8 +9,6 @@ using System.Collections.Immutable;
 using Microsoft.AspNetCore.Razor.Language.Extensions;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 using Microsoft.AspNetCore.Razor.Language.Legacy;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.NET.Sdk.Razor.SourceGenerators;
 using Moq;
 using Xunit;
 using static Microsoft.AspNetCore.Razor.Language.CommonMetadata;
@@ -467,7 +465,12 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
             b.AddTagHelpers(tagHelpers);
 
             b.Features.Add(new DesignTimeOptionsFeature(designTime));
-            b.Features.Add(new ConfigureRazorParserOptions(useRoslynTokenizer: true, CSharpParseOptions.Default));
+
+            b.ConfigureParserOptions(builder =>
+            {
+                builder.DesignTime = designTime;
+                builder.UseRoslynTokenizer = true;
+            });
         };
 
         var projectEngine = RazorProjectEngine.Create(configureEngine);
@@ -512,7 +515,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
         return descriptor;
     }
 
-    private class DesignTimeOptionsFeature : RazorEngineFeatureBase, IConfigureRazorParserOptionsFeature, IConfigureRazorCodeGenerationOptionsFeature
+    private class DesignTimeOptionsFeature : RazorEngineFeatureBase, IConfigureRazorCodeGenerationOptionsFeature
     {
         private readonly bool _designTime;
 
@@ -522,12 +525,6 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
         }
 
         public int Order { get; }
-
-        public void Configure(RazorParserOptions.Builder builder)
-        {
-            builder.DesignTime = _designTime;
-            builder.UseRoslynTokenizer = true;
-        }
 
         public void Configure(RazorCodeGenerationOptionsBuilder options)
         {

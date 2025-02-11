@@ -6,8 +6,6 @@
 using System.Collections.Immutable;
 using Microsoft.AspNetCore.Razor.Language.Components;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.NET.Sdk.Razor.SourceGenerators;
 using Xunit;
 using static Microsoft.AspNetCore.Razor.Language.Intermediate.IntermediateNodeAssert;
 
@@ -454,7 +452,11 @@ public class MetadataAttributePassTest
     {
         return RazorProjectEngine.Create(b =>
         {
-            b.Features.Add(new ConfigureRazorParserOptions(useRoslynTokenizer: true, CSharpParseOptions.Default));
+            b.ConfigureParserOptions(builder =>
+            {
+                builder.UseRoslynTokenizer = true;
+            });
+
             b.Features.Add(new DefaultMetadataIdentifierFeature());
         }).Engine;
     }

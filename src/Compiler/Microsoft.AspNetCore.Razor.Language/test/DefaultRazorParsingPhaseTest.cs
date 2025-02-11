@@ -37,7 +37,11 @@ public class DefaultRazorParsingPhaseTest
         {
             builder.Phases.Add(phase);
             builder.Features.Add(new DefaultRazorParserOptionsFeature(version: RazorLanguageVersion.Latest));
-            builder.Features.Add(new MyParserOptionsFeature());
+
+            builder.ConfigureParserOptions(builder =>
+            {
+                builder.Directives = [DirectiveDescriptor.CreateDirective("test", DirectiveKind.SingleLine)];
+            });
         });
 
         var codeDocument = TestRazorCodeDocument.CreateEmpty();
@@ -60,7 +64,11 @@ public class DefaultRazorParsingPhaseTest
         {
             builder.Phases.Add(phase);
             builder.Features.Add(new DefaultRazorParserOptionsFeature(version: RazorLanguageVersion.Latest));
-            builder.Features.Add(new MyParserOptionsFeature());
+
+            builder.ConfigureParserOptions(builder =>
+            {
+                builder.Directives = [DirectiveDescriptor.CreateDirective("test", DirectiveKind.SingleLine)];
+            });
         });
 
         var imports = ImmutableArray.Create(
@@ -79,15 +87,5 @@ public class DefaultRazorParsingPhaseTest
             importSyntaxTrees,
             t => { Assert.Same(t.Source, imports[0]); Assert.Equal("test", Assert.Single(t.Options.Directives).Directive); },
             t => { Assert.Same(t.Source, imports[1]); Assert.Equal("test", Assert.Single(t.Options.Directives).Directive); });
-    }
-
-    private class MyParserOptionsFeature : RazorEngineFeatureBase, IConfigureRazorParserOptionsFeature
-    {
-        public int Order { get; }
-
-        public void Configure(RazorParserOptions.Builder builder)
-        {
-            builder.Directives = [DirectiveDescriptor.CreateDirective("test", DirectiveKind.SingleLine)];
-        }
     }
 }

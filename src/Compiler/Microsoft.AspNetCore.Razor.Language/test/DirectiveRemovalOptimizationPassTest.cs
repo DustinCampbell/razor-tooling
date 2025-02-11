@@ -5,8 +5,6 @@
 
 using System.Linq;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.NET.Sdk.Razor.SourceGenerators;
 using Xunit;
 using static Microsoft.AspNetCore.Razor.Language.Intermediate.IntermediateNodeAssert;
 
@@ -24,7 +22,11 @@ public class DirectiveRemovalOptimizationPassTest
         var defaultEngine = RazorProjectEngine.Create(b =>
         {
             b.AddDirective(DirectiveDescriptor.CreateDirective("custom", DirectiveKind.SingleLine, d => d.AddStringToken()));
-            b.Features.Add(new ConfigureRazorParserOptions(useRoslynTokenizer: true, CSharpParseOptions.Default));
+
+            b.ConfigureParserOptions(builder =>
+            {
+                builder.UseRoslynTokenizer = true;
+            });
         }).Engine;
         var documentNode = Lower(codeDocument, defaultEngine);
         var pass = new DirectiveRemovalOptimizationPass()
@@ -59,7 +61,11 @@ public class DirectiveRemovalOptimizationPassTest
         var defaultEngine = RazorProjectEngine.Create(b =>
         {
             b.AddDirective(DirectiveDescriptor.CreateDirective("custom", DirectiveKind.SingleLine, d => d.AddStringToken()));
-            b.Features.Add(new ConfigureRazorParserOptions(useRoslynTokenizer: true, CSharpParseOptions.Default));
+
+            b.ConfigureParserOptions(builder =>
+            {
+                builder.UseRoslynTokenizer = true;
+            });
         }).Engine;
         var documentNode = Lower(codeDocument, defaultEngine);
         var pass = new DirectiveRemovalOptimizationPass()
@@ -91,7 +97,11 @@ public class DirectiveRemovalOptimizationPassTest
         var codeDocument = RazorCodeDocument.Create(sourceDocument);
         var defaultEngine = RazorProjectEngine.Create(b =>
         {
-            b.Features.Add(new ConfigureRazorParserOptions(useRoslynTokenizer: true, CSharpParseOptions.Default));
+            b.ConfigureParserOptions(builder =>
+            {
+                builder.UseRoslynTokenizer = true;
+            });
+
             b.AddDirective(DirectiveDescriptor.CreateDirective("custom", DirectiveKind.SingleLine, d => d.AddStringToken()));
         }).Engine;
         var documentNode = Lower(codeDocument, defaultEngine);

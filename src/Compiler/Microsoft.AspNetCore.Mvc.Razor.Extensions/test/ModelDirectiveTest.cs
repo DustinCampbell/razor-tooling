@@ -288,6 +288,12 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
 
             b.Features.Add(new RazorPageDocumentClassifierPass());
             b.Features.Add(new MvcViewDocumentClassifierPass());
+
+            b.ConfigureParserOptions(builder =>
+            {
+                builder.DesignTime = designTime;
+            });
+
             b.Features.Add(new DesignTimeOptionsFeature(designTime));
         }).Engine;
     }
@@ -334,7 +340,7 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
         }
     }
 
-    private class DesignTimeOptionsFeature : RazorEngineFeatureBase, IConfigureRazorParserOptionsFeature, IConfigureRazorCodeGenerationOptionsFeature
+    private class DesignTimeOptionsFeature : RazorEngineFeatureBase, IConfigureRazorCodeGenerationOptionsFeature
     {
         private readonly bool _designTime;
 
@@ -344,11 +350,6 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
         }
 
         public int Order { get; }
-
-        public void Configure(RazorParserOptions.Builder builder)
-        {
-            builder.DesignTime = _designTime;
-        }
 
         public void Configure(RazorCodeGenerationOptionsBuilder options)
         {

@@ -48,6 +48,16 @@ public static class RazorProjectEngineBuilderExtensions
         }
     }
 
+    public static RazorProjectEngineBuilder ConfigureParserOptions(this RazorProjectEngineBuilder builder, Action<RazorParserOptions.Builder> configure)
+    {
+        ArgHelper.ThrowIfNull(builder);
+        ArgHelper.ThrowIfNull(configure);
+
+        builder.Features.Add(new ConfigureParserOptionsFeature(configure));
+
+        return builder;
+    }
+
     /// <summary>
     /// Sets the root namespace for the generated code.
     /// </summary>
@@ -151,6 +161,13 @@ public static class RazorProjectEngineBuilderExtensions
         }
 
         return feature;
+    }
+
+    private sealed class ConfigureParserOptionsFeature(Action<RazorParserOptions.Builder> configure) : RazorEngineFeatureBase, IConfigureRazorParserOptionsFeature
+    {
+        public int Order { get; set; }
+
+        public void Configure(RazorParserOptions.Builder builder) => configure(builder);
     }
 
     private sealed class ConfigureSupportLocalizedComponentNamesFeature(bool value) : RazorEngineFeatureBase, IConfigureRazorCodeGenerationOptionsFeature
