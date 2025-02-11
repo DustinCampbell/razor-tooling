@@ -85,9 +85,9 @@ public class DefaultRazorParsingPhaseTest
     {
         public int Order { get; }
 
-        public void Configure(RazorParserOptionsBuilder options)
+        public void Configure(RazorParserOptions.Builder builder)
         {
-            options.SetDirectives([DirectiveDescriptor.CreateDirective("test", DirectiveKind.SingleLine)]);
+            builder.Directives = [DirectiveDescriptor.CreateDirective("test", DirectiveKind.SingleLine)];
         }
     }
 }

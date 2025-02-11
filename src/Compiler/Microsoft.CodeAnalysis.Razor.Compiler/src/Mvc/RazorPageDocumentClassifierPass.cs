@@ -164,9 +164,9 @@ public class RazorPageDocumentClassifierPass : DocumentClassifierPassBase
     {
         public int Order { get; }
 
-        public void Configure(RazorParserOptionsBuilder options)
+        public void Configure(RazorParserOptions.Builder builder)
         {
-            options.ParseLeadingDirectives = true;
+            builder.ParseLeadingDirectives = true;
         }
     }
 }

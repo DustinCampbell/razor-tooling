@@ -194,7 +194,7 @@ public abstract class ParserTestBase : IParserTest
         string document,
         bool designTime = false,
         ImmutableArray<DirectiveDescriptor> directives = default,
-        Action<RazorParserOptionsBuilder> configureParserOptions = null,
+        Action<RazorParserOptions.Builder> configureParserOptions = null,
         string fileKind = null,
         CSharpParseOptions csharpParseOptions = null)
     {
@@ -206,7 +206,7 @@ public abstract class ParserTestBase : IParserTest
         string document,
         ImmutableArray<DirectiveDescriptor> directives,
         bool designTime = false,
-        Action<RazorParserOptionsBuilder> configureParserOptions = null,
+        Action<RazorParserOptions.Builder> configureParserOptions = null,
         string fileKind = null,
         CSharpParseOptions csharpParseOptions = null)
     {
@@ -290,22 +290,21 @@ public abstract class ParserTestBase : IParserTest
         bool designTime,
         bool enableSpanEditHandlers,
         bool useLegacyTokenizer,
-        Action<RazorParserOptionsBuilder> configureParserOptions,
+        Action<RazorParserOptions.Builder> configureParserOptions,
         string fileKind,
         CSharpParseOptions csharpParseOptions)
     {
-        var builder = new RazorParserOptionsBuilder(version, fileKind ?? FileKinds.Legacy, designTime)
+        var builder = new RazorParserOptions.Builder(version, fileKind ?? FileKinds.Legacy)
         {
+            DesignTime = designTime,
+            Directives = directives,
             EnableSpanEditHandlers = enableSpanEditHandlers,
             UseRoslynTokenizer = !useLegacyTokenizer,
             CSharpParseOptions = csharpParseOptions ?? CSharpParseOptions.Default
         };
 
-        builder.SetDirectives(directives);
-        builder.SetDesignTime(designTime);
-
         configureParserOptions?.Invoke(builder);
 
-        return builder.Build();
+        return builder.ToOptions();
     }
 }

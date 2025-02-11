@@ -36,7 +36,7 @@ public class TagHelperRewritingTestBase() : ParserTestBase(layer: TestProject.La
         ImmutableArray<TagHelperDescriptor> descriptors,
         string documentContent,
         string? tagHelperPrefix = null,
-        Action<RazorParserOptionsBuilder>? configureParserOptions = null)
+        Action<RazorParserOptions.Builder>? configureParserOptions = null)
     {
         var syntaxTree = ParseDocument(documentContent, configureParserOptions: configureParserOptions);
 

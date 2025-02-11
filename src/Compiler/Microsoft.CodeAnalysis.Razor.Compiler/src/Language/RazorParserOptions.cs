@@ -10,7 +10,7 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-public sealed record class RazorParserOptions
+public sealed partial record class RazorParserOptions
 {
     private static RazorLanguageVersion DefaultLanguageVersion => RazorLanguageVersion.Latest;
     private static string DefaultFileKind => FileKinds.Legacy;
@@ -247,7 +247,7 @@ public sealed record class RazorParserOptions
         return new(LanguageVersion, FileKind, Directives, CSharpParseOptions, flags);
     }
 
-    internal static RazorParserOptionsFlags GetDefaultFlags(RazorLanguageVersion languageVersion, string fileKind)
+    private static RazorParserOptionsFlags GetDefaultFlags(RazorLanguageVersion languageVersion, string fileKind)
     {
         RazorParserOptionsFlags flags = 0;
 

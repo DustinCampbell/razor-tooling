@@ -2522,7 +2522,7 @@ public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
         EvaluateData(descriptors, document, configureParserOptions: ConfigureParserOptions(allowCSharpInMarkupAttributeArea: false));
     }
 
-    private static Action<RazorParserOptionsBuilder> ConfigureParserOptions(
+    private static Action<RazorParserOptions.Builder> ConfigureParserOptions(
         bool allowMinimizedBooleanTagHelperAttributes = false,
         bool allowHtmlCommentsInTagHelper = false,
         bool allowComponentFileKind = false,

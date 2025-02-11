@@ -349,9 +349,9 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
 
         public int Order { get; }
 
-        public void Configure(RazorParserOptionsBuilder options)
+        public void Configure(RazorParserOptions.Builder builder)
         {
-            options.SetDesignTime(_designTime);
+            builder.DesignTime = _designTime;
         }
 
         public void Configure(RazorCodeGenerationOptionsBuilder options)

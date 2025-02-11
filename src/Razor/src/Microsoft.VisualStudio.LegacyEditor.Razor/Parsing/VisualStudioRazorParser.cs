@@ -612,10 +612,10 @@ internal class VisualStudioRazorParser : IVisualStudioRazorParser, IDisposable
     {
         public int Order => 0;
 
-        public void Configure(RazorParserOptionsBuilder options)
+        public void Configure(RazorParserOptions.Builder builder)
         {
-            options.EnableSpanEditHandlers = true;
-            options.UseRoslynTokenizer = false;
+            builder.EnableSpanEditHandlers = true;
+            builder.UseRoslynTokenizer = false;
         }
     }
 

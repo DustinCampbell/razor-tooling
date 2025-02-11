@@ -102,9 +102,9 @@ public class RazorSyntaxFactsServiceTest(ITestOutputHelper testOutput) : RazorTo
     {
         public int Order => 0;
 
-        public void Configure(RazorParserOptionsBuilder options)
+        public void Configure(RazorParserOptions.Builder builder)
         {
-            options.EnableSpanEditHandlers = true;
+            builder.EnableSpanEditHandlers = true;
         }
     }
 }

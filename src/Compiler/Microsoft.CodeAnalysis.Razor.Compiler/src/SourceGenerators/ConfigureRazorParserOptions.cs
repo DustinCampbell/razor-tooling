@@ -10,9 +10,9 @@ internal class ConfigureRazorParserOptions(bool useRoslynTokenizer, CSharpParseO
 {
     public int Order { get; set; }
 
-    public void Configure(RazorParserOptionsBuilder options)
+    public void Configure(RazorParserOptions.Builder builder)
     {
-        options.UseRoslynTokenizer = useRoslynTokenizer;
-        options.CSharpParseOptions = csharpParseOptions;
+        builder.UseRoslynTokenizer = useRoslynTokenizer;
+        builder.CSharpParseOptions = csharpParseOptions;
     }
 }

@@ -523,10 +523,10 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
 
         public int Order { get; }
 
-        public void Configure(RazorParserOptionsBuilder options)
+        public void Configure(RazorParserOptions.Builder builder)
         {
-            options.SetDesignTime(_designTime);
-            options.UseRoslynTokenizer = true;
+            builder.DesignTime = _designTime;
+            builder.UseRoslynTokenizer = true;
         }
 
         public void Configure(RazorCodeGenerationOptionsBuilder options)

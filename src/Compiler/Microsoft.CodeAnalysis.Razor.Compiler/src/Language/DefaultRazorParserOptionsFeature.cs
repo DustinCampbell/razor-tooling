@@ -19,13 +19,13 @@ internal class DefaultRazorParserOptionsFeature(RazorLanguageVersion version) : 
 
     public RazorParserOptions GetOptions()
     {
-        var builder = new RazorParserOptionsBuilder(_version, FileKinds.Legacy, designTime: false);
+        var builder = new RazorParserOptions.Builder(_version, FileKinds.Legacy);
 
         foreach (var options in _configureOptions)
         {
             options.Configure(builder);
         }
 
-        return builder.Build();
+        return builder.ToOptions();
     }
 }
