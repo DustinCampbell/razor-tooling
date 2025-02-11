@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Razor.PooledObjects;
 
 namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
-public sealed class CodeRenderingContext : IDisposable
+public class CodeRenderingContext : IDisposable
 {
     private readonly record struct ScopeInternal(IntermediateNodeWriter Writer);
 
@@ -30,6 +30,8 @@ public sealed class CodeRenderingContext : IDisposable
     public IntermediateNodeVisitor Visitor => _visitor.AssumeNotNull();
 
     public string DocumentKind => _documentNode.DocumentKind;
+
+    private string? _checksum;
 
     public CodeRenderingContext(
         IntermediateNodeWriter nodeWriter,
@@ -86,18 +88,12 @@ public sealed class CodeRenderingContext : IDisposable
     public IntermediateNode? Parent
         => _ancestorStack.Count == 0 ? null : _ancestorStack.Peek();
 
-    public string GetDeterministicId()
+    public virtual string GetDeterministicId()
     {
-        var uniqueId = Options.SuppressUniqueIds;
+        _checksum ??= InterlockedOperations.Initialize(ref _checksum, ChecksumUtilities.BytesToString(SourceDocument.Text.GetChecksum()));
 
-        if (uniqueId is null)
-        {
-            // Use the file checksum along with the absolute position in the generated code to create a unique id for each tag helper call site.
-            var checksum = ChecksumUtilities.BytesToString(SourceDocument.Text.GetChecksum());
-            uniqueId = checksum + CodeWriter.Location.AbsoluteIndex;
-        }
-
-        return uniqueId;
+        // Use the file checksum along with the absolute position in the generated code to create a unique id for each tag helper call site.
+        return _checksum + CodeWriter.Location.AbsoluteIndex;
     }
 
     public void AddDiagnostic(RazorDiagnostic diagnostic)

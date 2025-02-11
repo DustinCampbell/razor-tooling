@@ -21,7 +21,7 @@ public class DocumentWriterTest
         var options = RazorCodeGenerationOptions.Default;
 
         var target = CodeTarget.CreateDefault(codeDocument, options);
-        var contextFactory = new DefaultCodeRenderingContextFactoryFeature();
+        var contextFactory = new CodeRenderingContextFactoryFeature();
 
         // Act
         var result = DocumentWriter.WriteDocument(codeDocument, document, target, options, contextFactory);
@@ -52,7 +52,7 @@ public class DocumentWriterTest
         var options = RazorCodeGenerationOptions.Default;
 
         var target = CodeTarget.CreateDefault(codeDocument, options);
-        var contextFactory = new DefaultCodeRenderingContextFactoryFeature();
+        var contextFactory = new CodeRenderingContextFactoryFeature();
 
         // Act
         var result = DocumentWriter.WriteDocument(codeDocument, document, target, options, contextFactory);
@@ -83,7 +83,7 @@ public class DocumentWriterTest
         var options = RazorCodeGenerationOptions.Default;
 
         var target = CodeTarget.CreateDefault(codeDocument, options);
-        var contextFactory = new DefaultCodeRenderingContextFactoryFeature();
+        var contextFactory = new CodeRenderingContextFactoryFeature();
 
         // Act
         var result = DocumentWriter.WriteDocument(codeDocument, document, target, options, contextFactory);
@@ -115,7 +115,7 @@ public class DocumentWriterTest
         var options = optionsBuilder.ToOptions();
 
         var target = CodeTarget.CreateDefault(codeDocument, options);
-        var contextFactory = new DefaultCodeRenderingContextFactoryFeature();
+        var contextFactory = new CodeRenderingContextFactoryFeature();
 
         // Act
         var result = DocumentWriter.WriteDocument(codeDocument, document, target, options, contextFactory);
@@ -145,7 +145,7 @@ public class DocumentWriterTest
         var options = RazorCodeGenerationOptions.Default;
 
         var target = CodeTarget.CreateDefault(codeDocument, options);
-        var contextFactory = new DefaultCodeRenderingContextFactoryFeature();
+        var contextFactory = new CodeRenderingContextFactoryFeature();
 
         // Act
         var result = DocumentWriter.WriteDocument(codeDocument, document, target, options, contextFactory);
@@ -193,7 +193,7 @@ public class DocumentWriterTest
         var options = RazorCodeGenerationOptions.Default;
 
         var target = CodeTarget.CreateDefault(codeDocument, options);
-        var contextFactory = new DefaultCodeRenderingContextFactoryFeature();
+        var contextFactory = new CodeRenderingContextFactoryFeature();
 
         // Act
         var result = DocumentWriter.WriteDocument(codeDocument, document, target, options, contextFactory);
@@ -244,7 +244,7 @@ public class DocumentWriterTest
         var options = RazorCodeGenerationOptions.Default;
 
         var target = CodeTarget.CreateDefault(codeDocument, options);
-        var contextFactory = new DefaultCodeRenderingContextFactoryFeature();
+        var contextFactory = new CodeRenderingContextFactoryFeature();
 
         // Act
         var result = DocumentWriter.WriteDocument(codeDocument, document, target, options, contextFactory);
@@ -293,7 +293,7 @@ public class DocumentWriterTest
         var options = RazorCodeGenerationOptions.Default;
 
         var target = CodeTarget.CreateDefault(codeDocument, options);
-        var contextFactory = new DefaultCodeRenderingContextFactoryFeature();
+        var contextFactory = new CodeRenderingContextFactoryFeature();
 
         // Act
         var result = DocumentWriter.WriteDocument(codeDocument, document, target, options, contextFactory);
@@ -356,7 +356,7 @@ public class DocumentWriterTest
         var options = RazorCodeGenerationOptions.Default;
 
         var target = CodeTarget.CreateDefault(codeDocument, options);
-        var contextFactory = new DefaultCodeRenderingContextFactoryFeature();
+        var contextFactory = new CodeRenderingContextFactoryFeature();
 
         // Act
         var result = DocumentWriter.WriteDocument(codeDocument, document, target, options, contextFactory);
@@ -400,7 +400,7 @@ public class DocumentWriterTest
         var options = RazorCodeGenerationOptions.Default;
 
         var target = CodeTarget.CreateDefault(codeDocument, options);
-        var contextFactory = new DefaultCodeRenderingContextFactoryFeature();
+        var contextFactory = new CodeRenderingContextFactoryFeature();
 
         // Act
         var result = DocumentWriter.WriteDocument(codeDocument, document, target, options, contextFactory);
@@ -440,7 +440,7 @@ public class DocumentWriterTest
         var options = RazorCodeGenerationOptions.Default;
 
         var target = CodeTarget.CreateDefault(codeDocument, options);
-        var contextFactory = new DefaultCodeRenderingContextFactoryFeature();
+        var contextFactory = new CodeRenderingContextFactoryFeature();
 
         // Act
         var result = DocumentWriter.WriteDocument(codeDocument, document, target, options, contextFactory);

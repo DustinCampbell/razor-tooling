@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Mvc.Razor.Extensions;
 using Microsoft.AspNetCore.Razor.Language;
+using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
+using Microsoft.AspNetCore.Razor.Language.Intermediate;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Razor;
 
@@ -106,11 +108,17 @@ namespace Microsoft.NET.Sdk.Razor.SourceGenerators
                 b.Features.Add(new DefaultTypeNameFeature());
                 b.SetRootNamespace(razorSourceGeneratorOptions.RootNamespace);
 
+                // If we're in test mode, replace the existing ICodeRenderingContextFactoryFeature with a test version.
+                if (razorSourceGeneratorOptions.TestSuppressUniqueIds is string uniqueId)
+                {
+                    b.Features.RemoveAll(static f => f is ICodeRenderingContextFactoryFeature);
+                    b.Features.Add(new TestCodeRenderingContextFactoryFeature(uniqueId));
+                }
+
                 b.Features.Add(new ConfigureRazorCodeGenerationOptions(options =>
                 {
                     options.SuppressMetadataSourceChecksumAttributes = !razorSourceGeneratorOptions.GenerateMetadataSourceChecksumAttributes;
                     options.SupportLocalizedComponentNames = razorSourceGeneratorOptions.SupportLocalizedComponentNames;
-                    options.SuppressUniqueIds = razorSourceGeneratorOptions.TestSuppressUniqueIds;
                     options.SuppressAddComponentParameter = razorSourceGeneratorOptions.Configuration.SuppressAddComponentParameter;
                 }));
 
@@ -127,6 +135,28 @@ namespace Microsoft.NET.Sdk.Razor.SourceGenerators
             });
 
             return new SourceGeneratorProjectEngine(projectEngine);
+        }
+
+        private sealed class TestCodeRenderingContextFactoryFeature(string uniqueId) : RazorEngineFeatureBase, ICodeRenderingContextFactoryFeature
+        {
+            public CodeRenderingContext Create(
+                IntermediateNodeWriter nodeWriter,
+                RazorSourceDocument sourceDocument,
+                DocumentIntermediateNode documentNode,
+                RazorCodeGenerationOptions options)
+                => new TestCodeRenderingContext(nodeWriter, sourceDocument, documentNode, options, uniqueId);
+
+            private sealed class TestCodeRenderingContext(
+                IntermediateNodeWriter nodeWriter,
+                RazorSourceDocument sourceDocument,
+                DocumentIntermediateNode documentNode,
+                RazorCodeGenerationOptions options,
+                string uniqueId)
+                : CodeRenderingContext(nodeWriter, sourceDocument, documentNode, options)
+            {
+                public override string GetDeterministicId()
+                    => uniqueId;
+            }
         }
     }
 }

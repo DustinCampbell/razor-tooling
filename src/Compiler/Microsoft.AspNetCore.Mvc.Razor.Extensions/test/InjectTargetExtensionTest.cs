@@ -3,11 +3,8 @@
 
 #nullable disable
 
-using System;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
-using Microsoft.AspNetCore.Razor.Language.Intermediate;
-using Microsoft.AspNetCore.Razor.Language.Legacy;
 using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions;

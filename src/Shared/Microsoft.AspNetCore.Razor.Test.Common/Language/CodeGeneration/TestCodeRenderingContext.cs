@@ -7,11 +7,27 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
-public static class TestCodeRenderingContext
+public sealed class TestCodeRenderingContext : CodeRenderingContext
 {
+    private readonly string _uniqueId;
+
+    private TestCodeRenderingContext(
+        IntermediateNodeWriter nodeWriter,
+        RazorSourceDocument sourceDocument,
+        DocumentIntermediateNode documentNode,
+        RazorCodeGenerationOptions options,
+        string uniqueId)
+        : base(nodeWriter, sourceDocument, documentNode, options)
+    {
+        _uniqueId = uniqueId;
+    }
+
+    public override string GetDeterministicId()
+        => _uniqueId;
+
     public static CodeRenderingContext CreateDesignTime(
         string newLineString = null,
-        string suppressUniqueIds = "test",
+        string uniqueId = "test",
         RazorSourceDocument source = null,
         IntermediateNodeWriter nodeWriter = null)
     {
@@ -19,9 +35,9 @@ public static class TestCodeRenderingContext
         source ??= TestRazorSourceDocument.Create();
         var documentNode = new DocumentIntermediateNode();
 
-        var options = ConfigureOptions(RazorCodeGenerationOptions.DesignTimeDefault, newLineString, suppressUniqueIds);
+        var options = ConfigureOptions(RazorCodeGenerationOptions.DesignTimeDefault, newLineString);
 
-        var context = new CodeRenderingContext(nodeWriter, source, documentNode, options);
+        var context = new TestCodeRenderingContext(nodeWriter, source, documentNode, options, uniqueId);
         context.SetVisitor(new RenderChildrenVisitor(context.CodeWriter));
 
         return context;
@@ -29,7 +45,7 @@ public static class TestCodeRenderingContext
 
     public static CodeRenderingContext CreateRuntime(
         string newLineString = null,
-        string suppressUniqueIds = "test",
+        string uniqueId = "test",
         RazorSourceDocument source = null,
         IntermediateNodeWriter nodeWriter = null)
     {
@@ -37,32 +53,19 @@ public static class TestCodeRenderingContext
         source ??= TestRazorSourceDocument.Create();
         var documentNode = new DocumentIntermediateNode();
 
-        var options = ConfigureOptions(RazorCodeGenerationOptions.Default, newLineString, suppressUniqueIds);
+        var options = ConfigureOptions(RazorCodeGenerationOptions.Default, newLineString);
 
-        var context = new CodeRenderingContext(nodeWriter, source, documentNode, options);
+        var context = new TestCodeRenderingContext(nodeWriter, source, documentNode, options, uniqueId);
         context.SetVisitor(new RenderChildrenVisitor(context.CodeWriter));
 
         return context;
     }
 
-    private static RazorCodeGenerationOptions ConfigureOptions(RazorCodeGenerationOptions options, string newLine, string suppressUniqueIds)
+    private static RazorCodeGenerationOptions ConfigureOptions(RazorCodeGenerationOptions options, string newLine)
     {
-        if (newLine is null && suppressUniqueIds is null)
-        {
-            return options;
-        }
-
-        if (newLine is not null)
-        {
-            options = options.WithNewLine(newLine);
-        }
-
-        if (suppressUniqueIds is not null)
-        {
-            options = options.WithSuppressUniqueIds(suppressUniqueIds);
-        }
-
-        return options;
+        return newLine is not null
+            ? options.WithNewLine(newLine)
+            : options;
     }
 
     private class RenderChildrenVisitor(CodeWriter writer) : IntermediateNodeVisitor

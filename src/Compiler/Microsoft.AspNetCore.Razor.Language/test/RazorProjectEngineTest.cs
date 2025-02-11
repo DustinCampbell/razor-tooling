@@ -6,6 +6,7 @@
 using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
+using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 using Microsoft.AspNetCore.Razor.Language.Components;
 using Microsoft.AspNetCore.Razor.Language.Extensions;
 using Microsoft.AspNetCore.Razor.PooledObjects;
@@ -52,6 +53,7 @@ public class RazorProjectEngineTest
         Assert.Collection(
             features,
             feature => Assert.IsType<AttributeDirectivePass>(feature),
+            feature => Assert.IsType<CodeRenderingContextFactoryFeature>(feature),
             feature => Assert.IsType<ComponentBindLoweringPass>(feature),
             feature => Assert.IsType<ComponentChildContentDiagnosticPass>(feature),
             feature => Assert.IsType<ComponentComplexAttributeContentPass>(feature),

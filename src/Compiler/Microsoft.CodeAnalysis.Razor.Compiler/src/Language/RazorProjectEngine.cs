@@ -7,6 +7,7 @@ using System.Collections.Immutable;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 using Microsoft.AspNetCore.Razor.Language.Components;
 using Microsoft.AspNetCore.Razor.Language.Extensions;
 using Microsoft.AspNetCore.Razor.PooledObjects;
@@ -346,6 +347,7 @@ public class RazorProjectEngine
         // General extensibility
         features.Add(new ConfigureDirectivesFeature());
         features.Add(new DefaultMetadataIdentifierFeature());
+        features.Add(new CodeRenderingContextFactoryFeature());
 
         // Legacy options features
         //

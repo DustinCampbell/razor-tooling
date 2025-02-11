@@ -19,11 +19,6 @@ public sealed class RazorCodeGenerationOptionsBuilder
     /// </summary>
     public string? RootNamespace { get; set; }
 
-    /// <summary>
-    /// Gets or sets a value that determines if unique ids are suppressed for testing.
-    /// </summary>
-    public string? SuppressUniqueIds { get; set; }
-
     public string NewLine
     {
         get => _newLine;
@@ -172,10 +167,5 @@ public sealed class RazorCodeGenerationOptionsBuilder
     }
 
     public RazorCodeGenerationOptions ToOptions()
-        => new(
-            IndentSize,
-            NewLine,
-            RootNamespace,
-            SuppressUniqueIds,
-            _flags);
+        => new(IndentSize, NewLine, RootNamespace, _flags);
 }

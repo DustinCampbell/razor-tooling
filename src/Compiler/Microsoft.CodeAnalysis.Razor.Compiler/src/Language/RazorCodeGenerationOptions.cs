@@ -12,14 +12,12 @@ public sealed class RazorCodeGenerationOptions
         indentSize: 4,
         newLine: Environment.NewLine,
         rootNamespace: null,
-        suppressUniqueIds: null,
         flags: RazorCodeGenerationOptionsFlags.DefaultFlags);
 
     public static RazorCodeGenerationOptions DesignTimeDefault { get; } = new RazorCodeGenerationOptions(
         indentSize: 4,
         newLine: Environment.NewLine,
         rootNamespace: null,
-        suppressUniqueIds: null,
         flags: RazorCodeGenerationOptionsFlags.DefaultDesignTimeFlags);
 
     private readonly RazorCodeGenerationOptionsFlags _flags;
@@ -32,23 +30,16 @@ public sealed class RazorCodeGenerationOptions
     /// </summary>
     public string? RootNamespace { get; }
 
-    /// <summary>
-    /// Gets a value used for unique ids for testing purposes. Null for unique ids.
-    /// </summary>
-    public string? SuppressUniqueIds { get; }
-
     public RazorCodeGenerationOptions(
         int indentSize,
         string newLine,
         string? rootNamespace,
-        string? suppressUniqueIds,
         RazorCodeGenerationOptionsFlags flags)
     {
         _flags = flags;
         IndentSize = indentSize;
         NewLine = newLine;
         RootNamespace = rootNamespace;
-        SuppressUniqueIds = suppressUniqueIds;
     }
 
     public bool DesignTime
@@ -146,7 +137,7 @@ public sealed class RazorCodeGenerationOptions
 
         return IndentSize == indentSize
             ? this
-            : new(indentSize, NewLine, RootNamespace, SuppressUniqueIds, _flags);
+            : new(indentSize, NewLine, RootNamespace, _flags);
     }
 
     internal RazorCodeGenerationOptions WithNewLine(string newLine)
@@ -155,21 +146,14 @@ public sealed class RazorCodeGenerationOptions
 
         return NewLine == newLine
             ? this
-            : new(IndentSize, newLine, RootNamespace, SuppressUniqueIds, _flags);
+            : new(IndentSize, newLine, RootNamespace, _flags);
     }
 
     internal RazorCodeGenerationOptions WithRootNamespace(string? rootNamespace)
     {
         return RootNamespace == rootNamespace
             ? this
-            : new(IndentSize, NewLine, rootNamespace, SuppressUniqueIds, _flags);
-    }
-
-    internal RazorCodeGenerationOptions WithSuppressUniqueIds(string? suppressUniqueIds)
-    {
-        return SuppressUniqueIds == suppressUniqueIds
-            ? this
-            : new(IndentSize, NewLine, RootNamespace, suppressUniqueIds, _flags);
+            : new(IndentSize, NewLine, rootNamespace, _flags);
     }
 
     /// <summary>
@@ -256,7 +240,7 @@ public sealed class RazorCodeGenerationOptions
             return this;
         }
 
-        return new(IndentSize, NewLine, RootNamespace, SuppressUniqueIds, flags);
+        return new(IndentSize, NewLine, RootNamespace, flags);
     }
 
     public static RazorCodeGenerationOptions Create(Action<RazorCodeGenerationOptionsBuilder> configure)

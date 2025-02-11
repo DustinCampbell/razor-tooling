@@ -1136,7 +1136,7 @@ private global::Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperScopeMana
     public void GetDeterministicId_IsDeterministic()
     {
         // Arrange
-        using var context = TestCodeRenderingContext.CreateRuntime(suppressUniqueIds: null);
+        using var context = TestCodeRenderingContext.CreateRuntime(uniqueId: null);
 
         // Act
         var firstId = context.GetDeterministicId();

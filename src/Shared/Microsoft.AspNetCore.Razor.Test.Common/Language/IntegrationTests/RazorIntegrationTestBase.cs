@@ -7,6 +7,7 @@ using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 using Microsoft.AspNetCore.Razor.Test.Common;
 using Microsoft.AspNetCore.Razor.Utilities;
 using Microsoft.CodeAnalysis;
@@ -121,7 +122,9 @@ public class RazorIntegrationTestBase
                 b.Features.Add(new SetNewLineOptionFeature(LineEnding));
             }
 
-            b.Features.Add(new SuppressUniqueIdsPhase());
+            // If we're in test mode, replace the existing ICodeRenderingContextFactoryFeature with a test version.
+            b.Features.RemoveAll(static f => f is ICodeRenderingContextFactoryFeature);
+            b.Features.Add(new TestCodeRenderingContextFactoryFeature());
 
             b.Features.Add(new CompilationTagHelperFeature());
             b.Features.Add(new DefaultMetadataReferenceFeature()
@@ -516,16 +519,6 @@ public class RazorIntegrationTestBase
         public void Configure(RazorCodeGenerationOptionsBuilder options)
         {
             options.NewLine = newLine;
-        }
-    }
-
-    private sealed class SuppressUniqueIdsPhase : RazorEngineFeatureBase, IConfigureRazorCodeGenerationOptionsFeature
-    {
-        public int Order { get; }
-
-        public void Configure(RazorCodeGenerationOptionsBuilder options)
-        {
-            options.SuppressUniqueIds = "__UniqueIdSuppressedForTesting__";
         }
     }
 }

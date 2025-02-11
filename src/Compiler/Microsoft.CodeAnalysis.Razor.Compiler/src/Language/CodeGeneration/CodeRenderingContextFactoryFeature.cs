@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
-internal sealed class DefaultCodeRenderingContextFactoryFeature : RazorEngineFeatureBase, ICodeRenderingContextFactoryFeature
+internal sealed class CodeRenderingContextFactoryFeature : RazorEngineFeatureBase, ICodeRenderingContextFactoryFeature
 {
     public CodeRenderingContext Create(
         IntermediateNodeWriter nodeWriter,

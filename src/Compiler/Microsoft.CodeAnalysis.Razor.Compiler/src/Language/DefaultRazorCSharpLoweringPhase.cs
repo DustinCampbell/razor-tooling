@@ -27,12 +27,9 @@ internal class DefaultRazorCSharpLoweringPhase : RazorEnginePhaseBase, IRazorCSh
             throw new InvalidOperationException(message);
         }
 
-        if (!Engine.TryGetFeature<ICodeRenderingContextFactoryFeature>(out var contextFactory))
-        {
-            contextFactory = new DefaultCodeRenderingContextFactoryFeature();
-        }
+        var contextFactory = GetRequiredFeature<ICodeRenderingContextFactoryFeature>();
 
-        var csharpDocument = DocumentWriter.WriteDocument(codeDocument, documentNode, documentNode.Target, documentNode.Options);
+        var csharpDocument = DocumentWriter.WriteDocument(codeDocument, documentNode, documentNode.Target, documentNode.Options, contextFactory);
         codeDocument.SetCSharpDocument(csharpDocument);
     }
 }

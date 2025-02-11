@@ -10,6 +10,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 using Microsoft.AspNetCore.Razor.Language.Legacy;
 using Microsoft.AspNetCore.Razor.Language.Syntax;
@@ -111,7 +112,7 @@ public abstract class IntegrationTestBase
         return syntaxTree;
     }
 
-    protected RazorProjectItem AddProjectItemFromText(string text, string filePath = "_ViewImports.cshtml", [CallerMemberName]string testName = "")
+    protected RazorProjectItem AddProjectItemFromText(string text, string filePath = "_ViewImports.cshtml", [CallerMemberName] string testName = "")
     {
         var projectItem = CreateProjectItemFromText(text, filePath, GetTestFileName(testName));
         FileSystem.Add(projectItem);
@@ -153,7 +154,7 @@ public abstract class IntegrationTestBase
         return projectItem;
     }
 
-    protected RazorProjectItem CreateProjectItemFromFile(string? filePath = null, string? fileKind = null, [CallerMemberName]string? testName = "")
+    protected RazorProjectItem CreateProjectItemFromFile(string? filePath = null, string? fileKind = null, [CallerMemberName] string? testName = "")
     {
         var fileName = GetTestFileName(testName);
 
@@ -194,7 +195,7 @@ public abstract class IntegrationTestBase
         return projectItem;
     }
 
-    protected CompiledCSharpCode CompileToCSharp(string text, string path = "test.cshtml", bool? designTime = null, string? cssScope = null, [CallerMemberName]string testName = "")
+    protected CompiledCSharpCode CompileToCSharp(string text, string path = "test.cshtml", bool? designTime = null, string? cssScope = null, [CallerMemberName] string testName = "")
     {
         var projectItem = CreateProjectItemFromText(text, path, GetTestFileName(testName), cssScope);
         return CompileToCSharp(projectItem, designTime);
@@ -301,6 +302,10 @@ public abstract class IntegrationTestBase
         {
             b.Features.Add(new ConfigureCodeGenerationOptionsFeature(LineEnding));
 
+            // If we're in test mode, replace the existing ICodeRenderingContextFactoryFeature with a test version.
+            b.Features.RemoveAll(static f => f is ICodeRenderingContextFactoryFeature);
+            b.Features.Add(new TestCodeRenderingContextFactoryFeature());
+
             b.RegisterExtensions();
 
             configure?.Invoke(b);
@@ -332,7 +337,7 @@ public abstract class IntegrationTestBase
         });
     }
 
-    protected void AssertDocumentNodeMatchesBaseline(DocumentIntermediateNode document, [CallerMemberName]string testName = "")
+    protected void AssertDocumentNodeMatchesBaseline(DocumentIntermediateNode document, [CallerMemberName] string testName = "")
     {
         var baselineFileName = Path.ChangeExtension(GetTestFileName(testName), ".ir.txt");
 
@@ -792,7 +797,6 @@ public abstract class IntegrationTestBase
         public void Configure(RazorCodeGenerationOptionsBuilder options)
         {
             options.NewLine = lineEnding;
-            options.SuppressUniqueIds = "__UniqueIdSuppressedForTesting__";
         }
     }
 
