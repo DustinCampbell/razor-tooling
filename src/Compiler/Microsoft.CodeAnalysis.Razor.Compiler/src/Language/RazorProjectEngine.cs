@@ -234,7 +234,7 @@ public class RazorProjectEngine
     private RazorParserOptions GetParserOptions(string fileKind, Action<RazorParserOptionsBuilder> configure)
     {
         var features = Engine.GetFeatures<IConfigureRazorParserOptionsFeature>();
-        var builder = new RazorParserOptionsBuilder(fileKind, Configuration.LanguageVersion, designTime: false);
+        var builder = new RazorParserOptionsBuilder(Configuration.LanguageVersion, fileKind, designTime: false);
 
         configure.Invoke(builder);
 

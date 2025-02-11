@@ -261,7 +261,7 @@ public abstract class ToolingParserTestBase : ToolingTestBase, IParserTest
         bool enableSpanEditHandlers,
         string fileKind = null)
     {
-        var builder = new RazorParserOptionsBuilder(fileKind, version, designTime)
+        var builder = new RazorParserOptionsBuilder(version, fileKind ?? FileKinds.Legacy, designTime)
         {
             EnableSpanEditHandlers = enableSpanEditHandlers,
             UseRoslynTokenizer = true,

@@ -19,8 +19,5 @@ internal enum RazorParserOptionsFlags
     AllowUsingVariableDeclarations = 1 << 8,
     AllowConditionalDataDashAttributes = 1 << 9,
     AllowCSharpInMarkupAttributeArea = 1 << 10,
-    AllowNullableForgivenessOperator = 1 << 11,
-
-    DefaultFlags = 0,
-    DefaultDesignTimeFlags = DesignTime
+    AllowNullableForgivenessOperator = 1 << 11
 }

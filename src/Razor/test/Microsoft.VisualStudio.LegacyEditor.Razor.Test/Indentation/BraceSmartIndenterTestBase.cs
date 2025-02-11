@@ -84,11 +84,10 @@ public class BraceSmartIndenterTestBase(ITestOutputHelper testOutput) : VisualSt
 
         var content = initialSnapshot.Content;
         var sourceDocument = TestRazorSourceDocument.Create(content);
-        var syntaxTree = RazorSyntaxTree.Parse(sourceDocument, RazorParserOptions.Create(opt =>
-        {
-            opt.SetDirectives([FunctionsDirective.Directive]);
-            opt.EnableSpanEditHandlers = true;
-        }));
+        var options = RazorParserOptions.Default
+            .WithDirectives(FunctionsDirective.Directive)
+            .WithFlags(enableSpanEditHandler: true);
+        var syntaxTree = RazorSyntaxTree.Parse(sourceDocument, options);
 
         var codeDocument = TestRazorCodeDocument.Create(content);
         codeDocument.SetSyntaxTree(syntaxTree);

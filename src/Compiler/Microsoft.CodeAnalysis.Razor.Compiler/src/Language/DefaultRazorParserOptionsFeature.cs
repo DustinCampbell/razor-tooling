@@ -19,7 +19,7 @@ internal class DefaultRazorParserOptionsFeature(RazorLanguageVersion version) : 
 
     public RazorParserOptions GetOptions()
     {
-        var builder = new RazorParserOptionsBuilder(fileKind: null, _version, designTime: false);
+        var builder = new RazorParserOptionsBuilder(_version, FileKinds.Legacy, designTime: false);
 
         foreach (var options in _configureOptions)
         {

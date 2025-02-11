@@ -14,7 +14,7 @@ public class RazorParserTest
     public void ParseMethodCallsParseDocumentOnMarkupParserAndReturnsResults()
     {
         // Arrange
-        var parser = new RazorParser(RazorParserOptions.Create(builder => builder.EnableSpanEditHandlers = true));
+        var parser = new RazorParser(RazorParserOptions.Default.WithFlags(enableSpanEditHandler: true));
         var expected =
 @"RazorDocument - [0..12)::12 - [foo @bar baz]
     MarkupBlock - [0..12)::12

@@ -44,10 +44,10 @@ public class SyntaxTreeGenerationBenchmark
     [Benchmark(Description = "Razor Design Time Syntax Tree Generation of MSN.com")]
     public void SyntaxTreeGeneration_DesignTime_LargeStaticFile()
     {
-        var options = RazorParserOptions.CreateDesignTime(o =>
-        {
-            o.SetDirectives(Directives);
-        });
+        var options = RazorParserOptions.Default
+            .WithDirectives(Directives)
+            .WithFlags(designTime: true);
+
         var syntaxTree = RazorSyntaxTree.Parse(MSN, options);
 
         if (syntaxTree.Diagnostics.Length != 0)
@@ -59,10 +59,7 @@ public class SyntaxTreeGenerationBenchmark
     [Benchmark(Description = "Razor Runtime Syntax Tree Generation of MSN.com")]
     public void SyntaxTreeGeneration_Runtime_LargeStaticFile()
     {
-        var options = RazorParserOptions.Create(o =>
-        {
-            o.SetDirectives(Directives);
-        });
+        var options = RazorParserOptions.Default.WithDirectives(Directives);
         var syntaxTree = RazorSyntaxTree.Parse(MSN, options);
 
         if (syntaxTree.Diagnostics.Length != 0)

@@ -294,7 +294,7 @@ public abstract class ParserTestBase : IParserTest
         string fileKind,
         CSharpParseOptions csharpParseOptions)
     {
-        var builder = new RazorParserOptionsBuilder(fileKind, version, designTime)
+        var builder = new RazorParserOptionsBuilder(version, fileKind ?? FileKinds.Legacy, designTime)
         {
             EnableSpanEditHandlers = enableSpanEditHandlers,
             UseRoslynTokenizer = !useLegacyTokenizer,

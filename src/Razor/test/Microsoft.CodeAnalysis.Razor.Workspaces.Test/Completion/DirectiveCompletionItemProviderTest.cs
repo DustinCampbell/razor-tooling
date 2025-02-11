@@ -469,11 +469,12 @@ public class DirectiveCompletionItemProviderTest(ITestOutputHelper testOutput) :
     private static RazorSyntaxTree CreateSyntaxTree(string text, string fileKind, params ImmutableArray<DirectiveDescriptor> directives)
     {
         var sourceDocument = TestRazorSourceDocument.Create(text);
-        var options = RazorParserOptions.Create(builder =>
-        {
-            builder.SetDirectives(directives);
-        }, fileKind);
+        var options = RazorParserOptions
+            .Create(RazorLanguageVersion.Latest, fileKind)
+            .WithDirectives(directives);
+
         var syntaxTree = RazorSyntaxTree.Parse(sourceDocument, options);
+
         return syntaxTree;
     }
 }

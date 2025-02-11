@@ -83,63 +83,27 @@ public sealed class RazorParserOptionsBuilder
         set => _flags.UpdateFlag(RazorParserOptionsFlags.AllowNullableForgivenessOperator, value);
     }
 
-    internal RazorParserOptionsBuilder(string? fileKind, RazorLanguageVersion version, bool designTime)
+    internal RazorParserOptionsBuilder(RazorLanguageVersion version, string fileKind, bool designTime)
     {
         FileKind = fileKind ?? FileKinds.Legacy;
         LanguageVersion = version ?? RazorLanguageVersion.Latest;
         CSharpParseOptions = CSharpParseOptions.Default;
 
-        _flags = ComputeFlags(FileKind, LanguageVersion, designTime);
-    }
-
-    private static RazorParserOptionsFlags ComputeFlags(string fileKind, RazorLanguageVersion version, bool designTime)
-    {
-        RazorParserOptionsFlags flags = 0;
+        _flags = RazorParserOptions.GetDefaultFlags(LanguageVersion, FileKind);
 
         if (designTime)
         {
-            flags.SetFlag(RazorParserOptionsFlags.DesignTime);
+            _flags.SetFlag(RazorParserOptionsFlags.DesignTime);
         }
-
-        flags.SetFlag(RazorParserOptionsFlags.AllowCSharpInMarkupAttributeArea);
-
-        if (version >= RazorLanguageVersion.Version_2_1)
-        {
-            // Added in 2.1
-            flags.SetFlag(RazorParserOptionsFlags.AllowMinimizedBooleanTagHelperAttributes);
-            flags.SetFlag(RazorParserOptionsFlags.AllowHtmlCommentsInTagHelpers);
-        }
-
-        if (version >= RazorLanguageVersion.Version_3_0)
-        {
-            // Added in 3.0
-            flags.SetFlag(RazorParserOptionsFlags.AllowComponentFileKind);
-            flags.SetFlag(RazorParserOptionsFlags.AllowRazorInAllCodeBlocks);
-            flags.SetFlag(RazorParserOptionsFlags.AllowUsingVariableDeclarations);
-            flags.SetFlag(RazorParserOptionsFlags.AllowNullableForgivenessOperator);
-        }
-
-        if (FileKinds.IsComponent(fileKind))
-        {
-            flags.SetFlag(RazorParserOptionsFlags.AllowConditionalDataDashAttributes);
-            flags.ClearFlag(RazorParserOptionsFlags.AllowCSharpInMarkupAttributeArea);
-        }
-
-        if (version >= RazorLanguageVersion.Experimental)
-        {
-            flags.SetFlag(RazorParserOptionsFlags.AllowConditionalDataDashAttributes);
-        }
-
-        return flags;
     }
 
     public RazorParserOptions Build()
         => new(
-            _flags,
-            _directives,
             LanguageVersion,
             FileKind,
-            CSharpParseOptions);
+            _directives,
+            CSharpParseOptions,
+            _flags);
 
     public void SetDesignTime(bool value)
     {

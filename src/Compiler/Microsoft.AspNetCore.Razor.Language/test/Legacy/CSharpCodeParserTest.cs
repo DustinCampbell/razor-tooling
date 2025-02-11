@@ -221,10 +221,8 @@ public class CSharpCodeParserTest
             DirectiveDescriptor.CreateDirective("test", DirectiveKind.SingleLine)
         ];
 
-        var options = RazorParserOptions.Create(builder =>
-        {
-            builder.SetDirectives(directives);
-        });
+        var options = RazorParserOptions.Default
+            .WithDirectives(directives);
 
         using var context = new ParserContext(source, options);
 

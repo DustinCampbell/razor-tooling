@@ -616,10 +616,7 @@ public class ExtractToComponentCodeActionProviderTest(ITestOutputHelper testOutp
         relativePath ??= filePath;
 
         var sourceDocument = RazorSourceDocument.Create(text, RazorSourceDocumentProperties.Create(filePath, relativePath));
-        var options = RazorParserOptions.Create(o =>
-        {
-            o.SetDirectives([ComponentCodeDirective.Directive, FunctionsDirective.Directive]);
-        });
+        var options = RazorParserOptions.Default.WithDirectives(ComponentCodeDirective.Directive, FunctionsDirective.Directive);
         var syntaxTree = RazorSyntaxTree.Parse(sourceDocument, options);
 
         var codeDocument = TestRazorCodeDocument.Create(sourceDocument, imports: default);
