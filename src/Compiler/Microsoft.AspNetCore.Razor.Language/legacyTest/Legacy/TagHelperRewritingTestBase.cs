@@ -1,6 +1,7 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using Xunit;
@@ -35,9 +36,26 @@ public class TagHelperRewritingTestBase() : ParserTestBase(layer: TestProject.La
         ImmutableArray<TagHelperDescriptor> descriptors,
         string documentContent,
         string? tagHelperPrefix = null,
-        RazorParserFeatureFlags? featureFlags = null)
+        Action<RazorParserOptionsBuilder>? configureParserOptions = null)
     {
-        var syntaxTree = ParseDocument(documentContent, featureFlags: featureFlags);
+        var syntaxTree = ParseDocument(documentContent, configureParserOptions: configureParserOptions);
+
+        var binder = new TagHelperBinder(tagHelperPrefix, descriptors);
+        var rewrittenTree = TagHelperParseTreeRewriter.Rewrite(syntaxTree, binder, out _);
+
+        Assert.Equal(syntaxTree.Root.FullWidth, rewrittenTree.Root.FullWidth);
+
+        BaselineTest(rewrittenTree);
+    }
+
+    internal void EvaluateData(
+        ImmutableArray<TagHelperDescriptor> descriptors,
+        string documentContent,
+        RazorLanguageVersion languageVersion,
+        string fileKind,
+        string? tagHelperPrefix = null)
+    {
+        var syntaxTree = ParseDocument(languageVersion, documentContent, directives: default, fileKind: fileKind);
 
         var binder = new TagHelperBinder(tagHelperPrefix, descriptors);
         var rewrittenTree = TagHelperParseTreeRewriter.Rewrite(syntaxTree, binder, out _);

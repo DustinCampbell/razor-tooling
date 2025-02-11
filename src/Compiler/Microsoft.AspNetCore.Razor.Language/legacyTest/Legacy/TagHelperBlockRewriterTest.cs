@@ -2208,10 +2208,8 @@ public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
                 .Build(),
         ];
 
-        var featureFlags = CreateFeatureFlags();
-
         // Act & Assert
-        EvaluateData(descriptors, document, featureFlags: featureFlags);
+        EvaluateData(descriptors, document, configureParserOptions: ConfigureParserOptions());
     }
 
     [Fact]
@@ -2252,10 +2250,9 @@ public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
                 .Build(),
         ];
 
-        var featureFlags = CreateFeatureFlags(allowCSharpInMarkupAttributeArea: false);
 
         // Act & Assert
-        EvaluateData(descriptors, document, featureFlags: featureFlags);
+        EvaluateData(descriptors, document, configureParserOptions: ConfigureParserOptions(allowCSharpInMarkupAttributeArea: false));
     }
 
     [Fact]
@@ -2297,13 +2294,11 @@ public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
                 .Build(),
         ];
 
-        var featureFlags = CreateFeatureFlags(allowCSharpInMarkupAttributeArea: false);
-
         // Act & Assert
-        EvaluateData(descriptors, document, featureFlags: featureFlags);
+        EvaluateData(descriptors, document, configureParserOptions: ConfigureParserOptions(allowCSharpInMarkupAttributeArea: false));
     }
 
-    private static RazorParserFeatureFlags CreateFeatureFlags(
+    private static Action<RazorParserOptionsBuilder> ConfigureParserOptions(
         bool allowMinimizedBooleanTagHelperAttributes = false,
         bool allowHtmlCommentsInTagHelper = false,
         bool allowComponentFileKind = false,
@@ -2312,13 +2307,17 @@ public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
         bool allowConditionalDataDashAttributesInComponents = false,
         bool allowCSharpInMarkupAttributeArea = true,
         bool allowNullableForgivenessOperator = false)
-        => new(
-            allowMinimizedBooleanTagHelperAttributes,
-            allowHtmlCommentsInTagHelper,
-            allowComponentFileKind,
-            allowRazorInCodeBlockDirectives,
-            allowUsingVariableDeclarations,
-            allowConditionalDataDashAttributesInComponents,
-            allowCSharpInMarkupAttributeArea,
-            allowNullableForgivenessOperator);
+    {
+        return builder =>
+        {
+            builder.AllowMinimizedBooleanTagHelperAttributes = allowMinimizedBooleanTagHelperAttributes;
+            builder.AllowHtmlCommentsInTagHelpers = allowHtmlCommentsInTagHelper;
+            builder.AllowComponentFileKind = allowComponentFileKind;
+            builder.AllowRazorInAllCodeBlocks = allowRazorInCodeBlockDirectives;
+            builder.AllowUsingVariableDeclarations = allowUsingVariableDeclarations;
+            builder.AllowConditionalDataDashAttributes = allowConditionalDataDashAttributesInComponents;
+            builder.AllowCSharpInMarkupAttributeArea = allowCSharpInMarkupAttributeArea;
+            builder.AllowNullableForgivenessOperator = allowNullableForgivenessOperator;
+        };
+    }
 }

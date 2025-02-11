@@ -194,11 +194,11 @@ public abstract class ParserTestBase : IParserTest
         string document,
         bool designTime = false,
         ImmutableArray<DirectiveDescriptor> directives = default,
-        RazorParserFeatureFlags featureFlags = null,
+        Action<RazorParserOptionsBuilder> configureParserOptions = null,
         string fileKind = null,
         CSharpParseOptions csharpParseOptions = null)
     {
-        return ParseDocument(RazorLanguageVersion.Latest, document, directives, designTime, featureFlags, fileKind, csharpParseOptions);
+        return ParseDocument(RazorLanguageVersion.Latest, document, directives, designTime, configureParserOptions, fileKind, csharpParseOptions);
     }
 
     internal virtual RazorSyntaxTree ParseDocument(
@@ -206,13 +206,13 @@ public abstract class ParserTestBase : IParserTest
         string document,
         ImmutableArray<DirectiveDescriptor> directives,
         bool designTime = false,
-        RazorParserFeatureFlags featureFlags = null,
+        Action<RazorParserOptionsBuilder> configureParserOptions = null,
         string fileKind = null,
         CSharpParseOptions csharpParseOptions = null)
     {
         var source = TestRazorSourceDocument.Create(document, filePath: null, relativePath: null, normalizeNewLines: true);
 
-        var options = CreateParserOptions(version, directives, designTime, _validateSpanEditHandlers, _useLegacyTokenizer, featureFlags, fileKind, csharpParseOptions);
+        var options = CreateParserOptions(version, directives, designTime, _validateSpanEditHandlers, _useLegacyTokenizer, configureParserOptions, fileKind, csharpParseOptions);
 
         using var context = new ParserContext(source, options);
         using var codeParser = new CSharpCodeParser(context);
@@ -290,7 +290,7 @@ public abstract class ParserTestBase : IParserTest
         bool designTime,
         bool enableSpanEditHandlers,
         bool useLegacyTokenizer,
-        RazorParserFeatureFlags featureFlags,
+        Action<RazorParserOptionsBuilder> configureParserOptions,
         string fileKind,
         CSharpParseOptions csharpParseOptions)
     {
@@ -304,10 +304,7 @@ public abstract class ParserTestBase : IParserTest
         builder.SetDirectives(directives);
         builder.SetDesignTime(designTime);
 
-        if (featureFlags is not null)
-        {
-            builder.SetFeatureFlags(featureFlags);
-        }
+        configureParserOptions?.Invoke(builder);
 
         return builder.Build();
     }

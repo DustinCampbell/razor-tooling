@@ -179,10 +179,9 @@ public abstract class ToolingParserTestBase : ToolingTestBase, IParserTest
         string document,
         bool designTime = false,
         ImmutableArray<DirectiveDescriptor> directives = default,
-        RazorParserFeatureFlags featureFlags = null,
         string fileKind = null)
     {
-        return ParseDocument(RazorLanguageVersion.Latest, document, directives, designTime, featureFlags, fileKind);
+        return ParseDocument(RazorLanguageVersion.Latest, document, directives, designTime, fileKind);
     }
 
     internal virtual RazorSyntaxTree ParseDocument(
@@ -190,12 +189,11 @@ public abstract class ToolingParserTestBase : ToolingTestBase, IParserTest
         string document,
         ImmutableArray<DirectiveDescriptor> directives,
         bool designTime = false,
-        RazorParserFeatureFlags featureFlags = null,
         string fileKind = null)
     {
         var source = TestRazorSourceDocument.Create(document, filePath: null, relativePath: null, normalizeNewLines: true);
 
-        var options = CreateParserOptions(version, directives, designTime, EnableSpanEditHandlers, featureFlags, fileKind);
+        var options = CreateParserOptions(version, directives, designTime, EnableSpanEditHandlers, fileKind);
 
         using var context = new ParserContext(source, options);
         using var codeParser = new CSharpCodeParser(context);
@@ -261,7 +259,6 @@ public abstract class ToolingParserTestBase : ToolingTestBase, IParserTest
         ImmutableArray<DirectiveDescriptor> directives,
         bool designTime,
         bool enableSpanEditHandlers,
-        RazorParserFeatureFlags featureFlags = null,
         string fileKind = null)
     {
         var builder = new RazorParserOptionsBuilder(fileKind, version, designTime)
@@ -273,11 +270,6 @@ public abstract class ToolingParserTestBase : ToolingTestBase, IParserTest
 
         builder.SetDirectives(directives);
         builder.SetDesignTime(designTime);
-
-        if (featureFlags is not null)
-        {
-            builder.SetFeatureFlags(featureFlags);
-        }
 
         return builder.Build();
     }

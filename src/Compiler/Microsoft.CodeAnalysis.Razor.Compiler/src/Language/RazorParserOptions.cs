@@ -16,8 +16,6 @@ public sealed class RazorParserOptions
     public CSharpParseOptions CSharpParseOptions { get; }
     public RazorLanguageVersion Version { get; } = RazorLanguageVersion.Latest;
 
-    internal RazorParserFeatureFlags FeatureFlags { get; /* Testing Only */ init; }
-
     public bool DesignTime
         => _flags.IsFlagSet(RazorParserOptionsFlags.DesignTime);
 
@@ -38,6 +36,30 @@ public sealed class RazorParserOptions
     internal bool EnableSpanEditHandlers
         => _flags.IsFlagSet(RazorParserOptionsFlags.EnableSpanEditHandlers);
 
+    internal bool AllowMinimizedBooleanTagHelperAttributes
+        => _flags.IsFlagSet(RazorParserOptionsFlags.AllowMinimizedBooleanTagHelperAttributes);
+
+    internal bool AllowHtmlCommentsInTagHelpers
+        => _flags.IsFlagSet(RazorParserOptionsFlags.AllowHtmlCommentsInTagHelpers);
+
+    internal bool AllowComponentFileKind
+        => _flags.IsFlagSet(RazorParserOptionsFlags.AllowComponentFileKind);
+
+    internal bool AllowRazorInAllCodeBlocks
+        => _flags.IsFlagSet(RazorParserOptionsFlags.AllowRazorInAllCodeBlocks);
+
+    internal bool AllowUsingVariableDeclarations
+        => _flags.IsFlagSet(RazorParserOptionsFlags.AllowUsingVariableDeclarations);
+
+    internal bool AllowConditionalDataDashAttributes
+        => _flags.IsFlagSet(RazorParserOptionsFlags.AllowConditionalDataDashAttributes);
+
+    internal bool AllowCSharpInMarkupAttributeArea
+        => _flags.IsFlagSet(RazorParserOptionsFlags.AllowCSharpInMarkupAttributeArea);
+
+    internal bool AllowNullableForgivenessOperator
+        => _flags.IsFlagSet(RazorParserOptionsFlags.AllowNullableForgivenessOperator);
+
     internal RazorParserOptions(
         RazorParserOptionsFlags flags,
         ImmutableArray<DirectiveDescriptor> directives,
@@ -57,7 +79,6 @@ public sealed class RazorParserOptions
 
         Directives = directives.NullToEmpty();
         Version = version;
-        FeatureFlags = RazorParserFeatureFlags.Create(Version, fileKind);
         FileKind = fileKind;
         CSharpParseOptions = csharpParseOptions;
     }
@@ -70,6 +91,11 @@ public sealed class RazorParserOptions
             version: RazorLanguageVersion.Latest,
             fileKind: FileKinds.Legacy,
             csharpParseOptions: CSharpParseOptions.Default);
+    }
+
+    public static RazorParserOptions Create(RazorLanguageVersion version, string fileKind)
+    {
+        return new RazorParserOptionsBuilder(fileKind, version, designTime: false).Build();
     }
 
     public static RazorParserOptions Create(Action<RazorParserOptionsBuilder> configure)
@@ -86,6 +112,11 @@ public sealed class RazorParserOptions
         var options = builder.Build();
 
         return options;
+    }
+
+    public static RazorParserOptions CreateDesignTime(RazorLanguageVersion version, string fileKind)
+    {
+        return new RazorParserOptionsBuilder(fileKind, version, designTime: true).Build();
     }
 
     public static RazorParserOptions CreateDesignTime(Action<RazorParserOptionsBuilder> configure)

@@ -2431,10 +2431,10 @@ public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
                 .Build(),
         ];
 
-        var featureFlags = CreateFeatureFlags();
+        var featureFlags = ConfigureParserOptions();
 
         // Act & Assert
-        EvaluateData(descriptors, document, featureFlags: featureFlags);
+        EvaluateData(descriptors, document, configureParserOptions: featureFlags);
     }
 
     [Fact]
@@ -2475,10 +2475,8 @@ public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
                 .Build(),
         ];
 
-        var featureFlags = CreateFeatureFlags(allowCSharpInMarkupAttributeArea: false);
-
         // Act & Assert
-        EvaluateData(descriptors, document, featureFlags: featureFlags);
+        EvaluateData(descriptors, document, configureParserOptions: ConfigureParserOptions(allowCSharpInMarkupAttributeArea: false));
     }
 
     [Fact]
@@ -2520,28 +2518,30 @@ public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
                 .Build(),
         ];
 
-        var featureFlags = CreateFeatureFlags(allowCSharpInMarkupAttributeArea: false);
-
         // Act & Assert
-        EvaluateData(descriptors, document, featureFlags: featureFlags);
+        EvaluateData(descriptors, document, configureParserOptions: ConfigureParserOptions(allowCSharpInMarkupAttributeArea: false));
     }
 
-    private static RazorParserFeatureFlags CreateFeatureFlags(
-            bool allowMinimizedBooleanTagHelperAttributes = false,
-            bool allowHtmlCommentsInTagHelper = false,
-            bool allowComponentFileKind = false,
-            bool allowRazorInCodeAllBlocks = false,
-            bool allowUsingVariableDeclarations = false,
-            bool allowConditionalDataDashAttributesInComponents = false,
-            bool allowCSharpInMarkupAttributeArea = true,
-            bool allowNullableForgivenessOperator = false)
-            => new(
-                allowMinimizedBooleanTagHelperAttributes,
-                allowHtmlCommentsInTagHelper,
-                allowComponentFileKind,
-                allowRazorInCodeAllBlocks,
-                allowUsingVariableDeclarations,
-                allowConditionalDataDashAttributesInComponents,
-                allowCSharpInMarkupAttributeArea,
-                allowNullableForgivenessOperator);
+    private static Action<RazorParserOptionsBuilder> ConfigureParserOptions(
+        bool allowMinimizedBooleanTagHelperAttributes = false,
+        bool allowHtmlCommentsInTagHelper = false,
+        bool allowComponentFileKind = false,
+        bool allowRazorInCodeAllBlocks = false,
+        bool allowUsingVariableDeclarations = false,
+        bool allowConditionalDataDashAttributesInComponents = false,
+        bool allowCSharpInMarkupAttributeArea = true,
+        bool allowNullableForgivenessOperator = false)
+    {
+        return builder =>
+        {
+            builder.AllowMinimizedBooleanTagHelperAttributes = allowMinimizedBooleanTagHelperAttributes;
+            builder.AllowHtmlCommentsInTagHelpers = allowHtmlCommentsInTagHelper;
+            builder.AllowComponentFileKind = allowComponentFileKind;
+            builder.AllowRazorInAllCodeBlocks = allowRazorInCodeAllBlocks;
+            builder.AllowUsingVariableDeclarations = allowUsingVariableDeclarations;
+            builder.AllowConditionalDataDashAttributes = allowConditionalDataDashAttributesInComponents;
+            builder.AllowCSharpInMarkupAttributeArea = allowCSharpInMarkupAttributeArea;
+            builder.AllowNullableForgivenessOperator = allowNullableForgivenessOperator;
+        };
+    }
 }

@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Razor.PooledObjects;
 using Microsoft.CodeAnalysis.CSharp;
@@ -12,7 +11,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
 internal sealed partial class ParserContext : IDisposable
 {
-    private readonly RazorParserOptions _options;
+    public RazorParserOptions Options { get; }
     private readonly Stack<ErrorSink> _errorSinkStack;
     private readonly HashSet<string> _seenDirectivesSet;
 
@@ -32,7 +31,7 @@ internal sealed partial class ParserContext : IDisposable
         ArgHelper.ThrowIfNull(options);
 
         SourceDocument = source;
-        _options = options;
+        Options = options;
 
         _errorSinkStack = StackPool<ErrorSink>.Default.Get();
         _errorSinkStack.Push(new ErrorSink());
@@ -56,21 +55,11 @@ internal sealed partial class ParserContext : IDisposable
 
     public ErrorSink ErrorSink => _errorSinkStack.Peek();
 
-    public RazorParserFeatureFlags FeatureFlags => _options.FeatureFlags;
-
     public HashSet<string> SeenDirectives => _seenDirectivesSet;
 
-    public ImmutableArray<DirectiveDescriptor> Directives => _options.Directives;
+    public bool DesignTimeMode => Options.DesignTime;
 
-    public bool DesignTimeMode => _options.DesignTime;
-
-    public bool UseRoslynTokenizer => _options.UseRoslynTokenizer;
-
-    public CSharpParseOptions CSharpParseOptions => _options.CSharpParseOptions;
-
-    public bool ParseLeadingDirectives => _options.ParseLeadingDirectives;
-
-    public bool EnableSpanEditHandlers => _options.EnableSpanEditHandlers;
+    public CSharpParseOptions CSharpParseOptions => Options.CSharpParseOptions;
 
     public bool IsEndOfFile
         => Source.Peek() == -1;
