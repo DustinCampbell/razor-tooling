@@ -10,20 +10,20 @@ internal class DefaultRazorParserOptionsFeature(RazorLanguageVersion version) : 
 #pragma warning restore CS0618 // Type or member is obsolete
 {
     private readonly RazorLanguageVersion _version = version;
-    private ImmutableArray<IConfigureRazorParserOptionsFeature> _configureOptions;
+    private ImmutableArray<IConfigureParserOptionsFeature> _features;
 
     protected override void OnInitialized()
     {
-        _configureOptions = Engine.GetFeatures<IConfigureRazorParserOptionsFeature>();
+        _features = Engine.GetFeatures<IConfigureParserOptionsFeature>().OrderByAsArray(static x => x.Order);
     }
 
     public RazorParserOptions GetOptions()
     {
         var builder = new RazorParserOptions.Builder(_version, FileKinds.Legacy);
 
-        foreach (var options in _configureOptions)
+        foreach (var feature in _features)
         {
-            options.Configure(builder);
+            feature.Configure(builder);
         }
 
         return builder.ToOptions();

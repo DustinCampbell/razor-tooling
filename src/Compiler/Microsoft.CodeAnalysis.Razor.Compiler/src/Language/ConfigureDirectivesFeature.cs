@@ -7,7 +7,7 @@ using System.Collections.Immutable;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-internal sealed class ConfigureDirectivesFeature : RazorEngineFeatureBase, IConfigureRazorParserOptionsFeature
+internal sealed class ConfigureDirectivesFeature : RazorEngineFeatureBase, IConfigureParserOptionsFeature
 {
     public int Order => 100;
 
@@ -43,7 +43,7 @@ internal sealed class ConfigureDirectivesFeature : RazorEngineFeatureBase, IConf
         }
     }
 
-    void IConfigureRazorParserOptionsFeature.Configure(RazorParserOptions.Builder builder)
+    void IConfigureParserOptionsFeature.Configure(RazorParserOptions.Builder builder)
     {
         builder.Directives = GetDirectives(builder.FileKind);
     }

@@ -233,7 +233,7 @@ public class RazorProjectEngine
 
     private RazorParserOptions GetParserOptions(string fileKind, Action<RazorParserOptions.Builder> configure)
     {
-        var features = Engine.GetFeatures<IConfigureRazorParserOptionsFeature>();
+        var features = Engine.GetFeatures<IConfigureParserOptionsFeature>().OrderByAsArray(static x => x.Order);
         var builder = new RazorParserOptions.Builder(Configuration.LanguageVersion, fileKind);
 
         configure.Invoke(builder);

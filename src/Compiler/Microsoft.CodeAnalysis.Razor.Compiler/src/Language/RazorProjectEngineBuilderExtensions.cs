@@ -163,7 +163,7 @@ public static class RazorProjectEngineBuilderExtensions
         return feature;
     }
 
-    private sealed class ConfigureParserOptionsFeature(Action<RazorParserOptions.Builder> configure) : RazorEngineFeatureBase, IConfigureRazorParserOptionsFeature
+    private sealed class ConfigureParserOptionsFeature(Action<RazorParserOptions.Builder> configure) : RazorEngineFeatureBase, IConfigureParserOptionsFeature
     {
         public int Order { get; set; }
 
