@@ -300,7 +300,10 @@ public abstract class IntegrationTestBase
     {
         return RazorProjectEngine.Create(configuration, FileSystem, b =>
         {
-            b.Features.Add(new ConfigureCodeGenerationOptionsFeature(LineEnding));
+            b.ConfigureCodeGenerationOptions(builder =>
+            {
+                builder.NewLine = LineEnding;
+            });
 
             // If we're in test mode, replace the existing ICodeRenderingContextFactoryFeature with a test version.
             b.Features.RemoveAll(static f => f is ICodeRenderingContextFactoryFeature);
@@ -788,16 +791,6 @@ public abstract class IntegrationTestBase
     private static string NormalizeNewLines(string content, string lineEnding)
     {
         return Regex.Replace(content, "(?<!\r)\n", lineEnding, RegexOptions.None, TimeSpan.FromSeconds(10));
-    }
-
-    private sealed class ConfigureCodeGenerationOptionsFeature(string lineEnding) : RazorEngineFeatureBase, IConfigureRazorCodeGenerationOptionsFeature
-    {
-        public int Order { get; }
-
-        public void Configure(RazorCodeGenerationOptions.Builder builder)
-        {
-            builder.NewLine = lineEnding;
-        }
     }
 
     // 'Default' imports won't have normalized line-endings, which is unfriendly for testing.

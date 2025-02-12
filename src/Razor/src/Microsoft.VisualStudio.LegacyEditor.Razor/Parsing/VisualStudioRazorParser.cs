@@ -500,8 +500,17 @@ internal class VisualStudioRazorParser : IVisualStudioRazorParser, IDisposable
             builder.SetCSharpLanguageVersion(projectSnapshot.CSharpLanguageVersion);
         }
 
-        builder.SetRootNamespace(projectSnapshot?.RootNamespace);
-        builder.Features.Add(new VisualStudioParserOptionsFeature(_documentTracker.EditorSettings));
+        var settings = _documentTracker.EditorSettings;
+
+        builder.ConfigureCodeGenerationOptions(builder =>
+        {
+            builder.IndentSize = settings.IndentSize;
+            builder.IndentWithTabs = settings.IndentWithTabs;
+            builder.RemapLinePragmaPathsOnWindows = true;
+
+            builder.RootNamespace = projectSnapshot?.RootNamespace;
+        });
+
         builder.Features.Add(new VisualStudioTagHelperFeature(_documentTracker.TagHelpers));
 
         builder.ConfigureParserOptions(ConfigureParserOptions);
@@ -578,25 +587,6 @@ internal class VisualStudioRazorParser : IVisualStudioRazorParser, IDisposable
                 // At this point it's possible these requests have been cancelled, if that's the case Complete noops.
                 matchingRequests[i].Complete(codeDocument);
             }
-        }
-    }
-
-    private class VisualStudioParserOptionsFeature : RazorEngineFeatureBase, IConfigureRazorCodeGenerationOptionsFeature
-    {
-        private readonly ClientSpaceSettings _settings;
-
-        public VisualStudioParserOptionsFeature(ClientSpaceSettings settings)
-        {
-            _settings = settings;
-        }
-
-        public int Order { get; set; }
-
-        public void Configure(RazorCodeGenerationOptions.Builder builder)
-        {
-            builder.IndentSize = _settings.IndentSize;
-            builder.IndentWithTabs = _settings.IndentWithTabs;
-            builder.RemapLinePragmaPathsOnWindows = true;
         }
     }
 

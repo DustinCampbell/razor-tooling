@@ -107,17 +107,20 @@ public class RazorToolingIntegrationTestBase : ToolingTestBase
     {
         return RazorProjectEngine.Create(configuration, FileSystem, b =>
         {
-            b.SetRootNamespace(DefaultRootNamespace);
+            b.ConfigureCodeGenerationOptions(builder =>
+            {
+                builder.RootNamespace = DefaultRootNamespace;
 
-            // Turn off checksums, we're testing code generation.
-            b.Features.Add(new SuppressChecksum());
+                // Turn off checksums, we're testing code generation.
+                builder.SuppressChecksum = true;
+
+                if (LineEnding != null)
+                {
+                    builder.NewLine = LineEnding;
+                }
+            });
 
             b.Features.Add(new TestImportProjectFeature(ImportItems.ToImmutable()));
-
-            if (LineEnding != null)
-            {
-                b.Features.Add(new SetNewLineOptionFeature(LineEnding));
-            }
 
             b.Features.Add(new DefaultTypeNameFeature());
 
@@ -399,26 +402,6 @@ public class RazorToolingIntegrationTestBase : ToolingTestBase
 
                 return builder.ToString();
             }
-        }
-    }
-
-    private class SuppressChecksum : RazorEngineFeatureBase, IConfigureRazorCodeGenerationOptionsFeature
-    {
-        public int Order => 0;
-
-        public void Configure(RazorCodeGenerationOptions.Builder builder)
-        {
-            builder.SuppressChecksum = true;
-        }
-    }
-
-    private sealed class SetNewLineOptionFeature(string newLine) : RazorEngineFeatureBase, IConfigureRazorCodeGenerationOptionsFeature
-    {
-        public int Order { get; }
-
-        public void Configure(RazorCodeGenerationOptions.Builder builder)
-        {
-            builder.NewLine = newLine;
         }
     }
 }

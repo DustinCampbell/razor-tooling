@@ -297,7 +297,10 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
                 builder.DesignTime = designTime;
             });
 
-            b.Features.Add(new DesignTimeOptionsFeature(designTime));
+            b.ConfigureCodeGenerationOptions(builder =>
+            {
+                builder.DesignTime = designTime;
+            });
         }).Engine;
     }
 
@@ -340,23 +343,6 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
         public override void VisitNamespaceDeclaration(NamespaceDeclarationIntermediateNode node)
         {
             Node = node;
-        }
-    }
-
-    private class DesignTimeOptionsFeature : RazorEngineFeatureBase, IConfigureRazorCodeGenerationOptionsFeature
-    {
-        private readonly bool _designTime;
-
-        public DesignTimeOptionsFeature(bool designTime)
-        {
-            _designTime = designTime;
-        }
-
-        public int Order { get; }
-
-        public void Configure(RazorCodeGenerationOptions.Builder builder)
-        {
-            builder.DesignTime = _designTime;
         }
     }
 }

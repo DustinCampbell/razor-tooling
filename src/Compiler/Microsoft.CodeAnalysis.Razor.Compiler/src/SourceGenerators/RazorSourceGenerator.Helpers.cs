@@ -50,20 +50,20 @@ namespace Microsoft.NET.Sdk.Razor.SourceGenerators
             var discoveryProjectEngine = RazorProjectEngine.Create(razorSourceGeneratorOptions.Configuration, fileSystem, b =>
             {
                 b.Features.Add(new DefaultTypeNameFeature());
-                b.Features.Add(new ConfigureRazorCodeGenerationOptions(options =>
+
+                b.ConfigureCodeGenerationOptions(builder =>
                 {
-                    options.SuppressPrimaryMethodBody = true;
-                    options.SuppressChecksum = true;
-                    options.SupportLocalizedComponentNames = razorSourceGeneratorOptions.SupportLocalizedComponentNames;
-                }));
+                    builder.SuppressPrimaryMethodBody = true;
+                    builder.SuppressChecksum = true;
+                    builder.SupportLocalizedComponentNames = razorSourceGeneratorOptions.SupportLocalizedComponentNames;
+                    builder.RootNamespace = razorSourceGeneratorOptions.RootNamespace;
+                });
 
                 b.ConfigureParserOptions(builder =>
                 {
                     builder.UseRoslynTokenizer = razorSourceGeneratorOptions.UseRoslynTokenizer;
                     builder.CSharpParseOptions = razorSourceGeneratorOptions.CSharpParseOptions;
                 });
-
-                b.SetRootNamespace(razorSourceGeneratorOptions.RootNamespace);
 
                 CompilerFeatures.Register(b);
                 RazorExtensions.Register(b);
@@ -106,7 +106,6 @@ namespace Microsoft.NET.Sdk.Razor.SourceGenerators
             var projectEngine = RazorProjectEngine.Create(razorSourceGeneratorOptions.Configuration, fileSystem, b =>
             {
                 b.Features.Add(new DefaultTypeNameFeature());
-                b.SetRootNamespace(razorSourceGeneratorOptions.RootNamespace);
 
                 // If we're in test mode, replace the existing ICodeRenderingContextFactoryFeature with a test version.
                 if (razorSourceGeneratorOptions.TestSuppressUniqueIds is string uniqueId)
@@ -115,12 +114,13 @@ namespace Microsoft.NET.Sdk.Razor.SourceGenerators
                     b.Features.Add(new TestCodeRenderingContextFactoryFeature(uniqueId));
                 }
 
-                b.Features.Add(new ConfigureRazorCodeGenerationOptions(options =>
+                b.ConfigureCodeGenerationOptions(builder =>
                 {
-                    options.SuppressMetadataSourceChecksumAttributes = !razorSourceGeneratorOptions.GenerateMetadataSourceChecksumAttributes;
-                    options.SupportLocalizedComponentNames = razorSourceGeneratorOptions.SupportLocalizedComponentNames;
-                    options.SuppressAddComponentParameter = razorSourceGeneratorOptions.Configuration.SuppressAddComponentParameter;
-                }));
+                    builder.SuppressMetadataSourceChecksumAttributes = !razorSourceGeneratorOptions.GenerateMetadataSourceChecksumAttributes;
+                    builder.SupportLocalizedComponentNames = razorSourceGeneratorOptions.SupportLocalizedComponentNames;
+                    builder.SuppressAddComponentParameter = razorSourceGeneratorOptions.Configuration.SuppressAddComponentParameter;
+                    builder.RootNamespace = razorSourceGeneratorOptions.RootNamespace;
+                });
 
                 b.ConfigureParserOptions(builder =>
                 {

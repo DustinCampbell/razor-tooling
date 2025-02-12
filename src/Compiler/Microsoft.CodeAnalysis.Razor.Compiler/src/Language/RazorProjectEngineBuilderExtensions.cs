@@ -58,6 +58,16 @@ public static class RazorProjectEngineBuilderExtensions
         return builder;
     }
 
+    public static RazorProjectEngineBuilder ConfigureCodeGenerationOptions(this RazorProjectEngineBuilder builder, Action<RazorCodeGenerationOptions.Builder> configure)
+    {
+        ArgHelper.ThrowIfNull(builder);
+        ArgHelper.ThrowIfNull(configure);
+
+        builder.Features.Add(new ConfigureCodeGenerationOptionsFeature(configure));
+
+        return builder;
+    }
+
     /// <summary>
     /// Sets the root namespace for the generated code.
     /// </summary>
@@ -68,7 +78,11 @@ public static class RazorProjectEngineBuilderExtensions
     {
         ArgHelper.ThrowIfNull(builder);
 
-        builder.Features.Add(new ConfigureRootNamespaceFeature(rootNamespace));
+        builder.ConfigureCodeGenerationOptions(builder =>
+        {
+            builder.RootNamespace = rootNamespace;
+        });
+
         return builder;
     }
 
@@ -81,7 +95,11 @@ public static class RazorProjectEngineBuilderExtensions
     {
         ArgHelper.ThrowIfNull(builder);
 
-        builder.Features.Add(new ConfigureSupportLocalizedComponentNamesFeature(true));
+        builder.ConfigureCodeGenerationOptions(builder =>
+        {
+            builder.SupportLocalizedComponentNames = true;
+        });
+
         return builder;
     }
 
@@ -170,23 +188,10 @@ public static class RazorProjectEngineBuilderExtensions
         public void Configure(RazorParserOptions.Builder builder) => configure(builder);
     }
 
-    private sealed class ConfigureSupportLocalizedComponentNamesFeature(bool value) : RazorEngineFeatureBase, IConfigureRazorCodeGenerationOptionsFeature
+    private sealed class ConfigureCodeGenerationOptionsFeature(Action<RazorCodeGenerationOptions.Builder> configure) : RazorEngineFeatureBase, IConfigureCodeGenerationOptionsFeature
     {
         public int Order { get; set; }
 
-        public void Configure(RazorCodeGenerationOptions.Builder builder)
-        {
-            builder.SupportLocalizedComponentNames = value;
-        }
-    }
-
-    private sealed class ConfigureRootNamespaceFeature(string? rootNamespace) : RazorEngineFeatureBase, IConfigureRazorCodeGenerationOptionsFeature
-    {
-        public int Order { get; set; }
-
-        public void Configure(RazorCodeGenerationOptions.Builder builder)
-        {
-            builder.RootNamespace = rootNamespace;
-        }
+        public void Configure(RazorCodeGenerationOptions.Builder builder) => configure(builder);
     }
 }

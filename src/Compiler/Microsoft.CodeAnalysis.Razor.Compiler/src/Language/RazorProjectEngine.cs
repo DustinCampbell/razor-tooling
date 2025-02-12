@@ -249,7 +249,7 @@ public class RazorProjectEngine
 
     private RazorCodeGenerationOptions GetCodeGenerationOptions(Action<RazorCodeGenerationOptions.Builder> configure)
     {
-        var features = Engine.GetFeatures<IConfigureRazorCodeGenerationOptionsFeature>().OrderByAsArray(static x => x.Order);
+        var features = Engine.GetFeatures<IConfigureCodeGenerationOptionsFeature>().OrderByAsArray(static x => x.Order);
         var builder = new RazorCodeGenerationOptions.Builder(Configuration.LanguageVersion)
         {
             SuppressAddComponentParameter = Configuration.SuppressAddComponentParameter

@@ -105,22 +105,25 @@ public class RazorIntegrationTestBase
     {
         return RazorProjectEngine.Create(configuration, FileSystem, b =>
         {
-            b.SetRootNamespace(DefaultRootNamespace);
-
-            // Turn off checksums, we're testing code generation.
-            b.Features.Add(new SuppressChecksum());
-
-            if (supportLocalizedComponentNames)
+            b.ConfigureCodeGenerationOptions(builder =>
             {
-                b.Features.Add(new SupportLocalizedComponentNames());
-            }
+                builder.RootNamespace = DefaultRootNamespace;
+
+                // Turn off checksums, we're testing code generation.
+                builder.SuppressChecksum = true;
+
+                if (supportLocalizedComponentNames)
+                {
+                    builder.SupportLocalizedComponentNames = true;
+                }
+
+                if (LineEnding != null)
+                {
+                    builder.NewLine = LineEnding;
+                }
+            });
 
             b.Features.Add(new TestImportProjectFeature(ImportItems.ToImmutable()));
-
-            if (LineEnding != null)
-            {
-                b.Features.Add(new SetNewLineOptionFeature(LineEnding));
-            }
 
             // If we're in test mode, replace the existing ICodeRenderingContextFactoryFeature with a test version.
             b.Features.RemoveAll(static f => f is ICodeRenderingContextFactoryFeature);
@@ -489,36 +492,6 @@ public class RazorIntegrationTestBase
 
                 return builder.ToString();
             }
-        }
-    }
-
-    private class SuppressChecksum : RazorEngineFeatureBase, IConfigureRazorCodeGenerationOptionsFeature
-    {
-        public int Order => 0;
-
-        public void Configure(RazorCodeGenerationOptions.Builder builder)
-        {
-            builder.SuppressChecksum = true;
-        }
-    }
-
-    private class SupportLocalizedComponentNames : RazorEngineFeatureBase, IConfigureRazorCodeGenerationOptionsFeature
-    {
-        public int Order => 0;
-
-        public void Configure(RazorCodeGenerationOptions.Builder builder)
-        {
-            builder.SupportLocalizedComponentNames = true;
-        }
-    }
-
-    private sealed class SetNewLineOptionFeature(string newLine) : RazorEngineFeatureBase, IConfigureRazorCodeGenerationOptionsFeature
-    {
-        public int Order { get; }
-
-        public void Configure(RazorCodeGenerationOptions.Builder builder)
-        {
-            builder.NewLine = newLine;
         }
     }
 }

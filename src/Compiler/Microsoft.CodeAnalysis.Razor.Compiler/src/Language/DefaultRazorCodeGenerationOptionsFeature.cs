@@ -10,11 +10,11 @@ internal class DefaultRazorCodeGenerationOptionsFeature(RazorLanguageVersion lan
 #pragma warning restore CS0618 // Type or member is obsolete
 {
     private readonly RazorLanguageVersion _languageVersion = languageVersion;
-    private ImmutableArray<IConfigureRazorCodeGenerationOptionsFeature> _features;
+    private ImmutableArray<IConfigureCodeGenerationOptionsFeature> _features;
 
     protected override void OnInitialized()
     {
-        _features = Engine.GetFeatures<IConfigureRazorCodeGenerationOptionsFeature>().OrderByAsArray(static x => x.Order);
+        _features = Engine.GetFeatures<IConfigureCodeGenerationOptionsFeature>().OrderByAsArray(static x => x.Order);
     }
 
     public RazorCodeGenerationOptions GetOptions()

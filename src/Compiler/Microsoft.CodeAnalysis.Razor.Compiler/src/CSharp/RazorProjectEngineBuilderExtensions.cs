@@ -42,7 +42,7 @@ public static class RazorProjectEngineBuilderExtensions
     }
 
     // Internal for testing
-    internal class ConfigureParserForCSharpVersionFeature : RazorEngineFeatureBase, IConfigureRazorCodeGenerationOptionsFeature
+    internal class ConfigureParserForCSharpVersionFeature : RazorEngineFeatureBase, IConfigureCodeGenerationOptionsFeature
     {
         public ConfigureParserForCSharpVersionFeature(LanguageVersion csharpLanguageVersion)
         {
