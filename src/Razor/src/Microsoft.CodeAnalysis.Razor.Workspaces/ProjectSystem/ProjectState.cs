@@ -110,9 +110,13 @@ internal sealed class ProjectState
 
                 return _projectEngineFactoryProvider.Create(configuration, rootDirectoryPath, builder =>
                 {
-                    builder.SetRootNamespace(HostProject.RootNamespace);
+                    builder.ConfigureCodeGenerationOptions(builder =>
+                    {
+                        builder.RootNamespace = HostProject.RootNamespace;
+                        builder.SupportLocalizedComponentNames = true;
+                    });
+
                     builder.SetCSharpLanguageVersion(CSharpLanguageVersion);
-                    builder.SetSupportLocalizedComponentNames();
 
                     builder.ConfigureParserOptions(builder =>
                     {
