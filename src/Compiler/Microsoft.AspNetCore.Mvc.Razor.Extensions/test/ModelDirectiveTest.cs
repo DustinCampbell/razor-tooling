@@ -4,7 +4,6 @@
 #nullable disable
 
 using Microsoft.AspNetCore.Razor.Language;
-using Microsoft.AspNetCore.Razor.Language.Extensions;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 using Xunit;
 
@@ -18,18 +17,22 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
     public void ModelDirective_GetModelType_GetsTypeFromFirstWellFormedDirective()
     {
         // Arrange
-        var codeDocument = CreateDocument(@"
+        var projectEngine = CreateRuntimeEngine();
+
+        var codeDocument = projectEngine.CreateCodeDocument(@"
 @model Type1
 @model Type2
 @model
 ");
 
-        var engine = CreateRuntimeEngine();
+        var runner = RazorProjectEngineRunner.From(projectEngine, codeDocument);
 
-        var irDocument = CreateIRDocument(engine, codeDocument);
+        runner.RunPhasesTo<IRazorDocumentClassifierPhase>();
+
+        var documentNode = codeDocument.GetDocumentIntermediateNode();
 
         // Act
-        var result = ModelDirective.GetModelType(irDocument);
+        var result = ModelDirective.GetModelType(documentNode);
 
         // Assert
         Assert.Equal("Type1", result);
@@ -39,14 +42,16 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
     public void ModelDirective_GetModelType_DefaultsToDynamic()
     {
         // Arrange
-        var codeDocument = CreateDocument(@" ");
+        var projectEngine = CreateRuntimeEngine();
+        var codeDocument = projectEngine.CreateCodeDocument(@" ");
+        var runner = RazorProjectEngineRunner.From(projectEngine, codeDocument);
 
-        var engine = CreateRuntimeEngine();
+        runner.RunPhasesTo<IRazorDocumentClassifierPhase>();
 
-        var irDocument = CreateIRDocument(engine, codeDocument);
+        var documentNode = codeDocument.GetDocumentIntermediateNode();
 
         // Act
-        var result = ModelDirective.GetModelType(irDocument);
+        var result = ModelDirective.GetModelType(documentNode);
 
         // Assert
         Assert.Equal("dynamic", result);
@@ -56,24 +61,24 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
     public void ModelDirectivePass_Execute_ReplacesTModelInBaseType()
     {
         // Arrange
-        var codeDocument = CreateDocument(@"
+        var projectEngine = CreateRuntimeEngine();
+
+        var codeDocument = projectEngine.CreateCodeDocument(@"
 @inherits BaseType<TModel>
 @model Type1
 ");
 
-        var engine = CreateRuntimeEngine();
-        var pass = new ModelDirective.Pass()
-        {
-            Engine = engine,
-        };
+        var runner = RazorProjectEngineRunner.From(projectEngine, codeDocument);
 
-        var irDocument = CreateIRDocument(engine, codeDocument);
+        runner.RunPhasesTo<IRazorDocumentClassifierPhase>();
 
         // Act
-        pass.Execute(codeDocument, irDocument);
+        runner.ExecutePass<ModelDirective.Pass>();
+
+        var documentNode = codeDocument.GetDocumentIntermediateNode();
 
         // Assert
-        var @class = FindClassNode(irDocument);
+        var @class = documentNode.FindClassNode();
         var baseType = @class.BaseType;
 
         Assert.Equal("BaseType", baseType.BaseType.Content);
@@ -87,25 +92,25 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
     public void ModelDirectivePass_Execute_ReplacesTModelInBaseType_DifferentOrdering()
     {
         // Arrange
-        var codeDocument = CreateDocument(@"
+        var projectEngine = CreateRuntimeEngine();
+
+        var codeDocument = projectEngine.CreateCodeDocument(@"
 @model Type1
 @inherits BaseType<TModel>
 @model Type2
 ");
 
-        var engine = CreateRuntimeEngine();
-        var pass = new ModelDirective.Pass()
-        {
-            Engine = engine,
-        };
+        var runner = RazorProjectEngineRunner.From(projectEngine, codeDocument);
 
-        var irDocument = CreateIRDocument(engine, codeDocument);
+        runner.RunPhasesTo<IRazorDocumentClassifierPhase>();
 
         // Act
-        pass.Execute(codeDocument, irDocument);
+        runner.ExecutePass<ModelDirective.Pass>();
+
+        var documentNode = codeDocument.GetDocumentIntermediateNode();
 
         // Assert
-        var @class = FindClassNode(irDocument);
+        var @class = documentNode.FindClassNode();
         var baseType = @class.BaseType;
 
         Assert.Equal("BaseType", baseType.BaseType.Content);
@@ -119,24 +124,24 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
     public void ModelDirectivePass_Execute_NoOpWithoutTModel()
     {
         // Arrange
-        var codeDocument = CreateDocument(@"
+        var projectEngine = CreateRuntimeEngine();
+
+        var codeDocument = projectEngine.CreateCodeDocument(@"
 @inherits BaseType
 @model Type1
 ");
 
-        var engine = CreateRuntimeEngine();
-        var pass = new ModelDirective.Pass()
-        {
-            Engine = engine,
-        };
+        var runner = RazorProjectEngineRunner.From(projectEngine, codeDocument);
 
-        var irDocument = CreateIRDocument(engine, codeDocument);
+        runner.RunPhasesTo<IRazorDocumentClassifierPhase>();
 
         // Act
-        pass.Execute(codeDocument, irDocument);
+        runner.ExecutePass<ModelDirective.Pass>();
+
+        var documentNode = codeDocument.GetDocumentIntermediateNode();
 
         // Assert
-        var @class = FindClassNode(irDocument);
+        var @class = documentNode.FindClassNode();
         Assert.NotNull(@class);
         var baseType = @class.BaseType;
 
@@ -151,23 +156,23 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
     public void ModelDirectivePass_Execute_ReplacesTModelInBaseType_DefaultDynamic()
     {
         // Arrange
-        var codeDocument = CreateDocument(@"
+        var projectEngine = CreateRuntimeEngine();
+
+        var codeDocument = projectEngine.CreateCodeDocument(@"
 @inherits BaseType<TModel>
 ");
 
-        var engine = CreateRuntimeEngine();
-        var pass = new ModelDirective.Pass()
-        {
-            Engine = engine,
-        };
+        var runner = RazorProjectEngineRunner.From(projectEngine, codeDocument);
 
-        var irDocument = CreateIRDocument(engine, codeDocument);
+        runner.RunPhasesTo<IRazorDocumentClassifierPhase>();
 
         // Act
-        pass.Execute(codeDocument, irDocument);
+        runner.ExecutePass<ModelDirective.Pass>();
+
+        var documentNode = codeDocument.GetDocumentIntermediateNode();
 
         // Assert
-        var @class = FindClassNode(irDocument);
+        var @class = documentNode.FindClassNode();
         Assert.NotNull(@class);
         var baseType = @class.BaseType;
 
@@ -182,23 +187,22 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
     public void ModelDirectivePass_DesignTime_AddsTModelUsingDirective()
     {
         // Arrange
-        var codeDocument = CreateDocument(@"
+        var projectEngine = CreateDesignTimeEngine();
+        var codeDocument = projectEngine.CreateCodeDocument(@"
 @inherits BaseType<TModel>
 ");
 
-        var engine = CreateDesignTimeEngine();
-        var pass = new ModelDirective.Pass()
-        {
-            Engine = engine,
-        };
+        var runner = RazorProjectEngineRunner.From(projectEngine, codeDocument);
 
-        var irDocument = CreateIRDocument(engine, codeDocument);
+        runner.RunPhasesTo<IRazorDocumentClassifierPhase>();
 
         // Act
-        pass.Execute(codeDocument, irDocument);
+        runner.ExecutePass<ModelDirective.Pass>();
+
+        var documentNode = codeDocument.GetDocumentIntermediateNode();
 
         // Assert
-        var @class = FindClassNode(irDocument);
+        var @class = documentNode.FindClassNode();
         Assert.NotNull(@class);
         var baseType = @class.BaseType;
 
@@ -208,7 +212,7 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
         Assert.Equal("dynamic", baseType.ModelType.Content);
         Assert.Null(baseType.ModelType.Source);
 
-        var @namespace = FindNamespaceNode(irDocument);
+        var @namespace = documentNode.FindNamespaceNode();
         var usingNode = Assert.IsType<UsingDirectiveIntermediateNode>(@namespace.Children[0]);
         Assert.Equal($"TModel = global::{typeof(object).FullName}", usingNode.Content);
     }
@@ -217,24 +221,23 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
     public void ModelDirectivePass_DesignTime_WithModel_AddsTModelUsingDirective()
     {
         // Arrange
-        var codeDocument = CreateDocument(@"
+        var projectEngine = CreateDesignTimeEngine();
+        var codeDocument = projectEngine.CreateCodeDocument(@"
 @inherits BaseType<TModel>
 @model SomeType
 ");
 
-        var engine = CreateDesignTimeEngine();
-        var pass = new ModelDirective.Pass()
-        {
-            Engine = engine,
-        };
+        var runner = RazorProjectEngineRunner.From(projectEngine, codeDocument);
 
-        var irDocument = CreateIRDocument(engine, codeDocument);
+        runner.RunPhasesTo<IRazorDocumentClassifierPhase>();
 
         // Act
-        pass.Execute(codeDocument, irDocument);
+        runner.ExecutePass<ModelDirective.Pass>();
+
+        var documentNode = codeDocument.GetDocumentIntermediateNode();
 
         // Assert
-        var @class = FindClassNode(irDocument);
+        var @class = documentNode.FindClassNode();
         Assert.NotNull(@class);
         var baseType = @class.BaseType;
 
@@ -244,102 +247,38 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
         Assert.Equal("SomeType", baseType.ModelType.Content);
         Assert.Null(baseType.ModelType.Source);
 
-        var @namespace = FindNamespaceNode(irDocument);
+        var @namespace = documentNode.FindNamespaceNode();
         var usingNode = Assert.IsType<UsingDirectiveIntermediateNode>(@namespace.Children[0]);
         Assert.Equal($"TModel = global::System.Object", usingNode.Content);
     }
 
-    private RazorCodeDocument CreateDocument(string content)
+    private RazorProjectEngine CreateRuntimeEngine()
     {
-        var source = RazorSourceDocument.Create(content, "test.cshtml");
-        return RazorCodeDocument.Create(source);
+        return CreateProjectEngine();
     }
 
-    private ClassDeclarationIntermediateNode FindClassNode(IntermediateNode node)
+    private RazorProjectEngine CreateDesignTimeEngine()
     {
-        var visitor = new ClassNodeVisitor();
-        visitor.Visit(node);
-        return visitor.Node;
-    }
-
-    private NamespaceDeclarationIntermediateNode FindNamespaceNode(IntermediateNode node)
-    {
-        var visitor = new NamespaceNodeVisitor();
-        visitor.Visit(node);
-        return visitor.Node;
-    }
-
-    private RazorEngine CreateRuntimeEngine()
-    {
-        return CreateEngineCore(designTime: false);
-    }
-
-    private RazorEngine CreateDesignTimeEngine()
-    {
-        return CreateEngineCore(designTime: true);
-    }
-
-    private RazorEngine CreateEngineCore(bool designTime = false)
-    {
-        return CreateProjectEngine(b =>
+        return CreateProjectEngine(buidler =>
         {
-            // Notice we're not registering the ModelDirective.Pass here so we can run it on demand.
-            b.AddDirective(ModelDirective.Directive);
-
-            b.Features.Add(new RazorPageDocumentClassifierPass());
-            b.Features.Add(new MvcViewDocumentClassifierPass());
-
-            b.ConfigureParserOptions(builder =>
+            buidler.ConfigureParserOptions(builder =>
             {
-                builder.DesignTime = designTime;
+                builder.DesignTime = true;
             });
 
-            b.ConfigureCodeGenerationOptions(builder =>
+            buidler.ConfigureCodeGenerationOptions(builder =>
             {
-                builder.DesignTime = designTime;
+                builder.DesignTime = true;
             });
-        }).Engine;
+        });
     }
 
-    private DocumentIntermediateNode CreateIRDocument(RazorEngine engine, RazorCodeDocument codeDocument)
+    protected override void ConfigureProjectEngine(RazorProjectEngineBuilder builder)
     {
-        foreach (var phase in engine.Phases)
-        {
-            phase.Execute(codeDocument);
+        // Notice we're not registering the ModelDirective.Pass here so we can run it on demand.
+        builder.AddDirective(ModelDirective.Directive);
 
-            if (phase is IRazorDocumentClassifierPhase)
-            {
-                break;
-            }
-        }
-
-        // InheritsDirectivePass needs to run before ModelDirective.
-        var pass = new InheritsDirectivePass()
-        {
-            Engine = engine
-        };
-        pass.Execute(codeDocument, codeDocument.GetDocumentIntermediateNode());
-
-        return codeDocument.GetDocumentIntermediateNode();
-    }
-
-    private class ClassNodeVisitor : IntermediateNodeWalker
-    {
-        public ClassDeclarationIntermediateNode Node { get; set; }
-
-        public override void VisitClassDeclaration(ClassDeclarationIntermediateNode node)
-        {
-            Node = node;
-        }
-    }
-
-    private class NamespaceNodeVisitor : IntermediateNodeWalker
-    {
-        public NamespaceDeclarationIntermediateNode Node { get; set; }
-
-        public override void VisitNamespaceDeclaration(NamespaceDeclarationIntermediateNode node)
-        {
-            Node = node;
-        }
+        builder.Features.Add(new RazorPageDocumentClassifierPass());
+        builder.Features.Add(new MvcViewDocumentClassifierPass());
     }
 }
